@@ -1,0 +1,22 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"files": {
+		"include": ["*.*"]
+	},
+	"vcs": { "useIgnoreFile": true, "enabled": true, "clientKind": "git" },
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 4,
+		"lineWidth": 120,
+		"formatWithErrors": true
+	},
+	"linter": {
+		"rules": {
+			"a11y": { "useKeyWithClickEvents": "off" },
+			"style": { "noUselessElse": "off", "useImportType": "info" },
+			"correctness": { "noUnusedImports": "info" }
+		}
+	},
+	"overrides": [{ "include": ["tsconfig.*"], "json": { "parser": { "allowComments": true } } }]
+}

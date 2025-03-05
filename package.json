@@ -5,7 +5,6 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "yarn@1.22.22",
   "scripts": {
     "prepare": "is-ci || husky install",
     "postinstall": "patch-package && yarn intl:compile",
@@ -295,10 +294,6 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|@discord|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|nanoid|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|normalize-url|react-native-svg|@sentry/.*|sentry-expo|bcp-47-match)"
-    ],
-    "modulePathIgnorePatterns": [
-      "__tests__/.*/__mocks__",
-      "__e2e__/.*"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/",
