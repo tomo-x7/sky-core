@@ -1,6 +1,6 @@
 import React from "react";
 
-type Component = React.ReactElement;
+type Component = React.ReactNode;
 
 type ContextType = {
 	outlet: Component | null;
@@ -19,19 +19,19 @@ export function createPortalGroup_INTERNAL() {
 		remove: () => {},
 	});
 
-	function Provider(props: React.PropsWithChildren<{}>) {
+	function Provider(props: React.PropsWithChildren) {
 		const map = React.useRef<ComponentMap>({});
 		const [outlet, setOutlet] = React.useState<ContextType["outlet"]>(null);
 
 		const append = React.useCallback<ContextType["append"]>((id, component) => {
 			if (map.current[id]) return;
 			map.current[id] = <React.Fragment key={id}>{component}</React.Fragment>;
-			setOutlet(<>{Object.values(map.current)}</>);
+			setOutlet(Object.values(map.current));
 		}, []);
 
 		const remove = React.useCallback<ContextType["remove"]>((id) => {
 			delete map.current[id];
-			setOutlet(<>{Object.values(map.current)}</>);
+			setOutlet(Object.values(map.current));
 		}, []);
 
 		const contextValue = React.useMemo(
@@ -51,7 +51,7 @@ export function createPortalGroup_INTERNAL() {
 		return ctx.outlet;
 	}
 
-	function Portal({ children }: React.PropsWithChildren<{}>) {
+	function Portal({ children }: React.PropsWithChildren) {
 		const { append, remove } = React.useContext(Context);
 		const id = React.useId();
 		React.useEffect(() => {
