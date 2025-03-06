@@ -1,7 +1,7 @@
 export function clearThumbnailCache() {
-  // no-op
+	// no-op
 }
 
 export function VideoTranscodeBackdrop() {
-  return null
+	return null;
 }

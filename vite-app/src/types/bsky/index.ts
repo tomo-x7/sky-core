@@ -1,8 +1,8 @@
-import {ValidationResult} from '@atproto/lexicon'
+import { ValidationResult } from "@atproto/lexicon";
 
-export * as post from '#/types/bsky/post'
-export * as profile from '#/types/bsky/profile'
-export * as starterPack from '#/types/bsky/starterPack'
+export * as post from "./post";
+export * as profile from "./profile";
+export * as starterPack from "./starterPack";
 
 /**
  * Fast type checking without full schema validation, for use with data we
@@ -21,11 +21,11 @@ export * as starterPack from '#/types/bsky/starterPack'
  * }
  * ```
  */
-export function dangerousIsType<R extends {$type?: string}>(
-  record: unknown,
-  identity: <V>(v: V) => v is V & {$type: NonNullable<R['$type']>},
+export function dangerousIsType<R extends { $type?: string }>(
+	record: unknown,
+	identity: <V>(v: V) => v is V & { $type: NonNullable<R["$type"]> },
 ): record is R {
-  return identity(record)
+	return identity(record);
 }
 
 /**
@@ -43,9 +43,9 @@ export function dangerousIsType<R extends {$type?: string}>(
  * }
  * ```
  */
-export function validate<R extends {$type?: string}>(
-  record: unknown,
-  validator: (v: unknown) => ValidationResult<R>,
+export function validate<R extends { $type?: string }>(
+	record: unknown,
+	validator: (v: unknown) => ValidationResult<R>,
 ): record is R {
-  return validator(record).success
+	return validator(record).success;
 }

@@ -1,3 +1,3 @@
 export function useWebScrollRestoration() {
-  return undefined
+	return undefined;
 }

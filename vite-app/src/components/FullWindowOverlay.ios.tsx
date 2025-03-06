@@ -1,1 +1,1 @@
-export {FullWindowOverlay} from 'react-native-screens'
+export { FullWindowOverlay } from "react-native-screens";

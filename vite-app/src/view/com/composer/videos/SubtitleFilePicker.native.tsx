@@ -1,3 +1,3 @@
 export function SubtitleFilePicker() {
-  throw new Error('SubtitleFilePicker is a web-only component')
+	throw new Error("SubtitleFilePicker is a web-only component");
 }

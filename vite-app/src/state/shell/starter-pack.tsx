@@ -1,25 +1,25 @@
-import React from 'react'
+import React from "react";
 
 type StateContext =
-  | {
-      uri: string
-      isClip?: boolean
-    }
-  | undefined
-type SetContext = (v: StateContext) => void
+	| {
+			uri: string;
+			isClip?: boolean;
+	  }
+	| undefined;
+type SetContext = (v: StateContext) => void;
 
-const stateContext = React.createContext<StateContext>(undefined)
-const setContext = React.createContext<SetContext>((_: StateContext) => {})
+const stateContext = React.createContext<StateContext>(undefined);
+const setContext = React.createContext<SetContext>((_: StateContext) => {});
 
-export function Provider({children}: {children: React.ReactNode}) {
-  const [state, setState] = React.useState<StateContext>()
+export function Provider({ children }: { children: React.ReactNode }) {
+	const [state, setState] = React.useState<StateContext>();
 
-  return (
-    <stateContext.Provider value={state}>
-      <setContext.Provider value={setState}>{children}</setContext.Provider>
-    </stateContext.Provider>
-  )
+	return (
+		<stateContext.Provider value={state}>
+			<setContext.Provider value={setState}>{children}</setContext.Provider>
+		</stateContext.Provider>
+	);
 }
 
-export const useActiveStarterPack = () => React.useContext(stateContext)
-export const useSetActiveStarterPack = () => React.useContext(setContext)
+export const useActiveStarterPack = () => React.useContext(stateContext);
+export const useSetActiveStarterPack = () => React.useContext(setContext);

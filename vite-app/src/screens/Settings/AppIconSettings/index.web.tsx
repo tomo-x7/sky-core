@@ -1,3 +1,3 @@
 export function AppIconSettingsScreen() {
-  throw new Error('Not supported on web')
+	throw new Error("Not supported on web");
 }

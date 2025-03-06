@@ -1,1 +1,1 @@
-export {Alert} from 'react-native'
+export { Alert } from "react-native";

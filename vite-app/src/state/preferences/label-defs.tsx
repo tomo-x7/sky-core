@@ -1,23 +1,23 @@
-import React from 'react'
-import {AppBskyLabelerDefs, InterpretedLabelValueDefinition} from '@atproto/api'
+import React from "react";
+import { AppBskyLabelerDefs, InterpretedLabelValueDefinition } from "@atproto/api";
 
-import {useLabelDefinitionsQuery} from '../queries/preferences'
+import { useLabelDefinitionsQuery } from "../queries/preferences";
 
 interface StateContext {
-  labelDefs: Record<string, InterpretedLabelValueDefinition[]>
-  labelers: AppBskyLabelerDefs.LabelerViewDetailed[]
+	labelDefs: Record<string, InterpretedLabelValueDefinition[]>;
+	labelers: AppBskyLabelerDefs.LabelerViewDetailed[];
 }
 
 const stateContext = React.createContext<StateContext>({
-  labelDefs: {},
-  labelers: [],
-})
+	labelDefs: {},
+	labelers: [],
+});
 
-export function Provider({children}: React.PropsWithChildren<{}>) {
-  const state = useLabelDefinitionsQuery()
-  return <stateContext.Provider value={state}>{children}</stateContext.Provider>
+export function Provider({ children }: React.PropsWithChildren<{}>) {
+	const state = useLabelDefinitionsQuery();
+	return <stateContext.Provider value={state}>{children}</stateContext.Provider>;
 }
 
 export function useLabelDefinitions() {
-  return React.useContext(stateContext)
+	return React.useContext(stateContext);
 }

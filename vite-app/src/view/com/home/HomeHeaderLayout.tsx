@@ -1,1 +1,1 @@
-export {HomeHeaderLayoutMobile as HomeHeaderLayout} from './HomeHeaderLayoutMobile'
+export { HomeHeaderLayoutMobile as HomeHeaderLayout } from "./HomeHeaderLayoutMobile";

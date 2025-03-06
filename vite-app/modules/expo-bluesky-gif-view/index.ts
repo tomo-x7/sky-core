@@ -1,1 +1,1 @@
-export {GifView} from './src/GifView'
+export { GifView } from "./src/GifView";

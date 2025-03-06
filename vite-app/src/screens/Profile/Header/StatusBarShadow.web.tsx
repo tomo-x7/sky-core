@@ -1,3 +1,3 @@
 export function StatusBarShadow() {
-  return null
+	return null;
 }

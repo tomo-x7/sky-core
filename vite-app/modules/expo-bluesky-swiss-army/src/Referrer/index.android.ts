@@ -1,13 +1,13 @@
-import {requireNativeModule} from 'expo'
+import { requireNativeModule } from "expo";
 
-import {GooglePlayReferrerInfo, ReferrerInfo} from './types'
+import { GooglePlayReferrerInfo, ReferrerInfo } from "./types";
 
-export const NativeModule = requireNativeModule('ExpoBlueskyReferrer')
+export const NativeModule = requireNativeModule("ExpoBlueskyReferrer");
 
 export function getGooglePlayReferrerInfoAsync(): Promise<GooglePlayReferrerInfo | null> {
-  return NativeModule.getGooglePlayReferrerInfoAsync()
+	return NativeModule.getGooglePlayReferrerInfoAsync();
 }
 
 export function getReferrerInfo(): Promise<ReferrerInfo | null> {
-  return NativeModule.getReferrerInfo()
+	return NativeModule.getReferrerInfo();
 }

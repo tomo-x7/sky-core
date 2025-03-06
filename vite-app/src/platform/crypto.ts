@@ -4,4 +4,4 @@
 // build fails when it tries to do this require. We use a babel
 // and tsconfig alias to direct it here
 // -prf
-export default crypto
+export default crypto;

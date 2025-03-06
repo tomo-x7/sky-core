@@ -1,1 +1,1 @@
-export {SearchScreen} from '#/view/screens/Search/Search'
+export { SearchScreen } from "#/view/screens/Search/Search";

@@ -14,93 +14,93 @@
  * the facet-set.
  */
 
-import {URL_REGEX} from '@atproto/api'
-import {Mark} from '@tiptap/core'
-import {Node as ProsemirrorNode} from '@tiptap/pm/model'
-import {Plugin, PluginKey} from '@tiptap/pm/state'
-import {Decoration, DecorationSet} from '@tiptap/pm/view'
+import { URL_REGEX } from "@atproto/api";
+import { Mark } from "@tiptap/core";
+import { Node as ProsemirrorNode } from "@tiptap/pm/model";
+import { Plugin, PluginKey } from "@tiptap/pm/state";
+import { Decoration, DecorationSet } from "@tiptap/pm/view";
 
-import {isValidDomain} from '#/lib/strings/url-helpers'
+import { isValidDomain } from "#/lib/strings/url-helpers";
 
 export const LinkDecorator = Mark.create({
-  name: 'link-decorator',
-  priority: 1000,
-  keepOnSplit: false,
-  inclusive() {
-    return true
-  },
-  addProseMirrorPlugins() {
-    return [linkDecorator()]
-  },
-})
+	name: "link-decorator",
+	priority: 1000,
+	keepOnSplit: false,
+	inclusive() {
+		return true;
+	},
+	addProseMirrorPlugins() {
+		return [linkDecorator()];
+	},
+});
 
 function getDecorations(doc: ProsemirrorNode) {
-  const decorations: Decoration[] = []
+	const decorations: Decoration[] = [];
 
-  doc.descendants((node, pos) => {
-    if (node.isText && node.text) {
-      const textContent = node.textContent
+	doc.descendants((node, pos) => {
+		if (node.isText && node.text) {
+			const textContent = node.textContent;
 
-      // links
-      iterateUris(textContent, (from, to) => {
-        decorations.push(
-          Decoration.inline(pos + from, pos + to, {
-            class: 'autolink',
-          }),
-        )
-      })
-    }
-  })
+			// links
+			iterateUris(textContent, (from, to) => {
+				decorations.push(
+					Decoration.inline(pos + from, pos + to, {
+						class: "autolink",
+					}),
+				);
+			});
+		}
+	});
 
-  return DecorationSet.create(doc, decorations)
+	return DecorationSet.create(doc, decorations);
 }
 
 function linkDecorator() {
-  const linkDecoratorPlugin: Plugin = new Plugin({
-    key: new PluginKey('link-decorator'),
+	const linkDecoratorPlugin: Plugin = new Plugin({
+		key: new PluginKey("link-decorator"),
 
-    state: {
-      init: (_, {doc}) => getDecorations(doc),
-      apply: (transaction, decorationSet) => {
-        if (transaction.docChanged) {
-          return getDecorations(transaction.doc)
-        }
-        return decorationSet.map(transaction.mapping, transaction.doc)
-      },
-    },
+		state: {
+			init: (_, { doc }) => getDecorations(doc),
+			apply: (transaction, decorationSet) => {
+				if (transaction.docChanged) {
+					return getDecorations(transaction.doc);
+				}
+				return decorationSet.map(transaction.mapping, transaction.doc);
+			},
+		},
 
-    props: {
-      decorations(state) {
-        return linkDecoratorPlugin.getState(state)
-      },
-    },
-  })
-  return linkDecoratorPlugin
+		props: {
+			decorations(state) {
+				return linkDecoratorPlugin.getState(state);
+			},
+		},
+	});
+	return linkDecoratorPlugin;
 }
 
 function iterateUris(str: string, cb: (from: number, to: number) => void) {
-  let match
-  const re = URL_REGEX
-  while ((match = re.exec(str))) {
-    let uri = match[2]
-    if (!uri.startsWith('http')) {
-      const domain = match.groups?.domain
-      if (!domain || !isValidDomain(domain)) {
-        continue
-      }
-      uri = `https://${uri}`
-    }
-    let from = str.indexOf(match[2], match.index)
-    let to = from + match[2].length
-    // strip ending puncuation
-    if (/[.,;!?]$/.test(uri)) {
-      uri = uri.slice(0, -1)
-      to--
-    }
-    if (/[)]$/.test(uri) && !uri.includes('(')) {
-      uri = uri.slice(0, -1)
-      to--
-    }
-    cb(from, to)
-  }
+	let match;
+	const re = URL_REGEX;
+	while ((match = re.exec(str))) {
+		let uri = match[2];
+		if (!uri.startsWith("http")) {
+			const domain = match.groups?.domain;
+			if (!domain || !isValidDomain(domain)) {
+				continue;
+			}
+			uri = `https://${uri}`;
+		}
+		let from = str.indexOf(match[2], match.index);
+		let to = from + match[2].length;
+		// strip ending puncuation
+		if (/[.,;!?]$/.test(uri)) {
+			uri = uri.slice(0, -1);
+			to--;
+		}
+		if (/[)]$/.test(uri) && !uri.includes("(")) {
+			uri = uri.slice(0, -1);
+			to--;
+		}
+		cb(from, to);
+	}
 }

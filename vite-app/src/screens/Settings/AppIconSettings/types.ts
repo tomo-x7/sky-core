@@ -1,8 +1,8 @@
-import {ImageSourcePropType} from 'react-native'
+import { ImageSourcePropType } from "react-native";
 
 export type AppIconSet = {
-  id: string
-  name: string
-  iosImage: () => ImageSourcePropType
-  androidImage: () => ImageSourcePropType
-}
+	id: string;
+	name: string;
+	iosImage: () => ImageSourcePropType;
+	androidImage: () => ImageSourcePropType;
+};

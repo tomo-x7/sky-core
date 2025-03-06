@@ -1,1 +1,1 @@
-export {ScrollView, TextInput} from 'react-native'
+export { ScrollView, TextInput } from "react-native";

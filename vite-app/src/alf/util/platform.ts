@@ -1,6 +1,6 @@
-import {Platform} from 'react-native'
+import { Platform } from "react-native";
 
-import {isAndroid, isIOS, isNative, isWeb} from '#/platform/detection'
+import { isAndroid, isIOS, isNative, isWeb } from "../../platform/detection";
 
 /**
  * Identity function on web. Returns nothing on other platforms.
@@ -9,10 +9,10 @@ import {isAndroid, isIOS, isNative, isWeb} from '#/platform/detection'
  * so don't do stuff like e.g. rely on platform-specific imports. Use
  * platform-split files instead.
  */
-export function web(value: any) {
-  if (isWeb) {
-    return value
-  }
+export function web<T>(value: T) {
+	if (isWeb) {
+		return value;
+	}
 }
 
 /**
@@ -22,10 +22,10 @@ export function web(value: any) {
  * so don't do stuff like e.g. rely on platform-specific imports. Use
  * platform-split files instead.
  */
-export function ios(value: any) {
-  if (isIOS) {
-    return value
-  }
+export function ios<T>(value: T) {
+	if (isIOS) {
+		return value;
+	}
 }
 
 /**
@@ -35,10 +35,10 @@ export function ios(value: any) {
  * so don't do stuff like e.g. rely on platform-specific imports. Use
  * platform-split files instead.
  */
-export function android(value: any) {
-  if (isAndroid) {
-    return value
-  }
+export function android<T>(value: T) {
+	if (isAndroid) {
+		return value;
+	}
 }
 
 /**
@@ -48,10 +48,10 @@ export function android(value: any) {
  * so don't do stuff like e.g. rely on platform-specific imports. Use
  * platform-split files instead.
  */
-export function native(value: any) {
-  if (isNative) {
-    return value
-  }
+export function native<T>(value: T) {
+	if (isNative) {
+		return value;
+	}
 }
 
 /**
@@ -59,4 +59,4 @@ export function native(value: any) {
  * so don't do stuff like e.g. rely on platform-specific imports. Use
  * platform-split files instead.
  */
-export const platform = Platform.select
+export const platform = Platform.select;

@@ -1,44 +1,40 @@
-import {createContext, useContext, useEffect, useState} from 'react'
+import { createContext, useContext, useEffect, useState } from "react";
 
-import {isWeb} from '#/platform/detection'
+import { isWeb } from "#/platform/detection";
 
-const LightStatusBarRefCountContext = createContext<boolean>(false)
-const SetLightStatusBarRefCountContext = createContext<React.Dispatch<
-  React.SetStateAction<number>
-> | null>(null)
+const LightStatusBarRefCountContext = createContext<boolean>(false);
+const SetLightStatusBarRefCountContext = createContext<React.Dispatch<React.SetStateAction<number>> | null>(null);
 
 export function useLightStatusBar() {
-  return useContext(LightStatusBarRefCountContext)
+	return useContext(LightStatusBarRefCountContext);
 }
 
 export function useSetLightStatusBar(enabled: boolean) {
-  const setRefCount = useContext(SetLightStatusBarRefCountContext)
-  useEffect(() => {
-    // noop on web -sfn
-    if (isWeb) return
+	const setRefCount = useContext(SetLightStatusBarRefCountContext);
+	useEffect(() => {
+		// noop on web -sfn
+		if (isWeb) return;
 
-    if (!setRefCount) {
-      if (__DEV__)
-        console.error(
-          'useLightStatusBar was used without a SetLightStatusBarRefCountContext provider',
-        )
-      return
-    }
-    if (enabled) {
-      setRefCount(prev => prev + 1)
-      return () => setRefCount(prev => prev - 1)
-    }
-  }, [enabled, setRefCount])
+		if (!setRefCount) {
+			if (__DEV__)
+				console.error("useLightStatusBar was used without a SetLightStatusBarRefCountContext provider");
+			return;
+		}
+		if (enabled) {
+			setRefCount((prev) => prev + 1);
+			return () => setRefCount((prev) => prev - 1);
+		}
+	}, [enabled, setRefCount]);
 }
 
-export function Provider({children}: React.PropsWithChildren<{}>) {
-  const [refCount, setRefCount] = useState(0)
+export function Provider({ children }: React.PropsWithChildren<{}>) {
+	const [refCount, setRefCount] = useState(0);
 
-  return (
-    <SetLightStatusBarRefCountContext.Provider value={setRefCount}>
-      <LightStatusBarRefCountContext.Provider value={refCount > 0}>
-        {children}
-      </LightStatusBarRefCountContext.Provider>
-    </SetLightStatusBarRefCountContext.Provider>
-  )
+	return (
+		<SetLightStatusBarRefCountContext.Provider value={setRefCount}>
+			<LightStatusBarRefCountContext.Provider value={refCount > 0}>
+				{children}
+			</LightStatusBarRefCountContext.Provider>
+		</SetLightStatusBarRefCountContext.Provider>
+	);
 }

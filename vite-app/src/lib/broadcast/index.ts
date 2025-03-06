@@ -1,2 +1,2 @@
-import Stub from '#/lib/broadcast/stub'
-export default Stub
+import Stub from "#/lib/broadcast/stub";
+export default Stub;

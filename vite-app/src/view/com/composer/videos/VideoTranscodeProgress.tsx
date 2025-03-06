@@ -1,63 +1,48 @@
-import {View} from 'react-native'
+import { View } from "react-native";
 // @ts-expect-error no type definition
-import ProgressPie from 'react-native-progress/Pie'
-import {ImagePickerAsset} from 'expo-image-picker'
+import ProgressPie from "react-native-progress/Pie";
+import { ImagePickerAsset } from "expo-image-picker";
 
-import {clamp} from '#/lib/numbers'
-import {isWeb} from '#/platform/detection'
-import {atoms as a, useTheme} from '#/alf'
-import {ExternalEmbedRemoveBtn} from '../ExternalEmbedRemoveBtn'
-import {VideoTranscodeBackdrop} from './VideoTranscodeBackdrop'
+import { clamp } from "#/lib/numbers";
+import { isWeb } from "#/platform/detection";
+import { atoms as a, useTheme } from "#/alf";
+import { ExternalEmbedRemoveBtn } from "../ExternalEmbedRemoveBtn";
+import { VideoTranscodeBackdrop } from "./VideoTranscodeBackdrop";
 
 export function VideoTranscodeProgress({
-  asset,
-  progress,
-  clear,
+	asset,
+	progress,
+	clear,
 }: {
-  asset: ImagePickerAsset
-  progress: number
-  clear: () => void
+	asset: ImagePickerAsset;
+	progress: number;
+	clear: () => void;
 }) {
-  const t = useTheme()
+	const t = useTheme();
 
-  if (isWeb) return null
+	if (isWeb) return null;
 
-  let aspectRatio = asset.width / asset.height
+	let aspectRatio = asset.width / asset.height;
 
-  if (isNaN(aspectRatio)) {
-    aspectRatio = 16 / 9
-  }
+	if (isNaN(aspectRatio)) {
+		aspectRatio = 16 / 9;
+	}
 
-  aspectRatio = clamp(aspectRatio, 1 / 1, 3 / 1)
+	aspectRatio = clamp(aspectRatio, 1 / 1, 3 / 1);
 
-  return (
-    <View
-      style={[
-        a.w_full,
-        t.atoms.bg_contrast_50,
-        a.rounded_md,
-        a.overflow_hidden,
-        {aspectRatio},
-      ]}>
-      <VideoTranscodeBackdrop uri={asset.uri} />
-      <View
-        style={[
-          a.flex_1,
-          a.align_center,
-          a.justify_center,
-          a.gap_lg,
-          a.absolute,
-          a.inset_0,
-        ]}>
-        <ProgressPie
-          size={48}
-          borderWidth={3}
-          borderColor={t.atoms.text.color}
-          color={t.atoms.text.color}
-          progress={progress}
-        />
-      </View>
-      <ExternalEmbedRemoveBtn onRemove={clear} />
-    </View>
-  )
+	return (
+		<View style={[a.w_full, t.atoms.bg_contrast_50, a.rounded_md, a.overflow_hidden, { aspectRatio }]}>
+			<VideoTranscodeBackdrop uri={asset.uri} />
+			<View style={[a.flex_1, a.align_center, a.justify_center, a.gap_lg, a.absolute, a.inset_0]}>
+				<ProgressPie
+					size={48}
+					borderWidth={3}
+					borderColor={t.atoms.text.color}
+					color={t.atoms.text.color}
+					progress={progress}
+				/>
+			</View>
+			<ExternalEmbedRemoveBtn onRemove={clear} />
+		</View>
+	);
 }

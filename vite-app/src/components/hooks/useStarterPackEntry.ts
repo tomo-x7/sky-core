@@ -1,29 +1,29 @@
-import React from 'react'
+import React from "react";
 
-import {httpStarterPackUriToAtUri} from '#/lib/strings/starter-pack'
-import {useSetActiveStarterPack} from '#/state/shell/starter-pack'
+import { httpStarterPackUriToAtUri } from "#/lib/strings/starter-pack";
+import { useSetActiveStarterPack } from "#/state/shell/starter-pack";
 
 export function useStarterPackEntry() {
-  const [ready, setReady] = React.useState(false)
+	const [ready, setReady] = React.useState(false);
 
-  const setActiveStarterPack = useSetActiveStarterPack()
+	const setActiveStarterPack = useSetActiveStarterPack();
 
-  React.useEffect(() => {
-    const href = window.location.href
-    const atUri = httpStarterPackUriToAtUri(href)
+	React.useEffect(() => {
+		const href = window.location.href;
+		const atUri = httpStarterPackUriToAtUri(href);
 
-    if (atUri) {
-      const url = new URL(href)
-      // Determines if an App Clip is loading this landing page
-      const isClip = url.searchParams.get('clip') === 'true'
-      setActiveStarterPack({
-        uri: atUri,
-        isClip,
-      })
-    }
+		if (atUri) {
+			const url = new URL(href);
+			// Determines if an App Clip is loading this landing page
+			const isClip = url.searchParams.get("clip") === "true";
+			setActiveStarterPack({
+				uri: atUri,
+				isClip,
+			});
+		}
 
-    setReady(true)
-  }, [setActiveStarterPack])
+		setReady(true);
+	}, [setActiveStarterPack]);
 
-  return ready
+	return ready;
 }

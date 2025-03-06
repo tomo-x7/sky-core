@@ -1,4 +1,3 @@
-import "./logger/sentry/setup"; // must be near top
 import "./view/icons";
 import "./style.css";
 
@@ -9,7 +8,6 @@ import { QueryProvider } from "./lib/react-query";
 import { Provider as StatsigProvider } from "./lib/statsig/statsig";
 import { ThemeProvider } from "./lib/ThemeContext";
 import I18nProvider from "./locale/i18nProvider";
-import { logger } from "./logger";
 import { Provider as A11yProvider } from "./state/a11y";
 import { Provider as MutedThreadsProvider } from "./state/cache/thread-mutes";
 import { Provider as DialogStateProvider } from "./state/dialogs";
@@ -73,7 +71,7 @@ function InnerApp() {
 					await resumeSession(account);
 				}
 			} catch (e) {
-				logger.error("session: resumeSession failed", { message: e });
+				console.error("session: resumeSession failed", { message: e });
 			} finally {
 				setIsReady(true);
 			}

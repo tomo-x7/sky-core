@@ -1,14 +1,10 @@
-import * as React from 'react'
-import {requireNativeViewManager} from 'expo-modules-core'
+import * as React from "react";
+import { requireNativeViewManager } from "expo-modules-core";
 
-import {ExpoScrollForwarderViewProps} from './ExpoScrollForwarder.types'
+import { ExpoScrollForwarderViewProps } from "./ExpoScrollForwarder.types";
 
-const NativeView: React.ComponentType<ExpoScrollForwarderViewProps> =
-  requireNativeViewManager('ExpoScrollForwarder')
+const NativeView: React.ComponentType<ExpoScrollForwarderViewProps> = requireNativeViewManager("ExpoScrollForwarder");
 
-export function ExpoScrollForwarderView({
-  children,
-  ...rest
-}: ExpoScrollForwarderViewProps) {
-  return <NativeView {...rest}>{children}</NativeView>
+export function ExpoScrollForwarderView({ children, ...rest }: ExpoScrollForwarderViewProps) {
+	return <NativeView {...rest}>{children}</NativeView>;
 }

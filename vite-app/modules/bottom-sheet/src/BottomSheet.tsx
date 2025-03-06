@@ -1,1 +1,1 @@
-export {BottomSheetNativeComponent as BottomSheet} from './BottomSheetNativeComponent'
+export { BottomSheetNativeComponent as BottomSheet } from "./BottomSheetNativeComponent";

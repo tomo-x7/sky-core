@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@atproto/api": "^0.14.7",
+		"@atproto/lexicon": "^0.4.7",
 		"@braintree/sanitize-url": "^7.1.1",
 		"@emoji-mart/react": "^1.1.1",
 		"@floating-ui/dom": "^1.6.13",
@@ -76,6 +77,7 @@
 	},
 	"devDependencies": {
 		"@types/invariant": "^2.2.37",
+		"@types/lodash.isequal": "^4.5.8",
 		"@types/lodash.throttle": "^4.1.9",
 		"@types/react": "^19.0.10",
 		"@types/react-dom": "^19.0.4",

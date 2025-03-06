@@ -1,8 +1,8 @@
-import {NotImplementedError} from '../NotImplemented'
-import {AudioCategory} from './types'
+import { NotImplementedError } from "../NotImplemented";
+import { AudioCategory } from "./types";
 
 export function getIsReducedMotionEnabled(): boolean {
-  throw new NotImplementedError()
+	throw new NotImplementedError();
 }
 
 /**
@@ -12,7 +12,7 @@ export function getIsReducedMotionEnabled(): boolean {
  * @see https://developer.apple.com/documentation/avfaudio/avaudiosession/setactiveoptions/1616603-notifyothersondeactivation
  */
 export function setAudioActive(active: boolean): void {
-  throw new NotImplementedError({active})
+	throw new NotImplementedError({ active });
 }
 
 /**
@@ -21,5 +21,5 @@ export function setAudioActive(active: boolean): void {
  * @platform ios
  */
 export function setAudioCategory(audioCategory: AudioCategory): void {
-  throw new NotImplementedError({audioCategory})
+	throw new NotImplementedError({ audioCategory });
 }

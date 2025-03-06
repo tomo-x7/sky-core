@@ -1,3 +1,3 @@
 export function OpenCameraBtn() {
-  return null
+	return null;
 }

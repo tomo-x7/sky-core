@@ -1,1 +1,1 @@
-export {FABInner as FAB} from './FABInner'
+export { FABInner as FAB } from "./FABInner";

@@ -1,3 +1,3 @@
 export function TestCtrls() {
-  return null
+	return null;
 }

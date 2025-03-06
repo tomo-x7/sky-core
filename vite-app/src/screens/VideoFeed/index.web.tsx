@@ -1,3 +1,3 @@
 export function VideoScreen() {
-  return null
+	return null;
 }

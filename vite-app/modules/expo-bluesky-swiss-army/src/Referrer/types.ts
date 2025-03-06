@@ -1,10 +1,10 @@
 export type GooglePlayReferrerInfo = {
-  installReferrer?: string
-  clickTimestamp?: number
-  installTimestamp?: number
-}
+	installReferrer?: string;
+	clickTimestamp?: number;
+	installTimestamp?: number;
+};
 
 export type ReferrerInfo = {
-  referrer: string
-  hostname: string
-}
+	referrer: string;
+	hostname: string;
+};

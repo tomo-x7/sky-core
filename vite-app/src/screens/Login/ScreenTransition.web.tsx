@@ -1,1 +1,1 @@
-export {Fragment as ScreenTransition} from 'react'
+export { Fragment as ScreenTransition } from "react";

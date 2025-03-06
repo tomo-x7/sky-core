@@ -1,17 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const MessageContext = React.createContext(false)
+const MessageContext = React.createContext(false);
 
 export function MessageContextProvider({
-  children,
+	children,
 }: {
-  children: React.ReactNode
+	children: React.ReactNode;
 }) {
-  return (
-    <MessageContext.Provider value={true}>{children}</MessageContext.Provider>
-  )
+	return <MessageContext.Provider value={true}>{children}</MessageContext.Provider>;
 }
 
 export function useIsWithinMessage() {
-  return React.useContext(MessageContext)
+	return React.useContext(MessageContext);
 }

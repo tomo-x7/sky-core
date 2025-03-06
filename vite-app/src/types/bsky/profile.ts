@@ -1,10 +1,10 @@
-import {AppBskyActorDefs, ChatBskyActorDefs} from '@atproto/api'
+import { AppBskyActorDefs, ChatBskyActorDefs } from "@atproto/api";
 
 /**
  * Matches any profile view exported by our SDK
  */
 export type AnyProfileView =
-  | AppBskyActorDefs.ProfileViewBasic
-  | AppBskyActorDefs.ProfileView
-  | AppBskyActorDefs.ProfileViewDetailed
-  | ChatBskyActorDefs.ProfileViewBasic
+	| AppBskyActorDefs.ProfileViewBasic
+	| AppBskyActorDefs.ProfileView
+	| AppBskyActorDefs.ProfileViewDetailed
+	| ChatBskyActorDefs.ProfileViewBasic;

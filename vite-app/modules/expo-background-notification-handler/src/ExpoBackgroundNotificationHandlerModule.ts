@@ -1,8 +1,7 @@
-import {requireNativeModule} from 'expo-modules-core'
+import { requireNativeModule } from "expo-modules-core";
 
-import {ExpoBackgroundNotificationHandlerModule} from './ExpoBackgroundNotificationHandler.types'
+import { ExpoBackgroundNotificationHandlerModule } from "./ExpoBackgroundNotificationHandler.types";
 
-export const BackgroundNotificationHandler =
-  requireNativeModule<ExpoBackgroundNotificationHandlerModule>(
-    'ExpoBackgroundNotificationHandler',
-  )
+export const BackgroundNotificationHandler = requireNativeModule<ExpoBackgroundNotificationHandlerModule>(
+	"ExpoBackgroundNotificationHandler",
+);

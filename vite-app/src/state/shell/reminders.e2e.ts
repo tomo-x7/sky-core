@@ -1,5 +1,5 @@
 export function shouldRequestEmailConfirmation() {
-  return false
+	return false;
 }
 
 export function snoozeEmailConfirmationPrompt() {}

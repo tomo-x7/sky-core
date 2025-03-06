@@ -1,1 +1,1 @@
-export {ExpoScrollForwarderView} from './src/ExpoScrollForwarderView'
+export { ExpoScrollForwarderView } from "./src/ExpoScrollForwarderView";

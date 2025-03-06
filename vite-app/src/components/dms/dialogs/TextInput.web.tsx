@@ -1,1 +1,1 @@
-export {TextInput} from 'react-native'
+export { TextInput } from "react-native";

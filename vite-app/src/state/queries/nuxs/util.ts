@@ -1,52 +1,47 @@
-import {AppBskyActorDefs, nuxSchema} from '@atproto/api'
+import { AppBskyActorDefs, nuxSchema } from "@atproto/api";
 
-import {
-  AppNux,
-  Nux,
-  nuxNames,
-  NuxSchemas,
-} from '#/state/queries/nuxs/definitions'
+import { AppNux, Nux, nuxNames, NuxSchemas } from "#/state/queries/nuxs/definitions";
 
 export function parseAppNux(nux: AppBskyActorDefs.Nux): AppNux | undefined {
-  if (!nuxNames.has(nux.id as Nux)) return
-  if (!nuxSchema.safeParse(nux).success) return
+	if (!nuxNames.has(nux.id as Nux)) return;
+	if (!nuxSchema.safeParse(nux).success) return;
 
-  const {data, ...rest} = nux
+	const { data, ...rest } = nux;
 
-  const schema = NuxSchemas[nux.id as Nux]
+	const schema = NuxSchemas[nux.id as Nux];
 
-  if (schema && data) {
-    const parsedData = JSON.parse(data)
+	if (schema && data) {
+		const parsedData = JSON.parse(data);
 
-    if (!schema.safeParse(parsedData).success) return
+		if (!schema.safeParse(parsedData).success) return;
 
-    return {
-      ...rest,
-      data: parsedData,
-    } as AppNux
-  }
+		return {
+			...rest,
+			data: parsedData,
+		} as AppNux;
+	}
 
-  return {
-    ...rest,
-    data: undefined,
-  } as AppNux
+	return {
+		...rest,
+		data: undefined,
+	} as AppNux;
 }
 
 export function serializeAppNux(nux: AppNux): AppBskyActorDefs.Nux {
-  const {data, ...rest} = nux
-  const schema = NuxSchemas[nux.id as Nux]
+	const { data, ...rest } = nux;
+	const schema = NuxSchemas[nux.id as Nux];
 
-  const result: AppBskyActorDefs.Nux = {
-    ...rest,
-    data: undefined,
-  }
+	const result: AppBskyActorDefs.Nux = {
+		...rest,
+		data: undefined,
+	};
 
-  if (schema) {
-    schema.parse(data)
-    result.data = JSON.stringify(data)
-  }
+	if (schema) {
+		schema.parse(data);
+		result.data = JSON.stringify(data);
+	}
 
-  nuxSchema.parse(result)
+	nuxSchema.parse(result);
 
-  return result
+	return result;
 }

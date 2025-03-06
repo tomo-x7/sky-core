@@ -1,13 +1,13 @@
-import {useCallback} from 'react'
-import {QueryClient, useQueryClient} from '@tanstack/react-query'
+import { useCallback } from "react";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 
-import * as bsky from '#/types/bsky'
+import * as bsky from "#/types/bsky";
 
-const unstableProfileViewCacheQueryKeyRoot = 'unstableProfileViewCache'
+const unstableProfileViewCacheQueryKeyRoot = "unstableProfileViewCache";
 export const unstableProfileViewCacheQueryKey = (didOrHandle: string) => [
-  unstableProfileViewCacheQueryKeyRoot,
-  didOrHandle,
-]
+	unstableProfileViewCacheQueryKeyRoot,
+	didOrHandle,
+];
 
 /**
  * Used as a rough cache of profile views to make loading snappier. This method
@@ -15,18 +15,9 @@ export const unstableProfileViewCacheQueryKey = (didOrHandle: string) => [
  *
  * Access the cache via {@link useUnstableProfileViewCache}.
  */
-export function unstableCacheProfileView(
-  queryClient: QueryClient,
-  profile: bsky.profile.AnyProfileView,
-) {
-  queryClient.setQueryData(
-    unstableProfileViewCacheQueryKey(profile.handle),
-    profile,
-  )
-  queryClient.setQueryData(
-    unstableProfileViewCacheQueryKey(profile.did),
-    profile,
-  )
+export function unstableCacheProfileView(queryClient: QueryClient, profile: bsky.profile.AnyProfileView) {
+	queryClient.setQueryData(unstableProfileViewCacheQueryKey(profile.handle), profile);
+	queryClient.setQueryData(unstableProfileViewCacheQueryKey(profile.did), profile);
 }
 
 /**
@@ -38,14 +29,12 @@ export function unstableCacheProfileView(
  * To cache a profile, use {@link unstableCacheProfileView}.
  */
 export function useUnstableProfileViewCache() {
-  const qc = useQueryClient()
-  const getUnstableProfile = useCallback(
-    (didOrHandle: string) => {
-      return qc.getQueryData<bsky.profile.AnyProfileView>(
-        unstableProfileViewCacheQueryKey(didOrHandle),
-      )
-    },
-    [qc],
-  )
-  return {getUnstableProfile}
+	const qc = useQueryClient();
+	const getUnstableProfile = useCallback(
+		(didOrHandle: string) => {
+			return qc.getQueryData<bsky.profile.AnyProfileView>(unstableProfileViewCacheQueryKey(didOrHandle));
+		},
+		[qc],
+	);
+	return { getUnstableProfile };
 }
