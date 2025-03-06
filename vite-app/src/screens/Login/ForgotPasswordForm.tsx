@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { ActivityIndicator, Keyboard, View } from "react-native";
-import { ComAtprotoServerDescribeServer } from "@atproto/api";
+import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { BskyAgent } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
+import React, { useState } from "react";
+import { ActivityIndicator, Keyboard, View } from "react-native";
 
-import { isNetworkError } from "#/lib/strings/errors";
-import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
+import { Text } from "#/components/Typography";
 import { FormError } from "#/components/forms/FormError";
 import { HostingProvider } from "#/components/forms/HostingProvider";
 import * as TextField from "#/components/forms/TextField";
 import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
-import { Text } from "#/components/Typography";
+import { isNetworkError } from "#/lib/strings/errors";
+import { cleanError } from "#/lib/strings/errors";
+import { logger } from "#/logger";
 import { FormContainer } from "./FormContainer";
 
 type ServiceDescription = ComAtprotoServerDescribeServer.OutputSchema;

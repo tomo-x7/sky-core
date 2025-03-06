@@ -1,15 +1,15 @@
+import type { AppBskyActorDefs, AppBskyLabelerDefs, ModerationOpts, RichText as RichTextAPI } from "@atproto/api";
+import { useIsFocused } from "@react-navigation/native";
 import React, { memo, useState } from "react";
-import { LayoutChangeEvent, StyleSheet, View } from "react-native";
+import { type LayoutChangeEvent, StyleSheet, View } from "react-native";
 import Animated, { runOnJS, useAnimatedReaction, useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppBskyActorDefs, AppBskyLabelerDefs, ModerationOpts, RichText as RichTextAPI } from "@atproto/api";
-import { useIsFocused } from "@react-navigation/native";
 
+import { atoms as a, useTheme } from "#/alf";
 import { isNative } from "#/platform/detection";
 import { useSetLightStatusBar } from "#/state/shell/light-status-bar";
 import { usePagerHeaderContext } from "#/view/com/pager/PagerHeaderContext";
 import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
-import { atoms as a, useTheme } from "#/alf";
 import { ProfileHeaderLabeler } from "./ProfileHeaderLabeler";
 import { ProfileHeaderStandard } from "./ProfileHeaderStandard";
 

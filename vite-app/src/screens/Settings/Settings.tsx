@@ -1,35 +1,20 @@
+import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { LayoutAnimation, Pressable, View } from "react-native";
 import { Linking } from "react-native";
 import { useReducedMotion } from "react-native-reanimated";
-import { AppBskyActorDefs, moderateProfile } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { IS_INTERNAL } from "#/lib/app-info";
-import { HELP_DESK_URL } from "#/lib/constants";
-import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
-import { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
-import { sanitizeHandle } from "#/lib/strings/handles";
-import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { clearStorage } from "#/state/persisted";
-import { useModerationOpts } from "#/state/preferences/moderation-opts";
-import { useDeleteActorDeclaration } from "#/state/queries/messages/actor-declaration";
-import { useProfileQuery, useProfilesQuery } from "#/state/queries/profile";
-import { SessionAccount, useSession, useSessionApi } from "#/state/session";
-import { useOnboardingDispatch } from "#/state/shell";
-import { useLoggedOutViewControls } from "#/state/shell/logged-out";
-import { useCloseAllActiveElements } from "#/state/util";
-import * as Toast from "#/view/com/util/Toast";
-import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { ProfileHeaderDisplayName } from "#/screens/Profile/Header/DisplayName";
-import { ProfileHeaderHandle } from "#/screens/Profile/Header/Handle";
-import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { AvatarStackWithFetch } from "#/components/AvatarStack";
 import { useDialogControl } from "#/components/Dialog";
+import * as Layout from "#/components/Layout";
+import { Loader } from "#/components/Loader";
+import * as Menu from "#/components/Menu";
+import * as Prompt from "#/components/Prompt";
 import { SwitchAccountDialog } from "#/components/dialogs/SwitchAccount";
 import { Accessibility_Stroke2_Corner2_Rounded as AccessibilityIcon } from "#/components/icons/Accessibility";
 import { BubbleInfo_Stroke2_Corner2_Rounded as BubbleInfoIcon } from "#/components/icons/BubbleInfo";
@@ -41,17 +26,32 @@ import { Earth_Stroke2_Corner2_Rounded as EarthIcon } from "#/components/icons/G
 import { Lock_Stroke2_Corner2_Rounded as LockIcon } from "#/components/icons/Lock";
 import { PaintRoller_Stroke2_Corner2_Rounded as PaintRollerIcon } from "#/components/icons/PaintRoller";
 import {
-	Person_Stroke2_Corner2_Rounded as PersonIcon,
 	PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon,
+	Person_Stroke2_Corner2_Rounded as PersonIcon,
 	PersonPlus_Stroke2_Corner2_Rounded as PersonPlusIcon,
 	PersonX_Stroke2_Corner0_Rounded as PersonXIcon,
 } from "#/components/icons/Person";
 import { RaisingHand4Finger_Stroke2_Corner2_Rounded as HandIcon } from "#/components/icons/RaisingHand";
 import { Window_Stroke2_Corner2_Rounded as WindowIcon } from "#/components/icons/Window";
-import * as Layout from "#/components/Layout";
-import { Loader } from "#/components/Loader";
-import * as Menu from "#/components/Menu";
-import * as Prompt from "#/components/Prompt";
+import { IS_INTERNAL } from "#/lib/app-info";
+import { HELP_DESK_URL } from "#/lib/constants";
+import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
+import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import { ProfileHeaderDisplayName } from "#/screens/Profile/Header/DisplayName";
+import { ProfileHeaderHandle } from "#/screens/Profile/Header/Handle";
+import * as SettingsList from "#/screens/Settings/components/SettingsList";
+import { useProfileShadow } from "#/state/cache/profile-shadow";
+import { clearStorage } from "#/state/persisted";
+import { useModerationOpts } from "#/state/preferences/moderation-opts";
+import { useDeleteActorDeclaration } from "#/state/queries/messages/actor-declaration";
+import { useProfileQuery, useProfilesQuery } from "#/state/queries/profile";
+import { type SessionAccount, useSession, useSessionApi } from "#/state/session";
+import { useOnboardingDispatch } from "#/state/shell";
+import { useLoggedOutViewControls } from "#/state/shell/logged-out";
+import { useCloseAllActiveElements } from "#/state/util";
+import * as Toast from "#/view/com/util/Toast";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Settings">;
 export function SettingsScreen({}: Props) {

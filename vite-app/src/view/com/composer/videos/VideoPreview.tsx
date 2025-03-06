@@ -1,14 +1,14 @@
+import { BlueskyVideoView } from "@haileyok/bluesky-video";
+import type { ImagePickerAsset } from "expo-image-picker";
 import React from "react";
 import { View } from "react-native";
-import { ImagePickerAsset } from "expo-image-picker";
-import { BlueskyVideoView } from "@haileyok/bluesky-video";
 
-import { CompressedVideo } from "#/lib/media/video/types";
+import { atoms as a, useTheme } from "#/alf";
+import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
+import type { CompressedVideo } from "#/lib/media/video/types";
 import { clamp } from "#/lib/numbers";
 import { useAutoplayDisabled } from "#/state/preferences";
 import { ExternalEmbedRemoveBtn } from "#/view/com/composer/ExternalEmbedRemoveBtn";
-import { atoms as a, useTheme } from "#/alf";
-import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import { VideoTranscodeBackdrop } from "./VideoTranscodeBackdrop";
 
 export function VideoPreview({

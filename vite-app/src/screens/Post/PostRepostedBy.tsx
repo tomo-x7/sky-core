@@ -1,13 +1,13 @@
-import React from "react";
 import { Plural, Trans } from "@lingui/macro";
 import { useFocusEffect } from "@react-navigation/native";
+import React from "react";
 
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import * as Layout from "#/components/Layout";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { makeRecordUri } from "#/lib/strings/url-helpers";
 import { usePostThreadQuery } from "#/state/queries/post-thread";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { PostRepostedBy as PostRepostedByComponent } from "#/view/com/post-thread/PostRepostedBy";
-import * as Layout from "#/components/Layout";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "PostRepostedBy">;
 export const PostRepostedByScreen = ({ route }: Props) => {

@@ -1,6 +1,6 @@
 import { requireNativeModule } from "expo";
 
-import { GooglePlayReferrerInfo, ReferrerInfo } from "./types";
+import type { GooglePlayReferrerInfo, ReferrerInfo } from "./types";
 
 export const NativeModule = requireNativeModule("ExpoBlueskyReferrer");
 

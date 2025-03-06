@@ -1,16 +1,17 @@
+import {
+	type AppBskyActorDefs,
+	AppBskyFeedDefs,
+	type AppBskyFeedPost,
+	AtUri,
+	type BskyAgent,
+	type ModerationDecision,
+	moderatePost,
+} from "@atproto/api";
+import { type InfiniteData, type QueryClient, type QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 import React, { useCallback, useEffect, useRef } from "react";
 import { AppState } from "react-native";
-import {
-	AppBskyActorDefs,
-	AppBskyFeedDefs,
-	AppBskyFeedPost,
-	AtUri,
-	BskyAgent,
-	moderatePost,
-	ModerationDecision,
-} from "@atproto/api";
-import { InfiniteData, QueryClient, QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 
+import { FeedTuner, type FeedTunerFn } from "#/lib/api/feed-manip";
 import { AuthorFeedAPI } from "#/lib/api/feed/author";
 import { CustomFeedAPI } from "#/lib/api/feed/custom";
 import { FollowingFeedAPI } from "#/lib/api/feed/following";
@@ -18,9 +19,8 @@ import { HomeFeedAPI } from "#/lib/api/feed/home";
 import { LikesFeedAPI } from "#/lib/api/feed/likes";
 import { ListFeedAPI } from "#/lib/api/feed/list";
 import { MergeFeedAPI } from "#/lib/api/feed/merge";
-import { FeedAPI, ReasonFeedSource } from "#/lib/api/feed/types";
+import type { FeedAPI, ReasonFeedSource } from "#/lib/api/feed/types";
 import { aggregateUserInterests } from "#/lib/api/feed/utils";
-import { FeedTuner, FeedTunerFn } from "#/lib/api/feed-manip";
 import { DISCOVER_FEED_URI } from "#/lib/constants";
 import { BSKY_FEED_OWNER_DIDS } from "#/lib/constants";
 import { logger } from "#/logger";
@@ -222,11 +222,11 @@ export function usePostFeedQuery(
 
 				// Keep track of the last run and whether we can reuse
 				// some already selected pages from there.
-				let reusedPages = [];
+				const reusedPages = [];
 				if (lastRun.current) {
 					const { data: lastData, args: lastArgs, result: lastResult } = lastRun.current;
 					let canReuse = true;
-					for (let key in selectArgs) {
+					for (const key in selectArgs) {
 						if (selectArgs.hasOwnProperty(key)) {
 							if ((selectArgs as any)[key] !== (lastArgs as any)[key]) {
 								// Can't do reuse anything if any input has changed.

@@ -1,20 +1,20 @@
-import React from "react";
-import { View } from "react-native";
-import { Image } from "expo-image";
 import { AppBskyGraphStarterpack, AtUri } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import { Image } from "expo-image";
+import React from "react";
+import { View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Link as BaseLink, type LinkProps as BaseLinkProps } from "#/components/Link";
+import { Text } from "#/components/Typography";
+import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
 import { precacheResolvedUri } from "#/state/queries/resolve-uri";
 import { precacheStarterPack } from "#/state/queries/starter-packs";
 import { useSession } from "#/state/session";
-import { atoms as a, useTheme } from "#/alf";
-import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
-import { Link as BaseLink, LinkProps as BaseLinkProps } from "#/components/Link";
-import { Text } from "#/components/Typography";
 import * as bsky from "#/types/bsky";
 
 export function Default({

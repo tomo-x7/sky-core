@@ -1,21 +1,28 @@
-import React from "react";
-import { ActivityIndicator, FlatList as RNFlatList, RefreshControl, StyleProp, View, ViewStyle } from "react-native";
-import { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
+import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import {
+	ActivityIndicator,
+	FlatList as RNFlatList,
+	RefreshControl,
+	type StyleProp,
+	View,
+	type ViewStyle,
+} from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import * as ListCard from "#/components/ListCard";
+import { Text } from "#/components/Typography";
+import { BulletList_Stroke2_Corner0_Rounded as ListIcon } from "#/components/icons/BulletList";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
 import { logger } from "#/logger";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
-import { MyListsFilter, useMyListsQuery } from "#/state/queries/my-lists";
-import { atoms as a, useTheme } from "#/alf";
-import { BulletList_Stroke2_Corner0_Rounded as ListIcon } from "#/components/icons/BulletList";
-import * as ListCard from "#/components/ListCard";
-import { Text } from "#/components/Typography";
-import { ErrorMessage } from "../util/error/ErrorMessage";
+import { type MyListsFilter, useMyListsQuery } from "#/state/queries/my-lists";
 import { List } from "../util/List";
+import { ErrorMessage } from "../util/error/ErrorMessage";
 
 const LOADING = { _reactKey: "__loading__" };
 const EMPTY = { _reactKey: "__empty__" };

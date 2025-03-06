@@ -1,10 +1,22 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { GestureResponderEvent, View } from "react-native";
-import { AppBskyEmbedRecord, ChatBskyConvoDefs, moderateProfile, ModerationOpts } from "@atproto/api";
+import { AppBskyEmbedRecord, ChatBskyConvoDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React, { useCallback, useMemo, useState } from "react";
+import { type GestureResponderEvent, View } from "react-native";
 
+import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import * as tokens from "#/alf/tokens";
+import { useDialogControl } from "#/components/Dialog";
+import { Link } from "#/components/Link";
+import { useMenuControl } from "#/components/Menu";
+import { Text } from "#/components/Typography";
+import { ConvoMenu } from "#/components/dms/ConvoMenu";
+import { LeaveConvoPrompt } from "#/components/dms/LeaveConvoPrompt";
+import { Bell2Off_Filled_Corner0_Rounded as BellStroke } from "#/components/icons/Bell2";
+import { Envelope_Open_Stroke2_Corner0_Rounded as EnvelopeOpen } from "#/components/icons/EnveopeOpen";
+import { Trash_Stroke2_Corner0_Rounded } from "#/components/icons/Trash";
+import { PostAlerts } from "#/components/moderation/PostAlerts";
 import { GestureActionView } from "#/lib/custom-animations/GestureActionView";
 import { useHaptics } from "#/lib/haptics";
 import { decrementBadgeCount } from "#/lib/notifications/notifications";
@@ -17,21 +29,9 @@ import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { precacheConvoQuery, useMarkAsReadMutation } from "#/state/queries/messages/conversation";
 import { precacheProfile } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
+import type * as bsky from "#/types/bsky";
 import { TimeElapsed } from "#/view/com/util/TimeElapsed";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
-import * as tokens from "#/alf/tokens";
-import { useDialogControl } from "#/components/Dialog";
-import { ConvoMenu } from "#/components/dms/ConvoMenu";
-import { LeaveConvoPrompt } from "#/components/dms/LeaveConvoPrompt";
-import { Bell2Off_Filled_Corner0_Rounded as BellStroke } from "#/components/icons/Bell2";
-import { Envelope_Open_Stroke2_Corner0_Rounded as EnvelopeOpen } from "#/components/icons/EnveopeOpen";
-import { Trash_Stroke2_Corner0_Rounded } from "#/components/icons/Trash";
-import { Link } from "#/components/Link";
-import { useMenuControl } from "#/components/Menu";
-import { PostAlerts } from "#/components/moderation/PostAlerts";
-import { Text } from "#/components/Typography";
-import * as bsky from "#/types/bsky";
 
 export let ChatListItem = ({
 	convo,

@@ -1,10 +1,21 @@
-import React, { memo, useCallback } from "react";
-import { Pressable, type PressableStateCallbackType, type StyleProp, View, type ViewStyle } from "react-native";
-import * as Clipboard from "expo-clipboard";
-import { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, AtUri, RichText as RichTextAPI } from "@atproto/api";
+import {
+	type AppBskyFeedDefs,
+	type AppBskyFeedPost,
+	type AppBskyFeedThreadgate,
+	AtUri,
+	type RichText as RichTextAPI,
+} from "@atproto/api";
 import { msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import * as Clipboard from "expo-clipboard";
+import React, { memo, useCallback } from "react";
+import { Pressable, type PressableStateCallbackType, type StyleProp, View, type ViewStyle } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { useDialogControl } from "#/components/Dialog";
+import * as Prompt from "#/components/Prompt";
+import { ArrowOutOfBox_Stroke2_Corner0_Rounded as ArrowOutOfBox } from "#/components/icons/ArrowOutOfBox";
+import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
 import { IS_INTERNAL } from "#/lib/app-info";
 import { POST_CTRL_HITSLOP } from "#/lib/constants";
 import { CountWheel } from "#/lib/custom-animations/CountWheel";
@@ -14,21 +25,16 @@ import { makeProfileLink } from "#/lib/routes/links";
 import { shareUrl } from "#/lib/sharing";
 import { useGate } from "#/lib/statsig/statsig";
 import { toShareUrl } from "#/lib/strings/url-helpers";
-import { Shadow } from "#/state/cache/types";
+import type { Shadow } from "#/state/cache/types";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
 import { usePostLikeMutationQueue, usePostRepostMutationQueue } from "#/state/queries/post";
 import { useRequireAuth, useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
 import { ProgressGuideAction, useProgressGuideControls } from "#/state/shell/progress-guide";
-import { atoms as a, useTheme } from "#/alf";
-import { useDialogControl } from "#/components/Dialog";
-import { ArrowOutOfBox_Stroke2_Corner0_Rounded as ArrowOutOfBox } from "#/components/icons/ArrowOutOfBox";
-import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
-import * as Prompt from "#/components/Prompt";
+import * as Toast from "../Toast";
 import { PostDropdownBtn } from "../forms/PostDropdownBtn";
 import { formatCount } from "../numeric/format";
 import { Text } from "../text/Text";
-import * as Toast from "../Toast";
 import { RepostButton } from "./RepostButton";
 
 let PostCtrls = ({

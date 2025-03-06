@@ -1,13 +1,25 @@
-import React, { memo, useMemo } from "react";
-import { Image, Pressable, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Image as RNImage } from "react-native-image-crop-picker";
-import Svg, { Circle, Path, Rect } from "react-native-svg";
-import { ModerationUI } from "@atproto/api";
+import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React, { memo, useMemo } from "react";
+import { Image, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import type { Image as RNImage } from "react-native-image-crop-picker";
+import Svg, { Circle, Path, Rect } from "react-native-svg";
 
+import { tokens, useTheme } from "#/alf";
+import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
+import { Link } from "#/components/Link";
+import { MediaInsetBorder } from "#/components/MediaInsetBorder";
+import * as Menu from "#/components/Menu";
+import { ProfileHoverCard } from "#/components/ProfileHoverCard";
+import {
+	Camera_Stroke2_Corner0_Rounded as Camera,
+	Camera_Filled_Stroke2_Corner0_Rounded as CameraFilled,
+} from "#/components/icons/Camera";
+import { StreamingLive_Stroke2_Corner0_Rounded as Library } from "#/components/icons/StreamingLive";
+import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useCameraPermission, usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -15,20 +27,8 @@ import { colors } from "#/lib/styles";
 import { logger } from "#/logger";
 import { isAndroid, isNative, isWeb } from "#/platform/detection";
 import { precacheProfile } from "#/state/queries/profile";
+import type * as bsky from "#/types/bsky";
 import { HighPriorityImage } from "#/view/com/util/images/Image";
-import { tokens, useTheme } from "#/alf";
-import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
-import {
-	Camera_Filled_Stroke2_Corner0_Rounded as CameraFilled,
-	Camera_Stroke2_Corner0_Rounded as Camera,
-} from "#/components/icons/Camera";
-import { StreamingLive_Stroke2_Corner0_Rounded as Library } from "#/components/icons/StreamingLive";
-import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
-import { Link } from "#/components/Link";
-import { MediaInsetBorder } from "#/components/MediaInsetBorder";
-import * as Menu from "#/components/Menu";
-import { ProfileHoverCard } from "#/components/ProfileHoverCard";
-import * as bsky from "#/types/bsky";
 import { openCamera, openCropper, openPicker } from "../../../lib/media/picker";
 
 export type UserAvatarType = "user" | "algo" | "list" | "labeler";

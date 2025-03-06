@@ -1,8 +1,8 @@
-import { StyleProp, ViewStyle } from "react-native";
-import { ModerationDecision } from "@atproto/api";
+import type { ModerationDecision } from "@atproto/api";
+import type { StyleProp, ViewStyle } from "react-native";
 
-import { getModerationCauseKey, unique } from "#/lib/moderation";
 import * as Pills from "#/components/Pills";
+import { getModerationCauseKey, unique } from "#/lib/moderation";
 
 export function ProfileHeaderAlerts({
 	moderation,

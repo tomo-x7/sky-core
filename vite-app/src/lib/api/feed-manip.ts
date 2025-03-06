@@ -1,5 +1,5 @@
 import {
-	AppBskyActorDefs,
+	type AppBskyActorDefs,
 	AppBskyEmbedRecord,
 	AppBskyEmbedRecordWithMedia,
 	AppBskyFeedDefs,
@@ -9,7 +9,7 @@ import {
 import * as bsky from "#/types/bsky";
 import { isPostInLanguage } from "../../locale/helpers";
 import { FALLBACK_MARKER_POST } from "./feed/home";
-import { ReasonFeedSource } from "./feed/types";
+import type { ReasonFeedSource } from "./feed/types";
 
 type FeedViewPost = AppBskyFeedDefs.FeedViewPost;
 
@@ -178,7 +178,7 @@ export class FeedViewPostsSlice {
 
 	getAuthors(): AuthorContext {
 		const feedPost = this._feedPost;
-		let author: AppBskyActorDefs.ProfileViewBasic = feedPost.post.author;
+		const author: AppBskyActorDefs.ProfileViewBasic = feedPost.post.author;
 		let parentAuthor: AppBskyActorDefs.ProfileViewBasic | undefined;
 		let grandparentAuthor: AppBskyActorDefs.ProfileViewBasic | undefined;
 		let rootAuthor: AppBskyActorDefs.ProfileViewBasic | undefined;

@@ -1,29 +1,29 @@
-import React from "react";
-import { findNodeHandle, View } from "react-native";
-import { useSafeAreaFrame } from "react-native-safe-area-context";
 import {
-	AppBskyLabelerDefs,
-	InterpretedLabelValueDefinition,
+	type AppBskyLabelerDefs,
+	type InterpretedLabelValueDefinition,
+	type ModerationOpts,
 	interpretLabelValueDefinitions,
-	ModerationOpts,
 } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { View, findNodeHandle } from "react-native";
+import { useSafeAreaFrame } from "react-native-safe-area-context";
 
-import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
-import { isLabelerSubscribed, lookupLabelValueDefinition } from "#/lib/moderation";
-import { useScrollHandlers } from "#/lib/ScrollContext";
-import { isNative } from "#/platform/detection";
-import { ListRef } from "#/view/com/util/List";
 import { atoms as a, useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
-import { LabelerLabelPreference } from "#/components/moderation/LabelPreference";
 import { Text } from "#/components/Typography";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
+import { LabelerLabelPreference } from "#/components/moderation/LabelPreference";
+import { useScrollHandlers } from "#/lib/ScrollContext";
+import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
+import { isLabelerSubscribed, lookupLabelValueDefinition } from "#/lib/moderation";
+import { isNative } from "#/platform/detection";
+import type { ListRef } from "#/view/com/util/List";
 import { ErrorState } from "../ErrorState";
-import { SectionRef } from "./types";
+import type { SectionRef } from "./types";
 
 interface LabelsSectionProps {
 	isLabelerLoading: boolean;

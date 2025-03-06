@@ -1,12 +1,30 @@
-import React, { ComponentProps } from "react";
-import { GestureResponderEvent, View } from "react-native";
+import { Trans, msg, plural } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { StackActions } from "@react-navigation/native";
+import React, { type ComponentProps } from "react";
+import { type GestureResponderEvent, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { msg, plural, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { StackActions } from "@react-navigation/native";
 
+import { atoms as a } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import { useDialogControl } from "#/components/Dialog";
+import { SwitchAccountDialog } from "#/components/dialogs/SwitchAccount";
+import {
+	Bell_Stroke2_Corner0_Rounded as Bell,
+	Bell_Filled_Corner0_Rounded as BellFilled,
+} from "#/components/icons/Bell";
+import {
+	HomeOpen_Stoke2_Corner0_Rounded as Home,
+	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
+} from "#/components/icons/HomeOpen";
+import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "#/components/icons/MagnifyingGlass";
+import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "#/components/icons/MagnifyingGlass2";
+import {
+	Message_Stroke2_Corner0_Rounded as Message,
+	Message_Stroke2_Corner0_Rounded_Filled as MessageFilled,
+} from "#/components/icons/Message";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useHaptics } from "#/lib/haptics";
 import { useDedupe } from "#/lib/hooks/useDedupe";
@@ -14,7 +32,7 @@ import { useMinimalShellFooterTransform } from "#/lib/hooks/useMinimalShellTrans
 import { useNavigationTabState } from "#/lib/hooks/useNavigationTabState";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { clamp } from "#/lib/numbers";
-import { getTabState, TabState } from "#/lib/routes/helpers";
+import { TabState, getTabState } from "#/lib/routes/helpers";
 import { useGate } from "#/lib/statsig/statsig";
 import { emitSoftReset } from "#/state/events";
 import { useHomeBadge } from "#/state/home-badge";
@@ -25,28 +43,10 @@ import { useSession } from "#/state/session";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import { useShellLayout } from "#/state/shell/shell-layout";
 import { useCloseAllActiveElements } from "#/state/util";
-import { Text } from "#/view/com/util/text/Text";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { Text } from "#/view/com/util/text/Text";
 import { Logo } from "#/view/icons/Logo";
 import { Logotype } from "#/view/icons/Logotype";
-import { atoms as a } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import { useDialogControl } from "#/components/Dialog";
-import { SwitchAccountDialog } from "#/components/dialogs/SwitchAccount";
-import {
-	Bell_Filled_Corner0_Rounded as BellFilled,
-	Bell_Stroke2_Corner0_Rounded as Bell,
-} from "#/components/icons/Bell";
-import {
-	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
-	HomeOpen_Stoke2_Corner0_Rounded as Home,
-} from "#/components/icons/HomeOpen";
-import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "#/components/icons/MagnifyingGlass";
-import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "#/components/icons/MagnifyingGlass2";
-import {
-	Message_Stroke2_Corner0_Rounded as Message,
-	Message_Stroke2_Corner0_Rounded_Filled as MessageFilled,
-} from "#/components/icons/Message";
 import { styles } from "./BottomBarStyles";
 
 type TabOptions = "Home" | "Search" | "Notifications" | "MyProfile" | "Feeds" | "Messages";

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { type ScrollView, StyleSheet, View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";

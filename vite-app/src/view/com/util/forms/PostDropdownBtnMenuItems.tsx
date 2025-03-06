@@ -1,38 +1,22 @@
-import React, { memo, useCallback } from "react";
-import { Platform, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
-import * as Clipboard from "expo-clipboard";
-import { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, AtUri, RichText as RichTextAPI } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import {
+	type AppBskyFeedDefs,
+	type AppBskyFeedPost,
+	type AppBskyFeedThreadgate,
+	AtUri,
+	type RichText as RichTextAPI,
+} from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import * as Clipboard from "expo-clipboard";
+import React, { memo, useCallback } from "react";
+import { Platform, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
 
-import { useOpenLink } from "#/lib/hooks/useOpenLink";
-import { getCurrentRoute } from "#/lib/routes/helpers";
-import { makeProfileLink } from "#/lib/routes/links";
-import { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
-import { shareText, shareUrl } from "#/lib/sharing";
-import { logEvent } from "#/lib/statsig/statsig";
-import { richTextToString } from "#/lib/strings/rich-text-helpers";
-import { toShareUrl } from "#/lib/strings/url-helpers";
-import { getTranslatorLink } from "#/locale/helpers";
-import { logger } from "#/logger";
-import { isWeb } from "#/platform/detection";
-import { Shadow } from "#/state/cache/post-shadow";
-import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { useFeedFeedbackContext } from "#/state/feed-feedback";
-import { useLanguagePrefs } from "#/state/preferences";
-import { useHiddenPosts, useHiddenPostsApi } from "#/state/preferences";
-import { useDevModeEnabled } from "#/state/preferences/dev-mode";
-import { usePinnedPostMutation } from "#/state/queries/pinned-post";
-import { usePostDeleteMutation, useThreadMuteMutationQueue } from "#/state/queries/post";
-import { useToggleQuoteDetachmentMutation } from "#/state/queries/postgate";
-import { getMaybeDetachedQuoteEmbed } from "#/state/queries/postgate/util";
-import { useProfileBlockMutationQueue, useProfileMuteMutationQueue } from "#/state/queries/profile";
-import { useToggleReplyVisibilityMutation } from "#/state/queries/threadgate";
-import { useSession } from "#/state/session";
-import { useMergedThreadgateHiddenReplies } from "#/state/threadgate-hidden-replies";
 import { useBreakpoints } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
+import { Loader } from "#/components/Loader";
+import * as Menu from "#/components/Menu";
+import * as Prompt from "#/components/Prompt";
 import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
 import { EmbedDialog } from "#/components/dialogs/Embed";
 import {
@@ -61,10 +45,32 @@ import { SpeakerVolumeFull_Stroke2_Corner0_Rounded as UnmuteIcon } from "#/compo
 import { SpeakerVolumeFull_Stroke2_Corner0_Rounded as Unmute } from "#/components/icons/Speaker";
 import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
 import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
-import { Loader } from "#/components/Loader";
-import * as Menu from "#/components/Menu";
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
-import * as Prompt from "#/components/Prompt";
+import { useOpenLink } from "#/lib/hooks/useOpenLink";
+import { getCurrentRoute } from "#/lib/routes/helpers";
+import { makeProfileLink } from "#/lib/routes/links";
+import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import { shareText, shareUrl } from "#/lib/sharing";
+import { logEvent } from "#/lib/statsig/statsig";
+import { richTextToString } from "#/lib/strings/rich-text-helpers";
+import { toShareUrl } from "#/lib/strings/url-helpers";
+import { getTranslatorLink } from "#/locale/helpers";
+import { logger } from "#/logger";
+import { isWeb } from "#/platform/detection";
+import type { Shadow } from "#/state/cache/post-shadow";
+import { useProfileShadow } from "#/state/cache/profile-shadow";
+import { useFeedFeedbackContext } from "#/state/feed-feedback";
+import { useLanguagePrefs } from "#/state/preferences";
+import { useHiddenPosts, useHiddenPostsApi } from "#/state/preferences";
+import { useDevModeEnabled } from "#/state/preferences/dev-mode";
+import { usePinnedPostMutation } from "#/state/queries/pinned-post";
+import { usePostDeleteMutation, useThreadMuteMutationQueue } from "#/state/queries/post";
+import { useToggleQuoteDetachmentMutation } from "#/state/queries/postgate";
+import { getMaybeDetachedQuoteEmbed } from "#/state/queries/postgate/util";
+import { useProfileBlockMutationQueue, useProfileMuteMutationQueue } from "#/state/queries/profile";
+import { useToggleReplyVisibilityMutation } from "#/state/queries/threadgate";
+import { useSession } from "#/state/session";
+import { useMergedThreadgateHiddenReplies } from "#/state/threadgate-hidden-replies";
 import * as Toast from "../Toast";
 
 let PostDropdownMenuItems = ({

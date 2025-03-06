@@ -1,7 +1,8 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo } from "react";
-import { ChatBskyConvoDefs, ChatBskyConvoListConvos, moderateProfile, ModerationOpts } from "@atproto/api";
-import { InfiniteData, QueryClient, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { ChatBskyConvoDefs, type ChatBskyConvoListConvos, type ModerationOpts, moderateProfile } from "@atproto/api";
+import { type InfiniteData, type QueryClient, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import throttle from "lodash.throttle";
+import type React from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo } from "react";
 
 import { useCurrentConvoId } from "#/state/messages/current-convo-id";
 import { useMessagesEventBus } from "#/state/messages/events";

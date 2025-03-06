@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Pressable, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type Hls from "hls.js";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Pressable, View } from "react-native";
 
-import { isTouchDevice } from "#/lib/browser";
-import { clamp } from "#/lib/numbers";
-import { isIPhoneWeb } from "#/platform/detection";
-import { useAutoplayDisabled, useSetSubtitlesEnabled, useSubtitlesEnabled } from "#/state/preferences";
 import { atoms as a, useTheme, web } from "#/alf";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
 import { useIsWithinMessage } from "#/components/dms/MessageContext";
 import { useFullscreen } from "#/components/hooks/useFullscreen";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
@@ -22,13 +21,15 @@ import {
 } from "#/components/icons/CC";
 import { Pause_Filled_Corner0_Rounded as PauseIcon } from "#/components/icons/Pause";
 import { Play_Filled_Corner0_Rounded as PlayIcon } from "#/components/icons/Play";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
+import { isTouchDevice } from "#/lib/browser";
+import { clamp } from "#/lib/numbers";
+import { isIPhoneWeb } from "#/platform/detection";
+import { useAutoplayDisabled, useSetSubtitlesEnabled, useSubtitlesEnabled } from "#/state/preferences";
 import { TimeIndicator } from "../TimeIndicator";
 import { ControlButton } from "./ControlButton";
 import { Scrubber } from "./Scrubber";
-import { formatTime, useVideoElement } from "./utils";
 import { VolumeControl } from "./VolumeControl";
+import { formatTime, useVideoElement } from "./utils";
 
 export function Controls({
 	videoRef,

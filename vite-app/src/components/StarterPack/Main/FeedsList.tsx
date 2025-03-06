@@ -1,14 +1,14 @@
+import type { AppBskyFeedDefs } from "@atproto/api";
+import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 import React, { useCallback } from "react";
-import { ListRenderItemInfo, View } from "react-native";
-import { AppBskyFeedDefs } from "@atproto/api";
-import { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
+import { type ListRenderItemInfo, View } from "react-native";
 
-import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
-import { isNative, isWeb } from "#/platform/detection";
-import { List, ListRef } from "#/view/com/util/List";
-import { SectionRef } from "#/screens/Profile/Sections/types";
 import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
+import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
+import { isNative, isWeb } from "#/platform/detection";
+import type { SectionRef } from "#/screens/Profile/Sections/types";
+import { List, type ListRef } from "#/view/com/util/List";
 
 function keyExtractor(item: AppBskyFeedDefs.GeneratorView) {
 	return item.uri;

@@ -1,11 +1,11 @@
-import { AtpSessionData, AtpSessionEvent } from "@atproto/api";
+import type { AtpSessionData, AtpSessionEvent } from "@atproto/api";
 import { sha256 } from "js-sha256";
 import { Statsig } from "statsig-react-native-expo";
 
 import { IS_INTERNAL } from "#/lib/app-info";
-import { Schema } from "../persisted";
-import { Action, State } from "./reducer";
-import { SessionAccount } from "./types";
+import type { Schema } from "../persisted";
+import type { Action, State } from "./reducer";
+import type { SessionAccount } from "./types";
 
 type Reducer = (state: State, action: Action) => State;
 
@@ -113,8 +113,8 @@ export function addSessionDebugLog(log: Log) {
 	}
 }
 
-let agentIds = new WeakMap<object, string>();
-let realmId = Math.random().toString(36).slice(2);
+const agentIds = new WeakMap<object, string>();
+const realmId = Math.random().toString(36).slice(2);
 let nextAgentId = 1;
 
 function getAgentId(agent: object) {

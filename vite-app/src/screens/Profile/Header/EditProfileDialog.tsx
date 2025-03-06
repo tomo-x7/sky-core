@@ -1,25 +1,25 @@
+import type { AppBskyActorDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useCallback, useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
-import { Image as RNImage } from "react-native-image-crop-picker";
-import { AppBskyActorDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import type { Image as RNImage } from "react-native-image-crop-picker";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import * as Prompt from "#/components/Prompt";
+import * as TextField from "#/components/forms/TextField";
 import { compressIfNeeded } from "#/lib/media/manip";
 import { cleanError } from "#/lib/strings/errors";
 import { useWarnMaxGraphemeCount } from "#/lib/strings/helpers";
 import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { useProfileUpdateMutation } from "#/state/queries/profile";
-import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import * as Toast from "#/view/com/util/Toast";
 import { EditableUserAvatar } from "#/view/com/util/UserAvatar";
 import { UserBanner } from "#/view/com/util/UserBanner";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import * as TextField from "#/components/forms/TextField";
-import * as Prompt from "#/components/Prompt";
+import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 
 const DISPLAY_NAME_MAX_GRAPHEMES = 64;
 const DESCRIPTION_MAX_GRAPHEMES = 256;

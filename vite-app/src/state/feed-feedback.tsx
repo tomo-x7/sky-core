@@ -1,12 +1,12 @@
-import React from "react";
-import { AppState, AppStateStatus } from "react-native";
-import { AppBskyFeedDefs } from "@atproto/api";
+import type { AppBskyFeedDefs } from "@atproto/api";
 import throttle from "lodash.throttle";
+import React from "react";
+import { AppState, type AppStateStatus } from "react-native";
 
 import { FEEDBACK_FEEDS, STAGING_FEEDS } from "#/lib/constants";
 import { logEvent } from "#/lib/statsig/statsig";
 import { logger } from "#/logger";
-import { FeedDescriptor, FeedPostSliceItem } from "#/state/queries/post-feed";
+import type { FeedDescriptor, FeedPostSliceItem } from "#/state/queries/post-feed";
 import { getItemsForFeedback } from "#/view/com/posts/PostFeed";
 import { useAgent } from "./session";
 
@@ -185,7 +185,7 @@ function createAggregatedStats(): AggregatedStats {
 }
 
 function sendOrAggregateInteractionsForStats(stats: AggregatedStats, interactions: AppBskyFeedDefs.Interaction[]) {
-	for (let interaction of interactions) {
+	for (const interaction of interactions) {
 		switch (interaction.event) {
 			// Pressing "Show more" / "Show less" is relatively uncommon so we won't aggregate them.
 			// This lets us send the feed context together with them.

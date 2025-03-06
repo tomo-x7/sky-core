@@ -1,20 +1,20 @@
+import type { ModerationDecision } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { ModerationDecision } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { useProfileBlockMutationQueue } from "#/state/queries/profile";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
+import { Text } from "#/components/Typography";
 import { BlockedByListDialog } from "#/components/dms/BlockedByListDialog";
 import { LeaveConvoPrompt } from "#/components/dms/LeaveConvoPrompt";
 import { ReportConversationPrompt } from "#/components/dms/ReportConversationPrompt";
-import { Text } from "#/components/Typography";
-import * as bsky from "#/types/bsky";
+import { useProfileShadow } from "#/state/cache/profile-shadow";
+import { useProfileBlockMutationQueue } from "#/state/queries/profile";
+import type * as bsky from "#/types/bsky";
 
 export function MessagesListBlockedFooter({
 	recipient: initialRecipient,

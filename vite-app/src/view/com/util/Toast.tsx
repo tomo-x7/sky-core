@@ -1,3 +1,4 @@
+import { FontAwesomeIcon, type Props as FontAwesomeProps } from "@fortawesome/react-native-fontawesome";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AccessibilityInfo, View } from "react-native";
 import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
@@ -13,11 +14,10 @@ import Animated, {
 } from "react-native-reanimated";
 import RootSiblings from "react-native-root-siblings";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { FontAwesomeIcon, Props as FontAwesomeProps } from "@fortawesome/react-native-fontawesome";
 
-import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
+import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 
 const TIMEOUT = 2e3;
 

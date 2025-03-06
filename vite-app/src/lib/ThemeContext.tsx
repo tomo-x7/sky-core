@@ -1,7 +1,8 @@
-import React, { createContext, ReactNode, useContext } from "react";
-import { TextStyle, ViewStyle } from "react-native";
+import type React from "react";
+import { type ReactNode, createContext, useContext } from "react";
+import type { TextStyle, ViewStyle } from "react-native";
 
-import { ThemeName } from "#/alf/types";
+import type { ThemeName } from "#/alf/types";
 import { darkTheme, defaultTheme, dimTheme } from "./themes";
 
 export type ColorScheme = "light" | "dark";

@@ -1,10 +1,15 @@
-import React, { memo, useCallback } from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
-import { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
+import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import type React from "react";
+import { memo, useCallback } from "react";
+import { type StyleProp, View, type ViewStyle } from "react-native";
 
+import { atoms as a, useTheme, web } from "#/alf";
+import { WebOnlyInlineLinkText } from "#/components/Link";
+import { ProfileHoverCard } from "#/components/ProfileHoverCard";
+import { Text } from "#/components/Typography";
 import { makeProfileLink } from "#/lib/routes/links";
 import { forceLTR } from "#/lib/strings/bidi";
 import { NON_BREAKING_SPACE } from "#/lib/strings/constants";
@@ -13,10 +18,6 @@ import { sanitizeHandle } from "#/lib/strings/handles";
 import { niceDate } from "#/lib/strings/time";
 import { isAndroid } from "#/platform/detection";
 import { precacheProfile } from "#/state/queries/profile";
-import { atoms as a, useTheme, web } from "#/alf";
-import { WebOnlyInlineLinkText } from "#/components/Link";
-import { ProfileHoverCard } from "#/components/ProfileHoverCard";
-import { Text } from "#/components/Typography";
 import { TimeElapsed } from "./TimeElapsed";
 import { PreviewableUserAvatar } from "./UserAvatar";
 

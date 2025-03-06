@@ -1,15 +1,19 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { useA11y } from "#/state/a11y";
 import { useModals } from "#/state/modals";
-import { ComposerOpts, useComposerState } from "#/state/shell/composer";
-import { EmojiPicker, EmojiPickerPosition, EmojiPickerState } from "#/view/com/composer/text-input/web/EmojiPicker.web";
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { type ComposerOpts, useComposerState } from "#/state/shell/composer";
+import {
+	EmojiPicker,
+	type EmojiPickerPosition,
+	type EmojiPickerState,
+} from "#/view/com/composer/text-input/web/EmojiPicker.web";
 import { ComposePost, useComposerCancelRef } from "../com/composer/Composer";
 
 const BOTTOM_BAR_HEIGHT = 61;

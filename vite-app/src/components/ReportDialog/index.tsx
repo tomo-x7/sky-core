@@ -1,24 +1,24 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import type { ScrollView } from "react-native-gesture-handler";
 
-import { ReportOption } from "#/lib/moderation/useReportOptions";
+import type { ReportOption } from "#/lib/moderation/useReportOptions";
 import { useMyLabelersQuery } from "#/state/queries/preferences";
 export { useDialogControl as useReportDialogControl } from "#/components/Dialog";
 
-import { AppBskyLabelerDefs } from "@atproto/api";
+import type { AppBskyLabelerDefs } from "@atproto/api";
 
 import { atoms as a } from "#/alf";
 import * as Dialog from "#/components/Dialog";
-import { useDelayedLoading } from "#/components/hooks/useDelayedLoading";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
+import { useDelayedLoading } from "#/components/hooks/useDelayedLoading";
 import { SelectLabelerView } from "./SelectLabelerView";
 import { SelectReportOptionView } from "./SelectReportOptionView";
 import { SubmitView } from "./SubmitView";
-import { ReportDialogProps } from "./types";
+import type { ReportDialogProps } from "./types";
 
 export function ReportDialog(props: ReportDialogProps) {
 	return (

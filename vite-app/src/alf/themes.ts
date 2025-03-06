@@ -1,6 +1,6 @@
 import { atoms } from "./atoms";
-import { Palette, Theme } from "./types";
-import { BLUE_HUE, defaultScale, dimScale, GREEN_HUE, RED_HUE } from "./util/colorGeneration";
+import type { Palette, Theme } from "./types";
+import { BLUE_HUE, GREEN_HUE, RED_HUE, defaultScale, dimScale } from "./util/colorGeneration";
 
 const themes = createThemes({
 	hues: {

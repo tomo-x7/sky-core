@@ -1,49 +1,49 @@
+import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useQueryClient } from "@tanstack/react-query";
 import React, { memo } from "react";
 import {
 	ActivityIndicator,
 	AppState,
 	Dimensions,
-	ListRenderItemInfo,
-	StyleProp,
+	type ListRenderItemInfo,
+	type StyleProp,
 	StyleSheet,
 	View,
-	ViewStyle,
+	type ViewStyle,
 } from "react-native";
-import { AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { useQueryClient } from "@tanstack/react-query";
 
-import { DISCOVER_FEED_URI, KNOWN_SHUTDOWN_FEEDS } from "#/lib/constants";
-import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
-import { isIOS, isNative, isWeb } from "#/platform/detection";
-import { listenPostCreated } from "#/state/events";
-import { useFeedFeedbackContext } from "#/state/feed-feedback";
-import { useTrendingSettings } from "#/state/preferences/trending";
-import { STALE } from "#/state/queries";
-import {
-	AuthorFilter,
-	FeedDescriptor,
-	FeedParams,
-	FeedPostSlice,
-	FeedPostSliceItem,
-	pollLatest,
-	RQKEY,
-	usePostFeedQuery,
-} from "#/state/queries/post-feed";
-import { useSession } from "#/state/session";
-import { useProgressGuide } from "#/state/shell/progress-guide";
-import { List, ListRef } from "#/view/com/util/List";
-import { PostFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
-import { LoadMoreRetryBtn } from "#/view/com/util/LoadMoreRetryBtn";
-import { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 import { useBreakpoints, useLayoutBreakpoints } from "#/alf";
 import { ProgressGuide, SuggestedFollows } from "#/components/FeedInterstitials";
 import { PostFeedVideoGridRow, PostFeedVideoGridRowPlaceholder } from "#/components/feeds/PostFeedVideoGridRow";
 import { TrendingInterstitial } from "#/components/interstitials/Trending";
 import { TrendingVideos as TrendingVideosInterstitial } from "#/components/interstitials/TrendingVideos";
+import { DISCOVER_FEED_URI, KNOWN_SHUTDOWN_FEEDS } from "#/lib/constants";
+import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
+import { logEvent } from "#/lib/statsig/statsig";
+import { logger } from "#/logger";
+import { isIOS, isNative, isWeb } from "#/platform/detection";
+import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
+import { listenPostCreated } from "#/state/events";
+import { useFeedFeedbackContext } from "#/state/feed-feedback";
+import { useTrendingSettings } from "#/state/preferences/trending";
+import { STALE } from "#/state/queries";
+import {
+	type AuthorFilter,
+	type FeedDescriptor,
+	type FeedParams,
+	type FeedPostSlice,
+	type FeedPostSliceItem,
+	RQKEY,
+	pollLatest,
+	usePostFeedQuery,
+} from "#/state/queries/post-feed";
+import { useSession } from "#/state/session";
+import { useProgressGuide } from "#/state/shell/progress-guide";
+import { List, type ListRef } from "#/view/com/util/List";
+import { LoadMoreRetryBtn } from "#/view/com/util/LoadMoreRetryBtn";
+import { PostFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { DiscoverFallbackHeader } from "./DiscoverFallbackHeader";
 import { FeedShutdownMsg } from "./FeedShutdownMsg";
 import { PostFeedErrorMessage } from "./PostFeedErrorMessage";
@@ -294,7 +294,7 @@ let PostFeed = ({
 			feedKind = "profile";
 		}
 
-		let arr: FeedRow[] = [];
+		const arr: FeedRow[] = [];
 		if (KNOWN_SHUTDOWN_FEEDS.includes(feedUriOrActorDid)) {
 			arr.push({
 				type: "feedShutdownMsg",

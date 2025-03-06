@@ -1,12 +1,12 @@
-import { StyleProp, View, ViewStyle } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { type StyleProp, View, type ViewStyle } from "react-native";
 
-import { useProgressGuide, useProgressGuideControls } from "#/state/shell/progress-guide";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
-import { TimesLarge_Stroke2_Corner0_Rounded as Times } from "#/components/icons/Times";
 import { Text } from "#/components/Typography";
+import { TimesLarge_Stroke2_Corner0_Rounded as Times } from "#/components/icons/Times";
+import { useProgressGuide, useProgressGuideControls } from "#/state/shell/progress-guide";
 import { FollowDialog } from "./FollowDialog";
 import { ProgressGuideTask } from "./Task";
 

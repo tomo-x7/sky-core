@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { MMKV } from "react-native-mmkv";
 
-import { Account, Device } from "./schema";
+import type { Account, Device } from "./schema";
 
 export * from "./schema";
 

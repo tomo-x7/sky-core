@@ -1,5 +1,5 @@
-import { Insets, Platform } from "react-native";
-import { AppBskyActorDefs } from "@atproto/api";
+import type { AppBskyActorDefs } from "@atproto/api";
+import { type Insets, Platform } from "react-native";
 
 export const LOCAL_DEV_SERVICE = Platform.OS === "android" ? "http://10.0.2.2:2583" : "http://localhost:2583";
 export const STAGING_SERVICE = "https://staging.bsky.dev";

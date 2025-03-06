@@ -1,8 +1,6 @@
-
-
-export function niceDate( date: number | string | Date) {
+export function niceDate(date: number | string | Date) {
 	const d = new Date(date);
-	return d.toLocaleString(undefined,{dateStyle:"long",timeStyle:"short"})
+	return d.toLocaleString(undefined, { dateStyle: "long", timeStyle: "short" });
 }
 
 export function getAge(birthDate: Date): number {

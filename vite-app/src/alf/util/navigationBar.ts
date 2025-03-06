@@ -1,4 +1,4 @@
-import { Theme } from "../types";
+import type { Theme } from "../types";
 
 export function setNavigationBar(themeType: "theme" | "lightbox", t: Theme) {
 	//Android専用なので削除

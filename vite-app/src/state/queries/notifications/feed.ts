@@ -16,16 +16,22 @@
  * 3. Don't call this query's `refetch()` if you're trying to sync latest; call `checkUnread()` instead.
  */
 
+import { type AppBskyActorDefs, AppBskyFeedDefs, AppBskyFeedPost, AtUri, moderatePost } from "@atproto/api";
+import {
+	type InfiniteData,
+	type QueryClient,
+	type QueryKey,
+	useInfiniteQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { AppBskyActorDefs, AppBskyFeedDefs, AppBskyFeedPost, AtUri, moderatePost } from "@atproto/api";
-import { InfiniteData, QueryClient, QueryKey, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useAgent } from "#/state/session";
 import { useThreadgateHiddenReplyUris } from "#/state/threadgate-hidden-replies";
-import { useModerationOpts } from "../../preferences/moderation-opts";
 import { STALE } from "..";
+import { useModerationOpts } from "../../preferences/moderation-opts";
 import { didOrHandleUriMatches, embedViewRecordToPostView, getEmbeddedPost } from "../util";
-import { FeedPage } from "./types";
+import type { FeedPage } from "./types";
 import { useUnreadNotificationsApi } from "./unread";
 import { fetchPage } from "./util";
 
@@ -111,11 +117,11 @@ export function useNotificationFeedQuery(opts: {
 
 				// Keep track of the last run and whether we can reuse
 				// some already selected pages from there.
-				let reusedPages = [];
+				const reusedPages = [];
 				if (lastRun.current) {
 					const { data: lastData, args: lastArgs, result: lastResult } = lastRun.current;
 					let canReuse = true;
-					for (let key in selectArgs) {
+					for (const key in selectArgs) {
 						if (selectArgs.hasOwnProperty(key)) {
 							if ((selectArgs as any)[key] !== (lastArgs as any)[key]) {
 								// Can't do reuse anything if any input has changed.

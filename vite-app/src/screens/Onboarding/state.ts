@@ -1,9 +1,9 @@
-import React from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
 
 import { logger } from "#/logger";
-import { AvatarColor, Emoji } from "#/screens/Onboarding/StepProfile/types";
+import type { AvatarColor, Emoji } from "#/screens/Onboarding/StepProfile/types";
 
 export type OnboardingState = {
 	hasPrev: boolean;

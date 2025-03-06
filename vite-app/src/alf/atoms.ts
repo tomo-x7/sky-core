@@ -1,8 +1,8 @@
-import { Platform, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Platform, type StyleProp, StyleSheet, type ViewStyle } from "react-native";
 
+import * as Layout from "../components/Layout";
 import * as tokens from "./tokens";
 import { ios, native, platform, web } from "./util/platform";
-import * as Layout from "../components/Layout";
 
 export const atoms = {
 	debug: {

@@ -1,10 +1,19 @@
-import React from "react";
-import { LayoutAnimation, Pressable, View } from "react-native";
-import * as Clipboard from "expo-clipboard";
-import { ChatBskyConvoDefs, RichText } from "@atproto/api";
+import { type ChatBskyConvoDefs, RichText } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import * as Clipboard from "expo-clipboard";
+import React from "react";
+import { LayoutAnimation, Pressable, View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import * as Menu from "#/components/Menu";
+import * as Prompt from "#/components/Prompt";
+import { usePromptControl } from "#/components/Prompt";
+import { ReportDialog } from "#/components/dms/ReportDialog";
+import { BubbleQuestion_Stroke2_Corner0_Rounded as Translate } from "#/components/icons/Bubble";
+import { DotGrid_Stroke2_Corner0_Rounded as DotsHorizontal } from "#/components/icons/DotGrid";
+import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
+import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { getTranslatorLink } from "#/locale/helpers";
@@ -13,15 +22,6 @@ import { useConvoActive } from "#/state/messages/convo";
 import { useLanguagePrefs } from "#/state/preferences";
 import { useSession } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, useTheme } from "#/alf";
-import { ReportDialog } from "#/components/dms/ReportDialog";
-import { BubbleQuestion_Stroke2_Corner0_Rounded as Translate } from "#/components/icons/Bubble";
-import { DotGrid_Stroke2_Corner0_Rounded as DotsHorizontal } from "#/components/icons/DotGrid";
-import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
-import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
-import * as Menu from "#/components/Menu";
-import * as Prompt from "#/components/Prompt";
-import { usePromptControl } from "#/components/Prompt";
 import { Clipboard_Stroke2_Corner2_Rounded as ClipboardIcon } from "../icons/Clipboard";
 
 export let MessageMenu = ({

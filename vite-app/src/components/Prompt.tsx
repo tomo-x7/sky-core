@@ -1,13 +1,13 @@
-import React from "react";
-import { GestureResponderEvent, View } from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { type GestureResponderEvent, View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
-import { Button, ButtonColor, ButtonText } from "#/components/Button";
+import { Button, type ButtonColor, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
-import { BottomSheetViewProps } from "../../modules/bottom-sheet";
+import type { BottomSheetViewProps } from "../../modules/bottom-sheet";
 
 export {
 	type DialogControlProps as PromptControlProps,

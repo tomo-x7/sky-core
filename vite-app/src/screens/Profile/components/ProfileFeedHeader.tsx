@@ -1,9 +1,31 @@
+import { AtUri } from "@atproto/api";
+import { Plural, Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { AtUri } from "@atproto/api";
-import { msg, Plural, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import { Divider } from "#/components/Divider";
+import * as Layout from "#/components/Layout";
+import { InlineLinkText } from "#/components/Link";
+import * as Menu from "#/components/Menu";
+import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
+import { useRichText } from "#/components/hooks/useRichText";
+import { ArrowOutOfBox_Stroke2_Corner0_Rounded as Share } from "#/components/icons/ArrowOutOfBox";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
+import { DotGrid_Stroke2_Corner0_Rounded as Ellipsis } from "#/components/icons/DotGrid";
+import {
+	Heart2_Stroke2_Corner0_Rounded as Heart,
+	Heart2_Filled_Stroke2_Corner0_Rounded as HeartFilled,
+} from "#/components/icons/Heart2";
+import { Pin_Stroke2_Corner0_Rounded as Pin, Pin_Filled_Corner0_Rounded as PinFilled } from "#/components/icons/Pin";
+import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
+import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
 import { useHaptics } from "#/lib/haptics";
 import { makeProfileLink } from "#/lib/routes/links";
 import { makeCustomFeedLink } from "#/lib/routes/links";
@@ -12,7 +34,7 @@ import { sanitizeHandle } from "#/lib/strings/handles";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
-import { FeedSourceFeedInfo } from "#/state/queries/feed";
+import type { FeedSourceFeedInfo } from "#/state/queries/feed";
 import { useLikeMutation, useUnlikeMutation } from "#/state/queries/like";
 import {
 	useAddSavedFeedsMutation,
@@ -21,31 +43,9 @@ import {
 	useUpdateSavedFeedsMutation,
 } from "#/state/queries/preferences";
 import { useSession } from "#/state/session";
-import { formatCount } from "#/view/com/util/numeric/format";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import { Divider } from "#/components/Divider";
-import { useRichText } from "#/components/hooks/useRichText";
-import { ArrowOutOfBox_Stroke2_Corner0_Rounded as Share } from "#/components/icons/ArrowOutOfBox";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { DotGrid_Stroke2_Corner0_Rounded as Ellipsis } from "#/components/icons/DotGrid";
-import {
-	Heart2_Filled_Stroke2_Corner0_Rounded as HeartFilled,
-	Heart2_Stroke2_Corner0_Rounded as Heart,
-} from "#/components/icons/Heart2";
-import { Pin_Filled_Corner0_Rounded as PinFilled, Pin_Stroke2_Corner0_Rounded as Pin } from "#/components/icons/Pin";
-import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
-import * as Layout from "#/components/Layout";
-import { InlineLinkText } from "#/components/Link";
-import * as Menu from "#/components/Menu";
-import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
-import { RichText } from "#/components/RichText";
-import { Text } from "#/components/Typography";
+import { formatCount } from "#/view/com/util/numeric/format";
 
 export function ProfileFeedHeaderSkeleton() {
 	const t = useTheme();

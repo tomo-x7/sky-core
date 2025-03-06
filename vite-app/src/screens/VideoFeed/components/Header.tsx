@@ -1,21 +1,21 @@
-import { useCallback } from "react";
-import { GestureResponderEvent, View } from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import { useCallback } from "react";
+import { type GestureResponderEvent, View } from "react-native";
 
-import { HITSLOP_30 } from "#/lib/constants";
-import { NavigationProp } from "#/lib/routes/types";
-import { sanitizeHandle } from "#/lib/strings/handles";
-import { useFeedSourceInfoQuery } from "#/state/queries/feed";
-import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 import { atoms as a, useBreakpoints } from "#/alf";
-import { Button, ButtonProps } from "#/components/Button";
-import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeft } from "#/components/icons/Arrow";
+import { Button, type ButtonProps } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { BUTTON_VISUAL_ALIGNMENT_OFFSET } from "#/components/Layout/const";
 import { Text } from "#/components/Typography";
+import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeft } from "#/components/icons/Arrow";
+import { HITSLOP_30 } from "#/lib/constants";
+import type { NavigationProp } from "#/lib/routes/types";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
+import { useFeedSourceInfoQuery } from "#/state/queries/feed";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
 
 export function HeaderPlaceholder() {
 	return (

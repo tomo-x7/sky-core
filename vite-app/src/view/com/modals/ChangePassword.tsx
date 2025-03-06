@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
+import { useState } from "react";
+import { ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -21,9 +21,9 @@ import { ScrollView } from "./util";
 import { TextInput } from "./util";
 
 enum Stages {
-	RequestCode,
-	ChangePassword,
-	Done,
+	RequestCode = 0,
+	ChangePassword = 1,
+	Done = 2,
 }
 
 export const snapPoints = isAndroid ? ["90%"] : ["45%"];

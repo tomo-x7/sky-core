@@ -6,8 +6,8 @@ import "@formatjs/intl-numberformat/polyfill-force";
 import "@formatjs/intl-pluralrules/locale-data/en";
 import "@formatjs/intl-numberformat/locale-data/en";
 
-import { useEffect } from "react";
 import { i18n } from "@lingui/core";
+import { useEffect } from "react";
 
 import { sanitizeAppLanguageSetting } from "#/locale/helpers";
 import { AppLanguage } from "#/locale/languages";
@@ -17,8 +17,8 @@ import { messages as messagesCa } from "#/locale/locales/ca/messages";
 import { messages as messagesDa } from "#/locale/locales/da/messages";
 import { messages as messagesDe } from "#/locale/locales/de/messages";
 import { messages as messagesEl } from "#/locale/locales/el/messages";
-import { messages as messagesEn } from "#/locale/locales/en/messages";
 import { messages as messagesEn_GB } from "#/locale/locales/en-GB/messages";
+import { messages as messagesEn } from "#/locale/locales/en/messages";
 import { messages as messagesEs } from "#/locale/locales/es/messages";
 import { messages as messagesEu } from "#/locale/locales/eu/messages";
 import { messages as messagesFi } from "#/locale/locales/fi/messages";

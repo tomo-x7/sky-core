@@ -1,15 +1,15 @@
+import type { AtpSessionEvent, BskyAgent } from "@atproto/api";
 import React from "react";
-import { AtpSessionEvent, BskyAgent } from "@atproto/api";
 
+import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
 import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import * as persisted from "#/state/persisted";
 import { useCloseAllActiveElements } from "#/state/util";
-import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
 import { emitSessionDropped } from "../events";
 import {
+	type BskyAppAgent,
 	agentToSessionAccount,
-	BskyAppAgent,
 	createAgentAndCreateAccount,
 	createAgentAndLogin,
 	createAgentAndResume,
@@ -20,7 +20,7 @@ import { getInitialState, reducer } from "./reducer";
 export { isSignupQueued } from "./util";
 import { addSessionDebugLog } from "./logging";
 export type { SessionAccount } from "#/state/session/types";
-import { SessionApiContext, SessionStateContext } from "#/state/session/types";
+import type { SessionApiContext, SessionStateContext } from "#/state/session/types";
 
 const StateContext = React.createContext<SessionStateContext>({
 	accounts: [],

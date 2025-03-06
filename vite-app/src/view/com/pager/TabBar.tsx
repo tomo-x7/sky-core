@@ -1,21 +1,21 @@
 import { useCallback } from "react";
-import { LayoutChangeEvent, ScrollView, StyleSheet, View } from "react-native";
+import { type LayoutChangeEvent, ScrollView, StyleSheet, View } from "react-native";
 import Animated, {
 	interpolate,
 	runOnJS,
 	runOnUI,
 	scrollTo,
-	SharedValue,
+	type SharedValue,
 	useAnimatedReaction,
 	useAnimatedRef,
 	useAnimatedStyle,
 	useSharedValue,
 } from "react-native-reanimated";
 
-import { PressableWithHover } from "#/view/com/util/PressableWithHover";
-import { BlockDrawerGesture } from "#/view/shell/BlockDrawerGesture";
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
+import { PressableWithHover } from "#/view/com/util/PressableWithHover";
+import { BlockDrawerGesture } from "#/view/shell/BlockDrawerGesture";
 
 export interface TabBarProps {
 	testID?: string;

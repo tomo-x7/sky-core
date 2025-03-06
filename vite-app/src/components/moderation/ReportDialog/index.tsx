@@ -1,10 +1,26 @@
+import type { AppBskyLabelerDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import { AppBskyLabelerDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import type { ScrollView } from "react-native-gesture-handler";
 
+import { atoms as a, useGutters, useTheme } from "#/alf";
+import * as Admonition from "#/components/Admonition";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import { InlineLinkText, Link, createStaticClick } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
+import { useDelayedLoading } from "#/components/hooks/useDelayedLoading";
+import { ArrowRotateCounterClockwise_Stroke2_Corner0_Rounded as Retry } from "#/components/icons/ArrowRotateCounterClockwise";
+import {
+	CheckThick_Stroke2_Corner0_Rounded as Check,
+	Check_Stroke2_Corner0_Rounded as CheckThin,
+} from "#/components/icons/Check";
+import { PaperPlane_Stroke2_Corner0_Rounded as PaperPlane } from "#/components/icons/PaperPlane";
+import { SquareArrowTopRight_Stroke2_Corner0_Rounded as SquareArrowTopRight } from "#/components/icons/SquareArrowTopRight";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { wait } from "#/lib/async/wait";
 import { getLabelingServiceTitle } from "#/lib/moderation";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -13,29 +29,13 @@ import { isNative } from "#/platform/detection";
 import { useMyLabelersQuery } from "#/state/queries/preferences";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useGutters, useTheme } from "#/alf";
-import * as Admonition from "#/components/Admonition";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import { useDelayedLoading } from "#/components/hooks/useDelayedLoading";
-import { ArrowRotateCounterClockwise_Stroke2_Corner0_Rounded as Retry } from "#/components/icons/ArrowRotateCounterClockwise";
-import {
-	Check_Stroke2_Corner0_Rounded as CheckThin,
-	CheckThick_Stroke2_Corner0_Rounded as Check,
-} from "#/components/icons/Check";
-import { PaperPlane_Stroke2_Corner0_Rounded as PaperPlane } from "#/components/icons/PaperPlane";
-import { SquareArrowTopRight_Stroke2_Corner0_Rounded as SquareArrowTopRight } from "#/components/icons/SquareArrowTopRight";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import { createStaticClick, InlineLinkText, Link } from "#/components/Link";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
 import { useSubmitReportMutation } from "./action";
 import { DMCA_LINK } from "./const";
 import { useCopyForSubject } from "./copy";
 import { initialState, reducer } from "./state";
-import { ReportDialogProps, ReportSubject } from "./types";
+import type { ReportDialogProps, ReportSubject } from "./types";
 import { parseReportSubject } from "./utils/parseReportSubject";
-import { ReportOption, useReportOptions } from "./utils/useReportOptions";
+import { type ReportOption, useReportOptions } from "./utils/useReportOptions";
 
 export { useDialogControl as useReportDialogControl } from "#/components/Dialog";
 

@@ -1,24 +1,24 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { cleanError } from "#/lib/strings/errors";
-import { isNative } from "#/platform/detection";
-import { useAgent, useSession } from "#/state/session";
-import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
-import * as Toast from "#/view/com/util/Toast";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
-import * as TextField from "#/components/forms/TextField";
-import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { Loader } from "#/components/Loader";
 import { P, Text } from "#/components/Typography";
+import * as TextField from "#/components/forms/TextField";
+import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
+import { cleanError } from "#/lib/strings/errors";
+import { isNative } from "#/platform/detection";
+import { useAgent, useSession } from "#/state/session";
+import * as Toast from "#/view/com/util/Toast";
+import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 
 enum Stages {
-	Email,
-	ConfirmCode,
+	Email = 0,
+	ConfirmCode = 1,
 }
 
 export function DisableEmail2FADialog({

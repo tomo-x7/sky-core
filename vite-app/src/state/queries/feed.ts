@@ -1,34 +1,34 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
-	AppBskyActorDefs,
-	AppBskyFeedDefs,
-	AppBskyGraphDefs,
-	AppBskyUnspeccedGetPopularFeedGenerators,
+	type AppBskyActorDefs,
+	type AppBskyFeedDefs,
+	type AppBskyGraphDefs,
+	type AppBskyUnspeccedGetPopularFeedGenerators,
 	AtUri,
-	moderateFeedGenerator,
 	RichText,
+	moderateFeedGenerator,
 } from "@atproto/api";
 import {
-	InfiniteData,
+	type InfiniteData,
+	type QueryClient,
+	type QueryKey,
 	keepPreviousData,
-	QueryClient,
-	QueryKey,
 	useInfiniteQuery,
 	useMutation,
 	useQuery,
 	useQueryClient,
 } from "@tanstack/react-query";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
 import { DISCOVER_FEED_URI, DISCOVER_SAVED_FEED } from "#/lib/constants";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
+import { router } from "#/routes";
 import { STALE } from "#/state/queries";
 import { RQKEY as listQueryKey } from "#/state/queries/list";
 import { usePreferencesQuery } from "#/state/queries/preferences";
 import { useAgent, useSession } from "#/state/session";
-import { router } from "#/routes";
 import { useModerationOpts } from "../preferences/moderation-opts";
-import { FeedDescriptor } from "./post-feed";
+import type { FeedDescriptor } from "./post-feed";
 import { precacheResolvedUri } from "./resolve-uri";
 
 export type FeedSourceFeedInfo = {
@@ -406,7 +406,7 @@ export function usePinnedFeedsInfos() {
 				return [PWI_DISCOVER_FEED_STUB];
 			}
 
-			let resolved = new Map<string, FeedSourceInfo>();
+			const resolved = new Map<string, FeedSourceInfo>();
 
 			// Get all feeds. We can do this in a batch.
 			const pinnedFeeds = pinnedItems.filter((feed) => feed.type === "feed");
@@ -443,7 +443,7 @@ export function usePinnedFeedsInfos() {
 
 			// order the feeds/lists in the order they were pinned
 			const result: SavedFeedSourceInfo[] = [];
-			for (let pinnedItem of pinnedItems) {
+			for (const pinnedItem of pinnedItems) {
 				const feedInfo = resolved.get(pinnedItem.value);
 				if (feedInfo) {
 					result.push({
@@ -557,7 +557,7 @@ export function useSavedFeeds() {
 			});
 
 			const result: SavedFeedItem[] = [];
-			for (let savedItem of savedItems) {
+			for (const savedItem of savedItems) {
 				if (savedItem.type === "timeline") {
 					result.push({
 						type: "timeline",

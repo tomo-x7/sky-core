@@ -1,5 +1,5 @@
-import { AppBskyActorDefs, AppBskyGraphDefs, AppBskyGraphGetList, BskyAgent } from "@atproto/api";
-import { InfiniteData, QueryClient, QueryKey, useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import type { AppBskyActorDefs, AppBskyGraphDefs, AppBskyGraphGetList, BskyAgent } from "@atproto/api";
+import { type InfiniteData, type QueryClient, type QueryKey, useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 import { STALE } from "#/state/queries";
 import { useAgent } from "#/state/session";

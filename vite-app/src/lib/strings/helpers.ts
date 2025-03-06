@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from "react";
 import Graphemer from "graphemer";
+import { useCallback, useMemo } from "react";
 
 export function enforceLen(str: string, len: number, ellipsis = false, mode: "end" | "middle" = "end"): string {
 	str = str || "";

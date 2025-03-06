@@ -1,14 +1,14 @@
 import {
-	AppBskyLabelerDefs,
-	ComAtprotoLabelDefs,
-	InterpretedLabelValueDefinition,
-	interpretLabelValueDefinition,
+	type AppBskyLabelerDefs,
+	type ComAtprotoLabelDefs,
+	type InterpretedLabelValueDefinition,
 	LABELS,
+	interpretLabelValueDefinition,
 } from "@atproto/api";
 import { useLingui } from "@lingui/react";
 import * as bcp47Match from "bcp-47-match";
 
-import { GlobalLabelStrings, useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
+import { type GlobalLabelStrings, useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
 import { useLabelDefinitions } from "#/state/preferences";
 
 export interface LabelInfo {

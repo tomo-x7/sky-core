@@ -1,8 +1,11 @@
-import React from "react";
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { AppBskyActorDefs, moderateProfile, ModerationDecision } from "@atproto/api";
+import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
+import { atoms as a } from "#/alf";
+import { KnownFollowers, shouldShowKnownFollowers } from "#/components/KnownFollowers";
+import * as Pills from "#/components/Pills";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { getModerationCauseKey, isJustAMute } from "#/lib/moderation";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -10,17 +13,14 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { s } from "#/lib/styles";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { Shadow } from "#/state/cache/types";
+import type { Shadow } from "#/state/cache/types";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { precacheProfile } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
-import { atoms as a } from "#/alf";
-import { KnownFollowers, shouldShowKnownFollowers } from "#/components/KnownFollowers";
-import * as Pills from "#/components/Pills";
-import * as bsky from "#/types/bsky";
+import type * as bsky from "#/types/bsky";
 import { Link } from "../util/Link";
-import { Text } from "../util/text/Text";
 import { PreviewableUserAvatar } from "../util/UserAvatar";
+import { Text } from "../util/text/Text";
 import { FollowButton } from "./FollowButton";
 
 export function ProfileCard({

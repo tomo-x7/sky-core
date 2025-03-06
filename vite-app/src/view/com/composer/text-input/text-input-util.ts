@@ -1,4 +1,4 @@
-import { AppBskyRichtextFacet, RichText } from "@atproto/api";
+import type { AppBskyRichtextFacet, RichText } from "@atproto/api";
 
 export type LinkFacetMatch = {
 	rt: RichText;

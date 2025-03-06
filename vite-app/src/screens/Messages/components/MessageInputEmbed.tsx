@@ -1,26 +1,26 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { LayoutAnimation, View } from "react-native";
-import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, moderatePost, RichText as RichTextAPI } from "@atproto/api";
+import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, RichText as RichTextAPI, moderatePost } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { type RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { LayoutAnimation, View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonIcon } from "#/components/Button";
+import { Loader } from "#/components/Loader";
+import * as MediaPreview from "#/components/MediaPreview";
+import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { ContentHider } from "#/components/moderation/ContentHider";
+import { PostAlerts } from "#/components/moderation/PostAlerts";
 import { makeProfileLink } from "#/lib/routes/links";
-import { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { convertBskyAppUrlIfNeeded, isBskyPostUrl, makeRecordUri } from "#/lib/strings/url-helpers";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { usePostQuery } from "#/state/queries/post";
-import { PostMeta } from "#/view/com/util/PostMeta";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonIcon } from "#/components/Button";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import { Loader } from "#/components/Loader";
-import * as MediaPreview from "#/components/MediaPreview";
-import { ContentHider } from "#/components/moderation/ContentHider";
-import { PostAlerts } from "#/components/moderation/PostAlerts";
-import { RichText } from "#/components/RichText";
-import { Text } from "#/components/Typography";
 import * as bsky from "#/types/bsky";
+import { PostMeta } from "#/view/com/util/PostMeta";
 
 export function useMessageEmbed() {
 	const route = useRoute<RouteProp<CommonNavigatorParams, "MessagesConversation">>();

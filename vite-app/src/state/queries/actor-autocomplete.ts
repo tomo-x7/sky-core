@@ -1,6 +1,6 @@
-import React from "react";
-import { AppBskyActorDefs, moderateProfile, ModerationOpts } from "@atproto/api";
+import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/react-query";
+import React from "react";
 
 import { isJustAMute, moduiContainsHideableOffense } from "#/lib/moderation";
 import { logger } from "#/logger";
@@ -100,7 +100,7 @@ function computeSuggestions({
 	searched?: AppBskyActorDefs.ProfileViewBasic[];
 	moderationOpts: ModerationOpts;
 }) {
-	let items: AppBskyActorDefs.ProfileViewBasic[] = [];
+	const items: AppBskyActorDefs.ProfileViewBasic[] = [];
 	for (const item of searched) {
 		if (!items.find((item2) => item2.handle === item.handle)) {
 			items.push(item);

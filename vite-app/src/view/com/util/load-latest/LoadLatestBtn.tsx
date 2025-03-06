@@ -1,9 +1,10 @@
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useMediaQuery } from "react-responsive";
 
+import { useLayoutBreakpoints } from "#/alf";
 import { HITSLOP_20 } from "#/lib/constants";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransform";
@@ -14,7 +15,6 @@ import { useGate } from "#/lib/statsig/statsig";
 import { colors } from "#/lib/styles";
 import { isWeb } from "#/platform/detection";
 import { useSession } from "#/state/session";
-import { useLayoutBreakpoints } from "#/alf";
 
 export function LoadLatestBtn({
 	onPress,

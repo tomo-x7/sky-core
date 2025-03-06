@@ -1,44 +1,44 @@
-import { Fragment, useCallback } from "react";
-import { Linking, View } from "react-native";
 import { LABELS } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
+import { Fragment, useCallback } from "react";
+import { Linking, View } from "react-native";
 
-import { getLabelingServiceTitle } from "#/lib/moderation";
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { logger } from "#/logger";
-import { isIOS } from "#/platform/detection";
-import {
-	useMyLabelersQuery,
-	usePreferencesQuery,
-	UsePreferencesQueryResponse,
-	usePreferencesSetAdultContentMutation,
-} from "#/state/queries/preferences";
-import { isNonConfigurableModerationAuthority } from "#/state/session/additional-moderation-authorities";
-import { useSetMinimalShellMode } from "#/state/shell";
-import { ViewHeader } from "#/view/com/util/ViewHeader";
-import { atoms as a, useBreakpoints, useTheme, ViewStyleProp } from "#/alf";
+import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
-import { BirthDateSettingsDialog } from "#/components/dialogs/BirthDateSettings";
-import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
 import { Divider } from "#/components/Divider";
-import * as Toggle from "#/components/forms/Toggle";
-import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
-import { CircleBanSign_Stroke2_Corner0_Rounded as CircleBanSign } from "#/components/icons/CircleBanSign";
-import { Props as SVGIconProps } from "#/components/icons/common";
-import { EditBig_Stroke2_Corner0_Rounded as EditBig } from "#/components/icons/EditBig";
-import { Filter_Stroke2_Corner0_Rounded as Filter } from "#/components/icons/Filter";
-import { Group3_Stroke2_Corner0_Rounded as Group } from "#/components/icons/Group";
-import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
 import * as LabelingService from "#/components/LabelingServiceCard";
 import * as Layout from "#/components/Layout";
 import { InlineLinkText, Link } from "#/components/Link";
 import { ListMaybePlaceholder } from "#/components/Lists";
 import { Loader } from "#/components/Loader";
-import { GlobalLabelPreference } from "#/components/moderation/LabelPreference";
 import { Text } from "#/components/Typography";
+import { BirthDateSettingsDialog } from "#/components/dialogs/BirthDateSettings";
+import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
+import * as Toggle from "#/components/forms/Toggle";
+import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
+import { CircleBanSign_Stroke2_Corner0_Rounded as CircleBanSign } from "#/components/icons/CircleBanSign";
+import { EditBig_Stroke2_Corner0_Rounded as EditBig } from "#/components/icons/EditBig";
+import { Filter_Stroke2_Corner0_Rounded as Filter } from "#/components/icons/Filter";
+import { Group3_Stroke2_Corner0_Rounded as Group } from "#/components/icons/Group";
+import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
+import type { Props as SVGIconProps } from "#/components/icons/common";
+import { GlobalLabelPreference } from "#/components/moderation/LabelPreference";
+import { getLabelingServiceTitle } from "#/lib/moderation";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import { logger } from "#/logger";
+import { isIOS } from "#/platform/detection";
+import {
+	type UsePreferencesQueryResponse,
+	useMyLabelersQuery,
+	usePreferencesQuery,
+	usePreferencesSetAdultContentMutation,
+} from "#/state/queries/preferences";
+import { isNonConfigurableModerationAuthority } from "#/state/session/additional-moderation-authorities";
+import { useSetMinimalShellMode } from "#/state/shell";
+import { ViewHeader } from "#/view/com/util/ViewHeader";
 
 function ErrorState({ error }: { error: string }) {
 	const t = useTheme();

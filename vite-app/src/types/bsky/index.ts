@@ -1,4 +1,4 @@
-import { ValidationResult } from "@atproto/lexicon";
+import type { ValidationResult } from "@atproto/lexicon";
 
 export * as post from "./post";
 export * as profile from "./profile";

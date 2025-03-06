@@ -1,6 +1,6 @@
-import React from "react";
-import { I18n } from "@lingui/core";
+import type { I18n } from "@lingui/core";
 import { useLingui } from "@lingui/react";
+import React from "react";
 
 import { useGetTimeAgo } from "#/lib/hooks/useTimeAgo";
 import { useTickEveryMinute } from "#/state/shell";

@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { View } from "react-native";
 
-import { type EmbedPlayerSource, embedPlayerSources, externalEmbedLabels } from "#/lib/strings/embed-player";
-import { useSetExternalEmbedPref } from "#/state/preferences";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
+import { type EmbedPlayerSource, embedPlayerSources, externalEmbedLabels } from "#/lib/strings/embed-player";
+import { useSetExternalEmbedPref } from "#/state/preferences";
 import { Button, ButtonText } from "../Button";
 import { Text } from "../Typography";
 

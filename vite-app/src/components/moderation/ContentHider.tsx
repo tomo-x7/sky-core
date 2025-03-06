@@ -1,22 +1,22 @@
-import React from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
-import { ModerationUI } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { ModerationUI } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { type StyleProp, View, type ViewStyle } from "react-native";
 
+import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { Button } from "#/components/Button";
+import { Text } from "#/components/Typography";
+import {
+	ModerationDetailsDialog,
+	useModerationDetailsDialogControl,
+} from "#/components/moderation/ModerationDetailsDialog";
 import { ADULT_CONTENT_LABELS, isJustAMute } from "#/lib/moderation";
 import { useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
 import { getDefinition, getLabelStrings } from "#/lib/moderation/useLabelInfo";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { useLabelDefinitions } from "#/state/preferences";
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
-import { Button } from "#/components/Button";
-import {
-	ModerationDetailsDialog,
-	useModerationDetailsDialogControl,
-} from "#/components/moderation/ModerationDetailsDialog";
-import { Text } from "#/components/Typography";
 
 export function ContentHider({
 	testID,

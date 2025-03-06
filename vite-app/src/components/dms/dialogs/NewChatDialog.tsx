@@ -1,18 +1,18 @@
-import { useCallback } from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useCallback } from "react";
 
-import { useEmail } from "#/lib/hooks/useEmail";
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
-import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
-import { FAB } from "#/view/com/util/fab/FAB";
-import * as Toast from "#/view/com/util/Toast";
 import { useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { useDialogControl } from "#/components/Dialog";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
+import { useEmail } from "#/lib/hooks/useEmail";
+import { logEvent } from "#/lib/statsig/statsig";
+import { logger } from "#/logger";
+import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
+import * as Toast from "#/view/com/util/Toast";
+import { FAB } from "#/view/com/util/fab/FAB";
 import { SearchablePeopleList } from "./SearchablePeopleList";
 
 export function NewChat({

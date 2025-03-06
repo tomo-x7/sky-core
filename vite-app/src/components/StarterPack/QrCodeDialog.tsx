@@ -1,24 +1,24 @@
-import React from "react";
-import { View } from "react-native";
-import type ViewShot from "react-native-view-shot";
+import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { createAssetAsync } from "expo-media-library";
 import * as Sharing from "expo-sharing";
-import { AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import React from "react";
+import { View } from "react-native";
+import type ViewShot from "react-native-view-shot";
 
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
-import { isNative, isWeb } from "#/platform/detection";
-import * as Toast from "#/view/com/util/Toast";
 import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
-import { DialogControlProps } from "#/components/Dialog";
+import type { DialogControlProps } from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { QrCode } from "#/components/StarterPack/QrCode";
+import { logEvent } from "#/lib/statsig/statsig";
+import { logger } from "#/logger";
+import { isNative, isWeb } from "#/platform/detection";
 import * as bsky from "#/types/bsky";
+import * as Toast from "#/view/com/util/Toast";
 
 export function QrCodeDialog({
 	starterPack,

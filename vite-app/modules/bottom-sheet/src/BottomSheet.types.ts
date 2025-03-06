@@ -1,12 +1,12 @@
-import React from "react";
-import { ColorValue, NativeSyntheticEvent } from "react-native";
+import type React from "react";
+import type { ColorValue, NativeSyntheticEvent } from "react-native";
 
 export type BottomSheetState = "closed" | "closing" | "open" | "opening";
 
 export enum BottomSheetSnapPoint {
-	Hidden,
-	Partial,
-	Full,
+	Hidden = 0,
+	Partial = 1,
+	Full = 2,
 }
 
 export type BottomSheetAttemptDismissEvent = NativeSyntheticEvent<object>;

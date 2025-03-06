@@ -1,38 +1,48 @@
-import React, { useCallback, useMemo } from "react";
-import { StyleSheet, View } from "react-native";
-import { useAnimatedRef } from "react-native-reanimated";
-import { AppBskyGraphDefs, AtUri, moderateUserList, ModerationOpts, RichText as RichTextAPI } from "@atproto/api";
+import { AppBskyGraphDefs, AtUri, type ModerationOpts, RichText as RichTextAPI, moderateUserList } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import React, { useCallback, useMemo } from "react";
+import { StyleSheet, View } from "react-native";
+import { useAnimatedRef } from "react-native-reanimated";
 
+import { atoms as a } from "#/alf";
+import { ButtonIcon, ButtonText, Button as NewButton } from "#/components/Button";
+import { useDialogControl } from "#/components/Dialog";
+import * as Layout from "#/components/Layout";
+import * as Prompt from "#/components/Prompt";
+import { RichText } from "#/components/RichText";
+import { PersonPlus_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
+import * as Hider from "#/components/moderation/Hider";
+import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
 import { useHaptics } from "#/lib/haptics";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { ComposeIcon2 } from "#/lib/icons";
 import { makeListLink } from "#/lib/routes/links";
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { NavigationProp } from "#/lib/routes/types";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { NavigationProp } from "#/lib/routes/types";
 import { shareUrl } from "#/lib/sharing";
 import { cleanError } from "#/lib/strings/errors";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { s } from "#/lib/styles";
 import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
+import { ListHiddenScreen } from "#/screens/List/ListHiddenScreen";
 import { listenSoftReset } from "#/state/events";
 import { useModalControls } from "#/state/modals";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useListBlockMutation, useListDeleteMutation, useListMuteMutation, useListQuery } from "#/state/queries/list";
-import { FeedDescriptor } from "#/state/queries/post-feed";
+import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { RQKEY as FEED_RQKEY } from "#/state/queries/post-feed";
 import {
+	type UsePreferencesQueryResponse,
 	useAddSavedFeedsMutation,
 	usePreferencesQuery,
-	UsePreferencesQueryResponse,
 	useRemoveFeedMutation,
 	useUpdateSavedFeedsMutation,
 } from "#/state/queries/preferences";
@@ -46,24 +56,14 @@ import { PagerWithHeader } from "#/view/com/pager/PagerWithHeader";
 import { PostFeed } from "#/view/com/posts/PostFeed";
 import { ProfileSubpageHeader } from "#/view/com/profile/ProfileSubpageHeader";
 import { EmptyState } from "#/view/com/util/EmptyState";
+import type { ListRef } from "#/view/com/util/List";
+import { LoadingScreen } from "#/view/com/util/LoadingScreen";
+import * as Toast from "#/view/com/util/Toast";
 import { FAB } from "#/view/com/util/fab/FAB";
 import { Button } from "#/view/com/util/forms/Button";
-import { DropdownItem, NativeDropdown } from "#/view/com/util/forms/NativeDropdown";
-import { ListRef } from "#/view/com/util/List";
+import { type DropdownItem, NativeDropdown } from "#/view/com/util/forms/NativeDropdown";
 import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
-import { LoadingScreen } from "#/view/com/util/LoadingScreen";
 import { Text } from "#/view/com/util/text/Text";
-import * as Toast from "#/view/com/util/Toast";
-import { ListHiddenScreen } from "#/screens/List/ListHiddenScreen";
-import { atoms as a } from "#/alf";
-import { Button as NewButton, ButtonIcon, ButtonText } from "#/components/Button";
-import { useDialogControl } from "#/components/Dialog";
-import { PersonPlus_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
-import * as Layout from "#/components/Layout";
-import * as Hider from "#/components/moderation/Hider";
-import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
-import * as Prompt from "#/components/Prompt";
-import { RichText } from "#/components/RichText";
 
 const SECTION_TITLES_CURATE = ["Posts", "People"];
 
@@ -412,7 +412,7 @@ function Header({
 	}, [list, rkey]);
 
 	const dropdownItems: DropdownItem[] = useMemo(() => {
-		let items: DropdownItem[] = [
+		const items: DropdownItem[] = [
 			{
 				testID: "listHeaderDropdownShareBtn",
 				label: isWeb ? _(msg`Copy link to list`) : _(msg`Share`),

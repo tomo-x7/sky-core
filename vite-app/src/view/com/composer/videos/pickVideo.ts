@@ -1,8 +1,8 @@
 import {
-	ImagePickerAsset,
-	launchImageLibraryAsync,
+	type ImagePickerAsset,
 	MediaTypeOptions,
 	UIImagePickerPreferredAssetRepresentationMode,
+	launchImageLibraryAsync,
 } from "expo-image-picker";
 
 export async function pickVideo() {

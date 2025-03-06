@@ -1,10 +1,10 @@
 import {
-	AppBskyActorDefs,
-	AppBskyActorGetSuggestions,
-	AppBskyGraphGetSuggestedFollowsByActor,
+	type AppBskyActorDefs,
+	type AppBskyActorGetSuggestions,
+	type AppBskyGraphGetSuggestedFollowsByActor,
 	moderateProfile,
 } from "@atproto/api";
-import { InfiniteData, QueryClient, QueryKey, useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { type InfiniteData, type QueryClient, type QueryKey, useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 import { aggregateUserInterests, createBskyTopicsHeader } from "#/lib/api/feed/utils";
 import { getContentLanguages } from "#/state/preferences/languages";

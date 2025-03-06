@@ -1,21 +1,21 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useCallback, useMemo } from "react";
 import { View } from "react-native";
-import RNPickerSelect, { PickerSelectProps } from "react-native-picker-select";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import RNPickerSelect, { type PickerSelectProps } from "react-native-picker-select";
 
-import { APP_LANGUAGES, LANGUAGES } from "#/lib/../locale/languages";
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { languageName, sanitizeAppLanguageSetting } from "#/locale/helpers";
-import { useModalControls } from "#/state/modals";
-import { useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences";
 import { atoms as a, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { Check_Stroke2_Corner0_Rounded as CheckIcon } from "#/components/icons/Check";
 import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon } from "#/components/icons/Chevron";
 import { PlusLarge_Stroke2_Corner0_Rounded as PlusIcon } from "#/components/icons/Plus";
-import * as Layout from "#/components/Layout";
-import { Text } from "#/components/Typography";
+import { APP_LANGUAGES, LANGUAGES } from "#/lib/../locale/languages";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import { languageName, sanitizeAppLanguageSetting } from "#/locale/helpers";
+import { useModalControls } from "#/state/modals";
+import { useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences";
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "LanguageSettings">;

@@ -1,13 +1,10 @@
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { CommonNavigatorParams } from "#/lib/routes/types";
-import { useModalControls } from "#/state/modals";
-import { useSession } from "#/state/session";
-import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { atoms as a, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
+import * as Layout from "#/components/Layout";
 import { BirthDateSettingsDialog } from "#/components/dialogs/BirthDateSettings";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { At_Stroke2_Corner2_Rounded as AtIcon } from "#/components/icons/At";
@@ -19,7 +16,10 @@ import { Lock_Stroke2_Corner2_Rounded as LockIcon } from "#/components/icons/Loc
 import { PencilLine_Stroke2_Corner2_Rounded as PencilIcon } from "#/components/icons/Pencil";
 import { Trash_Stroke2_Corner2_Rounded } from "#/components/icons/Trash";
 import { Verified_Stroke2_Corner2_Rounded as VerifiedIcon } from "#/components/icons/Verified";
-import * as Layout from "#/components/Layout";
+import type { CommonNavigatorParams } from "#/lib/routes/types";
+import * as SettingsList from "#/screens/Settings/components/SettingsList";
+import { useModalControls } from "#/state/modals";
+import { useSession } from "#/state/session";
 import { ChangeHandleDialog } from "./components/ChangeHandleDialog";
 import { DeactivateAccountDialog } from "./components/DeactivateAccountDialog";
 import { ExportCarDialog } from "./components/ExportCarDialog";

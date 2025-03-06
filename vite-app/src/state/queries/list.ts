@@ -1,17 +1,17 @@
-import { Image as RNImage } from "react-native-image-crop-picker";
 import {
-	$Typed,
-	AppBskyGraphDefs,
-	AppBskyGraphGetList,
-	AppBskyGraphList,
+	type $Typed,
+	type AppBskyGraphDefs,
+	type AppBskyGraphGetList,
+	type AppBskyGraphList,
 	AtUri,
-	BskyAgent,
-	ComAtprotoRepoApplyWrites,
-	Facet,
-	Un$Typed,
+	type BskyAgent,
+	type ComAtprotoRepoApplyWrites,
+	type Facet,
+	type Un$Typed,
 } from "@atproto/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import chunk from "lodash.chunk";
+import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { uploadBlob } from "#/lib/api";
 import { until } from "#/lib/async/until";

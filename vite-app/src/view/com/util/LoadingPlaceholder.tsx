@@ -1,9 +1,6 @@
 import { useMemo } from "react";
-import { DimensionValue, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { type DimensionValue, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
-import { usePalette } from "#/lib/hooks/usePalette";
-import { s } from "#/lib/styles";
-import { useTheme } from "#/lib/ThemeContext";
 import { atoms as a, useTheme as useTheme_NEW } from "#/alf";
 import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
 import {
@@ -11,6 +8,9 @@ import {
 	Heart2_Stroke2_Corner0_Rounded as HeartIconOutline,
 } from "#/components/icons/Heart2";
 import { Repost_Stroke2_Corner2_Rounded as Repost } from "#/components/icons/Repost";
+import { useTheme } from "#/lib/ThemeContext";
+import { usePalette } from "#/lib/hooks/usePalette";
+import { s } from "#/lib/styles";
 
 export function LoadingPlaceholder({
 	width,

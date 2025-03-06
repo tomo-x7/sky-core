@@ -1,18 +1,18 @@
-import React, { useRef } from "react";
-import { DimensionValue, Pressable, View } from "react-native";
-import { Image } from "expo-image";
-import { AppBskyEmbedImages } from "@atproto/api";
+import type { AppBskyEmbedImages } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image } from "expo-image";
+import React, { useRef } from "react";
+import { type DimensionValue, Pressable, View } from "react-native";
 
-import { HandleRef, useHandleRef } from "#/lib/hooks/useHandleRef";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { MediaInsetBorder } from "#/components/MediaInsetBorder";
+import { Text } from "#/components/Typography";
+import { ArrowsDiagonalOut_Stroke2_Corner0_Rounded as Fullscreen } from "#/components/icons/ArrowsDiagonal";
+import { type HandleRef, useHandleRef } from "#/lib/hooks/useHandleRef";
 import type { Dimensions } from "#/lib/media/types";
 import { isNative } from "#/platform/detection";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
-import { ArrowsDiagonalOut_Stroke2_Corner0_Rounded as Fullscreen } from "#/components/icons/ArrowsDiagonal";
-import { MediaInsetBorder } from "#/components/MediaInsetBorder";
-import { Text } from "#/components/Typography";
 
 export function ConstrainedImage({
 	aspectRatio,

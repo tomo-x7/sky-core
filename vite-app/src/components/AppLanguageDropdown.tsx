@@ -1,14 +1,14 @@
+import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View } from "react-native";
-import RNPickerSelect, { PickerSelectProps } from "react-native-picker-select";
-import { useQueryClient } from "@tanstack/react-query";
+import RNPickerSelect, { type PickerSelectProps } from "react-native-picker-select";
 
+import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDown } from "#/components/icons/Chevron";
 import { sanitizeAppLanguageSetting } from "#/locale/helpers";
 import { APP_LANGUAGES } from "#/locale/languages";
 import { useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences";
 import { resetPostsFeedQueries } from "#/state/queries/post-feed";
-import { atoms as a, useTheme, ViewStyleProp } from "#/alf";
-import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDown } from "#/components/icons/Chevron";
 
 export function AppLanguageDropdown(_props: ViewStyleProp) {
 	const t = useTheme();

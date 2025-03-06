@@ -1,16 +1,16 @@
 import React, { useContext, useMemo } from "react";
-import { StyleSheet, View, ViewProps, ViewStyle } from "react-native";
-import { StyleProp } from "react-native";
-import { KeyboardAwareScrollView, KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
-import Animated, { AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
+import { StyleSheet, View, type ViewProps, type ViewStyle } from "react-native";
+import type { StyleProp } from "react-native";
+import { KeyboardAwareScrollView, type KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
+import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { isWeb } from "#/platform/detection";
-import { useShellLayout } from "#/state/shell/shell-layout";
 import { atoms as a, useBreakpoints, useLayoutBreakpoints, useTheme, web } from "#/alf";
 import { useDialogContext } from "#/components/Dialog";
 import { SCROLLBAR_OFFSET } from "#/components/Layout/const";
 import { ScrollbarOffsetContext } from "#/components/Layout/context";
+import { isWeb } from "#/platform/detection";
+import { useShellLayout } from "#/state/shell/shell-layout";
 
 export * from "#/components/Layout/const";
 export * as Header from "#/components/Layout/Header";

@@ -1,10 +1,15 @@
-import React, { useCallback } from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
-import { Image } from "expo-image";
-import { AppBskyEmbedExternal } from "@atproto/api";
+import type { AppBskyEmbedExternal } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image } from "expo-image";
+import React, { useCallback } from "react";
+import { type StyleProp, View, type ViewStyle } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Divider } from "#/components/Divider";
+import { Link } from "#/components/Link";
+import { Text } from "#/components/Typography";
+import { Earth_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe";
 import { parseAltFromGIFDescription } from "#/lib/gif-alt-text";
 import { shareUrl } from "#/lib/sharing";
 import { parseEmbedPlayerFromUrl } from "#/lib/strings/embed-player";
@@ -14,11 +19,6 @@ import { useExternalEmbedsPrefs } from "#/state/preferences";
 import { ExternalGifEmbed } from "#/view/com/util/post-embeds/ExternalGifEmbed";
 import { ExternalPlayer } from "#/view/com/util/post-embeds/ExternalPlayerEmbed";
 import { GifEmbed } from "#/view/com/util/post-embeds/GifEmbed";
-import { atoms as a, useTheme } from "#/alf";
-import { Divider } from "#/components/Divider";
-import { Earth_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe";
-import { Link } from "#/components/Link";
-import { Text } from "#/components/Typography";
 
 export const ExternalLinkEmbed = ({
 	link,

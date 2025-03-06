@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
-import { AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedDefs } from "@atproto/api";
-import { QueryClient } from "@tanstack/react-query";
+import { AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, type AppBskyFeedDefs } from "@atproto/api";
+import type { QueryClient } from "@tanstack/react-query";
 import EventEmitter from "eventemitter3";
+import { useEffect, useMemo, useState } from "react";
 
 import { batchedUpdates } from "#/lib/batchedUpdates";
 import { findAllPostsInQueryData as findAllPostsInNotifsQueryData } from "../queries/notifications/feed";
@@ -9,7 +9,7 @@ import { findAllPostsInQueryData as findAllPostsInFeedQueryData } from "../queri
 import { findAllPostsInQueryData as findAllPostsInQuoteQueryData } from "../queries/post-quotes";
 import { findAllPostsInQueryData as findAllPostsInThreadQueryData } from "../queries/post-thread";
 import { findAllPostsInQueryData as findAllPostsInSearchQueryData } from "../queries/search-posts";
-import { castAsShadow, Shadow } from "./types";
+import { type Shadow, castAsShadow } from "./types";
 export type { Shadow } from "./types";
 
 export interface PostShadow {
@@ -112,7 +112,7 @@ function mergeShadow(
 
 export function updatePostShadow(queryClient: QueryClient, uri: string, value: Partial<PostShadow>) {
 	const cachedPosts = findPostsInCache(queryClient, uri);
-	for (let post of cachedPosts) {
+	for (const post of cachedPosts) {
 		shadows.set(post, { ...shadows.get(post), ...value });
 	}
 	batchedUpdates(() => {
@@ -121,21 +121,21 @@ export function updatePostShadow(queryClient: QueryClient, uri: string, value: P
 }
 
 function* findPostsInCache(queryClient: QueryClient, uri: string): Generator<AppBskyFeedDefs.PostView, void> {
-	for (let post of findAllPostsInFeedQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInFeedQueryData(queryClient, uri)) {
 		yield post;
 	}
-	for (let post of findAllPostsInNotifsQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInNotifsQueryData(queryClient, uri)) {
 		yield post;
 	}
-	for (let node of findAllPostsInThreadQueryData(queryClient, uri)) {
+	for (const node of findAllPostsInThreadQueryData(queryClient, uri)) {
 		if (node.type === "post") {
 			yield node.post;
 		}
 	}
-	for (let post of findAllPostsInSearchQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInSearchQueryData(queryClient, uri)) {
 		yield post;
 	}
-	for (let post of findAllPostsInQuoteQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInQuoteQueryData(queryClient, uri)) {
 		yield post;
 	}
 }

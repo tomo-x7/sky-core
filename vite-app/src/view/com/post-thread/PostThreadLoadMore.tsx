@@ -1,11 +1,11 @@
+import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
+import { Trans } from "@lingui/macro";
 import * as React from "react";
 import { View } from "react-native";
-import { AppBskyFeedDefs, AtUri } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 
-import { makeProfileLink } from "#/lib/routes/links";
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
+import { makeProfileLink } from "#/lib/routes/links";
 import { Link } from "../util/Link";
 import { UserAvatar } from "../util/UserAvatar";
 

@@ -1,6 +1,6 @@
-import { Platform } from "react-native";
-import { getLocales } from "expo-localization";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
+import { getLocales } from "expo-localization";
+import { Platform } from "react-native";
 
 import { GIF_FEATURED, GIF_SEARCH } from "#/lib/constants";
 

@@ -1,17 +1,17 @@
-import React from "react";
-import { View } from "react-native";
-import { InterpretedLabelValueDefinition, LabelPreference } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { InterpretedLabelValueDefinition, LabelPreference } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type React from "react";
+import { View } from "react-native";
 
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { InlineLinkText } from "#/components/Link";
+import { Text } from "#/components/Typography";
+import * as ToggleButton from "#/components/forms/ToggleButton";
 import { useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
 import { useLabelBehaviorDescription } from "#/lib/moderation/useLabelBehaviorDescription";
 import { getLabelStrings } from "#/lib/moderation/useLabelInfo";
 import { usePreferencesQuery, usePreferencesSetContentLabelMutation } from "#/state/queries/preferences";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
-import * as ToggleButton from "#/components/forms/ToggleButton";
-import { InlineLinkText } from "#/components/Link";
-import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "../icons/CircleInfo";
 
 export function Outer({ children }: React.PropsWithChildren<{}>) {

@@ -1,9 +1,9 @@
 import {
-	BskyAgent,
-	ChatBskyActorDefs,
+	type BskyAgent,
+	type ChatBskyActorDefs,
 	ChatBskyConvoDefs,
-	ChatBskyConvoGetLog,
-	ChatBskyConvoSendMessage,
+	type ChatBskyConvoGetLog,
+	type ChatBskyConvoSendMessage,
 } from "@atproto/api";
 import { XRPCError } from "@atproto/xrpc";
 import EventEmitter from "eventemitter3";
@@ -19,19 +19,19 @@ import {
 	NETWORK_FAILURE_STATUSES,
 } from "#/state/messages/convo/const";
 import {
-	ConvoDispatch,
+	type ConvoDispatch,
 	ConvoDispatchEvent,
-	ConvoError,
+	type ConvoError,
 	ConvoErrorCode,
-	ConvoEvent,
-	ConvoItem,
+	type ConvoEvent,
+	type ConvoItem,
 	ConvoItemError,
-	ConvoParams,
-	ConvoState,
+	type ConvoParams,
+	type ConvoState,
 	ConvoStatus,
 } from "#/state/messages/convo/types";
-import { MessagesEventBus } from "#/state/messages/events/agent";
-import { MessagesEventBusError } from "#/state/messages/events/types";
+import type { MessagesEventBus } from "#/state/messages/events/agent";
+import type { MessagesEventBusError } from "#/state/messages/events/types";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 
 const logger = Logger.create(Logger.Context.ConversationAgent);

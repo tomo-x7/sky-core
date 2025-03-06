@@ -1,24 +1,24 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { HITSLOP_10, MAX_ALT_TEXT } from "#/lib/constants";
-import { parseAltFromGIFDescription } from "#/lib/gif-alt-text";
-import { EmbedPlayerParams, parseEmbedPlayerFromUrl } from "#/lib/strings/embed-player";
-import { isAndroid } from "#/platform/detection";
-import { useResolveGifQuery } from "#/state/queries/resolve-link";
-import { Gif } from "#/state/queries/tenor";
-import { AltTextCounterWrapper } from "#/view/com/composer/AltTextCounterWrapper";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
-import { DialogControlProps } from "#/components/Dialog";
+import type { DialogControlProps } from "#/components/Dialog";
+import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { PlusSmall_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import { Text } from "#/components/Typography";
+import { HITSLOP_10, MAX_ALT_TEXT } from "#/lib/constants";
+import { parseAltFromGIFDescription } from "#/lib/gif-alt-text";
+import { type EmbedPlayerParams, parseEmbedPlayerFromUrl } from "#/lib/strings/embed-player";
+import { isAndroid } from "#/platform/detection";
+import { useResolveGifQuery } from "#/state/queries/resolve-link";
+import type { Gif } from "#/state/queries/tenor";
+import { AltTextCounterWrapper } from "#/view/com/composer/AltTextCounterWrapper";
 import { GifEmbed } from "../util/post-embeds/GifEmbed";
 import { AltTextReminder } from "./photos/Gallery";
 

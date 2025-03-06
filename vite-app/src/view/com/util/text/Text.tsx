@@ -1,13 +1,13 @@
 import React from "react";
-import { StyleSheet, TextProps } from "react-native";
+import { StyleSheet, type TextProps } from "react-native";
 import { UITextView } from "react-native-uitextview";
 
+import { applyFonts, useAlf } from "#/alf";
+import { type StringChild, childHasEmoji, renderChildrenWithEmoji } from "#/alf/typography";
+import { type TypographyVariant, useTheme } from "#/lib/ThemeContext";
 import { lh, s } from "#/lib/styles";
-import { TypographyVariant, useTheme } from "#/lib/ThemeContext";
 import { logger } from "#/logger";
 import { isIOS, isWeb } from "#/platform/detection";
-import { applyFonts, useAlf } from "#/alf";
-import { childHasEmoji, renderChildrenWithEmoji, StringChild } from "#/alf/typography";
 
 export type CustomTextProps = Omit<TextProps, "children"> & {
 	type?: TypographyVariant;

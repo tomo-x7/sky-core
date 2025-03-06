@@ -1,6 +1,12 @@
+import {
+	type AppBskyActorDefs,
+	type AppBskyFeedDefs,
+	type AppBskyFeedSearchPosts,
+	AtUri,
+	moderatePost,
+} from "@atproto/api";
+import { type InfiniteData, type QueryClient, type QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
-import { AppBskyActorDefs, AppBskyFeedDefs, AppBskyFeedSearchPosts, AtUri, moderatePost } from "@atproto/api";
-import { InfiniteData, QueryClient, QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useAgent } from "#/state/session";
@@ -72,11 +78,11 @@ export function useSearchPostsQuery({
 
 				// Keep track of the last run and whether we can reuse
 				// some already selected pages from there.
-				let reusedPages = [];
+				const reusedPages = [];
 				if (lastRun.current) {
 					const { data: lastData, args: lastArgs, result: lastResult } = lastRun.current;
 					let canReuse = true;
-					for (let key in selectArgs) {
+					for (const key in selectArgs) {
 						if (selectArgs.hasOwnProperty(key)) {
 							if ((selectArgs as any)[key] !== (lastArgs as any)[key]) {
 								// Can't do reuse anything if any input has changed.

@@ -1,4 +1,4 @@
-import { getLocales as defaultGetLocales, Locale } from "expo-localization";
+import { type Locale, getLocales as defaultGetLocales } from "expo-localization";
 
 import { dedupArray } from "#/lib/functions";
 

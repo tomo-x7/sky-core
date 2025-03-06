@@ -1,7 +1,7 @@
-import React from "react";
-import { ActivityIndicator, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View } from "react-native";
 
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
@@ -10,10 +10,10 @@ import { logger } from "#/logger";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useNotificationFeedQuery } from "#/state/queries/notifications/feed";
 import { EmptyState } from "#/view/com/util/EmptyState";
-import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
-import { List, ListRef } from "#/view/com/util/List";
-import { NotificationFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
+import { List, type ListRef } from "#/view/com/util/List";
 import { LoadMoreRetryBtn } from "#/view/com/util/LoadMoreRetryBtn";
+import { NotificationFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
+import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import { NotificationFeedItem } from "./NotificationFeedItem";
 
 const EMPTY_FEED_ITEM = { _reactKey: "__empty__" };

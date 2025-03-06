@@ -1,32 +1,33 @@
-import React, { PropsWithChildren, useMemo, useRef } from "react";
-import {
-	Dimensions,
-	GestureResponderEvent,
-	Insets,
-	StyleProp,
-	StyleSheet,
-	TouchableOpacity,
-	TouchableWithoutFeedback,
-	useWindowDimensions,
-	View,
-	ViewStyle,
-} from "react-native";
-import Animated, { FadeIn, FadeInDown, FadeInUp } from "react-native-reanimated";
-import RootSiblings from "react-native-root-siblings";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type React from "react";
+import { type PropsWithChildren, useMemo, useRef } from "react";
+import {
+	Dimensions,
+	type GestureResponderEvent,
+	type Insets,
+	type StyleProp,
+	StyleSheet,
+	TouchableOpacity,
+	TouchableWithoutFeedback,
+	View,
+	type ViewStyle,
+	useWindowDimensions,
+} from "react-native";
+import Animated, { FadeIn, FadeInDown, FadeInUp } from "react-native-reanimated";
+import RootSiblings from "react-native-root-siblings";
 
+import { native } from "#/alf";
+import { FullWindowOverlay } from "#/components/FullWindowOverlay";
+import { useTheme } from "#/lib/ThemeContext";
 import { HITSLOP_10 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { colors } from "#/lib/styles";
-import { useTheme } from "#/lib/ThemeContext";
 import { isWeb } from "#/platform/detection";
-import { native } from "#/alf";
-import { FullWindowOverlay } from "#/components/FullWindowOverlay";
 import { Text } from "../text/Text";
-import { Button, ButtonType } from "./Button";
+import { Button, type ButtonType } from "./Button";
 
 const ESTIMATED_BTN_HEIGHT = 50;
 const ESTIMATED_SEP_HEIGHT = 16;

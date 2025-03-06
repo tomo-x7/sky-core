@@ -1,15 +1,15 @@
-import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { View } from "react-native";
 
+import { atoms as a, ios, useBreakpoints, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
+import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useHaptics } from "#/lib/haptics";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, ios, useBreakpoints, useTheme } from "#/alf";
-import { useInteractionState } from "#/components/hooks/useInteractionState";
-import { Text } from "#/components/Typography";
 
 export function PostThreadComposePrompt({
 	onPressCompose,

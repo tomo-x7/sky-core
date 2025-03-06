@@ -1,7 +1,7 @@
-import { ImagePickerAsset } from "expo-image-picker";
+import type { ImagePickerAsset } from "expo-image-picker";
 
 import { VideoTooLargeError } from "#/lib/media/video/errors";
-import { CompressedVideo } from "./types";
+import type { CompressedVideo } from "./types";
 
 const MAX_VIDEO_SIZE = 1000 * 1000 * 50; // 50mb
 

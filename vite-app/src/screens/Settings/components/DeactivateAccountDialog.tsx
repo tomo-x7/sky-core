@@ -1,18 +1,18 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { logger } from "#/logger";
-import { useAgent, useSessionApi } from "#/state/session";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { DialogOuterProps } from "#/components/Dialog";
+import type { DialogOuterProps } from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { Loader } from "#/components/Loader";
 import * as Prompt from "#/components/Prompt";
 import { Text } from "#/components/Typography";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
+import { logger } from "#/logger";
+import { useAgent, useSessionApi } from "#/state/session";
 
 export function DeactivateAccountDialog({
 	control,

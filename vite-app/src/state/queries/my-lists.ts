@@ -1,5 +1,5 @@
-import { AppBskyGraphDefs } from "@atproto/api";
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import type { AppBskyGraphDefs } from "@atproto/api";
+import { type QueryClient, useQuery } from "@tanstack/react-query";
 
 import { accumulate } from "#/lib/async/accumulate";
 import { STALE } from "#/state/queries";
@@ -17,7 +17,7 @@ export function useMyListsQuery(filter: MyListsFilter) {
 		staleTime: STALE.MINUTES.ONE,
 		queryKey: RQKEY(filter),
 		async queryFn() {
-			let lists: AppBskyGraphDefs.ListView[] = [];
+			const lists: AppBskyGraphDefs.ListView[] = [];
 			const promises = [
 				accumulate((cursor) =>
 					agent.app.bsky.graph
@@ -62,7 +62,7 @@ export function useMyListsQuery(filter: MyListsFilter) {
 			}
 			const resultset = await Promise.all(promises);
 			for (const res of resultset) {
-				for (let list of res) {
+				for (const list of res) {
 					if (filter === "curate" && list.purpose !== "app.bsky.graph.defs#curatelist") {
 						continue;
 					}

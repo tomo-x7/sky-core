@@ -1,4 +1,4 @@
-import { BskyFeedViewPreference, BskyPreferences, BskyThreadViewPreference } from "@atproto/api";
+import type { BskyFeedViewPreference, BskyPreferences, BskyThreadViewPreference } from "@atproto/api";
 
 export type UsePreferencesQueryResponse = Omit<BskyPreferences, "contentLabels" | "feedViewPrefs" | "feeds"> & {
 	feedViewPrefs: BskyFeedViewPreference & {

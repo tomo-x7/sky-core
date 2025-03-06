@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 
+import { type ViewStyleProp, useTheme } from "#/alf";
 import { isTouchDevice } from "#/lib/browser";
-import { useTheme, ViewStyleProp } from "#/alf";
 
 export function SubtleWebHover({ style, hover }: ViewStyleProp & { hover: boolean }) {
 	const t = useTheme();

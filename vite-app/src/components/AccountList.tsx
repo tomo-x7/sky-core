@@ -1,17 +1,17 @@
+import type { AppBskyActorDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { View } from "react-native";
-import { AppBskyActorDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
+import { ChevronRight_Stroke2_Corner0_Rounded as Chevron } from "#/components/icons/Chevron";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { useProfilesQuery } from "#/state/queries/profile";
 import { type SessionAccount, useSession } from "#/state/session";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme } from "#/alf";
-import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
-import { ChevronRight_Stroke2_Corner0_Rounded as Chevron } from "#/components/icons/Chevron";
 import { Button } from "./Button";
 import { Text } from "./Typography";
 

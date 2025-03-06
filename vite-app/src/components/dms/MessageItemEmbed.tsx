@@ -1,9 +1,9 @@
+import type { AppBskyEmbedRecord } from "@atproto/api";
 import React from "react";
 import { View } from "react-native";
-import { AppBskyEmbedRecord } from "@atproto/api";
 
-import { PostEmbeds, PostEmbedViewContext } from "#/view/com/util/post-embeds";
 import { atoms as a, native, useTheme } from "#/alf";
+import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
 import { MessageContextProvider } from "./MessageContext";
 
 let MessageItemEmbed = ({

@@ -1,22 +1,22 @@
 import {
-	AppBskyFeedDefs,
+	type AppBskyFeedDefs,
 	AppBskyFeedLike,
 	AppBskyFeedPost,
 	AppBskyFeedRepost,
-	AppBskyGraphDefs,
+	type AppBskyGraphDefs,
 	AppBskyGraphStarterpack,
-	AppBskyNotificationListNotifications,
-	BskyAgent,
+	type AppBskyNotificationListNotifications,
+	type BskyAgent,
+	type ModerationOpts,
 	moderateNotification,
-	ModerationOpts,
 } from "@atproto/api";
-import { QueryClient } from "@tanstack/react-query";
+import type { QueryClient } from "@tanstack/react-query";
 import chunk from "lodash.chunk";
 
 import { labelIsHideableOffense } from "#/lib/moderation";
 import * as bsky from "#/types/bsky";
 import { precacheProfile } from "../profile";
-import { FeedNotification, FeedPage, NotificationType } from "./types";
+import type { FeedNotification, FeedPage, NotificationType } from "./types";
 
 const GROUPABLE_REASONS = ["like", "repost", "follow"];
 const MS_1HR = 1e3 * 60 * 60;
@@ -57,7 +57,7 @@ export async function fetchPage({
 	const notifs = res.data.notifications.filter((notif) => !shouldFilterNotif(notif, moderationOpts));
 
 	// group notifications which are essentially similar (follows, likes on a post)
-	let notifsGrouped = groupNotifications(notifs);
+	const notifsGrouped = groupNotifications(notifs);
 
 	// we fetch subjects of notifications (usually posts) now instead of lazily
 	// in the UI to avoid relayouts

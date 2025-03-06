@@ -1,4 +1,4 @@
-import { AppBskyFeedDefs, AppBskyGraphDefs, AppBskyNotificationListNotifications } from "@atproto/api";
+import type { AppBskyFeedDefs, AppBskyGraphDefs, AppBskyNotificationListNotifications } from "@atproto/api";
 
 export type NotificationType = StarterPackNotificationType | OtherNotificationType;
 

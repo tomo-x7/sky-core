@@ -1,6 +1,6 @@
-import { AppBskyFeedDefs, AppBskyFeedGetAuthorFeed as GetAuthorFeed, BskyAgent } from "@atproto/api";
+import { AppBskyFeedDefs, type BskyAgent, type AppBskyFeedGetAuthorFeed as GetAuthorFeed } from "@atproto/api";
 
-import { FeedAPI, FeedAPIResponse } from "./types";
+import type { FeedAPI, FeedAPIResponse } from "./types";
 
 export class AuthorFeedAPI implements FeedAPI {
 	agent: BskyAgent;

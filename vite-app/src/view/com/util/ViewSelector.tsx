@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
-	NativeScrollEvent,
-	NativeSyntheticEvent,
+	type NativeScrollEvent,
+	type NativeSyntheticEvent,
 	Pressable,
 	RefreshControl,
 	ScrollView,
@@ -14,8 +14,8 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { clamp } from "#/lib/numbers";
 import { colors, s } from "#/lib/styles";
 import { isAndroid } from "#/platform/detection";
-import { Text } from "./text/Text";
 import { FlatList_INTERNAL } from "./Views";
+import { Text } from "./text/Text";
 
 const HEADER_ITEM = { _reactKey: "__header__" };
 const SELECTOR_ITEM = { _reactKey: "__selector__" };

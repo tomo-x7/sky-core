@@ -1,26 +1,26 @@
+import { AppBskyGraphStarterpack } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 import Animated, { FadeIn, LayoutAnimationConfig } from "react-native-reanimated";
-import { AppBskyGraphStarterpack } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { FEEDBACK_FORM_URL } from "#/lib/constants";
-import { useServiceQuery } from "#/state/queries/service";
-import { useStarterPackQuery } from "#/state/queries/starter-packs";
-import { useActiveStarterPack } from "#/state/shell/starter-pack";
-import { LoggedOutLayout } from "#/view/com/util/layouts/LoggedOutLayout";
-import { initialState, reducer, SignupContext, SignupStep, useSubmitSignup } from "#/screens/Signup/state";
-import { StepCaptcha } from "#/screens/Signup/StepCaptcha";
-import { StepHandle } from "#/screens/Signup/StepHandle";
-import { StepInfo } from "#/screens/Signup/StepInfo";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
 import { Divider } from "#/components/Divider";
 import { LinearGradientBackground } from "#/components/LinearGradientBackground";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
+import { FEEDBACK_FORM_URL } from "#/lib/constants";
+import { StepCaptcha } from "#/screens/Signup/StepCaptcha";
+import { StepHandle } from "#/screens/Signup/StepHandle";
+import { StepInfo } from "#/screens/Signup/StepInfo";
+import { SignupContext, SignupStep, initialState, reducer, useSubmitSignup } from "#/screens/Signup/state";
+import { useServiceQuery } from "#/state/queries/service";
+import { useStarterPackQuery } from "#/state/queries/starter-packs";
+import { useActiveStarterPack } from "#/state/shell/starter-pack";
 import * as bsky from "#/types/bsky";
+import { LoggedOutLayout } from "#/view/com/util/layouts/LoggedOutLayout";
 
 export function Signup({ onPressBack }: { onPressBack: () => void }) {
 	const { _ } = useLingui();

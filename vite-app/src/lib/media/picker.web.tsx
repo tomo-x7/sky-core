@@ -1,8 +1,8 @@
 /// <reference lib="dom" />
 
-import { Image as RNImage } from "react-native-image-crop-picker";
+import type { Image as RNImage } from "react-native-image-crop-picker";
 
-import { CameraOpts, CropperOptions } from "./types";
+import type { CameraOpts, CropperOptions } from "./types";
 export { openPicker } from "./picker.shared";
 import { unstable__openModal } from "#/state/modals";
 

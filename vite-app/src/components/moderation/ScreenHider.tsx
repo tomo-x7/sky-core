@@ -1,21 +1,21 @@
-import React from "react";
-import { StyleProp, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
-import { ModerationUI } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { ModerationUI } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { type StyleProp, TouchableWithoutFeedback, View, type ViewStyle } from "react-native";
 
-import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
-import { NavigationProp } from "#/lib/routes/types";
-import { CenteredView } from "#/view/com/util/Views";
 import { atoms as a, useTheme, web } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
+import { Text } from "#/components/Typography";
 import {
 	ModerationDetailsDialog,
 	useModerationDetailsDialogControl,
 } from "#/components/moderation/ModerationDetailsDialog";
-import { Text } from "#/components/Typography";
+import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
+import type { NavigationProp } from "#/lib/routes/types";
+import { CenteredView } from "#/view/com/util/Views";
 
 export function ScreenHider({
 	testID,

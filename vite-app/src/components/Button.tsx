@@ -1,24 +1,24 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
-	AccessibilityProps,
-	GestureResponderEvent,
-	MouseEvent,
-	NativeSyntheticEvent,
+	type AccessibilityProps,
+	type GestureResponderEvent,
+	type MouseEvent,
+	type NativeSyntheticEvent,
 	Pressable,
-	PressableProps,
-	StyleProp,
+	type PressableProps,
+	type StyleProp,
 	StyleSheet,
-	TargetedEvent,
-	TextProps,
-	TextStyle,
+	type TargetedEvent,
+	type TextProps,
+	type TextStyle,
 	View,
-	ViewStyle,
+	type ViewStyle,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 import { atoms as a, flatten, select, tokens, useTheme } from "#/alf";
-import { Props as SVGIconProps } from "#/components/icons/common";
 import { Text } from "#/components/Typography";
+import type { Props as SVGIconProps } from "#/components/icons/common";
 
 export type ButtonVariant = "solid" | "outline" | "ghost" | "gradient";
 export type ButtonColor =

@@ -1,5 +1,3 @@
-import React from "react";
-import { Alert, AppState, AppStateStatus } from "react-native";
 import { nativeBuildVersion } from "expo-application";
 import {
 	checkForUpdateAsync,
@@ -9,6 +7,8 @@ import {
 	setExtraParamAsync,
 	useUpdates,
 } from "expo-updates";
+import React from "react";
+import { Alert, AppState, type AppStateStatus } from "react-native";
 
 import { IS_TESTFLIGHT } from "#/lib/app-info";
 import { logger } from "#/logger";

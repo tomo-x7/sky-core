@@ -1,22 +1,22 @@
-import { useState } from "react";
-import { ListRenderItemInfo, View } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
+import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { Trans } from "@lingui/macro";
+import { useState } from "react";
+import { type ListRenderItemInfo, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
-import { isNative } from "#/platform/detection";
-import { useA11y } from "#/state/a11y";
-import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
-import { useActorSearchPaginated } from "#/state/queries/actor-search";
-import { List } from "#/view/com/util/List";
-import { useWizardState } from "#/screens/StarterPack/Wizard/State";
 import { atoms as a, useTheme } from "#/alf";
-import { SearchInput } from "#/components/forms/SearchInput";
 import { Loader } from "#/components/Loader";
 import { ScreenTransition } from "#/components/StarterPack/Wizard/ScreenTransition";
 import { WizardProfileCard } from "#/components/StarterPack/Wizard/WizardListCard";
 import { Text } from "#/components/Typography";
-import * as bsky from "#/types/bsky";
+import { SearchInput } from "#/components/forms/SearchInput";
+import { isNative } from "#/platform/detection";
+import { useWizardState } from "#/screens/StarterPack/Wizard/State";
+import { useA11y } from "#/state/a11y";
+import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
+import { useActorSearchPaginated } from "#/state/queries/actor-search";
+import type * as bsky from "#/types/bsky";
+import { List } from "#/view/com/util/List";
 
 function keyExtractor(item: AppBskyActorDefs.ProfileViewBasic) {
 	return item?.did ?? "";

@@ -1,6 +1,6 @@
-import { AppBskyFeedDefs, AppBskyFeedThreadgate } from "@atproto/api";
+import { type AppBskyFeedDefs, AppBskyFeedThreadgate } from "@atproto/api";
 
-import { ThreadgateAllowUISetting } from "#/state/queries/threadgate/types";
+import type { ThreadgateAllowUISetting } from "#/state/queries/threadgate/types";
 import * as bsky from "#/types/bsky";
 
 export function threadgateViewToAllowUISetting(
@@ -69,7 +69,7 @@ export function threadgateAllowUISettingToAllowRecordValue(
 		return undefined;
 	}
 
-	let allow: Exclude<AppBskyFeedThreadgate.Record["allow"], undefined> = [];
+	const allow: Exclude<AppBskyFeedThreadgate.Record["allow"], undefined> = [];
 
 	if (!threadgate.find((v) => v.type === "nobody")) {
 		for (const rule of threadgate) {

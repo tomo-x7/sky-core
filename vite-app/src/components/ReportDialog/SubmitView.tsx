@@ -1,25 +1,25 @@
+import type { AppBskyLabelerDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { AppBskyLabelerDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { getLabelingServiceTitle } from "#/lib/moderation";
-import { ReportOption } from "#/lib/moderation/useReportOptions";
-import { isAndroid } from "#/platform/detection";
-import { useAgent } from "#/state/session";
-import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
-import * as Toast from "#/view/com/util/Toast";
 import { atoms as a, native, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components/icons/Chevron";
 import { PaperPlane_Stroke2_Corner0_Rounded as SendIcon } from "#/components/icons/PaperPlane";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
-import { ReportDialogProps } from "./types";
+import { getLabelingServiceTitle } from "#/lib/moderation";
+import type { ReportOption } from "#/lib/moderation/useReportOptions";
+import { isAndroid } from "#/platform/detection";
+import { useAgent } from "#/state/session";
+import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
+import * as Toast from "#/view/com/util/Toast";
+import type { ReportDialogProps } from "./types";
 
 export function SubmitView({
 	params,

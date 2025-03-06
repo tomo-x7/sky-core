@@ -1,14 +1,14 @@
+import type { ModerationUI } from "@atproto/api";
 import React from "react";
-import { ModerationUI } from "@atproto/api";
 
-import {
-	ModerationCauseDescription,
-	useModerationCauseDescription,
-} from "#/lib/moderation/useModerationCauseDescription";
 import {
 	ModerationDetailsDialog,
 	useModerationDetailsDialogControl,
 } from "#/components/moderation/ModerationDetailsDialog";
+import {
+	type ModerationCauseDescription,
+	useModerationCauseDescription,
+} from "#/lib/moderation/useModerationCauseDescription";
 
 type Context = {
 	isContentVisible: boolean;

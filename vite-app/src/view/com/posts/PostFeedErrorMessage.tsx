@@ -1,22 +1,22 @@
-import React from "react";
-import { View } from "react-native";
-import { AppBskyActorDefs, AppBskyFeedGetAuthorFeed, AtUri } from "@atproto/api";
-import { msg as msgLingui, Trans } from "@lingui/macro";
+import { type AppBskyActorDefs, AppBskyFeedGetAuthorFeed, AtUri } from "@atproto/api";
+import { Trans, msg as msgLingui } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { View } from "react-native";
 
+import * as Prompt from "#/components/Prompt";
 import { usePalette } from "#/lib/hooks/usePalette";
-import { NavigationProp } from "#/lib/routes/types";
+import type { NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
-import { FeedDescriptor } from "#/state/queries/post-feed";
+import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { useRemoveFeedMutation } from "#/state/queries/preferences";
-import * as Prompt from "#/components/Prompt";
 import { EmptyState } from "../util/EmptyState";
+import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
 import { Text } from "../util/text/Text";
-import * as Toast from "../util/Toast";
 
 export enum KnownError {
 	Block = "Block",

@@ -1,29 +1,51 @@
-import React from "react";
-import { View } from "react-native";
-import { Image } from "expo-image";
 import {
 	AppBskyGraphDefs,
 	AppBskyGraphStarterpack,
 	AtUri,
-	ModerationOpts,
+	type ModerationOpts,
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
+import { Image } from "expo-image";
+import React from "react";
+import { View } from "react-native";
 
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { useDialogControl } from "#/components/Dialog";
+import * as Layout from "#/components/Layout";
+import { ListMaybePlaceholder } from "#/components/Lists";
+import { Loader } from "#/components/Loader";
+import * as Menu from "#/components/Menu";
+import * as Prompt from "#/components/Prompt";
+import { RichText } from "#/components/RichText";
+import { FeedsList } from "#/components/StarterPack/Main/FeedsList";
+import { PostsList } from "#/components/StarterPack/Main/PostsList";
+import { ProfilesList } from "#/components/StarterPack/Main/ProfilesList";
+import { QrCodeDialog } from "#/components/StarterPack/QrCodeDialog";
+import { ShareDialog } from "#/components/StarterPack/ShareDialog";
+import { Text } from "#/components/Typography";
+import { ArrowOutOfBox_Stroke2_Corner0_Rounded as ArrowOutOfBox } from "#/components/icons/ArrowOutOfBox";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
+import { DotGrid_Stroke2_Corner0_Rounded as Ellipsis } from "#/components/icons/DotGrid";
+import { Pencil_Stroke2_Corner0_Rounded as Pencil } from "#/components/icons/Pencil";
+import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
+import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
 import { batchedUpdates } from "#/lib/batchedUpdates";
 import { HITSLOP_20 } from "#/lib/constants";
 import { isBlockedOrBlocking, isMuted } from "#/lib/moderation/blocked-and-muted";
 import { makeProfileLink, makeStarterPackLink } from "#/lib/routes/links";
-import { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
 import { logger } from "#/logger";
+import { bulkWriteFollows } from "#/screens/Onboarding/util";
 import { updateProfileShadow } from "#/state/cache/profile-shadow";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { getAllListMembers } from "#/state/queries/list-members";
@@ -36,32 +58,10 @@ import { useAgent, useSession } from "#/state/session";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import { ProgressGuideAction, useProgressGuideControls } from "#/state/shell/progress-guide";
 import { useSetActiveStarterPack } from "#/state/shell/starter-pack";
+import * as bsky from "#/types/bsky";
 import { PagerWithHeader } from "#/view/com/pager/PagerWithHeader";
 import { ProfileSubpageHeader } from "#/view/com/profile/ProfileSubpageHeader";
 import * as Toast from "#/view/com/util/Toast";
-import { bulkWriteFollows } from "#/screens/Onboarding/util";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { useDialogControl } from "#/components/Dialog";
-import { ArrowOutOfBox_Stroke2_Corner0_Rounded as ArrowOutOfBox } from "#/components/icons/ArrowOutOfBox";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { DotGrid_Stroke2_Corner0_Rounded as Ellipsis } from "#/components/icons/DotGrid";
-import { Pencil_Stroke2_Corner0_Rounded as Pencil } from "#/components/icons/Pencil";
-import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
-import * as Layout from "#/components/Layout";
-import { ListMaybePlaceholder } from "#/components/Lists";
-import { Loader } from "#/components/Loader";
-import * as Menu from "#/components/Menu";
-import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
-import * as Prompt from "#/components/Prompt";
-import { RichText } from "#/components/RichText";
-import { FeedsList } from "#/components/StarterPack/Main/FeedsList";
-import { PostsList } from "#/components/StarterPack/Main/PostsList";
-import { ProfilesList } from "#/components/StarterPack/Main/ProfilesList";
-import { QrCodeDialog } from "#/components/StarterPack/QrCodeDialog";
-import { ShareDialog } from "#/components/StarterPack/ShareDialog";
-import { Text } from "#/components/Typography";
-import * as bsky from "#/types/bsky";
 
 type StarterPackScreeProps = NativeStackScreenProps<CommonNavigatorParams, "StarterPack">;
 type StarterPackScreenShortProps = NativeStackScreenProps<CommonNavigatorParams, "StarterPackShort">;
@@ -343,7 +343,7 @@ function Header({
 
 		setIsProcessing(false);
 		batchedUpdates(() => {
-			for (let did of dids) {
+			for (const did of dids) {
 				updateProfileShadow(queryClient, did, {
 					followingUri: followUris.get(did),
 				});

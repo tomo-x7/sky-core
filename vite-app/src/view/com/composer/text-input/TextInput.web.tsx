@@ -1,6 +1,3 @@
-import React, { useRef } from "react";
-import { StyleSheet, View } from "react-native";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { AppBskyRichtextFacet, RichText } from "@atproto/api";
 import { Trans } from "@lingui/macro";
 import { Document } from "@tiptap/extension-document";
@@ -12,20 +9,23 @@ import { Placeholder } from "@tiptap/extension-placeholder";
 import { Text as TiptapText } from "@tiptap/extension-text";
 import { generateJSON } from "@tiptap/html";
 import { Fragment, Node, Slice } from "@tiptap/pm/model";
-import { EditorContent, JSONContent, useEditor } from "@tiptap/react";
+import { EditorContent, type JSONContent, useEditor } from "@tiptap/react";
+import React, { useRef } from "react";
+import { StyleSheet, View } from "react-native";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
+import { atoms as a, useAlf } from "#/alf";
+import { normalizeTextStyles } from "#/alf/typography";
+import { Portal } from "#/components/Portal";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { blobToDataUri, isUriImage } from "#/lib/media/util";
 import { useActorAutocompleteFn } from "#/state/queries/actor-autocomplete";
-import { LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
+import { type LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
 import { textInputWebEmitter } from "#/view/com/composer/text-input/textInputWebEmitter";
-import { atoms as a, useAlf } from "#/alf";
-import { normalizeTextStyles } from "#/alf/typography";
-import { Portal } from "#/components/Portal";
 import { Text } from "../../util/text/Text";
 import { createSuggestion } from "./web/Autocomplete";
-import { Emoji } from "./web/EmojiPicker.web";
+import type { Emoji } from "./web/EmojiPicker.web";
 import { LinkDecorator } from "./web/LinkDecorator";
 import { TagDecorator } from "./web/TagDecorator";
 
@@ -340,7 +340,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 	);
 });
 
-function editorJsonToText(json: JSONContent, isLastDocumentChild: boolean = false): string {
+function editorJsonToText(json: JSONContent, isLastDocumentChild = false): string {
 	let text = "";
 	if (json.type === "doc") {
 		if (json.content?.length) {

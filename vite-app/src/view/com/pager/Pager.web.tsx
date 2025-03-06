@@ -1,6 +1,6 @@
 import React from "react";
-import { View } from "react-native";
 import { flushSync } from "react-dom";
+import { View } from "react-native";
 
 import { s } from "#/lib/styles";
 
@@ -37,7 +37,7 @@ export const Pager = React.forwardRef(function PagerImpl(
 			// case we should preserve and restore scroll), or if it is somewhere below in the
 			// viewport (in which case a scroll jump would be jarring). We determine this by
 			// measuring where the "anchor" element is (which we place just above the tabbar).
-			let anchorTop = anchorRef.current ? (anchorRef.current as Element).getBoundingClientRect().top : -scrollY; // If there's no anchor, treat the top of the page as one.
+			const anchorTop = anchorRef.current ? (anchorRef.current as Element).getBoundingClientRect().top : -scrollY; // If there's no anchor, treat the top of the page as one.
 			const isSticking = anchorTop <= 5; // This would be 0 if browser scrollTo() was reliable.
 
 			if (isSticking) {

@@ -1,16 +1,22 @@
-import { Keyboard, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Keyboard, View } from "react-native";
 
-import { ADULT_CONTENT_LABELS, AdultSelfLabel, OTHER_SELF_LABELS, OtherSelfLabel, SelfLabel } from "#/lib/moderation";
-import { isWeb } from "#/platform/detection";
 import { atoms as a, native, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
+import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { Shield_Stroke2_Corner0_Rounded } from "#/components/icons/Shield";
-import { Text } from "#/components/Typography";
+import {
+	ADULT_CONTENT_LABELS,
+	type AdultSelfLabel,
+	OTHER_SELF_LABELS,
+	type OtherSelfLabel,
+	type SelfLabel,
+} from "#/lib/moderation";
+import { isWeb } from "#/platform/detection";
 
 export function LabelsBtn({
 	labels,

@@ -1,5 +1,8 @@
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import Graphemer from "graphemer";
 import { useCallback, useState } from "react";
-import { Pressable, TextInput, useWindowDimensions, View } from "react-native";
+import { Pressable, TextInput, View, useWindowDimensions } from "react-native";
 import { useFocusedInputHandler, useReanimatedKeyboardAnimation } from "react-native-keyboard-controller";
 import Animated, {
 	measure,
@@ -9,20 +12,17 @@ import Animated, {
 	useSharedValue,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import Graphemer from "graphemer";
 
+import { atoms as a, useTheme } from "#/alf";
+import { useSharedInputStyles } from "#/components/forms/TextField";
+import { PaperPlane_Stroke2_Corner0_Rounded as PaperPlane } from "#/components/icons/PaperPlane";
 import { HITSLOP_10, MAX_DM_GRAPHEME_LENGTH } from "#/lib/constants";
 import { useHaptics } from "#/lib/haptics";
 import { useEmail } from "#/lib/hooks/useEmail";
 import { isIOS, isWeb } from "#/platform/detection";
 import { useMessageDraft, useSaveMessageDraft } from "#/state/messages/message-drafts";
-import { EmojiPickerPosition } from "#/view/com/composer/text-input/web/EmojiPicker.web";
+import type { EmojiPickerPosition } from "#/view/com/composer/text-input/web/EmojiPicker.web";
 import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, useTheme } from "#/alf";
-import { useSharedInputStyles } from "#/components/forms/TextField";
-import { PaperPlane_Stroke2_Corner0_Rounded as PaperPlane } from "#/components/icons/PaperPlane";
 import { useExtractEmbedFromFacets } from "./MessageInputEmbed";
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);

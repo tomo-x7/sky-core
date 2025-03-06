@@ -1,16 +1,16 @@
+import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
+import { Plural, Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { AppBskyActorDefs, moderateProfile, ModerationOpts } from "@atproto/api";
-import { msg, Plural, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Link, type LinkProps } from "#/components/Link";
+import { Text } from "#/components/Typography";
 import { makeProfileLink } from "#/lib/routes/links";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
+import type * as bsky from "#/types/bsky";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme } from "#/alf";
-import { Link, LinkProps } from "#/components/Link";
-import { Text } from "#/components/Typography";
-import * as bsky from "#/types/bsky";
 
 const AVI_SIZE = 30;
 const AVI_SIZE_SMALL = 20;

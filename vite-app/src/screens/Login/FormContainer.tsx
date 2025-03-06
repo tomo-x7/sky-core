@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";

@@ -1,28 +1,28 @@
-import React from "react";
-import { GestureResponderEvent, View } from "react-native";
-import { AppBskyFeedDefs, AppBskyGraphDefs, AtUri, RichText as RichTextApi } from "@atproto/api";
-import { msg, Plural, Trans } from "@lingui/macro";
+import { type AppBskyFeedDefs, type AppBskyGraphDefs, AtUri, RichText as RichTextApi } from "@atproto/api";
+import { Plural, Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { type GestureResponderEvent, View } from "react-native";
 
+import { useTheme } from "#/alf";
+import { atoms as a } from "#/alf";
+import { Button, ButtonIcon } from "#/components/Button";
+import { Link as InternalLink, type LinkProps } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import * as Prompt from "#/components/Prompt";
+import { RichText, type RichTextProps } from "#/components/RichText";
+import { Text } from "#/components/Typography";
+import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
+import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { logger } from "#/logger";
 import { precacheFeedFromGeneratorView } from "#/state/queries/feed";
 import { useAddSavedFeedsMutation, usePreferencesQuery, useRemoveFeedMutation } from "#/state/queries/preferences";
 import { useSession } from "#/state/session";
+import type * as bsky from "#/types/bsky";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { useTheme } from "#/alf";
-import { atoms as a } from "#/alf";
-import { Button, ButtonIcon } from "#/components/Button";
-import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
-import { Link as InternalLink, LinkProps } from "#/components/Link";
-import { Loader } from "#/components/Loader";
-import * as Prompt from "#/components/Prompt";
-import { RichText, RichTextProps } from "#/components/RichText";
-import { Text } from "#/components/Typography";
-import * as bsky from "#/types/bsky";
 
 type Props = {
 	view: AppBskyFeedDefs.GeneratorView;

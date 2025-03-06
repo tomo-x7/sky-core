@@ -1,5 +1,11 @@
-import { AppBskyActorDefs, AppBskyEmbedRecord, AppBskyFeedDefs, AppBskyFeedGetQuotes, AtUri } from "@atproto/api";
-import { InfiniteData, QueryClient, QueryKey, useInfiniteQuery } from "@tanstack/react-query";
+import {
+	type AppBskyActorDefs,
+	AppBskyEmbedRecord,
+	type AppBskyFeedDefs,
+	type AppBskyFeedGetQuotes,
+	AtUri,
+} from "@atproto/api";
+import { type InfiniteData, type QueryClient, type QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 
 import { useAgent } from "#/state/session";
 import { didOrHandleUriMatches, embedViewRecordToPostView, getEmbeddedPost } from "./util";

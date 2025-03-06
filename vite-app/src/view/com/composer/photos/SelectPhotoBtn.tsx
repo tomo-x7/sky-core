@@ -1,16 +1,16 @@
-/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
-import { useCallback } from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+/* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
+import { useCallback } from "react";
 
-import { usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
-import { openPicker } from "#/lib/media/picker";
-import { isNative } from "#/platform/detection";
-import { ComposerImage, createComposerImage } from "#/state/gallery";
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 import { Image_Stroke2_Corner0_Rounded as Image } from "#/components/icons/Image";
+import { usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
+import { openPicker } from "#/lib/media/picker";
+import { isNative } from "#/platform/detection";
+import { type ComposerImage, createComposerImage } from "#/state/gallery";
 
 type Props = {
 	size: number;

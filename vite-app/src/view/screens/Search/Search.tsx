@@ -1,24 +1,46 @@
-import React, { useCallback, useLayoutEffect, useMemo } from "react";
-import { ActivityIndicator, Pressable, StyleProp, StyleSheet, TextInput, View, ViewStyle } from "react-native";
-import { ScrollView as RNGHScrollView } from "react-native-gesture-handler";
-import { AppBskyActorDefs, AppBskyFeedDefs, moderateProfile } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import React, { useCallback, useLayoutEffect, useMemo } from "react";
+import {
+	ActivityIndicator,
+	Pressable,
+	type StyleProp,
+	StyleSheet,
+	type TextInput,
+	View,
+	type ViewStyle,
+} from "react-native";
+import { ScrollView as RNGHScrollView } from "react-native-gesture-handler";
 
+import { atoms as a, native, platform, tokens, useBreakpoints, useTheme, web } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import * as FeedCard from "#/components/FeedCard";
+import * as Layout from "#/components/Layout";
+import * as Menu from "#/components/Menu";
+import { Text } from "#/components/Typography";
+import { SearchInput } from "#/components/forms/SearchInput";
+import {
+	ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon,
+	ChevronTopBottom_Stroke2_Corner0_Rounded as ChevronUpDownIcon,
+} from "#/components/icons/Chevron";
+import { Earth_Stroke2_Corner0_Rounded as EarthIcon } from "#/components/icons/Globe";
+import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
 import { APP_LANGUAGES, LANGUAGES } from "#/lib/../locale/languages";
-import { createHitslop, HITSLOP_20 } from "#/lib/constants";
+import { HITSLOP_20, createHitslop } from "#/lib/constants";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { MagnifyingGlassIcon } from "#/lib/icons";
 import { makeProfileLink } from "#/lib/routes/links";
-import { NavigationProp } from "#/lib/routes/types";
-import { NativeStackScreenProps, SearchTabNavigatorParams } from "#/lib/routes/types";
+import type { NavigationProp } from "#/lib/routes/types";
+import type { NativeStackScreenProps, SearchTabNavigatorParams } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { augmentSearchQuery } from "#/lib/strings/helpers";
 import { languageName } from "#/locale/helpers";
 import { isNative, isWeb } from "#/platform/detection";
+import { type Params, makeSearchQuery, parseSearchQuery } from "#/screens/Search/utils";
 import { listenSoftReset } from "#/state/events";
 import { useLanguagePrefs } from "#/state/preferences/languages";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -29,6 +51,8 @@ import { unstableCacheProfileView, useProfilesQuery } from "#/state/queries/prof
 import { useSearchPostsQuery } from "#/state/queries/search-posts";
 import { useSession } from "#/state/session";
 import { useSetMinimalShellMode } from "#/state/shell";
+import { account, useStorage } from "#/storage";
+import type * as bsky from "#/types/bsky";
 import { Pager } from "#/view/com/pager/Pager";
 import { TabBar } from "#/view/com/pager/TabBar";
 import { Post } from "#/view/com/post/Post";
@@ -38,22 +62,6 @@ import { List } from "#/view/com/util/List";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { Explore } from "#/view/screens/Search/Explore";
 import { SearchLinkCard, SearchProfileCard } from "#/view/shell/desktop/Search";
-import { makeSearchQuery, Params, parseSearchQuery } from "#/screens/Search/utils";
-import { atoms as a, native, platform, tokens, useBreakpoints, useTheme, web } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import * as FeedCard from "#/components/FeedCard";
-import { SearchInput } from "#/components/forms/SearchInput";
-import {
-	ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon,
-	ChevronTopBottom_Stroke2_Corner0_Rounded as ChevronUpDownIcon,
-} from "#/components/icons/Chevron";
-import { Earth_Stroke2_Corner0_Rounded as EarthIcon } from "#/components/icons/Globe";
-import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
-import * as Layout from "#/components/Layout";
-import * as Menu from "#/components/Menu";
-import { Text } from "#/components/Typography";
-import { account, useStorage } from "#/storage";
-import * as bsky from "#/types/bsky";
 
 function Loader() {
 	return (
@@ -152,7 +160,7 @@ let SearchScreenPostResults = ({
 		return results?.pages.flatMap((page) => page.posts) || [];
 	}, [results]);
 	const items = React.useMemo(() => {
-		let temp: SearchResultSlice[] = [];
+		const temp: SearchResultSlice[] = [];
 
 		const seenUris = new Set();
 		for (const post of posts) {

@@ -1,17 +1,17 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
-import { SessionAccount, useSession, useSessionApi } from "#/state/session";
-import { useLoggedOutViewControls } from "#/state/shell/logged-out";
-import * as Toast from "#/view/com/util/Toast";
 import { atoms as a } from "#/alf";
 import { AccountList } from "#/components/AccountList";
 import { Button, ButtonText } from "#/components/Button";
 import * as TextField from "#/components/forms/TextField";
+import { logEvent } from "#/lib/statsig/statsig";
+import { logger } from "#/logger";
+import { type SessionAccount, useSession, useSessionApi } from "#/state/session";
+import { useLoggedOutViewControls } from "#/state/shell/logged-out";
+import * as Toast from "#/view/com/util/Toast";
 import { FormContainer } from "./FormContainer";
 
 export const ChooseAccountForm = ({

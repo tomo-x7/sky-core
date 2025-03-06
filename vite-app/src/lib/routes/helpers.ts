@@ -1,6 +1,6 @@
-import { NavigationProp } from "@react-navigation/native";
+import type { NavigationProp } from "@react-navigation/native";
 
-import { RouteParams, State } from "./types";
+import type { RouteParams, State } from "./types";
 
 export function getRootNavigation<T extends {}>(nav: NavigationProp<T>): NavigationProp<T> {
 	while (nav.getParent()) {
@@ -48,9 +48,9 @@ export function isTab(current: string, route: string) {
 }
 
 export enum TabState {
-	InsideAtRoot,
-	Inside,
-	Outside,
+	InsideAtRoot = 0,
+	Inside = 1,
+	Outside = 2,
 }
 export function getTabState(state: State | undefined, tab: string): TabState {
 	if (!state) {

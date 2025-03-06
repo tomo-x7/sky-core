@@ -1,16 +1,16 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
 import { Trans } from "@lingui/macro";
 import { ReactRenderer } from "@tiptap/react";
-import { SuggestionKeyDownProps, SuggestionOptions, SuggestionProps } from "@tiptap/suggestion";
-import tippy, { Instance as TippyInstance } from "tippy.js";
+import type { SuggestionKeyDownProps, SuggestionOptions, SuggestionProps } from "@tiptap/suggestion";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
+import tippy, { type Instance as TippyInstance } from "tippy.js";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { ActorAutocompleteFn } from "#/state/queries/actor-autocomplete";
-import { Text } from "#/view/com/util/text/Text";
+import type { ActorAutocompleteFn } from "#/state/queries/actor-autocomplete";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { Text } from "#/view/com/util/text/Text";
 import { useGrapheme } from "../hooks/useGrapheme";
 
 interface MentionListRef {

@@ -1,31 +1,38 @@
+import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React, { memo, useRef, useState } from "react";
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { StyleSheet, View, useWindowDimensions } from "react-native";
 import { runOnJS } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AppBskyFeedDefs, AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonIcon } from "#/components/Button";
+import { Header } from "#/components/Layout";
+import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
+import * as Menu from "#/components/Menu";
+import { Text } from "#/components/Typography";
+import { SettingsSliderVertical_Stroke2_Corner0_Rounded as SettingsSlider } from "#/components/icons/SettingsSlider";
+import { ScrollProvider } from "#/lib/ScrollContext";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
-import { ScrollProvider } from "#/lib/ScrollContext";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { isAndroid, isNative, isWeb } from "#/platform/detection";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import {
+	type ThreadBlocked,
+	type ThreadModerationCache,
+	type ThreadNode,
+	type ThreadNotFound,
+	type ThreadPost,
 	fillThreadModerationCache,
 	sortThread,
-	ThreadBlocked,
-	ThreadModerationCache,
-	ThreadNode,
-	ThreadNotFound,
-	ThreadPost,
 	usePostThreadQuery,
 } from "#/state/queries/post-thread";
 import { useSetThreadViewPreferencesMutation } from "#/state/queries/preferences";
@@ -33,14 +40,7 @@ import { usePreferencesQuery } from "#/state/queries/preferences";
 import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell";
 import { useMergedThreadgateHiddenReplies } from "#/state/threadgate-hidden-replies";
-import { List, ListMethods } from "#/view/com/util/List";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonIcon } from "#/components/Button";
-import { SettingsSliderVertical_Stroke2_Corner0_Rounded as SettingsSlider } from "#/components/icons/SettingsSlider";
-import { Header } from "#/components/Layout";
-import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
-import * as Menu from "#/components/Menu";
-import { Text } from "#/components/Typography";
+import { List, type ListMethods } from "#/view/com/util/List";
 import { PostThreadComposePrompt } from "./PostThreadComposePrompt";
 import { PostThreadItem } from "./PostThreadItem";
 import { PostThreadLoadMore } from "./PostThreadLoadMore";
@@ -62,9 +62,9 @@ const SHOW_HIDDEN_REPLIES = { _reactKey: "__show_hidden_replies__" };
 const SHOW_MUTED_REPLIES = { _reactKey: "__show_muted_replies__" };
 
 enum HiddenRepliesState {
-	Hide,
-	Show,
-	ShowAndOverridePostHider,
+	Hide = 0,
+	Show = 1,
+	ShowAndOverridePostHider = 2,
 }
 
 type YieldedItem = ThreadPost | ThreadBlocked | ThreadNotFound | typeof SHOW_HIDDEN_REPLIES | typeof SHOW_MUTED_REPLIES;
@@ -159,7 +159,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 	// Values used for proper rendering of parents
 	const ref = useRef<ListMethods>(null);
 	const highlightedPostRef = useRef<View | null>(null);
-	const [maxParents, setMaxParents] = React.useState(isWeb ? Infinity : PARENTS_CHUNK_SIZE);
+	const [maxParents, setMaxParents] = React.useState(isWeb ? Number.POSITIVE_INFINITY : PARENTS_CHUNK_SIZE);
 	const [maxReplies, setMaxReplies] = React.useState(50);
 
 	useSetTitle(
@@ -260,7 +260,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 		if (!skeleton) return [];
 
 		const { parents, highlightedPost, replies } = skeleton;
-		let arr: RowItem[] = [];
+		const arr: RowItem[] = [];
 		if (highlightedPost.type === "post") {
 			// We want to wait for parents to load before rendering.
 			// If you add something here, you'll need to update both
@@ -274,7 +274,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 				// https://bsky.app/profile/www.mozzius.dev/post/3kjqhblh6qk2o
 
 				// Everything is loaded
-				let startIndex = Math.max(0, parents.length - maxParents);
+				const startIndex = Math.max(0, parents.length - maxParents);
 				for (let i = startIndex; i < parents.length; i++) {
 					arr.push(parents[i]);
 				}
@@ -776,7 +776,7 @@ function* flattenThreadReplies(
 		if (node.replies?.length) {
 			let hiddenReplies = HiddenReplyType.None;
 			for (const reply of node.replies) {
-				let hiddenReply = yield* flattenThreadReplies(
+				const hiddenReply = yield* flattenThreadReplies(
 					reply,
 					currentDid,
 					treeView,

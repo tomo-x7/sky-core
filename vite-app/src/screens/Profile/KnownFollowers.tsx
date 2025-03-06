@@ -1,11 +1,13 @@
-import React from "react";
-import { AppBskyActorDefs } from "@atproto/api";
+import type { AppBskyActorDefs } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
+import React from "react";
 
+import * as Layout from "#/components/Layout";
+import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
 import { useProfileKnownFollowersQuery } from "#/state/queries/known-followers";
@@ -14,8 +16,6 @@ import { useSetMinimalShellMode } from "#/state/shell";
 import { ProfileCardWithFollowBtn } from "#/view/com/profile/ProfileCard";
 import { List } from "#/view/com/util/List";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
-import * as Layout from "#/components/Layout";
-import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 
 function renderItem({
 	item,

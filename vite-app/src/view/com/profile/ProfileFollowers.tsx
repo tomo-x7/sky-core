@@ -1,15 +1,15 @@
-import React from "react";
-import { AppBskyActorDefs as ActorDefs } from "@atproto/api";
+import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
 
+import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
 import { useProfileFollowersQuery } from "#/state/queries/profile-followers";
 import { useResolveDidQuery } from "#/state/queries/resolve-uri";
 import { useSession } from "#/state/session";
-import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { List } from "../util/List";
 import { ProfileCardWithFollowBtn } from "./ProfileCard";
 

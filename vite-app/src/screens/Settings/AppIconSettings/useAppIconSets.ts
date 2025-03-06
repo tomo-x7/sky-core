@@ -1,7 +1,7 @@
-import { useMemo } from "react";
 import { useLingui } from "@lingui/react";
+import { useMemo } from "react";
 
-import { AppIconSet } from "#/screens/Settings/AppIconSettings/types";
+import type { AppIconSet } from "#/screens/Settings/AppIconSettings/types";
 
 export function useAppIconSets() {
 	const { _ } = useLingui();

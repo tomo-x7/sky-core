@@ -1,5 +1,5 @@
-import React from "react";
 import { BskyAgent, DEFAULT_LABEL_SETTINGS, interpretLabelValueDefinitions } from "@atproto/api";
+import React from "react";
 
 import { isNonConfigurableModerationAuthority } from "#/state/session/additional-moderation-authorities";
 import { useLabelersDetailedInfoQuery } from "../labeler";

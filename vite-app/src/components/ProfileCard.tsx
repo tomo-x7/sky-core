@@ -1,26 +1,26 @@
-import React from "react";
-import { GestureResponderEvent, View } from "react-native";
-import { moderateProfile, ModerationOpts, RichText as RichTextApi } from "@atproto/api";
+import { type ModerationOpts, RichText as RichTextApi, moderateProfile } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { type GestureResponderEvent, View } from "react-native";
 
-import { LogEvents } from "#/lib/statsig/statsig";
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonIcon, type ButtonProps, ButtonText } from "#/components/Button";
+import { Link as InternalLink, type LinkProps } from "#/components/Link";
+import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
+import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
+import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
+import type { LogEvents } from "#/lib/statsig/statsig";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useProfileFollowMutationQueue } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
+import type * as bsky from "#/types/bsky";
 import { ProfileCardPills } from "#/view/com/profile/ProfileCard";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonIcon, ButtonProps, ButtonText } from "#/components/Button";
-import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
-import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import { Link as InternalLink, LinkProps } from "#/components/Link";
-import { RichText } from "#/components/RichText";
-import { Text } from "#/components/Typography";
-import * as bsky from "#/types/bsky";
 
 export function Default({
 	profile,

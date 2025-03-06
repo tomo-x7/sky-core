@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 
-import { getTabState, TabState } from "#/lib/routes/helpers";
+import { TabState, getTabState } from "#/lib/routes/helpers";
 
 export function useTabFocusEffect(tabName: string, cb: (isInside: boolean) => void) {
 	const [isInside, setIsInside] = useState(false);
@@ -15,7 +15,7 @@ export function useTabFocusEffect(tabName: string, cb: (isInside: boolean) => vo
 
 	useEffect(() => {
 		// check if inside
-		let v = getTabState(state, tabName) !== TabState.Outside;
+		const v = getTabState(state, tabName) !== TabState.Outside;
 		if (v !== isInside) {
 			// fire
 			setIsInside(v);

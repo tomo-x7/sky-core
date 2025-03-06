@@ -1,9 +1,9 @@
 import React from "react";
 import { Modal, View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
 import { useDialogStateControlContext } from "#/state/dialogs";
 import { useComposerState } from "#/state/shell/composer";
-import { atoms as a, useTheme } from "#/alf";
 import { ComposePost, useComposerCancelRef } from "../com/composer/Composer";
 
 export function Composer({}: { winHeight: number }) {

@@ -1,8 +1,8 @@
-import { Image as RNImage, openCropper as openCropperFn } from "react-native-image-crop-picker";
 import { documentDirectory, getInfoAsync, readDirectoryAsync } from "expo-file-system";
+import { type Image as RNImage, openCropper as openCropperFn } from "react-native-image-crop-picker";
 
 import { compressIfNeeded } from "./manip";
-import { CropperOptions } from "./types";
+import type { CropperOptions } from "./types";
 
 async function getFile() {
 	const imagesDir = documentDirectory!.split("/").slice(0, -6).concat(["Media", "DCIM", "100APPLE"]).join("/");

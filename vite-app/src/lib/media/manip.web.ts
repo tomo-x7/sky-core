@@ -1,6 +1,6 @@
-import { Image as RNImage } from "react-native-image-crop-picker";
+import type { Image as RNImage } from "react-native-image-crop-picker";
 
-import { Dimensions } from "./types";
+import type { Dimensions } from "./types";
 import { blobToDataUri, getDataUriSize } from "./util";
 
 export async function compressIfNeeded(img: RNImage, maxSize: number): Promise<RNImage> {
@@ -121,8 +121,8 @@ function createResizedImage(
 			} else if (mode === "contain") {
 				scale = img.width > img.height ? width / img.width : height / img.height;
 			}
-			let w = img.width * scale;
-			let h = img.height * scale;
+			const w = img.width * scale;
+			const h = img.height * scale;
 
 			canvas.width = w;
 			canvas.height = h;

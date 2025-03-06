@@ -1,15 +1,15 @@
 import {
-	AppBskyFeedDefs,
+	type AppBskyFeedDefs,
 	AppBskyGraphDefs,
-	AppBskyGraphGetStarterPack,
+	type AppBskyGraphGetStarterPack,
 	AppBskyGraphStarterpack,
-	AppBskyRichtextFacet,
+	type AppBskyRichtextFacet,
 	AtUri,
-	BskyAgent,
+	type BskyAgent,
 	RichText,
 } from "@atproto/api";
-import { StarterPackView } from "@atproto/api/dist/client/types/app/bsky/graph/defs";
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { StarterPackView } from "@atproto/api/dist/client/types/app/bsky/graph/defs";
+import { type QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import chunk from "lodash.chunk";
 
 import { until } from "#/lib/async/until";

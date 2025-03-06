@@ -1,15 +1,13 @@
-import React from "react";
-import { Pressable, StyleProp, View, ViewStyle } from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import React from "react";
+import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
 
-import { useA11y } from "#/state/a11y";
 import { atoms as a, flatten, useTheme, web } from "#/alf";
-import * as Dialog from "#/components/Dialog";
-import { useInteractionState } from "#/components/hooks/useInteractionState";
+import type * as Dialog from "#/components/Dialog";
 import { Context, ItemContext, useMenuContext, useMenuItemContext } from "#/components/Menu/context";
-import {
+import type {
 	ContextType,
 	GroupProps,
 	ItemIconProps,
@@ -20,6 +18,8 @@ import {
 } from "#/components/Menu/types";
 import { Portal } from "#/components/Portal";
 import { Text } from "#/components/Typography";
+import { useInteractionState } from "#/components/hooks/useInteractionState";
+import { useA11y } from "#/state/a11y";
 
 export function useMenuControl(): Dialog.DialogControlProps {
 	const id = React.useId();

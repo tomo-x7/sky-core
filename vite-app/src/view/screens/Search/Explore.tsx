@@ -1,13 +1,32 @@
+import {
+	type AppBskyActorDefs,
+	type AppBskyFeedDefs,
+	type ModerationDecision,
+	type ModerationOpts,
+	moderateProfile,
+} from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { AppBskyActorDefs, AppBskyFeedDefs, moderateProfile, ModerationDecision, ModerationOpts } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { Button } from "#/components/Button";
+import * as FeedCard from "#/components/FeedCard";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
+import { ArrowBottom_Stroke2_Corner0_Rounded as ArrowBottom } from "#/components/icons/Arrow";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
+import { ListSparkle_Stroke2_Corner0_Rounded as ListSparkle } from "#/components/icons/ListSparkle";
+import { UserCircle_Stroke2_Corner0_Rounded as Person } from "#/components/icons/UserCircle";
+import type { Props as SVGIconProps } from "#/components/icons/common";
 import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
+import { ExploreRecommendations } from "#/screens/Search/components/ExploreRecommendations";
+import { ExploreTrendingTopics } from "#/screens/Search/components/ExploreTrendingTopics";
+import { ExploreTrendingVideos } from "#/screens/Search/components/ExploreTrendingVideos";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useGetPopularFeedsQuery } from "#/state/queries/feed";
 import { usePreferencesQuery } from "#/state/queries/preferences";
@@ -16,19 +35,6 @@ import { ProfileCardWithFollowBtn } from "#/view/com/profile/ProfileCard";
 import { List } from "#/view/com/util/List";
 import { FeedFeedLoadingPlaceholder, ProfileCardFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { ExploreRecommendations } from "#/screens/Search/components/ExploreRecommendations";
-import { ExploreTrendingTopics } from "#/screens/Search/components/ExploreTrendingTopics";
-import { ExploreTrendingVideos } from "#/screens/Search/components/ExploreTrendingVideos";
-import { atoms as a, useTheme, ViewStyleProp } from "#/alf";
-import { Button } from "#/components/Button";
-import * as FeedCard from "#/components/FeedCard";
-import { ArrowBottom_Stroke2_Corner0_Rounded as ArrowBottom } from "#/components/icons/Arrow";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { Props as SVGIconProps } from "#/components/icons/common";
-import { ListSparkle_Stroke2_Corner0_Rounded as ListSparkle } from "#/components/icons/ListSparkle";
-import { UserCircle_Stroke2_Corner0_Rounded as Person } from "#/components/icons/UserCircle";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
 
 function SuggestedItemsHeader({
 	title,
@@ -338,7 +344,7 @@ export function Explore() {
 		if (profiles) {
 			// Currently the responses contain duplicate items.
 			// Needs to be fixed on backend, but let's dedupe to be safe.
-			let seen = new Set();
+			const seen = new Set();
 			const profileItems: ExploreScreenItems[] = [];
 			for (const page of profiles.pages) {
 				for (const actor of page.actors) {
@@ -394,7 +400,7 @@ export function Explore() {
 		if (feeds && preferences) {
 			// Currently the responses contain duplicate items.
 			// Needs to be fixed on backend, but let's dedupe to be safe.
-			let seen = new Set();
+			const seen = new Set();
 			const feedItems: ExploreScreenItems[] = [];
 			for (const page of feeds.pages) {
 				for (const feed of page.feeds) {

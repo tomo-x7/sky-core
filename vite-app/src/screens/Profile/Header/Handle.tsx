@@ -1,14 +1,14 @@
-import { View } from "react-native";
-import { AppBskyActorDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { AppBskyActorDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { View } from "react-native";
 
-import { isInvalidHandle } from "#/lib/strings/handles";
-import { isIOS } from "#/platform/detection";
-import { Shadow } from "#/state/cache/types";
 import { atoms as a, useTheme, web } from "#/alf";
 import { NewskieDialog } from "#/components/NewskieDialog";
 import { Text } from "#/components/Typography";
+import { isInvalidHandle } from "#/lib/strings/handles";
+import { isIOS } from "#/platform/detection";
+import type { Shadow } from "#/state/cache/types";
 
 export function ProfileHeaderHandle({
 	profile,

@@ -1,28 +1,28 @@
-import React, { ComponentProps, memo, useMemo } from "react";
-import {
-	GestureResponderEvent,
-	Platform,
-	Pressable,
-	StyleProp,
-	TextProps,
-	TextStyle,
-	TouchableOpacity,
-	View,
-	ViewStyle,
-} from "react-native";
 import { sanitizeUrl } from "@braintree/sanitize-url";
 import { StackActions, useLinkProps } from "@react-navigation/native";
+import React, { type ComponentProps, memo, useMemo } from "react";
+import {
+	type GestureResponderEvent,
+	Platform,
+	Pressable,
+	type StyleProp,
+	type TextProps,
+	type TextStyle,
+	type TouchableOpacity,
+	View,
+	type ViewStyle,
+} from "react-native";
 
-import { DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
+import { useTheme } from "#/alf";
+import type { TypographyVariant } from "#/lib/ThemeContext";
+import { type DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
-import { getTabState, TabState } from "#/lib/routes/helpers";
+import { TabState, getTabState } from "#/lib/routes/helpers";
 import { convertBskyAppUrlIfNeeded, isExternalUrl, linkRequiresWarning } from "#/lib/strings/url-helpers";
-import { TypographyVariant } from "#/lib/ThemeContext";
 import { isAndroid, isWeb } from "#/platform/detection";
 import { emitSoftReset } from "#/state/events";
 import { useModalControls } from "#/state/modals";
 import { WebAuxClickWrapper } from "#/view/com/util/WebAuxClickWrapper";
-import { useTheme } from "#/alf";
 import { router } from "../../../routes";
 import { PressableWithHover } from "./PressableWithHover";
 import { Text } from "./text/Text";

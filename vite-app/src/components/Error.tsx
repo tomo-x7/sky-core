@@ -1,12 +1,12 @@
-import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { View } from "react-native";
 
-import { useGoBack } from "#/lib/hooks/useGoBack";
-import { CenteredView } from "#/view/com/util/Views";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
+import { useGoBack } from "#/lib/hooks/useGoBack";
+import { CenteredView } from "#/view/com/util/Views";
 
 export function Error({
 	title,

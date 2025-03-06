@@ -1,9 +1,13 @@
-import React from "react";
-import { View } from "react-native";
-import { AtUri } from "@atproto/api";
+import type { AtUri } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { View } from "react-native";
 
+import { type ViewStyleProp, atoms as a, native, useTheme } from "#/alf";
+import { Link as InternalLink, type LinkProps } from "#/components/Link";
+import { Text } from "#/components/Typography";
+import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 // import {makeProfileLink} from '#/lib/routes/links'
 // import {feedUriToHref} from '#/lib/strings/url-helpers'
@@ -11,10 +15,6 @@ import { PressableScale } from "#/lib/custom-animations/PressableScale";
 // import {CloseQuote_Filled_Stroke2_Corner0_Rounded as Quote} from '#/components/icons/Quote'
 // import {UserAvatar} from '#/view/com/util/UserAvatar'
 import type { TrendingTopic } from "#/state/queries/trending/useTrendingTopics";
-import { atoms as a, native, useTheme, ViewStyleProp } from "#/alf";
-import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
-import { Link as InternalLink, LinkProps } from "#/components/Link";
-import { Text } from "#/components/Typography";
 
 export function TrendingTopic({
 	topic: raw,

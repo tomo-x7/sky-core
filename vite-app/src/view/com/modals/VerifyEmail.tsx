@@ -1,9 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React, { useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
 import { Circle, Path, Svg } from "react-native-svg";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -13,18 +13,18 @@ import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
+import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
 import { Text } from "../util/text/Text";
-import * as Toast from "../util/Toast";
 import { ScrollView, TextInput } from "./util";
 
 export const snapPoints = ["90%"];
 
 enum Stages {
-	Reminder,
-	Email,
-	ConfirmCode,
+	Reminder = 0,
+	Email = 1,
+	ConfirmCode = 2,
 }
 
 export function Component({

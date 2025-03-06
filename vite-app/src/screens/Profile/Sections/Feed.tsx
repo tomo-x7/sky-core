@@ -1,22 +1,22 @@
-import React from "react";
-import { findNodeHandle, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { View, findNodeHandle } from "react-native";
 
+import { ios } from "#/alf";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { isNative } from "#/platform/detection";
-import { FeedDescriptor } from "#/state/queries/post-feed";
+import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { RQKEY as FEED_RQKEY } from "#/state/queries/post-feed";
 import { truncateAndInvalidate } from "#/state/queries/util";
 import { PostFeed } from "#/view/com/posts/PostFeed";
 import { EmptyState } from "#/view/com/util/EmptyState";
-import { ListRef } from "#/view/com/util/List";
+import type { ListRef } from "#/view/com/util/List";
 import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
 import { Text } from "#/view/com/util/text/Text";
-import { ios } from "#/alf";
-import { SectionRef } from "./types";
+import type { SectionRef } from "./types";
 
 interface FeedSectionProps {
 	feed: FeedDescriptor;

@@ -1,11 +1,11 @@
-import { ChatBskyConvoDefs } from "@atproto/api";
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { ChatBskyConvoDefs } from "@atproto/api";
+import { type QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { STALE } from "#/state/queries";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useOnMarkAsRead } from "#/state/queries/messages/list-conversations";
 import { useAgent } from "#/state/session";
-import { ConvoListQueryData, getConvoFromQueryData, RQKEY_ROOT as LIST_CONVOS_KEY } from "./list-conversations";
+import { type ConvoListQueryData, RQKEY_ROOT as LIST_CONVOS_KEY, getConvoFromQueryData } from "./list-conversations";
 
 const RQKEY_ROOT = "convo";
 export const RQKEY = (convoId: string) => [RQKEY_ROOT, convoId];

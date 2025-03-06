@@ -1,21 +1,21 @@
-import React from "react";
-import { ImageStyle, useWindowDimensions, View } from "react-native";
-import { Image } from "expo-image";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image } from "expo-image";
+import React from "react";
+import { type ImageStyle, View, useWindowDimensions } from "react-native";
 
-import { MAX_ALT_TEXT } from "#/lib/constants";
-import { enforceLen } from "#/lib/strings/helpers";
-import { isAndroid, isWeb } from "#/platform/detection";
-import { ComposerImage } from "#/state/gallery";
-import { AltTextCounterWrapper } from "#/view/com/composer/AltTextCounterWrapper";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
-import { DialogControlProps } from "#/components/Dialog";
+import type { DialogControlProps } from "#/components/Dialog";
+import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { Text } from "#/components/Typography";
+import { MAX_ALT_TEXT } from "#/lib/constants";
+import { enforceLen } from "#/lib/strings/helpers";
+import { isAndroid, isWeb } from "#/platform/detection";
+import type { ComposerImage } from "#/state/gallery";
+import { AltTextCounterWrapper } from "#/view/com/composer/AltTextCounterWrapper";
 
 type Props = {
 	control: Dialog.DialogOuterProps["control"];

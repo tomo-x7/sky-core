@@ -1,13 +1,19 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { Avatar } from "#/screens/Onboarding/StepProfile/index";
-import { AvatarColor, avatarColors, emojiItems, EmojiName, emojiNames } from "#/screens/Onboarding/StepProfile/types";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Text } from "#/components/Typography";
+import type { Avatar } from "#/screens/Onboarding/StepProfile/index";
+import {
+	type AvatarColor,
+	type EmojiName,
+	avatarColors,
+	emojiItems,
+	emojiNames,
+} from "#/screens/Onboarding/StepProfile/types";
 
 const ACTIVE_BORDER_WIDTH = 3;
 const ACTIVE_BORDER_STYLES = {

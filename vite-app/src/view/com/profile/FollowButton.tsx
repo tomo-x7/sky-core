@@ -1,12 +1,12 @@
-import { StyleProp, TextStyle, View } from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { type StyleProp, type TextStyle, View } from "react-native";
 
-import { Shadow } from "#/state/cache/types";
+import type { Shadow } from "#/state/cache/types";
 import { useProfileFollowMutationQueue } from "#/state/queries/profile";
-import * as bsky from "#/types/bsky";
-import { Button, ButtonType } from "../util/forms/Button";
+import type * as bsky from "#/types/bsky";
 import * as Toast from "../util/Toast";
+import { Button, type ButtonType } from "../util/forms/Button";
 
 export function FollowButton({
 	unfollowedType = "inverted",

@@ -1,21 +1,21 @@
-import React from "react";
 import { AtUri } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import React from "react";
 
-import { useEmail } from "#/lib/hooks/useEmail";
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { NavigationProp } from "#/lib/routes/types";
-import { useModalControls } from "#/state/modals";
-import { useSetMinimalShellMode } from "#/state/shell";
-import { MyLists } from "#/view/com/lists/MyLists";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
+import * as Layout from "#/components/Layout";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { PlusLarge_Stroke2_Corner0_Rounded as PlusIcon } from "#/components/icons/Plus";
-import * as Layout from "#/components/Layout";
+import { useEmail } from "#/lib/hooks/useEmail";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { NavigationProp } from "#/lib/routes/types";
+import { useModalControls } from "#/state/modals";
+import { useSetMinimalShellMode } from "#/state/shell";
+import { MyLists } from "#/view/com/lists/MyLists";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Lists">;
 export function ListsScreen({}: Props) {

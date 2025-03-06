@@ -1,15 +1,15 @@
-import { View } from "react-native";
-import { AppBskyLabelerDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { AppBskyLabelerDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { View } from "react-native";
 
-import { getLabelingServiceTitle } from "#/lib/moderation";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, useButtonContext } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import * as LabelingServiceCard from "#/components/LabelingServiceCard";
 import { Text } from "#/components/Typography";
-import { ReportDialogProps } from "./types";
+import { getLabelingServiceTitle } from "#/lib/moderation";
+import type { ReportDialogProps } from "./types";
 
 export function SelectLabelerView({
 	...props

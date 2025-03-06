@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { logger } from "#/logger";
-import { defaults, Schema, tryParse, tryStringify } from "#/state/persisted/schema";
-import { PersistedApi } from "./types";
+import { type Schema, defaults, tryParse, tryStringify } from "#/state/persisted/schema";
+import type { PersistedApi } from "./types";
 import { normalizeData } from "./util";
 
 export type { PersistedAccount, Schema } from "#/state/persisted/schema";

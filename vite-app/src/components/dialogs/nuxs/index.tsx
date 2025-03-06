@@ -1,16 +1,16 @@
+import type { AppBskyActorDefs } from "@atproto/api";
 import React from "react";
-import { AppBskyActorDefs } from "@atproto/api";
 
-import { useGate } from "#/lib/statsig/statsig";
-import { Nux, useNuxs, useResetNuxs, useSaveNux } from "#/state/queries/nuxs";
-import { usePreferencesQuery, UsePreferencesQueryResponse } from "#/state/queries/preferences";
-import { useProfileQuery } from "#/state/queries/profile";
-import { SessionAccount, useSession } from "#/state/session";
-import { useOnboardingState } from "#/state/shell";
 /*
  * NUXs
  */
 import { isSnoozed, snooze, unsnooze } from "#/components/dialogs/nuxs/snoozing";
+import { useGate } from "#/lib/statsig/statsig";
+import { type Nux, useNuxs, useResetNuxs, useSaveNux } from "#/state/queries/nuxs";
+import { type UsePreferencesQueryResponse, usePreferencesQuery } from "#/state/queries/preferences";
+import { useProfileQuery } from "#/state/queries/profile";
+import { type SessionAccount, useSession } from "#/state/session";
+import { useOnboardingState } from "#/state/shell";
 
 type Context = {
 	activeNux: Nux | undefined;
@@ -82,7 +82,7 @@ function Inner({
 	const dismissActiveNux = React.useCallback(() => {
 		if (!activeNux) return;
 		setActiveNux(undefined);
-	}, [activeNux, ]);
+	}, [activeNux]);
 
 	if (__DEV__ && typeof window !== "undefined") {
 		// @ts-ignore
@@ -109,7 +109,6 @@ function Inner({
 			if (enabled && !enabled({ gate, currentAccount, currentProfile, preferences })) {
 				continue;
 			}
-
 
 			// we have a winner
 			setActiveNux(id);

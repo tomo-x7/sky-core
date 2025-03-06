@@ -1,12 +1,12 @@
-import { useCallback } from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useCallback } from "react";
 
+import * as Dialog from "#/components/Dialog";
 import { logEvent } from "#/lib/statsig/statsig";
 import { logger } from "#/logger";
 import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
 import * as Toast from "#/view/com/util/Toast";
-import * as Dialog from "#/components/Dialog";
 import { SearchablePeopleList } from "./SearchablePeopleList";
 
 export function SendViaChatDialog({

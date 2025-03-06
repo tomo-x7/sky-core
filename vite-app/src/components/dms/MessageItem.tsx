@@ -1,18 +1,18 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import { GestureResponderEvent, LayoutAnimation, StyleProp, TextStyle, View } from "react-native";
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, RichText as RichTextAPI } from "@atproto/api";
-import { I18n } from "@lingui/core";
+import type { I18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React, { useCallback, useMemo, useRef } from "react";
+import { type GestureResponderEvent, LayoutAnimation, type StyleProp, type TextStyle, View } from "react-native";
 
-import { ConvoItem } from "#/state/messages/convo/types";
-import { useSession } from "#/state/session";
-import { TimeElapsed } from "#/view/com/util/TimeElapsed";
 import { atoms as a, useTheme } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
-import { ActionsWrapper } from "#/components/dms/ActionsWrapper";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
+import { ActionsWrapper } from "#/components/dms/ActionsWrapper";
+import type { ConvoItem } from "#/state/messages/convo/types";
+import { useSession } from "#/state/session";
+import { TimeElapsed } from "#/view/com/util/TimeElapsed";
 import { RichText } from "../RichText";
 import { DateDivider } from "./DateDivider";
 import { MessageItemEmbed } from "./MessageItemEmbed";

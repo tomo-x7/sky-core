@@ -1,19 +1,19 @@
-import { ImagePickerAsset } from "expo-image-picker";
-import { AppBskyFeedPostgate, AppBskyRichtextFacet, BskyPreferences, RichText } from "@atproto/api";
+import { type AppBskyFeedPostgate, AppBskyRichtextFacet, type BskyPreferences, RichText } from "@atproto/api";
+import type { ImagePickerAsset } from "expo-image-picker";
 import { nanoid } from "nanoid/non-secure";
 
-import { SelfLabel } from "#/lib/moderation";
+import type { SelfLabel } from "#/lib/moderation";
 import { insertMentionAt } from "#/lib/strings/mention-manip";
 import { shortenLinks } from "#/lib/strings/rich-text-manip";
 import { isBskyPostUrl, postUriToRelativePath, toBskyAppUrl } from "#/lib/strings/url-helpers";
-import { ComposerImage, createInitialImages } from "#/state/gallery";
+import { type ComposerImage, createInitialImages } from "#/state/gallery";
 import { createPostgateRecord } from "#/state/queries/postgate/util";
-import { Gif } from "#/state/queries/tenor";
+import type { Gif } from "#/state/queries/tenor";
 import { threadgateRecordToAllowUISetting } from "#/state/queries/threadgate";
-import { ThreadgateAllowUISetting } from "#/state/queries/threadgate";
-import { ComposerOpts } from "#/state/shell/composer";
-import { LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
-import { createVideoState, VideoAction, videoReducer, VideoState } from "./video";
+import type { ThreadgateAllowUISetting } from "#/state/queries/threadgate";
+import type { ComposerOpts } from "#/state/shell/composer";
+import { type LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
+import { type VideoAction, type VideoState, createVideoState, videoReducer } from "./video";
 
 type ImagesMedia = {
 	type: "images";
@@ -171,7 +171,7 @@ export function composerReducer(state: ComposerState, action: ComposerAction): C
 			}
 			let nextActivePostIndex = state.activePostIndex;
 			const indexToRemove = state.thread.posts.findIndex((p) => p.id === action.postId);
-			let nextPosts = [...state.thread.posts];
+			const nextPosts = [...state.thread.posts];
 			if (indexToRemove !== -1) {
 				const postToRemove = state.thread.posts[indexToRemove];
 				if (postToRemove.embed.media?.type === "video") {

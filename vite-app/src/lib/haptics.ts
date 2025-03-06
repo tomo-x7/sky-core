@@ -1,6 +1,6 @@
-import React from "react";
 import * as Device from "expo-device";
-import { impactAsync, ImpactFeedbackStyle } from "expo-haptics";
+import { ImpactFeedbackStyle, impactAsync } from "expo-haptics";
+import React from "react";
 
 import { isIOS, isWeb } from "#/platform/detection";
 import { useHapticsDisabled } from "#/state/preferences/disable-haptics";

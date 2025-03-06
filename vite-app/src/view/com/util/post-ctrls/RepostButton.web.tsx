@@ -1,16 +1,16 @@
-import React from "react";
-import { Pressable, View } from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { Pressable, View } from "react-native";
 
-import { useRequireAuth } from "#/state/session";
-import { useSession } from "#/state/session";
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
-import { CloseQuote_Stroke2_Corner1_Rounded as Quote } from "#/components/icons/Quote";
-import { Repost_Stroke2_Corner2_Rounded as Repost } from "#/components/icons/Repost";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
+import { CloseQuote_Stroke2_Corner1_Rounded as Quote } from "#/components/icons/Quote";
+import { Repost_Stroke2_Corner2_Rounded as Repost } from "#/components/icons/Repost";
+import { useRequireAuth } from "#/state/session";
+import { useSession } from "#/state/session";
 import { EventStopper } from "../EventStopper";
 import { formatCount } from "../numeric/format";
 

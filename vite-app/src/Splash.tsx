@@ -1,5 +1,8 @@
+// import Svg, {Path, SvgProps} from 'react-native-svg'
+import { Image } from "expo-image";
+import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect } from "react";
-import { AccessibilityInfo, Image as RNImage, StyleSheet, useColorScheme, View } from "react-native";
+import { AccessibilityInfo, Image as RNImage, StyleSheet, View, useColorScheme } from "react-native";
 import Animated, {
 	Easing,
 	interpolate,
@@ -8,13 +11,10 @@ import Animated, {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
-// import Svg, {Path, SvgProps} from 'react-native-svg'
-import { Image } from "expo-image";
-import * as SplashScreen from "expo-splash-screen";
 
-import { Logotype } from "./view/icons/Logotype";
-import splashImagePointer from "./assets/splash.png";
 import darkSplashImagePointer from "./assets/splash-dark.png";
+import splashImagePointer from "./assets/splash.png";
+import { Logotype } from "./view/icons/Logotype";
 const splashImageUri = RNImage.resolveAssetSource(splashImagePointer).uri;
 const darkSplashImageUri = RNImage.resolveAssetSource(darkSplashImagePointer).uri;
 

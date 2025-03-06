@@ -1,16 +1,34 @@
-import React, { memo, useMemo } from "react";
-import { GestureResponderEvent, StyleSheet, Text as RNText, View } from "react-native";
 import {
-	AppBskyFeedDefs,
+	type AppBskyFeedDefs,
 	AppBskyFeedPost,
-	AppBskyFeedThreadgate,
+	type AppBskyFeedThreadgate,
 	AtUri,
-	ModerationDecision,
+	type ModerationDecision,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { msg, Plural, Trans } from "@lingui/macro";
+import { Plural, Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React, { memo, useMemo } from "react";
+import { type GestureResponderEvent, Text as RNText, StyleSheet, View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { colors } from "#/components/Admonition";
+import { Button } from "#/components/Button";
+import { InlineLinkText } from "#/components/Link";
+import type { AppModerationCause } from "#/components/Pills";
+import * as Prompt from "#/components/Prompt";
+import { RichText } from "#/components/RichText";
+import { SubtleWebHover } from "#/components/SubtleWebHover";
+import { Text } from "#/components/Typography";
+import { WhoCanReply } from "#/components/WhoCanReply";
+import { useInteractionState } from "#/components/hooks/useInteractionState";
+import { CalendarClock_Stroke2_Corner0_Rounded as CalendarClockIcon } from "#/components/icons/CalendarClock";
+import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRightIcon } from "#/components/icons/Chevron";
+import { Trash_Stroke2_Corner0_Rounded as TrashIcon } from "#/components/icons/Trash";
+import { ContentHider } from "#/components/moderation/ContentHider";
+import { LabelsOnMyPost } from "#/components/moderation/LabelsOnMe";
+import { PostAlerts } from "#/components/moderation/PostAlerts";
+import { PostHider } from "#/components/moderation/PostHider";
 import { MAX_POST_LINES } from "#/lib/constants";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -21,39 +39,21 @@ import { countLines } from "#/lib/strings/helpers";
 import { niceDate } from "#/lib/strings/time";
 import { s } from "#/lib/styles";
 import { getTranslatorLink, isPostInLanguage } from "#/locale/helpers";
-import { POST_TOMBSTONE, Shadow, usePostShadow } from "#/state/cache/post-shadow";
+import { POST_TOMBSTONE, type Shadow, usePostShadow } from "#/state/cache/post-shadow";
 import { useLanguagePrefs } from "#/state/preferences";
-import { ThreadPost } from "#/state/queries/post-thread";
+import type { ThreadPost } from "#/state/queries/post-thread";
 import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
 import { useMergedThreadgateHiddenReplies } from "#/state/threadgate-hidden-replies";
+import * as bsky from "#/types/bsky";
 import { PostThreadFollowBtn } from "#/view/com/post-thread/PostThreadFollowBtn";
-import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import { Link, TextLink } from "#/view/com/util/Link";
-import { formatCount } from "#/view/com/util/numeric/format";
-import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
-import { PostEmbeds, PostEmbedViewContext } from "#/view/com/util/post-embeds";
 import { PostMeta } from "#/view/com/util/PostMeta";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme } from "#/alf";
-import { colors } from "#/components/Admonition";
-import { Button } from "#/components/Button";
-import { useInteractionState } from "#/components/hooks/useInteractionState";
-import { CalendarClock_Stroke2_Corner0_Rounded as CalendarClockIcon } from "#/components/icons/CalendarClock";
-import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRightIcon } from "#/components/icons/Chevron";
-import { Trash_Stroke2_Corner0_Rounded as TrashIcon } from "#/components/icons/Trash";
-import { InlineLinkText } from "#/components/Link";
-import { ContentHider } from "#/components/moderation/ContentHider";
-import { LabelsOnMyPost } from "#/components/moderation/LabelsOnMe";
-import { PostAlerts } from "#/components/moderation/PostAlerts";
-import { PostHider } from "#/components/moderation/PostHider";
-import { AppModerationCause } from "#/components/Pills";
-import * as Prompt from "#/components/Prompt";
-import { RichText } from "#/components/RichText";
-import { SubtleWebHover } from "#/components/SubtleWebHover";
-import { Text } from "#/components/Typography";
-import { WhoCanReply } from "#/components/WhoCanReply";
-import * as bsky from "#/types/bsky";
+import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
+import { formatCount } from "#/view/com/util/numeric/format";
+import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
+import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
 
 export function PostThreadItem({
 	post,

@@ -1,18 +1,25 @@
-import React, { useImperativeHandle } from "react";
-import { FlatList, FlatListProps, StyleProp, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
+import React, { useImperativeHandle } from "react";
+import {
+	FlatList,
+	type FlatListProps,
+	type StyleProp,
+	TouchableWithoutFeedback,
+	View,
+	type ViewStyle,
+} from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
-import { useA11y } from "#/state/a11y";
-import { useDialogStateControlContext } from "#/state/dialogs";
 import { atoms as a, flatten, useBreakpoints, useTheme, web } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Context } from "#/components/Dialog/context";
-import { DialogControlProps, DialogInnerProps, DialogOuterProps } from "#/components/Dialog/types";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import type { DialogControlProps, DialogInnerProps, DialogOuterProps } from "#/components/Dialog/types";
 import { Portal } from "#/components/Portal";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { useA11y } from "#/state/a11y";
+import { useDialogStateControlContext } from "#/state/dialogs";
 
 export { useDialogContext, useDialogControl } from "#/components/Dialog/context";
 export * from "#/components/Dialog/shared";

@@ -1,21 +1,21 @@
-import React from "react";
-import { Pressable, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { Pressable, type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
-import { HITSLOP_20 } from "#/lib/constants";
-import { EmbedPlayerParams } from "#/lib/strings/embed-player";
-import { isWeb } from "#/platform/detection";
-import { useAutoplayDisabled } from "#/state/preferences";
-import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 import { atoms as a, useTheme } from "#/alf";
 import { Fill } from "#/components/Fill";
 import { Loader } from "#/components/Loader";
 import * as Prompt from "#/components/Prompt";
 import { Text } from "#/components/Typography";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
+import { HITSLOP_20 } from "#/lib/constants";
+import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
+import { isWeb } from "#/platform/detection";
+import { useAutoplayDisabled } from "#/state/preferences";
+import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 import { GifView } from "../../../../../modules/expo-bluesky-gif-view";
-import { GifViewStateChangeEvent } from "../../../../../modules/expo-bluesky-gif-view/src/GifView.types";
+import type { GifViewStateChangeEvent } from "../../../../../modules/expo-bluesky-gif-view/src/GifView.types";
 
 function PlaybackControls({
 	onPress,

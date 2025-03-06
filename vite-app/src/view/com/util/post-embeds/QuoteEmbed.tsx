@@ -1,23 +1,26 @@
-import React from "react";
-import { StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
 import {
 	AppBskyEmbedExternal,
 	AppBskyEmbedImages,
 	AppBskyEmbedRecord,
 	AppBskyEmbedRecordWithMedia,
 	AppBskyEmbedVideo,
-	AppBskyFeedDefs,
+	type AppBskyFeedDefs,
 	AppBskyFeedPost,
-	moderatePost,
-	ModerationDecision,
+	type ModerationDecision,
 	RichText as RichTextAPI,
+	moderatePost,
 } from "@atproto/api";
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { RichText } from "#/components/RichText";
+import { SubtleWebHover } from "#/components/SubtleWebHover";
 import { HITSLOP_20 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { InfoCircleIcon } from "#/lib/icons";
@@ -27,17 +30,14 @@ import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { precacheProfile } from "#/state/queries/profile";
 import { useResolveLinkQuery } from "#/state/queries/resolve-link";
 import { useSession } from "#/state/session";
-import { atoms as a, useTheme } from "#/alf";
-import { RichText } from "#/components/RichText";
-import { SubtleWebHover } from "#/components/SubtleWebHover";
 import * as bsky from "#/types/bsky";
+import { PostEmbeds } from ".";
 import { ContentHider } from "../../../../components/moderation/ContentHider";
 import { PostAlerts } from "../../../../components/moderation/PostAlerts";
 import { Link } from "../Link";
 import { PostMeta } from "../PostMeta";
 import { Text } from "../text/Text";
-import { PostEmbeds } from ".";
-import { QuoteEmbedViewContext } from "./types";
+import type { QuoteEmbedViewContext } from "./types";
 
 export function MaybeQuoteEmbed({
 	embed,

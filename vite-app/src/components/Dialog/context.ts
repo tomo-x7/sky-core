@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useDialogStateContext } from "../../state/dialogs";
-import { DialogContextProps, DialogControlRefProps, DialogOuterProps } from "../Dialog/types";
 import { BottomSheetSnapPoint } from "../../../modules/bottom-sheet/src/BottomSheet.types";
+import { useDialogStateContext } from "../../state/dialogs";
+import type { DialogContextProps, DialogControlRefProps, DialogOuterProps } from "../Dialog/types";
 
 export const Context = React.createContext<DialogContextProps>({
 	close: () => {},

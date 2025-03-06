@@ -1,24 +1,24 @@
+import { useEventListener } from "expo";
+import type { VideoPlayer } from "expo-video";
 import { useCallback, useMemo, useState } from "react";
 import { View } from "react-native";
-import { Gesture, GestureDetector, NativeGesture } from "react-native-gesture-handler";
+import { Gesture, GestureDetector, type NativeGesture } from "react-native-gesture-handler";
 import Animated, {
 	interpolate,
 	runOnJS,
 	runOnUI,
-	SharedValue,
+	type SharedValue,
 	useAnimatedReaction,
 	useAnimatedStyle,
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
 import { useSafeAreaFrame, useSafeAreaInsets } from "react-native-safe-area-context";
-import { useEventListener } from "expo";
-import { VideoPlayer } from "expo-video";
 
-import { formatTime } from "#/view/com/util/post-embeds/VideoEmbedInner/web-controls/utils";
 import { tokens } from "#/alf";
 import { atoms as a } from "#/alf";
 import { Text } from "#/components/Typography";
+import { formatTime } from "#/view/com/util/post-embeds/VideoEmbedInner/web-controls/utils";
 
 // magic number that is roughly the min height of the write reply button
 // we inset the video by this amount

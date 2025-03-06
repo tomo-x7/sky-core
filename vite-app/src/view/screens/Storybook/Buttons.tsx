@@ -2,10 +2,10 @@ import React from "react";
 import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
-import { Button, ButtonColor, ButtonIcon, ButtonText, ButtonVariant } from "#/components/Button";
+import { Button, type ButtonColor, ButtonIcon, ButtonText, type ButtonVariant } from "#/components/Button";
+import { H1 } from "#/components/Typography";
 import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components/icons/Chevron";
 import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe";
-import { H1 } from "#/components/Typography";
 
 export function Buttons() {
 	return (

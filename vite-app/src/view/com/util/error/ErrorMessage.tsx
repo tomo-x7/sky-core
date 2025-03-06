@@ -1,11 +1,11 @@
-import { StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
-import { FontAwesomeIcon, FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
-import { usePalette } from "#/lib/hooks/usePalette";
-import { useTheme } from "#/lib/ThemeContext";
 import * as Layout from "#/components/Layout";
+import { useTheme } from "#/lib/ThemeContext";
+import { usePalette } from "#/lib/hooks/usePalette";
 import { Text } from "../text/Text";
 
 export function ErrorMessage({

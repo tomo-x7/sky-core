@@ -1,9 +1,9 @@
-import { AppBskyActorDefs, AppBskyActorSearchActors } from "@atproto/api";
+import type { AppBskyActorDefs, AppBskyActorSearchActors } from "@atproto/api";
 import {
-	InfiniteData,
+	type InfiniteData,
+	type QueryClient,
+	type QueryKey,
 	keepPreviousData,
-	QueryClient,
-	QueryKey,
 	useInfiniteQuery,
 	useQuery,
 } from "@tanstack/react-query";

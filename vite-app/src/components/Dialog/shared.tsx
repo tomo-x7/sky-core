@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
+import type React from "react";
+import { type StyleProp, type TextStyle, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";

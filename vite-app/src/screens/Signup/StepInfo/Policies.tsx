@@ -1,13 +1,13 @@
-import { ReactElement } from "react";
-import { View } from "react-native";
-import { ComAtprotoServerDescribeServer } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { ComAtprotoServerDescribeServer } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type { ReactElement } from "react";
+import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 
 export const Policies = ({
 	serviceDescription,

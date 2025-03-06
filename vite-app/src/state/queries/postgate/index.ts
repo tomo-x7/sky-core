@@ -1,13 +1,13 @@
-import React from "react";
 import {
 	AppBskyEmbedRecord,
 	AppBskyEmbedRecordWithMedia,
-	AppBskyFeedDefs,
+	type AppBskyFeedDefs,
 	AppBskyFeedPostgate,
 	AtUri,
-	BskyAgent,
+	type BskyAgent,
 } from "@atproto/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import React from "react";
 
 import { networkRetry, retry } from "#/lib/async/retry";
 import { logger } from "#/logger";
@@ -15,10 +15,10 @@ import { updatePostShadow } from "#/state/cache/post-shadow";
 import { STALE } from "#/state/queries";
 import { useGetPosts } from "#/state/queries/post";
 import {
+	POSTGATE_COLLECTION,
 	createMaybeDetachedQuoteEmbed,
 	createPostgateRecord,
 	mergePostgateRecords,
-	POSTGATE_COLLECTION,
 } from "#/state/queries/postgate/util";
 import { useAgent } from "#/state/session";
 import * as bsky from "#/types/bsky";

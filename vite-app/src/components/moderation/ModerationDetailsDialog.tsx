@@ -1,19 +1,19 @@
-import { View } from "react-native";
-import { ModerationCause } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { ModerationCause } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { View } from "react-native";
 
+import { atoms as a, useGutters, useTheme } from "#/alf";
+import * as Dialog from "#/components/Dialog";
+import { InlineLinkText } from "#/components/Link";
+import type { AppModerationCause } from "#/components/Pills";
+import { Text } from "#/components/Typography";
 import { useGetTimeAgo } from "#/lib/hooks/useTimeAgo";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
 import { makeProfileLink } from "#/lib/routes/links";
 import { listUriToHref } from "#/lib/strings/url-helpers";
 import { isNative } from "#/platform/detection";
 import { useSession } from "#/state/session";
-import { atoms as a, useGutters, useTheme } from "#/alf";
-import * as Dialog from "#/components/Dialog";
-import { InlineLinkText } from "#/components/Link";
-import { AppModerationCause } from "#/components/Pills";
-import { Text } from "#/components/Typography";
 
 export { useDialogControl as useModerationDetailsDialogControl } from "#/components/Dialog";
 

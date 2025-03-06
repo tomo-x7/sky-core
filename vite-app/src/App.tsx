@@ -4,18 +4,25 @@ import "./style.css";
 import React, { useEffect, useState } from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
 
+import { BackgroundNotificationPreferencesProvider } from "../modules/expo-background-notification-handler/src/BackgroundNotificationHandlerProvider";
+import { ThemeProvider as Alf } from "./alf";
+import { useColorModeTheme } from "./alf/util/useColorModeTheme";
+import { Provider as PortalProvider } from "./components/Portal";
+import { NuxDialogs } from "./components/dialogs/nuxs";
+import { useStarterPackEntry } from "./components/hooks/useStarterPackEntry";
+import { Provider as IntentDialogProvider } from "./components/intents/IntentDialogs";
+import { ThemeProvider } from "./lib/ThemeContext";
 import { QueryProvider } from "./lib/react-query";
 import { Provider as StatsigProvider } from "./lib/statsig/statsig";
-import { ThemeProvider } from "./lib/ThemeContext";
 import I18nProvider from "./locale/i18nProvider";
 import { Provider as A11yProvider } from "./state/a11y";
 import { Provider as MutedThreadsProvider } from "./state/cache/thread-mutes";
 import { Provider as DialogStateProvider } from "./state/dialogs";
 import { listenSessionDropped } from "./state/events";
 import {
+	Provider as GeolocationProvider,
 	beginResolveGeolocation,
 	ensureGeolocationResolved,
-	Provider as GeolocationProvider,
 } from "./state/geolocation";
 import { Provider as HomeBadgeProvider } from "./state/home-badge";
 import { Provider as InvitesStateProvider } from "./state/invites";
@@ -27,7 +34,7 @@ import { Provider as PrefsStateProvider } from "./state/preferences";
 import { Provider as LabelDefsProvider } from "./state/preferences/label-defs";
 import { Provider as ModerationOptsProvider } from "./state/preferences/moderation-opts";
 import { Provider as UnreadNotifsProvider } from "./state/queries/notifications/unread";
-import { Provider as SessionProvider, SessionAccount, useSession, useSessionApi } from "./state/session";
+import { type SessionAccount, Provider as SessionProvider, useSession, useSessionApi } from "./state/session";
 import { readLastActiveAccount } from "./state/session/util";
 import { Provider as ShellStateProvider } from "./state/shell";
 import { Provider as ComposerProvider } from "./state/shell/composer";
@@ -38,18 +45,11 @@ import { Provider as SelectedFeedProvider } from "./state/shell/selected-feed";
 import { Provider as StarterPackProvider } from "./state/shell/starter-pack";
 import { Provider as HiddenRepliesProvider } from "./state/threadgate-hidden-replies";
 import { Provider as TrendingConfigProvider } from "./state/trending-config";
-import { Provider as ActiveVideoProvider } from "./view/com/util/post-embeds/ActiveVideoWebContext";
-import { Provider as VideoVolumeProvider } from "./view/com/util/post-embeds/VideoVolumeContext";
 import * as Toast from "./view/com/util/Toast";
 import { ToastContainer } from "./view/com/util/Toast.web";
+import { Provider as ActiveVideoProvider } from "./view/com/util/post-embeds/ActiveVideoWebContext";
+import { Provider as VideoVolumeProvider } from "./view/com/util/post-embeds/VideoVolumeContext";
 import { Shell } from "./view/shell/index";
-import { ThemeProvider as Alf } from "./alf";
-import { useColorModeTheme } from "./alf/util/useColorModeTheme";
-import { NuxDialogs } from "./components/dialogs/nuxs";
-import { useStarterPackEntry } from "./components/hooks/useStarterPackEntry";
-import { Provider as IntentDialogProvider } from "./components/intents/IntentDialogs";
-import { Provider as PortalProvider } from "./components/Portal";
-import { BackgroundNotificationPreferencesProvider } from "../modules/expo-background-notification-handler/src/BackgroundNotificationHandlerProvider";
 
 /**
  * Begin geolocation ASAP

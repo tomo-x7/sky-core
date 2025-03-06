@@ -1,13 +1,13 @@
 import React from "react";
-import { Pressable, View, ViewStyle } from "react-native";
+import { Pressable, View, type ViewStyle } from "react-native";
 import Animated, { LinearTransition } from "react-native-reanimated";
 
-import { HITSLOP_10 } from "#/lib/constants";
-import { isNative } from "#/platform/detection";
-import { atoms as a, flatten, native, TextStyleProp, useTheme, ViewStyleProp } from "#/alf";
+import { type TextStyleProp, type ViewStyleProp, atoms as a, flatten, native, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { CheckThick_Stroke2_Corner0_Rounded as Checkmark } from "#/components/icons/Check";
-import { Text } from "#/components/Typography";
+import { HITSLOP_10 } from "#/lib/constants";
+import { isNative } from "#/platform/detection";
 
 export type ItemState = {
 	name: string;

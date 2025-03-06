@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Breakpoint, useBreakpoints } from "../breakpoints";
+import { type Breakpoint, useBreakpoints } from "../breakpoints";
 import * as tokens from "../tokens";
 
 type Gutter = "compact" | "base" | "wide" | 0;

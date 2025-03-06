@@ -1,26 +1,26 @@
-import React, { useCallback } from "react";
-import { TouchableOpacity, View } from "react-native";
-import { AppBskyActorDefs, ModerationCause, ModerationDecision } from "@atproto/api";
+import type { AppBskyActorDefs, ModerationCause, ModerationDecision } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { TouchableOpacity, View } from "react-native";
 
-import { BACK_HITSLOP } from "#/lib/constants";
-import { makeProfileLink } from "#/lib/routes/links";
-import { NavigationProp } from "#/lib/routes/types";
-import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { isWeb } from "#/platform/detection";
-import { Shadow } from "#/state/cache/profile-shadow";
-import { isConvoActive, useConvo } from "#/state/messages/convo";
-import { ConvoItem } from "#/state/messages/convo/types";
-import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { Link } from "#/components/Link";
+import { Text } from "#/components/Typography";
 import { ConvoMenu } from "#/components/dms/ConvoMenu";
 import { Bell2Off_Filled_Corner0_Rounded as BellStroke } from "#/components/icons/Bell2";
-import { Link } from "#/components/Link";
 import { PostAlerts } from "#/components/moderation/PostAlerts";
-import { Text } from "#/components/Typography";
+import { BACK_HITSLOP } from "#/lib/constants";
+import { makeProfileLink } from "#/lib/routes/links";
+import type { NavigationProp } from "#/lib/routes/types";
+import { sanitizeDisplayName } from "#/lib/strings/display-names";
+import { isWeb } from "#/platform/detection";
+import type { Shadow } from "#/state/cache/profile-shadow";
+import { isConvoActive, useConvo } from "#/state/messages/convo";
+import type { ConvoItem } from "#/state/messages/convo/types";
+import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 
 const PFP_SIZE = isWeb ? 40 : 34;
 

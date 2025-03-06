@@ -1,20 +1,36 @@
-import React from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { AppBskyFeedDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { AppBskyFeedDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import debounce from "lodash.debounce";
+import React from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { ButtonIcon } from "#/components/Button";
+import { Divider } from "#/components/Divider";
+import * as FeedCard from "#/components/FeedCard";
+import { IconCircle } from "#/components/IconCircle";
+import * as Layout from "#/components/Layout";
+import { Link } from "#/components/Link";
+import * as ListCard from "#/components/ListCard";
+import { SearchInput } from "#/components/forms/SearchInput";
+import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
+import { FilterTimeline_Stroke2_Corner0_Rounded as FilterTimeline } from "#/components/icons/FilterTimeline";
+import { ListMagnifyingGlass_Stroke2_Corner0_Rounded } from "#/components/icons/ListMagnifyingGlass";
+import { ListSparkle_Stroke2_Corner0_Rounded } from "#/components/icons/ListSparkle";
+import { SettingsGear2_Stroke2_Corner0_Rounded as Gear } from "#/components/icons/SettingsGear2";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { ComposeIcon2 } from "#/lib/icons";
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
 import { isNative, isWeb } from "#/platform/detection";
+import { NoFollowingFeed } from "#/screens/Feeds/NoFollowingFeed";
+import { NoSavedFeedsOfAnyType } from "#/screens/Feeds/NoSavedFeedsOfAnyType";
 import {
-	SavedFeedItem,
+	type SavedFeedItem,
 	useGetPopularFeedsQuery,
 	useSavedFeeds,
 	useSearchPopularFeedsMutation,
@@ -22,27 +38,11 @@ import {
 import { useSession } from "#/state/session";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { useComposerControls } from "#/state/shell/composer";
+import { List, type ListMethods } from "#/view/com/util/List";
+import { FeedFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import { FAB } from "#/view/com/util/fab/FAB";
-import { List, ListMethods } from "#/view/com/util/List";
-import { FeedFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { Text } from "#/view/com/util/text/Text";
-import { NoFollowingFeed } from "#/screens/Feeds/NoFollowingFeed";
-import { NoSavedFeedsOfAnyType } from "#/screens/Feeds/NoSavedFeedsOfAnyType";
-import { atoms as a, useTheme } from "#/alf";
-import { ButtonIcon } from "#/components/Button";
-import { Divider } from "#/components/Divider";
-import * as FeedCard from "#/components/FeedCard";
-import { SearchInput } from "#/components/forms/SearchInput";
-import { IconCircle } from "#/components/IconCircle";
-import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
-import { FilterTimeline_Stroke2_Corner0_Rounded as FilterTimeline } from "#/components/icons/FilterTimeline";
-import { ListMagnifyingGlass_Stroke2_Corner0_Rounded } from "#/components/icons/ListMagnifyingGlass";
-import { ListSparkle_Stroke2_Corner0_Rounded } from "#/components/icons/ListSparkle";
-import { SettingsGear2_Stroke2_Corner0_Rounded as Gear } from "#/components/icons/SettingsGear2";
-import * as Layout from "#/components/Layout";
-import { Link } from "#/components/Link";
-import * as ListCard from "#/components/ListCard";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Feeds">;
 

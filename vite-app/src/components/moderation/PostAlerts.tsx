@@ -1,8 +1,8 @@
-import { StyleProp, ViewStyle } from "react-native";
-import { ModerationCause, ModerationUI } from "@atproto/api";
+import type { ModerationCause, ModerationUI } from "@atproto/api";
+import type { StyleProp, ViewStyle } from "react-native";
 
-import { getModerationCauseKey, unique } from "#/lib/moderation";
 import * as Pills from "#/components/Pills";
+import { getModerationCauseKey, unique } from "#/lib/moderation";
 
 export function PostAlerts({
 	modui,

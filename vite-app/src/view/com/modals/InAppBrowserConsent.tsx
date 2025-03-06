@@ -1,7 +1,7 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
 import { usePalette } from "#/lib/hooks/usePalette";

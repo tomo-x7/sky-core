@@ -1,15 +1,16 @@
-import React, { memo, useMemo, useState } from "react";
-import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
-import { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, RichText as RichTextAPI } from "@atproto/api";
+import type { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, RichText as RichTextAPI } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type React from "react";
+import { memo, useMemo, useState } from "react";
+import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
 
-import { useTheme } from "#/lib/ThemeContext";
-import { Shadow } from "#/state/cache/post-shadow";
 import { atoms as a, useTheme as useAlf } from "#/alf";
-import { DotGrid_Stroke2_Corner0_Rounded as DotsHorizontal } from "#/components/icons/DotGrid";
 import { useMenuControl } from "#/components/Menu";
 import * as Menu from "#/components/Menu";
+import { DotGrid_Stroke2_Corner0_Rounded as DotsHorizontal } from "#/components/icons/DotGrid";
+import { useTheme } from "#/lib/ThemeContext";
+import type { Shadow } from "#/state/cache/post-shadow";
 import { EventStopper } from "../EventStopper";
 import { PostDropdownMenuItems } from "./PostDropdownBtnMenuItems";
 

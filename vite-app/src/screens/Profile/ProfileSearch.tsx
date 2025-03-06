@@ -1,8 +1,8 @@
-import { useMemo } from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useMemo } from "react";
 
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useResolveDidQuery } from "#/state/queries/resolve-uri";
 import { useSession } from "#/state/session";

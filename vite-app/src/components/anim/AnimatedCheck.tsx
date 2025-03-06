@@ -2,7 +2,7 @@ import React from "react";
 import Animated, { Easing, useAnimatedProps, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import Svg, { Circle, Path } from "react-native-svg";
 
-import { Props, useCommonSVGProps } from "../icons/common";
+import { type Props, useCommonSVGProps } from "../icons/common";
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);

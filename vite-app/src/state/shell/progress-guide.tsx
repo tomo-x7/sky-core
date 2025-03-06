@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React, { useMemo } from "react";
 
+import { ProgressGuideToast, type ProgressGuideToastRef } from "#/components/ProgressGuide/Toast";
 import { logEvent } from "#/lib/statsig/statsig";
-import { ProgressGuideToast, ProgressGuideToastRef } from "#/components/ProgressGuide/Toast";
 import { usePreferencesQuery, useSetActiveProgressGuideMutation } from "../queries/preferences";
 
 export enum ProgressGuideAction {

@@ -1,23 +1,23 @@
-import React from "react";
-import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import deepEqual from "lodash.isequal";
+import React from "react";
+import { View } from "react-native";
 
+import { atoms as a, useGutters } from "#/alf";
+import { Admonition } from "#/components/Admonition";
+import * as Layout from "#/components/Layout";
+import { Loader } from "#/components/Loader";
+import { PostInteractionSettingsForm } from "#/components/dialogs/PostInteractionSettingsDialog";
 import { logger } from "#/logger";
 import { usePostInteractionSettingsMutation } from "#/state/queries/post-interaction-settings";
 import { createPostgateRecord } from "#/state/queries/postgate/util";
-import { usePreferencesQuery, UsePreferencesQueryResponse } from "#/state/queries/preferences";
+import { type UsePreferencesQueryResponse, usePreferencesQuery } from "#/state/queries/preferences";
 import {
 	threadgateAllowUISettingToAllowRecordValue,
 	threadgateRecordToAllowUISetting,
 } from "#/state/queries/threadgate";
 import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, useGutters } from "#/alf";
-import { Admonition } from "#/components/Admonition";
-import { PostInteractionSettingsForm } from "#/components/dialogs/PostInteractionSettingsDialog";
-import * as Layout from "#/components/Layout";
-import { Loader } from "#/components/Loader";
 
 export function Screen() {
 	const gutters = useGutters(["base"]);

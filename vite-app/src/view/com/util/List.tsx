@@ -1,15 +1,15 @@
-import React, { memo } from "react";
-import { RefreshControl, ViewToken } from "react-native";
-import { FlatListPropsWithLayout, runOnJS, useSharedValue } from "react-native-reanimated";
 import { updateActiveVideoViewAsync } from "@haileyok/bluesky-video";
+import React, { memo } from "react";
+import { RefreshControl, type ViewToken } from "react-native";
+import { type FlatListPropsWithLayout, runOnJS, useSharedValue } from "react-native-reanimated";
 
+import { useTheme } from "#/alf";
+import { useScrollHandlers } from "#/lib/ScrollContext";
 import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
 import { useDedupe } from "#/lib/hooks/useDedupe";
-import { useScrollHandlers } from "#/lib/ScrollContext";
 import { addStyle } from "#/lib/styles";
 import { isAndroid, isIOS } from "#/platform/detection";
 import { useLightbox } from "#/state/lightbox";
-import { useTheme } from "#/alf";
 import { FlatList_INTERNAL } from "./Views";
 
 export type ListMethods = FlatList_INTERNAL;

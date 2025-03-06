@@ -1,6 +1,6 @@
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, View } from "react-native";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon, FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { s } from "#/lib/styles";

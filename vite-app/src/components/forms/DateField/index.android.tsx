@@ -3,7 +3,7 @@ import { Keyboard } from "react-native";
 import DatePicker from "react-native-date-picker";
 
 import { useTheme } from "#/alf";
-import { DateFieldProps } from "#/components/forms/DateField/types";
+import type { DateFieldProps } from "#/components/forms/DateField/types";
 import { toSimpleDateString } from "#/components/forms/DateField/utils";
 import * as TextField from "#/components/forms/TextField";
 import { DateFieldButton } from "./index.shared";

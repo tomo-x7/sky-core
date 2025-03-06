@@ -1,12 +1,12 @@
-import { $Typed, ChatBskyConvoDefs, ComAtprotoModerationCreateReport } from "@atproto/api";
+import type { $Typed, ChatBskyConvoDefs, ComAtprotoModerationCreateReport } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 
 import { logger } from "#/logger";
 import { useAgent } from "#/state/session";
-import { ReportState } from "./state";
-import { ParsedReportSubject } from "./types";
+import type { ReportState } from "./state";
+import type { ParsedReportSubject } from "./types";
 
 export function useSubmitReportMutation() {
 	const { _ } = useLingui();

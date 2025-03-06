@@ -1,7 +1,9 @@
+import * as WebBrowser from "expo-web-browser";
 import { useCallback } from "react";
 import { Linking } from "react-native";
-import * as WebBrowser from "expo-web-browser";
 
+import { useTheme } from "#/alf";
+import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 import { logEvent } from "#/lib/statsig/statsig";
 import {
 	createBskyAppAbsoluteUrl,
@@ -14,8 +16,6 @@ import {
 import { isNative } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useInAppBrowser } from "#/state/preferences/in-app-browser";
-import { useTheme } from "#/alf";
-import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 
 export function useOpenLink() {
 	const { openModal } = useModalControls();

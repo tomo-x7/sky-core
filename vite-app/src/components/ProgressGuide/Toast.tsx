@@ -1,15 +1,15 @@
-import React, { useImperativeHandle } from "react";
-import { Pressable, useWindowDimensions, View } from "react-native";
-import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React, { useImperativeHandle } from "react";
+import { Pressable, View, useWindowDimensions } from "react-native";
+import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { isWeb } from "#/platform/detection";
 import { atoms as a, useTheme } from "#/alf";
 import { Portal } from "#/components/Portal";
-import { AnimatedCheck, AnimatedCheckRef } from "../anim/AnimatedCheck";
+import { isWeb } from "#/platform/detection";
 import { Text } from "../Typography";
+import { AnimatedCheck, type AnimatedCheckRef } from "../anim/AnimatedCheck";
 
 export interface ProgressGuideToastRef {
 	open(): void;

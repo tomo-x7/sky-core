@@ -1,4 +1,4 @@
-import { ThemeName } from "../types";
+import type { ThemeName } from "../types";
 
 export function select<T>(name: ThemeName, options: Record<ThemeName, T>) {
 	switch (name) {

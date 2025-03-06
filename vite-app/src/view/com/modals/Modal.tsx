@@ -1,11 +1,11 @@
+import BottomSheet from "@discord/bottom-sheet/src";
 import { Fragment, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import BottomSheet from "@discord/bottom-sheet/src";
 
+import { FullWindowOverlay } from "#/components/FullWindowOverlay";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useModalControls, useModals } from "#/state/modals";
-import { FullWindowOverlay } from "#/components/FullWindowOverlay";
 import { createCustomBackdrop } from "../util/BottomSheetCustomBackdrop";
 import * as ChangeEmailModal from "./ChangeEmail";
 import * as ChangePasswordModal from "./ChangePassword";
@@ -14,12 +14,12 @@ import * as DeleteAccountModal from "./DeleteAccount";
 import * as EditProfileModal from "./EditProfile";
 import * as InAppBrowserConsentModal from "./InAppBrowserConsent";
 import * as InviteCodesModal from "./InviteCodes";
-import * as ContentLanguagesSettingsModal from "./lang-settings/ContentLanguagesSettings";
-import * as PostLanguagesSettingsModal from "./lang-settings/PostLanguagesSettings";
 import * as LinkWarningModal from "./LinkWarning";
 import * as ListAddUserModal from "./ListAddRemoveUsers";
 import * as UserAddRemoveListsModal from "./UserAddRemoveLists";
 import * as VerifyEmailModal from "./VerifyEmail";
+import * as ContentLanguagesSettingsModal from "./lang-settings/ContentLanguagesSettings";
+import * as PostLanguagesSettingsModal from "./lang-settings/PostLanguagesSettings";
 
 const DEFAULT_SNAPPOINTS = ["90%"];
 const HANDLE_HEIGHT = 24;

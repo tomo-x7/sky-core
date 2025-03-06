@@ -13,14 +13,21 @@
  */
 
 import React from "react";
-import { FlatList, FlatListProps, ScrollViewProps, StyleSheet, View, ViewProps } from "react-native";
+import {
+	type FlatList,
+	type FlatListProps,
+	type ScrollViewProps,
+	StyleSheet,
+	View,
+	type ViewProps,
+} from "react-native";
 import Animated from "react-native-reanimated";
 
+import { useLayoutBreakpoints } from "#/alf";
+import { useDialogContext } from "#/components/Dialog";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { addStyle } from "#/lib/styles";
-import { useLayoutBreakpoints } from "#/alf";
-import { useDialogContext } from "#/components/Dialog";
 
 interface AddedProps {
 	desktopFixedHeight?: boolean | number;

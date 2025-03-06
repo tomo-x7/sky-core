@@ -1,6 +1,6 @@
+import { Trans } from "@lingui/macro";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Trans } from "@lingui/macro";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";

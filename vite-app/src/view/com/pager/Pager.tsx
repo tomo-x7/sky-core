@@ -1,18 +1,18 @@
+import { useFocusEffect } from "@react-navigation/native";
 import React, { forwardRef, useCallback, useContext } from "react";
 import { View } from "react-native";
 import { DrawerGestureContext } from "react-native-drawer-layout";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import PagerView, {
-	PagerViewOnPageScrollEventData,
-	PagerViewOnPageSelectedEvent,
-	PagerViewOnPageSelectedEventData,
-	PageScrollStateChangedNativeEventData,
+	type PagerViewOnPageScrollEventData,
+	type PagerViewOnPageSelectedEvent,
+	type PagerViewOnPageSelectedEventData,
+	type PageScrollStateChangedNativeEventData,
 } from "react-native-pager-view";
-import Animated, { runOnJS, SharedValue, useEvent, useHandler, useSharedValue } from "react-native-reanimated";
-import { useFocusEffect } from "@react-navigation/native";
+import Animated, { runOnJS, type SharedValue, useEvent, useHandler, useSharedValue } from "react-native-reanimated";
 
-import { useSetDrawerSwipeDisabled } from "#/state/shell";
 import { atoms as a, native } from "#/alf";
+import { useSetDrawerSwipeDisabled } from "#/state/shell";
 
 export type PageSelectedEvent = PagerViewOnPageSelectedEvent;
 

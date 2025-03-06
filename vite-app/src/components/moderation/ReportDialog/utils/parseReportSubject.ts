@@ -1,6 +1,6 @@
 import { AppBskyActorDefs, AppBskyFeedDefs, AppBskyFeedPost, AppBskyGraphDefs } from "@atproto/api";
 
-import { ParsedReportSubject, ReportSubject } from "#/components/moderation/ReportDialog/types";
+import type { ParsedReportSubject, ReportSubject } from "#/components/moderation/ReportDialog/types";
 import * as bsky from "#/types/bsky";
 
 export function parseReportSubject(subject: ReportSubject): ParsedReportSubject | undefined {

@@ -1,10 +1,11 @@
-import React from "react";
-import * as Notifications from "expo-notifications";
 import { CommonActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import * as Notifications from "expo-notifications";
+import React from "react";
 
+import { resetToTab } from "#/Navigation";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
-import { NavigationProp } from "#/lib/routes/types";
+import type { NavigationProp } from "#/lib/routes/types";
 import { logEvent } from "#/lib/statsig/statsig";
 import { Logger } from "#/logger";
 import { isAndroid } from "#/platform/detection";
@@ -15,7 +16,6 @@ import { truncateAndInvalidate } from "#/state/queries/util";
 import { useSession } from "#/state/session";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import { useCloseAllActiveElements } from "#/state/util";
-import { resetToTab } from "#/Navigation";
 
 type NotificationReason =
 	| "like"

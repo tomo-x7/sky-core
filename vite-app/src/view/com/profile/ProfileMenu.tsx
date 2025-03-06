@@ -1,29 +1,13 @@
-import React, { memo } from "react";
-import { AppBskyActorDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { AppBskyActorDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import React, { memo } from "react";
 
-import { HITSLOP_20 } from "#/lib/constants";
-import { makeProfileLink } from "#/lib/routes/links";
-import { NavigationProp } from "#/lib/routes/types";
-import { shareText, shareUrl } from "#/lib/sharing";
-import { toShareUrl } from "#/lib/strings/url-helpers";
-import { logger } from "#/logger";
-import { Shadow } from "#/state/cache/types";
-import { useModalControls } from "#/state/modals";
-import { useDevModeEnabled } from "#/state/preferences/dev-mode";
-import {
-	RQKEY as profileQueryKey,
-	useProfileBlockMutationQueue,
-	useProfileFollowMutationQueue,
-	useProfileMuteMutationQueue,
-} from "#/state/queries/profile";
-import { useSession } from "#/state/session";
-import { EventStopper } from "#/view/com/util/EventStopper";
-import * as Toast from "#/view/com/util/Toast";
 import { Button, ButtonIcon } from "#/components/Button";
+import * as Menu from "#/components/Menu";
+import * as Prompt from "#/components/Prompt";
 import { ArrowOutOfBox_Stroke2_Corner0_Rounded as Share } from "#/components/icons/ArrowOutOfBox";
 import { DotGrid_Stroke2_Corner0_Rounded as Ellipsis } from "#/components/icons/DotGrid";
 import { Flag_Stroke2_Corner0_Rounded as Flag } from "#/components/icons/Flag";
@@ -37,9 +21,25 @@ import {
 } from "#/components/icons/Person";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { SpeakerVolumeFull_Stroke2_Corner0_Rounded as Unmute } from "#/components/icons/Speaker";
-import * as Menu from "#/components/Menu";
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
-import * as Prompt from "#/components/Prompt";
+import { HITSLOP_20 } from "#/lib/constants";
+import { makeProfileLink } from "#/lib/routes/links";
+import type { NavigationProp } from "#/lib/routes/types";
+import { shareText, shareUrl } from "#/lib/sharing";
+import { toShareUrl } from "#/lib/strings/url-helpers";
+import { logger } from "#/logger";
+import type { Shadow } from "#/state/cache/types";
+import { useModalControls } from "#/state/modals";
+import { useDevModeEnabled } from "#/state/preferences/dev-mode";
+import {
+	RQKEY as profileQueryKey,
+	useProfileBlockMutationQueue,
+	useProfileFollowMutationQueue,
+	useProfileMuteMutationQueue,
+} from "#/state/queries/profile";
+import { useSession } from "#/state/session";
+import { EventStopper } from "#/view/com/util/EventStopper";
+import * as Toast from "#/view/com/util/Toast";
 
 let ProfileMenu = ({
 	profile,

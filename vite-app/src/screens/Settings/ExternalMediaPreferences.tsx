@@ -1,14 +1,14 @@
+import { Trans } from "@lingui/macro";
 import { Fragment } from "react";
 import { View } from "react-native";
-import { Trans } from "@lingui/macro";
 
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { EmbedPlayerSource, externalEmbedLabels } from "#/lib/strings/embed-player";
-import { useExternalEmbedsPrefs, useSetExternalEmbedPref } from "#/state/preferences";
 import { atoms as a, native } from "#/alf";
 import { Admonition } from "#/components/Admonition";
-import * as Toggle from "#/components/forms/Toggle";
 import * as Layout from "#/components/Layout";
+import * as Toggle from "#/components/forms/Toggle";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import { type EmbedPlayerSource, externalEmbedLabels } from "#/lib/strings/embed-player";
+import { useExternalEmbedsPrefs, useSetExternalEmbedPref } from "#/state/preferences";
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "PreferencesExternalEmbeds">;

@@ -1,23 +1,23 @@
-import React, { useCallback } from "react";
-import { Dimensions, StyleProp, View, ViewStyle } from "react-native";
-import { AppBskyGraphDefs } from "@atproto/api";
+import type { AppBskyGraphDefs } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React, { useCallback } from "react";
+import { Dimensions, type StyleProp, View, type ViewStyle } from "react-native";
 
+import { ListFooter } from "#/components/Lists";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
 import { useModalControls } from "#/state/modals";
 import { useListMembersQuery } from "#/state/queries/list-members";
 import { useSession } from "#/state/session";
-import { ListFooter } from "#/components/Lists";
-import * as bsky from "#/types/bsky";
+import type * as bsky from "#/types/bsky";
 import { ProfileCard } from "../profile/ProfileCard";
+import { List, type ListRef } from "../util/List";
+import { LoadMoreRetryBtn } from "../util/LoadMoreRetryBtn";
+import { ProfileCardFeedLoadingPlaceholder } from "../util/LoadingPlaceholder";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
-import { List, ListRef } from "../util/List";
-import { ProfileCardFeedLoadingPlaceholder } from "../util/LoadingPlaceholder";
-import { LoadMoreRetryBtn } from "../util/LoadMoreRetryBtn";
 
 const LOADING_ITEM = { _reactKey: "__loading__" };
 const EMPTY_ITEM = { _reactKey: "__empty__" };

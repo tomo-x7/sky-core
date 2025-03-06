@@ -1,17 +1,17 @@
 import React from "react";
 import { Platform } from "react-native";
-import { AppState, AppStateStatus } from "react-native";
+import { AppState, type AppStateStatus } from "react-native";
 import { Statsig, StatsigProvider } from "statsig-react-native-expo";
 
 import { BUNDLE_DATE, BUNDLE_IDENTIFIER, IS_TESTFLIGHT } from "#/lib/app-info";
 import { logger } from "#/logger";
-import { MetricEvents } from "#/logger/metrics";
+import type { MetricEvents } from "#/logger/metrics";
 import { isWeb } from "#/platform/detection";
 import * as persisted from "#/state/persisted";
 import { useSession } from "../../state/session";
 import { timeout } from "../async/timeout";
 import { useNonReactiveCallback } from "../hooks/useNonReactiveCallback";
-import { Gate } from "./gates";
+import type { Gate } from "./gates";
 
 const SDK_KEY = "client-SXJakO39w9vIhl3D44u8UupyzFl4oZ2qPIkjwcvuPsV";
 
@@ -124,7 +124,7 @@ function toStringRecord<E extends keyof MetricEvents>(
 	metadata: MetricEvents[E] & FlatJSONRecord,
 ): Record<string, string> {
 	const record: Record<string, string> = {};
-	for (let key in metadata) {
+	for (const key in metadata) {
 		if (metadata.hasOwnProperty(key)) {
 			if (typeof metadata[key] === "string") {
 				record[key] = metadata[key];

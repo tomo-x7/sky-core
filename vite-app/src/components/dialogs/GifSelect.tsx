@@ -1,23 +1,23 @@
-import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { TextInput, View } from "react-native";
-import { useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
+import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { type TextInput, View } from "react-native";
+import { useWindowDimensions } from "react-native";
 
-import { logEvent } from "#/lib/statsig/statsig";
-import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
-import { Gif, useFeaturedGifsQuery, useGifSearchQuery } from "#/state/queries/tenor";
-import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
-import { ErrorBoundary } from "#/view/com/util/ErrorBoundary";
-import { ListMethods } from "#/view/com/util/List";
 import { atoms as a, ios, native, useBreakpoints, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
+import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import * as TextField from "#/components/forms/TextField";
 import { useThrottledValue } from "#/components/hooks/useThrottledValue";
 import { ArrowLeft_Stroke2_Corner0_Rounded as Arrow } from "#/components/icons/Arrow";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
-import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
+import { logEvent } from "#/lib/statsig/statsig";
+import { cleanError } from "#/lib/strings/errors";
+import { isWeb } from "#/platform/detection";
+import { type Gif, useFeaturedGifsQuery, useGifSearchQuery } from "#/state/queries/tenor";
+import { ErrorBoundary } from "#/view/com/util/ErrorBoundary";
+import type { ListMethods } from "#/view/com/util/List";
+import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 
 export function GifSelectDialog({
 	controlRef,

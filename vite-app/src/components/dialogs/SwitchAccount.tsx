@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { View } from "react-native";
 
+import { atoms as a } from "#/alf";
+import * as Dialog from "#/components/Dialog";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
 import { type SessionAccount, useSession } from "#/state/session";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
-import { atoms as a } from "#/alf";
-import * as Dialog from "#/components/Dialog";
 import { AccountList } from "../AccountList";
 import { Text } from "../Typography";
 

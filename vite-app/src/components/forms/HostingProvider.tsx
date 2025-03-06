@@ -1,17 +1,17 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { Keyboard, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { toNiceDomain } from "#/lib/strings/url-helpers";
-import { isAndroid } from "#/platform/detection";
-import { ServerInputDialog } from "#/view/com/auth/server-input";
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
+import { Text } from "#/components/Typography";
 import { Globe_Stroke2_Corner0_Rounded as GlobeIcon } from "#/components/icons/Globe";
 import { PencilLine_Stroke2_Corner0_Rounded as PencilIcon } from "#/components/icons/Pencil";
-import { Text } from "#/components/Typography";
+import { toNiceDomain } from "#/lib/strings/url-helpers";
+import { isAndroid } from "#/platform/detection";
+import { ServerInputDialog } from "#/view/com/auth/server-input";
 
 export function HostingProvider({
 	serviceUrl,

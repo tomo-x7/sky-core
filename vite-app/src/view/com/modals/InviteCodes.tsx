@@ -1,10 +1,10 @@
+import type { ComAtprotoServerDefs } from "@atproto/api";
+import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { setStringAsync } from "expo-clipboard";
 import React from "react";
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from "react-native";
-import { setStringAsync } from "expo-clipboard";
-import { ComAtprotoServerDefs } from "@atproto/api";
-import { FontAwesomeIcon, FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -13,13 +13,13 @@ import { cleanError } from "#/lib/strings/errors";
 import { isWeb } from "#/platform/detection";
 import { useInvitesAPI, useInvitesState } from "#/state/invites";
 import { useModalControls } from "#/state/modals";
-import { InviteCodesQueryResponse, useInviteCodesQuery } from "#/state/queries/invites";
-import { ErrorMessage } from "../util/error/ErrorMessage";
-import { Button } from "../util/forms/Button";
+import { type InviteCodesQueryResponse, useInviteCodesQuery } from "#/state/queries/invites";
 import { Link } from "../util/Link";
-import { Text } from "../util/text/Text";
 import * as Toast from "../util/Toast";
 import { UserInfoText } from "../util/UserInfoText";
+import { ErrorMessage } from "../util/error/ErrorMessage";
+import { Button } from "../util/forms/Button";
+import { Text } from "../util/text/Text";
 import { ScrollView } from "./util";
 
 export const snapPoints = ["70%"];

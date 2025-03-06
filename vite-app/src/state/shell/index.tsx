@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 import { Provider as ColorModeProvider } from "./color-mode";
 import { Provider as DrawerOpenProvider } from "./drawer-open";

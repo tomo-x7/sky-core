@@ -1,5 +1,5 @@
 import { cacheDirectory, deleteAsync, makeDirectoryAsync, moveAsync } from "expo-file-system";
-import { Action, ActionCrop, manipulateAsync, SaveFormat } from "expo-image-manipulator";
+import { type Action, type ActionCrop, SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { nanoid } from "nanoid/non-secure";
 
 import { POST_IMG_MAX } from "#/lib/constants";

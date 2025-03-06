@@ -1,12 +1,12 @@
-import { View } from "react-native";
-import { ChatBskyConvoDefs } from "@atproto/api";
+import type { ChatBskyConvoDefs } from "@atproto/api";
 import { Trans } from "@lingui/macro";
+import { View } from "react-native";
 
-import { useModerationOpts } from "#/state/preferences/moderation-opts";
-import { useSession } from "#/state/session";
 import { atoms as a, tokens } from "#/alf";
 import { KnownFollowers } from "#/components/KnownFollowers";
 import { Text } from "#/components/Typography";
+import { useModerationOpts } from "#/state/preferences/moderation-opts";
+import { useSession } from "#/state/session";
 import { ChatListItem } from "./ChatListItem";
 import { AcceptChatButton, DeleteChatButton, RejectMenu } from "./RequestButtons";
 

@@ -1,30 +1,30 @@
+import type { AppBskyEmbedExternal } from "@atproto/api";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useNavigation } from "@react-navigation/native";
+import { Image } from "expo-image";
 import React from "react";
 import {
 	ActivityIndicator,
-	GestureResponderEvent,
+	type GestureResponderEvent,
 	Pressable,
 	StyleSheet,
-	useWindowDimensions,
 	View,
+	useWindowDimensions,
 } from "react-native";
 import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
-import { Image } from "expo-image";
-import { AppBskyEmbedExternal } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { useNavigation } from "@react-navigation/native";
 
-import { NavigationProp } from "#/lib/routes/types";
-import { EmbedPlayerParams, getPlayerAspect } from "#/lib/strings/embed-player";
-import { isNative } from "#/platform/detection";
-import { useExternalEmbedsPrefs } from "#/state/preferences";
 import { atoms as a, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
-import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
 import { Fill } from "#/components/Fill";
+import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
+import type { NavigationProp } from "#/lib/routes/types";
+import { type EmbedPlayerParams, getPlayerAspect } from "#/lib/strings/embed-player";
+import { isNative } from "#/platform/detection";
+import { useExternalEmbedsPrefs } from "#/state/preferences";
 import { EventStopper } from "../EventStopper";
 
 interface ShouldStartLoadRequest {

@@ -1,18 +1,18 @@
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { isWeb } from "#/platform/detection";
-import { useOnboardingDispatch } from "#/state/shell";
-import { Context } from "#/screens/Onboarding/state";
-import { atoms as a, flatten, native, TextStyleProp, useBreakpoints, useTheme, web } from "#/alf";
+import { type TextStyleProp, atoms as a, flatten, native, useBreakpoints, useTheme, web } from "#/alf";
 import { leading } from "#/alf/typography";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components/icons/Chevron";
 import { createPortalGroup } from "#/components/Portal";
 import { P, Text } from "#/components/Typography";
+import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components/icons/Chevron";
+import { isWeb } from "#/platform/detection";
+import { Context } from "#/screens/Onboarding/state";
+import { useOnboardingDispatch } from "#/state/shell";
 
 const COL_WIDTH = 420;
 

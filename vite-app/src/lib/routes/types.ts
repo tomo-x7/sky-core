@@ -1,7 +1,7 @@
-import { NavigationState, PartialState } from "@react-navigation/native";
+import type { NavigationState, PartialState } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
+import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 
 export type { NativeStackScreenProps } from "@react-navigation/native-stack";
 

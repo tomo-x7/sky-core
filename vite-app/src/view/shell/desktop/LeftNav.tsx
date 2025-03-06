@@ -1,54 +1,34 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { AppBskyActorDefs } from "@atproto/api";
-import { msg, plural, Trans } from "@lingui/macro";
+import type { AppBskyActorDefs } from "@atproto/api";
+import { Trans, msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useLinkProps, useNavigation, useNavigationState } from "@react-navigation/native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
-import { usePalette } from "#/lib/hooks/usePalette";
-import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { getCurrentRoute, isTab } from "#/lib/routes/helpers";
-import { makeProfileLink } from "#/lib/routes/links";
-import { CommonNavigatorParams } from "#/lib/routes/types";
-import { useGate } from "#/lib/statsig/statsig";
-import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { isInvalidHandle, sanitizeHandle } from "#/lib/strings/handles";
-import { emitSoftReset } from "#/state/events";
-import { useHomeBadge } from "#/state/home-badge";
-import { useFetchHandle } from "#/state/queries/handle";
-import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
-import { useUnreadNotifications } from "#/state/queries/notifications/unread";
-import { useProfilesQuery } from "#/state/queries/profile";
-import { SessionAccount, useSession, useSessionApi } from "#/state/session";
-import { useComposerControls } from "#/state/shell/composer";
-import { useLoggedOutViewControls } from "#/state/shell/logged-out";
-import { useCloseAllActiveElements } from "#/state/util";
-import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
-import { PressableWithHover } from "#/view/com/util/PressableWithHover";
-import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { NavSignupCard } from "#/view/shell/NavSignupCard";
 import { atoms as a, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { DialogControlProps } from "#/components/Dialog";
+import type { DialogControlProps } from "#/components/Dialog";
+import * as Menu from "#/components/Menu";
+import * as Prompt from "#/components/Prompt";
+import { Text } from "#/components/Typography";
 import { ArrowBoxLeft_Stroke2_Corner0_Rounded as LeaveIcon } from "#/components/icons/ArrowBoxLeft";
 import {
-	Bell_Filled_Corner0_Rounded as BellFilled,
 	Bell_Stroke2_Corner0_Rounded as Bell,
+	Bell_Filled_Corner0_Rounded as BellFilled,
 } from "#/components/icons/Bell";
 import {
-	BulletList_Filled_Corner0_Rounded as ListFilled,
 	BulletList_Stroke2_Corner0_Rounded as List,
+	BulletList_Filled_Corner0_Rounded as ListFilled,
 } from "#/components/icons/BulletList";
 import { DotGrid_Stroke2_Corner0_Rounded as EllipsisIcon } from "#/components/icons/DotGrid";
 import { EditBig_Stroke2_Corner0_Rounded as EditBig } from "#/components/icons/EditBig";
 import {
-	Hashtag_Filled_Corner0_Rounded as HashtagFilled,
 	Hashtag_Stroke2_Corner0_Rounded as Hashtag,
+	Hashtag_Filled_Corner0_Rounded as HashtagFilled,
 } from "#/components/icons/Hashtag";
 import {
-	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
 	HomeOpen_Stoke2_Corner0_Rounded as Home,
+	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
 } from "#/components/icons/HomeOpen";
 import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "#/components/icons/MagnifyingGlass";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "#/components/icons/MagnifyingGlass2";
@@ -58,16 +38,36 @@ import {
 } from "#/components/icons/Message";
 import { PlusLarge_Stroke2_Corner0_Rounded as PlusIcon } from "#/components/icons/Plus";
 import {
-	SettingsGear2_Filled_Corner0_Rounded as SettingsFilled,
 	SettingsGear2_Stroke2_Corner0_Rounded as Settings,
+	SettingsGear2_Filled_Corner0_Rounded as SettingsFilled,
 } from "#/components/icons/SettingsGear2";
 import {
-	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
 	UserCircle_Stroke2_Corner0_Rounded as UserCircle,
+	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
 } from "#/components/icons/UserCircle";
-import * as Menu from "#/components/Menu";
-import * as Prompt from "#/components/Prompt";
-import { Text } from "#/components/Typography";
+import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
+import { usePalette } from "#/lib/hooks/usePalette";
+import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { getCurrentRoute, isTab } from "#/lib/routes/helpers";
+import { makeProfileLink } from "#/lib/routes/links";
+import type { CommonNavigatorParams } from "#/lib/routes/types";
+import { useGate } from "#/lib/statsig/statsig";
+import { sanitizeDisplayName } from "#/lib/strings/display-names";
+import { isInvalidHandle, sanitizeHandle } from "#/lib/strings/handles";
+import { emitSoftReset } from "#/state/events";
+import { useHomeBadge } from "#/state/home-badge";
+import { useFetchHandle } from "#/state/queries/handle";
+import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
+import { useUnreadNotifications } from "#/state/queries/notifications/unread";
+import { useProfilesQuery } from "#/state/queries/profile";
+import { type SessionAccount, useSession, useSessionApi } from "#/state/session";
+import { useComposerControls } from "#/state/shell/composer";
+import { useLoggedOutViewControls } from "#/state/shell/logged-out";
+import { useCloseAllActiveElements } from "#/state/util";
+import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
+import { PressableWithHover } from "#/view/com/util/PressableWithHover";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { NavSignupCard } from "#/view/shell/NavSignupCard";
 import { PlatformInfo } from "../../../../modules/expo-bluesky-swiss-army";
 import { router } from "../../../routes";
 
@@ -298,7 +298,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 		}
 		return getCurrentRoute(state);
 	});
-	let isCurrent =
+	const isCurrent =
 		currentRouteInfo.name === "Profile"
 			? isTab(currentRouteInfo.name, pathName) &&
 				(currentRouteInfo.params as CommonNavigatorParams["Profile"]).name === currentAccount?.handle

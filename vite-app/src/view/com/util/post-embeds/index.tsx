@@ -1,7 +1,3 @@
-import React from "react";
-import { InteractionManager, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
-import { Image } from "expo-image";
 import {
 	AppBskyEmbedExternal,
 	AppBskyEmbedImages,
@@ -10,27 +6,31 @@ import {
 	AppBskyEmbedVideo,
 	AppBskyFeedDefs,
 	AppBskyGraphDefs,
+	type ModerationDecision,
 	moderateFeedGenerator,
 	moderateUserList,
-	ModerationDecision,
 } from "@atproto/api";
+import { Image } from "expo-image";
+import React from "react";
+import { InteractionManager, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
-import { HandleRef, measureHandle } from "#/lib/hooks/useHandleRef";
+import { atoms as a, useTheme } from "#/alf";
+import * as ListCard from "#/components/ListCard";
+import { Embed as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
+import { type HandleRef, measureHandle } from "#/lib/hooks/useHandleRef";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useLightboxControls } from "#/state/lightbox";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { FeedSourceCard } from "#/view/com/feeds/FeedSourceCard";
-import { atoms as a, useTheme } from "#/alf";
-import * as ListCard from "#/components/ListCard";
-import { Embed as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
 import { ContentHider } from "../../../../components/moderation/ContentHider";
-import { Dimensions } from "../../lightbox/ImageViewing/@types";
+import type { Dimensions } from "../../lightbox/ImageViewing/@types";
 import { AutoSizedImage } from "../images/AutoSizedImage";
 import { ImageLayoutGrid } from "../images/ImageLayoutGrid";
 import { ExternalLinkEmbed } from "./ExternalLinkEmbed";
 import { MaybeQuoteEmbed } from "./QuoteEmbed";
-import { PostEmbedViewContext, QuoteEmbedViewContext } from "./types";
 import { VideoEmbed } from "./VideoEmbed";
+import { PostEmbedViewContext, QuoteEmbedViewContext } from "./types";
 
 export * from "./types";
 

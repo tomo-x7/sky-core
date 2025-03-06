@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { FontAwesomeIcon, FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import lande from "lande";
+import { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { s } from "#/lib/styles";

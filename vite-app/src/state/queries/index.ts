@@ -16,5 +16,5 @@ export const STALE = {
 	HOURS: {
 		ONE: HOUR,
 	},
-	INFINITY: Infinity,
+	INFINITY: Number.POSITIVE_INFINITY,
 };

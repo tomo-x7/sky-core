@@ -1,19 +1,19 @@
+import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
+import { Trans } from "@lingui/macro";
 import React from "react";
 import { View } from "react-native";
 // @ts-expect-error missing types
 import QRCode from "react-native-qrcode-styled";
 import type ViewShot from "react-native-view-shot";
-import { AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 
-import { isWeb } from "#/platform/detection";
-import { Logo } from "#/view/icons/Logo";
-import { Logotype } from "#/view/icons/Logotype";
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
 import { LinearGradientBackground } from "#/components/LinearGradientBackground";
 import { Text } from "#/components/Typography";
+import { isWeb } from "#/platform/detection";
 import * as bsky from "#/types/bsky";
+import { Logo } from "#/view/icons/Logo";
+import { Logotype } from "#/view/icons/Logotype";
 
 const LazyViewShot = React.lazy(
 	// @ts-expect-error dynamic import

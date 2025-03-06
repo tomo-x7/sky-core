@@ -1,14 +1,14 @@
-import React from "react";
-import { Platform, Pressable, StyleSheet, View, ViewStyle } from "react-native";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import React from "react";
+import { Platform, Pressable, StyleSheet, View, type ViewStyle } from "react-native";
 import * as DropdownMenu from "zeego/dropdown-menu";
-import { MenuItemCommonProps } from "zeego/lib/typescript/menu";
+import type { MenuItemCommonProps } from "zeego/lib/typescript/menu";
 
-import { usePalette } from "#/lib/hooks/usePalette";
-import { useTheme } from "#/lib/ThemeContext";
-import { isIOS } from "#/platform/detection";
 import { Portal } from "#/components/Portal";
+import { useTheme } from "#/lib/ThemeContext";
+import { usePalette } from "#/lib/hooks/usePalette";
+import { isIOS } from "#/platform/detection";
 
 // Custom Dropdown Menu Components
 // ==

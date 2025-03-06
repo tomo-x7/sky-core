@@ -1,27 +1,27 @@
-import { useCallback } from "react";
-import { Image as RNImage } from "react-native-image-crop-picker";
 import {
-	AppBskyActorDefs,
-	AppBskyActorGetProfile,
-	AppBskyActorGetProfiles,
-	AppBskyActorProfile,
+	type AppBskyActorDefs,
+	type AppBskyActorGetProfile,
+	type AppBskyActorGetProfiles,
+	type AppBskyActorProfile,
 	AtUri,
-	BskyAgent,
-	ComAtprotoRepoUploadBlob,
-	Un$Typed,
+	type BskyAgent,
+	type ComAtprotoRepoUploadBlob,
+	type Un$Typed,
 } from "@atproto/api";
-import { keepPreviousData, QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { type QueryClient, keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useCallback } from "react";
+import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { uploadBlob } from "#/lib/api";
 import { until } from "#/lib/async/until";
 import { useToggleMutationQueue } from "#/lib/hooks/useToggleMutationQueue";
-import { logEvent, LogEvents, toClout } from "#/lib/statsig/statsig";
-import { Shadow } from "#/state/cache/types";
+import { type LogEvents, logEvent, toClout } from "#/lib/statsig/statsig";
+import type { Shadow } from "#/state/cache/types";
 import { STALE } from "#/state/queries";
 import { resetProfilePostsQueries } from "#/state/queries/post-feed";
 import { unstableCacheProfileView, useUnstableProfileViewCache } from "#/state/queries/unstable-profile-cache";
 import * as userActionHistory from "#/state/userActionHistory";
-import * as bsky from "#/types/bsky";
+import type * as bsky from "#/types/bsky";
 import { updateProfileShadow } from "../cache/profile-shadow";
 import { useAgent, useSession } from "../session";
 import { ProgressGuideAction, useProgressGuideControls } from "../shell/progress-guide";
@@ -508,7 +508,7 @@ export function* findAllProfilesInQueryData(
 		if (!queryData) {
 			continue;
 		}
-		for (let profile of queryData.profiles) {
+		for (const profile of queryData.profiles) {
 			if (profile.did === did) {
 				yield profile;
 			}

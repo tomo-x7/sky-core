@@ -1,19 +1,19 @@
+import { type AppBskyActorDefs, type AppBskyGraphGetList, AtUri, type ModerationOpts } from "@atproto/api";
+import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import React, { useCallback } from "react";
-import { ListRenderItemInfo, View } from "react-native";
-import { AppBskyActorDefs, AppBskyGraphGetList, AtUri, ModerationOpts } from "@atproto/api";
-import { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
+import { type ListRenderItemInfo, View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
+import { Default as ProfileCard } from "#/components/ProfileCard";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { isBlockedOrBlocking } from "#/lib/moderation/blocked-and-muted";
 import { isNative, isWeb } from "#/platform/detection";
+import type { SectionRef } from "#/screens/Profile/Sections/types";
 import { useAllListMembersQuery } from "#/state/queries/list-members";
 import { useSession } from "#/state/session";
-import { List, ListRef } from "#/view/com/util/List";
-import { SectionRef } from "#/screens/Profile/Sections/types";
-import { atoms as a, useTheme } from "#/alf";
-import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
-import { Default as ProfileCard } from "#/components/ProfileCard";
+import { List, type ListRef } from "#/view/com/util/List";
 
 function keyExtractor(item: AppBskyActorDefs.ProfileViewBasic, index: number) {
 	return `${item.did}-${index}`;

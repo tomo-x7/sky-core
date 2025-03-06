@@ -1,17 +1,29 @@
-import React from "react";
-import { View } from "react-native";
-import { AppBskyActorProfile, AppBskyGraphDefs, AppBskyGraphStarterpack, Un$Typed } from "@atproto/api";
-import { SavedFeed } from "@atproto/api/dist/client/types/app/bsky/actor/defs";
+import { type AppBskyActorProfile, type AppBskyGraphDefs, AppBskyGraphStarterpack, type Un$Typed } from "@atproto/api";
+import type { SavedFeed } from "@atproto/api/dist/client/types/app/bsky/actor/defs";
 import { TID } from "@atproto/common-web";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { IconCircle } from "#/components/IconCircle";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
+import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
+import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
+import { News2_Stroke2_Corner0_Rounded as News } from "#/components/icons/News2";
+import { Trending2_Stroke2_Corner2_Rounded as Trending } from "#/components/icons/Trending2";
 import { uploadBlob } from "#/lib/api";
 import { BSKY_APP_ACCOUNT_DID, DISCOVER_SAVED_FEED, TIMELINE_SAVED_FEED, VIDEO_SAVED_FEED } from "#/lib/constants";
 import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
 import { logEvent, useGate } from "#/lib/statsig/statsig";
 import { logger } from "#/logger";
+import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
+import { Context } from "#/screens/Onboarding/state";
+import { bulkWriteFollows } from "#/screens/Onboarding/util";
 import { useSetHasCheckedForStarterPack } from "#/state/preferences/used-starter-packs";
 import { getAllListMembers } from "#/state/queries/list-members";
 import { preferencesQueryKey } from "#/state/queries/preferences";
@@ -20,18 +32,6 @@ import { useAgent } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
 import { useProgressGuideControls } from "#/state/shell/progress-guide";
 import { useActiveStarterPack, useSetActiveStarterPack } from "#/state/shell/starter-pack";
-import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
-import { Context } from "#/screens/Onboarding/state";
-import { bulkWriteFollows } from "#/screens/Onboarding/util";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { IconCircle } from "#/components/IconCircle";
-import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
-import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
-import { News2_Stroke2_Corner0_Rounded as News } from "#/components/icons/News2";
-import { Trending2_Stroke2_Corner2_Rounded as Trending } from "#/components/icons/Trending2";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
 import * as bsky from "#/types/bsky";
 
 export function StepFinished() {
@@ -124,7 +124,7 @@ export function StepFinished() {
 					const blobPromise = imageUri && imageMime ? uploadBlob(agent, imageUri, imageMime) : undefined;
 
 					await agent.upsertProfile(async (existing) => {
-						let next: Un$Typed<AppBskyActorProfile.Record> = existing ?? {};
+						const next: Un$Typed<AppBskyActorProfile.Record> = existing ?? {};
 
 						if (blobPromise) {
 							const res = await blobPromise;

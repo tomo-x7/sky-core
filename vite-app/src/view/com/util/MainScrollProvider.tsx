@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect } from "react";
-import { NativeScrollEvent } from "react-native";
-import { interpolate, useSharedValue, withSpring } from "react-native-reanimated";
 import EventEmitter from "eventemitter3";
+import React, { useCallback, useEffect } from "react";
+import type { NativeScrollEvent } from "react-native";
+import { interpolate, useSharedValue, withSpring } from "react-native-reanimated";
 
 import { ScrollProvider } from "#/lib/ScrollContext";
 import { isNative, isWeb } from "#/platform/detection";

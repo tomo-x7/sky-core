@@ -7,8 +7,7 @@
  * {@link https://github.com/date-fns/date-fns/blob/main/docs/i18n.md}
  */
 
-import React from "react";
-import { formatDistance, Locale } from "date-fns";
+import { type Locale, formatDistance } from "date-fns";
 import {
 	ca,
 	da,
@@ -41,8 +40,9 @@ import {
 	zhHK,
 	zhTW,
 } from "date-fns/locale";
+import React from "react";
 
-import { AppLanguage } from "#/locale/languages";
+import type { AppLanguage } from "#/locale/languages";
 import { useLanguagePrefs } from "#/state/preferences";
 
 /**

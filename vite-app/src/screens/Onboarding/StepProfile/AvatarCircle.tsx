@@ -1,15 +1,15 @@
-import React from "react";
-import { View } from "react-native";
-import { Image as ExpoImage } from "expo-image";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image as ExpoImage } from "expo-image";
+import React from "react";
+import { View } from "react-native";
 
-import { AvatarCreatorCircle } from "#/screens/Onboarding/StepProfile/AvatarCreatorCircle";
-import { useAvatar } from "#/screens/Onboarding/StepProfile/index";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Pencil_Stroke2_Corner0_Rounded as Pencil } from "#/components/icons/Pencil";
 import { StreamingLive_Stroke2_Corner0_Rounded as StreamingLive } from "#/components/icons/StreamingLive";
+import { AvatarCreatorCircle } from "#/screens/Onboarding/StepProfile/AvatarCreatorCircle";
+import { useAvatar } from "#/screens/Onboarding/StepProfile/index";
 
 export function AvatarCircle({
 	openLibrary,

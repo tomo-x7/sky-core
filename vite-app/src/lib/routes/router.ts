@@ -1,4 +1,4 @@
-import { Route, RouteParams } from "./types";
+import type { Route, RouteParams } from "./types";
 
 export class Router {
 	routes: [string, Route][] = [];
@@ -39,7 +39,7 @@ export class Router {
 
 function createRoute(pattern: string): Route {
 	const pathParamNames: Set<string> = new Set();
-	let matcherReInternal = pattern.replace(/:([\w]+)/g, (_m, name) => {
+	const matcherReInternal = pattern.replace(/:([\w]+)/g, (_m, name) => {
 		pathParamNames.add(name);
 		return `(?<${name}>[^/]+)`;
 	});

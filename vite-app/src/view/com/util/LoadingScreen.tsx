@@ -1,7 +1,7 @@
 import { ActivityIndicator, View } from "react-native";
 
-import { s } from "#/lib/styles";
 import * as Layout from "#/components/Layout";
+import { s } from "#/lib/styles";
 
 /**
  * @deprecated use Layout compoenents directly

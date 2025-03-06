@@ -1,12 +1,12 @@
-import React from "react";
 import * as Linking from "expo-linking";
+import React from "react";
 
+import { useIntentDialogs } from "#/components/intents/IntentDialogs";
 import { logEvent } from "#/lib/statsig/statsig";
 import { isNative } from "#/platform/detection";
 import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell";
 import { useCloseAllActiveElements } from "#/state/util";
-import { useIntentDialogs } from "#/components/intents/IntentDialogs";
 import { Referrer } from "../../../modules/expo-bluesky-swiss-army";
 
 type IntentType = "compose" | "verify-email";

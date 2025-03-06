@@ -1,14 +1,14 @@
-import React from "react";
-import { Pressable, useWindowDimensions, View } from "react-native";
 import Picker from "@emoji-mart/react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { FocusScope } from "@radix-ui/react-focus-scope";
+import React from "react";
+import { Pressable, View, useWindowDimensions } from "react-native";
 
-import { textInputWebEmitter } from "#/view/com/composer/text-input/textInputWebEmitter";
 import { atoms as a, flatten } from "#/alf";
 import { Portal } from "#/components/Portal";
+import { textInputWebEmitter } from "#/view/com/composer/text-input/textInputWebEmitter";
 
 const HEIGHT_OFFSET = 40;
 const WIDTH_OFFSET = 100;

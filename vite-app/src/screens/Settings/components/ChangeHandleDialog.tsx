@@ -1,5 +1,9 @@
+import type { ComAtprotoServerDescribeServer } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
-import { useWindowDimensions, View } from "react-native";
+import { View, useWindowDimensions } from "react-native";
 import Animated, {
 	FadeIn,
 	FadeOut,
@@ -10,24 +14,14 @@ import Animated, {
 	SlideOutLeft,
 	SlideOutRight,
 } from "react-native-reanimated";
-import { ComAtprotoServerDescribeServer } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { HITSLOP_10 } from "#/lib/constants";
-import { cleanError } from "#/lib/strings/errors";
-import { createFullHandle, validateServiceHandle } from "#/lib/strings/handles";
-import { sanitizeHandle } from "#/lib/strings/handles";
-import { useFetchDid, useUpdateHandleMutation } from "#/state/queries/handle";
-import { RQKEY as RQKEY_PROFILE } from "#/state/queries/profile";
-import { useServiceQuery } from "#/state/queries/service";
-import { useAgent, useSession } from "#/state/session";
-import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 import { atoms as a, native, useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
+import { InlineLinkText } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import * as ToggleButton from "#/components/forms/ToggleButton";
 import {
@@ -37,9 +31,15 @@ import {
 import { At_Stroke2_Corner0_Rounded as AtIcon } from "#/components/icons/At";
 import { CheckThick_Stroke2_Corner0_Rounded as CheckIcon } from "#/components/icons/Check";
 import { SquareBehindSquare4_Stroke2_Corner0_Rounded as CopyIcon } from "#/components/icons/SquareBehindSquare4";
-import { InlineLinkText } from "#/components/Link";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
+import { HITSLOP_10 } from "#/lib/constants";
+import { cleanError } from "#/lib/strings/errors";
+import { createFullHandle, validateServiceHandle } from "#/lib/strings/handles";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import { useFetchDid, useUpdateHandleMutation } from "#/state/queries/handle";
+import { RQKEY as RQKEY_PROFILE } from "#/state/queries/profile";
+import { useServiceQuery } from "#/state/queries/service";
+import { useAgent, useSession } from "#/state/session";
+import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 import { CopyButton } from "./CopyButton";
 
 export function ChangeHandleDialog({

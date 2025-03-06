@@ -1,20 +1,26 @@
+import { AppBskyFeedDefs, type AppBskyFeedGetPostThread, type BskyAgent, type RichText } from "@atproto/api";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useQueryClient } from "@tanstack/react-query";
+import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
 import {
 	ActivityIndicator,
 	BackHandler,
 	Keyboard,
 	KeyboardAvoidingView,
-	LayoutChangeEvent,
+	type LayoutChangeEvent,
 	ScrollView,
-	StyleProp,
+	type StyleProp,
 	StyleSheet,
 	View,
-	ViewStyle,
+	type ViewStyle,
 } from "react-native";
 // @ts-expect-error no type definition
 import ProgressCircle from "react-native-progress/Circle";
 import Animated, {
-	AnimatedRef,
+	type AnimatedRef,
 	Easing,
 	FadeIn,
 	FadeOut,
@@ -33,17 +39,20 @@ import Animated, {
 	ZoomOut,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ImagePickerAsset } from "expo-image-picker";
-import { AppBskyFeedDefs, AppBskyFeedGetPostThread, BskyAgent, RichText } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { useQueryClient } from "@tanstack/react-query";
 
+import { atoms as a, native, useTheme } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { useDialogControl } from "#/components/Dialog";
+import * as Prompt from "#/components/Prompt";
+import { Text as NewText } from "#/components/Typography";
+import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
+import { EmojiArc_Stroke2_Corner0_Rounded as EmojiSmile } from "#/components/icons/Emoji";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import * as apilib from "#/lib/api/index";
 import { EmbeddingDisabledError } from "#/lib/api/resolve";
 import { until } from "#/lib/async/until";
-import { MAX_GRAPHEME_LENGTH, SUPPORTED_MIME_TYPES, SupportedMimeTypes } from "#/lib/constants";
+import { MAX_GRAPHEME_LENGTH, SUPPORTED_MIME_TYPES, type SupportedMimeTypes } from "#/lib/constants";
 import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
 import { useEmail } from "#/lib/hooks/useEmail";
 import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
@@ -58,20 +67,20 @@ import { logger } from "#/logger";
 import { isAndroid, isIOS, isNative, isWeb } from "#/platform/detection";
 import { useDialogStateControlContext } from "#/state/dialogs";
 import { emitPostCreated } from "#/state/events";
-import { ComposerImage, pasteImage } from "#/state/gallery";
+import { type ComposerImage, pasteImage } from "#/state/gallery";
 import { useModalControls } from "#/state/modals";
 import { useRequireAltTextEnabled } from "#/state/preferences";
 import { toPostLanguages, useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences/languages";
 import { usePreferencesQuery } from "#/state/queries/preferences";
 import { useProfileQuery } from "#/state/queries/profile";
-import { Gif } from "#/state/queries/tenor";
+import type { Gif } from "#/state/queries/tenor";
 import { useAgent, useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
-import { ComposerOpts } from "#/state/shell/composer";
-import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
+import type { ComposerOpts } from "#/state/shell/composer";
 import { ComposerReplyTo } from "#/view/com/composer/ComposerReplyTo";
 import { ExternalEmbedGif, ExternalEmbedLink } from "#/view/com/composer/ExternalEmbed";
 import { GifAltTextDialog } from "#/view/com/composer/GifAltText";
+import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import { LabelsBtn } from "#/view/com/composer/labels/LabelsBtn";
 import { Gallery } from "#/view/com/composer/photos/Gallery";
 import { OpenCameraBtn } from "#/view/com/composer/photos/OpenCameraBtn";
@@ -81,39 +90,30 @@ import { SelectLangBtn } from "#/view/com/composer/select-language/SelectLangBtn
 import { SuggestedLanguage } from "#/view/com/composer/select-language/SuggestedLanguage";
 // TODO: Prevent naming components that coincide with RN primitives
 // due to linting false positives
-import { TextInput, TextInputRef } from "#/view/com/composer/text-input/TextInput";
+import { TextInput, type TextInputRef } from "#/view/com/composer/text-input/TextInput";
 import { ThreadgateBtn } from "#/view/com/composer/threadgate/ThreadgateBtn";
 import { SelectVideoBtn } from "#/view/com/composer/videos/SelectVideoBtn";
 import { SubtitleDialogBtn } from "#/view/com/composer/videos/SubtitleDialog";
 import { VideoPreview } from "#/view/com/composer/videos/VideoPreview";
 import { VideoTranscodeProgress } from "#/view/com/composer/videos/VideoTranscodeProgress";
-import { LazyQuoteEmbed, QuoteX } from "#/view/com/util/post-embeds/QuoteEmbed";
-import { Text } from "#/view/com/util/text/Text";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, native, useTheme } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { useDialogControl } from "#/components/Dialog";
-import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { EmojiArc_Stroke2_Corner0_Rounded as EmojiSmile } from "#/components/icons/Emoji";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import * as Prompt from "#/components/Prompt";
-import { Text as NewText } from "#/components/Typography";
+import { LazyQuoteEmbed, QuoteX } from "#/view/com/util/post-embeds/QuoteEmbed";
+import { Text } from "#/view/com/util/text/Text";
 import { BottomSheetPortalProvider } from "../../../../modules/bottom-sheet";
 import {
-	ComposerAction,
+	type ComposerAction,
+	type EmbedDraft,
+	MAX_IMAGES,
+	type PostAction,
+	type PostDraft,
+	type ThreadDraft,
 	composerReducer,
 	createComposerState,
-	EmbedDraft,
-	MAX_IMAGES,
-	PostAction,
-	PostDraft,
-	ThreadDraft,
 } from "./state/composer";
-import { NO_VIDEO, NoVideoState, processVideo, VideoState } from "./state/video";
-import { getVideoMetadata } from "./videos/pickVideo";
+import { NO_VIDEO, type NoVideoState, type VideoState, processVideo } from "./state/video";
 import { clearThumbnailCache } from "./videos/VideoTranscodeBackdrop";
+import { getVideoMetadata } from "./videos/pickVideo";
 
 type CancelRef = {
 	onPressCancel: () => void;
@@ -389,7 +389,7 @@ export const ComposePost = ({
 		} finally {
 			if (postUri) {
 				let index = 0;
-				for (let post of thread.posts) {
+				for (const post of thread.posts) {
 					logEvent("post:create", {
 						imageCount: post.embed.media?.type === "images" ? post.embed.media.images.length : 0,
 						isReply: index > 0 || !!replyTo,
@@ -462,7 +462,7 @@ export const ComposePost = ({
 		if (publishOnUpload) {
 			let erroredVideos = 0;
 			let uploadingVideos = 0;
-			for (let post of thread.posts) {
+			for (const post of thread.posts) {
 				if (post.embed.media?.type === "video") {
 					const video = post.embed.media.video;
 					if (video.status === "error") {
@@ -643,7 +643,7 @@ export const ComposePost = ({
 	);
 };
 
-let ComposerPost = React.memo(function ComposerPost({
+const ComposerPost = React.memo(function ComposerPost({
 	post,
 	dispatch,
 	textInput,
@@ -1208,7 +1208,7 @@ function useScrollTracker({
 }) {
 	const t = useTheme();
 	const contentOffset = useSharedValue(0);
-	const scrollViewHeight = useSharedValue(Infinity);
+	const scrollViewHeight = useSharedValue(Number.POSITIVE_INFINITY);
 	const contentHeight = useSharedValue(0);
 
 	const hasScrolledToTop = useDerivedValue(() => withTiming(contentOffset.get() === 0 ? 1 : 0));

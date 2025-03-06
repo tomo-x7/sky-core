@@ -2,8 +2,8 @@ import React from "react";
 import { View } from "react-native";
 import type ViewShot from "react-native-view-shot";
 
-import { useAvatar } from "#/screens/Onboarding/StepProfile/index";
 import { atoms as a } from "#/alf";
+import { useAvatar } from "#/screens/Onboarding/StepProfile/index";
 
 const LazyViewShot = React.lazy(
 	// @ts-expect-error dynamic import

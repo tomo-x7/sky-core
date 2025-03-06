@@ -1,15 +1,8 @@
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { CommonNavigatorParams } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
-import { isNative } from "#/platform/detection";
-import { useAutoplayDisabled, useSetAutoplayDisabled } from "#/state/preferences";
-import { useInAppBrowser, useSetInAppBrowser } from "#/state/preferences/in-app-browser";
-import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences/trending";
-import { useTrendingConfig } from "#/state/trending-config";
-import * as SettingsList from "#/screens/Settings/components/SettingsList";
+import * as Layout from "#/components/Layout";
 import * as Toggle from "#/components/forms/Toggle";
 import { Bubbles_Stroke2_Corner2_Rounded as BubblesIcon } from "#/components/icons/Bubble";
 import { Hashtag_Stroke2_Corner0_Rounded as HashtagIcon } from "#/components/icons/Hashtag";
@@ -18,7 +11,14 @@ import { Macintosh_Stroke2_Corner2_Rounded as MacintoshIcon } from "#/components
 import { Play_Stroke2_Corner2_Rounded as PlayIcon } from "#/components/icons/Play";
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
 import { Window_Stroke2_Corner2_Rounded as WindowIcon } from "#/components/icons/Window";
-import * as Layout from "#/components/Layout";
+import type { CommonNavigatorParams } from "#/lib/routes/types";
+import { logEvent } from "#/lib/statsig/statsig";
+import { isNative } from "#/platform/detection";
+import * as SettingsList from "#/screens/Settings/components/SettingsList";
+import { useAutoplayDisabled, useSetAutoplayDisabled } from "#/state/preferences";
+import { useInAppBrowser, useSetInAppBrowser } from "#/state/preferences/in-app-browser";
+import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences/trending";
+import { useTrendingConfig } from "#/state/trending-config";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ContentAndMediaSettings">;
 export function ContentAndMediaSettingsScreen({}: Props) {

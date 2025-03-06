@@ -1,4 +1,4 @@
-import {
+import type {
 	BackgroundNotificationHandlerPreferences,
 	ExpoBackgroundNotificationHandlerModule,
 } from "./ExpoBackgroundNotificationHandler.types";

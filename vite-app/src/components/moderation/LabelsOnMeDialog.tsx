@@ -1,10 +1,15 @@
-import React from "react";
-import { View } from "react-native";
-import { ComAtprotoLabelDefs, ComAtprotoModerationDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { type ComAtprotoLabelDefs, ComAtprotoModerationDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
+import React from "react";
+import { View } from "react-native";
 
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import { InlineLinkText } from "#/components/Link";
+import { Text } from "#/components/Typography";
 import { useGetTimeAgo } from "#/lib/hooks/useTimeAgo";
 import { useLabelSubject } from "#/lib/moderation";
 import { useLabelInfo } from "#/lib/moderation/useLabelInfo";
@@ -14,11 +19,6 @@ import { logger } from "#/logger";
 import { isAndroid } from "#/platform/detection";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import { InlineLinkText } from "#/components/Link";
-import { Text } from "#/components/Typography";
 import { Divider } from "../Divider";
 import { Loader } from "../Loader";
 

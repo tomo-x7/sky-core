@@ -1,44 +1,44 @@
-import React, { useMemo, useState } from "react";
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import {
-	AppBskyFeedDefs,
+	type AppBskyFeedDefs,
 	AppBskyFeedPost,
 	AtUri,
-	moderatePost,
-	ModerationDecision,
+	type ModerationDecision,
 	RichText as RichTextAPI,
+	moderatePost,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React, { useMemo, useState } from "react";
+import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
+import { atoms as a } from "#/alf";
+import { ProfileHoverCard } from "#/components/ProfileHoverCard";
+import { RichText } from "#/components/RichText";
+import { SubtleWebHover } from "#/components/SubtleWebHover";
 import { MAX_POST_LINES } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
 import { countLines } from "#/lib/strings/helpers";
 import { colors, s } from "#/lib/styles";
-import { POST_TOMBSTONE, Shadow, usePostShadow } from "#/state/cache/post-shadow";
+import { POST_TOMBSTONE, type Shadow, usePostShadow } from "#/state/cache/post-shadow";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { precacheProfile } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
-import { AviFollowButton } from "#/view/com/posts/AviFollowButton";
-import { atoms as a } from "#/alf";
-import { ProfileHoverCard } from "#/components/ProfileHoverCard";
-import { RichText } from "#/components/RichText";
-import { SubtleWebHover } from "#/components/SubtleWebHover";
 import * as bsky from "#/types/bsky";
+import { AviFollowButton } from "#/view/com/posts/AviFollowButton";
 import { ContentHider } from "../../../components/moderation/ContentHider";
 import { LabelsOnMyPost } from "../../../components/moderation/LabelsOnMe";
 import { PostAlerts } from "../../../components/moderation/PostAlerts";
 import { Link, TextLink } from "../util/Link";
-import { PostCtrls } from "../util/post-ctrls/PostCtrls";
-import { PostEmbeds, PostEmbedViewContext } from "../util/post-embeds";
 import { PostMeta } from "../util/PostMeta";
-import { Text } from "../util/text/Text";
 import { PreviewableUserAvatar } from "../util/UserAvatar";
 import { UserInfoText } from "../util/UserInfoText";
+import { PostCtrls } from "../util/post-ctrls/PostCtrls";
+import { PostEmbedViewContext, PostEmbeds } from "../util/post-embeds";
+import { Text } from "../util/text/Text";
 
 export function Post({
 	post,

@@ -1,32 +1,32 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ScrollView, TextInput, useWindowDimensions, View } from "react-native";
-import Animated, { LayoutAnimationConfig, LinearTransition, ZoomInEasyDown } from "react-native-reanimated";
-import { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ScrollView, TextInput, View, useWindowDimensions } from "react-native";
+import Animated, { LayoutAnimationConfig, LinearTransition, ZoomInEasyDown } from "react-native-reanimated";
 
+import { type ViewStyleProp, atoms as a, native, tokens, useBreakpoints, useTheme, web } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import * as ProfileCard from "#/components/ProfileCard";
+import { Text } from "#/components/Typography";
+import { useInteractionState } from "#/components/hooks/useInteractionState";
+import { MagnifyingGlass2_Stroke2_Corner0_Rounded as SearchIcon } from "#/components/icons/MagnifyingGlass2";
+import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/components/icons/Person";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
+import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorSearchPaginated } from "#/state/queries/actor-search";
 import { usePreferencesQuery } from "#/state/queries/preferences";
 import { useSuggestedFollowsByActorQuery } from "#/state/queries/suggested-follows";
 import { useSession } from "#/state/session";
-import { Follow10ProgressGuide } from "#/state/shell/progress-guide";
-import { ListMethods } from "#/view/com/util/List";
-import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
-import { atoms as a, native, tokens, useBreakpoints, useTheme, ViewStyleProp, web } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import { useInteractionState } from "#/components/hooks/useInteractionState";
-import { MagnifyingGlass2_Stroke2_Corner0_Rounded as SearchIcon } from "#/components/icons/MagnifyingGlass2";
-import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/components/icons/Person";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import * as ProfileCard from "#/components/ProfileCard";
-import { Text } from "#/components/Typography";
+import type { Follow10ProgressGuide } from "#/state/shell/progress-guide";
+import type { ListMethods } from "#/view/com/util/List";
 import { ListFooter } from "../Lists";
 import { ProgressGuideTask } from "./Task";
 
@@ -715,8 +715,8 @@ function boostInterests(boosts?: string[]) {
 	return (_a: string, _b: string) => {
 		const indexA = boosts?.indexOf(_a) ?? -1;
 		const indexB = boosts?.indexOf(_b) ?? -1;
-		const rankA = indexA === -1 ? Infinity : indexA;
-		const rankB = indexB === -1 ? Infinity : indexB;
+		const rankA = indexA === -1 ? Number.POSITIVE_INFINITY : indexA;
+		const rankB = indexB === -1 ? Number.POSITIVE_INFINITY : indexB;
 		return rankA - rankB;
 	};
 }

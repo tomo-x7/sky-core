@@ -1,21 +1,21 @@
+import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
+import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useRef } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import { View } from "react-native";
-import { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
-import { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import { isWeb } from "#/platform/detection";
-import { useSession } from "#/state/session";
-import { ListMethods } from "#/view/com/util/List";
-import { WizardAction, WizardState } from "#/screens/StarterPack/Wizard/State";
 import { atoms as a, native, useTheme, web } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { WizardFeedCard, WizardProfileCard } from "#/components/StarterPack/Wizard/WizardListCard";
 import { Text } from "#/components/Typography";
+import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
+import { isWeb } from "#/platform/detection";
+import type { WizardAction, WizardState } from "#/screens/StarterPack/Wizard/State";
+import { useSession } from "#/state/session";
+import type { ListMethods } from "#/view/com/util/List";
 
 function keyExtractor(item: AppBskyActorDefs.ProfileViewBasic | GeneratorView, index: number) {
 	return `${item.did}-${index}`;

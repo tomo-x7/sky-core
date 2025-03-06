@@ -1,14 +1,35 @@
+import { Trans, msg, plural } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useNavigationState } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
-import { msg, plural, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { useNavigationState } from "@react-navigation/native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import { Text } from "#/components/Typography";
+import {
+	Bell_Stroke2_Corner0_Rounded as Bell,
+	Bell_Filled_Corner0_Rounded as BellFilled,
+} from "#/components/icons/Bell";
+import {
+	HomeOpen_Stoke2_Corner0_Rounded as Home,
+	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
+} from "#/components/icons/HomeOpen";
+import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "#/components/icons/MagnifyingGlass";
+import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "#/components/icons/MagnifyingGlass2";
+import {
+	Message_Stroke2_Corner0_Rounded as Message,
+	Message_Stroke2_Corner0_Rounded_Filled as MessageFilled,
+} from "#/components/icons/Message";
+import {
+	UserCircle_Stroke2_Corner0_Rounded as UserCircle,
+	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
+} from "#/components/icons/UserCircle";
 import { useMinimalShellFooterTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { getCurrentRoute, isTab } from "#/lib/routes/helpers";
 import { makeProfileLink } from "#/lib/routes/links";
-import { CommonNavigatorParams } from "#/lib/routes/types";
+import type { CommonNavigatorParams } from "#/lib/routes/types";
 import { useGate } from "#/lib/statsig/statsig";
 import { useHomeBadge } from "#/state/home-badge";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
@@ -19,27 +40,6 @@ import { useCloseAllActiveElements } from "#/state/util";
 import { Link } from "#/view/com/util/Link";
 import { Logo } from "#/view/icons/Logo";
 import { Logotype } from "#/view/icons/Logotype";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import {
-	Bell_Filled_Corner0_Rounded as BellFilled,
-	Bell_Stroke2_Corner0_Rounded as Bell,
-} from "#/components/icons/Bell";
-import {
-	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
-	HomeOpen_Stoke2_Corner0_Rounded as Home,
-} from "#/components/icons/HomeOpen";
-import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "#/components/icons/MagnifyingGlass";
-import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "#/components/icons/MagnifyingGlass2";
-import {
-	Message_Stroke2_Corner0_Rounded as Message,
-	Message_Stroke2_Corner0_Rounded_Filled as MessageFilled,
-} from "#/components/icons/Message";
-import {
-	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
-	UserCircle_Stroke2_Corner0_Rounded as UserCircle,
-} from "#/components/icons/UserCircle";
-import { Text } from "#/components/Typography";
 import { styles } from "./BottomBarStyles";
 
 export function BottomBarWeb() {

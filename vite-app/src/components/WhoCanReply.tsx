@@ -1,17 +1,15 @@
-import React from "react";
-import { Keyboard, Platform, StyleProp, View, ViewStyle } from "react-native";
-import { AppBskyFeedDefs, AppBskyFeedPost, AppBskyGraphDefs, AtUri } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { Keyboard, Platform, type StyleProp, View, type ViewStyle } from "react-native";
 
-import { HITSLOP_10 } from "#/lib/constants";
-import { makeListLink, makeProfileLink } from "#/lib/routes/links";
-import { isNative } from "#/platform/detection";
-import { ThreadgateAllowUISetting, threadgateViewToAllowUISetting } from "#/state/queries/threadgate";
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { useDialogControl } from "#/components/Dialog";
+import { InlineLinkText } from "#/components/Link";
+import { Text } from "#/components/Typography";
 import {
 	PostInteractionSettingsDialog,
 	usePrefetchPostInteractionSettings,
@@ -19,8 +17,10 @@ import {
 import { CircleBanSign_Stroke2_Corner0_Rounded as CircleBanSign } from "#/components/icons/CircleBanSign";
 import { Earth_Stroke2_Corner0_Rounded as Earth } from "#/components/icons/Globe";
 import { Group3_Stroke2_Corner0_Rounded as Group } from "#/components/icons/Group";
-import { InlineLinkText } from "#/components/Link";
-import { Text } from "#/components/Typography";
+import { HITSLOP_10 } from "#/lib/constants";
+import { makeListLink, makeProfileLink } from "#/lib/routes/links";
+import { isNative } from "#/platform/detection";
+import { type ThreadgateAllowUISetting, threadgateViewToAllowUISetting } from "#/state/queries/threadgate";
 import * as bsky from "#/types/bsky";
 import { PencilLine_Stroke2_Corner0_Rounded as PencilLine } from "./icons/Pencil";
 

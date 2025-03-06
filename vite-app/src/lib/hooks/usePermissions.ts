@@ -1,6 +1,6 @@
-import { Linking } from "react-native";
 import { useCameraPermissions as useExpoCameraPermissions } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import { Linking } from "react-native";
 
 import { isWeb } from "#/platform/detection";
 import { Alert } from "#/view/com/util/Alert";

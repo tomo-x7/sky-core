@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from "react";
 import Graphemer from "graphemer";
+import { useCallback, useMemo } from "react";
 
 export const useGrapheme = () => {
 	const splitter = useMemo(() => new Graphemer(), []);

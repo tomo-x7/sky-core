@@ -1,33 +1,33 @@
-import { useMemo } from "react";
-import { View } from "react-native";
-import { Image } from "expo-image";
-import { LinearGradient } from "expo-linear-gradient";
 import {
-	AppBskyActorDefs,
+	type AppBskyActorDefs,
 	AppBskyEmbedVideo,
-	AppBskyFeedDefs,
+	type AppBskyFeedDefs,
 	AppBskyFeedPost,
-	ModerationDecision,
+	type ModerationDecision,
 } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
+import { useMemo } from "react";
+import { View } from "react-native";
 
-import { sanitizeHandle } from "#/lib/strings/handles";
-import { formatCount } from "#/view/com/util/numeric/format";
-import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 import { atoms as a, useTheme } from "#/alf";
 import { BLUE_HUE } from "#/alf/util/colorGeneration";
 import { select } from "#/alf/util/themeSelector";
+import { Link } from "#/components/Link";
+import { MediaInsetBorder } from "#/components/MediaInsetBorder";
+import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { EyeSlash_Stroke2_Corner0_Rounded as Eye } from "#/components/icons/EyeSlash";
 import { Heart2_Stroke2_Corner0_Rounded as Heart } from "#/components/icons/Heart2";
 import { Repost_Stroke2_Corner2_Rounded as Repost } from "#/components/icons/Repost";
-import { Link } from "#/components/Link";
-import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import * as Hider from "#/components/moderation/Hider";
-import { Text } from "#/components/Typography";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 import * as bsky from "#/types/bsky";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { formatCount } from "#/view/com/util/numeric/format";
 
 function getBlackColor(t: ReturnType<typeof useTheme>) {
 	return select(t.name, {

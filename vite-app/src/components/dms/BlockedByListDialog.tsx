@@ -1,16 +1,16 @@
-import React from "react";
-import { View } from "react-native";
-import { ModerationCause } from "@atproto/api";
+import type { ModerationCause } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { View } from "react-native";
 
-import { listUriToHref } from "#/lib/strings/url-helpers";
 import { atoms as a, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
-import { DialogControlProps } from "#/components/Dialog";
+import type { DialogControlProps } from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
 import * as Prompt from "#/components/Prompt";
 import { Text } from "#/components/Typography";
+import { listUriToHref } from "#/lib/strings/url-helpers";
 
 export function BlockedByListDialog({
 	control,

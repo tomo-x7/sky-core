@@ -1,9 +1,9 @@
-import React from "react";
 import EventEmitter from "eventemitter3";
+import React from "react";
 
 import { networkRetry } from "#/lib/async/retry";
 import { logger } from "#/logger";
-import { Device, device } from "#/storage";
+import { type Device, device } from "#/storage";
 
 const events = new EventEmitter();
 const EVENT = "geolocation-updated";

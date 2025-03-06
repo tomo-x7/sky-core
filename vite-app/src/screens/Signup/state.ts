@@ -1,9 +1,9 @@
-import React, { useCallback } from "react";
-import { LayoutAnimation } from "react-native";
-import { ComAtprotoServerCreateAccount, ComAtprotoServerDescribeServer } from "@atproto/api";
+import { ComAtprotoServerCreateAccount, type ComAtprotoServerDescribeServer } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
+import React, { useCallback } from "react";
+import { LayoutAnimation } from "react-native";
 
 import { DEFAULT_SERVICE } from "#/lib/constants";
 import { cleanError } from "#/lib/strings/errors";
@@ -18,9 +18,9 @@ export type ServiceDescription = ComAtprotoServerDescribeServer.OutputSchema;
 const DEFAULT_DATE = new Date(Date.now() - 60e3 * 60 * 24 * 365 * 20); // default to 20 years ago
 
 export enum SignupStep {
-	INFO,
-	HANDLE,
-	CAPTCHA,
+	INFO = 0,
+	HANDLE = 1,
+	CAPTCHA = 2,
 }
 
 type SubmitTask = {
@@ -96,7 +96,7 @@ export function is18(date: Date) {
 }
 
 export function reducer(s: SignupState, a: SignupAction): SignupState {
-	let next = { ...s };
+	const next = { ...s };
 
 	switch (a.type) {
 		case "prev": {
@@ -257,7 +257,7 @@ export function useSubmitSignup() {
 				 */
 				onboardingDispatch({ type: "start" });
 			} catch (e: any) {
-				let errMsg = e.toString();
+				const errMsg = e.toString();
 				if (e instanceof ComAtprotoServerCreateAccount.InvalidInviteCodeError) {
 					dispatch({
 						type: "setError",

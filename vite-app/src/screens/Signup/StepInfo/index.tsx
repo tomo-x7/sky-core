@@ -1,26 +1,26 @@
-import React, { useRef } from "react";
-import { TextInput, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
+import React, { useRef } from "react";
+import { type TextInput, View } from "react-native";
 import type tldts from "tldts";
 
-import { logEvent } from "#/lib/statsig/statsig";
-import { isEmailMaybeInvalid } from "#/lib/strings/email";
-import { logger } from "#/logger";
-import { ScreenTransition } from "#/screens/Login/ScreenTransition";
-import { is13, is18, useSignupContext } from "#/screens/Signup/state";
-import { Policies } from "#/screens/Signup/StepInfo/Policies";
 import { atoms as a, native } from "#/alf";
+import { Loader } from "#/components/Loader";
 import * as DateField from "#/components/forms/DateField";
-import { DateFieldRef } from "#/components/forms/DateField/types";
+import type { DateFieldRef } from "#/components/forms/DateField/types";
 import { FormError } from "#/components/forms/FormError";
 import { HostingProvider } from "#/components/forms/HostingProvider";
 import * as TextField from "#/components/forms/TextField";
 import { Envelope_Stroke2_Corner0_Rounded as Envelope } from "#/components/icons/Envelope";
 import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
-import { Loader } from "#/components/Loader";
+import { logEvent } from "#/lib/statsig/statsig";
+import { isEmailMaybeInvalid } from "#/lib/strings/email";
+import { logger } from "#/logger";
+import { ScreenTransition } from "#/screens/Login/ScreenTransition";
+import { Policies } from "#/screens/Signup/StepInfo/Policies";
+import { is13, is18, useSignupContext } from "#/screens/Signup/state";
 import { BackNextButtons } from "../BackNextButtons";
 
 function sanitizeDate(date: Date): Date {

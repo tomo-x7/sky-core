@@ -1,6 +1,6 @@
-import { AppBskyActorDefs, nuxSchema } from "@atproto/api";
+import { type AppBskyActorDefs, nuxSchema } from "@atproto/api";
 
-import { AppNux, Nux, nuxNames, NuxSchemas } from "#/state/queries/nuxs/definitions";
+import { type AppNux, type Nux, NuxSchemas, nuxNames } from "#/state/queries/nuxs/definitions";
 
 export function parseAppNux(nux: AppBskyActorDefs.Nux): AppNux | undefined {
 	if (!nuxNames.has(nux.id as Nux)) return;

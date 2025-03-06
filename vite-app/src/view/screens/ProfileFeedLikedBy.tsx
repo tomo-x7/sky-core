@@ -1,15 +1,15 @@
-import React from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
+import React from "react";
 
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import * as Layout from "#/components/Layout";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { makeRecordUri } from "#/lib/strings/url-helpers";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { PostLikedBy as PostLikedByComponent } from "#/view/com/post-thread/PostLikedBy";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { CenteredView } from "#/view/com/util/Views";
-import * as Layout from "#/components/Layout";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileFeedLikedBy">;
 export const ProfileFeedLikedByScreen = ({ route }: Props) => {

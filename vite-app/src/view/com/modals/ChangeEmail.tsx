@@ -1,7 +1,7 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ActivityIndicator, SafeAreaView, StyleSheet, View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -10,16 +10,16 @@ import { colors, s } from "#/lib/styles";
 import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
+import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
 import { Text } from "../util/text/Text";
-import * as Toast from "../util/Toast";
 import { ScrollView, TextInput } from "./util";
 
 enum Stages {
-	InputEmail,
-	ConfirmCode,
-	Done,
+	InputEmail = 0,
+	ConfirmCode = 1,
+	Done = 2,
 }
 
 export const snapPoints = ["90%"];

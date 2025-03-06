@@ -1,8 +1,8 @@
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
-import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
 import { Text } from "#/components/Typography";
+import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
 
 export function FormError({ error }: { error?: string }) {
 	const t = useTheme();

@@ -1,13 +1,11 @@
+import { type AppBskyActorDefs, type AppBskyFeedPost, AtUri } from "@atproto/api";
 import { memo, useEffect, useMemo, useState } from "react";
 import { View } from "react-native";
-import { AppBskyActorDefs, AppBskyFeedPost, AtUri } from "@atproto/api";
 
-import { EMBED_SCRIPT } from "#/lib/constants";
-import { niceDate } from "#/lib/strings/time";
-import { toShareUrl } from "#/lib/strings/url-helpers";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
+import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import * as ToggleButton from "#/components/forms/ToggleButton";
 import { Check_Stroke2_Corner0_Rounded as CheckIcon } from "#/components/icons/Check";
@@ -16,7 +14,9 @@ import {
 	ChevronRight_Stroke2_Corner0_Rounded as ChevronRightIcon,
 } from "#/components/icons/Chevron";
 import { CodeBrackets_Stroke2_Corner0_Rounded as CodeBracketsIcon } from "#/components/icons/CodeBrackets";
-import { Text } from "#/components/Typography";
+import { EMBED_SCRIPT } from "#/lib/constants";
+import { niceDate } from "#/lib/strings/time";
+import { toShareUrl } from "#/lib/strings/url-helpers";
 
 export type ColorModeValues = "system" | "light" | "dark";
 
@@ -183,9 +183,9 @@ function escapeHtml(string: string) {
 	if (!match) {
 		return str;
 	}
-	let esc:string|undefined;
+	let esc: string | undefined;
 	let html = "";
-	let index:number;
+	let index: number;
 	let lastIndex = 0;
 	for (index = match.index; index < str.length; index++) {
 		switch (str.charCodeAt(index)) {

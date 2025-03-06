@@ -1,15 +1,15 @@
-import { View } from "react-native";
-import { AppBskyUnspeccedDefs } from "@atproto/api";
+import type { AppBskyUnspeccedDefs } from "@atproto/api";
 import { Trans } from "@lingui/macro";
+import { View } from "react-native";
 
+import { atoms as a, useGutters, useTheme } from "#/alf";
+import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
+import { Text } from "#/components/Typography";
+import { Hashtag_Stroke2_Corner0_Rounded } from "#/components/icons/Hashtag";
 import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import { DEFAULT_LIMIT as RECOMMENDATIONS_COUNT, useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
 import { useTrendingConfig } from "#/state/trending-config";
-import { atoms as a, useGutters, useTheme } from "#/alf";
-import { Hashtag_Stroke2_Corner0_Rounded } from "#/components/icons/Hashtag";
-import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
-import { Text } from "#/components/Typography";
 
 export function ExploreRecommendations() {
 	const { enabled } = useTrendingConfig();

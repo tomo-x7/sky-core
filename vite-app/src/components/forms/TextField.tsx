@@ -1,12 +1,20 @@
 import React from "react";
-import { AccessibilityProps, StyleSheet, TextInput, TextInputProps, TextStyle, View, ViewStyle } from "react-native";
+import {
+	type AccessibilityProps,
+	StyleSheet,
+	TextInput,
+	type TextInputProps,
+	type TextStyle,
+	View,
+	type ViewStyle,
+} from "react-native";
 
+import { type TextStyleProp, atoms as a, android, applyFonts, ios, useAlf, useTheme, web } from "#/alf";
+import { Text } from "#/components/Typography";
+import { useInteractionState } from "#/components/hooks/useInteractionState";
+import type { Props as SVGIconProps } from "#/components/icons/common";
 import { HITSLOP_20 } from "#/lib/constants";
 import { mergeRefs } from "#/lib/merge-refs";
-import { android, applyFonts, atoms as a, ios, TextStyleProp, useAlf, useTheme, web } from "#/alf";
-import { useInteractionState } from "#/components/hooks/useInteractionState";
-import { Props as SVGIconProps } from "#/components/icons/common";
-import { Text } from "#/components/Typography";
 
 const Context = React.createContext<{
 	inputRef: React.RefObject<TextInput> | null;

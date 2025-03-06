@@ -1,20 +1,20 @@
 import React from "react";
 import { View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import * as Dialog from "#/components/Dialog";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
+import { DateField } from "#/components/forms/DateField";
 import { cleanError } from "#/lib/strings/errors";
 import { getDateAgo } from "#/lib/strings/time";
 import { isIOS, isWeb } from "#/platform/detection";
 import {
+	type UsePreferencesQueryResponse,
 	usePreferencesQuery,
-	UsePreferencesQueryResponse,
 	usePreferencesSetBirthDateMutation,
 } from "#/state/queries/preferences";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
-import { atoms as a, useTheme } from "#/alf";
-import * as Dialog from "#/components/Dialog";
-import { DateField } from "#/components/forms/DateField";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
 import { Button, ButtonIcon, ButtonText } from "../Button";
 
 export function BirthDateSettingsDialog({

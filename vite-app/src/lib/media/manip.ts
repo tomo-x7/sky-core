@@ -1,28 +1,28 @@
-import { Image as RNImage, Share as RNShare } from "react-native";
-import { Image } from "react-native-image-crop-picker";
-import uuid from "react-native-uuid";
+import { Buffer } from "buffer";
 import {
+	EncodingType,
+	StorageAccessFramework,
 	cacheDirectory,
 	copyAsync,
 	deleteAsync,
-	EncodingType,
 	getInfoAsync,
 	makeDirectoryAsync,
-	StorageAccessFramework,
 	writeAsStringAsync,
 } from "expo-file-system";
-import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
+import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
-import { Buffer } from "buffer";
+import { Image as RNImage, Share as RNShare } from "react-native";
+import type { Image } from "react-native-image-crop-picker";
+import uuid from "react-native-uuid";
 import RNFetchBlob from "rn-fetch-blob";
 
 import { POST_IMG_MAX } from "#/lib/constants";
 import { logger } from "#/logger";
 import { isAndroid, isIOS } from "#/platform/detection";
-import { Dimensions } from "./types";
+import type { Dimensions } from "./types";
 
-export async function compressIfNeeded(img: Image, maxSize: number = 1000000): Promise<Image> {
+export async function compressIfNeeded(img: Image, maxSize = 1000000): Promise<Image> {
 	const origUri = `file://${img.path}`;
 	if (img.size < maxSize) {
 		return img;

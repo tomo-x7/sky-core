@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React, { type ComponentProps } from "react";
 import { ScrollView } from "react-native";
 
 import { useDraggableScroll } from "#/lib/hooks/useDraggableScrollView";

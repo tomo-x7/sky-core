@@ -1,29 +1,29 @@
-import { createContext, useCallback, useContext } from "react";
-import { GestureResponderEvent, Keyboard, View } from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import { createContext, useCallback, useContext } from "react";
+import { type GestureResponderEvent, Keyboard, View } from "react-native";
 
-import { HITSLOP_30 } from "#/lib/constants";
-import { NavigationProp } from "#/lib/routes/types";
-import { isIOS } from "#/platform/detection";
-import { useSetDrawerOpen } from "#/state/shell";
 import {
+	type TextStyleProp,
 	atoms as a,
 	platform,
-	TextStyleProp,
 	useBreakpoints,
 	useGutters,
 	useLayoutBreakpoints,
 	useTheme,
 	web,
 } from "#/alf";
-import { Button, ButtonIcon, ButtonProps } from "#/components/Button";
-import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeft } from "#/components/icons/Arrow";
-import { Menu_Stroke2_Corner0_Rounded as Menu } from "#/components/icons/Menu";
+import { Button, ButtonIcon, type ButtonProps } from "#/components/Button";
 import { BUTTON_VISUAL_ALIGNMENT_OFFSET, HEADER_SLOT_SIZE, SCROLLBAR_OFFSET } from "#/components/Layout/const";
 import { ScrollbarOffsetContext } from "#/components/Layout/context";
 import { Text } from "#/components/Typography";
+import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeft } from "#/components/icons/Arrow";
+import { Menu_Stroke2_Corner0_Rounded as Menu } from "#/components/icons/Menu";
+import { HITSLOP_30 } from "#/lib/constants";
+import type { NavigationProp } from "#/lib/routes/types";
+import { isIOS } from "#/platform/detection";
+import { useSetDrawerOpen } from "#/state/shell";
 
 export function Outer({
 	children,

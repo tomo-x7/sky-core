@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, TextProps } from "react-native";
-import Svg, { Defs, LinearGradient, Path, PathProps, Stop, SvgProps } from "react-native-svg";
 import { Image } from "expo-image";
+import React from "react";
+import { StyleSheet, type TextProps } from "react-native";
+import Svg, { Defs, LinearGradient, Path, type PathProps, Stop, type SvgProps } from "react-native-svg";
 
 import { colors } from "#/lib/styles";
 import { useKawaiiMode } from "#/state/preferences/kawaii";
@@ -19,7 +19,7 @@ export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
 	const styles = StyleSheet.flatten(props.style);
 	const _fill = gradient ? "url(#sky)" : fill || styles?.color || colors.blue3;
 	// @ts-ignore it's fiiiiine
-	const size = parseInt(rest.width || 32);
+	const size = Number.parseInt(rest.width || 32);
 
 	const isKawaii = useKawaiiMode();
 

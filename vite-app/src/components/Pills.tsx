@@ -1,17 +1,17 @@
+import { BSKY_LABELER_DID, type ModerationCause } from "@atproto/api";
+import { Trans } from "@lingui/macro";
 import React from "react";
 import { View } from "react-native";
-import { BSKY_LABELER_DID, ModerationCause } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 
-import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
-import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme, ViewStyleProp } from "#/alf";
+import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
+import { Text } from "#/components/Typography";
 import {
 	ModerationDetailsDialog,
 	useModerationDetailsDialogControl,
 } from "#/components/moderation/ModerationDetailsDialog";
-import { Text } from "#/components/Typography";
+import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
 
 export type AppModerationCause =
 	| ModerationCause

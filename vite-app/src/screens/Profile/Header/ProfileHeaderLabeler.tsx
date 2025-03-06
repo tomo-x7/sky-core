@@ -1,23 +1,31 @@
+import {
+	type AppBskyActorDefs,
+	type AppBskyLabelerDefs,
+	type ModerationOpts,
+	type RichText as RichTextAPI,
+	moderateProfile,
+} from "@atproto/api";
+import { Plural, Trans, msg, plural } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React, { memo, useMemo } from "react";
 import { View } from "react-native";
+import { atoms as a, tokens, useTheme } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import { type DialogOuterProps, useDialogControl } from "#/components/Dialog";
+import { Link } from "#/components/Link";
+import * as Prompt from "#/components/Prompt";
+import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
 import {
-	AppBskyActorDefs,
-	AppBskyLabelerDefs,
-	moderateProfile,
-	ModerationOpts,
-	RichText as RichTextAPI,
-} from "@atproto/api";
-import { msg, Plural, plural, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { MAX_LABELERS } from "#/lib/constants";
+	Heart2_Stroke2_Corner0_Rounded as Heart,
+	Heart2_Filled_Stroke2_Corner0_Rounded as HeartFilled,
+} from "#/components/icons/Heart2";
 import { useHaptics } from "#/lib/haptics";
 import { isAppLabeler } from "#/lib/moderation";
 import { logger } from "#/logger";
 import { isIOS, isWeb } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { Shadow } from "#/state/cache/types";
+import type { Shadow } from "#/state/cache/types";
 import { useModalControls } from "#/state/modals";
 import { useLabelerSubscriptionMutation } from "#/state/queries/labeler";
 import { useLikeMutation, useUnlikeMutation } from "#/state/queries/like";
@@ -25,17 +33,6 @@ import { usePreferencesQuery } from "#/state/queries/preferences";
 import { useRequireAuth, useSession } from "#/state/session";
 import { ProfileMenu } from "#/view/com/profile/ProfileMenu";
 import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, tokens, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import { DialogOuterProps, useDialogControl } from "#/components/Dialog";
-import {
-	Heart2_Filled_Stroke2_Corner0_Rounded as HeartFilled,
-	Heart2_Stroke2_Corner0_Rounded as Heart,
-} from "#/components/icons/Heart2";
-import { Link } from "#/components/Link";
-import * as Prompt from "#/components/Prompt";
-import { RichText } from "#/components/RichText";
-import { Text } from "#/components/Typography";
 import { ProfileHeaderDisplayName } from "./DisplayName";
 import { EditProfileDialog } from "./EditProfileDialog";
 import { ProfileHeaderHandle } from "./Handle";

@@ -1,8 +1,13 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { InlineLinkText } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
 import { logger } from "#/logger";
 import {
@@ -12,11 +17,6 @@ import {
 } from "#/state/queries/preferences";
 import { useSetSelectedFeed } from "#/state/shell/selected-feed";
 import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { InlineLinkText } from "#/components/Link";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
 
 export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 	const t = useTheme();

@@ -1,8 +1,7 @@
 import { View } from "react-native";
 
-import * as Toast from "#/view/com/util/Toast";
-import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { atoms as a, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import { Alien_Stroke2_Corner0_Rounded as AlienIcon } from "#/components/icons/Alien";
 import { BirthdayCake_Stroke2_Corner2_Rounded as BirthdayCakeIcon } from "#/components/icons/BirthdayCake";
 import { BubbleInfo_Stroke2_Corner2_Rounded as BubbleInfoIcon } from "#/components/icons/BubbleInfo";
@@ -16,7 +15,8 @@ import { Pizza_Stroke2_Corner0_Rounded as PizzaIcon } from "#/components/icons/P
 import { RaisingHand4Finger_Stroke2_Corner2_Rounded as HandIcon } from "#/components/icons/RaisingHand";
 import { Verified_Stroke2_Corner2_Rounded as VerifiedIcon } from "#/components/icons/Verified";
 import { Window_Stroke2_Corner2_Rounded as WindowIcon } from "#/components/icons/Window";
-import { Text } from "#/components/Typography";
+import * as SettingsList from "#/screens/Settings/components/SettingsList";
+import * as Toast from "#/view/com/util/Toast";
 
 export function Settings() {
 	const t = useTheme();

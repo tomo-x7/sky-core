@@ -1,16 +1,16 @@
 import React from "react";
 import { View } from "react-native";
 
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import { Text } from "#/components/Typography";
+import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
 import { isNative } from "#/platform/detection";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import { useCloseAllActiveElements } from "#/state/util";
 import { Logo } from "#/view/icons/Logo";
 import { Logotype } from "#/view/icons/Logotype";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
-import { Text } from "#/components/Typography";
 
 export function SigninDialog() {
 	const { signinDialogControl: control } = useGlobalDialogsControlContext();

@@ -1,3 +1,6 @@
+import type { ChatBskyConvoDefs } from "@atproto/api";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { Keyboard } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -8,15 +11,12 @@ import Animated, {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
-import { ChatBskyConvoDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a } from "#/alf";
+import { useMenuControl } from "#/components/Menu";
+import { MessageMenu } from "#/components/dms/MessageMenu";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useHaptics } from "#/lib/haptics";
-import { atoms as a } from "#/alf";
-import { MessageMenu } from "#/components/dms/MessageMenu";
-import { useMenuControl } from "#/components/Menu";
 
 export function ActionsWrapper({
 	message,

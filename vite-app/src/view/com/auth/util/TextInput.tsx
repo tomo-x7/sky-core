@@ -1,10 +1,10 @@
-import { ComponentProps } from "react";
-import { StyleSheet, TextInput as RNTextInput, View } from "react-native";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import type { ComponentProps } from "react";
+import { TextInput as RNTextInput, StyleSheet, View } from "react-native";
 
-import { usePalette } from "#/lib/hooks/usePalette";
 import { useTheme } from "#/lib/ThemeContext";
+import { usePalette } from "#/lib/hooks/usePalette";
 
 interface Props extends Omit<ComponentProps<typeof RNTextInput>, "onChange"> {
 	testID?: string;

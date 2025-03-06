@@ -1,7 +1,12 @@
-import { AppBskyFeedDefs, AppBskyFeedGetFeed as GetCustomFeed, BskyAgent, jsonStringToLex } from "@atproto/api";
+import {
+	type AppBskyFeedDefs,
+	BskyAgent,
+	type AppBskyFeedGetFeed as GetCustomFeed,
+	jsonStringToLex,
+} from "@atproto/api";
 
 import { getAppLanguageAsContentLanguage, getContentLanguages } from "#/state/preferences/languages";
-import { FeedAPI, FeedAPIResponse } from "./types";
+import type { FeedAPI, FeedAPIResponse } from "./types";
 import { createBskyTopicsHeader, isBlueskyOwnedFeed } from "./utils";
 
 export class CustomFeedAPI implements FeedAPI {
@@ -96,7 +101,7 @@ async function loggedOutFetch({
 	limit: number;
 	cursor?: string;
 }) {
-	let contentLangs = getAppLanguageAsContentLanguage();
+	const contentLangs = getAppLanguageAsContentLanguage();
 
 	/**
 	 * Copied from our root `Agent` class

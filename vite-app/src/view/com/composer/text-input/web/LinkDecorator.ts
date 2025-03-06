@@ -16,7 +16,7 @@
 
 import { URL_REGEX } from "@atproto/api";
 import { Mark } from "@tiptap/core";
-import { Node as ProsemirrorNode } from "@tiptap/pm/model";
+import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
 import { Plugin, PluginKey } from "@tiptap/pm/state";
 import { Decoration, DecorationSet } from "@tiptap/pm/view";
 
@@ -90,7 +90,7 @@ function iterateUris(str: string, cb: (from: number, to: number) => void) {
 			}
 			uri = `https://${uri}`;
 		}
-		let from = str.indexOf(match[2], match.index);
+		const from = str.indexOf(match[2], match.index);
 		let to = from + match[2].length;
 		// strip ending puncuation
 		if (/[.,;!?]$/.test(uri)) {

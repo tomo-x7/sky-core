@@ -1,4 +1,4 @@
-import * as bsky from "#/types/bsky";
+import type * as bsky from "#/types/bsky";
 
 export function canBeMessaged(profile: bsky.profile.AnyProfileView) {
 	switch (profile.associated?.chat?.allowIncoming) {

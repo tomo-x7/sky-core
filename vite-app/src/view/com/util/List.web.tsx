@@ -1,12 +1,12 @@
 import React, { isValidElement, memo, startTransition, useRef } from "react";
-import { FlatListProps, StyleSheet, View, ViewProps } from "react-native";
-import { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
+import { type FlatListProps, StyleSheet, View, type ViewProps } from "react-native";
+import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
+import * as Layout from "#/components/Layout";
+import { useScrollHandlers } from "#/lib/ScrollContext";
 import { batchedUpdates } from "#/lib/batchedUpdates";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { useScrollHandlers } from "#/lib/ScrollContext";
 import { addStyle } from "#/lib/styles";
-import * as Layout from "#/components/Layout";
 
 export type ListMethods = any; // TODO: Better types.
 export type ListProps<ItemT> = Omit<
@@ -393,7 +393,7 @@ function useResizeObserver(ref: React.RefObject<Element>, onResize: undefined | 
 		}
 		const resizeObserver = new ResizeObserver((entries) => {
 			batchedUpdates(() => {
-				for (let entry of entries) {
+				for (const entry of entries) {
 					const rect = entry.contentRect;
 					handleResize(rect.width, rect.height);
 				}

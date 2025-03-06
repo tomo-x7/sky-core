@@ -1,11 +1,11 @@
-import React from "react";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
 
-import { useModalControls } from "#/state/modals";
-import { useAgent, useSession } from "#/state/session";
 import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
+import { useModalControls } from "#/state/modals";
+import { useAgent, useSession } from "#/state/session";
 import { DisableEmail2FADialog } from "./DisableEmail2FADialog";
 import * as SettingsList from "./SettingsList";
 

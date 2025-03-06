@@ -24,7 +24,7 @@ const TRUSTED_REGEX = new RegExp(`^(http(s)?://(([\\w-]+\\.)?${BSKY_TRUSTED_HOST
 
 export function isValidDomain(str: string): boolean {
 	return !!TLDs.find((tld) => {
-		let i = str.lastIndexOf(tld);
+		const i = str.lastIndexOf(tld);
 		if (i === -1) {
 			return false;
 		}

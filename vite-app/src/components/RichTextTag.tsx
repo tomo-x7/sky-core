@@ -1,10 +1,16 @@
-import React from "react";
-import { StyleProp, Text as RNText, TextStyle } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
 
-import { NavigationProp } from "#/lib/routes/types";
+import { InlineLinkText, createStaticClick, createStaticClickIfUnmodified } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import * as Menu from "#/components/Menu";
+import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
+import { Mute_Stroke2_Corner0_Rounded as Mute } from "#/components/icons/Mute";
+import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
+import type { NavigationProp } from "#/lib/routes/types";
 import { isInvalidHandle } from "#/lib/strings/handles";
 import { isNative, isWeb } from "#/platform/detection";
 import {
@@ -12,12 +18,6 @@ import {
 	useRemoveMutedWordsMutation,
 	useUpsertMutedWordsMutation,
 } from "#/state/queries/preferences";
-import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
-import { Mute_Stroke2_Corner0_Rounded as Mute } from "#/components/icons/Mute";
-import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
-import { createStaticClick, createStaticClickIfUnmodified, InlineLinkText } from "#/components/Link";
-import { Loader } from "#/components/Loader";
-import * as Menu from "#/components/Menu";
 
 export function RichTextTag({
 	tag,

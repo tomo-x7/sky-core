@@ -1,20 +1,20 @@
-import React from "react";
-import { View } from "react-native";
-import { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
+import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import type React from "react";
+import { View } from "react-native";
 
-import { NavigationProp } from "#/lib/routes/types";
-import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { useSession } from "#/state/session";
-import { DropdownItem, NativeDropdown } from "#/view/com/util/forms/NativeDropdown";
-import * as Toast from "#/view/com/util/Toast";
 import { atoms as a, select, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { useFollowMethods } from "#/components/hooks/useFollowMethods";
 import { PlusSmall_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
+import type { NavigationProp } from "#/lib/routes/types";
+import { sanitizeDisplayName } from "#/lib/strings/display-names";
+import { useProfileShadow } from "#/state/cache/profile-shadow";
+import { useSession } from "#/state/session";
+import * as Toast from "#/view/com/util/Toast";
+import { type DropdownItem, NativeDropdown } from "#/view/com/util/forms/NativeDropdown";
 
 export function AviFollowButton({
 	author,

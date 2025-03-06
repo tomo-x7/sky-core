@@ -1,5 +1,5 @@
-import React from "react";
 import { RichText as RichTextAPI } from "@atproto/api";
+import React from "react";
 
 import { useAgent } from "#/state/session";
 

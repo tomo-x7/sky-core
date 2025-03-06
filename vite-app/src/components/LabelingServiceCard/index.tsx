@@ -1,18 +1,18 @@
-import React from "react";
-import { View } from "react-native";
-import { AppBskyLabelerDefs } from "@atproto/api";
-import { msg, Plural, Trans } from "@lingui/macro";
+import type { AppBskyLabelerDefs } from "@atproto/api";
+import { Plural, Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type React from "react";
+import { View } from "react-native";
 
+import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { Link as InternalLink, type LinkProps } from "#/components/Link";
+import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
+import { Flag_Stroke2_Corner0_Rounded as Flag } from "#/components/icons/Flag";
 import { getLabelingServiceTitle } from "#/lib/moderation";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { useLabelerInfoQuery } from "#/state/queries/labeler";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme, ViewStyleProp } from "#/alf";
-import { Flag_Stroke2_Corner0_Rounded as Flag } from "#/components/icons/Flag";
-import { Link as InternalLink, LinkProps } from "#/components/Link";
-import { RichText } from "#/components/RichText";
-import { Text } from "#/components/Typography";
 import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "../icons/Chevron";
 
 type LabelingServiceProps = {

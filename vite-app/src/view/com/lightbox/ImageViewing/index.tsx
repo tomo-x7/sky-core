@@ -8,17 +8,21 @@
 // Original code copied and simplified from the link below as the codebase is currently not maintained:
 // https://github.com/jobtoday/react-native-image-viewing
 
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Trans } from "@lingui/macro";
+import * as ScreenOrientation from "expo-screen-orientation";
+import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { LayoutAnimation, PixelRatio, Platform, StyleSheet, View } from "react-native";
 import { Gesture } from "react-native-gesture-handler";
 import PagerView from "react-native-pager-view";
 import Animated, {
-	AnimatedRef,
+	type AnimatedRef,
 	cancelAnimation,
 	interpolate,
 	measure,
 	runOnJS,
-	SharedValue,
+	type SharedValue,
 	useAnimatedReaction,
 	useAnimatedRef,
 	useAnimatedStyle,
@@ -26,25 +30,21 @@ import Animated, {
 	useSharedValue,
 	withDecay,
 	withSpring,
-	WithSpringConfig,
+	type WithSpringConfig,
 } from "react-native-reanimated";
-import { Edge, SafeAreaView, useSafeAreaFrame, useSafeAreaInsets } from "react-native-safe-area-context";
-import * as ScreenOrientation from "expo-screen-orientation";
-import { StatusBar } from "expo-status-bar";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans } from "@lingui/macro";
+import { type Edge, SafeAreaView, useSafeAreaFrame, useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Dimensions } from "#/lib/media/types";
-import { colors, s } from "#/lib/styles";
-import { isIOS } from "#/platform/detection";
-import { Lightbox } from "#/state/lightbox";
-import { Button } from "#/view/com/util/forms/Button";
-import { Text } from "#/view/com/util/text/Text";
-import { ScrollView } from "#/view/com/util/Views";
 import { ios, useTheme } from "#/alf";
 import { setNavigationBar } from "#/alf/util/navigationBar";
+import type { Dimensions } from "#/lib/media/types";
+import { colors, s } from "#/lib/styles";
+import { isIOS } from "#/platform/detection";
+import type { Lightbox } from "#/state/lightbox";
+import { ScrollView } from "#/view/com/util/Views";
+import { Button } from "#/view/com/util/forms/Button";
+import { Text } from "#/view/com/util/text/Text";
 import { PlatformInfo } from "../../../../../modules/expo-bluesky-swiss-army";
-import { ImageSource, Transform } from "./@types";
+import type { ImageSource, Transform } from "./@types";
 import ImageDefaultHeader from "./components/ImageDefaultHeader";
 import ImageItem from "./components/ImageItem/ImageItem";
 

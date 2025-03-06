@@ -1,9 +1,9 @@
-import { AppBskyFeedDefs, AppBskyFeedPost } from "@atproto/api";
+import { type AppBskyFeedDefs, AppBskyFeedPost } from "@atproto/api";
 import * as bcp47Match from "bcp-47-match";
 import lande from "lande";
 
 import { hasProp } from "#/lib/type-guards";
-import { AppLanguage, type Language, LANGUAGES_MAP_CODE2, LANGUAGES_MAP_CODE3 } from "./languages";
+import { AppLanguage, LANGUAGES_MAP_CODE2, LANGUAGES_MAP_CODE3, type Language } from "./languages";
 
 export function code2ToCode3(lang: string): string {
 	if (lang.length === 2) {
@@ -66,7 +66,7 @@ export function codeToLanguageName(lang2or3: string, appLang: string): string {
 
 export function getPostLanguage(post: AppBskyFeedDefs.PostView): string | undefined {
 	let candidates: string[] = [];
-	let postText: string = "";
+	let postText = "";
 	if (hasProp(post.record, "text") && typeof post.record.text === "string") {
 		postText = post.record.text;
 	}

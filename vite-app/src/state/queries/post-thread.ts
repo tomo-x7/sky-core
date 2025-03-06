@@ -1,18 +1,18 @@
 import {
-	AppBskyActorDefs,
-	AppBskyEmbedRecord,
+	type AppBskyActorDefs,
+	type AppBskyEmbedRecord,
 	AppBskyFeedDefs,
-	AppBskyFeedGetPostThread,
+	type AppBskyFeedGetPostThread,
 	AppBskyFeedPost,
 	AtUri,
+	type ModerationDecision,
+	type ModerationOpts,
 	moderatePost,
-	ModerationDecision,
-	ModerationOpts,
 } from "@atproto/api";
-import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
+import { type QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { findAllPostsInQueryData as findAllPostsInQuoteQueryData } from "#/state/queries/post-quotes";
-import { UsePreferencesQueryResponse } from "#/state/queries/preferences/types";
+import type { UsePreferencesQueryResponse } from "#/state/queries/preferences/types";
 import {
 	findAllPostsInQueryData as findAllPostsInSearchQueryData,
 	findAllProfilesInQueryData as findAllProfilesInSearchQueryData,
@@ -406,7 +406,7 @@ function annotateSelfThread(thread: ThreadNode) {
 
 function findPostInQueryData(queryClient: QueryClient, uri: string): ThreadNode | void {
 	let partial;
-	for (let item of findAllPostsInQueryData(queryClient, uri)) {
+	for (const item of findAllPostsInQueryData(queryClient, uri)) {
 		if (item.type === "post") {
 			// Currently, the backend doesn't send full post info in some cases
 			// (for example, for quoted posts). We use missing `likeCount`
@@ -448,20 +448,20 @@ export function* findAllPostsInQueryData(queryClient: QueryClient, uri: string):
 			}
 		}
 	}
-	for (let post of findAllPostsInNotifsQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInNotifsQueryData(queryClient, uri)) {
 		// Check notifications first. If you have a post in notifications,
 		// it's often due to a like or a repost, and we want to prioritize
 		// a post object with >0 likes/reposts over a stale version with no
 		// metrics in order to avoid a notification->post scroll jump.
 		yield postViewToPlaceholderThread(post);
 	}
-	for (let post of findAllPostsInFeedQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInFeedQueryData(queryClient, uri)) {
 		yield postViewToPlaceholderThread(post);
 	}
-	for (let post of findAllPostsInQuoteQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInQuoteQueryData(queryClient, uri)) {
 		yield postViewToPlaceholderThread(post);
 	}
-	for (let post of findAllPostsInSearchQueryData(queryClient, uri)) {
+	for (const post of findAllPostsInSearchQueryData(queryClient, uri)) {
 		yield postViewToPlaceholderThread(post);
 	}
 }
@@ -488,13 +488,13 @@ export function* findAllProfilesInQueryData(
 			}
 		}
 	}
-	for (let profile of findAllProfilesInFeedQueryData(queryClient, did)) {
+	for (const profile of findAllProfilesInFeedQueryData(queryClient, did)) {
 		yield profile;
 	}
-	for (let profile of findAllProfilesInNotifsQueryData(queryClient, did)) {
+	for (const profile of findAllProfilesInNotifsQueryData(queryClient, did)) {
 		yield profile;
 	}
-	for (let profile of findAllProfilesInSearchQueryData(queryClient, did)) {
+	for (const profile of findAllProfilesInSearchQueryData(queryClient, did)) {
 		yield profile;
 	}
 }

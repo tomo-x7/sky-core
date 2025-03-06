@@ -1,17 +1,13 @@
-import React, { useCallback } from "react";
-import { Keyboard, Pressable, View } from "react-native";
-import { ChatBskyConvoDefs, ModerationCause } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { ChatBskyConvoDefs, ModerationCause } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { Keyboard, Pressable, View } from "react-native";
 
-import { NavigationProp } from "#/lib/routes/types";
-import { Shadow } from "#/state/cache/types";
-import { useConvoQuery, useMarkAsReadMutation } from "#/state/queries/messages/conversation";
-import { useMuteConvo } from "#/state/queries/messages/mute-conversation";
-import { useProfileBlockMutationQueue } from "#/state/queries/profile";
-import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, useTheme, ViewStyleProp } from "#/alf";
+import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import * as Menu from "#/components/Menu";
+import * as Prompt from "#/components/Prompt";
 import { BlockedByListDialog } from "#/components/dms/BlockedByListDialog";
 import { LeaveConvoPrompt } from "#/components/dms/LeaveConvoPrompt";
 import { ReportConversationPrompt } from "#/components/dms/ReportConversationPrompt";
@@ -25,9 +21,13 @@ import {
 	PersonX_Stroke2_Corner0_Rounded as PersonX,
 } from "#/components/icons/Person";
 import { SpeakerVolumeFull_Stroke2_Corner0_Rounded as Unmute } from "#/components/icons/Speaker";
-import * as Menu from "#/components/Menu";
-import * as Prompt from "#/components/Prompt";
-import * as bsky from "#/types/bsky";
+import type { NavigationProp } from "#/lib/routes/types";
+import type { Shadow } from "#/state/cache/types";
+import { useConvoQuery, useMarkAsReadMutation } from "#/state/queries/messages/conversation";
+import { useMuteConvo } from "#/state/queries/messages/mute-conversation";
+import { useProfileBlockMutationQueue } from "#/state/queries/profile";
+import type * as bsky from "#/types/bsky";
+import * as Toast from "#/view/com/util/Toast";
 import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "../icons/Bubble";
 import { ReportDialog } from "./ReportDialog";
 

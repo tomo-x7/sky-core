@@ -1,21 +1,21 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a, tokens, useGutters, useTheme } from "#/alf";
+import { Button, ButtonIcon } from "#/components/Button";
+import { GradientFill } from "#/components/GradientFill";
+import * as Prompt from "#/components/Prompt";
+import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
+import { Text } from "#/components/Typography";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { Trending2_Stroke2_Corner2_Rounded as Trending } from "#/components/icons/Trending2";
 import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences/trending";
 import { DEFAULT_LIMIT as TRENDING_TOPICS_COUNT, useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
 import { useTrendingConfig } from "#/state/trending-config";
-import { atoms as a, tokens, useGutters, useTheme } from "#/alf";
-import { Button, ButtonIcon } from "#/components/Button";
-import { GradientFill } from "#/components/GradientFill";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import { Trending2_Stroke2_Corner2_Rounded as Trending } from "#/components/icons/Trending2";
-import * as Prompt from "#/components/Prompt";
-import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
-import { Text } from "#/components/Typography";
 
 export function ExploreTrendingTopics() {
 	const { enabled } = useTrendingConfig();

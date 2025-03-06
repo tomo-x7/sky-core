@@ -1,4 +1,4 @@
-import { AtpSessionData, AtpSessionEvent, BskyAgent } from "@atproto/api";
+import { type AtpSessionData, type AtpSessionEvent, BskyAgent } from "@atproto/api";
 import { TID } from "@atproto/common-web";
 
 import { networkRetry } from "#/lib/async/retry";
@@ -16,7 +16,7 @@ import { snoozeEmailConfirmationPrompt } from "#/state/shell/reminders";
 import { emitNetworkConfirmed, emitNetworkLost } from "../events";
 import { addSessionErrorLog } from "./logging";
 import { configureModerationForAccount, configureModerationForGuest } from "./moderation";
-import { SessionAccount } from "./types";
+import type { SessionAccount } from "./types";
 import { isSessionExpired, isSignupQueued } from "./util";
 
 export function createPublicAgent() {
@@ -214,7 +214,7 @@ export function sessionAccountToSession(account: SessionAccount): AtpSessionData
 }
 
 // Not exported. Use factories above to create it.
-let realFetch = globalThis.fetch;
+const realFetch = globalThis.fetch;
 class BskyAppAgent extends BskyAgent {
 	persistSessionHandler: ((event: AtpSessionEvent) => void) | undefined = undefined;
 

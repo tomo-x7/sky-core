@@ -1,8 +1,8 @@
-import React from "react";
-import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { subDays } from "date-fns";
+import React from "react";
+import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "../Typography";

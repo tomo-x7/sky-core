@@ -1,9 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { View } from "react-native";
-import { AppBskyEmbedVideo } from "@atproto/api";
+import type { AppBskyEmbedVideo } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { View } from "react-native";
 
+import { atoms as a } from "#/alf";
+import { useIsWithinMessage } from "#/components/dms/MessageContext";
+import { useFullscreen } from "#/components/hooks/useFullscreen";
 import { isFirefox } from "#/lib/browser";
 import { ConstrainedImage } from "#/view/com/util/images/AutoSizedImage";
 import {
@@ -11,9 +15,6 @@ import {
 	VideoEmbedInnerWeb,
 	VideoNotFoundError,
 } from "#/view/com/util/post-embeds/VideoEmbedInner/VideoEmbedInnerWeb";
-import { atoms as a } from "#/alf";
-import { useIsWithinMessage } from "#/components/dms/MessageContext";
-import { useFullscreen } from "#/components/hooks/useFullscreen";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { useActiveVideoWeb } from "./ActiveVideoWebContext";
 import * as VideoFallback from "./VideoEmbedInner/VideoFallback";

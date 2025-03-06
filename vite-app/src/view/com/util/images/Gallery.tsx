@@ -1,17 +1,17 @@
-import React from "react";
-import { Pressable, StyleProp, View, ViewStyle } from "react-native";
-import { Image, ImageStyle } from "expo-image";
-import { AppBskyEmbedImages } from "@atproto/api";
+import type { AppBskyEmbedImages } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image, type ImageStyle } from "expo-image";
+import type React from "react";
+import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
 
-import { HandleRef } from "#/lib/hooks/useHandleRef";
-import { Dimensions } from "#/lib/media/types";
-import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
-import { PostEmbedViewContext } from "#/view/com/util/post-embeds/types";
 import { atoms as a, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
+import type { HandleRef } from "#/lib/hooks/useHandleRef";
+import type { Dimensions } from "#/lib/media/types";
+import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
+import { PostEmbedViewContext } from "#/view/com/util/post-embeds/types";
 
 type EventFunction = (index: number) => void;
 

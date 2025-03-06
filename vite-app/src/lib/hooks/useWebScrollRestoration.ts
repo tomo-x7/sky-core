@@ -1,5 +1,5 @@
+import { type EventArg, useNavigation } from "@react-navigation/core";
 import { useEffect, useMemo, useState } from "react";
-import { EventArg, useNavigation } from "@react-navigation/core";
 
 if ("scrollRestoration" in history) {
 	// Tell the brower not to mess with the scroll.

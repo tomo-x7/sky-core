@@ -1,14 +1,14 @@
+import { Trans } from "@lingui/macro";
 import { View } from "react-native";
 import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
-import { Trans } from "@lingui/macro";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme } from "#/alf";
-import { Text } from "#/components/Typography";
 
 export function Autocomplete({
 	prefix,

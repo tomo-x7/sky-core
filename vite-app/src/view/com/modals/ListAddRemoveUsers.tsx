@@ -1,9 +1,9 @@
+import type { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React, { useCallback, useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
-import { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
 import { HITSLOP_20 } from "#/lib/constants";
 import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
@@ -17,16 +17,16 @@ import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import {
+	type ListMembersip,
 	getMembership,
-	ListMembersip,
 	useDangerousListMembershipsQuery,
 	useListMembershipAddMutation,
 	useListMembershipRemoveMutation,
 } from "#/state/queries/list-memberships";
-import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
 import * as Toast from "../util/Toast";
 import { UserAvatar } from "../util/UserAvatar";
+import { Button } from "../util/forms/Button";
+import { Text } from "../util/text/Text";
 import { ScrollView, TextInput } from "./util";
 
 export const snapPoints = ["90%"];

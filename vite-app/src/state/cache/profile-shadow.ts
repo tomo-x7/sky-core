@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
-import { QueryClient } from "@tanstack/react-query";
+import type { QueryClient } from "@tanstack/react-query";
 import EventEmitter from "eventemitter3";
+import { useEffect, useMemo, useState } from "react";
 
 import { batchedUpdates } from "#/lib/batchedUpdates";
-import * as bsky from "#/types/bsky";
+import type * as bsky from "#/types/bsky";
 import { findAllProfilesInQueryData as findAllProfilesInActorSearchQueryData } from "../queries/actor-search";
 import { findAllProfilesInQueryData as findAllProfilesInKnownFollowersQueryData } from "../queries/known-followers";
 import { findAllProfilesInQueryData as findAllProfilesInListMembersQueryData } from "../queries/list-members";
@@ -19,7 +19,7 @@ import { findAllProfilesInQueryData as findAllProfilesInProfileQueryData } from 
 import { findAllProfilesInQueryData as findAllProfilesInProfileFollowersQueryData } from "../queries/profile-followers";
 import { findAllProfilesInQueryData as findAllProfilesInProfileFollowsQueryData } from "../queries/profile-follows";
 import { findAllProfilesInQueryData as findAllProfilesInSuggestedFollowsQueryData } from "../queries/suggested-follows";
-import { castAsShadow, Shadow } from "./types";
+import { type Shadow, castAsShadow } from "./types";
 
 export type { Shadow } from "./types";
 
@@ -99,7 +99,7 @@ export function useMaybeProfileShadow<TProfileView extends bsky.profile.AnyProfi
 
 export function updateProfileShadow(queryClient: QueryClient, did: string, value: Partial<ProfileShadow>) {
 	const cachedProfiles = findProfilesInCache(queryClient, did);
-	for (let post of cachedProfiles) {
+	for (const post of cachedProfiles) {
 		shadows.set(post, { ...shadows.get(post), ...value });
 	}
 	batchedUpdates(() => {

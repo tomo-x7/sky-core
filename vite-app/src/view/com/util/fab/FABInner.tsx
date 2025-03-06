@@ -1,9 +1,10 @@
-import { ComponentProps } from "react";
-import { StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import type { ComponentProps } from "react";
+import { StyleSheet, type TouchableWithoutFeedback } from "react-native";
 import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
 
+import { ios } from "#/alf";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useHaptics } from "#/lib/haptics";
 import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransform";
@@ -11,7 +12,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
 import { gradients } from "#/lib/styles";
 import { isWeb } from "#/platform/detection";
-import { ios } from "#/alf";
 
 export interface FABProps extends ComponentProps<typeof TouchableWithoutFeedback> {
 	testID?: string;

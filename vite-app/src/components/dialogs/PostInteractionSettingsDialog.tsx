@@ -1,9 +1,18 @@
-import React from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
-import { AppBskyFeedDefs, AppBskyFeedPostgate, AtUri } from "@atproto/api";
+import { type AppBskyFeedDefs, type AppBskyFeedPostgate, AtUri } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import isEqual from "lodash.isequal";
+import React from "react";
+import { type StyleProp, View, type ViewStyle } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import { Divider } from "#/components/Divider";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
+import * as Toggle from "#/components/forms/Toggle";
+import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { STALE } from "#/state/queries";
 import { useMyListsQuery } from "#/state/queries/my-lists";
 import {
@@ -14,24 +23,15 @@ import {
 } from "#/state/queries/postgate";
 import { createPostgateRecord, embeddingRules } from "#/state/queries/postgate/util";
 import {
+	type ThreadgateAllowUISetting,
 	createThreadgateViewQueryKey,
 	getThreadgateView,
-	ThreadgateAllowUISetting,
 	threadgateViewToAllowUISetting,
 	useSetThreadgateAllowMutation,
 	useThreadgateViewQuery,
 } from "#/state/queries/threadgate";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import { Divider } from "#/components/Divider";
-import * as Toggle from "#/components/forms/Toggle";
-import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
 
 export type PostInteractionSettingsFormProps = {
 	canSave?: boolean;

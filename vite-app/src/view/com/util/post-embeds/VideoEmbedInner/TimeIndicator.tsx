@@ -1,7 +1,7 @@
-import { StyleProp, ViewStyle } from "react-native";
-import { View } from "react-native";
 import { msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type { StyleProp, ViewStyle } from "react-native";
+import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";

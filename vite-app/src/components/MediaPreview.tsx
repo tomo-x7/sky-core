@@ -1,14 +1,14 @@
-import React from "react";
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Image } from "expo-image";
-import { AppBskyFeedDefs } from "@atproto/api";
+import type { AppBskyFeedDefs } from "@atproto/api";
 import { Trans } from "@lingui/macro";
+import { Image } from "expo-image";
+import type React from "react";
+import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
-import { isTenorGifUri } from "#/lib/strings/embed-player";
 import { atoms as a, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
+import { isTenorGifUri } from "#/lib/strings/embed-player";
 import * as bsky from "#/types/bsky";
 
 /**

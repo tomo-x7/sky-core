@@ -1,24 +1,24 @@
-import React from "react";
-import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from "react-native";
-import { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import React from "react";
+import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from "react-native";
 
+import { atoms as a } from "#/alf";
+import * as Layout from "#/components/Layout";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { CommonNavigatorParams } from "#/lib/routes/types";
+import type { CommonNavigatorParams } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
 import { useMyMutedAccountsQuery } from "#/state/queries/my-muted-accounts";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { ProfileCard } from "#/view/com/profile/ProfileCard";
+import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 import { Text } from "#/view/com/util/text/Text";
-import { ViewHeader } from "#/view/com/util/ViewHeader";
-import { atoms as a } from "#/alf";
-import * as Layout from "#/components/Layout";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ModerationMutedAccounts">;
 export function ModerationMutedAccounts({}: Props) {

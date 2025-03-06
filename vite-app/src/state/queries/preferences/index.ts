@@ -1,4 +1,4 @@
-import { AppBskyActorDefs, BskyFeedViewPreference, LabelPreference } from "@atproto/api";
+import type { AppBskyActorDefs, BskyFeedViewPreference, LabelPreference } from "@atproto/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
@@ -10,7 +10,7 @@ import {
 	DEFAULT_LOGGED_OUT_PREFERENCES,
 	DEFAULT_THREAD_VIEW_PREFS,
 } from "#/state/queries/preferences/const";
-import { ThreadViewPreferences, UsePreferencesQueryResponse } from "#/state/queries/preferences/types";
+import type { ThreadViewPreferences, UsePreferencesQueryResponse } from "#/state/queries/preferences/types";
 import { useAgent } from "#/state/session";
 import { saveLabelers } from "#/state/session/agent-config";
 

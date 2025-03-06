@@ -1,31 +1,31 @@
-import React, { useCallback } from "react";
-import { View } from "react-native";
-import { AppBskyActorDefs, moderateProfile, ModerationDecision } from "@atproto/api";
+import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { RouteProp, useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { type RouteProp, useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import React, { useCallback } from "react";
+import { View } from "react-native";
 
+import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { useDialogControl } from "#/components/Dialog";
+import { Error } from "#/components/Error";
+import * as Layout from "#/components/Layout";
+import { Loader } from "#/components/Loader";
+import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
+import { MessagesListBlockedFooter } from "#/components/dms/MessagesListBlockedFooter";
+import { MessagesListHeader } from "#/components/dms/MessagesListHeader";
 import { useEmail } from "#/lib/hooks/useEmail";
 import { useEnableKeyboardControllerScreen } from "#/lib/hooks/useEnableKeyboardController";
-import { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { isWeb } from "#/platform/detection";
-import { Shadow, useMaybeProfileShadow } from "#/state/cache/profile-shadow";
+import { MessagesList } from "#/screens/Messages/components/MessagesList";
+import { type Shadow, useMaybeProfileShadow } from "#/state/cache/profile-shadow";
 import { ConvoProvider, isConvoActive, useConvo } from "#/state/messages/convo";
 import { ConvoStatus } from "#/state/messages/convo/types";
 import { useCurrentConvoId } from "#/state/messages/current-convo-id";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useSetMinimalShellMode } from "#/state/shell";
-import { MessagesList } from "#/screens/Messages/components/MessagesList";
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
-import { useDialogControl } from "#/components/Dialog";
-import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
-import { MessagesListBlockedFooter } from "#/components/dms/MessagesListBlockedFooter";
-import { MessagesListHeader } from "#/components/dms/MessagesListHeader";
-import { Error } from "#/components/Error";
-import * as Layout from "#/components/Layout";
-import { Loader } from "#/components/Loader";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "MessagesConversation">;
 export function MessagesConversationScreen({ route }: Props) {

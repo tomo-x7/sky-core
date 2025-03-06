@@ -1,8 +1,8 @@
-import React from "react";
 import { nanoid } from "nanoid/non-secure";
+import React from "react";
 
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { ImageSource } from "#/view/com/lightbox/ImageViewing/@types";
+import type { ImageSource } from "#/view/com/lightbox/ImageViewing/@types";
 
 export type Lightbox = {
 	id: string;
@@ -40,7 +40,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 	});
 
 	const closeLightbox = useNonReactiveCallback(() => {
-		let wasActive = !!activeLightbox;
+		const wasActive = !!activeLightbox;
 		setActiveLightbox(null);
 		return wasActive;
 	});

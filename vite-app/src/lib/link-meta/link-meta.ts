@@ -1,4 +1,4 @@
-import { BskyAgent } from "@atproto/api";
+import type { BskyAgent } from "@atproto/api";
 
 import { LINK_META_PROXY } from "#/lib/constants";
 import { getGiphyMetaUri } from "#/lib/strings/embed-player";
@@ -6,13 +6,13 @@ import { parseStarterPackUri } from "#/lib/strings/starter-pack";
 import { isBskyAppUrl } from "../strings/url-helpers";
 
 export enum LikelyType {
-	HTML,
-	Text,
-	Image,
-	Video,
-	Audio,
-	AtpData,
-	Other,
+	HTML = 0,
+	Text = 1,
+	Image = 2,
+	Video = 3,
+	Audio = 4,
+	AtpData = 5,
+	Other = 6,
 }
 
 export interface LinkMeta {

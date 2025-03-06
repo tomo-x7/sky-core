@@ -1,17 +1,19 @@
-import React from "react";
-import {
-	ActivityIndicator,
-	findNodeHandle,
-	ListRenderItemInfo,
-	StyleProp,
-	StyleSheet,
-	View,
-	ViewStyle,
-} from "react-native";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import {
+	ActivityIndicator,
+	type ListRenderItemInfo,
+	type StyleProp,
+	StyleSheet,
+	View,
+	type ViewStyle,
+	findNodeHandle,
+} from "react-native";
 
+import { atoms as a, ios, useTheme } from "#/alf";
+import * as FeedCard from "#/components/FeedCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { logger } from "#/logger";
@@ -20,11 +22,9 @@ import { usePreferencesQuery } from "#/state/queries/preferences";
 import { RQKEY, useProfileFeedgensQuery } from "#/state/queries/profile-feedgens";
 import { EmptyState } from "#/view/com/util/EmptyState";
 import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
-import { atoms as a, ios, useTheme } from "#/alf";
-import * as FeedCard from "#/components/FeedCard";
-import { ErrorMessage } from "../util/error/ErrorMessage";
-import { List, ListRef } from "../util/List";
+import { List, type ListRef } from "../util/List";
 import { LoadMoreRetryBtn } from "../util/LoadMoreRetryBtn";
+import { ErrorMessage } from "../util/error/ErrorMessage";
 
 const LOADING = { _reactKey: "__loading__" };
 const EMPTY = { _reactKey: "__empty__" };

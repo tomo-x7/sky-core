@@ -1,6 +1,6 @@
-import React from "react";
+import type React from "react";
 
-import { atoms as a, useTheme, ViewStyleProp } from "#/alf";
+import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import { Fill } from "#/components/Fill";
 
 /**

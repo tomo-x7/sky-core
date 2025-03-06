@@ -6,12 +6,13 @@
  *
  */
 
+import { Image } from "expo-image";
 import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet } from "react-native";
-import { Gesture, GestureDetector, PanGesture } from "react-native-gesture-handler";
+import { Gesture, GestureDetector, type PanGesture } from "react-native-gesture-handler";
 import Animated, {
 	runOnJS,
-	SharedValue,
+	type SharedValue,
 	useAnimatedProps,
 	useAnimatedReaction,
 	useAnimatedRef,
@@ -19,10 +20,9 @@ import Animated, {
 	useSharedValue,
 } from "react-native-reanimated";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
-import { Image } from "expo-image";
 
 import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
-import { Dimensions as ImageDimensions, ImageSource, Transform } from "../../@types";
+import type { Dimensions as ImageDimensions, ImageSource, Transform } from "../../@types";
 
 const MAX_ORIGINAL_IMAGE_ZOOM = 2;
 const MIN_SCREEN_ZOOM = 2;
@@ -283,8 +283,8 @@ const getZoomRectAfterDoubleTap = (
 
 	// Next, we'll be calculating the rectangle to "zoom into" in screen coordinates.
 	// We already know the zoom level, so this gives us the rectangle size.
-	let rectWidth = screenSize.width / zoom;
-	let rectHeight = screenSize.height / zoom;
+	const rectWidth = screenSize.width / zoom;
+	const rectHeight = screenSize.height / zoom;
 
 	// Before we settle on the zoomed rect, figure out the safe area it has to be inside.
 	// We don't want to introduce new black bars or make existing black bars unbalanced.

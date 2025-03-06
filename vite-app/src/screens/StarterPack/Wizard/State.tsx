@@ -1,12 +1,12 @@
-import React from "react";
-import { AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
+import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
+import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 import { msg } from "@lingui/macro";
+import React from "react";
 
 import { STARTER_PACK_MAX_SIZE } from "#/lib/constants";
 import { useSession } from "#/state/session";
-import * as Toast from "#/view/com/util/Toast";
 import * as bsky from "#/types/bsky";
+import * as Toast from "#/view/com/util/Toast";
 
 const steps = ["Details", "Profiles", "Feeds"] as const;
 type Step = (typeof steps)[number];
@@ -141,4 +141,4 @@ export function Provider({
 	return <StateContext.Provider value={[state, dispatch]}>{children}</StateContext.Provider>;
 }
 
-export { type Action as WizardAction, type State as WizardState, type Step as WizardStep };
+export type { Action as WizardAction, State as WizardState, Step as WizardStep };

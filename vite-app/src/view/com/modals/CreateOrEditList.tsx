@@ -1,3 +1,7 @@
+import { type AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useMemo, useState } from "react";
 import {
 	ActivityIndicator,
@@ -8,12 +12,9 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import { Image as RNImage } from "react-native-image-crop-picker";
-import { LinearGradient } from "expo-linear-gradient";
-import { AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import type { Image as RNImage } from "react-native-image-crop-picker";
 
+import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { compressIfNeeded } from "#/lib/media/manip";
@@ -22,14 +23,13 @@ import { enforceLen } from "#/lib/strings/helpers";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
 import { colors, gradients, s } from "#/lib/styles";
-import { useTheme } from "#/lib/ThemeContext";
 import { useModalControls } from "#/state/modals";
 import { useListCreateMutation, useListMetadataMutation } from "#/state/queries/list";
 import { useAgent } from "#/state/session";
-import { ErrorMessage } from "../util/error/ErrorMessage";
-import { Text } from "../util/text/Text";
 import * as Toast from "../util/Toast";
 import { EditableUserAvatar } from "../util/UserAvatar";
+import { ErrorMessage } from "../util/error/ErrorMessage";
+import { Text } from "../util/text/Text";
 
 const MAX_NAME = 64; // todo
 const MAX_DESCRIPTION = 300; // todo

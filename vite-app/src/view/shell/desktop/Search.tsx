@@ -1,14 +1,16 @@
-import React from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
-import { AppBskyActorDefs, moderateProfile, ModerationDecision } from "@atproto/api";
+import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
+import { atoms as a } from "#/alf";
+import { SearchInput } from "#/components/forms/SearchInput";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
-import { NavigationProp } from "#/lib/routes/types";
+import type { NavigationProp } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { s } from "#/lib/styles";
@@ -16,10 +18,8 @@ import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { precacheProfile } from "#/state/queries/profile";
 import { Link } from "#/view/com/util/Link";
-import { Text } from "#/view/com/util/text/Text";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a } from "#/alf";
-import { SearchInput } from "#/components/forms/SearchInput";
+import { Text } from "#/view/com/util/text/Text";
 
 let SearchLinkCard = ({
 	label,

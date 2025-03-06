@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { i18n } from "@lingui/core";
+import { useEffect } from "react";
 
 import { sanitizeAppLanguageSetting } from "#/locale/helpers";
 import { AppLanguage } from "#/locale/languages";

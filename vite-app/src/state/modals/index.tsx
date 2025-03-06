@@ -1,6 +1,6 @@
+import type { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
 import React from "react";
-import { Image as RNImage } from "react-native-image-crop-picker";
-import { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
+import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 
@@ -157,7 +157,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 	});
 
 	const closeModal = useNonReactiveCallback(() => {
-		let wasActive = activeModals.length > 0;
+		const wasActive = activeModals.length > 0;
 		setActiveModals((modals) => {
 			return modals.slice(0, -1);
 		});
@@ -165,7 +165,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 	});
 
 	const closeAllModals = useNonReactiveCallback(() => {
-		let wasActive = activeModals.length > 0;
+		const wasActive = activeModals.length > 0;
 		setActiveModals([]);
 		return wasActive;
 	});

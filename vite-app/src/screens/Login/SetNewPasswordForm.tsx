@@ -1,21 +1,21 @@
+import { BskyAgent } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
-import { BskyAgent } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import { Text } from "#/components/Typography";
+import { FormError } from "#/components/forms/FormError";
+import * as TextField from "#/components/forms/TextField";
+import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
+import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
 import { logEvent } from "#/lib/statsig/statsig";
 import { isNetworkError } from "#/lib/strings/errors";
 import { cleanError } from "#/lib/strings/errors";
 import { checkAndFormatResetCode } from "#/lib/strings/password";
 import { logger } from "#/logger";
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import { FormError } from "#/components/forms/FormError";
-import * as TextField from "#/components/forms/TextField";
-import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
-import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
-import { Text } from "#/components/Typography";
 import { FormContainer } from "./FormContainer";
 
 export const SetNewPasswordForm = ({

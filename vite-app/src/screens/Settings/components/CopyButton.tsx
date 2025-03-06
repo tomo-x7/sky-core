@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-import { GestureResponderEvent, View } from "react-native";
-import Animated, { FadeOutUp, useReducedMotion, ZoomIn } from "react-native-reanimated";
-import * as Clipboard from "expo-clipboard";
 import { Trans } from "@lingui/macro";
+import * as Clipboard from "expo-clipboard";
+import { useCallback, useEffect, useState } from "react";
+import { type GestureResponderEvent, View } from "react-native";
+import Animated, { FadeOutUp, useReducedMotion, ZoomIn } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonProps } from "#/components/Button";
+import { Button, type ButtonProps } from "#/components/Button";
 import { Text } from "#/components/Typography";
 
 export function CopyButton({ style, value, onPress: onPressProp, ...props }: ButtonProps & { value: string }) {

@@ -1,24 +1,24 @@
+import type { AppBskyLabelerDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { AppBskyLabelerDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { ReportOption, useReportOptions } from "#/lib/moderation/useReportOptions";
 import { Link } from "#/components/Link";
 import { DMCA_LINK } from "#/components/ReportDialog/const";
+import { type ReportOption, useReportOptions } from "#/lib/moderation/useReportOptions";
 export { useDialogControl as useReportDialogControl } from "#/components/Dialog";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText, useButtonContext } from "#/components/Button";
 import { Divider } from "#/components/Divider";
+import { Text } from "#/components/Typography";
 import {
 	ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft,
 	ChevronRight_Stroke2_Corner0_Rounded as ChevronRight,
 } from "#/components/icons/Chevron";
 import { SquareArrowTopRight_Stroke2_Corner0_Rounded as SquareArrowTopRight } from "#/components/icons/SquareArrowTopRight";
-import { Text } from "#/components/Typography";
-import { ReportDialogProps } from "./types";
+import type { ReportDialogProps } from "./types";
 
 export function SelectReportOptionView(props: {
 	params: ReportDialogProps["params"];

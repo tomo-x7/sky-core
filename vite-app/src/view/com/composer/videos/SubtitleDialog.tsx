@@ -1,23 +1,23 @@
-import { useCallback, useState } from "react";
-import { Keyboard, StyleProp, View, ViewStyle } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useCallback, useState } from "react";
+import { Keyboard, type StyleProp, View, type ViewStyle } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
 
-import { MAX_ALT_TEXT } from "#/lib/constants";
-import { useEnforceMaxGraphemeCount } from "#/lib/strings/helpers";
-import { LANGUAGES } from "#/locale/languages";
-import { isWeb } from "#/platform/detection";
-import { useLanguagePrefs } from "#/state/preferences";
 import { atoms as a, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
+import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { CC_Stroke2_Corner0_Rounded as CCIcon } from "#/components/icons/CC";
 import { PageText_Stroke2_Corner0_Rounded as PageTextIcon } from "#/components/icons/PageText";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { Warning_Stroke2_Corner0_Rounded as WarningIcon } from "#/components/icons/Warning";
-import { Text } from "#/components/Typography";
+import { MAX_ALT_TEXT } from "#/lib/constants";
+import { useEnforceMaxGraphemeCount } from "#/lib/strings/helpers";
+import { LANGUAGES } from "#/locale/languages";
+import { isWeb } from "#/platform/detection";
+import { useLanguagePrefs } from "#/state/preferences";
 import { SubtitleFilePicker } from "./SubtitleFilePicker";
 
 const MAX_NUM_CAPTIONS = 1;

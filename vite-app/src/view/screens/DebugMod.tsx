@@ -1,36 +1,30 @@
-/* eslint-disable no-restricted-imports */
-import React from "react";
-import { View } from "react-native";
 import {
-	AppBskyActorDefs,
-	AppBskyFeedDefs,
-	AppBskyFeedPost,
-	ComAtprotoLabelDefs,
-	interpretLabelValueDefinition,
-	LabelPreference,
+	type AppBskyActorDefs,
+	type AppBskyFeedDefs,
+	type AppBskyFeedPost,
+	type ComAtprotoLabelDefs,
 	LABELS,
+	type LabelPreference,
+	type ModerationBehavior,
+	type ModerationDecision,
+	type ModerationOpts,
+	RichText,
+	interpretLabelValueDefinition,
 	mock,
 	moderatePost,
 	moderateProfile,
-	ModerationBehavior,
-	ModerationDecision,
-	ModerationOpts,
-	RichText,
 } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+/* eslint-disable no-restricted-imports */
+import React from "react";
+import { View } from "react-native";
 
-import { useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
-import { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { moderationOptsOverrideContext } from "#/state/preferences/moderation-opts";
-import { FeedNotification } from "#/state/queries/notifications/types";
-import { groupNotifications, shouldFilterNotif } from "#/state/queries/notifications/util";
-import { useSession } from "#/state/session";
-import { CenteredView, ScrollView } from "#/view/com/util/Views";
-import { ProfileHeaderStandard } from "#/screens/Profile/Header/ProfileHeaderStandard";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Divider } from "#/components/Divider";
+import * as Layout from "#/components/Layout";
+import { H1, H3, P, Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import * as ToggleButton from "#/components/forms/ToggleButton";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
@@ -38,8 +32,14 @@ import {
 	ChevronBottom_Stroke2_Corner0_Rounded as ChevronBottom,
 	ChevronTop_Stroke2_Corner0_Rounded as ChevronTop,
 } from "#/components/icons/Chevron";
-import * as Layout from "#/components/Layout";
-import { H1, H3, P, Text } from "#/components/Typography";
+import { useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
+import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import { ProfileHeaderStandard } from "#/screens/Profile/Header/ProfileHeaderStandard";
+import { moderationOptsOverrideContext } from "#/state/preferences/moderation-opts";
+import type { FeedNotification } from "#/state/queries/notifications/types";
+import { groupNotifications, shouldFilterNotif } from "#/state/queries/notifications/util";
+import { useSession } from "#/state/session";
+import { CenteredView, ScrollView } from "#/view/com/util/Views";
 import { ScreenHider } from "../../components/moderation/ScreenHider";
 import { NotificationFeedItem } from "../com/notifications/NotificationFeedItem";
 import { PostThreadItem } from "../com/post-thread/PostThreadItem";

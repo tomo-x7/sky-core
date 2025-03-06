@@ -1,40 +1,25 @@
-import React, { ComponentProps } from "react";
+import { StackActions, useNavigation } from "@react-navigation/native";
+import React, { type ComponentProps } from "react";
 import { Linking, ScrollView, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StackActions, useNavigation } from "@react-navigation/native";
 
-import { FEEDBACK_FORM_URL, HELP_DESK_URL } from "../../lib/constants";
-import { PressableScale } from "../../lib/custom-animations/PressableScale";
-import { useNavigationTabState } from "../../lib/hooks/useNavigationTabState";
-import { getTabState, TabState } from "../../lib/routes/helpers";
-import { NavigationProp } from "../../lib/routes/types";
-import { sanitizeHandle } from "../../lib/strings/handles";
-import { colors } from "../../lib/styles";
-import { isWeb } from "../../platform/detection";
-import { emitSoftReset } from "../../state/events";
-import { useKawaiiMode } from "../../state/preferences/kawaii";
-import { useUnreadNotifications } from "../../state/queries/notifications/unread";
-import { useProfileQuery } from "../../state/queries/profile";
-import { SessionAccount, useSession } from "../../state/session";
-import { useSetDrawerOpen } from "../../state/shell";
-import { formatCount } from "../../view/com/util/numeric/format";
-import { UserAvatar } from "../../view/com/util/UserAvatar";
-import { NavSignupCard } from "../../view/shell/NavSignupCard";
 import { atoms as a, tokens, useTheme, web } from "../../alf";
 import { Button, ButtonIcon, ButtonText } from "../../components/Button";
 import { Divider } from "../../components/Divider";
+import { InlineLinkText } from "../../components/Link";
+import { Text } from "../../components/Typography";
 import {
-	Bell_Filled_Corner0_Rounded as BellFilled,
 	Bell_Stroke2_Corner0_Rounded as Bell,
+	Bell_Filled_Corner0_Rounded as BellFilled,
 } from "../../components/icons/Bell";
 import { BulletList_Stroke2_Corner0_Rounded as List } from "../../components/icons/BulletList";
 import {
-	Hashtag_Filled_Corner0_Rounded as HashtagFilled,
 	Hashtag_Stroke2_Corner0_Rounded as Hashtag,
+	Hashtag_Filled_Corner0_Rounded as HashtagFilled,
 } from "../../components/icons/Hashtag";
 import {
-	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
 	HomeOpen_Stoke2_Corner0_Rounded as Home,
+	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
 } from "../../components/icons/HomeOpen";
 import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "../../components/icons/MagnifyingGlass";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "../../components/icons/MagnifyingGlass2";
@@ -44,11 +29,26 @@ import {
 } from "../../components/icons/Message";
 import { SettingsGear2_Stroke2_Corner0_Rounded as Settings } from "../../components/icons/SettingsGear2";
 import {
-	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
 	UserCircle_Stroke2_Corner0_Rounded as UserCircle,
+	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
 } from "../../components/icons/UserCircle";
-import { InlineLinkText } from "../../components/Link";
-import { Text } from "../../components/Typography";
+import { FEEDBACK_FORM_URL, HELP_DESK_URL } from "../../lib/constants";
+import type { PressableScale } from "../../lib/custom-animations/PressableScale";
+import { useNavigationTabState } from "../../lib/hooks/useNavigationTabState";
+import { TabState, getTabState } from "../../lib/routes/helpers";
+import type { NavigationProp } from "../../lib/routes/types";
+import { sanitizeHandle } from "../../lib/strings/handles";
+import { colors } from "../../lib/styles";
+import { isWeb } from "../../platform/detection";
+import { emitSoftReset } from "../../state/events";
+import { useKawaiiMode } from "../../state/preferences/kawaii";
+import { useUnreadNotifications } from "../../state/queries/notifications/unread";
+import { useProfileQuery } from "../../state/queries/profile";
+import { type SessionAccount, useSession } from "../../state/session";
+import { useSetDrawerOpen } from "../../state/shell";
+import { UserAvatar } from "../../view/com/util/UserAvatar";
+import { formatCount } from "../../view/com/util/numeric/format";
+import { NavSignupCard } from "../../view/shell/NavSignupCard";
 
 const iconWidth = 26;
 

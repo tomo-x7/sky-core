@@ -2,10 +2,10 @@
  * A kind of companion API to ./feed.ts. See that file for more info.
  */
 
-import React, { useRef } from "react";
-import { AppState } from "react-native";
 import { useQueryClient } from "@tanstack/react-query";
 import EventEmitter from "eventemitter3";
+import React, { useRef } from "react";
+import { AppState } from "react-native";
 
 import BroadcastChannel from "#/lib/broadcast";
 import { resetBadgeCount } from "#/lib/notifications/notifications";
@@ -14,7 +14,7 @@ import { useAgent, useSession } from "#/state/session";
 import { useModerationOpts } from "../../preferences/moderation-opts";
 import { truncateAndInvalidate } from "../util";
 import { RQKEY as RQKEY_NOTIFS } from "./feed";
-import { CachedFeedPage, FeedPage } from "./types";
+import type { CachedFeedPage, FeedPage } from "./types";
 import { fetchPage } from "./util";
 
 const UPDATE_INTERVAL = 30 * 1e3; // 30sec
@@ -87,7 +87,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 				usableInFeed: false,
 				syncedAt: new Date(),
 				data: undefined,
-				unreadCount: data.event === "30+" ? 30 : data.event === "" ? 0 : parseInt(data.event, 10) || 1,
+				unreadCount: data.event === "30+" ? 30 : data.event === "" ? 0 : Number.parseInt(data.event, 10) || 1,
 			};
 			setNumUnread(data.event);
 		};

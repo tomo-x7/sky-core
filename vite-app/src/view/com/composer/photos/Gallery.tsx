@@ -1,19 +1,27 @@
-import React from "react";
-import { ImageStyle, Keyboard, LayoutChangeEvent, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
-import { Image } from "expo-image";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image } from "expo-image";
+import React from "react";
+import {
+	type ImageStyle,
+	Keyboard,
+	type LayoutChangeEvent,
+	StyleSheet,
+	TouchableOpacity,
+	View,
+	type ViewStyle,
+} from "react-native";
 
-import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { Dimensions } from "#/lib/media/types";
-import { colors, s } from "#/lib/styles";
-import { isNative } from "#/platform/detection";
-import { ComposerImage, cropImage } from "#/state/gallery";
-import { Text } from "#/view/com/util/text/Text";
 import { useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
-import { PostAction } from "../state/composer";
+import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import type { Dimensions } from "#/lib/media/types";
+import { colors, s } from "#/lib/styles";
+import { isNative } from "#/platform/detection";
+import { type ComposerImage, cropImage } from "#/state/gallery";
+import { Text } from "#/view/com/util/text/Text";
+import type { PostAction } from "../state/composer";
 import { EditImageDialog } from "./EditImageDialog";
 import { ImageAltTextDialog } from "./ImageAltTextDialog";
 

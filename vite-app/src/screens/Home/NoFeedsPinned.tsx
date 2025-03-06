@@ -1,20 +1,20 @@
+import { TID } from "@atproto/common-web";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
-import { TID } from "@atproto/common-web";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { DISCOVER_SAVED_FEED, TIMELINE_SAVED_FEED } from "#/lib/constants";
-import { useOverwriteSavedFeedsMutation } from "#/state/queries/preferences";
-import { UsePreferencesQueryResponse } from "#/state/queries/preferences";
-import { CenteredView } from "#/view/com/util/Views";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { Link } from "#/components/Link";
+import { Text } from "#/components/Typography";
 import { useHeaderOffset } from "#/components/hooks/useHeaderOffset";
 import { ListSparkle_Stroke2_Corner0_Rounded as ListSparkle } from "#/components/icons/ListSparkle";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import { Link } from "#/components/Link";
-import { Text } from "#/components/Typography";
+import { DISCOVER_SAVED_FEED, TIMELINE_SAVED_FEED } from "#/lib/constants";
+import { useOverwriteSavedFeedsMutation } from "#/state/queries/preferences";
+import type { UsePreferencesQueryResponse } from "#/state/queries/preferences";
+import { CenteredView } from "#/view/com/util/Views";
 
 export function NoFeedsPinned({
 	preferences,
@@ -28,7 +28,7 @@ export function NoFeedsPinned({
 	const addRecommendedFeeds = React.useCallback(async () => {
 		let skippedTimeline = false;
 		let skippedDiscover = false;
-		let remainingSavedFeeds = [];
+		const remainingSavedFeeds = [];
 
 		// remove first instance of both timeline and discover, since we're going to overwrite them
 		for (const savedFeed of preferences.savedFeeds) {

@@ -1,11 +1,9 @@
-import React, { Children } from "react";
-import { TextProps as RNTextProps } from "react-native";
-import { StyleProp, TextStyle } from "react-native";
 import createEmojiRegex from "emoji-regex";
-
-import { isNative } from "../platform/detection";
-import { isIOS } from "../platform/detection";
-import { Alf, applyFonts, atoms, flatten } from ".";
+import type React from "react";
+import { Children } from "react";
+import type { TextProps as RNTextProps } from "react-native";
+import type { StyleProp, TextStyle } from "react-native";
+import { type Alf, applyFonts, atoms, flatten } from ".";
 
 /**
  * Util to calculate lineHeight from a text size atom and a leading atom

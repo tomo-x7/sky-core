@@ -1,20 +1,20 @@
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { logEvent } from "#/lib/statsig/statsig";
-import { createFullHandle, MAX_SERVICE_HANDLE_LENGTH, validateServiceHandle } from "#/lib/strings/handles";
-import { useAgent } from "#/state/session";
-import { ScreenTransition } from "#/screens/Login/ScreenTransition";
-import { useSignupContext } from "#/screens/Signup/state";
 import { atoms as a, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { useThrottledValue } from "#/components/hooks/useThrottledValue";
 import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { TimesLarge_Stroke2_Corner0_Rounded as Times } from "#/components/icons/Times";
-import { Text } from "#/components/Typography";
+import { logEvent } from "#/lib/statsig/statsig";
+import { MAX_SERVICE_HANDLE_LENGTH, createFullHandle, validateServiceHandle } from "#/lib/strings/handles";
+import { ScreenTransition } from "#/screens/Login/ScreenTransition";
+import { useSignupContext } from "#/screens/Signup/state";
+import { useAgent } from "#/state/session";
 import { BackNextButtons } from "./BackNextButtons";
 
 export function StepHandle() {

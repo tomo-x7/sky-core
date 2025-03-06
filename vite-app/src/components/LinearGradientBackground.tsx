@@ -1,6 +1,6 @@
-import React from "react";
-import { StyleProp, ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import type React from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 
 import { gradients } from "#/alf/tokens";
 

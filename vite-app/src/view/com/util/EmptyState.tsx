@@ -1,11 +1,11 @@
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon, FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
+import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { UserGroupIcon } from "#/lib/icons";
-import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
 import { Text } from "./text/Text";
 
 export function EmptyState({

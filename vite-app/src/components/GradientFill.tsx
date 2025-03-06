@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 
-import { atoms as a, tokens, ViewStyleProp } from "#/alf";
+import { type ViewStyleProp, atoms as a, type tokens } from "#/alf";
 
 export function GradientFill({
 	gradient,

@@ -1,31 +1,31 @@
-import React from "react";
-import { Linking, Pressable, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Plural, Trans } from "@lingui/macro";
+import { Plural, Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { Linking, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
-import { useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
-import { usePalette } from "#/lib/hooks/usePalette";
-import { sanitizeHandle } from "#/lib/strings/handles";
-import { s } from "#/lib/styles";
-import { logger } from "#/logger";
-import { FeedSourceInfo, useFeedSourceInfoQuery } from "#/state/queries/feed";
-import {
-	useAddSavedFeedsMutation,
-	usePreferencesQuery,
-	UsePreferencesQueryResponse,
-	useRemoveFeedMutation,
-} from "#/state/queries/preferences";
-import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
-import * as Toast from "#/view/com/util/Toast";
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
 import { shouldClickOpenNewTab } from "#/components/Link";
 import * as Prompt from "#/components/Prompt";
 import { RichText } from "#/components/RichText";
-import { Text } from "../util/text/Text";
+import { useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
+import { usePalette } from "#/lib/hooks/usePalette";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import { s } from "#/lib/styles";
+import { logger } from "#/logger";
+import { type FeedSourceInfo, useFeedSourceInfoQuery } from "#/state/queries/feed";
+import {
+	type UsePreferencesQueryResponse,
+	useAddSavedFeedsMutation,
+	usePreferencesQuery,
+	useRemoveFeedMutation,
+} from "#/state/queries/preferences";
+import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
+import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "../util/UserAvatar";
+import { Text } from "../util/text/Text";
 
 export function FeedSourceCard({
 	feedUri,

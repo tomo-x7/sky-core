@@ -1,14 +1,20 @@
+import { type ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { useMutation } from "@tanstack/react-query";
+import { StatusBar } from "expo-status-bar";
+import Graphemer from "graphemer";
 import { useMemo, useState } from "react";
 import { Modal, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
-import { ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { useMutation } from "@tanstack/react-query";
-import Graphemer from "graphemer";
 
+import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { InlineLinkText } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import { P, Text } from "#/components/Typography";
+import * as TextField from "#/components/forms/TextField";
 import { MAX_REPORT_REASON_GRAPHEME_LENGTH } from "#/lib/constants";
 import { useEnableKeyboardController } from "#/lib/hooks/useEnableKeyboardController";
 import { cleanError } from "#/lib/strings/errors";
@@ -16,12 +22,6 @@ import { isIOS, isWeb } from "#/platform/detection";
 import { useAgent, useSession, useSessionApi } from "#/state/session";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import { Logo } from "#/view/icons/Logo";
-import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import * as TextField from "#/components/forms/TextField";
-import { InlineLinkText } from "#/components/Link";
-import { Loader } from "#/components/Loader";
-import { P, Text } from "#/components/Typography";
 
 const COL_WIDTH = 400;
 

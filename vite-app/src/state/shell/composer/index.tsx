@@ -1,8 +1,8 @@
-import React from "react";
-import { AppBskyActorDefs, AppBskyFeedDefs, ModerationDecision } from "@atproto/api";
+import type { AppBskyActorDefs, AppBskyFeedDefs, ModerationDecision } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
 
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { postUriToRelativePath, toBskyAppUrl } from "#/lib/strings/url-helpers";
@@ -84,7 +84,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 	});
 
 	const closeComposer = useNonReactiveCallback(() => {
-		let wasOpen = !!state;
+		const wasOpen = !!state;
 		if (wasOpen) {
 			setState(undefined);
 			purgeTemporaryImageFiles();

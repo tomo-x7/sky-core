@@ -1,13 +1,13 @@
+import { AtUri } from "@atproto/api";
+import { Trans } from "@lingui/macro";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Svg, { Circle, Line } from "react-native-svg";
-import { AtUri } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 
+import { SubtleWebHover } from "#/components/SubtleWebHover";
+import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
-import { useInteractionState } from "#/components/hooks/useInteractionState";
-import { SubtleWebHover } from "#/components/SubtleWebHover";
 import { Link } from "../util/Link";
 import { Text } from "../util/text/Text";
 

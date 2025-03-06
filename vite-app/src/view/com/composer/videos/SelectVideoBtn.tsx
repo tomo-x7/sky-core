@@ -1,22 +1,22 @@
-import { useCallback } from "react";
-import { Keyboard } from "react-native";
-import { ImagePickerAsset } from "expo-image-picker";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type { ImagePickerAsset } from "expo-image-picker";
+import { useCallback } from "react";
+import { Keyboard } from "react-native";
 
-import { SUPPORTED_MIME_TYPES, SupportedMimeTypes } from "#/lib/constants";
+import { atoms as a, useTheme } from "#/alf";
+import { Button } from "#/components/Button";
+import { useDialogControl } from "#/components/Dialog";
+import * as Prompt from "#/components/Prompt";
+import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
+import { VideoClip_Stroke2_Corner0_Rounded as VideoClipIcon } from "#/components/icons/VideoClip";
+import { SUPPORTED_MIME_TYPES, type SupportedMimeTypes } from "#/lib/constants";
 import { BSKY_SERVICE } from "#/lib/constants";
 import { useVideoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { getHostnameFromUrl } from "#/lib/strings/url-helpers";
 import { isWeb } from "#/platform/detection";
 import { isNative } from "#/platform/detection";
 import { useSession } from "#/state/session";
-import { atoms as a, useTheme } from "#/alf";
-import { Button } from "#/components/Button";
-import { useDialogControl } from "#/components/Dialog";
-import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
-import { VideoClip_Stroke2_Corner0_Rounded as VideoClipIcon } from "#/components/icons/VideoClip";
-import * as Prompt from "#/components/Prompt";
 import { pickVideo } from "./pickVideo";
 
 const VIDEO_MAX_DURATION = 60 * 1000; // 60s in milliseconds

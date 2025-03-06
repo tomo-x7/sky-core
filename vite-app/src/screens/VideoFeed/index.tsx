@@ -1,73 +1,73 @@
+import {
+	AppBskyEmbedVideo,
+	type AppBskyFeedDefs,
+	AppBskyFeedPost,
+	AtUri,
+	type ModerationDecision,
+	RichText as RichTextAPI,
+} from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { type RouteProp, useFocusEffect, useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useEvent } from "expo";
+import { useEventListener } from "expo";
+import { Image, type ImageStyle } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
+import { type VideoPlayer, VideoView, createVideoPlayer } from "expo-video";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	LayoutAnimation,
-	ListRenderItem,
+	type ListRenderItem,
 	Pressable,
 	ScrollView,
 	View,
-	ViewabilityConfig,
-	ViewToken,
+	type ViewToken,
+	type ViewabilityConfig,
 } from "react-native";
-import { Gesture, GestureDetector, NativeGesture } from "react-native-gesture-handler";
+import { Gesture, GestureDetector, type NativeGesture } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import { useSafeAreaFrame, useSafeAreaInsets } from "react-native-safe-area-context";
-import { useEvent } from "expo";
-import { useEventListener } from "expo";
-import { Image, ImageStyle } from "expo-image";
-import { LinearGradient } from "expo-linear-gradient";
-import { createVideoPlayer, VideoPlayer, VideoView } from "expo-video";
-import {
-	AppBskyEmbedVideo,
-	AppBskyFeedDefs,
-	AppBskyFeedPost,
-	AtUri,
-	ModerationDecision,
-	RichText as RichTextAPI,
-} from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import { RouteProp, useFocusEffect, useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { HITSLOP_20 } from "#/lib/constants";
-import { useHaptics } from "#/lib/haptics";
-import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
-import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { cleanError } from "#/lib/strings/errors";
-import { sanitizeHandle } from "#/lib/strings/handles";
-import { isAndroid } from "#/platform/detection";
-import { useA11y } from "#/state/a11y";
-import { POST_TOMBSTONE, Shadow, usePostShadow } from "#/state/cache/post-shadow";
-import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { FeedFeedbackProvider, useFeedFeedbackContext } from "#/state/feed-feedback";
-import { useFeedFeedback } from "#/state/feed-feedback";
-import { usePostLikeMutationQueue } from "#/state/queries/post";
-import { AuthorFilter, FeedPostSliceItem, usePostFeedQuery } from "#/state/queries/post-feed";
-import { useProfileFollowMutationQueue } from "#/state/queries/profile";
-import { useSession } from "#/state/session";
-import { useComposerControls, useSetMinimalShellMode } from "#/state/shell";
-import { useSetLightStatusBar } from "#/state/shell/light-status-bar";
-import { PostThreadComposePrompt } from "#/view/com/post-thread/PostThreadComposePrompt";
-import { List } from "#/view/com/util/List";
-import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
-import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { Header } from "#/screens/VideoFeed/components/Header";
-import { atoms as a, ios, platform, ThemeProvider, useTheme } from "#/alf";
+import { ThemeProvider, atoms as a, ios, platform, useTheme } from "#/alf";
 import { setNavigationBar } from "#/alf/util/navigationBar";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Divider } from "#/components/Divider";
+import * as Layout from "#/components/Layout";
+import { Link } from "#/components/Link";
+import { ListFooter } from "#/components/Lists";
+import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeftIcon } from "#/components/icons/Arrow";
 import { Check_Stroke2_Corner0_Rounded as CheckIcon } from "#/components/icons/Check";
 import { EyeSlash_Stroke2_Corner0_Rounded as Eye } from "#/components/icons/EyeSlash";
 import { Leaf_Stroke2_Corner0_Rounded as LeafIcon } from "#/components/icons/Leaf";
-import * as Layout from "#/components/Layout";
-import { Link } from "#/components/Link";
-import { ListFooter } from "#/components/Lists";
 import * as Hider from "#/components/moderation/Hider";
-import { RichText } from "#/components/RichText";
-import { Text } from "#/components/Typography";
+import { HITSLOP_20 } from "#/lib/constants";
+import { useHaptics } from "#/lib/haptics";
+import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
+import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import { sanitizeDisplayName } from "#/lib/strings/display-names";
+import { cleanError } from "#/lib/strings/errors";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import { isAndroid } from "#/platform/detection";
+import { Header } from "#/screens/VideoFeed/components/Header";
+import { useA11y } from "#/state/a11y";
+import { POST_TOMBSTONE, type Shadow, usePostShadow } from "#/state/cache/post-shadow";
+import { useProfileShadow } from "#/state/cache/profile-shadow";
+import { FeedFeedbackProvider, useFeedFeedbackContext } from "#/state/feed-feedback";
+import { useFeedFeedback } from "#/state/feed-feedback";
+import { usePostLikeMutationQueue } from "#/state/queries/post";
+import { type AuthorFilter, type FeedPostSliceItem, usePostFeedQuery } from "#/state/queries/post-feed";
+import { useProfileFollowMutationQueue } from "#/state/queries/profile";
+import { useSession } from "#/state/session";
+import { useComposerControls, useSetMinimalShellMode } from "#/state/shell";
+import { useSetLightStatusBar } from "#/state/shell/light-status-bar";
 import * as bsky from "#/types/bsky";
+import { PostThreadComposePrompt } from "#/view/com/post-thread/PostThreadComposePrompt";
+import { List } from "#/view/com/util/List";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
 import { Scrubber, VIDEO_PLAYER_BOTTOM_INSET } from "./components/Scrubber";
 
 function createThreeVideoPlayers(sources?: [string, string, string]): [VideoPlayer, VideoPlayer, VideoPlayer] {

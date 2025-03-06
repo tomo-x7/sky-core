@@ -1,14 +1,14 @@
-import { AppBskyFeedDefs, AppBskyFeedGetTimeline, BskyAgent } from "@atproto/api";
+import type { AppBskyFeedDefs, AppBskyFeedGetTimeline, BskyAgent } from "@atproto/api";
 import shuffle from "lodash.shuffle";
 
 import { bundleAsync } from "#/lib/async/bundle";
 import { timeout } from "#/lib/async/timeout";
 import { feedUriToHref } from "#/lib/strings/url-helpers";
 import { getContentLanguages } from "#/state/preferences/languages";
-import { FeedParams } from "#/state/queries/post-feed";
+import type { FeedParams } from "#/state/queries/post-feed";
 import { FeedTuner } from "../feed-manip";
-import { FeedTunerFn } from "../feed-manip";
-import { FeedAPI, FeedAPIResponse, ReasonFeedSource } from "./types";
+import type { FeedTunerFn } from "../feed-manip";
+import type { FeedAPI, FeedAPIResponse, ReasonFeedSource } from "./types";
 import { createBskyTopicsHeader, isBlueskyOwnedFeed } from "./utils";
 
 const REQUEST_WAIT_MS = 500; // 500ms
@@ -120,7 +120,7 @@ export class MergeFeedAPI implements FeedAPI {
 		// assemble a response by sampling from feeds with content
 		const posts: AppBskyFeedDefs.FeedViewPost[] = [];
 		while (posts.length < limit) {
-			let slice = this.sampleItem();
+			const slice = this.sampleItem();
 			if (slice[0]) {
 				posts.push(slice[0]);
 			} else {

@@ -1,17 +1,17 @@
-import React from "react";
-import { LayoutAnimation, Pressable, StyleSheet, View } from "react-native";
-import { Image } from "expo-image";
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { Image } from "expo-image";
+import React from "react";
+import { LayoutAnimation, Pressable, StyleSheet, View } from "react-native";
 
+import { atoms as a, useTheme } from "#/alf";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { ComposerOptsPostRef } from "#/state/shell/composer";
+import type { ComposerOptsPostRef } from "#/state/shell/composer";
+import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 import { MaybeQuoteEmbed } from "#/view/com/util/post-embeds/QuoteEmbed";
 import { Text } from "#/view/com/util/text/Text";
-import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
-import { atoms as a, useTheme } from "#/alf";
 
 export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 	const t = useTheme();

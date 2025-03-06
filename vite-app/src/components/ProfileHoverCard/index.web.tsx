@@ -1,28 +1,12 @@
-import React from "react";
-import { View } from "react-native";
-import { AppBskyActorDefs, moderateProfile, ModerationOpts } from "@atproto/api";
+import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import { flip, offset, shift, size, useFloating } from "@floating-ui/react-dom";
 import { msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { View } from "react-native";
 
-import { isTouchDevice } from "#/lib/browser";
-import { getModerationCauseKey } from "#/lib/moderation";
-import { makeProfileLink } from "#/lib/routes/links";
-import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { sanitizeHandle } from "#/lib/strings/handles";
-import { useProfileShadow } from "#/state/cache/profile-shadow";
-import { useModerationOpts } from "#/state/preferences/moderation-opts";
-import { usePrefetchProfileQuery, useProfileQuery } from "#/state/queries/profile";
-import { useSession } from "#/state/session";
-import { formatCount } from "#/view/com/util/numeric/format";
-import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { ProfileHeaderHandle } from "#/screens/Profile/Header/Handle";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
-import { useFollowMethods } from "#/components/hooks/useFollowMethods";
-import { useRichText } from "#/components/hooks/useRichText";
-import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
-import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { KnownFollowers, shouldShowKnownFollowers } from "#/components/KnownFollowers";
 import { InlineLinkText, Link } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -30,7 +14,23 @@ import * as Pills from "#/components/Pills";
 import { Portal } from "#/components/Portal";
 import { RichText } from "#/components/RichText";
 import { Text } from "#/components/Typography";
-import { ProfileHoverCardProps } from "./types";
+import { useFollowMethods } from "#/components/hooks/useFollowMethods";
+import { useRichText } from "#/components/hooks/useRichText";
+import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
+import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
+import { isTouchDevice } from "#/lib/browser";
+import { getModerationCauseKey } from "#/lib/moderation";
+import { makeProfileLink } from "#/lib/routes/links";
+import { sanitizeDisplayName } from "#/lib/strings/display-names";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import { ProfileHeaderHandle } from "#/screens/Profile/Header/Handle";
+import { useProfileShadow } from "#/state/cache/profile-shadow";
+import { useModerationOpts } from "#/state/preferences/moderation-opts";
+import { usePrefetchProfileQuery, useProfileQuery } from "#/state/queries/profile";
+import { useSession } from "#/state/session";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { formatCount } from "#/view/com/util/numeric/format";
+import type { ProfileHoverCardProps } from "./types";
 
 const floatingMiddlewares = [
 	offset(4),

@@ -1,35 +1,35 @@
-import * as React from "react";
-import { View } from "react-native";
 // Based on @react-navigation/native-stack/src/createNativeStackNavigator.ts
 // MIT License
 // Copyright (c) 2017 React Navigation Contributors
 import {
-	createNavigatorFactory,
-	EventArg,
-	ParamListBase,
-	StackActionHelpers,
+	type EventArg,
+	type ParamListBase,
+	type StackActionHelpers,
 	StackActions,
-	StackNavigationState,
+	type StackNavigationState,
 	StackRouter,
-	StackRouterOptions,
+	type StackRouterOptions,
+	createNavigatorFactory,
 	useNavigationBuilder,
 } from "@react-navigation/native";
 import type { NativeStackNavigationEventMap, NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { NativeStackView } from "@react-navigation/native-stack";
 import type { NativeStackNavigatorProps } from "@react-navigation/native-stack/src/types";
+import * as React from "react";
+import { View } from "react-native";
 
+import { atoms as a } from "#/alf";
 import { PWI_ENABLED } from "#/lib/build-flags";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { isNative, isWeb } from "#/platform/detection";
-import { useSession } from "#/state/session";
-import { useOnboardingState } from "#/state/shell";
-import { useLoggedOutView, useLoggedOutViewControls } from "#/state/shell/logged-out";
-import { LoggedOut } from "#/view/com/auth/LoggedOut";
 import { Deactivated } from "#/screens/Deactivated";
 import { Onboarding } from "#/screens/Onboarding";
 import { SignupQueued } from "#/screens/SignupQueued";
 import { Takendown } from "#/screens/Takendown";
-import { atoms as a } from "#/alf";
+import { useSession } from "#/state/session";
+import { useOnboardingState } from "#/state/shell";
+import { useLoggedOutView, useLoggedOutViewControls } from "#/state/shell/logged-out";
+import { LoggedOut } from "#/view/com/auth/LoggedOut";
 import { BottomBarWeb } from "./bottom-bar/BottomBarWeb";
 import { DesktopLeftNav } from "./desktop/LeftNav";
 import { DesktopRightNav } from "./desktop/RightNav";
@@ -110,7 +110,7 @@ function NativeStackNavigator({
 		return <Onboarding />;
 	}
 	const newDescriptors: typeof descriptors = {};
-	for (let key in descriptors) {
+	for (const key in descriptors) {
 		const descriptor = descriptors[key];
 		const requireAuth = descriptor.options.requireAuth ?? false;
 		newDescriptors[key] = {

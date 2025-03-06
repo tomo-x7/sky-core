@@ -1,10 +1,19 @@
-import React, { useEffect } from "react";
-import { ScrollView, View } from "react-native";
 import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
+import React, { useEffect } from "react";
+import { ScrollView, View } from "react-native";
 
+import { atoms as a, useGutters, useTheme } from "#/alf";
+import { Button, ButtonIcon } from "#/components/Button";
+import { Link } from "#/components/Link";
+import * as Prompt from "#/components/Prompt";
+import { Text } from "#/components/Typography";
+import { CompactVideoPostCard, CompactVideoPostCardPlaceholder } from "#/components/VideoPostCard";
+import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
 import { VIDEO_FEED_URI } from "#/lib/constants";
 import { makeCustomFeedLink } from "#/lib/routes/links";
 import { logEvent } from "#/lib/statsig/statsig";
@@ -12,15 +21,6 @@ import { useTrendingSettingsApi } from "#/state/preferences/trending";
 import { usePostFeedQuery } from "#/state/queries/post-feed";
 import { RQKEY } from "#/state/queries/post-feed";
 import { BlockDrawerGesture } from "#/view/shell/BlockDrawerGesture";
-import { atoms as a, useGutters, useTheme } from "#/alf";
-import { Button, ButtonIcon } from "#/components/Button";
-import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
-import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
-import { Link } from "#/components/Link";
-import * as Prompt from "#/components/Prompt";
-import { Text } from "#/components/Typography";
-import { CompactVideoPostCard, CompactVideoPostCardPlaceholder } from "#/components/VideoPostCard";
 
 const CARD_WIDTH = 100;
 

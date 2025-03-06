@@ -1,6 +1,6 @@
-import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { View } from "react-native";
 
 import { atoms as a, useBreakpoints } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";

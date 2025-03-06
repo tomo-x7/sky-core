@@ -1,7 +1,7 @@
-import React from "react";
+import type React from "react";
 
-import { ComposerImage } from "#/state/gallery";
-import * as Dialog from "#/components/Dialog";
+import type * as Dialog from "#/components/Dialog";
+import type { ComposerImage } from "#/state/gallery";
 
 export type EditImageDialogProps = {
 	control: Dialog.DialogOuterProps["control"];

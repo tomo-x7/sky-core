@@ -1,24 +1,24 @@
-import React, { ComponentProps, forwardRef, useCallback, useMemo, useRef, useState } from "react";
+import { AppBskyRichtextFacet, RichText } from "@atproto/api";
+import PasteInput, { type PastedFile, type PasteInputRef } from "@mattermost/react-native-paste-input";
+import React, { type ComponentProps, forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import {
-	NativeSyntheticEvent,
+	type NativeSyntheticEvent,
 	Text as RNText,
-	TextInput as RNTextInput,
-	TextInputSelectionChangeEventData,
+	type TextInput as RNTextInput,
+	type TextInputSelectionChangeEventData,
 	View,
 } from "react-native";
-import { AppBskyRichtextFacet, RichText } from "@atproto/api";
-import PasteInput, { PastedFile, PasteInputRef } from "@mattermost/react-native-paste-input";
 
+import { atoms as a, useAlf } from "#/alf";
+import { normalizeTextStyles } from "#/alf/typography";
+import { useTheme } from "#/lib/ThemeContext";
 import { POST_IMG_MAX } from "#/lib/constants";
 import { downloadAndResize } from "#/lib/media/manip";
 import { isUriImage } from "#/lib/media/util";
 import { cleanError } from "#/lib/strings/errors";
 import { getMentionAt, insertMentionAt } from "#/lib/strings/mention-manip";
-import { useTheme } from "#/lib/ThemeContext";
 import { isAndroid, isNative } from "#/platform/detection";
-import { LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
-import { atoms as a, useAlf } from "#/alf";
-import { normalizeTextStyles } from "#/alf/typography";
+import { type LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
 import { Autocomplete } from "./mobile/Autocomplete";
 
 export interface TextInputRef {

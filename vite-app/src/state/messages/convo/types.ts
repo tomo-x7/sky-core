@@ -1,6 +1,6 @@
-import { BskyAgent, ChatBskyActorDefs, ChatBskyConvoDefs, ChatBskyConvoSendMessage } from "@atproto/api";
+import type { BskyAgent, ChatBskyActorDefs, ChatBskyConvoDefs, ChatBskyConvoSendMessage } from "@atproto/api";
 
-import { MessagesEventBus } from "#/state/messages/events/agent";
+import type { MessagesEventBus } from "#/state/messages/events/agent";
 
 export type ConvoParams = {
 	convoId: string;

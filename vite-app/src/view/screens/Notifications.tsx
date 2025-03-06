@@ -1,13 +1,20 @@
-import React from "react";
-import { View } from "react-native";
-import { msg, Trans } from "@lingui/macro";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
+import React from "react";
+import { View } from "react-native";
 
+import { atoms as a } from "#/alf";
+import { web } from "#/alf";
+import { ButtonIcon } from "#/components/Button";
+import * as Layout from "#/components/Layout";
+import { Link } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import { SettingsGear2_Stroke2_Corner0_Rounded as SettingsIcon } from "#/components/icons/SettingsGear2";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { ComposeIcon2 } from "#/lib/icons";
-import { NativeStackScreenProps, NotificationsTabNavigatorParams } from "#/lib/routes/types";
+import type { NativeStackScreenProps, NotificationsTabNavigatorParams } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { logger } from "#/logger";
 import { isNative } from "#/platform/detection";
@@ -20,17 +27,10 @@ import { useComposerControls } from "#/state/shell/composer";
 import { NotificationFeed } from "#/view/com/notifications/NotificationFeed";
 import { Pager } from "#/view/com/pager/Pager";
 import { TabBar } from "#/view/com/pager/TabBar";
-import { FAB } from "#/view/com/util/fab/FAB";
-import { ListMethods } from "#/view/com/util/List";
-import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
+import type { ListMethods } from "#/view/com/util/List";
 import { MainScrollProvider } from "#/view/com/util/MainScrollProvider";
-import { atoms as a } from "#/alf";
-import { web } from "#/alf";
-import { ButtonIcon } from "#/components/Button";
-import { SettingsGear2_Stroke2_Corner0_Rounded as SettingsIcon } from "#/components/icons/SettingsGear2";
-import * as Layout from "#/components/Layout";
-import { Link } from "#/components/Link";
-import { Loader } from "#/components/Loader";
+import { FAB } from "#/view/com/util/fab/FAB";
+import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
 
 // We don't currently persist this across reloads since
 // you gotta visit All to clear the badge anyway.

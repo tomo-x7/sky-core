@@ -1,5 +1,6 @@
 import React from "react";
 
+import type { Device } from "../storage";
 import {
 	computeFontScaleMultiplier,
 	getFontFamily,
@@ -8,9 +9,8 @@ import {
 	setFontScale as persistFontScale,
 } from "./fonts";
 import { createThemes, defaultTheme } from "./themes";
-import { Theme, ThemeName } from "./types";
+import type { Theme, ThemeName } from "./types";
 import { BLUE_HUE, GREEN_HUE, RED_HUE } from "./util/colorGeneration";
-import { Device } from "../storage";
 
 export { atoms } from "./atoms";
 export * from "./breakpoints";

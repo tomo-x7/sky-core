@@ -1,22 +1,22 @@
-import React from "react";
-import { View } from "react-native";
-import { AppBskyActorDefs } from "@atproto/api";
+import type { AppBskyActorDefs } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { View } from "react-native";
 
-import { useEmail } from "#/lib/hooks/useEmail";
-import { NavigationProp } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
-import { useGetConvoAvailabilityQuery } from "#/state/queries/messages/get-convo-availability";
-import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
-import * as Toast from "#/view/com/util/Toast";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { canBeMessaged } from "#/components/dms/util";
 import { Message_Stroke2_Corner0_Rounded as Message } from "#/components/icons/Message";
+import { useEmail } from "#/lib/hooks/useEmail";
+import type { NavigationProp } from "#/lib/routes/types";
+import { logEvent } from "#/lib/statsig/statsig";
+import { useGetConvoAvailabilityQuery } from "#/state/queries/messages/get-convo-availability";
+import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
+import * as Toast from "#/view/com/util/Toast";
 
 export function MessageProfileButton({
 	profile,

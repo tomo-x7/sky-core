@@ -15,7 +15,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
 	}
 
 	const [activeViewId, setActiveViewId] = useState<string | null>(null);
-	const activeViewLocationRef = useRef(Infinity);
+	const activeViewLocationRef = useRef(Number.POSITIVE_INFINITY);
 	const { height: windowHeight } = useWindowDimensions();
 
 	// minimising re-renders by using refs

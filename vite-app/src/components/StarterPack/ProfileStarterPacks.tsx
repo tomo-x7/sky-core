@@ -1,30 +1,30 @@
-import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
-import { findNodeHandle, ListRenderItemInfo, StyleProp, View, ViewStyle } from "react-native";
-import { AppBskyGraphDefs } from "@atproto/api";
-import { msg, Trans } from "@lingui/macro";
+import type { AppBskyGraphDefs } from "@atproto/api";
+import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
+import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
+import { type ListRenderItemInfo, type StyleProp, View, type ViewStyle, findNodeHandle } from "react-native";
 
-import { useGenerateStarterPackMutation } from "#/lib/generate-starterpack";
-import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
-import { useEmail } from "#/lib/hooks/useEmail";
-import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { NavigationProp } from "#/lib/routes/types";
-import { parseStarterPackUri } from "#/lib/strings/starter-pack";
-import { logger } from "#/logger";
-import { useActorStarterPacksQuery } from "#/state/queries/actor-starter-packs";
-import { List, ListRef } from "#/view/com/util/List";
-import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { atoms as a, ios, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
-import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
-import { PlusSmall_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { LinearGradientBackground } from "#/components/LinearGradientBackground";
 import { Loader } from "#/components/Loader";
 import * as Prompt from "#/components/Prompt";
 import { Default as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
 import { Text } from "#/components/Typography";
+import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
+import { PlusSmall_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
+import { useGenerateStarterPackMutation } from "#/lib/generate-starterpack";
+import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
+import { useEmail } from "#/lib/hooks/useEmail";
+import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import type { NavigationProp } from "#/lib/routes/types";
+import { parseStarterPackUri } from "#/lib/strings/starter-pack";
+import { logger } from "#/logger";
+import { useActorStarterPacksQuery } from "#/state/queries/actor-starter-packs";
+import { List, type ListRef } from "#/view/com/util/List";
+import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 
 interface SectionRef {
 	scrollToTop: () => void;

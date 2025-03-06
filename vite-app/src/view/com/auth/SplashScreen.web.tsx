@@ -1,21 +1,21 @@
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Trans, msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 
-import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { useKawaiiMode } from "#/state/preferences/kawaii";
-import { ErrorBoundary } from "#/view/com/util/ErrorBoundary";
-import { Logo } from "#/view/icons/Logo";
-import { Logotype } from "#/view/icons/Logotype";
-import { AppClipOverlay, postAppClipMessage } from "#/screens/StarterPack/StarterPackLandingScreen";
 import { atoms as a, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
 import { Button, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
+import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { AppClipOverlay, postAppClipMessage } from "#/screens/StarterPack/StarterPackLandingScreen";
+import { useKawaiiMode } from "#/state/preferences/kawaii";
+import { ErrorBoundary } from "#/view/com/util/ErrorBoundary";
+import { Logo } from "#/view/icons/Logo";
+import { Logotype } from "#/view/icons/Logotype";
 
 export const SplashScreen = ({
 	onDismiss,

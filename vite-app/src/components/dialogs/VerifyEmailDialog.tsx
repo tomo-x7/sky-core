@@ -1,17 +1,17 @@
 import React from "react";
 import { View } from "react-native";
 
+import { atoms as a, useBreakpoints } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import * as Dialog from "#/components/Dialog";
+import { InlineLinkText } from "#/components/Link";
+import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
+import * as TextField from "#/components/forms/TextField";
 import { cleanError } from "#/lib/strings/errors";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
-import { atoms as a, useBreakpoints } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
-import * as TextField from "#/components/forms/TextField";
-import { InlineLinkText } from "#/components/Link";
-import { Loader } from "#/components/Loader";
-import { Text } from "#/components/Typography";
 
 export function VerifyEmailDialog({
 	control,

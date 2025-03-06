@@ -1,17 +1,17 @@
-import React from "react";
-import { BSKY_LABELER_DID, ModerationCause, ModerationCauseSource } from "@atproto/api";
+import { BSKY_LABELER_DID, type ModerationCause, type ModerationCauseSource } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
 
+import type { AppModerationCause } from "#/components/Pills";
+import { CircleBanSign_Stroke2_Corner0_Rounded as CircleBanSign } from "#/components/icons/CircleBanSign";
+import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
+import { EyeSlash_Stroke2_Corner0_Rounded as EyeSlash } from "#/components/icons/EyeSlash";
+import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
+import type { Props as SVGIconProps } from "#/components/icons/common";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { useLabelDefinitions } from "#/state/preferences";
 import { useSession } from "#/state/session";
-import { CircleBanSign_Stroke2_Corner0_Rounded as CircleBanSign } from "#/components/icons/CircleBanSign";
-import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { Props as SVGIconProps } from "#/components/icons/common";
-import { EyeSlash_Stroke2_Corner0_Rounded as EyeSlash } from "#/components/icons/EyeSlash";
-import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
-import { AppModerationCause } from "#/components/Pills";
 import { useGlobalLabelStrings } from "./useGlobalLabelStrings";
 import { getDefinition, getLabelStrings } from "./useLabelInfo";
 
