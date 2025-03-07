@@ -1,49 +1,46 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useMemo } from "react";
 
 import type { ParsedReportSubject } from "./types";
 
 export function useCopyForSubject(subject: ParsedReportSubject) {
-	const { _ } = useLingui();
 	return useMemo(() => {
 		switch (subject.type) {
 			case "account": {
 				return {
-					title: _(msg`Report this user`),
-					subtitle: _(msg`Why should this user be reviewed?`),
+					title: "Report this user",
+					subtitle: "Why should this user be reviewed?",
 				};
 			}
 			case "post": {
 				return {
-					title: _(msg`Report this post`),
-					subtitle: _(msg`Why should this post be reviewed?`),
+					title: "Report this post",
+					subtitle: "Why should this post be reviewed?",
 				};
 			}
 			case "list": {
 				return {
-					title: _(msg`Report this list`),
-					subtitle: _(msg`Why should this list be reviewed?`),
+					title: "Report this list",
+					subtitle: "Why should this list be reviewed?",
 				};
 			}
 			case "feed": {
 				return {
-					title: _(msg`Report this feed`),
-					subtitle: _(msg`Why should this feed be reviewed?`),
+					title: "Report this feed",
+					subtitle: "Why should this feed be reviewed?",
 				};
 			}
 			case "starterPack": {
 				return {
-					title: _(msg`Report this starter pack`),
-					subtitle: _(msg`Why should this starter pack be reviewed?`),
+					title: "Report this starter pack",
+					subtitle: "Why should this starter pack be reviewed?",
 				};
 			}
 			case "chatMessage": {
 				return {
-					title: _(msg`Report this message`),
-					subtitle: _(msg`Why should this message be reviewed?`),
+					title: "Report this message",
+					subtitle: "Why should this message be reviewed?",
 				};
 			}
 		}
-	}, [_, subject]);
+	}, [subject]);
 }

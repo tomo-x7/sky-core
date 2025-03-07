@@ -12,7 +12,7 @@ import { type RouteProp, useFocusEffect, useIsFocused, useNavigation, useRoute }
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useEvent } from "expo";
 import { useEventListener } from "expo";
-import { Image, type ImageStyle } from "expo-image";
+import { Image, type ImageStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { type VideoPlayer, VideoView, createVideoPlayer } from "expo-video";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";

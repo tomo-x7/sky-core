@@ -23,7 +23,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
 			verifyEmailState,
 			setVerifyEmailState,
 		}),
-		[verifyEmailDialogControl, verifyEmailState, setVerifyEmailState],
+		[verifyEmailDialogControl, verifyEmailState],
 	);
 
 	return (

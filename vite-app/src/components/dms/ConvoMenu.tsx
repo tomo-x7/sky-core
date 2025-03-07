@@ -1,6 +1,4 @@
 import type { ChatBskyConvoDefs, ModerationCause } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { Keyboard, Pressable, View } from "react-native";
@@ -55,7 +53,6 @@ let ConvoMenu = ({
 	latestReportableMessage?: ChatBskyConvoDefs.MessageView;
 	style?: ViewStyleProp["style"];
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	const leaveConvoControl = Prompt.usePromptControl();
@@ -69,7 +66,7 @@ let ConvoMenu = ({
 			<Menu.Root control={control}>
 				{!hideTrigger && (
 					<View style={[style]}>
-						<Menu.Trigger label={_(msg`Chat settings`)}>
+						<Menu.Trigger label={"Chat settings"}>
 							{({ props, state }) => (
 								<Pressable
 									{...props}
@@ -147,7 +144,6 @@ function MenuContent({
 	blockedByListControl: Prompt.PromptControlProps;
 }) {
 	const navigation = useNavigation<NavigationProp>();
-	const { _ } = useLingui();
 	const { mutate: markAsRead } = useMarkAsReadMutation();
 
 	const { listBlocks, userBlock } = blockInfo;
@@ -164,13 +160,13 @@ function MenuContent({
 	const { mutate: muteConvo } = useMuteConvo(convoId, {
 		onSuccess: (data) => {
 			if (data.convo.muted) {
-				Toast.show(_(msg`Chat muted`));
+				Toast.show("Chat muted");
 			} else {
-				Toast.show(_(msg`Chat unmuted`));
+				Toast.show("Chat unmuted");
 			}
 		},
 		onError: () => {
-			Toast.show(_(msg`Could not mute chat`), "xmark");
+			Toast.show("Could not mute chat", "xmark");
 		},
 	});
 
@@ -190,55 +186,43 @@ function MenuContent({
 	}, [userBlock, listBlocks, blockedByListControl, queueBlock, queueUnblock]);
 
 	return isDeletedAccount ? (
-		<Menu.Item label={_(msg`Leave conversation`)} onPress={() => leaveConvoControl.open()}>
-			<Menu.ItemText>
-				<Trans>Leave conversation</Trans>
-			</Menu.ItemText>
+		<Menu.Item label={"Leave conversation"} onPress={() => leaveConvoControl.open()}>
+			<Menu.ItemText>Leave conversation</Menu.ItemText>
 			<Menu.ItemIcon icon={ArrowBoxLeft} />
 		</Menu.Item>
 	) : (
 		<>
 			<Menu.Group>
 				{showMarkAsRead && (
-					<Menu.Item label={_(msg`Mark as read`)} onPress={() => markAsRead({ convoId })}>
-						<Menu.ItemText>
-							<Trans>Mark as read</Trans>
-						</Menu.ItemText>
+					<Menu.Item label="Mark as read" onPress={() => markAsRead({ convoId })}>
+						<Menu.ItemText>Mark as read</Menu.ItemText>
 						<Menu.ItemIcon icon={Bubble} />
 					</Menu.Item>
 				)}
-				<Menu.Item label={_(msg`Go to user's profile`)} onPress={onNavigateToProfile}>
-					<Menu.ItemText>
-						<Trans>Go to profile</Trans>
-					</Menu.ItemText>
+				<Menu.Item label="Go to user's profile" onPress={onNavigateToProfile}>
+					<Menu.ItemText>Go to profile</Menu.ItemText>
 					<Menu.ItemIcon icon={Person} />
 				</Menu.Item>
-				<Menu.Item label={_(msg`Mute conversation`)} onPress={() => muteConvo({ mute: !convo?.muted })}>
-					<Menu.ItemText>
-						{convo?.muted ? <Trans>Unmute conversation</Trans> : <Trans>Mute conversation</Trans>}
-					</Menu.ItemText>
+				<Menu.Item label="Mute conversation" onPress={() => muteConvo({ mute: !convo?.muted })}>
+					<Menu.ItemText>{convo?.muted ? <>Unmute conversation</> : <>Mute conversation</>}</Menu.ItemText>
 					<Menu.ItemIcon icon={convo?.muted ? Unmute : Mute} />
 				</Menu.Item>
 			</Menu.Group>
 			<Menu.Divider />
 			<Menu.Group>
-				<Menu.Item label={isBlocking ? _(msg`Unblock account`) : _(msg`Block account`)} onPress={toggleBlock}>
-					<Menu.ItemText>{isBlocking ? _(msg`Unblock account`) : _(msg`Block account`)}</Menu.ItemText>
+				<Menu.Item label={isBlocking ? "Unblock account" : "Block account"} onPress={toggleBlock}>
+					<Menu.ItemText>{isBlocking ? "Unblock account" : "Block account"}</Menu.ItemText>
 					<Menu.ItemIcon icon={isBlocking ? PersonCheck : PersonX} />
 				</Menu.Item>
-				<Menu.Item label={_(msg`Report conversation`)} onPress={() => reportControl.open()}>
-					<Menu.ItemText>
-						<Trans>Report conversation</Trans>
-					</Menu.ItemText>
+				<Menu.Item label={"Report conversation"} onPress={() => reportControl.open()}>
+					<Menu.ItemText>Report conversation</Menu.ItemText>
 					<Menu.ItemIcon icon={Flag} />
 				</Menu.Item>
 			</Menu.Group>
 			<Menu.Divider />
 			<Menu.Group>
-				<Menu.Item label={_(msg`Leave conversation`)} onPress={() => leaveConvoControl.open()}>
-					<Menu.ItemText>
-						<Trans>Leave conversation</Trans>
-					</Menu.ItemText>
+				<Menu.Item label={"Leave conversation"} onPress={() => leaveConvoControl.open()}>
+					<Menu.ItemText>Leave conversation</Menu.ItemText>
 					<Menu.ItemIcon icon={ArrowBoxLeft} />
 				</Menu.Item>
 			</Menu.Group>

@@ -1,5 +1,3 @@
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import flattenReactChildren from "react-keyed-flatten-children";
 import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
@@ -77,14 +75,12 @@ export function Outer({
 	style?: StyleProp<ViewStyle>;
 }>) {
 	const context = useMenuContext();
-	const { _ } = useLingui();
-
 	return (
 		<Dialog.Outer control={context.control} nativeOptions={{ preventExpansion: true }}>
 			<Dialog.Handle />
 			{/* Re-wrap with context since Dialogs are portal-ed to root */}
 			<Context.Provider value={context}>
-				<Dialog.ScrollableInner label={_(msg`Menu`)}>
+				<Dialog.ScrollableInner label={"Menu"}>
 					<View style={[a.gap_lg]}>
 						{children}
 						{isNative && showCancel && <Cancel />}
@@ -237,7 +233,7 @@ export function Group({ children, style }: GroupProps) {
 		<View style={[a.rounded_md, a.overflow_hidden, a.border, t.atoms.border_contrast_low, style]}>
 			{flattenReactChildren(children).map((child, i) => {
 				return React.isValidElement(child) && child.type === Item ? (
-					<React.Fragment key={i}>
+					<React.Fragment key={i.toString()}>
 						{i > 0 ? <View style={[a.border_b, t.atoms.border_contrast_low]} /> : null}
 						{React.cloneElement(child, {
 							// @ts-ignore
@@ -254,20 +250,17 @@ export function Group({ children, style }: GroupProps) {
 }
 
 function Cancel() {
-	const { _ } = useLingui();
 	const context = useMenuContext();
 
 	return (
 		<Button
-			label={_(msg`Close this dialog`)}
+			label={"Close this dialog"}
 			size="small"
 			variant="ghost"
 			color="secondary"
 			onPress={() => context.control.close()}
 		>
-			<ButtonText>
-				<Trans>Cancel</Trans>
-			</ButtonText>
+			<ButtonText>Cancel</ButtonText>
 		</Button>
 	);
 }

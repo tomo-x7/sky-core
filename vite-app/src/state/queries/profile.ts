@@ -198,7 +198,6 @@ export function useProfileUpdateMutation() {
 
 export function useProfileFollowMutationQueue(
 	profile: Shadow<bsky.profile.AnyProfileView>,
-	logContext: LogEvents["profile:follow"]["logContext"] & LogEvents["profile:follow"]["logContext"],
 ) {
 	const agent = useAgent();
 	const queryClient = useQueryClient();

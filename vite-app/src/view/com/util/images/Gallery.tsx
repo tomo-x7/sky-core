@@ -1,7 +1,7 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image, type ImageStyle } from "expo-image";
+import { Image, type ImageStyle } from "react-native";
 import type React from "react";
 import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
 

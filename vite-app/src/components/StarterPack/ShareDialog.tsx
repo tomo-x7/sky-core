@@ -1,7 +1,7 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { View } from "react-native";
 

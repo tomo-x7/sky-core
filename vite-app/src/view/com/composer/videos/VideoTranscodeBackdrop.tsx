@@ -1,5 +1,5 @@
 import { type QueryClient, useQuery } from "@tanstack/react-query";
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import { clearCache, createVideoThumbnail } from "react-native-compressor";
 import Animated, { FadeIn } from "react-native-reanimated";
 

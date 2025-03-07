@@ -1,6 +1,4 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Keyboard } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -27,7 +25,6 @@ export function ActionsWrapper({
 	isFromSelf: boolean;
 	children: React.ReactNode;
 }) {
-	const { _ } = useLingui();
 	const playHaptic = useHaptics();
 	const menuControl = useMenuControl();
 
@@ -79,7 +76,7 @@ export function ActionsWrapper({
 					animatedStyle,
 				]}
 				accessible={true}
-				accessibilityActions={[{ name: "activate", label: _(msg`Open message options`) }]}
+				accessibilityActions={[{ name: "activate", label: "Open message options" }]}
 				onAccessibilityAction={open}
 			>
 				{children}

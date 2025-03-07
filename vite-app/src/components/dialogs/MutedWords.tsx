@@ -346,10 +346,8 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 								a.flex_1,
 								a.leading_snug,
 								a.font_bold,
-								web({
-									overflowWrap: "break-word",
-									wordBreak: "break-word",
-								}),
+								//@ts-ignore
+								{ overflowWrap: "break-word", wordBreak: "break-word" },
 							]}
 						>
 							{word.targets.find((t) => t === "content") ? (

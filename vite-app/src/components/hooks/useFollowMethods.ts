@@ -1,9 +1,5 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 
-import type { LogEvents } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
 import type { Shadow } from "#/state/cache/types";
 import { useProfileFollowMutationQueue } from "#/state/queries/profile";
 import { useRequireAuth } from "#/state/session";
@@ -12,42 +8,39 @@ import * as Toast from "#/view/com/util/Toast";
 
 export function useFollowMethods({
 	profile,
-	logContext,
 }: {
 	profile: Shadow<bsky.profile.AnyProfileView>;
-	logContext: LogEvents["profile:follow"]["logContext"] & LogEvents["profile:unfollow"]["logContext"];
 }) {
-	const { _ } = useLingui();
 	const requireAuth = useRequireAuth();
-	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile, logContext);
+	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 
 	const follow = React.useCallback(() => {
 		requireAuth(async () => {
 			try {
 				await queueFollow();
-			} catch (e: any) {
-				logger.error(`useFollowMethods: failed to follow`, { message: String(e) });
-				if (e?.name !== "AbortError") {
-					Toast.show(_(msg`An issue occurred, please try again.`), "xmark");
+			} catch (e: unknown) {
+				console.error("useFollowMethods: failed to follow", { message: String(e) });
+				if ((e as { name: unknown }).name !== "AbortError") {
+					Toast.show("An issue occurred, please try again.", "xmark");
 				}
 			}
 		});
-	}, [_, queueFollow, requireAuth]);
+	}, [queueFollow, requireAuth]);
 
 	const unfollow = React.useCallback(() => {
 		requireAuth(async () => {
 			try {
 				await queueUnfollow();
-			} catch (e: any) {
-				logger.error(`useFollowMethods: failed to unfollow`, {
+			} catch (e: unknown) {
+				console.error("useFollowMethods: failed to unfollow", {
 					message: String(e),
 				});
-				if (e?.name !== "AbortError") {
-					Toast.show(_(msg`An issue occurred, please try again.`), "xmark");
+				if ((e as { name: unknown })?.name !== "AbortError") {
+					Toast.show("An issue occurred, please try again.", "xmark");
 				}
 			}
 		});
-	}, [_, queueUnfollow, requireAuth]);
+	}, [queueUnfollow, requireAuth]);
 
 	return {
 		follow,

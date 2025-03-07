@@ -41,7 +41,7 @@ export function DateField({
 	maximumDate,
 }: DateFieldProps) {
 	const handleOnChange = React.useCallback(
-		(e: any) => {
+		(e: React.ChangeEvent<HTMLInputElement>) => {
 			const date = e.target.valueAsDate || e.target.value;
 
 			if (date) {
@@ -59,10 +59,10 @@ export function DateField({
 				value={toSimpleDateString(value)}
 				inputRef={inputRef as React.Ref<TextInput>}
 				label={label}
+				//@ts-ignore
 				onChange={handleOnChange}
 				testID={testID}
 				accessibilityHint={accessibilityHint}
-				// @ts-expect-error not typed as <input type="date"> even though it is one
 				max={maximumDate ? toSimpleDateString(maximumDate) : undefined}
 			/>
 		</TextField.Root>

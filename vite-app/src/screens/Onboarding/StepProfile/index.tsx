@@ -1,6 +1,6 @@
 import { Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image as ExpoImage } from "expo-image";
+import { Image as ExpoImage } from "react-native";
 import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import React from "react";
 import { View } from "react-native";

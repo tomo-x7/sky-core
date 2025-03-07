@@ -3,7 +3,6 @@ import { StyleSheet, View, type ViewProps, type ViewStyle } from "react-native";
 import type { StyleProp } from "react-native";
 import { KeyboardAwareScrollView, type KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
 import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useBreakpoints, useLayoutBreakpoints, useTheme, web } from "#/alf";
 import { useDialogContext } from "#/components/Dialog";
@@ -24,11 +23,10 @@ export type ScreenProps = React.ComponentProps<typeof View> & {
  * Outermost component of every screen
  */
 export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }: ScreenProps) {
-	const { top } = useSafeAreaInsets();
 	return (
 		<>
 			{isWeb && <WebCenterBorders />}
-			<View style={[a.util_screen_outer, { paddingTop: noInsetTop ? 0 : top }, style]} {...props} />
+			<View style={[a.util_screen_outer, { paddingTop: 0 }, style]} {...props} />
 		</>
 	);
 });

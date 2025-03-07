@@ -1,6 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { Plural, Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { View } from "react-native";
 
@@ -36,14 +34,13 @@ export function Title({ value }: { value: string }) {
 }
 
 export function Description({ value, handle }: { value?: string; handle: string }) {
-	const { _ } = useLingui();
 	return value ? (
 		<Text numberOfLines={2}>
 			<RichText value={value} style={[a.leading_snug]} />
 		</Text>
 	) : (
 		<Text emoji style={[a.leading_snug]}>
-			{_(msg`By ${sanitizeHandle(handle, "@")}`)}
+			{`By ${sanitizeHandle(handle, "@")}`}
 		</Text>
 	);
 }
@@ -53,9 +50,7 @@ export function RegionalNotice() {
 	return (
 		<View style={[a.flex_row, a.align_center, a.gap_xs, a.pt_2xs, { marginLeft: -2 }]}>
 			<Flag fill={t.atoms.text_contrast_low.color} size="sm" />
-			<Text style={[a.italic, a.leading_snug]}>
-				<Trans>Required in your region</Trans>
-			</Text>
+			<Text style={[a.italic, a.leading_snug]}>Required in your region</Text>
 		</View>
 	);
 }
@@ -64,14 +59,12 @@ export function LikeCount({ likeCount }: { likeCount: number }) {
 	const t = useTheme();
 	return (
 		<Text style={[a.mt_sm, a.text_sm, t.atoms.text_contrast_medium, { fontWeight: "600" }]}>
-			<Trans>
-				Liked by <Plural value={likeCount} one="# user" other="# users" />
-			</Trans>
+			Liked by {likeCount} {likeCount === 1 ? "user" : "users"}
 		</Text>
 	);
 }
 
-export function Content({ children }: React.PropsWithChildren<{}>) {
+export function Content({ children }: React.PropsWithChildren) {
 	const t = useTheme();
 
 	return (
@@ -105,8 +98,6 @@ export function Default({ labeler, style }: LabelingServiceProps & ViewStyleProp
 }
 
 export function Link({ children, labeler }: LabelingServiceProps & Pick<LinkProps, "children">) {
-	const { _ } = useLingui();
-
 	return (
 		<InternalLink
 			to={{
@@ -115,7 +106,7 @@ export function Link({ children, labeler }: LabelingServiceProps & Pick<LinkProp
 					name: labeler.creator.handle,
 				},
 			}}
-			label={_(msg`View the labeling service provided by @${labeler.creator.handle}`)}
+			label={`View the labeling service provided by @${labeler.creator.handle}`}
 		>
 			{children}
 		</InternalLink>
@@ -138,7 +129,7 @@ export function Loader({
 	component: Component,
 }: {
 	did: string;
-	loading?: React.ComponentType<{}>;
+	loading?: React.ComponentType;
 	error?: React.ComponentType<{ error: string }>;
 	component: React.ComponentType<{
 		labeler: AppBskyLabelerDefs.LabelerViewDetailed;

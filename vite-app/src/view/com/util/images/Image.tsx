@@ -1,4 +1,4 @@
-import { Image, type ImageProps, type ImageSource } from "expo-image";
+import { Image, type ImageProps, type ImageSource } from "react-native";
 
 interface HighPriorityImageProps extends ImageProps {
 	source: ImageSource;

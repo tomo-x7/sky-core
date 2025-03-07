@@ -43,7 +43,7 @@ export function Button({ children, ...props }: ItemProps) {
 	);
 }
 
-function ButtonInner({ children }: React.PropsWithChildren<{}>) {
+function ButtonInner({ children }: React.PropsWithChildren) {
 	const t = useTheme();
 	const state = Toggle.useItemContext();
 

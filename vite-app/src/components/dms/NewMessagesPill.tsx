@@ -1,8 +1,6 @@
-import { Trans } from "@lingui/macro";
 import React from "react";
 import { Pressable, View } from "react-native";
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -19,9 +17,8 @@ export function NewMessagesPill({
 }) {
 	const t = useTheme();
 	const playHaptic = useHaptics();
-	const { bottom: bottomInset } = useSafeAreaInsets();
 	const bottomBarHeight = isIOS ? 42 : isAndroid ? 60 : 0;
-	const bottomOffset = isWeb ? 0 : bottomInset + bottomBarHeight;
+	const bottomOffset = isWeb ? 0 : bottomBarHeight;
 
 	const scale = useSharedValue(1);
 
@@ -82,9 +79,7 @@ export function NewMessagesPill({
 				onPressIn={onPressIn}
 				onPressOut={onPressOut}
 			>
-				<Text style={[a.font_bold]}>
-					<Trans>New messages</Trans>
-				</Text>
+				<Text style={[a.font_bold]}>New messages</Text>
 			</AnimatedPressable>
 		</View>
 	);

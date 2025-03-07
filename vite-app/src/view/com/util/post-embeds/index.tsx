@@ -10,7 +10,7 @@ import {
 	moderateFeedGenerator,
 	moderateUserList,
 } from "@atproto/api";
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import React from "react";
 import { InteractionManager, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";

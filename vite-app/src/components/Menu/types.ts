@@ -14,15 +14,16 @@ export type ItemContextType = {
 };
 
 export type RadixPassThroughTriggerProps = {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	ref: React.RefObject<any>;
 	id: string;
 	type: "button";
 	disabled: boolean;
-	["data-disabled"]: boolean;
-	["data-state"]: string;
-	["aria-controls"]?: string;
-	["aria-haspopup"]?: boolean;
-	["aria-expanded"]?: AccessibilityProps["aria-expanded"];
+	"data-disabled": boolean;
+	"data-state": string;
+	"aria-controls"?: string;
+	"aria-haspopup"?: boolean;
+	"aria-expanded"?: AccessibilityProps["aria-expanded"];
 	onKeyDown: (e: React.KeyboardEvent) => void;
 	/**
 	 * Radix provides this, but we override on web to use `onPress` instead,

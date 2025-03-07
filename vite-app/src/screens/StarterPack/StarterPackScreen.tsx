@@ -11,7 +11,7 @@ import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import React from "react";
 import { View } from "react-native";
 

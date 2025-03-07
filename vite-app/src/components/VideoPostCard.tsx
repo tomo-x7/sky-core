@@ -7,7 +7,7 @@ import {
 } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useMemo } from "react";
 import { View } from "react-native";

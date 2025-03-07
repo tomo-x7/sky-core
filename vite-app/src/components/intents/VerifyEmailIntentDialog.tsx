@@ -1,5 +1,3 @@
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -26,10 +24,9 @@ export function VerifyEmailIntentDialog() {
 	);
 }
 
-function Inner({}: { control: DialogControlProps }) {
+function Inner({ control }: { control: DialogControlProps }) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
-	const { _ } = useLingui();
 	const { verifyEmailState: state } = useIntentDialogs();
 	const [status, setStatus] = React.useState<"loading" | "success" | "failure" | "resent">("loading");
 	const [sending, setSending] = React.useState(false);
@@ -62,7 +59,7 @@ function Inner({}: { control: DialogControlProps }) {
 
 	return (
 		<Dialog.ScrollableInner
-			label={_(msg`Verify email dialog`)}
+			label={"Verify email dialog"}
 			style={[gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full]}
 		>
 			<View style={[a.gap_xl]}>
@@ -72,37 +69,25 @@ function Inner({}: { control: DialogControlProps }) {
 					</View>
 				) : status === "success" ? (
 					<View style={[a.gap_sm, isNative && a.pb_xl]}>
-						<Text style={[a.font_heavy, a.text_2xl]}>
-							<Trans>Email Verified</Trans>
-						</Text>
+						<Text style={[a.font_heavy, a.text_2xl]}>Email Verified</Text>
 						<Text style={[a.text_md, a.leading_snug]}>
-							<Trans>
-								Thanks, you have successfully verified your email address. You can close this dialog.
-							</Trans>
+							Thanks, you have successfully verified your email address. You can close this dialog.
 						</Text>
 					</View>
 				) : status === "failure" ? (
 					<View style={[a.gap_sm]}>
-						<Text style={[a.font_heavy, a.text_2xl]}>
-							<Trans>Invalid Verification Code</Trans>
-						</Text>
+						<Text style={[a.font_heavy, a.text_2xl]}>Invalid Verification Code</Text>
 						<Text style={[a.text_md, a.leading_snug]}>
-							<Trans>
-								The verification code you have provided is invalid. Please make sure that you have used
-								the correct verification link or request a new one.
-							</Trans>
+							The verification code you have provided is invalid. Please make sure that you have used the
+							correct verification link or request a new one.
 						</Text>
 					</View>
 				) : (
 					<View style={[a.gap_sm, isNative && a.pb_xl]}>
-						<Text style={[a.font_heavy, a.text_2xl]}>
-							<Trans>Email Resent</Trans>
-						</Text>
+						<Text style={[a.font_heavy, a.text_2xl]}>Email Resent</Text>
 						<Text style={[a.text_md, a.leading_snug]}>
-							<Trans>
-								We have sent another verification email to{" "}
-								<Text style={[a.text_md, a.font_bold]}>{currentAccount?.email}</Text>.
-							</Trans>
+							We have sent another verification email to{" "}
+							<Text style={[a.text_md, a.font_bold]}>{currentAccount?.email}</Text>.
 						</Text>
 					</View>
 				)}
@@ -111,7 +96,7 @@ function Inner({}: { control: DialogControlProps }) {
 					<>
 						<Divider />
 						<Button
-							label={_(msg`Resend Verification Email`)}
+							label={"Resend Verification Email"}
 							onPress={onPressResendEmail}
 							variant="solid"
 							color="secondary_inverted"
@@ -119,9 +104,7 @@ function Inner({}: { control: DialogControlProps }) {
 							disabled={sending}
 						>
 							<ButtonIcon icon={sending ? Loader : Resend} position="left" />
-							<ButtonText>
-								<Trans>Resend Email</Trans>
-							</ButtonText>
+							<ButtonText>Resend Email</ButtonText>
 						</Button>
 					</>
 				)}

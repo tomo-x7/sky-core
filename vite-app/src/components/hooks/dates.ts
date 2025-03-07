@@ -56,7 +56,7 @@ const locales: Record<AppLanguage, Locale | undefined> = {
 	da,
 	de,
 	el,
-	["en-GB"]: enGB,
+	"en-GB": enGB,
 	es,
 	eu,
 	fi,
@@ -74,7 +74,7 @@ const locales: Record<AppLanguage, Locale | undefined> = {
 	ne: undefined,
 	nl,
 	pl,
-	["pt-BR"]: ptBR,
+	"pt-BR": ptBR,
 	ro,
 	ru,
 	sv,
@@ -82,9 +82,9 @@ const locales: Record<AppLanguage, Locale | undefined> = {
 	tr,
 	uk,
 	vi,
-	["zh-Hans-CN"]: zhCN,
-	["zh-Hant-HK"]: zhHK,
-	["zh-Hant-TW"]: zhTW,
+	"zh-Hans-CN": zhCN,
+	"zh-Hant-HK": zhHK,
+	"zh-Hant-TW": zhTW,
 };
 
 /**

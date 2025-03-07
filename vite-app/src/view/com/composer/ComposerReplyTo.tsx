@@ -1,7 +1,7 @@
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import React from "react";
 import { LayoutAnimation, Pressable, StyleSheet, View } from "react-native";
 

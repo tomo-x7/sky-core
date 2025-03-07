@@ -1,5 +1,3 @@
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { subDays } from "date-fns";
 import React from "react";
 import { View } from "react-native";
@@ -28,7 +26,6 @@ const longDateFormatterWithYear = new Intl.DateTimeFormat(undefined, {
 });
 
 let DateDivider = ({ date: dateStr }: { date: string }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	let date: string;
@@ -41,9 +38,9 @@ let DateDivider = ({ date: dateStr }: { date: string }): React.ReactNode => {
 	const oneWeekAgo = subDays(today, 7);
 
 	if (localDateString(today) === localDateString(timestamp)) {
-		date = _(msg`Today`);
+		date = "Today";
 	} else if (localDateString(yesterday) === localDateString(timestamp)) {
-		date = _(msg`Yesterday`);
+		date = "Yesterday";
 	} else {
 		if (timestamp < oneWeekAgo) {
 			if (timestamp.getFullYear() === today.getFullYear()) {
@@ -59,9 +56,7 @@ let DateDivider = ({ date: dateStr }: { date: string }): React.ReactNode => {
 	return (
 		<View style={[a.w_full, a.my_lg]}>
 			<Text style={[a.text_xs, a.text_center, t.atoms.bg, t.atoms.text_contrast_medium, a.px_md]}>
-				<Trans>
-					<Text style={[a.text_xs, t.atoms.text_contrast_medium, a.font_bold]}>{date}</Text> at {time}
-				</Trans>
+				<Text style={[a.text_xs, t.atoms.text_contrast_medium, a.font_bold]}>{date}</Text> at {time}
 			</Text>
 		</View>
 	);

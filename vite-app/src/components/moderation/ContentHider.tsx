@@ -1,6 +1,4 @@
 import type { ModerationUI } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
@@ -60,13 +58,11 @@ function ContentHiderActive({
 	childContainerStyle?: StyleProp<ViewStyle>;
 }>) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const [override, setOverride] = React.useState(false);
 	const control = useModerationDetailsDialogControl();
 	const { labelDefs } = useLabelDefinitions();
 	const globalLabelStrings = useGlobalLabelStrings();
-	const { i18n } = useLingui();
 	const blur = modui?.blurs[0];
 	const desc = useModerationCauseDescription(blur);
 
@@ -103,16 +99,16 @@ function ContentHiderActive({
 
 				const def = cause.labelDef || getDefinition(labelDefs, cause.label);
 				if (def.identifier === "porn" || def.identifier === "sexual") {
-					return _(msg`Adult Content`);
+					return "Adult Content";
 				}
-				return getLabelStrings(i18n.locale, globalLabelStrings, def).name;
+				return getLabelStrings("ja", globalLabelStrings, def).name;
 			});
 
 		if (selfBlurNames.length === 0) {
 			return desc.name;
 		}
 		return [...new Set(selfBlurNames)].join(", ");
-	}, [_, modui?.blurs, blur, desc.name, labelDefs, i18n.locale, globalLabelStrings]);
+	}, [modui?.blurs, blur, desc.name, labelDefs, globalLabelStrings]);
 
 	return (
 		<View testID={testID} style={[a.overflow_hidden, style]}>
@@ -131,10 +127,10 @@ function ContentHiderActive({
 				label={desc.name}
 				accessibilityHint={
 					modui.noOverride
-						? _(msg`Learn more about the moderation applied to this content`)
+						? "Learn more about the moderation applied to this content"
 						: override
-							? _(msg`Hides the content`)
-							: _(msg`Shows the content`)
+							? "Hides the content"
+							: "Shows the content"
 				}
 			>
 				{(state) => (
@@ -182,7 +178,7 @@ function ContentHiderActive({
 									}),
 								]}
 							>
-								{override ? <Trans>Hide</Trans> : <Trans>Show</Trans>}
+								{override ? <>Hide</> : <>Show</>}
 							</Text>
 						)}
 					</View>
@@ -196,7 +192,7 @@ function ContentHiderActive({
 						e.stopPropagation();
 						control.open();
 					}}
-					label={_(msg`Learn more about the moderation applied to this content.`)}
+					label={"Learn more about the moderation applied to this content."}
 					style={[a.pt_sm]}
 				>
 					{(state) => (
@@ -211,18 +207,20 @@ function ContentHiderActive({
 							]}
 						>
 							{desc.sourceType === "user" ? (
-								<Trans>Labeled by the author.</Trans>
+								<>Labeled by the author.</>
 							) : (
-								<Trans>Labeled by {sanitizeDisplayName(desc.source!)}.</Trans>
+								// biome-ignore lint/style/noNonNullAssertion: <explanation>
+								<>Labeled by {sanitizeDisplayName(desc.source!)}.</>
 							)}{" "}
 							<Text
 								style={[
 									{ color: t.palette.primary_500 },
 									a.text_sm,
+									//@ts-ignore
 									state.hovered && [web({ textDecoration: "underline" })],
 								]}
 							>
-								<Trans>Learn more.</Trans>
+								Learn more.
 							</Text>
 						</Text>
 					)}

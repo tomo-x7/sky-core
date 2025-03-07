@@ -1,7 +1,5 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationDecision } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { TouchableOpacity, View } from "react-native";
@@ -32,7 +30,6 @@ export let MessagesListHeader = ({
 	moderation?: ModerationDecision;
 }): React.ReactNode => {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { gtTablet } = useBreakpoints();
 	const navigation = useNavigation<NavigationProp>();
 
@@ -76,11 +73,11 @@ export let MessagesListHeader = ({
 				hitSlop={BACK_HITSLOP}
 				style={{ width: 30, height: 30, marginTop: isWeb ? 6 : 4 }}
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Back`)}
+				accessibilityLabel={"Back"}
 				accessibilityHint=""
 			>
 				<FontAwesomeIcon
-					size={18}
+					size="3x"//TODO もともと18だったので大きさ見て調整
 					icon="angle-left"
 					style={{
 						marginTop: 6,
@@ -121,13 +118,12 @@ function HeaderReady({
 		userBlock?: ModerationCause;
 	};
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const convoState = useConvo();
 
 	const isDeletedAccount = profile?.handle === "missing.invalid";
 	const displayName = isDeletedAccount
-		? _(msg`Deleted Account`)
+		? "Deleted Account"
 		: sanitizeDisplayName(profile.displayName || profile.handle, moderation.ui("displayName"));
 
 	// @ts-ignore findLast is polyfilled - esb
@@ -142,7 +138,7 @@ function HeaderReady({
 		<View style={[a.flex_1]}>
 			<View style={[a.w_full, a.flex_row, a.align_center, a.justify_between]}>
 				<Link
-					label={_(msg`View ${displayName}'s profile`)}
+					label={`View ${displayName}'s profile`}
 					style={[a.flex_row, a.align_start, a.gap_md, a.flex_1, a.pr_md]}
 					to={makeProfileLink(profile)}
 				>

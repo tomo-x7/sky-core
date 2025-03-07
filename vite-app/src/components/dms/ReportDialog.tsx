@@ -5,8 +5,6 @@ import {
 	type ComAtprotoModerationCreateReport,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useMutation } from "@tanstack/react-query";
 import type React from "react";
@@ -50,11 +48,10 @@ let ReportDialog = ({
 	params: ReportDialogParams;
 	currentScreen: "list" | "conversation";
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	return (
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />
-			<Dialog.ScrollableInner label={_(msg`Report this message`)}>
+			<Dialog.ScrollableInner label={"Report this message"}>
 				<DialogInner params={params} currentScreen={currentScreen} />
 				<Dialog.Close />
 			</Dialog.ScrollableInner>
@@ -135,7 +132,6 @@ function SubmitStep({
 	goBack: () => void;
 	onComplete: () => void;
 }) {
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
 	const [details, setDetails] = useState("");
@@ -171,10 +167,10 @@ function SubmitStep({
 	const copy = useMemo(() => {
 		return {
 			convoMessage: {
-				title: _(msg`Report this message`),
+				title: "Report this message",
 			},
 		}[params.type];
-	}, [_, params]);
+	}, [params]);
 
 	return (
 		<View style={a.gap_lg}>
@@ -183,7 +179,7 @@ function SubmitStep({
 				variant="solid"
 				color="secondary"
 				shape="round"
-				label={_(msg`Go back to previous step`)}
+				label="Go back to previous step"
 				onPress={goBack}
 			>
 				<ButtonIcon icon={Chevron} />
@@ -192,32 +188,28 @@ function SubmitStep({
 			<View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
 				<Text style={[a.text_2xl, a.font_bold]}>{copy.title}</Text>
 				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-					<Trans>Your report will be sent to the Bluesky Moderation Service</Trans>
+					Your report will be sent to the Bluesky Moderation Service
 				</Text>
 			</View>
 
 			{params.type === "convoMessage" && <PreviewMessage message={params.message} />}
 
 			<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-				<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
-					<Trans>Reason:</Trans>
-				</Text>{" "}
+				<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>Reason:</Text>{" "}
 				<Text style={[a.font_bold, a.text_md]}>{reportOption.title}</Text>
 			</Text>
 
 			<Divider />
 
 			<View style={[a.gap_md]}>
-				<Text style={[t.atoms.text_contrast_medium]}>
-					<Trans>Optionally provide additional information below:</Trans>
-				</Text>
+				<Text style={[t.atoms.text_contrast_medium]}>Optionally provide additional information below:</Text>
 
 				<View style={[a.relative, a.w_full]}>
 					<Dialog.Input
 						multiline
 						defaultValue={details}
 						onChangeText={setDetails}
-						label={_(msg`Text field`)}
+						label="Text field"
 						style={{ paddingRight: 60 }}
 						numberOfLines={5}
 					/>
@@ -242,7 +234,7 @@ function SubmitStep({
 			<View style={[a.flex_row, a.align_center, a.justify_end, a.gap_lg]}>
 				{error && (
 					<Text style={[a.flex_1, a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-						<Trans>There was an issue sending your report. Please check your internet connection.</Trans>
+						There was an issue sending your report. Please check your internet connection.
 					</Text>
 				)}
 
@@ -251,12 +243,10 @@ function SubmitStep({
 					size="large"
 					variant="solid"
 					color="negative"
-					label={_(msg`Send report`)}
+					label="Send report"
 					onPress={() => submit()}
 				>
-					<ButtonText>
-						<Trans>Send report</Trans>
-					</ButtonText>
+					<ButtonText>Send report</ButtonText>
 					<ButtonIcon icon={submitting ? Loader : SendIcon} />
 				</Button>
 			</View>
@@ -273,7 +263,6 @@ function DoneStep({
 	currentScreen: "list" | "conversation";
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 	const control = Dialog.useDialogContext();
 	const { gtMobile } = useBreakpoints();
@@ -289,21 +278,21 @@ function DoneStep({
 			}
 		},
 		onError: () => {
-			Toast.show(_(msg`Could not leave chat`), "xmark");
+			Toast.show("Could not leave chat", "xmark");
 		},
 	});
 
-	let btnText = _(msg`Done`);
+	let btnText = "Done";
 	let toastMsg: string | undefined;
 	if (actions.includes("leave") && actions.includes("block")) {
-		btnText = _(msg`Block and Delete`);
-		toastMsg = _(msg`Conversation deleted`);
+		btnText = "Block and Delete";
+		toastMsg = "Conversation deleted";
 	} else if (actions.includes("leave")) {
-		btnText = _(msg`Delete Conversation`);
-		toastMsg = _(msg`Conversation deleted`);
+		btnText = "Delete Conversation";
+		toastMsg = "Conversation deleted";
 	} else if (actions.includes("block")) {
-		btnText = _(msg`Block User`);
-		toastMsg = _(msg`User blocked`);
+		btnText = "Block User";
+		toastMsg = "User blocked";
 	}
 
 	const onPressPrimaryAction = () => {
@@ -323,26 +312,20 @@ function DoneStep({
 	return (
 		<View style={a.gap_2xl}>
 			<View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
-				<Text style={[a.text_2xl, a.font_bold]}>
-					<Trans>Report submitted</Trans>
-				</Text>
+				<Text style={[a.text_2xl, a.font_bold]}>Report submitted</Text>
 				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-					<Trans>Our moderation team has received your report.</Trans>
+					Our moderation team has received your report.
 				</Text>
 			</View>
-			<Toggle.Group label={_(msg`Block and/or delete this conversation`)} values={actions} onChange={setActions}>
+			<Toggle.Group label={"Block and/or delete this conversation"} values={actions} onChange={setActions}>
 				<View style={[a.gap_md]}>
-					<Toggle.Item name="block" label={_(msg`Block user`)}>
+					<Toggle.Item name="block" label={"Block user"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={[a.text_md]}>
-							<Trans>Block user</Trans>
-						</Toggle.LabelText>
+						<Toggle.LabelText style={[a.text_md]}>Block user</Toggle.LabelText>
 					</Toggle.Item>
-					<Toggle.Item name="leave" label={_(msg`Delete conversation`)}>
+					<Toggle.Item name="leave" label={"Delete conversation"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={[a.text_md]}>
-							<Trans>Delete conversation</Trans>
-						</Toggle.LabelText>
+						<Toggle.LabelText style={[a.text_md]}>Delete conversation</Toggle.LabelText>
 					</Toggle.Item>
 				</View>
 			</Toggle.Group>
@@ -358,7 +341,7 @@ function DoneStep({
 					<ButtonText>{btnText}</ButtonText>
 				</Button>
 				<Button
-					label={_(msg`Close`)}
+					label={"Close"}
 					onPress={() => control.close()}
 					size={platform({ native: "small", web: "large" })}
 					variant={platform({
@@ -367,9 +350,7 @@ function DoneStep({
 					})}
 					color="secondary"
 				>
-					<ButtonText>
-						<Trans>Close</Trans>
-					</ButtonText>
+					<ButtonText>Close</ButtonText>
 				</Button>
 			</View>
 		</View>

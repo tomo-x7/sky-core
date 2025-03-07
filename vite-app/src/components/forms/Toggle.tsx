@@ -101,7 +101,7 @@ export function Group({
 				setMaxReached(false);
 			}
 		}
-	}, [type, values.length, maxSelections, maxReached, setMaxReached]);
+	}, [type, values.length, maxSelections, maxReached]);
 
 	const context = React.useMemo(
 		() => ({

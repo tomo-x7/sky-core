@@ -27,8 +27,12 @@ export * from "#/components/Dialog/types";
 export * from "#/components/Dialog/utils";
 export { Input } from "#/components/forms/TextField";
 
-const stopPropagation = (e: Event) => e.stopPropagation();
-const preventDefault = (e: Event) => e.preventDefault();
+function stopPropagation<T extends { stopPropagation: () => void } = Event>(e: T) {
+	return e.stopPropagation();
+}
+function preventDefault<T extends { preventDefault: () => void } = Event>(e: T) {
+	e.preventDefault();
+}
 
 export function Outer({ children, control, onClose, webOptions }: React.PropsWithChildren<DialogOuterProps>) {
 	const { gtMobile } = useBreakpoints();
@@ -109,6 +113,7 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 									webOptions?.alignCenter ? a.justify_center : undefined,
 									a.align_center,
 									{
+										//@ts-ignore
 										overflowY: "auto",
 										paddingVertical: gtMobile ? "10vh" : a.pt_xl.paddingTop,
 									},
@@ -125,6 +130,7 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 										a.w_full,
 										a.z_20,
 										a.align_center,
+										//@ts-ignore
 										web({ minHeight: "60vh", position: "static" }),
 									]}
 								>
@@ -155,16 +161,14 @@ export function Inner({
 	useFocusGuards();
 	return (
 		<FocusScope loop asChild trapped>
-			<View
-				role="dialog"
-				aria-role="dialog"
+			<dialog
 				aria-label={label}
 				aria-labelledby={accessibilityLabelledBy}
 				aria-describedby={accessibilityDescribedBy}
-				// @ts-expect-error web only -prf
 				onClick={stopPropagation}
-				onStartShouldSetResponder={(_) => true}
+				onStartShouldSetResponder={() => true}
 				onTouchEnd={stopPropagation}
+				//@ts-ignore
 				style={flatten([
 					a.relative,
 					a.rounded_md,
@@ -191,7 +195,7 @@ export function Inner({
 					{header}
 					<View style={[gtMobile ? a.p_2xl : a.p_xl, contentContainerStyle]}>{children}</View>
 				</DismissableLayer>
-			</View>
+			</dialog>
 		</FocusScope>
 	);
 }
@@ -200,6 +204,7 @@ export const ScrollableInner = Inner;
 
 export const InnerFlatList = React.forwardRef<
 	FlatList,
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	FlatListProps<any> & { label: string } & {
 		webInnerStyle?: StyleProp<ViewStyle>;
 		webInnerContentContainerStyle?: StyleProp<ViewStyle>;
@@ -213,6 +218,7 @@ export const InnerFlatList = React.forwardRef<
 				a.overflow_hidden,
 				a.px_0,
 				// 100 minus 10vh of paddingVertical
+				//@ts-ignore
 				web({ maxHeight: "80vh" }),
 				webInnerStyle,
 			]}
@@ -260,6 +266,7 @@ function Backdrop() {
 	return (
 		<View style={{ opacity: 0.8 }}>
 			<View
+				//@ts-ignore
 				style={[a.fixed, a.inset_0, { backgroundColor: t.palette.black }, !reduceMotionEnabled && a.fade_in]}
 			/>
 		</View>

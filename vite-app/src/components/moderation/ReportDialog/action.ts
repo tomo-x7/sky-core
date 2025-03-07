@@ -1,15 +1,11 @@
 import type { $Typed, ChatBskyConvoDefs, ComAtprotoModerationCreateReport } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 
-import { logger } from "#/logger";
 import { useAgent } from "#/state/session";
 import type { ReportState } from "./state";
 import type { ParsedReportSubject } from "./types";
 
 export function useSubmitReportMutation() {
-	const { _ } = useLingui();
 	const agent = useAgent();
 
 	return useMutation({
@@ -21,10 +17,10 @@ export function useSubmitReportMutation() {
 			state: ReportState;
 		}) {
 			if (!state.selectedOption) {
-				throw new Error(_(msg`Please select a reason for this report`));
+				throw new Error("Please select a reason for this report");
 			}
 			if (!state.selectedLabeler) {
-				throw new Error(_(msg`Please select a moderation service`));
+				throw new Error("Please select a moderation service");
 			}
 
 			let report:
@@ -75,21 +71,12 @@ export function useSubmitReportMutation() {
 				}
 			}
 
-			if (__DEV__) {
-				logger.info("Submitting report", {
-					labeler: {
-						handle: state.selectedLabeler.creator.handle,
-					},
-					report,
-				});
-			} else {
-				await agent.createModerationReport(report, {
-					encoding: "application/json",
-					headers: {
-						"atproto-proxy": `${state.selectedLabeler.creator.did}#atproto_labeler`,
-					},
-				});
-			}
+			await agent.createModerationReport(report, {
+				encoding: "application/json",
+				headers: {
+					"atproto-proxy": `${state.selectedLabeler.creator.did}#atproto_labeler`,
+				},
+			});
 		},
 	});
 }

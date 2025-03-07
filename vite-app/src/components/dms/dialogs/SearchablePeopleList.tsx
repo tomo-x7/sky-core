@@ -1,6 +1,4 @@
 import { type ModerationOpts, moderateProfile } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { TextInput, View } from "react-native";
@@ -56,7 +54,6 @@ export function SearchablePeopleList({
 	showRecentConvos?: boolean;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const moderationOpts = useModerationOpts();
 	const control = Dialog.useDialogContext();
 	const [headerHeight, setHeaderHeight] = useState(0);
@@ -77,7 +74,7 @@ export function SearchablePeopleList({
 			_items.push({
 				type: "empty",
 				key: "empty",
-				message: _(msg`We're having network issues, try again`),
+				message: "We're having network issues, try again",
 			});
 		} else if (searchText.length) {
 			if (results?.length) {
@@ -101,7 +98,7 @@ export function SearchablePeopleList({
 				.fill(0)
 				.map((__, i) => ({
 					type: "placeholder",
-					key: i + "",
+					key: `${i}`,
 				}));
 
 			if (showRecentConvos) {
@@ -175,10 +172,10 @@ export function SearchablePeopleList({
 		}
 
 		return _items;
-	}, [_, searchText, results, isError, currentAccount?.did, follows, convos, showRecentConvos]);
+	}, [searchText, results, isError, currentAccount?.did, follows, convos, showRecentConvos]);
 
 	if (searchText && !isFetching && !items.length && !isError) {
-		items.push({ type: "empty", key: "empty", message: _(msg`No results`) });
+		items.push({ type: "empty", key: "empty", message: "No results" });
 	}
 
 	const renderItems = useCallback(
@@ -190,6 +187,7 @@ export function SearchablePeopleList({
 							key={item.key}
 							enabled={item.enabled}
 							profile={item.profile}
+							// biome-ignore lint/style/noNonNullAssertion: <explanation>
 							moderationOpts={moderationOpts!}
 							onPress={onSelectChat}
 						/>
@@ -237,7 +235,7 @@ export function SearchablePeopleList({
 					</Text>
 					{isWeb ? (
 						<Button
-							label={_(msg`Close`)}
+							label={"Close"}
 							size="small"
 							shape="round"
 							variant={isWeb ? "ghost" : "solid"}
@@ -258,7 +256,7 @@ export function SearchablePeopleList({
 
 				<View style={web([a.pt_xs])}>
 					<SearchInput
-						inputRef={inputRef}
+						inputRef={inputRef as React.RefObject<TextInput>}
 						value={searchText}
 						onChangeText={(text) => {
 							setSearchText(text);
@@ -269,7 +267,7 @@ export function SearchablePeopleList({
 				</View>
 			</View>
 		);
-	}, [t.atoms.border_contrast_low, t.atoms.bg, t.atoms.text_contrast_high, _, title, searchText, control]);
+	}, [t.atoms.border_contrast_low, t.atoms.bg, t.atoms.text_contrast_high, title, searchText, control]);
 
 	return (
 		<Dialog.InnerFlatList
@@ -279,7 +277,8 @@ export function SearchablePeopleList({
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
-			style={[web([a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]), native({ height: "100%" })]}
+			//@ts-ignore
+			style={[web([a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0])]}
 			webInnerContentContainerStyle={a.py_0}
 			webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
 			scrollIndicatorInsets={{ top: headerHeight }}
@@ -300,7 +299,6 @@ function ProfileCard({
 	onPress: (did: string) => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const moderation = moderateProfile(profile, moderationOpts);
 	const handle = sanitizeHandle(profile.handle, "@");
 	const displayName = sanitizeDisplayName(
@@ -313,7 +311,7 @@ function ProfileCard({
 	}, [onPress, profile.did]);
 
 	return (
-		<Button disabled={!enabled} label={_(msg`Start chat with ${displayName}`)} onPress={handleOnPress}>
+		<Button disabled={!enabled} label={`Start chat with ${displayName}`} onPress={handleOnPress}>
 			{({ hovered, pressed, focused }) => (
 				<View
 					style={[
@@ -347,7 +345,7 @@ function ProfileCard({
 							{displayName}
 						</Text>
 						<Text style={[a.leading_tight, t.atoms.text_contrast_high]} numberOfLines={2}>
-							{!enabled ? <Trans>{handle} can't be messaged</Trans> : handle}
+							{!enabled ? <>{handle} can't be messaged</> : handle}
 						</Text>
 					</View>
 				</View>
@@ -394,7 +392,6 @@ function SearchInput({
 	inputRef: React.RefObject<TextInput>;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { state: hovered, onIn: onMouseEnter, onOut: onMouseLeave } = useInteractionState();
 	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
 	const interacted = hovered || focused;
@@ -412,7 +409,7 @@ function SearchInput({
 			<TextInput
 				// @ts-ignore bottom sheet input types issue — esb
 				ref={inputRef}
-				placeholder={_(msg`Search`)}
+				placeholder={"Search"}
 				value={value}
 				onChangeText={onChangeText}
 				onFocus={onFocus}
@@ -432,8 +429,8 @@ function SearchInput({
 				autoComplete="off"
 				autoCapitalize="none"
 				autoFocus
-				accessibilityLabel={_(msg`Search profiles`)}
-				accessibilityHint={_(msg`Searches for profiles`)}
+				accessibilityLabel={"Search profiles"}
+				accessibilityHint={"Searches for profiles"}
 			/>
 		</View>
 	);

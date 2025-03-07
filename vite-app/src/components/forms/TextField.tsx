@@ -45,7 +45,7 @@ export function Root({ children, isInvalid = false }: RootProps) {
 
 	const context = React.useMemo(
 		() => ({
-			inputRef,
+			inputRef: inputRef as React.RefObject<TextInput>,
 			hovered,
 			onHoverIn,
 			onHoverOut,
@@ -54,7 +54,7 @@ export function Root({ children, isInvalid = false }: RootProps) {
 			onBlur,
 			isInvalid,
 		}),
-		[inputRef, hovered, onHoverIn, onHoverOut, focused, onFocus, onBlur, isInvalid],
+		[hovered, onHoverIn, onHoverOut, focused, onFocus, onBlur, isInvalid],
 	);
 
 	return (
@@ -157,6 +157,7 @@ export function createInput(Component: typeof TextInput) {
 			);
 		}
 
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		const refs = mergeRefs([ctx.inputRef, inputRef!].filter(Boolean));
 
 		const flattened = StyleSheet.flatten([
@@ -184,7 +185,7 @@ export function createInput(Component: typeof TextInput) {
 			}),
 			style,
 		]);
-
+		//@ts-ignore
 		applyFonts(flattened, fonts.family);
 
 		// should always be defined on `typography`
@@ -218,6 +219,7 @@ export function createInput(Component: typeof TextInput) {
 					placeholder={placeholder || label}
 					placeholderTextColor={t.palette.contrast_500}
 					keyboardAppearance={t.name === "light" ? "light" : "dark"}
+					//@ts-ignore
 					style={flattened}
 				/>
 

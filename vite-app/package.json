@@ -18,6 +18,7 @@
 		"@fortawesome/fontawesome-svg-core": "^6.7.2",
 		"@fortawesome/free-regular-svg-icons": "^6.7.2",
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
+		"@fortawesome/react-fontawesome": "^0.2.2",
 		"@ipld/dag-cbor": "^9.2.2",
 		"@radix-ui/react-dismissable-layer": "^1.1.5",
 		"@radix-ui/react-dropdown-menu": "^2.1.6",
@@ -82,11 +83,17 @@
 		"@types/react": "^19.0.10",
 		"@types/react-dom": "^19.0.4",
 		"@vitejs/plugin-react-swc": "^3.8.0",
+		"react-native": "^0.78.0",
+		"react-native-reanimated": "^3.17.1",
+		"react-native-svg": "^15.11.2",
 		"typescript": "~5.7.2",
 		"vite": "^6.2.0"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["@swc/core", "esbuild"]
+		"onlyBuiltDependencies": [
+			"@swc/core",
+			"esbuild"
+		]
 	},
 	"resolutions": {
 		"react-is": "^18.0.0"

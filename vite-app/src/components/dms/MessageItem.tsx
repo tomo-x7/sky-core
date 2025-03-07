@@ -1,7 +1,4 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, RichText as RichTextAPI } from "@atproto/api";
-import type { I18n } from "@lingui/core";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { useCallback, useMemo, useRef } from "react";
 import { type GestureResponderEvent, LayoutAnimation, type StyleProp, type TextStyle, View } from "react-native";
 
@@ -146,7 +143,6 @@ let MessageItemMetadata = ({
 	style: StyleProp<TextStyle>;
 }): React.ReactNode => {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { message } = item;
 
 	const handleRetry = useCallback(
@@ -160,27 +156,21 @@ let MessageItemMetadata = ({
 		[item],
 	);
 
-	const relativeTimestamp = useCallback(
-		(i18n: I18n, timestamp: string) => {
-			const date = new Date(timestamp);
-			const now = new Date();
+	const relativeTimestamp = useCallback((timestamp: string) => {
+		const date = new Date(timestamp);
+		const now = new Date();
 
-			const time = i18n.date(date, {
-				hour: "numeric",
-				minute: "numeric",
-			});
+		const time = date.toLocaleString(undefined, { hour: "numeric", minute: "numeric" });
 
-			const diff = now.getTime() - date.getTime();
+		const diff = now.getTime() - date.getTime();
 
-			// if under 30 seconds
-			if (diff < 1000 * 30) {
-				return _(msg`Now`);
-			}
+		// if under 30 seconds
+		if (diff < 1000 * 30) {
+			return "Now";
+		}
 
-			return time;
-		},
-		[_],
-	);
+		return time;
+	}, []);
 
 	return (
 		<Text style={[a.text_xs, a.mt_2xs, a.mb_lg, t.atoms.text_contrast_medium, style]}>
@@ -200,19 +190,19 @@ let MessageItemMetadata = ({
 							},
 						]}
 					>
-						{_(msg`Failed to send`)}
+						{"Failed to send"}
 					</Text>
 					{item.retry && (
 						<>
 							{" "}
 							&middot;{" "}
 							<InlineLinkText
-								label={_(msg`Click to retry failed message`)}
+								label={"Click to retry failed message"}
 								to="#"
 								onPress={handleRetry}
 								style={[a.text_xs]}
 							>
-								{_(msg`Retry`)}
+								{"Retry"}
 							</InlineLinkText>
 						</>
 					)}

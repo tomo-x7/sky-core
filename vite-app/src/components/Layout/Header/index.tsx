@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { createContext, useCallback, useContext } from "react";
 import { type GestureResponderEvent, Keyboard, View } from "react-native";
@@ -33,7 +31,7 @@ export function Outer({
 }: {
 	children: React.ReactNode;
 	noBottomBorder?: boolean;
-	headerRef?: React.MutableRefObject<View | null>;
+	headerRef?: React.RefObject<View | null>;
 	sticky?: boolean;
 }) {
 	const t = useTheme();
@@ -51,6 +49,7 @@ export function Outer({
 				a.flex_row,
 				a.align_center,
 				a.gap_sm,
+				//@ts-ignore
 				sticky && web([a.sticky, { top: 0 }, a.z_10, t.atoms.bg]),
 				gutters,
 				platform({
@@ -100,7 +99,6 @@ export function Slot({ children }: { children?: React.ReactNode }) {
 }
 
 export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 
 	const onPressBack = useCallback(
@@ -119,7 +117,7 @@ export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
 	return (
 		<Slot>
 			<Button
-				label={_(msg`Go back`)}
+				label={"Go back"}
 				size="small"
 				variant="ghost"
 				color="secondary"
@@ -136,7 +134,6 @@ export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
 }
 
 export function MenuButton() {
-	const { _ } = useLingui();
 	const setDrawerOpen = useSetDrawerOpen();
 	const { gtMobile } = useBreakpoints();
 
@@ -148,7 +145,7 @@ export function MenuButton() {
 	return gtMobile ? null : (
 		<Slot>
 			<Button
-				label={_(msg`Open drawer menu`)}
+				label={"Open drawer menu"}
 				size="small"
 				variant="ghost"
 				color="secondary"

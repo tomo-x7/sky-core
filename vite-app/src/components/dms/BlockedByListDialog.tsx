@@ -1,6 +1,4 @@
 import type { ModerationCause } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -19,22 +17,21 @@ export function BlockedByListDialog({
 	control: DialogControlProps;
 	listBlocks: ModerationCause[];
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	return (
 		<Prompt.Outer control={control} testID="blockedByListDialog">
-			<Prompt.TitleText>{_(msg`User blocked by list`)}</Prompt.TitleText>
+			<Prompt.TitleText>{"User blocked by list"}</Prompt.TitleText>
 
 			<View style={[a.gap_sm, a.pb_lg]}>
 				<Text selectable style={[a.text_md, a.leading_snug, t.atoms.text_contrast_high]}>
-					{_(
-						msg`This account is blocked by one or more of your moderation lists. To unblock, please visit the lists directly and remove this user.`,
-					)}{" "}
+					{
+						"This account is blocked by one or more of your moderation lists. To unblock, please visit the lists directly and remove this user."
+					}{" "}
 				</Text>
 
 				<Text style={[a.text_md, a.leading_snug, t.atoms.text_contrast_high]}>
-					{_(msg`Lists blocking this user:`)}{" "}
+					{"Lists blocking this user:"}{" "}
 					{listBlocks.map((block, i) =>
 						block.source.type === "list" ? (
 							<React.Fragment key={block.source.list.uri}>
@@ -53,7 +50,7 @@ export function BlockedByListDialog({
 			</View>
 
 			<Prompt.Actions>
-				<Prompt.Action cta={_(msg`I understand`)} onPress={() => {}} />
+				<Prompt.Action cta={"I understand"} onPress={() => {}} />
 			</Prompt.Actions>
 
 			<Dialog.Close />

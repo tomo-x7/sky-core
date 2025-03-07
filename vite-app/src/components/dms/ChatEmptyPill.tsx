@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
@@ -17,7 +15,6 @@ let lastIndex = 0;
 
 export function ChatEmptyPill() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const playHaptic = useHaptics();
 	const [promptIndex, setPromptIndex] = React.useState(lastIndex);
 
@@ -25,15 +22,15 @@ export function ChatEmptyPill() {
 
 	const prompts = React.useMemo(() => {
 		return [
-			_(msg`Say hello!`),
-			_(msg`Share your favorite feed!`),
-			_(msg`Tell a joke!`),
-			_(msg`Share a fun fact!`),
-			_(msg`Share a cool story!`),
-			_(msg`Send a neat website!`),
-			_(msg`Clip 🐴 clop 🐴`),
+			"Say hello!",
+			"Share your favorite feed!",
+			"Tell a joke!",
+			"Share a fun fact!",
+			"Share a cool story!",
+			"Send a neat website!",
+			"Clip 🐴 clop 🐴",
 		];
-	}, [_]);
+	}, []);
 
 	const onPressIn = React.useCallback(() => {
 		if (isWeb) return;

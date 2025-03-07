@@ -1,4 +1,4 @@
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { type TextInput, View } from "react-native";
 import { useWindowDimensions } from "react-native";
@@ -48,6 +48,7 @@ export function GifSelectDialog({
 			control={control}
 			onClose={onClose}
 			nativeOptions={{
+				//@ts-ignore
 				bottomInset: 0,
 				// use system corner radius on iOS
 				...ios({ cornerRadius: undefined }),
@@ -178,7 +179,9 @@ function GifList({
 				renderItem={renderItem}
 				numColumns={gtMobile ? 3 : 2}
 				columnWrapperStyle={[a.gap_sm]}
-				contentContainerStyle={[native([a.px_xl, { minHeight: height }]), web(a.h_full_vh)]}
+				//@ts-ignore
+				contentContainerStyle={[web(a.h_full_vh)]}
+				//@ts-ignore
 				style={[web(a.h_full_vh)]}
 				ListHeaderComponent={
 					<>
@@ -274,6 +277,7 @@ export function GifPreview({
 					source={{
 						uri: gif.media_formats.tinygif.url,
 					}}
+					//@ts-ignore
 					contentFit="cover"
 					accessibilityLabel={gif.title}
 					accessibilityHint=""

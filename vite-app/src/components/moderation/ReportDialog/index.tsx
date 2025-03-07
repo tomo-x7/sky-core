@@ -1,6 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
 import type { ScrollView } from "react-native-gesture-handler";
@@ -24,7 +22,6 @@ import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Time
 import { wait } from "#/lib/async/wait";
 import { getLabelingServiceTitle } from "#/lib/moderation";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { Logger } from "#/logger";
 import { isNative } from "#/platform/detection";
 import { useMyLabelersQuery } from "#/state/queries/preferences";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
@@ -39,19 +36,15 @@ import { type ReportOption, useReportOptions } from "./utils/useReportOptions";
 
 export { useDialogControl as useReportDialogControl } from "#/components/Dialog";
 
-const logger = Logger.create(Logger.Context.ReportDialog);
-
 export function ReportDialog(
 	props: Omit<ReportDialogProps, "subject"> & {
 		subject: ReportSubject;
 	},
 ) {
 	const subject = React.useMemo(() => parseReportSubject(props.subject), [props.subject]);
-	const onClose = React.useCallback(() => {
-		logger.metric("reportDialog:close", {});
-	}, []);
+
 	return (
-		<Dialog.Outer control={props.control} onClose={onClose}>
+		<Dialog.Outer control={props.control}>
 			<Dialog.Handle />
 			{subject ? <Inner {...props} subject={subject} /> : <Invalid />}
 		</Dialog.Outer>
@@ -63,16 +56,11 @@ export function ReportDialog(
  * developer, but nevertheless we should have a graceful fallback.
  */
 function Invalid() {
-	const { _ } = useLingui();
 	return (
-		<Dialog.ScrollableInner label={_(msg`Report dialog`)}>
-			<Text style={[a.font_heavy, a.text_xl, a.leading_snug, a.pb_xs]}>
-				<Trans>Invalid report subject</Trans>
-			</Text>
+		<Dialog.ScrollableInner label={"Report dialog"}>
+			<Text style={[a.font_heavy, a.text_xl, a.leading_snug, a.pb_xs]}>Invalid report subject</Text>
 			<Text style={[a.text_md, a.leading_snug]}>
-				<Trans>
-					Something wasn't quite right with the data you're trying to report. Please contact support.
-				</Trans>
+				Something wasn't quite right with the data you're trying to report. Please contact support.
 			</Text>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
@@ -81,7 +69,6 @@ function Invalid() {
 
 function Inner(props: ReportDialogProps) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const ref = React.useRef<ScrollView>(null);
 	const {
 		data: allLabelers,
@@ -138,8 +125,6 @@ function Inner(props: ReportDialogProps) {
 	const onSubmit = React.useCallback(async () => {
 		dispatch({ type: "clearError" });
 
-		logger.info("submitting");
-
 		try {
 			setPending(true);
 			// wait at least 1s, make it feel substantial
@@ -151,37 +136,23 @@ function Inner(props: ReportDialogProps) {
 				}),
 			);
 			setSuccess(true);
-			logger.metric("reportDialog:success", {
-				reason: state.selectedOption?.reason!,
-				labeler: state.selectedLabeler?.creator.handle!,
-				details: !!state.details,
-			});
 			// give time for user feedback
 			setTimeout(() => {
 				props.control.close();
 			}, 1e3);
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		} catch (e: any) {
-			logger.metric("reportDialog:failure", {});
-			logger.error(e, {
-				source: "ReportDialog",
-			});
 			dispatch({
 				type: "setError",
-				error: _(msg`Something went wrong. Please try again.`),
+				error: "Something went wrong. Please try again.",
 			});
 		} finally {
 			setPending(false);
 		}
-	}, [_, submitReport, state, dispatch, props, setPending, setSuccess]);
-
-	React.useEffect(() => {
-		logger.metric("reportDialog:open", {
-			subjectType: props.subject.type,
-		});
-	}, [props.subject]);
+	}, [submitReport, state, props]);
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Report dialog`)} ref={ref} style={[a.w_full, { maxWidth: 500 }]}>
+		<Dialog.ScrollableInner label={"Report dialog"} ref={ref} style={[a.w_full, { maxWidth: 500 }]}>
 			<View style={[a.gap_2xl, isNative && a.pt_md]}>
 				<StepOuter>
 					<StepTitle index={1} title={copy.subtitle} activeIndex1={state.activeStepIndex1} />
@@ -199,16 +170,12 @@ function Inner(props: ReportDialogProps) {
 						<Admonition.Outer type="error">
 							<Admonition.Row>
 								<Admonition.Icon />
-								<Admonition.Text>
-									<Trans>Something went wrong, please try again</Trans>
-								</Admonition.Text>
+								<Admonition.Text>Something went wrong, please try again</Admonition.Text>
 								<Admonition.Button
-									label={_(msg`Retry loading report options`)}
+									label={"Retry loading report options"}
 									onPress={() => refetchLabelers()}
 								>
-									<ButtonText>
-										<Trans>Retry</Trans>
-									</ButtonText>
+									<ButtonText>Retry</ButtonText>
 									<ButtonIcon icon={Retry} />
 								</Admonition.Button>
 							</Admonition.Row>
@@ -221,7 +188,7 @@ function Inner(props: ReportDialogProps) {
 										<OptionCard option={state.selectedOption} />
 									</View>
 									<Button
-										label={_(msg`Change report reason`)}
+										label={"Change report reason"}
 										size="tiny"
 										variant="solid"
 										color="secondary"
@@ -246,10 +213,7 @@ function Inner(props: ReportDialogProps) {
 									))}
 
 									{["post", "account"].includes(props.subject.type) && (
-										<Link
-											to={DMCA_LINK}
-											label={_(msg`View details for reporting a copyright violation`)}
-										>
+										<Link to={DMCA_LINK} label={"View details for reporting a copyright violation"}>
 											{({ hovered, pressed }) => (
 												<View
 													style={[
@@ -266,7 +230,7 @@ function Inner(props: ReportDialogProps) {
 													]}
 												>
 													<Text style={[a.flex_1, a.italic, a.leading_snug]}>
-														<Trans>Need to report a copyright violation?</Trans>
+														Need to report a copyright violation?
 													</Text>
 													<SquareArrowTopRight size="sm" fill={t.atoms.text.color} />
 												</View>
@@ -280,104 +244,92 @@ function Inner(props: ReportDialogProps) {
 				</StepOuter>
 
 				<StepOuter>
-					<StepTitle
-						index={2}
-						title={_(msg`Select moderation service`)}
-						activeIndex1={state.activeStepIndex1}
-					/>
-					{state.activeStepIndex1 >= 2 && (
-						<>
-							{state.selectedLabeler ? (
-								<>
-									{hasSingleSupportedLabeler ? (
-										<LabelerCard labeler={state.selectedLabeler} />
-									) : (
-										<View style={[a.flex_row, a.align_center, a.gap_md]}>
-											<View style={[a.flex_1]}>
-												<LabelerCard labeler={state.selectedLabeler} />
-											</View>
-											<Button
-												label={_(msg`Change moderation service`)}
-												size="tiny"
-												variant="solid"
-												color="secondary"
-												shape="round"
-												onPress={() => {
-													dispatch({ type: "clearLabeler" });
-												}}
-											>
-												<ButtonIcon icon={X} />
-											</Button>
+					<StepTitle index={2} title={"Select moderation service"} activeIndex1={state.activeStepIndex1} />
+					{state.activeStepIndex1 >= 2 &&
+						(state.selectedLabeler ? (
+							<>
+								{hasSingleSupportedLabeler ? (
+									<LabelerCard labeler={state.selectedLabeler} />
+								) : (
+									<View style={[a.flex_row, a.align_center, a.gap_md]}>
+										<View style={[a.flex_1]}>
+											<LabelerCard labeler={state.selectedLabeler} />
 										</View>
-									)}
-								</>
-							) : (
-								<>
-									{hasSupportedLabelers ? (
-										<View style={[a.gap_sm]}>
-											{hasSingleSupportedLabeler ? (
-												<>
-													<LabelerCard labeler={supportedLabelers[0]} />
-													<ActionOnce
-														check={() => !state.selectedLabeler}
-														callback={() => {
-															dispatch({
-																type: "selectLabeler",
-																labeler: supportedLabelers[0],
-															});
+										<Button
+											label={"Change moderation service"}
+											size="tiny"
+											variant="solid"
+											color="secondary"
+											shape="round"
+											onPress={() => {
+												dispatch({ type: "clearLabeler" });
+											}}
+										>
+											<ButtonIcon icon={X} />
+										</Button>
+									</View>
+								)}
+							</>
+						) : (
+							<>
+								{hasSupportedLabelers ? (
+									<View style={[a.gap_sm]}>
+										{hasSingleSupportedLabeler ? (
+											<>
+												<LabelerCard labeler={supportedLabelers[0]} />
+												<ActionOnce
+													check={() => !state.selectedLabeler}
+													callback={() => {
+														dispatch({
+															type: "selectLabeler",
+															labeler: supportedLabelers[0],
+														});
+													}}
+												/>
+											</>
+										) : (
+											<>
+												{supportedLabelers.map((l) => (
+													<LabelerCard
+														key={l.creator.did}
+														labeler={l}
+														onSelect={() => {
+															dispatch({ type: "selectLabeler", labeler: l });
 														}}
 													/>
-												</>
-											) : (
-												<>
-													{supportedLabelers.map((l) => (
-														<LabelerCard
-															key={l.creator.did}
-															labeler={l}
-															onSelect={() => {
-																dispatch({ type: "selectLabeler", labeler: l });
-															}}
-														/>
-													))}
-												</>
-											)}
-										</View>
-									) : (
-										// should never happen in our app
-										<Admonition.Admonition type="warning">
-											<Trans>
-												Unfortunately, none of your subscribed labelers supports this report
-												type.
-											</Trans>
-										</Admonition.Admonition>
-									)}
-								</>
-							)}
-						</>
-					)}
+												))}
+											</>
+										)}
+									</View>
+								) : (
+									// should never happen in our app
+									<Admonition.Admonition type="warning">
+										Unfortunately, none of your subscribed labelers supports this report type.
+									</Admonition.Admonition>
+								)}
+							</>
+						))}
 				</StepOuter>
 
 				<StepOuter>
-					<StepTitle index={3} title={_(msg`Submit report`)} activeIndex1={state.activeStepIndex1} />
+					<StepTitle index={3} title={"Submit report"} activeIndex1={state.activeStepIndex1} />
 					{state.activeStepIndex1 === 3 && (
 						<>
 							<View style={[a.pb_xs, a.gap_xs]}>
 								<Text style={[a.leading_snug, a.pb_xs]}>
-									<Trans>
-										Your report will be sent to{" "}
-										<Text style={[a.font_bold, a.leading_snug]}>
-											{state.selectedLabeler?.creator.displayName}
-										</Text>
-										.
-									</Trans>{" "}
+									Your report will be sent to{" "}
+									<Text style={[a.font_bold, a.leading_snug]}>
+										{state.selectedLabeler?.creator.displayName}
+									</Text>
+									.{" "}
 									{!state.detailsOpen ? (
 										<InlineLinkText
-											label={_(msg`Add more details (optional)`)}
+											label={"Add more details (optional)"}
 											{...createStaticClick(() => {
 												dispatch({ type: "showDetails" });
 											})}
 										>
-											<Trans>Add more details (optional)</Trans>
+											Add more details (optional)
 										</InlineLinkText>
 									) : null}
 								</Text>
@@ -390,7 +342,7 @@ function Inner(props: ReportDialogProps) {
 											onChangeText={(details) => {
 												dispatch({ type: "setDetails", details });
 											}}
-											label={_(msg`Additional details (limit 300 characters)`)}
+											label={"Additional details (limit 300 characters)"}
 											style={{ paddingRight: 60 }}
 											numberOfLines={4}
 										/>
@@ -413,16 +365,14 @@ function Inner(props: ReportDialogProps) {
 								)}
 							</View>
 							<Button
-								label={_(msg`Submit report`)}
+								label={"Submit report"}
 								size="large"
 								variant="solid"
 								color="primary"
 								disabled={isPending || isSuccess}
 								onPress={onSubmit}
 							>
-								<ButtonText>
-									<Trans>Submit report</Trans>
-								</ButtonText>
+								<ButtonText>Submit report</ButtonText>
 								<ButtonIcon icon={isSuccess ? CheckThin : isPending ? Loader : PaperPlane} />
 							</Button>
 
@@ -544,13 +494,12 @@ function OptionCard({
 	onSelect?: (option: ReportOption) => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const gutters = useGutters(["compact"]);
 	const onPress = React.useCallback(() => {
 		onSelect?.(option);
 	}, [onSelect, option]);
 	return (
-		<Button label={_(msg`Create report for ${option.title}`)} onPress={onPress} disabled={!onSelect}>
+		<Button label={`Create report for ${option.title}`} onPress={onPress} disabled={!onSelect}>
 			{({ hovered, pressed }) => (
 				<View
 					style={[
@@ -564,9 +513,7 @@ function OptionCard({
 					]}
 				>
 					<Text style={[a.text_md, a.font_bold, a.leading_snug]}>{option.title}</Text>
-					<Text style={[a.text_sm, , a.leading_snug, t.atoms.text_contrast_medium]}>
-						{option.description}
-					</Text>
+					<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>{option.description}</Text>
 				</View>
 			)}
 		</Button>
@@ -597,7 +544,6 @@ function LabelerCard({
 	onSelect?: (option: AppBskyLabelerDefs.LabelerViewDetailed) => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const onPress = React.useCallback(() => {
 		onSelect?.(labeler);
 	}, [onSelect, labeler]);
@@ -606,7 +552,7 @@ function LabelerCard({
 		handle: labeler.creator.handle,
 	});
 	return (
-		<Button label={_(msg`Send report to ${title}`)} onPress={onPress} disabled={!onSelect}>
+		<Button label={`Send report to ${title}`} onPress={onPress} disabled={!onSelect}>
 			{({ hovered, pressed }) => (
 				<View
 					style={[
@@ -624,8 +570,8 @@ function LabelerCard({
 					<UserAvatar type="labeler" size={36} avatar={labeler.creator.avatar} />
 					<View style={[a.flex_1]}>
 						<Text style={[a.text_md, a.font_bold, a.leading_snug]}>{title}</Text>
-						<Text style={[a.text_sm, , a.leading_snug, t.atoms.text_contrast_medium]}>
-							<Trans>By {sanitizeHandle(labeler.creator.handle, "@")}</Trans>
+						<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
+							By {sanitizeHandle(labeler.creator.handle, "@")}
 						</Text>
 					</View>
 				</View>

@@ -1,7 +1,5 @@
 import { type ChatBskyConvoDefs, RichText } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
-import * as Clipboard from "expo-clipboard";
+// import * as Clipboard from "expo-clipboard";
 import React from "react";
 import { LayoutAnimation, Pressable, View } from "react-native";
 
@@ -33,7 +31,6 @@ export let MessageMenu = ({
 	message: ChatBskyConvoDefs.MessageView;
 	control: Menu.MenuControlProps;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const convo = useConvoActive();
@@ -53,9 +50,9 @@ export let MessageMenu = ({
 			true,
 		);
 
-		Clipboard.setStringAsync(str);
-		Toast.show(_(msg`Copied to clipboard`), "clipboard-check");
-	}, [_, message.text, message.facets]);
+		new Clipboard().writeText(str);
+		Toast.show("Copied to clipboard", "clipboard-check");
+	}, [message.text, message.facets]);
 
 	const onPressTranslateMessage = React.useCallback(() => {
 		const translatorUrl = getTranslatorLink(message.text, langPrefs.primaryLanguage);
@@ -66,16 +63,16 @@ export let MessageMenu = ({
 		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 		convo
 			.deleteMessage(message.id)
-			.then(() => Toast.show(_(msg`Message deleted`)))
-			.catch(() => Toast.show(_(msg`Failed to delete message`)));
-	}, [_, convo, message.id]);
+			.then(() => Toast.show("Message deleted"))
+			.catch(() => Toast.show("Failed to delete message"));
+	}, [convo, message.id]);
 
 	return (
 		<>
 			<Menu.Root control={control}>
 				{isWeb && (
 					<View style={{ opacity: triggerOpacity }}>
-						<Menu.Trigger label={_(msg`Chat settings`)}>
+						<Menu.Trigger label={"Chat settings"}>
 							{({ props, state }) => (
 								<Pressable
 									{...props}
@@ -98,18 +95,18 @@ export let MessageMenu = ({
 							<Menu.Group>
 								<Menu.Item
 									testID="messageDropdownTranslateBtn"
-									label={_(msg`Translate`)}
+									label={"Translate"}
 									onPress={onPressTranslateMessage}
 								>
-									<Menu.ItemText>{_(msg`Translate`)}</Menu.ItemText>
+									<Menu.ItemText>{"Translate"}</Menu.ItemText>
 									<Menu.ItemIcon icon={Translate} position="right" />
 								</Menu.Item>
 								<Menu.Item
 									testID="messageDropdownCopyBtn"
-									label={_(msg`Copy message text`)}
+									label={"Copy message text"}
 									onPress={onCopyMessage}
 								>
-									<Menu.ItemText>{_(msg`Copy message text`)}</Menu.ItemText>
+									<Menu.ItemText>{"Copy message text"}</Menu.ItemText>
 									<Menu.ItemIcon icon={ClipboardIcon} position="right" />
 								</Menu.Item>
 							</Menu.Group>
@@ -119,19 +116,19 @@ export let MessageMenu = ({
 					<Menu.Group>
 						<Menu.Item
 							testID="messageDropdownDeleteBtn"
-							label={_(msg`Delete message for me`)}
+							label={"Delete message for me"}
 							onPress={() => deleteControl.open()}
 						>
-							<Menu.ItemText>{_(msg`Delete for me`)}</Menu.ItemText>
+							<Menu.ItemText>{"Delete for me"}</Menu.ItemText>
 							<Menu.ItemIcon icon={Trash} position="right" />
 						</Menu.Item>
 						{!isFromSelf && (
 							<Menu.Item
 								testID="messageDropdownReportBtn"
-								label={_(msg`Report message`)}
+								label={"Report message"}
 								onPress={() => reportControl.open()}
 							>
-								<Menu.ItemText>{_(msg`Report`)}</Menu.ItemText>
+								<Menu.ItemText>{"Report"}</Menu.ItemText>
 								<Menu.ItemIcon icon={Warning} position="right" />
 							</Menu.Item>
 						)}
@@ -147,11 +144,11 @@ export let MessageMenu = ({
 
 			<Prompt.Basic
 				control={deleteControl}
-				title={_(msg`Delete message`)}
-				description={_(
-					msg`Are you sure you want to delete this message? The message will be deleted for you, but not for the other participant.`,
-				)}
-				confirmButtonCta={_(msg`Delete`)}
+				title={"Delete message"}
+				description={
+					"Are you sure you want to delete this message? The message will be deleted for you, but not for the other participant."
+				}
+				confirmButtonCta={"Delete"}
 				confirmButtonColor="negative"
 				onConfirm={onDelete}
 			/>

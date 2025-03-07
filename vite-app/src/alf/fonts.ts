@@ -63,7 +63,3 @@ export function applyFonts(style: TextStyle, fontFamily: "system" | "theme") {
 	}
 }
 
-/**
- * Here only for bundling purposes, not actually used.
- */
-export { DO_NOT_USE } from "./util/unusedUseFonts";

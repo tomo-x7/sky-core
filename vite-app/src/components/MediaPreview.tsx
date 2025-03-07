@@ -1,6 +1,6 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
 import { Trans } from "@lingui/macro";
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import type React from "react";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 

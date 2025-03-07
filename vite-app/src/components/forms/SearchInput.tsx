@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { type TextInput, View } from "react-native";
 
@@ -24,7 +22,6 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 	ref,
 ) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const showClear = value && value.length > 0;
 
 	return (
@@ -33,9 +30,9 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 				<TextField.Icon icon={MagnifyingGlassIcon} />
 				<TextField.Input
 					inputRef={ref}
-					label={label || _(msg`Search`)}
+					label={label || "Search"}
 					value={value}
-					placeholder={_(msg`Search`)}
+					placeholder={"Search"}
 					returnKeyType="search"
 					keyboardAppearance={t.scheme}
 					selectTextOnFocus={isNative}
@@ -60,7 +57,7 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 					<Button
 						testID="searchTextInputClearBtn"
 						onPress={onClearText}
-						label={_(msg`Clear search query`)}
+						label={"Clear search query"}
 						hitSlop={HITSLOP_10}
 						size="tiny"
 						shape="round"

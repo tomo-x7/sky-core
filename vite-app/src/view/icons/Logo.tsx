@@ -1,4 +1,4 @@
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import React from "react";
 import { StyleSheet, type TextProps } from "react-native";
 import Svg, { Defs, LinearGradient, Path, type PathProps, Stop, type SvgProps } from "react-native-svg";

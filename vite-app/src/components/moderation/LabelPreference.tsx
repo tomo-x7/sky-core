@@ -1,6 +1,4 @@
 import type { InterpretedLabelValueDefinition, LabelPreference } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { View } from "react-native";
 
@@ -14,7 +12,7 @@ import { getLabelStrings } from "#/lib/moderation/useLabelInfo";
 import { usePreferencesQuery, usePreferencesSetContentLabelMutation } from "#/state/queries/preferences";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "../icons/CircleInfo";
 
-export function Outer({ children }: React.PropsWithChildren<{}>) {
+export function Outer({ children }: React.PropsWithChildren) {
 	return <View style={[a.flex_row, a.gap_sm, a.px_lg, a.py_lg, a.justify_between, a.flex_wrap]}>{children}</View>;
 }
 
@@ -58,12 +56,10 @@ export function Buttons({
 	warnLabel?: string;
 	hideLabel?: string;
 }) {
-	const { _ } = useLingui();
-
 	return (
 		<View style={[{ minHeight: 35 }, a.w_full]}>
 			<ToggleButton.Group
-				label={_(msg`Configure content filtering setting for category: ${name}`)}
+				label={`Configure content filtering setting for category: ${name}`}
 				values={values}
 				onChange={onChange}
 			>
@@ -98,8 +94,6 @@ export function GlobalLabelPreference({
 	labelDefinition: InterpretedLabelValueDefinition;
 	disabled?: boolean;
 }) {
-	const { _ } = useLingui();
-
 	const { identifier } = labelDefinition;
 	const { data: preferences } = usePreferencesQuery();
 	const { mutate, variables } = usePreferencesSetContentLabelMutation();
@@ -116,9 +110,9 @@ export function GlobalLabelPreference({
 				};
 
 	const labelOptions = {
-		hide: _(msg`Hide`),
-		warn: _(msg`Warn`),
-		ignore: _(msg`Show`),
+		hide: "Hide",
+		warn: "Warn",
+		ignore: "Show",
 	};
 
 	return (
@@ -156,7 +150,6 @@ export function LabelerLabelPreference({
 	disabled?: boolean;
 	labelerDid?: string;
 }) {
-	const { _, i18n } = useLingui();
 	const t = useTheme();
 	const { gtPhone } = useBreakpoints();
 
@@ -194,7 +187,7 @@ export function LabelerLabelPreference({
 	const warnLabel = useLabelBehaviorDescription(labelDefinition, "warn");
 	const ignoreLabel = useLabelBehaviorDescription(labelDefinition, "ignore");
 	const globalLabelStrings = useGlobalLabelStrings();
-	const labelStrings = getLabelStrings(i18n.locale, globalLabelStrings, labelDefinition);
+	const labelStrings = getLabelStrings("ja", globalLabelStrings, labelDefinition);
 
 	return (
 		<Outer>
@@ -205,61 +198,54 @@ export function LabelerLabelPreference({
 
 						<Text style={[t.atoms.text_contrast_medium, a.font_bold, a.italic]}>
 							{adultDisabled ? (
-								<Trans>Adult content is disabled.</Trans>
+								<>Adult content is disabled.</>
 							) : isGlobalLabel ? (
-								<Trans>
+								<>
 									Configured in{" "}
-									<InlineLinkText
-										label={_(msg`moderation settings`)}
-										to="/moderation"
-										style={a.text_sm}
-									>
+									<InlineLinkText label={"moderation settings"} to="/moderation" style={a.text_sm}>
 										moderation settings
 									</InlineLinkText>
 									.
-								</Trans>
+								</>
 							) : null}
 						</Text>
 					</View>
 				)}
 			</Content>
 
-			{showConfig && (
-				<>
-					{cantConfigure ? (
-						<View
-							style={[
-								{ minHeight: 35 },
-								a.px_md,
-								a.py_md,
-								a.rounded_sm,
-								a.border,
-								t.atoms.border_contrast_low,
-								a.self_start,
-							]}
-						>
-							<Text emoji style={[a.font_bold, t.atoms.text_contrast_low]}>
-								{currentPrefLabel}
-							</Text>
-						</View>
-					) : (
-						<Buttons
-							name={labelStrings.name.toLowerCase()}
-							values={[pref]}
-							onChange={(values) => {
-								mutate({
-									label: identifier,
-									visibility: values[0] as LabelPreference,
-									labelerDid,
-								});
-							}}
-							ignoreLabel={ignoreLabel}
-							warnLabel={canWarn ? warnLabel : undefined}
-							hideLabel={hideLabel}
-						/>
-					)}
-				</>
-			)}
+			{showConfig &&
+				(cantConfigure ? (
+					<View
+						style={[
+							{ minHeight: 35 },
+							a.px_md,
+							a.py_md,
+							a.rounded_sm,
+							a.border,
+							t.atoms.border_contrast_low,
+							a.self_start,
+						]}
+					>
+						<Text emoji style={[a.font_bold, t.atoms.text_contrast_low]}>
+							{currentPrefLabel}
+						</Text>
+					</View>
+				) : (
+					<Buttons
+						name={labelStrings.name.toLowerCase()}
+						values={[pref]}
+						onChange={(values) => {
+							mutate({
+								label: identifier,
+								visibility: values[0] as LabelPreference,
+								labelerDid,
+							});
+						}}
+						ignoreLabel={ignoreLabel}
+						warnLabel={canWarn ? warnLabel : undefined}
+						hideLabel={hideLabel}
+					/>
+				))}
 		</Outer>
 	);
 }

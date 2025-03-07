@@ -1,5 +1,3 @@
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useCallback, useImperativeHandle } from "react";
 import { Keyboard, View } from "react-native";
 import DatePicker from "react-native-date-picker";
@@ -33,7 +31,6 @@ export function DateField({
 	accessibilityHint,
 	maximumDate,
 }: DateFieldProps) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const control = Dialog.useDialogControl();
 
@@ -92,15 +89,13 @@ export function DateField({
 							/>
 						</View>
 						<Button
-							label={_(msg`Done`)}
+							label={"Done"}
 							onPress={() => control.close()}
 							size="large"
 							color="primary"
 							variant="solid"
 						>
-							<ButtonText>
-								<Trans>Done</Trans>
-							</ButtonText>
+							<ButtonText>Done</ButtonText>
 						</Button>
 					</View>
 				</Dialog.ScrollableInner>

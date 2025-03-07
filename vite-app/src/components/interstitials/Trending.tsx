@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { ScrollView, View } from "react-native";
 
@@ -10,7 +8,6 @@ import { TrendingTopicLink } from "#/components/TrendingTopics";
 import { Text } from "#/components/Typography";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
-import { logEvent } from "#/lib/statsig/statsig";
 import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences/trending";
 import { useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
 import { useTrendingConfig } from "#/state/trending-config";
@@ -25,7 +22,6 @@ export function TrendingInterstitial() {
 
 export function Inner() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const gutters = useGutters([0, "base", 0, "base"]);
 	const trendingPrompt = Prompt.usePromptControl();
 	const { setTrendingDisabled } = useTrendingSettingsApi();
@@ -33,7 +29,6 @@ export function Inner() {
 	const noTopics = !isLoading && !error && !trending?.topics?.length;
 
 	const onConfirmHide = React.useCallback(() => {
-		logEvent("trendingTopics:hide", { context: "interstitial" });
 		setTrendingDisabled(true);
 	}, [setTrendingDisabled]);
 
@@ -57,13 +52,7 @@ export function Inner() {
 						) : !trending?.topics ? null : (
 							<>
 								{trending.topics.map((topic) => (
-									<TrendingTopicLink
-										key={topic.link}
-										topic={topic}
-										onPress={() => {
-											logEvent("trendingTopic:click", { context: "interstitial" });
-										}}
-									>
+									<TrendingTopicLink key={topic.link} topic={topic}>
 										<View style={[a.py_lg]}>
 											<Text
 												style={[
@@ -79,7 +68,7 @@ export function Inner() {
 									</TrendingTopicLink>
 								))}
 								<Button
-									label={_(msg`Hide trending topics`)}
+									label={"Hide trending topics"}
 									size="tiny"
 									variant="ghost"
 									color="secondary"
@@ -96,9 +85,9 @@ export function Inner() {
 
 			<Prompt.Basic
 				control={trendingPrompt}
-				title={_(msg`Hide trending topics?`)}
-				description={_(msg`You can update this later from your settings.`)}
-				confirmButtonCta={_(msg`Hide`)}
+				title={"Hide trending topics?"}
+				description={"You can update this later from your settings."}
+				confirmButtonCta={"Hide"}
 				onConfirm={onConfirmHide}
 			/>
 		</View>

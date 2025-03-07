@@ -1,5 +1,5 @@
 // import Svg, {Path, SvgProps} from 'react-native-svg'
-import { Image } from "expo-image";
+import { Image } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect } from "react";
 import { AccessibilityInfo, Image as RNImage, StyleSheet, View, useColorScheme } from "react-native";

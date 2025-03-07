@@ -1,6 +1,4 @@
 import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { ScrollView, View } from "react-native";
@@ -16,7 +14,6 @@ import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Time
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
 import { VIDEO_FEED_URI } from "#/lib/constants";
 import { makeCustomFeedLink } from "#/lib/routes/links";
-import { logEvent } from "#/lib/statsig/statsig";
 import { useTrendingSettingsApi } from "#/state/preferences/trending";
 import { usePostFeedQuery } from "#/state/queries/post-feed";
 import { RQKEY } from "#/state/queries/post-feed";
@@ -33,7 +30,6 @@ const FEED_PARAMS: {
 
 export function TrendingVideos() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const gutters = useGutters([0, "base"]);
 	const { data, isLoading, error } = usePostFeedQuery(FEED_DESC, FEED_PARAMS);
 
@@ -53,7 +49,6 @@ export function TrendingVideos() {
 
 	const onConfirmHide = React.useCallback(() => {
 		setTrendingVideoDisabled(true);
-		logEvent("trendingVideos:hide", { context: "interstitial:discover" });
 	}, [setTrendingVideoDisabled]);
 
 	if (error) {
@@ -65,12 +60,10 @@ export function TrendingVideos() {
 			<View style={[gutters, a.pb_sm, a.flex_row, a.align_center, a.justify_between]}>
 				<View style={[a.flex_1, a.flex_row, a.align_center, a.gap_xs]}>
 					<Graph />
-					<Text style={[a.text_md, a.font_bold, a.leading_snug]}>
-						<Trans>Trending Videos</Trans>
-					</Text>
+					<Text style={[a.text_md, a.font_bold, a.leading_snug]}>Trending Videos</Text>
 				</View>
 				<Button
-					label={_(msg`Dismiss this section`)}
+					label={"Dismiss this section"}
 					size="tiny"
 					variant="ghost"
 					color="secondary"
@@ -102,14 +95,12 @@ export function TrendingVideos() {
 							Array(10)
 								.fill(0)
 								.map((_, i) => (
-									<View key={i} style={[{ width: CARD_WIDTH }]}>
+									<View key={i.toString()} style={[{ width: CARD_WIDTH }]}>
 										<CompactVideoPostCardPlaceholder />
 									</View>
 								))
 						) : error || !data ? (
-							<Text>
-								<Trans>Whoops! Trending videos failed to load.</Trans>
-							</Text>
+							<Text>Whoops! Trending videos failed to load.</Text>
 						) : (
 							<VideoCards data={data} />
 						)}
@@ -119,9 +110,9 @@ export function TrendingVideos() {
 
 			<Prompt.Basic
 				control={trendingPrompt}
-				title={_(msg`Hide trending videos?`)}
-				description={_(msg`You can update this later from your settings.`)}
-				confirmButtonCta={_(msg`Hide`)}
+				title={"Hide trending videos?"}
+				description={"You can update this later from your settings."}
+				confirmButtonCta={"Hide"}
 				onConfirm={onConfirmHide}
 			/>
 		</View>
@@ -134,7 +125,6 @@ function VideoCards({
 	data: Exclude<ReturnType<typeof usePostFeedQuery>["data"], undefined>;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const items = React.useMemo(() => {
 		return data.pages
 			.flatMap((page) => page.slices)
@@ -160,11 +150,6 @@ function VideoCards({
 							uri: VIDEO_FEED_URI,
 							sourceInterstitial: "discover",
 						}}
-						onInteract={() => {
-							logEvent("videoCard:click", {
-								context: "interstitial:discover",
-							});
-						}}
 					/>
 				</View>
 			))}
@@ -172,7 +157,7 @@ function VideoCards({
 			<View style={[{ width: CARD_WIDTH * 2 }]}>
 				<Link
 					to={href}
-					label={_(msg`View more`)}
+					label={"View more"}
 					style={[a.justify_center, a.align_center, a.flex_1, a.rounded_md, t.atoms.bg]}
 				>
 					{({ pressed }) => (
@@ -186,9 +171,7 @@ function VideoCards({
 								},
 							]}
 						>
-							<Text style={[a.text_md]}>
-								<Trans>View more</Trans>
-							</Text>
+							<Text style={[a.text_md]}>View more</Text>
 							<View
 								style={[
 									a.align_center,

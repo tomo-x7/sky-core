@@ -188,13 +188,11 @@ export function PostInteractionSettingsDialogControlledInner(props: PostInteract
 			setIsSaving(false);
 		}
 	}, [
-		_,
 		props.postUri,
 		props.rootPostUri,
 		props.control,
 		editedPostgate,
 		editedAllowUISettings,
-		setIsSaving,
 		writePostgateRecord,
 		setThreadgateAllow,
 		isThreadgateOwnedByViewer,

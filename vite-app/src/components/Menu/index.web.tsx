@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
 import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
@@ -24,7 +22,7 @@ import { useA11y } from "#/state/a11y";
 export function useMenuControl(): Dialog.DialogControlProps {
 	const id = React.useId();
 	const [isOpen, setIsOpen] = React.useState(false);
-
+	//@ts-ignore
 	return React.useMemo(
 		() => ({
 			id,
@@ -37,7 +35,7 @@ export function useMenuControl(): Dialog.DialogControlProps {
 				setIsOpen(false);
 			},
 		}),
-		[id, isOpen, setIsOpen],
+		[id, isOpen],
 	);
 }
 
@@ -47,7 +45,6 @@ export function Root({
 }: React.PropsWithChildren<{
 	control?: Dialog.DialogOuterProps["control"];
 }>) {
-	const { _ } = useLingui();
 	const defaultControl = useMenuControl();
 	const context = React.useMemo<ContextType>(
 		() => ({
@@ -74,7 +71,7 @@ export function Root({
 						style={[a.fixed, a.inset_0, a.z_50]}
 						onPress={() => context.control.close()}
 						accessibilityHint=""
-						accessibilityLabel={_(msg`Context menu backdrop, click to close the menu.`)}
+						accessibilityLabel={("Context menu backdrop, click to close the menu.")}
 					/>
 				</Portal>
 			)}
@@ -90,6 +87,7 @@ const RadixTriggerPassThrough = React.forwardRef(
 		props: {
 			children: (
 				props: RadixPassThroughTriggerProps & {
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					ref: React.Ref<any>;
 				},
 			) => React.ReactNode;
@@ -179,7 +177,9 @@ export function Outer({
 						t.name === "light" ? t.atoms.bg : t.atoms.bg_contrast_25,
 						t.atoms.shadow_md,
 						t.atoms.border_contrast_low,
+						//@ts-ignore
 						a.overflow_auto,
+						//@ts-ignore
 						!reduceMotionEnabled && a.zoom_fade_in,
 						style,
 					]}
@@ -228,6 +228,7 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 				onFocus={onFocus}
 				onBlur={onBlur}
 				// need `flatten` here for Radix compat
+				//@ts-ignore
 				style={flatten([
 					a.flex_row,
 					a.align_center,
@@ -236,6 +237,7 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 					a.rounded_xs,
 					{ minHeight: 32, paddingHorizontal: 10 },
 					web({ outline: 0 }),
+					//@ts-ignore
 					(hovered || focused) &&
 						!rest.disabled && [
 							web({ outline: "0 !important" }),

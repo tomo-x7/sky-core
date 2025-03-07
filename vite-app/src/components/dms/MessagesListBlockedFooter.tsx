@@ -1,6 +1,4 @@
 import type { ModerationDecision } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -29,7 +27,6 @@ export function MessagesListBlockedFooter({
 }) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
-	const { _ } = useLingui();
 	const recipient = useProfileShadow(initialRecipient);
 	const [__, queueUnblock] = useProfileBlockMutationQueue(recipient);
 
@@ -62,62 +59,54 @@ export function MessagesListBlockedFooter({
 		<View style={[hasMessages && a.pt_md, a.pb_xl, a.gap_lg]}>
 			<Divider />
 			<Text style={[a.text_md, a.font_bold, a.text_center]}>
-				{isBlocking ? <Trans>You have blocked this user</Trans> : <Trans>This user has blocked you</Trans>}
+				{isBlocking ? <>You have blocked this user</> : <>This user has blocked you</>}
 			</Text>
 
 			<View style={[a.flex_row, a.justify_between, a.gap_lg, a.px_md]}>
 				<Button
-					label={_(msg`Leave chat`)}
+					label={"Leave chat"}
 					color="secondary"
 					variant="solid"
 					size="small"
 					style={[a.flex_1]}
 					onPress={leaveConvoControl.open}
 				>
-					<ButtonText style={{ color: t.palette.negative_500 }}>
-						<Trans>Leave chat</Trans>
-					</ButtonText>
+					<ButtonText style={{ color: t.palette.negative_500 }}>Leave chat</ButtonText>
 				</Button>
 				<Button
-					label={_(msg`Report`)}
+					label={"Report"}
 					color="secondary"
 					variant="solid"
 					size="small"
 					style={[a.flex_1]}
 					onPress={reportControl.open}
 				>
-					<ButtonText style={{ color: t.palette.negative_500 }}>
-						<Trans>Report</Trans>
-					</ButtonText>
+					<ButtonText style={{ color: t.palette.negative_500 }}>Report</ButtonText>
 				</Button>
 				{isBlocking && gtMobile && (
 					<Button
-						label={_(msg`Unblock`)}
+						label={"Unblock"}
 						color="secondary"
 						variant="solid"
 						size="small"
 						style={[a.flex_1]}
 						onPress={onUnblockPress}
 					>
-						<ButtonText style={{ color: t.palette.primary_500 }}>
-							<Trans>Unblock</Trans>
-						</ButtonText>
+						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>
 					</Button>
 				)}
 			</View>
 			{isBlocking && !gtMobile && (
 				<View style={[a.flex_row, a.justify_center, a.px_md]}>
 					<Button
-						label={_(msg`Unblock`)}
+						label={"Unblock"}
 						color="secondary"
 						variant="solid"
 						size="small"
 						style={[a.flex_1]}
 						onPress={onUnblockPress}
 					>
-						<ButtonText style={{ color: t.palette.primary_500 }}>
-							<Trans>Unblock</Trans>
-						</ButtonText>
+						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>
 					</Button>
 				</View>
 			)}

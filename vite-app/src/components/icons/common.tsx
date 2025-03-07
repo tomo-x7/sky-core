@@ -30,7 +30,7 @@ export function useCommonSVGProps(props: Props) {
 	let gradientDef = null;
 
 	if (gradient && tokens.gradients[gradient]) {
-		const id = gradient + "_" + nanoid();
+		const id = `${gradient}_${nanoid()}`;
 		const config = tokens.gradients[gradient];
 		_fill = `url(#${id})`;
 		gradientDef = (

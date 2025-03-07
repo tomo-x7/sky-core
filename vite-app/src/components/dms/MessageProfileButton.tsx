@@ -1,6 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
@@ -23,7 +21,6 @@ export function MessageProfileButton({
 }: {
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const navigation = useNavigation<NavigationProp>();
 	const { needsEmailVerification } = useEmail();
@@ -36,7 +33,7 @@ export function MessageProfileButton({
 			navigation.navigate("MessagesConversation", { conversation: convo.id });
 		},
 		onError: () => {
-			Toast.show(_(msg`Failed to create conversation`));
+			Toast.show("Failed to create conversation");
 		},
 	});
 
@@ -94,14 +91,14 @@ export function MessageProfileButton({
 					color="secondary"
 					variant="solid"
 					shape="round"
-					label={_(msg`Message ${profile.handle}`)}
+					label={`Message ${profile.handle}`}
 					style={[a.justify_center]}
 					onPress={onPress}
 				>
 					<ButtonIcon icon={Message} size="md" />
 				</Button>
 				<VerifyEmailDialog
-					reasonText={_(msg`Before you may message another user, you must first verify your email.`)}
+					reasonText={"Before you may message another user, you must first verify your email."}
 					control={verifyEmailControl}
 				/>
 			</>

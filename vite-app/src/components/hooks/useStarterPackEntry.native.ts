@@ -31,7 +31,7 @@ export function useStarterPackEntry() {
 			if (isAndroid) {
 				const res = await Referrer.getGooglePlayReferrerInfoAsync();
 
-				if (res && res.installReferrer) {
+				if (res?.installReferrer) {
 					uri = createStarterPackLinkFromAndroidReferrer(res.installReferrer);
 				}
 			} else {

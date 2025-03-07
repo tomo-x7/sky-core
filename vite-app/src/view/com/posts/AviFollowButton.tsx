@@ -30,7 +30,6 @@ export function AviFollowButton({
 	const profile = useProfileShadow(author);
 	const { follow } = useFollowMethods({
 		profile: profile,
-		logContext: "AvatarButton",
 	});
 	const { currentAccount, hasSession } = useSession();
 	const navigation = useNavigation<NavigationProp>();
