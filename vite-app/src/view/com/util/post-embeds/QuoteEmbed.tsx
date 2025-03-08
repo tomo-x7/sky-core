@@ -74,7 +74,7 @@ export function MaybeQuoteEmbed({
 			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
-					<>Blocked</>
+					Blocked
 				</Text>
 			</View>
 		);
@@ -83,7 +83,7 @@ export function MaybeQuoteEmbed({
 			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
-					<>Deleted</>
+					Deleted
 				</Text>
 			</View>
 		);

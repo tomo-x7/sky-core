@@ -169,13 +169,11 @@ function AltText({ text }: { text: string }) {
 				style={styles.altContainer}
 			>
 				<Text style={[styles.alt, largeAltBadge && a.text_xs]} accessible={false}>
-					<>ALT</>
+					ALT
 				</Text>
 			</TouchableOpacity>
 			<Prompt.Outer control={control}>
-				<Prompt.TitleText>
-					<>Alt Text</>
-				</Prompt.TitleText>
+				<Prompt.TitleText>Alt Text</Prompt.TitleText>
 				<Prompt.DescriptionText selectable>{text}</Prompt.DescriptionText>
 				<Prompt.Actions>
 					<Prompt.Action onPress={() => control.close()} cta={_(msg`Close`)} color="secondary" />

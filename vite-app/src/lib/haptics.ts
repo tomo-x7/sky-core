@@ -21,7 +21,7 @@ export function useHaptics() {
 
 			// DEV ONLY - show a toast when a haptic is meant to fire on simulator
 			if (__DEV__ && !Device.isDevice) {
-				Toast.show(`Buzzz!`);
+				Toast.show("Buzzz!");
 			}
 		},
 		[isHapticsDisabled],

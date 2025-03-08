@@ -29,9 +29,7 @@ export function AboutSettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>About</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>About</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
@@ -39,31 +37,23 @@ export function AboutSettingsScreen({}: Props) {
 				<SettingsList.Container>
 					<SettingsList.LinkItem to="https://bsky.social/about/support/tos" label={_(msg`Terms of Service`)}>
 						<SettingsList.ItemIcon icon={NewspaperIcon} />
-						<SettingsList.ItemText>
-							<>Terms of Service</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Terms of Service</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem
 						to="https://bsky.social/about/support/privacy-policy"
 						label={_(msg`Privacy Policy`)}
 					>
 						<SettingsList.ItemIcon icon={NewspaperIcon} />
-						<SettingsList.ItemText>
-							<>Privacy Policy</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Privacy Policy</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to={STATUS_PAGE_URL} label={_(msg`Status Page`)}>
 						<SettingsList.ItemIcon icon={GlobeIcon} />
-						<SettingsList.ItemText>
-							<>Status Page</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Status Page</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.Divider />
 					<SettingsList.LinkItem to="/sys/log" label={_(msg`System log`)}>
 						<SettingsList.ItemIcon icon={CodeLinesIcon} />
-						<SettingsList.ItemText>
-							<>System log</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>System log</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.PressableItem
 						label={_(msg`Version ${appVersion}`)}

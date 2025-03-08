@@ -58,17 +58,13 @@ export function MessagesSettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Chat Settings</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Chat Settings</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<View style={[a.p_lg, a.gap_md]}>
-					<Text style={[a.text_lg, a.font_bold]}>
-						<>Allow new messages from</>
-					</Text>
+					<Text style={[a.text_lg, a.font_bold]}>Allow new messages from</Text>
 					<Toggle.Group
 						label={_(msg`Allow new messages from`)}
 						type="radio"
@@ -77,9 +73,7 @@ export function MessagesSettingsScreen({}: Props) {
 					>
 						<View>
 							<Toggle.Item name="all" label={_(msg`Everyone`)} style={[a.justify_between, a.py_sm]}>
-								<Toggle.LabelText>
-									<>Everyone</>
-								</Toggle.LabelText>
+								<Toggle.LabelText>Everyone</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
 							<Toggle.Item
@@ -87,28 +81,22 @@ export function MessagesSettingsScreen({}: Props) {
 								label={_(msg`Users I follow`)}
 								style={[a.justify_between, a.py_sm]}
 							>
-								<Toggle.LabelText>
-									<>Users I follow</>
-								</Toggle.LabelText>
+								<Toggle.LabelText>Users I follow</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
 							<Toggle.Item name="none" label={_(msg`No one`)} style={[a.justify_between, a.py_sm]}>
-								<Toggle.LabelText>
-									<>No one</>
-								</Toggle.LabelText>
+								<Toggle.LabelText>No one</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
 						</View>
 					</Toggle.Group>
 					<Admonition type="tip">
-						<>You can continue ongoing conversations regardless of which setting you choose.</>
+						You can continue ongoing conversations regardless of which setting you choose.
 					</Admonition>
 					{isNative && (
 						<>
 							<Divider style={a.my_md} />
-							<Text style={[a.text_lg, a.font_bold]}>
-								<>Notification Sounds</>
-							</Text>
+							<Text style={[a.text_lg, a.font_bold]}>Notification Sounds</Text>
 							<Toggle.Group
 								label={_(msg`Notification sounds`)}
 								type="radio"
@@ -121,9 +109,7 @@ export function MessagesSettingsScreen({}: Props) {
 										label={_(msg`Enabled`)}
 										style={[a.justify_between, a.py_sm]}
 									>
-										<Toggle.LabelText>
-											<>Enabled</>
-										</Toggle.LabelText>
+										<Toggle.LabelText>Enabled</Toggle.LabelText>
 										<Toggle.Radio />
 									</Toggle.Item>
 									<Toggle.Item
@@ -131,9 +117,7 @@ export function MessagesSettingsScreen({}: Props) {
 										label={_(msg`Disabled`)}
 										style={[a.justify_between, a.py_sm]}
 									>
-										<Toggle.LabelText>
-											<>Disabled</>
-										</Toggle.LabelText>
+										<Toggle.LabelText>Disabled</Toggle.LabelText>
 										<Toggle.Radio />
 									</Toggle.Item>
 								</View>

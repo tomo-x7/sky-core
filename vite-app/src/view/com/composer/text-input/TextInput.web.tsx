@@ -136,7 +136,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 			const transfer = event.dataTransfer;
 
 			event.preventDefault();
-			if (transfer && transfer.types.includes("Files")) {
+			if (transfer?.types.includes("Files")) {
 				setIsDropping(true);
 			}
 		};
@@ -308,7 +308,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 		 *
 		 * `lineHeight` should always be defined here, this is defensive.
 		 */
-		style.lineHeight = style.lineHeight ? ((style.lineHeight + "px") as unknown as number) : undefined;
+		style.lineHeight = style.lineHeight ? ((`${style.lineHeight}px`) as unknown as number) : undefined;
 		style.minHeight = webForceMinHeight ? 140 : undefined;
 		return style;
 	}, [t, fonts, webForceMinHeight]);
@@ -329,7 +329,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 					>
 						<View style={[pal.view, pal.border, styles.dropModal]}>
 							<Text type="lg" style={[pal.text, pal.borderDark, styles.dropText]}>
-								<>Drop to add images</>
+								Drop to add images
 							</Text>
 						</View>
 					</Animated.View>

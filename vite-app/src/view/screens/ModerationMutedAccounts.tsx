@@ -86,10 +86,8 @@ export function ModerationMutedAccounts({}: Props) {
 						},
 					]}
 				>
-					<>
-						Muted accounts have their posts removed from your feed and from your notifications. Mutes are
-						completely private.
-					</>
+					Muted accounts have their posts removed from your feed and from your notifications. Mutes are
+					completely private.
 				</Text>
 				{isEmpty ? (
 					<View style={[pal.border]}>
@@ -98,10 +96,8 @@ export function ModerationMutedAccounts({}: Props) {
 						) : (
 							<View style={[styles.empty, pal.viewLight]}>
 								<Text type="lg" style={[pal.text, styles.emptyText]}>
-									<>
-										You have not muted any accounts yet. To mute an account, go to their profile and
-										select "Mute account" from the menu on their account.
-									</>
+									You have not muted any accounts yet. To mute an account, go to their profile and
+									select "Mute account" from the menu on their account.
 								</Text>
 							</View>
 						)}

@@ -147,7 +147,7 @@ export function Component() {
 								accessibilityHint={_(msg`Navigates to the next screen`)}
 							>
 								<Text type="xl" style={[pal.link, s.pr5]}>
-									<>Already have a code?</>
+									Already have a code?
 								</Text>
 							</TouchableOpacity>
 						</View>

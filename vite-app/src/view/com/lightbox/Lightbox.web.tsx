@@ -209,9 +209,9 @@ const styles = StyleSheet.create({
 	},
 	avi: {
 		// @ts-ignore web-only
-		maxWidth: `calc(min(400px, 100vw))`,
+		maxWidth: "calc(min(400px, 100vw))",
 		// @ts-ignore web-only
-		maxHeight: `calc(min(400px, 100vh))`,
+		maxHeight: "calc(min(400px, 100vh))",
 		padding: 16,
 		boxSizing: "border-box",
 	},

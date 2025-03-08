@@ -636,9 +636,7 @@ function Header({
 							accessibilityHint=""
 						>
 							<View style={[palInverted.view, styles.btn]}>
-								<Text style={palInverted.text}>
-									<>Subscribe</>
-								</Text>
+								<Text style={palInverted.text}>Subscribe</Text>
 							</View>
 						</NativeDropdown>
 					)
@@ -743,9 +741,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 						variant="solid"
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
-						<ButtonText>
-							<>Start adding people!</>
-						</ButtonText>
+						<ButtonText>Start adding people!</ButtonText>
 					</NewButton>
 				)}
 			</View>
@@ -817,9 +813,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 						style={[a.py_md]}
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
-						<ButtonText>
-							<>Add people</>
-						</ButtonText>
+						<ButtonText>Add people</ButtonText>
 					</NewButton>
 				</View>
 			);
@@ -836,9 +830,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					style={[a.py_sm]}
 				>
 					<ButtonIcon icon={PersonPlusIcon} />
-					<ButtonText>
-						<>Add people</>
-					</ButtonText>
+					<ButtonText>Add people</ButtonText>
 				</NewButton>
 			</View>
 		);
@@ -858,9 +850,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 						variant="solid"
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
-						<ButtonText>
-							<>Start adding people!</>
-						</ButtonText>
+						<ButtonText>Start adding people!</ButtonText>
 					</NewButton>
 				)}
 			</View>
@@ -910,7 +900,7 @@ function ErrorScreen({ error }: { error: string }) {
 			]}
 		>
 			<Text type="title-lg" style={[pal.text, s.mb10]}>
-				<>Could not load list</>
+				Could not load list
 			</Text>
 			<Text type="md" style={[pal.text, s.mb20]}>
 				{error}
@@ -925,7 +915,7 @@ function ErrorScreen({ error }: { error: string }) {
 					style={{ flexShrink: 1 }}
 				>
 					<Text type="button" style={pal.text}>
-						<>Go Back</>
+						Go Back
 					</Text>
 				</Button>
 			</View>

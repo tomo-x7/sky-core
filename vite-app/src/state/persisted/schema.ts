@@ -194,7 +194,7 @@ export function tryParse(rawData: string): Schema | undefined {
 				expected: e?.expected,
 				path: e.path?.join("."),
 			})) || [];
-		logger.error(`persisted store: data failed validation on read`, { errors });
+		logger.error("persisted store: data failed validation on read", { errors });
 		return undefined;
 	}
 }
@@ -204,7 +204,7 @@ export function tryStringify(value: Schema): string | undefined {
 		schema.parse(value);
 		return JSON.stringify(value);
 	} catch (e) {
-		logger.error(`persisted state: failed stringifying root state`, {
+		logger.error("persisted state: failed stringifying root state", {
 			message: e,
 		});
 		return undefined;

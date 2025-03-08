@@ -86,9 +86,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 	return (
 		<Dialog.ScrollableInner label={_(msg`Video settings`)}>
 			<View style={a.gap_md}>
-				<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>
-					<>Alt text</>
-				</Text>
+				<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>Alt text</Text>
 				<TextField.Root>
 					<Dialog.Input
 						label={_(msg`Alt text`)}
@@ -110,9 +108,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 				{isWeb && (
 					<>
 						<View style={[a.border_t, a.w_full, t.atoms.border_contrast_medium, a.my_md]} />
-						<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>
-							<>Captions (.vtt)</>
-						</Text>
+						<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>Captions (.vtt)</Text>
 						<SubtitleFilePicker
 							onSelectFile={handleSelectFile}
 							disabled={subtitleMissingLanguage || captions.length >= MAX_NUM_CAPTIONS}
@@ -135,7 +131,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 						</View>
 						{subtitleMissingLanguage && (
 							<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
-								<>Ensure you have selected a language for each subtitle file.</>
+								Ensure you have selected a language for each subtitle file.
 							</Text>
 						)}
 					</>
@@ -153,9 +149,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 						}}
 						style={a.mt_lg}
 					>
-						<ButtonText>
-							<>Done</>
-						</ButtonText>
+						<ButtonText>Done</ButtonText>
 					</Button>
 				</View>
 			</View>

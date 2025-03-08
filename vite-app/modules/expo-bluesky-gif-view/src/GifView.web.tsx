@@ -7,10 +7,6 @@ export class GifView extends React.PureComponent<GifViewProps> {
 	private readonly videoPlayerRef: React.RefObject<HTMLMediaElement> = React.createRef();
 	private isLoaded = false;
 
-	constructor(props: GifViewProps | Readonly<GifViewProps>) {
-		super(props);
-	}
-
 	componentDidUpdate(prevProps: Readonly<GifViewProps>) {
 		if (prevProps.autoplay !== this.props.autoplay) {
 			if (this.props.autoplay) {

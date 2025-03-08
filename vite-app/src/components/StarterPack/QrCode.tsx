@@ -49,7 +49,7 @@ export const QrCode = React.forwardRef<ViewShot, Props>(function QrCode({ starte
 				</View>
 				<View style={[a.gap_xl, a.align_center]}>
 					<Text style={[a.font_bold, a.text_center, { color: "white", fontSize: 18 }]}>
-						<>Join the conversation</>
+						Join the conversation
 					</Text>
 					<View style={[a.rounded_sm, a.overflow_hidden]}>
 						<QrCodeInner link={link} />

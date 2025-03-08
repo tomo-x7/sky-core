@@ -82,7 +82,7 @@ export const DebugModScreen = ({}: NativeStackScreenProps<CommonNavigatorParams,
 
 	const profile = React.useMemo(() => {
 		const mockedProfile = mock.profileViewBasic({
-			handle: `bob.test`,
+			handle: "bob.test",
 			displayName: "Bob Robertson",
 			description: "User with this as their bio",
 			labels:
@@ -108,7 +108,7 @@ export const DebugModScreen = ({}: NativeStackScreenProps<CommonNavigatorParams,
 				muted: scenario[0] === "mute",
 				mutedByList: undefined,
 				blockedBy: undefined,
-				blocking: scenario[0] === "block" ? `at://did:web:alice.test/app.bsky.actor.block/fake` : undefined,
+				blocking: scenario[0] === "block" ? "at://did:web:alice.test/app.bsky.actor.block/fake" : undefined,
 				blockingByList: undefined,
 			}),
 		});

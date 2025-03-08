@@ -34,9 +34,7 @@ export const SplashScreen = ({
 						<Logotype width={161} fill={t.atoms.text.color} />
 					</View>
 
-					<Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>
-						<>What's up?</>
-					</Text>
+					<Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>What's up?</Text>
 				</View>
 				<View testID="signinOrCreateAccount" style={[a.px_xl, a.gap_md, a.pb_2xl]}>
 					<Button
@@ -48,9 +46,7 @@ export const SplashScreen = ({
 						variant="solid"
 						color="primary"
 					>
-						<ButtonText>
-							<>Create account</>
-						</ButtonText>
+						<ButtonText>Create account</ButtonText>
 					</Button>
 					<Button
 						testID="signInButton"
@@ -61,9 +57,7 @@ export const SplashScreen = ({
 						variant="solid"
 						color="secondary"
 					>
-						<ButtonText>
-							<>Sign in</>
-						</ButtonText>
+						<ButtonText>Sign in</ButtonText>
 					</Button>
 				</View>
 				<View style={[a.px_lg, a.pt_md, a.pb_2xl, a.justify_center, a.align_center]}>

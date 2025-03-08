@@ -112,7 +112,7 @@ export function SelectReportOptionView(props: {
 						]}
 					>
 						<Text style={[a.flex_1, t.atoms.text_inverted, a.italic, a.leading_snug]}>
-							<>Need to report a copyright violation?</>
+							Need to report a copyright violation?
 						</Text>
 						<Link
 							to={DMCA_LINK}
@@ -121,9 +121,7 @@ export function SelectReportOptionView(props: {
 							variant="solid"
 							color="secondary"
 						>
-							<ButtonText>
-								<>View details</>
-							</ButtonText>
+							<ButtonText>View details</ButtonText>
 							<ButtonIcon position="right" icon={SquareArrowTopRight} />
 						</Link>
 					</View>

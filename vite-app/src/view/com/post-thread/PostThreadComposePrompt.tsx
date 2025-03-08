@@ -63,9 +63,7 @@ export function PostThreadComposePrompt({
 					avatar={profile?.avatar}
 					type={profile?.associated?.labeler ? "labeler" : "user"}
 				/>
-				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-					<>Write your reply</>
-				</Text>
+				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>Write your reply</Text>
 			</View>
 		</PressableScale>
 	);

@@ -54,7 +54,7 @@ export const MAX_ALT_TEXT = 2000;
 export const MAX_REPORT_REASON_GRAPHEME_LENGTH = 2000;
 
 export function IS_TEST_USER(handle?: string) {
-	return handle && handle?.endsWith(".test");
+	return handle?.endsWith(".test");
 }
 
 export function IS_PROD_SERVICE(url?: string) {

@@ -93,7 +93,7 @@ export function GifAltTextDialogLoaded({
 					<Plus size="sm" fill={t.palette.white} />
 				)}
 				<Text style={[a.font_bold, { color: t.palette.white }]} accessible={false}>
-					<>ALT</>
+					ALT
 				</Text>
 			</TouchableOpacity>
 
@@ -143,9 +143,7 @@ function AltTextInner({
 				<View style={[a.mt_md, a.gap_md]}>
 					<View style={[a.gap_sm]}>
 						<View style={[a.relative]}>
-							<TextField.LabelText>
-								<>Descriptive alt text</>
-							</TextField.LabelText>
+							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
 									label={_(msg`Alt text`)}
@@ -185,17 +183,13 @@ function AltTextInner({
 							}}
 							style={[a.flex_grow]}
 						>
-							<ButtonText>
-								<>Save</>
-							</ButtonText>
+							<ButtonText>Save</ButtonText>
 						</Button>
 					</AltTextCounterWrapper>
 				</View>
 				{/* below the text input to force tab order */}
 				<View>
-					<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-						<>Add alt text</>
-					</Text>
+					<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>Add alt text</Text>
 					<View style={[a.align_center]}>
 						<GifEmbed
 							thumb={thumb}

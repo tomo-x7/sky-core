@@ -51,26 +51,26 @@ export function Component({
 						<>
 							<FontAwesomeIcon icon="circle-exclamation" color={pal.colors.text} size={18} />
 							<Text type="title-lg" style={[pal.text, styles.title]}>
-								<>Potentially Misleading Link</>
+								Potentially Misleading Link
 							</Text>
 						</>
 					) : (
 						<Text type="title-lg" style={[pal.text, styles.title]}>
-							<>Leaving Bluesky</>
+							Leaving Bluesky
 						</Text>
 					)}
 				</View>
 
 				<View style={{ gap: 10 }}>
 					<Text type="lg" style={pal.text}>
-						<>This link is taking you to the following website:</>
+						This link is taking you to the following website:
 					</Text>
 
 					<LinkBox href={href} />
 
 					{potentiallyMisleading && (
 						<Text type="lg" style={pal.text}>
-							<>Make sure this is where you intend to go!</>
+							Make sure this is where you intend to go!
 						</Text>
 					)}
 				</View>
@@ -110,7 +110,7 @@ function LinkBox({ href }: { href: string }) {
 		try {
 			const urlp = new URL(href);
 			const [subdomain, apexdomain] = splitApexDomain(urlp.hostname);
-			return [urlp.protocol + "//" + subdomain, apexdomain, urlp.pathname + urlp.search + urlp.hash];
+			return [`${urlp.protocol}//${subdomain}`, apexdomain, urlp.pathname + urlp.search + urlp.hash];
 		} catch {
 			return ["", href, ""];
 		}

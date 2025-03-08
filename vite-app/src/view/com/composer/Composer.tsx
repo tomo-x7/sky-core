@@ -367,13 +367,13 @@ export const ComposePost = ({
 				});
 			} catch (waitErr: any) {
 				logger.error(waitErr, {
-					message: `Waiting for app view failed`,
+					message: "Waiting for app view failed",
 				});
 				// Keep going because the post *was* published.
 			}
 		} catch (e: any) {
 			logger.error(e, {
-				message: `Composer: create post failed`,
+				message: "Composer: create post failed",
 				hasImages: thread.posts.some((p) => p.embed.media?.type === "images"),
 			});
 
@@ -865,9 +865,7 @@ function ComposerTopBar({
 					onPress={onCancel}
 					accessibilityHint="Closes post composer and discards post draft"
 				>
-					<ButtonText style={[a.text_md]}>
-						<>Cancel</>
-					</ButtonText>
+					<ButtonText style={[a.text_md]}>Cancel</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{isPublishing ? (

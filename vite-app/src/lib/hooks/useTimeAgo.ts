@@ -124,7 +124,7 @@ export function formatDateDiff({
 				: i18n._(
 						defineMessage({
 							message: `${diff.value}s`,
-							comment: `How many seconds have passed, displayed in a narrow form`,
+							comment: "How many seconds have passed, displayed in a narrow form",
 						}),
 					);
 		}
@@ -134,7 +134,7 @@ export function formatDateDiff({
 				: i18n._(
 						defineMessage({
 							message: `${diff.value}m`,
-							comment: `How many minutes have passed, displayed in a narrow form`,
+							comment: "How many minutes have passed, displayed in a narrow form",
 						}),
 					);
 		}
@@ -144,7 +144,7 @@ export function formatDateDiff({
 				: i18n._(
 						defineMessage({
 							message: `${diff.value}h`,
-							comment: `How many hours have passed, displayed in a narrow form`,
+							comment: "How many hours have passed, displayed in a narrow form",
 						}),
 					);
 		}
@@ -154,7 +154,7 @@ export function formatDateDiff({
 				: i18n._(
 						defineMessage({
 							message: `${diff.value}d`,
-							comment: `How many days have passed, displayed in a narrow form`,
+							comment: "How many days have passed, displayed in a narrow form",
 						}),
 					);
 		}
@@ -165,7 +165,7 @@ export function formatDateDiff({
 					: i18n._(
 							defineMessage({
 								message: plural(diff.value, { one: "#mo", other: "#mo" }),
-								comment: `How many months have passed, displayed in a narrow form`,
+								comment: "How many months have passed, displayed in a narrow form",
 							}),
 						);
 			}

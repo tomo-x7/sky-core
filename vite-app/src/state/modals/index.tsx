@@ -139,14 +139,14 @@ const ModalControlContext = React.createContext<{
  * @deprecated DO NOT USE THIS unless you have no other choice.
  */
 export let unstable__openModal: (modal: Modal) => void = () => {
-	throw new Error(`ModalContext is not initialized`);
+	throw new Error("ModalContext is not initialized");
 };
 
 /**
  * @deprecated DO NOT USE THIS unless you have no other choice.
  */
 export let unstable__closeModal: () => boolean = () => {
-	throw new Error(`ModalContext is not initialized`);
+	throw new Error("ModalContext is not initialized");
 };
 
 export function Provider({ children }: React.PropsWithChildren<{}>) {

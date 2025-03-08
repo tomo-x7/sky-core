@@ -33,7 +33,7 @@ export function normalizeData(data: Schema) {
 		);
 		next.languagePrefs = langPrefs;
 	} catch (e: any) {
-		logger.error(`persisted state: failed to normalize language prefs`, {
+		logger.error("persisted state: failed to normalize language prefs", {
 			safeMessage: e.message,
 		});
 	}

@@ -299,9 +299,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 									variant="solid"
 									color="primary"
 								>
-									<ButtonText>
-										<>Create account</>
-									</ButtonText>
+									<ButtonText>Create account</ButtonText>
 								</Button>
 								<Button
 									onPress={showSignIn}
@@ -310,9 +308,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 									variant="solid"
 									color="secondary"
 								>
-									<ButtonText>
-										<>Sign in</>
-									</ButtonText>
+									<ButtonText>Sign in</ButtonText>
 								</Button>
 							</View>
 						</View>

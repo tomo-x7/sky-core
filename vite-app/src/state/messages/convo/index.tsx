@@ -47,7 +47,7 @@ export function useConvoActive() {
 		throw new Error("useConvo must be used within a ConvoProvider");
 	}
 	if (!isConvoActive(ctx)) {
-		throw new Error(`useConvoActive must only be rendered when the Convo is ready.`);
+		throw new Error("useConvoActive must only be rendered when the Convo is ready.");
 	}
 	return ctx;
 }

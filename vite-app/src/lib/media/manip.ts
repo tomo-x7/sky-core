@@ -239,7 +239,7 @@ function joinPath(a: string, b: string) {
 	} else if (b.startsWith("/")) {
 		return a + b;
 	}
-	return a + "/" + b;
+	return `${a}/${b}`;
 }
 
 function normalizePath(str: string, allPlatforms = false): string {

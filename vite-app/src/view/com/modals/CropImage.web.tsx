@@ -96,7 +96,7 @@ export function Component({
 					accessibilityHint={_(msg`Exits image cropping process`)}
 				>
 					<Text type="xl" style={pal.link}>
-						<>Cancel</>
+						Cancel
 					</Text>
 				</TouchableOpacity>
 				<View style={s.flex1} />
@@ -113,7 +113,7 @@ export function Component({
 						style={[styles.btn]}
 					>
 						<Text type="xl-medium" style={s.white}>
-							<>Done</>
+							Done
 						</Text>
 					</LinearGradient>
 				</TouchableOpacity>

@@ -94,9 +94,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 						disabled={isProcessing}
 						onPress={onRemoveFeed}
 					>
-						<ButtonText>
-							<>Remove feed</>
-						</ButtonText>
+						<ButtonText>Remove feed</ButtonText>
 						{isRemovePending && <ButtonIcon icon={Loader} />}
 					</Button>
 					{!hasDiscoverPinned && (
@@ -108,9 +106,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 							disabled={isProcessing}
 							onPress={onReplaceFeed}
 						>
-							<ButtonText>
-								<>Replace with Discover</>
-							</ButtonText>
+							<ButtonText>Replace with Discover</ButtonText>
 							{isReplacePending && <ButtonIcon icon={Loader} />}
 						</Button>
 					)}

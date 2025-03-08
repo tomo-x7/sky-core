@@ -140,9 +140,7 @@ export function ListHiddenScreen({
 							onPress={onRemoveList}
 							disabled={isProcessing}
 						>
-							<ButtonText>
-								<>Removed from saved feeds</>
-							</ButtonText>
+							<ButtonText>Removed from saved feeds</ButtonText>
 							{isProcessing ? <ButtonIcon icon={Loader} position="right" /> : null}
 						</Button>
 					) : null}
@@ -155,9 +153,7 @@ export function ListHiddenScreen({
 							onPress={() => setIsContentVisible(true)}
 							disabled={isProcessing}
 						>
-							<ButtonText>
-								<>Show anyway</>
-							</ButtonText>
+							<ButtonText>Show anyway</ButtonText>
 						</Button>
 					) : list.viewer?.muted || list.viewer?.blocked ? (
 						<Button
@@ -174,9 +170,7 @@ export function ListHiddenScreen({
 							}}
 							disabled={isProcessing}
 						>
-							<ButtonText>
-								<>Unsubscribe from list</>
-							</ButtonText>
+							<ButtonText>Unsubscribe from list</ButtonText>
 							{isProcessing ? <ButtonIcon icon={Loader} position="right" /> : null}
 						</Button>
 					) : null}
@@ -189,9 +183,7 @@ export function ListHiddenScreen({
 					size="large"
 					disabled={isProcessing}
 				>
-					<ButtonText>
-						<>Go Back</>
-					</ButtonText>
+					<ButtonText>Go Back</ButtonText>
 				</Button>
 			</View>
 		</CenteredView>

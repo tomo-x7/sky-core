@@ -53,7 +53,7 @@ let ProfileHeaderStandard = ({
 	const { currentAccount, hasSession } = useSession();
 	const { _ } = useLingui();
 	const moderation = useMemo(() => moderateProfile(profile, moderationOpts), [profile, moderationOpts]);
-	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile, "ProfileHeader");
+	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 	const [_queueBlock, queueUnblock] = useProfileBlockMutationQueue(profile);
 	const unblockPromptControl = Prompt.usePromptControl();
 	const requireAuth = useRequireAuth();
@@ -160,9 +160,7 @@ let ProfileHeaderStandard = ({
 								label={_(msg`Edit profile`)}
 								style={[a.rounded_full]}
 							>
-								<ButtonText>
-									<>Edit Profile</>
-								</ButtonText>
+								<ButtonText>Edit Profile</ButtonText>
 							</Button>
 							<EditProfileDialog profile={profile} control={editProfileControl} />
 						</>

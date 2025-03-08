@@ -31,11 +31,11 @@ export function CustomFeedEmptyState() {
 				<MagnifyingGlassIcon style={[styles.emptyIcon, pal.text]} size={62} />
 			</View>
 			<Text type="xl-medium" style={[s.textCenter, pal.text]}>
-				<>This feed is empty! You may need to follow more users or tune your language settings.</>
+				This feed is empty! You may need to follow more users or tune your language settings.
 			</Text>
 			<Button type="inverted" style={styles.emptyBtn} onPress={onPressFindAccounts}>
 				<Text type="lg-medium" style={palInverted.text}>
-					<>Find accounts to follow</>
+					Find accounts to follow
 				</Text>
 				<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 			</Button>

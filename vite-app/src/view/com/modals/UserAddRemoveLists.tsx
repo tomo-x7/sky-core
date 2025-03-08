@@ -105,10 +105,10 @@ export function Component({
 					type="default"
 					onPress={onPressDone}
 					style={styles.footerBtn}
-					accessibilityLabel={_(msg({ message: `Done`, context: "action" }))}
+					accessibilityLabel={_(msg({ message: "Done", context: "action" }))}
 					accessibilityHint=""
 					onAccessibilityEscape={onPressDone}
-					label={_(msg({ message: `Done`, context: "action" }))}
+					label={_(msg({ message: "Done", context: "action" }))}
 				/>
 			</View>
 		</View>

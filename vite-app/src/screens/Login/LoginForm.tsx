@@ -160,9 +160,7 @@ export const LoginForm = ({
 	return (
 		<FormContainer testID="loginForm" titleText={<>Sign in</>}>
 			<View>
-				<TextField.LabelText>
-					<>Hosting provider</>
-				</TextField.LabelText>
+				<TextField.LabelText>Hosting provider</TextField.LabelText>
 				<HostingProvider
 					serviceUrl={serviceUrl}
 					onSelectServiceUrl={setServiceUrl}
@@ -170,9 +168,7 @@ export const LoginForm = ({
 				/>
 			</View>
 			<View>
-				<TextField.LabelText>
-					<>Account</>
-				</TextField.LabelText>
+				<TextField.LabelText>Account</TextField.LabelText>
 				<View style={[a.gap_sm]}>
 					<TextField.Root>
 						<TextField.Icon icon={At} />
@@ -234,18 +230,14 @@ export const LoginForm = ({
 								a.z_10,
 							]}
 						>
-							<ButtonText>
-								<>Forgot?</>
-							</ButtonText>
+							<ButtonText>Forgot?</ButtonText>
 						</Button>
 					</TextField.Root>
 				</View>
 			</View>
 			{isAuthFactorTokenNeeded && (
 				<View>
-					<TextField.LabelText>
-						<>2FA Confirmation</>
-					</TextField.LabelText>
+					<TextField.LabelText>2FA Confirmation</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={Ticket} />
 						<TextField.Input
@@ -273,16 +265,14 @@ export const LoginForm = ({
 						/>
 					</TextField.Root>
 					<Text style={[a.text_sm, t.atoms.text_contrast_medium, a.mt_sm]}>
-						<>Check your email for a sign in code and enter it here.</>
+						Check your email for a sign in code and enter it here.
 					</Text>
 				</View>
 			)}
 			<FormError error={error} />
 			<View style={[a.flex_row, a.align_center, a.pt_md]}>
 				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
-					<ButtonText>
-						<>Back</>
-					</ButtonText>
+					<ButtonText>Back</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{!serviceDescription && error ? (
@@ -295,16 +285,12 @@ export const LoginForm = ({
 						size="large"
 						onPress={onPressRetryConnect}
 					>
-						<ButtonText>
-							<>Retry</>
-						</ButtonText>
+						<ButtonText>Retry</ButtonText>
 					</Button>
 				) : !serviceDescription ? (
 					<>
 						<ActivityIndicator />
-						<Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-							<>Connecting...</>
-						</Text>
+						<Text style={[t.atoms.text_contrast_high, a.pl_md]}>Connecting...</Text>
 					</>
 				) : (
 					<Button
@@ -316,9 +302,7 @@ export const LoginForm = ({
 						size="large"
 						onPress={onPressNext}
 					>
-						<ButtonText>
-							<>Next</>
-						</ButtonText>
+						<ButtonText>Next</ButtonText>
 						{isProcessing && <ButtonIcon icon={Loader} />}
 					</Button>
 				)}

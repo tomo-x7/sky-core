@@ -449,7 +449,7 @@ let VideoItem = ({
 					]}
 				>
 					<Text style={[a.text_2xl, a.font_heavy, a.text_center, a.leading_tight, a.mx_xl]}>
-						<>Post has been deleted</>
+						Post has been deleted
 					</Text>
 				</View>
 			) : (
@@ -542,9 +542,7 @@ function ModerationOverlay({
 			>
 				<View style={[a.align_center, a.gap_sm]}>
 					<Eye width={36} fill="white" />
-					<Text style={[a.text_center, a.leading_snug, a.pb_xs]}>
-						<>Hidden by your moderation settings.</>
-					</Text>
+					<Text style={[a.text_center, a.leading_snug, a.pb_xs]}>Hidden by your moderation settings.</Text>
 					<Button
 						label={_(msg`Show anyway`)}
 						size="small"
@@ -552,9 +550,7 @@ function ModerationOverlay({
 						color="secondary_inverted"
 						onPress={onShow}
 					>
-						<ButtonText>
-							<>Show anyway</>
-						</ButtonText>
+						<ButtonText>Show anyway</ButtonText>
 					</Button>
 				</View>
 				<View
@@ -586,7 +582,7 @@ function ModerationOverlay({
 						>
 							{({ pressed }) => (
 								<Text style={[a.text_sm, a.font_bold, a.text_center, { opacity: pressed ? 0.5 : 1 }]}>
-									<>View details</>
+									View details
 								</Text>
 							)}
 						</Button>
@@ -948,11 +944,9 @@ function EndMessage() {
 				<LeafIcon width={64} fill="black" />
 			</View>
 			<View style={[a.w_full, a.gap_md]}>
-				<Text style={[a.text_3xl, a.text_center, a.font_heavy]}>
-					<>That's everything!</>
-				</Text>
+				<Text style={[a.text_3xl, a.text_center, a.font_heavy]}>That's everything!</Text>
 				<Text style={[a.text_lg, a.text_center, t.atoms.text_contrast_high, a.leading_snug]}>
-					<>You've run out of videos to watch. Maybe it's a good time to take a break?</>
+					You've run out of videos to watch. Maybe it's a good time to take a break?
 				</Text>
 			</View>
 			<Button
@@ -971,9 +965,7 @@ function EndMessage() {
 				accessibilityHint={_(msg`Returns to previous page`)}
 			>
 				<ButtonIcon icon={ArrowLeftIcon} />
-				<ButtonText>
-					<>Go back</>
-				</ButtonText>
+				<ButtonText>Go back</ButtonText>
 			</Button>
 		</View>
 	);

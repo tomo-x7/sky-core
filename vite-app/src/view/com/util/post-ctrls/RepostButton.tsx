@@ -133,7 +133,7 @@ let RepostButtonDialogInner = ({
 				<View style={a.gap_xs}>
 					<Button
 						style={[a.justify_start, a.px_md]}
-						label={isReposted ? _(msg`Remove repost`) : _(msg({ message: `Repost`, context: "action" }))}
+						label={isReposted ? _(msg`Remove repost`) : _(msg({ message: "Repost", context: "action" }))}
 						onPress={onPressRepost}
 						size="large"
 						variant="ghost"
@@ -170,9 +170,7 @@ let RepostButtonDialogInner = ({
 					variant="outline"
 					color="primary"
 				>
-					<ButtonText>
-						<>Cancel</>
-					</ButtonText>
+					<ButtonText>Cancel</ButtonText>
 				</Button>
 			</View>
 		</Dialog.ScrollableInner>

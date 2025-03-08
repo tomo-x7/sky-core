@@ -107,9 +107,7 @@ export function NotificationsScreen({}: Props) {
 			<Layout.Header.Outer noBottomBorder sticky={false}>
 				<Layout.Header.MenuButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Notifications</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Notifications</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot>
 					<Link

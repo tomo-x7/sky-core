@@ -117,9 +117,7 @@ export function SubmitView({
 			</View>
 
 			<View style={[a.gap_md]}>
-				<Text style={[t.atoms.text_contrast_medium]}>
-					<>Select the moderation service(s) to report to</>
-				</Text>
+				<Text style={[t.atoms.text_contrast_medium]}>Select the moderation service(s) to report to</Text>
 
 				<Toggle.Group label="Select mod services" values={selectedServices} onChange={setSelectedServices}>
 					<View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
@@ -138,9 +136,7 @@ export function SubmitView({
 				</Toggle.Group>
 			</View>
 			<View style={[a.gap_md]}>
-				<Text style={[t.atoms.text_contrast_medium]}>
-					<>Optionally provide additional information below:</>
-				</Text>
+				<Text style={[t.atoms.text_contrast_medium]}>Optionally provide additional information below:</Text>
 
 				<View style={[a.relative, a.w_full]}>
 					<Dialog.Input
@@ -187,9 +183,7 @@ export function SubmitView({
 					onPress={submit}
 					disabled={!selectedServices.length}
 				>
-					<ButtonText>
-						<>Send report</>
-					</ButtonText>
+					<ButtonText>Send report</ButtonText>
 					<ButtonIcon icon={submitting ? Loader : SendIcon} />
 				</Button>
 			</View>

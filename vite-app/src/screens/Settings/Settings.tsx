@@ -74,9 +74,7 @@ export function SettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Settings</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Settings</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
@@ -98,9 +96,7 @@ export function SettingsScreen({}: Props) {
 								}}
 							>
 								<SettingsList.ItemIcon icon={PersonGroupIcon} />
-								<SettingsList.ItemText>
-									<>Switch account</>
-								</SettingsList.ItemText>
+								<SettingsList.ItemText>Switch account</SettingsList.ItemText>
 								{showAccounts ? (
 									<SettingsList.ItemIcon icon={ChevronUpIcon} size="md" />
 								) : (
@@ -136,45 +132,31 @@ export function SettingsScreen({}: Props) {
 					<SettingsList.Divider />
 					<SettingsList.LinkItem to="/settings/account" label={_(msg`Account`)}>
 						<SettingsList.ItemIcon icon={PersonIcon} />
-						<SettingsList.ItemText>
-							<>Account</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Account</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/privacy-and-security" label={_(msg`Privacy and security`)}>
 						<SettingsList.ItemIcon icon={LockIcon} />
-						<SettingsList.ItemText>
-							<>Privacy and security</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Privacy and security</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/moderation" label={_(msg`Moderation`)}>
 						<SettingsList.ItemIcon icon={HandIcon} />
-						<SettingsList.ItemText>
-							<>Moderation</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Moderation</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/content-and-media" label={_(msg`Content and media`)}>
 						<SettingsList.ItemIcon icon={WindowIcon} />
-						<SettingsList.ItemText>
-							<>Content and media</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Content and media</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/appearance" label={_(msg`Appearance`)}>
 						<SettingsList.ItemIcon icon={PaintRollerIcon} />
-						<SettingsList.ItemText>
-							<>Appearance</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Appearance</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/accessibility" label={_(msg`Accessibility`)}>
 						<SettingsList.ItemIcon icon={AccessibilityIcon} />
-						<SettingsList.ItemText>
-							<>Accessibility</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Accessibility</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/language" label={_(msg`Languages`)}>
 						<SettingsList.ItemIcon icon={EarthIcon} />
-						<SettingsList.ItemText>
-							<>Languages</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Languages</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.PressableItem
 						onPress={() => Linking.openURL(HELP_DESK_URL)}
@@ -182,16 +164,12 @@ export function SettingsScreen({}: Props) {
 						accessibilityHint={_(msg`Opens helpdesk in browser`)}
 					>
 						<SettingsList.ItemIcon icon={CircleQuestionIcon} />
-						<SettingsList.ItemText>
-							<>Help</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Help</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.LinkItem to="/settings/about" label={_(msg`About`)}>
 						<SettingsList.ItemIcon icon={BubbleInfoIcon} />
-						<SettingsList.ItemText>
-							<>About</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>About</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.Divider />
 					<SettingsList.PressableItem
@@ -199,9 +177,7 @@ export function SettingsScreen({}: Props) {
 						onPress={() => signOutPromptControl.open()}
 						label={_(msg`Sign out`)}
 					>
-						<SettingsList.ItemText>
-							<>Sign out</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Sign out</SettingsList.ItemText>
 					</SettingsList.PressableItem>
 					{IS_INTERNAL && (
 						<>
@@ -216,9 +192,7 @@ export function SettingsScreen({}: Props) {
 								label={_(msg`Developer options`)}
 							>
 								<SettingsList.ItemIcon icon={CodeBracketsIcon} />
-								<SettingsList.ItemText>
-									<>Developer options</>
-								</SettingsList.ItemText>
+								<SettingsList.ItemText>Developer options</SettingsList.ItemText>
 							</SettingsList.PressableItem>
 							{showDevOptions && <DevOptions />}
 						</>
@@ -287,43 +261,31 @@ function DevOptions() {
 	return (
 		<>
 			<SettingsList.PressableItem onPress={() => navigation.navigate("Log")} label={_(msg`Open system log`)}>
-				<SettingsList.ItemText>
-					<>System log</>
-				</SettingsList.ItemText>
+				<SettingsList.ItemText>System log</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 			<SettingsList.PressableItem
 				onPress={() => navigation.navigate("Debug")}
 				label={_(msg`Open storybook page`)}
 			>
-				<SettingsList.ItemText>
-					<>Storybook</>
-				</SettingsList.ItemText>
+				<SettingsList.ItemText>Storybook</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 			<SettingsList.PressableItem
 				onPress={() => navigation.navigate("DebugMod")}
 				label={_(msg`Open moderation debug page`)}
 			>
-				<SettingsList.ItemText>
-					<>Debug Moderation</>
-				</SettingsList.ItemText>
+				<SettingsList.ItemText>Debug Moderation</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 			<SettingsList.PressableItem
 				onPress={() => deleteChatDeclarationRecord()}
 				label={_(msg`Open storybook page`)}
 			>
-				<SettingsList.ItemText>
-					<>Delete chat declaration record</>
-				</SettingsList.ItemText>
+				<SettingsList.ItemText>Delete chat declaration record</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 			<SettingsList.PressableItem onPress={() => resetOnboarding()} label={_(msg`Reset onboarding state`)}>
-				<SettingsList.ItemText>
-					<>Reset onboarding state</>
-				</SettingsList.ItemText>
+				<SettingsList.ItemText>Reset onboarding state</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 			<SettingsList.PressableItem onPress={() => clearAllStorage()} label={_(msg`Clear all storage data`)}>
-				<SettingsList.ItemText>
-					<>Clear all storage data (restart after this)</>
-				</SettingsList.ItemText>
+				<SettingsList.ItemText>Clear all storage data (restart after this)</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 		</>
 	);
@@ -342,9 +304,7 @@ function AddAccountRow() {
 	return (
 		<SettingsList.PressableItem onPress={onAddAnotherAccount} label={_(msg`Add another account`)}>
 			<SettingsList.ItemIcon icon={PersonPlusIcon} />
-			<SettingsList.ItemText>
-				<>Add another account</>
-			</SettingsList.ItemText>
+			<SettingsList.ItemText>Add another account</SettingsList.ItemText>
 		</SettingsList.PressableItem>
 	);
 }
@@ -408,9 +368,7 @@ function AccountRow({
 					</Menu.Trigger>
 					<Menu.Outer showCancel>
 						<Menu.Item label={_(msg`Remove account`)} onPress={() => removePromptControl.open()}>
-							<Menu.ItemText>
-								<>Remove account</>
-							</Menu.ItemText>
+							<Menu.ItemText>Remove account</Menu.ItemText>
 							<Menu.ItemIcon icon={PersonXIcon} />
 						</Menu.Item>
 					</Menu.Outer>

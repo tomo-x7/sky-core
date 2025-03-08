@@ -100,32 +100,30 @@ let ProfileHeaderShell = ({
 				<StatusBarShadow />
 				<GrowableBanner
 					backButton={
-						<>
-							{!hideBackButton && (
-								<TouchableWithoutFeedback
-									testID="profileHeaderBackBtn"
-									onPress={onPressBack}
-									hitSlop={BACK_HITSLOP}
-									accessibilityRole="button"
-									accessibilityLabel={_(msg`Back`)}
-									accessibilityHint=""
+						!hideBackButton && (
+							<TouchableWithoutFeedback
+								testID="profileHeaderBackBtn"
+								onPress={onPressBack}
+								hitSlop={BACK_HITSLOP}
+								accessibilityRole="button"
+								accessibilityLabel={_(msg`Back`)}
+								accessibilityHint=""
+							>
+								<View
+									style={[
+										styles.backBtnWrapper,
+										{
+											top: platform({
+												web: 10,
+												default: topInset,
+											}),
+										},
+									]}
 								>
-									<View
-										style={[
-											styles.backBtnWrapper,
-											{
-												top: platform({
-													web: 10,
-													default: topInset,
-												}),
-											},
-										]}
-									>
-										<ArrowLeftIcon size="lg" fill="white" />
-									</View>
-								</TouchableWithoutFeedback>
-							)}
-						</>
+									<ArrowLeftIcon size="lg" fill="white" />
+								</View>
+							</TouchableWithoutFeedback>
+						)
 					}
 				>
 					{isPlaceholderProfile ? (

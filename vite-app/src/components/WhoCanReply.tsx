@@ -190,7 +190,7 @@ function Rules({
 						Only{" "}
 						{settings.map((rule, i) => (
 							<React.Fragment key={`rule-${i}`}>
-								<Rule rule={rule} post={post} lists={post.threadgate!.lists} />
+								<Rule rule={rule} post={post} lists={post.threadgate?.lists} />
 								<Separator i={i} length={settings.length} />
 							</React.Fragment>
 						))}{" "}

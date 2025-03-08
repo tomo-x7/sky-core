@@ -134,9 +134,7 @@ function CreateAnother() {
 				style={[a.self_center]}
 				onPress={() => navigation.navigate("StarterPackWizard")}
 			>
-				<ButtonText>
-					<>Create another</>
-				</ButtonText>
+				<ButtonText>Create another</ButtonText>
 				<ButtonIcon icon={Plus} position="right" />
 			</Button>
 		</View>
@@ -188,10 +186,10 @@ function Empty() {
 		>
 			<View style={[a.gap_xs]}>
 				<Text style={[a.font_bold, a.text_lg, { color: "white" }]}>
-					<>You haven't created a starter pack yet!</>
+					You haven't created a starter pack yet!
 				</Text>
 				<Text style={[a.text_md, { color: "white" }]}>
-					<>Starter packs let you easily share your favorite feeds and people with your friends.</>
+					Starter packs let you easily share your favorite feeds and people with your friends.
 				</Text>
 			</View>
 			<View style={[a.flex_row, a.gap_md, { marginLeft: "auto" }]}>
@@ -210,9 +208,7 @@ function Empty() {
 					}}
 					style={{ backgroundColor: "transparent" }}
 				>
-					<ButtonText style={{ color: "white" }}>
-						<>Make one for me</>
-					</ButtonText>
+					<ButtonText style={{ color: "white" }}>Make one for me</ButtonText>
 					{isGenerating && <Loader size="md" />}
 				</Button>
 				<Button
@@ -235,18 +231,14 @@ function Empty() {
 					}}
 					hoverStyle={[{ backgroundColor: "#dfdfdf" }]}
 				>
-					<ButtonText>
-						<>Create</>
-					</ButtonText>
+					<ButtonText>Create</ButtonText>
 				</Button>
 			</View>
 
 			<Prompt.Outer control={confirmDialogControl}>
-				<Prompt.TitleText>
-					<>Generate a starter pack</>
-				</Prompt.TitleText>
+				<Prompt.TitleText>Generate a starter pack</Prompt.TitleText>
 				<Prompt.DescriptionText>
-					<>Bluesky will choose a set of recommended accounts from people in your network.</>
+					Bluesky will choose a set of recommended accounts from people in your network.
 				</Prompt.DescriptionText>
 				<Prompt.Actions>
 					<Prompt.Action color="primary" cta={_(msg`Choose for me`)} onPress={generate} />

@@ -50,19 +50,13 @@ function Inner() {
 				<View style={[a.flex_1, a.gap_sm]}>
 					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 						<Trending size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
-						<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>
-							<>Trending</>
-						</Text>
+						<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>Trending</Text>
 						<View style={[a.py_xs, a.px_sm, a.rounded_sm, a.overflow_hidden]}>
 							<GradientFill gradient={tokens.gradients.primary} />
-							<Text style={[a.text_sm, a.font_heavy, { color: "white" }]}>
-								<>BETA</>
-							</Text>
+							<Text style={[a.text_sm, a.font_heavy, { color: "white" }]}>BETA</Text>
 						</View>
 					</View>
-					<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-						<>What people are posting about.</>
-					</Text>
+					<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>What people are posting about.</Text>
 				</View>
 				<Button
 					label={_(msg`Hide trending topics`)}

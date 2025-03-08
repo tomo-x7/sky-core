@@ -96,9 +96,7 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 								]}
 							/>
 
-							<Text style={[t.atoms.text_contrast_medium]}>
-								<>Error:</> {error}
-							</Text>
+							<Text style={[t.atoms.text_contrast_medium]}>Error: {error}</Text>
 						</>
 					)}
 				</View>
@@ -368,13 +366,9 @@ function SearchLanguageDropdown({
 				)}
 			</Menu.Trigger>
 			<Menu.Outer>
-				<Menu.LabelText>
-					<>Filter search by language</>
-				</Menu.LabelText>
+				<Menu.LabelText>Filter search by language</Menu.LabelText>
 				<Menu.Item label={_(msg`All languages`)} onPress={() => onChange("")}>
-					<Menu.ItemText>
-						<>All languages</>
-					</Menu.ItemText>
+					<Menu.ItemText>All languages</Menu.ItemText>
 					<Menu.ItemRadio selected={value === ""} />
 				</Menu.Item>
 				<Menu.Divider />
@@ -510,9 +504,7 @@ let SearchScreenInner = ({
 			<View style={a.flex_1}>
 				{gtTablet && (
 					<View style={[a.border_b, t.atoms.border_contrast_low, a.px_lg, a.pt_sm, a.pb_lg]}>
-						<Text style={[a.text_2xl, a.font_heavy]}>
-							<>Search</>
-						</Text>
+						<Text style={[a.text_2xl, a.font_heavy]}>Search</Text>
 					</View>
 				)}
 
@@ -523,7 +515,7 @@ let SearchScreenInner = ({
 						style={t.atoms.text_contrast_medium as StyleProp<ViewStyle>}
 					/>
 					<Text style={[t.atoms.text_contrast_medium, a.text_md]}>
-						<>Find posts, users, and feeds on Bluesky</>
+						Find posts, users, and feeds on Bluesky
 					</Text>
 				</View>
 			</View>
@@ -772,9 +764,7 @@ export function SearchScreenShell({
 							<Layout.Header.Outer noBottomBorder>
 								{navButton === "menu" ? <Layout.Header.MenuButton /> : <Layout.Header.BackButton />}
 								<Layout.Header.Content align="left">
-									<Layout.Header.TitleText>
-										<>Search</>
-									</Layout.Header.TitleText>
+									<Layout.Header.TitleText>Search</Layout.Header.TitleText>
 								</Layout.Header.Content>
 								{showFilters ? (
 									<SearchLanguageDropdown value={params.lang} onChange={params.setLang} />
@@ -809,9 +799,7 @@ export function SearchScreenShell({
 										onPress={onPressCancelSearch}
 										hitSlop={HITSLOP_10}
 									>
-										<ButtonText>
-											<>Cancel</>
-										</ButtonText>
+										<ButtonText>Cancel</ButtonText>
 									</Button>
 								)}
 							</View>
@@ -935,9 +923,7 @@ function SearchHistory({
 		<Layout.Content keyboardDismissMode="interactive" keyboardShouldPersistTaps="handled">
 			<View style={[a.w_full, a.px_md]}>
 				{(searchHistory.length > 0 || selectedProfiles.length > 0) && (
-					<Text style={[a.text_md, a.font_bold, a.p_md]}>
-						<>Recent Searches</>
-					</Text>
+					<Text style={[a.text_md, a.font_bold, a.p_md]}>Recent Searches</Text>
 				)}
 				{selectedProfiles.length > 0 && (
 					<View

@@ -120,9 +120,7 @@ export function UserBanner({
 								label={_(msg`Upload from Camera`)}
 								onPress={onOpenCamera}
 							>
-								<Menu.ItemText>
-									<>Upload from Camera</>
-								</Menu.ItemText>
+								<Menu.ItemText>Upload from Camera</Menu.ItemText>
 								<Menu.ItemIcon icon={Camera} />
 							</Menu.Item>
 						)}
@@ -144,12 +142,10 @@ export function UserBanner({
 							<Menu.Group>
 								<Menu.Item
 									testID="changeBannerRemoveBtn"
-									label={_(`Remove Banner`)}
+									label={_("Remove Banner")}
 									onPress={onRemoveBanner}
 								>
-									<Menu.ItemText>
-										<>Remove Banner</>
-									</Menu.ItemText>
+									<Menu.ItemText>Remove Banner</Menu.ItemText>
 									<Menu.ItemIcon icon={Trash} />
 								</Menu.Item>
 							</Menu.Group>

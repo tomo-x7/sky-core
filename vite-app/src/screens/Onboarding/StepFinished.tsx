@@ -160,7 +160,7 @@ export function StepFinished() {
 				requestNotificationsPermission("AfterOnboarding"),
 			]);
 		} catch (e: any) {
-			logger.info(`onboarding: bulk save failed`);
+			logger.info("onboarding: bulk save failed");
 			logger.error(e);
 			// don't alert the user, just let them into their account
 		}
@@ -224,44 +224,34 @@ export function StepFinished() {
 		<View style={[a.align_start]}>
 			<IconCircle icon={Check} style={[a.mb_2xl]} />
 
-			<TitleText>
-				<>You're ready to go!</>
-			</TitleText>
-			<DescriptionText>
-				<>We hope you have a wonderful time. Remember, Bluesky is:</>
-			</DescriptionText>
+			<TitleText>You're ready to go!</TitleText>
+			<DescriptionText>We hope you have a wonderful time. Remember, Bluesky is:</DescriptionText>
 
 			<View style={[a.pt_5xl, a.gap_3xl]}>
 				<View style={[a.flex_row, a.align_center, a.w_full, a.gap_lg]}>
 					<IconCircle icon={Growth} size="lg" style={{ width: 48, height: 48 }} />
 					<View style={[a.flex_1, a.gap_xs]}>
-						<Text style={[a.font_bold, a.text_lg]}>
-							<>Public</>
-						</Text>
+						<Text style={[a.font_bold, a.text_lg]}>Public</Text>
 						<Text style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-							<>Your posts, likes, and blocks are public. Mutes are private.</>
+							Your posts, likes, and blocks are public. Mutes are private.
 						</Text>
 					</View>
 				</View>
 				<View style={[a.flex_row, a.align_center, a.w_full, a.gap_lg]}>
 					<IconCircle icon={News} size="lg" style={{ width: 48, height: 48 }} />
 					<View style={[a.flex_1, a.gap_xs]}>
-						<Text style={[a.font_bold, a.text_lg]}>
-							<>Open</>
-						</Text>
+						<Text style={[a.font_bold, a.text_lg]}>Open</Text>
 						<Text style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-							<>Never lose access to your followers or data.</>
+							Never lose access to your followers or data.
 						</Text>
 					</View>
 				</View>
 				<View style={[a.flex_row, a.align_center, a.w_full, a.gap_lg]}>
 					<IconCircle icon={Trending} size="lg" style={{ width: 48, height: 48 }} />
 					<View style={[a.flex_1, a.gap_xs]}>
-						<Text style={[a.font_bold, a.text_lg]}>
-							<>Flexible</>
-						</Text>
+						<Text style={[a.font_bold, a.text_lg]}>Flexible</Text>
 						<Text style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-							<>Choose the algorithms that power your custom feeds.</>
+							Choose the algorithms that power your custom feeds.
 						</Text>
 					</View>
 				</View>

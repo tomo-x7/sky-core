@@ -63,10 +63,10 @@ write satisfies PersistedApi["write"];
 export function onUpdate<K extends keyof Schema>(key: K, cb: (v: Schema[K]) => void): () => void {
 	const listener = () => cb(get(key));
 	_emitter.addListener("update", listener); // Backcompat while upgrading
-	_emitter.addListener("update:" + key, listener);
+	_emitter.addListener(`update:${key}`, listener);
 	return () => {
 		_emitter.removeListener("update", listener); // Backcompat while upgrading
-		_emitter.removeListener("update:" + key, listener);
+		_emitter.removeListener(`update:${key}`, listener);
 	};
 }
 onUpdate satisfies PersistedApi["onUpdate"];
@@ -105,12 +105,12 @@ async function onBroadcastMessage({ data }: MessageEvent) {
 		if (next) {
 			_state = next;
 			if (typeof data.event.key === "string") {
-				_emitter.emit("update:" + data.event.key);
+				_emitter.emit(`update:${data.event.key}`);
 			} else {
 				_emitter.emit("update"); // Backcompat while upgrading
 			}
 		} else {
-			logger.error(`persisted state: handled update update from broadcast channel, but found no data`);
+			logger.error("persisted state: handled update update from broadcast channel, but found no data");
 		}
 	}
 }

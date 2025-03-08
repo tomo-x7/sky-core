@@ -31,7 +31,7 @@ export const SupportScreen = (_props: Props) => {
 			<ViewHeader title={_(msg`Support`)} />
 			<CenteredView>
 				<Text type="title-xl" style={[pal.text, s.p20, s.pb5]}>
-					<>Support</>
+					Support
 				</Text>
 				<Text style={[pal.text, s.p20]}>
 					<>

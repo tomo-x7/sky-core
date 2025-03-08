@@ -215,7 +215,7 @@ export async function compressImage(img: ComposerImage): Promise<ImageMeta> {
 		}
 	}
 
-	throw new Error(`Unable to compress image`);
+	throw new Error("Unable to compress image");
 }
 
 async function moveIfNecessary(from: string) {

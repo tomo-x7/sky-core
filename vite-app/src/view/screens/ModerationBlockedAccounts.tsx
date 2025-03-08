@@ -86,10 +86,8 @@ export function ModerationBlockedAccounts({}: Props) {
 						},
 					]}
 				>
-					<>
-						Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you. You
-						will not see their content and they will be prevented from seeing yours.
-					</>
+					Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you. You will
+					not see their content and they will be prevented from seeing yours.
 				</Text>
 				{isEmpty ? (
 					<View style={[pal.border]}>
@@ -98,10 +96,8 @@ export function ModerationBlockedAccounts({}: Props) {
 						) : (
 							<View style={[styles.empty, pal.viewLight]}>
 								<Text type="lg" style={[pal.text, styles.emptyText]}>
-									<>
-										You have not blocked any accounts yet. To block an account, go to their profile
-										and select "Block account" from the menu on their account.
-									</>
+									You have not blocked any accounts yet. To block an account, go to their profile and
+									select "Block account" from the menu on their account.
 								</Text>
 							</View>
 						)}

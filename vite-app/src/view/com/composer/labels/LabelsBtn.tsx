@@ -95,23 +95,17 @@ function DialogInner({
 		<Dialog.ScrollableInner label={_(msg`Add a content warning`)} style={[{ maxWidth: 500 }, a.w_full]}>
 			<View style={[a.flex_1]}>
 				<View style={[a.gap_sm]}>
-					<Text style={[a.text_2xl, a.font_bold]}>
-						<>Add a content warning</>
-					</Text>
+					<Text style={[a.text_2xl, a.font_bold]}>Add a content warning</Text>
 					<Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
-						<>
-							Choose self-labels that are applicable for the media you are posting. If none are selected,
-							this post is suitable for all audiences.
-						</>
+						Choose self-labels that are applicable for the media you are posting. If none are selected, this
+						post is suitable for all audiences.
 					</Text>
 				</View>
 
 				<View style={[a.my_md, a.gap_lg]}>
 					<View>
 						<View style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
-							<Text style={[a.font_bold, a.text_lg]}>
-								<>Adult Content</>
-							</Text>
+							<Text style={[a.font_bold, a.text_lg]}>Adult Content</Text>
 						</View>
 						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
 							<Toggle.Group
@@ -124,21 +118,15 @@ function DialogInner({
 								<View style={[a.gap_sm]}>
 									<Toggle.Item name="sexual" label={_(msg`Suggestive`)}>
 										<Toggle.Checkbox />
-										<Toggle.LabelText>
-											<>Suggestive</>
-										</Toggle.LabelText>
+										<Toggle.LabelText>Suggestive</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="nudity" label={_(msg`Nudity`)}>
 										<Toggle.Checkbox />
-										<Toggle.LabelText>
-											<>Nudity</>
-										</Toggle.LabelText>
+										<Toggle.LabelText>Nudity</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="porn" label={_(msg`Porn`)}>
 										<Toggle.Checkbox />
-										<Toggle.LabelText>
-											<>Adult</>
-										</Toggle.LabelText>
+										<Toggle.LabelText>Adult</Toggle.LabelText>
 									</Toggle.Item>
 								</View>
 							</Toggle.Group>
@@ -159,9 +147,7 @@ function DialogInner({
 					</View>
 					<View>
 						<View style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
-							<Text style={[a.font_bold, a.text_lg]}>
-								<>Other</>
-							</Text>
+							<Text style={[a.font_bold, a.text_lg]}>Other</Text>
 						</View>
 						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
 							<Toggle.Group
@@ -173,14 +159,12 @@ function DialogInner({
 							>
 								<Toggle.Item name="graphic-media" label={_(msg`Graphic Media`)}>
 									<Toggle.Checkbox />
-									<Toggle.LabelText>
-										<>Graphic Media</>
-									</Toggle.LabelText>
+									<Toggle.LabelText>Graphic Media</Toggle.LabelText>
 								</Toggle.Item>
 							</Toggle.Group>
 							{labels.includes("graphic-media") ? (
 								<Text style={[a.mt_sm, t.atoms.text_contrast_medium]}>
-									<>Media that may be disturbing or inappropriate for some audiences.</>
+									Media that may be disturbing or inappropriate for some audiences.
 								</Text>
 							) : null}
 						</View>
@@ -197,9 +181,7 @@ function DialogInner({
 					variant="solid"
 					testID="confirmBtn"
 				>
-					<ButtonText>
-						<>Done</>
-					</ButtonText>
+					<ButtonText>Done</ButtonText>
 				</Button>
 			</View>
 		</Dialog.ScrollableInner>

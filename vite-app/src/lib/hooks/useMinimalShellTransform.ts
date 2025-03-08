@@ -13,7 +13,7 @@ export function useMinimalShellHeaderTransform() {
 		const headerModeValue = headerMode.get();
 		return {
 			pointerEvents: headerModeValue === 0 ? "auto" : "none",
-			opacity: Math.pow(1 - headerModeValue, 2),
+			opacity: (1 - headerModeValue) ** 2,
 			transform: [
 				{
 					translateY: interpolate(headerModeValue, [0, 1], [0, -headerHeight.get()]),
@@ -33,7 +33,7 @@ export function useMinimalShellFooterTransform() {
 		const footerModeValue = footerMode.get();
 		return {
 			pointerEvents: footerModeValue === 0 ? "auto" : "none",
-			opacity: Math.pow(1 - footerModeValue, 2),
+			opacity: (1 - footerModeValue) ** 2,
 			transform: [
 				{
 					translateY: interpolate(footerModeValue, [0, 1], [0, footerHeight.get()]),

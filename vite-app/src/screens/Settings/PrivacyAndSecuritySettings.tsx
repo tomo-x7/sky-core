@@ -29,9 +29,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Privacy and Security</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Privacy and Security</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
@@ -53,9 +51,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
 					</SettingsList.Item>
 					<SettingsList.LinkItem to="/settings/app-passwords" label={_(msg`App passwords`)}>
 						<SettingsList.ItemIcon icon={KeyIcon} />
-						<SettingsList.ItemText>
-							<>App passwords</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>App passwords</SettingsList.ItemText>
 						{appPasswords && appPasswords.length > 0 && (
 							<SettingsList.BadgeText>{appPasswords.length}</SettingsList.BadgeText>
 						)}
@@ -63,9 +59,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
 					<SettingsList.Divider />
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={EyeSlashIcon} />
-						<SettingsList.ItemText>
-							<>Logged-out visibility</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Logged-out visibility</SettingsList.ItemText>
 						<PwiOptOut />
 					</SettingsList.Group>
 					<SettingsList.Item>
@@ -74,19 +68,17 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
 								<Admonition.Icon />
 								<View style={[a.flex_1, a.gap_sm]}>
 									<Admonition.Text>
-										<>
-											Note: Bluesky is an open and public network. This setting only limits the
-											visibility of your content on the Bluesky app and website, and other apps
-											may not respect this setting. Your content may still be shown to logged-out
-											users by other apps and websites.
-										</>
+										Note: Bluesky is an open and public network. This setting only limits the
+										visibility of your content on the Bluesky app and website, and other apps may
+										not respect this setting. Your content may still be shown to logged-out users by
+										other apps and websites.
 									</Admonition.Text>
 									<Admonition.Text>
 										<InlineLinkText
 											label={_(msg`Learn more about what is public on Bluesky.`)}
 											to="https://blueskyweb.zendesk.com/hc/en-us/articles/15835264007693-Data-Privacy"
 										>
-											<>Learn more about what is public on Bluesky.</>
+											Learn more about what is public on Bluesky.
 										</InlineLinkText>
 									</Admonition.Text>
 								</View>

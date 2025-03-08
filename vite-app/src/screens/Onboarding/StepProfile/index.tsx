@@ -211,11 +211,9 @@ export function StepProfile() {
 		<AvatarContext.Provider value={value}>
 			<View style={[a.align_start, t.atoms.bg, a.justify_between]}>
 				<IconCircle icon={StreamingLive} style={[a.mb_2xl]} />
-				<TitleText>
-					<>Give your profile a face</>
-				</TitleText>
+				<TitleText>Give your profile a face</TitleText>
 				<DescriptionText>
-					<>Help people know you're not a bot by uploading a picture or creating an avatar.</>
+					Help people know you're not a bot by uploading a picture or creating an avatar.
 				</DescriptionText>
 				<View style={[a.w_full, a.align_center, { paddingTop: gtMobile ? 80 : 40 }]}>
 					<AvatarCircle openLibrary={openLibrary} openCreator={creatorControl.open} />
@@ -250,9 +248,7 @@ export function StepProfile() {
 							label={_(msg`Continue to next step`)}
 							onPress={onContinue}
 						>
-							<ButtonText>
-								<>Continue</>
-							</ButtonText>
+							<ButtonText>Continue</ButtonText>
 							<ButtonIcon icon={ChevronRight} position="right" />
 						</Button>
 						<Button
@@ -296,9 +292,7 @@ export function StepProfile() {
 							label={_(msg`Done`)}
 							onPress={onDoneCreating}
 						>
-							<ButtonText>
-								<>Done</>
-							</ButtonText>
+							<ButtonText>Done</ButtonText>
 						</Button>
 					</View>
 				</Dialog.Inner>

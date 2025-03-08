@@ -42,7 +42,7 @@ export function ViewFullThread({ uri }: { uri: string }) {
 			</View>
 
 			<Text type="md" style={[pal.link, { paddingTop: 18, paddingBottom: 4 }]}>
-				<>View full thread</>
+				View full thread
 			</Text>
 		</Link>
 	);

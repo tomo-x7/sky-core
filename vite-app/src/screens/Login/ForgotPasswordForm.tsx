@@ -73,9 +73,7 @@ export const ForgotPasswordForm = ({
 	return (
 		<FormContainer testID="forgotPasswordForm" titleText={<>Reset password</>}>
 			<View>
-				<TextField.LabelText>
-					<>Hosting provider</>
-				</TextField.LabelText>
+				<TextField.LabelText>Hosting provider</TextField.LabelText>
 				<HostingProvider
 					serviceUrl={serviceUrl}
 					onSelectServiceUrl={setServiceUrl}
@@ -83,9 +81,7 @@ export const ForgotPasswordForm = ({
 				/>
 			</View>
 			<View>
-				<TextField.LabelText>
-					<>Email address</>
-				</TextField.LabelText>
+				<TextField.LabelText>Email address</TextField.LabelText>
 				<TextField.Root>
 					<TextField.Icon icon={At} />
 					<TextField.Input
@@ -104,34 +100,26 @@ export const ForgotPasswordForm = ({
 			</View>
 
 			<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-				<>
-					Enter the email you used to create your account. We'll send you a "reset code" so you can set a new
-					password.
-				</>
+				Enter the email you used to create your account. We'll send you a "reset code" so you can set a new
+				password.
 			</Text>
 
 			<FormError error={error} />
 
 			<View style={[a.flex_row, a.align_center, a.pt_md]}>
 				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
-					<ButtonText>
-						<>Back</>
-					</ButtonText>
+					<ButtonText>Back</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{!serviceDescription || isProcessing ? (
 					<ActivityIndicator />
 				) : (
 					<Button label={_(msg`Next`)} variant="solid" color={"primary"} size="large" onPress={onPressNext}>
-						<ButtonText>
-							<>Next</>
-						</ButtonText>
+						<ButtonText>Next</ButtonText>
 					</Button>
 				)}
 				{!serviceDescription || isProcessing ? (
-					<Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-						<>Processing...</>
-					</Text>
+					<Text style={[t.atoms.text_contrast_high, a.pl_md]}>Processing...</Text>
 				) : undefined}
 			</View>
 			<View style={[t.atoms.border_contrast_medium, a.border_t, a.pt_2xl, a.mt_md, a.flex_row, a.justify_center]}>
@@ -144,9 +132,7 @@ export const ForgotPasswordForm = ({
 					variant="ghost"
 					color="secondary"
 				>
-					<ButtonText>
-						<>Already have a code?</>
-					</ButtonText>
+					<ButtonText>Already have a code?</ButtonText>
 				</Button>
 			</View>
 		</FormContainer>

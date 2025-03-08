@@ -7,7 +7,7 @@ type Callback = (...args: any[]) => any;
  */
 export const useStableCallback = (callback: Callback) => {
 	const callbackRef = useRef<Callback>();
-	const memoCallback = useCallback((...args: any) => callbackRef.current && callbackRef.current(...args), []);
+	const memoCallback = useCallback((...args: any) => callbackRef.current?.(...args), []);
 	useEffect(() => {
 		callbackRef.current = callback;
 		return () => (callbackRef.current = undefined);

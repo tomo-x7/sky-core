@@ -36,9 +36,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Content & Media</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Content & Media</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
@@ -46,27 +44,19 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 				<SettingsList.Container>
 					<SettingsList.LinkItem to="/settings/saved-feeds" label={_(msg`Manage saved feeds`)}>
 						<SettingsList.ItemIcon icon={HashtagIcon} />
-						<SettingsList.ItemText>
-							<>Manage saved feeds</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Manage saved feeds</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/threads" label={_(msg`Thread preferences`)}>
 						<SettingsList.ItemIcon icon={BubblesIcon} />
-						<SettingsList.ItemText>
-							<>Thread preferences</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Thread preferences</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/following-feed" label={_(msg`Following feed preferences`)}>
 						<SettingsList.ItemIcon icon={HomeIcon} />
-						<SettingsList.ItemText>
-							<>Following feed preferences</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Following feed preferences</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/external-embeds" label={_(msg`External media`)}>
 						<SettingsList.ItemIcon icon={MacintoshIcon} />
-						<SettingsList.ItemText>
-							<>External media</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>External media</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.Divider />
 					{isNative && (
@@ -78,9 +68,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 						>
 							<SettingsList.Item>
 								<SettingsList.ItemIcon icon={WindowIcon} />
-								<SettingsList.ItemText>
-									<>Use in-app browser to open links</>
-								</SettingsList.ItemText>
+								<SettingsList.ItemText>Use in-app browser to open links</SettingsList.ItemText>
 								<Toggle.Platform />
 							</SettingsList.Item>
 						</Toggle.Item>
@@ -93,9 +81,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 					>
 						<SettingsList.Item>
 							<SettingsList.ItemIcon icon={PlayIcon} />
-							<SettingsList.ItemText>
-								<>Autoplay videos and GIFs</>
-							</SettingsList.ItemText>
+							<SettingsList.ItemText>Autoplay videos and GIFs</SettingsList.ItemText>
 							<Toggle.Platform />
 						</SettingsList.Item>
 					</Toggle.Item>
@@ -118,9 +104,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 							>
 								<SettingsList.Item>
 									<SettingsList.ItemIcon icon={Graph} />
-									<SettingsList.ItemText>
-										<>Enable trending topics</>
-									</SettingsList.ItemText>
+									<SettingsList.ItemText>Enable trending topics</SettingsList.ItemText>
 									<Toggle.Platform />
 								</SettingsList.Item>
 							</Toggle.Item>
@@ -141,7 +125,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 								<SettingsList.Item>
 									<SettingsList.ItemIcon icon={Graph} />
 									<SettingsList.ItemText>
-										<>Enable trending videos in your Discover feed</>
+										Enable trending videos in your Discover feed
 									</SettingsList.ItemText>
 									<Toggle.Platform />
 								</SettingsList.Item>

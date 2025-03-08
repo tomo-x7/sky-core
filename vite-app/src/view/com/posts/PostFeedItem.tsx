@@ -334,7 +334,7 @@ let FeedItemInner = ({
 						<View style={styles.includeReason}>
 							<PinIcon style={{ color: pal.colors.textLight, marginRight: 3 }} width={13} height={13} />
 							<Text type="sm-bold" style={pal.textLight} lineHeight={1.2} numberOfLines={1}>
-								<>Pinned</>
+								Pinned
 							</Text>
 						</View>
 					) : null}

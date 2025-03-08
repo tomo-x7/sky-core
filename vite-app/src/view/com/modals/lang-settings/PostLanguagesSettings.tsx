@@ -63,12 +63,8 @@ export function Component() {
 						},
 			]}
 		>
-			<Text style={[pal.text, styles.title]}>
-				<>Post Languages</>
-			</Text>
-			<Text style={[pal.text, styles.description]}>
-				<>Which languages are used in this post?</>
-			</Text>
+			<Text style={[pal.text, styles.title]}>Post Languages</Text>
+			<Text style={[pal.text, styles.description]}>Which languages are used in this post?</Text>
 			<ScrollView style={styles.scrollContainer}>
 				{languages.map((lang) => {
 					const isSelected = hasPostLanguage(langPrefs.postLanguage, lang.code2);

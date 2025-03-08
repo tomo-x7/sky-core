@@ -91,8 +91,8 @@ export function VolumeControl({
 			)}
 			<ControlButton
 				active={muted || volume === 0}
-				activeLabel={_(msg({ message: `Unmute`, context: "video" }))}
-				inactiveLabel={_(msg({ message: `Mute`, context: "video" }))}
+				activeLabel={_(msg({ message: "Unmute", context: "video" }))}
+				inactiveLabel={_(msg({ message: "Mute", context: "video" }))}
 				activeIcon={MuteIcon}
 				inactiveIcon={UnmuteIcon}
 				onPress={onPressMute}
@@ -102,9 +102,9 @@ export function VolumeControl({
 }
 
 function sliderVolumeToVideoVolume(value: number) {
-	return Math.pow(value / 100, 4);
+	return (value / 100) ** 4;
 }
 
 function videoVolumeToSliderVolume(value: number) {
-	return Math.round(Math.pow(value, 1 / 4) * 100);
+	return Math.round(value ** (1 / 4) * 100);
 }

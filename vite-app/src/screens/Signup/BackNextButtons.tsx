@@ -38,9 +38,7 @@ export function BackNextButtons({
 				size="large"
 				onPress={onBackPress}
 			>
-				<ButtonText>
-					<>Back</>
-				</ButtonText>
+				<ButtonText>Back</ButtonText>
 			</Button>
 			{!hideNext &&
 				(showRetry ? (
@@ -51,9 +49,7 @@ export function BackNextButtons({
 						size="large"
 						onPress={onRetryPress}
 					>
-						<ButtonText>
-							<>Retry</>
-						</ButtonText>
+						<ButtonText>Retry</ButtonText>
 						{isLoading && <ButtonIcon icon={Loader} />}
 					</Button>
 				) : (

@@ -69,9 +69,7 @@ export function SignupQueued() {
 			onPress={checkStatus}
 			disabled={isProcessing}
 		>
-			<ButtonText>
-				<>Check my status</>
-			</ButtonText>
+			<ButtonText>Check my status</ButtonText>
 			{isProcessing && <ButtonIcon icon={Loader} />}
 		</Button>
 	);
@@ -84,9 +82,7 @@ export function SignupQueued() {
 			label={_(msg`Sign out`)}
 			onPress={() => logoutCurrentAccount("SignupQueued")}
 		>
-			<ButtonText>
-				<>Sign out</>
-			</ButtonText>
+			<ButtonText>Sign out</ButtonText>
 		</Button>
 	);
 
@@ -102,14 +98,9 @@ export function SignupQueued() {
 							<Logo width={120} />
 						</View>
 
-						<Text style={[a.text_4xl, a.font_heavy, a.pb_sm]}>
-							<>You're in line</>
-						</Text>
+						<Text style={[a.text_4xl, a.font_heavy, a.pb_sm]}>You're in line</Text>
 						<P style={[t.atoms.text_contrast_medium]}>
-							<>
-								There's been a rush of new users to Bluesky! We'll activate your account as soon as we
-								can.
-							</>
+							There's been a rush of new users to Bluesky! We'll activate your account as soon as we can.
 						</P>
 
 						<View

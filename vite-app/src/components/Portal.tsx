@@ -1,6 +1,6 @@
 import React from "react";
 
-type Component = React.ReactElement;
+type Component = React.ReactNode;
 
 type ContextType = {
 	outlet: Component | null;
@@ -26,12 +26,12 @@ export function createPortalGroup() {
 		const append = React.useCallback<ContextType["append"]>((id, component) => {
 			if (map.current[id]) return;
 			map.current[id] = <React.Fragment key={id}>{component}</React.Fragment>;
-			setOutlet(<>{Object.values(map.current)}</>);
+			setOutlet(Object.values(map.current));
 		}, []);
 
 		const remove = React.useCallback<ContextType["remove"]>((id) => {
 			delete map.current[id];
-			setOutlet(<>{Object.values(map.current)}</>);
+			setOutlet(Object.values(map.current));
 		}, []);
 
 		const contextValue = React.useMemo(

@@ -91,7 +91,7 @@ export const SetNewPasswordForm = ({
 	return (
 		<FormContainer testID="setNewPasswordForm" titleText={<>Set new password</>}>
 			<Text style={[a.leading_snug, a.mb_sm]}>
-				<>You will receive an email with a "reset code." Enter that code here, then enter your new password.</>
+				You will receive an email with a "reset code." Enter that code here, then enter your new password.
 			</Text>
 
 			<View>
@@ -142,25 +142,17 @@ export const SetNewPasswordForm = ({
 
 			<View style={[a.flex_row, a.align_center, a.pt_lg]}>
 				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
-					<ButtonText>
-						<>Back</>
-					</ButtonText>
+					<ButtonText>Back</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{isProcessing ? (
 					<ActivityIndicator />
 				) : (
 					<Button label={_(msg`Next`)} variant="solid" color="primary" size="large" onPress={onPressNext}>
-						<ButtonText>
-							<>Next</>
-						</ButtonText>
+						<ButtonText>Next</ButtonText>
 					</Button>
 				)}
-				{isProcessing ? (
-					<Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-						<>Updating...</>
-					</Text>
-				) : undefined}
+				{isProcessing ? <Text style={[t.atoms.text_contrast_high, a.pl_md]}>Updating...</Text> : undefined}
 			</View>
 		</FormContainer>
 	);

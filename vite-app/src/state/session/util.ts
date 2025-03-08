@@ -28,7 +28,7 @@ export function isSessionExpired(account: SessionAccount) {
 			}
 		}
 	} catch (e) {
-		logger.error(`session: could not decode jwt`);
+		logger.error("session: could not decode jwt");
 	}
 	return true;
 }

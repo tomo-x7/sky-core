@@ -120,7 +120,7 @@ function VideoControls({
 	// 1. timeRemaining is a number - was seeing NaNs
 	// 2. duration is greater than 0 - means metadata has loaded
 	// 3. we're less than 5 second into the video
-	const showTime = !isNaN(timeRemaining);
+	const showTime = !Number.isNaN(timeRemaining);
 
 	return (
 		<View style={[a.absolute, a.inset_0]}>
@@ -149,8 +149,8 @@ function VideoControls({
 				onPress={toggleMuted}
 				label={
 					muted
-						? _(msg({ message: `Unmute`, context: "video" }))
-						: _(msg({ message: `Mute`, context: "video" }))
+						? _(msg({ message: "Unmute", context: "video" }))
+						: _(msg({ message: "Mute", context: "video" }))
 				}
 				accessibilityHint={_(msg`Toggles the sound`)}
 				style={{ right: 6 }}

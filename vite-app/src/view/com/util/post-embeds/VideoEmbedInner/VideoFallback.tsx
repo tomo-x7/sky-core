@@ -42,9 +42,7 @@ export function RetryButton({ onPress }: { onPress: () => void }) {
 
 	return (
 		<Button onPress={onPress} size="small" color="secondary_inverted" variant="solid" label={_(msg`Retry`)}>
-			<ButtonText>
-				<>Retry</>
-			</ButtonText>
+			<ButtonText>Retry</ButtonText>
 		</Button>
 	);
 }

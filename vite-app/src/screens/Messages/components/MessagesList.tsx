@@ -410,34 +410,31 @@ export function MessagesList({
 					footer
 				) : (
 					isConvoActive(convoState) &&
-					!convoState.isFetchingHistory && (
+					!convoState.isFetchingHistory &&
+					(convoState.items.length === 0 ? (
 						<>
-							{convoState.items.length === 0 ? (
-								<>
-									<ChatEmptyPill />
-									<MessageInput
-										onSendMessage={onSendMessage}
-										hasEmbed={!!embedUri}
-										setEmbed={setEmbed}
-										openEmojiPicker={(pos) => setEmojiPickerState({ isOpen: true, pos })}
-									>
-										<MessageInputEmbed embedUri={embedUri} setEmbed={setEmbed} />
-									</MessageInput>
-								</>
-							) : convoState.convo.status === "request" && !hasAcceptOverride ? (
-								<ChatStatusInfo convoState={convoState} />
-							) : (
-								<MessageInput
-									onSendMessage={onSendMessage}
-									hasEmbed={!!embedUri}
-									setEmbed={setEmbed}
-									openEmojiPicker={(pos) => setEmojiPickerState({ isOpen: true, pos })}
-								>
-									<MessageInputEmbed embedUri={embedUri} setEmbed={setEmbed} />
-								</MessageInput>
-							)}
+							<ChatEmptyPill />
+							<MessageInput
+								onSendMessage={onSendMessage}
+								hasEmbed={!!embedUri}
+								setEmbed={setEmbed}
+								openEmojiPicker={(pos) => setEmojiPickerState({ isOpen: true, pos })}
+							>
+								<MessageInputEmbed embedUri={embedUri} setEmbed={setEmbed} />
+							</MessageInput>
 						</>
-					)
+					) : convoState.convo.status === "request" && !hasAcceptOverride ? (
+						<ChatStatusInfo convoState={convoState} />
+					) : (
+						<MessageInput
+							onSendMessage={onSendMessage}
+							hasEmbed={!!embedUri}
+							setEmbed={setEmbed}
+							openEmojiPicker={(pos) => setEmojiPickerState({ isOpen: true, pos })}
+						>
+							<MessageInputEmbed embedUri={embedUri} setEmbed={setEmbed} />
+						</MessageInput>
+					))
 				)}
 			</Animated.View>
 

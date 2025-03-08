@@ -93,7 +93,7 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 							<Loader size="lg" />
 						) : (
 							<Text style={[a.font_bold, a.text_lg, a.text_center, a.mt_lg, a.leading_snug]}>
-								<>No feeds found. Try searching for something else.</>
+								No feeds found. Try searching for something else.
 							</Text>
 						)}
 					</View>

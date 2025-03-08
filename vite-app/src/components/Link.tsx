@@ -49,13 +49,13 @@ type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0]
 	 *
 	 * DO NOT use this for navigation, that's what the `to` prop is for.
 	 */
-	onPress?: (e: GestureResponderEvent) => void | false;
+	onPress?: (e: GestureResponderEvent) => undefined | false;
 
 	/**
 	 * Callback for when the link is long pressed (on native). Prevent default
 	 * and return `false` to exit early and prevent default long press hander.
 	 */
-	onLongPress?: (e: GestureResponderEvent) => void | false;
+	onLongPress?: (e: GestureResponderEvent) => undefined | false;
 
 	/**
 	 * Web-only attribute. Sets `download` attr on web.
@@ -405,7 +405,7 @@ export function isClickTargetExternal(e: GestureResponderEvent) {
 	if (!isWeb) return false;
 	const event = e as unknown as MouseEvent;
 	const el = event.currentTarget as HTMLAnchorElement;
-	return el && el.target && el.target !== "_self";
+	return el?.target && el.target !== "_self";
 }
 
 /**

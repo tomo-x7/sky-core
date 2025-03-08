@@ -376,11 +376,7 @@ export function Controls({
 			{(showSpinner || error) && (
 				<View pointerEvents="none" style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
 					{showSpinner && <Loader fill={t.palette.white} size="lg" />}
-					{error && (
-						<Text style={{ color: t.palette.white }}>
-							<>An error occurred</>
-						</Text>
-					)}
+					{error && <Text style={{ color: t.palette.white }}>An error occurred</Text>}
 				</View>
 			)}
 		</div>

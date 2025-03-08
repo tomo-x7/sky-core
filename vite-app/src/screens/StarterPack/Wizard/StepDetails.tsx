@@ -27,17 +27,13 @@ export function StepDetails() {
 			<View style={[a.px_xl, a.gap_xl, a.mt_4xl]}>
 				<View style={[a.gap_md, a.align_center, a.px_md, a.mb_md]}>
 					<StarterPack width={90} gradient="sky" />
-					<Text style={[a.font_bold, a.text_3xl]}>
-						<>Invites, but personal</>
-					</Text>
+					<Text style={[a.font_bold, a.text_3xl]}>Invites, but personal</Text>
 					<Text style={[a.text_center, a.text_md, a.px_md]}>
-						<>Invite your friends to follow your favorite feeds and people</>
+						Invite your friends to follow your favorite feeds and people
 					</Text>
 				</View>
 				<View>
-					<TextField.LabelText>
-						<>What do you want to call your starter pack?</>
-					</TextField.LabelText>
+					<TextField.LabelText>What do you want to call your starter pack?</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Input
 							label={_(msg`${currentProfile?.displayName || currentProfile?.handle}'s starter pack`)}
@@ -50,9 +46,7 @@ export function StepDetails() {
 					</TextField.Root>
 				</View>
 				<View>
-					<TextField.LabelText>
-						<>Tell us a little more</>
-					</TextField.LabelText>
+					<TextField.LabelText>Tell us a little more</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Input
 							label={_(

@@ -182,20 +182,17 @@ function LoadMore({
 											},
 										]}
 									>
-										{moderationOpts && (
-											<>
-												{_item.type === "profile" ? (
-													<UserAvatar
-														size={28}
-														avatar={_item.avatar}
-														moderation={_item.moderation.ui("avatar")}
-														type="user"
-													/>
-												) : _item.type === "feed" ? (
-													<UserAvatar size={28} avatar={_item.avatar} type="algo" />
-												) : null}
-											</>
-										)}
+										{moderationOpts &&
+											(_item.type === "profile" ? (
+												<UserAvatar
+													size={28}
+													avatar={_item.avatar}
+													moderation={_item.moderation.ui("avatar")}
+													type="user"
+												/>
+											) : _item.type === "feed" ? (
+												<UserAvatar size={28} avatar={_item.avatar} type="algo" />
+											) : null)}
 									</View>
 								);
 							})}
@@ -314,19 +311,19 @@ export function Explore() {
 
 		i.push({
 			type: "trendingTopics",
-			key: `trending-topics`,
+			key: "trending-topics",
 		});
 
 		if (isNative) {
 			i.push({
 				type: "trendingVideos",
-				key: `trending-videos`,
+				key: "trending-videos",
 			});
 		}
 
 		i.push({
 			type: "recommendations",
-			key: `recommendations`,
+			key: "recommendations",
 		});
 
 		i.push({

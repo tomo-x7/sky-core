@@ -58,9 +58,7 @@ export function ModerationModlistsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align="left">
-					<Layout.Header.TitleText>
-						<>Moderation Lists</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Moderation Lists</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button
 					label={_(msg`New list`)}

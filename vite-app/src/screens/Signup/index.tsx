@@ -146,13 +146,13 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 						<View style={[a.w_full, a.py_lg, a.flex_row, a.gap_lg, a.align_center]}>
 							<AppLanguageDropdown />
 							<Text style={[t.atoms.text_contrast_medium, !gtMobile && a.text_md]}>
-								<>Having trouble?</>{" "}
+								Having trouble?{" "}
 								<InlineLinkText
 									label={_(msg`Contact support`)}
 									to={FEEDBACK_FORM_URL({ email: state.email })}
 									style={[!gtMobile && a.text_md]}
 								>
-									<>Contact support</>
+									Contact support
 								</InlineLinkText>
 							</Text>
 						</View>

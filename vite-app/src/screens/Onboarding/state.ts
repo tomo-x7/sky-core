@@ -200,7 +200,7 @@ export function reducer(s: OnboardingState, a: OnboardingAction): OnboardingStat
 		hasPrev: next.activeStep !== "profile",
 	};
 
-	logger.debug(`onboarding`, {
+	logger.debug("onboarding", {
 		hasPrev: state.hasPrev,
 		activeStep: state.activeStep,
 		activeStepIndex: state.activeStepIndex,
@@ -211,7 +211,7 @@ export function reducer(s: OnboardingState, a: OnboardingAction): OnboardingStat
 	});
 
 	if (s.activeStep !== state.activeStep) {
-		logger.debug(`onboarding: step changed`, { activeStep: state.activeStep });
+		logger.debug("onboarding: step changed", { activeStep: state.activeStep });
 	}
 
 	return state;

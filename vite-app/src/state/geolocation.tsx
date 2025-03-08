@@ -26,7 +26,7 @@ export const DEFAULT_GEOLOCATION: Device["geolocation"] = {
 };
 
 async function getGeolocation(): Promise<Device["geolocation"]> {
-	const res = await fetch(`https://bsky.app/ipcc`);
+	const res = await fetch("https://bsky.app/ipcc");
 
 	if (!res.ok) {
 		throw new Error(`geolocation: lookup failed ${res.status}`);
@@ -75,13 +75,13 @@ export function beginResolveGeolocation() {
 			if (geolocation) {
 				device.set(["geolocation"], geolocation);
 				emitGeolocationUpdate(geolocation);
-				logger.debug(`geolocation: success`, { geolocation });
+				logger.debug("geolocation: success", { geolocation });
 			} else {
 				// endpoint should throw on all failures, this is insurance
-				throw new Error(`geolocation: nothing returned from initial request`);
+				throw new Error("geolocation: nothing returned from initial request");
 			}
 		} catch (e: any) {
-			logger.error(`geolocation: failed initial request`, {
+			logger.error("geolocation: failed initial request", {
 				safeMessage: e.message,
 			});
 
@@ -94,15 +94,15 @@ export function beginResolveGeolocation() {
 					if (geolocation) {
 						device.set(["geolocation"], geolocation);
 						emitGeolocationUpdate(geolocation);
-						logger.debug(`geolocation: success`, { geolocation });
+						logger.debug("geolocation: success", { geolocation });
 					} else {
 						// endpoint should throw on all failures, this is insurance
-						throw new Error(`geolocation: nothing returned from retries`);
+						throw new Error("geolocation: nothing returned from retries");
 					}
 				})
 				.catch((e: any) => {
 					// complete fail closed
-					logger.error(`geolocation: failed retries`, { safeMessage: e.message });
+					logger.error("geolocation: failed retries", { safeMessage: e.message });
 				});
 		} finally {
 			resolve(undefined);
@@ -117,16 +117,16 @@ export function beginResolveGeolocation() {
  */
 export async function ensureGeolocationResolved() {
 	if (!geolocationResolution) {
-		throw new Error(`geolocation: beginResolveGeolocation not called yet`);
+		throw new Error("geolocation: beginResolveGeolocation not called yet");
 	}
 
 	const cached = device.get(["geolocation"]);
 	if (cached) {
-		logger.debug(`geolocation: using cache`, { cached });
+		logger.debug("geolocation: using cache", { cached });
 	} else {
-		logger.debug(`geolocation: no cache`);
+		logger.debug("geolocation: no cache");
 		await geolocationResolution;
-		logger.debug(`geolocation: resolved`, {
+		logger.debug("geolocation: resolved", {
 			resolved: device.get(["geolocation"]),
 		});
 	}

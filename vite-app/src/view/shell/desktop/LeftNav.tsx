@@ -230,9 +230,7 @@ function SwitchMenuItems({
 			{accounts && accounts.length > 0 && (
 				<>
 					<Menu.Group>
-						<Menu.LabelText>
-							<>Switch account</>
-						</Menu.LabelText>
+						<Menu.LabelText>Switch account</Menu.LabelText>
 						{accounts.map((other) => (
 							<Menu.Item
 								disabled={!!pendingDid}
@@ -264,15 +262,11 @@ function SwitchMenuItems({
 			)}
 			<Menu.Item label={_(msg`Add another account`)} onPress={onAddAnotherAccount}>
 				<Menu.ItemIcon icon={PlusIcon} />
-				<Menu.ItemText>
-					<>Add another account</>
-				</Menu.ItemText>
+				<Menu.ItemText>Add another account</Menu.ItemText>
 			</Menu.Item>
 			<Menu.Item label={_(msg`Sign out`)} onPress={signOutPromptControl.open}>
 				<Menu.ItemIcon icon={LeaveIcon} />
-				<Menu.ItemText>
-					<>Sign out</>
-				</Menu.ItemText>
+				<Menu.ItemText>Sign out</Menu.ItemText>
 			</Menu.Item>
 		</Menu.Outer>
 	);

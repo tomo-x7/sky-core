@@ -6,7 +6,7 @@ import { dateDiff } from "../useTimeAgo";
 const base = new Date("2024-06-17T00:00:00Z");
 
 describe("dateDiff", () => {
-	it(`works with numbers`, () => {
+	it("works with numbers", () => {
 		const earlier = subDays(base, 3);
 		expect(dateDiff(earlier, Number(base))).toEqual({
 			value: 3,
@@ -15,7 +15,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`works with strings`, () => {
+	it("works with strings", () => {
 		const earlier = subDays(base, 3);
 		expect(dateDiff(earlier, base.toString())).toEqual({
 			value: 3,
@@ -24,7 +24,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`works with dates`, () => {
+	it("works with dates", () => {
 		const earlier = subDays(base, 3);
 		expect(dateDiff(earlier, base)).toEqual({
 			value: 3,
@@ -34,7 +34,7 @@ describe("dateDiff", () => {
 		});
 	});
 
-	it(`equal values return now`, () => {
+	it("equal values return now", () => {
 		expect(dateDiff(base, base)).toEqual({
 			value: 0,
 			unit: "now",
@@ -42,7 +42,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`future dates return now`, () => {
+	it("future dates return now", () => {
 		const earlier = addDays(base, 3);
 		expect(dateDiff(earlier, base)).toEqual({
 			value: 0,
@@ -52,7 +52,7 @@ describe("dateDiff", () => {
 		});
 	});
 
-	it(`values < 5 seconds ago return now`, () => {
+	it("values < 5 seconds ago return now", () => {
 		const then = subSeconds(base, 4);
 		expect(dateDiff(then, base)).toEqual({
 			value: 0,
@@ -61,7 +61,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`values >= 5 seconds ago return seconds`, () => {
+	it("values >= 5 seconds ago return seconds", () => {
 		const then = subSeconds(base, 5);
 		expect(dateDiff(then, base)).toEqual({
 			value: 5,
@@ -71,7 +71,7 @@ describe("dateDiff", () => {
 		});
 	});
 
-	it(`values < 1 min return seconds`, () => {
+	it("values < 1 min return seconds", () => {
 		const then = subSeconds(base, 59);
 		expect(dateDiff(then, base)).toEqual({
 			value: 59,
@@ -80,7 +80,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`values >= 1 min return minutes`, () => {
+	it("values >= 1 min return minutes", () => {
 		const then = subSeconds(base, 60);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -89,7 +89,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`minutes round down`, () => {
+	it("minutes round down", () => {
 		const then = subSeconds(base, 119);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -99,7 +99,7 @@ describe("dateDiff", () => {
 		});
 	});
 
-	it(`values < 1 hour return minutes`, () => {
+	it("values < 1 hour return minutes", () => {
 		const then = subMinutes(base, 59);
 		expect(dateDiff(then, base)).toEqual({
 			value: 59,
@@ -108,7 +108,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`values >= 1 hour return hours`, () => {
+	it("values >= 1 hour return hours", () => {
 		const then = subMinutes(base, 60);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -117,7 +117,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`hours round down`, () => {
+	it("hours round down", () => {
 		const then = subMinutes(base, 119);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -127,7 +127,7 @@ describe("dateDiff", () => {
 		});
 	});
 
-	it(`values < 1 day return hours`, () => {
+	it("values < 1 day return hours", () => {
 		const then = subHours(base, 23);
 		expect(dateDiff(then, base)).toEqual({
 			value: 23,
@@ -136,7 +136,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`values >= 1 day return days`, () => {
+	it("values >= 1 day return days", () => {
 		const then = subHours(base, 24);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -145,7 +145,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`days round down`, () => {
+	it("days round down", () => {
 		const then = subHours(base, 47);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -155,7 +155,7 @@ describe("dateDiff", () => {
 		});
 	});
 
-	it(`values < 30 days return days`, () => {
+	it("values < 30 days return days", () => {
 		const then = subDays(base, 29);
 		expect(dateDiff(then, base)).toEqual({
 			value: 29,
@@ -164,7 +164,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`values >= 30 days return months`, () => {
+	it("values >= 30 days return months", () => {
 		const then = subDays(base, 30);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -173,7 +173,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`months round down`, () => {
+	it("months round down", () => {
 		const then = subDays(base, 59);
 		expect(dateDiff(then, base)).toEqual({
 			value: 1,
@@ -182,7 +182,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`values are rounded by increments of 30`, () => {
+	it("values are rounded by increments of 30", () => {
 		const then = subDays(base, 61);
 		expect(dateDiff(then, base)).toEqual({
 			value: 2,
@@ -192,7 +192,7 @@ describe("dateDiff", () => {
 		});
 	});
 
-	it(`values < 360 days return months`, () => {
+	it("values < 360 days return months", () => {
 		const then = subDays(base, 359);
 		expect(dateDiff(then, base)).toEqual({
 			value: 11,
@@ -201,7 +201,7 @@ describe("dateDiff", () => {
 			later: base,
 		});
 	});
-	it(`values >= 360 days return the earlier value`, () => {
+	it("values >= 360 days return the earlier value", () => {
 		const then = subDays(base, 360);
 		expect(dateDiff(then, base)).toEqual({
 			value: 12,

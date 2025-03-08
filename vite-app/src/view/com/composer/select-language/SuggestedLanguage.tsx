@@ -63,7 +63,7 @@ export function SuggestedLanguage({ text }: { text: string }) {
 					accessibilityHint=""
 				>
 					<Text type="button" style={[pal.link, s.fw600]}>
-						<>Yes</>
+						Yes
 					</Text>
 				</Button>
 			</View>

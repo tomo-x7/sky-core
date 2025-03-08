@@ -67,21 +67,17 @@ export function LanguageSettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Languages</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Languages</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<SettingsList.Container>
 					<SettingsList.Group iconInset={false}>
-						<SettingsList.ItemText>
-							<>App Language</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>App Language</SettingsList.ItemText>
 						<View style={[a.gap_md, a.w_full]}>
 							<Text style={[a.leading_snug]}>
-								<>Select which language to use for the app's user interface.</>
+								Select which language to use for the app's user interface.
 							</Text>
 							<View style={[a.relative, web([a.w_full, { maxWidth: 400 }])]}>
 								<RNPickerSelect
@@ -161,12 +157,10 @@ export function LanguageSettingsScreen({}: Props) {
 					</SettingsList.Group>
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
-						<SettingsList.ItemText>
-							<>Primary Language</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Primary Language</SettingsList.ItemText>
 						<View style={[a.gap_md, a.w_full]}>
 							<Text style={[a.leading_snug]}>
-								<>Select your preferred language for translations in your feed.</>
+								Select your preferred language for translations in your feed.
 							</Text>
 							<View style={[a.relative, web([a.w_full, { maxWidth: 400 }])]}>
 								<RNPickerSelect
@@ -244,15 +238,11 @@ export function LanguageSettingsScreen({}: Props) {
 					</SettingsList.Group>
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
-						<SettingsList.ItemText>
-							<>Content Languages</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Content Languages</SettingsList.ItemText>
 						<View style={[a.gap_md]}>
 							<Text style={[a.leading_snug]}>
-								<>
-									Select which languages you want your subscribed feeds to include. If none are
-									selected, all languages will be shown.
-								</>
+								Select which languages you want your subscribed feeds to include. If none are selected,
+								all languages will be shown.
 							</Text>
 
 							<Button

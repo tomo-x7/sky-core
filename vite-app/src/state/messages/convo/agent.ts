@@ -561,7 +561,7 @@ export class Convo {
 			this.sender = sender || this.sender;
 			this.recipients = recipients || this.recipients;
 		} catch (e: any) {
-			logger.error(e, { message: `Convo: failed to refresh convo` });
+			logger.error(e, { message: "Convo: failed to refresh convo" });
 		}
 	}
 
@@ -825,7 +825,7 @@ export class Convo {
 			// continue queue processing
 			await this.processPendingMessages();
 		} catch (e: any) {
-			logger.error(e, { message: `Convo: failed to send message` });
+			logger.error(e, { message: "Convo: failed to send message" });
 			this.handleSendMessageFailure(e);
 			this.isProcessingPendingMessages = false;
 		}
@@ -855,7 +855,7 @@ export class Convo {
 					case "recipient has disabled incoming messages":
 						break;
 					default:
-						logger.warn(`Convo handleSendMessageFailure could not handle error`, {
+						logger.warn("Convo handleSendMessageFailure could not handle error", {
 							status: e.status,
 							message: e.message,
 						});
@@ -865,7 +865,7 @@ export class Convo {
 		} else {
 			this.pendingMessageFailure = "unrecoverable";
 			logger.error(e, {
-				message: `Convo handleSendMessageFailure received unknown error`,
+				message: "Convo handleSendMessageFailure received unknown error",
 			});
 		}
 
@@ -914,7 +914,7 @@ export class Convo {
 
 			logger.debug(`Convo: sent ${this.pendingMessages.size} pending messages`, {});
 		} catch (e: any) {
-			logger.error(e, { message: `Convo: failed to batch retry messages` });
+			logger.error(e, { message: "Convo: failed to batch retry messages" });
 			this.handleSendMessageFailure(e);
 		}
 	}
@@ -936,7 +936,7 @@ export class Convo {
 				);
 			});
 		} catch (e: any) {
-			logger.error(e, { message: `Convo: failed to delete message` });
+			logger.error(e, { message: "Convo: failed to delete message" });
 			this.deletedMessages.delete(messageId);
 			this.commit();
 			throw e;

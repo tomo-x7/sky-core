@@ -92,9 +92,7 @@ function ProfileEndOfFeed() {
 
 	return (
 		<View style={[pal.border, { paddingTop: 32, paddingBottom: 32, borderTopWidth: 1 }]}>
-			<Text style={[pal.textLight, pal.border, { textAlign: "center" }]}>
-				<>End of feed</>
-			</Text>
+			<Text style={[pal.textLight, pal.border, { textAlign: "center" }]}>End of feed</Text>
 		</View>
 	);
 }

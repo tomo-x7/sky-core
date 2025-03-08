@@ -82,7 +82,7 @@ export function StepProfiles({
 							<Loader size="lg" />
 						) : (
 							<Text style={[a.font_bold, a.text_lg, a.text_center, a.mt_lg, a.leading_snug]}>
-								<>Nobody was found. Try searching for someone else.</>
+								Nobody was found. Try searching for someone else.
 							</Text>
 						)}
 					</View>

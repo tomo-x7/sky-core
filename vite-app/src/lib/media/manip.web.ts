@@ -46,7 +46,7 @@ export async function saveImageToAlbum(_opts: { uri: string; album: string }) {
 }
 
 export async function getImageDim(path: string): Promise<Dimensions> {
-	var img = document.createElement("img");
+	const img = document.createElement("img");
 	const promise = new Promise((resolve, reject) => {
 		img.onload = resolve;
 		img.onerror = reject;

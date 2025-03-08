@@ -36,21 +36,21 @@ export function FollowingEmptyState() {
 					<MagnifyingGlassIcon style={[styles.icon, pal.text]} size={62} />
 				</View>
 				<Text type="xl-medium" style={[s.textCenter, pal.text]}>
-					<>Your following feed is empty! Follow more users to see what's happening.</>
+					Your following feed is empty! Follow more users to see what's happening.
 				</Text>
 				<Button type="inverted" style={styles.emptyBtn} onPress={onPressFindAccounts}>
 					<Text type="lg-medium" style={palInverted.text}>
-						<>Find accounts to follow</>
+						Find accounts to follow
 					</Text>
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 				</Button>
 
 				<Text type="xl-medium" style={[s.textCenter, pal.text, s.mt20]}>
-					<>You can also discover new Custom Feeds to follow.</>
+					You can also discover new Custom Feeds to follow.
 				</Text>
 				<Button type="inverted" style={[styles.emptyBtn, s.mt10]} onPress={onPressDiscoverFeeds}>
 					<Text type="lg-medium" style={palInverted.text}>
-						<>Discover new custom feeds</>
+						Discover new custom feeds
 					</Text>
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 				</Button>

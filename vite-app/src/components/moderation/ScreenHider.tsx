@@ -112,7 +112,7 @@ export function ScreenHider({
 									}),
 								]}
 							>
-								<>Learn More</>
+								Learn More
 							</Text>
 						</TouchableWithoutFeedback>
 						<ModerationDetailsDialog control={control} modcause={blur} />
@@ -135,9 +135,7 @@ export function ScreenHider({
 						}
 					}}
 				>
-					<ButtonText>
-						<>Go back</>
-					</ButtonText>
+					<ButtonText>Go back</ButtonText>
 				</Button>
 				{!modui.noOverride && (
 					<Button
@@ -148,9 +146,7 @@ export function ScreenHider({
 						label={_(msg`Show anyway`)}
 						onPress={() => setOverride((v) => !v)}
 					>
-						<ButtonText>
-							<>Show anyway</>
-						</ButtonText>
+						<ButtonText>Show anyway</ButtonText>
 					</Button>
 				)}
 			</View>

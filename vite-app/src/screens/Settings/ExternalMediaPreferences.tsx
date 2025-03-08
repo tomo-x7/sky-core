@@ -17,9 +17,7 @@ export function ExternalMediaPreferencesScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>External Media Preferences</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>External Media Preferences</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
@@ -27,16 +25,12 @@ export function ExternalMediaPreferencesScreen({}: Props) {
 				<SettingsList.Container>
 					<SettingsList.Item>
 						<Admonition type="info" style={[a.flex_1]}>
-							<>
-								External media may allow websites to collect information about you and your device. No
-								information is sent or requested until you press the "play" button.
-							</>
+							External media may allow websites to collect information about you and your device. No
+							information is sent or requested until you press the "play" button.
 						</Admonition>
 					</SettingsList.Item>
 					<SettingsList.Group iconInset={false}>
-						<SettingsList.ItemText>
-							<>Enable media players for</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Enable media players for</SettingsList.ItemText>
 						<View style={[a.mt_sm, a.w_full]}>
 							{native(<SettingsList.Divider style={[a.my_0]} />)}
 							{Object.entries(externalEmbedLabels)

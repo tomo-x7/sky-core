@@ -220,9 +220,7 @@ export function Component({
 						<ErrorMessage message={error} />
 					</View>
 				)}
-				<Text style={[styles.label, pal.text]}>
-					<>List Avatar</>
-				</Text>
+				<Text style={[styles.label, pal.text]}>List Avatar</Text>
 				<View style={[styles.avi, { borderColor: pal.colors.background }]}>
 					<EditableUserAvatar type="list" size={80} avatar={avatar} onSelectNewAvatar={onSelectNewAvatar} />
 				</View>
@@ -230,7 +228,7 @@ export function Component({
 					<View>
 						<View style={styles.labelWrapper}>
 							<Text style={[styles.label, pal.text]} nativeID="list-name">
-								<>List Name</>
+								List Name
 							</Text>
 						</View>
 						<TextInput
@@ -249,7 +247,7 @@ export function Component({
 					<View style={s.pb10}>
 						<View style={styles.labelWrapper}>
 							<Text style={[styles.label, pal.text]} nativeID="list-description">
-								<>Description</>
+								Description
 							</Text>
 							<Text style={[!isDescriptionOver ? pal.textLight : s.red3, s.f13]}>
 								{graphemeLength}/{MAX_DESCRIPTION}

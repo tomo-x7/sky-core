@@ -493,9 +493,7 @@ function DialogInner({
 						<Divider />
 
 						<View style={[a.flex_row, a.align_center, a.gap_sm, a.justify_between]}>
-							<Text style={[a.italic, t.atoms.text_contrast_medium]}>
-								<>Something wrong? Let us know.</>
-							</Text>
+							<Text style={[a.italic, t.atoms.text_contrast_medium]}>Something wrong? Let us know.</Text>
 
 							<Button
 								label={_(msg`Report feed`)}
@@ -504,9 +502,7 @@ function DialogInner({
 								color="secondary"
 								onPress={onPressReport}
 							>
-								<ButtonText>
-									<>Report feed</>
-								</ButtonText>
+								<ButtonText>Report feed</ButtonText>
 								<ButtonIcon icon={CircleInfo} position="right" />
 							</Button>
 						</View>

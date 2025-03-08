@@ -71,9 +71,7 @@ export function Takendown() {
 				onPress={() => submitAppeal(reason)}
 				disabled={isPending || reasonGraphemeLength > MAX_REPORT_REASON_GRAPHEME_LENGTH}
 			>
-				<ButtonText>
-					<>Submit Appeal</>
-				</ButtonText>
+				<ButtonText>Submit Appeal</ButtonText>
 				{isPending && <ButtonIcon icon={Loader} />}
 			</Button>
 		) : (
@@ -84,9 +82,7 @@ export function Takendown() {
 				label={_(msg`Sign out`)}
 				onPress={() => logoutCurrentAccount("Takendown")}
 			>
-				<ButtonText>
-					<>Sign Out</>
-				</ButtonText>
+				<ButtonText>Sign Out</ButtonText>
 			</Button>
 		);
 
@@ -99,9 +95,7 @@ export function Takendown() {
 				label={_(msg`Cancel`)}
 				onPress={() => setIsAppealling(false)}
 			>
-				<ButtonText>
-					<>Cancel</>
-				</ButtonText>
+				<ButtonText>Cancel</ButtonText>
 			</Button>
 		)
 	) : (
@@ -112,9 +106,7 @@ export function Takendown() {
 			label={_(msg`Appeal suspension`)}
 			onPress={() => setIsAppealling(true)}
 		>
-			<ButtonText>
-				<>Appeal Suspension</>
-			</ButtonText>
+			<ButtonText>Appeal Suspension</ButtonText>
 		</Button>
 	);
 
@@ -140,16 +132,12 @@ export function Takendown() {
 							<View style={[a.relative, a.w_full, a.mt_xl]}>
 								{isSuccess ? (
 									<P style={[t.atoms.text_contrast_medium, a.text_center]}>
-										<>
-											Your appeal has been submitted. If your appeal succeeds, you will receive an
-											email.
-										</>
+										Your appeal has been submitted. If your appeal succeeds, you will receive an
+										email.
 									</P>
 								) : (
 									<>
-										<TextField.LabelText>
-											<>Reason for appeal</>
-										</TextField.LabelText>
+										<TextField.LabelText>Reason for appeal</TextField.LabelText>
 										<TextField.Root
 											isInvalid={
 												reasonGraphemeLength > MAX_REPORT_REASON_GRAPHEME_LENGTH || !!error

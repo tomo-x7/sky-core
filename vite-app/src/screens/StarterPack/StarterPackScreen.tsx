@@ -392,9 +392,7 @@ function Header({
 								size="small"
 								onPress={onOpenShareDialog}
 							>
-								<ButtonText>
-									<>Share</>
-								</ButtonText>
+								<ButtonText>Share</ButtonText>
 							</Button>
 						) : (
 							<Button
@@ -406,9 +404,7 @@ function Header({
 								onPress={onFollowAll}
 								style={[a.flex_row, a.gap_xs, a.align_center]}
 							>
-								<ButtonText>
-									<>Follow all</>
-								</ButtonText>
+								<ButtonText>Follow all</ButtonText>
 								{isProcessing && <Loader size="xs" />}
 							</Button>
 						)}
@@ -436,9 +432,7 @@ function Header({
 							color="primary"
 							size="large"
 						>
-							<ButtonText style={[a.text_lg]}>
-								<>Join Bluesky</>
-							</ButtonText>
+							<ButtonText style={[a.text_lg]}>Join Bluesky</ButtonText>
 						</Button>
 					) : null}
 					{joinedAllTimeCount >= 25 ? (
@@ -500,7 +494,7 @@ function OverflowMenu({
 
 	const onDeleteStarterPack = async () => {
 		if (!starterPack.list) {
-			logger.error(`Unable to delete starterpack because list is missing`);
+			logger.error("Unable to delete starterpack because list is missing");
 			return;
 		}
 
@@ -542,9 +536,7 @@ function OverflowMenu({
 									});
 								}}
 							>
-								<Menu.ItemText>
-									<>Edit</>
-								</Menu.ItemText>
+								<Menu.ItemText>Edit</Menu.ItemText>
 								<Menu.ItemIcon icon={Pencil} position="right" />
 							</Menu.Item>
 							<Menu.Item
@@ -554,9 +546,7 @@ function OverflowMenu({
 									deleteDialogControl.open();
 								}}
 							>
-								<Menu.ItemText>
-									<>Delete</>
-								</Menu.ItemText>
+								<Menu.ItemText>Delete</Menu.ItemText>
 								<Menu.ItemIcon icon={Trash} position="right" />
 							</Menu.Item>
 						</>
@@ -568,17 +558,13 @@ function OverflowMenu({
 									testID="shareStarterPackLinkBtn"
 									onPress={onOpenShareDialog}
 								>
-									<Menu.ItemText>
-										<>Share link</>
-									</Menu.ItemText>
+									<Menu.ItemText>Share link</Menu.ItemText>
 									<Menu.ItemIcon icon={ArrowOutOfBox} position="right" />
 								</Menu.Item>
 							</Menu.Group>
 
 							<Menu.Item label={_(msg`Report starter pack`)} onPress={() => reportDialogControl.open()}>
-								<Menu.ItemText>
-									<>Report starter pack</>
-								</Menu.ItemText>
+								<Menu.ItemText>Report starter pack</Menu.ItemText>
 								<Menu.ItemIcon icon={CircleInfo} position="right" />
 							</Menu.Item>
 						</>
@@ -597,12 +583,8 @@ function OverflowMenu({
 			)}
 
 			<Prompt.Outer control={deleteDialogControl}>
-				<Prompt.TitleText>
-					<>Delete starter pack?</>
-				</Prompt.TitleText>
-				<Prompt.DescriptionText>
-					<>Are you sure you want to delete this starter pack?</>
-				</Prompt.DescriptionText>
+				<Prompt.TitleText>Delete starter pack?</Prompt.TitleText>
+				<Prompt.DescriptionText>Are you sure you want to delete this starter pack?</Prompt.DescriptionText>
 				{deleteError && (
 					<View
 						style={[
@@ -617,9 +599,7 @@ function OverflowMenu({
 						]}
 					>
 						<View style={[a.flex_1, a.gap_2xs]}>
-							<Text style={[a.font_bold]}>
-								<>Unable to delete</>
-							</Text>
+							<Text style={[a.font_bold]}>Unable to delete</Text>
 							<Text style={[a.leading_snug]}>{cleanError(deleteError)}</Text>
 						</View>
 						<CircleInfo size="sm" fill={t.palette.negative_400} />
@@ -633,9 +613,7 @@ function OverflowMenu({
 						label={_(msg`Yes, delete this starter pack`)}
 						onPress={onDeleteStarterPack}
 					>
-						<ButtonText>
-							<>Delete</>
-						</ButtonText>
+						<ButtonText>Delete</ButtonText>
 						{isDeletePending && <ButtonIcon icon={Loader} />}
 					</Button>
 					<Prompt.Cancel />
@@ -676,9 +654,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 		<Layout.Content centerContent>
 			<View style={[a.py_4xl, a.px_xl, a.align_center, a.gap_5xl]}>
 				<View style={[a.w_full, a.align_center, a.gap_lg]}>
-					<Text style={[a.font_bold, a.text_3xl]}>
-						<>Starter pack is invalid</>
-					</Text>
+					<Text style={[a.font_bold, a.text_3xl]}>Starter pack is invalid</Text>
 					<Text
 						style={[
 							a.text_md,
@@ -688,10 +664,8 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 							gtMobile ? { width: 450 } : [a.w_full, a.px_lg],
 						]}
 					>
-						<>
-							The starter pack that you are trying to view is invalid. You may delete this starter pack
-							instead.
-						</>
+						The starter pack that you are trying to view is invalid. You may delete this starter pack
+						instead.
 					</Text>
 				</View>
 				<View style={[a.gap_md, gtMobile ? { width: 350 } : [a.w_full, a.px_lg]]}>
@@ -707,9 +681,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 							deleteStarterPack({ rkey });
 						}}
 					>
-						<ButtonText>
-							<>Delete</>
-						</ButtonText>
+						<ButtonText>Delete</ButtonText>
 						{isProcessing && <Loader size="xs" color="white" />}
 					</Button>
 					<Button
@@ -721,9 +693,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						disabled={isProcessing}
 						onPress={goBack}
 					>
-						<ButtonText>
-							<>Go Back</>
-						</ButtonText>
+						<ButtonText>Go Back</ButtonText>
 					</Button>
 				</View>
 			</View>

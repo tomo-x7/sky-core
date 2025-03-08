@@ -85,9 +85,7 @@ function SavedFeedsInner({
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align="left">
-					<Layout.Header.TitleText>
-						<>Feeds</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Feeds</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button
 					testID="saveChangesBtn"
@@ -112,7 +110,7 @@ function SavedFeedsInner({
 
 				<View style={[pal.text, pal.border, styles.title]}>
 					<Text type="title" style={pal.text}>
-						<>Pinned Feeds</>
+						Pinned Feeds
 					</Text>
 				</View>
 
@@ -120,7 +118,7 @@ function SavedFeedsInner({
 					!pinnedFeeds.length ? (
 						<View style={[pal.border, isMobile && s.flex1, pal.viewLight, styles.empty]}>
 							<Text type="lg" style={[pal.text]}>
-								<>You don't have any pinned feeds.</>
+								You don't have any pinned feeds.
 							</Text>
 						</View>
 					) : (
@@ -147,14 +145,14 @@ function SavedFeedsInner({
 
 				<View style={[pal.text, pal.border, styles.title]}>
 					<Text type="title" style={pal.text}>
-						<>Saved Feeds</>
+						Saved Feeds
 					</Text>
 				</View>
 				{preferences ? (
 					!unpinnedFeeds.length ? (
 						<View style={[pal.border, isMobile && s.flex1, pal.viewLight, styles.empty]}>
 							<Text type="lg" style={[pal.text]}>
-								<>You don't have any saved feeds.</>
+								You don't have any saved feeds.
 							</Text>
 						</View>
 					) : (
@@ -374,7 +372,7 @@ function FollowingFeedCard() {
 			</View>
 			<View style={{ flex: 1, flexDirection: "row", gap: 8, alignItems: "center" }}>
 				<Text type="lg-medium" style={[t.atoms.text]} numberOfLines={1}>
-					<>Following</>
+					Following
 				</Text>
 			</View>
 		</View>

@@ -307,20 +307,16 @@ function Container({ children }: { children: React.ReactNode }) {
 		<KeyboardAwareScrollView style={[a.flex_1]} keyboardShouldPersistTaps="handled">
 			{children}
 			{state.currentStep === "Details" && (
-				<>
-					<Button
-						label={_(msg`Next`)}
-						variant="solid"
-						color="primary"
-						size="large"
-						style={[a.mx_xl, a.mb_lg, { marginTop: 35 }]}
-						onPress={() => dispatch({ type: "Next" })}
-					>
-						<ButtonText>
-							<>Next</>
-						</ButtonText>
-					</Button>
-				</>
+				<Button
+					label={_(msg`Next`)}
+					variant="solid"
+					color="primary"
+					size="large"
+					style={[a.mx_xl, a.mb_lg, { marginTop: 35 }]}
+					onPress={() => dispatch({ type: "Next" })}
+				>
+					<ButtonText>Next</ButtonText>
+				</Button>
 			)}
 		</KeyboardAwareScrollView>
 	);
@@ -428,10 +424,10 @@ function Footer({
 					items.length === 0 ? (
 						<View style={[a.gap_sm]}>
 							<Text style={[a.font_bold, a.text_center, textStyles]}>
-								<>Add some feeds to your starter pack!</>
+								Add some feeds to your starter pack!
 							</Text>
 							<Text style={[a.text_center, textStyles]}>
-								<>Search for feeds that you want to suggest to others.</>
+								Search for feeds that you want to suggest to others.
 							</Text>
 						</View>
 					) : (
@@ -484,9 +480,7 @@ function Footer({
 						style={{ width: 70 }}
 						onPress={editDialogControl.open}
 					>
-						<ButtonText>
-							<>Edit</>
-						</ButtonText>
+						<ButtonText>Edit</ButtonText>
 					</Button>
 				) : (
 					<View style={{ width: 70, height: 35 }} />

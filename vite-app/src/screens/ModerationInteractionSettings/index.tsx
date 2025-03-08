@@ -27,19 +27,15 @@ export function Screen() {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Post Interaction Settings</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Post Interaction Settings</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<View style={[gutters, a.gap_xl]}>
 					<Admonition type="tip">
-						<>
-							The following settings will be used as your defaults when creating new posts. You can edit
-							these for a specific post from the composer.
-						</>
+						The following settings will be used as your defaults when creating new posts. You can edit these
+						for a specific post from the composer.
 					</Admonition>
 					{preferences ? (
 						<Inner preferences={preferences} />
@@ -94,7 +90,7 @@ function Inner({ preferences }: { preferences: UsePreferencesQueryResponse }) {
 			});
 			Toast.show(_(msg`Settings saved`));
 		} catch (e: any) {
-			logger.error(`Failed to save post interaction settings`, {
+			logger.error("Failed to save post interaction settings", {
 				source: "ModerationInteractionSettingsScreen",
 				safeMessage: e.message,
 			});

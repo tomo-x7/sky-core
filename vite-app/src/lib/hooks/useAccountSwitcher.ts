@@ -41,7 +41,7 @@ export function useAccountSwitcher() {
 					Toast.show(_(msg`Please sign in as @${account.handle}`), "circle-exclamation");
 				}
 			} catch (e: any) {
-				logger.error(`switch account: selectAccount failed`, {
+				logger.error("switch account: selectAccount failed", {
 					message: e.message,
 				});
 				requestSwitchToAccount({ requestedAccount: account.did });

@@ -130,9 +130,7 @@ export function Component({
 	return (
 		<KeyboardAvoidingView style={s.flex1} behavior="height">
 			<ScrollView style={[pal.view]} testID="editProfileModal">
-				<Text style={[styles.title, pal.text]}>
-					<>Edit my profile</>
-				</Text>
+				<Text style={[styles.title, pal.text]}>Edit my profile</Text>
 				<View style={styles.photos}>
 					<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
 					<View style={[styles.avi, { borderColor: pal.colors.background }]}>
@@ -151,9 +149,7 @@ export function Component({
 				)}
 				<View style={styles.form}>
 					<View>
-						<Text style={[styles.label, pal.text]}>
-							<>Display Name</>
-						</Text>
+						<Text style={[styles.label, pal.text]}>Display Name</Text>
 						<TextInput
 							testID="editProfileDisplayNameInput"
 							style={[styles.textInput, pal.border, pal.text]}
@@ -167,9 +163,7 @@ export function Component({
 						/>
 					</View>
 					<View style={s.pb10}>
-						<Text style={[styles.label, pal.text]}>
-							<>Description</>
-						</Text>
+						<Text style={[styles.label, pal.text]}>Description</Text>
 						<TextInput
 							testID="editProfileDescriptionInput"
 							style={[styles.textArea, pal.border, pal.text]}
@@ -203,9 +197,7 @@ export function Component({
 								end={{ x: 1, y: 1 }}
 								style={[styles.btn]}
 							>
-								<Text style={[s.white, s.bold]}>
-									<>Save Changes</>
-								</Text>
+								<Text style={[s.white, s.bold]}>Save Changes</Text>
 							</LinearGradient>
 						</TouchableOpacity>
 					)}
@@ -221,9 +213,7 @@ export function Component({
 							onAccessibilityEscape={onPressCancel}
 						>
 							<View style={[styles.btn]}>
-								<Text style={[s.black, s.bold, pal.text]}>
-									<>Cancel</>
-								</Text>
+								<Text style={[s.black, s.bold, pal.text]}>Cancel</Text>
 							</View>
 						</AnimatedTouchableOpacity>
 					)}

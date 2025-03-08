@@ -14,8 +14,10 @@
 	"linter": {
 		"rules": {
 			"a11y": { "useKeyWithClickEvents": "off" },
-			"style": { "noUselessElse": "off", "useImportType": "info" },
-			"correctness": { "noUnusedImports": "info" }
+			"style": { "noUselessElse": "off", "useImportType": "info","noNonNullAssertion":"off","noUnusedTemplateLiteral":"error" },
+			"correctness": { "noUnusedImports": "info" },
+			"recommended": true,
+			"complexity": { "noUselessFragments": "error" }
 		}
 	},
 	"overrides": [{ "include": ["tsconfig.*"], "json": { "parser": { "allowComments": true } } }]

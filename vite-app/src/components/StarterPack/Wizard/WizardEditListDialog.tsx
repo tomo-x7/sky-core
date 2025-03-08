@@ -108,9 +108,7 @@ export function WizardEditListDialog({
 									size="small"
 									onPress={() => control.close()}
 								>
-									<ButtonText>
-										<>Close</>
-									</ButtonText>
+									<ButtonText>Close</ButtonText>
 								</Button>
 							)}
 						</View>

@@ -92,11 +92,9 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 				<LayoutAnimationConfig skipEntering skipExiting>
 					{!data ? (
 						<Animated.View style={[a.gap_lg]} exiting={native(SlideOutLeft)} key={0}>
-							<Text style={[a.text_2xl, a.font_bold]}>
-								<>Add App Password</>
-							</Text>
+							<Text style={[a.text_2xl, a.font_bold]}>Add App Password</Text>
 							<Text style={[a.text_md, a.leading_snug]}>
-								<>Please enter a unique name for this app password or use our randomly generated one.</>
+								Please enter a unique name for this app password or use our randomly generated one.
 							</Text>
 							<View>
 								<TextInput.Root isInvalid={!!error}>
@@ -130,7 +128,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								>
 									<Toggle.Checkbox />
 									<Toggle.LabelText style={[a.font_normal, a.text_md, a.leading_snug]}>
-										<>Allow access to your direct messages</>
+										Allow access to your direct messages
 									</Toggle.LabelText>
 								</Toggle.Item>
 								<Button
@@ -142,16 +140,14 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									onPress={() => createAppPassword()}
 									disabled={isPending}
 								>
-									<ButtonText>
-										<>Next</>
-									</ButtonText>
+									<ButtonText>Next</ButtonText>
 									<ButtonIcon icon={ChevronRight} />
 								</Button>
 								{!!apiError ||
 									(error && !(error instanceof DisplayableError) && (
 										<Animated.View entering={FadeIn} exiting={FadeOut}>
 											<Admonition type="error">
-												<>Failed to create app password. Please try again.</>
+												Failed to create app password. Please try again.
 											</Admonition>
 										</Animated.View>
 									))}
@@ -159,11 +155,9 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 						</Animated.View>
 					) : (
 						<Animated.View style={[a.gap_lg]} entering={isWeb ? FadeIn.delay(200) : SlideInRight} key={1}>
-							<Text style={[a.text_2xl, a.font_bold]}>
-								<>Here is your app password!</>
-							</Text>
+							<Text style={[a.text_2xl, a.font_bold]}>Here is your app password!</Text>
 							<Text style={[a.text_md, a.leading_snug]}>
-								<>Use this to sign in to the other app along with your handle.</>
+								Use this to sign in to the other app along with your handle.
 							</Text>
 							<CopyButton
 								value={data.password}
@@ -176,10 +170,8 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								<ButtonIcon icon={CopyIcon} />
 							</CopyButton>
 							<Text style={[a.text_md, a.leading_snug, t.atoms.text_contrast_medium]}>
-								<>
-									For security reasons, you won't be able to view this again. If you lose this app
-									password, you'll need to generate a new one.
-								</>
+								For security reasons, you won't be able to view this again. If you lose this app
+								password, you'll need to generate a new one.
 							</Text>
 							<Button
 								label={_(msg`Done`)}
@@ -189,9 +181,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								style={[a.flex_1]}
 								onPress={() => control.close()}
 							>
-								<ButtonText>
-									<>Done</>
-								</ButtonText>
+								<ButtonText>Done</ButtonText>
 							</Button>
 						</Animated.View>
 					)}

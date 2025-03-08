@@ -48,7 +48,7 @@ export async function getPostgateRecord({
 				 * throwing an error. NB: This will also catch reference errors, such as
 				 * a typo in the URI.
 				 */
-				if (e.message.includes(`Could not locate record:`)) {
+				if (e.message.includes("Could not locate record:")) {
 					return false;
 				}
 				return true;
@@ -72,7 +72,7 @@ export async function getPostgateRecord({
 		 * throwing an error. NB: This will also catch reference errors, such as
 		 * a typo in the URI.
 		 */
-		if (e.message.includes(`Could not locate record:`)) {
+		if (e.message.includes("Could not locate record:")) {
 			return undefined;
 		} else {
 			throw e;
@@ -227,7 +227,7 @@ export function useToggleQuoteDetachmentMutation() {
 					});
 				} catch (e: any) {
 					// ok if this fails, it's just optimistic UI
-					logger.error(`Postgate: failed to get quote post for re-attachment`, {
+					logger.error("Postgate: failed to get quote post for re-attachment", {
 						safeMessage: e.message,
 					});
 				}

@@ -14,7 +14,7 @@ export async function bulkWriteFollows(agent: BskyAgent, dids: string[]) {
 	const session = agent.session;
 
 	if (!session) {
-		throw new Error(`bulkWriteFollows failed: no session`);
+		throw new Error("bulkWriteFollows failed: no session");
 	}
 
 	const followRecords: $Typed<AppBskyGraphFollow.Record>[] = dids.map((did) => {

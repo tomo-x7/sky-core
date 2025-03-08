@@ -47,7 +47,7 @@ export function Component({
 
 	React.useEffect(() => {
 		if (!currentAccount) {
-			logger.error(`VerifyEmail modal opened without currentAccount`);
+			logger.error("VerifyEmail modal opened without currentAccount");
 			closeModal();
 		}
 	}, [currentAccount, closeModal]);
@@ -140,7 +140,7 @@ export function Component({
 							style={styles.changeEmailLink}
 						>
 							<Text type="lg" style={pal.link}>
-								<>Change</>
+								Change
 							</Text>
 						</Pressable>
 					</>

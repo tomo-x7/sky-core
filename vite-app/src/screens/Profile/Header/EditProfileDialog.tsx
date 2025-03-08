@@ -213,9 +213,7 @@ function DialogInner({
 				style={[a.rounded_full]}
 				testID="editProfileCancelBtn"
 			>
-				<ButtonText style={[a.text_md]}>
-					<>Cancel</>
-				</ButtonText>
+				<ButtonText style={[a.text_md]}>Cancel</ButtonText>
 			</Button>
 		),
 		[onPressCancel, _],
@@ -233,9 +231,7 @@ function DialogInner({
 				style={[a.rounded_full]}
 				testID="editProfileSaveBtn"
 			>
-				<ButtonText style={[a.text_md, !dirty && t.atoms.text_contrast_low]}>
-					<>Save</>
-				</ButtonText>
+				<ButtonText style={[a.text_md, !dirty && t.atoms.text_contrast_low]}>Save</ButtonText>
 			</Button>
 		),
 		[_, t, dirty, onPressSave, isUpdatingProfile, displayNameTooLong, descriptionTooLong],
@@ -248,9 +244,7 @@ function DialogInner({
 			contentContainerStyle={[a.px_0, a.pt_0]}
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
-					<Dialog.HeaderText>
-						<>Edit profile</>
-					</Dialog.HeaderText>
+					<Dialog.HeaderText>Edit profile</Dialog.HeaderText>
 				</Dialog.Header>
 			}
 		>
@@ -285,9 +279,7 @@ function DialogInner({
 			)}
 			<View style={[a.mt_4xl, a.px_xl, a.gap_xl]}>
 				<View>
-					<TextField.LabelText>
-						<>Display name</>
-					</TextField.LabelText>
+					<TextField.LabelText>Display name</TextField.LabelText>
 					<TextField.Root isInvalid={displayNameTooLong}>
 						<Dialog.Input
 							defaultValue={displayName}
@@ -311,9 +303,7 @@ function DialogInner({
 				</View>
 
 				<View>
-					<TextField.LabelText>
-						<>Description</>
-					</TextField.LabelText>
+					<TextField.LabelText>Description</TextField.LabelText>
 					<TextField.Root isInvalid={descriptionTooLong}>
 						<Dialog.Input
 							defaultValue={description}

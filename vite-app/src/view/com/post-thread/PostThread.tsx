@@ -406,17 +406,13 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 		} else if (isThreadNotFound(item)) {
 			return (
 				<View style={[a.p_lg, index !== 0 && a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
-					<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
-						<>Deleted post.</>
-					</Text>
+					<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>Deleted post.</Text>
 				</View>
 			);
 		} else if (isThreadBlocked(item)) {
 			return (
 				<View style={[a.p_lg, index !== 0 && a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
-					<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>
-						<>Blocked post.</>
-					</Text>
+					<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>Blocked post.</Text>
 				</View>
 			);
 		} else if (isThreadPost(item)) {
@@ -562,9 +558,7 @@ let ThreadMenu = ({
 				)}
 			</Menu.Trigger>
 			<Menu.Outer>
-				<Menu.LabelText>
-					<>Show replies as</>
-				</Menu.LabelText>
+				<Menu.LabelText>Show replies as</Menu.LabelText>
 				<Menu.Group>
 					<Menu.Item
 						label={_(msg`Linear`)}
@@ -572,9 +566,7 @@ let ThreadMenu = ({
 							setTreeViewEnabled(false);
 						}}
 					>
-						<Menu.ItemText>
-							<>Linear</>
-						</Menu.ItemText>
+						<Menu.ItemText>Linear</Menu.ItemText>
 						<Menu.ItemRadio selected={!treeViewEnabled} />
 					</Menu.Item>
 					<Menu.Item
@@ -583,16 +575,12 @@ let ThreadMenu = ({
 							setTreeViewEnabled(true);
 						}}
 					>
-						<Menu.ItemText>
-							<>Threaded</>
-						</Menu.ItemText>
+						<Menu.ItemText>Threaded</Menu.ItemText>
 						<Menu.ItemRadio selected={treeViewEnabled} />
 					</Menu.Item>
 				</Menu.Group>
 				<Menu.Divider />
-				<Menu.LabelText>
-					<>Reply sorting</>
-				</Menu.LabelText>
+				<Menu.LabelText>Reply sorting</Menu.LabelText>
 				<Menu.Group>
 					<Menu.Item
 						label={_(msg`Hot replies first`)}
@@ -600,9 +588,7 @@ let ThreadMenu = ({
 							setSortReplies("hotness");
 						}}
 					>
-						<Menu.ItemText>
-							<>Hot replies first</>
-						</Menu.ItemText>
+						<Menu.ItemText>Hot replies first</Menu.ItemText>
 						<Menu.ItemRadio selected={sortReplies === "hotness"} />
 					</Menu.Item>
 					<Menu.Item
@@ -611,9 +597,7 @@ let ThreadMenu = ({
 							setSortReplies("oldest");
 						}}
 					>
-						<Menu.ItemText>
-							<>Oldest replies first</>
-						</Menu.ItemText>
+						<Menu.ItemText>Oldest replies first</Menu.ItemText>
 						<Menu.ItemRadio selected={sortReplies === "oldest"} />
 					</Menu.Item>
 					<Menu.Item
@@ -622,9 +606,7 @@ let ThreadMenu = ({
 							setSortReplies("newest");
 						}}
 					>
-						<Menu.ItemText>
-							<>Newest replies first</>
-						</Menu.ItemText>
+						<Menu.ItemText>Newest replies first</Menu.ItemText>
 						<Menu.ItemRadio selected={sortReplies === "newest"} />
 					</Menu.Item>
 					<Menu.Item
@@ -633,9 +615,7 @@ let ThreadMenu = ({
 							setSortReplies("most-likes");
 						}}
 					>
-						<Menu.ItemText>
-							<>Most-liked replies first</>
-						</Menu.ItemText>
+						<Menu.ItemText>Most-liked replies first</Menu.ItemText>
 						<Menu.ItemRadio selected={sortReplies === "most-likes"} />
 					</Menu.Item>
 					<Menu.Item
@@ -644,9 +624,7 @@ let ThreadMenu = ({
 							setSortReplies("random");
 						}}
 					>
-						<Menu.ItemText>
-							<>Random (aka "Poster's Roulette")</>
-						</Menu.ItemText>
+						<Menu.ItemText>Random (aka "Poster's Roulette")</Menu.ItemText>
 						<Menu.ItemRadio selected={sortReplies === "random"} />
 					</Menu.Item>
 				</Menu.Group>

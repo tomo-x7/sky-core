@@ -153,7 +153,7 @@ export async function post(agent: BskyAgent, queryClient: QueryClient, opts: Pos
 			validate: true,
 		});
 	} catch (e: any) {
-		logger.error(`Failed to create post`, {
+		logger.error("Failed to create post", {
 			safeMessage: e.message,
 		});
 		if (isNetworkError(e)) {
@@ -257,7 +257,7 @@ async function resolveMedia(
 > {
 	if (embedDraft.media?.type === "images") {
 		const imagesDraft = embedDraft.media.images;
-		logger.debug(`Uploading images`, {
+		logger.debug("Uploading images", {
 			count: imagesDraft.length,
 		});
 		onStateChange?.(t`Uploading images...`);

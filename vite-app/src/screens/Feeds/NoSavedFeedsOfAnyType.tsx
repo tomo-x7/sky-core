@@ -33,7 +33,7 @@ export function NoSavedFeedsOfAnyType() {
 	return (
 		<View style={[a.flex_row, a.flex_wrap, a.justify_between, a.p_xl, a.gap_md]}>
 			<Text style={[a.leading_snug, t.atoms.text_contrast_medium, { maxWidth: 310 }]}>
-				<>Looks like you haven't saved any feeds! Use our recommendations or browse more below.</>
+				Looks like you haven't saved any feeds! Use our recommendations or browse more below.
 			</Text>
 
 			<Button

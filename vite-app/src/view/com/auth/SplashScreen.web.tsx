@@ -93,9 +93,7 @@ export const SplashScreen = ({
 								</View>
 							)}
 
-							<Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>
-								<>What's up?</>
-							</Text>
+							<Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>What's up?</Text>
 						</View>
 
 						<View
@@ -111,9 +109,7 @@ export const SplashScreen = ({
 								variant="solid"
 								color="primary"
 							>
-								<ButtonText>
-									<>Create account</>
-								</ButtonText>
+								<ButtonText>Create account</ButtonText>
 							</Button>
 							<Button
 								testID="signInButton"
@@ -124,9 +120,7 @@ export const SplashScreen = ({
 								variant="solid"
 								color="secondary"
 							>
-								<ButtonText>
-									<>Sign in</>
-								</ButtonText>
+								<ButtonText>Sign in</ButtonText>
 							</Button>
 						</View>
 					</ErrorBoundary>
@@ -158,10 +152,10 @@ function Footer() {
 			]}
 		>
 			<InlineLinkText label={_(msg`Learn more about Bluesky`)} to="https://bsky.social">
-				<>Business</>
+				Business
 			</InlineLinkText>
 			<InlineLinkText label={_(msg`Read the Bluesky blog`)} to="https://bsky.social/about/blog">
-				<>Blog</>
+				Blog
 			</InlineLinkText>
 			<InlineLinkText label={_(msg`See jobs at Bluesky`)} to="https://bsky.social/about/join">
 				<Trans comment="Link to a page with job openings at Bluesky">Jobs</Trans>

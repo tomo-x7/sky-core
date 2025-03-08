@@ -116,17 +116,13 @@ export function Deactivated() {
 					</View>
 
 					<View style={[a.gap_xs, a.pb_3xl]}>
-						<Text style={[a.text_xl, a.font_bold, a.leading_snug]}>
-							<>Welcome back!</>
-						</Text>
+						<Text style={[a.text_xl, a.font_bold, a.leading_snug]}>Welcome back!</Text>
 						<Text style={[a.text_sm, a.leading_snug]}>
 							<>You previously deactivated @{currentAccount?.handle}.</>
 						</Text>
 						<Text style={[a.text_sm, a.leading_snug, a.pb_md]}>
-							<>
-								You can reactivate your account to continue logging in. Your profile and posts will be
-								visible to other users.
-							</>
+							You can reactivate your account to continue logging in. Your profile and posts will be
+							visible to other users.
 						</Text>
 
 						<View style={[a.gap_sm]}>
@@ -137,9 +133,7 @@ export function Deactivated() {
 								color="primary"
 								onPress={handleActivate}
 							>
-								<ButtonText>
-									<>Yes, reactivate my account</>
-								</ButtonText>
+								<ButtonText>Yes, reactivate my account</ButtonText>
 								{pending && <ButtonIcon icon={Loader} position="right" />}
 							</Button>
 							<Button
@@ -149,9 +143,7 @@ export function Deactivated() {
 								color="secondary"
 								onPress={onPressLogout}
 							>
-								<ButtonText>
-									<>Cancel</>
-								</ButtonText>
+								<ButtonText>Cancel</ButtonText>
 							</Button>
 						</View>
 
@@ -170,7 +162,7 @@ export function Deactivated() {
 					{hasOtherAccounts ? (
 						<>
 							<Text style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
-								<>Or, sign in to one of your other accounts.</>
+								Or, sign in to one of your other accounts.
 							</Text>
 							<AccountList
 								onSelectAccount={onSelectAccount}
@@ -182,7 +174,7 @@ export function Deactivated() {
 					) : (
 						<>
 							<Text style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
-								<>Or, continue with another account.</>
+								Or, continue with another account.
 							</Text>
 							<Button
 								label={_(msg`Sign in or sign up`)}
@@ -191,9 +183,7 @@ export function Deactivated() {
 								color="secondary"
 								onPress={() => setShowLoggedOut(true)}
 							>
-								<ButtonText>
-									<>Sign in or sign up</>
-								</ButtonText>
+								<ButtonText>Sign in or sign up</ButtonText>
 							</Button>
 						</>
 					)}

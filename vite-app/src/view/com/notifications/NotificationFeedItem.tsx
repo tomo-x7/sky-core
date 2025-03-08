@@ -157,7 +157,7 @@ let NotificationFeedItem = ({
 		);
 	}
 
-	const niceTimestamp = niceDate(i18n, item.notification.indexedAt);
+	const niceTimestamp = niceDate(item.notification.indexedAt);
 	const firstAuthor = authors[0];
 	const firstAuthorName = sanitizeDisplayName(firstAuthor.profile.displayName || firstAuthor.profile.handle);
 	const firstAuthorLink = (
@@ -525,9 +525,7 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 				}
 			}}
 		>
-			<ButtonText>
-				<>Say hello!</>
-			</ButtonText>
+			<ButtonText>Say hello!</ButtonText>
 		</Button>
 	);
 }

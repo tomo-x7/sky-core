@@ -39,18 +39,14 @@ function Inner() {
 							fill={t.palette.primary_500}
 							style={{ marginLeft: -2 }}
 						/>
-						<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>
-							<>Recommended</>
-						</Text>
+						<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>Recommended</Text>
 					</View>
 					{!allFeeds ? (
 						<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-							<>Content from across the network we think you might like.</>
+							Content from across the network we think you might like.
 						</Text>
 					) : (
-						<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-							<>Feeds we think you might like.</>
-						</Text>
+						<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>Feeds we think you might like.</Text>
 					)}
 				</View>
 			</View>

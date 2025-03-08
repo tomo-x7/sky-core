@@ -34,7 +34,7 @@ export const Policies = ({
 				<CircleInfo size="md" fill={t.atoms.text_contrast_low.color} />
 
 				<Text style={[t.atoms.text_contrast_medium]}>
-					<>This service has not provided terms of service or a privacy policy.</>
+					This service has not provided terms of service or a privacy policy.
 				</Text>
 			</View>
 		);
@@ -85,14 +85,12 @@ export const Policies = ({
 
 			{under13 ? (
 				<Text style={[a.font_bold, a.leading_snug, t.atoms.text_contrast_high]}>
-					<>You must be 13 years of age or older to sign up.</>
+					You must be 13 years of age or older to sign up.
 				</Text>
 			) : needsGuardian ? (
 				<Text style={[a.font_bold, a.leading_snug, t.atoms.text_contrast_high]}>
-					<>
-						If you are not yet an adult according to the laws of your country, your parent or legal guardian
-						must read these Terms on your behalf.
-					</>
+					If you are not yet an adult according to the laws of your country, your parent or legal guardian
+					must read these Terms on your behalf.
 				</Text>
 			) : undefined}
 		</View>

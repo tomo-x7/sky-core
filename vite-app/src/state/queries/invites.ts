@@ -36,7 +36,7 @@ export function useInviteCodesQuery() {
 			}
 
 			if (!res.data?.codes) {
-				throw new Error(`useInviteCodesQuery: no codes returned`);
+				throw new Error("useInviteCodesQuery: no codes returned");
 			}
 
 			const available = res.data.codes.filter(isInviteAvailable);

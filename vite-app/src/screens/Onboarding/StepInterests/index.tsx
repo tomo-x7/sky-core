@@ -75,10 +75,10 @@ export function StepInterests() {
 					} as ApiResponseMap,
 				);
 			} catch (e: any) {
-				logger.info(`onboarding: getTaggedSuggestions fetch or processing failed`);
+				logger.info("onboarding: getTaggedSuggestions fetch or processing failed");
 				logger.error(e);
 
-				throw new Error(`a network error occurred`);
+				throw new Error("a network error occurred");
 			}
 		},
 	});
@@ -99,7 +99,7 @@ export function StepInterests() {
 				selectedInterestsLength: interests.length,
 			});
 		} catch (e: any) {
-			logger.info(`onboading: error saving interests`);
+			logger.info("onboading: error saving interests");
 			logger.error(e);
 		}
 	}, [interests, data, setSaving, dispatch]);
@@ -167,7 +167,7 @@ export function StepInterests() {
 									},
 								]}
 							>
-								<>Error:</>{" "}
+								Error:{" "}
 							</Text>
 							{error?.message || _(msg`an unknown error occurred`)}
 						</Text>
@@ -204,9 +204,7 @@ export function StepInterests() {
 							label={_(msg`Retry`)}
 							onPress={() => refetch()}
 						>
-							<ButtonText>
-								<>Retry</>
-							</ButtonText>
+							<ButtonText>Retry</ButtonText>
 							<ButtonIcon icon={ArrowRotateCounterClockwise} position="right" />
 						</Button>
 						<Button
@@ -216,9 +214,7 @@ export function StepInterests() {
 							label={_(msg`Skip this flow`)}
 							onPress={skipOnboarding}
 						>
-							<ButtonText>
-								<>Skip</>
-							</ButtonText>
+							<ButtonText>Skip</ButtonText>
 						</Button>
 					</View>
 				) : (
@@ -230,9 +226,7 @@ export function StepInterests() {
 						label={_(msg`Continue to next step`)}
 						onPress={saveInterests}
 					>
-						<ButtonText>
-							<>Continue</>
-						</ButtonText>
+						<ButtonText>Continue</ButtonText>
 						<ButtonIcon icon={saving ? Loader : ChevronRight} position="right" />
 					</Button>
 				)}

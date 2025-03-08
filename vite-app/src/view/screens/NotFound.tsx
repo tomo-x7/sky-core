@@ -40,10 +40,10 @@ export const NotFoundScreen = () => {
 			<ViewHeader title={_(msg`Page Not Found`)} />
 			<View style={styles.container}>
 				<Text type="title-2xl" style={[pal.text, s.mb10]}>
-					<>Page not found</>
+					Page not found
 				</Text>
 				<Text type="md" style={[pal.text, s.mb10]}>
-					<>We're sorry! We can't find the page you were looking for.</>
+					We're sorry! We can't find the page you were looking for.
 				</Text>
 				<Button
 					type="primary"

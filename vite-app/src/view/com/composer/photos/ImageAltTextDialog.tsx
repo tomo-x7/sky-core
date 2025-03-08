@@ -81,9 +81,7 @@ const ImageAltTextInner = ({
 			<Dialog.Close />
 
 			<View>
-				<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-					<>Add alt text</>
-				</Text>
+				<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>Add alt text</Text>
 
 				<View style={[t.atoms.bg_contrast_50, a.rounded_sm, a.overflow_hidden]}>
 					<Image
@@ -102,9 +100,7 @@ const ImageAltTextInner = ({
 			<View style={[a.mt_md, a.gap_md]}>
 				<View style={[a.gap_sm]}>
 					<View style={[a.relative, { width: "100%" }]}>
-						<TextField.LabelText>
-							<>Descriptive alt text</>
-						</TextField.LabelText>
+						<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 						<TextField.Root>
 							<Dialog.Input
 								label={_(msg`Alt text`)}
@@ -141,9 +137,7 @@ const ImageAltTextInner = ({
 						}}
 						style={[a.flex_grow]}
 					>
-						<ButtonText>
-							<>Save</>
-						</ButtonText>
+						<ButtonText>Save</ButtonText>
 					</Button>
 				</AltTextCounterWrapper>
 			</View>

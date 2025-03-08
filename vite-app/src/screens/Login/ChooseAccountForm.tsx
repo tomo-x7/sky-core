@@ -67,9 +67,7 @@ export const ChooseAccountForm = ({
 	return (
 		<FormContainer testID="chooseAccountForm" titleText={<>Select account</>}>
 			<View>
-				<TextField.LabelText>
-					<>Sign in as...</>
-				</TextField.LabelText>
+				<TextField.LabelText>Sign in as...</TextField.LabelText>
 				<AccountList
 					onSelectAccount={onSelect}
 					onSelectOther={() => onSelectAccount()}

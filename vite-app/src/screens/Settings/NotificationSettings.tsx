@@ -36,9 +36,7 @@ export function NotificationSettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Notification Settings</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Notification Settings</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
@@ -54,9 +52,7 @@ export function NotificationSettingsScreen({}: Props) {
 					<SettingsList.Container>
 						<SettingsList.Group>
 							<SettingsList.ItemIcon icon={BeakerIcon} />
-							<SettingsList.ItemText>
-								<>Notification filters</>
-							</SettingsList.ItemText>
+							<SettingsList.ItemText>Notification filters</SettingsList.ItemText>
 							<Toggle.Group
 								label={_(msg`Priority notifications`)}
 								type="checkbox"
@@ -69,9 +65,7 @@ export function NotificationSettingsScreen({}: Props) {
 									label={_(msg`Enable priority notifications`)}
 									style={[a.flex_1, a.justify_between]}
 								>
-									<Toggle.LabelText>
-										<>Enable priority notifications</>
-									</Toggle.LabelText>
+									<Toggle.LabelText>Enable priority notifications</Toggle.LabelText>
 									{!data ? <Loader size="md" /> : <Toggle.Platform />}
 								</Toggle.Item>
 							</Toggle.Group>

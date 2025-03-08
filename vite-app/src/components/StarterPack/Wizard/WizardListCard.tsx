@@ -81,9 +81,7 @@ function WizardListCard({
 					style={[a.self_center, { marginLeft: "auto" }]}
 					onPress={onPress}
 				>
-					<ButtonText>
-						<>Remove</>
-					</ButtonText>
+					<ButtonText>Remove</ButtonText>
 				</Button>
 			) : null}
 		</Toggle.Item>

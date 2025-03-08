@@ -42,9 +42,7 @@ function Inner() {
 			<View style={[a.gap_sm, { paddingBottom: 2 }]}>
 				<View style={[a.flex_row, a.align_center, a.gap_xs]}>
 					<Graph size="sm" />
-					<Text style={[a.flex_1, a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>
-						<>Trending</>
-					</Text>
+					<Text style={[a.flex_1, a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>Trending</Text>
 					<Button
 						label={_(msg`Hide trending topics`)}
 						size="tiny"

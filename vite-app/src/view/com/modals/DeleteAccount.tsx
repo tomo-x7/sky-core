@@ -52,7 +52,7 @@ export function Component({}: {}) {
 	};
 	const onPressConfirmDelete = async () => {
 		if (!currentAccount?.did) {
-			throw new Error(`DeleteAccount modal: currentAccount.did is undefined`);
+			throw new Error("DeleteAccount modal: currentAccount.did is undefined");
 		}
 
 		setError("");
@@ -110,7 +110,7 @@ export function Component({}: {}) {
 				{!isEmailSent ? (
 					<>
 						<Text type="lg" style={[styles.description, pal.text]}>
-							<>For security reasons, we'll need to send a confirmation code to your email address.</>
+							For security reasons, we'll need to send a confirmation code to your email address.
 						</Text>
 						{error ? (
 							<View style={s.mt10}>
@@ -179,10 +179,8 @@ export function Component({}: {}) {
 								/>
 
 								<NewText style={[a.leading_snug, a.flex_1]}>
-									<>
-										You can also temporarily deactivate your account instead, and reactivate it at
-										any time.
-									</>
+									You can also temporarily deactivate your account instead, and reactivate it at any
+									time.
 								</NewText>
 							</View>
 						</View>
@@ -191,7 +189,7 @@ export function Component({}: {}) {
 					<>
 						{/* TODO: Update this label to be more concise */}
 						<Text type="lg" style={[pal.text, styles.description]} nativeID="confirmationCode">
-							<>Check your inbox for an email with the confirmation code to enter below:</>
+							Check your inbox for an email with the confirmation code to enter below:
 						</Text>
 						<TextInput
 							style={[styles.textInput, pal.borderDark, pal.text, styles.mb20]}
@@ -205,7 +203,7 @@ export function Component({}: {}) {
 							accessibilityHint={_(msg`Input confirmation code for account deletion`)}
 						/>
 						<Text type="lg" style={[pal.text, styles.description]} nativeID="password">
-							<>Please enter your password as well:</>
+							Please enter your password as well:
 						</Text>
 						<TextInput
 							style={[styles.textInput, pal.borderDark, pal.text]}
@@ -238,7 +236,7 @@ export function Component({}: {}) {
 									accessibilityHint=""
 								>
 									<Text type="button-lg" style={[s.white, s.bold]}>
-										<>Delete my account</>
+										Delete my account
 									</Text>
 								</TouchableOpacity>
 								<TouchableOpacity

@@ -98,16 +98,12 @@ export function RejectMenu({
 					<Menu.Group>
 						{showDeleteConvo && (
 							<Menu.Item label={_(msg`Delete conversation`)} onPress={onPressDelete}>
-								<Menu.ItemText>
-									<>Delete conversation</>
-								</Menu.ItemText>
+								<Menu.ItemText>Delete conversation</Menu.ItemText>
 								<Menu.ItemIcon icon={CircleX_Stroke2_Corner0_Rounded} />
 							</Menu.Item>
 						)}
 						<Menu.Item label={_(msg`Block account`)} onPress={onPressBlock}>
-							<Menu.ItemText>
-								<>Block account</>
-							</Menu.ItemText>
+							<Menu.ItemText>Block account</Menu.ItemText>
 							<Menu.ItemIcon icon={PersonXIcon} />
 						</Menu.Item>
 						{/* note: last message will almost certainly be defined, since you can't
@@ -115,9 +111,7 @@ export function RejectMenu({
               screen to have a message sent by you */}
 						{lastMessage && (
 							<Menu.Item label={_(msg`Report conversation`)} onPress={reportControl.open}>
-								<Menu.ItemText>
-									<>Report conversation</>
-								</Menu.ItemText>
+								<Menu.ItemText>Report conversation</Menu.ItemText>
 								<Menu.ItemIcon icon={FlagIcon} />
 							</Menu.Item>
 						)}
@@ -243,7 +237,7 @@ export function DeleteChatButton({
 			onPress={onPressDelete}
 			{...props}
 		>
-			<ButtonText>{label || <>Delete chat</>}</ButtonText>
+			<ButtonText>{label || "Delete chat"}</ButtonText>
 		</Button>
 	);
 }

@@ -150,7 +150,7 @@ export function useModerationCauseDescription(
 		return {
 			icon: CircleInfo,
 			name: "",
-			description: ``,
+			description: "",
 		};
 	}, [labelDefs, labelers, globalLabelStrings, cause, _, i18n.locale, currentAccount?.did]);
 }

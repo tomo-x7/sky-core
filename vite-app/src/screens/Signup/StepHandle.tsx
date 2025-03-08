@@ -134,16 +134,12 @@ export function StepHandle() {
 						{validCheck.hyphenStartOrEnd ? (
 							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
 								<IsValidIcon valid={validCheck.handleChars} />
-								<Text style={[a.text_md, a.flex_1]}>
-									<>Only contains letters, numbers, and hyphens</>
-								</Text>
+								<Text style={[a.text_md, a.flex_1]}>Only contains letters, numbers, and hyphens</Text>
 							</View>
 						) : (
 							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
 								<IsValidIcon valid={validCheck.hyphenStartOrEnd} />
-								<Text style={[a.text_md, a.flex_1]}>
-									<>Doesn't begin or end with a hyphen</>
-								</Text>
+								<Text style={[a.text_md, a.flex_1]}>Doesn't begin or end with a hyphen</Text>
 							</View>
 						)}
 						<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
@@ -153,9 +149,7 @@ export function StepHandle() {
 									<>No longer than {MAX_SERVICE_HANDLE_LENGTH} characters</>
 								</Text>
 							) : (
-								<Text style={[a.text_md, a.flex_1]}>
-									<>At least 3 characters</>
-								</Text>
+								<Text style={[a.text_md, a.flex_1]}>At least 3 characters</Text>
 							)}
 						</View>
 					</View>

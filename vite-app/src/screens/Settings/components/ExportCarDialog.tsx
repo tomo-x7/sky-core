@@ -60,17 +60,15 @@ export function ExportCarDialog({
 			>
 				<View style={[a.relative, a.gap_lg, a.w_full]}>
 					<Text nativeID="dialog-title" style={[a.text_2xl, a.font_heavy]}>
-						<>Export My Data</>
+						Export My Data
 					</Text>
 					<Text
 						nativeID="dialog-description"
 						style={[a.text_sm, a.leading_normal, t.atoms.text_contrast_high]}
 					>
-						<>
-							Your account repository, containing all public data records, can be downloaded as a "CAR"
-							file. This file does not include media embeds, such as images, or your private data, which
-							must be fetched separately.
-						</>
+						Your account repository, containing all public data records, can be downloaded as a "CAR" file.
+						This file does not include media embeds, such as images, or your private data, which must be
+						fetched separately.
 					</Text>
 
 					<Button
@@ -82,9 +80,7 @@ export function ExportCarDialog({
 						onPress={download}
 					>
 						<ButtonIcon icon={DownloadIcon} />
-						<ButtonText>
-							<>Download CAR file</>
-						</ButtonText>
+						<ButtonText>Download CAR file</ButtonText>
 						{loading && <ButtonIcon icon={Loader} />}
 					</Button>
 

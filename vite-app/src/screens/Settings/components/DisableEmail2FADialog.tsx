@@ -85,7 +85,7 @@ export function DisableEmail2FADialog({
 			>
 				<View style={[a.relative, a.gap_md, a.w_full]}>
 					<Text nativeID="dialog-title" style={[a.text_2xl, a.font_bold, t.atoms.text]}>
-						<>Disable Email 2FA</>
+						Disable Email 2FA
 					</Text>
 					<P nativeID="dialog-description">
 						{stage === Stages.ConfirmCode ? (
@@ -111,9 +111,7 @@ export function DisableEmail2FADialog({
 								label={_(msg`Send verification email`)}
 								disabled={isProcessing}
 							>
-								<ButtonText>
-									<>Send verification email</>
-								</ButtonText>
+								<ButtonText>Send verification email</ButtonText>
 								{isProcessing && <ButtonIcon icon={Loader} />}
 							</Button>
 							<Button
@@ -125,17 +123,13 @@ export function DisableEmail2FADialog({
 								label={_(msg`I have a code`)}
 								disabled={isProcessing}
 							>
-								<ButtonText>
-									<>I have a code</>
-								</ButtonText>
+								<ButtonText>I have a code</ButtonText>
 							</Button>
 						</View>
 					) : stage === Stages.ConfirmCode ? (
 						<View>
 							<View style={[a.mb_md]}>
-								<TextField.LabelText>
-									<>Confirmation code</>
-								</TextField.LabelText>
+								<TextField.LabelText>Confirmation code</TextField.LabelText>
 								<TextField.Root>
 									<TextField.Icon icon={Lock} />
 									<Dialog.Input
@@ -162,9 +156,7 @@ export function DisableEmail2FADialog({
 									label={_(msg`Resend email`)}
 									disabled={isProcessing}
 								>
-									<ButtonText>
-										<>Resend email</>
-									</ButtonText>
+									<ButtonText>Resend email</ButtonText>
 								</Button>
 								<Button
 									testID="confirmBtn"
@@ -175,9 +167,7 @@ export function DisableEmail2FADialog({
 									label={_(msg`Confirm`)}
 									disabled={isProcessing}
 								>
-									<ButtonText>
-										<>Confirm</>
-									</ButtonText>
+									<ButtonText>Confirm</ButtonText>
 									{isProcessing && <ButtonIcon icon={Loader} />}
 								</Button>
 							</View>

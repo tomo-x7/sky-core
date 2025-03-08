@@ -96,7 +96,7 @@ let ProfileHeaderLabeler = ({
 				_(msg`There was an issue contacting the server, please check your internet connection and try again.`),
 				"xmark",
 			);
-			logger.error(`Failed to toggle labeler like`, { message: e.message });
+			logger.error("Failed to toggle labeler like", { message: e.message });
 		}
 	}, [labeler, playHaptic, likeUri, unlikeMod, likeMod, _]);
 
@@ -128,7 +128,7 @@ let ProfileHeaderLabeler = ({
 						cantSubscribePrompt.open();
 						return;
 					}
-					logger.error(`Failed to subscribe to labeler`, { message: e.message });
+					logger.error("Failed to subscribe to labeler", { message: e.message });
 				}
 			}),
 		[requireAuth, toggleSubscription, isSubscribed, profile, cantSubscribePrompt, reset],
@@ -159,9 +159,7 @@ let ProfileHeaderLabeler = ({
 								label={_(msg`Edit profile`)}
 								style={a.rounded_full}
 							>
-								<ButtonText>
-									<>Edit Profile</>
-								</ButtonText>
+								<ButtonText>Edit Profile</ButtonText>
 							</Button>
 							<EditProfileDialog profile={profile} control={editProfileControl} />
 						</>
@@ -308,7 +306,7 @@ function CantSubscribePrompt({
 		<Prompt.Outer control={control}>
 			<Prompt.TitleText>Unable to subscribe</Prompt.TitleText>
 			<Prompt.DescriptionText>
-				<>We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty.</>
+				We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty.
 			</Prompt.DescriptionText>
 			<Prompt.Actions>
 				<Prompt.Action onPress={() => control.close()} cta={_(msg`OK`)} />

@@ -142,9 +142,7 @@ function InnerWrapper({ embed }: Props) {
 function VideoError({ retry }: { error: unknown; retry: () => void }) {
 	return (
 		<VideoFallback.Container>
-			<VideoFallback.Text>
-				<>An error occurred while loading the video. Please try again later.</>
-			</VideoFallback.Text>
+			<VideoFallback.Text>An error occurred while loading the video. Please try again later.</VideoFallback.Text>
 			<VideoFallback.RetryButton onPress={retry} />
 		</VideoFallback.Container>
 	);

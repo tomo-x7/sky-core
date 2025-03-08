@@ -11,7 +11,7 @@ export function Loader(props: Props) {
 	const rotation = useSharedValue(0);
 
 	const animatedStyles = useAnimatedStyle(() => ({
-		transform: [{ rotate: rotation.get() + "deg" }],
+		transform: [{ rotate: `${rotation.get()}deg` }],
 	}));
 
 	React.useEffect(() => {

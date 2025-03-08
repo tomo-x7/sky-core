@@ -34,7 +34,6 @@ export function Row({
 		switch (size) {
 			case "lg":
 				return [{ gap: 5 }];
-			case "sm":
 			default:
 				return [{ gap: 3 }];
 		}
@@ -71,7 +70,6 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 					text: [a.text_sm],
 				};
 			}
-			case "sm":
 			default: {
 				return {
 					outer: [
@@ -142,8 +140,6 @@ export function FollowsYou({ size = "sm" }: CommonProps) {
 
 	const variantStyles = React.useMemo(() => {
 		switch (size) {
-			case "sm":
-			case "lg":
 			default:
 				return [
 					{

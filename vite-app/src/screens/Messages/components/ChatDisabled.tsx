@@ -20,10 +20,10 @@ export function ChatDisabled() {
 		<View style={[a.p_md]}>
 			<View style={[a.align_start, a.p_xl, a.rounded_md, t.atoms.bg_contrast_25]}>
 				<Text style={[a.text_md, a.font_bold, a.pb_sm, t.atoms.text_contrast_high]}>
-					<>Your chats have been disabled</>
+					Your chats have been disabled
 				</Text>
 				<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
-					<>Our moderators have reviewed reports and decided to disable your access to chats on Bluesky.</>
+					Our moderators have reviewed reports and decided to disable your access to chats on Bluesky.
 				</Text>
 				<AppealDialog />
 			</View>
@@ -92,12 +92,8 @@ function DialogInner() {
 
 	return (
 		<Dialog.ScrollableInner label={_(msg`Appeal this decision`)}>
-			<Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>
-				<>Appeal this decision</>
-			</Text>
-			<Text style={[a.text_md, a.leading_snug]}>
-				<>This appeal will be sent to Bluesky's moderation service.</>
-			</Text>
+			<Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>Appeal this decision</Text>
+			<Text style={[a.text_md, a.leading_snug]}>This appeal will be sent to Bluesky's moderation service.</Text>
 			<View style={[a.my_md]}>
 				<Dialog.Input
 					label={_(msg`Text input field`)}

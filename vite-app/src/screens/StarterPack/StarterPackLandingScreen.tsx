@@ -62,8 +62,7 @@ export function LandingScreen({
 	});
 
 	const isValid =
-		starterPack &&
-		starterPack.list &&
+		starterPack?.list &&
 		AppBskyGraphDefs.validateStarterPackView(starterPack) &&
 		AppBskyGraphStarterpack.validateRecord(starterPack.record);
 
@@ -185,9 +184,7 @@ function LandingScreenLoaded({
 							color="primary"
 							size="large"
 						>
-							<ButtonText style={[a.text_lg]}>
-								<>Join Bluesky</>
-							</ButtonText>
+							<ButtonText style={[a.text_lg]}>Join Bluesky</ButtonText>
 						</Button>
 						<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 							<FontAwesomeIcon
@@ -235,9 +232,7 @@ function LandingScreenLoaded({
 						)}
 						{feeds?.length ? (
 							<View style={[a.gap_md]}>
-								<Text style={[a.font_heavy, a.text_lg]}>
-									<>You'll stay updated with these feeds</>
-								</Text>
+								<Text style={[a.font_heavy, a.text_lg]}>You'll stay updated with these feeds</Text>
 
 								<View
 									style={[
@@ -270,22 +265,15 @@ function LandingScreenLoaded({
 						style={[a.py_lg]}
 						onPress={onJoinWithoutPress}
 					>
-						<ButtonText>
-							<>Signup without a starter pack</>
-						</ButtonText>
+						<ButtonText>Signup without a starter pack</ButtonText>
 					</Button>
 				</View>
 			</Layout.Content>
 			<AppClipOverlay visible={appClipOverlayVisible} setIsVisible={setAppClipOverlayVisible} />
 			<Prompt.Outer control={androidDialogControl}>
-				<Prompt.TitleText>
-					<>Download Bluesky</>
-				</Prompt.TitleText>
+				<Prompt.TitleText>Download Bluesky</Prompt.TitleText>
 				<Prompt.DescriptionText>
-					<>
-						The experience is better in the app. Download Bluesky now and we'll pick back up where you left
-						off.
-					</>
+					The experience is better in the app. Download Bluesky now and we'll pick back up where you left off.
 				</Prompt.DescriptionText>
 				<Prompt.Actions>
 					<Prompt.Action

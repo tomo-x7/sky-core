@@ -200,9 +200,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 								<>
 									<View style={[a.pt_3xl, a.align_center]}>
 										<CircleInfo width={48} fill={t.atoms.text_contrast_low.color} />
-										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-											<>Whoops!</>
-										</Text>
+										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Whoops!</Text>
 										<Text
 											style={[
 												a.text_md,
@@ -223,9 +221,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 											variant="solid"
 											onPress={() => refetch()}
 										>
-											<ButtonText>
-												<>Retry</>
-											</ButtonText>
+											<ButtonText>Retry</ButtonText>
 											<ButtonIcon icon={Retry} position="right" />
 										</Button>
 									</View>
@@ -234,9 +230,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 								<>
 									<View style={[a.pt_3xl, a.align_center]}>
 										<Message width={48} fill={t.palette.primary_500} />
-										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-											<>Nothing here</>
-										</Text>
+										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Nothing here</Text>
 										<Text
 											style={[
 												a.text_md,
@@ -246,7 +240,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 												t.atoms.text_contrast_medium,
 											]}
 										>
-											<>You have no conversations yet. Start one!</>
+											You have no conversations yet. Start one!
 										</Text>
 									</View>
 								</>
@@ -314,9 +308,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 			{gtMobile ? (
 				<>
 					<Layout.Header.Content>
-						<Layout.Header.TitleText>
-							<>Chats</>
-						</Layout.Header.TitleText>
+						<Layout.Header.TitleText>Chats</Layout.Header.TitleText>
 					</Layout.Header.Content>
 
 					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
@@ -329,9 +321,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 							onPress={newChatControl.open}
 						>
 							<ButtonIcon icon={Plus} position="left" />
-							<ButtonText>
-								<>New chat</>
-							</ButtonText>
+							<ButtonText>New chat</ButtonText>
 						</Button>
 					</View>
 				</>
@@ -339,9 +329,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 				<>
 					<Layout.Header.MenuButton />
 					<Layout.Header.Content>
-						<Layout.Header.TitleText>
-							<>Chats</>
-						</Layout.Header.TitleText>
+						<Layout.Header.TitleText>Chats</Layout.Header.TitleText>
 					</Layout.Header.Content>
 					<Layout.Header.Slot>{settingsLink}</Layout.Header.Slot>
 				</>

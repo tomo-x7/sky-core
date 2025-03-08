@@ -172,7 +172,7 @@ const GalleryItem = ({
 					<FontAwesomeIcon icon="plus" size={10} style={{ color: t.palette.white }} />
 				)}
 				<Text style={styles.altTextControlLabel} accessible={false}>
-					<>ALT</>
+					ALT
 				</Text>
 			</TouchableOpacity>
 			<View style={imageControlsStyle}>
@@ -230,7 +230,7 @@ export function AltTextReminder() {
 				<FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
 			</View>
 			<Text type="sm" style={[t.atoms.text_contrast_medium, s.flex1]}>
-				<>Alt text describes images for blind and low-vision users, and helps give context to everyone.</>
+				Alt text describes images for blind and low-vision users, and helps give context to everyone.
 			</Text>
 		</View>
 	);

@@ -165,7 +165,7 @@ function QueryProviderInner({
 	const [persistOptions, _setPersistOptions] = useState(() => {
 		const asyncPersister = createAsyncStoragePersister({
 			storage: AsyncStorage,
-			key: "queryClient-" + (currentDid ?? "logged-out"),
+			key: `queryClient-${currentDid ?? "logged-out"}`,
 		});
 		return {
 			persister: asyncPersister,

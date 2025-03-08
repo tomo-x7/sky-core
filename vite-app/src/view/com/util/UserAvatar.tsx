@@ -341,9 +341,7 @@ let EditableUserAvatar = ({
 							label={_(msg`Upload from Camera`)}
 							onPress={onOpenCamera}
 						>
-							<Menu.ItemText>
-								<>Upload from Camera</>
-							</Menu.ItemText>
+							<Menu.ItemText>Upload from Camera</Menu.ItemText>
 							<Menu.ItemIcon icon={Camera} />
 						</Menu.Item>
 					)}
@@ -363,12 +361,10 @@ let EditableUserAvatar = ({
 						<Menu.Group>
 							<Menu.Item
 								testID="changeAvatarRemoveBtn"
-								label={_(`Remove Avatar`)}
+								label={_("Remove Avatar")}
 								onPress={onRemoveAvatar}
 							>
-								<Menu.ItemText>
-									<>Remove Avatar</>
-								</Menu.ItemText>
+								<Menu.ItemText>Remove Avatar</Menu.ItemText>
 								<Menu.ItemIcon icon={Trash} />
 							</Menu.Item>
 						</Menu.Group>

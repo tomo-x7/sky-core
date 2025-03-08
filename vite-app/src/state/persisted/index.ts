@@ -43,7 +43,7 @@ export async function clearStorage() {
 	try {
 		await AsyncStorage.removeItem(BSKY_STORAGE);
 	} catch (e: any) {
-		logger.error(`persisted store: failed to clear`, { message: e.toString() });
+		logger.error("persisted store: failed to clear", { message: e.toString() });
 	}
 }
 clearStorage satisfies PersistedApi["clearStorage"];
@@ -54,7 +54,7 @@ async function writeToStorage(value: Schema) {
 		try {
 			await AsyncStorage.setItem(BSKY_STORAGE, rawData);
 		} catch (e) {
-			logger.error(`persisted state: failed writing root state to storage`, {
+			logger.error("persisted state: failed writing root state to storage", {
 				message: e,
 			});
 		}
@@ -66,7 +66,7 @@ async function readFromStorage(): Promise<Schema | undefined> {
 	try {
 		rawData = await AsyncStorage.getItem(BSKY_STORAGE);
 	} catch (e) {
-		logger.error(`persisted state: failed reading root state from storage`, {
+		logger.error("persisted state: failed reading root state from storage", {
 			message: e,
 		});
 	}

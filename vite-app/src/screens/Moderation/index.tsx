@@ -45,10 +45,8 @@ function ErrorState({ error }: { error: string }) {
 	return (
 		<View style={[a.p_xl]}>
 			<Text style={[a.text_md, a.leading_normal, a.pb_md, t.atoms.text_contrast_medium]}>
-				<>
-					Hmmmm, it seems we're having trouble loading this data. See below for more details. If this issue
-					persists, please contact us.
-				</>
+				Hmmmm, it seems we're having trouble loading this data. See below for more details. If this issue
+				persists, please contact us.
 			</Text>
 			<View style={[a.relative, a.py_md, a.px_lg, a.rounded_md, a.mb_2xl, t.atoms.bg_contrast_25]}>
 				<Text style={[a.text_md, a.leading_normal]}>{error}</Text>
@@ -137,7 +135,7 @@ export function ModerationScreenInner({
 					enabled: selected,
 				});
 			} catch (e: any) {
-				logger.error(`Failed to set adult content pref`, {
+				logger.error("Failed to set adult content pref", {
 					message: e.message,
 				});
 			}
@@ -149,9 +147,7 @@ export function ModerationScreenInner({
 
 	return (
 		<View style={[a.pt_2xl, a.px_lg, gtMobile && a.px_2xl]}>
-			<Text style={[a.text_md, a.font_bold, a.pb_md, t.atoms.text_contrast_high]}>
-				<>Moderation tools</>
-			</Text>
+			<Text style={[a.text_md, a.font_bold, a.pb_md, t.atoms.text_contrast_high]}>Moderation tools</Text>
 
 			<View style={[a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25]}>
 				<Link
@@ -221,9 +217,7 @@ export function ModerationScreenInner({
 				</Link>
 			</View>
 
-			<Text style={[a.pt_2xl, a.pb_md, a.text_md, a.font_bold, t.atoms.text_contrast_high]}>
-				<>Content filters</>
-			</Text>
+			<Text style={[a.pt_2xl, a.pb_md, a.text_md, a.font_bold, t.atoms.text_contrast_high]}>Content filters</Text>
 
 			<View style={[a.gap_md]}>
 				{ageNotSet && (
@@ -238,12 +232,8 @@ export function ModerationScreenInner({
 							}}
 							style={[a.justify_between, a.rounded_md, a.px_lg, a.py_lg]}
 						>
-							<ButtonText>
-								<>Confirm your age:</>
-							</ButtonText>
-							<ButtonText>
-								<>Set birthdate</>
-							</ButtonText>
+							<ButtonText>Confirm your age:</ButtonText>
+							<ButtonText>Set birthdate</ButtonText>
 						</Button>
 
 						<BirthDateSettingsDialog control={birthdateDialogControl} />
@@ -262,9 +252,7 @@ export function ModerationScreenInner({
 									disabledOnIOS && { opacity: 0.5 },
 								]}
 							>
-								<Text style={[a.font_bold, t.atoms.text_contrast_high]}>
-									<>Enable adult content</>
-								</Text>
+								<Text style={[a.font_bold, t.atoms.text_contrast_high]}>Enable adult content</Text>
 								<Toggle.Item
 									label={_(msg`Toggle to enable or disable adult content`)}
 									disabled={disabledOnIOS}
@@ -318,9 +306,7 @@ export function ModerationScreenInner({
 				</View>
 			</View>
 
-			<Text style={[a.text_md, a.font_bold, a.pt_2xl, a.pb_md, t.atoms.text_contrast_high]}>
-				<>Advanced</>
-			</Text>
+			<Text style={[a.text_md, a.font_bold, a.pt_2xl, a.pb_md, t.atoms.text_contrast_high]}>Advanced</Text>
 
 			{isLabelersLoading ? (
 				<View style={[a.w_full, a.align_center, a.p_lg]}>
@@ -328,9 +314,7 @@ export function ModerationScreenInner({
 				</View>
 			) : labelersError || !labelers ? (
 				<View style={[a.p_lg, a.rounded_sm, t.atoms.bg_contrast_25]}>
-					<Text>
-						<>We were unable to load your configured labelers at this time.</>
-					</Text>
+					<Text>We were unable to load your configured labelers at this time.</Text>
 				</View>
 			) : (
 				<View style={[a.rounded_sm, t.atoms.bg_contrast_25]}>

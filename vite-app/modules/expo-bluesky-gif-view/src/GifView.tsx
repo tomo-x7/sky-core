@@ -12,10 +12,6 @@ export class GifView extends React.PureComponent<GifViewProps> {
 	// TODO native types, should all be the same as those in this class
 	private nativeRef: React.RefObject<any> = React.createRef();
 
-	constructor(props: GifViewProps | Readonly<GifViewProps>) {
-		super(props);
-	}
-
 	static async prefetchAsync(sources: string[]): Promise<void> {
 		return await NativeModule.prefetchAsync(sources);
 	}

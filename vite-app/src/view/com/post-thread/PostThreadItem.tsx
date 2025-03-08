@@ -145,9 +145,7 @@ function PostThreadItemDeleted({ hideTopBorder }: { hideTopBorder?: boolean }) {
 			]}
 		>
 			<TrashIcon style={[t.atoms.text]} />
-			<Text style={[t.atoms.text_contrast_medium, a.mt_2xs]}>
-				<>This post has been deleted.</>
-			</Text>
+			<Text style={[t.atoms.text_contrast_medium, a.mt_2xs]}>This post has been deleted.</Text>
 		</View>
 	);
 }
@@ -600,9 +598,7 @@ let PostThreadItemLoaded = ({
 							title={itemTitle}
 							noFeedback
 						>
-							<Text style={[t.atoms.text_contrast_medium, a.font_bold, a.text_sm]}>
-								<>More</>
-							</Text>
+							<Text style={[t.atoms.text_contrast_medium, a.font_bold, a.text_sm]}>More</Text>
 							<ChevronRightIcon size="xs" style={[t.atoms.text_contrast_medium]} />
 						</Link>
 					) : undefined}
@@ -720,7 +716,7 @@ function ExpandedPostDetails({
 		<View style={[a.gap_md, a.pt_md, a.align_start]}>
 			<BackdatedPostIndicator post={post} />
 			<View style={[a.flex_row, a.align_center, a.flex_wrap, a.gap_sm]}>
-				<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>{niceDate(i18n, post.indexedAt)}</Text>
+				<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>{niceDate(post.indexedAt)}</Text>
 				{isRootPost && <WhoCanReply post={post} isThreadAuthor={isThreadAuthor} />}
 				{needsTranslation && (
 					<>
@@ -732,7 +728,7 @@ function ExpandedPostDetails({
 							style={[a.text_sm, pal.link]}
 							onPress={onTranslatePress}
 						>
-							<>Translate</>
+							Translate
 						</InlineLinkText>
 					</>
 				)}
@@ -786,25 +782,23 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 					>
 						<CalendarClockIcon fill={orange} size="sm" aria-hidden />
 						<Text style={[a.text_xs, a.font_bold, a.leading_tight, t.atoms.text_contrast_medium]}>
-							<>Archived from {niceDate(i18n, createdAt)}</>
+							<>Archived from {niceDate(createdAt)}</>
 						</Text>
 					</View>
 				)}
 			</Button>
 
 			<Prompt.Outer control={control}>
-				<Prompt.TitleText>
-					<>Archived post</>
-				</Prompt.TitleText>
+				<Prompt.TitleText>Archived post</Prompt.TitleText>
 				<Prompt.DescriptionText>
 					<>
 						This post claims to have been created on{" "}
-						<RNText style={[a.font_bold]}>{niceDate(i18n, createdAt)}</RNText>, but was first seen by
-						Bluesky on <RNText style={[a.font_bold]}>{niceDate(i18n, indexedAt)}</RNText>.
+						<RNText style={[a.font_bold]}>{niceDate(createdAt)}</RNText>, but was first seen by Bluesky on{" "}
+						<RNText style={[a.font_bold]}>{niceDate(indexedAt)}</RNText>.
 					</>
 				</Prompt.DescriptionText>
 				<Text style={[a.text_md, a.leading_snug, t.atoms.text_contrast_high, a.pb_xl]}>
-					<>Bluesky cannot confirm the authenticity of the claimed date.</>
+					Bluesky cannot confirm the authenticity of the claimed date.
 				</Text>
 				<Prompt.Actions>
 					<Prompt.Action cta={_(msg`Okay`)} onPress={() => {}} />

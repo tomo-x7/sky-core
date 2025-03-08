@@ -162,9 +162,7 @@ export function QrCodeDialog({
 											size="small"
 											onPress={onSavePress}
 										>
-											<ButtonText>
-												<>Save</>
-											</ButtonText>
+											<ButtonText>Save</ButtonText>
 										</Button>
 									</View>
 								)}

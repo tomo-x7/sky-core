@@ -41,9 +41,7 @@ export function AccountSettingsScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
-					<Layout.Header.TitleText>
-						<>Account</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Account</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
@@ -56,13 +54,11 @@ export function AccountSettingsScreen({}: Props) {
                 ItemText is also flex: 1. So we need to set flex: 0 on the ItemText to prevent it from growing, but if we did that everywhere
                 it wouldn't push the BadgeText/Chevron/whatever to the right.
                 TODO: find a general solution for this. workaround in this case is to set the ItemText to flex: 1 and BadgeText to flex: 0 -sfn */}
-						<SettingsList.ItemText style={[a.flex_0]}>
-							<>Email</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText style={[a.flex_0]}>Email</SettingsList.ItemText>
 						{currentAccount && (
 							<>
 								<SettingsList.BadgeText style={[a.flex_1]}>
-									{currentAccount.email || <>(no email)</>}
+									{currentAccount.email || "(no email)"}
 								</SettingsList.BadgeText>
 								{currentAccount.emailConfirmed && (
 									<VerifiedIcon fill={t.palette.primary_500} size="md" />
@@ -80,7 +76,7 @@ export function AccountSettingsScreen({}: Props) {
 						>
 							<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
 							<SettingsList.ItemText style={[{ color: t.palette.primary_500 }, a.font_bold]}>
-								<>Verify your email</>
+								Verify your email
 							</SettingsList.ItemText>
 							<SettingsList.Chevron color={t.palette.primary_500} />
 						</SettingsList.PressableItem>
@@ -90,17 +86,13 @@ export function AccountSettingsScreen({}: Props) {
 						onPress={() => openModal({ name: "change-email" })}
 					>
 						<SettingsList.ItemIcon icon={PencilIcon} />
-						<SettingsList.ItemText>
-							<>Change email</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Change email</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.Divider />
 					<SettingsList.Item>
 						<SettingsList.ItemIcon icon={BirthdayCakeIcon} />
-						<SettingsList.ItemText>
-							<>Birthday</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Birthday</SettingsList.ItemText>
 						<SettingsList.BadgeButton label={_(msg`Edit`)} onPress={() => birthdayControl.open()} />
 					</SettingsList.Item>
 					<SettingsList.PressableItem
@@ -108,9 +100,7 @@ export function AccountSettingsScreen({}: Props) {
 						onPress={() => openModal({ name: "change-password" })}
 					>
 						<SettingsList.ItemIcon icon={LockIcon} />
-						<SettingsList.ItemText>
-							<>Password</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Password</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.PressableItem
@@ -119,17 +109,13 @@ export function AccountSettingsScreen({}: Props) {
 						onPress={() => changeHandleControl.open()}
 					>
 						<SettingsList.ItemIcon icon={AtIcon} />
-						<SettingsList.ItemText>
-							<>Handle</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Handle</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.Divider />
 					<SettingsList.PressableItem label={_(msg`Export my data`)} onPress={() => exportCarControl.open()}>
 						<SettingsList.ItemIcon icon={CarIcon} />
-						<SettingsList.ItemText>
-							<>Export my data</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Export my data</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.PressableItem
@@ -138,9 +124,7 @@ export function AccountSettingsScreen({}: Props) {
 						destructive
 					>
 						<SettingsList.ItemIcon icon={FreezeIcon} />
-						<SettingsList.ItemText>
-							<>Deactivate account</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Deactivate account</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.PressableItem
@@ -149,9 +133,7 @@ export function AccountSettingsScreen({}: Props) {
 						destructive
 					>
 						<SettingsList.ItemIcon icon={Trash_Stroke2_Corner2_Rounded} />
-						<SettingsList.ItemText>
-							<>Delete account</>
-						</SettingsList.ItemText>
+						<SettingsList.ItemText>Delete account</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 				</SettingsList.Container>

@@ -64,9 +64,7 @@ export function MessagesInboxScreen({}: Props) {
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align={gtTablet ? "left" : "platform"}>
-					<Layout.Header.TitleText>
-						<>Chat requests</>
-					</Layout.Header.TitleText>
+					<Layout.Header.TitleText>Chat requests</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				{hasUnreadConvos && gtTablet ? <MarkAsReadHeaderButton /> : <Layout.Header.Slot />}
 			</Layout.Header.Outer>
@@ -143,9 +141,7 @@ function RequestList({
 							<>
 								<View style={[a.pt_3xl, a.align_center]}>
 									<CircleInfoIcon width={48} fill={t.atoms.text_contrast_low.color} />
-									<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-										<>Whoops!</>
-									</Text>
+									<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Whoops!</Text>
 									<Text
 										style={[
 											a.text_md,
@@ -166,9 +162,7 @@ function RequestList({
 										variant="solid"
 										onPress={() => refetch()}
 									>
-										<ButtonText>
-											<>Retry</>
-										</ButtonText>
+										<ButtonText>Retry</ButtonText>
 										<ButtonIcon icon={RetryIcon} position="right" />
 									</Button>
 								</View>
@@ -191,7 +185,7 @@ function RequestList({
 											t.atoms.text_contrast_medium,
 										]}
 									>
-										<>You don't have any chat requests at the moment.</>
+										You don't have any chat requests at the moment.
 									</Text>
 									<Button
 										variant="solid"
@@ -207,9 +201,7 @@ function RequestList({
 										}}
 									>
 										<ButtonIcon icon={ArrowLeftIcon} />
-										<ButtonText>
-											<>Back to Chats</>
-										</ButtonText>
+										<ButtonText>Back to Chats</ButtonText>
 									</Button>
 								</View>
 							</>
@@ -301,9 +293,7 @@ function MarkAsReadHeaderButton() {
 			onPress={() => markAllRead()}
 		>
 			<ButtonIcon icon={CheckIcon} />
-			<ButtonText>
-				<>Mark all as read</>
-			</ButtonText>
+			<ButtonText>Mark all as read</ButtonText>
 		</Button>
 	);
 }

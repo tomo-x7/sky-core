@@ -25,7 +25,7 @@ import { BackNextButtons } from "../BackNextButtons";
 
 function sanitizeDate(date: Date): Date {
 	if (!date || date.toString() === "Invalid Date") {
-		logger.error(`Create account: handled invalid date for birthDate`, {
+		logger.error("Create account: handled invalid date for birthDate", {
 			hasDate: !!date,
 		});
 		return new Date();
@@ -154,9 +154,7 @@ export function StepInfo({
 					<>
 						{state.serviceDescription.inviteCodeRequired && (
 							<View>
-								<TextField.LabelText>
-									<>Invite code</>
-								</TextField.LabelText>
+								<TextField.LabelText>Invite code</TextField.LabelText>
 								<TextField.Root isInvalid={state.errorField === "invite-code"}>
 									<TextField.Icon icon={Ticket} />
 									<TextField.Input
@@ -179,9 +177,7 @@ export function StepInfo({
 							</View>
 						)}
 						<View>
-							<TextField.LabelText>
-								<>Email</>
-							</TextField.LabelText>
+							<TextField.LabelText>Email</TextField.LabelText>
 							<TextField.Root isInvalid={state.errorField === "email"}>
 								<TextField.Icon icon={Envelope} />
 								<TextField.Input
@@ -212,9 +208,7 @@ export function StepInfo({
 							</TextField.Root>
 						</View>
 						<View>
-							<TextField.LabelText>
-								<>Password</>
-							</TextField.LabelText>
+							<TextField.LabelText>Password</TextField.LabelText>
 							<TextField.Root isInvalid={state.errorField === "password"}>
 								<TextField.Icon icon={Lock} />
 								<TextField.Input
@@ -239,9 +233,7 @@ export function StepInfo({
 							</TextField.Root>
 						</View>
 						<View>
-							<DateField.LabelText>
-								<>Your birth date</>
-							</DateField.LabelText>
+							<DateField.LabelText>Your birth date</DateField.LabelText>
 							<DateField.DateField
 								testID="date"
 								inputRef={birthdateInputRef}

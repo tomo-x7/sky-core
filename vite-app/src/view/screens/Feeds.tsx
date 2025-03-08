@@ -224,7 +224,7 @@ export function FeedsScreen(_props: Props) {
 						.fill(0)
 						.forEach((_, i) => {
 							slices.push({
-								key: "savedFeedPlaceholder" + i,
+								key: `savedFeedPlaceholder${i}`,
 								type: "savedFeedPlaceholder",
 							});
 						});
@@ -480,9 +480,7 @@ export function FeedsScreen(_props: Props) {
 				<Layout.Header.Outer>
 					<Layout.Header.BackButton />
 					<Layout.Header.Content>
-						<Layout.Header.TitleText>
-							<>Feeds</>
-						</Layout.Header.TitleText>
+						<Layout.Header.TitleText>Feeds</Layout.Header.TitleText>
 					</Layout.Header.Content>
 					<Layout.Header.Slot>
 						<Link
@@ -632,12 +630,8 @@ function FeedsSavedHeader() {
 		>
 			<IconCircle icon={ListSparkle_Stroke2_Corner0_Rounded} size="lg" />
 			<View style={[a.flex_1, a.gap_xs]}>
-				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>
-					<>My Feeds</>
-				</Text>
-				<Text style={[t.atoms.text_contrast_high]}>
-					<>All the feeds you've saved, right in one place.</>
-				</Text>
+				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>My Feeds</Text>
+				<Text style={[t.atoms.text_contrast_high]}>All the feeds you've saved, right in one place.</Text>
 			</View>
 		</View>
 	);
@@ -656,11 +650,9 @@ function FeedsAboutHeader() {
 		>
 			<IconCircle icon={ListMagnifyingGlass_Stroke2_Corner0_Rounded} size="lg" />
 			<View style={[a.flex_1, a.gap_sm]}>
-				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>
-					<>Discover New Feeds</>
-				</Text>
+				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>Discover New Feeds</Text>
 				<Text style={[t.atoms.text_contrast_high]}>
-					<>Choose your own timeline! Feeds built by the community help you find content you love.</>
+					Choose your own timeline! Feeds built by the community help you find content you love.
 				</Text>
 			</View>
 		</View>

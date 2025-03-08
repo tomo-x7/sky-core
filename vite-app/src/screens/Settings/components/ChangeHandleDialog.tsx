@@ -74,9 +74,7 @@ function ChangeHandleDialogInner() {
 				variant="ghost"
 				style={[a.rounded_full]}
 			>
-				<ButtonText style={[a.text_md]}>
-					<>Cancel</>
-				</ButtonText>
+				<ButtonText style={[a.text_md]}>Cancel</ButtonText>
 			</Button>
 		),
 		[control, _],
@@ -87,9 +85,7 @@ function ChangeHandleDialogInner() {
 			label={_(msg`Change Handle`)}
 			header={
 				<Dialog.Header renderLeft={cancelButton}>
-					<Dialog.HeaderText>
-						<>Change Handle</>
-					</Dialog.HeaderText>
+					<Dialog.HeaderText>Change Handle</Dialog.HeaderText>
 				</Dialog.Header>
 			}
 			contentContainerStyle={[a.pt_0, a.px_0]}
@@ -178,9 +174,7 @@ function ProvidedHandlePage({
 				)}
 				<Animated.View layout={native(LinearTransition)} style={[a.flex_1, a.gap_md]}>
 					<View>
-						<TextField.LabelText>
-							<>New handle</>
-						</TextField.LabelText>
+						<TextField.LabelText>New handle</TextField.LabelText>
 						<TextField.Root isInvalid={isInvalid}>
 							<TextField.Icon icon={AtIcon} />
 							<Dialog.Input
@@ -215,13 +209,7 @@ function ProvidedHandlePage({
 							}
 						}}
 					>
-						{isPending ? (
-							<ButtonIcon icon={Loader} />
-						) : (
-							<ButtonText>
-								<>Save</>
-							</ButtonText>
-						)}
+						{isPending ? <ButtonIcon icon={Loader} /> : <ButtonText>Save</ButtonText>}
 					</Button>
 					<Text style={[a.leading_snug]}>
 						<>
@@ -244,9 +232,7 @@ function ProvidedHandlePage({
 						size="large"
 						onPress={goToOwnHandle}
 					>
-						<ButtonText>
-							<>I have my own domain</>
-						</ButtonText>
+						<ButtonText>I have my own domain</ButtonText>
 						<ButtonIcon icon={ArrowRightIcon} position="right" />
 					</Button>
 				</Animated.View>
@@ -324,9 +310,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 			)}
 			<Animated.View layout={native(LinearTransition)} style={[a.flex_1, a.gap_md, a.overflow_hidden]}>
 				<View>
-					<TextField.LabelText>
-						<>Enter the domain you want to use</>
-					</TextField.LabelText>
+					<TextField.LabelText>Enter the domain you want to use</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={AtIcon} />
 						<Dialog.Input
@@ -349,21 +333,15 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					onChange={(values) => setDNSPanel(values[0] === "dns")}
 				>
 					<ToggleButton.Button name="dns" label={_(msg`DNS Panel`)}>
-						<ToggleButton.ButtonText>
-							<>DNS Panel</>
-						</ToggleButton.ButtonText>
+						<ToggleButton.ButtonText>DNS Panel</ToggleButton.ButtonText>
 					</ToggleButton.Button>
 					<ToggleButton.Button name="file" label={_(msg`No DNS Panel`)}>
-						<ToggleButton.ButtonText>
-							<>No DNS Panel</>
-						</ToggleButton.ButtonText>
+						<ToggleButton.ButtonText>No DNS Panel</ToggleButton.ButtonText>
 					</ToggleButton.Button>
 				</ToggleButton.Group>
 				{dnsPanel ? (
 					<>
-						<Text>
-							<>Add the following DNS record to your domain:</>
-						</Text>
+						<Text>Add the following DNS record to your domain:</Text>
 						<View
 							style={[
 								t.atoms.bg_contrast_25,
@@ -373,9 +351,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								t.atoms.border_contrast_low,
 							]}
 						>
-							<Text style={[t.atoms.text_contrast_medium]}>
-								<>Host:</>
-							</Text>
+							<Text style={[t.atoms.text_contrast_medium]}>Host:</Text>
 							<View style={[a.py_xs]}>
 								<CopyButton
 									variant="solid"
@@ -389,15 +365,11 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									<ButtonIcon icon={CopyIcon} />
 								</CopyButton>
 							</View>
-							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>
-								<>Type:</>
-							</Text>
+							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>Type:</Text>
 							<View style={[a.py_xs]}>
 								<Text style={[a.text_md]}>TXT</Text>
 							</View>
-							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>
-								<>Value:</>
-							</Text>
+							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>Value:</Text>
 							<View style={[a.py_xs]}>
 								<CopyButton
 									variant="solid"
@@ -412,9 +384,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								</CopyButton>
 							</View>
 						</View>
-						<Text>
-							<>This should create a domain record at:</>
-						</Text>
+						<Text>This should create a domain record at:</Text>
 						<View
 							style={[
 								t.atoms.bg_contrast_25,
@@ -429,9 +399,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					</>
 				) : (
 					<>
-						<Text>
-							<>Upload a text file to:</>
-						</Text>
+						<Text>Upload a text file to:</Text>
 						<View
 							style={[
 								t.atoms.bg_contrast_25,
@@ -443,9 +411,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 						>
 							<Text style={[a.text_md]}>https://{domain}/.well-known/atproto-did</Text>
 						</View>
-						<Text>
-							<>That contains the following:</>
-						</Text>
+						<Text>That contains the following:</Text>
 						<CopyButton
 							value={currentAccount?.did ?? ""}
 							label={_(msg`Copy DID`)}
@@ -521,9 +487,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					style={[a.mt_sm]}
 				>
 					<ButtonIcon icon={ArrowLeftIcon} position="left" />
-					<ButtonText>
-						<>Nevermind, create a handle for me</>
-					</ButtonText>
+					<ButtonText>Nevermind, create a handle for me</ButtonText>
 				</Button>
 			</Animated.View>
 		</View>

@@ -268,9 +268,7 @@ let DrawerFooter = ({
 				onPress={onPressFeedback}
 			>
 				<ButtonIcon icon={Message} position="left" />
-				<ButtonText>
-					<>Feedback</>
-				</ButtonText>
+				<ButtonText>Feedback</ButtonText>
 			</Button>
 			<Button
 				label={_(msg`Get help`)}
@@ -282,9 +280,7 @@ let DrawerFooter = ({
 					backgroundColor: "transparent",
 				}}
 			>
-				<ButtonText>
-					<>Help</>
-				</ButtonText>
+				<ButtonText>Help</ButtonText>
 			</Button>
 		</View>
 	);
@@ -557,14 +553,14 @@ function ExtraLinks() {
 				label={_(msg`Terms of Service`)}
 				to="https://bsky.social/about/support/tos"
 			>
-				<>Terms of Service</>
+				Terms of Service
 			</InlineLinkText>
 			<InlineLinkText
 				style={[a.text_md]}
 				to="https://bsky.social/about/support/privacy-policy"
 				label={_(msg`Privacy Policy`)}
 			>
-				<>Privacy Policy</>
+				Privacy Policy
 			</InlineLinkText>
 			{kawaii && (
 				<Text style={t.atoms.text_contrast_medium}>
