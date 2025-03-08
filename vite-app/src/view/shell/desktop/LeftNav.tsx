@@ -231,7 +231,7 @@ function SwitchMenuItems({
 				<>
 					<Menu.Group>
 						<Menu.LabelText>
-							<Trans>Switch account</Trans>
+							<>Switch account</>
 						</Menu.LabelText>
 						{accounts.map((other) => (
 							<Menu.Item
@@ -265,13 +265,13 @@ function SwitchMenuItems({
 			<Menu.Item label={_(msg`Add another account`)} onPress={onAddAnotherAccount}>
 				<Menu.ItemIcon icon={PlusIcon} />
 				<Menu.ItemText>
-					<Trans>Add another account</Trans>
+					<>Add another account</>
 				</Menu.ItemText>
 			</Menu.Item>
 			<Menu.Item label={_(msg`Sign out`)} onPress={signOutPromptControl.open}>
 				<Menu.ItemIcon icon={LeaveIcon} />
 				<Menu.ItemText>
-					<Trans>Sign out</Trans>
+					<>Sign out</>
 				</Menu.ItemText>
 			</Menu.Item>
 		</Menu.Outer>

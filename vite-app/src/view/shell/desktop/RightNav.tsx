@@ -107,7 +107,7 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 
 			{kawaii && (
 				<Text style={[t.atoms.text_contrast_medium, { marginTop: 12 }]}>
-					<Trans>
+					<>
 						Logo by{" "}
 						<InlineLinkText
 							label={_(msg`Logo by @sawaratsuki.bsky.social`)}
@@ -115,7 +115,7 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 						>
 							@sawaratsuki.bsky.social
 						</InlineLinkText>
-					</Trans>
+					</>
 				</Text>
 			)}
 

@@ -304,9 +304,9 @@ let FeedItemInner = ({
 							/>
 							<Text type="sm-bold" style={pal.textLight} lineHeight={1.2} numberOfLines={1}>
 								{isOwner ? (
-									<Trans>Reposted by you</Trans>
+									<>Reposted by you</>
 								) : (
-									<Trans>
+									<>
 										Reposted by{" "}
 										<ProfileHoverCard inline did={reason.by.did}>
 											<TextLinkOnWebOnly
@@ -326,7 +326,7 @@ let FeedItemInner = ({
 												onBeforePress={onOpenReposter}
 											/>
 										</ProfileHoverCard>
-									</Trans>
+									</>
 								)}
 							</Text>
 						</Link>
@@ -334,7 +334,7 @@ let FeedItemInner = ({
 						<View style={styles.includeReason}>
 							<PinIcon style={{ color: pal.colors.textLight, marginRight: 3 }} width={13} height={13} />
 							<Text type="sm-bold" style={pal.textLight} lineHeight={1.2} numberOfLines={1}>
-								<Trans>Pinned</Trans>
+								<>Pinned</>
 							</Text>
 						</View>
 					) : null}

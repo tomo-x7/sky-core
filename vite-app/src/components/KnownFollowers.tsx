@@ -174,7 +174,7 @@ function KnownFollowersInner({
 						{slice.length >= 2 ? (
 							// 2-n followers, including blocks
 							serverCount > 2 ? (
-								<Trans>
+								<>
 									Followed by{" "}
 									<Text emoji key={slice[0].profile.did} style={textStyle}>
 										{slice[0].profile.displayName}
@@ -184,10 +184,10 @@ function KnownFollowersInner({
 										{slice[1].profile.displayName}
 									</Text>
 									, and <Plural value={serverCount - 2} one="# other" other="# others" />
-								</Trans>
+								</>
 							) : (
 								// only 2
-								<Trans>
+								<>
 									Followed by{" "}
 									<Text emoji key={slice[0].profile.did} style={textStyle}>
 										{slice[0].profile.displayName}
@@ -196,25 +196,25 @@ function KnownFollowersInner({
 									<Text emoji key={slice[1].profile.did} style={textStyle}>
 										{slice[1].profile.displayName}
 									</Text>
-								</Trans>
+								</>
 							)
 						) : serverCount > 1 ? (
 							// 1-n followers, including blocks
-							<Trans>
+							<>
 								Followed by{" "}
 								<Text emoji key={slice[0].profile.did} style={textStyle}>
 									{slice[0].profile.displayName}
 								</Text>{" "}
 								and <Plural value={serverCount - 1} one="# other" other="# others" />
-							</Trans>
+							</>
 						) : (
 							// only 1
-							<Trans>
+							<>
 								Followed by{" "}
 								<Text emoji key={slice[0].profile.did} style={textStyle}>
 									{slice[0].profile.displayName}
 								</Text>
-							</Trans>
+							</>
 						)}
 					</Text>
 				</>
@@ -230,7 +230,7 @@ function EmptyFallback({ show }: { show?: boolean }) {
 
 	return (
 		<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
-			<Trans>Not followed by anyone you're following</Trans>
+			Not followed by anyone you're following
 		</Text>
 	);
 }

@@ -35,7 +35,7 @@ export const SplashScreen = ({
 					</View>
 
 					<Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>
-						<Trans>What's up?</Trans>
+						<>What's up?</>
 					</Text>
 				</View>
 				<View testID="signinOrCreateAccount" style={[a.px_xl, a.gap_md, a.pb_2xl]}>
@@ -49,7 +49,7 @@ export const SplashScreen = ({
 						color="primary"
 					>
 						<ButtonText>
-							<Trans>Create account</Trans>
+							<>Create account</>
 						</ButtonText>
 					</Button>
 					<Button
@@ -62,7 +62,7 @@ export const SplashScreen = ({
 						color="secondary"
 					>
 						<ButtonText>
-							<Trans>Sign in</Trans>
+							<>Sign in</>
 						</ButtonText>
 					</Button>
 				</View>

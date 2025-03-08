@@ -85,18 +85,18 @@ export function DisableEmail2FADialog({
 			>
 				<View style={[a.relative, a.gap_md, a.w_full]}>
 					<Text nativeID="dialog-title" style={[a.text_2xl, a.font_bold, t.atoms.text]}>
-						<Trans>Disable Email 2FA</Trans>
+						<>Disable Email 2FA</>
 					</Text>
 					<P nativeID="dialog-description">
 						{stage === Stages.ConfirmCode ? (
-							<Trans>
+							<>
 								An email has been sent to {currentAccount?.email || "(no email)"}. It includes a
 								confirmation code which you can enter below.
-							</Trans>
+							</>
 						) : (
-							<Trans>
+							<>
 								To disable the email 2FA method, please verify your access to the email address.
-							</Trans>
+							</>
 						)}
 					</P>
 
@@ -114,7 +114,7 @@ export function DisableEmail2FADialog({
 								disabled={isProcessing}
 							>
 								<ButtonText>
-									<Trans>Send verification email</Trans>
+									<>Send verification email</>
 								</ButtonText>
 								{isProcessing && <ButtonIcon icon={Loader} />}
 							</Button>
@@ -128,7 +128,7 @@ export function DisableEmail2FADialog({
 								disabled={isProcessing}
 							>
 								<ButtonText>
-									<Trans>I have a code</Trans>
+									<>I have a code</>
 								</ButtonText>
 							</Button>
 						</View>
@@ -136,7 +136,7 @@ export function DisableEmail2FADialog({
 						<View>
 							<View style={[a.mb_md]}>
 								<TextField.LabelText>
-									<Trans>Confirmation code</Trans>
+									<>Confirmation code</>
 								</TextField.LabelText>
 								<TextField.Root>
 									<TextField.Icon icon={Lock} />
@@ -165,7 +165,7 @@ export function DisableEmail2FADialog({
 									disabled={isProcessing}
 								>
 									<ButtonText>
-										<Trans>Resend email</Trans>
+										<>Resend email</>
 									</ButtonText>
 								</Button>
 								<Button
@@ -178,7 +178,7 @@ export function DisableEmail2FADialog({
 									disabled={isProcessing}
 								>
 									<ButtonText>
-										<Trans>Confirm</Trans>
+										<>Confirm</>
 									</ButtonText>
 									{isProcessing && <ButtonIcon icon={Loader} />}
 								</Button>

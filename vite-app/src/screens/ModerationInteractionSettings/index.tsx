@@ -28,7 +28,7 @@ export function Screen() {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Post Interaction Settings</Trans>
+						<>Post Interaction Settings</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -36,10 +36,10 @@ export function Screen() {
 			<Layout.Content>
 				<View style={[gutters, a.gap_xl]}>
 					<Admonition type="tip">
-						<Trans>
+						<>
 							The following settings will be used as your defaults when creating new posts. You can edit
 							these for a specific post from the composer.
-						</Trans>
+						</>
 					</Admonition>
 					{preferences ? (
 						<Inner preferences={preferences} />

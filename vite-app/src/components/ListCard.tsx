@@ -105,7 +105,7 @@ export function TitleAndByline({
 			>
 				<Hider.Mask>
 					<Text style={[a.text_md, a.font_bold, a.leading_snug, a.italic]} numberOfLines={1}>
-						<Trans>Hidden list</Trans>
+						Hidden list
 					</Text>
 				</Hider.Mask>
 				<Hider.Content>

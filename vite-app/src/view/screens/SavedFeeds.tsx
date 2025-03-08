@@ -86,7 +86,7 @@ function SavedFeedsInner({
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align="left">
 					<Layout.Header.TitleText>
-						<Trans>Feeds</Trans>
+						<>Feeds</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button
@@ -99,7 +99,7 @@ function SavedFeedsInner({
 					disabled={isOverwritePending || !hasUnsavedChanges}
 				>
 					<ButtonIcon icon={isOverwritePending ? Loader : SaveIcon} />
-					<ButtonText>{isDesktop ? <Trans>Save changes</Trans> : <Trans>Save</Trans>}</ButtonText>
+					<ButtonText>{isDesktop ? <>Save changes</> : <>Save</>}</ButtonText>
 				</Button>
 			</Layout.Header.Outer>
 
@@ -112,7 +112,7 @@ function SavedFeedsInner({
 
 				<View style={[pal.text, pal.border, styles.title]}>
 					<Text type="title" style={pal.text}>
-						<Trans>Pinned Feeds</Trans>
+						<>Pinned Feeds</>
 					</Text>
 				</View>
 
@@ -120,7 +120,7 @@ function SavedFeedsInner({
 					!pinnedFeeds.length ? (
 						<View style={[pal.border, isMobile && s.flex1, pal.viewLight, styles.empty]}>
 							<Text type="lg" style={[pal.text]}>
-								<Trans>You don't have any pinned feeds.</Trans>
+								<>You don't have any pinned feeds.</>
 							</Text>
 						</View>
 					) : (
@@ -147,14 +147,14 @@ function SavedFeedsInner({
 
 				<View style={[pal.text, pal.border, styles.title]}>
 					<Text type="title" style={pal.text}>
-						<Trans>Saved Feeds</Trans>
+						<>Saved Feeds</>
 					</Text>
 				</View>
 				{preferences ? (
 					!unpinnedFeeds.length ? (
 						<View style={[pal.border, isMobile && s.flex1, pal.viewLight, styles.empty]}>
 							<Text type="lg" style={[pal.text]}>
-								<Trans>You don't have any saved feeds.</Trans>
+								<>You don't have any saved feeds.</>
 							</Text>
 						</View>
 					) : (
@@ -175,7 +175,7 @@ function SavedFeedsInner({
 
 				<View style={styles.footerText}>
 					<Text type="sm" style={pal.textLight}>
-						<Trans>
+						<>
 							Feeds are custom algorithms that users build with a little coding expertise.{" "}
 							<TextLink
 								type="sm"
@@ -184,7 +184,7 @@ function SavedFeedsInner({
 								text={_(msg`See this guide`)}
 							/>{" "}
 							for more information.
-						</Trans>
+						</>
 					</Text>
 				</View>
 			</Layout.Content>
@@ -374,7 +374,7 @@ function FollowingFeedCard() {
 			</View>
 			<View style={{ flex: 1, flexDirection: "row", gap: 8, alignItems: "center" }}>
 				<Text type="lg-medium" style={[t.atoms.text]} numberOfLines={1}>
-					<Trans>Following</Trans>
+					<>Following</>
 				</Text>
 			</View>
 		</View>

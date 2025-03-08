@@ -103,7 +103,7 @@ export function Component({
 						</>
 					) : (
 						<Text type="xl" style={[pal.textLight, { paddingHorizontal: 12, paddingVertical: 16 }]}>
-							<Trans>No results found for {query}</Trans>
+							<>No results found for {query}</>
 						</Text>
 					)}
 				</ScrollView>

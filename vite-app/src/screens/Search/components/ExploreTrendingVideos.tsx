@@ -92,17 +92,17 @@ export function ExploreTrendingVideos() {
 					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 						<Graph size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
 						<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>
-							<Trans>Trending Videos</Trans>
+							<>Trending Videos</>
 						</Text>
 						<View style={[a.py_xs, a.px_sm, a.rounded_sm, a.overflow_hidden]}>
 							<GradientFill gradient={tokens.gradients.primary} />
 							<Text style={[a.text_sm, a.font_heavy, { color: "white" }]}>
-								<Trans>BETA</Trans>
+								<>BETA</>
 							</Text>
 						</View>
 					</View>
 					<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
-						<Trans>Popular videos in your network.</Trans>
+						<>Popular videos in your network.</>
 					</Text>
 				</View>
 			</View>
@@ -135,7 +135,7 @@ export function ExploreTrendingVideos() {
 								))
 						) : error || !data ? (
 							<Text>
-								<Trans>Whoops! Trending videos failed to load.</Trans>
+								<>Whoops! Trending videos failed to load.</>
 							</Text>
 						) : (
 							<VideoCards data={data} />
@@ -147,7 +147,7 @@ export function ExploreTrendingVideos() {
 			{!isSavedAlready && (
 				<View style={[gutters, a.pt_lg, a.flex_row, a.align_center, a.justify_between, a.gap_xl]}>
 					<Text style={[a.flex_1, a.text_sm, a.leading_snug]}>
-						<Trans>Pin the trending videos feed to your home screen for easy access</Trans>
+						<>Pin the trending videos feed to your home screen for easy access</>
 					</Text>
 					<Button
 						disabled={isPinPending}
@@ -225,7 +225,7 @@ function VideoCards({
 							]}
 						>
 							<Text style={[a.text_md]}>
-								<Trans>View more</Trans>
+								<>View more</>
 							</Text>
 							<View
 								style={[

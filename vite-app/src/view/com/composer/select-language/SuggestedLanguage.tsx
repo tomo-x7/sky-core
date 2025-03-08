@@ -47,13 +47,13 @@ export function SuggestedLanguage({ text }: { text: string }) {
 			<View style={[pal.border, styles.infoBar]}>
 				<FontAwesomeIcon icon="language" style={pal.text as FontAwesomeIconStyle} size={24} />
 				<Text style={[pal.text, s.flex1]}>
-					<Trans>
+					<>
 						Are you writing in{" "}
 						<Text type="sm-bold" style={pal.text}>
 							{suggestedLanguageName}
 						</Text>
 						?
-					</Trans>
+					</>
 				</Text>
 
 				<Button
@@ -63,7 +63,7 @@ export function SuggestedLanguage({ text }: { text: string }) {
 					accessibilityHint=""
 				>
 					<Text type="button" style={[pal.link, s.fw600]}>
-						<Trans>Yes</Trans>
+						<>Yes</>
 					</Text>
 				</Button>
 			</View>

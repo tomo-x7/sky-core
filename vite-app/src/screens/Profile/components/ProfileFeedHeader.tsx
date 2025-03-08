@@ -408,7 +408,7 @@ function DialogInner({
 						{info.displayName}
 					</Text>
 					<Text style={[a.text_sm, a.leading_tight, t.atoms.text_contrast_medium]} numberOfLines={1}>
-						<Trans>
+						<>
 							By{" "}
 							<InlineLinkText
 								label={_(msg`View ${info.creatorHandle}'s profile`)}
@@ -422,7 +422,7 @@ function DialogInner({
 							>
 								{sanitizeHandle(info.creatorHandle, "@")}
 							</InlineLinkText>
-						</Trans>
+						</>
 					</Text>
 				</View>
 
@@ -448,9 +448,9 @@ function DialogInner({
 						style={[a.underline, t.atoms.text_contrast_medium]}
 						onPress={() => control.close()}
 					>
-						<Trans>
+						<>
 							Liked by <Plural value={likeCount} one="# user" other="# users" />
-						</Trans>
+						</>
 					</InlineLinkText>
 				)}
 			</View>
@@ -473,7 +473,7 @@ function DialogInner({
 								<ButtonIcon icon={Heart} position="left" />
 							)}
 
-							<ButtonText>{isLiked ? <Trans>Unlike</Trans> : <Trans>Like</Trans>}</ButtonText>
+							<ButtonText>{isLiked ? <>Unlike</> : <>Like</>}</ButtonText>
 						</Button>
 						<Button
 							disabled={isFeedStateChangePending}
@@ -484,7 +484,7 @@ function DialogInner({
 							onPress={onTogglePinned}
 							style={[a.flex_1]}
 						>
-							<ButtonText>{isPinned ? <Trans>Unpin feed</Trans> : <Trans>Pin feed</Trans>}</ButtonText>
+							<ButtonText>{isPinned ? <>Unpin feed</> : <>Pin feed</>}</ButtonText>
 							<ButtonIcon icon={Pin} position="right" />
 						</Button>
 					</View>
@@ -494,7 +494,7 @@ function DialogInner({
 
 						<View style={[a.flex_row, a.align_center, a.gap_sm, a.justify_between]}>
 							<Text style={[a.italic, t.atoms.text_contrast_medium]}>
-								<Trans>Something wrong? Let us know.</Trans>
+								<>Something wrong? Let us know.</>
 							</Text>
 
 							<Button
@@ -505,7 +505,7 @@ function DialogInner({
 								onPress={onPressReport}
 							>
 								<ButtonText>
-									<Trans>Report feed</Trans>
+									<>Report feed</>
 								</ButtonText>
 								<ButtonIcon icon={CircleInfo} position="right" />
 							</Button>

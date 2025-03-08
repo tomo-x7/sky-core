@@ -65,7 +65,7 @@ export function Error({
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
 					>
 						<ButtonText>
-							<Trans>Retry</Trans>
+							Retry
 						</ButtonText>
 					</Button>
 				)}
@@ -79,7 +79,7 @@ export function Error({
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
 					>
 						<ButtonText>
-							<Trans>Go Back</Trans>
+							Go Back
 						</ButtonText>
 					</Button>
 				)}

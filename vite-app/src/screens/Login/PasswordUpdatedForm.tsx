@@ -18,10 +18,10 @@ export const PasswordUpdatedForm = ({
 	return (
 		<FormContainer testID="passwordUpdatedForm" style={[a.gap_2xl, !gtMobile && a.mt_5xl]}>
 			<Text style={[a.text_3xl, a.font_bold, a.text_center]}>
-				<Trans>Password updated!</Trans>
+				<>Password updated!</>
 			</Text>
 			<Text style={[a.text_center, a.mx_auto, { maxWidth: "80%" }]}>
-				<Trans>You can now sign in with your new password.</Trans>
+				<>You can now sign in with your new password.</>
 			</Text>
 			<View style={[a.flex_row, a.justify_center]}>
 				<Button
@@ -33,7 +33,7 @@ export const PasswordUpdatedForm = ({
 					size="large"
 				>
 					<ButtonText>
-						<Trans>Okay</Trans>
+						<>Okay</>
 					</ButtonText>
 				</Button>
 			</View>

@@ -31,14 +31,14 @@ export const SupportScreen = (_props: Props) => {
 			<ViewHeader title={_(msg`Support`)} />
 			<CenteredView>
 				<Text type="title-xl" style={[pal.text, s.p20, s.pb5]}>
-					<Trans>Support</Trans>
+					<>Support</>
 				</Text>
 				<Text style={[pal.text, s.p20]}>
-					<Trans>
+					<>
 						The support form has been moved. If you need help, please{" "}
 						<TextLink href={HELP_DESK_URL} text={_(msg`click here`)} style={pal.link} /> or visit{" "}
 						{HELP_DESK_URL} to get in touch with us.
-					</Trans>
+					</>
 				</Text>
 			</CenteredView>
 		</Layout.Screen>

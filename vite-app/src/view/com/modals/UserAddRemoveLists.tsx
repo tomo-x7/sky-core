@@ -74,13 +74,13 @@ export function Component({
 	return (
 		<View testID="userAddRemoveListsModal" style={s.hContentRegion}>
 			<Text style={headerStyles} numberOfLines={1}>
-				<Trans>
+				<>
 					Update{" "}
 					<Text style={headerStyles} numberOfLines={1}>
 						{displayName}
 					</Text>{" "}
 					in Lists
-				</Trans>
+				</>
 			</Text>
 			<MyLists
 				filter="all"
@@ -197,15 +197,15 @@ function ListItem({
 				<Text type="md" style={[pal.textLight]} numberOfLines={1}>
 					{list.purpose === "app.bsky.graph.defs#curatelist" &&
 						(list.creator.did === currentAccount?.did ? (
-							<Trans>User list by you</Trans>
+							<>User list by you</>
 						) : (
-							<Trans>User list by {sanitizeHandle(list.creator.handle, "@")}</Trans>
+							<>User list by {sanitizeHandle(list.creator.handle, "@")}</>
 						))}
 					{list.purpose === "app.bsky.graph.defs#modlist" &&
 						(list.creator.did === currentAccount?.did ? (
-							<Trans>Moderation list by you</Trans>
+							<>Moderation list by you</>
 						) : (
-							<Trans>Moderation list by {sanitizeHandle(list.creator.handle, "@")}</Trans>
+							<>Moderation list by {sanitizeHandle(list.creator.handle, "@")}</>
 						))}
 				</Text>
 			</View>

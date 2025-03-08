@@ -155,7 +155,7 @@ export function StepInfo({
 						{state.serviceDescription.inviteCodeRequired && (
 							<View>
 								<TextField.LabelText>
-									<Trans>Invite code</Trans>
+									<>Invite code</>
 								</TextField.LabelText>
 								<TextField.Root isInvalid={state.errorField === "invite-code"}>
 									<TextField.Icon icon={Ticket} />
@@ -180,7 +180,7 @@ export function StepInfo({
 						)}
 						<View>
 							<TextField.LabelText>
-								<Trans>Email</Trans>
+								<>Email</>
 							</TextField.LabelText>
 							<TextField.Root isInvalid={state.errorField === "email"}>
 								<TextField.Icon icon={Envelope} />
@@ -213,7 +213,7 @@ export function StepInfo({
 						</View>
 						<View>
 							<TextField.LabelText>
-								<Trans>Password</Trans>
+								<>Password</>
 							</TextField.LabelText>
 							<TextField.Root isInvalid={state.errorField === "password"}>
 								<TextField.Icon icon={Lock} />
@@ -240,7 +240,7 @@ export function StepInfo({
 						</View>
 						<View>
 							<DateField.LabelText>
-								<Trans>Your birth date</Trans>
+								<>Your birth date</>
 							</DateField.LabelText>
 							<DateField.DateField
 								testID="date"

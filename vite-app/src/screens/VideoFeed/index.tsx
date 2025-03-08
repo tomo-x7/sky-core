@@ -449,7 +449,7 @@ let VideoItem = ({
 					]}
 				>
 					<Text style={[a.text_2xl, a.font_heavy, a.text_center, a.leading_tight, a.mx_xl]}>
-						<Trans>Post has been deleted</Trans>
+						<>Post has been deleted</>
 					</Text>
 				</View>
 			) : (
@@ -543,7 +543,7 @@ function ModerationOverlay({
 				<View style={[a.align_center, a.gap_sm]}>
 					<Eye width={36} fill="white" />
 					<Text style={[a.text_center, a.leading_snug, a.pb_xs]}>
-						<Trans>Hidden by your moderation settings.</Trans>
+						<>Hidden by your moderation settings.</>
 					</Text>
 					<Button
 						label={_(msg`Show anyway`)}
@@ -553,7 +553,7 @@ function ModerationOverlay({
 						onPress={onShow}
 					>
 						<ButtonText>
-							<Trans>Show anyway</Trans>
+							<>Show anyway</>
 						</ButtonText>
 					</Button>
 				</View>
@@ -586,7 +586,7 @@ function ModerationOverlay({
 						>
 							{({ pressed }) => (
 								<Text style={[a.text_sm, a.font_bold, a.text_center, { opacity: pressed ? 0.5 : 1 }]}>
-									<Trans>View details</Trans>
+									<>View details</>
 								</Text>
 							)}
 						</Button>
@@ -721,9 +721,9 @@ function Overlay({
 										{!!profile.viewer?.following && <ButtonIcon icon={CheckIcon} />}
 										<ButtonText>
 											{profile.viewer?.following ? (
-												<Trans>Following</Trans>
+												<>Following</>
 											) : (
-												<Trans>Follow</Trans>
+												<>Follow</>
 											)}
 										</ButtonText>
 									</Button>
@@ -953,10 +953,10 @@ function EndMessage() {
 			</View>
 			<View style={[a.w_full, a.gap_md]}>
 				<Text style={[a.text_3xl, a.text_center, a.font_heavy]}>
-					<Trans>That's everything!</Trans>
+					<>That's everything!</>
 				</Text>
 				<Text style={[a.text_lg, a.text_center, t.atoms.text_contrast_high, a.leading_snug]}>
-					<Trans>You've run out of videos to watch. Maybe it's a good time to take a break?</Trans>
+					<>You've run out of videos to watch. Maybe it's a good time to take a break?</>
 				</Text>
 			</View>
 			<Button
@@ -976,7 +976,7 @@ function EndMessage() {
 			>
 				<ButtonIcon icon={ArrowLeftIcon} />
 				<ButtonText>
-					<Trans>Go back</Trans>
+					<>Go back</>
 				</ButtonText>
 			</Button>
 		</View>

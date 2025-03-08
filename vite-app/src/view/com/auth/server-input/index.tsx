@@ -120,7 +120,7 @@ function DialogInner({
 		<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description" accessibilityLabelledBy="dialog-title">
 			<View style={[a.relative, a.gap_md, a.w_full]}>
 				<Text nativeID="dialog-title" style={[a.text_2xl, a.font_bold]}>
-					<Trans>Choose your account provider</Trans>
+					<>Choose your account provider</>
 				</Text>
 				<ToggleButton.Group
 					label="Preferences"
@@ -137,17 +137,17 @@ function DialogInner({
 
 				{fixedOption === BSKY_SERVICE && isFirstTimeUser && (
 					<Admonition type="tip">
-						<Trans>
+						<>
 							Bluesky is an open network where you can choose your own provider. If you're new here, we
 							recommend sticking with the default Bluesky Social option.
-						</Trans>
+						</>
 					</Admonition>
 				)}
 
 				{fixedOption === "custom" && (
 					<View style={[a.border, t.atoms.border_contrast_low, a.rounded_sm, a.px_md, a.py_md]}>
 						<TextField.LabelText nativeID="address-input-label">
-							<Trans>Server address</Trans>
+							<>Server address</>
 						</TextField.LabelText>
 						<TextField.Root>
 							<TextField.Icon icon={Globe} />
@@ -183,18 +183,18 @@ function DialogInner({
 				<View style={[a.py_xs]}>
 					<P style={[t.atoms.text_contrast_medium, a.text_sm, a.leading_snug, a.flex_1]}>
 						{isFirstTimeUser ? (
-							<Trans>If you're a developer, you can host your own server.</Trans>
+							<>If you're a developer, you can host your own server.</>
 						) : (
-							<Trans>
+							<>
 								Bluesky is an open network where you can choose your hosting provider. If you're a
 								developer, you can host your own server.
-							</Trans>
+							</>
 						)}{" "}
 						<InlineLinkText
 							label={_(msg`Learn more about self hosting your PDS.`)}
 							to="https://atproto.com/guides/self-hosting"
 						>
-							<Trans>Learn more.</Trans>
+							<>Learn more.</>
 						</InlineLinkText>
 					</P>
 				</View>

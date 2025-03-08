@@ -37,7 +37,7 @@ export function NotificationSettingsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Notification Settings</Trans>
+						<>Notification Settings</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -55,7 +55,7 @@ export function NotificationSettingsScreen({}: Props) {
 						<SettingsList.Group>
 							<SettingsList.ItemIcon icon={BeakerIcon} />
 							<SettingsList.ItemText>
-								<Trans>Notification filters</Trans>
+								<>Notification filters</>
 							</SettingsList.ItemText>
 							<Toggle.Group
 								label={_(msg`Priority notifications`)}
@@ -70,7 +70,7 @@ export function NotificationSettingsScreen({}: Props) {
 									style={[a.flex_1, a.justify_between]}
 								>
 									<Toggle.LabelText>
-										<Trans>Enable priority notifications</Trans>
+										<>Enable priority notifications</>
 									</Toggle.LabelText>
 									{!data ? <Loader size="md" /> : <Toggle.Platform />}
 								</Toggle.Item>
@@ -78,11 +78,11 @@ export function NotificationSettingsScreen({}: Props) {
 						</SettingsList.Group>
 						<SettingsList.Item>
 							<Admonition type="warning" style={[a.flex_1]}>
-								<Trans>
+								<>
 									<Text style={[a.font_bold]}>Experimental:</Text> When this preference is enabled,
 									you'll only receive reply and quote notifications from users you follow. We'll
 									continue to add more controls here over time.
-								</Trans>
+								</>
 							</Admonition>
 						</SettingsList.Item>
 					</SettingsList.Container>

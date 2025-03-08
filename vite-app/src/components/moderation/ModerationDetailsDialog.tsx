@@ -54,13 +54,13 @@ function ModerationDetailsDialogInner({
 			const list = modcause.source.list;
 			name = _(msg`User Blocked by List`);
 			description = (
-				<Trans>
+				<>
 					This user is included in the{" "}
 					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={[a.text_sm]}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have blocked.
-				</Trans>
+				</>
 			);
 		} else {
 			name = _(msg`User Blocked`);
@@ -77,13 +77,13 @@ function ModerationDetailsDialogInner({
 			const list = modcause.source.list;
 			name = _(msg`Account Muted by List`);
 			description = (
-				<Trans>
+				<>
 					This user is included in the{" "}
 					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={[a.text_sm]}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have muted.
-				</Trans>
+				</>
 			);
 		} else {
 			name = _(msg`Account Muted`);
@@ -146,7 +146,7 @@ function ModerationDetailsDialogInner({
 				>
 					{modcause.source.type === "user" ? (
 						<Text style={[t.atoms.text, a.text_md, a.leading_snug]}>
-							<Trans>This label was applied by the author.</Trans>
+							This label was applied by the author.
 						</Text>
 					) : (
 						<>
@@ -155,7 +155,7 @@ function ModerationDetailsDialogInner({
 									style={[a.flex_1, a.leading_snug, t.atoms.text_contrast_medium]}
 									numberOfLines={1}
 								>
-									<Trans>
+									<>
 										Source:{" "}
 										<InlineLinkText
 											label={sourceName}
@@ -167,14 +167,14 @@ function ModerationDetailsDialogInner({
 										>
 											{sourceName}
 										</InlineLinkText>
-									</Trans>
+									</>
 								</Text>
 								{modcause.label.exp && (
 									<View>
 										<Text
 											style={[a.leading_snug, a.text_sm, a.italic, t.atoms.text_contrast_medium]}
 										>
-											<Trans>Expires in {timeDiff(Date.now(), modcause.label.exp)}</Trans>
+											<>Expires in {timeDiff(Date.now(), modcause.label.exp)}</>
 										</Text>
 									</View>
 								)}

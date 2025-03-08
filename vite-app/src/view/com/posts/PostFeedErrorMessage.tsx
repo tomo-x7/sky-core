@@ -170,7 +170,7 @@ function FeedgenErrorMessage({
 
 				{rawError?.message && (
 					<Text style={pal.textLight}>
-						<Trans>Message from server: {rawError.message}</Trans>
+						<>Message from server: {rawError.message}</>
 					</Text>
 				)}
 

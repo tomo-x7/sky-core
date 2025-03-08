@@ -34,7 +34,7 @@ export const Policies = ({
 				<CircleInfo size="md" fill={t.atoms.text_contrast_low.color} />
 
 				<Text style={[t.atoms.text_contrast_medium]}>
-					<Trans>This service has not provided terms of service or a privacy policy.</Trans>
+					<>This service has not provided terms of service or a privacy policy.</>
 				</Text>
 			</View>
 		);
@@ -43,7 +43,7 @@ export const Policies = ({
 	let els: ReactElement;
 	if (tos && pp) {
 		els = (
-			<Trans>
+			<>
 				By creating an account you agree to the{" "}
 				<InlineLinkText label={_(msg`Read the Bluesky Terms of Service`)} key="tos" to={tos}>
 					Terms of Service
@@ -53,27 +53,27 @@ export const Policies = ({
 					Privacy Policy
 				</InlineLinkText>
 				.
-			</Trans>
+			</>
 		);
 	} else if (tos) {
 		els = (
-			<Trans>
+			<>
 				By creating an account you agree to the{" "}
 				<InlineLinkText label={_(msg`Read the Bluesky Terms of Service`)} key="tos" to={tos}>
 					Terms of Service
 				</InlineLinkText>
 				.
-			</Trans>
+			</>
 		);
 	} else if (pp) {
 		els = (
-			<Trans>
+			<>
 				By creating an account you agree to the{" "}
 				<InlineLinkText label={_(msg`Read the Bluesky Privacy Policy`)} key="pp" to={pp}>
 					Privacy Policy
 				</InlineLinkText>
 				.
-			</Trans>
+			</>
 		);
 	} else {
 		return null;
@@ -85,14 +85,14 @@ export const Policies = ({
 
 			{under13 ? (
 				<Text style={[a.font_bold, a.leading_snug, t.atoms.text_contrast_high]}>
-					<Trans>You must be 13 years of age or older to sign up.</Trans>
+					<>You must be 13 years of age or older to sign up.</>
 				</Text>
 			) : needsGuardian ? (
 				<Text style={[a.font_bold, a.leading_snug, t.atoms.text_contrast_high]}>
-					<Trans>
+					<>
 						If you are not yet an adult according to the laws of your country, your parent or legal guardian
 						must read these Terms on your behalf.
-					</Trans>
+					</>
 				</Text>
 			) : undefined}
 		</View>

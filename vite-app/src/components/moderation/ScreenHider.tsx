@@ -81,14 +81,14 @@ export function ScreenHider({
 				</View>
 			</View>
 			<Text style={[a.text_4xl, a.font_bold, a.text_center, a.mb_md, t.atoms.text]}>
-				{isNoPwi ? <Trans>Sign-in Required</Trans> : <Trans>Content Warning</Trans>}
+				{isNoPwi ? <>Sign-in Required</> : <>Content Warning</>}
 			</Text>
 			<Text style={[a.text_lg, a.mb_md, a.px_lg, a.text_center, a.leading_snug, t.atoms.text_contrast_medium]}>
 				{isNoPwi ? (
-					<Trans>This account has requested that users sign in to view their profile.</Trans>
+					<>This account has requested that users sign in to view their profile.</>
 				) : (
 					<>
-						<Trans>This {screenDescription} has been flagged:</Trans>{" "}
+						<>This {screenDescription} has been flagged:</>{" "}
 						<Text style={[a.text_lg, a.font_bold, a.leading_snug, t.atoms.text, a.ml_xs]}>
 							{desc.name}.{" "}
 						</Text>
@@ -112,7 +112,7 @@ export function ScreenHider({
 									}),
 								]}
 							>
-								<Trans>Learn More</Trans>
+								<>Learn More</>
 							</Text>
 						</TouchableWithoutFeedback>
 						<ModerationDetailsDialog control={control} modcause={blur} />
@@ -136,7 +136,7 @@ export function ScreenHider({
 					}}
 				>
 					<ButtonText>
-						<Trans>Go back</Trans>
+						<>Go back</>
 					</ButtonText>
 				</Button>
 				{!modui.noOverride && (
@@ -149,7 +149,7 @@ export function ScreenHider({
 						onPress={() => setOverride((v) => !v)}
 					>
 						<ButtonText>
-							<Trans>Show anyway</Trans>
+							<>Show anyway</>
 						</ButtonText>
 					</Button>
 				)}

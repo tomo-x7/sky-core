@@ -126,14 +126,14 @@ export function Component() {
 
 					<Text type="lg" style={[pal.textLight, { marginBottom: 10 }]}>
 						{stage === Stages.RequestCode ? (
-							<Trans>
+							<>
 								If you want to change your password, we will send you a code to verify that this is your
 								account.
-							</Trans>
+							</>
 						) : stage === Stages.ChangePassword ? (
-							<Trans>Enter the code you received to change your password.</Trans>
+							<>Enter the code you received to change your password.</>
 						) : (
-							<Trans>Your password has been changed successfully!</Trans>
+							<>Your password has been changed successfully!</>
 						)}
 					</Text>
 
@@ -147,7 +147,7 @@ export function Component() {
 								accessibilityHint={_(msg`Navigates to the next screen`)}
 							>
 								<Text type="xl" style={[pal.link, s.pr5]}>
-									<Trans>Already have a code?</Trans>
+									<>Already have a code?</>
 								</Text>
 							</TouchableOpacity>
 						</View>

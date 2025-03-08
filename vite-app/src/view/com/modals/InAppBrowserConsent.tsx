@@ -39,10 +39,10 @@ export function Component({ href }: { href: string }) {
 			style={[s.flex1, pal.view, { paddingHorizontal: 20, paddingTop: 10 }]}
 		>
 			<Text style={[pal.text, styles.title]}>
-				<Trans>How should we open this link?</Trans>
+				<>How should we open this link?</>
 			</Text>
 			<Text style={pal.text}>
-				<Trans>Your choice will be saved, but can be changed later in settings.</Trans>
+				<>Your choice will be saved, but can be changed later in settings.</>
 			</Text>
 			<View style={[styles.btnContainer]}>
 				<Button

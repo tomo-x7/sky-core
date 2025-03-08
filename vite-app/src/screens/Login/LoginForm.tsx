@@ -158,10 +158,10 @@ export const LoginForm = ({
 	};
 
 	return (
-		<FormContainer testID="loginForm" titleText={<Trans>Sign in</Trans>}>
+		<FormContainer testID="loginForm" titleText={<>Sign in</>}>
 			<View>
 				<TextField.LabelText>
-					<Trans>Hosting provider</Trans>
+					<>Hosting provider</>
 				</TextField.LabelText>
 				<HostingProvider
 					serviceUrl={serviceUrl}
@@ -171,7 +171,7 @@ export const LoginForm = ({
 			</View>
 			<View>
 				<TextField.LabelText>
-					<Trans>Account</Trans>
+					<>Account</>
 				</TextField.LabelText>
 				<View style={[a.gap_sm]}>
 					<TextField.Root>
@@ -235,7 +235,7 @@ export const LoginForm = ({
 							]}
 						>
 							<ButtonText>
-								<Trans>Forgot?</Trans>
+								<>Forgot?</>
 							</ButtonText>
 						</Button>
 					</TextField.Root>
@@ -244,7 +244,7 @@ export const LoginForm = ({
 			{isAuthFactorTokenNeeded && (
 				<View>
 					<TextField.LabelText>
-						<Trans>2FA Confirmation</Trans>
+						<>2FA Confirmation</>
 					</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={Ticket} />
@@ -273,7 +273,7 @@ export const LoginForm = ({
 						/>
 					</TextField.Root>
 					<Text style={[a.text_sm, t.atoms.text_contrast_medium, a.mt_sm]}>
-						<Trans>Check your email for a sign in code and enter it here.</Trans>
+						<>Check your email for a sign in code and enter it here.</>
 					</Text>
 				</View>
 			)}
@@ -281,7 +281,7 @@ export const LoginForm = ({
 			<View style={[a.flex_row, a.align_center, a.pt_md]}>
 				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>
-						<Trans>Back</Trans>
+						<>Back</>
 					</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
@@ -296,14 +296,14 @@ export const LoginForm = ({
 						onPress={onPressRetryConnect}
 					>
 						<ButtonText>
-							<Trans>Retry</Trans>
+							<>Retry</>
 						</ButtonText>
 					</Button>
 				) : !serviceDescription ? (
 					<>
 						<ActivityIndicator />
 						<Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-							<Trans>Connecting...</Trans>
+							<>Connecting...</>
 						</Text>
 					</>
 				) : (
@@ -317,7 +317,7 @@ export const LoginForm = ({
 						onPress={onPressNext}
 					>
 						<ButtonText>
-							<Trans>Next</Trans>
+							<>Next</>
 						</ButtonText>
 						{isProcessing && <ButtonIcon icon={Loader} />}
 					</Button>

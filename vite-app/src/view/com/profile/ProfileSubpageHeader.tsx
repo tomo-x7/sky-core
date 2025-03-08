@@ -145,42 +145,42 @@ export function ProfileSubpageHeader({
 						<Text type="lg" style={[pal.textLight]} numberOfLines={1}>
 							{purpose === "app.bsky.graph.defs#curatelist" ? (
 								isOwner ? (
-									<Trans>List by you</Trans>
+									<>List by you</>
 								) : (
-									<Trans>
+									<>
 										List by{" "}
 										<TextLink
 											text={sanitizeHandle(creator.handle || "", "@")}
 											href={makeProfileLink(creator)}
 											style={pal.textLight}
 										/>
-									</Trans>
+									</>
 								)
 							) : purpose === "app.bsky.graph.defs#modlist" ? (
 								isOwner ? (
-									<Trans>Moderation list by you</Trans>
+									<>Moderation list by you</>
 								) : (
-									<Trans>
+									<>
 										Moderation list by{" "}
 										<TextLink
 											text={sanitizeHandle(creator.handle || "", "@")}
 											href={makeProfileLink(creator)}
 											style={pal.textLight}
 										/>
-									</Trans>
+									</>
 								)
 							) : purpose === "app.bsky.graph.defs#referencelist" ? (
 								isOwner ? (
-									<Trans>Starter pack by you</Trans>
+									<>Starter pack by you</>
 								) : (
-									<Trans>
+									<>
 										Starter pack by{" "}
 										<TextLink
 											text={sanitizeHandle(creator.handle || "", "@")}
 											href={makeProfileLink(creator)}
 											style={pal.textLight}
 										/>
-									</Trans>
+									</>
 								)
 							) : null}
 						</Text>

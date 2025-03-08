@@ -70,7 +70,7 @@ export function SignupQueued() {
 			disabled={isProcessing}
 		>
 			<ButtonText>
-				<Trans>Check my status</Trans>
+				<>Check my status</>
 			</ButtonText>
 			{isProcessing && <ButtonIcon icon={Loader} />}
 		</Button>
@@ -85,7 +85,7 @@ export function SignupQueued() {
 			onPress={() => logoutCurrentAccount("SignupQueued")}
 		>
 			<ButtonText>
-				<Trans>Sign out</Trans>
+				<>Sign out</>
 			</ButtonText>
 		</Button>
 	);
@@ -103,13 +103,13 @@ export function SignupQueued() {
 						</View>
 
 						<Text style={[a.text_4xl, a.font_heavy, a.pb_sm]}>
-							<Trans>You're in line</Trans>
+							<>You're in line</>
 						</Text>
 						<P style={[t.atoms.text_contrast_medium]}>
-							<Trans>
+							<>
 								There's been a rush of new users to Bluesky! We'll activate your account as soon as we
 								can.
-							</Trans>
+							</>
 						</P>
 
 						<View
@@ -129,14 +129,14 @@ export function SignupQueued() {
 							)}
 							<P style={[a.text_center]}>
 								{typeof placeInQueue === "number" ? (
-									<Trans>left to go.</Trans>
+									<>left to go.</>
 								) : (
-									<Trans>You are in line.</Trans>
+									<>You are in line.</>
 								)}{" "}
 								{estimatedTime ? (
-									<Trans>We estimate {estimatedTime} until your account is ready.</Trans>
+									<>We estimate {estimatedTime} until your account is ready.</>
 								) : (
-									<Trans>We will let you know when your account is ready.</Trans>
+									<>We will let you know when your account is ready.</>
 								)}
 							</P>
 						</View>

@@ -107,16 +107,16 @@ export function Component() {
 
 				<Text type="lg" style={[pal.textLight, { marginBottom: 10 }]}>
 					{stage === Stages.InputEmail ? (
-						<Trans>Enter your new email address below.</Trans>
+						<>Enter your new email address below.</>
 					) : stage === Stages.ConfirmCode ? (
-						<Trans>
+						<>
 							An email has been sent to your previous address, {currentAccount?.email || "(no email)"}. It
 							includes a confirmation code which you can enter below.
-						</Trans>
+						</>
 					) : (
-						<Trans>
+						<>
 							Your email has been updated but not verified. As a next step, please verify your new email.
-						</Trans>
+						</>
 					)}
 				</Text>
 

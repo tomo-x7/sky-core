@@ -378,7 +378,7 @@ export function Controls({
 					{showSpinner && <Loader fill={t.palette.white} size="lg" />}
 					{error && (
 						<Text style={{ color: t.palette.white }}>
-							<Trans>An error occurred</Trans>
+							<>An error occurred</>
 						</Text>
 					)}
 				</View>

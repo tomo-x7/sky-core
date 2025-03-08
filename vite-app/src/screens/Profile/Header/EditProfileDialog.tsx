@@ -214,7 +214,7 @@ function DialogInner({
 				testID="editProfileCancelBtn"
 			>
 				<ButtonText style={[a.text_md]}>
-					<Trans>Cancel</Trans>
+					<>Cancel</>
 				</ButtonText>
 			</Button>
 		),
@@ -234,7 +234,7 @@ function DialogInner({
 				testID="editProfileSaveBtn"
 			>
 				<ButtonText style={[a.text_md, !dirty && t.atoms.text_contrast_low]}>
-					<Trans>Save</Trans>
+					<>Save</>
 				</ButtonText>
 			</Button>
 		),
@@ -249,7 +249,7 @@ function DialogInner({
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
 					<Dialog.HeaderText>
-						<Trans>Edit profile</Trans>
+						<>Edit profile</>
 					</Dialog.HeaderText>
 				</Dialog.Header>
 			}
@@ -286,7 +286,7 @@ function DialogInner({
 			<View style={[a.mt_4xl, a.px_xl, a.gap_xl]}>
 				<View>
 					<TextField.LabelText>
-						<Trans>Display name</Trans>
+						<>Display name</>
 					</TextField.LabelText>
 					<TextField.Root isInvalid={displayNameTooLong}>
 						<Dialog.Input
@@ -302,17 +302,17 @@ function DialogInner({
 							style={[a.text_sm, a.mt_xs, a.font_bold, { color: t.palette.negative_400 }]}
 							label={_(msg`Display name is too long`)}
 						>
-							<Trans>
+							<>
 								Display name is too long. The maximum number of characters is{" "}
 								{DISPLAY_NAME_MAX_GRAPHEMES}.
-							</Trans>
+							</>
 						</TextField.SuffixText>
 					)}
 				</View>
 
 				<View>
 					<TextField.LabelText>
-						<Trans>Description</Trans>
+						<>Description</>
 					</TextField.LabelText>
 					<TextField.Root isInvalid={descriptionTooLong}>
 						<Dialog.Input
@@ -329,10 +329,10 @@ function DialogInner({
 							style={[a.text_sm, a.mt_xs, a.font_bold, { color: t.palette.negative_400 }]}
 							label={_(msg`Description is too long`)}
 						>
-							<Trans>
+							<>
 								Description is too long. The maximum number of characters is {DESCRIPTION_MAX_GRAPHEMES}
 								.
-							</Trans>
+							</>
 						</TextField.SuffixText>
 					)}
 				</View>

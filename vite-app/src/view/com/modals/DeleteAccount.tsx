@@ -89,7 +89,7 @@ export function Component({}: {}) {
 			<ScrollView style={[pal.view]} keyboardShouldPersistTaps="handled">
 				<View style={[styles.titleContainer, pal.view]}>
 					<Text type="title-xl" style={[s.textCenter, pal.text]}>
-						<Trans>
+						<>
 							Delete Account{" "}
 							<Text type="title-xl" style={[pal.text, s.bold]}>
 								"
@@ -104,15 +104,15 @@ export function Component({}: {}) {
 							<Text type="title-xl" style={[pal.text, s.bold]}>
 								"
 							</Text>
-						</Trans>
+						</>
 					</Text>
 				</View>
 				{!isEmailSent ? (
 					<>
 						<Text type="lg" style={[styles.description, pal.text]}>
-							<Trans>
+							<>
 								For security reasons, we'll need to send a confirmation code to your email address.
-							</Trans>
+							</>
 						</Text>
 						{error ? (
 							<View style={s.mt10}>
@@ -181,10 +181,10 @@ export function Component({}: {}) {
 								/>
 
 								<NewText style={[a.leading_snug, a.flex_1]}>
-									<Trans>
+									<>
 										You can also temporarily deactivate your account instead, and reactivate it at
 										any time.
-									</Trans>
+									</>
 								</NewText>
 							</View>
 						</View>
@@ -193,7 +193,7 @@ export function Component({}: {}) {
 					<>
 						{/* TODO: Update this label to be more concise */}
 						<Text type="lg" style={[pal.text, styles.description]} nativeID="confirmationCode">
-							<Trans>Check your inbox for an email with the confirmation code to enter below:</Trans>
+							<>Check your inbox for an email with the confirmation code to enter below:</>
 						</Text>
 						<TextInput
 							style={[styles.textInput, pal.borderDark, pal.text, styles.mb20]}
@@ -207,7 +207,7 @@ export function Component({}: {}) {
 							accessibilityHint={_(msg`Input confirmation code for account deletion`)}
 						/>
 						<Text type="lg" style={[pal.text, styles.description]} nativeID="password">
-							<Trans>Please enter your password as well:</Trans>
+							<>Please enter your password as well:</>
 						</Text>
 						<TextInput
 							style={[styles.textInput, pal.borderDark, pal.text]}
@@ -240,7 +240,7 @@ export function Component({}: {}) {
 									accessibilityHint=""
 								>
 									<Text type="button-lg" style={[s.white, s.bold]}>
-										<Trans>Delete my account</Trans>
+										<>Delete my account</>
 									</Text>
 								</TouchableOpacity>
 								<TouchableOpacity

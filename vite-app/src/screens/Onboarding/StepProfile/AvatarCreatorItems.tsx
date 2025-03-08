@@ -61,7 +61,7 @@ export function AvatarCreatorItems({
 	return (
 		<View style={[a.w_full]}>
 			<Text style={[a.pb_md, t.atoms.text_contrast_medium]}>
-				{isEmojis ? <Trans>Select an emoji</Trans> : <Trans>Select a color</Trans>}
+				{isEmojis ? <>Select an emoji</> : <>Select a color</>}
 			</Text>
 
 			<View style={[a.flex_row, a.align_start, a.justify_start, a.flex_wrap, a.gap_md]}>

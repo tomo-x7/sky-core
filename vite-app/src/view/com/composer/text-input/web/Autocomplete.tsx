@@ -184,7 +184,7 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 					})
 				) : (
 					<Text type="sm" style={[pal.text, styles.noResult]}>
-						<Trans>No result</Trans>
+						<>No result</>
 					</Text>
 				)}
 			</View>

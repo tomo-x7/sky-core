@@ -58,7 +58,7 @@ export function AppIconSettingsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>App Icon</Trans>
+						<>App Icon</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -77,7 +77,7 @@ export function AppIconSettingsScreen({}: Props) {
 				{IS_INTERNAL && gate("debug_subscriptions") && (
 					<>
 						<Text style={[a.text_md, a.mt_xl, a.mb_sm, a.font_bold, t.atoms.text_contrast_medium]}>
-							<Trans>Bluesky+</Trans>
+							<>Bluesky+</>
 						</Text>
 						<Group label={_(msg`Bluesky+ icons`)} value={currentAppIcon} onChange={onSetAppIcon}>
 							{sets.core.map((icon, i) => (

@@ -154,7 +154,7 @@ export function QrCodeDialog({
 											onPress={isWeb ? onCopyPress : onSharePress}
 										>
 											<ButtonText>
-												{isWeb ? <Trans>Copy</Trans> : <Trans>Share</Trans>}
+												{isWeb ? <>Copy</> : <>Share</>}
 											</ButtonText>
 										</Button>
 										<Button
@@ -165,7 +165,7 @@ export function QrCodeDialog({
 											onPress={onSavePress}
 										>
 											<ButtonText>
-												<Trans>Save</Trans>
+												<>Save</>
 											</ButtonText>
 										</Button>
 									</View>

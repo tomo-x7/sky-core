@@ -17,7 +17,7 @@ export function SettingsListItem() {
 			<SettingsList.ItemIcon icon={Shapes} />
 			<View style={[a.flex_1]}>
 				<SettingsList.ItemText style={[a.pt_xs, a.pb_md]}>
-					<Trans>App Icon</Trans>
+					<>App Icon</>
 				</SettingsList.ItemText>
 				<AppIconImage icon={icon} size={60} />
 			</View>

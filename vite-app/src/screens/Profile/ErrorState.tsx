@@ -28,13 +28,13 @@ export function ErrorState({ error }: { error: string }) {
 			<CircleInfo width={48} style={[t.atoms.text_contrast_low]} />
 
 			<Text style={[a.text_xl, a.font_bold, a.pb_md, a.pt_xl]}>
-				<Trans>Hmmmm, we couldn't load that moderation service.</Trans>
+				<>Hmmmm, we couldn't load that moderation service.</>
 			</Text>
 			<Text style={[a.text_md, a.leading_normal, a.pb_md, t.atoms.text_contrast_medium]}>
-				<Trans>
+				<>
 					This moderation service is unavailable. See below for more details. If this issue persists, contact
 					us.
-				</Trans>
+				</>
 			</Text>
 			<View style={[a.relative, a.py_md, a.px_lg, a.rounded_md, a.mb_2xl, t.atoms.bg_contrast_25]}>
 				<Text style={[a.text_md, a.leading_normal]}>{error}</Text>
@@ -50,7 +50,7 @@ export function ErrorState({ error }: { error: string }) {
 					onPress={onPressBack}
 				>
 					<ButtonText>
-						<Trans>Go Back</Trans>
+						<>Go Back</>
 					</ButtonText>
 				</Button>
 			</View>

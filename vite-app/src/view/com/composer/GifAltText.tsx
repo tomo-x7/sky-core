@@ -93,7 +93,7 @@ export function GifAltTextDialogLoaded({
 					<Plus size="sm" fill={t.palette.white} />
 				)}
 				<Text style={[a.font_bold, { color: t.palette.white }]} accessible={false}>
-					<Trans>ALT</Trans>
+					<>ALT</>
 				</Text>
 			</TouchableOpacity>
 
@@ -144,7 +144,7 @@ function AltTextInner({
 					<View style={[a.gap_sm]}>
 						<View style={[a.relative]}>
 							<TextField.LabelText>
-								<Trans>Descriptive alt text</Trans>
+								<>Descriptive alt text</>
 							</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
@@ -168,9 +168,9 @@ function AltTextInner({
 							<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
 								<CircleInfo fill={t.palette.negative_500} />
 								<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-									<Trans>
+									<>
 										Alt text will be truncated. Limit: {i18n.number(MAX_ALT_TEXT)} characters.
-									</Trans>
+									</>
 								</Text>
 							</View>
 						)}
@@ -188,7 +188,7 @@ function AltTextInner({
 							style={[a.flex_grow]}
 						>
 							<ButtonText>
-								<Trans>Save</Trans>
+								<>Save</>
 							</ButtonText>
 						</Button>
 					</AltTextCounterWrapper>
@@ -196,7 +196,7 @@ function AltTextInner({
 				{/* below the text input to force tab order */}
 				<View>
 					<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-						<Trans>Add alt text</Trans>
+						<>Add alt text</>
 					</Text>
 					<View style={[a.align_center]}>
 						<GifEmbed

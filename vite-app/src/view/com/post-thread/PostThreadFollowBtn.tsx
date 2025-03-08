@@ -112,12 +112,12 @@ function PostThreadFollowBtnLoaded({
 			<ButtonText>
 				{!isFollowing ? (
 					isFollowedBy ? (
-						<Trans>Follow Back</Trans>
+						<>Follow Back</>
 					) : (
-						<Trans>Follow</Trans>
+						<>Follow</>
 					)
 				) : (
-					<Trans>Following</Trans>
+					<>Following</>
 				)}
 			</ButtonText>
 		</Button>

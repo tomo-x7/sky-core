@@ -97,7 +97,7 @@ export function WizardEditListDialog({
 					>
 						<View style={{ width: 60 }} />
 						<Text style={[a.font_bold, a.text_xl]}>
-							{state.currentStep === "Profiles" ? <Trans>Edit People</Trans> : <Trans>Edit Feeds</Trans>}
+							{state.currentStep === "Profiles" ? <>Edit People</> : <>Edit Feeds</>}
 						</Text>
 						<View style={{ width: 60 }}>
 							{isWeb && (
@@ -109,7 +109,7 @@ export function WizardEditListDialog({
 									onPress={() => control.close()}
 								>
 									<ButtonText>
-										<Trans>Close</Trans>
+										<>Close</>
 									</ButtonText>
 								</Button>
 							)}

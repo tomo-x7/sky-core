@@ -404,7 +404,7 @@ let PostDropdownMenuItems = ({
 							onPress={() => sendViaChatControl.open()}
 						>
 							<Menu.ItemText>
-								<Trans>Send via direct message</Trans>
+								<>Send via direct message</>
 							</Menu.ItemText>
 							<Menu.ItemIcon icon={Send} position="right" />
 						</Menu.Item>

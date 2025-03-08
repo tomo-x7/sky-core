@@ -98,7 +98,7 @@ export function GifItem({ thumbnail, alt }: { thumbnail: string; alt?: string })
 			</View>
 			<View style={styles.altContainer}>
 				<Text style={styles.alt}>
-					<Trans>GIF</Trans>
+					GIF
 				</Text>
 			</View>
 		</ImageItem>

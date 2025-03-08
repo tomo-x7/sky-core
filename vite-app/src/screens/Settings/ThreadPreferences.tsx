@@ -36,7 +36,7 @@ export function ThreadPreferencesScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Thread Preferences</Trans>
+						<>Thread Preferences</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -46,11 +46,11 @@ export function ThreadPreferencesScreen({}: Props) {
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={BubblesIcon} />
 						<SettingsList.ItemText>
-							<Trans>Sort replies</Trans>
+							<>Sort replies</>
 						</SettingsList.ItemText>
 						<View style={[a.w_full, a.gap_md]}>
 							<Text style={[a.flex_1, t.atoms.text_contrast_medium]}>
-								<Trans>Sort replies to the same post by:</Trans>
+								<>Sort replies to the same post by:</>
 							</Text>
 							<Toggle.Group
 								label={_(msg`Sort replies by`)}
@@ -62,31 +62,31 @@ export function ThreadPreferencesScreen({}: Props) {
 									<Toggle.Item name="hotness" label={_(msg`Hot replies first`)}>
 										<Toggle.Radio />
 										<Toggle.LabelText>
-											<Trans>Hot replies first</Trans>
+											<>Hot replies first</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="oldest" label={_(msg`Oldest replies first`)}>
 										<Toggle.Radio />
 										<Toggle.LabelText>
-											<Trans>Oldest replies first</Trans>
+											<>Oldest replies first</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="newest" label={_(msg`Newest replies first`)}>
 										<Toggle.Radio />
 										<Toggle.LabelText>
-											<Trans>Newest replies first</Trans>
+											<>Newest replies first</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="most-likes" label={_(msg`Most-liked replies first`)}>
 										<Toggle.Radio />
 										<Toggle.LabelText>
-											<Trans>Most-liked first</Trans>
+											<>Most-liked first</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="random" label={_(msg`Random (aka "Poster's Roulette")`)}>
 										<Toggle.Radio />
 										<Toggle.LabelText>
-											<Trans>Random (aka "Poster's Roulette")</Trans>
+											<>Random (aka "Poster's Roulette")</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 								</View>
@@ -96,7 +96,7 @@ export function ThreadPreferencesScreen({}: Props) {
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={PersonGroupIcon} />
 						<SettingsList.ItemText>
-							<Trans>Prioritize your Follows</Trans>
+							<>Prioritize your Follows</>
 						</SettingsList.ItemText>
 						<Toggle.Item
 							type="checkbox"
@@ -111,7 +111,7 @@ export function ThreadPreferencesScreen({}: Props) {
 							style={[a.w_full, a.gap_md]}
 						>
 							<Toggle.LabelText style={[a.flex_1]}>
-								<Trans>Show replies by people you follow before all other replies</Trans>
+								<>Show replies by people you follow before all other replies</>
 							</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>
@@ -120,7 +120,7 @@ export function ThreadPreferencesScreen({}: Props) {
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={BeakerIcon} />
 						<SettingsList.ItemText>
-							<Trans>Experimental</Trans>
+							<>Experimental</>
 						</SettingsList.ItemText>
 						<Toggle.Item
 							type="checkbox"
@@ -135,7 +135,7 @@ export function ThreadPreferencesScreen({}: Props) {
 							style={[a.w_full, a.gap_md]}
 						>
 							<Toggle.LabelText style={[a.flex_1]}>
-								<Trans>Show replies as threaded</Trans>
+								<>Show replies as threaded</>
 							</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>

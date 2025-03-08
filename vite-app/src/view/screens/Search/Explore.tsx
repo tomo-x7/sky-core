@@ -203,9 +203,9 @@ function LoadMore({
 
 						<Text style={[a.pl_sm, a.leading_snug, hovered ? t.atoms.text : t.atoms.text_contrast_medium]}>
 							{type === "profile" ? (
-								<Trans>Load more suggested follows</Trans>
+								<>Load more suggested follows</>
 							) : (
-								<Trans>Load more suggested feeds</Trans>
+								<>Load more suggested feeds</>
 							)}
 						</Text>
 

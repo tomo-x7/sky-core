@@ -65,7 +65,7 @@ export function SubtitleFilePicker({
 				>
 					<ButtonIcon icon={CCIcon} />
 					<ButtonText>
-						<Trans>Select subtitle file (.vtt)</Trans>
+						<>Select subtitle file (.vtt)</>
 					</ButtonText>
 				</Button>
 			</View>

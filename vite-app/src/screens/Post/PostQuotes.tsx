@@ -35,7 +35,7 @@ export const PostQuotesScreen = ({ route }: Props) => {
 					{post && (
 						<>
 							<Layout.Header.TitleText>
-								<Trans>Quotes</Trans>
+								<>Quotes</>
 							</Layout.Header.TitleText>
 							<Layout.Header.SubtitleText>
 								<Plural value={quoteCount ?? 0} one="# quote" other="# quotes" />

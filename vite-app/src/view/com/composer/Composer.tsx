@@ -866,7 +866,7 @@ function ComposerTopBar({
 					accessibilityHint="Closes post composer and discards post draft"
 				>
 					<ButtonText style={[a.text_md]}>
-						<Trans>Cancel</Trans>
+						<>Cancel</>
 					</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
@@ -1459,7 +1459,7 @@ function ErrorBanner({
 					<NewText
 						style={[{ paddingLeft: 28 }, a.text_xs, a.font_bold, a.leading_snug, t.atoms.text_contrast_low]}
 					>
-						<Trans>Job ID: {videoState.jobId}</Trans>
+						<>Job ID: {videoState.jobId}</>
 					</NewText>
 				)}
 			</View>

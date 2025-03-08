@@ -25,7 +25,7 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 					<Text
 						style={[t.atoms.text_contrast_medium, a.font_bold, a.text_sm, { textTransform: "uppercase" }]}
 					>
-						<Trans>Getting started</Trans>
+						Getting started
 					</Text>
 					<Button
 						variant="ghost"

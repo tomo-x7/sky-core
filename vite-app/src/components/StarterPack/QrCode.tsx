@@ -50,7 +50,7 @@ export const QrCode = React.forwardRef<ViewShot, Props>(function QrCode({ starte
 				</View>
 				<View style={[a.gap_xl, a.align_center]}>
 					<Text style={[a.font_bold, a.text_center, { color: "white", fontSize: 18 }]}>
-						<Trans>Join the conversation</Trans>
+						<>Join the conversation</>
 					</Text>
 					<View style={[a.rounded_sm, a.overflow_hidden]}>
 						<QrCodeInner link={link} />
@@ -65,7 +65,7 @@ export const QrCode = React.forwardRef<ViewShot, Props>(function QrCode({ starte
 							{ color: "white", fontSize: 18, gap: 6 },
 						]}
 					>
-						<Trans>
+						<>
 							on
 							<View style={[a.flex_row, a.align_center, { gap: 6 }]}>
 								<Logo width={25} fill="white" />
@@ -73,7 +73,7 @@ export const QrCode = React.forwardRef<ViewShot, Props>(function QrCode({ starte
 									<Logotype width={72} fill="white" />
 								</View>
 							</View>
-						</Trans>
+						</>
 					</Text>
 				</View>
 			</LinearGradientBackground>

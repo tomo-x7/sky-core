@@ -97,7 +97,7 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 							/>
 
 							<Text style={[t.atoms.text_contrast_medium]}>
-								<Trans>Error:</Trans> {error}
+								<>Error:</> {error}
 							</Text>
 						</>
 					)}
@@ -369,11 +369,11 @@ function SearchLanguageDropdown({
 			</Menu.Trigger>
 			<Menu.Outer>
 				<Menu.LabelText>
-					<Trans>Filter search by language</Trans>
+					<>Filter search by language</>
 				</Menu.LabelText>
 				<Menu.Item label={_(msg`All languages`)} onPress={() => onChange("")}>
 					<Menu.ItemText>
-						<Trans>All languages</Trans>
+						<>All languages</>
 					</Menu.ItemText>
 					<Menu.ItemRadio selected={value === ""} />
 				</Menu.Item>
@@ -511,7 +511,7 @@ let SearchScreenInner = ({
 				{gtTablet && (
 					<View style={[a.border_b, t.atoms.border_contrast_low, a.px_lg, a.pt_sm, a.pb_lg]}>
 						<Text style={[a.text_2xl, a.font_heavy]}>
-							<Trans>Search</Trans>
+							<>Search</>
 						</Text>
 					</View>
 				)}
@@ -523,7 +523,7 @@ let SearchScreenInner = ({
 						style={t.atoms.text_contrast_medium as StyleProp<ViewStyle>}
 					/>
 					<Text style={[t.atoms.text_contrast_medium, a.text_md]}>
-						<Trans>Find posts, users, and feeds on Bluesky</Trans>
+						<>Find posts, users, and feeds on Bluesky</>
 					</Text>
 				</View>
 			</View>
@@ -773,7 +773,7 @@ export function SearchScreenShell({
 								{navButton === "menu" ? <Layout.Header.MenuButton /> : <Layout.Header.BackButton />}
 								<Layout.Header.Content align="left">
 									<Layout.Header.TitleText>
-										<Trans>Search</Trans>
+										<>Search</>
 									</Layout.Header.TitleText>
 								</Layout.Header.Content>
 								{showFilters ? (
@@ -810,7 +810,7 @@ export function SearchScreenShell({
 										hitSlop={HITSLOP_10}
 									>
 										<ButtonText>
-											<Trans>Cancel</Trans>
+											<>Cancel</>
 										</ButtonText>
 									</Button>
 								)}
@@ -936,7 +936,7 @@ function SearchHistory({
 			<View style={[a.w_full, a.px_md]}>
 				{(searchHistory.length > 0 || selectedProfiles.length > 0) && (
 					<Text style={[a.text_md, a.font_bold, a.p_md]}>
-						<Trans>Recent Searches</Trans>
+						<>Recent Searches</>
 					</Text>
 				)}
 				{selectedProfiles.length > 0 && (

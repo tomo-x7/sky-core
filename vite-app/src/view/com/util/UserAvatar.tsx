@@ -342,7 +342,7 @@ let EditableUserAvatar = ({
 							onPress={onOpenCamera}
 						>
 							<Menu.ItemText>
-								<Trans>Upload from Camera</Trans>
+								<>Upload from Camera</>
 							</Menu.ItemText>
 							<Menu.ItemIcon icon={Camera} />
 						</Menu.Item>
@@ -354,7 +354,7 @@ let EditableUserAvatar = ({
 						onPress={onOpenLibrary}
 					>
 						<Menu.ItemText>
-							{isNative ? <Trans>Upload from Library</Trans> : <Trans>Upload from Files</Trans>}
+							{isNative ? <>Upload from Library</> : <>Upload from Files</>}
 						</Menu.ItemText>
 						<Menu.ItemIcon icon={Library} />
 					</Menu.Item>
@@ -369,7 +369,7 @@ let EditableUserAvatar = ({
 								onPress={onRemoveAvatar}
 							>
 								<Menu.ItemText>
-									<Trans>Remove Avatar</Trans>
+									<>Remove Avatar</>
 								</Menu.ItemText>
 								<Menu.ItemIcon icon={Trash} />
 							</Menu.Item>

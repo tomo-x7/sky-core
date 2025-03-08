@@ -160,7 +160,7 @@ let ProfileHeaderLabeler = ({
 								style={a.rounded_full}
 							>
 								<ButtonText>
-									<Trans>Edit Profile</Trans>
+									<>Edit Profile</>
 								</ButtonText>
 							</Button>
 							<EditProfileDialog profile={profile} control={editProfileControl} />
@@ -205,9 +205,9 @@ let ProfileHeaderLabeler = ({
 											]}
 										>
 											{isSubscribed ? (
-												<Trans>Unsubscribe</Trans>
+												<>Unsubscribe</>
 											) : (
-												<Trans>Subscribe to Labeler</Trans>
+												<>Subscribe to Labeler</>
 											)}
 										</Text>
 									</View>
@@ -280,9 +280,9 @@ let ProfileHeaderLabeler = ({
 													(hovered || focused || pressed) && t.atoms.text_contrast_high,
 												]}
 											>
-												<Trans>
+												<>
 													Liked by <Plural value={likeCount} one="# user" other="# users" />
-												</Trans>
+												</>
 											</Text>
 										)}
 									</Link>
@@ -312,9 +312,9 @@ function CantSubscribePrompt({
 		<Prompt.Outer control={control}>
 			<Prompt.TitleText>Unable to subscribe</Prompt.TitleText>
 			<Prompt.DescriptionText>
-				<Trans>
+				<>
 					We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty.
-				</Trans>
+				</>
 			</Prompt.DescriptionText>
 			<Prompt.Actions>
 				<Prompt.Action onPress={() => control.close()} cta={_(msg`OK`)} />

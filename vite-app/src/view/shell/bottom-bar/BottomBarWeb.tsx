@@ -196,7 +196,7 @@ export function BottomBarWeb() {
 								color="primary"
 							>
 								<ButtonText>
-									<Trans>Create account</Trans>
+									<>Create account</>
 								</ButtonText>
 							</Button>
 							<Button
@@ -207,7 +207,7 @@ export function BottomBarWeb() {
 								color="secondary"
 							>
 								<ButtonText>
-									<Trans>Sign in</Trans>
+									<>Sign in</>
 								</ButtonText>
 							</Button>
 						</View>

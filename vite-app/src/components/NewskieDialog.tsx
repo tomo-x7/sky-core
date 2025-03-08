@@ -95,19 +95,19 @@ export function NewskieDialog({
 								<Newskie width={64} height={64} fill="#FFC404" style={[a.absolute, a.inset_0]} />
 							</View>
 							<Text style={[a.font_bold, a.text_xl]}>
-								{isMe ? <Trans>Welcome, friend!</Trans> : <Trans>Say hello!</Trans>}
+								{isMe ? <>Welcome, friend!</> : <>Say hello!</>}
 							</Text>
 						</View>
 						<Text style={[a.text_md, a.text_center, a.leading_snug]}>
 							{profile.joinedViaStarterPack ? (
-								<Trans>
+								<>
 									{profileName} joined Bluesky using a starter pack{" "}
 									{timeAgo(createdAt, now, { format: "long" })} ago
-								</Trans>
+								</>
 							) : (
-								<Trans>
+								<>
 									{profileName} joined Bluesky {timeAgo(createdAt, now, { format: "long" })} ago
-								</Trans>
+								</>
 							)}
 						</Text>
 						{profile.joinedViaStarterPack ? (
@@ -142,7 +142,7 @@ export function NewskieDialog({
 								onPress={() => control.close()}
 							>
 								<ButtonText>
-									<Trans>Close</Trans>
+									Close
 								</ButtonText>
 							</Button>
 						)}

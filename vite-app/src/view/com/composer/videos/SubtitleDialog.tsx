@@ -49,7 +49,7 @@ export function SubtitleDialogBtn(props: Props) {
 				}}
 			>
 				<ButtonIcon icon={CCIcon} />
-				<ButtonText>{isWeb ? <Trans>Captions & alt text</Trans> : <Trans>Alt text</Trans>}</ButtonText>
+				<ButtonText>{isWeb ? <>Captions & alt text</> : <>Alt text</>}</ButtonText>
 			</Button>
 			<Dialog.Outer control={control}>
 				<Dialog.Handle />
@@ -87,7 +87,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 		<Dialog.ScrollableInner label={_(msg`Video settings`)}>
 			<View style={a.gap_md}>
 				<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>
-					<Trans>Alt text</Trans>
+					<>Alt text</>
 				</Text>
 				<TextField.Root>
 					<Dialog.Input
@@ -111,7 +111,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 					<>
 						<View style={[a.border_t, a.w_full, t.atoms.border_contrast_medium, a.my_md]} />
 						<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>
-							<Trans>Captions (.vtt)</Trans>
+							<>Captions (.vtt)</>
 						</Text>
 						<SubtitleFilePicker
 							onSelectFile={handleSelectFile}
@@ -135,7 +135,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 						</View>
 						{subtitleMissingLanguage && (
 							<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
-								<Trans>Ensure you have selected a language for each subtitle file.</Trans>
+								<>Ensure you have selected a language for each subtitle file.</>
 							</Text>
 						)}
 					</>
@@ -154,7 +154,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 						style={a.mt_lg}
 					>
 						<ButtonText>
-							<Trans>Done</Trans>
+							<>Done</>
 						</ButtonText>
 					</Button>
 				</View>

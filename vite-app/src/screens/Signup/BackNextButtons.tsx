@@ -39,7 +39,7 @@ export function BackNextButtons({
 				onPress={onBackPress}
 			>
 				<ButtonText>
-					<Trans>Back</Trans>
+					<>Back</>
 				</ButtonText>
 			</Button>
 			{!hideNext &&
@@ -52,7 +52,7 @@ export function BackNextButtons({
 						onPress={onRetryPress}
 					>
 						<ButtonText>
-							<Trans>Retry</Trans>
+							<>Retry</>
 						</ButtonText>
 						{isLoading && <ButtonIcon icon={Loader} />}
 					</Button>
@@ -66,7 +66,7 @@ export function BackNextButtons({
 						disabled={isLoading || isNextDisabled}
 						onPress={onNextPress}
 					>
-						<ButtonText>{overrideNextText ? overrideNextText : <Trans>Next</Trans>}</ButtonText>
+						<ButtonText>{overrideNextText ? overrideNextText : <>Next</>}</ButtonText>
 						{isLoading && <ButtonIcon icon={Loader} />}
 					</Button>
 				))}

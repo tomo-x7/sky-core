@@ -143,7 +143,7 @@ function VideoError({ retry }: { error: unknown; retry: () => void }) {
 	return (
 		<VideoFallback.Container>
 			<VideoFallback.Text>
-				<Trans>An error occurred while loading the video. Please try again later.</Trans>
+				<>An error occurred while loading the video. Please try again later.</>
 			</VideoFallback.Text>
 			<VideoFallback.RetryButton onPress={retry} />
 		</VideoFallback.Container>

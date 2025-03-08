@@ -158,7 +158,7 @@ function WhoCanReplyDialog({
 			>
 				<View style={[a.gap_sm]}>
 					<Text style={[a.font_bold, a.text_xl, a.pb_sm]}>
-						<Trans>Who can interact with this post?</Trans>
+						Who can interact with this post?
 					</Text>
 					<Rules post={post} settings={settings} embeddingDisabled={embeddingDisabled} />
 				</View>
@@ -182,13 +182,13 @@ function Rules({
 		<>
 			<Text style={[a.text_sm, a.leading_snug, a.flex_wrap, t.atoms.text_contrast_medium]}>
 				{settings.length === 0 ? (
-					<Trans>This post has an unknown type of threadgate on it. Your app may be out of date.</Trans>
+					<>This post has an unknown type of threadgate on it. Your app may be out of date.</>
 				) : settings[0].type === "everybody" ? (
-					<Trans>Everybody can reply to this post.</Trans>
+					<>Everybody can reply to this post.</>
 				) : settings[0].type === "nobody" ? (
-					<Trans>Replies to this post are disabled.</Trans>
+					<>Replies to this post are disabled.</>
 				) : (
-					<Trans>
+					<>
 						Only{" "}
 						{settings.map((rule, i) => (
 							<React.Fragment key={`rule-${i}`}>
@@ -197,12 +197,12 @@ function Rules({
 							</React.Fragment>
 						))}{" "}
 						can reply.
-					</Trans>
+					</>
 				)}{" "}
 			</Text>
 			{embeddingDisabled && (
 				<Text style={[a.text_sm, a.leading_snug, a.flex_wrap, t.atoms.text_contrast_medium]}>
-					<Trans>No one but the author can quote this post.</Trans>
+					No one but the author can quote this post.
 				</Text>
 			)}
 		</>
@@ -219,11 +219,11 @@ function Rule({
 	lists: AppBskyGraphDefs.ListViewBasic[] | undefined;
 }) {
 	if (rule.type === "mention") {
-		return <Trans>mentioned users</Trans>;
+		return <>mentioned users</>;
 	}
 	if (rule.type === "followers") {
 		return (
-			<Trans>
+			<>
 				users following{" "}
 				<InlineLinkText
 					label={`@${post.author.handle}`}
@@ -232,12 +232,12 @@ function Rule({
 				>
 					@{post.author.handle}
 				</InlineLinkText>
-			</Trans>
+			</>
 		);
 	}
 	if (rule.type === "following") {
 		return (
-			<Trans>
+			<>
 				users followed by{" "}
 				<InlineLinkText
 					label={`@${post.author.handle}`}
@@ -246,7 +246,7 @@ function Rule({
 				>
 					@{post.author.handle}
 				</InlineLinkText>
-			</Trans>
+			</>
 		);
 	}
 	if (rule.type === "list") {
@@ -254,7 +254,7 @@ function Rule({
 		if (list) {
 			const listUrip = new AtUri(list.uri);
 			return (
-				<Trans>
+				<>
 					<InlineLinkText
 						label={list.name}
 						to={makeListLink(listUrip.hostname, listUrip.rkey)}
@@ -263,7 +263,7 @@ function Rule({
 						{list.name}
 					</InlineLinkText>{" "}
 					members
-				</Trans>
+				</>
 			);
 		}
 	}
@@ -276,7 +276,7 @@ function Separator({ i, length }: { i: number; length: number }) {
 	if (i === length - 2) {
 		return (
 			<>
-				{length > 2 ? "," : ""} <Trans>and</Trans>{" "}
+				{length > 2 ? "," : ""} and{" "}
 			</>
 		);
 	}

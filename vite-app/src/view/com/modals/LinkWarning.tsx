@@ -51,26 +51,26 @@ export function Component({
 						<>
 							<FontAwesomeIcon icon="circle-exclamation" color={pal.colors.text} size={18} />
 							<Text type="title-lg" style={[pal.text, styles.title]}>
-								<Trans>Potentially Misleading Link</Trans>
+								<>Potentially Misleading Link</>
 							</Text>
 						</>
 					) : (
 						<Text type="title-lg" style={[pal.text, styles.title]}>
-							<Trans>Leaving Bluesky</Trans>
+							<>Leaving Bluesky</>
 						</Text>
 					)}
 				</View>
 
 				<View style={{ gap: 10 }}>
 					<Text type="lg" style={pal.text}>
-						<Trans>This link is taking you to the following website:</Trans>
+						<>This link is taking you to the following website:</>
 					</Text>
 
 					<LinkBox href={href} />
 
 					{potentiallyMisleading && (
 						<Text type="lg" style={pal.text}>
-							<Trans>Make sure this is where you intend to go!</Trans>
+							<>Make sure this is where you intend to go!</>
 						</Text>
 					)}
 				</View>

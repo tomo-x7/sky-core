@@ -218,7 +218,7 @@ let ProfileMenu = ({
 							}}
 						>
 							<Menu.ItemText>
-								<Trans>Share</Trans>
+								<>Share</>
 							</Menu.ItemText>
 							<Menu.ItemIcon icon={Share} />
 						</Menu.Item>
@@ -228,7 +228,7 @@ let ProfileMenu = ({
 							onPress={onPressSearch}
 						>
 							<Menu.ItemText>
-								<Trans>Search posts</Trans>
+								<>Search posts</>
 							</Menu.ItemText>
 							<Menu.ItemIcon icon={SearchIcon} />
 						</Menu.Item>
@@ -248,9 +248,9 @@ let ProfileMenu = ({
 											>
 												<Menu.ItemText>
 													{isFollowing ? (
-														<Trans>Unfollow account</Trans>
+														<>Unfollow account</>
 													) : (
-														<Trans>Follow account</Trans>
+														<>Follow account</>
 													)}
 												</Menu.ItemText>
 												<Menu.ItemIcon icon={isFollowing ? UserMinus : Plus} />
@@ -264,7 +264,7 @@ let ProfileMenu = ({
 									onPress={onPressAddRemoveLists}
 								>
 									<Menu.ItemText>
-										<Trans>Add to lists</Trans>
+										<>Add to lists</>
 									</Menu.ItemText>
 									<Menu.ItemIcon icon={List} />
 								</Menu.Item>
@@ -282,9 +282,9 @@ let ProfileMenu = ({
 											>
 												<Menu.ItemText>
 													{profile.viewer?.muted ? (
-														<Trans>Unmute account</Trans>
+														<>Unmute account</>
 													) : (
-														<Trans>Mute account</Trans>
+														<>Mute account</>
 													)}
 												</Menu.ItemText>
 												<Menu.ItemIcon icon={profile.viewer?.muted ? Unmute : Mute} />
@@ -298,9 +298,9 @@ let ProfileMenu = ({
 											>
 												<Menu.ItemText>
 													{profile.viewer?.blocking ? (
-														<Trans>Unblock account</Trans>
+														<>Unblock account</>
 													) : (
-														<Trans>Block account</Trans>
+														<>Block account</>
 													)}
 												</Menu.ItemText>
 												<Menu.ItemIcon
@@ -314,7 +314,7 @@ let ProfileMenu = ({
 											onPress={onPressReportAccount}
 										>
 											<Menu.ItemText>
-												<Trans>Report account</Trans>
+												<>Report account</>
 											</Menu.ItemText>
 											<Menu.ItemIcon icon={Flag} />
 										</Menu.Item>
@@ -333,7 +333,7 @@ let ProfileMenu = ({
 									onPress={onPressShareATUri}
 								>
 									<Menu.ItemText>
-										<Trans>Copy at:// URI</Trans>
+										<>Copy at:// URI</>
 									</Menu.ItemText>
 									<Menu.ItemIcon icon={Share} />
 								</Menu.Item>
@@ -343,7 +343,7 @@ let ProfileMenu = ({
 									onPress={onPressShareDID}
 								>
 									<Menu.ItemText>
-										<Trans>Copy DID</Trans>
+										<>Copy DID</>
 									</Menu.ItemText>
 									<Menu.ItemIcon icon={Share} />
 								</Menu.Item>

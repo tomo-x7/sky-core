@@ -117,16 +117,16 @@ export function Deactivated() {
 
 					<View style={[a.gap_xs, a.pb_3xl]}>
 						<Text style={[a.text_xl, a.font_bold, a.leading_snug]}>
-							<Trans>Welcome back!</Trans>
+							<>Welcome back!</>
 						</Text>
 						<Text style={[a.text_sm, a.leading_snug]}>
-							<Trans>You previously deactivated @{currentAccount?.handle}.</Trans>
+							<>You previously deactivated @{currentAccount?.handle}.</>
 						</Text>
 						<Text style={[a.text_sm, a.leading_snug, a.pb_md]}>
-							<Trans>
+							<>
 								You can reactivate your account to continue logging in. Your profile and posts will be
 								visible to other users.
-							</Trans>
+							</>
 						</Text>
 
 						<View style={[a.gap_sm]}>
@@ -138,7 +138,7 @@ export function Deactivated() {
 								onPress={handleActivate}
 							>
 								<ButtonText>
-									<Trans>Yes, reactivate my account</Trans>
+									<>Yes, reactivate my account</>
 								</ButtonText>
 								{pending && <ButtonIcon icon={Loader} position="right" />}
 							</Button>
@@ -150,7 +150,7 @@ export function Deactivated() {
 								onPress={onPressLogout}
 							>
 								<ButtonText>
-									<Trans>Cancel</Trans>
+									<>Cancel</>
 								</ButtonText>
 							</Button>
 						</View>
@@ -170,7 +170,7 @@ export function Deactivated() {
 					{hasOtherAccounts ? (
 						<>
 							<Text style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
-								<Trans>Or, sign in to one of your other accounts.</Trans>
+								<>Or, sign in to one of your other accounts.</>
 							</Text>
 							<AccountList
 								onSelectAccount={onSelectAccount}
@@ -182,7 +182,7 @@ export function Deactivated() {
 					) : (
 						<>
 							<Text style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
-								<Trans>Or, continue with another account.</Trans>
+								<>Or, continue with another account.</>
 							</Text>
 							<Button
 								label={_(msg`Sign in or sign up`)}
@@ -192,7 +192,7 @@ export function Deactivated() {
 								onPress={() => setShowLoggedOut(true)}
 							>
 								<ButtonText>
-									<Trans>Sign in or sign up</Trans>
+									<>Sign in or sign up</>
 								</ButtonText>
 							</Button>
 						</>

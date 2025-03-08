@@ -77,16 +77,16 @@ export function PwiOptOut() {
 				style={[a.w_full]}
 			>
 				<Toggle.LabelText style={[a.flex_1]}>
-					<Trans>Discourage apps from showing my account to logged-out users</Trans>
+					<>Discourage apps from showing my account to logged-out users</>
 				</Toggle.LabelText>
 				<Toggle.Platform />
 			</Toggle.Item>
 
 			<Text style={[a.leading_snug, t.atoms.text_contrast_high]}>
-				<Trans>
+				<>
 					Bluesky will not show your profile and posts to logged-out users. Other apps may not honor this
 					request. This does not make your account private.
-				</Trans>
+				</>
 			</Text>
 		</View>
 	);

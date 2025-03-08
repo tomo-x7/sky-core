@@ -86,15 +86,15 @@ let DrawerProfileCard = ({
 				</Text>
 			</View>
 			<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-				<Trans>
+				<>
 					<Text style={[a.text_md, a.font_bold]}>{formatCount(i18n, profile?.followersCount ?? 0)}</Text>{" "}
 					<Plural value={profile?.followersCount || 0} one="follower" other="followers" />
-				</Trans>{" "}
+				</>{" "}
 				&middot;{" "}
-				<Trans>
+				<>
 					<Text style={[a.text_md, a.font_bold]}>{formatCount(i18n, profile?.followsCount ?? 0)}</Text>{" "}
 					<Plural value={profile?.followsCount || 0} one="following" other="following" />
-				</Trans>
+				</>
 			</Text>
 		</TouchableOpacity>
 	);
@@ -269,7 +269,7 @@ let DrawerFooter = ({
 			>
 				<ButtonIcon icon={Message} position="left" />
 				<ButtonText>
-					<Trans>Feedback</Trans>
+					<>Feedback</>
 				</ButtonText>
 			</Button>
 			<Button
@@ -283,7 +283,7 @@ let DrawerFooter = ({
 				}}
 			>
 				<ButtonText>
-					<Trans>Help</Trans>
+					<>Help</>
 				</ButtonText>
 			</Button>
 		</View>
@@ -557,18 +557,18 @@ function ExtraLinks() {
 				label={_(msg`Terms of Service`)}
 				to="https://bsky.social/about/support/tos"
 			>
-				<Trans>Terms of Service</Trans>
+				<>Terms of Service</>
 			</InlineLinkText>
 			<InlineLinkText
 				style={[a.text_md]}
 				to="https://bsky.social/about/support/privacy-policy"
 				label={_(msg`Privacy Policy`)}
 			>
-				<Trans>Privacy Policy</Trans>
+				<>Privacy Policy</>
 			</InlineLinkText>
 			{kawaii && (
 				<Text style={t.atoms.text_contrast_medium}>
-					<Trans>
+					<>
 						Logo by{" "}
 						<InlineLinkText
 							style={[a.text_md]}
@@ -577,7 +577,7 @@ function ExtraLinks() {
 						>
 							@sawaratsuki.bsky.social
 						</InlineLinkText>
-					</Trans>
+					</>
 				</Text>
 			)}
 		</View>

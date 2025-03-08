@@ -201,7 +201,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 									<View style={[a.pt_3xl, a.align_center]}>
 										<CircleInfo width={48} fill={t.atoms.text_contrast_low.color} />
 										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-											<Trans>Whoops!</Trans>
+											<>Whoops!</>
 										</Text>
 										<Text
 											style={[
@@ -224,7 +224,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 											onPress={() => refetch()}
 										>
 											<ButtonText>
-												<Trans>Retry</Trans>
+												<>Retry</>
 											</ButtonText>
 											<ButtonIcon icon={Retry} position="right" />
 										</Button>
@@ -235,7 +235,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 									<View style={[a.pt_3xl, a.align_center]}>
 										<Message width={48} fill={t.palette.primary_500} />
 										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-											<Trans>Nothing here</Trans>
+											<>Nothing here</>
 										</Text>
 										<Text
 											style={[
@@ -246,7 +246,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 												t.atoms.text_contrast_medium,
 											]}
 										>
-											<Trans>You have no conversations yet. Start one!</Trans>
+											<>You have no conversations yet. Start one!</>
 										</Text>
 									</View>
 								</>
@@ -315,7 +315,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 				<>
 					<Layout.Header.Content>
 						<Layout.Header.TitleText>
-							<Trans>Chats</Trans>
+							<>Chats</>
 						</Layout.Header.TitleText>
 					</Layout.Header.Content>
 
@@ -330,7 +330,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 						>
 							<ButtonIcon icon={Plus} position="left" />
 							<ButtonText>
-								<Trans>New chat</Trans>
+								<>New chat</>
 							</ButtonText>
 						</Button>
 					</View>
@@ -340,7 +340,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 					<Layout.Header.MenuButton />
 					<Layout.Header.Content>
 						<Layout.Header.TitleText>
-							<Trans>Chats</Trans>
+							<>Chats</>
 						</Layout.Header.TitleText>
 					</Layout.Header.Content>
 					<Layout.Header.Slot>{settingsLink}</Layout.Header.Slot>

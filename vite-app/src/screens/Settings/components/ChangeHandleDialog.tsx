@@ -75,7 +75,7 @@ function ChangeHandleDialogInner() {
 				style={[a.rounded_full]}
 			>
 				<ButtonText style={[a.text_md]}>
-					<Trans>Cancel</Trans>
+					<>Cancel</>
 				</ButtonText>
 			</Button>
 		),
@@ -88,7 +88,7 @@ function ChangeHandleDialogInner() {
 			header={
 				<Dialog.Header renderLeft={cancelButton}>
 					<Dialog.HeaderText>
-						<Trans>Change Handle</Trans>
+						<>Change Handle</>
 					</Dialog.HeaderText>
 				</Dialog.Header>
 			}
@@ -179,7 +179,7 @@ function ProvidedHandlePage({
 				<Animated.View layout={native(LinearTransition)} style={[a.flex_1, a.gap_md]}>
 					<View>
 						<TextField.LabelText>
-							<Trans>New handle</Trans>
+							<>New handle</>
 						</TextField.LabelText>
 						<TextField.Root isInvalid={isInvalid}>
 							<TextField.Icon icon={AtIcon} />
@@ -198,10 +198,10 @@ function ProvidedHandlePage({
 						</TextField.Root>
 					</View>
 					<Text>
-						<Trans>
+						<>
 							Your full handle will be{" "}
 							<Text style={[a.font_bold]}>@{createFullHandle(subdomain, host)}</Text>
-						</Trans>
+						</>
 					</Text>
 					<Button
 						label={_(msg`Save new handle`)}
@@ -219,12 +219,12 @@ function ProvidedHandlePage({
 							<ButtonIcon icon={Loader} />
 						) : (
 							<ButtonText>
-								<Trans>Save</Trans>
+								<>Save</>
 							</ButtonText>
 						)}
 					</Button>
 					<Text style={[a.leading_snug]}>
-						<Trans>
+						<>
 							If you have your own domain, you can use that as your handle. This lets you self-verify your
 							identity.{" "}
 							<InlineLinkText
@@ -235,7 +235,7 @@ function ProvidedHandlePage({
 							>
 								Learn more here.
 							</InlineLinkText>
-						</Trans>
+						</>
 					</Text>
 					<Button
 						label={_(msg`I have my own domain`)}
@@ -245,7 +245,7 @@ function ProvidedHandlePage({
 						onPress={goToOwnHandle}
 					>
 						<ButtonText>
-							<Trans>I have my own domain</Trans>
+							<>I have my own domain</>
 						</ButtonText>
 						<ButtonIcon icon={ArrowRightIcon} position="right" />
 					</Button>
@@ -315,9 +315,9 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 				<Animated.View entering={FadeIn} exiting={FadeOut}>
 					<Admonition type="error">
 						{verifyError instanceof DidMismatchError ? (
-							<Trans>Wrong DID returned from server. Received: {verifyError.did}</Trans>
+							<>Wrong DID returned from server. Received: {verifyError.did}</>
 						) : (
-							<Trans>Failed to verify handle. Please try again.</Trans>
+							<>Failed to verify handle. Please try again.</>
 						)}
 					</Admonition>
 				</Animated.View>
@@ -325,7 +325,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 			<Animated.View layout={native(LinearTransition)} style={[a.flex_1, a.gap_md, a.overflow_hidden]}>
 				<View>
 					<TextField.LabelText>
-						<Trans>Enter the domain you want to use</Trans>
+						<>Enter the domain you want to use</>
 					</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={AtIcon} />
@@ -350,19 +350,19 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 				>
 					<ToggleButton.Button name="dns" label={_(msg`DNS Panel`)}>
 						<ToggleButton.ButtonText>
-							<Trans>DNS Panel</Trans>
+							<>DNS Panel</>
 						</ToggleButton.ButtonText>
 					</ToggleButton.Button>
 					<ToggleButton.Button name="file" label={_(msg`No DNS Panel`)}>
 						<ToggleButton.ButtonText>
-							<Trans>No DNS Panel</Trans>
+							<>No DNS Panel</>
 						</ToggleButton.ButtonText>
 					</ToggleButton.Button>
 				</ToggleButton.Group>
 				{dnsPanel ? (
 					<>
 						<Text>
-							<Trans>Add the following DNS record to your domain:</Trans>
+							<>Add the following DNS record to your domain:</>
 						</Text>
 						<View
 							style={[
@@ -374,7 +374,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							]}
 						>
 							<Text style={[t.atoms.text_contrast_medium]}>
-								<Trans>Host:</Trans>
+								<>Host:</>
 							</Text>
 							<View style={[a.py_xs]}>
 								<CopyButton
@@ -390,13 +390,13 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								</CopyButton>
 							</View>
 							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>
-								<Trans>Type:</Trans>
+								<>Type:</>
 							</Text>
 							<View style={[a.py_xs]}>
 								<Text style={[a.text_md]}>TXT</Text>
 							</View>
 							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>
-								<Trans>Value:</Trans>
+								<>Value:</>
 							</Text>
 							<View style={[a.py_xs]}>
 								<CopyButton
@@ -413,7 +413,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							</View>
 						</View>
 						<Text>
-							<Trans>This should create a domain record at:</Trans>
+							<>This should create a domain record at:</>
 						</Text>
 						<View
 							style={[
@@ -430,7 +430,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 				) : (
 					<>
 						<Text>
-							<Trans>Upload a text file to:</Trans>
+							<>Upload a text file to:</>
 						</Text>
 						<View
 							style={[
@@ -444,7 +444,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							<Text style={[a.text_md]}>https://{domain}/.well-known/atproto-did</Text>
 						</View>
 						<Text>
-							<Trans>That contains the following:</Trans>
+							<>That contains the following:</>
 						</Text>
 						<CopyButton
 							value={currentAccount?.did ?? ""}
@@ -468,12 +468,12 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 			<Animated.View layout={native(LinearTransition)}>
 				{currentAccount?.handle?.endsWith(".bsky.social") && (
 					<Admonition type="info" style={[a.mb_md]}>
-						<Trans>
+						<>
 							Your current handle{" "}
 							<Text style={[a.font_bold]}>{sanitizeHandle(currentAccount?.handle || "", "@")}</Text> will
 							automatically remain reserved for you. You can switch back to it at any time from this
 							account.
-						</Trans>
+						</>
 					</Admonition>
 				)}
 				<Button
@@ -501,11 +501,11 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					) : (
 						<ButtonText>
 							{isVerified ? (
-								<Trans>Update to {domain}</Trans>
+								<>Update to {domain}</>
 							) : dnsPanel ? (
-								<Trans>Verify DNS Record</Trans>
+								<>Verify DNS Record</>
 							) : (
-								<Trans>Verify Text File</Trans>
+								<>Verify Text File</>
 							)}
 						</ButtonText>
 					)}
@@ -522,7 +522,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 				>
 					<ButtonIcon icon={ArrowLeftIcon} position="left" />
 					<ButtonText>
-						<Trans>Nevermind, create a handle for me</Trans>
+						<>Nevermind, create a handle for me</>
 					</ButtonText>
 				</Button>
 			</Animated.View>

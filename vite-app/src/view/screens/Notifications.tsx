@@ -108,7 +108,7 @@ export function NotificationsScreen({}: Props) {
 				<Layout.Header.MenuButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Notifications</Trans>
+						<>Notifications</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot>

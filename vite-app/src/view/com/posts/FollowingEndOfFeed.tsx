@@ -33,21 +33,21 @@ export function FollowingEndOfFeed() {
 		<View style={[styles.container, pal.border, { minHeight: Dimensions.get("window").height * 0.75 }]}>
 			<View style={styles.inner}>
 				<Text type="xl-medium" style={[s.textCenter, pal.text]}>
-					<Trans>You've reached the end of your feed! Find some more accounts to follow.</Trans>
+					<>You've reached the end of your feed! Find some more accounts to follow.</>
 				</Text>
 				<Button type="inverted" style={styles.emptyBtn} onPress={onPressFindAccounts}>
 					<Text type="lg-medium" style={palInverted.text}>
-						<Trans>Find accounts to follow</Trans>
+						<>Find accounts to follow</>
 					</Text>
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 				</Button>
 
 				<Text type="xl-medium" style={[s.textCenter, pal.text, s.mt20]}>
-					<Trans>You can also discover new Custom Feeds to follow.</Trans>
+					<>You can also discover new Custom Feeds to follow.</>
 				</Text>
 				<Button type="inverted" style={[styles.emptyBtn, s.mt10]} onPress={onPressDiscoverFeeds}>
 					<Text type="lg-medium" style={palInverted.text}>
-						<Trans>Discover new custom feeds</Trans>
+						<>Discover new custom feeds</>
 					</Text>
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 				</Button>

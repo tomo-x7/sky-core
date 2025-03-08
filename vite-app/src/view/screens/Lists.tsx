@@ -59,7 +59,7 @@ export function ListsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align="left">
 					<Layout.Header.TitleText>
-						<Trans>Lists</Trans>
+						<>Lists</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button

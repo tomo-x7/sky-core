@@ -65,10 +65,10 @@ export function Component() {
 			]}
 		>
 			<Text style={[pal.text, styles.title]}>
-				<Trans>Post Languages</Trans>
+				<>Post Languages</>
 			</Text>
 			<Text style={[pal.text, styles.description]}>
-				<Trans>Which languages are used in this post?</Trans>
+				<>Which languages are used in this post?</>
 			</Text>
 			<ScrollView style={styles.scrollContainer}>
 				{languages.map((lang) => {

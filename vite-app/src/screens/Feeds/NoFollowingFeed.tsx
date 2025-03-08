@@ -34,7 +34,7 @@ export function NoFollowingFeed() {
 	return (
 		<View style={[a.flex_row, a.flex_wrap, a.align_center, a.py_md, a.px_lg]}>
 			<Text style={[a.leading_snug, t.atoms.text_contrast_medium]}>
-				<Trans>
+				<>
 					Looks like you're missing a following feed.{" "}
 					<InlineLinkText
 						to="/"
@@ -44,7 +44,7 @@ export function NoFollowingFeed() {
 					>
 						Click here to add one.
 					</InlineLinkText>
-				</Trans>
+				</>
 			</Text>
 		</View>
 	);

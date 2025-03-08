@@ -161,7 +161,7 @@ let ProfileHeaderStandard = ({
 								style={[a.rounded_full]}
 							>
 								<ButtonText>
-									<Trans>Edit Profile</Trans>
+									<>Edit Profile</>
 								</ButtonText>
 							</Button>
 							<EditProfileDialog profile={profile} control={editProfileControl} />
@@ -203,11 +203,11 @@ let ProfileHeaderStandard = ({
 								<ButtonIcon position="left" icon={profile.viewer?.following ? Check : Plus} />
 								<ButtonText>
 									{profile.viewer?.following ? (
-										<Trans>Following</Trans>
+										<>Following</>
 									) : profile.viewer?.followedBy ? (
-										<Trans>Follow Back</Trans>
+										<>Follow Back</>
 									) : (
-										<Trans>Follow</Trans>
+										<>Follow</>
 									)}
 								</ButtonText>
 							</Button>

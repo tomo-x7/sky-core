@@ -227,9 +227,9 @@ export function FeedSourceCardLoaded({
 						</Text>
 						<Text style={[pal.textLight]} numberOfLines={1}>
 							{feed.type === "feed" ? (
-								<Trans>Feed by {sanitizeHandle(feed.creatorHandle, "@")}</Trans>
+								<>Feed by {sanitizeHandle(feed.creatorHandle, "@")}</>
 							) : (
-								<Trans>List by {sanitizeHandle(feed.creatorHandle, "@")}</Trans>
+								<>List by {sanitizeHandle(feed.creatorHandle, "@")}</>
 							)}
 						</Text>
 					</View>
@@ -266,9 +266,9 @@ export function FeedSourceCardLoaded({
 
 				{showLikes && feed.type === "feed" ? (
 					<Text type="sm-medium" style={[pal.text, pal.textLight]}>
-						<Trans>
+						<>
 							Liked by <Plural value={feed.likeCount || 0} one="# user" other="# users" />
-						</Trans>
+						</>
 					</Text>
 				) : null}
 			</Pressable>

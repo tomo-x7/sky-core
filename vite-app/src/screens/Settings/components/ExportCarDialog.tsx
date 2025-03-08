@@ -60,17 +60,17 @@ export function ExportCarDialog({
 			>
 				<View style={[a.relative, a.gap_lg, a.w_full]}>
 					<Text nativeID="dialog-title" style={[a.text_2xl, a.font_heavy]}>
-						<Trans>Export My Data</Trans>
+						<>Export My Data</>
 					</Text>
 					<Text
 						nativeID="dialog-description"
 						style={[a.text_sm, a.leading_normal, t.atoms.text_contrast_high]}
 					>
-						<Trans>
+						<>
 							Your account repository, containing all public data records, can be downloaded as a "CAR"
 							file. This file does not include media embeds, such as images, or your private data, which
 							must be fetched separately.
-						</Trans>
+						</>
 					</Text>
 
 					<Button
@@ -83,13 +83,13 @@ export function ExportCarDialog({
 					>
 						<ButtonIcon icon={DownloadIcon} />
 						<ButtonText>
-							<Trans>Download CAR file</Trans>
+							<>Download CAR file</>
 						</ButtonText>
 						{loading && <ButtonIcon icon={Loader} />}
 					</Button>
 
 					<Text style={[t.atoms.text_contrast_medium, a.text_sm, a.leading_snug, a.flex_1]}>
-						<Trans>
+						<>
 							This feature is in beta. You can read more about repository exports in{" "}
 							<InlineLinkText
 								label={_(msg`View blogpost for more details`)}
@@ -99,7 +99,7 @@ export function ExportCarDialog({
 								this blogpost
 							</InlineLinkText>
 							.
-						</Trans>
+						</>
 					</Text>
 				</View>
 			</Dialog.ScrollableInner>

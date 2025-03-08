@@ -72,20 +72,20 @@ function DeactivateAccountDialogInner({
 		<>
 			<Prompt.TitleText>{_(msg`Deactivate account`)}</Prompt.TitleText>
 			<Prompt.DescriptionText>
-				<Trans>
+				<>
 					Your profile, posts, feeds, and lists will no longer be visible to other Bluesky users. You can
 					reactivate your account at any time by logging in.
-				</Trans>
+				</>
 			</Prompt.DescriptionText>
 
 			<View style={[a.pb_xl]}>
 				<Divider />
 				<View style={[a.gap_sm, a.pt_lg, a.pb_xl]}>
 					<Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
-						<Trans>There is no time limit for account deactivation, come back any time.</Trans>
+						<>There is no time limit for account deactivation, come back any time.</>
 					</Text>
 					<Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
-						<Trans>If you're trying to change your handle or email, do so before you deactivate.</Trans>
+						<>If you're trying to change your handle or email, do so before you deactivate.</>
 					</Text>
 				</View>
 

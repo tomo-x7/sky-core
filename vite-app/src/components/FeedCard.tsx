@@ -109,7 +109,7 @@ export function TitleAndByline({
 			</Text>
 			{creator && (
 				<Text style={[a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
-					<Trans>Feed by {sanitizeHandle(creator.handle, "@")}</Trans>
+					<>Feed by {sanitizeHandle(creator.handle, "@")}</>
 				</Text>
 			)}
 		</View>
@@ -174,9 +174,9 @@ export function Likes({ count }: { count: number }) {
 	const t = useTheme();
 	return (
 		<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
-			<Trans>
+			<>
 				Liked by <Plural value={count || 0} one="# user" other="# users" />
-			</Trans>
+			</>
 		</Text>
 	);
 }
@@ -233,7 +233,7 @@ function SaveButtonInner({
 				}
 				Toast.show(_(msg`Feeds updated!`));
 			} catch (err: any) {
-				logger.error(err, { message: `FeedCard: failed to update feeds`, pin });
+				logger.error(err, { message: "FeedCard: failed to update feeds", pin });
 				Toast.show(_(msg`Failed to update feeds`), "xmark");
 			}
 		},

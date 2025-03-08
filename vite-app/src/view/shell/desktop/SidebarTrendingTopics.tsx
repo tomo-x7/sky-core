@@ -43,7 +43,7 @@ function Inner() {
 				<View style={[a.flex_row, a.align_center, a.gap_xs]}>
 					<Graph size="sm" />
 					<Text style={[a.flex_1, a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>
-						<Trans>Trending</Trans>
+						<>Trending</>
 					</Text>
 					<Button
 						label={_(msg`Hide trending topics`)}

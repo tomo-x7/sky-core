@@ -36,7 +36,7 @@ export function ErrorScreen({
 					<Layout.Header.BackButton />
 					<Layout.Header.Content>
 						<Layout.Header.TitleText>
-							<Trans>Error</Trans>
+							<>Error</>
 						</Layout.Header.TitleText>
 					</Layout.Header.Content>
 					<Layout.Header.Slot />

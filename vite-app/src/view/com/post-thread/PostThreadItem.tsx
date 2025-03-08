@@ -146,7 +146,7 @@ function PostThreadItemDeleted({ hideTopBorder }: { hideTopBorder?: boolean }) {
 		>
 			<TrashIcon style={[t.atoms.text]} />
 			<Text style={[t.atoms.text_contrast_medium, a.mt_2xs]}>
-				<Trans>This post has been deleted.</Trans>
+				<>This post has been deleted.</>
 			</Text>
 		</View>
 	);
@@ -601,7 +601,7 @@ let PostThreadItemLoaded = ({
 							noFeedback
 						>
 							<Text style={[t.atoms.text_contrast_medium, a.font_bold, a.text_sm]}>
-								<Trans>More</Trans>
+								<>More</>
 							</Text>
 							<ChevronRightIcon size="xs" style={[t.atoms.text_contrast_medium]} />
 						</Link>
@@ -732,7 +732,7 @@ function ExpandedPostDetails({
 							style={[a.text_sm, pal.link]}
 							onPress={onTranslatePress}
 						>
-							<Trans>Translate</Trans>
+							<>Translate</>
 						</InlineLinkText>
 					</>
 				)}
@@ -786,7 +786,7 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 					>
 						<CalendarClockIcon fill={orange} size="sm" aria-hidden />
 						<Text style={[a.text_xs, a.font_bold, a.leading_tight, t.atoms.text_contrast_medium]}>
-							<Trans>Archived from {niceDate(i18n, createdAt)}</Trans>
+							<>Archived from {niceDate(i18n, createdAt)}</>
 						</Text>
 					</View>
 				)}
@@ -794,17 +794,17 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 
 			<Prompt.Outer control={control}>
 				<Prompt.TitleText>
-					<Trans>Archived post</Trans>
+					<>Archived post</>
 				</Prompt.TitleText>
 				<Prompt.DescriptionText>
-					<Trans>
+					<>
 						This post claims to have been created on{" "}
 						<RNText style={[a.font_bold]}>{niceDate(i18n, createdAt)}</RNText>, but was first seen by
 						Bluesky on <RNText style={[a.font_bold]}>{niceDate(i18n, indexedAt)}</RNText>.
-					</Trans>
+					</>
 				</Prompt.DescriptionText>
 				<Text style={[a.text_md, a.leading_snug, t.atoms.text_contrast_high, a.pb_xl]}>
-					<Trans>Bluesky cannot confirm the authenticity of the claimed date.</Trans>
+					<>Bluesky cannot confirm the authenticity of the claimed date.</>
 				</Text>
 				<Prompt.Actions>
 					<Prompt.Action cta={_(msg`Okay`)} onPress={() => {}} />

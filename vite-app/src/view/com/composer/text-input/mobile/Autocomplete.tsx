@@ -71,7 +71,7 @@ export function Autocomplete({
 				})
 			) : (
 				<Text style={[a.text_md, a.px_sm, a.py_md]}>
-					{isFetching ? <Trans>Loading...</Trans> : <Trans>No result</Trans>}
+					{isFetching ? <>Loading...</> : <>No result</>}
 				</Text>
 			)}
 		</Animated.View>

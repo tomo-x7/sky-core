@@ -212,10 +212,10 @@ export function StepProfile() {
 			<View style={[a.align_start, t.atoms.bg, a.justify_between]}>
 				<IconCircle icon={StreamingLive} style={[a.mb_2xl]} />
 				<TitleText>
-					<Trans>Give your profile a face</Trans>
+					<>Give your profile a face</>
 				</TitleText>
 				<DescriptionText>
-					<Trans>Help people know you're not a bot by uploading a picture or creating an avatar.</Trans>
+					<>Help people know you're not a bot by uploading a picture or creating an avatar.</>
 				</DescriptionText>
 				<View style={[a.w_full, a.align_center, { paddingTop: gtMobile ? 80 : 40 }]}>
 					<AvatarCircle openLibrary={openLibrary} openCreator={creatorControl.open} />
@@ -251,7 +251,7 @@ export function StepProfile() {
 							onPress={onContinue}
 						>
 							<ButtonText>
-								<Trans>Continue</Trans>
+								<>Continue</>
 							</ButtonText>
 							<ButtonIcon icon={ChevronRight} position="right" />
 						</Button>
@@ -264,9 +264,9 @@ export function StepProfile() {
 						>
 							<ButtonText>
 								{avatar.useCreatedAvatar ? (
-									<Trans>Upload a photo instead</Trans>
+									<>Upload a photo instead</>
 								) : (
-									<Trans>Create an avatar instead</Trans>
+									<>Create an avatar instead</>
 								)}
 							</ButtonText>
 						</Button>
@@ -301,7 +301,7 @@ export function StepProfile() {
 							onPress={onDoneCreating}
 						>
 							<ButtonText>
-								<Trans>Done</Trans>
+								<>Done</>
 							</ButtonText>
 						</Button>
 					</View>

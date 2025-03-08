@@ -60,7 +60,7 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 			</View>
 			<View style={[a.px_sm]}>
 				<Text style={[{ color: t.palette.primary_500 }, a.text_md]}>
-					<Trans>Continue thread...</Trans>
+					<>Continue thread...</>
 				</Text>
 			</View>
 		</Link>

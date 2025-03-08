@@ -53,10 +53,10 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 			<View style={[styles.container, pal.view]} testID="inviteCodesModal">
 				<View style={[styles.empty, pal.viewLight]}>
 					<Text type="lg" style={[pal.text, styles.emptyText]}>
-						<Trans>
+						<>
 							You don't have any invite codes yet! We'll send you some when you've been on Bluesky for a
 							little longer.
-						</Trans>
+						</>
 					</Text>
 				</View>
 				<View style={styles.flex1} />
@@ -76,10 +76,10 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 	return (
 		<View style={[styles.container, pal.view]} testID="inviteCodesModal">
 			<Text type="title-xl" style={[styles.title, pal.text]}>
-				<Trans>Invite a Friend</Trans>
+				<>Invite a Friend</>
 			</Text>
 			<Text type="lg" style={[styles.description, pal.text]}>
-				<Trans>Each code works once. You'll receive more invite codes periodically.</Trans>
+				<>Each code works once. You'll receive more invite codes periodically.</>
 			</Text>
 			<ScrollView style={[styles.scrollContainer, pal.border]}>
 				{invites.available.map((invite, i) => (
@@ -150,7 +150,7 @@ function InviteCode({
 				<View style={styles.flex1} />
 				{!used && invitesState.copiedInvites.includes(invite.code) && (
 					<Text style={[pal.textLight, styles.codeCopied]}>
-						<Trans>Copied</Trans>
+						<>Copied</>
 					</Text>
 				)}
 				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text as FontAwesomeIconStyle} />}
@@ -164,7 +164,7 @@ function InviteCode({
 					}}
 				>
 					<Text style={pal.text}>
-						<Trans>Used by:</Trans>{" "}
+						<>Used by:</>{" "}
 						{uses.map((use, i) => (
 							<Link
 								key={use.usedBy}

@@ -141,7 +141,7 @@ let RepostButtonDialogInner = ({
 					>
 						<Repost size="lg" fill={t.palette.primary_500} />
 						<Text style={[a.font_bold, a.text_xl]}>
-							{isReposted ? <Trans>Remove repost</Trans> : <Trans context="action">Repost</Trans>}
+							{isReposted ? <>Remove repost</> : <Trans context="action">Repost</Trans>}
 						</Text>
 					</Button>
 					<Button
@@ -159,7 +159,7 @@ let RepostButtonDialogInner = ({
 							fill={embeddingDisabled ? t.atoms.text_contrast_low.color : t.palette.primary_500}
 						/>
 						<Text style={[a.font_bold, a.text_xl, embeddingDisabled && t.atoms.text_contrast_low]}>
-							{embeddingDisabled ? <Trans>Quote posts disabled</Trans> : <Trans>Quote post</Trans>}
+							{embeddingDisabled ? <>Quote posts disabled</> : <>Quote post</>}
 						</Text>
 					</Button>
 				</View>
@@ -171,7 +171,7 @@ let RepostButtonDialogInner = ({
 					color="primary"
 				>
 					<ButtonText>
-						<Trans>Cancel</Trans>
+						<>Cancel</>
 					</ButtonText>
 				</Button>
 			</View>

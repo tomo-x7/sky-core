@@ -205,14 +205,14 @@ export function Component({
 				<Text style={[styles.title, pal.text]}>
 					{isCurateList ? (
 						list ? (
-							<Trans>Edit User List</Trans>
+							<>Edit User List</>
 						) : (
-							<Trans>New User List</Trans>
+							<>New User List</>
 						)
 					) : list ? (
-						<Trans>Edit Moderation List</Trans>
+						<>Edit Moderation List</>
 					) : (
-						<Trans>New Moderation List</Trans>
+						<>New Moderation List</>
 					)}
 				</Text>
 				{error !== "" && (
@@ -221,7 +221,7 @@ export function Component({
 					</View>
 				)}
 				<Text style={[styles.label, pal.text]}>
-					<Trans>List Avatar</Trans>
+					<>List Avatar</>
 				</Text>
 				<View style={[styles.avi, { borderColor: pal.colors.background }]}>
 					<EditableUserAvatar type="list" size={80} avatar={avatar} onSelectNewAvatar={onSelectNewAvatar} />
@@ -230,7 +230,7 @@ export function Component({
 					<View>
 						<View style={styles.labelWrapper}>
 							<Text style={[styles.label, pal.text]} nativeID="list-name">
-								<Trans>List Name</Trans>
+								<>List Name</>
 							</Text>
 						</View>
 						<TextInput
@@ -249,7 +249,7 @@ export function Component({
 					<View style={s.pb10}>
 						<View style={styles.labelWrapper}>
 							<Text style={[styles.label, pal.text]} nativeID="list-description">
-								<Trans>Description</Trans>
+								<>Description</>
 							</Text>
 							<Text style={[!isDescriptionOver ? pal.textLight : s.red3, s.f13]}>
 								{graphemeLength}/{MAX_DESCRIPTION}

@@ -186,7 +186,7 @@ function LandingScreenLoaded({
 							size="large"
 						>
 							<ButtonText style={[a.text_lg]}>
-								<Trans>Join Bluesky</Trans>
+								<>Join Bluesky</>
 							</ButtonText>
 						</Button>
 						<View style={[a.flex_row, a.align_center, a.gap_sm]}>
@@ -196,7 +196,7 @@ function LandingScreenLoaded({
 								color={t.atoms.text_contrast_medium.color}
 							/>
 							<Text style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]} numberOfLines={1}>
-								<Trans>{formatCount(i18n, JOINED_THIS_WEEK)} joined this week</Trans>
+								<>{formatCount(i18n, JOINED_THIS_WEEK)} joined this week</>
 							</Text>
 						</View>
 					</View>
@@ -205,9 +205,9 @@ function LandingScreenLoaded({
 							<View style={[a.gap_md]}>
 								<Text style={[a.font_heavy, a.text_lg]}>
 									{listItemsCount <= 8 ? (
-										<Trans>You'll follow these people right away</Trans>
+										<>You'll follow these people right away</>
 									) : (
-										<Trans>You'll follow these people and {listItemsCount - 8} others</Trans>
+										<>You'll follow these people and {listItemsCount - 8} others</>
 									)}
 								</Text>
 								<View
@@ -236,7 +236,7 @@ function LandingScreenLoaded({
 						{feeds?.length ? (
 							<View style={[a.gap_md]}>
 								<Text style={[a.font_heavy, a.text_lg]}>
-									<Trans>You'll stay updated with these feeds</Trans>
+									<>You'll stay updated with these feeds</>
 								</Text>
 
 								<View
@@ -271,7 +271,7 @@ function LandingScreenLoaded({
 						onPress={onJoinWithoutPress}
 					>
 						<ButtonText>
-							<Trans>Signup without a starter pack</Trans>
+							<>Signup without a starter pack</>
 						</ButtonText>
 					</Button>
 				</View>
@@ -279,13 +279,13 @@ function LandingScreenLoaded({
 			<AppClipOverlay visible={appClipOverlayVisible} setIsVisible={setAppClipOverlayVisible} />
 			<Prompt.Outer control={androidDialogControl}>
 				<Prompt.TitleText>
-					<Trans>Download Bluesky</Trans>
+					<>Download Bluesky</>
 				</Prompt.TitleText>
 				<Prompt.DescriptionText>
-					<Trans>
+					<>
 						The experience is better in the app. Download Bluesky now and we'll pick back up where you left
 						off.
-					</Trans>
+					</>
 				</Prompt.DescriptionText>
 				<Prompt.Actions>
 					<Prompt.Action

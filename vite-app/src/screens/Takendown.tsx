@@ -72,7 +72,7 @@ export function Takendown() {
 				disabled={isPending || reasonGraphemeLength > MAX_REPORT_REASON_GRAPHEME_LENGTH}
 			>
 				<ButtonText>
-					<Trans>Submit Appeal</Trans>
+					<>Submit Appeal</>
 				</ButtonText>
 				{isPending && <ButtonIcon icon={Loader} />}
 			</Button>
@@ -85,7 +85,7 @@ export function Takendown() {
 				onPress={() => logoutCurrentAccount("Takendown")}
 			>
 				<ButtonText>
-					<Trans>Sign Out</Trans>
+					<>Sign Out</>
 				</ButtonText>
 			</Button>
 		);
@@ -100,7 +100,7 @@ export function Takendown() {
 				onPress={() => setIsAppealling(false)}
 			>
 				<ButtonText>
-					<Trans>Cancel</Trans>
+					<>Cancel</>
 				</ButtonText>
 			</Button>
 		)
@@ -113,7 +113,7 @@ export function Takendown() {
 			onPress={() => setIsAppealling(true)}
 		>
 			<ButtonText>
-				<Trans>Appeal Suspension</Trans>
+				<>Appeal Suspension</>
 			</ButtonText>
 		</Button>
 	);
@@ -134,9 +134,9 @@ export function Takendown() {
 
 						<Text style={[a.text_4xl, a.font_heavy, a.pb_md]}>
 							{isAppealling ? (
-								<Trans>Appeal suspension</Trans>
+								<>Appeal suspension</>
 							) : (
-								<Trans>Your account has been suspended</Trans>
+								<>Your account has been suspended</>
 							)}
 						</Text>
 
@@ -144,15 +144,15 @@ export function Takendown() {
 							<View style={[a.relative, a.w_full, a.mt_xl]}>
 								{isSuccess ? (
 									<P style={[t.atoms.text_contrast_medium, a.text_center]}>
-										<Trans>
+										<>
 											Your appeal has been submitted. If your appeal succeeds, you will receive an
 											email.
-										</Trans>
+										</>
 									</P>
 								) : (
 									<>
 										<TextField.LabelText>
-											<Trans>Reason for appeal</Trans>
+											<>Reason for appeal</>
 										</TextField.LabelText>
 										<TextField.Root
 											isInvalid={
@@ -206,7 +206,7 @@ export function Takendown() {
 							</View>
 						) : (
 							<P style={[t.atoms.text_contrast_medium]}>
-								<Trans>
+								<>
 									Your account was found to be in violation of the{" "}
 									<InlineLinkText
 										label={_(msg`Bluesky Social Terms of Service`)}
@@ -219,7 +219,7 @@ export function Takendown() {
 									. You have been sent an email outlining the specific violation and suspension
 									period, if applicable. You can appeal this decision if you believe it was made in
 									error.
-								</Trans>
+								</>
 							</P>
 						)}
 

@@ -37,7 +37,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Content & Media</Trans>
+						<>Content & Media</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -47,25 +47,25 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 					<SettingsList.LinkItem to="/settings/saved-feeds" label={_(msg`Manage saved feeds`)}>
 						<SettingsList.ItemIcon icon={HashtagIcon} />
 						<SettingsList.ItemText>
-							<Trans>Manage saved feeds</Trans>
+							<>Manage saved feeds</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/threads" label={_(msg`Thread preferences`)}>
 						<SettingsList.ItemIcon icon={BubblesIcon} />
 						<SettingsList.ItemText>
-							<Trans>Thread preferences</Trans>
+							<>Thread preferences</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/following-feed" label={_(msg`Following feed preferences`)}>
 						<SettingsList.ItemIcon icon={HomeIcon} />
 						<SettingsList.ItemText>
-							<Trans>Following feed preferences</Trans>
+							<>Following feed preferences</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to="/settings/external-embeds" label={_(msg`External media`)}>
 						<SettingsList.ItemIcon icon={MacintoshIcon} />
 						<SettingsList.ItemText>
-							<Trans>External media</Trans>
+							<>External media</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.Divider />
@@ -79,7 +79,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 							<SettingsList.Item>
 								<SettingsList.ItemIcon icon={WindowIcon} />
 								<SettingsList.ItemText>
-									<Trans>Use in-app browser to open links</Trans>
+									<>Use in-app browser to open links</>
 								</SettingsList.ItemText>
 								<Toggle.Platform />
 							</SettingsList.Item>
@@ -94,7 +94,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 						<SettingsList.Item>
 							<SettingsList.ItemIcon icon={PlayIcon} />
 							<SettingsList.ItemText>
-								<Trans>Autoplay videos and GIFs</Trans>
+								<>Autoplay videos and GIFs</>
 							</SettingsList.ItemText>
 							<Toggle.Platform />
 						</SettingsList.Item>
@@ -119,7 +119,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 								<SettingsList.Item>
 									<SettingsList.ItemIcon icon={Graph} />
 									<SettingsList.ItemText>
-										<Trans>Enable trending topics</Trans>
+										<>Enable trending topics</>
 									</SettingsList.ItemText>
 									<Toggle.Platform />
 								</SettingsList.Item>
@@ -141,7 +141,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 								<SettingsList.Item>
 									<SettingsList.ItemIcon icon={Graph} />
 									<SettingsList.ItemText>
-										<Trans>Enable trending videos in your Discover feed</Trans>
+										<>Enable trending videos in your Discover feed</>
 									</SettingsList.ItemText>
 									<Toggle.Platform />
 								</SettingsList.Item>

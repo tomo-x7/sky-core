@@ -317,7 +317,7 @@ function Container({ children }: { children: React.ReactNode }) {
 						onPress={() => dispatch({ type: "Next" })}
 					>
 						<ButtonText>
-							<Trans>Next</Trans>
+							<>Next</>
 						</ButtonText>
 					</Button>
 				</>
@@ -400,18 +400,18 @@ function Footer({
 					<Text style={[a.text_center, textStyles]}>
 						{
 							items.length < 2 ? (
-								<Trans>
+								<>
 									It's just you right now! Add more people to your starter pack by searching above.
-								</Trans>
+								</>
 							) : items.length === 2 ? (
-								<Trans>
+								<>
 									<Text style={[a.font_bold, textStyles]}>You</Text> and
 									<Text> </Text>
 									<Text style={[a.font_bold, textStyles]} emoji>
 										{getName(items[1] /* [0] is self, skip it */)}{" "}
 									</Text>
 									are included in your starter pack
-								</Trans>
+								</>
 							) : items.length > 2 ? (
 								<Trans context="profiles">
 									<Text style={[a.font_bold, textStyles]} emoji>
@@ -430,24 +430,24 @@ function Footer({
 					items.length === 0 ? (
 						<View style={[a.gap_sm]}>
 							<Text style={[a.font_bold, a.text_center, textStyles]}>
-								<Trans>Add some feeds to your starter pack!</Trans>
+								<>Add some feeds to your starter pack!</>
 							</Text>
 							<Text style={[a.text_center, textStyles]}>
-								<Trans>Search for feeds that you want to suggest to others.</Trans>
+								<>Search for feeds that you want to suggest to others.</>
 							</Text>
 						</View>
 					) : (
 						<Text style={[a.text_center, textStyles]}>
 							{
 								items.length === 1 ? (
-									<Trans>
+									<>
 										<Text style={[a.font_bold, textStyles]} emoji>
 											{getName(items[0])}
 										</Text>{" "}
 										is included in your starter pack
-									</Trans>
+									</>
 								) : items.length === 2 ? (
-									<Trans>
+									<>
 										<Text style={[a.font_bold, textStyles]} emoji>
 											{getName(items[0])}
 										</Text>{" "}
@@ -457,7 +457,7 @@ function Footer({
 											{getName(items[1])}{" "}
 										</Text>
 										are included in your starter pack
-									</Trans>
+									</>
 								) : items.length > 2 ? (
 									<Trans context="feeds">
 										<Text style={[a.font_bold, textStyles]} emoji>
@@ -487,7 +487,7 @@ function Footer({
 						onPress={editDialogControl.open}
 					>
 						<ButtonText>
-							<Trans>Edit</Trans>
+							<>Edit</>
 						</ButtonText>
 					</Button>
 				) : (
@@ -496,7 +496,7 @@ function Footer({
 				{state.currentStep === "Profiles" && items.length < 8 ? (
 					<>
 						<Text style={[a.font_bold, textStyles, t.atoms.text_contrast_medium]}>
-							<Trans>Add {8 - items.length} more to continue</Trans>
+							<>Add {8 - items.length} more to continue</>
 						</Text>
 						<View style={{ width: 70 }} />
 					</>

@@ -283,7 +283,7 @@ export function ProfileGrid({
 	);
 
 	if (error || (!isLoading && profiles.length < 4)) {
-		logger.debug(`Not enough profiles to show suggested follows`);
+		logger.debug("Not enough profiles to show suggested follows");
 		return null;
 	}
 
@@ -291,7 +291,7 @@ export function ProfileGrid({
 		<View style={[a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
 			<View style={[a.p_lg, a.pb_xs, a.flex_row, a.align_center, a.justify_between]}>
 				<Text style={[a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>
-					{viewContext === "profile" ? <Trans>Similar accounts</Trans> : <Trans>Suggested for you</Trans>}
+					{viewContext === "profile" ? <>Similar accounts</> : <>Suggested for you</>}
 				</Text>
 				<Person fill={t.atoms.text_contrast_low.color} size="sm" />
 			</View>
@@ -306,7 +306,7 @@ export function ProfileGrid({
 							to="/search"
 							style={[t.atoms.text_contrast_medium]}
 						>
-							<Trans>Browse more suggestions</Trans>
+							Browse more suggestions
 						</InlineLinkText>
 						<Arrow size="sm" fill={t.atoms.text_contrast_medium.color} />
 					</View>
@@ -332,7 +332,7 @@ export function ProfileGrid({
 									<View style={[a.flex_1, a.justify_center]}>
 										<View style={[a.flex_row, a.px_lg]}>
 											<Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>
-												<Trans>Browse more suggestions on the Explore page</Trans>
+												Browse more suggestions on the Explore page
 											</Text>
 
 											<Arrow size="xl" />
@@ -406,7 +406,7 @@ export function SuggestedFeeds() {
 		<View style={[a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
 			<View style={[a.pt_2xl, a.px_lg, a.flex_row, a.pb_xs]}>
 				<Text style={[a.flex_1, a.text_lg, a.font_bold, t.atoms.text_contrast_medium]}>
-					<Trans>Some other feeds you might like</Trans>
+					Some other feeds you might like
 				</Text>
 				<Hashtag fill={t.atoms.text_contrast_low.color} />
 			</View>
@@ -421,7 +421,7 @@ export function SuggestedFeeds() {
 							to="/search"
 							style={[t.atoms.text_contrast_medium]}
 						>
-							<Trans>Browse more suggestions</Trans>
+							Browse more suggestions
 						</InlineLinkText>
 						<Arrow size="sm" fill={t.atoms.text_contrast_medium.color} />
 					</View>
@@ -448,7 +448,7 @@ export function SuggestedFeeds() {
 									<View style={[a.flex_1, a.justify_center]}>
 										<View style={[a.flex_row, a.px_lg]}>
 											<Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>
-												<Trans>Browse more suggestions on the Explore page</Trans>
+												Browse more suggestions on the Explore page
 											</Text>
 
 											<Arrow size="xl" />

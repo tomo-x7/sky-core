@@ -55,7 +55,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 			<Dialog.Close />
 
 			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-				<Trans>Edit image</Trans>
+				<>Edit image</>
 			</Text>
 
 			<View style={[a.align_center]}>
@@ -78,7 +78,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 					onPress={onPressSubmit}
 				>
 					<ButtonText>
-						<Trans>Save</Trans>
+						<>Save</>
 					</ButtonText>
 				</Button>
 			</View>

@@ -36,7 +36,7 @@ let NavSignupCard = ({}: {}): React.ReactNode => {
 
 			<View style={[a.pt_lg]}>
 				<Text style={[a.text_3xl, a.font_heavy, { lineHeight: a.text_3xl.fontSize }]}>
-					<Trans>Join the conversation</Trans>
+					<>Join the conversation</>
 				</Text>
 			</View>
 
@@ -49,12 +49,12 @@ let NavSignupCard = ({}: {}): React.ReactNode => {
 					color="primary"
 				>
 					<ButtonText>
-						<Trans>Create account</Trans>
+						<>Create account</>
 					</ButtonText>
 				</Button>
 				<Button onPress={showSignIn} label={_(msg`Sign in`)} size="small" variant="solid" color="secondary">
 					<ButtonText>
-						<Trans>Sign in</Trans>
+						<>Sign in</>
 					</ButtonText>
 				</Button>
 			</View>

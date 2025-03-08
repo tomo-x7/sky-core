@@ -96,11 +96,11 @@ export function Component({
 				<View style={styles.titleSection}>
 					<Text type="title-lg" style={[pal.text, styles.title]}>
 						{stage === Stages.Reminder ? (
-							<Trans>Please Verify Your Email</Trans>
+							<>Please Verify Your Email</>
 						) : stage === Stages.Email ? (
-							<Trans>Verify Your Email</Trans>
+							<>Verify Your Email</>
 						) : stage === Stages.ConfirmCode ? (
-							<Trans>Enter Confirmation Code</Trans>
+							<>Enter Confirmation Code</>
 						) : (
 							""
 						)}
@@ -109,18 +109,18 @@ export function Component({
 
 				<Text type="lg" style={[pal.textLight, { marginBottom: 10 }]}>
 					{stage === Stages.Reminder ? (
-						<Trans>
+						<>
 							Your email has not yet been verified. This is an important security step which we recommend.
-						</Trans>
+						</>
 					) : stage === Stages.Email ? (
-						<Trans>
+						<>
 							This is important in case you ever need to change your email or reset your password.
-						</Trans>
+						</>
 					) : stage === Stages.ConfirmCode ? (
-						<Trans>
+						<>
 							An email has been sent to {currentAccount?.email || "(no email)"}. It includes a
 							confirmation code which you can enter below.
-						</Trans>
+						</>
 					) : (
 						""
 					)}
@@ -142,7 +142,7 @@ export function Component({
 							style={styles.changeEmailLink}
 						>
 							<Text type="lg" style={pal.link}>
-								<Trans>Change</Trans>
+								<>Change</>
 							</Text>
 						</Pressable>
 					</>

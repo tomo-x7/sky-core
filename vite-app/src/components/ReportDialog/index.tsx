@@ -51,7 +51,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 			) : error || !labelers ? (
 				<View>
 					<Text style={[a.text_md]}>
-						<Trans>Something went wrong, please try again.</Trans>
+						Something went wrong, please try again.
 					</Text>
 				</View>
 			) : (

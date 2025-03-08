@@ -30,7 +30,7 @@ export function AboutSettingsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>About</Trans>
+						<>About</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -40,7 +40,7 @@ export function AboutSettingsScreen({}: Props) {
 					<SettingsList.LinkItem to="https://bsky.social/about/support/tos" label={_(msg`Terms of Service`)}>
 						<SettingsList.ItemIcon icon={NewspaperIcon} />
 						<SettingsList.ItemText>
-							<Trans>Terms of Service</Trans>
+							<>Terms of Service</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem
@@ -49,20 +49,20 @@ export function AboutSettingsScreen({}: Props) {
 					>
 						<SettingsList.ItemIcon icon={NewspaperIcon} />
 						<SettingsList.ItemText>
-							<Trans>Privacy Policy</Trans>
+							<>Privacy Policy</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem to={STATUS_PAGE_URL} label={_(msg`Status Page`)}>
 						<SettingsList.ItemIcon icon={GlobeIcon} />
 						<SettingsList.ItemText>
-							<Trans>Status Page</Trans>
+							<>Status Page</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.Divider />
 					<SettingsList.LinkItem to="/sys/log" label={_(msg`System log`)}>
 						<SettingsList.ItemIcon icon={CodeLinesIcon} />
 						<SettingsList.ItemText>
-							<Trans>System log</Trans>
+							<>System log</>
 						</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.PressableItem
@@ -84,7 +84,7 @@ export function AboutSettingsScreen({}: Props) {
 					>
 						<SettingsList.ItemIcon icon={WrenchIcon} />
 						<SettingsList.ItemText>
-							<Trans>Version {appVersion}</Trans>
+							<>Version {appVersion}</>
 						</SettingsList.ItemText>
 						<SettingsList.BadgeText>{bundleInfo}</SettingsList.BadgeText>
 					</SettingsList.PressableItem>

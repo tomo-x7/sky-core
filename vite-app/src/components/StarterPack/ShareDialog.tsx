@@ -84,10 +84,10 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 					<View style={[!isTabletOrDesktop && a.gap_lg]}>
 						<View style={[a.gap_sm, isTabletOrDesktop && a.pb_lg]}>
 							<Text style={[a.font_bold, a.text_2xl]}>
-								<Trans>Invite people to this starter pack!</Trans>
+								<>Invite people to this starter pack!</>
 							</Text>
 							<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-								<Trans>Share this starter pack and help people join your community on Bluesky.</Trans>
+								<>Share this starter pack and help people join your community on Bluesky.</>
 							</Text>
 						</View>
 						<Image
@@ -111,7 +111,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								style={[isWeb && a.self_center]}
 								onPress={onShareLink}
 							>
-								<ButtonText>{isWeb ? <Trans>Copy Link</Trans> : <Trans>Share link</Trans>}</ButtonText>
+								<ButtonText>{isWeb ? <>Copy Link</> : <>Share link</>}</ButtonText>
 							</Button>
 							<Button
 								label={_(msg`Share QR code`)}
@@ -126,7 +126,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								}}
 							>
 								<ButtonText>
-									<Trans>Share QR code</Trans>
+									<>Share QR code</>
 								</ButtonText>
 							</Button>
 							{isNative && (
@@ -139,7 +139,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 									onPress={onSave}
 								>
 									<ButtonText>
-										<Trans>Save image</Trans>
+										<>Save image</>
 									</ButtonText>
 								</Button>
 							)}

@@ -112,7 +112,7 @@ export function PostHider({
 			</Text>
 			{!modui.noOverride && (
 				<Text style={[{ color: t.palette.primary_500 }]}>
-					{override ? <Trans>Hide</Trans> : <Trans>Show</Trans>}
+					{override ? <>Hide</> : <>Show</>}
 				</Text>
 			)}
 		</Pressable>

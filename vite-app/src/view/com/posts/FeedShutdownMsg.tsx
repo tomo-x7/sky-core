@@ -72,7 +72,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 		<View style={[a.py_3xl, a.px_2xl, a.gap_xl, t.atoms.border_contrast_low, a.border_t]}>
 			<Text style={[a.text_5xl, a.font_bold, t.atoms.text, a.text_center]}>:(</Text>
 			<Text style={[a.text_md, a.leading_snug, t.atoms.text, a.text_center]}>
-				<Trans>
+				<>
 					This feed is no longer online. We are showing{" "}
 					<InlineLinkText
 						label={_(msg`The Discover feed`)}
@@ -82,7 +82,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 						Discover
 					</InlineLinkText>{" "}
 					instead.
-				</Trans>
+				</>
 			</Text>
 			{hasFeedPinned ? (
 				<View style={[a.flex_row, a.justify_center, a.gap_sm]}>
@@ -95,7 +95,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 						onPress={onRemoveFeed}
 					>
 						<ButtonText>
-							<Trans>Remove feed</Trans>
+							<>Remove feed</>
 						</ButtonText>
 						{isRemovePending && <ButtonIcon icon={Loader} />}
 					</Button>
@@ -109,7 +109,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 							onPress={onReplaceFeed}
 						>
 							<ButtonText>
-								<Trans>Replace with Discover</Trans>
+								<>Replace with Discover</>
 							</ButtonText>
 							{isReplacePending && <ButtonIcon icon={Loader} />}
 						</Button>

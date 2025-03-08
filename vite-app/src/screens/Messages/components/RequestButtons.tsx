@@ -99,14 +99,14 @@ export function RejectMenu({
 						{showDeleteConvo && (
 							<Menu.Item label={_(msg`Delete conversation`)} onPress={onPressDelete}>
 								<Menu.ItemText>
-									<Trans>Delete conversation</Trans>
+									<>Delete conversation</>
 								</Menu.ItemText>
 								<Menu.ItemIcon icon={CircleX_Stroke2_Corner0_Rounded} />
 							</Menu.Item>
 						)}
 						<Menu.Item label={_(msg`Block account`)} onPress={onPressBlock}>
 							<Menu.ItemText>
-								<Trans>Block account</Trans>
+								<>Block account</>
 							</Menu.ItemText>
 							<Menu.ItemIcon icon={PersonXIcon} />
 						</Menu.Item>
@@ -116,7 +116,7 @@ export function RejectMenu({
 						{lastMessage && (
 							<Menu.Item label={_(msg`Report conversation`)} onPress={reportControl.open}>
 								<Menu.ItemText>
-									<Trans>Report conversation</Trans>
+									<>Report conversation</>
 								</Menu.ItemText>
 								<Menu.ItemIcon icon={FlagIcon} />
 							</Menu.Item>
@@ -243,7 +243,7 @@ export function DeleteChatButton({
 			onPress={onPressDelete}
 			{...props}
 		>
-			<ButtonText>{label || <Trans>Delete chat</Trans>}</ButtonText>
+			<ButtonText>{label || <>Delete chat</>}</ButtonText>
 		</Button>
 	);
 }

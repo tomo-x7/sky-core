@@ -37,7 +37,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Accessibility</Trans>
+						<>Accessibility</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -47,7 +47,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 					<SettingsList.Group contentContainerStyle={[a.gap_sm]}>
 						<SettingsList.ItemIcon icon={AccessibilityIcon} />
 						<SettingsList.ItemText>
-							<Trans>Alt text</Trans>
+							<>Alt text</>
 						</SettingsList.ItemText>
 						<Toggle.Item
 							name="require_alt_text"
@@ -57,7 +57,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 							style={[a.w_full]}
 						>
 							<Toggle.LabelText style={[a.flex_1]}>
-								<Trans>Require alt text before posting</Trans>
+								<>Require alt text before posting</>
 							</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>
@@ -69,7 +69,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 							style={[a.w_full]}
 						>
 							<Toggle.LabelText style={[a.flex_1]}>
-								<Trans>Display larger alt text badges</Trans>
+								<>Display larger alt text badges</>
 							</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>
@@ -80,7 +80,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 							<SettingsList.Group contentContainerStyle={[a.gap_sm]}>
 								<SettingsList.ItemIcon icon={HapticIcon} />
 								<SettingsList.ItemText>
-									<Trans>Haptics</Trans>
+									<>Haptics</>
 								</SettingsList.ItemText>
 								<Toggle.Item
 									name="haptics"
@@ -90,7 +90,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 									style={[a.w_full]}
 								>
 									<Toggle.LabelText style={[a.flex_1]}>
-										<Trans>Disable haptic feedback</Trans>
+										<>Disable haptic feedback</>
 									</Toggle.LabelText>
 									<Toggle.Platform />
 								</Toggle.Item>
@@ -99,13 +99,13 @@ export function AccessibilitySettingsScreen({}: Props) {
 					)}
 					<SettingsList.Item>
 						<Admonition type="info" style={[a.flex_1]}>
-							<Trans>
+							<>
 								Autoplay options have moved to the{" "}
 								<InlineLinkText to="/settings/content-and-media" label={_(msg`Content and media`)}>
 									Content and Media settings
 								</InlineLinkText>
 								.
-							</Trans>
+							</>
 						</Admonition>
 					</SettingsList.Item>
 				</SettingsList.Container>

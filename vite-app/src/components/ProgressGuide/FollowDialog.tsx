@@ -71,7 +71,7 @@ export function FollowDialog({ guide }: { guide: Follow10ProgressGuide }) {
 			>
 				<ButtonIcon icon={PersonGroupIcon} />
 				<ButtonText>
-					<Trans>Find people to follow</Trans>
+					Find people to follow
 				</ButtonText>
 			</Button>
 			<Dialog.Outer control={control} nativeOptions={{ minHeight }}>
@@ -161,7 +161,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 				_items.push({
 					type: "profile",
 					// Don't share identity across tabs or typing attempts
-					key: query + ":" + profile.did,
+					key: `${query}:${profile.did}`,
 					profile,
 					isSuggestion: false,
 				});
@@ -199,7 +199,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 				.fill(0)
 				.map((__, i) => ({
 					type: "placeholder",
-					key: i + "",
+					key: `${i}`,
 				}));
 
 			_items.push(...placeholders);
@@ -370,7 +370,7 @@ function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
 	return (
 		<View style={[a.px_lg, a.relative, a.flex_row, a.justify_between, a.align_center]}>
 			<Text style={[a.z_10, a.text_lg, a.font_heavy, a.leading_tight, t.atoms.text_contrast_high]}>
-				<Trans>Find people to follow</Trans>
+				Find people to follow
 			</Text>
 			<View style={isWeb && { paddingRight: 36 }}>
 				<ProgressGuideTask

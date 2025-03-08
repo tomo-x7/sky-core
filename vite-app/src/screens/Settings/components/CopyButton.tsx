@@ -39,7 +39,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 					pointerEvents="none"
 				>
 					<Text style={[a.font_bold, a.text_right, a.text_md, t.atoms.text_contrast_high]}>
-						<Trans>Copied!</Trans>
+						<>Copied!</>
 					</Text>
 				</Animated.View>
 			)}

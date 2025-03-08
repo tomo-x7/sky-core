@@ -114,12 +114,12 @@ export function StepHandle() {
 				</View>
 				{draftValue !== "" && (
 					<Text style={[a.text_md]}>
-						<Trans>
+						<>
 							Your full username will be{" "}
 							<Text style={[a.text_md, a.font_bold]}>
 								@{createFullHandle(draftValue, state.userDomain)}
 							</Text>
-						</Trans>
+						</>
 					</Text>
 				)}
 
@@ -135,14 +135,14 @@ export function StepHandle() {
 							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
 								<IsValidIcon valid={validCheck.handleChars} />
 								<Text style={[a.text_md, a.flex_1]}>
-									<Trans>Only contains letters, numbers, and hyphens</Trans>
+									<>Only contains letters, numbers, and hyphens</>
 								</Text>
 							</View>
 						) : (
 							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
 								<IsValidIcon valid={validCheck.hyphenStartOrEnd} />
 								<Text style={[a.text_md, a.flex_1]}>
-									<Trans>Doesn't begin or end with a hyphen</Trans>
+									<>Doesn't begin or end with a hyphen</>
 								</Text>
 							</View>
 						)}
@@ -150,11 +150,11 @@ export function StepHandle() {
 							<IsValidIcon valid={validCheck.frontLength && validCheck.totalLength} />
 							{!validCheck.totalLength || draftValue.length > MAX_SERVICE_HANDLE_LENGTH ? (
 								<Text style={[a.text_md, a.flex_1]}>
-									<Trans>No longer than {MAX_SERVICE_HANDLE_LENGTH} characters</Trans>
+									<>No longer than {MAX_SERVICE_HANDLE_LENGTH} characters</>
 								</Text>
 							) : (
 								<Text style={[a.text_md, a.flex_1]}>
-									<Trans>At least 3 characters</Trans>
+									<>At least 3 characters</>
 								</Text>
 							)}
 						</View>

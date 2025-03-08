@@ -64,7 +64,7 @@ export function LabelsBtn({
 			>
 				<ButtonIcon icon={hasLabel ? Check : Shield_Stroke2_Corner0_Rounded} />
 				<ButtonText numberOfLines={1}>
-					{labels.length > 0 ? <Trans>Labels added</Trans> : <Trans>Labels</Trans>}
+					{labels.length > 0 ? <>Labels added</> : <>Labels</>}
 				</ButtonText>
 			</Button>
 
@@ -98,13 +98,13 @@ function DialogInner({
 			<View style={[a.flex_1]}>
 				<View style={[a.gap_sm]}>
 					<Text style={[a.text_2xl, a.font_bold]}>
-						<Trans>Add a content warning</Trans>
+						<>Add a content warning</>
 					</Text>
 					<Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
-						<Trans>
+						<>
 							Choose self-labels that are applicable for the media you are posting. If none are selected,
 							this post is suitable for all audiences.
-						</Trans>
+						</>
 					</Text>
 				</View>
 
@@ -112,7 +112,7 @@ function DialogInner({
 					<View>
 						<View style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
 							<Text style={[a.font_bold, a.text_lg]}>
-								<Trans>Adult Content</Trans>
+								<>Adult Content</>
 							</Text>
 						</View>
 						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
@@ -127,19 +127,19 @@ function DialogInner({
 									<Toggle.Item name="sexual" label={_(msg`Suggestive`)}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>
-											<Trans>Suggestive</Trans>
+											<>Suggestive</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="nudity" label={_(msg`Nudity`)}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>
-											<Trans>Nudity</Trans>
+											<>Nudity</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 									<Toggle.Item name="porn" label={_(msg`Porn`)}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>
-											<Trans>Adult</Trans>
+											<>Adult</>
 										</Toggle.LabelText>
 									</Toggle.Item>
 								</View>
@@ -147,11 +147,11 @@ function DialogInner({
 							{labels.includes("sexual") || labels.includes("nudity") || labels.includes("porn") ? (
 								<Text style={[a.mt_sm, t.atoms.text_contrast_medium]}>
 									{labels.includes("sexual") ? (
-										<Trans>Pictures meant for adults.</Trans>
+										<>Pictures meant for adults.</>
 									) : labels.includes("nudity") ? (
-										<Trans>Artistic or non-erotic nudity.</Trans>
+										<>Artistic or non-erotic nudity.</>
 									) : labels.includes("porn") ? (
-										<Trans>Sexual activity or erotic nudity.</Trans>
+										<>Sexual activity or erotic nudity.</>
 									) : (
 										""
 									)}
@@ -162,7 +162,7 @@ function DialogInner({
 					<View>
 						<View style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
 							<Text style={[a.font_bold, a.text_lg]}>
-								<Trans>Other</Trans>
+								<>Other</>
 							</Text>
 						</View>
 						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
@@ -176,13 +176,13 @@ function DialogInner({
 								<Toggle.Item name="graphic-media" label={_(msg`Graphic Media`)}>
 									<Toggle.Checkbox />
 									<Toggle.LabelText>
-										<Trans>Graphic Media</Trans>
+										<>Graphic Media</>
 									</Toggle.LabelText>
 								</Toggle.Item>
 							</Toggle.Group>
 							{labels.includes("graphic-media") ? (
 								<Text style={[a.mt_sm, t.atoms.text_contrast_medium]}>
-									<Trans>Media that may be disturbing or inappropriate for some audiences.</Trans>
+									<>Media that may be disturbing or inappropriate for some audiences.</>
 								</Text>
 							) : null}
 						</View>
@@ -200,7 +200,7 @@ function DialogInner({
 					testID="confirmBtn"
 				>
 					<ButtonText>
-						<Trans>Done</Trans>
+						<>Done</>
 					</ButtonText>
 				</Button>
 			</View>

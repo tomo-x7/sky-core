@@ -68,7 +68,7 @@ export function LanguageSettingsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Languages</Trans>
+						<>Languages</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -77,11 +77,11 @@ export function LanguageSettingsScreen({}: Props) {
 				<SettingsList.Container>
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>
-							<Trans>App Language</Trans>
+							<>App Language</>
 						</SettingsList.ItemText>
 						<View style={[a.gap_md, a.w_full]}>
 							<Text style={[a.leading_snug]}>
-								<Trans>Select which language to use for the app's user interface.</Trans>
+								<>Select which language to use for the app's user interface.</>
 							</Text>
 							<View style={[a.relative, web([a.w_full, { maxWidth: 400 }])]}>
 								<RNPickerSelect
@@ -162,11 +162,11 @@ export function LanguageSettingsScreen({}: Props) {
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>
-							<Trans>Primary Language</Trans>
+							<>Primary Language</>
 						</SettingsList.ItemText>
 						<View style={[a.gap_md, a.w_full]}>
 							<Text style={[a.leading_snug]}>
-								<Trans>Select your preferred language for translations in your feed.</Trans>
+								<>Select your preferred language for translations in your feed.</>
 							</Text>
 							<View style={[a.relative, web([a.w_full, { maxWidth: 400 }])]}>
 								<RNPickerSelect
@@ -245,14 +245,14 @@ export function LanguageSettingsScreen({}: Props) {
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>
-							<Trans>Content Languages</Trans>
+							<>Content Languages</>
 						</SettingsList.ItemText>
 						<View style={[a.gap_md]}>
 							<Text style={[a.leading_snug]}>
-								<Trans>
+								<>
 									Select which languages you want your subscribed feeds to include. If none are
 									selected, all languages will be shown.
-								</Trans>
+								</>
 							</Text>
 
 							<Button

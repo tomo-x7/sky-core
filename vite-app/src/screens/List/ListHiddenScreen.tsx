@@ -106,27 +106,27 @@ export function ListHiddenScreen({
 				<View style={[a.gap_sm, a.align_center]}>
 					<Text style={[a.font_bold, a.text_3xl]}>
 						{list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
-							<Trans>Creator has been blocked</Trans>
+							<>Creator has been blocked</>
 						) : (
-							<Trans>List has been hidden</Trans>
+							<>List has been hidden</>
 						)}
 					</Text>
 					<Text style={[a.text_md, a.text_center, a.px_md, t.atoms.text_contrast_high, { lineHeight: 1.4 }]}>
 						{list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
-							<Trans>
+							<>
 								Either the creator of this list has blocked you or you have blocked the creator.
-							</Trans>
+							</>
 						) : isOwner ? (
-							<Trans>
+							<>
 								This list – created by you – contains possible violations of Bluesky's community
 								guidelines in its name or description.
-							</Trans>
+							</>
 						) : (
-							<Trans>
+							<>
 								This list – created by{" "}
 								<Text style={[a.font_bold]}>{sanitizeHandle(list.creator.handle, "@")}</Text> – contains
 								possible violations of Bluesky's community guidelines in its name or description.
-							</Trans>
+							</>
 						)}
 					</Text>
 				</View>
@@ -143,7 +143,7 @@ export function ListHiddenScreen({
 							disabled={isProcessing}
 						>
 							<ButtonText>
-								<Trans>Removed from saved feeds</Trans>
+								<>Removed from saved feeds</>
 							</ButtonText>
 							{isProcessing ? <ButtonIcon icon={Loader} position="right" /> : null}
 						</Button>
@@ -158,7 +158,7 @@ export function ListHiddenScreen({
 							disabled={isProcessing}
 						>
 							<ButtonText>
-								<Trans>Show anyway</Trans>
+								<>Show anyway</>
 							</ButtonText>
 						</Button>
 					) : list.viewer?.muted || list.viewer?.blocked ? (
@@ -177,7 +177,7 @@ export function ListHiddenScreen({
 							disabled={isProcessing}
 						>
 							<ButtonText>
-								<Trans>Unsubscribe from list</Trans>
+								<>Unsubscribe from list</>
 							</ButtonText>
 							{isProcessing ? <ButtonIcon icon={Loader} position="right" /> : null}
 						</Button>
@@ -192,7 +192,7 @@ export function ListHiddenScreen({
 					disabled={isProcessing}
 				>
 					<ButtonText>
-						<Trans>Go Back</Trans>
+						<>Go Back</>
 					</ButtonText>
 				</Button>
 			</View>

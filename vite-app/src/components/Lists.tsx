@@ -56,7 +56,7 @@ export function ListFooter({
 					renderEndMessage()
 				) : (
 					<Text style={[a.text_sm, t.atoms.text_contrast_low]}>
-						{endMessageText ?? <Trans>You have reached the end</Trans>}
+						{endMessageText ?? "You have reached the end"}
 					</Text>
 				)
 			) : null}
@@ -80,7 +80,7 @@ function ListFooterMaybeError({
 		<View style={[a.w_full, a.px_lg]}>
 			<View style={[a.flex_row, a.gap_md, a.p_md, a.rounded_sm, a.align_center, t.atoms.bg_contrast_25]}>
 				<Text style={[a.flex_1, a.text_sm, t.atoms.text_contrast_medium]} numberOfLines={2}>
-					{error ? cleanError(error) : <Trans>Oops, something went wrong!</Trans>}
+					{error ? cleanError(error) : <>Oops, something went wrong!</>}
 				</Text>
 				<Button
 					variant="gradient"
@@ -89,7 +89,7 @@ function ListFooterMaybeError({
 					onPress={onRetry}
 				>
 					<ButtonText>
-						<Trans>Retry</Trans>
+						Retry
 					</ButtonText>
 				</Button>
 			</View>

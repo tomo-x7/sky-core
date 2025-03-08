@@ -151,28 +151,28 @@ export function ProfileLabelsSectionInner({
 			<View style={[a.pt_xl, a.px_lg, a.border_t, t.atoms.border_contrast_low]}>
 				<View>
 					<Text style={[t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
-						<Trans>
+						<>
 							Labels are annotations on users and content. They can be used to hide, warn, and categorize
 							the network.
-						</Trans>
+						</>
 					</Text>
 					{labelerInfo.creator.viewer?.blocking ? (
 						<View style={[a.flex_row, a.gap_sm, a.align_center, a.mt_md]}>
 							<CircleInfo size="sm" fill={t.atoms.text_contrast_medium.color} />
 							<Text style={[t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
-								<Trans>
+								<>
 									Blocking does not prevent this labeler from placing labels on your account.
-								</Trans>
+								</>
 							</Text>
 						</View>
 					) : null}
 					{labelValues.length === 0 ? (
 						<Text style={[a.pt_xl, t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
-							<Trans>This labeler hasn't declared what labels it publishes, and may not be active.</Trans>
+							<>This labeler hasn't declared what labels it publishes, and may not be active.</>
 						</Text>
 					) : !isSubscribed ? (
 						<Text style={[a.pt_xl, t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
-							<Trans>Subscribe to @{labelerInfo.creator.handle} to use these labels:</Trans>
+							<>Subscribe to @{labelerInfo.creator.handle} to use these labels:</>
 						</Text>
 					) : null}
 				</View>

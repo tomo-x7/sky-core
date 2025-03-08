@@ -68,7 +68,7 @@ export function ProfileFeedScreen(props: Props) {
 				<Layout.Content>
 					<View style={[pal.view, pal.border, styles.notFoundContainer]}>
 						<Text type="title-lg" style={[pal.text, s.mb10]}>
-							<Trans>Could not load feed</Trans>
+							<>Could not load feed</>
 						</Text>
 						<Text type="md" style={[pal.text, s.mb20]}>
 							{error.toString()}
@@ -83,7 +83,7 @@ export function ProfileFeedScreen(props: Props) {
 								style={{ flexShrink: 1 }}
 							>
 								<Text type="button" style={pal.text}>
-									<Trans>Go Back</Trans>
+									<>Go Back</>
 								</Text>
 							</Button>
 						</View>

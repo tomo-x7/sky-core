@@ -1,6 +1,4 @@
 import type { AppBskyFeedDefs, ComAtprotoLabelDefs } from "@atproto/api";
-import { Plural, Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a } from "#/alf";
@@ -20,7 +18,6 @@ export function LabelsOnMe({
 	size?: ButtonSize;
 	style?: StyleProp<ViewStyle>;
 }) {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const control = useLabelsOnMeDialogControl();
 
@@ -40,7 +37,7 @@ export function LabelsOnMe({
 				variant="solid"
 				color="secondary"
 				size={size || "small"}
-				label={_(msg`View information about these labels`)}
+				label={"View information about these labels"}
 				onPress={() => {
 					control.open();
 				}}
@@ -48,15 +45,15 @@ export function LabelsOnMe({
 				<ButtonIcon position="left" icon={CircleInfo} />
 				<ButtonText style={[a.leading_snug]}>
 					{type === "account" ? (
-						<Trans>
+						<>
 							<Plural value={labels.length} one="# label has" other="# labels have" /> been placed on this
 							account
-						</Trans>
+						</>
 					) : (
-						<Trans>
+						<>
 							<Plural value={labels.length} one="# label has" other="# labels have" /> been placed on this
 							content
-						</Trans>
+						</>
 					)}
 				</ButtonText>
 			</Button>

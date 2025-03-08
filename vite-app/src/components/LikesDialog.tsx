@@ -74,7 +74,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 	return (
 		<Dialog.Inner label={_(msg`Users that have liked this content or profile`)}>
 			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_lg]}>
-				<Trans>Liked by</Trans>
+				Liked by
 			</Text>
 
 			{isLoading ? (
@@ -86,7 +86,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 			) : likes.length === 0 ? (
 				<View style={[t.atoms.bg_contrast_50, a.px_md, a.py_xl, a.rounded_md]}>
 					<Text style={[a.text_center]}>
-						<Trans>Nobody has liked this yet. Maybe you should be the first!</Trans>
+						Nobody has liked this yet. Maybe you should be the first!
 					</Text>
 				</View>
 			) : (

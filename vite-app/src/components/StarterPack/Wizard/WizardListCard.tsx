@@ -82,7 +82,7 @@ function WizardListCard({
 					onPress={onPress}
 				>
 					<ButtonText>
-						<Trans>Remove</Trans>
+						<>Remove</>
 					</ButtonText>
 				</Button>
 			) : null}

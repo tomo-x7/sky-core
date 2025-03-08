@@ -60,7 +60,7 @@ export function InboxPreview({
 				)}
 			</View>
 			<ButtonText style={[a.flex_1, a.font_bold, a.text_left]} numberOfLines={1}>
-				<Trans>Chat requests</Trans>
+				<>Chat requests</>
 			</ButtonText>
 			<AvatarStack profiles={profiles} backgroundColor={t.atoms.bg_contrast_25.backgroundColor} />
 			<ButtonIcon icon={ArrowRightIcon} size="lg" />

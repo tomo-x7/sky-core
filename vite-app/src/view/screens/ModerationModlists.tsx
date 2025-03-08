@@ -59,7 +59,7 @@ export function ModerationModlistsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align="left">
 					<Layout.Header.TitleText>
-						<Trans>Moderation Lists</Trans>
+						<>Moderation Lists</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button

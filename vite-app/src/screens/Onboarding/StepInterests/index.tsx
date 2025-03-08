@@ -109,14 +109,14 @@ export function StepInterests() {
 		dispatch({ type: "finish" });
 	}, [onboardDispatch, dispatch]);
 
-	const title = isError ? <Trans>Oh no! Something went wrong.</Trans> : <Trans>What are your interests?</Trans>;
+	const title = isError ? <>Oh no! Something went wrong.</> : <>What are your interests?</>;
 	const description = isError ? (
-		<Trans>
+		<>
 			We weren't able to connect. Please try again to continue setting up your account. If it continues to fail,
 			you can skip this flow.
-		</Trans>
+		</>
 	) : (
-		<Trans>We'll use this to help customize your experience.</Trans>
+		<>We'll use this to help customize your experience.</>
 	);
 
 	return (
@@ -167,7 +167,7 @@ export function StepInterests() {
 									},
 								]}
 							>
-								<Trans>Error:</Trans>{" "}
+								<>Error:</>{" "}
 							</Text>
 							{error?.message || _(msg`an unknown error occurred`)}
 						</Text>
@@ -205,7 +205,7 @@ export function StepInterests() {
 							onPress={() => refetch()}
 						>
 							<ButtonText>
-								<Trans>Retry</Trans>
+								<>Retry</>
 							</ButtonText>
 							<ButtonIcon icon={ArrowRotateCounterClockwise} position="right" />
 						</Button>
@@ -217,7 +217,7 @@ export function StepInterests() {
 							onPress={skipOnboarding}
 						>
 							<ButtonText>
-								<Trans>Skip</Trans>
+								<>Skip</>
 							</ButtonText>
 						</Button>
 					</View>
@@ -231,7 +231,7 @@ export function StepInterests() {
 						onPress={saveInterests}
 					>
 						<ButtonText>
-							<Trans>Continue</Trans>
+							<>Continue</>
 						</ButtonText>
 						<ButtonIcon icon={saving ? Loader : ChevronRight} position="right" />
 					</Button>

@@ -637,7 +637,7 @@ function Header({
 						>
 							<View style={[palInverted.view, styles.btn]}>
 								<Text style={palInverted.text}>
-									<Trans>Subscribe</Trans>
+									<>Subscribe</>
 								</Text>
 							</View>
 						</NativeDropdown>
@@ -744,7 +744,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
 						<ButtonText>
-							<Trans>Start adding people!</Trans>
+							<>Start adding people!</>
 						</ButtonText>
 					</NewButton>
 				)}
@@ -818,7 +818,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
 						<ButtonText>
-							<Trans>Add people</Trans>
+							<>Add people</>
 						</ButtonText>
 					</NewButton>
 				</View>
@@ -837,7 +837,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				>
 					<ButtonIcon icon={PersonPlusIcon} />
 					<ButtonText>
-						<Trans>Add people</Trans>
+						<>Add people</>
 					</ButtonText>
 				</NewButton>
 			</View>
@@ -859,7 +859,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
 						<ButtonText>
-							<Trans>Start adding people!</Trans>
+							<>Start adding people!</>
 						</ButtonText>
 					</NewButton>
 				)}
@@ -910,7 +910,7 @@ function ErrorScreen({ error }: { error: string }) {
 			]}
 		>
 			<Text type="title-lg" style={[pal.text, s.mb10]}>
-				<Trans>Could not load list</Trans>
+				<>Could not load list</>
 			</Text>
 			<Text type="md" style={[pal.text, s.mb20]}>
 				{error}
@@ -925,7 +925,7 @@ function ErrorScreen({ error }: { error: string }) {
 					style={{ flexShrink: 1 }}
 				>
 					<Text type="button" style={pal.text}>
-						<Trans>Go Back</Trans>
+						<>Go Back</>
 					</Text>
 				</Button>
 			</View>

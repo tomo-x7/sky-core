@@ -102,7 +102,7 @@ export function RichTextTag({
 						}}
 					>
 						<Menu.ItemText>
-							<Trans>See #{tag} posts</Trans>
+							<>See #{tag} posts</>
 						</Menu.ItemText>
 						<Menu.ItemIcon icon={Search} />
 					</Menu.Item>
@@ -117,7 +117,7 @@ export function RichTextTag({
 							}}
 						>
 							<Menu.ItemText>
-								<Trans>See #{tag} posts by user</Trans>
+								<>See #{tag} posts by user</>
 							</Menu.ItemText>
 							<Menu.ItemIcon icon={Person} />
 						</Menu.Item>

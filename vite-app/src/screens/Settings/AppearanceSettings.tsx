@@ -71,7 +71,7 @@ export function AppearanceSettingsScreen({}: Props) {
 					<Layout.Header.BackButton />
 					<Layout.Header.Content>
 						<Layout.Header.TitleText>
-							<Trans>Appearance</Trans>
+							<>Appearance</>
 						</Layout.Header.TitleText>
 					</Layout.Header.Content>
 					<Layout.Header.Slot />

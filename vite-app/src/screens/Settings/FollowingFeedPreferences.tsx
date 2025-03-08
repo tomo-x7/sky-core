@@ -36,7 +36,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Following Feed Preferences</Trans>
+						<>Following Feed Preferences</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -45,7 +45,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 				<SettingsList.Container>
 					<SettingsList.Item>
 						<Admonition type="tip" style={[a.flex_1]}>
-							<Trans>These settings only apply to the Following feed.</Trans>
+							<>These settings only apply to the Following feed.</>
 						</Admonition>
 					</SettingsList.Item>
 					<Toggle.Item
@@ -62,7 +62,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 						<SettingsList.Item>
 							<SettingsList.ItemIcon icon={BubblesIcon} />
 							<SettingsList.ItemText>
-								<Trans>Show replies</Trans>
+								<>Show replies</>
 							</SettingsList.ItemText>
 							<Toggle.Platform />
 						</SettingsList.Item>
@@ -81,7 +81,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 						<SettingsList.Item>
 							<SettingsList.ItemIcon icon={RepostIcon} />
 							<SettingsList.ItemText>
-								<Trans>Show reposts</Trans>
+								<>Show reposts</>
 							</SettingsList.ItemText>
 							<Toggle.Platform />
 						</SettingsList.Item>
@@ -100,7 +100,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 						<SettingsList.Item>
 							<SettingsList.ItemIcon icon={QuoteIcon} />
 							<SettingsList.ItemText>
-								<Trans>Show quote posts</Trans>
+								<>Show quote posts</>
 							</SettingsList.ItemText>
 							<Toggle.Platform />
 						</SettingsList.Item>
@@ -109,7 +109,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={BeakerIcon} />
 						<SettingsList.ItemText>
-							<Trans>Experimental</Trans>
+							<>Experimental</>
 						</SettingsList.ItemText>
 						<Toggle.Item
 							type="checkbox"
@@ -124,7 +124,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 							style={[a.w_full, a.gap_md]}
 						>
 							<Toggle.LabelText style={[a.flex_1]}>
-								<Trans>Show samples of your saved feeds in your Following feed</Trans>
+								<>Show samples of your saved feeds in your Following feed</>
 							</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>

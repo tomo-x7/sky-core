@@ -82,7 +82,7 @@ const ImageAltTextInner = ({
 
 			<View>
 				<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>
-					<Trans>Add alt text</Trans>
+					<>Add alt text</>
 				</Text>
 
 				<View style={[t.atoms.bg_contrast_50, a.rounded_sm, a.overflow_hidden]}>
@@ -103,7 +103,7 @@ const ImageAltTextInner = ({
 				<View style={[a.gap_sm]}>
 					<View style={[a.relative, { width: "100%" }]}>
 						<TextField.LabelText>
-							<Trans>Descriptive alt text</Trans>
+							<>Descriptive alt text</>
 						</TextField.LabelText>
 						<TextField.Root>
 							<Dialog.Input
@@ -123,9 +123,9 @@ const ImageAltTextInner = ({
 						<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
 							<CircleInfo fill={t.palette.negative_500} />
 							<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-								<Trans>
+								<>
 									Alt text will be truncated. Limit: {i18n.number(MAX_ALT_TEXT)} characters.
-								</Trans>
+								</>
 							</Text>
 						</View>
 					)}
@@ -144,7 +144,7 @@ const ImageAltTextInner = ({
 						style={[a.flex_grow]}
 					>
 						<ButtonText>
-							<Trans>Save</Trans>
+							<>Save</>
 						</ButtonText>
 					</Button>
 				</AltTextCounterWrapper>

@@ -451,7 +451,7 @@ export function FeedsScreen(_props: Props) {
 						}}
 					>
 						<Text type="lg" style={pal.textLight}>
-							<Trans>No results found for "{query}"</Trans>
+							<>No results found for "{query}"</>
 						</Text>
 					</View>
 				);
@@ -481,7 +481,7 @@ export function FeedsScreen(_props: Props) {
 					<Layout.Header.BackButton />
 					<Layout.Header.Content>
 						<Layout.Header.TitleText>
-							<Trans>Feeds</Trans>
+							<>Feeds</>
 						</Layout.Header.TitleText>
 					</Layout.Header.Content>
 					<Layout.Header.Slot>
@@ -633,10 +633,10 @@ function FeedsSavedHeader() {
 			<IconCircle icon={ListSparkle_Stroke2_Corner0_Rounded} size="lg" />
 			<View style={[a.flex_1, a.gap_xs]}>
 				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>
-					<Trans>My Feeds</Trans>
+					<>My Feeds</>
 				</Text>
 				<Text style={[t.atoms.text_contrast_high]}>
-					<Trans>All the feeds you've saved, right in one place.</Trans>
+					<>All the feeds you've saved, right in one place.</>
 				</Text>
 			</View>
 		</View>
@@ -657,12 +657,12 @@ function FeedsAboutHeader() {
 			<IconCircle icon={ListMagnifyingGlass_Stroke2_Corner0_Rounded} size="lg" />
 			<View style={[a.flex_1, a.gap_sm]}>
 				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>
-					<Trans>Discover New Feeds</Trans>
+					<>Discover New Feeds</>
 				</Text>
 				<Text style={[t.atoms.text_contrast_high]}>
-					<Trans>
+					<>
 						Choose your own timeline! Feeds built by the community help you find content you love.
-					</Trans>
+					</>
 				</Text>
 			</View>
 		</View>

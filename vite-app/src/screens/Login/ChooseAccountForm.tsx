@@ -65,10 +65,10 @@ export const ChooseAccountForm = ({
 	);
 
 	return (
-		<FormContainer testID="chooseAccountForm" titleText={<Trans>Select account</Trans>}>
+		<FormContainer testID="chooseAccountForm" titleText={<>Select account</>}>
 			<View>
 				<TextField.LabelText>
-					<Trans>Sign in as...</Trans>
+					<>Sign in as...</>
 				</TextField.LabelText>
 				<AccountList
 					onSelectAccount={onSelect}

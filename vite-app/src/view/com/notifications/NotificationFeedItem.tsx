@@ -199,7 +199,7 @@ let NotificationFeedItem = ({
 				)
 			: _(msg`${firstAuthorName} liked your post`);
 		notificationContent = hasMultipleAuthors ? (
-			<Trans>
+			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
 					<Plural
@@ -209,9 +209,9 @@ let NotificationFeedItem = ({
 					/>
 				</Text>{" "}
 				liked your post
-			</Trans>
+			</>
 		) : (
-			<Trans>{firstAuthorLink} liked your post</Trans>
+			<>{firstAuthorLink} liked your post</>
 		);
 	} else if (item.type === "repost") {
 		a11yLabel = hasMultipleAuthors
@@ -223,7 +223,7 @@ let NotificationFeedItem = ({
 				)
 			: _(msg`${firstAuthorName} reposted your post`);
 		notificationContent = hasMultipleAuthors ? (
-			<Trans>
+			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
 					<Plural
@@ -233,9 +233,9 @@ let NotificationFeedItem = ({
 					/>
 				</Text>{" "}
 				reposted your post
-			</Trans>
+			</>
 		) : (
-			<Trans>{firstAuthorLink} reposted your post</Trans>
+			<>{firstAuthorLink} reposted your post</>
 		);
 		icon = <RepostIcon size="xl" style={{ color: t.palette.positive_600 }} />;
 	} else if (item.type === "follow") {
@@ -265,7 +265,7 @@ let NotificationFeedItem = ({
 			 * see `src/state/queries/notifications/util.ts`
 			 */
 			a11yLabel = _(msg`${firstAuthorName} followed you back`);
-			notificationContent = <Trans>{firstAuthorLink} followed you back</Trans>;
+			notificationContent = <>{firstAuthorLink} followed you back</>;
 		} else {
 			a11yLabel = hasMultipleAuthors
 				? _(
@@ -276,7 +276,7 @@ let NotificationFeedItem = ({
 					)
 				: _(msg`${firstAuthorName} followed you`);
 			notificationContent = hasMultipleAuthors ? (
-				<Trans>
+				<>
 					{firstAuthorLink} and{" "}
 					<Text style={[pal.text, s.bold]}>
 						<Plural
@@ -286,9 +286,9 @@ let NotificationFeedItem = ({
 						/>
 					</Text>{" "}
 					followed you
-				</Trans>
+				</>
 			) : (
-				<Trans>{firstAuthorLink} followed you</Trans>
+				<>{firstAuthorLink} followed you</>
 			);
 		}
 		icon = <PersonPlusIcon size="xl" style={{ color: t.palette.primary_500 }} />;
@@ -302,7 +302,7 @@ let NotificationFeedItem = ({
 				)
 			: _(msg`${firstAuthorName} liked your custom feed`);
 		notificationContent = hasMultipleAuthors ? (
-			<Trans>
+			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
 					<Plural
@@ -312,9 +312,9 @@ let NotificationFeedItem = ({
 					/>
 				</Text>{" "}
 				liked your custom feed
-			</Trans>
+			</>
 		) : (
-			<Trans>{firstAuthorLink} liked your custom feed</Trans>
+			<>{firstAuthorLink} liked your custom feed</>
 		);
 	} else if (item.type === "starterpack-joined") {
 		a11yLabel = hasMultipleAuthors
@@ -326,7 +326,7 @@ let NotificationFeedItem = ({
 				)
 			: _(msg`${firstAuthorName} signed up with your starter pack`);
 		notificationContent = hasMultipleAuthors ? (
-			<Trans>
+			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
 					<Plural
@@ -336,9 +336,9 @@ let NotificationFeedItem = ({
 					/>
 				</Text>{" "}
 				signed up with your starter pack
-			</Trans>
+			</>
 		) : (
-			<Trans>{firstAuthorLink} signed up with your starter pack</Trans>
+			<>{firstAuthorLink} signed up with your starter pack</>
 		);
 		icon = (
 			<View style={{ height: 30, width: 30 }}>
@@ -526,7 +526,7 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 			}}
 		>
 			<ButtonText>
-				<Trans>Say hello!</Trans>
+				<>Say hello!</>
 			</ButtonText>
 		</Button>
 	);

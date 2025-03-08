@@ -118,7 +118,7 @@ export function SubmitView({
 
 			<View style={[a.gap_md]}>
 				<Text style={[t.atoms.text_contrast_medium]}>
-					<Trans>Select the moderation service(s) to report to</Trans>
+					<>Select the moderation service(s) to report to</>
 				</Text>
 
 				<Toggle.Group label="Select mod services" values={selectedServices} onChange={setSelectedServices}>
@@ -139,7 +139,7 @@ export function SubmitView({
 			</View>
 			<View style={[a.gap_md]}>
 				<Text style={[t.atoms.text_contrast_medium]}>
-					<Trans>Optionally provide additional information below:</Trans>
+					<>Optionally provide additional information below:</>
 				</Text>
 
 				<View style={[a.relative, a.w_full]}>
@@ -174,7 +174,7 @@ export function SubmitView({
 				{!selectedServices.length ||
 					(error && (
 						<Text style={[a.flex_1, a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-							{error ? error : <Trans>You must select at least one labeler for a report</Trans>}
+							{error ? error : <>You must select at least one labeler for a report</>}
 						</Text>
 					))}
 
@@ -188,7 +188,7 @@ export function SubmitView({
 					disabled={!selectedServices.length}
 				>
 					<ButtonText>
-						<Trans>Send report</Trans>
+						<>Send report</>
 					</ButtonText>
 					<ButtonIcon icon={submitting ? Loader : SendIcon} />
 				</Button>

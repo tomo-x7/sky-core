@@ -67,13 +67,13 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 			) : (
 				<>
 					<Text style={[a.text_2xl, a.font_heavy, a.pb_xs, a.leading_tight]}>
-						{isAccount ? <Trans>Labels on your account</Trans> : <Trans>Labels on your content</Trans>}
+						{isAccount ? <>Labels on your account</> : <>Labels on your content</>}
 					</Text>
 					<Text style={[a.text_md, a.leading_snug]}>
 						{containsSelfLabel ? (
-							<Trans>You may appeal non-self labels if you feel they were placed in error.</Trans>
+							<>You may appeal non-self labels if you feel they were placed in error.</>
 						) : (
-							<Trans>You may appeal these labels if you feel they were placed in error.</Trans>
+							<>You may appeal these labels if you feel they were placed in error.</>
 						)}
 					</Text>
 
@@ -132,7 +132,7 @@ function Label({
 							onPress={() => onPressAppeal(label)}
 						>
 							<ButtonText>
-								<Trans>Appeal</Trans>
+								Appeal
 							</ButtonText>
 						</Button>
 					</View>
@@ -144,12 +144,12 @@ function Label({
 			<View style={[a.px_md, a.py_sm, t.atoms.bg_contrast_25]}>
 				{isSelfLabel ? (
 					<Text style={[t.atoms.text_contrast_medium]}>
-						<Trans>This label was applied by you.</Trans>
+						This label was applied by you.
 					</Text>
 				) : (
 					<View style={[a.flex_row, a.justify_between, a.gap_xl, { paddingBottom: 1 }]}>
 						<Text style={[a.flex_1, a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
-							<Trans>
+							<>
 								Source:{" "}
 								<InlineLinkText
 									label={sourceName}
@@ -158,12 +158,12 @@ function Label({
 								>
 									{sourceName}
 								</InlineLinkText>
-							</Trans>
+							</>
 						</Text>
 						{label.exp && (
 							<View>
 								<Text style={[a.leading_snug, a.text_sm, a.italic, t.atoms.text_contrast_medium]}>
-									<Trans>Expires in {timeDiff(Date.now(), label.exp)}</Trans>
+									<>Expires in {timeDiff(Date.now(), label.exp)}</>
 								</Text>
 							</View>
 						)}
@@ -228,10 +228,10 @@ function AppealForm({
 		<>
 			<View>
 				<Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>
-					<Trans>Appeal "{strings.name}" label</Trans>
+					<>Appeal "{strings.name}" label</>
 				</Text>
 				<Text style={[a.text_md, a.leading_snug]}>
-					<Trans>
+					<>
 						This appeal will be sent to{" "}
 						<InlineLinkText
 							label={sourceName}
@@ -242,7 +242,7 @@ function AppealForm({
 							{sourceName}
 						</InlineLinkText>
 						.
-					</Trans>
+					</>
 				</Text>
 			</View>
 			<View style={[a.my_md]}>

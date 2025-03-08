@@ -65,13 +65,13 @@ export function Component({}: {}) {
 			]}
 		>
 			<Text style={[pal.text, styles.title]}>
-				<Trans>Content Languages</Trans>
+				<>Content Languages</>
 			</Text>
 			<Text style={[pal.text, styles.description]}>
-				<Trans>Which languages would you like to see in your algorithmic feeds?</Trans>
+				<>Which languages would you like to see in your algorithmic feeds?</>
 			</Text>
 			<Text style={[pal.textLight, styles.description]}>
-				<Trans>Leave them all unchecked to see any language.</Trans>
+				<>Leave them all unchecked to see any language.</>
 			</Text>
 			<ScrollView style={styles.scrollContainer}>
 				{languages.map((lang) => (

@@ -45,7 +45,7 @@ export function AppPasswordsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>App Passwords</Trans>
+						<>App Passwords</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -61,10 +61,10 @@ export function AppPasswordsScreen({}: Props) {
 					<SettingsList.Container>
 						<SettingsList.Item>
 							<Admonition type="tip" style={[a.flex_1]}>
-								<Trans>
+								<>
 									Use app passwords to sign in to other Bluesky clients without giving full access to
 									your account or password.
-								</Trans>
+								</>
 							</Admonition>
 						</SettingsList.Item>
 						<SettingsList.Item>
@@ -78,7 +78,7 @@ export function AppPasswordsScreen({}: Props) {
 							>
 								<ButtonIcon icon={PlusIcon} />
 								<ButtonText>
-									<Trans>Add App Password</Trans>
+									<>Add App Password</>
 								</ButtonText>
 							</Button>
 						</SettingsList.Item>
@@ -153,7 +153,7 @@ function AppPasswordCard({
 				<View style={[a.gap_xs]}>
 					<Text style={[t.atoms.text, a.text_md, a.font_bold]}>{appPassword.name}</Text>
 					<Text style={[t.atoms.text_contrast_medium]}>
-						<Trans>
+						<>
 							Created{" "}
 							{i18n.date(appPassword.createdAt, {
 								year: "numeric",
@@ -162,7 +162,7 @@ function AppPasswordCard({
 								hour: "2-digit",
 								minute: "2-digit",
 							})}
-						</Trans>
+						</>
 					</Text>
 				</View>
 				<Button
@@ -180,7 +180,7 @@ function AppPasswordCard({
 				<View style={[a.flex_row, a.gap_sm, a.align_center, a.mt_md]}>
 					<WarningIcon style={[{ color: colors.warning[t.scheme] }]} />
 					<Text style={t.atoms.text_contrast_high}>
-						<Trans>Allows access to direct messages</Trans>
+						<>Allows access to direct messages</>
 					</Text>
 				</View>
 			)}

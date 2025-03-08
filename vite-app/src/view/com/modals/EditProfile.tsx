@@ -131,7 +131,7 @@ export function Component({
 		<KeyboardAvoidingView style={s.flex1} behavior="height">
 			<ScrollView style={[pal.view]} testID="editProfileModal">
 				<Text style={[styles.title, pal.text]}>
-					<Trans>Edit my profile</Trans>
+					<>Edit my profile</>
 				</Text>
 				<View style={styles.photos}>
 					<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
@@ -152,7 +152,7 @@ export function Component({
 				<View style={styles.form}>
 					<View>
 						<Text style={[styles.label, pal.text]}>
-							<Trans>Display Name</Trans>
+							<>Display Name</>
 						</Text>
 						<TextInput
 							testID="editProfileDisplayNameInput"
@@ -168,7 +168,7 @@ export function Component({
 					</View>
 					<View style={s.pb10}>
 						<Text style={[styles.label, pal.text]}>
-							<Trans>Description</Trans>
+							<>Description</>
 						</Text>
 						<TextInput
 							testID="editProfileDescriptionInput"
@@ -204,7 +204,7 @@ export function Component({
 								style={[styles.btn]}
 							>
 								<Text style={[s.white, s.bold]}>
-									<Trans>Save Changes</Trans>
+									<>Save Changes</>
 								</Text>
 							</LinearGradient>
 						</TouchableOpacity>
@@ -222,7 +222,7 @@ export function Component({
 						>
 							<View style={[styles.btn]}>
 								<Text style={[s.black, s.bold, pal.text]}>
-									<Trans>Cancel</Trans>
+									<>Cancel</>
 								</Text>
 							</View>
 						</AnimatedTouchableOpacity>

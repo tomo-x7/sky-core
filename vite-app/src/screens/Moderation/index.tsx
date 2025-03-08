@@ -45,10 +45,10 @@ function ErrorState({ error }: { error: string }) {
 	return (
 		<View style={[a.p_xl]}>
 			<Text style={[a.text_md, a.leading_normal, a.pb_md, t.atoms.text_contrast_medium]}>
-				<Trans>
+				<>
 					Hmmmm, it seems we're having trouble loading this data. See below for more details. If this issue
 					persists, please contact us.
-				</Trans>
+				</>
 			</Text>
 			<View style={[a.relative, a.py_md, a.px_lg, a.rounded_md, a.mb_2xl, t.atoms.bg_contrast_25]}>
 				<Text style={[a.text_md, a.leading_normal]}>{error}</Text>
@@ -150,7 +150,7 @@ export function ModerationScreenInner({
 	return (
 		<View style={[a.pt_2xl, a.px_lg, gtMobile && a.px_2xl]}>
 			<Text style={[a.text_md, a.font_bold, a.pb_md, t.atoms.text_contrast_high]}>
-				<Trans>Moderation tools</Trans>
+				<>Moderation tools</>
 			</Text>
 
 			<View style={[a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25]}>
@@ -222,7 +222,7 @@ export function ModerationScreenInner({
 			</View>
 
 			<Text style={[a.pt_2xl, a.pb_md, a.text_md, a.font_bold, t.atoms.text_contrast_high]}>
-				<Trans>Content filters</Trans>
+				<>Content filters</>
 			</Text>
 
 			<View style={[a.gap_md]}>
@@ -239,10 +239,10 @@ export function ModerationScreenInner({
 							style={[a.justify_between, a.rounded_md, a.px_lg, a.py_lg]}
 						>
 							<ButtonText>
-								<Trans>Confirm your age:</Trans>
+								<>Confirm your age:</>
 							</ButtonText>
 							<ButtonText>
-								<Trans>Set birthdate</Trans>
+								<>Set birthdate</>
 							</ButtonText>
 						</Button>
 
@@ -263,7 +263,7 @@ export function ModerationScreenInner({
 								]}
 							>
 								<Text style={[a.font_bold, t.atoms.text_contrast_high]}>
-									<Trans>Enable adult content</Trans>
+									<>Enable adult content</>
 								</Text>
 								<Toggle.Item
 									label={_(msg`Toggle to enable or disable adult content`)}
@@ -274,7 +274,7 @@ export function ModerationScreenInner({
 								>
 									<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 										<Text style={[t.atoms.text_contrast_medium]}>
-											{adultContentEnabled ? <Trans>Enabled</Trans> : <Trans>Disabled</Trans>}
+											{adultContentEnabled ? <>Enabled</> : <>Disabled</>}
 										</Text>
 										<Toggle.Switch />
 									</View>
@@ -283,7 +283,7 @@ export function ModerationScreenInner({
 							{disabledOnIOS && (
 								<View style={[a.pb_lg, a.px_lg]}>
 									<Text>
-										<Trans>
+										<>
 											Adult content can only be enabled via the Web at{" "}
 											<InlineLinkText
 												label={_(msg`The Bluesky web application`)}
@@ -297,7 +297,7 @@ export function ModerationScreenInner({
 												bsky.app
 											</InlineLinkText>
 											.
-										</Trans>
+										</>
 									</Text>
 								</View>
 							)}
@@ -319,7 +319,7 @@ export function ModerationScreenInner({
 			</View>
 
 			<Text style={[a.text_md, a.font_bold, a.pt_2xl, a.pb_md, t.atoms.text_contrast_high]}>
-				<Trans>Advanced</Trans>
+				<>Advanced</>
 			</Text>
 
 			{isLabelersLoading ? (
@@ -329,7 +329,7 @@ export function ModerationScreenInner({
 			) : labelersError || !labelers ? (
 				<View style={[a.p_lg, a.rounded_sm, t.atoms.bg_contrast_25]}>
 					<Text>
-						<Trans>We were unable to load your configured labelers at this time.</Trans>
+						<>We were unable to load your configured labelers at this time.</>
 					</Text>
 				</View>
 			) : (

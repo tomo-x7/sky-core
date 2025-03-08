@@ -225,10 +225,10 @@ export function StepFinished() {
 			<IconCircle icon={Check} style={[a.mb_2xl]} />
 
 			<TitleText>
-				<Trans>You're ready to go!</Trans>
+				<>You're ready to go!</>
 			</TitleText>
 			<DescriptionText>
-				<Trans>We hope you have a wonderful time. Remember, Bluesky is:</Trans>
+				<>We hope you have a wonderful time. Remember, Bluesky is:</>
 			</DescriptionText>
 
 			<View style={[a.pt_5xl, a.gap_3xl]}>
@@ -236,10 +236,10 @@ export function StepFinished() {
 					<IconCircle icon={Growth} size="lg" style={{ width: 48, height: 48 }} />
 					<View style={[a.flex_1, a.gap_xs]}>
 						<Text style={[a.font_bold, a.text_lg]}>
-							<Trans>Public</Trans>
+							<>Public</>
 						</Text>
 						<Text style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-							<Trans>Your posts, likes, and blocks are public. Mutes are private.</Trans>
+							<>Your posts, likes, and blocks are public. Mutes are private.</>
 						</Text>
 					</View>
 				</View>
@@ -247,10 +247,10 @@ export function StepFinished() {
 					<IconCircle icon={News} size="lg" style={{ width: 48, height: 48 }} />
 					<View style={[a.flex_1, a.gap_xs]}>
 						<Text style={[a.font_bold, a.text_lg]}>
-							<Trans>Open</Trans>
+							<>Open</>
 						</Text>
 						<Text style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-							<Trans>Never lose access to your followers or data.</Trans>
+							<>Never lose access to your followers or data.</>
 						</Text>
 					</View>
 				</View>
@@ -258,10 +258,10 @@ export function StepFinished() {
 					<IconCircle icon={Trending} size="lg" style={{ width: 48, height: 48 }} />
 					<View style={[a.flex_1, a.gap_xs]}>
 						<Text style={[a.font_bold, a.text_lg]}>
-							<Trans>Flexible</Trans>
+							<>Flexible</>
 						</Text>
 						<Text style={[t.atoms.text_contrast_medium, a.text_md, a.leading_snug]}>
-							<Trans>Choose the algorithms that power your custom feeds.</Trans>
+							<>Choose the algorithms that power your custom feeds.</>
 						</Text>
 					</View>
 				</View>
@@ -277,7 +277,7 @@ export function StepFinished() {
 					label={_(msg`Complete onboarding and start using your account`)}
 					onPress={finishOnboarding}
 				>
-					<ButtonText>{saving ? <Trans>Finalizing</Trans> : <Trans>Let's go!</Trans>}</ButtonText>
+					<ButtonText>{saving ? <>Finalizing</> : <>Let's go!</>}</ButtonText>
 					{saving && <ButtonIcon icon={Loader} position="right" />}
 				</Button>
 			</OnboardingControls.Portal>

@@ -94,14 +94,14 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 								</Text>
 								<Text style={[{ color: "white" }]}>
 									{starterPack.feeds?.length ? (
-										<Trans>
+										<>
 											You'll follow the suggested users and feeds once you finish creating your
 											account!
-										</Trans>
+										</>
 									) : (
-										<Trans>
+										<>
 											You'll follow the suggested users once you finish creating your account!
-										</Trans>
+										</>
 									)}
 								</Text>
 							</LinearGradientBackground>
@@ -110,20 +110,20 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 					<View style={[a.flex_1, a.px_xl, a.pt_2xl, !gtMobile && { paddingBottom: 100 }]}>
 						<View style={[a.gap_sm, a.pb_3xl]}>
 							<Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
-								<Trans>
+								<>
 									Step {state.activeStep + 1} of{" "}
 									{state.serviceDescription && !state.serviceDescription.phoneVerificationRequired
 										? "2"
 										: "3"}
-								</Trans>
+								</>
 							</Text>
 							<Text style={[a.text_3xl, a.font_bold]}>
 								{state.activeStep === SignupStep.INFO ? (
-									<Trans>Your account</Trans>
+									<>Your account</>
 								) : state.activeStep === SignupStep.HANDLE ? (
-									<Trans>Choose your username</Trans>
+									<>Choose your username</>
 								) : (
-									<Trans>Complete the challenge</Trans>
+									<>Complete the challenge</>
 								)}
 							</Text>
 						</View>
@@ -148,13 +148,13 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 						<View style={[a.w_full, a.py_lg, a.flex_row, a.gap_lg, a.align_center]}>
 							<AppLanguageDropdown />
 							<Text style={[t.atoms.text_contrast_medium, !gtMobile && a.text_md]}>
-								<Trans>Having trouble?</Trans>{" "}
+								<>Having trouble?</>{" "}
 								<InlineLinkText
 									label={_(msg`Contact support`)}
 									to={FEEDBACK_FORM_URL({ email: state.email })}
 									style={[!gtMobile && a.text_md]}
 								>
-									<Trans>Contact support</Trans>
+									<>Contact support</>
 								</InlineLinkText>
 							</Text>
 						</View>

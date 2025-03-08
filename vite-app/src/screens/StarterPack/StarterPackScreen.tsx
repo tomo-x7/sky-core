@@ -393,7 +393,7 @@ function Header({
 								onPress={onOpenShareDialog}
 							>
 								<ButtonText>
-									<Trans>Share</Trans>
+									<>Share</>
 								</ButtonText>
 							</Button>
 						) : (
@@ -407,7 +407,7 @@ function Header({
 								style={[a.flex_row, a.gap_xs, a.align_center]}
 							>
 								<ButtonText>
-									<Trans>Follow all</Trans>
+									<>Follow all</>
 								</ButtonText>
 								{isProcessing && <Loader size="xs" />}
 							</Button>
@@ -437,7 +437,7 @@ function Header({
 							size="large"
 						>
 							<ButtonText style={[a.text_lg]}>
-								<Trans>Join Bluesky</Trans>
+								<>Join Bluesky</>
 							</ButtonText>
 						</Button>
 					) : null}
@@ -449,7 +449,7 @@ function Header({
 								color={t.atoms.text_contrast_medium.color}
 							/>
 							<Text style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]}>
-								<Trans>{starterPack.joinedAllTimeCount || 0} people have used this starter pack!</Trans>
+								<>{starterPack.joinedAllTimeCount || 0} people have used this starter pack!</>
 							</Text>
 						</View>
 					) : null}
@@ -543,7 +543,7 @@ function OverflowMenu({
 								}}
 							>
 								<Menu.ItemText>
-									<Trans>Edit</Trans>
+									<>Edit</>
 								</Menu.ItemText>
 								<Menu.ItemIcon icon={Pencil} position="right" />
 							</Menu.Item>
@@ -555,7 +555,7 @@ function OverflowMenu({
 								}}
 							>
 								<Menu.ItemText>
-									<Trans>Delete</Trans>
+									<>Delete</>
 								</Menu.ItemText>
 								<Menu.ItemIcon icon={Trash} position="right" />
 							</Menu.Item>
@@ -569,7 +569,7 @@ function OverflowMenu({
 									onPress={onOpenShareDialog}
 								>
 									<Menu.ItemText>
-										<Trans>Share link</Trans>
+										<>Share link</>
 									</Menu.ItemText>
 									<Menu.ItemIcon icon={ArrowOutOfBox} position="right" />
 								</Menu.Item>
@@ -577,7 +577,7 @@ function OverflowMenu({
 
 							<Menu.Item label={_(msg`Report starter pack`)} onPress={() => reportDialogControl.open()}>
 								<Menu.ItemText>
-									<Trans>Report starter pack</Trans>
+									<>Report starter pack</>
 								</Menu.ItemText>
 								<Menu.ItemIcon icon={CircleInfo} position="right" />
 							</Menu.Item>
@@ -598,10 +598,10 @@ function OverflowMenu({
 
 			<Prompt.Outer control={deleteDialogControl}>
 				<Prompt.TitleText>
-					<Trans>Delete starter pack?</Trans>
+					<>Delete starter pack?</>
 				</Prompt.TitleText>
 				<Prompt.DescriptionText>
-					<Trans>Are you sure you want to delete this starter pack?</Trans>
+					<>Are you sure you want to delete this starter pack?</>
 				</Prompt.DescriptionText>
 				{deleteError && (
 					<View
@@ -618,7 +618,7 @@ function OverflowMenu({
 					>
 						<View style={[a.flex_1, a.gap_2xs]}>
 							<Text style={[a.font_bold]}>
-								<Trans>Unable to delete</Trans>
+								<>Unable to delete</>
 							</Text>
 							<Text style={[a.leading_snug]}>{cleanError(deleteError)}</Text>
 						</View>
@@ -634,7 +634,7 @@ function OverflowMenu({
 						onPress={onDeleteStarterPack}
 					>
 						<ButtonText>
-							<Trans>Delete</Trans>
+							<>Delete</>
 						</ButtonText>
 						{isDeletePending && <ButtonIcon icon={Loader} />}
 					</Button>
@@ -677,7 +677,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 			<View style={[a.py_4xl, a.px_xl, a.align_center, a.gap_5xl]}>
 				<View style={[a.w_full, a.align_center, a.gap_lg]}>
 					<Text style={[a.font_bold, a.text_3xl]}>
-						<Trans>Starter pack is invalid</Trans>
+						<>Starter pack is invalid</>
 					</Text>
 					<Text
 						style={[
@@ -688,10 +688,10 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 							gtMobile ? { width: 450 } : [a.w_full, a.px_lg],
 						]}
 					>
-						<Trans>
+						<>
 							The starter pack that you are trying to view is invalid. You may delete this starter pack
 							instead.
-						</Trans>
+						</>
 					</Text>
 				</View>
 				<View style={[a.gap_md, gtMobile ? { width: 350 } : [a.w_full, a.px_lg]]}>
@@ -708,7 +708,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						}}
 					>
 						<ButtonText>
-							<Trans>Delete</Trans>
+							<>Delete</>
 						</ButtonText>
 						{isProcessing && <Loader size="xs" color="white" />}
 					</Button>
@@ -722,7 +722,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						onPress={goBack}
 					>
 						<ButtonText>
-							<Trans>Go Back</Trans>
+							<>Go Back</>
 						</ButtonText>
 					</Button>
 				</View>

@@ -74,7 +74,7 @@ export function MaybeQuoteEmbed({
 			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
-					<Trans>Blocked</Trans>
+					<>Blocked</>
 				</Text>
 			</View>
 		);
@@ -83,7 +83,7 @@ export function MaybeQuoteEmbed({
 			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
-					<Trans>Deleted</Trans>
+					<>Deleted</>
 				</Text>
 			</View>
 		);
@@ -93,7 +93,7 @@ export function MaybeQuoteEmbed({
 			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
-					{isViewerOwner ? <Trans>Removed by you</Trans> : <Trans>Removed by author</Trans>}
+					{isViewerOwner ? <>Removed by you</> : <>Removed by author</>}
 				</Text>
 			</View>
 		);

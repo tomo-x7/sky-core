@@ -42,7 +42,7 @@ export function AccountSettingsScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
 					<Layout.Header.TitleText>
-						<Trans>Account</Trans>
+						<>Account</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
@@ -57,12 +57,12 @@ export function AccountSettingsScreen({}: Props) {
                 it wouldn't push the BadgeText/Chevron/whatever to the right.
                 TODO: find a general solution for this. workaround in this case is to set the ItemText to flex: 1 and BadgeText to flex: 0 -sfn */}
 						<SettingsList.ItemText style={[a.flex_0]}>
-							<Trans>Email</Trans>
+							<>Email</>
 						</SettingsList.ItemText>
 						{currentAccount && (
 							<>
 								<SettingsList.BadgeText style={[a.flex_1]}>
-									{currentAccount.email || <Trans>(no email)</Trans>}
+									{currentAccount.email || <>(no email)</>}
 								</SettingsList.BadgeText>
 								{currentAccount.emailConfirmed && (
 									<VerifiedIcon fill={t.palette.primary_500} size="md" />
@@ -80,7 +80,7 @@ export function AccountSettingsScreen({}: Props) {
 						>
 							<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
 							<SettingsList.ItemText style={[{ color: t.palette.primary_500 }, a.font_bold]}>
-								<Trans>Verify your email</Trans>
+								<>Verify your email</>
 							</SettingsList.ItemText>
 							<SettingsList.Chevron color={t.palette.primary_500} />
 						</SettingsList.PressableItem>
@@ -91,7 +91,7 @@ export function AccountSettingsScreen({}: Props) {
 					>
 						<SettingsList.ItemIcon icon={PencilIcon} />
 						<SettingsList.ItemText>
-							<Trans>Change email</Trans>
+							<>Change email</>
 						</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
@@ -99,7 +99,7 @@ export function AccountSettingsScreen({}: Props) {
 					<SettingsList.Item>
 						<SettingsList.ItemIcon icon={BirthdayCakeIcon} />
 						<SettingsList.ItemText>
-							<Trans>Birthday</Trans>
+							<>Birthday</>
 						</SettingsList.ItemText>
 						<SettingsList.BadgeButton label={_(msg`Edit`)} onPress={() => birthdayControl.open()} />
 					</SettingsList.Item>
@@ -109,7 +109,7 @@ export function AccountSettingsScreen({}: Props) {
 					>
 						<SettingsList.ItemIcon icon={LockIcon} />
 						<SettingsList.ItemText>
-							<Trans>Password</Trans>
+							<>Password</>
 						</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
@@ -120,7 +120,7 @@ export function AccountSettingsScreen({}: Props) {
 					>
 						<SettingsList.ItemIcon icon={AtIcon} />
 						<SettingsList.ItemText>
-							<Trans>Handle</Trans>
+							<>Handle</>
 						</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
@@ -128,7 +128,7 @@ export function AccountSettingsScreen({}: Props) {
 					<SettingsList.PressableItem label={_(msg`Export my data`)} onPress={() => exportCarControl.open()}>
 						<SettingsList.ItemIcon icon={CarIcon} />
 						<SettingsList.ItemText>
-							<Trans>Export my data</Trans>
+							<>Export my data</>
 						</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
@@ -139,7 +139,7 @@ export function AccountSettingsScreen({}: Props) {
 					>
 						<SettingsList.ItemIcon icon={FreezeIcon} />
 						<SettingsList.ItemText>
-							<Trans>Deactivate account</Trans>
+							<>Deactivate account</>
 						</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
@@ -150,7 +150,7 @@ export function AccountSettingsScreen({}: Props) {
 					>
 						<SettingsList.ItemIcon icon={Trash_Stroke2_Corner2_Rounded} />
 						<SettingsList.ItemText>
-							<Trans>Delete account</Trans>
+							<>Delete account</>
 						</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>

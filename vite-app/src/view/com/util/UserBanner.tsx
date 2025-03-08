@@ -121,7 +121,7 @@ export function UserBanner({
 								onPress={onOpenCamera}
 							>
 								<Menu.ItemText>
-									<Trans>Upload from Camera</Trans>
+									<>Upload from Camera</>
 								</Menu.ItemText>
 								<Menu.ItemIcon icon={Camera} />
 							</Menu.Item>
@@ -133,7 +133,7 @@ export function UserBanner({
 							onPress={onOpenLibrary}
 						>
 							<Menu.ItemText>
-								{isNative ? <Trans>Upload from Library</Trans> : <Trans>Upload from Files</Trans>}
+								{isNative ? <>Upload from Library</> : <>Upload from Files</>}
 							</Menu.ItemText>
 							<Menu.ItemIcon icon={Library} />
 						</Menu.Item>
@@ -148,7 +148,7 @@ export function UserBanner({
 									onPress={onRemoveBanner}
 								>
 									<Menu.ItemText>
-										<Trans>Remove Banner</Trans>
+										<>Remove Banner</>
 									</Menu.ItemText>
 									<Menu.ItemIcon icon={Trash} />
 								</Menu.Item>

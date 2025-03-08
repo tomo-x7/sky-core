@@ -89,11 +89,11 @@ export const SetNewPasswordForm = ({
 	};
 
 	return (
-		<FormContainer testID="setNewPasswordForm" titleText={<Trans>Set new password</Trans>}>
+		<FormContainer testID="setNewPasswordForm" titleText={<>Set new password</>}>
 			<Text style={[a.leading_snug, a.mb_sm]}>
-				<Trans>
+				<>
 					You will receive an email with a "reset code." Enter that code here, then enter your new password.
-				</Trans>
+				</>
 			</Text>
 
 			<View>
@@ -145,7 +145,7 @@ export const SetNewPasswordForm = ({
 			<View style={[a.flex_row, a.align_center, a.pt_lg]}>
 				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>
-						<Trans>Back</Trans>
+						<>Back</>
 					</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
@@ -154,13 +154,13 @@ export const SetNewPasswordForm = ({
 				) : (
 					<Button label={_(msg`Next`)} variant="solid" color="primary" size="large" onPress={onPressNext}>
 						<ButtonText>
-							<Trans>Next</Trans>
+							<>Next</>
 						</ButtonText>
 					</Button>
 				)}
 				{isProcessing ? (
 					<Text style={[t.atoms.text_contrast_high, a.pl_md]}>
-						<Trans>Updating...</Trans>
+						<>Updating...</>
 					</Text>
 				) : undefined}
 			</View>

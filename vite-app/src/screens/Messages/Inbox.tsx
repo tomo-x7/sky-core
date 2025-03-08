@@ -65,7 +65,7 @@ export function MessagesInboxScreen({}: Props) {
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align={gtTablet ? "left" : "platform"}>
 					<Layout.Header.TitleText>
-						<Trans>Chat requests</Trans>
+						<>Chat requests</>
 					</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				{hasUnreadConvos && gtTablet ? <MarkAsReadHeaderButton /> : <Layout.Header.Slot />}
@@ -144,7 +144,7 @@ function RequestList({
 								<View style={[a.pt_3xl, a.align_center]}>
 									<CircleInfoIcon width={48} fill={t.atoms.text_contrast_low.color} />
 									<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-										<Trans>Whoops!</Trans>
+										<>Whoops!</>
 									</Text>
 									<Text
 										style={[
@@ -167,7 +167,7 @@ function RequestList({
 										onPress={() => refetch()}
 									>
 										<ButtonText>
-											<Trans>Retry</Trans>
+											<>Retry</>
 										</ButtonText>
 										<ButtonIcon icon={RetryIcon} position="right" />
 									</Button>
@@ -191,7 +191,7 @@ function RequestList({
 											t.atoms.text_contrast_medium,
 										]}
 									>
-										<Trans>You don't have any chat requests at the moment.</Trans>
+										<>You don't have any chat requests at the moment.</>
 									</Text>
 									<Button
 										variant="solid"
@@ -208,7 +208,7 @@ function RequestList({
 									>
 										<ButtonIcon icon={ArrowLeftIcon} />
 										<ButtonText>
-											<Trans>Back to Chats</Trans>
+											<>Back to Chats</>
 										</ButtonText>
 									</Button>
 								</View>
@@ -302,7 +302,7 @@ function MarkAsReadHeaderButton() {
 		>
 			<ButtonIcon icon={CheckIcon} />
 			<ButtonText>
-				<Trans>Mark all as read</Trans>
+				<>Mark all as read</>
 			</ButtonText>
 		</Button>
 	);

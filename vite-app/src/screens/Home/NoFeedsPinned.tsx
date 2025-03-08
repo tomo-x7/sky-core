@@ -73,12 +73,12 @@ export function NoFeedsPinned({
 			>
 				<View style={[a.align_center, a.gap_sm, a.pb_xl]}>
 					<Text style={[a.text_xl, a.font_bold]}>
-						<Trans>Whoops!</Trans>
+						<>Whoops!</>
 					</Text>
 					<Text style={[a.text_md, a.text_center, a.leading_snug, { maxWidth: 340 }]}>
-						<Trans>
+						<>
 							Looks like you unpinned all your feeds. But don't worry, you can add some below 😄
-						</Trans>
+						</>
 					</Text>
 				</View>
 
