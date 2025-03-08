@@ -1,12 +1,12 @@
-import { useContext } from 'react';
-import { BottomSheetContext } from '../contexts/external';
+import { useContext } from "react";
+import { BottomSheetContext } from "../contexts/external";
 
 export const useBottomSheet = () => {
-  const context = useContext(BottomSheetContext);
+	const context = useContext(BottomSheetContext);
 
-  if (context === null) {
-    throw "'useBottomSheet' cannot be used out of the BottomSheet!";
-  }
+	if (context === null) {
+		throw "'useBottomSheet' cannot be used out of the BottomSheet!";
+	}
 
-  return context;
+	return context;
 };

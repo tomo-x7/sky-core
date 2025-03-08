@@ -1,5 +1,5 @@
 import type { ChatBskyActorDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 

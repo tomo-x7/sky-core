@@ -1,5 +1,5 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import lande from "lande";
 import { useEffect, useState } from "react";

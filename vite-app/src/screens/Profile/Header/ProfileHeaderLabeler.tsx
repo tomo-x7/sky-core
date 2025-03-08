@@ -5,7 +5,7 @@ import {
 	type RichText as RichTextAPI,
 	moderateProfile,
 } from "@atproto/api";
-import { Plural, Trans, msg, plural } from "@lingui/macro";
+import { Plural, msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { memo, useMemo } from "react";
 import { View } from "react-native";
@@ -204,11 +204,7 @@ let ProfileHeaderLabeler = ({
 												a.leading_tight,
 											]}
 										>
-											{isSubscribed ? (
-												<>Unsubscribe</>
-											) : (
-												<>Subscribe to Labeler</>
-											)}
+											{isSubscribed ? <>Unsubscribe</> : <>Subscribe to Labeler</>}
 										</Text>
 									</View>
 								)}
@@ -312,9 +308,7 @@ function CantSubscribePrompt({
 		<Prompt.Outer control={control}>
 			<Prompt.TitleText>Unable to subscribe</Prompt.TitleText>
 			<Prompt.DescriptionText>
-				<>
-					We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty.
-				</>
+				<>We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty.</>
 			</Prompt.DescriptionText>
 			<Prompt.Actions>
 				<Prompt.Action onPress={() => control.close()} cta={_(msg`OK`)} />

@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import { Fragment } from "react";
 import { View } from "react-native";
 

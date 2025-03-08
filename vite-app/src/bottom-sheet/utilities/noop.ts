@@ -1,5 +1,5 @@
 const workletNoop = () => {
-  'worklet';
+	"worklet";
 };
 
 const noop = () => {};

@@ -1,8 +1,8 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "react-native";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
+import { Image } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";

@@ -1,5 +1,5 @@
 import { ComAtprotoServerCreateSession, type ComAtprotoServerDescribeServer } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useRef, useState } from "react";
 import { ActivityIndicator, Keyboard, LayoutAnimation, type TextInput, View } from "react-native";

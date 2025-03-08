@@ -1,5 +1,5 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";

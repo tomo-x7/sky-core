@@ -1,4 +1,4 @@
-import { Trans, msg, plural } from "@lingui/macro";
+import { msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -128,11 +128,7 @@ export function SignupQueued() {
 								<Text style={[a.text_5xl, a.text_center, a.font_heavy, a.mb_2xl]}>{placeInQueue}</Text>
 							)}
 							<P style={[a.text_center]}>
-								{typeof placeInQueue === "number" ? (
-									<>left to go.</>
-								) : (
-									<>You are in line.</>
-								)}{" "}
+								{typeof placeInQueue === "number" ? <>left to go.</> : <>You are in line.</>}{" "}
 								{estimatedTime ? (
 									<>We estimate {estimatedTime} until your account is ready.</>
 								) : (

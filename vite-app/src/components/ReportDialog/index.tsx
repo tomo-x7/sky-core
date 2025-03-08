@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
@@ -50,9 +50,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 				</View>
 			) : error || !labelers ? (
 				<View>
-					<Text style={[a.text_md]}>
-						Something went wrong, please try again.
-					</Text>
+					<Text style={[a.text_md]}>Something went wrong, please try again.</Text>
 				</View>
 			) : (
 				<ReportDialogLoaded labelers={labelers} {...props} />

@@ -1,8 +1,8 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "react-native";
 import React, { useCallback } from "react";
+import { Image } from "react-native";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";

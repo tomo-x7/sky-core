@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "react-native";
 import React from "react";
+import { Image } from "react-native";
 import {
 	type ImageStyle,
 	Keyboard,
@@ -230,9 +230,7 @@ export function AltTextReminder() {
 				<FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
 			</View>
 			<Text type="sm" style={[t.atoms.text_contrast_medium, s.flex1]}>
-				<>
-					Alt text describes images for blind and low-vision users, and helps give context to everyone.
-				</>
+				<>Alt text describes images for blind and low-vision users, and helps give context to everyone.</>
 			</Text>
 		</View>
 	);

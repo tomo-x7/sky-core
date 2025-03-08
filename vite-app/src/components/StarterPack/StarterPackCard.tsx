@@ -2,8 +2,8 @@ import { AppBskyGraphStarterpack, AtUri } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { Image } from "react-native";
 import React from "react";
+import { Image } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";

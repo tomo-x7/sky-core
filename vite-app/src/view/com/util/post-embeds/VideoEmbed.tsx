@@ -1,8 +1,8 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { ImageBackground } from "react-native";
 import React, { useCallback, useState } from "react";
+import { ImageBackground } from "react-native";
 import { ActivityIndicator, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";

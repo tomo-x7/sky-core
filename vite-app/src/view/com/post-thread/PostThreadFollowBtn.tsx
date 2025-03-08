@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -109,17 +109,7 @@ function PostThreadFollowBtnLoaded({
 			style={[a.rounded_full]}
 		>
 			{gtMobile && <ButtonIcon icon={isFollowing ? Check : Plus} position="left" size="sm" />}
-			<ButtonText>
-				{!isFollowing ? (
-					isFollowedBy ? (
-						<>Follow Back</>
-					) : (
-						<>Follow</>
-					)
-				) : (
-					<>Following</>
-				)}
-			</ButtonText>
+			<ButtonText>{!isFollowing ? isFollowedBy ? <>Follow Back</> : <>Follow</> : <>Following</>}</ButtonText>
 		</Button>
 	);
 }

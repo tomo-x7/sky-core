@@ -1,5 +1,5 @@
 import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { createAssetAsync } from "expo-media-library";
@@ -153,9 +153,7 @@ export function QrCodeDialog({
 											size="small"
 											onPress={isWeb ? onCopyPress : onSharePress}
 										>
-											<ButtonText>
-												{isWeb ? <>Copy</> : <>Share</>}
-											</ButtonText>
+											<ButtonText>{isWeb ? <>Copy</> : <>Share</>}</ButtonText>
 										</Button>
 										<Button
 											label={_(msg`Save QR code`)}

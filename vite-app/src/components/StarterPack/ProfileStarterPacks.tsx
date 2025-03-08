@@ -1,5 +1,5 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";

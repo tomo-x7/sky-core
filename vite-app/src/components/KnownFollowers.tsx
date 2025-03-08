@@ -1,5 +1,5 @@
 import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
-import { Plural, Trans, msg } from "@lingui/macro";
+import { Plural, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";

@@ -2,8 +2,8 @@ import type { AppBskyEmbedExternal } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
-import { Image } from "react-native";
 import React from "react";
+import { Image } from "react-native";
 import {
 	ActivityIndicator,
 	type GestureResponderEvent,

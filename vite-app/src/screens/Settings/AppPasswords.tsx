@@ -1,5 +1,5 @@
 import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";

@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type Hls from "hls.js";
 import type React from "react";

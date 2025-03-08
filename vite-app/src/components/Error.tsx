@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -64,9 +64,7 @@ export function Error({
 						size="large"
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
 					>
-						<ButtonText>
-							Retry
-						</ButtonText>
+						<ButtonText>Retry</ButtonText>
 					</Button>
 				)}
 				{!hideBackButton && (
@@ -78,9 +76,7 @@ export function Error({
 						size="large"
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
 					>
-						<ButtonText>
-							Go Back
-						</ButtonText>
+						<ButtonText>Go Back</ButtonText>
 					</Button>
 				)}
 			</View>

@@ -1,5 +1,5 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -24,9 +24,7 @@ export function SelectLabelerView({
 	return (
 		<View style={[a.gap_lg]}>
 			<View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
-				<Text style={[a.text_2xl, a.font_bold]}>
-					Select moderator
-				</Text>
+				<Text style={[a.text_2xl, a.font_bold]}>Select moderator</Text>
 				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
 					To whom would you like to send this report?
 				</Text>

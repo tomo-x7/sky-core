@@ -1,6 +1,6 @@
 import { AppBskyGraphDefs, AtUri, type ModerationOpts, RichText as RichTextAPI, moderateUserList } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";

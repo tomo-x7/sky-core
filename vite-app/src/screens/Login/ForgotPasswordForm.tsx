@@ -1,6 +1,6 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { BskyAgent } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import React, { useState } from "react";

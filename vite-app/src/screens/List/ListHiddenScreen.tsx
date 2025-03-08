@@ -1,5 +1,5 @@
 import { AppBskyGraphDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -113,9 +113,7 @@ export function ListHiddenScreen({
 					</Text>
 					<Text style={[a.text_md, a.text_center, a.px_md, t.atoms.text_contrast_high, { lineHeight: 1.4 }]}>
 						{list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
-							<>
-								Either the creator of this list has blocked you or you have blocked the creator.
-							</>
+							<>Either the creator of this list has blocked you or you have blocked the creator.</>
 						) : isOwner ? (
 							<>
 								This list – created by you – contains possible violations of Bluesky's community

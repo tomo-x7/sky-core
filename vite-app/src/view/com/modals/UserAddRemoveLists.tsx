@@ -1,5 +1,5 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { ActivityIndicator, StyleSheet, View, useWindowDimensions } from "react-native";

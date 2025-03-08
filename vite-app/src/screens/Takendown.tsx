@@ -1,5 +1,5 @@
 import { type ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import { StatusBar } from "expo-status-bar";
@@ -133,11 +133,7 @@ export function Takendown() {
 						</View>
 
 						<Text style={[a.text_4xl, a.font_heavy, a.pb_md]}>
-							{isAppealling ? (
-								<>Appeal suspension</>
-							) : (
-								<>Your account has been suspended</>
-							)}
+							{isAppealling ? <>Appeal suspension</> : <>Your account has been suspended</>}
 						</Text>
 
 						{isAppealling ? (

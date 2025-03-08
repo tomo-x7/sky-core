@@ -1,5 +1,5 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import debounce from "lodash.debounce";
@@ -660,9 +660,7 @@ function FeedsAboutHeader() {
 					<>Discover New Feeds</>
 				</Text>
 				<Text style={[t.atoms.text_contrast_high]}>
-					<>
-						Choose your own timeline! Feeds built by the community help you find content you love.
-					</>
+					<>Choose your own timeline! Feeds built by the community help you find content you love.</>
 				</Text>
 			</View>
 		</View>

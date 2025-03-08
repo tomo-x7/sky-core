@@ -1,6 +1,6 @@
 import type { ComAtprotoServerDefs } from "@atproto/api";
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";

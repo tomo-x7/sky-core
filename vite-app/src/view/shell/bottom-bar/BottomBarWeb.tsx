@@ -1,4 +1,4 @@
-import { Trans, msg, plural } from "@lingui/macro";
+import { msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigationState } from "@react-navigation/native";
 import React from "react";

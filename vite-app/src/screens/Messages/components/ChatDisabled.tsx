@@ -1,5 +1,5 @@
 import { ComAtprotoModerationDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
@@ -23,9 +23,7 @@ export function ChatDisabled() {
 					<>Your chats have been disabled</>
 				</Text>
 				<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
-					<>
-						Our moderators have reviewed reports and decided to disable your access to chats on Bluesky.
-					</>
+					<>Our moderators have reviewed reports and decided to disable your access to chats on Bluesky.</>
 				</Text>
 				<AppealDialog />
 			</View>

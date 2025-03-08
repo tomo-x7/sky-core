@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import { View } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";

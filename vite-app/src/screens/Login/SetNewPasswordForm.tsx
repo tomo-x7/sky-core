@@ -1,5 +1,5 @@
 import { BskyAgent } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
@@ -91,9 +91,7 @@ export const SetNewPasswordForm = ({
 	return (
 		<FormContainer testID="setNewPasswordForm" titleText={<>Set new password</>}>
 			<Text style={[a.leading_snug, a.mb_sm]}>
-				<>
-					You will receive an email with a "reset code." Enter that code here, then enter your new password.
-				</>
+				<>You will receive an email with a "reset code." Enter that code here, then enter your new password.</>
 			</Text>
 
 			<View>

@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import { View } from "react-native";
 import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
 
@@ -70,9 +69,7 @@ export function Autocomplete({
 					);
 				})
 			) : (
-				<Text style={[a.text_md, a.px_sm, a.py_md]}>
-					{isFetching ? <>Loading...</> : <>No result</>}
-				</Text>
+				<Text style={[a.text_md, a.px_sm, a.py_md]}>{isFetching ? <>Loading...</> : <>No result</>}</Text>
 			)}
 		</Animated.View>
 	);

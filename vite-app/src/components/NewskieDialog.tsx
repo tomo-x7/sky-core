@@ -1,5 +1,5 @@
 import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { differenceInSeconds } from "date-fns";
 import React from "react";
@@ -141,9 +141,7 @@ export function NewskieDialog({
 								style={[a.mt_sm]}
 								onPress={() => control.close()}
 							>
-								<ButtonText>
-									Close
-								</ButtonText>
+								<ButtonText>Close</ButtonText>
 							</Button>
 						)}
 					</View>

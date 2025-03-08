@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ScrollView, TextInput, View, useWindowDimensions } from "react-native";
@@ -70,9 +70,7 @@ export function FollowDialog({ guide }: { guide: Follow10ProgressGuide }) {
 				variant="solid"
 			>
 				<ButtonIcon icon={PersonGroupIcon} />
-				<ButtonText>
-					Find people to follow
-				</ButtonText>
+				<ButtonText>Find people to follow</ButtonText>
 			</Button>
 			<Dialog.Outer control={control} nativeOptions={{ minHeight }}>
 				<Dialog.Handle />

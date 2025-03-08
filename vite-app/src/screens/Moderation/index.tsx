@@ -1,5 +1,5 @@
 import { LABELS } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Fragment, useCallback } from "react";

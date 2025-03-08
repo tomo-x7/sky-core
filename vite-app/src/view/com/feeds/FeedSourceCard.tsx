@@ -1,6 +1,6 @@
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Plural, Trans, msg } from "@lingui/macro";
+import { Plural, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Linking, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";

@@ -77,7 +77,7 @@ export let MessagesListHeader = ({
 				accessibilityHint=""
 			>
 				<FontAwesomeIcon
-					size="3x"//TODO もともと18だったので大きさ見て調整
+					size="3x" //TODO もともと18だったので大きさ見て調整
 					icon="angle-left"
 					style={{
 						marginTop: 6,

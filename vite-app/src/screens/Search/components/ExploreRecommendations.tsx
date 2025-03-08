@@ -1,5 +1,4 @@
 import type { AppBskyUnspeccedDefs } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 import { View } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";

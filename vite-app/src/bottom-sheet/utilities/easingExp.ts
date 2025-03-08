@@ -5,6 +5,6 @@
  * @param t number
  */
 export const exp = (t: number) => {
-  'worklet';
-  return Math.min(Math.max(0, 2 ** (10 * (t - 1))), 1);
+	"worklet";
+	return Math.min(Math.max(0, 2 ** (10 * (t - 1))), 1);
 };

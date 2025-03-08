@@ -1,7 +1,6 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
-import { Trans } from "@lingui/macro";
-import { Image } from "react-native";
 import type React from "react";
+import { Image } from "react-native";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -97,9 +96,7 @@ export function GifItem({ thumbnail, alt }: { thumbnail: string; alt?: string })
 				<PlayButtonIcon size={24} />
 			</View>
 			<View style={styles.altContainer}>
-				<Text style={styles.alt}>
-					GIF
-				</Text>
+				<Text style={styles.alt}>GIF</Text>
 			</View>
 		</ImageItem>
 	);

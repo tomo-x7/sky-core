@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 

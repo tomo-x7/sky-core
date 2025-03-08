@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
@@ -113,9 +113,7 @@ export function Component({
 							Your email has not yet been verified. This is an important security step which we recommend.
 						</>
 					) : stage === Stages.Email ? (
-						<>
-							This is important in case you ever need to change your email or reset your password.
-						</>
+						<>This is important in case you ever need to change your email or reset your password.</>
 					) : stage === Stages.ConfirmCode ? (
 						<>
 							An email has been sent to {currentAccount?.email || "(no email)"}. It includes a

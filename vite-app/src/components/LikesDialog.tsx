@@ -1,5 +1,5 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useMemo } from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
@@ -73,9 +73,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 
 	return (
 		<Dialog.Inner label={_(msg`Users that have liked this content or profile`)}>
-			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_lg]}>
-				Liked by
-			</Text>
+			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_lg]}>Liked by</Text>
 
 			{isLoading ? (
 				<View style={{ minHeight: 300 }}>
@@ -85,9 +83,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 				<ErrorMessage message={cleanError(resolveError || likedByError)} />
 			) : likes.length === 0 ? (
 				<View style={[t.atoms.bg_contrast_50, a.px_md, a.py_xl, a.rounded_md]}>
-					<Text style={[a.text_center]}>
-						Nobody has liked this yet. Maybe you should be the first!
-					</Text>
+					<Text style={[a.text_center]}>Nobody has liked this yet. Maybe you should be the first!</Text>
 				</View>
 			) : (
 				<FlatList

@@ -1,4 +1,3 @@
-import type { BottomSheetProps } from '../bottomSheet';
+import type { BottomSheetProps } from "../bottomSheet";
 
-export interface BottomSheetFooterContainerProps
-  extends Required<Pick<BottomSheetProps, 'renderFooter'>> {}
+export interface BottomSheetFooterContainerProps extends Required<Pick<BottomSheetProps, "renderFooter">> {}

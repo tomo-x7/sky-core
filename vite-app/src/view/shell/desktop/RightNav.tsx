@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";

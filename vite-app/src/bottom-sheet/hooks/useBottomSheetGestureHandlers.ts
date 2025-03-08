@@ -1,12 +1,12 @@
-import { useContext } from 'react';
-import { BottomSheetGestureHandlersContext } from '../contexts/gesture';
+import { useContext } from "react";
+import { BottomSheetGestureHandlersContext } from "../contexts/gesture";
 
 export const useBottomSheetGestureHandlers = () => {
-  const context = useContext(BottomSheetGestureHandlersContext);
+	const context = useContext(BottomSheetGestureHandlersContext);
 
-  if (context === null) {
-    throw "'useBottomSheetGestureHandlers' cannot be used out of the BottomSheet!";
-  }
+	if (context === null) {
+		throw "'useBottomSheetGestureHandlers' cannot be used out of the BottomSheet!";
+	}
 
-  return context;
+	return context;
 };

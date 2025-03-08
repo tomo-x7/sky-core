@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/macro";
 import * as Clipboard from "expo-clipboard";
 import { useCallback, useEffect, useState } from "react";
 import { type GestureResponderEvent, View } from "react-native";

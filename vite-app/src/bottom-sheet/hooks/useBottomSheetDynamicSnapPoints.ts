@@ -1,9 +1,6 @@
-import { useCallback, useEffect } from 'react';
-import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
-import {
-  INITIAL_HANDLE_HEIGHT,
-  INITIAL_SNAP_POINT,
-} from '../components/bottomSheet/constants';
+import { useCallback, useEffect } from "react";
+import { useDerivedValue, useSharedValue } from "react-native-reanimated";
+import { INITIAL_HANDLE_HEIGHT, INITIAL_SNAP_POINT } from "../components/bottomSheet/constants";
 
 /**
  * Provides dynamic content height calculating functionalities, by
@@ -19,55 +16,49 @@ import {
  * }
  * @deprecated will be deprecated in the next major release! please use the new introduce prop `enableDynamicSizing`.
  */
-export const useBottomSheetDynamicSnapPoints = (
-  initialSnapPoints: Array<string | number>
-) => {
-  // variables
-  const animatedContentHeight = useSharedValue(0);
-  const animatedHandleHeight = useSharedValue(INITIAL_HANDLE_HEIGHT);
-  const animatedSnapPoints = useDerivedValue(() => {
-    if (
-      animatedHandleHeight.value === INITIAL_HANDLE_HEIGHT ||
-      animatedContentHeight.value === 0
-    ) {
-      return initialSnapPoints.map(() => INITIAL_SNAP_POINT);
-    }
-    const contentWithHandleHeight =
-      animatedContentHeight.value + animatedHandleHeight.value;
+export const useBottomSheetDynamicSnapPoints = (initialSnapPoints: Array<string | number>) => {
+	// variables
+	const animatedContentHeight = useSharedValue(0);
+	const animatedHandleHeight = useSharedValue(INITIAL_HANDLE_HEIGHT);
+	const animatedSnapPoints = useDerivedValue(() => {
+		if (animatedHandleHeight.value === INITIAL_HANDLE_HEIGHT || animatedContentHeight.value === 0) {
+			return initialSnapPoints.map(() => INITIAL_SNAP_POINT);
+		}
+		const contentWithHandleHeight = animatedContentHeight.value + animatedHandleHeight.value;
 
-    return initialSnapPoints.map(snapPoint =>
-      snapPoint === 'CONTENT_HEIGHT' ? contentWithHandleHeight : snapPoint
-    );
-  }, []);
+		return initialSnapPoints.map((snapPoint) =>
+			snapPoint === "CONTENT_HEIGHT" ? contentWithHandleHeight : snapPoint,
+		);
+	}, []);
 
-  type HandleContentLayoutProps = {
-    nativeEvent: {
-      layout: { height: number };
-    };
-  };
-  // callbacks
-  const handleContentLayout = useCallback(
-    ({
-      nativeEvent: {
-        layout: { height },
-      },
-    }: HandleContentLayoutProps) => {
-      animatedContentHeight.value = height;
-    },
-    [animatedContentHeight]
-  );
+	type HandleContentLayoutProps = {
+		nativeEvent: {
+			layout: { height: number };
+		};
+	};
+	// callbacks
+	const handleContentLayout = useCallback(
+		({
+			nativeEvent: {
+				layout: { height },
+			},
+		}: HandleContentLayoutProps) => {
+			animatedContentHeight.value = height;
+		},
+		[animatedContentHeight],
+	);
 
-  //#region effects
-  useEffect(() => {
-    console.warn(
-      '`useBottomSheetDynamicSnapPoints` will be deprecated in the next major release! please use the new introduce prop `enableDynamicSizing`.'
-    );
-  }, []);
-  //#endregion
-  return {
-    animatedSnapPoints,
-    animatedHandleHeight,
-    animatedContentHeight,
-    handleContentLayout,
-  };
+	//#region effects
+	useEffect(() => {
+		console.warn(
+			"`useBottomSheetDynamicSnapPoints` will be deprecated in the next major release! please use the new introduce prop `enableDynamicSizing`.",
+		);
+	}, []);
+	//#endregion
+	return {
+		animatedSnapPoints,
+		animatedHandleHeight,
+		animatedContentHeight,
+		handleContentLayout,
+	};
 };

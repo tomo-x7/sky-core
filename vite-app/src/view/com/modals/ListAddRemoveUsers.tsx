@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useCallback, useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";

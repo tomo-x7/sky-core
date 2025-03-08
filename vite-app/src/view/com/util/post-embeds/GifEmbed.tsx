@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";

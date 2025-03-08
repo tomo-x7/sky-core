@@ -5,7 +5,7 @@ import {
 	type ModerationOpts,
 	moderateProfile,
 } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -202,11 +202,7 @@ function LoadMore({
 						</View>
 
 						<Text style={[a.pl_sm, a.leading_snug, hovered ? t.atoms.text : t.atoms.text_contrast_medium]}>
-							{type === "profile" ? (
-								<>Load more suggested follows</>
-							) : (
-								<>Load more suggested feeds</>
-							)}
+							{type === "profile" ? <>Load more suggested follows</> : <>Load more suggested feeds</>}
 						</Text>
 
 						<View style={[a.flex_1, a.align_end]}>{item.isLoadingMore && <Loader size="lg" />}</View>

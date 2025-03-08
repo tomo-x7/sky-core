@@ -1,5 +1,5 @@
 import { type ComAtprotoLabelDefs, ComAtprotoModerationDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
@@ -131,9 +131,7 @@ function Label({
 							label={_(msg`Appeal`)}
 							onPress={() => onPressAppeal(label)}
 						>
-							<ButtonText>
-								Appeal
-							</ButtonText>
+							<ButtonText>Appeal</ButtonText>
 						</Button>
 					</View>
 				)}
@@ -143,9 +141,7 @@ function Label({
 
 			<View style={[a.px_md, a.py_sm, t.atoms.bg_contrast_25]}>
 				{isSelfLabel ? (
-					<Text style={[t.atoms.text_contrast_medium]}>
-						This label was applied by you.
-					</Text>
+					<Text style={[t.atoms.text_contrast_medium]}>This label was applied by you.</Text>
 				) : (
 					<View style={[a.flex_row, a.justify_between, a.gap_xl, { paddingBottom: 1 }]}>
 						<Text style={[a.flex_1, a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>

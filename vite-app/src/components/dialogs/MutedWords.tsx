@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, sanitizeMutedWordValue } from "@atproto/api";
 import React from "react";
 import { View } from "react-native";
 
-import { type ViewStyleProp, atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
+import { type ViewStyleProp, atoms as a, native, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";

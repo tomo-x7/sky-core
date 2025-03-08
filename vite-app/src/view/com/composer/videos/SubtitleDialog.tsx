@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useState } from "react";
 import { Keyboard, type StyleProp, View, type ViewStyle } from "react-native";

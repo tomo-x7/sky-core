@@ -1,5 +1,5 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Keyboard, Platform, type StyleProp, View, type ViewStyle } from "react-native";
@@ -157,9 +157,7 @@ function WhoCanReplyDialog({
 				style={[{ width: "auto", maxWidth: 400, minWidth: 200 }]}
 			>
 				<View style={[a.gap_sm]}>
-					<Text style={[a.font_bold, a.text_xl, a.pb_sm]}>
-						Who can interact with this post?
-					</Text>
+					<Text style={[a.font_bold, a.text_xl, a.pb_sm]}>Who can interact with this post?</Text>
 					<Rules post={post} settings={settings} embeddingDisabled={embeddingDisabled} />
 				</View>
 			</Dialog.ScrollableInner>
@@ -274,11 +272,7 @@ function Separator({ i, length }: { i: number; length: number }) {
 		return null;
 	}
 	if (i === length - 2) {
-		return (
-			<>
-				{length > 2 ? "," : ""} and{" "}
-			</>
-		);
+		return <>{length > 2 ? "," : ""} and </>;
 	}
 	return <>, </>;
 }

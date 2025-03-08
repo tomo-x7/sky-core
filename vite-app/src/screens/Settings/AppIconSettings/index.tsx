@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as DynamicAppIcon from "@mozzius/expo-dynamic-app-icon";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";

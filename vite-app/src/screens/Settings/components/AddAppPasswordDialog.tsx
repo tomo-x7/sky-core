@@ -1,5 +1,5 @@
 import type { ComAtprotoServerCreateAppPassword } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
@@ -96,9 +96,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								<>Add App Password</>
 							</Text>
 							<Text style={[a.text_md, a.leading_snug]}>
-								<>
-									Please enter a unique name for this app password or use our randomly generated one.
-								</>
+								<>Please enter a unique name for this app password or use our randomly generated one.</>
 							</Text>
 							<View>
 								<TextInput.Root isInvalid={!!error}>

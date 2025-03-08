@@ -1,8 +1,8 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image, type ImageStyle } from "react-native";
 import type React from "react";
+import { Image, type ImageStyle } from "react-native";
 import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";

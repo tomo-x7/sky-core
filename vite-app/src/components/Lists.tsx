@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { memo } from "react";
@@ -88,9 +88,7 @@ function ListFooterMaybeError({
 					style={[a.align_center, a.justify_center, a.rounded_sm, a.overflow_hidden, a.px_md, a.py_sm]}
 					onPress={onRetry}
 				>
-					<ButtonText>
-						Retry
-					</ButtonText>
+					<ButtonText>Retry</ButtonText>
 				</Button>
 			</View>
 		</View>

@@ -6,16 +6,16 @@ import {
 	type ModerationDecision,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { type RouteProp, useFocusEffect, useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useEvent } from "expo";
 import { useEventListener } from "expo";
-import { Image, type ImageStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { type VideoPlayer, VideoView, createVideoPlayer } from "expo-video";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Image, type ImageStyle } from "react-native";
 import {
 	LayoutAnimation,
 	type ListRenderItem,
@@ -720,11 +720,7 @@ function Overlay({
 									>
 										{!!profile.viewer?.following && <ButtonIcon icon={CheckIcon} />}
 										<ButtonText>
-											{profile.viewer?.following ? (
-												<>Following</>
-											) : (
-												<>Follow</>
-											)}
+											{profile.viewer?.following ? <>Following</> : <>Follow</>}
 										</ButtonText>
 									</Button>
 								)}

@@ -5,7 +5,7 @@ import {
 	AtUri,
 	type RichText as RichTextAPI,
 } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";

@@ -1,5 +1,5 @@
 import { type AppBskyFeedDefs, type AppBskyGraphDefs, AtUri, RichText as RichTextApi } from "@atproto/api";
-import { Plural, Trans, msg } from "@lingui/macro";
+import { Plural, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";

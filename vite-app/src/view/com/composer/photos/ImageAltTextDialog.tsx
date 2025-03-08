@@ -1,7 +1,7 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "react-native";
 import React from "react";
+import { Image } from "react-native";
 import { type ImageStyle, View, useWindowDimensions } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -123,9 +123,7 @@ const ImageAltTextInner = ({
 						<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
 							<CircleInfo fill={t.palette.negative_500} />
 							<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-								<>
-									Alt text will be truncated. Limit: {i18n.number(MAX_ALT_TEXT)} characters.
-								</>
+								<>Alt text will be truncated. Limit: {i18n.number(MAX_ALT_TEXT)} characters.</>
 							</Text>
 						</View>
 					)}

@@ -1,5 +1,4 @@
 import type { AppBskyFeedDefs, ModerationOpts } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 import { useState } from "react";
 import { type ListRenderItemInfo, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";

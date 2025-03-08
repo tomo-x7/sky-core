@@ -1,5 +1,4 @@
 import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 import React from "react";
 import { View } from "react-native";
 // @ts-expect-error missing types

@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";

@@ -110,9 +110,7 @@ export function Component({}: {}) {
 				{!isEmailSent ? (
 					<>
 						<Text type="lg" style={[styles.description, pal.text]}>
-							<>
-								For security reasons, we'll need to send a confirmation code to your email address.
-							</>
+							<>For security reasons, we'll need to send a confirmation code to your email address.</>
 						</Text>
 						{error ? (
 							<View style={s.mt10}>

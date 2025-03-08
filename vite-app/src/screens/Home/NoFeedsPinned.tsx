@@ -1,5 +1,5 @@
 import { TID } from "@atproto/common-web";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -76,9 +76,7 @@ export function NoFeedsPinned({
 						<>Whoops!</>
 					</Text>
 					<Text style={[a.text_md, a.text_center, a.leading_snug, { maxWidth: 340 }]}>
-						<>
-							Looks like you unpinned all your feeds. But don't worry, you can add some below 😄
-						</>
+						<>Looks like you unpinned all your feeds. But don't worry, you can add some below 😄</>
 					</Text>
 				</View>
 

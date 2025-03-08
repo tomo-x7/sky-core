@@ -1,5 +1,5 @@
 import { type AppBskyActorDefs, AppBskyFeedGetAuthorFeed, AtUri } from "@atproto/api";
-import { Trans, msg as msgLingui } from "@lingui/macro";
+import { msg as msgLingui } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";

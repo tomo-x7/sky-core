@@ -62,4 +62,3 @@ export function applyFonts(style: TextStyle, fontFamily: "system" | "theme") {
 		style.letterSpacing = 0.25;
 	}
 }
-

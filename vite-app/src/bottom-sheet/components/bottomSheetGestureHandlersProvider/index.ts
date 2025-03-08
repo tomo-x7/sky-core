@@ -1,1 +1,1 @@
-export { default } from './BottomSheetGestureHandlersProvider';
+export { default } from "./BottomSheetGestureHandlersProvider";

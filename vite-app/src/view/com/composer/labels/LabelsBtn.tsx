@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { Keyboard, View } from "react-native";
 
@@ -63,9 +63,7 @@ export function LabelsBtn({
 				]}
 			>
 				<ButtonIcon icon={hasLabel ? Check : Shield_Stroke2_Corner0_Rounded} />
-				<ButtonText numberOfLines={1}>
-					{labels.length > 0 ? <>Labels added</> : <>Labels</>}
-				</ButtonText>
+				<ButtonText numberOfLines={1}>{labels.length > 0 ? <>Labels added</> : <>Labels</>}</ButtonText>
 			</Button>
 
 			<Dialog.Outer control={control} nativeOptions={{ preventExpansion: true }}>

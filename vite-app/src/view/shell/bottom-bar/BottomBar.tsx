@@ -1,4 +1,4 @@
-import { Trans, msg, plural } from "@lingui/macro";
+import { msg, plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { StackActions } from "@react-navigation/native";

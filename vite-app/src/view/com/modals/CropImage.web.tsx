@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { LinearGradient } from "expo-linear-gradient";

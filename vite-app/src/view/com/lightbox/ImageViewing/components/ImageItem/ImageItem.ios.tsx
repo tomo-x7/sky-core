@@ -6,8 +6,8 @@
  *
  */
 
-import { Image } from "react-native";
 import React, { useState } from "react";
+import { Image } from "react-native";
 import { ActivityIndicator, StyleSheet } from "react-native";
 import { Gesture, GestureDetector, type PanGesture } from "react-native-gesture-handler";
 import Animated, {

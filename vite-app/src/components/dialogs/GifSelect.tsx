@@ -1,5 +1,5 @@
-import { Image } from "react-native";
 import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { Image } from "react-native";
 import { type TextInput, View } from "react-native";
 import { useWindowDimensions } from "react-native";
 

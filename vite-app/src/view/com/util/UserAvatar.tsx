@@ -1,6 +1,6 @@
 import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
@@ -353,9 +353,7 @@ let EditableUserAvatar = ({
 						label={_(msg`Upload from Library`)}
 						onPress={onOpenLibrary}
 					>
-						<Menu.ItemText>
-							{isNative ? <>Upload from Library</> : <>Upload from Files</>}
-						</Menu.ItemText>
+						<Menu.ItemText>{isNative ? <>Upload from Library</> : <>Upload from Files</>}</Menu.ItemText>
 						<Menu.ItemIcon icon={Library} />
 					</Menu.Item>
 				</Menu.Group>

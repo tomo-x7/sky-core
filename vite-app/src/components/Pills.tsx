@@ -1,5 +1,4 @@
 import { BSKY_LABELER_DID, type ModerationCause } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 import React from "react";
 import { View } from "react-native";
 
@@ -158,9 +157,7 @@ export function FollowsYou({ size = "sm" }: CommonProps) {
 
 	return (
 		<View style={[variantStyles, a.justify_center, t.atoms.bg_contrast_25]}>
-			<Text style={[a.text_xs, a.leading_tight]}>
-				Follows You
-			</Text>
+			<Text style={[a.text_xs, a.leading_tight]}>Follows You</Text>
 		</View>
 	);
 }

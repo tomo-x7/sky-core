@@ -1,7 +1,7 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image as ExpoImage } from "react-native";
 import React from "react";
+import { Image as ExpoImage } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";

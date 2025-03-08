@@ -71,7 +71,7 @@ export function Root({
 						style={[a.fixed, a.inset_0, a.z_50]}
 						onPress={() => context.control.close()}
 						accessibilityHint=""
-						accessibilityLabel={("Context menu backdrop, click to close the menu.")}
+						accessibilityLabel={"Context menu backdrop, click to close the menu."}
 					/>
 				</Portal>
 			)}

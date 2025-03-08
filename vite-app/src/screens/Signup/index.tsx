@@ -1,5 +1,5 @@
 import { AppBskyGraphStarterpack } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -99,9 +99,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 											account!
 										</>
 									) : (
-										<>
-											You'll follow the suggested users once you finish creating your account!
-										</>
+										<>You'll follow the suggested users once you finish creating your account!</>
 									)}
 								</Text>
 							</LinearGradientBackground>

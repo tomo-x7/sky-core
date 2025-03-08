@@ -1,8 +1,8 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image as ExpoImage } from "react-native";
 import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import React from "react";
+import { Image as ExpoImage } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -263,11 +263,7 @@ export function StepProfile() {
 							onPress={onSecondaryPress}
 						>
 							<ButtonText>
-								{avatar.useCreatedAvatar ? (
-									<>Upload a photo instead</>
-								) : (
-									<>Create an avatar instead</>
-								)}
+								{avatar.useCreatedAvatar ? <>Upload a photo instead</> : <>Create an avatar instead</>}
 							</ButtonText>
 						</Button>
 					</View>

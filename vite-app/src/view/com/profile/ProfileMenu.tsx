@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -247,11 +247,7 @@ let ProfileMenu = ({
 												onPress={isFollowing ? onPressUnfollowAccount : onPressFollowAccount}
 											>
 												<Menu.ItemText>
-													{isFollowing ? (
-														<>Unfollow account</>
-													) : (
-														<>Follow account</>
-													)}
+													{isFollowing ? <>Unfollow account</> : <>Follow account</>}
 												</Menu.ItemText>
 												<Menu.ItemIcon icon={isFollowing ? UserMinus : Plus} />
 											</Menu.Item>
@@ -281,11 +277,7 @@ let ProfileMenu = ({
 												onPress={onPressMuteAccount}
 											>
 												<Menu.ItemText>
-													{profile.viewer?.muted ? (
-														<>Unmute account</>
-													) : (
-														<>Mute account</>
-													)}
+													{profile.viewer?.muted ? <>Unmute account</> : <>Mute account</>}
 												</Menu.ItemText>
 												<Menu.ItemIcon icon={profile.viewer?.muted ? Unmute : Mute} />
 											</Menu.Item>

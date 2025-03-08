@@ -1,5 +1,5 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { ReactElement } from "react";
 import { View } from "react-native";

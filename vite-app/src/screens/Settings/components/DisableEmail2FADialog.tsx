@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { View } from "react-native";
@@ -94,9 +94,7 @@ export function DisableEmail2FADialog({
 								confirmation code which you can enter below.
 							</>
 						) : (
-							<>
-								To disable the email 2FA method, please verify your access to the email address.
-							</>
+							<>To disable the email 2FA method, please verify your access to the email address.</>
 						)}
 					</P>
 

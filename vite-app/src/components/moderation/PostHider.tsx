@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationUI } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type ComponentProps } from "react";
@@ -111,9 +111,7 @@ export function PostHider({
 				{desc.name}
 			</Text>
 			{!modui.noOverride && (
-				<Text style={[{ color: t.palette.primary_500 }]}>
-					{override ? <>Hide</> : <>Show</>}
-				</Text>
+				<Text style={[{ color: t.palette.primary_500 }]}>{override ? <>Hide</> : <>Show</>}</Text>
 			)}
 		</Pressable>
 	) : (

@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React, { type JSX } from "react";
 
 import { useGetTimeAgo } from "#/lib/hooks/useTimeAgo";
 import { useTickEveryMinute } from "#/state/shell";

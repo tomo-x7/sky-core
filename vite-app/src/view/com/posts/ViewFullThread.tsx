@@ -1,5 +1,4 @@
 import { AtUri } from "@atproto/api";
-import { Trans } from "@lingui/macro";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Svg, { Circle, Line } from "react-native-svg";

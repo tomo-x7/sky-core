@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ActivityIndicator, SafeAreaView, StyleSheet, View } from "react-native";
@@ -114,9 +114,7 @@ export function Component() {
 							includes a confirmation code which you can enter below.
 						</>
 					) : (
-						<>
-							Your email has been updated but not verified. As a next step, please verify your new email.
-						</>
+						<>Your email has been updated but not verified. As a next step, please verify your new email.</>
 					)}
 				</Text>
 

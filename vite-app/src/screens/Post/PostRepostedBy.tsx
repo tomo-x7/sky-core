@@ -1,4 +1,4 @@
-import { Plural, Trans } from "@lingui/macro";
+import { Plural } from "@lingui/macro";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 

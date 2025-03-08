@@ -4,8 +4,8 @@ import { Plural, Trans, msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Image } from "react-native";
 import React from "react";
+import { Image } from "react-native";
 import { Keyboard, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -400,9 +400,7 @@ function Footer({
 					<Text style={[a.text_center, textStyles]}>
 						{
 							items.length < 2 ? (
-								<>
-									It's just you right now! Add more people to your starter pack by searching above.
-								</>
+								<>It's just you right now! Add more people to your starter pack by searching above.</>
 							) : items.length === 2 ? (
 								<>
 									<Text style={[a.font_bold, textStyles]}>You</Text> and

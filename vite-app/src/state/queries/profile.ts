@@ -196,9 +196,7 @@ export function useProfileUpdateMutation() {
 	});
 }
 
-export function useProfileFollowMutationQueue(
-	profile: Shadow<bsky.profile.AnyProfileView>,
-) {
+export function useProfileFollowMutationQueue(profile: Shadow<bsky.profile.AnyProfileView>) {
 	const agent = useAgent();
 	const queryClient = useQueryClient();
 	const did = profile.did;

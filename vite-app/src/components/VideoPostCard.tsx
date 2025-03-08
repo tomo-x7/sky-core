@@ -7,9 +7,9 @@ import {
 } from "@atproto/api";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useMemo } from "react";
+import { Image } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";

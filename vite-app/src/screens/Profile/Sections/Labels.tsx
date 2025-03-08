@@ -4,7 +4,7 @@ import {
 	type ModerationOpts,
 	interpretLabelValueDefinitions,
 } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View, findNodeHandle } from "react-native";
@@ -160,9 +160,7 @@ export function ProfileLabelsSectionInner({
 						<View style={[a.flex_row, a.gap_sm, a.align_center, a.mt_md]}>
 							<CircleInfo size="sm" fill={t.atoms.text_contrast_medium.color} />
 							<Text style={[t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
-								<>
-									Blocking does not prevent this labeler from placing labels on your account.
-								</>
+								<>Blocking does not prevent this labeler from placing labels on your account.</>
 							</Text>
 						</View>
 					) : null}

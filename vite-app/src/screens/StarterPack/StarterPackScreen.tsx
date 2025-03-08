@@ -6,13 +6,13 @@ import {
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
-import { Image } from "react-native";
 import React from "react";
+import { Image } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";

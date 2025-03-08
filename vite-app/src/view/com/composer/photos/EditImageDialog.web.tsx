@@ -1,6 +1,6 @@
 import "react-image-crop/dist/ReactCrop.css";
 
-import { Trans, msg } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
