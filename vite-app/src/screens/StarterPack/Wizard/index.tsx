@@ -1,6 +1,6 @@
 import { type AppBskyActorDefs, type AppBskyGraphDefs, AtUri, type ModerationOpts } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { Plural, Trans, msg } from "@lingui/macro";
+import { Plural, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -81,7 +81,7 @@ export function Wizard({
 				<ListMaybePlaceholder
 					isLoading={isLoadingStarterPack || isLoadingProfiles || isLoadingProfile}
 					isError={isErrorStarterPack || isErrorProfiles || isErrorProfile}
-					errorMessage={_(msg`That starter pack could not be found.`)}
+					errorMessage={"That starter pack could not be found."}
 				/>
 			</Layout.Screen>
 		);
@@ -91,7 +91,7 @@ export function Wizard({
 				<ListMaybePlaceholder
 					isLoading={false}
 					isError={true}
-					errorMessage={_(msg`That starter pack could not be found.`)}
+					errorMessage={"That starter pack could not be found."}
 				/>
 			</Layout.Screen>
 		);
@@ -153,21 +153,21 @@ function WizardInner({
 
 	const getDefaultName = () => {
 		const displayName = createSanitizedDisplayName(currentProfile!, true);
-		return _(msg`${displayName}'s Starter Pack`).slice(0, 50);
+		return `${displayName}'s Starter Pack`.slice(0, 50);
 	};
 
 	const wizardUiStrings: Record<WizardStep, { header: string; nextBtn: string; subtitle?: string }> = {
 		Details: {
-			header: _(msg`Starter Pack`),
-			nextBtn: _(msg`Next`),
+			header: "Starter Pack",
+			nextBtn: "Next",
 		},
 		Profiles: {
-			header: _(msg`Choose People`),
-			nextBtn: _(msg`Next`),
+			header: "Choose People",
+			nextBtn: "Next",
 		},
 		Feeds: {
-			header: _(msg`Choose Feeds`),
-			nextBtn: state.feeds.length === 0 ? _(msg`Skip`) : _(msg`Finish`),
+			header: "Choose Feeds",
+			nextBtn: state.feeds.length === 0 ? "Skip" : "Finish",
 		},
 	};
 	const currUiStrings = wizardUiStrings[state.currentStep];
@@ -205,7 +205,7 @@ function WizardInner({
 		onError: (e) => {
 			logger.error("Failed to create starter pack", { safeMessage: e });
 			dispatch({ type: "SetProcessing", processing: false });
-			Toast.show(_(msg`Failed to create starter pack`), "xmark");
+			Toast.show("Failed to create starter pack", "xmark");
 		},
 	});
 	const { mutate: editStarterPack } = useEditStarterPackMutation({
@@ -213,7 +213,7 @@ function WizardInner({
 		onError: (e) => {
 			logger.error("Failed to edit starter pack", { safeMessage: e });
 			dispatch({ type: "SetProcessing", processing: false });
-			Toast.show(_(msg`Failed to create starter pack`), "xmark");
+			Toast.show("Failed to create starter pack", "xmark");
 		},
 	});
 
@@ -258,8 +258,8 @@ function WizardInner({
 		<Layout.Center style={[a.flex_1]}>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton
-					label={_(msg`Back`)}
-					accessibilityHint={_(msg`Returns to the previous step`)}
+					label={"Back"}
+					accessibilityHint={"Returns to the previous step"}
 					onPress={(evt) => {
 						if (state.currentStep !== "Details") {
 							evt.preventDefault();
@@ -308,7 +308,7 @@ function Container({ children }: { children: React.ReactNode }) {
 			{children}
 			{state.currentStep === "Details" && (
 				<Button
-					label={_(msg`Next`)}
+					label={"Next"}
 					variant="solid"
 					color="primary"
 					size="large"
@@ -473,7 +473,7 @@ function Footer({
 			<View style={[a.flex_row, a.w_full, a.justify_between, a.align_center, isNative ? a.mt_sm : a.mt_md]}>
 				{isEditEnabled ? (
 					<Button
-						label={_(msg`Edit`)}
+						label={"Edit"}
 						variant="solid"
 						color="secondary"
 						size="small"

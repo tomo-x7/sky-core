@@ -333,8 +333,8 @@ export function Controls({
 				<View style={[a.flex_1, a.px_xs, a.pb_sm, a.gap_sm, a.flex_row, a.align_center]}>
 					<ControlButton
 						active={playing}
-						activeLabel={_(msg`Pause`)}
-						inactiveLabel={_(msg`Play`)}
+						activeLabel={"Pause"}
+						inactiveLabel={"Play"}
 						activeIcon={PauseIcon}
 						inactiveIcon={PlayIcon}
 						onPress={onPressPlayPause}
@@ -346,8 +346,8 @@ export function Controls({
 					{hasSubtitleTrack && (
 						<ControlButton
 							active={subtitlesEnabled}
-							activeLabel={_(msg`Disable subtitles`)}
-							inactiveLabel={_(msg`Enable subtitles`)}
+							activeLabel={"Disable subtitles"}
+							inactiveLabel={"Enable subtitles"}
 							activeIcon={CCActiveIcon}
 							inactiveIcon={CCInactiveIcon}
 							onPress={onPressSubtitles}
@@ -364,8 +364,8 @@ export function Controls({
 					{!isIPhoneWeb && (
 						<ControlButton
 							active={isFullscreen}
-							activeLabel={_(msg`Exit fullscreen`)}
-							inactiveLabel={_(msg`Enter fullscreen`)}
+							activeLabel={"Exit fullscreen"}
+							inactiveLabel={"Enter fullscreen"}
 							activeIcon={ArrowsInIcon}
 							inactiveIcon={ArrowsOutIcon}
 							onPress={onPressFullscreen}

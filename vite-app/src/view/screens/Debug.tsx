@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { ScrollView, View } from "react-native";
@@ -55,7 +54,7 @@ function DebugInner({
 						type="default-light"
 						onPress={onToggleColorScheme}
 						isSelected={colorScheme === "dark"}
-						label={_(msg`Dark mode`)}
+						label={"Dark mode"}
 					/>
 				</View>
 				{item.currentView === 3 ? (
@@ -75,7 +74,7 @@ function DebugInner({
 
 	return (
 		<View style={[s.hContentRegion, pal.view]}>
-			<ViewHeader title={_(msg`Debug panel`)} />
+			<ViewHeader title={"Debug panel"} />
 			<ViewSelector
 				swipeEnabled
 				sections={MAIN_VIEWS}

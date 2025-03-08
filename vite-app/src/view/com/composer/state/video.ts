@@ -331,7 +331,7 @@ export async function processVideo(
 			logger.error("Error processing video", { safeMessage: e });
 			dispatch({
 				type: "to_error",
-				error: _(msg`Video failed to process`),
+				error: "Video failed to process",
 				signal,
 			});
 			return; // Exit async loop
@@ -365,10 +365,10 @@ function getCompressErrorMessage(e: unknown, _: I18n["_"]): string | null {
 		return null;
 	}
 	if (e instanceof VideoTooLargeError) {
-		return _(msg`The selected video is larger than 50MB.`);
+		return "The selected video is larger than 50MB.";
 	}
 	logger.error("Error compressing video", { safeMessage: e });
-	return _(msg`An error occurred while compressing the video.`);
+	return "An error occurred while compressing the video.";
 }
 
 function getUploadErrorMessage(e: unknown, _: I18n["_"]): string | null {
@@ -380,22 +380,22 @@ function getUploadErrorMessage(e: unknown, _: I18n["_"]): string | null {
 		// https://github.com/bluesky-social/tango/blob/lumi/lumi/worker/permissions.go#L77
 		switch (e.message) {
 			case "User is not allowed to upload videos":
-				return _(msg`You are not allowed to upload videos.`);
+				return "You are not allowed to upload videos.";
 			case "Uploading is disabled at the moment":
 				return _(
 					msg`Hold up! We’re gradually giving access to video, and you’re still waiting in line. Check back soon!`,
 				);
 			case "Failed to get user's upload stats":
-				return _(msg`We were unable to determine if you are allowed to upload videos. Please try again.`);
+				return "We were unable to determine if you are allowed to upload videos. Please try again.";
 			case "User has exceeded daily upload bytes limit":
-				return _(msg`You've reached your daily limit for video uploads (too many bytes)`);
+				return `You've reached your daily limit for video uploads (too many bytes)`;
 			case "User has exceeded daily upload videos limit":
-				return _(msg`You've reached your daily limit for video uploads (too many videos)`);
+				return `You've reached your daily limit for video uploads (too many videos)`;
 			case "Account is not old enough to upload videos":
-				return _(msg`Your account is not yet old enough to upload videos. Please try again later.`);
+				return "Your account is not yet old enough to upload videos. Please try again later.";
 			default:
 				return e.message;
 		}
 	}
-	return _(msg`An error occurred while uploading the video.`);
+	return "An error occurred while uploading the video.";
 }

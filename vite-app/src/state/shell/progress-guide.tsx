@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useMemo } from "react";
 
@@ -196,28 +195,28 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 					<>
 						<ProgressGuideToast
 							ref={firstLikeToastRef}
-							title={_(msg`Your first like!`)}
-							subtitle={_(msg`Like 10 posts to train the Discover feed`)}
+							title={"Your first like!"}
+							subtitle={"Like 10 posts to train the Discover feed"}
 						/>
 						<ProgressGuideToast
 							ref={fifthLikeToastRef}
-							title={_(msg`Half way there!`)}
-							subtitle={_(msg`Like 10 posts to train the Discover feed`)}
+							title={"Half way there!"}
+							subtitle={"Like 10 posts to train the Discover feed"}
 						/>
 						<ProgressGuideToast
 							ref={tenthLikeToastRef}
-							title={_(msg`Task complete - 10 likes!`)}
-							subtitle={_(msg`The Discover feed now knows what you like`)}
+							title={"Task complete - 10 likes!"}
+							subtitle={"The Discover feed now knows what you like"}
 						/>
 						<ProgressGuideToast
 							ref={fifthFollowToastRef}
-							title={_(msg`Half way there!`)}
-							subtitle={_(msg`Follow 10 accounts`)}
+							title={"Half way there!"}
+							subtitle={"Follow 10 accounts"}
 						/>
 						<ProgressGuideToast
 							ref={tenthFollowToastRef}
-							title={_(msg`Task complete - 10 follows!`)}
-							subtitle={_(msg`You've found some people to follow`)}
+							title={"Task complete - 10 follows!"}
+							subtitle={`You've found some people to follow`}
 						/>
 					</>
 				)}

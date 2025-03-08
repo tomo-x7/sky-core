@@ -1,5 +1,4 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type ModerationDecision, moderatePost } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useState } from "react";
 
@@ -93,8 +92,8 @@ export function PostQuotes({ uri }: { uri: string }) {
 				isLoading={isLoadingUri || isLoadingQuotes}
 				isError={isError}
 				emptyType="results"
-				emptyTitle={_(msg`No quotes yet`)}
-				emptyMessage={_(msg`Nobody has quoted this yet. Maybe you should be the first!`)}
+				emptyTitle={"No quotes yet"}
+				emptyMessage={"Nobody has quoted this yet. Maybe you should be the first!"}
 				errorMessage={cleanError(resolveError || error)}
 				sideBorders={false}
 			/>
@@ -118,7 +117,7 @@ export function PostQuotes({ uri }: { uri: string }) {
 					error={cleanError(error)}
 					onRetry={fetchNextPage}
 					showEndMessage
-					endMessageText={_(msg`That's all, folks!`)}
+					endMessageText={`That's all, folks!`}
 				/>
 			}
 			// @ts-ignore our .web version only -prf

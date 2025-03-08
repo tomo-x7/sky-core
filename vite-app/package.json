@@ -92,10 +92,7 @@
 		"vite": "^6.2.0"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@swc/core",
-			"esbuild"
-		]
+		"onlyBuiltDependencies": ["@swc/core", "esbuild"]
 	},
 	"resolutions": {
 		"react-is": "^18.0.0"

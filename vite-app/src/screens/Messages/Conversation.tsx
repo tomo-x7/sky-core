@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { type RouteProp, useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -99,8 +98,8 @@ function Inner() {
 			<Layout.Center style={[a.flex_1]}>
 				<MessagesListHeader />
 				<Error
-					title={_(msg`Something went wrong`)}
-					message={_(msg`We couldn't load this conversation`)}
+					title={"Something went wrong"}
+					message={`We couldn't load this conversation`}
 					onRetry={() => convoState.error.retry()}
 					sideBorders={false}
 				/>
@@ -185,7 +184,7 @@ function InnerReady({
 				/>
 			)}
 			<VerifyEmailDialog
-				reasonText={_(msg`Before you may message another user, you must first verify your email.`)}
+				reasonText={"Before you may message another user, you must first verify your email."}
 				control={verifyEmailControl}
 				onCloseWithoutVerifying={() => {
 					navigation.navigate("Home");

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -49,29 +48,29 @@ export function ThreadPreferencesScreen({}: Props) {
 								Sort replies to the same post by:
 							</Text>
 							<Toggle.Group
-								label={_(msg`Sort replies by`)}
+								label={"Sort replies by"}
 								type="radio"
 								values={sortReplies ? [sortReplies] : []}
 								onChange={(values) => setThreadViewPrefs({ sort: values[0] })}
 							>
 								<View style={[a.gap_sm, a.flex_1]}>
-									<Toggle.Item name="hotness" label={_(msg`Hot replies first`)}>
+									<Toggle.Item name="hotness" label={"Hot replies first"}>
 										<Toggle.Radio />
 										<Toggle.LabelText>Hot replies first</Toggle.LabelText>
 									</Toggle.Item>
-									<Toggle.Item name="oldest" label={_(msg`Oldest replies first`)}>
+									<Toggle.Item name="oldest" label={"Oldest replies first"}>
 										<Toggle.Radio />
 										<Toggle.LabelText>Oldest replies first</Toggle.LabelText>
 									</Toggle.Item>
-									<Toggle.Item name="newest" label={_(msg`Newest replies first`)}>
+									<Toggle.Item name="newest" label={"Newest replies first"}>
 										<Toggle.Radio />
 										<Toggle.LabelText>Newest replies first</Toggle.LabelText>
 									</Toggle.Item>
-									<Toggle.Item name="most-likes" label={_(msg`Most-liked replies first`)}>
+									<Toggle.Item name="most-likes" label={"Most-liked replies first"}>
 										<Toggle.Radio />
 										<Toggle.LabelText>Most-liked first</Toggle.LabelText>
 									</Toggle.Item>
-									<Toggle.Item name="random" label={_(msg`Random (aka "Poster's Roulette")`)}>
+									<Toggle.Item name="random" label={`Random (aka "Poster's Roulette")`}>
 										<Toggle.Radio />
 										<Toggle.LabelText>Random (aka "Poster's Roulette")</Toggle.LabelText>
 									</Toggle.Item>
@@ -85,7 +84,7 @@ export function ThreadPreferencesScreen({}: Props) {
 						<Toggle.Item
 							type="checkbox"
 							name="prioritize-follows"
-							label={_(msg`Prioritize your Follows`)}
+							label={"Prioritize your Follows"}
 							value={prioritizeFollowedUsers}
 							onChange={(value) =>
 								setThreadViewPrefs({
@@ -107,7 +106,7 @@ export function ThreadPreferencesScreen({}: Props) {
 						<Toggle.Item
 							type="checkbox"
 							name="threaded-mode"
-							label={_(msg`Threaded mode`)}
+							label={"Threaded mode"}
 							value={treeViewEnabled}
 							onChange={(value) =>
 								setThreadViewPrefs({

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
@@ -32,8 +31,8 @@ function PlaybackControls({
 	return (
 		<Pressable
 			accessibilityRole="button"
-			accessibilityHint={_(msg`Plays or pauses the GIF`)}
-			accessibilityLabel={isPlaying ? _(msg`Pause`) : _(msg`Play`)}
+			accessibilityHint={"Plays or pauses the GIF"}
+			accessibilityLabel={isPlaying ? "Pause" : "Play"}
 			style={[
 				a.absolute,
 				a.align_center,
@@ -133,7 +132,7 @@ export function GifEmbed({
 					autoplay={!autoplayDisabled}
 					onPlayerStateChange={onPlayerStateChange}
 					ref={playerRef}
-					accessibilityHint={_(msg`Animated GIF`)}
+					accessibilityHint={"Animated GIF"}
 					accessibilityLabel={altText}
 				/>
 				{!playerState.isPlaying && (
@@ -162,7 +161,7 @@ function AltText({ text }: { text: string }) {
 			<TouchableOpacity
 				testID="altTextButton"
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Show alt text`)}
+				accessibilityLabel={"Show alt text"}
 				accessibilityHint=""
 				hitSlop={HITSLOP_20}
 				onPress={control.open}
@@ -176,7 +175,7 @@ function AltText({ text }: { text: string }) {
 				<Prompt.TitleText>Alt Text</Prompt.TitleText>
 				<Prompt.DescriptionText selectable>{text}</Prompt.DescriptionText>
 				<Prompt.Actions>
-					<Prompt.Action onPress={() => control.close()} cta={_(msg`Close`)} color="secondary" />
+					<Prompt.Action onPress={() => control.close()} cta={"Close"} color="secondary" />
 				</Prompt.Actions>
 			</Prompt.Outer>
 		</>

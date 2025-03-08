@@ -16,7 +16,7 @@
 			"a11y": { "useKeyWithClickEvents": "off" },
 			"style": { "noUselessElse": "off", "useImportType": "info","noNonNullAssertion":"off","noUnusedTemplateLiteral":"error" },
 			"correctness": { "noUnusedImports": "info" },
-			"recommended": true,
+			"recommended": false,
 			"complexity": { "noUselessFragments": "error" }
 		}
 	},

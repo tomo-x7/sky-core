@@ -6,7 +6,6 @@ import {
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -90,8 +89,8 @@ export function StarterPackScreenShort({ route }: StarterPackScreenShortProps) {
 				<ListMaybePlaceholder
 					isLoading={isLoading}
 					isError={isError}
-					errorMessage={_(msg`That starter pack could not be found.`)}
-					emptyMessage={_(msg`That starter pack could not be found.`)}
+					errorMessage={"That starter pack could not be found."}
+					emptyMessage={"That starter pack could not be found."}
 				/>
 			</Layout.Screen>
 		);
@@ -131,8 +130,8 @@ export function StarterPackScreenInner({
 			<ListMaybePlaceholder
 				isLoading={isLoadingDid || isLoadingStarterPack || !moderationOpts}
 				isError={isErrorDid || isErrorStarterPack || !isValid}
-				errorMessage={_(msg`That starter pack could not be found.`)}
-				emptyMessage={_(msg`That starter pack could not be found.`)}
+				errorMessage={"That starter pack could not be found."}
+				emptyMessage={"That starter pack could not be found."}
 			/>
 		);
 	}
@@ -161,9 +160,9 @@ function StarterPackScreenLoaded({
 	const { _ } = useLingui();
 
 	const tabs = [
-		...(showPeopleTab ? [_(msg`People`)] : []),
-		...(showFeedsTab ? [_(msg`Feeds`)] : []),
-		...(showPostsTab ? [_(msg`Posts`)] : []),
+		...(showPeopleTab ? ["People"] : []),
+		...(showFeedsTab ? ["Feeds"] : []),
+		...(showPostsTab ? ["Posts"] : []),
 	];
 
 	const qrCodeDialogControl = useDialogControl();
@@ -315,7 +314,7 @@ function Header({
 			listItems = await getAllListMembers(agent, starterPack.list.uri);
 		} catch (e) {
 			setIsProcessing(false);
-			Toast.show(_(msg`An error occurred while trying to follow all`), "xmark");
+			Toast.show("An error occurred while trying to follow all", "xmark");
 			logger.error("Failed to get list members for starter pack", {
 				safeMessage: e,
 			});
@@ -337,7 +336,7 @@ function Header({
 			followUris = await bulkWriteFollows(agent, dids);
 		} catch (e) {
 			setIsProcessing(false);
-			Toast.show(_(msg`An error occurred while trying to follow all`), "xmark");
+			Toast.show("An error occurred while trying to follow all", "xmark");
 			logger.error("Failed to follow all accounts", { safeMessage: e });
 		}
 
@@ -349,7 +348,7 @@ function Header({
 				});
 			}
 		});
-		Toast.show(_(msg`All accounts have been followed!`));
+		Toast.show("All accounts have been followed!");
 		captureAction(ProgressGuideAction.Follow, dids.length);
 		logEvent("starterPack:followAll", {
 			logContext: "StarterPackProfilesList",
@@ -385,7 +384,7 @@ function Header({
 					<View style={[a.flex_row, a.gap_sm, a.align_center]}>
 						{isOwn ? (
 							<Button
-								label={_(msg`Share this starter pack`)}
+								label={"Share this starter pack"}
 								hitSlop={HITSLOP_20}
 								variant="solid"
 								color="primary"
@@ -396,7 +395,7 @@ function Header({
 							</Button>
 						) : (
 							<Button
-								label={_(msg`Follow all`)}
+								label={"Follow all"}
 								variant="solid"
 								color="primary"
 								size="small"
@@ -421,7 +420,7 @@ function Header({
 					{richText ? <RichText value={richText} style={[a.text_md, a.leading_snug]} /> : null}
 					{!hasSession ? (
 						<Button
-							label={_(msg`Join Bluesky`)}
+							label={"Join Bluesky"}
 							onPress={() => {
 								setActiveStarterPack({
 									uri: starterPack.uri,
@@ -508,12 +507,12 @@ function OverflowMenu({
 	return (
 		<>
 			<Menu.Root>
-				<Menu.Trigger label={_(msg`Repost or quote post`)}>
+				<Menu.Trigger label={"Repost or quote post"}>
 					{({ props }) => (
 						<Button
 							{...props}
 							testID="headerDropdownBtn"
-							label={_(msg`Open starter pack menu`)}
+							label={"Open starter pack menu"}
 							hitSlop={HITSLOP_20}
 							variant="solid"
 							color="secondary"
@@ -528,7 +527,7 @@ function OverflowMenu({
 					{isOwn ? (
 						<>
 							<Menu.Item
-								label={_(msg`Edit starter pack`)}
+								label={"Edit starter pack"}
 								testID="editStarterPackLinkBtn"
 								onPress={() => {
 									navigation.navigate("StarterPackEdit", {
@@ -540,7 +539,7 @@ function OverflowMenu({
 								<Menu.ItemIcon icon={Pencil} position="right" />
 							</Menu.Item>
 							<Menu.Item
-								label={_(msg`Delete starter pack`)}
+								label={"Delete starter pack"}
 								testID="deleteStarterPackBtn"
 								onPress={() => {
 									deleteDialogControl.open();
@@ -553,17 +552,13 @@ function OverflowMenu({
 					) : (
 						<>
 							<Menu.Group>
-								<Menu.Item
-									label={_(msg`Share`)}
-									testID="shareStarterPackLinkBtn"
-									onPress={onOpenShareDialog}
-								>
+								<Menu.Item label={"Share"} testID="shareStarterPackLinkBtn" onPress={onOpenShareDialog}>
 									<Menu.ItemText>Share link</Menu.ItemText>
 									<Menu.ItemIcon icon={ArrowOutOfBox} position="right" />
 								</Menu.Item>
 							</Menu.Group>
 
-							<Menu.Item label={_(msg`Report starter pack`)} onPress={() => reportDialogControl.open()}>
+							<Menu.Item label={"Report starter pack"} onPress={() => reportDialogControl.open()}>
 								<Menu.ItemText>Report starter pack</Menu.ItemText>
 								<Menu.ItemIcon icon={CircleInfo} position="right" />
 							</Menu.Item>
@@ -610,7 +605,7 @@ function OverflowMenu({
 						variant="solid"
 						color="negative"
 						size={gtMobile ? "small" : "large"}
-						label={_(msg`Yes, delete this starter pack`)}
+						label={"Yes, delete this starter pack"}
 						onPress={onDeleteStarterPack}
 					>
 						<ButtonText>Delete</ButtonText>
@@ -646,7 +641,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 		onError: (e) => {
 			setIsProcessing(false);
 			logger.error("Failed to delete invalid starter pack", { safeMessage: e });
-			Toast.show(_(msg`Failed to delete starter pack`), "xmark");
+			Toast.show("Failed to delete starter pack", "xmark");
 		},
 	});
 
@@ -672,7 +667,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 					<Button
 						variant="solid"
 						color="primary"
-						label={_(msg`Delete starter pack`)}
+						label={"Delete starter pack"}
 						size="large"
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
 						disabled={isProcessing}
@@ -687,7 +682,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 					<Button
 						variant="solid"
 						color="secondary"
-						label={_(msg`Return to previous page`)}
+						label={"Return to previous page"}
 						size="large"
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
 						disabled={isProcessing}

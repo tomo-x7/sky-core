@@ -1,5 +1,4 @@
 import { LABELS } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Fragment, useCallback } from "react";
@@ -64,14 +63,12 @@ export function ModerationScreen(_props: NativeStackScreenProps<CommonNavigatorP
 
 	return (
 		<Layout.Screen testID="moderationScreen">
-			<ViewHeader title={_(msg`Moderation`)} showOnDesktop />
+			<ViewHeader title={"Moderation"} showOnDesktop />
 			<Layout.Content>
 				{isLoading ? (
 					<ListMaybePlaceholder isLoading={true} sideBorders={false} />
 				) : error || !preferences ? (
-					<ErrorState
-						error={preferencesError?.toString() || _(msg`Something went wrong, please try again.`)}
-					/>
+					<ErrorState error={preferencesError?.toString() || "Something went wrong, please try again."} />
 				) : (
 					<ModerationScreenInner preferences={preferences} />
 				)}
@@ -151,13 +148,13 @@ export function ModerationScreenInner({
 
 			<View style={[a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25]}>
 				<Link
-					label={_(msg`View your default post interaction settings`)}
+					label={"View your default post interaction settings"}
 					testID="interactionSettingsBtn"
 					to="/moderation/interaction-settings"
 				>
 					{(state) => (
 						<SubItem
-							title={_(msg`Interaction settings`)}
+							title={"Interaction settings"}
 							icon={EditBig}
 							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
 						/>
@@ -166,36 +163,32 @@ export function ModerationScreenInner({
 				<Divider />
 				<Button
 					testID="mutedWordsBtn"
-					label={_(msg`Open muted words and tags settings`)}
+					label={"Open muted words and tags settings"}
 					onPress={() => mutedWordsDialogControl.open()}
 				>
 					{(state) => (
 						<SubItem
-							title={_(msg`Muted words & tags`)}
+							title={"Muted words & tags"}
 							icon={Filter}
 							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
 						/>
 					)}
 				</Button>
 				<Divider />
-				<Link label={_(msg`View your moderation lists`)} testID="moderationlistsBtn" to="/moderation/modlists">
+				<Link label={"View your moderation lists"} testID="moderationlistsBtn" to="/moderation/modlists">
 					{(state) => (
 						<SubItem
-							title={_(msg`Moderation lists`)}
+							title={"Moderation lists"}
 							icon={Group}
 							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
 						/>
 					)}
 				</Link>
 				<Divider />
-				<Link
-					label={_(msg`View your muted accounts`)}
-					testID="mutedAccountsBtn"
-					to="/moderation/muted-accounts"
-				>
+				<Link label={"View your muted accounts"} testID="mutedAccountsBtn" to="/moderation/muted-accounts">
 					{(state) => (
 						<SubItem
-							title={_(msg`Muted accounts`)}
+							title={"Muted accounts"}
 							icon={Person}
 							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
 						/>
@@ -203,13 +196,13 @@ export function ModerationScreenInner({
 				</Link>
 				<Divider />
 				<Link
-					label={_(msg`View your blocked accounts`)}
+					label={"View your blocked accounts"}
 					testID="blockedAccountsBtn"
 					to="/moderation/blocked-accounts"
 				>
 					{(state) => (
 						<SubItem
-							title={_(msg`Blocked accounts`)}
+							title={"Blocked accounts"}
 							icon={CircleBanSign}
 							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
 						/>
@@ -223,7 +216,7 @@ export function ModerationScreenInner({
 				{ageNotSet && (
 					<>
 						<Button
-							label={_(msg`Confirm your birthdate`)}
+							label={"Confirm your birthdate"}
 							size="small"
 							variant="solid"
 							color="secondary"
@@ -254,7 +247,7 @@ export function ModerationScreenInner({
 							>
 								<Text style={[a.font_bold, t.atoms.text_contrast_high]}>Enable adult content</Text>
 								<Toggle.Item
-									label={_(msg`Toggle to enable or disable adult content`)}
+									label={"Toggle to enable or disable adult content"}
 									disabled={disabledOnIOS}
 									name="adultContent"
 									value={adultContentEnabled}
@@ -274,7 +267,7 @@ export function ModerationScreenInner({
 										<>
 											Adult content can only be enabled via the Web at{" "}
 											<InlineLinkText
-												label={_(msg`The Bluesky web application`)}
+												label={"The Bluesky web application"}
 												to=""
 												onPress={(evt) => {
 													evt.preventDefault();

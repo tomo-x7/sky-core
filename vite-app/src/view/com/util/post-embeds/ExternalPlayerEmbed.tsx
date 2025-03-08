@@ -1,5 +1,4 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -50,8 +49,8 @@ function PlaceholderOverlay({
 		<View style={[a.absolute, a.inset_0, styles.overlayLayer]}>
 			<Pressable
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Play Video`)}
-				accessibilityHint={_(msg`Plays the video`)}
+				accessibilityLabel={"Play Video"}
+				accessibilityHint={"Plays the video"}
 				onPress={onPress}
 				style={[styles.overlayContainer]}
 			>

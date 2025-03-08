@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
@@ -147,7 +146,7 @@ export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
 	return (
 		<Layout.Header.Slot>
 			<Button
-				label={_(msg`Go back`)}
+				label={"Go back"}
 				size="small"
 				variant="ghost"
 				color="secondary"

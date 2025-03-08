@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -44,7 +43,7 @@ function Inner() {
 					<Graph size="sm" />
 					<Text style={[a.flex_1, a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>Trending</Text>
 					<Button
-						label={_(msg`Hide trending topics`)}
+						label={"Hide trending topics"}
 						size="tiny"
 						variant="ghost"
 						color="secondary"
@@ -85,9 +84,9 @@ function Inner() {
 			</View>
 			<Prompt.Basic
 				control={trendingPrompt}
-				title={_(msg`Hide trending topics?`)}
-				description={_(msg`You can update this later from your settings.`)}
-				confirmButtonCta={_(msg`Hide`)}
+				title={"Hide trending topics?"}
+				description={"You can update this later from your settings."}
+				confirmButtonCta={"Hide"}
 				onConfirm={onConfirmHide}
 			/>
 			<Divider />

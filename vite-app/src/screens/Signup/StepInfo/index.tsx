@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import React, { useRef } from "react";
@@ -82,21 +81,21 @@ export function StepInfo({
 		if (state.serviceDescription?.inviteCodeRequired && !inviteCode) {
 			return dispatch({
 				type: "setError",
-				value: _(msg`Please enter your invite code.`),
+				value: "Please enter your invite code.",
 				field: "invite-code",
 			});
 		}
 		if (!email) {
 			return dispatch({
 				type: "setError",
-				value: _(msg`Please enter your email.`),
+				value: "Please enter your email.",
 				field: "email",
 			});
 		}
 		if (!EmailValidator.validate(email)) {
 			return dispatch({
 				type: "setError",
-				value: _(msg`Your email appears to be invalid.`),
+				value: "Your email appears to be invalid.",
 				field: "email",
 			});
 		}
@@ -106,7 +105,7 @@ export function StepInfo({
 				setHasWarnedEmail(true);
 				return dispatch({
 					type: "setError",
-					value: _(msg`Please double-check that you have entered your email address correctly.`),
+					value: "Please double-check that you have entered your email address correctly.",
 				});
 			}
 		} else if (hasWarnedEmail) {
@@ -116,14 +115,14 @@ export function StepInfo({
 		if (!password) {
 			return dispatch({
 				type: "setError",
-				value: _(msg`Please choose your password.`),
+				value: "Please choose your password.",
 				field: "password",
 			});
 		}
 		if (password.length < 8) {
 			return dispatch({
 				type: "setError",
-				value: _(msg`Your password must be at least 8 characters long.`),
+				value: "Your password must be at least 8 characters long.",
 				field: "password",
 			});
 		}
@@ -164,7 +163,7 @@ export function StepInfo({
 												dispatch({ type: "clearError" });
 											}
 										}}
-										label={_(msg`Required for this provider`)}
+										label={"Required for this provider"}
 										defaultValue={state.inviteCode}
 										autoCapitalize="none"
 										autoComplete="email"
@@ -196,7 +195,7 @@ export function StepInfo({
 											dispatch({ type: "clearError" });
 										}
 									}}
-									label={_(msg`Enter your email address`)}
+									label={"Enter your email address"}
 									defaultValue={state.email}
 									autoCapitalize="none"
 									autoComplete="email"
@@ -220,7 +219,7 @@ export function StepInfo({
 											dispatch({ type: "clearError" });
 										}
 									}}
-									label={_(msg`Choose your password`)}
+									label={"Choose your password"}
 									defaultValue={state.password}
 									secureTextEntry
 									autoComplete="new-password"
@@ -244,8 +243,8 @@ export function StepInfo({
 										value: sanitizeDate(new Date(date)),
 									});
 								}}
-								label={_(msg`Date of birth`)}
-								accessibilityHint={_(msg`Select your date of birth`)}
+								label={"Date of birth"}
+								accessibilityHint={"Select your date of birth"}
 								maximumDate={new Date()}
 							/>
 						</View>
@@ -264,7 +263,7 @@ export function StepInfo({
 				onBackPress={onPressBack}
 				onNextPress={onNextPress}
 				onRetryPress={refetchServer}
-				overrideNextText={hasWarnedEmail ? _(msg`It's correct`) : undefined}
+				overrideNextText={hasWarnedEmail ? `It's correct` : undefined}
 			/>
 		</ScreenTransition>
 	);

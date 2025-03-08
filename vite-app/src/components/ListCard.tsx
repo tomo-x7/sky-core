@@ -1,5 +1,4 @@
 import { type AppBskyGraphDefs, AtUri, type ModerationUI, moderateUserList } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -118,8 +117,8 @@ export function TitleAndByline({
 			{creator && (
 				<Text emoji style={[a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
 					{purpose === MODLIST
-						? _(msg`Moderation list by ${sanitizeHandle(creator.handle, "@")}`)
-						: _(msg`List by ${sanitizeHandle(creator.handle, "@")}`)}
+						? `Moderation list by ${sanitizeHandle(creator.handle, "@")}`
+						: `List by ${sanitizeHandle(creator.handle, "@")}`}
 				</Text>
 			)}
 		</View>

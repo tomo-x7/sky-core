@@ -1,5 +1,4 @@
 import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -302,7 +301,7 @@ export function ProfileGrid({
 
 					<View style={[a.flex_row, a.justify_end, a.align_center, a.gap_md]}>
 						<InlineLinkText
-							label={_(msg`Browse more suggestions`)}
+							label={"Browse more suggestions"}
 							to="/search"
 							style={[t.atoms.text_contrast_medium]}
 						>
@@ -323,7 +322,7 @@ export function ProfileGrid({
 							{content}
 
 							<Button
-								label={_(msg`Browse more accounts on the Explore page`)}
+								label={"Browse more accounts on the Explore page"}
 								onPress={() => {
 									navigation.navigate("SearchTab");
 								}}
@@ -417,7 +416,7 @@ export function SuggestedFeeds() {
 
 					<View style={[a.flex_row, a.justify_end, a.align_center, a.pt_xs, a.gap_md]}>
 						<InlineLinkText
-							label={_(msg`Browse more suggestions`)}
+							label={"Browse more suggestions"}
 							to="/search"
 							style={[t.atoms.text_contrast_medium]}
 						>
@@ -438,7 +437,7 @@ export function SuggestedFeeds() {
 							{content}
 
 							<Button
-								label={_(msg`Browse more feeds on the Explore page`)}
+								label={"Browse more feeds on the Explore page"}
 								onPress={() => {
 									navigation.navigate("SearchTab");
 								}}

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import Graphemer from "graphemer";
 import React from "react";
@@ -51,7 +50,7 @@ export function MessageInput({
 			return;
 		}
 		if (new Graphemer().countGraphemes(message) > MAX_DM_GRAPHEME_LENGTH) {
-			Toast.show(_(msg`Message is too long`), "xmark");
+			Toast.show("Message is too long", "xmark");
 			return;
 		}
 		clearDraft();
@@ -166,7 +165,7 @@ export function MessageInput({
 							width: 30,
 						},
 					]}
-					label={_(msg`Open emoji picker`)}
+					label={"Open emoji picker"}
 				>
 					{(state) => (
 						<View
@@ -201,7 +200,7 @@ export function MessageInput({
 						},
 					])}
 					maxRows={12}
-					placeholder={_(msg`Write a message`)}
+					placeholder={"Write a message"}
 					defaultValue=""
 					value={message}
 					dirName="ltr"
@@ -222,7 +221,7 @@ export function MessageInput({
 				/>
 				<Pressable
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Send message`)}
+					accessibilityLabel={"Send message"}
 					accessibilityHint=""
 					style={[
 						a.rounded_full,

@@ -288,7 +288,7 @@ let FeedItemInner = ({
 							href={makeProfileLink(reason.by)}
 							title={
 								isOwner
-									? _(msg`Reposted by you`)
+									? "Reposted by you"
 									: _(
 											msg`Reposted by ${sanitizeDisplayName(
 												reason.by.displayName || reason.by.handle,
@@ -473,7 +473,7 @@ let PostContent = ({
 				</View>
 			) : undefined}
 			{limitLines ? (
-				<TextLink text={_(msg`Show More`)} style={pal.link} onPress={onPressShowMore} href="#" />
+				<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 			) : undefined}
 			{postEmbed ? (
 				<View style={[a.pb_xs]}>

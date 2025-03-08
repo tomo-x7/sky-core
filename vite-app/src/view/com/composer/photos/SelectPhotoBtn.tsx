@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 /* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { useCallback } from "react";
@@ -45,8 +44,8 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 		<Button
 			testID="openGalleryBtn"
 			onPress={onPressSelectPhotos}
-			label={_(msg`Gallery`)}
-			accessibilityHint={_(msg`Opens device photo gallery`)}
+			label={"Gallery"}
+			accessibilityHint={"Opens device photo gallery"}
 			style={a.p_sm}
 			variant="ghost"
 			shape="round"

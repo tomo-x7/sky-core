@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -169,14 +168,14 @@ export function StepInterests() {
 							>
 								Error:{" "}
 							</Text>
-							{error?.message || _(msg`an unknown error occurred`)}
+							{error?.message || "an unknown error occurred"}
 						</Text>
 					</View>
 				) : (
 					<Toggle.Group
 						values={interests}
 						onChange={setInterests}
-						label={_(msg`Select your interests from the options below`)}
+						label={"Select your interests from the options below"}
 					>
 						<View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
 							{data.interests.map((interest) => (
@@ -201,7 +200,7 @@ export function StepInterests() {
 							variant="solid"
 							color="secondary"
 							size="large"
-							label={_(msg`Retry`)}
+							label={"Retry"}
 							onPress={() => refetch()}
 						>
 							<ButtonText>Retry</ButtonText>
@@ -211,7 +210,7 @@ export function StepInterests() {
 							variant="outline"
 							color="secondary"
 							size="large"
-							label={_(msg`Skip this flow`)}
+							label={"Skip this flow"}
 							onPress={skipOnboarding}
 						>
 							<ButtonText>Skip</ButtonText>
@@ -223,7 +222,7 @@ export function StepInterests() {
 						variant="gradient"
 						color="gradient_sky"
 						size="large"
-						label={_(msg`Continue to next step`)}
+						label={"Continue to next step"}
 						onPress={saveInterests}
 					>
 						<ButtonText>Continue</ButtonText>

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
@@ -103,8 +103,8 @@ export const SplashScreen = ({
 							<Button
 								testID="createAccountButton"
 								onPress={onPressCreateAccount}
-								label={_(msg`Create new account`)}
-								accessibilityHint={_(msg`Opens flow to create a new Bluesky account`)}
+								label={"Create new account"}
+								accessibilityHint={"Opens flow to create a new Bluesky account"}
 								size="large"
 								variant="solid"
 								color="primary"
@@ -114,8 +114,8 @@ export const SplashScreen = ({
 							<Button
 								testID="signInButton"
 								onPress={onPressSignin}
-								label={_(msg`Sign in`)}
-								accessibilityHint={_(msg`Opens flow to sign in to your existing Bluesky account`)}
+								label={"Sign in"}
+								accessibilityHint={"Opens flow to sign in to your existing Bluesky account"}
 								size="large"
 								variant="solid"
 								color="secondary"
@@ -151,13 +151,13 @@ function Footer() {
 				t.atoms.border_contrast_medium,
 			]}
 		>
-			<InlineLinkText label={_(msg`Learn more about Bluesky`)} to="https://bsky.social">
+			<InlineLinkText label={"Learn more about Bluesky"} to="https://bsky.social">
 				Business
 			</InlineLinkText>
-			<InlineLinkText label={_(msg`Read the Bluesky blog`)} to="https://bsky.social/about/blog">
+			<InlineLinkText label={"Read the Bluesky blog"} to="https://bsky.social/about/blog">
 				Blog
 			</InlineLinkText>
-			<InlineLinkText label={_(msg`See jobs at Bluesky`)} to="https://bsky.social/about/join">
+			<InlineLinkText label={"See jobs at Bluesky"} to="https://bsky.social/about/join">
 				<Trans comment="Link to a page with job openings at Bluesky">Jobs</Trans>
 			</InlineLinkText>
 

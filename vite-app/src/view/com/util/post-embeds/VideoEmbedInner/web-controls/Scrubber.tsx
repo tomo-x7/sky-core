@@ -189,7 +189,7 @@ export function Scrubber({
 					aria-valuemax={duration}
 					aria-valuemin={0}
 					aria-valuenow={currentTime}
-					aria-valuetext={_(msg`${formatTime(currentTime)} of ${formatTime(duration)}`)}
+					aria-valuetext={`${formatTime(currentTime)} of ${formatTime(duration)}`}
 					tabIndex={0}
 					onFocus={onFocus}
 					onBlur={onBlur}

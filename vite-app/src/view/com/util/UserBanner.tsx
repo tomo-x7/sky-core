@@ -1,5 +1,4 @@
 import type { ModerationUI } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
@@ -89,7 +88,7 @@ export function UserBanner({
 	return onSelectNewBanner ? (
 		<EventStopper onKeyDown={true}>
 			<Menu.Root>
-				<Menu.Trigger label={_(msg`Edit avatar`)}>
+				<Menu.Trigger label={"Edit avatar"}>
 					{({ props }) => (
 						<Pressable {...props} testID="changeBannerBtn">
 							{banner ? (
@@ -117,7 +116,7 @@ export function UserBanner({
 						{isNative && (
 							<Menu.Item
 								testID="changeBannerCameraBtn"
-								label={_(msg`Upload from Camera`)}
+								label={"Upload from Camera"}
 								onPress={onOpenCamera}
 							>
 								<Menu.ItemText>Upload from Camera</Menu.ItemText>
@@ -127,7 +126,7 @@ export function UserBanner({
 
 						<Menu.Item
 							testID="changeBannerLibraryBtn"
-							label={_(msg`Upload from Library`)}
+							label={"Upload from Library"}
 							onPress={onOpenLibrary}
 						>
 							<Menu.ItemText>

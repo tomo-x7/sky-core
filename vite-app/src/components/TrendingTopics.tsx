@@ -1,5 +1,4 @@
 import type { AtUri } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -165,7 +164,7 @@ export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
 		if (link.startsWith("/search")) {
 			return {
 				type: "topic",
-				label: _(msg`Browse posts about ${displayName}`),
+				label: `Browse posts about ${displayName}`,
 				displayName,
 				uri: undefined,
 				url: link,
@@ -173,7 +172,7 @@ export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
 		} else if (link.startsWith("/hashtag")) {
 			return {
 				type: "tag",
-				label: _(msg`Browse posts tagged with ${displayName}`),
+				label: `Browse posts tagged with ${displayName}`,
 				displayName,
 				// displayName: displayName.replace(/^#/, ''),
 				uri: undefined,
@@ -182,7 +181,7 @@ export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
 		} else if (link.startsWith("/starter-pack")) {
 			return {
 				type: "starter-pack",
-				label: _(msg`Browse starter pack ${displayName}`),
+				label: `Browse starter pack ${displayName}`,
 				displayName,
 				uri: undefined,
 				url: link,
@@ -198,7 +197,7 @@ export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
         case 'app.bsky.actor.profile': {
           return {
             type: 'profile',
-            label: _(msg`View ${displayName}'s profile`),
+            label: `View ${displayName}'s profile`,
             displayName,
             uri: urip,
             url: makeProfileLink({did: urip.host, handle: urip.host}),
@@ -207,7 +206,7 @@ export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
         case 'app.bsky.feed.generator': {
           return {
             type: 'feed',
-            label: _(msg`Browse the ${displayName} feed`),
+            label: `Browse the ${displayName} feed`,
             displayName,
             uri: urip,
             url: feedUriToHref(link),
@@ -219,7 +218,7 @@ export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
 
 		return {
 			type: "unknown",
-			label: _(msg`Browse topic ${displayName}`),
+			label: `Browse topic ${displayName}`,
 			displayName,
 			uri: undefined,
 			url: link,

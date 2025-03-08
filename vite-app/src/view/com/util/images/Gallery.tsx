@@ -1,5 +1,4 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { Image, type ImageStyle } from "react-native";
@@ -54,7 +53,7 @@ export function GalleryItem({
 				onLongPress={onLongPress ? () => onLongPress(index) : undefined}
 				style={[a.flex_1, a.overflow_hidden, t.atoms.bg_contrast_25, imageStyle]}
 				accessibilityRole="button"
-				accessibilityLabel={image.alt || _(msg`Image`)}
+				accessibilityLabel={image.alt || "Image"}
 				accessibilityHint=""
 			>
 				<Image

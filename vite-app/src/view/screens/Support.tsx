@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
@@ -28,7 +27,7 @@ export const SupportScreen = (_props: Props) => {
 
 	return (
 		<Layout.Screen>
-			<ViewHeader title={_(msg`Support`)} />
+			<ViewHeader title={"Support"} />
 			<CenteredView>
 				<Text type="title-xl" style={[pal.text, s.p20, s.pb5]}>
 					Support
@@ -36,8 +35,8 @@ export const SupportScreen = (_props: Props) => {
 				<Text style={[pal.text, s.p20]}>
 					<>
 						The support form has been moved. If you need help, please{" "}
-						<TextLink href={HELP_DESK_URL} text={_(msg`click here`)} style={pal.link} /> or visit{" "}
-						{HELP_DESK_URL} to get in touch with us.
+						<TextLink href={HELP_DESK_URL} text={"click here"} style={pal.link} /> or visit {HELP_DESK_URL}{" "}
+						to get in touch with us.
 					</>
 				</Text>
 			</CenteredView>

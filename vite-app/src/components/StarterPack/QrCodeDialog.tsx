@@ -1,5 +1,4 @@
 import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { createAssetAsync } from "expo-media-library";
@@ -56,7 +55,7 @@ export function QrCodeDialog({
 				const res = await requestMediaLibraryPermissionsAsync();
 
 				if (!res) {
-					Toast.show(_(msg`You must grant access to your photo library to save a QR code`));
+					Toast.show("You must grant access to your photo library to save a QR code");
 					return;
 				}
 
@@ -64,7 +63,7 @@ export function QrCodeDialog({
 				try {
 					await createAssetAsync(`file://${uri}`);
 				} catch (e: unknown) {
-					Toast.show(_(msg`An error occurred while saving the QR code!`), "xmark");
+					Toast.show("An error occurred while saving the QR code!", "xmark");
 					logger.error("Failed to save QR code", { error: e });
 					return;
 				}
@@ -90,7 +89,7 @@ export function QrCodeDialog({
 				qrShareType: "save",
 			});
 			setIsProcessing(false);
-			Toast.show(isWeb ? _(msg`QR code has been downloaded!`) : _(msg`QR code saved to your camera roll!`));
+			Toast.show(isWeb ? "QR code has been downloaded!" : "QR code saved to your camera roll!");
 			control.close();
 		});
 	};
@@ -110,7 +109,7 @@ export function QrCodeDialog({
 				shareType: "qrcode",
 				qrShareType: "copy",
 			});
-			Toast.show(_(msg`QR code copied to your clipboard!`));
+			Toast.show("QR code copied to your clipboard!");
 			setIsProcessing(false);
 			control.close();
 		});
@@ -132,7 +131,7 @@ export function QrCodeDialog({
 
 	return (
 		<Dialog.Outer control={control}>
-			<Dialog.ScrollableInner label={_(msg`Create a QR code for a starter pack`)}>
+			<Dialog.ScrollableInner label={"Create a QR code for a starter pack"}>
 				<View style={[a.flex_1, a.align_center, a.gap_5xl]}>
 					<React.Suspense fallback={<Loading />}>
 						{!link ? (
@@ -147,7 +146,7 @@ export function QrCodeDialog({
 								) : (
 									<View style={[a.w_full, a.gap_md, isWeb && [a.flex_row_reverse]]}>
 										<Button
-											label={_(msg`Copy QR code`)}
+											label={"Copy QR code"}
 											variant="solid"
 											color="secondary"
 											size="small"
@@ -156,7 +155,7 @@ export function QrCodeDialog({
 											<ButtonText>{isWeb ? <>Copy</> : <>Share</>}</ButtonText>
 										</Button>
 										<Button
-											label={_(msg`Save QR code`)}
+											label={"Save QR code"}
 											variant="solid"
 											color="secondary"
 											size="small"

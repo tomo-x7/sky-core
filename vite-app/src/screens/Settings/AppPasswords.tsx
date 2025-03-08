@@ -1,5 +1,4 @@
 import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
@@ -51,8 +50,8 @@ export function AppPasswordsScreen({}: Props) {
 			<Layout.Content>
 				{error ? (
 					<ErrorScreen
-						title={_(msg`Oops!`)}
-						message={_(msg`There was an issue fetching your app passwords`)}
+						title={"Oops!"}
+						message={"There was an issue fetching your app passwords"}
 						details={cleanError(error)}
 					/>
 				) : (
@@ -65,7 +64,7 @@ export function AppPasswordsScreen({}: Props) {
 						</SettingsList.Item>
 						<SettingsList.Item>
 							<Button
-								label={_(msg`Add App Password`)}
+								label={"Add App Password"}
 								size="large"
 								color="primary"
 								variant="solid"
@@ -96,7 +95,7 @@ export function AppPasswordsScreen({}: Props) {
 										))}
 									</View>
 								) : (
-									<EmptyState icon="growth" message={_(msg`No app passwords yet`)} />
+									<EmptyState icon="growth" message={"No app passwords yet"} />
 								)
 							) : (
 								<View style={[a.flex_1, a.justify_center, a.align_center, a.py_4xl]}>
@@ -128,7 +127,7 @@ function AppPasswordCard({
 
 	const onDelete = useCallback(async () => {
 		await deleteMutation({ name: appPassword.name });
-		Toast.show(_(msg`App password deleted`));
+		Toast.show("App password deleted");
 	}, [deleteMutation, appPassword.name, _]);
 
 	return (
@@ -160,7 +159,7 @@ function AppPasswordCard({
 					</Text>
 				</View>
 				<Button
-					label={_(msg`Delete app password`)}
+					label={"Delete app password"}
 					variant="ghost"
 					color="negative"
 					size="small"
@@ -179,10 +178,10 @@ function AppPasswordCard({
 
 			<Prompt.Basic
 				control={deleteControl}
-				title={_(msg`Delete app password?`)}
-				description={_(msg`Are you sure you want to delete the app password "${appPassword.name}"?`)}
+				title={"Delete app password?"}
+				description={`Are you sure you want to delete the app password "${appPassword.name}"?`}
 				onConfirm={onDelete}
-				confirmButtonCta={_(msg`Delete`)}
+				confirmButtonCta={"Delete"}
 				confirmButtonColor="negative"
 			/>
 		</View>

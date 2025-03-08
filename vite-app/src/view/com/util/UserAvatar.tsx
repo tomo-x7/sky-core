@@ -1,6 +1,5 @@
 import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
@@ -314,7 +313,7 @@ let EditableUserAvatar = ({
 
 	return (
 		<Menu.Root>
-			<Menu.Trigger label={_(msg`Edit avatar`)}>
+			<Menu.Trigger label={"Edit avatar"}>
 				{({ props }) => (
 					<Pressable {...props} testID="changeAvatarBtn">
 						{avatar ? (
@@ -336,21 +335,13 @@ let EditableUserAvatar = ({
 			<Menu.Outer showCancel>
 				<Menu.Group>
 					{isNative && (
-						<Menu.Item
-							testID="changeAvatarCameraBtn"
-							label={_(msg`Upload from Camera`)}
-							onPress={onOpenCamera}
-						>
+						<Menu.Item testID="changeAvatarCameraBtn" label={"Upload from Camera"} onPress={onOpenCamera}>
 							<Menu.ItemText>Upload from Camera</Menu.ItemText>
 							<Menu.ItemIcon icon={Camera} />
 						</Menu.Item>
 					)}
 
-					<Menu.Item
-						testID="changeAvatarLibraryBtn"
-						label={_(msg`Upload from Library`)}
-						onPress={onOpenLibrary}
-					>
+					<Menu.Item testID="changeAvatarLibraryBtn" label={"Upload from Library"} onPress={onOpenLibrary}>
 						<Menu.ItemText>{isNative ? <>Upload from Library</> : <>Upload from Files</>}</Menu.ItemText>
 						<Menu.ItemIcon icon={Library} />
 					</Menu.Item>
@@ -408,8 +399,8 @@ let PreviewableUserAvatar = ({
 				avatarEl
 			) : (
 				<Link
-					label={_(msg`${profile.displayName || profile.handle}'s avatar`)}
-					accessibilityHint={_(msg`Opens this profile`)}
+					label={`${profile.displayName || profile.handle}'s avatar`}
+					accessibilityHint={"Opens this profile"}
 					to={makeProfileLink({
 						did: profile.did,
 						handle: profile.handle,

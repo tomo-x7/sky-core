@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -52,9 +51,9 @@ export function usePinnedPostMutation() {
 				});
 
 				if (pinCurrentPost) {
-					Toast.show(_(msg`Post pinned`));
+					Toast.show("Post pinned");
 				} else {
-					Toast.show(_(msg`Post unpinned`));
+					Toast.show("Post unpinned");
 				}
 
 				queryClient.invalidateQueries({
@@ -64,7 +63,7 @@ export function usePinnedPostMutation() {
 					queryKey: FEED_RQKEY(`author|${currentAccount.did}|posts_with_replies`),
 				});
 			} catch (e: any) {
-				Toast.show(_(msg`Failed to pin post`));
+				Toast.show("Failed to pin post");
 				logger.error("Failed to pin post", { message: String(e) });
 				// revert optimistic update
 				updatePostShadow(queryClient, postUri, {

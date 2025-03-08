@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useRef } from "react";
 import { Keyboard } from "react-native";
@@ -32,8 +31,8 @@ export function SelectGifBtn({ onClose, onSelectGif, disabled }: Props) {
 			<Button
 				testID="openGifBtn"
 				onPress={onPressSelectGif}
-				label={_(msg`Select GIF`)}
-				accessibilityHint={_(msg`Opens GIF select dialog`)}
+				label={"Select GIF"}
+				accessibilityHint={"Opens GIF select dialog"}
 				style={a.p_sm}
 				variant="ghost"
 				shape="round"

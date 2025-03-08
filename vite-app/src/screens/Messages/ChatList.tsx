@@ -1,5 +1,4 @@
 import type { ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -211,11 +210,11 @@ export function MessagesScreen({ navigation, route }: Props) {
 												{ maxWidth: 360 },
 											]}
 										>
-											{cleanError(error) || _(msg`Failed to load conversations`)}
+											{cleanError(error) || "Failed to load conversations"}
 										</Text>
 
 										<Button
-											label={_(msg`Reload conversations`)}
+											label={"Reload conversations"}
 											size="small"
 											color="secondary_inverted"
 											variant="solid"
@@ -292,7 +291,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 	const settingsLink = (
 		<Link
 			to="/messages/settings"
-			label={_(msg`Chat settings`)}
+			label={"Chat settings"}
 			size="small"
 			variant="ghost"
 			color="secondary"
@@ -314,7 +313,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 						{settingsLink}
 						<Button
-							label={_(msg`New chat`)}
+							label={"New chat"}
 							color="primary"
 							size="small"
 							variant="solid"

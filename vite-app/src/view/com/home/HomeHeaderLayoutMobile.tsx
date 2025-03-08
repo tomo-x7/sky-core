@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { View } from "react-native";
@@ -76,7 +75,7 @@ export function HomeHeaderLayoutMobile({
 							testID="viewHeaderHomeFeedPrefsBtn"
 							to="/feeds"
 							hitSlop={HITSLOP_10}
-							label={_(msg`View your feeds and explore more`)}
+							label={"View your feeds and explore more"}
 							size="small"
 							variant="ghost"
 							color="secondary"

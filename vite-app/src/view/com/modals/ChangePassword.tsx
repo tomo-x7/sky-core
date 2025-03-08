@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import { useState } from "react";
@@ -43,7 +42,7 @@ export function Component() {
 
 	const onRequestCode = async () => {
 		if (!currentAccount?.email || !EmailValidator.validate(currentAccount.email)) {
-			return setError(_(msg`Your email appears to be invalid.`));
+			return setError("Your email appears to be invalid.");
 		}
 
 		setError("");
@@ -57,7 +56,7 @@ export function Component() {
 			const errMsg = e.toString();
 			logger.warn("Failed to request password reset", { error: e });
 			if (isNetworkError(e)) {
-				setError(_(msg`Unable to contact your service. Please check your Internet connection.`));
+				setError("Unable to contact your service. Please check your Internet connection.");
 			} else {
 				setError(cleanError(errMsg));
 			}
@@ -69,15 +68,15 @@ export function Component() {
 	const onChangePassword = async () => {
 		const formattedCode = checkAndFormatResetCode(resetCode);
 		if (!formattedCode) {
-			setError(_(msg`You have entered an invalid code. It should look like XXXXX-XXXXX.`));
+			setError("You have entered an invalid code. It should look like XXXXX-XXXXX.");
 			return;
 		}
 		if (!newPassword) {
-			setError(_(msg`Please enter a password. It must be at least 8 characters long.`));
+			setError("Please enter a password. It must be at least 8 characters long.");
 			return;
 		}
 		if (newPassword.length < 8) {
-			setError(_(msg`Password must be at least 8 characters long.`));
+			setError("Password must be at least 8 characters long.");
 			return;
 		}
 
@@ -93,7 +92,7 @@ export function Component() {
 			const errMsg = e.toString();
 			logger.warn("Failed to set new password", { error: e });
 			if (isNetworkError(e)) {
-				setError(_(msg`Unable to contact your service. Please check your Internet connection.`));
+				setError("Unable to contact your service. Please check your Internet connection.");
 			} else {
 				setError(cleanError(errMsg));
 			}
@@ -105,7 +104,7 @@ export function Component() {
 	const onBlur = () => {
 		const formattedCode = checkAndFormatResetCode(resetCode);
 		if (!formattedCode) {
-			setError(_(msg`You have entered an invalid code. It should look like XXXXX-XXXXX.`));
+			setError("You have entered an invalid code. It should look like XXXXX-XXXXX.");
 			return;
 		}
 		setResetCode(formattedCode);
@@ -120,7 +119,7 @@ export function Component() {
 				<View>
 					<View style={styles.titleSection}>
 						<Text type="title-lg" style={[pal.text, styles.title]}>
-							{stage !== Stages.Done ? _(msg`Change Password`) : _(msg`Password Changed`)}
+							{stage !== Stages.Done ? "Change Password" : "Password Changed"}
 						</Text>
 					</View>
 
@@ -143,8 +142,8 @@ export function Component() {
 								testID="skipSendEmailButton"
 								onPress={() => setStage(Stages.ChangePassword)}
 								accessibilityRole="button"
-								accessibilityLabel={_(msg`Go to next`)}
-								accessibilityHint={_(msg`Navigates to the next screen`)}
+								accessibilityLabel={"Go to next"}
+								accessibilityHint={"Navigates to the next screen"}
 							>
 								<Text type="xl" style={[pal.link, s.pr5]}>
 									Already have a code?
@@ -159,14 +158,14 @@ export function Component() {
 								<TextInput
 									testID="codeInput"
 									style={[pal.text, styles.textInput]}
-									placeholder={_(msg`Reset code`)}
+									placeholder={"Reset code"}
 									placeholderTextColor={pal.colors.textLight}
 									value={resetCode}
 									onChangeText={setResetCode}
 									onFocus={() => setError("")}
 									onBlur={onBlur}
 									accessible={true}
-									accessibilityLabel={_(msg`Reset Code`)}
+									accessibilityLabel={"Reset Code"}
 									accessibilityHint=""
 									autoCapitalize="none"
 									autoCorrect={false}
@@ -178,12 +177,12 @@ export function Component() {
 								<TextInput
 									testID="codeInput"
 									style={[pal.text, styles.textInput]}
-									placeholder={_(msg`New password`)}
+									placeholder={"New password"}
 									placeholderTextColor={pal.colors.textLight}
 									onChangeText={setNewPassword}
 									secureTextEntry
 									accessible={true}
-									accessibilityLabel={_(msg`New Password`)}
+									accessibilityLabel={"New Password"}
 									accessibilityHint=""
 									autoCapitalize="none"
 									autoComplete="new-password"
@@ -205,9 +204,9 @@ export function Component() {
 									testID="requestChangeBtn"
 									type="primary"
 									onPress={onRequestCode}
-									accessibilityLabel={_(msg`Request Code`)}
+									accessibilityLabel={"Request Code"}
 									accessibilityHint=""
-									label={_(msg`Request Code`)}
+									label={"Request Code"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 									labelStyle={[s.f18]}
 								/>
@@ -217,9 +216,9 @@ export function Component() {
 									testID="confirmBtn"
 									type="primary"
 									onPress={onChangePassword}
-									accessibilityLabel={_(msg`Next`)}
+									accessibilityLabel={"Next"}
 									accessibilityHint=""
-									label={_(msg`Next`)}
+									label={"Next"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 									labelStyle={[s.f18]}
 								/>
@@ -230,9 +229,9 @@ export function Component() {
 								onPress={() => {
 									closeModal();
 								}}
-								accessibilityLabel={stage !== Stages.Done ? _(msg`Cancel`) : _(msg`Close`)}
+								accessibilityLabel={stage !== Stages.Done ? "Cancel" : "Close"}
 								accessibilityHint=""
-								label={stage !== Stages.Done ? _(msg`Cancel`) : _(msg`Close`)}
+								label={stage !== Stages.Done ? "Cancel" : "Close"}
 								labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 								labelStyle={[s.f18]}
 							/>

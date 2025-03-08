@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { LinearGradient } from "expo-linear-gradient";
@@ -92,8 +91,8 @@ export function Component({
 				<TouchableOpacity
 					onPress={onPressCancel}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Cancel image crop`)}
-					accessibilityHint={_(msg`Exits image cropping process`)}
+					accessibilityLabel={"Cancel image crop"}
+					accessibilityHint={"Exits image cropping process"}
 				>
 					<Text type="xl" style={pal.link}>
 						Cancel
@@ -103,8 +102,8 @@ export function Component({
 				<TouchableOpacity
 					onPress={onPressDone}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Save image crop`)}
-					accessibilityHint={_(msg`Saves image crop settings`)}
+					accessibilityLabel={"Save image crop"}
+					accessibilityHint={"Saves image crop settings"}
 				>
 					<LinearGradient
 						colors={[gradients.blueLight.start, gradients.blueLight.end]}

@@ -39,7 +39,7 @@ export function Component() {
 
 	const onRequestChange = async () => {
 		if (email === currentAccount?.email) {
-			setError(_(msg`Enter your new email above`));
+			setError("Enter your new email above");
 			return;
 		}
 		setError("");
@@ -51,7 +51,7 @@ export function Component() {
 			} else {
 				await agent.com.atproto.server.updateEmail({ email: email.trim() });
 				await agent.resumeSession(agent.session!);
-				Toast.show(_(msg`Email updated`));
+				Toast.show("Email updated");
 				setStage(Stages.Done);
 			}
 		} catch (e) {
@@ -80,7 +80,7 @@ export function Component() {
 				token: confirmationCode.trim(),
 			});
 			await agent.resumeSession(agent.session!);
-			Toast.show(_(msg`Email updated`));
+			Toast.show("Email updated");
 			setStage(Stages.Done);
 		} catch (e) {
 			setError(cleanError(String(e)));
@@ -99,9 +99,9 @@ export function Component() {
 			<ScrollView testID="changeEmailModal" style={[s.flex1, isMobile && { paddingHorizontal: 18 }]}>
 				<View style={styles.titleSection}>
 					<Text type="title-lg" style={[pal.text, styles.title]}>
-						{stage === Stages.InputEmail ? _(msg`Change Your Email`) : ""}
-						{stage === Stages.ConfirmCode ? _(msg`Security Step Required`) : ""}
-						{stage === Stages.Done ? _(msg`Email Updated`) : ""}
+						{stage === Stages.InputEmail ? "Change Your Email" : ""}
+						{stage === Stages.ConfirmCode ? "Security Step Required" : ""}
+						{stage === Stages.Done ? "Email Updated" : ""}
 					</Text>
 				</View>
 
@@ -127,7 +127,7 @@ export function Component() {
 						value={email}
 						onChangeText={setEmail}
 						accessible={true}
-						accessibilityLabel={_(msg`Email`)}
+						accessibilityLabel={"Email"}
 						accessibilityHint=""
 						autoCapitalize="none"
 						autoComplete="email"
@@ -143,7 +143,7 @@ export function Component() {
 						value={confirmationCode}
 						onChangeText={setConfirmationCode}
 						accessible={true}
-						accessibilityLabel={_(msg`Confirmation code`)}
+						accessibilityLabel={"Confirmation code"}
 						accessibilityHint=""
 						autoCapitalize="none"
 						autoComplete="off"
@@ -165,9 +165,9 @@ export function Component() {
 									testID="requestChangeBtn"
 									type="primary"
 									onPress={onRequestChange}
-									accessibilityLabel={_(msg`Request Change`)}
+									accessibilityLabel={"Request Change"}
 									accessibilityHint=""
-									label={_(msg`Request Change`)}
+									label={"Request Change"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 									labelStyle={[s.f18]}
 								/>
@@ -177,9 +177,9 @@ export function Component() {
 									testID="confirmBtn"
 									type="primary"
 									onPress={onConfirm}
-									accessibilityLabel={_(msg`Confirm Change`)}
+									accessibilityLabel={"Confirm Change"}
 									accessibilityHint=""
-									label={_(msg`Confirm Change`)}
+									label={"Confirm Change"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 									labelStyle={[s.f18]}
 								/>
@@ -189,9 +189,9 @@ export function Component() {
 									testID="verifyBtn"
 									type="primary"
 									onPress={onVerify}
-									accessibilityLabel={_(msg`Verify New Email`)}
+									accessibilityLabel={"Verify New Email"}
 									accessibilityHint=""
-									label={_(msg`Verify New Email`)}
+									label={"Verify New Email"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 									labelStyle={[s.f18]}
 								/>
@@ -202,9 +202,9 @@ export function Component() {
 								onPress={() => {
 									closeModal();
 								}}
-								accessibilityLabel={_(msg`Cancel`)}
+								accessibilityLabel={"Cancel"}
 								accessibilityHint=""
-								label={_(msg`Cancel`)}
+								label={"Cancel"}
 								labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 								labelStyle={[s.f18]}
 							/>

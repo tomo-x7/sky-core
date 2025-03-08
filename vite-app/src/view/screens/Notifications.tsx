@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -74,7 +73,7 @@ export function NotificationsScreen({}: Props) {
 	const sections = React.useMemo(() => {
 		return [
 			{
-				title: _(msg`All`),
+				title: "All",
 				component: (
 					<NotificationsTab
 						filter="all"
@@ -87,7 +86,7 @@ export function NotificationsScreen({}: Props) {
 				),
 			},
 			{
-				title: _(msg`Mentions`),
+				title: "Mentions",
 				component: (
 					<NotificationsTab
 						filter="mentions"
@@ -112,7 +111,7 @@ export function NotificationsScreen({}: Props) {
 				<Layout.Header.Slot>
 					<Link
 						to="/notifications/settings"
-						label={_(msg`Notification settings`)}
+						label={"Notification settings"}
 						size="small"
 						variant="ghost"
 						color="secondary"
@@ -145,7 +144,7 @@ export function NotificationsScreen({}: Props) {
 				onPress={() => openComposer({})}
 				icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`New post`)}
+				accessibilityLabel={"New post"}
 				accessibilityHint=""
 			/>
 		</Layout.Screen>
@@ -240,11 +239,7 @@ function NotificationsTab({
 				/>
 			</MainScrollProvider>
 			{(isScrolledDown || hasNew) && (
-				<LoadLatestBtn
-					onPress={onPressLoadLatest}
-					label={_(msg`Load new notifications`)}
-					showIndicator={hasNew}
-				/>
+				<LoadLatestBtn onPress={onPressLoadLatest} label={"Load new notifications"} showIndicator={hasNew} />
 			)}
 		</>
 	);

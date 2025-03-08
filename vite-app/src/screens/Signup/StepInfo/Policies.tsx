@@ -1,5 +1,4 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { ReactElement } from "react";
 import { View } from "react-native";
@@ -45,11 +44,11 @@ export const Policies = ({
 		els = (
 			<>
 				By creating an account you agree to the{" "}
-				<InlineLinkText label={_(msg`Read the Bluesky Terms of Service`)} key="tos" to={tos}>
+				<InlineLinkText label={"Read the Bluesky Terms of Service"} key="tos" to={tos}>
 					Terms of Service
 				</InlineLinkText>{" "}
 				and{" "}
-				<InlineLinkText label={_(msg`Read the Bluesky Privacy Policy`)} key="pp" to={pp}>
+				<InlineLinkText label={"Read the Bluesky Privacy Policy"} key="pp" to={pp}>
 					Privacy Policy
 				</InlineLinkText>
 				.
@@ -59,7 +58,7 @@ export const Policies = ({
 		els = (
 			<>
 				By creating an account you agree to the{" "}
-				<InlineLinkText label={_(msg`Read the Bluesky Terms of Service`)} key="tos" to={tos}>
+				<InlineLinkText label={"Read the Bluesky Terms of Service"} key="tos" to={tos}>
 					Terms of Service
 				</InlineLinkText>
 				.
@@ -69,7 +68,7 @@ export const Policies = ({
 		els = (
 			<>
 				By creating an account you agree to the{" "}
-				<InlineLinkText label={_(msg`Read the Bluesky Privacy Policy`)} key="pp" to={pp}>
+				<InlineLinkText label={"Read the Bluesky Privacy Policy"} key="pp" to={pp}>
 					Privacy Policy
 				</InlineLinkText>
 				.

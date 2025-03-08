@@ -1,6 +1,5 @@
 import type { BskyAgent } from "@atproto/api";
 import type { I18n } from "@lingui/core";
-import { msg } from "@lingui/macro";
 
 import { VIDEO_SERVICE_DID } from "#/lib/constants";
 import { UploadLimitError } from "#/lib/media/video/errors";
@@ -52,7 +51,7 @@ export async function getVideoUploadLimits(agent: BskyAgent, _: I18n["_"]) {
 			throw new UploadLimitError(limits.message);
 		} else {
 			throw new UploadLimitError(
-				_(msg`You have temporarily reached the limit for video uploads. Please try again later.`),
+				"You have temporarily reached the limit for video uploads. Please try again later.",
 			);
 		}
 	}

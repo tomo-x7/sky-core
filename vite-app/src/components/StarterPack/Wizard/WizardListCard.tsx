@@ -7,7 +7,6 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { Keyboard, View } from "react-native";
 
@@ -52,10 +51,8 @@ function WizardListCard({
 
 	return (
 		<Toggle.Item
-			name={type === "user" ? _(msg`Person toggle`) : _(msg`Feed toggle`)}
-			label={
-				included ? _(msg`Remove ${displayName} from starter pack`) : _(msg`Add ${displayName} to starter pack`)
-			}
+			name={type === "user" ? "Person toggle" : "Feed toggle"}
+			label={included ? `Remove ${displayName} from starter pack` : `Add ${displayName} to starter pack`}
 			value={included}
 			disabled={btnType === "remove" || disabled}
 			onChange={onPress}
@@ -74,7 +71,7 @@ function WizardListCard({
 				<Checkbox />
 			) : !disabled ? (
 				<Button
-					label={_(msg`Remove`)}
+					label={"Remove"}
 					variant="solid"
 					color="secondary"
 					size="small"

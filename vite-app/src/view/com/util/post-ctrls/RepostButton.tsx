@@ -128,12 +128,12 @@ let RepostButtonDialogInner = ({
 	const onPressClose = useCallback(() => control.close(), [control]);
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Repost or quote post`)}>
+		<Dialog.ScrollableInner label={"Repost or quote post"}>
 			<View style={a.gap_xl}>
 				<View style={a.gap_xs}>
 					<Button
 						style={[a.justify_start, a.px_md]}
-						label={isReposted ? _(msg`Remove repost`) : _(msg({ message: "Repost", context: "action" }))}
+						label={isReposted ? "Remove repost" : _(msg({ message: "Repost", context: "action" }))}
 						onPress={onPressRepost}
 						size="large"
 						variant="ghost"
@@ -148,7 +148,7 @@ let RepostButtonDialogInner = ({
 						disabled={embeddingDisabled}
 						testID="quoteBtn"
 						style={[a.justify_start, a.px_md]}
-						label={embeddingDisabled ? _(msg`Quote posts disabled`) : _(msg`Quote post`)}
+						label={embeddingDisabled ? "Quote posts disabled" : "Quote post"}
 						onPress={onPressQuote}
 						size="large"
 						variant="ghost"
@@ -164,7 +164,7 @@ let RepostButtonDialogInner = ({
 					</Button>
 				</View>
 				<Button
-					label={_(msg`Cancel quote post`)}
+					label={"Cancel quote post"}
 					onPress={onPressClose}
 					size="large"
 					variant="outline"

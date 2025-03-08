@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 /**
  * Copyright (c) JOB TODAY S.A. and its affiliates.
@@ -28,8 +27,8 @@ const ImageDefaultHeader = ({ onRequestClose }: Props) => {
 				onPress={onRequestClose}
 				hitSlop={HIT_SLOP}
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Close image`)}
-				accessibilityHint={_(msg`Closes viewer for header image`)}
+				accessibilityLabel={"Close image"}
+				accessibilityHint={"Closes viewer for header image"}
 				onAccessibilityEscape={onRequestClose}
 			>
 				<FontAwesomeIcon icon="close" color={"#fff"} size={22} />

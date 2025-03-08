@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useMemo } from "react";
 import { Keyboard, StyleSheet } from "react-native";
@@ -71,11 +70,11 @@ export function SelectLangBtn() {
 		}
 
 		return [
-			{ heading: true, label: _(msg`Post language`) },
+			{ heading: true, label: "Post language" },
 			...arr.slice(0, 6),
 			{ sep: true },
 			{
-				label: _(msg`Other...`),
+				label: "Other...",
 				onPress: onPressMore,
 			},
 		];
@@ -89,7 +88,7 @@ export function SelectLangBtn() {
 			openUpwards
 			style={styles.button}
 			hitSlop={LANG_DROPDOWN_HITSLOP}
-			accessibilityLabel={_(msg`Language selection`)}
+			accessibilityLabel={"Language selection"}
 			accessibilityHint=""
 		>
 			{postLanguagesPref.length > 0 ? (

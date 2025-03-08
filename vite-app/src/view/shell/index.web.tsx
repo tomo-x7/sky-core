@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -80,7 +79,7 @@ function ShellInner() {
 								setDrawerOpen(false);
 							}
 						}}
-						accessibilityLabel={_(msg`Close drawer menu`)}
+						accessibilityLabel={"Close drawer menu"}
 						accessibilityHint=""
 					>
 						<View

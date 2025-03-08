@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -173,7 +172,7 @@ export function DesktopSearch() {
 					) : (
 						<>
 							<SearchLinkCard
-								label={_(msg`Search for "${query}"`)}
+								label={`Search for "${query}"`}
 								to={`/search?q=${encodeURIComponent(query)}`}
 								style={(autocompleteData?.length ?? 0) > 0 ? { borderBottomWidth: 1 } : undefined}
 							/>

@@ -1,5 +1,4 @@
 import { AppBskyFeedDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -77,8 +76,8 @@ export function ProfileFeedScreen(props: Props) {
 						<View style={{ flexDirection: "row" }}>
 							<Button
 								type="default"
-								accessibilityLabel={_(msg`Go back`)}
-								accessibilityHint={_(msg`Returns to previous page`)}
+								accessibilityLabel={"Go back"}
+								accessibilityHint={"Returns to previous page"}
 								onPress={onPressBack}
 								style={{ flexShrink: 1 }}
 							>
@@ -175,7 +174,7 @@ export function ProfileFeedScreenInner({
 	}, [onScrollToTop, isScreenFocused]);
 
 	const renderPostsEmpty = useCallback(() => {
-		return <EmptyState icon="hashtag" message={_(msg`This feed is empty.`)} />;
+		return <EmptyState icon="hashtag" message={"This feed is empty."} />;
 	}, [_]);
 
 	const isVideoFeed = React.useMemo(() => {
@@ -204,7 +203,7 @@ export function ProfileFeedScreenInner({
 			</FeedFeedbackProvider>
 
 			{(isScrolledDown || hasNew) && (
-				<LoadLatestBtn onPress={onScrollToTop} label={_(msg`Load new posts`)} showIndicator={hasNew} />
+				<LoadLatestBtn onPress={onScrollToTop} label={"Load new posts"} showIndicator={hasNew} />
 			)}
 
 			{hasSession && (
@@ -213,7 +212,7 @@ export function ProfileFeedScreenInner({
 					onPress={() => openComposer({})}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`New post`)}
+					accessibilityLabel={"New post"}
 					accessibilityHint=""
 				/>
 			)}

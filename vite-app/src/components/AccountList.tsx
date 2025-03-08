@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { View } from "react-native";
@@ -58,7 +57,7 @@ export function AccountList({
 				testID="chooseAddAccountBtn"
 				style={[a.flex_1]}
 				onPress={pendingDid ? undefined : onPressAddAccount}
-				label={_(msg`Sign in to account that is not listed`)}
+				label={"Sign in to account that is not listed"}
 			>
 				{({ hovered, pressed }) => (
 					<View
@@ -109,8 +108,8 @@ function AccountItem({
 			onPress={onPress}
 			label={
 				isCurrentAccount
-					? _(msg`Continue as ${account.handle} (currently signed in)`)
-					: _(msg`Sign in as ${account.handle}`)
+					? `Continue as ${account.handle} (currently signed in)`
+					: `Sign in as ${account.handle}`
 			}
 		>
 			{({ hovered, pressed }) => (

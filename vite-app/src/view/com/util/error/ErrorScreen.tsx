@@ -1,5 +1,5 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -90,8 +90,8 @@ export function ErrorScreen({
 							variant="solid"
 							color="secondary_inverted"
 							size="small"
-							label={_(msg`Retry`)}
-							accessibilityHint={_(msg`Retries the last action, which errored out`)}
+							label={"Retry"}
+							accessibilityHint={"Retries the last action, which errored out"}
 						>
 							<ButtonIcon icon={ArrowRotateCounterClockwiseIcon} />
 							<ButtonText>

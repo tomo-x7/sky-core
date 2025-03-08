@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -59,7 +58,7 @@ export function Error({
 					<Button
 						variant="solid"
 						color="primary"
-						label={_(msg`Press to retry`)}
+						label={"Press to retry"}
 						onPress={onRetry}
 						size="large"
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
@@ -71,7 +70,7 @@ export function Error({
 					<Button
 						variant="solid"
 						color={onRetry ? "secondary" : "primary"}
-						label={_(msg`Return to previous page`)}
+						label={"Return to previous page"}
 						onPress={goBack}
 						size="large"
 						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}

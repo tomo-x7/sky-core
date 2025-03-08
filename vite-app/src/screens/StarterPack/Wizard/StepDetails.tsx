@@ -36,7 +36,7 @@ export function StepDetails() {
 					<TextField.LabelText>What do you want to call your starter pack?</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Input
-							label={_(msg`${currentProfile?.displayName || currentProfile?.handle}'s starter pack`)}
+							label={`${currentProfile?.displayName || currentProfile?.handle}'s starter pack`}
 							value={state.name}
 							onChangeText={(text) => dispatch({ type: "SetName", name: text })}
 						/>

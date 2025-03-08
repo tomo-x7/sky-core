@@ -96,7 +96,7 @@ let PostCtrls = ({
 
 	const onPressToggleLike = React.useCallback(async () => {
 		if (isBlocked) {
-			Toast.show(_(msg`Cannot interact with a blocked user`), "exclamation-circle");
+			Toast.show("Cannot interact with a blocked user", "exclamation-circle");
 			return;
 		}
 
@@ -134,7 +134,7 @@ let PostCtrls = ({
 
 	const onRepost = useCallback(async () => {
 		if (isBlocked) {
-			Toast.show(_(msg`Cannot interact with a blocked user`), "exclamation-circle");
+			Toast.show("Cannot interact with a blocked user", "exclamation-circle");
 			return;
 		}
 
@@ -158,7 +158,7 @@ let PostCtrls = ({
 
 	const onQuote = useCallback(() => {
 		if (isBlocked) {
-			Toast.show(_(msg`Cannot interact with a blocked user`), "exclamation-circle");
+			Toast.show("Cannot interact with a blocked user", "exclamation-circle");
 			return;
 		}
 
@@ -295,7 +295,7 @@ let PostCtrls = ({
 								}
 							}}
 							accessibilityRole="button"
-							accessibilityLabel={_(msg`Share`)}
+							accessibilityLabel={"Share"}
 							accessibilityHint=""
 							hitSlop={POST_CTRL_HITSLOP}
 						>
@@ -304,12 +304,12 @@ let PostCtrls = ({
 					</View>
 					<Prompt.Basic
 						control={loggedOutWarningPromptControl}
-						title={_(msg`Note about sharing`)}
+						title={"Note about sharing"}
 						description={_(
 							msg`This post is only visible to logged-in users. It won't be visible to people who aren't signed in.`,
 						)}
 						onConfirm={onShare}
-						confirmButtonCta={_(msg`Share anyway`)}
+						confirmButtonCta={"Share anyway"}
 					/>
 				</>
 			)}
@@ -340,7 +340,7 @@ let PostCtrls = ({
 					onPress={(e) => {
 						e.stopPropagation();
 						Clipboard.setStringAsync(feedContext);
-						Toast.show(_(msg`Copied to clipboard`), "clipboard-check");
+						Toast.show("Copied to clipboard", "clipboard-check");
 					}}
 				>
 					<Text

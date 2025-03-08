@@ -1,5 +1,4 @@
 import { AppBskyGraphStarterpack, AtUri } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -72,8 +71,8 @@ export function Card({
 					</Text>
 					<Text emoji style={[a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
 						{creator?.did === currentAccount?.did
-							? _(msg`Starter pack by you`)
-							: _(msg`Starter pack by ${sanitizeHandle(creator.handle, "@")}`)}
+							? "Starter pack by you"
+							: `Starter pack by ${sanitizeHandle(creator.handle, "@")}`}
 					</Text>
 				</View>
 			</View>
@@ -114,7 +113,7 @@ export function Link({
 		<BaseLink
 			action="push"
 			to={`/starter-pack/${handleOrDid}/${rkey}`}
-			label={_(msg`Navigate to ${record.name}`)}
+			label={`Navigate to ${record.name}`}
 			onPress={() => {
 				precacheResolvedUri(queryClient, starterPack.creator.handle, starterPack.creator.did);
 				precacheStarterPack(queryClient, starterPack);

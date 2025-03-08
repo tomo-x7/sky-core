@@ -1,5 +1,4 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useMemo } from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
@@ -72,7 +71,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 	);
 
 	return (
-		<Dialog.Inner label={_(msg`Users that have liked this content or profile`)}>
+		<Dialog.Inner label={"Users that have liked this content or profile"}>
 			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_lg]}>Liked by</Text>
 
 			{isLoading ? (

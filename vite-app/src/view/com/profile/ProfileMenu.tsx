@@ -61,7 +61,7 @@ let ProfileMenu = ({
 
 	const [queueMute, queueUnmute] = useProfileMuteMutationQueue(profile);
 	const [queueBlock, queueUnblock] = useProfileBlockMutationQueue(profile);
-	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile,);
+	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 
 	const blockPromptControl = Prompt.usePromptControl();
 	const loggedOutWarningPromptControl = Prompt.usePromptControl();
@@ -98,21 +98,21 @@ let ProfileMenu = ({
 		if (profile.viewer?.muted) {
 			try {
 				await queueUnmute();
-				Toast.show(_(msg`Account unmuted`));
+				Toast.show("Account unmuted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to unmute account", { message: e });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		} else {
 			try {
 				await queueMute();
-				Toast.show(_(msg`Account muted`));
+				Toast.show("Account muted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to mute account", { message: e });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		}
@@ -122,21 +122,21 @@ let ProfileMenu = ({
 		if (profile.viewer?.blocking) {
 			try {
 				await queueUnblock();
-				Toast.show(_(msg`Account unblocked`));
+				Toast.show("Account unblocked");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to unblock account", { message: e });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		} else {
 			try {
 				await queueBlock();
-				Toast.show(_(msg`Account blocked`));
+				Toast.show("Account blocked");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to block account", { message: e });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		}
@@ -145,11 +145,11 @@ let ProfileMenu = ({
 	const onPressFollowAccount = React.useCallback(async () => {
 		try {
 			await queueFollow();
-			Toast.show(_(msg`Account followed`));
+			Toast.show("Account followed");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
 				logger.error("Failed to follow account", { message: e });
-				Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
 	}, [_, queueFollow]);
@@ -157,11 +157,11 @@ let ProfileMenu = ({
 	const onPressUnfollowAccount = React.useCallback(async () => {
 		try {
 			await queueUnfollow();
-			Toast.show(_(msg`Account unfollowed`));
+			Toast.show("Account unfollowed");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
 				logger.error("Failed to unfollow account", { message: e });
-				Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
 	}, [_, queueUnfollow]);
@@ -191,7 +191,7 @@ let ProfileMenu = ({
 							<Button
 								{...props}
 								testID="profileHeaderDropdownBtn"
-								label={_(msg`More options`)}
+								label={"More options"}
 								hitSlop={HITSLOP_20}
 								variant="solid"
 								color="secondary"
@@ -208,7 +208,7 @@ let ProfileMenu = ({
 					<Menu.Group>
 						<Menu.Item
 							testID="profileHeaderDropdownShareBtn"
-							label={_(msg`Share`)}
+							label={"Share"}
 							onPress={() => {
 								if (showLoggedOutWarning) {
 									loggedOutWarningPromptControl.open();
@@ -222,7 +222,7 @@ let ProfileMenu = ({
 						</Menu.Item>
 						<Menu.Item
 							testID="profileHeaderDropdownSearchBtn"
-							label={_(msg`Search posts`)}
+							label={"Search posts"}
 							onPress={onPressSearch}
 						>
 							<Menu.ItemText>Search posts</Menu.ItemText>
@@ -237,7 +237,7 @@ let ProfileMenu = ({
 								{!isSelf && (isLabelerAndNotBlocked || isFollowingBlockedAccount) && (
 									<Menu.Item
 										testID="profileHeaderDropdownFollowBtn"
-										label={isFollowing ? _(msg`Unfollow account`) : _(msg`Follow account`)}
+										label={isFollowing ? "Unfollow account" : "Follow account"}
 										onPress={isFollowing ? onPressUnfollowAccount : onPressFollowAccount}
 									>
 										<Menu.ItemText>
@@ -248,7 +248,7 @@ let ProfileMenu = ({
 								)}
 								<Menu.Item
 									testID="profileHeaderDropdownListAddRemoveBtn"
-									label={_(msg`Add to Lists`)}
+									label={"Add to Lists"}
 									onPress={onPressAddRemoveLists}
 								>
 									<Menu.ItemText>Add to lists</Menu.ItemText>
@@ -259,11 +259,7 @@ let ProfileMenu = ({
 										{!profile.viewer?.blocking && !profile.viewer?.mutedByList && (
 											<Menu.Item
 												testID="profileHeaderDropdownMuteBtn"
-												label={
-													profile.viewer?.muted
-														? _(msg`Unmute account`)
-														: _(msg`Mute account`)
-												}
+												label={profile.viewer?.muted ? "Unmute account" : "Mute account"}
 												onPress={onPressMuteAccount}
 											>
 												<Menu.ItemText>
@@ -275,7 +271,7 @@ let ProfileMenu = ({
 										{!profile.viewer?.blockingByList && (
 											<Menu.Item
 												testID="profileHeaderDropdownBlockBtn"
-												label={profile.viewer ? _(msg`Unblock account`) : _(msg`Block account`)}
+												label={profile.viewer ? "Unblock account" : "Block account"}
 												onPress={() => blockPromptControl.open()}
 											>
 												<Menu.ItemText>
@@ -292,7 +288,7 @@ let ProfileMenu = ({
 										)}
 										<Menu.Item
 											testID="profileHeaderDropdownReportBtn"
-											label={_(msg`Report account`)}
+											label={"Report account"}
 											onPress={onPressReportAccount}
 										>
 											<Menu.ItemText>Report account</Menu.ItemText>
@@ -309,7 +305,7 @@ let ProfileMenu = ({
 							<Menu.Group>
 								<Menu.Item
 									testID="profileHeaderDropdownShareATURIBtn"
-									label={_(msg`Copy at:// URI`)}
+									label={"Copy at:// URI"}
 									onPress={onPressShareATUri}
 								>
 									<Menu.ItemText>Copy at:// URI</Menu.ItemText>
@@ -317,7 +313,7 @@ let ProfileMenu = ({
 								</Menu.Item>
 								<Menu.Item
 									testID="profileHeaderDropdownShareDIDBtn"
-									label={_(msg`Copy DID`)}
+									label={"Copy DID"}
 									onPress={onPressShareDID}
 								>
 									<Menu.ItemText>Copy DID</Menu.ItemText>
@@ -339,10 +335,10 @@ let ProfileMenu = ({
 
 			<Prompt.Basic
 				control={blockPromptControl}
-				title={profile.viewer?.blocking ? _(msg`Unblock Account?`) : _(msg`Block Account?`)}
+				title={profile.viewer?.blocking ? "Unblock Account?" : "Block Account?"}
 				description={
 					profile.viewer?.blocking
-						? _(msg`The account will be able to interact with you after unblocking.`)
+						? "The account will be able to interact with you after unblocking."
 						: profile.associated?.labeler
 							? _(
 									msg`Blocking will not prevent labels from being applied on your account, but it will stop this account from replying in your threads or interacting with you.`,
@@ -352,18 +348,18 @@ let ProfileMenu = ({
 								)
 				}
 				onConfirm={blockAccount}
-				confirmButtonCta={profile.viewer?.blocking ? _(msg`Unblock`) : _(msg`Block`)}
+				confirmButtonCta={profile.viewer?.blocking ? "Unblock" : "Block"}
 				confirmButtonColor={profile.viewer?.blocking ? undefined : "negative"}
 			/>
 
 			<Prompt.Basic
 				control={loggedOutWarningPromptControl}
-				title={_(msg`Note about sharing`)}
+				title={"Note about sharing"}
 				description={_(
 					msg`This profile is only visible to logged-in users. It won't be visible to people who aren't signed in.`,
 				)}
 				onConfirm={onPressShare}
-				confirmButtonCta={_(msg`Share anyway`)}
+				confirmButtonCta={"Share anyway"}
 			/>
 		</EventStopper>
 	);

@@ -86,7 +86,7 @@ export function Deactivated() {
 					);
 					break;
 				default:
-					setError(_(msg`Something went wrong, please try again`));
+					setError("Something went wrong, please try again");
 					break;
 			}
 
@@ -127,7 +127,7 @@ export function Deactivated() {
 
 						<View style={[a.gap_sm]}>
 							<Button
-								label={_(msg`Reactivate your account`)}
+								label={"Reactivate your account"}
 								size="large"
 								variant="solid"
 								color="primary"
@@ -137,7 +137,7 @@ export function Deactivated() {
 								{pending && <ButtonIcon icon={Loader} position="right" />}
 							</Button>
 							<Button
-								label={_(msg`Cancel reactivation and sign out`)}
+								label={"Cancel reactivation and sign out"}
 								size="large"
 								variant="solid"
 								color="secondary"
@@ -167,7 +167,7 @@ export function Deactivated() {
 							<AccountList
 								onSelectAccount={onSelectAccount}
 								onSelectOther={onPressAddAccount}
-								otherLabel={_(msg`Add account`)}
+								otherLabel={"Add account"}
 								pendingDid={pendingDid}
 							/>
 						</>
@@ -177,7 +177,7 @@ export function Deactivated() {
 								Or, continue with another account.
 							</Text>
 							<Button
-								label={_(msg`Sign in or sign up`)}
+								label={"Sign in or sign up"}
 								size="large"
 								variant="solid"
 								color="secondary"

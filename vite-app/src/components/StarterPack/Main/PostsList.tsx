@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { View } from "react-native";
@@ -35,7 +34,7 @@ export const PostsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 	}));
 
 	const renderPostsEmpty = useCallback(() => {
-		return <EmptyState icon="hashtag" message={_(msg`This feed is empty.`)} />;
+		return <EmptyState icon="hashtag" message={"This feed is empty."} />;
 	}, [_]);
 
 	return (

@@ -1,5 +1,4 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Keyboard, Platform, type StyleProp, View, type ViewStyle } from "react-native";
@@ -56,10 +55,10 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 	const anyoneCanReply = settings.length === 1 && settings[0].type === "everybody";
 	const noOneCanReply = settings.length === 1 && settings[0].type === "nobody";
 	const description = anyoneCanReply
-		? _(msg`Everybody can reply`)
+		? "Everybody can reply"
 		: noOneCanReply
-			? _(msg`Replies disabled`)
-			: _(msg`Some people can reply`);
+			? "Replies disabled"
+			: "Some people can reply";
 
 	const onPressOpen = () => {
 		if (isNative && Keyboard.isVisible()) {
@@ -75,7 +74,7 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 	return (
 		<>
 			<Button
-				label={isThreadAuthor ? _(msg`Edit who can reply`) : _(msg`Who can reply`)}
+				label={isThreadAuthor ? "Edit who can reply" : "Who can reply"}
 				onPress={onPressOpen}
 				{...(isThreadAuthor
 					? Platform.select({
@@ -153,7 +152,7 @@ function WhoCanReplyDialog({
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<Dialog.ScrollableInner
-				label={_(msg`Dialog: adjust who can interact with this post`)}
+				label={"Dialog: adjust who can interact with this post"}
 				style={[{ width: "auto", maxWidth: 400, minWidth: 200 }]}
 			>
 				<View style={[a.gap_sm]}>

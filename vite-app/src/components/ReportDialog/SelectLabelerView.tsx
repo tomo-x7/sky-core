@@ -1,5 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -37,7 +36,7 @@ export function SelectLabelerView({
 					return (
 						<Button
 							key={labeler.creator.did}
-							label={_(msg`Send report to ${labeler.creator.displayName}`)}
+							label={`Send report to ${labeler.creator.displayName}`}
 							onPress={() => props.onSelectLabeler(labeler.creator.did)}
 						>
 							<LabelerButton labeler={labeler} />

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -43,14 +42,14 @@ let NavSignupCard = ({}: {}): React.ReactNode => {
 			<View style={[a.flex_row, a.flex_wrap, a.gap_sm, a.pt_md]}>
 				<Button
 					onPress={showCreateAccount}
-					label={_(msg`Create account`)}
+					label={"Create account"}
 					size="small"
 					variant="solid"
 					color="primary"
 				>
 					<ButtonText>Create account</ButtonText>
 				</Button>
-				<Button onPress={showSignIn} label={_(msg`Sign in`)} size="small" variant="solid" color="secondary">
+				<Button onPress={showSignIn} label={"Sign in"} size="small" variant="solid" color="secondary">
 					<ButtonText>Sign in</ButtonText>
 				</Button>
 			</View>

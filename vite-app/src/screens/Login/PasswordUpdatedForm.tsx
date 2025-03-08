@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -24,8 +23,8 @@ export const PasswordUpdatedForm = ({
 			<View style={[a.flex_row, a.justify_center]}>
 				<Button
 					onPress={onPressNext}
-					label={_(msg`Close alert`)}
-					accessibilityHint={_(msg`Closes password update alert`)}
+					label={"Close alert"}
+					accessibilityHint={"Closes password update alert"}
 					variant="solid"
 					color="primary"
 					size="large"

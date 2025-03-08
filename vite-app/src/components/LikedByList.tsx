@@ -1,5 +1,4 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 
@@ -71,8 +70,8 @@ export function LikedByList({ uri }: { uri: string }) {
 				isLoading={isUriLoading || isLikedByLoading}
 				isError={isError}
 				emptyType="results"
-				emptyTitle={_(msg`No likes yet`)}
-				emptyMessage={_(msg`Nobody has liked this yet. Maybe you should be the first!`)}
+				emptyTitle={"No likes yet"}
+				emptyMessage={"Nobody has liked this yet. Maybe you should be the first!"}
 				errorMessage={cleanError(resolveError || error)}
 				onRetry={isError ? refetch : undefined}
 				topBorder={false}

@@ -1,5 +1,4 @@
 import { ComAtprotoServerCreateSession, type ComAtprotoServerDescribeServer } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useRef, useState } from "react";
 import { ActivityIndicator, Keyboard, LayoutAnimation, type TextInput, View } from "react-native";
@@ -80,12 +79,12 @@ export const LoginForm = ({
 		const authFactorToken = authFactorTokenValueRef.current;
 
 		if (!identifier) {
-			setError(_(msg`Please enter your username`));
+			setError("Please enter your username");
 			return;
 		}
 
 		if (!password) {
-			setError(_(msg`Please enter your password`));
+			setError("Please enter your password");
 			return;
 		}
 
@@ -137,7 +136,7 @@ export const LoginForm = ({
 					logger.debug("Failed to login due to invalid 2fa token", {
 						error: errMsg,
 					});
-					setError(_(msg`Invalid 2FA confirmation code.`));
+					setError("Invalid 2FA confirmation code.");
 				} else if (
 					errMsg.includes("Authentication Required") ||
 					errMsg.includes("Invalid identifier or password")
@@ -145,10 +144,10 @@ export const LoginForm = ({
 					logger.debug("Failed to login due to invalid credentials", {
 						error: errMsg,
 					});
-					setError(_(msg`Incorrect username or password`));
+					setError("Incorrect username or password");
 				} else if (isNetworkError(e)) {
 					logger.warn("Failed to login due to network error", { error: errMsg });
-					setError(_(msg`Unable to contact your service. Please check your Internet connection.`));
+					setError("Unable to contact your service. Please check your Internet connection.");
 				} else {
 					logger.warn("Failed to login", { error: errMsg });
 					setError(cleanError(errMsg));
@@ -174,7 +173,7 @@ export const LoginForm = ({
 						<TextField.Icon icon={At} />
 						<TextField.Input
 							testID="loginUsernameInput"
-							label={_(msg`Username or email address`)}
+							label={"Username or email address"}
 							autoCapitalize="none"
 							autoFocus
 							autoCorrect={false}
@@ -190,7 +189,7 @@ export const LoginForm = ({
 							}}
 							blurOnSubmit={false} // prevents flickering due to onSubmitEditing going to next field
 							editable={!isProcessing}
-							accessibilityHint={_(msg`Input the username or email address you used at signup`)}
+							accessibilityHint={"Input the username or email address you used at signup"}
 						/>
 					</TextField.Root>
 
@@ -199,7 +198,7 @@ export const LoginForm = ({
 						<TextField.Input
 							testID="loginPasswordInput"
 							inputRef={passwordRef}
-							label={_(msg`Password`)}
+							label={"Password"}
 							autoCapitalize="none"
 							autoCorrect={false}
 							autoComplete="password"
@@ -214,13 +213,13 @@ export const LoginForm = ({
 							onSubmitEditing={onPressNext}
 							blurOnSubmit={false} // HACK: https://github.com/facebook/react-native/issues/21911#issuecomment-558343069 Keyboard blur behavior is now handled in onSubmitEditing
 							editable={!isProcessing}
-							accessibilityHint={_(msg`Enter your password`)}
+							accessibilityHint={"Enter your password"}
 						/>
 						<Button
 							testID="forgotPasswordButton"
 							onPress={onPressForgotPassword}
-							label={_(msg`Forgot password?`)}
-							accessibilityHint={_(msg`Opens password reset form`)}
+							label={"Forgot password?"}
+							accessibilityHint={"Opens password reset form"}
 							variant="solid"
 							color="secondary"
 							style={[
@@ -242,7 +241,7 @@ export const LoginForm = ({
 						<TextField.Icon icon={Ticket} />
 						<TextField.Input
 							testID="loginAuthFactorTokenInput"
-							label={_(msg`Confirmation code`)}
+							label={"Confirmation code"}
 							autoCapitalize="none"
 							autoFocus
 							autoCorrect={false}
@@ -256,7 +255,7 @@ export const LoginForm = ({
 							}}
 							onSubmitEditing={onPressNext}
 							editable={!isProcessing}
-							accessibilityHint={_(msg`Input the code which has been emailed to you`)}
+							accessibilityHint={"Input the code which has been emailed to you"}
 							style={[
 								{
 									textTransform: isAuthFactorTokenValueEmpty ? "none" : "uppercase",
@@ -271,15 +270,15 @@ export const LoginForm = ({
 			)}
 			<FormError error={error} />
 			<View style={[a.flex_row, a.align_center, a.pt_md]}>
-				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
+				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{!serviceDescription && error ? (
 					<Button
 						testID="loginRetryButton"
-						label={_(msg`Retry`)}
-						accessibilityHint={_(msg`Retries signing in`)}
+						label={"Retry"}
+						accessibilityHint={"Retries signing in"}
 						variant="solid"
 						color="secondary"
 						size="large"
@@ -295,8 +294,8 @@ export const LoginForm = ({
 				) : (
 					<Button
 						testID="loginNextButton"
-						label={_(msg`Next`)}
-						accessibilityHint={_(msg`Navigates to the next screen`)}
+						label={"Next"}
+						accessibilityHint={"Navigates to the next screen"}
 						variant="solid"
 						color="primary"
 						size="large"

@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationUI } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type ComponentProps } from "react";
@@ -67,7 +66,7 @@ export function PostHider({
 				}
 			}}
 			accessibilityRole="button"
-			accessibilityHint={override ? _(msg`Hides the content`) : _(msg`Shows the content`)}
+			accessibilityHint={override ? "Hides the content" : "Shows the content"}
 			accessibilityLabel=""
 			style={[
 				a.flex_row,
@@ -88,7 +87,7 @@ export function PostHider({
 					control.open();
 				}}
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Learn more about this warning`)}
+				accessibilityLabel={"Learn more about this warning"}
 				accessibilityHint=""
 			>
 				<View

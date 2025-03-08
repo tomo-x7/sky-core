@@ -91,7 +91,7 @@ export function Link({
 	const { _ } = useLingui();
 	return (
 		<InternalLink
-			label={_(msg`View ${profile.displayName || sanitizeHandle(profile.handle)}'s profile`)}
+			label={`View ${profile.displayName || sanitizeHandle(profile.handle)}'s profile`}
 			to={{
 				screen: "Profile",
 				params: { name: profile.did },
@@ -291,7 +291,7 @@ export function FollowButtonInner({
 			onFollow?.();
 		} catch (err: any) {
 			if (err?.name !== "AbortError") {
-				Toast.show(_(msg`An issue occurred, please try again.`), "xmark");
+				Toast.show("An issue occurred, please try again.", "xmark");
 			}
 		}
 	};
@@ -312,7 +312,7 @@ export function FollowButtonInner({
 			onPressProp?.(e);
 		} catch (err: any) {
 			if (err?.name !== "AbortError") {
-				Toast.show(_(msg`An issue occurred, please try again.`), "xmark");
+				Toast.show("An issue occurred, please try again.", "xmark");
 			}
 		}
 	};

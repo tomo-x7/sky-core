@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
@@ -28,7 +27,7 @@ export const CopyrightPolicyScreen = (_props: Props) => {
 
 	return (
 		<Layout.Screen>
-			<ViewHeader title={_(msg`Copyright Policy`)} />
+			<ViewHeader title={"Copyright Policy"} />
 			<ScrollView style={[s.hContentRegion, pal.view]}>
 				<View style={[s.p20]}>
 					<Text style={pal.text}>

@@ -1,5 +1,4 @@
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
@@ -58,8 +57,8 @@ export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 			style={[t.atoms.border_contrast_medium, styles.replyToLayout]}
 			onPress={onPress}
 			accessibilityRole="button"
-			accessibilityLabel={_(msg`Expand or collapse the full post you are replying to`)}
-			accessibilityHint={_(msg`Expands or collapses the full post you are replying to`)}
+			accessibilityLabel={"Expand or collapse the full post you are replying to"}
+			accessibilityHint={"Expands or collapses the full post you are replying to"}
 		>
 			<PreviewableUserAvatar
 				size={50}

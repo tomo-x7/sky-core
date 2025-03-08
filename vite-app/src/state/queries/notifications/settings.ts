@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -35,10 +34,10 @@ export function useNotificationSettingsMutation() {
 			logger.error("Failed to save notification preferences", {
 				safeMessage: err,
 			});
-			Toast.show(_(msg`Failed to save notification preferences, please try again`), "xmark");
+			Toast.show("Failed to save notification preferences, please try again", "xmark");
 		},
 		onSuccess: () => {
-			Toast.show(_(msg`Preference saved`));
+			Toast.show("Preference saved");
 		},
 		onSettled: () => {
 			invalidateCachedUnreadPage();

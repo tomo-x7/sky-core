@@ -5,7 +5,6 @@ import {
 	AppBskyFeedPost,
 	type ModerationDecision,
 } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useMemo } from "react";
@@ -104,8 +103,8 @@ export function VideoPostCard({
 
 	return (
 		<Link
-			accessibilityHint={_(msg`Views video in immersive mode`)}
-			label={_(msg`Video from ${author.handle}: ${text}`)}
+			accessibilityHint={"Views video in immersive mode"}
+			label={`Video from ${author.handle}: ${text}`}
 			to={{
 				screen: "VideoFeed",
 				params: {
@@ -161,7 +160,7 @@ export function VideoPostCard({
 							/>
 							<View style={[a.align_center, a.gap_xs]}>
 								<Eye size="lg" fill="white" />
-								<Text style={[a.text_sm, { color: "white" }]}>{_(msg`Hidden`)}</Text>
+								<Text style={[a.text_sm, { color: "white" }]}>{"Hidden"}</Text>
 							</View>
 						</View>
 					</View>
@@ -370,7 +369,7 @@ export function CompactVideoPostCard({
 
 	return (
 		<Link
-			label={_(msg`View video`)}
+			label={"View video"}
 			to={{
 				screen: "VideoFeed",
 				params: {
@@ -426,7 +425,7 @@ export function CompactVideoPostCard({
 							/>
 							<View style={[a.align_center, a.gap_xs]}>
 								<Eye size="lg" fill="white" />
-								<Text style={[a.text_sm, { color: "white" }]}>{_(msg`Hidden`)}</Text>
+								<Text style={[a.text_sm, { color: "white" }]}>{"Hidden"}</Text>
 							</View>
 						</View>
 					</View>

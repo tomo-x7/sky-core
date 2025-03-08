@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -113,7 +112,7 @@ export function ProfileSubpageHeader({
 						testID="headerAviButton"
 						onPress={onPressAvi}
 						accessibilityRole="image"
-						accessibilityLabel={_(msg`View the avatar`)}
+						accessibilityLabel={"View the avatar"}
 						accessibilityHint=""
 						style={{ width: 58 }}
 					>

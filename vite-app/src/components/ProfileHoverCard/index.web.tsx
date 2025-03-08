@@ -1,6 +1,6 @@
 import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import { flip, offset, shift, size, useFloating } from "@floating-ui/react-dom";
-import { msg, plural } from "@lingui/macro";
+import { plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -394,7 +394,7 @@ function Inner({
 	return (
 		<View>
 			<View style={[a.flex_row, a.justify_between, a.align_start]}>
-				<Link to={profileURL} label={_(msg`View profile`)} onPress={hide}>
+				<Link to={profileURL} label={"View profile"} onPress={hide}>
 					<UserAvatar
 						size={64}
 						avatar={profile.avatar}
@@ -408,33 +408,31 @@ function Inner({
 					(isBlockedUser ? (
 						<Link
 							to={profileURL}
-							label={_(msg`View blocked user's profile`)}
+							label={`View blocked user's profile`}
 							onPress={hide}
 							size="small"
 							color="secondary"
 							variant="solid"
 							style={[a.rounded_full]}
 						>
-							<ButtonText>{_(msg`View profile`)}</ButtonText>
+							<ButtonText>{"View profile"}</ButtonText>
 						</Link>
 					) : (
 						<Button
 							size="small"
 							color={profileShadow.viewer?.following ? "secondary" : "primary"}
 							variant="solid"
-							label={profileShadow.viewer?.following ? _(msg`Following`) : _(msg`Follow`)}
+							label={profileShadow.viewer?.following ? "Following" : "Follow"}
 							style={[a.rounded_full]}
 							onPress={profileShadow.viewer?.following ? unfollow : follow}
 						>
 							<ButtonIcon position="left" icon={profileShadow.viewer?.following ? Check : Plus} />
-							<ButtonText>
-								{profileShadow.viewer?.following ? _(msg`Following`) : _(msg`Follow`)}
-							</ButtonText>
+							<ButtonText>{profileShadow.viewer?.following ? "Following" : "Follow"}</ButtonText>
 						</Button>
 					))}
 			</View>
 
-			<Link to={profileURL} label={_(msg`View profile`)} onPress={hide}>
+			<Link to={profileURL} label={"View profile"} onPress={hide}>
 				<View style={[a.pb_sm, a.flex_1]}>
 					<Text style={[a.pt_md, a.pb_xs, a.text_lg, a.font_bold, a.self_start]}>
 						{sanitizeDisplayName(
@@ -469,7 +467,7 @@ function Inner({
 						</InlineLinkText>
 						<InlineLinkText
 							to={makeProfileLink(profile, "follows")}
-							label={_(msg`${following} following`)}
+							label={`${following} following`}
 							style={[t.atoms.text]}
 							onPress={hide}
 						>

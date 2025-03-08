@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import deepEqual from "lodash.isequal";
 import React from "react";
@@ -88,13 +87,13 @@ function Inner({ preferences }: { preferences: UsePreferencesQueryResponse }) {
 				threadgateAllowRules: threadgateAllowUISettingToAllowRecordValue(maybeEditedAllowUI),
 				postgateEmbeddingRules: maybeEditedPostgate.embeddingRules ?? [],
 			});
-			Toast.show(_(msg`Settings saved`));
+			Toast.show("Settings saved");
 		} catch (e: any) {
 			logger.error("Failed to save post interaction settings", {
 				source: "ModerationInteractionSettingsScreen",
 				safeMessage: e.message,
 			});
-			setError(_(msg`Failed to save settings. Please try again.`));
+			setError("Failed to save settings. Please try again.");
 		}
 	}, [_, maybeEditedPostgate, maybeEditedAllowUI, setPostInteractionSettings]);
 

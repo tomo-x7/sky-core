@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { KeyboardAvoidingView } from "react-native";
@@ -60,7 +59,7 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 
 	React.useEffect(() => {
 		if (serviceError) {
-			setError(_(msg`Unable to contact your service. Please check your Internet connection.`));
+			setError("Unable to contact your service. Please check your Internet connection.");
 			logger.warn(`Failed to fetch service description for ${serviceUrl}`, {
 				error: String(serviceError),
 			});
@@ -101,8 +100,8 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 
 	switch (currentForm) {
 		case Forms.Login:
-			title = _(msg`Sign in`);
-			description = _(msg`Enter your username and password`);
+			title = "Sign in";
+			description = "Enter your username and password";
 			content = (
 				<LoginForm
 					error={error}
@@ -120,13 +119,13 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 			);
 			break;
 		case Forms.ChooseAccount:
-			title = _(msg`Sign in`);
-			description = _(msg`Select from an existing account`);
+			title = "Sign in";
+			description = "Select from an existing account";
 			content = <ChooseAccountForm onSelectAccount={onSelectAccount} onPressBack={handlePressBack} />;
 			break;
 		case Forms.ForgotPassword:
-			title = _(msg`Forgot Password`);
-			description = _(msg`Let's get your password reset!`);
+			title = "Forgot Password";
+			description = `Let's get your password reset!`;
 			content = (
 				<ForgotPasswordForm
 					error={error}
@@ -140,8 +139,8 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 			);
 			break;
 		case Forms.SetNewPassword:
-			title = _(msg`Forgot Password`);
-			description = _(msg`Let's get your password reset!`);
+			title = "Forgot Password";
+			description = `Let's get your password reset!`;
 			content = (
 				<SetNewPasswordForm
 					error={error}
@@ -153,8 +152,8 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 			);
 			break;
 		case Forms.PasswordUpdated:
-			title = _(msg`Password updated`);
-			description = _(msg`You can now sign in with your new password.`);
+			title = "Password updated";
+			description = "You can now sign in with your new password.";
 			content = <PasswordUpdatedForm onPressNext={() => gotoForm(Forms.Login)} />;
 			break;
 	}

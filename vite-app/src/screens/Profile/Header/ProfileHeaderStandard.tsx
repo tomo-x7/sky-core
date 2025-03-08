@@ -88,7 +88,7 @@ let ProfileHeaderStandard = ({
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to follow", { message: String(e) });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		});
@@ -109,7 +109,7 @@ let ProfileHeaderStandard = ({
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to unfollow", { message: String(e) });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		});
@@ -118,11 +118,11 @@ let ProfileHeaderStandard = ({
 	const unblockAccount = React.useCallback(async () => {
 		try {
 			await queueUnblock();
-			Toast.show(_(msg`Account unblocked`));
+			Toast.show("Account unblocked");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
 				logger.error("Failed to unblock account", { message: e });
-				Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
 	}, [_, queueUnblock]);
@@ -157,7 +157,7 @@ let ProfileHeaderStandard = ({
 								color="secondary"
 								variant="solid"
 								onPress={onPressEditProfile}
-								label={_(msg`Edit profile`)}
+								label={"Edit profile"}
 								style={[a.rounded_full]}
 							>
 								<ButtonText>Edit Profile</ButtonText>
@@ -171,7 +171,7 @@ let ProfileHeaderStandard = ({
 								size="small"
 								color="secondary"
 								variant="solid"
-								label={_(msg`Unblock`)}
+								label={"Unblock"}
 								disabled={!hasSession}
 								onPress={() => unblockPromptControl.open()}
 								style={[a.rounded_full]}
@@ -192,8 +192,8 @@ let ProfileHeaderStandard = ({
 								variant="solid"
 								label={
 									profile.viewer?.following
-										? _(msg`Unfollow ${profile.handle}`)
-										: _(msg`Follow ${profile.handle}`)
+										? `Unfollow ${profile.handle}`
+										: `Follow ${profile.handle}`
 								}
 								onPress={profile.viewer?.following ? onPressUnfollow : onPressFollow}
 								style={[a.rounded_full]}
@@ -243,10 +243,10 @@ let ProfileHeaderStandard = ({
 			</View>
 			<Prompt.Basic
 				control={unblockPromptControl}
-				title={_(msg`Unblock Account?`)}
-				description={_(msg`The account will be able to interact with you after unblocking.`)}
+				title={"Unblock Account?"}
+				description={"The account will be able to interact with you after unblocking."}
 				onConfirm={unblockAccount}
-				confirmButtonCta={profile.viewer?.blocking ? _(msg`Unblock`) : _(msg`Block`)}
+				confirmButtonCta={profile.viewer?.blocking ? "Unblock" : "Block"}
 				confirmButtonColor="negative"
 			/>
 		</ProfileHeaderShell>

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useMemo } from "react";
 import { View } from "react-native";
@@ -246,7 +245,7 @@ export function LanguageSettingsScreen({}: Props) {
 							</Text>
 
 							<Button
-								label={_(msg`Select content languages`)}
+								label={"Select content languages"}
 								size="small"
 								color="secondary"
 								variant="solid"
@@ -255,7 +254,7 @@ export function LanguageSettingsScreen({}: Props) {
 							>
 								<ButtonIcon icon={myLanguages.length > 0 ? CheckIcon : PlusIcon} />
 								<ButtonText style={[t.atoms.text, a.text_md, a.flex_1, a.text_left]} numberOfLines={1}>
-									{myLanguages.length > 0 ? myLanguages : _(msg`Select languages`)}
+									{myLanguages.length > 0 ? myLanguages : "Select languages"}
 								</ButtonText>
 							</Button>
 						</View>

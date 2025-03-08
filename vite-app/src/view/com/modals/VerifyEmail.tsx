@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
@@ -74,7 +73,7 @@ export function Component({
 				token: confirmationCode.trim(),
 			});
 			await agent.resumeSession(agent.session!);
-			Toast.show(_(msg`Email verified`));
+			Toast.show("Email verified");
 			closeModal();
 			onSuccess?.();
 		} catch (e) {
@@ -129,12 +128,12 @@ export function Component({
 						<View style={styles.emailContainer}>
 							<FontAwesomeIcon icon="envelope" color={pal.colors.text} size={16} />
 							<Text type="xl-medium" style={[pal.text, s.flex1, { minWidth: 0 }]}>
-								{currentAccount?.email || _(msg`(no email)`)}
+								{currentAccount?.email || "(no email)"}
 							</Text>
 						</View>
 						<Pressable
 							accessibilityRole="link"
-							accessibilityLabel={_(msg`Change my email`)}
+							accessibilityLabel={"Change my email"}
 							accessibilityHint=""
 							onPress={onEmailIncorrect}
 							style={styles.changeEmailLink}
@@ -153,7 +152,7 @@ export function Component({
 						value={confirmationCode}
 						onChangeText={setConfirmationCode}
 						accessible={true}
-						accessibilityLabel={_(msg`Confirmation code`)}
+						accessibilityLabel={"Confirmation code"}
 						accessibilityHint=""
 						autoCapitalize="none"
 						autoComplete="one-time-code"
@@ -175,9 +174,9 @@ export function Component({
 									testID="getStartedBtn"
 									type="primary"
 									onPress={() => setStage(Stages.Email)}
-									accessibilityLabel={_(msg`Get Started`)}
+									accessibilityLabel={"Get Started"}
 									accessibilityHint=""
-									label={_(msg`Get Started`)}
+									label={"Get Started"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 									labelStyle={[s.f18]}
 								/>
@@ -188,9 +187,9 @@ export function Component({
 										testID="sendEmailBtn"
 										type="primary"
 										onPress={onSendEmail}
-										accessibilityLabel={_(msg`Send Confirmation Email`)}
+										accessibilityLabel={"Send Confirmation Email"}
 										accessibilityHint=""
-										label={_(msg`Send Confirmation Email`)}
+										label={"Send Confirmation Email"}
 										labelContainerStyle={{
 											justifyContent: "center",
 											padding: 4,
@@ -200,9 +199,9 @@ export function Component({
 									<Button
 										testID="haveCodeBtn"
 										type="default"
-										accessibilityLabel={_(msg`I have a code`)}
+										accessibilityLabel={"I have a code"}
 										accessibilityHint=""
-										label={_(msg`I have a confirmation code`)}
+										label={"I have a confirmation code"}
 										labelContainerStyle={{
 											justifyContent: "center",
 											padding: 4,
@@ -217,9 +216,9 @@ export function Component({
 									testID="confirmBtn"
 									type="primary"
 									onPress={onConfirm}
-									accessibilityLabel={_(msg`Confirm`)}
+									accessibilityLabel={"Confirm"}
 									accessibilityHint=""
-									label={_(msg`Confirm`)}
+									label={"Confirm"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 									labelStyle={[s.f18]}
 								/>
@@ -230,9 +229,9 @@ export function Component({
 								onPress={() => {
 									closeModal();
 								}}
-								accessibilityLabel={stage === Stages.Reminder ? _(msg`Not right now`) : _(msg`Cancel`)}
+								accessibilityLabel={stage === Stages.Reminder ? "Not right now" : "Cancel"}
 								accessibilityHint=""
-								label={stage === Stages.Reminder ? _(msg`Not right now`) : _(msg`Cancel`)}
+								label={stage === Stages.Reminder ? "Not right now" : "Cancel"}
 								labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 								labelStyle={[s.f18]}
 							/>

@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
@@ -72,10 +71,10 @@ function SavedFeedsInner({
 	const onSaveChanges = React.useCallback(async () => {
 		try {
 			await overwriteSavedFeeds(currentFeeds);
-			Toast.show(_(msg`Feeds updated!`));
+			Toast.show("Feeds updated!");
 			navigation.navigate("Feeds");
 		} catch (e) {
-			Toast.show(_(msg`There was an issue contacting the server`), "xmark");
+			Toast.show("There was an issue contacting the server", "xmark");
 			logger.error("Failed to toggle pinned feed", { message: e });
 		}
 	}, [_, overwriteSavedFeeds, currentFeeds, navigation]);
@@ -93,7 +92,7 @@ function SavedFeedsInner({
 					variant={hasUnsavedChanges ? "solid" : "solid"}
 					color={hasUnsavedChanges ? "primary" : "secondary"}
 					onPress={onSaveChanges}
-					label={_(msg`Save changes`)}
+					label={"Save changes"}
 					disabled={isOverwritePending || !hasUnsavedChanges}
 				>
 					<ButtonIcon icon={isOverwritePending ? Loader : SaveIcon} />
@@ -179,7 +178,7 @@ function SavedFeedsInner({
 								type="sm"
 								style={pal.link}
 								href="https://github.com/bluesky-social/feed-generator"
-								text={_(msg`See this guide`)}
+								text={"See this guide"}
 							/>{" "}
 							for more information.
 						</>
@@ -297,7 +296,7 @@ function ListItem({
 				<Pressable
 					testID={`feed-${feedUri}-toggleSave`}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Remove from my feeds`)}
+					accessibilityLabel={"Remove from my feeds"}
 					accessibilityHint=""
 					onPress={onPressRemove}
 					hitSlop={5}

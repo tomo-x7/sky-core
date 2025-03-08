@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -86,8 +85,8 @@ export function SettingsScreen({}: Props) {
 					{accounts.length > 1 ? (
 						<>
 							<SettingsList.PressableItem
-								label={_(msg`Switch account`)}
-								accessibilityHint={_(msg`Shows other accounts you can switch to`)}
+								label={"Switch account"}
+								accessibilityHint={"Shows other accounts you can switch to"}
 								onPress={() => {
 									if (!reducedMotion) {
 										LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -130,44 +129,44 @@ export function SettingsScreen({}: Props) {
 						<AddAccountRow />
 					)}
 					<SettingsList.Divider />
-					<SettingsList.LinkItem to="/settings/account" label={_(msg`Account`)}>
+					<SettingsList.LinkItem to="/settings/account" label={"Account"}>
 						<SettingsList.ItemIcon icon={PersonIcon} />
 						<SettingsList.ItemText>Account</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/privacy-and-security" label={_(msg`Privacy and security`)}>
+					<SettingsList.LinkItem to="/settings/privacy-and-security" label={"Privacy and security"}>
 						<SettingsList.ItemIcon icon={LockIcon} />
 						<SettingsList.ItemText>Privacy and security</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/moderation" label={_(msg`Moderation`)}>
+					<SettingsList.LinkItem to="/moderation" label={"Moderation"}>
 						<SettingsList.ItemIcon icon={HandIcon} />
 						<SettingsList.ItemText>Moderation</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/content-and-media" label={_(msg`Content and media`)}>
+					<SettingsList.LinkItem to="/settings/content-and-media" label={"Content and media"}>
 						<SettingsList.ItemIcon icon={WindowIcon} />
 						<SettingsList.ItemText>Content and media</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/appearance" label={_(msg`Appearance`)}>
+					<SettingsList.LinkItem to="/settings/appearance" label={"Appearance"}>
 						<SettingsList.ItemIcon icon={PaintRollerIcon} />
 						<SettingsList.ItemText>Appearance</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/accessibility" label={_(msg`Accessibility`)}>
+					<SettingsList.LinkItem to="/settings/accessibility" label={"Accessibility"}>
 						<SettingsList.ItemIcon icon={AccessibilityIcon} />
 						<SettingsList.ItemText>Accessibility</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/language" label={_(msg`Languages`)}>
+					<SettingsList.LinkItem to="/settings/language" label={"Languages"}>
 						<SettingsList.ItemIcon icon={EarthIcon} />
 						<SettingsList.ItemText>Languages</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.PressableItem
 						onPress={() => Linking.openURL(HELP_DESK_URL)}
-						label={_(msg`Help`)}
-						accessibilityHint={_(msg`Opens helpdesk in browser`)}
+						label={"Help"}
+						accessibilityHint={"Opens helpdesk in browser"}
 					>
 						<SettingsList.ItemIcon icon={CircleQuestionIcon} />
 						<SettingsList.ItemText>Help</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
-					<SettingsList.LinkItem to="/settings/about" label={_(msg`About`)}>
+					<SettingsList.LinkItem to="/settings/about" label={"About"}>
 						<SettingsList.ItemIcon icon={BubbleInfoIcon} />
 						<SettingsList.ItemText>About</SettingsList.ItemText>
 					</SettingsList.LinkItem>
@@ -175,7 +174,7 @@ export function SettingsScreen({}: Props) {
 					<SettingsList.PressableItem
 						destructive
 						onPress={() => signOutPromptControl.open()}
-						label={_(msg`Sign out`)}
+						label={"Sign out"}
 					>
 						<SettingsList.ItemText>Sign out</SettingsList.ItemText>
 					</SettingsList.PressableItem>
@@ -189,7 +188,7 @@ export function SettingsScreen({}: Props) {
 									}
 									setShowDevOptions((d) => !d);
 								}}
-								label={_(msg`Developer options`)}
+								label={"Developer options"}
 							>
 								<SettingsList.ItemIcon icon={CodeBracketsIcon} />
 								<SettingsList.ItemText>Developer options</SettingsList.ItemText>
@@ -202,11 +201,11 @@ export function SettingsScreen({}: Props) {
 
 			<Prompt.Basic
 				control={signOutPromptControl}
-				title={_(msg`Sign out?`)}
-				description={_(msg`You will be signed out of all your accounts.`)}
+				title={"Sign out?"}
+				description={"You will be signed out of all your accounts."}
 				onConfirm={() => logoutEveryAccount("Settings")}
-				confirmButtonCta={_(msg`Sign out`)}
-				cancelButtonCta={_(msg`Cancel`)}
+				confirmButtonCta={"Sign out"}
+				cancelButtonCta={"Cancel"}
 				confirmButtonColor="negative"
 			/>
 
@@ -250,41 +249,35 @@ function DevOptions() {
 	const resetOnboarding = async () => {
 		navigation.navigate("Home");
 		onboardingDispatch({ type: "start" });
-		Toast.show(_(msg`Onboarding reset`));
+		Toast.show("Onboarding reset");
 	};
 
 	const clearAllStorage = async () => {
 		await clearStorage();
-		Toast.show(_(msg`Storage cleared, you need to restart the app now.`));
+		Toast.show("Storage cleared, you need to restart the app now.");
 	};
 
 	return (
 		<>
-			<SettingsList.PressableItem onPress={() => navigation.navigate("Log")} label={_(msg`Open system log`)}>
+			<SettingsList.PressableItem onPress={() => navigation.navigate("Log")} label={"Open system log"}>
 				<SettingsList.ItemText>System log</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.PressableItem
-				onPress={() => navigation.navigate("Debug")}
-				label={_(msg`Open storybook page`)}
-			>
+			<SettingsList.PressableItem onPress={() => navigation.navigate("Debug")} label={"Open storybook page"}>
 				<SettingsList.ItemText>Storybook</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 			<SettingsList.PressableItem
 				onPress={() => navigation.navigate("DebugMod")}
-				label={_(msg`Open moderation debug page`)}
+				label={"Open moderation debug page"}
 			>
 				<SettingsList.ItemText>Debug Moderation</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.PressableItem
-				onPress={() => deleteChatDeclarationRecord()}
-				label={_(msg`Open storybook page`)}
-			>
+			<SettingsList.PressableItem onPress={() => deleteChatDeclarationRecord()} label={"Open storybook page"}>
 				<SettingsList.ItemText>Delete chat declaration record</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.PressableItem onPress={() => resetOnboarding()} label={_(msg`Reset onboarding state`)}>
+			<SettingsList.PressableItem onPress={() => resetOnboarding()} label={"Reset onboarding state"}>
 				<SettingsList.ItemText>Reset onboarding state</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.PressableItem onPress={() => clearAllStorage()} label={_(msg`Clear all storage data`)}>
+			<SettingsList.PressableItem onPress={() => clearAllStorage()} label={"Clear all storage data"}>
 				<SettingsList.ItemText>Clear all storage data (restart after this)</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 		</>
@@ -302,7 +295,7 @@ function AddAccountRow() {
 	};
 
 	return (
-		<SettingsList.PressableItem onPress={onAddAnotherAccount} label={_(msg`Add another account`)}>
+		<SettingsList.PressableItem onPress={onAddAnotherAccount} label={"Add another account"}>
 			<SettingsList.ItemIcon icon={PersonPlusIcon} />
 			<SettingsList.ItemText>Add another account</SettingsList.ItemText>
 		</SettingsList.PressableItem>
@@ -334,7 +327,7 @@ function AccountRow({
 
 	return (
 		<View style={[a.relative]}>
-			<SettingsList.PressableItem onPress={onSwitchAccount} label={_(msg`Switch account`)}>
+			<SettingsList.PressableItem onPress={onSwitchAccount} label={"Switch account"}>
 				{moderationOpts && profile ? (
 					<UserAvatar
 						size={28}
@@ -350,7 +343,7 @@ function AccountRow({
 			</SettingsList.PressableItem>
 			{!pendingDid && (
 				<Menu.Root>
-					<Menu.Trigger label={_(msg`Account options`)}>
+					<Menu.Trigger label={"Account options"}>
 						{({ props, state }) => (
 							<Pressable
 								{...props}
@@ -367,7 +360,7 @@ function AccountRow({
 						)}
 					</Menu.Trigger>
 					<Menu.Outer showCancel>
-						<Menu.Item label={_(msg`Remove account`)} onPress={() => removePromptControl.open()}>
+						<Menu.Item label={"Remove account"} onPress={() => removePromptControl.open()}>
 							<Menu.ItemText>Remove account</Menu.ItemText>
 							<Menu.ItemIcon icon={PersonXIcon} />
 						</Menu.Item>
@@ -377,13 +370,13 @@ function AccountRow({
 
 			<Prompt.Basic
 				control={removePromptControl}
-				title={_(msg`Remove from quick access?`)}
-				description={_(msg`This will remove @${account.handle} from the quick access list.`)}
+				title={"Remove from quick access?"}
+				description={`This will remove @${account.handle} from the quick access list.`}
 				onConfirm={() => {
 					removeAccount(account);
-					Toast.show(_(msg`Account removed from quick access`));
+					Toast.show("Account removed from quick access");
 				}}
-				confirmButtonCta={_(msg`Remove`)}
+				confirmButtonCta={"Remove"}
 				confirmButtonColor="negative"
 			/>
 		</View>

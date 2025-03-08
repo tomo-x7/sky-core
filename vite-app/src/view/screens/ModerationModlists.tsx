@@ -1,5 +1,5 @@
 import { AtUri } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -61,7 +61,7 @@ export function ModerationModlistsScreen({}: Props) {
 					<Layout.Header.TitleText>Moderation Lists</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button
-					label={_(msg`New list`)}
+					label={"New list"}
 					testID="newModListBtn"
 					color="secondary"
 					variant="solid"
@@ -76,7 +76,7 @@ export function ModerationModlistsScreen({}: Props) {
 			</Layout.Header.Outer>
 			<MyLists filter="mod" style={a.flex_grow} />
 			<VerifyEmailDialog
-				reasonText={_(msg`Before creating a list, you must first verify your email.`)}
+				reasonText={"Before creating a list, you must first verify your email."}
 				control={control}
 			/>
 		</Layout.Screen>

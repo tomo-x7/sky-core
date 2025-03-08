@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { setStringAsync } from "expo-clipboard";
@@ -35,41 +34,39 @@ export function AboutSettingsScreen({}: Props) {
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<SettingsList.Container>
-					<SettingsList.LinkItem to="https://bsky.social/about/support/tos" label={_(msg`Terms of Service`)}>
+					<SettingsList.LinkItem to="https://bsky.social/about/support/tos" label={"Terms of Service"}>
 						<SettingsList.ItemIcon icon={NewspaperIcon} />
 						<SettingsList.ItemText>Terms of Service</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.LinkItem
 						to="https://bsky.social/about/support/privacy-policy"
-						label={_(msg`Privacy Policy`)}
+						label={"Privacy Policy"}
 					>
 						<SettingsList.ItemIcon icon={NewspaperIcon} />
 						<SettingsList.ItemText>Privacy Policy</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to={STATUS_PAGE_URL} label={_(msg`Status Page`)}>
+					<SettingsList.LinkItem to={STATUS_PAGE_URL} label={"Status Page"}>
 						<SettingsList.ItemIcon icon={GlobeIcon} />
 						<SettingsList.ItemText>Status Page</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.Divider />
-					<SettingsList.LinkItem to="/sys/log" label={_(msg`System log`)}>
+					<SettingsList.LinkItem to="/sys/log" label={"System log"}>
 						<SettingsList.ItemIcon icon={CodeLinesIcon} />
 						<SettingsList.ItemText>System log</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.PressableItem
-						label={_(msg`Version ${appVersion}`)}
-						accessibilityHint={_(msg`Copies build version to clipboard`)}
+						label={`Version ${appVersion}`}
+						accessibilityHint={"Copies build version to clipboard"}
 						onLongPress={() => {
 							const newDevModeEnabled = !devModeEnabled;
 							setDevModeEnabled(newDevModeEnabled);
-							Toast.show(
-								newDevModeEnabled ? _(msg`Developer mode enabled`) : _(msg`Developer mode disabled`),
-							);
+							Toast.show(newDevModeEnabled ? "Developer mode enabled" : "Developer mode disabled");
 						}}
 						onPress={() => {
 							setStringAsync(
 								`Build version: ${appVersion}; Bundle info: ${bundleInfo}; Bundle date: ${BUNDLE_DATE}; Platform: ${Platform.OS}; Platform version: ${Platform.Version}; Anonymous ID: ${stableID}`,
 							);
-							Toast.show(_(msg`Copied build version to clipboard`));
+							Toast.show("Copied build version to clipboard");
 						}}
 					>
 						<SettingsList.ItemIcon icon={WrenchIcon} />

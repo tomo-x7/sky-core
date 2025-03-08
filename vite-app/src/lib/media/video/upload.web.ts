@@ -1,7 +1,6 @@
 import type { AppBskyVideoDefs } from "@atproto/api";
 import type { BskyAgent } from "@atproto/api";
 import type { I18n } from "@lingui/core";
-import { msg } from "@lingui/macro";
 import { nanoid } from "nanoid/non-secure";
 
 import { AbortError } from "#/lib/async/cancelable";
@@ -68,11 +67,11 @@ export async function uploadVideo({
 				const uploadRes = JSON.parse(xhr.responseText) as AppBskyVideoDefs.JobStatus;
 				resolve(uploadRes);
 			} else {
-				reject(new ServerError(_(msg`Failed to upload video`)));
+				reject(new ServerError("Failed to upload video"));
 			}
 		};
 		xhr.onerror = () => {
-			reject(new ServerError(_(msg`Failed to upload video`)));
+			reject(new ServerError("Failed to upload video"));
 		};
 		xhr.open("POST", uri);
 		xhr.setRequestHeader("Content-Type", video.mimeType);
@@ -81,7 +80,7 @@ export async function uploadVideo({
 	});
 
 	if (!res.jobId) {
-		throw new ServerError(res.error || _(msg`Failed to upload video`));
+		throw new ServerError(res.error || "Failed to upload video");
 	}
 
 	if (signal.aborted) {

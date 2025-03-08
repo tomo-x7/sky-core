@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { ImagePickerAsset } from "expo-image-picker";
 import { View } from "react-native";
@@ -60,7 +59,7 @@ export function VideoPreview({
 						playsInline
 						onError={(err) => {
 							console.error("Error loading video", err);
-							Toast.show(_(msg`Could not process your video`), "xmark");
+							Toast.show("Could not process your video", "xmark");
 							clear();
 						}}
 					/>

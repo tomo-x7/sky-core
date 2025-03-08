@@ -1,5 +1,4 @@
 import type { ModerationUI } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -97,7 +96,7 @@ export function ScreenHider({
 								control.open();
 							}}
 							accessibilityRole="button"
-							accessibilityLabel={_(msg`Learn more about this warning`)}
+							accessibilityLabel={"Learn more about this warning"}
 							accessibilityHint=""
 						>
 							<Text
@@ -126,7 +125,7 @@ export function ScreenHider({
 					color="primary"
 					size="large"
 					style={[a.rounded_full]}
-					label={_(msg`Go back`)}
+					label={"Go back"}
 					onPress={() => {
 						if (navigation.canGoBack()) {
 							navigation.goBack();
@@ -143,7 +142,7 @@ export function ScreenHider({
 						color="secondary"
 						size="large"
 						style={[a.rounded_full]}
-						label={_(msg`Show anyway`)}
+						label={"Show anyway"}
 						onPress={() => setOverride((v) => !v)}
 					>
 						<ButtonText>Show anyway</ButtonText>

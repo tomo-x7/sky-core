@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import {
@@ -67,13 +66,13 @@ export function MyLists({
 	let emptyText;
 	switch (filter) {
 		case "curate":
-			emptyText = _(msg`Public, sharable lists which can be used to drive feeds.`);
+			emptyText = "Public, sharable lists which can be used to drive feeds.";
 			break;
 		case "mod":
-			emptyText = _(msg`Public, sharable lists of users to mute or block in bulk.`);
+			emptyText = "Public, sharable lists of users to mute or block in bulk.";
 			break;
 		default:
-			emptyText = _(msg`You have no lists.`);
+			emptyText = "You have no lists.";
 			break;
 	}
 

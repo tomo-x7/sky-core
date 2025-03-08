@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useCallback } from "react";
@@ -77,19 +76,19 @@ export function AppearanceSettingsScreen({}: Props) {
 				<Layout.Content>
 					<SettingsList.Container>
 						<AppearanceToggleButtonGroup
-							title={_(msg`Color mode`)}
+							title={"Color mode"}
 							icon={PhoneIcon}
 							items={[
 								{
-									label: _(msg`System`),
+									label: "System",
 									name: "system",
 								},
 								{
-									label: _(msg`Light`),
+									label: "Light",
 									name: "light",
 								},
 								{
-									label: _(msg`Dark`),
+									label: "Dark",
 									name: "dark",
 								},
 							]}
@@ -100,15 +99,15 @@ export function AppearanceSettingsScreen({}: Props) {
 						{colorMode !== "light" && (
 							<Animated.View entering={native(FadeInUp)} exiting={native(FadeOutUp)}>
 								<AppearanceToggleButtonGroup
-									title={_(msg`Dark theme`)}
+									title={"Dark theme"}
 									icon={MoonIcon}
 									items={[
 										{
-											label: _(msg`Dim`),
+											label: "Dim",
 											name: "dim",
 										},
 										{
-											label: _(msg`Dark`),
+											label: "Dark",
 											name: "dark",
 										},
 									]}
@@ -122,16 +121,16 @@ export function AppearanceSettingsScreen({}: Props) {
 							<SettingsList.Divider />
 
 							<AppearanceToggleButtonGroup
-								title={_(msg`Font`)}
-								description={_(msg`For the best experience, we recommend using the theme font.`)}
+								title={"Font"}
+								description={"For the best experience, we recommend using the theme font."}
 								icon={Aa}
 								items={[
 									{
-										label: _(msg`System`),
+										label: "System",
 										name: "system",
 									},
 									{
-										label: _(msg`Theme`),
+										label: "Theme",
 										name: "theme",
 									},
 								]}
@@ -140,19 +139,19 @@ export function AppearanceSettingsScreen({}: Props) {
 							/>
 
 							<AppearanceToggleButtonGroup
-								title={_(msg`Font size`)}
+								title={"Font size"}
 								icon={TextSize}
 								items={[
 									{
-										label: _(msg`Smaller`),
+										label: "Smaller",
 										name: "-1",
 									},
 									{
-										label: _(msg`Default`),
+										label: "Default",
 										name: "0",
 									},
 									{
-										label: _(msg`Larger`),
+										label: "Larger",
 										name: "1",
 									},
 								]}

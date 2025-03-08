@@ -1,5 +1,4 @@
 import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -79,11 +78,11 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 	const sections = React.useMemo(() => {
 		return [
 			{
-				title: _(msg`Top`),
+				title: "Top",
 				component: <HashtagScreenTab fullTag={fullTag} author={author} sort="top" active={activeTab === 0} />,
 			},
 			{
-				title: _(msg`Latest`),
+				title: "Latest",
 				component: (
 					<HashtagScreenTab fullTag={fullTag} author={author} sort="latest" active={activeTab === 1} />
 				),
@@ -103,13 +102,13 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 								<Layout.Header.TitleText>{headerTitle}</Layout.Header.TitleText>
 								{author && (
 									<Layout.Header.SubtitleText>
-										{_(msg`From @${sanitizedAuthor}`)}
+										{`From @${sanitizedAuthor}`}
 									</Layout.Header.SubtitleText>
 								)}
 							</Layout.Header.Content>
 							<Layout.Header.Slot>
 								<Button
-									label={_(msg`Share`)}
+									label={"Share"}
 									size="small"
 									variant="ghost"
 									color="primary"
@@ -181,7 +180,7 @@ function HashtagScreenTab({
 					isError={isError}
 					onRetry={refetch}
 					emptyType="results"
-					emptyMessage={_(msg`We couldn't find any results for that hashtag.`)}
+					emptyMessage={`We couldn't find any results for that hashtag.`}
 				/>
 			) : (
 				<List

@@ -5,7 +5,6 @@ import {
 	type ModerationOpts,
 	moderateProfile,
 } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -123,7 +122,7 @@ function LoadMore({
 
 	return (
 		<View style={[]}>
-			<Button label={_(msg`Load more`)} onPress={item.onLoadMore} style={[a.relative, a.w_full]}>
+			<Button label={"Load more"} onPress={item.onLoadMore} style={[a.relative, a.w_full]}>
 				{({ hovered, pressed }) => (
 					<View
 						style={[
@@ -329,8 +328,8 @@ export function Explore() {
 		i.push({
 			type: "header",
 			key: "suggested-follows-header",
-			title: _(msg`Suggested accounts`),
-			description: _(msg`Follow more accounts to get connected to your interests and build your network.`),
+			title: "Suggested accounts",
+			description: "Follow more accounts to get connected to your interests and build your network.",
 			icon: Person,
 		});
 
@@ -373,7 +372,7 @@ export function Explore() {
 				i.push({
 					type: "error",
 					key: "profilesError",
-					message: _(msg`Failed to load suggested follows`),
+					message: "Failed to load suggested follows",
 					error: cleanError(profilesError),
 				});
 			} else {
@@ -384,8 +383,8 @@ export function Explore() {
 		i.push({
 			type: "header",
 			key: "suggested-feeds-header",
-			title: _(msg`Discover new feeds`),
-			description: _(msg`Choose your own timeline! Feeds built by the community help you find content you love.`),
+			title: "Discover new feeds",
+			description: "Choose your own timeline! Feeds built by the community help you find content you love.",
 			style: [a.pt_5xl],
 			icon: ListSparkle,
 		});
@@ -413,14 +412,14 @@ export function Explore() {
 				i.push({
 					type: "error",
 					key: "feedsError",
-					message: _(msg`Failed to load suggested feeds`),
+					message: "Failed to load suggested feeds",
 					error: cleanError(feedsError),
 				});
 			} else if (preferencesError) {
 				i.push({
 					type: "error",
 					key: "preferencesError",
-					message: _(msg`Failed to load feeds preferences`),
+					message: "Failed to load feeds preferences",
 					error: cleanError(preferencesError),
 				});
 			} else if (hasNextFeedsPage) {
@@ -441,14 +440,14 @@ export function Explore() {
 				i.push({
 					type: "error",
 					key: "feedsError",
-					message: _(msg`Failed to load suggested feeds`),
+					message: "Failed to load suggested feeds",
 					error: cleanError(feedsError),
 				});
 			} else if (preferencesError) {
 				i.push({
 					type: "error",
 					key: "preferencesError",
-					message: _(msg`Failed to load feeds preferences`),
+					message: "Failed to load feeds preferences",
 					error: cleanError(preferencesError),
 				});
 			} else {

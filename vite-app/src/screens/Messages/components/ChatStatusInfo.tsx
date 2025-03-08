@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback } from "react";
 import { View } from "react-native";
@@ -35,7 +34,7 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 			<View style={[a.flex_row, a.gap_md, a.w_full, otherUser && a.pt_sm]}>
 				{otherUser && (
 					<RejectMenu
-						label={_(msg`Block or report`)}
+						label={"Block or report"}
 						convo={convoState.convo}
 						profile={otherUser}
 						color="negative"
@@ -44,7 +43,7 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 					/>
 				)}
 				<DeleteChatButton
-					label={_(msg`Delete`)}
+					label={"Delete"}
 					convo={convoState.convo}
 					color="secondary"
 					size="small"

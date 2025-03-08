@@ -1,5 +1,4 @@
 import { AppBskyGraphDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -55,7 +54,7 @@ export function ListHiddenScreen({
 			} catch (e) {
 				setIsProcessing(false);
 				logger.error("Failed to unmute list", { message: e });
-				Toast.show(_(msg`There was an issue. Please check your internet connection and try again.`));
+				Toast.show("There was an issue. Please check your internet connection and try again.");
 				return;
 			}
 		}
@@ -65,14 +64,14 @@ export function ListHiddenScreen({
 			} catch (e) {
 				setIsProcessing(false);
 				logger.error("Failed to unblock list", { message: e });
-				Toast.show(_(msg`There was an issue. Please check your internet connection and try again.`));
+				Toast.show("There was an issue. Please check your internet connection and try again.");
 				return;
 			}
 		}
 		queryClient.invalidateQueries({
 			queryKey: [listQueryRoot],
 		});
-		Toast.show(_(msg`Unsubscribed from list`));
+		Toast.show("Unsubscribed from list");
 		setIsProcessing(false);
 	};
 
@@ -80,10 +79,10 @@ export function ListHiddenScreen({
 		if (!savedFeedConfig) return;
 		try {
 			await removeSavedFeed(savedFeedConfig);
-			Toast.show(_(msg`Removed from saved feeds`));
+			Toast.show("Removed from saved feeds");
 		} catch (e) {
 			logger.error("Failed to remove list from saved feeds", { message: e });
-			Toast.show(_(msg`There was an issue. Please check your internet connection and try again.`));
+			Toast.show("There was an issue. Please check your internet connection and try again.");
 		} finally {
 			setIsProcessing(false);
 		}
@@ -136,7 +135,7 @@ export function ListHiddenScreen({
 							variant="solid"
 							color="secondary"
 							size="large"
-							label={_(msg`Remove from saved feeds`)}
+							label={"Remove from saved feeds"}
 							onPress={onRemoveList}
 							disabled={isProcessing}
 						>
@@ -149,7 +148,7 @@ export function ListHiddenScreen({
 							variant="solid"
 							color="secondary"
 							size="large"
-							label={_(msg`Show list anyway`)}
+							label={"Show list anyway"}
 							onPress={() => setIsContentVisible(true)}
 							disabled={isProcessing}
 						>
@@ -160,7 +159,7 @@ export function ListHiddenScreen({
 							variant="solid"
 							color="secondary"
 							size="large"
-							label={_(msg`Unsubscribe from list`)}
+							label={"Unsubscribe from list"}
 							onPress={() => {
 								if (isModList) {
 									onUnsubscribe();
@@ -178,7 +177,7 @@ export function ListHiddenScreen({
 				<Button
 					variant="solid"
 					color="primary"
-					label={_(msg`Return to previous page`)}
+					label={"Return to previous page"}
 					onPress={goBack}
 					size="large"
 					disabled={isProcessing}

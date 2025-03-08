@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useMemo, useState } from "react";
 
@@ -77,8 +76,8 @@ export function PostRepostedBy({ uri }: { uri: string }) {
 				isLoading={isLoadingUri || isLoadingRepostedBy}
 				isError={isError}
 				emptyType="results"
-				emptyTitle={_(msg`No reposts yet`)}
-				emptyMessage={_(msg`Nobody has reposted this yet. Maybe you should be the first!`)}
+				emptyTitle={"No reposts yet"}
+				emptyMessage={"Nobody has reposted this yet. Maybe you should be the first!"}
 				errorMessage={cleanError(resolveError || error)}
 				sideBorders={false}
 			/>

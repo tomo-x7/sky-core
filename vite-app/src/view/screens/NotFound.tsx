@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { StackActions, useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -37,7 +36,7 @@ export const NotFoundScreen = () => {
 
 	return (
 		<Layout.Screen testID="notFoundView">
-			<ViewHeader title={_(msg`Page Not Found`)} />
+			<ViewHeader title={"Page Not Found"} />
 			<View style={styles.container}>
 				<Text type="title-2xl" style={[pal.text, s.mb10]}>
 					Page not found
@@ -47,9 +46,9 @@ export const NotFoundScreen = () => {
 				</Text>
 				<Button
 					type="primary"
-					label={canGoBack ? _(msg`Go Back`) : _(msg`Go Home`)}
-					accessibilityLabel={canGoBack ? _(msg`Go back`) : _(msg`Go home`)}
-					accessibilityHint={canGoBack ? _(msg`Returns to previous page`) : _(msg`Returns to home page`)}
+					label={canGoBack ? "Go Back" : "Go Home"}
+					accessibilityLabel={canGoBack ? "Go back" : "Go home"}
+					accessibilityHint={canGoBack ? "Returns to previous page" : "Returns to home page"}
 					onPress={onPressHome}
 				/>
 			</View>

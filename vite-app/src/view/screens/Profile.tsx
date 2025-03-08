@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type ModerationOpts, RichText as RichTextAPI, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -113,7 +112,7 @@ function ProfileScreenInner({ route }: Props) {
 			<SafeAreaView style={[a.flex_1]}>
 				<ErrorScreen
 					testID="profileErrorScreen"
-					title={profileError ? _(msg`Not Found`) : _(msg`Oops!`)}
+					title={profileError ? "Not Found" : "Oops!"}
 					message={cleanError(resolveError || profileError)}
 					onPressTryAgain={onPressTryAgain}
 					showHeader
@@ -204,16 +203,16 @@ function ProfileScreenLoaded({
 	const showListsTab = hasSession && (isMe || (profile.associated?.lists || 0) > 0);
 
 	const sectionTitles = [
-		showFiltersTab ? _(msg`Labels`) : undefined,
-		showListsTab && hasLabeler ? _(msg`Lists`) : undefined,
-		showPostsTab ? _(msg`Posts`) : undefined,
-		showRepliesTab ? _(msg`Replies`) : undefined,
-		showMediaTab ? _(msg`Media`) : undefined,
-		showVideosTab ? _(msg`Videos`) : undefined,
-		showLikesTab ? _(msg`Likes`) : undefined,
-		showFeedsTab ? _(msg`Feeds`) : undefined,
-		showStarterPacksTab ? _(msg`Starter Packs`) : undefined,
-		showListsTab && !hasLabeler ? _(msg`Lists`) : undefined,
+		showFiltersTab ? "Labels" : undefined,
+		showListsTab && hasLabeler ? "Lists" : undefined,
+		showPostsTab ? "Posts" : undefined,
+		showRepliesTab ? "Replies" : undefined,
+		showMediaTab ? "Media" : undefined,
+		showVideosTab ? "Videos" : undefined,
+		showLikesTab ? "Likes" : undefined,
+		showFeedsTab ? "Feeds" : undefined,
+		showStarterPacksTab ? "Starter Packs" : undefined,
+		showListsTab && !hasLabeler ? "Lists" : undefined,
 	].filter(Boolean) as string[];
 
 	let nextIndex = 0;
@@ -342,7 +341,7 @@ function ProfileScreenLoaded({
 		<ScreenHider
 			testID="profileView"
 			style={styles.container}
-			screenDescription={_(msg`profile`)}
+			screenDescription={"profile"}
 			modui={moderation.ui("profileView")}
 		>
 			<PagerWithHeader
@@ -490,7 +489,7 @@ function ProfileScreenLoaded({
 					onPress={onPressCompose}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`New post`)}
+					accessibilityLabel={"New post"}
 					accessibilityHint=""
 				/>
 			)}

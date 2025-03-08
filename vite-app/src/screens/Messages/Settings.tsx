@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
@@ -31,7 +30,7 @@ export function MessagesSettingsScreen({}: Props) {
 
 	const { mutate: updateDeclaration } = useUpdateActorDeclaration({
 		onError: () => {
-			Toast.show(_(msg`Failed to update settings`), "xmark");
+			Toast.show("Failed to update settings", "xmark");
 		},
 	});
 
@@ -66,25 +65,21 @@ export function MessagesSettingsScreen({}: Props) {
 				<View style={[a.p_lg, a.gap_md]}>
 					<Text style={[a.text_lg, a.font_bold]}>Allow new messages from</Text>
 					<Toggle.Group
-						label={_(msg`Allow new messages from`)}
+						label={"Allow new messages from"}
 						type="radio"
 						values={[(profile?.associated?.chat?.allowIncoming as AllowIncoming) ?? "following"]}
 						onChange={onSelectMessagesFrom}
 					>
 						<View>
-							<Toggle.Item name="all" label={_(msg`Everyone`)} style={[a.justify_between, a.py_sm]}>
+							<Toggle.Item name="all" label={"Everyone"} style={[a.justify_between, a.py_sm]}>
 								<Toggle.LabelText>Everyone</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
-							<Toggle.Item
-								name="following"
-								label={_(msg`Users I follow`)}
-								style={[a.justify_between, a.py_sm]}
-							>
+							<Toggle.Item name="following" label={"Users I follow"} style={[a.justify_between, a.py_sm]}>
 								<Toggle.LabelText>Users I follow</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
-							<Toggle.Item name="none" label={_(msg`No one`)} style={[a.justify_between, a.py_sm]}>
+							<Toggle.Item name="none" label={"No one"} style={[a.justify_between, a.py_sm]}>
 								<Toggle.LabelText>No one</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
@@ -98,23 +93,19 @@ export function MessagesSettingsScreen({}: Props) {
 							<Divider style={a.my_md} />
 							<Text style={[a.text_lg, a.font_bold]}>Notification Sounds</Text>
 							<Toggle.Group
-								label={_(msg`Notification sounds`)}
+								label={"Notification sounds"}
 								type="radio"
 								values={[preferences.playSoundChat ? "enabled" : "disabled"]}
 								onChange={onSelectSoundSetting}
 							>
 								<View>
-									<Toggle.Item
-										name="enabled"
-										label={_(msg`Enabled`)}
-										style={[a.justify_between, a.py_sm]}
-									>
+									<Toggle.Item name="enabled" label={"Enabled"} style={[a.justify_between, a.py_sm]}>
 										<Toggle.LabelText>Enabled</Toggle.LabelText>
 										<Toggle.Radio />
 									</Toggle.Item>
 									<Toggle.Item
 										name="disabled"
-										label={_(msg`Disabled`)}
+										label={"Disabled"}
 										style={[a.justify_between, a.py_sm]}
 									>
 										<Toggle.LabelText>Disabled</Toggle.LabelText>

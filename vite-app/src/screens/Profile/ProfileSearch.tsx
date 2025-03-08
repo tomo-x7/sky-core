@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMemo } from "react";
 
@@ -30,9 +29,9 @@ export const ProfileSearchScreen = ({ route }: Props) => {
 			inputPlaceholder={
 				profile
 					? currentAccount?.did === profile.did
-						? _(msg`Search my posts`)
-						: _(msg`Search @${profile.handle}'s posts`)
-					: _(msg`Search...`)
+						? "Search my posts"
+						: `Search @${profile.handle}'s posts`
+					: "Search..."
 			}
 			fixedParams={fixedParams}
 			queryParam={queryParam}

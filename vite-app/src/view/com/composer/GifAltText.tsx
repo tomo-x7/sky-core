@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
@@ -70,7 +69,7 @@ export function GifAltTextDialogLoaded({
 			<TouchableOpacity
 				testID="altTextButton"
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Add alt text`)}
+				accessibilityLabel={"Add alt text"}
 				accessibilityHint=""
 				hitSlop={HITSLOP_10}
 				onPress={control.open}
@@ -138,7 +137,7 @@ function AltTextInner({
 	const { _, i18n } = useLingui();
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Add alt text`)}>
+		<Dialog.ScrollableInner label={"Add alt text"}>
 			<View style={a.flex_col_reverse}>
 				<View style={[a.mt_md, a.gap_md]}>
 					<View style={[a.gap_sm]}>
@@ -146,7 +145,7 @@ function AltTextInner({
 							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
-									label={_(msg`Alt text`)}
+									label={"Alt text"}
 									placeholder={vendorAltText}
 									onChangeText={onChange}
 									defaultValue={altText}
@@ -174,7 +173,7 @@ function AltTextInner({
 
 					<AltTextCounterWrapper altText={altText}>
 						<Button
-							label={_(msg`Save`)}
+							label={"Save"}
 							size="large"
 							color="primary"
 							variant="solid"

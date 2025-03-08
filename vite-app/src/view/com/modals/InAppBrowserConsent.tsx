@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -45,9 +44,9 @@ export function Component({ href }: { href: string }) {
 					testID="confirmBtn"
 					type="inverted"
 					onPress={onUseIAB}
-					accessibilityLabel={_(msg`Use in-app browser`)}
+					accessibilityLabel={"Use in-app browser"}
 					accessibilityHint=""
-					label={_(msg`Use in-app browser`)}
+					label={"Use in-app browser"}
 					labelContainerStyle={{ justifyContent: "center", padding: 8 }}
 					labelStyle={[s.f18]}
 				/>
@@ -55,9 +54,9 @@ export function Component({ href }: { href: string }) {
 					testID="confirmBtn"
 					type="inverted"
 					onPress={onUseLinking}
-					accessibilityLabel={_(msg`Use my default browser`)}
+					accessibilityLabel={"Use my default browser"}
 					accessibilityHint=""
-					label={_(msg`Use my default browser`)}
+					label={"Use my default browser"}
 					labelContainerStyle={{ justifyContent: "center", padding: 8 }}
 					labelStyle={[s.f18]}
 				/>
@@ -67,9 +66,9 @@ export function Component({ href }: { href: string }) {
 					onPress={() => {
 						closeModal();
 					}}
-					accessibilityLabel={_(msg`Cancel`)}
+					accessibilityLabel={"Cancel"}
 					accessibilityHint=""
-					label={_(msg`Cancel`)}
+					label={"Cancel"}
 					labelContainerStyle={{ justifyContent: "center", padding: 8 }}
 					labelStyle={[s.f18]}
 				/>

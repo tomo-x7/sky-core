@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -78,7 +77,7 @@ function PostThreadFollowBtnLoaded({
 				} catch (e: any) {
 					if (e?.name !== "AbortError") {
 						logger.error("Failed to follow", { message: String(e) });
-						Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+						Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 					}
 				}
 			});
@@ -89,7 +88,7 @@ function PostThreadFollowBtnLoaded({
 				} catch (e: any) {
 					if (e?.name !== "AbortError") {
 						logger.error("Failed to unfollow", { message: String(e) });
-						Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+						Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 					}
 				}
 			});
@@ -101,7 +100,7 @@ function PostThreadFollowBtnLoaded({
 	return (
 		<Button
 			testID="followBtn"
-			label={_(msg`Follow ${profile.handle}`)}
+			label={`Follow ${profile.handle}`}
 			onPress={onPress}
 			size="small"
 			variant="solid"

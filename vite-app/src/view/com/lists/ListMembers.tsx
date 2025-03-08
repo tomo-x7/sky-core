@@ -147,7 +147,7 @@ export function ListMembers({
 			} else if (item === LOAD_MORE_ERROR_ITEM) {
 				return (
 					<LoadMoreRetryBtn
-						label={_(msg`There was an issue fetching the list. Tap here to try again.`)}
+						label={"There was an issue fetching the list. Tap here to try again."}
 						onPress={onPressRetryLoadMore}
 					/>
 				);

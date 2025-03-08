@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { View } from "react-native";
@@ -49,7 +48,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
 						</SettingsList.ItemText>
 						<Email2FAToggle />
 					</SettingsList.Item>
-					<SettingsList.LinkItem to="/settings/app-passwords" label={_(msg`App passwords`)}>
+					<SettingsList.LinkItem to="/settings/app-passwords" label={"App passwords"}>
 						<SettingsList.ItemIcon icon={KeyIcon} />
 						<SettingsList.ItemText>App passwords</SettingsList.ItemText>
 						{appPasswords && appPasswords.length > 0 && (
@@ -75,7 +74,7 @@ export function PrivacyAndSecuritySettingsScreen({}: Props) {
 									</Admonition.Text>
 									<Admonition.Text>
 										<InlineLinkText
-											label={_(msg`Learn more about what is public on Bluesky.`)}
+											label={"Learn more about what is public on Bluesky."}
 											to="https://blueskyweb.zendesk.com/hc/en-us/articles/15835264007693-Data-Privacy"
 										>
 											Learn more about what is public on Bluesky.

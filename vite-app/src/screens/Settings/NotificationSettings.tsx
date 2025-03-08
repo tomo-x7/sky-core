@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { Text } from "react-native";
 
@@ -42,19 +41,14 @@ export function NotificationSettingsScreen({}: Props) {
 			</Layout.Header.Outer>
 			<Layout.Content>
 				{isQueryError ? (
-					<Error
-						title={_(msg`Oops!`)}
-						message={_(msg`Something went wrong!`)}
-						onRetry={refetch}
-						sideBorders={false}
-					/>
+					<Error title={"Oops!"} message={"Something went wrong!"} onRetry={refetch} sideBorders={false} />
 				) : (
 					<SettingsList.Container>
 						<SettingsList.Group>
 							<SettingsList.ItemIcon icon={BeakerIcon} />
 							<SettingsList.ItemText>Notification filters</SettingsList.ItemText>
 							<Toggle.Group
-								label={_(msg`Priority notifications`)}
+								label={"Priority notifications"}
 								type="checkbox"
 								values={priority ? ["enabled"] : []}
 								onChange={onChangePriority}
@@ -62,7 +56,7 @@ export function NotificationSettingsScreen({}: Props) {
 							>
 								<Toggle.Item
 									name="enabled"
-									label={_(msg`Enable priority notifications`)}
+									label={"Enable priority notifications"}
 									style={[a.flex_1, a.justify_between]}
 								>
 									<Toggle.LabelText>Enable priority notifications</Toggle.LabelText>

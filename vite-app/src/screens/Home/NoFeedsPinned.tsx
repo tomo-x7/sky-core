@@ -1,5 +1,4 @@
 import { TID } from "@atproto/common-web";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -81,19 +80,19 @@ export function NoFeedsPinned({
 				<View style={[a.flex_row, a.gap_md, a.justify_center, a.flex_wrap]}>
 					<Button
 						disabled={isPending}
-						label={_(msg`Apply default recommended feeds`)}
+						label={"Apply default recommended feeds"}
 						size="large"
 						variant="solid"
 						color="primary"
 						onPress={addRecommendedFeeds}
 					>
 						<ButtonIcon icon={Plus} position="left" />
-						<ButtonText>{_(msg`Add recommended feeds`)}</ButtonText>
+						<ButtonText>{"Add recommended feeds"}</ButtonText>
 					</Button>
 
-					<Link label={_(msg`Browse other feeds`)} to="/feeds" size="large" variant="solid" color="secondary">
+					<Link label={"Browse other feeds"} to="/feeds" size="large" variant="solid" color="secondary">
 						<ButtonIcon icon={ListSparkle} position="left" />
-						<ButtonText>{_(msg`Browse other feeds`)}</ButtonText>
+						<ButtonText>{"Browse other feeds"}</ButtonText>
 					</Link>
 				</View>
 			</View>

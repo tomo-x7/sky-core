@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -32,7 +31,7 @@ export const ConfirmLanguagesButton = ({
 				testID="confirmContentLanguagesBtn"
 				onPress={onPress}
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Confirm content language settings`)}
+				accessibilityLabel={"Confirm content language settings"}
 				accessibilityHint=""
 			>
 				<LinearGradient

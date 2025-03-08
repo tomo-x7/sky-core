@@ -1,5 +1,4 @@
 import { ComAtprotoModerationDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
@@ -43,10 +42,10 @@ function AppealDialog() {
 				color="secondary"
 				size="small"
 				onPress={control.open}
-				label={_(msg`Appeal this decision`)}
+				label={"Appeal this decision"}
 				style={a.mt_sm}
 			>
-				<ButtonText>{_(msg`Appeal this decision`)}</ButtonText>
+				<ButtonText>{"Appeal this decision"}</ButtonText>
 			</Button>
 
 			<Dialog.Outer control={control}>
@@ -79,11 +78,11 @@ function DialogInner() {
 		},
 		onError: (err) => {
 			logger.error("Failed to submit chat appeal", { message: err });
-			Toast.show(_(msg`Failed to submit appeal, please try again.`), "xmark");
+			Toast.show("Failed to submit appeal, please try again.", "xmark");
 		},
 		onSuccess: () => {
 			control.close();
-			Toast.show(_(msg`Appeal submitted`));
+			Toast.show("Appeal submitted");
 		},
 	});
 
@@ -91,13 +90,13 @@ function DialogInner() {
 	const onBack = useCallback(() => control.close(), [control]);
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Appeal this decision`)}>
+		<Dialog.ScrollableInner label={"Appeal this decision"}>
 			<Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>Appeal this decision</Text>
 			<Text style={[a.text_md, a.leading_snug]}>This appeal will be sent to Bluesky's moderation service.</Text>
 			<View style={[a.my_md]}>
 				<Dialog.Input
-					label={_(msg`Text input field`)}
-					placeholder={_(msg`Please explain why you think your chats were incorrectly disabled`)}
+					label={"Text input field"}
+					placeholder={"Please explain why you think your chats were incorrectly disabled"}
 					value={details}
 					onChangeText={setDetails}
 					autoFocus={true}
@@ -108,15 +107,8 @@ function DialogInner() {
 			</View>
 
 			<View style={gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm]}>
-				<Button
-					testID="backBtn"
-					variant="solid"
-					color="secondary"
-					size="large"
-					onPress={onBack}
-					label={_(msg`Back`)}
-				>
-					<ButtonText>{_(msg`Back`)}</ButtonText>
+				<Button testID="backBtn" variant="solid" color="secondary" size="large" onPress={onBack} label={"Back"}>
+					<ButtonText>{"Back"}</ButtonText>
 				</Button>
 				<Button
 					testID="submitBtn"
@@ -124,9 +116,9 @@ function DialogInner() {
 					color="primary"
 					size="large"
 					onPress={onSubmit}
-					label={_(msg`Submit`)}
+					label={"Submit"}
 				>
-					<ButtonText>{_(msg`Submit`)}</ButtonText>
+					<ButtonText>{"Submit"}</ButtonText>
 					{isPending && <ButtonIcon icon={Loader} />}
 				</Button>
 			</View>

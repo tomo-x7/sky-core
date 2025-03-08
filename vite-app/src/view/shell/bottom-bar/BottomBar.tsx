@@ -144,7 +144,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							hasNew={hasHomeBadge && gate("remove_show_latest_button")}
 							onPress={onPressHome}
 							accessibilityRole="tab"
-							accessibilityLabel={_(msg`Home`)}
+							accessibilityLabel={"Home"}
 							accessibilityHint=""
 						/>
 						<Btn
@@ -164,7 +164,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							}
 							onPress={onPressSearch}
 							accessibilityRole="search"
-							accessibilityLabel={_(msg`Search`)}
+							accessibilityLabel={"Search"}
 							accessibilityHint=""
 						/>
 						<Btn
@@ -187,7 +187,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							hasNew={numUnreadMessages.hasNew}
 							accessible={true}
 							accessibilityRole="tab"
-							accessibilityLabel={_(msg`Chat`)}
+							accessibilityLabel={"Chat"}
 							accessibilityHint={
 								numUnreadMessages.count > 0
 									? _(
@@ -215,7 +215,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							notificationCount={numUnreadNotifications}
 							accessible={true}
 							accessibilityRole="tab"
-							accessibilityLabel={_(msg`Notifications`)}
+							accessibilityLabel={"Notifications"}
 							accessibilityHint={
 								numUnreadNotifications === ""
 									? ""
@@ -265,7 +265,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							onPress={onPressProfile}
 							onLongPress={onLongPressProfile}
 							accessibilityRole="tab"
-							accessibilityLabel={_(msg`Profile`)}
+							accessibilityLabel={"Profile"}
 							accessibilityHint=""
 						/>
 					</>
@@ -294,7 +294,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							<View style={[a.flex_row, a.flex_wrap, a.gap_sm]}>
 								<Button
 									onPress={showCreateAccount}
-									label={_(msg`Create account`)}
+									label={"Create account"}
 									size="small"
 									variant="solid"
 									color="primary"
@@ -303,7 +303,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 								</Button>
 								<Button
 									onPress={showSignIn}
-									label={_(msg`Sign in`)}
+									label={"Sign in"}
 									size="small"
 									variant="solid"
 									color="secondary"

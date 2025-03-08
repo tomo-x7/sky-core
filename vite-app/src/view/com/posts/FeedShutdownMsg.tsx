@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -36,14 +35,14 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 		try {
 			if (feedConfig) {
 				await removeFeed(feedConfig);
-				Toast.show(_(msg`Removed from your feeds`));
+				Toast.show("Removed from your feeds");
 			}
 			if (hasDiscoverPinned) {
 				setSelectedFeed(`feedgen|${PROD_DEFAULT_FEED("whats-hot")}`);
 			}
 		} catch (err: any) {
 			Toast.show(
-				_(msg`There was an issue updating your feeds, please check your internet connection and try again.`),
+				"There was an issue updating your feeds, please check your internet connection and try again.",
 				"exclamation-circle",
 			);
 			logger.error("Failed to update feeds", { message: err });
@@ -57,10 +56,10 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 				discoverFeedConfig,
 			});
 			setSelectedFeed(`feedgen|${PROD_DEFAULT_FEED("whats-hot")}`);
-			Toast.show(_(msg`The feed has been replaced with Discover.`));
+			Toast.show("The feed has been replaced with Discover.");
 		} catch (err: any) {
 			Toast.show(
-				_(msg`There was an issue updating your feeds, please check your internet connection and try again.`),
+				"There was an issue updating your feeds, please check your internet connection and try again.",
 				"exclamation-circle",
 			);
 			logger.error("Failed to update feeds", { message: err });
@@ -75,7 +74,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 				<>
 					This feed is no longer online. We are showing{" "}
 					<InlineLinkText
-						label={_(msg`The Discover feed`)}
+						label={"The Discover feed"}
 						to="/profile/bsky.app/feed/whats-hot"
 						style={[a.text_md]}
 					>
@@ -90,7 +89,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 						variant="outline"
 						color="primary"
 						size="small"
-						label={_(msg`Remove feed`)}
+						label={"Remove feed"}
 						disabled={isProcessing}
 						onPress={onRemoveFeed}
 					>
@@ -102,7 +101,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 							variant="solid"
 							color="primary"
 							size="small"
-							label={_(msg`Replace with Discover`)}
+							label={"Replace with Discover"}
 							disabled={isProcessing}
 							onPress={onReplaceFeed}
 						>

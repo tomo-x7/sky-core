@@ -1,5 +1,4 @@
 import { BskyAgent } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
@@ -44,14 +43,14 @@ export const SetNewPasswordForm = ({
 		const formattedCode = checkAndFormatResetCode(resetCode);
 
 		if (!formattedCode) {
-			setError(_(msg`You have entered an invalid code. It should look like XXXXX-XXXXX.`));
+			setError("You have entered an invalid code. It should look like XXXXX-XXXXX.");
 			logEvent("signin:passwordResetFailure", {});
 			return;
 		}
 
 		// TODO Better password strength check
 		if (!password) {
-			setError(_(msg`Please enter a password.`));
+			setError("Please enter a password.");
 			return;
 		}
 
@@ -72,7 +71,7 @@ export const SetNewPasswordForm = ({
 			logEvent("signin:passwordResetFailure", {});
 			setIsProcessing(false);
 			if (isNetworkError(e)) {
-				setError(_(msg`Unable to contact your service. Please check your Internet connection.`));
+				setError("Unable to contact your service. Please check your Internet connection.");
 			} else {
 				setError(cleanError(errMsg));
 			}
@@ -82,7 +81,7 @@ export const SetNewPasswordForm = ({
 	const onBlur = () => {
 		const formattedCode = checkAndFormatResetCode(resetCode);
 		if (!formattedCode) {
-			setError(_(msg`You have entered an invalid code. It should look like XXXXX-XXXXX.`));
+			setError("You have entered an invalid code. It should look like XXXXX-XXXXX.");
 			return;
 		}
 		setResetCode(formattedCode);
@@ -100,7 +99,7 @@ export const SetNewPasswordForm = ({
 					<TextField.Icon icon={Ticket} />
 					<TextField.Input
 						testID="resetCodeInput"
-						label={_(msg`Looks like XXXXX-XXXXX`)}
+						label={"Looks like XXXXX-XXXXX"}
 						autoCapitalize="none"
 						autoFocus={true}
 						autoCorrect={false}
@@ -110,7 +109,7 @@ export const SetNewPasswordForm = ({
 						onFocus={() => setError("")}
 						onBlur={onBlur}
 						editable={!isProcessing}
-						accessibilityHint={_(msg`Input code sent to your email for password reset`)}
+						accessibilityHint={"Input code sent to your email for password reset"}
 					/>
 				</TextField.Root>
 			</View>
@@ -121,7 +120,7 @@ export const SetNewPasswordForm = ({
 					<TextField.Icon icon={Lock} />
 					<TextField.Input
 						testID="newPasswordInput"
-						label={_(msg`Enter a password`)}
+						label={"Enter a password"}
 						autoCapitalize="none"
 						autoCorrect={false}
 						autoComplete="password"
@@ -133,7 +132,7 @@ export const SetNewPasswordForm = ({
 						onChangeText={setPassword}
 						onSubmitEditing={onPressNext}
 						editable={!isProcessing}
-						accessibilityHint={_(msg`Input new password`)}
+						accessibilityHint={"Input new password"}
 					/>
 				</TextField.Root>
 			</View>
@@ -141,14 +140,14 @@ export const SetNewPasswordForm = ({
 			<FormError error={error} />
 
 			<View style={[a.flex_row, a.align_center, a.pt_lg]}>
-				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
+				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{isProcessing ? (
 					<ActivityIndicator />
 				) : (
-					<Button label={_(msg`Next`)} variant="solid" color="primary" size="large" onPress={onPressNext}>
+					<Button label={"Next"} variant="solid" color="primary" size="large" onPress={onPressNext}>
 						<ButtonText>Next</ButtonText>
 					</Button>
 				)}

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -18,7 +17,7 @@ export function PostThreadShowHiddenReplies({
 }) {
 	const { _ } = useLingui();
 	const t = useTheme();
-	const label = type === "muted" ? _(msg`Show muted replies`) : _(msg`Show hidden replies`);
+	const label = type === "muted" ? "Show muted replies" : "Show hidden replies";
 
 	return (
 		<Button onPress={onPress} label={label}>

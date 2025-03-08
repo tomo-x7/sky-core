@@ -1,5 +1,4 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { Image } from "react-native";
@@ -68,7 +67,7 @@ export const ExternalLinkEmbed = ({
 
 	return (
 		<Link
-			label={link.title || _(msg`Open link to ${niceUrl}`)}
+			label={link.title || `Open link to ${niceUrl}`}
 			to={link.uri}
 			shouldProxy={true}
 			onPress={onOpen}

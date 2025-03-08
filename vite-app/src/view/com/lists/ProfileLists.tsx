@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -123,13 +122,13 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 	const renderItemInner = React.useCallback(
 		({ item, index }: ListRenderItemInfo<any>) => {
 			if (item === EMPTY) {
-				return <EmptyState icon="list-ul" message={_(msg`You have no lists.`)} testID="listsEmpty" />;
+				return <EmptyState icon="list-ul" message={"You have no lists."} testID="listsEmpty" />;
 			} else if (item === ERROR_ITEM) {
 				return <ErrorMessage message={cleanError(error)} onPressTryAgain={refetch} />;
 			} else if (item === LOAD_MORE_ERROR_ITEM) {
 				return (
 					<LoadMoreRetryBtn
-						label={_(msg`There was an issue fetching your lists. Tap here to try again.`)}
+						label={"There was an issue fetching your lists. Tap here to try again."}
 						onPress={onPressRetryLoadMore}
 					/>
 				);

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { View } from "react-native";
@@ -98,13 +97,8 @@ export function DesktopFeeds() {
 				);
 			})}
 
-			<InlineLinkText
-				to="/feeds"
-				label={_(msg`More feeds`)}
-				style={[a.text_md, a.leading_snug]}
-				numberOfLines={1}
-			>
-				{_(msg`More feeds`)}
+			<InlineLinkText to="/feeds" label={"More feeds"} style={[a.text_md, a.leading_snug]} numberOfLines={1}>
+				{"More feeds"}
 			</InlineLinkText>
 		</View>
 	);

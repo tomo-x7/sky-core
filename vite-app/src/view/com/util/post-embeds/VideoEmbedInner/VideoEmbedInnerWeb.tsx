@@ -1,5 +1,4 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type * as HlsTypes from "hls.js";
 import React, { useEffect, useId, useRef, useState } from "react";
@@ -54,7 +53,7 @@ export function VideoEmbedInnerWeb({
 	return (
 		<View
 			style={[a.flex_1, a.rounded_md, a.overflow_hidden]}
-			accessibilityLabel={_(msg`Embedded video player`)}
+			accessibilityLabel={"Embedded video player"}
 			accessibilityHint=""
 		>
 			<div ref={containerRef} style={{ height: "100%", width: "100%" }}>

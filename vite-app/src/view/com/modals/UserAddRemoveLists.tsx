@@ -154,7 +154,7 @@ function ListItem({
 					listUri: list.uri,
 					actorDid: subject,
 				});
-				Toast.show(_(msg`Added to list`));
+				Toast.show("Added to list");
 				onAdd?.(list.uri);
 			} else {
 				await listMembershipRemoveMutation.mutateAsync({
@@ -162,7 +162,7 @@ function ListItem({
 					actorDid: subject,
 					membershipUri: membership,
 				});
-				Toast.show(_(msg`Removed from list`));
+				Toast.show("Removed from list");
 				onRemove?.(list.uri);
 			}
 		} catch (e) {
@@ -216,7 +216,7 @@ function ListItem({
 					<Button
 						testID={`user-${handle}-addBtn`}
 						type="default"
-						label={membership === false ? _(msg`Add`) : _(msg`Remove`)}
+						label={membership === false ? "Add" : "Remove"}
 						onPress={onToggleMembership}
 					/>
 				)}

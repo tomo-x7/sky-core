@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -68,7 +67,7 @@ export function AccountSettingsScreen({}: Props) {
 					</SettingsList.Item>
 					{currentAccount && !currentAccount.emailConfirmed && (
 						<SettingsList.PressableItem
-							label={_(msg`Verify your email`)}
+							label={"Verify your email"}
 							onPress={() => verifyEmailControl.open()}
 							style={[a.my_xs, a.mx_lg, a.rounded_md, { backgroundColor: t.palette.primary_50 }]}
 							hoverStyle={[{ backgroundColor: t.palette.primary_100 }]}
@@ -82,7 +81,7 @@ export function AccountSettingsScreen({}: Props) {
 						</SettingsList.PressableItem>
 					)}
 					<SettingsList.PressableItem
-						label={_(msg`Change email`)}
+						label={"Change email"}
 						onPress={() => openModal({ name: "change-email" })}
 					>
 						<SettingsList.ItemIcon icon={PencilIcon} />
@@ -93,10 +92,10 @@ export function AccountSettingsScreen({}: Props) {
 					<SettingsList.Item>
 						<SettingsList.ItemIcon icon={BirthdayCakeIcon} />
 						<SettingsList.ItemText>Birthday</SettingsList.ItemText>
-						<SettingsList.BadgeButton label={_(msg`Edit`)} onPress={() => birthdayControl.open()} />
+						<SettingsList.BadgeButton label={"Edit"} onPress={() => birthdayControl.open()} />
 					</SettingsList.Item>
 					<SettingsList.PressableItem
-						label={_(msg`Password`)}
+						label={"Password"}
 						onPress={() => openModal({ name: "change-password" })}
 					>
 						<SettingsList.ItemIcon icon={LockIcon} />
@@ -104,8 +103,8 @@ export function AccountSettingsScreen({}: Props) {
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.PressableItem
-						label={_(msg`Handle`)}
-						accessibilityHint={_(msg`Opens change handle dialog`)}
+						label={"Handle"}
+						accessibilityHint={"Opens change handle dialog"}
 						onPress={() => changeHandleControl.open()}
 					>
 						<SettingsList.ItemIcon icon={AtIcon} />
@@ -113,13 +112,13 @@ export function AccountSettingsScreen({}: Props) {
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.Divider />
-					<SettingsList.PressableItem label={_(msg`Export my data`)} onPress={() => exportCarControl.open()}>
+					<SettingsList.PressableItem label={"Export my data"} onPress={() => exportCarControl.open()}>
 						<SettingsList.ItemIcon icon={CarIcon} />
 						<SettingsList.ItemText>Export my data</SettingsList.ItemText>
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.PressableItem
-						label={_(msg`Deactivate account`)}
+						label={"Deactivate account"}
 						onPress={() => deactivateAccountControl.open()}
 						destructive
 					>
@@ -128,7 +127,7 @@ export function AccountSettingsScreen({}: Props) {
 						<SettingsList.Chevron />
 					</SettingsList.PressableItem>
 					<SettingsList.PressableItem
-						label={_(msg`Delete account`)}
+						label={"Delete account"}
 						onPress={() => openModal({ name: "delete-account" })}
 						destructive
 					>

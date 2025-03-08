@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { type GestureResponderEvent, View } from "react-native";
@@ -119,10 +118,10 @@ export function Cancel({
 			variant="solid"
 			color="secondary"
 			size={gtMobile ? "small" : "large"}
-			label={cta || _(msg`Cancel`)}
+			label={cta || "Cancel"}
 			onPress={onPress}
 		>
-			<ButtonText>{cta || _(msg`Cancel`)}</ButtonText>
+			<ButtonText>{cta || "Cancel"}</ButtonText>
 		</Button>
 	);
 }
@@ -163,11 +162,11 @@ export function Action({
 			variant="solid"
 			color={color}
 			size={gtMobile ? "small" : "large"}
-			label={cta || _(msg`Confirm`)}
+			label={cta || "Confirm"}
 			onPress={handleOnPress}
 			testID={testID}
 		>
-			<ButtonText>{cta || _(msg`Confirm`)}</ButtonText>
+			<ButtonText>{cta || "Confirm"}</ButtonText>
 		</Button>
 	);
 }

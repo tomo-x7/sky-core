@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { View } from "react-native";
@@ -48,7 +47,7 @@ export function StepHandle() {
 			if (res.data.did) {
 				dispatch({
 					type: "setError",
-					value: _(msg`That handle is already taken.`),
+					value: "That handle is already taken.",
 				});
 				return;
 			}
@@ -103,7 +102,7 @@ export function StepHandle() {
 								handleValueRef.current = val;
 								setDraftValue(val);
 							}}
-							label={_(msg`Type your desired username`)}
+							label={"Type your desired username"}
 							defaultValue={draftValue}
 							autoCapitalize="none"
 							autoCorrect={false}

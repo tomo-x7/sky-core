@@ -99,7 +99,7 @@ function ProfileCard() {
 		<View style={[a.my_md, !leftNavMinimal && [a.w_full, a.align_start]]}>
 			{!isLoading && profile ? (
 				<Menu.Root>
-					<Menu.Trigger label={_(msg`Switch accounts`)}>
+					<Menu.Trigger label={"Switch accounts"}>
 						{({ props, state, control }) => {
 							const active = state.hovered || state.focused || control.isOpen;
 							return (
@@ -193,11 +193,11 @@ function ProfileCard() {
 			)}
 			<Prompt.Basic
 				control={signOutPromptControl}
-				title={_(msg`Sign out?`)}
-				description={_(msg`You will be signed out of all your accounts.`)}
+				title={"Sign out?"}
+				description={"You will be signed out of all your accounts."}
 				onConfirm={() => logoutEveryAccount("Settings")}
-				confirmButtonCta={_(msg`Sign out`)}
-				cancelButtonCta={_(msg`Cancel`)}
+				confirmButtonCta={"Sign out"}
+				cancelButtonCta={"Cancel"}
 				confirmButtonColor="negative"
 			/>
 		</View>
@@ -260,11 +260,11 @@ function SwitchMenuItems({
 					<Menu.Divider />
 				</>
 			)}
-			<Menu.Item label={_(msg`Add another account`)} onPress={onAddAnotherAccount}>
+			<Menu.Item label={"Add another account"} onPress={onAddAnotherAccount}>
 				<Menu.ItemIcon icon={PlusIcon} />
 				<Menu.ItemText>Add another account</Menu.ItemText>
 			</Menu.Item>
-			<Menu.Item label={_(msg`Sign out`)} onPress={signOutPromptControl.open}>
+			<Menu.Item label={"Sign out"} onPress={signOutPromptControl.open}>
 				<Menu.ItemIcon icon={LeaveIcon} />
 				<Menu.ItemText>Sign out</Menu.ItemText>
 			</Menu.Item>
@@ -457,7 +457,7 @@ function ComposeBtn() {
 		<View style={[a.flex_row, a.pl_md, a.pt_xl]}>
 			<Button
 				disabled={isFetchingHandle}
-				label={_(msg`Compose new post`)}
+				label={"Compose new post"}
 				onPress={onPressCompose}
 				size="large"
 				variant="solid"
@@ -485,7 +485,7 @@ function ChatNavItem() {
 			hasNew={numUnreadMessages.hasNew}
 			icon={<Message style={pal.text} aria-hidden={true} width={NAV_ICON_WIDTH} />}
 			iconFilled={<MessageFilled style={pal.text} aria-hidden={true} width={NAV_ICON_WIDTH} />}
-			label={_(msg`Chat`)}
+			label={"Chat"}
 		/>
 	);
 }
@@ -535,7 +535,7 @@ export function DesktopLeftNav() {
 						hasNew={hasHomeBadge && gate("remove_show_latest_button")}
 						icon={<Home aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						iconFilled={<HomeFilled aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
-						label={_(msg`Home`)}
+						label={"Home"}
 					/>
 					<NavItem
 						href="/search"
@@ -543,39 +543,39 @@ export function DesktopLeftNav() {
 						iconFilled={
 							<MagnifyingGlassFilled style={pal.text} aria-hidden={true} width={NAV_ICON_WIDTH} />
 						}
-						label={_(msg`Search`)}
+						label={"Search"}
 					/>
 					<NavItem
 						href="/notifications"
 						count={numUnreadNotifications}
 						icon={<Bell aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						iconFilled={<BellFilled aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
-						label={_(msg`Notifications`)}
+						label={"Notifications"}
 					/>
 					<ChatNavItem />
 					<NavItem
 						href="/feeds"
 						icon={<Hashtag style={pal.text} aria-hidden={true} width={NAV_ICON_WIDTH} />}
 						iconFilled={<HashtagFilled style={pal.text} aria-hidden={true} width={NAV_ICON_WIDTH} />}
-						label={_(msg`Feeds`)}
+						label={"Feeds"}
 					/>
 					<NavItem
 						href="/lists"
 						icon={<List style={pal.text} aria-hidden={true} width={NAV_ICON_WIDTH} />}
 						iconFilled={<ListFilled style={pal.text} aria-hidden={true} width={NAV_ICON_WIDTH} />}
-						label={_(msg`Lists`)}
+						label={"Lists"}
 					/>
 					<NavItem
 						href={currentAccount ? makeProfileLink(currentAccount) : "/"}
 						icon={<UserCircle aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						iconFilled={<UserCircleFilled aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
-						label={_(msg`Profile`)}
+						label={"Profile"}
 					/>
 					<NavItem
 						href="/settings"
 						icon={<Settings aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						iconFilled={<SettingsFilled aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
-						label={_(msg`Settings`)}
+						label={"Settings"}
 					/>
 
 					<ComposeBtn />

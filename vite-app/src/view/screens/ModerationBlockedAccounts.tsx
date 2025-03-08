@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -74,7 +73,7 @@ export function ModerationBlockedAccounts({}: Props) {
 	return (
 		<Layout.Screen testID="blockedAccountsScreen">
 			<Layout.Center style={[a.flex_1, { paddingBottom: 100 }]}>
-				<ViewHeader title={_(msg`Blocked Accounts`)} showOnDesktop />
+				<ViewHeader title={"Blocked Accounts"} showOnDesktop />
 				<Text
 					type="sm"
 					style={[

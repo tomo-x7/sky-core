@@ -1,6 +1,4 @@
 import "react-image-crop/dist/ReactCrop.css";
-
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
@@ -51,7 +49,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 	}, [crop, image, source, control, onChange]);
 
 	return (
-		<Dialog.Inner label={_(msg`Edit image`)}>
+		<Dialog.Inner label={"Edit image"}>
 			<Dialog.Close />
 
 			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>Edit image</Text>
@@ -69,7 +67,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 			<View style={[a.mt_md, a.gap_md]}>
 				<Button
 					disabled={!isNew}
-					label={_(msg`Save`)}
+					label={"Save"}
 					size="large"
 					color="primary"
 					variant="solid"

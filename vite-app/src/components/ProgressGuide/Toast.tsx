@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useImperativeHandle } from "react";
 import { Pressable, View, useWindowDimensions } from "react-native";
@@ -146,7 +145,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 								},
 							]}
 							onPress={close}
-							accessibilityLabel={_(msg`Tap to dismiss`)}
+							accessibilityLabel={"Tap to dismiss"}
 							accessibilityHint=""
 						>
 							<AnimatedCheck fill={t.palette.primary_500} ref={animatedCheckRef} />

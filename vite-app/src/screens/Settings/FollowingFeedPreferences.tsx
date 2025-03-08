@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 
 import { atoms as a } from "#/alf";
@@ -49,7 +48,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 					<Toggle.Item
 						type="checkbox"
 						name="show-replies"
-						label={_(msg`Show replies`)}
+						label={"Show replies"}
 						value={showReplies}
 						onChange={(value) =>
 							setFeedViewPref({
@@ -66,7 +65,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 					<Toggle.Item
 						type="checkbox"
 						name="show-reposts"
-						label={_(msg`Show reposts`)}
+						label={"Show reposts"}
 						value={showReposts}
 						onChange={(value) =>
 							setFeedViewPref({
@@ -83,7 +82,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 					<Toggle.Item
 						type="checkbox"
 						name="show-quotes"
-						label={_(msg`Show quote posts`)}
+						label={"Show quote posts"}
 						value={showQuotePosts}
 						onChange={(value) =>
 							setFeedViewPref({
@@ -104,7 +103,7 @@ export function FollowingFeedPreferencesScreen({}: Props) {
 						<Toggle.Item
 							type="checkbox"
 							name="merge-feed"
-							label={_(msg`Show samples of your saved feeds in your Following feed`)}
+							label={"Show samples of your saved feeds in your Following feed"}
 							value={mergeFeedEnabled}
 							onChange={(value) =>
 								setFeedViewPref({

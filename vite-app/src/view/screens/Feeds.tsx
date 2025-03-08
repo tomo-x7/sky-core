@@ -1,5 +1,4 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import debounce from "lodash.debounce";
@@ -421,7 +420,7 @@ export function FeedsScreen(_props: Props) {
 						<FeedsAboutHeader />
 						<View style={{ paddingHorizontal: 12, paddingBottom: 4 }}>
 							<SearchInput
-								placeholder={_(msg`Search feeds`)}
+								placeholder={"Search feeds"}
 								value={query}
 								onChangeText={onChangeQuery}
 								onClearText={onPressCancelSearch}
@@ -486,7 +485,7 @@ export function FeedsScreen(_props: Props) {
 						<Link
 							testID="editFeedsBtn"
 							to="/settings/saved-feeds"
-							label={_(msg`Edit My Feeds`)}
+							label={"Edit My Feeds"}
 							size="small"
 							variant="ghost"
 							color="secondary"
@@ -521,7 +520,7 @@ export function FeedsScreen(_props: Props) {
 					onPress={onPressCompose}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`New post`)}
+					accessibilityLabel={"New post"}
 					accessibilityHint=""
 				/>
 			)}
@@ -561,7 +560,7 @@ function FollowingFeed() {
 						fill={t.palette.white}
 					/>
 				</View>
-				<FeedCard.TitleAndByline title={_(msg`Following`)} />
+				<FeedCard.TitleAndByline title={"Following"} />
 			</FeedCard.Header>
 		</View>
 	);

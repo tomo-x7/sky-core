@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { memo } from "react";
@@ -84,7 +83,7 @@ function ListFooterMaybeError({
 				</Text>
 				<Button
 					variant="gradient"
-					label={_(msg`Press to retry`)}
+					label={"Press to retry"}
 					style={[a.align_center, a.justify_center, a.rounded_sm, a.overflow_hidden, a.px_md, a.py_sm]}
 					onPress={onRetry}
 				>
@@ -151,8 +150,8 @@ let ListMaybePlaceholder = ({
 	if (isError) {
 		return (
 			<Error
-				title={errorTitle ?? _(msg`Oops!`)}
-				message={errorMessage ?? _(msg`Something went wrong!`)}
+				title={errorTitle ?? "Oops!"}
+				message={errorMessage ?? "Something went wrong!"}
 				onRetry={onRetry}
 				onGoBack={onGoBack}
 				sideBorders={sideBorders}
@@ -164,8 +163,8 @@ let ListMaybePlaceholder = ({
 	if (!noEmpty) {
 		return (
 			<Error
-				title={emptyTitle ?? (emptyType === "results" ? _(msg`No results found`) : _(msg`Page not found`))}
-				message={emptyMessage ?? _(msg`We're sorry! We can't find the page you were looking for.`)}
+				title={emptyTitle ?? (emptyType === "results" ? "No results found" : "Page not found")}
+				message={emptyMessage ?? `We're sorry! We can't find the page you were looking for.`}
 				onRetry={onRetry}
 				onGoBack={onGoBack}
 				hideBackButton={hideBackButton}

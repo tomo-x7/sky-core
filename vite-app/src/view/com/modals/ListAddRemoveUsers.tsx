@@ -57,12 +57,12 @@ export function Component({
 					<TextInput
 						testID="searchInput"
 						style={[styles.searchInput, pal.border, pal.text]}
-						placeholder={_(msg`Search for users`)}
+						placeholder={"Search for users"}
 						placeholderTextColor={pal.colors.textLight}
 						value={query}
 						onChangeText={setQuery}
 						accessible={true}
-						accessibilityLabel={_(msg`Search`)}
+						accessibilityLabel={"Search"}
 						accessibilityHint=""
 						autoFocus
 						autoCapitalize="none"
@@ -74,8 +74,8 @@ export function Component({
 						<Pressable
 							onPress={onPressCancelSearch}
 							accessibilityRole="button"
-							accessibilityLabel={_(msg`Cancel search`)}
-							accessibilityHint={_(msg`Exits inputting search query`)}
+							accessibilityLabel={"Cancel search"}
+							accessibilityHint={"Exits inputting search query"}
 							onAccessibilityEscape={onPressCancelSearch}
 							hitSlop={HITSLOP_20}
 						>
@@ -114,7 +114,7 @@ export function Component({
 						onPress={() => {
 							closeModal();
 						}}
-						accessibilityLabel={_(msg`Done`)}
+						accessibilityLabel={"Done"}
 						accessibilityHint=""
 						label={_(msg({ message: "Done", context: "action" }))}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
@@ -160,7 +160,7 @@ function UserResult({
 					listUri: list.uri,
 					actorDid: profile.did,
 				});
-				Toast.show(_(msg`Added to list`));
+				Toast.show("Added to list");
 				onChange?.("add", profile);
 			} else {
 				await listMembershipRemoveMutation.mutateAsync({
@@ -168,7 +168,7 @@ function UserResult({
 					actorDid: profile.did,
 					membershipUri: membership,
 				});
-				Toast.show(_(msg`Removed from list`));
+				Toast.show("Removed from list");
 				onChange?.("remove", profile);
 			}
 		} catch (e) {
@@ -230,7 +230,7 @@ function UserResult({
 					<Button
 						testID={`user-${profile.handle}-addBtn`}
 						type="default"
-						label={membership === false ? _(msg`Add`) : _(msg`Remove`)}
+						label={membership === false ? "Add" : "Remove"}
 						onPress={onToggleMembership}
 					/>
 				)}

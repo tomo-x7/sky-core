@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { Keyboard, View } from "react-native";
 
@@ -53,8 +52,8 @@ export function LabelsBtn({
 					Keyboard.dismiss();
 					control.open();
 				}}
-				label={_(msg`Content warnings`)}
-				accessibilityHint={_(msg`Opens a dialog to add a content warning to your post`)}
+				label={"Content warnings"}
+				accessibilityHint={"Opens a dialog to add a content warning to your post"}
 				style={[
 					native({
 						paddingHorizontal: 8,
@@ -92,7 +91,7 @@ function DialogInner({
 	const t = useTheme();
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Add a content warning`)} style={[{ maxWidth: 500 }, a.w_full]}>
+		<Dialog.ScrollableInner label={"Add a content warning"} style={[{ maxWidth: 500 }, a.w_full]}>
 			<View style={[a.flex_1]}>
 				<View style={[a.gap_sm]}>
 					<Text style={[a.text_2xl, a.font_bold]}>Add a content warning</Text>
@@ -109,22 +108,22 @@ function DialogInner({
 						</View>
 						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
 							<Toggle.Group
-								label={_(msg`Adult Content labels`)}
+								label={"Adult Content labels"}
 								values={labels}
 								onChange={(values) => {
 									updateAdultLabels(values as AdultSelfLabel[]);
 								}}
 							>
 								<View style={[a.gap_sm]}>
-									<Toggle.Item name="sexual" label={_(msg`Suggestive`)}>
+									<Toggle.Item name="sexual" label={"Suggestive"}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Suggestive</Toggle.LabelText>
 									</Toggle.Item>
-									<Toggle.Item name="nudity" label={_(msg`Nudity`)}>
+									<Toggle.Item name="nudity" label={"Nudity"}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Nudity</Toggle.LabelText>
 									</Toggle.Item>
-									<Toggle.Item name="porn" label={_(msg`Porn`)}>
+									<Toggle.Item name="porn" label={"Porn"}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Adult</Toggle.LabelText>
 									</Toggle.Item>
@@ -151,13 +150,13 @@ function DialogInner({
 						</View>
 						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
 							<Toggle.Group
-								label={_(msg`Adult Content labels`)}
+								label={"Adult Content labels"}
 								values={labels}
 								onChange={(values) => {
 									updateOtherLabels(values as OtherSelfLabel[]);
 								}}
 							>
-								<Toggle.Item name="graphic-media" label={_(msg`Graphic Media`)}>
+								<Toggle.Item name="graphic-media" label={"Graphic Media"}>
 									<Toggle.Checkbox />
 									<Toggle.LabelText>Graphic Media</Toggle.LabelText>
 								</Toggle.Item>
@@ -174,7 +173,7 @@ function DialogInner({
 
 			<View style={[a.mt_sm, web([a.flex_row, a.ml_auto])]}>
 				<Button
-					label={_(msg`Done`)}
+					label={"Done"}
 					onPress={() => control.close()}
 					color="primary"
 					size={isWeb ? "small" : "large"}

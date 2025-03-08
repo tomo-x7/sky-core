@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import Graphemer from "graphemer";
 import { useCallback, useState } from "react";
@@ -70,7 +69,7 @@ export function MessageInput({
 			return;
 		}
 		if (new Graphemer().countGraphemes(message) > MAX_DM_GRAPHEME_LENGTH) {
-			Toast.show(_(msg`Message is too long`), "xmark");
+			Toast.show("Message is too long", "xmark");
 			return;
 		}
 		clearDraft();
@@ -134,9 +133,9 @@ export function MessageInput({
 				]}
 			>
 				<AnimatedTextInput
-					accessibilityLabel={_(msg`Message input field`)}
-					accessibilityHint={_(msg`Type your message here`)}
-					placeholder={_(msg`Write a message`)}
+					accessibilityLabel={"Message input field"}
+					accessibilityHint={"Type your message here"}
+					placeholder={"Write a message"}
 					placeholderTextColor={t.palette.contrast_500}
 					value={message}
 					onChange={(evt) => {
@@ -173,7 +172,7 @@ export function MessageInput({
 				/>
 				<Pressable
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Send message`)}
+					accessibilityLabel={"Send message"}
 					accessibilityHint=""
 					hitSlop={HITSLOP_10}
 					style={[

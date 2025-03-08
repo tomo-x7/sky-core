@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ScrollView, TextInput, View, useWindowDimensions } from "react-native";
@@ -60,7 +59,7 @@ export function FollowDialog({ guide }: { guide: Follow10ProgressGuide }) {
 	return (
 		<>
 			<Button
-				label={_(msg`Find people to follow`)}
+				label={"Find people to follow"}
 				onPress={() => {
 					control.open();
 					logEvent("progressGuide:followDialog:open", {});
@@ -138,7 +137,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 			_items.push({
 				type: "empty",
 				key: "empty",
-				message: _(msg`We're having network issues, try again`),
+				message: `We're having network issues, try again`,
 			});
 		} else if (results) {
 			// First pass: search results
@@ -207,7 +206,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 	}, [_, searchResults, isError, currentAccount?.did, hasSearchText, selectedInterest, suggestedAccounts, query]);
 
 	if (searchText && !isFetching && !items.length && !isError) {
-		items.push({ type: "empty", key: "empty", message: _(msg`No results`) });
+		items.push({ type: "empty", key: "empty", message: "No results" });
 	}
 
 	const renderItems = useCallback(
@@ -380,7 +379,7 @@ function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
 			</View>
 			{isWeb ? (
 				<Button
-					label={_(msg`Close`)}
+					label={"Close"}
 					size="small"
 					shape="round"
 					variant={isWeb ? "ghost" : "solid"}
@@ -517,11 +516,11 @@ let Tab = ({
 	onLayout: (index: number, x: number, width: number) => void;
 }): React.ReactNode => {
 	const { _ } = useLingui();
-	const activeText = active ? _(msg` (active)`) : "";
+	const activeText = active ? " (active)" : "";
 	return (
 		<View key={interest} onLayout={(e) => onLayout(index, e.nativeEvent.layout.x, e.nativeEvent.layout.width)}>
 			<Button
-				label={_(msg`Search for "${interestsDisplayName}"${activeText}`)}
+				label={`Search for "${interestsDisplayName}"${activeText}`}
 				variant={active ? "solid" : "outline"}
 				color={active ? "primary" : "secondary"}
 				size="small"
@@ -657,7 +656,7 @@ function SearchInput({
 
 			<TextInput
 				ref={inputRef}
-				placeholder={_(msg`Search by name or interest`)}
+				placeholder={"Search by name or interest"}
 				defaultValue={defaultValue}
 				onChangeText={onChangeText}
 				onFocus={onFocus}
@@ -676,8 +675,8 @@ function SearchInput({
 				autoCorrect={false}
 				autoComplete="off"
 				autoCapitalize="none"
-				accessibilityLabel={_(msg`Search profiles`)}
-				accessibilityHint={_(msg`Searches for profiles`)}
+				accessibilityLabel={"Search profiles"}
+				accessibilityHint={"Searches for profiles"}
 			/>
 		</View>
 	);

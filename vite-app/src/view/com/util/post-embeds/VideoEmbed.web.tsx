@@ -1,5 +1,4 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -172,12 +171,12 @@ function VideoError({ error, retry }: { error: unknown; retry: () => void }) {
 	let text = null;
 
 	if (error instanceof VideoNotFoundError) {
-		text = _(msg`Video not found.`);
+		text = "Video not found.";
 	} else if (error instanceof HLSUnsupportedError) {
 		showRetryButton = false;
-		text = _(msg`Your browser does not support the video format. Please try a different browser.`);
+		text = "Your browser does not support the video format. Please try a different browser.";
 	} else {
-		text = _(msg`An error occurred while loading the video. Please try again.`);
+		text = "An error occurred while loading the video. Please try again.";
 	}
 
 	return (

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as MediaLibrary from "expo-media-library";
 import { useCallback } from "react";
@@ -65,8 +64,8 @@ export function OpenCameraBtn({ disabled, onAdd }: Props) {
 		<Button
 			testID="openCameraButton"
 			onPress={onPressTakePicture}
-			label={_(msg`Camera`)}
-			accessibilityHint={_(msg`Opens camera on device`)}
+			label={"Camera"}
+			accessibilityHint={"Opens camera on device"}
 			style={a.p_sm}
 			variant="ghost"
 			shape="round"

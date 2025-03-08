@@ -190,7 +190,7 @@ export function BottomBarWeb() {
 						<View style={[a.flex_row, a.flex_wrap, a.gap_sm]}>
 							<Button
 								onPress={showCreateAccount}
-								label={_(msg`Create account`)}
+								label={"Create account"}
 								size="small"
 								variant="solid"
 								color="primary"
@@ -199,7 +199,7 @@ export function BottomBarWeb() {
 							</Button>
 							<Button
 								onPress={showSignIn}
-								label={_(msg`Sign in`)}
+								label={"Sign in"}
 								size="small"
 								variant="solid"
 								color="secondary"

@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useRef } from "react";
 import type { ListRenderItemInfo } from "react-native";
@@ -102,7 +101,7 @@ export function WizardEditListDialog({
 						<View style={{ width: 60 }}>
 							{isWeb && (
 								<Button
-									label={_(msg`Close`)}
+									label={"Close"}
 									variant="ghost"
 									color="primary"
 									size="small"

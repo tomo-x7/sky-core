@@ -1,7 +1,6 @@
 import { type AppBskyActorProfile, type AppBskyGraphDefs, AppBskyGraphStarterpack, type Un$Typed } from "@atproto/api";
 import type { SavedFeed } from "@atproto/api/dist/client/types/app/bsky/actor/defs";
 import { TID } from "@atproto/common-web";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -264,7 +263,7 @@ export function StepFinished() {
 					variant="gradient"
 					color="gradient_sky"
 					size="large"
-					label={_(msg`Complete onboarding and start using your account`)}
+					label={"Complete onboarding and start using your account"}
 					onPress={finishOnboarding}
 				>
 					<ButtonText>{saving ? <>Finalizing</> : <>Let's go!</>}</ButtonText>

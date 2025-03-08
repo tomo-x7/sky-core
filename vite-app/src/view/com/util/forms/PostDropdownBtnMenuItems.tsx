@@ -160,7 +160,7 @@ let PostDropdownMenuItems = ({
 	const onDeletePost = React.useCallback(() => {
 		deletePostMutate({ uri: postUri }).then(
 			() => {
-				Toast.show(_(msg`Post deleted`));
+				Toast.show("Post deleted");
 
 				const route = getCurrentRoute(navigation.getState());
 				if (route.name === "PostThread") {
@@ -179,7 +179,7 @@ let PostDropdownMenuItems = ({
 			},
 			(e) => {
 				logger.error("Failed to delete post", { message: e });
-				Toast.show(_(msg`Failed to delete post, please try again`), "xmark");
+				Toast.show("Failed to delete post, please try again", "xmark");
 			},
 		);
 	}, [navigation, postUri, deletePostMutate, postAuthor, currentAccount, isAuthor, href, _]);
@@ -188,15 +188,15 @@ let PostDropdownMenuItems = ({
 		try {
 			if (isThreadMuted) {
 				unmuteThread();
-				Toast.show(_(msg`You will now receive notifications for this thread`));
+				Toast.show("You will now receive notifications for this thread");
 			} else {
 				muteThread();
-				Toast.show(_(msg`You will no longer receive notifications for this thread`));
+				Toast.show("You will no longer receive notifications for this thread");
 			}
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
 				logger.error("Failed to toggle thread mute", { message: e });
-				Toast.show(_(msg`Failed to toggle thread mute, please try again`), "xmark");
+				Toast.show("Failed to toggle thread mute, please try again", "xmark");
 			}
 		}
 	}, [isThreadMuted, unmuteThread, _, muteThread]);
@@ -205,7 +205,7 @@ let PostDropdownMenuItems = ({
 		const str = richTextToString(richText, true);
 
 		Clipboard.setStringAsync(str);
-		Toast.show(_(msg`Copied to clipboard`), "clipboard-check");
+		Toast.show("Copied to clipboard", "clipboard-check");
 	}, [_, richText]);
 
 	const onPressTranslate = React.useCallback(async () => {
@@ -233,7 +233,7 @@ let PostDropdownMenuItems = ({
 			item: postUri,
 			feedContext: postFeedContext,
 		});
-		Toast.show(_(msg`Feedback sent!`));
+		Toast.show("Feedback sent!");
 	}, [feedFeedback, postUri, postFeedContext, _]);
 
 	const onPressShowLess = React.useCallback(() => {
@@ -242,7 +242,7 @@ let PostDropdownMenuItems = ({
 			item: postUri,
 			feedContext: postFeedContext,
 		});
-		Toast.show(_(msg`Feedback sent!`));
+		Toast.show("Feedback sent!");
 	}, [feedFeedback, postUri, postFeedContext, _]);
 
 	const onSelectChatToShareTo = React.useCallback(
@@ -267,9 +267,9 @@ let PostDropdownMenuItems = ({
 				quoteUri: quoteEmbed.uri,
 				action: quoteEmbed.isDetached ? "reattach" : "detach",
 			});
-			Toast.show(isDetach ? _(msg`Quote post was successfully detached`) : _(msg`Quote post was re-attached`));
+			Toast.show(isDetach ? "Quote post was successfully detached" : "Quote post was re-attached");
 		} catch (e: any) {
-			Toast.show(_(msg`Updating quote attachment failed`));
+			Toast.show("Updating quote attachment failed");
 			logger.error(`Failed to ${action} quote`, { safeMessage: e.message });
 		}
 	}, [_, quoteEmbed, post, toggleQuoteDetachment]);
@@ -292,9 +292,9 @@ let PostDropdownMenuItems = ({
 				replyUri: postUri,
 				action,
 			});
-			Toast.show(isHide ? _(msg`Reply was successfully hidden`) : _(msg`Reply visibility updated`));
+			Toast.show(isHide ? "Reply was successfully hidden" : "Reply visibility updated");
 		} catch (e: any) {
-			Toast.show(_(msg`Updating reply visibility failed`));
+			Toast.show("Updating reply visibility failed");
 			logger.error(`Failed to ${action} reply`, { safeMessage: e.message });
 		}
 	}, [_, isReplyHiddenByThreadgate, rootUri, postUri, canHideReplyForEveryone, toggleReplyVisibility]);
@@ -311,11 +311,11 @@ let PostDropdownMenuItems = ({
 	const onBlockAuthor = useCallback(async () => {
 		try {
 			await queueBlock();
-			Toast.show(_(msg`Account blocked`));
+			Toast.show("Account blocked");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
 				logger.error("Failed to block account", { message: e });
-				Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
 	}, [_, queueBlock]);
@@ -324,21 +324,21 @@ let PostDropdownMenuItems = ({
 		if (postAuthor.viewer?.muted) {
 			try {
 				await queueUnmute();
-				Toast.show(_(msg`Account unmuted`));
+				Toast.show("Account unmuted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to unmute account", { message: e });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		} else {
 			try {
 				await queueMute();
-				Toast.show(_(msg`Account muted`));
+				Toast.show("Account muted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
 					logger.error("Failed to mute account", { message: e });
-					Toast.show(_(msg`There was an issue! ${e.toString()}`), "xmark");
+					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		}
@@ -360,13 +360,11 @@ let PostDropdownMenuItems = ({
 						<Menu.Group>
 							<Menu.Item
 								testID="pinPostBtn"
-								label={isPinned ? _(msg`Unpin from profile`) : _(msg`Pin to your profile`)}
+								label={isPinned ? "Unpin from profile" : "Pin to your profile"}
 								disabled={isPinPending}
 								onPress={onPressPin}
 							>
-								<Menu.ItemText>
-									{isPinned ? _(msg`Unpin from profile`) : _(msg`Pin to your profile`)}
-								</Menu.ItemText>
+								<Menu.ItemText>{isPinned ? "Unpin from profile" : "Pin to your profile"}</Menu.ItemText>
 								<Menu.ItemIcon icon={isPinPending ? Loader : PinIcon} position="right" />
 							</Menu.Item>
 						</Menu.Group>
@@ -377,21 +375,17 @@ let PostDropdownMenuItems = ({
 				<Menu.Group>
 					{(!hideInPWI || hasSession) && (
 						<>
-							<Menu.Item
-								testID="postDropdownTranslateBtn"
-								label={_(msg`Translate`)}
-								onPress={onPressTranslate}
-							>
-								<Menu.ItemText>{_(msg`Translate`)}</Menu.ItemText>
+							<Menu.Item testID="postDropdownTranslateBtn" label={"Translate"} onPress={onPressTranslate}>
+								<Menu.ItemText>{"Translate"}</Menu.ItemText>
 								<Menu.ItemIcon icon={Translate} position="right" />
 							</Menu.Item>
 
 							<Menu.Item
 								testID="postDropdownCopyTextBtn"
-								label={_(msg`Copy post text`)}
+								label={"Copy post text"}
 								onPress={onCopyPostText}
 							>
-								<Menu.ItemText>{_(msg`Copy post text`)}</Menu.ItemText>
+								<Menu.ItemText>{"Copy post text"}</Menu.ItemText>
 								<Menu.ItemIcon icon={ClipboardIcon} position="right" />
 							</Menu.Item>
 						</>
@@ -400,7 +394,7 @@ let PostDropdownMenuItems = ({
 					{hasSession && (
 						<Menu.Item
 							testID="postDropdownSendViaDMBtn"
-							label={_(msg`Send via direct message`)}
+							label={"Send via direct message"}
 							onPress={() => sendViaChatControl.open()}
 						>
 							<Menu.ItemText>Send via direct message</Menu.ItemText>
@@ -410,7 +404,7 @@ let PostDropdownMenuItems = ({
 
 					<Menu.Item
 						testID="postDropdownShareBtn"
-						label={isWeb ? _(msg`Copy link to post`) : _(msg`Share`)}
+						label={isWeb ? "Copy link to post" : "Share"}
 						onPress={() => {
 							if (showLoggedOutWarning) {
 								loggedOutWarningPromptControl.open();
@@ -419,17 +413,17 @@ let PostDropdownMenuItems = ({
 							}
 						}}
 					>
-						<Menu.ItemText>{isWeb ? _(msg`Copy link to post`) : _(msg`Share`)}</Menu.ItemText>
+						<Menu.ItemText>{isWeb ? "Copy link to post" : "Share"}</Menu.ItemText>
 						<Menu.ItemIcon icon={Share} position="right" />
 					</Menu.Item>
 
 					{canEmbed && (
 						<Menu.Item
 							testID="postDropdownEmbedBtn"
-							label={_(msg`Embed post`)}
+							label={"Embed post"}
 							onPress={() => embedPostControl.open()}
 						>
-							<Menu.ItemText>{_(msg`Embed post`)}</Menu.ItemText>
+							<Menu.ItemText>{"Embed post"}</Menu.ItemText>
 							<Menu.ItemIcon icon={CodeBrackets} position="right" />
 						</Menu.Item>
 					)}
@@ -441,19 +435,19 @@ let PostDropdownMenuItems = ({
 						<Menu.Group>
 							<Menu.Item
 								testID="postDropdownShowMoreBtn"
-								label={_(msg`Show more like this`)}
+								label={"Show more like this"}
 								onPress={onPressShowMore}
 							>
-								<Menu.ItemText>{_(msg`Show more like this`)}</Menu.ItemText>
+								<Menu.ItemText>{"Show more like this"}</Menu.ItemText>
 								<Menu.ItemIcon icon={EmojiSmile} position="right" />
 							</Menu.Item>
 
 							<Menu.Item
 								testID="postDropdownShowLessBtn"
-								label={_(msg`Show less like this`)}
+								label={"Show less like this"}
 								onPress={onPressShowLess}
 							>
-								<Menu.ItemText>{_(msg`Show less like this`)}</Menu.ItemText>
+								<Menu.ItemText>{"Show less like this"}</Menu.ItemText>
 								<Menu.ItemIcon icon={EmojiSad} position="right" />
 							</Menu.Item>
 						</Menu.Group>
@@ -466,21 +460,19 @@ let PostDropdownMenuItems = ({
 						<Menu.Group>
 							<Menu.Item
 								testID="postDropdownMuteThreadBtn"
-								label={isThreadMuted ? _(msg`Unmute thread`) : _(msg`Mute thread`)}
+								label={isThreadMuted ? "Unmute thread" : "Mute thread"}
 								onPress={onToggleThreadMute}
 							>
-								<Menu.ItemText>
-									{isThreadMuted ? _(msg`Unmute thread`) : _(msg`Mute thread`)}
-								</Menu.ItemText>
+								<Menu.ItemText>{isThreadMuted ? "Unmute thread" : "Mute thread"}</Menu.ItemText>
 								<Menu.ItemIcon icon={isThreadMuted ? Unmute : Mute} position="right" />
 							</Menu.Item>
 
 							<Menu.Item
 								testID="postDropdownMuteWordsBtn"
-								label={_(msg`Mute words & tags`)}
+								label={"Mute words & tags"}
 								onPress={() => mutedWordsDialogControl.open()}
 							>
-								<Menu.ItemText>{_(msg`Mute words & tags`)}</Menu.ItemText>
+								<Menu.ItemText>{"Mute words & tags"}</Menu.ItemText>
 								<Menu.ItemIcon icon={Filter} position="right" />
 							</Menu.Item>
 						</Menu.Group>
@@ -494,12 +486,10 @@ let PostDropdownMenuItems = ({
 							{canHidePostForMe && (
 								<Menu.Item
 									testID="postDropdownHideBtn"
-									label={isReply ? _(msg`Hide reply for me`) : _(msg`Hide post for me`)}
+									label={isReply ? "Hide reply for me" : "Hide post for me"}
 									onPress={() => hidePromptControl.open()}
 								>
-									<Menu.ItemText>
-										{isReply ? _(msg`Hide reply for me`) : _(msg`Hide post for me`)}
-									</Menu.ItemText>
+									<Menu.ItemText>{isReply ? "Hide reply for me" : "Hide post for me"}</Menu.ItemText>
 									<Menu.ItemIcon icon={EyeSlash} position="right" />
 								</Menu.Item>
 							)}
@@ -508,8 +498,8 @@ let PostDropdownMenuItems = ({
 									testID="postDropdownHideBtn"
 									label={
 										isReplyHiddenByThreadgate
-											? _(msg`Show reply for everyone`)
-											: _(msg`Hide reply for everyone`)
+											? "Show reply for everyone"
+											: "Hide reply for everyone"
 									}
 									onPress={
 										isReplyHiddenByThreadgate
@@ -519,8 +509,8 @@ let PostDropdownMenuItems = ({
 								>
 									<Menu.ItemText>
 										{isReplyHiddenByThreadgate
-											? _(msg`Show reply for everyone`)
-											: _(msg`Hide reply for everyone`)}
+											? "Show reply for everyone"
+											: "Hide reply for everyone"}
 									</Menu.ItemText>
 									<Menu.ItemIcon icon={isReplyHiddenByThreadgate ? Eye : EyeSlash} position="right" />
 								</Menu.Item>
@@ -530,7 +520,7 @@ let PostDropdownMenuItems = ({
 								<Menu.Item
 									disabled={isDetachPending}
 									testID="postDropdownHideBtn"
-									label={quoteEmbed.isDetached ? _(msg`Re-attach quote`) : _(msg`Detach quote`)}
+									label={quoteEmbed.isDetached ? "Re-attach quote" : "Detach quote"}
 									onPress={
 										quoteEmbed.isDetached
 											? onToggleQuotePostAttachment
@@ -538,7 +528,7 @@ let PostDropdownMenuItems = ({
 									}
 								>
 									<Menu.ItemText>
-										{quoteEmbed.isDetached ? _(msg`Re-attach quote`) : _(msg`Detach quote`)}
+										{quoteEmbed.isDetached ? "Re-attach quote" : "Detach quote"}
 									</Menu.ItemText>
 									<Menu.ItemIcon
 										icon={isDetachPending ? Loader : quoteEmbed.isDetached ? Eye : EyeSlash}
@@ -558,11 +548,11 @@ let PostDropdownMenuItems = ({
 								<>
 									<Menu.Item
 										testID="postDropdownMuteBtn"
-										label={postAuthor.viewer?.muted ? _(msg`Unmute account`) : _(msg`Mute account`)}
+										label={postAuthor.viewer?.muted ? "Unmute account" : "Mute account"}
 										onPress={onMuteAuthor}
 									>
 										<Menu.ItemText>
-											{postAuthor.viewer?.muted ? _(msg`Unmute account`) : _(msg`Mute account`)}
+											{postAuthor.viewer?.muted ? "Unmute account" : "Mute account"}
 										</Menu.ItemText>
 										<Menu.ItemIcon
 											icon={postAuthor.viewer?.muted ? UnmuteIcon : MuteIcon}
@@ -573,20 +563,20 @@ let PostDropdownMenuItems = ({
 									{!postAuthor.viewer?.blocking && (
 										<Menu.Item
 											testID="postDropdownBlockBtn"
-											label={_(msg`Block account`)}
+											label={"Block account"}
 											onPress={() => blockPromptControl.open()}
 										>
-											<Menu.ItemText>{_(msg`Block account`)}</Menu.ItemText>
+											<Menu.ItemText>{"Block account"}</Menu.ItemText>
 											<Menu.ItemIcon icon={PersonX} position="right" />
 										</Menu.Item>
 									)}
 
 									<Menu.Item
 										testID="postDropdownReportBtn"
-										label={_(msg`Report post`)}
+										label={"Report post"}
 										onPress={() => reportDialogControl.open()}
 									>
-										<Menu.ItemText>{_(msg`Report post`)}</Menu.ItemText>
+										<Menu.ItemText>{"Report post"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Warning} position="right" />
 									</Menu.Item>
 								</>
@@ -596,7 +586,7 @@ let PostDropdownMenuItems = ({
 								<>
 									<Menu.Item
 										testID="postDropdownEditPostInteractions"
-										label={_(msg`Edit interaction settings`)}
+										label={"Edit interaction settings"}
 										onPress={() => postInteractionSettingsDialogControl.open()}
 										{...(isAuthor
 											? Platform.select({
@@ -609,15 +599,15 @@ let PostDropdownMenuItems = ({
 												})
 											: {})}
 									>
-										<Menu.ItemText>{_(msg`Edit interaction settings`)}</Menu.ItemText>
+										<Menu.ItemText>{"Edit interaction settings"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Gear} position="right" />
 									</Menu.Item>
 									<Menu.Item
 										testID="postDropdownDeleteBtn"
-										label={_(msg`Delete post`)}
+										label={"Delete post"}
 										onPress={() => deletePromptControl.open()}
 									>
-										<Menu.ItemText>{_(msg`Delete post`)}</Menu.ItemText>
+										<Menu.ItemText>{"Delete post"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Trash} position="right" />
 									</Menu.Item>
 								</>
@@ -630,18 +620,18 @@ let PostDropdownMenuItems = ({
 								<Menu.Group>
 									<Menu.Item
 										testID="postAtUriShareBtn"
-										label={_(msg`Copy post at:// URI`)}
+										label={"Copy post at:// URI"}
 										onPress={onShareATURI}
 									>
-										<Menu.ItemText>{_(msg`Copy post at:// URI`)}</Menu.ItemText>
+										<Menu.ItemText>{"Copy post at:// URI"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Share} position="right" />
 									</Menu.Item>
 									<Menu.Item
 										testID="postAuthorDIDShareBtn"
-										label={_(msg`Copy author DID`)}
+										label={"Copy author DID"}
 										onPress={onShareAuthorDID}
 									>
-										<Menu.ItemText>{_(msg`Copy author DID`)}</Menu.ItemText>
+										<Menu.ItemText>{"Copy author DID"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Share} position="right" />
 									</Menu.Item>
 								</Menu.Group>
@@ -653,19 +643,19 @@ let PostDropdownMenuItems = ({
 
 			<Prompt.Basic
 				control={deletePromptControl}
-				title={_(msg`Delete this post?`)}
-				description={_(msg`If you remove this post, you won't be able to recover it.`)}
+				title={"Delete this post?"}
+				description={`If you remove this post, you won't be able to recover it.`}
 				onConfirm={onDeletePost}
-				confirmButtonCta={_(msg`Delete`)}
+				confirmButtonCta={"Delete"}
 				confirmButtonColor="negative"
 			/>
 
 			<Prompt.Basic
 				control={hidePromptControl}
-				title={isReply ? _(msg`Hide this reply?`) : _(msg`Hide this post?`)}
-				description={_(msg`This post will be hidden from feeds and threads. This cannot be undone.`)}
+				title={isReply ? "Hide this reply?" : "Hide this post?"}
+				description={"This post will be hidden from feeds and threads. This cannot be undone."}
 				onConfirm={onHidePost}
-				confirmButtonCta={_(msg`Hide`)}
+				confirmButtonCta={"Hide"}
 			/>
 
 			<ReportDialog
@@ -678,12 +668,12 @@ let PostDropdownMenuItems = ({
 
 			<Prompt.Basic
 				control={loggedOutWarningPromptControl}
-				title={_(msg`Note about sharing`)}
+				title={"Note about sharing"}
 				description={_(
 					msg`This post is only visible to logged-in users. It won't be visible to people who aren't signed in.`,
 				)}
 				onConfirm={onSharePost}
-				confirmButtonCta={_(msg`Share anyway`)}
+				confirmButtonCta={"Share anyway"}
 			/>
 
 			{canEmbed && (
@@ -708,32 +698,32 @@ let PostDropdownMenuItems = ({
 
 			<Prompt.Basic
 				control={quotePostDetachConfirmControl}
-				title={_(msg`Detach quote post?`)}
+				title={"Detach quote post?"}
 				description={_(
 					msg`This will remove your post from this quote post for all users, and replace it with a placeholder.`,
 				)}
 				onConfirm={onToggleQuotePostAttachment}
-				confirmButtonCta={_(msg`Yes, detach`)}
+				confirmButtonCta={"Yes, detach"}
 			/>
 
 			<Prompt.Basic
 				control={hideReplyConfirmControl}
-				title={_(msg`Hide this reply?`)}
+				title={"Hide this reply?"}
 				description={_(
 					msg`This reply will be sorted into a hidden section at the bottom of your thread and will mute notifications for subsequent replies - both for yourself and others.`,
 				)}
 				onConfirm={onToggleReplyVisibility}
-				confirmButtonCta={_(msg`Yes, hide`)}
+				confirmButtonCta={"Yes, hide"}
 			/>
 
 			<Prompt.Basic
 				control={blockPromptControl}
-				title={_(msg`Block Account?`)}
+				title={"Block Account?"}
 				description={_(
 					msg`Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`,
 				)}
 				onConfirm={onBlockAuthor}
-				confirmButtonCta={_(msg`Block`)}
+				confirmButtonCta={"Block"}
 				confirmButtonColor="negative"
 			/>
 		</>

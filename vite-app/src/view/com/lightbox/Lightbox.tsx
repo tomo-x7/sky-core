@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as MediaLibrary from "expo-media-library";
 import React from "react";
@@ -23,12 +22,12 @@ export function Lightbox() {
 	const saveImageToAlbumWithToasts = React.useCallback(
 		async (uri: string) => {
 			if (!permissionResponse || permissionResponse.granted === false) {
-				Toast.show(_(msg`Permission to access camera roll is required.`), "info");
+				Toast.show("Permission to access camera roll is required.", "info");
 				if (permissionResponse?.canAskAgain) {
 					requestPermission();
 				} else {
 					Toast.show(
-						_(msg`Permission to access camera roll was denied. Please enable it in your system settings.`),
+						"Permission to access camera roll was denied. Please enable it in your system settings.",
 						"xmark",
 					);
 				}
@@ -36,9 +35,9 @@ export function Lightbox() {
 			}
 			try {
 				await saveImageToMediaLibrary({ uri });
-				Toast.show(_(msg`Saved to your camera roll`));
+				Toast.show("Saved to your camera roll");
 			} catch (e: any) {
-				Toast.show(_(msg`Failed to save image: ${String(e)}`), "xmark");
+				Toast.show(`Failed to save image: ${String(e)}`, "xmark");
 			}
 		},
 		[permissionResponse, requestPermission, _],

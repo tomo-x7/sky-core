@@ -1,5 +1,4 @@
 import type { AppBskyFeedPostgate } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { Keyboard, type StyleProp, type ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
@@ -41,7 +40,7 @@ export function ThreadgateBtn({
 	const anyoneCanReply = threadgateAllowUISettings.length === 1 && threadgateAllowUISettings[0].type === "everybody";
 	const anyoneCanQuote = !postgate.embeddingRules || postgate.embeddingRules.length === 0;
 	const anyoneCanInteract = anyoneCanReply && anyoneCanQuote;
-	const label = anyoneCanInteract ? _(msg`Anybody can interact`) : _(msg`Interaction limited`);
+	const label = anyoneCanInteract ? "Anybody can interact" : "Interaction limited";
 
 	return (
 		<>
@@ -52,7 +51,7 @@ export function ThreadgateBtn({
 				testID="openReplyGateButton"
 				onPress={onPress}
 				label={label}
-				accessibilityHint={_(msg`Opens a dialog to choose who can reply to this thread`)}
+				accessibilityHint={"Opens a dialog to choose who can reply to this thread"}
 				style={[
 					native({
 						paddingHorizontal: 8,

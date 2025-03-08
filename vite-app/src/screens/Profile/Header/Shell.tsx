@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React, { memo } from "react";
@@ -106,7 +105,7 @@ let ProfileHeaderShell = ({
 								onPress={onPressBack}
 								hitSlop={BACK_HITSLOP}
 								accessibilityRole="button"
-								accessibilityLabel={_(msg`Back`)}
+								accessibilityLabel={"Back"}
 								accessibilityHint=""
 							>
 								<View
@@ -155,7 +154,7 @@ let ProfileHeaderShell = ({
 					testID="profileHeaderAviButton"
 					onPress={onPressAvi}
 					accessibilityRole="image"
-					accessibilityLabel={_(msg`View ${profile.handle}'s avatar`)}
+					accessibilityLabel={`View ${profile.handle}'s avatar`}
 					accessibilityHint=""
 				>
 					<View

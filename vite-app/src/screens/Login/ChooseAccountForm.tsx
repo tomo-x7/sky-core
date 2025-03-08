@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -40,7 +39,7 @@ export const ChooseAccountForm = ({
 			}
 			if (account.did === currentAccount?.did) {
 				setShowLoggedOut(false);
-				Toast.show(_(msg`Already signed in as @${account.handle}`));
+				Toast.show(`Already signed in as @${account.handle}`);
 				return;
 			}
 			try {
@@ -50,7 +49,7 @@ export const ChooseAccountForm = ({
 					logContext: "ChooseAccountForm",
 					withPassword: false,
 				});
-				Toast.show(_(msg`Signed in as @${account.handle}`));
+				Toast.show(`Signed in as @${account.handle}`);
 			} catch (e: any) {
 				logger.error("choose account: initSession failed", {
 					message: e.message,
@@ -75,8 +74,8 @@ export const ChooseAccountForm = ({
 				/>
 			</View>
 			<View style={[a.flex_row]}>
-				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
-					<ButtonText>{_(msg`Back`)}</ButtonText>
+				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
+					<ButtonText>{"Back"}</ButtonText>
 				</Button>
 				<View style={[a.flex_1]} />
 			</View>

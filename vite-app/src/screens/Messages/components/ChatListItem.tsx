@@ -1,5 +1,4 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
@@ -99,14 +98,14 @@ function ChatListItemReady({
 
 	const isDeletedAccount = profile.handle === "missing.invalid";
 	const displayName = isDeletedAccount
-		? _(msg`Deleted Account`)
+		? "Deleted Account"
 		: sanitizeDisplayName(profile.displayName || profile.handle, moderation.ui("displayName"));
 
 	const isDimStyle = convo.muted || moderation.blocked || isDeletedAccount;
 
 	const { lastMessage, lastMessageSentAt, latestReportableMessage } = useMemo(() => {
 		// eslint-disable-next-line @typescript-eslint/no-shadow
-		let lastMessage = _(msg`No messages yet`);
+		let lastMessage = "No messages yet";
 		// eslint-disable-next-line @typescript-eslint/no-shadow
 		let lastMessageSentAt: string | null = null;
 		// eslint-disable-next-line @typescript-eslint/no-shadow
@@ -121,12 +120,12 @@ function ChatListItemReady({
 
 			if (convo.lastMessage.text) {
 				if (isFromMe) {
-					lastMessage = _(msg`You: ${convo.lastMessage.text}`);
+					lastMessage = `You: ${convo.lastMessage.text}`;
 				} else {
 					lastMessage = convo.lastMessage.text;
 				}
 			} else if (convo.lastMessage.embed) {
-				const defaultEmbeddedContentMessage = _(msg`(contains embedded content)`);
+				const defaultEmbeddedContentMessage = "(contains embedded content)";
 
 				if (AppBskyEmbedRecord.isView(convo.lastMessage.embed)) {
 					const embed = convo.lastMessage.embed;
@@ -139,14 +138,14 @@ function ChatListItemReady({
 						const href = path ? toBskyAppUrl(path) : undefined;
 						const short = href ? toShortUrl(href) : defaultEmbeddedContentMessage;
 						if (isFromMe) {
-							lastMessage = _(msg`You: ${short}`);
+							lastMessage = `You: ${short}`;
 						} else {
 							lastMessage = short;
 						}
 					}
 				} else {
 					if (isFromMe) {
-						lastMessage = _(msg`You: ${defaultEmbeddedContentMessage}`);
+						lastMessage = `You: ${defaultEmbeddedContentMessage}`;
 					} else {
 						lastMessage = defaultEmbeddedContentMessage;
 					}
@@ -156,7 +155,7 @@ function ChatListItemReady({
 			lastMessageSentAt = convo.lastMessage.sentAt;
 		}
 		if (ChatBskyConvoDefs.isDeletedMessageView(convo.lastMessage)) {
-			lastMessage = isDeletedAccount ? _(msg`Conversation deleted`) : _(msg`Message deleted`);
+			lastMessage = isDeletedAccount ? "Conversation deleted" : "Message deleted";
 		}
 
 		return {
@@ -252,14 +251,14 @@ function ChatListItemReady({
 					label={displayName}
 					accessibilityHint={
 						!isDeletedAccount
-							? _(msg`Go to conversation with ${profile.handle}`)
-							: _(msg`This conversation is with a deleted or a deactivated account. Press for options`)
+							? `Go to conversation with ${profile.handle}`
+							: "This conversation is with a deleted or a deactivated account. Press for options"
 					}
 					accessibilityActions={
 						isNative
 							? [
-									{ name: "magicTap", label: _(msg`Open conversation options`) },
-									{ name: "longpress", label: _(msg`Open conversation options`) },
+									{ name: "magicTap", label: "Open conversation options" },
+									{ name: "longpress", label: "Open conversation options" },
 								]
 							: undefined
 					}

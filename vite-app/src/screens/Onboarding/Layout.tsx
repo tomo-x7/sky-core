@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { ScrollView, View } from "react-native";
@@ -36,7 +35,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 	}, [state]);
 
 	const paddingTop = gtMobile ? a.py_5xl : a.py_lg;
-	const dialogLabel = _(msg`Set up your account`);
+	const dialogLabel = "Set up your account";
 
 	return (
 		<View
@@ -45,7 +44,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 			aria-role="dialog"
 			aria-label={dialogLabel}
 			accessibilityLabel={dialogLabel}
-			accessibilityHint={_(msg`Customizes your Bluesky experience`)}
+			accessibilityHint={"Customizes your Bluesky experience"}
 			style={[
 				// @ts-ignore web only -prf
 				isWeb ? a.fixed : a.absolute,
@@ -91,7 +90,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 							color="secondary"
 							size="small"
 							shape="round"
-							label={_(msg`Go back to previous step`)}
+							label={"Go back to previous step"}
 							style={[a.absolute]}
 							onPress={() => dispatch({ type: "prev" })}
 						>
@@ -168,7 +167,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 								color="secondary"
 								size="large"
 								shape="round"
-								label={_(msg`Go back to previous step`)}
+								label={"Go back to previous step"}
 								onPress={() => dispatch({ type: "prev" })}
 							>
 								<ButtonIcon icon={ChevronLeft} />

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -12,7 +11,7 @@ export function ExternalEmbedRemoveBtn({ onRemove }: { onRemove: () => void }) {
 	return (
 		<View style={[a.absolute, { top: 8, right: 8 }, a.z_50]}>
 			<Button
-				label={_(msg`Remove attachment`)}
+				label={"Remove attachment"}
 				onPress={onRemove}
 				size="small"
 				variant="solid"

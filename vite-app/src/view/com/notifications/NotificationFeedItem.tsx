@@ -197,7 +197,7 @@ let NotificationFeedItem = ({
 						other: `${formattedAuthorsCount} others`,
 					})} liked your post`,
 				)
-			: _(msg`${firstAuthorName} liked your post`);
+			: `${firstAuthorName} liked your post`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
@@ -221,7 +221,7 @@ let NotificationFeedItem = ({
 						other: `${formattedAuthorsCount} others`,
 					})} reposted your post`,
 				)
-			: _(msg`${firstAuthorName} reposted your post`);
+			: `${firstAuthorName} reposted your post`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
@@ -264,7 +264,7 @@ let NotificationFeedItem = ({
 			 * Follow-backs are ungrouped, grouped follow-backs not supported atm,
 			 * see `src/state/queries/notifications/util.ts`
 			 */
-			a11yLabel = _(msg`${firstAuthorName} followed you back`);
+			a11yLabel = `${firstAuthorName} followed you back`;
 			notificationContent = <>{firstAuthorLink} followed you back</>;
 		} else {
 			a11yLabel = hasMultipleAuthors
@@ -274,7 +274,7 @@ let NotificationFeedItem = ({
 							other: `${formattedAuthorsCount} others`,
 						})} followed you`,
 					)
-				: _(msg`${firstAuthorName} followed you`);
+				: `${firstAuthorName} followed you`;
 			notificationContent = hasMultipleAuthors ? (
 				<>
 					{firstAuthorLink} and{" "}
@@ -300,7 +300,7 @@ let NotificationFeedItem = ({
 						other: `${formattedAuthorsCount} others`,
 					})} liked your custom feed`,
 				)
-			: _(msg`${firstAuthorName} liked your custom feed`);
+			: `${firstAuthorName} liked your custom feed`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
@@ -324,7 +324,7 @@ let NotificationFeedItem = ({
 						other: `${formattedAuthorsCount} others`,
 					})} signed up with your starter pack`,
 				)
-			: _(msg`${firstAuthorName} signed up with your starter pack`);
+			: `${firstAuthorName} signed up with your starter pack`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
@@ -375,9 +375,7 @@ let NotificationFeedItem = ({
 					? [
 							{
 								name: "toggleAuthorsExpanded",
-								label: isAuthorsExpanded
-									? _(msg`Collapse list of users`)
-									: _(msg`Expand list of users`),
+								label: isAuthorsExpanded ? "Collapse list of users" : "Expand list of users",
 							},
 						]
 					: [
@@ -500,7 +498,7 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 
 	return (
 		<Button
-			label={_(msg`Say hello!`)}
+			label={"Say hello!"}
 			variant="ghost"
 			color="primary"
 			size="small"
@@ -551,8 +549,8 @@ function CondensedAuthorsList({
 					style={styles.expandedAuthorsCloseBtn}
 					onPress={onToggleAuthorsExpanded}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Hide user list`)}
-					accessibilityHint={_(msg`Collapses list of users for a given notification`)}
+					accessibilityLabel={"Hide user list"}
+					accessibilityHint={"Collapses list of users for a given notification"}
 				>
 					<ChevronUpIcon size="md" style={[styles.expandedAuthorsCloseBtnIcon, pal.text]} />
 					<Text type="sm-medium" style={pal.text}>
@@ -626,7 +624,7 @@ function ExpandedAuthorsList({
 					<NewLink
 						key={author.profile.did}
 						label={author.profile.displayName || author.profile.handle}
-						accessibilityHint={_(msg`Opens this profile`)}
+						accessibilityHint={"Opens this profile"}
 						to={makeProfileLink({
 							did: author.profile.did,
 							handle: author.profile.handle,

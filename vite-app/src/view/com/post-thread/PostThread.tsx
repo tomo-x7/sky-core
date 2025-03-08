@@ -1,5 +1,5 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { memo, useRef, useState } from "react";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
@@ -233,18 +233,18 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 	const error = React.useMemo(() => {
 		if (AppBskyFeedDefs.isNotFoundPost(thread)) {
 			return {
-				title: _(msg`Post not found`),
-				message: _(msg`The post may have been deleted.`),
+				title: "Post not found",
+				message: "The post may have been deleted.",
 			};
 		} else if (skeleton?.highlightedPost.type === "blocked") {
 			return {
-				title: _(msg`Post hidden`),
-				message: _(msg`You have blocked the author or you have been blocked by the author.`),
+				title: "Post hidden",
+				message: "You have blocked the author or you have been blocked by the author.",
 			};
 		} else if (threadError?.message.startsWith("Post not found")) {
 			return {
-				title: _(msg`Post not found`),
-				message: _(msg`The post may have been deleted.`),
+				title: "Post not found",
+				message: "The post may have been deleted.",
 			};
 		} else if (isThreadError) {
 			return {
@@ -542,10 +542,10 @@ let ThreadMenu = ({
 	const { _ } = useLingui();
 	return (
 		<Menu.Root>
-			<Menu.Trigger label={_(msg`Thread options`)}>
+			<Menu.Trigger label={"Thread options"}>
 				{({ props }) => (
 					<Button
-						label={_(msg`Thread options`)}
+						label={"Thread options"}
 						size="small"
 						variant="ghost"
 						color="secondary"
@@ -561,7 +561,7 @@ let ThreadMenu = ({
 				<Menu.LabelText>Show replies as</Menu.LabelText>
 				<Menu.Group>
 					<Menu.Item
-						label={_(msg`Linear`)}
+						label={"Linear"}
 						onPress={() => {
 							setTreeViewEnabled(false);
 						}}
@@ -570,7 +570,7 @@ let ThreadMenu = ({
 						<Menu.ItemRadio selected={!treeViewEnabled} />
 					</Menu.Item>
 					<Menu.Item
-						label={_(msg`Threaded`)}
+						label={"Threaded"}
 						onPress={() => {
 							setTreeViewEnabled(true);
 						}}
@@ -583,7 +583,7 @@ let ThreadMenu = ({
 				<Menu.LabelText>Reply sorting</Menu.LabelText>
 				<Menu.Group>
 					<Menu.Item
-						label={_(msg`Hot replies first`)}
+						label={"Hot replies first"}
 						onPress={() => {
 							setSortReplies("hotness");
 						}}
@@ -592,7 +592,7 @@ let ThreadMenu = ({
 						<Menu.ItemRadio selected={sortReplies === "hotness"} />
 					</Menu.Item>
 					<Menu.Item
-						label={_(msg`Oldest replies first`)}
+						label={"Oldest replies first"}
 						onPress={() => {
 							setSortReplies("oldest");
 						}}
@@ -601,7 +601,7 @@ let ThreadMenu = ({
 						<Menu.ItemRadio selected={sortReplies === "oldest"} />
 					</Menu.Item>
 					<Menu.Item
-						label={_(msg`Newest replies first`)}
+						label={"Newest replies first"}
 						onPress={() => {
 							setSortReplies("newest");
 						}}
@@ -610,7 +610,7 @@ let ThreadMenu = ({
 						<Menu.ItemRadio selected={sortReplies === "newest"} />
 					</Menu.Item>
 					<Menu.Item
-						label={_(msg`Most-liked replies first`)}
+						label={"Most-liked replies first"}
 						onPress={() => {
 							setSortReplies("most-likes");
 						}}
@@ -619,7 +619,7 @@ let ThreadMenu = ({
 						<Menu.ItemRadio selected={sortReplies === "most-likes"} />
 					</Menu.Item>
 					<Menu.Item
-						label={_(msg`Random (aka "Poster's Roulette")`)}
+						label={`Random (aka "Poster's Roulette")`}
 						onPress={() => {
 							setSortReplies("random");
 						}}

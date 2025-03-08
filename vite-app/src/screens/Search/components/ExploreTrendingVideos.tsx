@@ -1,5 +1,4 @@
 import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -143,13 +142,13 @@ export function ExploreTrendingVideos() {
 					</Text>
 					<Button
 						disabled={isPinPending}
-						label={_(msg`Pin`)}
+						label={"Pin"}
 						size="small"
 						variant="outline"
 						color="secondary"
 						onPress={pinFeed}
 					>
-						<ButtonText>{_(msg`Pin`)}</ButtonText>
+						<ButtonText>{"Pin"}</ButtonText>
 						<ButtonIcon icon={Pin} position="right" />
 					</Button>
 				</View>
@@ -202,7 +201,7 @@ function VideoCards({
 			<View style={[{ width: CARD_WIDTH * 2 }]}>
 				<Link
 					to={href}
-					label={_(msg`View more`)}
+					label={"View more"}
 					style={[a.justify_center, a.align_center, a.flex_1, a.rounded_md, t.atoms.bg_contrast_25]}
 				>
 					{({ pressed }) => (

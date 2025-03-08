@@ -1,6 +1,5 @@
 import type { ComAtprotoServerDefs } from "@atproto/api";
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";
@@ -61,7 +60,7 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 				<View style={[styles.btnContainer, isTabletOrDesktop && styles.btnContainerDesktop]}>
 					<Button
 						type="primary"
-						label={_(msg`Done`)}
+						label={"Done"}
 						style={styles.btn}
 						labelStyle={styles.btnLabel}
 						onPress={onClose}
@@ -91,7 +90,7 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 				<Button
 					testID="closeBtn"
 					type="primary"
-					label={_(msg`Done`)}
+					label={"Done"}
 					style={styles.btn}
 					labelStyle={styles.btnLabel}
 					onPress={onClose}
@@ -120,7 +119,7 @@ function InviteCode({
 
 	const onPress = React.useCallback(() => {
 		setStringAsync(invite.code);
-		Toast.show(_(msg`Copied to clipboard`), "clipboard-check");
+		Toast.show("Copied to clipboard", "clipboard-check");
 		setInviteCopied(invite.code);
 	}, [setInviteCopied, invite, _]);
 
@@ -133,10 +132,10 @@ function InviteCode({
 				accessibilityRole="button"
 				accessibilityLabel={
 					invites.available.length === 1
-						? _(msg`Invite codes: 1 available`)
-						: _(msg`Invite codes: ${invites.available.length} available`)
+						? "Invite codes: 1 available"
+						: `Invite codes: ${invites.available.length} available`
 				}
-				accessibilityHint={_(msg`Opens list of invite codes`)}
+				accessibilityHint={"Opens list of invite codes"}
 			>
 				<Text
 					testID={`${testID}-code`}

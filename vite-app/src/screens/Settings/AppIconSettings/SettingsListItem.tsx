@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -13,7 +12,7 @@ export function SettingsListItem() {
 	const icon = useCurrentAppIcon();
 
 	return (
-		<SettingsList.LinkItem to="/settings/app-icon" label={_(msg`App Icon`)} contentContainerStyle={[a.align_start]}>
+		<SettingsList.LinkItem to="/settings/app-icon" label={"App Icon"} contentContainerStyle={[a.align_start]}>
 			<SettingsList.ItemIcon icon={Shapes} />
 			<View style={[a.flex_1]}>
 				<SettingsList.ItemText style={[a.pt_xs, a.pb_md]}>App Icon</SettingsList.ItemText>

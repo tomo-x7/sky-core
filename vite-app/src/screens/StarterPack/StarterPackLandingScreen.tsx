@@ -1,6 +1,5 @@
 import { AppBskyGraphDefs, AppBskyGraphStarterpack, AtUri, type ModerationOpts } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
@@ -178,7 +177,7 @@ function LandingScreenLoaded({
 					{record.description ? <RichText value={descriptionRt} style={[a.text_md]} /> : null}
 					<View style={[a.gap_sm]}>
 						<Button
-							label={_(msg`Join Bluesky`)}
+							label={"Join Bluesky"}
 							onPress={onJoinPress}
 							variant="solid"
 							color="primary"
@@ -258,7 +257,7 @@ function LandingScreenLoaded({
 						) : null}
 					</View>
 					<Button
-						label={_(msg`Signup without a starter pack`)}
+						label={"Signup without a starter pack"}
 						variant="solid"
 						color="secondary"
 						size="large"

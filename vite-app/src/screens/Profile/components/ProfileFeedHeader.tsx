@@ -1,5 +1,5 @@
 import { AtUri } from "@atproto/api";
-import { Plural, msg } from "@lingui/macro";
+import { Plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -105,7 +105,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 
 			if (savedFeedConfig) {
 				await removeFeed(savedFeedConfig);
-				Toast.show(_(msg`Removed from your feeds`));
+				Toast.show("Removed from your feeds");
 			} else {
 				await addSavedFeeds([
 					{
@@ -114,11 +114,11 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 						pinned: false,
 					},
 				]);
-				Toast.show(_(msg`Saved to your feeds`));
+				Toast.show("Saved to your feeds");
 			}
 		} catch (err) {
 			Toast.show(
-				_(msg`There was an issue updating your feeds, please check your internet connection and try again.`),
+				"There was an issue updating your feeds, please check your internet connection and try again.",
 				"xmark",
 			);
 			logger.error("Failed to update feeds", { message: err });
@@ -139,9 +139,9 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 				]);
 
 				if (pinned) {
-					Toast.show(_(msg`Pinned ${info.displayName} to Home`));
+					Toast.show(`Pinned ${info.displayName} to Home`);
 				} else {
-					Toast.show(_(msg`Unpinned ${info.displayName} from Home`));
+					Toast.show(`Unpinned ${info.displayName} from Home`);
 				}
 			} else {
 				await addSavedFeeds([
@@ -151,10 +151,10 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 						pinned: true,
 					},
 				]);
-				Toast.show(_(msg`Pinned ${info.displayName} to Home`));
+				Toast.show(`Pinned ${info.displayName} to Home`);
 			}
 		} catch (e) {
-			Toast.show(_(msg`There was an issue contacting the server`), "xmark");
+			Toast.show("There was an issue contacting the server", "xmark");
 			logger.error("Failed to toggle pinned feed", { message: e });
 		}
 	}, [playHaptic, info, _, savedFeedConfig, updateSavedFeeds, addSavedFeeds]);
@@ -166,7 +166,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 					<Layout.Header.BackButton />
 					<Layout.Header.Content align="left">
 						<Button
-							label={_(msg`Open feed info screen`)}
+							label={"Open feed info screen"}
 							style={[
 								a.justify_start,
 								{
@@ -262,12 +262,12 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 						<Layout.Header.Slot>
 							{isPinned ? (
 								<Menu.Root>
-									<Menu.Trigger label={_(msg`Open feed options menu`)}>
+									<Menu.Trigger label={"Open feed options menu"}>
 										{({ props }) => {
 											return (
 												<Button
 													{...props}
-													label={_(msg`Open feed options menu`)}
+													label={"Open feed options menu"}
 													size="small"
 													variant="ghost"
 													shape="square"
@@ -282,19 +282,19 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 									<Menu.Outer>
 										<Menu.Item
 											disabled={isFeedStateChangePending}
-											label={_(msg`Unpin from home`)}
+											label={"Unpin from home"}
 											onPress={onTogglePinned}
 										>
-											<Menu.ItemText>{_(msg`Unpin from home`)}</Menu.ItemText>
+											<Menu.ItemText>{"Unpin from home"}</Menu.ItemText>
 											<Menu.ItemIcon icon={X} position="right" />
 										</Menu.Item>
 										<Menu.Item
 											disabled={isFeedStateChangePending}
-											label={isSaved ? _(msg`Remove from my feeds`) : _(msg`Save to my feeds`)}
+											label={isSaved ? "Remove from my feeds" : "Save to my feeds"}
 											onPress={onToggleSaved}
 										>
 											<Menu.ItemText>
-												{isSaved ? _(msg`Remove from my feeds`) : _(msg`Save to my feeds`)}
+												{isSaved ? "Remove from my feeds" : "Save to my feeds"}
 											</Menu.ItemText>
 											<Menu.ItemIcon icon={isSaved ? Trash : Plus} position="right" />
 										</Menu.Item>
@@ -302,7 +302,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 								</Menu.Root>
 							) : (
 								<Button
-									label={_(msg`Pin to Home`)}
+									label={"Pin to Home"}
 									size="small"
 									variant="ghost"
 									shape="square"
@@ -320,7 +320,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 			<Dialog.Outer control={infoControl}>
 				<Dialog.Handle />
 				<Dialog.ScrollableInner
-					label={_(msg`Feed menu`)}
+					label={"Feed menu"}
 					style={[gtMobile ? { width: "auto", minWidth: 450 } : a.w_full]}
 				>
 					<DialogInner
@@ -381,7 +381,7 @@ function DialogInner({
 			}
 		} catch (err) {
 			Toast.show(
-				_(msg`There was an issue contacting the server, please check your internet connection and try again.`),
+				"There was an issue contacting the server, please check your internet connection and try again.",
 				"xmark",
 			);
 			logger.error("Failed to toggle like", { message: err });
@@ -411,7 +411,7 @@ function DialogInner({
 						<>
 							By{" "}
 							<InlineLinkText
-								label={_(msg`View ${info.creatorHandle}'s profile`)}
+								label={`View ${info.creatorHandle}'s profile`}
 								to={makeProfileLink({
 									did: info.creatorDid,
 									handle: info.creatorHandle,
@@ -427,7 +427,7 @@ function DialogInner({
 				</View>
 
 				<Button
-					label={_(msg`Share this feed`)}
+					label={"Share this feed"}
 					size="small"
 					variant="ghost"
 					color="secondary"
@@ -443,7 +443,7 @@ function DialogInner({
 			<View style={[a.flex_row, a.gap_sm, a.align_center]}>
 				{typeof likeCount === "number" && (
 					<InlineLinkText
-						label={_(msg`View users who like this feed`)}
+						label={"View users who like this feed"}
 						to={makeCustomFeedLink(info.creatorDid, feedRkey, "liked-by")}
 						style={[a.underline, t.atoms.text_contrast_medium]}
 						onPress={() => control.close()}
@@ -460,7 +460,7 @@ function DialogInner({
 					<View style={[a.flex_row, a.gap_sm, a.align_center, a.pt_sm]}>
 						<Button
 							disabled={isLikePending || isUnlikePending}
-							label={_(msg`Like this feed`)}
+							label={"Like this feed"}
 							size="small"
 							variant="solid"
 							color="secondary"
@@ -477,7 +477,7 @@ function DialogInner({
 						</Button>
 						<Button
 							disabled={isFeedStateChangePending}
-							label={isPinned ? _(msg`Unpin feed`) : _(msg`Pin feed`)}
+							label={isPinned ? "Unpin feed" : "Pin feed"}
 							size="small"
 							variant="solid"
 							color={isPinned ? "secondary" : "primary"}
@@ -496,7 +496,7 @@ function DialogInner({
 							<Text style={[a.italic, t.atoms.text_contrast_medium]}>Something wrong? Let us know.</Text>
 
 							<Button
-								label={_(msg`Report feed`)}
+								label={"Report feed"}
 								size="small"
 								variant="solid"
 								color="secondary"

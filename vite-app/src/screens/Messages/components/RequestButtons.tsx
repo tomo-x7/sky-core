@@ -1,5 +1,5 @@
 import { type ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -73,7 +73,7 @@ export function RejectMenu({
 	return (
 		<>
 			<Menu.Root>
-				<Menu.Trigger label={_(msg`Reject chat request`)}>
+				<Menu.Trigger label={"Reject chat request"}>
 					{({ props: triggerProps }) => (
 						<Button
 							{...triggerProps}
@@ -97,12 +97,12 @@ export function RejectMenu({
 				<Menu.Outer>
 					<Menu.Group>
 						{showDeleteConvo && (
-							<Menu.Item label={_(msg`Delete conversation`)} onPress={onPressDelete}>
+							<Menu.Item label={"Delete conversation"} onPress={onPressDelete}>
 								<Menu.ItemText>Delete conversation</Menu.ItemText>
 								<Menu.ItemIcon icon={CircleX_Stroke2_Corner0_Rounded} />
 							</Menu.Item>
 						)}
-						<Menu.Item label={_(msg`Block account`)} onPress={onPressBlock}>
+						<Menu.Item label={"Block account"} onPress={onPressBlock}>
 							<Menu.ItemText>Block account</Menu.ItemText>
 							<Menu.ItemIcon icon={PersonXIcon} />
 						</Menu.Item>
@@ -110,7 +110,7 @@ export function RejectMenu({
               delete messages for other people andit's impossible for a convo on this
               screen to have a message sent by you */}
 						{lastMessage && (
-							<Menu.Item label={_(msg`Report conversation`)} onPress={reportControl.open}>
+							<Menu.Item label={"Report conversation"} onPress={reportControl.open}>
 								<Menu.ItemText>Report conversation</Menu.ItemText>
 								<Menu.ItemIcon icon={FlagIcon} />
 							</Menu.Item>
@@ -179,7 +179,7 @@ export function AcceptChatButton({
 	return (
 		<Button
 			{...props}
-			label={label || _(msg`Accept chat request`)}
+			label={label || "Accept chat request"}
 			size={size}
 			variant={variant}
 			color={color}
@@ -229,7 +229,7 @@ export function DeleteChatButton({
 
 	return (
 		<Button
-			label={label || _(msg`Delete chat`)}
+			label={label || "Delete chat"}
 			size={size}
 			variant={variant}
 			color={color}

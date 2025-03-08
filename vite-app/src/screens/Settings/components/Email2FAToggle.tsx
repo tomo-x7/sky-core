@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 
@@ -50,13 +49,13 @@ export function Email2FAToggle() {
 			<DisableEmail2FADialog control={disableDialogControl} />
 			<Prompt.Basic
 				control={enableDialogControl}
-				title={_(msg`Enable Email 2FA`)}
-				description={_(msg`Require an email code to sign in to your account.`)}
+				title={"Enable Email 2FA"}
+				description={"Require an email code to sign in to your account."}
 				onConfirm={enableEmailAuthFactor}
-				confirmButtonCta={_(msg`Enable`)}
+				confirmButtonCta={"Enable"}
 			/>
 			<SettingsList.BadgeButton
-				label={currentAccount?.emailAuthFactor ? _(msg`Change`) : _(msg`Enable`)}
+				label={currentAccount?.emailAuthFactor ? "Change" : "Enable"}
 				onPress={onToggle}
 			/>
 		</>

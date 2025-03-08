@@ -1,5 +1,5 @@
 import type { ChatBskyConvoDefs, ChatBskyConvoListConvos } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -152,11 +152,11 @@ function RequestList({
 											{ maxWidth: 360 },
 										]}
 									>
-										{cleanError(error) || _(msg`Failed to load conversations`)}
+										{cleanError(error) || "Failed to load conversations"}
 									</Text>
 
 									<Button
-										label={_(msg`Reload conversations`)}
+										label={"Reload conversations"}
 										size="small"
 										color="secondary_inverted"
 										variant="solid"
@@ -191,7 +191,7 @@ function RequestList({
 										variant="solid"
 										color="secondary"
 										size="small"
-										label={_(msg`Go back`)}
+										label={"Go back"}
 										onPress={() => {
 											if (navigation.canGoBack()) {
 												navigation.goBack();
@@ -254,10 +254,10 @@ function MarkAllReadFAB() {
 	const t = useTheme();
 	const { mutate: markAllRead } = useUpdateAllRead("request", {
 		onMutate: () => {
-			Toast.show(_(msg`Marked all as read`), "check");
+			Toast.show("Marked all as read", "check");
 		},
 		onError: () => {
-			Toast.show(_(msg`Failed to mark all requests as read`), "xmark");
+			Toast.show("Failed to mark all requests as read", "xmark");
 		},
 	});
 
@@ -267,7 +267,7 @@ function MarkAllReadFAB() {
 			onPress={() => markAllRead()}
 			icon={<CheckIcon size="lg" fill={t.palette.white} />}
 			accessibilityRole="button"
-			accessibilityLabel={_(msg`Mark all as read`)}
+			accessibilityLabel={"Mark all as read"}
 			accessibilityHint=""
 		/>
 	);
@@ -277,21 +277,15 @@ function MarkAsReadHeaderButton() {
 	const { _ } = useLingui();
 	const { mutate: markAllRead } = useUpdateAllRead("request", {
 		onMutate: () => {
-			Toast.show(_(msg`Marked all as read`), "check");
+			Toast.show("Marked all as read", "check");
 		},
 		onError: () => {
-			Toast.show(_(msg`Failed to mark all requests as read`), "xmark");
+			Toast.show("Failed to mark all requests as read", "xmark");
 		},
 	});
 
 	return (
-		<Button
-			label={_(msg`Mark all as read`)}
-			size="small"
-			color="secondary"
-			variant="solid"
-			onPress={() => markAllRead()}
-		>
+		<Button label={"Mark all as read"} size="small" color="secondary" variant="solid" onPress={() => markAllRead()}>
 			<ButtonIcon icon={CheckIcon} />
 			<ButtonText>Mark all as read</ButtonText>
 		</Button>

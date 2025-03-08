@@ -6,7 +6,7 @@ import {
 	type ModerationDecision,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { Plural, msg } from "@lingui/macro";
+import { Plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { memo, useMemo } from "react";
 import { type GestureResponderEvent, Text as RNText, StyleSheet, View } from "react-native";
@@ -199,7 +199,7 @@ let PostThreadItemLoaded = ({
 		const urip = new AtUri(post.uri);
 		return makeProfileLink(post.author, "post", urip.rkey);
 	}, [post.uri, post.author]);
-	const itemTitle = _(msg`Post by ${post.author.handle}`);
+	const itemTitle = `Post by ${post.author.handle}`;
 	const authorHref = makeProfileLink(post.author);
 	const authorTitle = post.author.handle;
 	const isThreadAuthor = getThreadAuthor(post, record) === currentAccount?.did;
@@ -207,12 +207,12 @@ let PostThreadItemLoaded = ({
 		const urip = new AtUri(post.uri);
 		return makeProfileLink(post.author, "post", urip.rkey, "liked-by");
 	}, [post.uri, post.author]);
-	const likesTitle = _(msg`Likes on this post`);
+	const likesTitle = "Likes on this post";
 	const repostsHref = React.useMemo(() => {
 		const urip = new AtUri(post.uri);
 		return makeProfileLink(post.author, "post", urip.rkey, "reposted-by");
 	}, [post.uri, post.author]);
-	const repostsTitle = _(msg`Reposts of this post`);
+	const repostsTitle = "Reposts of this post";
 	const threadgateHiddenReplies = useMergedThreadgateHiddenReplies({
 		threadgateRecord,
 	});
@@ -233,7 +233,7 @@ let PostThreadItemLoaded = ({
 		const urip = new AtUri(post.uri);
 		return makeProfileLink(post.author, "post", urip.rkey, "quotes");
 	}, [post.uri, post.author]);
-	const quotesTitle = _(msg`Quotes of this post`);
+	const quotesTitle = "Quotes of this post";
 	const onlyFollowersCanReply = !!threadgateRecord?.allow?.find(
 		(rule) => rule.$type === "app.bsky.feed.threadgate#followerRule",
 	);
@@ -264,7 +264,7 @@ let PostThreadItemLoaded = ({
 	}, [setLimitLines]);
 
 	if (!record) {
-		return <ErrorMessage message={_(msg`Invalid or unsupported post record`)} />;
+		return <ErrorMessage message={"Invalid or unsupported post record"} />;
 	}
 
 	if (isHighlightedPost) {
@@ -558,12 +558,7 @@ let PostThreadItemLoaded = ({
 								</View>
 							) : undefined}
 							{limitLines ? (
-								<TextLink
-									text={_(msg`Show More`)}
-									style={pal.link}
-									onPress={onPressShowMore}
-									href="#"
-								/>
+								<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 							) : undefined}
 							{post.embed && (
 								<View style={[a.pb_xs]}>
@@ -724,7 +719,7 @@ function ExpandedPostDetails({
 
 						<InlineLinkText
 							to={translatorUrl}
-							label={_(msg`Translate`)}
+							label={"Translate"}
 							style={[a.text_sm, pal.link]}
 							onPress={onTranslatePress}
 						>
@@ -757,8 +752,8 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 	return (
 		<>
 			<Button
-				label={_(msg`Archived post`)}
-				accessibilityHint={_(msg`Shows information about when this post was created`)}
+				label={"Archived post"}
+				accessibilityHint={"Shows information about when this post was created"}
 				onPress={(e) => {
 					e.preventDefault();
 					e.stopPropagation();
@@ -801,7 +796,7 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 					Bluesky cannot confirm the authenticity of the claimed date.
 				</Text>
 				<Prompt.Actions>
-					<Prompt.Action cta={_(msg`Okay`)} onPress={() => {}} />
+					<Prompt.Action cta={"Okay"} onPress={() => {}} />
 				</Prompt.Actions>
 			</Prompt.Outer>
 		</>

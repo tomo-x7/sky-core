@@ -1,5 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -33,27 +32,27 @@ export function SelectReportOptionView(props: {
 	const reportOptions = allReportOptions[props.params.type];
 
 	const i18n = React.useMemo(() => {
-		let title = _(msg`Report this content`);
-		let description = _(msg`Why should this content be reviewed?`);
+		let title = "Report this content";
+		let description = "Why should this content be reviewed?";
 
 		if (props.params.type === "account") {
-			title = _(msg`Report this user`);
-			description = _(msg`Why should this user be reviewed?`);
+			title = "Report this user";
+			description = "Why should this user be reviewed?";
 		} else if (props.params.type === "post") {
-			title = _(msg`Report this post`);
-			description = _(msg`Why should this post be reviewed?`);
+			title = "Report this post";
+			description = "Why should this post be reviewed?";
 		} else if (props.params.type === "list") {
-			title = _(msg`Report this list`);
-			description = _(msg`Why should this list be reviewed?`);
+			title = "Report this list";
+			description = "Why should this list be reviewed?";
 		} else if (props.params.type === "feedgen") {
-			title = _(msg`Report this feed`);
-			description = _(msg`Why should this feed be reviewed?`);
+			title = "Report this feed";
+			description = "Why should this feed be reviewed?";
 		} else if (props.params.type === "starterpack") {
-			title = _(msg`Report this starter pack`);
-			description = _(msg`Why should this starter pack be reviewed?`);
+			title = "Report this starter pack";
+			description = "Why should this starter pack be reviewed?";
 		} else if (props.params.type === "convoMessage") {
-			title = _(msg`Report this message`);
-			description = _(msg`Why should this message be reviewed?`);
+			title = "Report this message";
+			description = "Why should this message be reviewed?";
 		}
 
 		return {
@@ -70,7 +69,7 @@ export function SelectReportOptionView(props: {
 					variant="solid"
 					color="secondary"
 					shape="round"
-					label={_(msg`Go back to previous step`)}
+					label={"Go back to previous step"}
 					onPress={props.goBack}
 				>
 					<ButtonIcon icon={ChevronLeft} />
@@ -90,7 +89,7 @@ export function SelectReportOptionView(props: {
 						<Button
 							key={reportOption.reason}
 							testID={reportOption.reason}
-							label={_(msg`Create report for ${reportOption.title}`)}
+							label={`Create report for ${reportOption.title}`}
 							onPress={() => props.onSelectReportOption(reportOption)}
 						>
 							<ReportOptionButton title={reportOption.title} description={reportOption.description} />
@@ -116,7 +115,7 @@ export function SelectReportOptionView(props: {
 						</Text>
 						<Link
 							to={DMCA_LINK}
-							label={_(msg`View details for reporting a copyright violation`)}
+							label={"View details for reporting a copyright violation"}
 							size="small"
 							variant="solid"
 							color="secondary"

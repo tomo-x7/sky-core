@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
@@ -51,8 +50,8 @@ export function LogScreen({}: NativeStackScreenProps<CommonNavigatorParams, "Log
 								<TouchableOpacity
 									style={[styles.entry, pal.border, pal.view]}
 									onPress={toggler(entry.id)}
-									accessibilityLabel={_(msg`View debug entry`)}
-									accessibilityHint={_(msg`Opens additional details for a debug entry`)}
+									accessibilityLabel={"View debug entry"}
+									accessibilityHint={"Opens additional details for a debug entry"}
 								>
 									{entry.level === "debug" ? (
 										<FontAwesomeIcon icon="info" />

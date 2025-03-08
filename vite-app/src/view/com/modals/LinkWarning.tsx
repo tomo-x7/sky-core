@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
@@ -80,9 +79,9 @@ export function Component({
 						testID="confirmBtn"
 						type="primary"
 						onPress={onPressVisit}
-						accessibilityLabel={share ? _(msg`Share Link`) : _(msg`Visit Site`)}
-						accessibilityHint={share ? _(msg`Shares the linked website`) : _(msg`Opens the linked website`)}
-						label={share ? _(msg`Share Link`) : _(msg`Visit Site`)}
+						accessibilityLabel={share ? "Share Link" : "Visit Site"}
+						accessibilityHint={share ? "Shares the linked website" : "Opens the linked website"}
+						label={share ? "Share Link" : "Visit Site"}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 						labelStyle={[s.f18]}
 					/>
@@ -92,9 +91,9 @@ export function Component({
 						onPress={() => {
 							closeModal();
 						}}
-						accessibilityLabel={_(msg`Cancel`)}
-						accessibilityHint={_(msg`Cancels opening the linked website`)}
-						label={_(msg`Cancel`)}
+						accessibilityLabel={"Cancel"}
+						accessibilityHint={"Cancels opening the linked website"}
+						label={"Cancel"}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 						labelStyle={[s.f18]}
 					/>

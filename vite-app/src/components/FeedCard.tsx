@@ -1,5 +1,5 @@
 import { type AppBskyFeedDefs, type AppBskyGraphDefs, AtUri, RichText as RichTextApi } from "@atproto/api";
-import { Plural, msg } from "@lingui/macro";
+import { Plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -231,10 +231,10 @@ function SaveButtonInner({
 						},
 					]);
 				}
-				Toast.show(_(msg`Feeds updated!`));
+				Toast.show("Feeds updated!");
 			} catch (err: any) {
 				logger.error(err, { message: "FeedCard: failed to update feeds", pin });
-				Toast.show(_(msg`Failed to update feeds`), "xmark");
+				Toast.show("Failed to update feeds", "xmark");
 			}
 		},
 		[_, pin, saveFeeds, removeFeed, uri, savedFeedConfig, type],
@@ -254,7 +254,7 @@ function SaveButtonInner({
 		<>
 			<Button
 				disabled={isPending}
-				label={_(msg`Add this feed to your feeds`)}
+				label={"Add this feed to your feeds"}
 				size="small"
 				variant="ghost"
 				color="secondary"
@@ -270,10 +270,10 @@ function SaveButtonInner({
 
 			<Prompt.Basic
 				control={removePromptControl}
-				title={_(msg`Remove from your feeds?`)}
-				description={_(msg`Are you sure you want to remove this from your feeds?`)}
+				title={"Remove from your feeds?"}
+				description={"Are you sure you want to remove this from your feeds?"}
 				onConfirm={toggleSave}
-				confirmButtonCta={_(msg`Remove`)}
+				confirmButtonCta={"Remove"}
 				confirmButtonColor="negative"
 			/>
 		</>

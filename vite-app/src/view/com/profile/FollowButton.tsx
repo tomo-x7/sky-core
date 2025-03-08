@@ -32,7 +32,7 @@ export function FollowButton({
 			onFollow?.();
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
-				Toast.show(_(msg`An issue occurred, please try again.`), "xmark");
+				Toast.show("An issue occurred, please try again.", "xmark");
 			}
 		}
 	};
@@ -42,7 +42,7 @@ export function FollowButton({
 			await queueUnfollow();
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
-				Toast.show(_(msg`An issue occurred, please try again.`), "xmark");
+				Toast.show("An issue occurred, please try again.", "xmark");
 			}
 		}
 	};

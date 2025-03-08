@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
@@ -32,7 +31,7 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 						size="tiny"
 						color="secondary"
 						shape="round"
-						label={_(msg`Dismiss getting started guide`)}
+						label={"Dismiss getting started guide"}
 						onPress={endProgressGuide}
 					>
 						<ButtonIcon icon={Times} size="sm" />
@@ -43,8 +42,8 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 						<ProgressGuideTask
 							current={guide.numFollows + 1}
 							total={10 + 1}
-							title={_(msg`Follow 10 accounts`)}
-							subtitle={_(msg`Bluesky is better with friends!`)}
+							title={"Follow 10 accounts"}
+							subtitle={"Bluesky is better with friends!"}
 						/>
 						<FollowDialog guide={guide} />
 					</>
@@ -54,14 +53,14 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 						<ProgressGuideTask
 							current={guide.numLikes + 1}
 							total={10 + 1}
-							title={_(msg`Like 10 posts`)}
-							subtitle={_(msg`Teach our algorithm what you like`)}
+							title={"Like 10 posts"}
+							subtitle={"Teach our algorithm what you like"}
 						/>
 						<ProgressGuideTask
 							current={guide.numFollows + 1}
 							total={7 + 1}
-							title={_(msg`Follow 7 accounts`)}
-							subtitle={_(msg`Bluesky is better with friends!`)}
+							title={"Follow 7 accounts"}
+							subtitle={"Bluesky is better with friends!"}
 						/>
 					</>
 				)}

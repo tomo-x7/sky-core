@@ -1,4 +1,4 @@
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
@@ -72,7 +72,7 @@ export function Component({}: {}) {
 				password,
 				token,
 			});
-			Toast.show(_(msg`Your account has been deleted`));
+			Toast.show("Your account has been deleted");
 			resetToTab("HomeTab");
 			removeAccount(currentAccount);
 			closeModal();
@@ -127,8 +127,8 @@ export function Component({}: {}) {
 									style={styles.mt20}
 									onPress={onPressSendEmail}
 									accessibilityRole="button"
-									accessibilityLabel={_(msg`Send email`)}
-									accessibilityHint={_(msg`Sends email with confirmation code for account deletion`)}
+									accessibilityLabel={"Send email"}
+									accessibilityHint={"Sends email with confirmation code for account deletion"}
 								>
 									<LinearGradient
 										colors={[gradients.blueLight.start, gradients.blueLight.end]}
@@ -145,7 +145,7 @@ export function Component({}: {}) {
 									style={[styles.btn, s.mt10]}
 									onPress={onCancel}
 									accessibilityRole="button"
-									accessibilityLabel={_(msg`Cancel account deletion`)}
+									accessibilityLabel={"Cancel account deletion"}
 									accessibilityHint=""
 									onAccessibilityEscape={onCancel}
 								>
@@ -193,29 +193,29 @@ export function Component({}: {}) {
 						</Text>
 						<TextInput
 							style={[styles.textInput, pal.borderDark, pal.text, styles.mb20]}
-							placeholder={_(msg`Confirmation code`)}
+							placeholder={"Confirmation code"}
 							placeholderTextColor={pal.textLight.color}
 							keyboardAppearance={theme.colorScheme}
 							value={confirmCode}
 							onChangeText={setConfirmCode}
 							accessibilityLabelledBy="confirmationCode"
-							accessibilityLabel={_(msg`Confirmation code`)}
-							accessibilityHint={_(msg`Input confirmation code for account deletion`)}
+							accessibilityLabel={"Confirmation code"}
+							accessibilityHint={"Input confirmation code for account deletion"}
 						/>
 						<Text type="lg" style={[pal.text, styles.description]} nativeID="password">
 							Please enter your password as well:
 						</Text>
 						<TextInput
 							style={[styles.textInput, pal.borderDark, pal.text]}
-							placeholder={_(msg`Password`)}
+							placeholder={"Password"}
 							placeholderTextColor={pal.textLight.color}
 							keyboardAppearance={theme.colorScheme}
 							secureTextEntry
 							value={password}
 							onChangeText={setPassword}
 							accessibilityLabelledBy="password"
-							accessibilityLabel={_(msg`Password`)}
-							accessibilityHint={_(msg`Input password for account deletion`)}
+							accessibilityLabel={"Password"}
+							accessibilityHint={"Input password for account deletion"}
 						/>
 						{error ? (
 							<View style={styles.mt20}>
@@ -232,7 +232,7 @@ export function Component({}: {}) {
 									style={[styles.btn, styles.evilBtn, styles.mt20]}
 									onPress={onPressConfirmDelete}
 									accessibilityRole="button"
-									accessibilityLabel={_(msg`Confirm delete account`)}
+									accessibilityLabel={"Confirm delete account"}
 									accessibilityHint=""
 								>
 									<Text type="button-lg" style={[s.white, s.bold]}>
@@ -243,8 +243,8 @@ export function Component({}: {}) {
 									style={[styles.btn, s.mt10]}
 									onPress={onCancel}
 									accessibilityRole="button"
-									accessibilityLabel={_(msg`Cancel account deletion`)}
-									accessibilityHint={_(msg`Exits account deletion process`)}
+									accessibilityLabel={"Cancel account deletion"}
+									accessibilityHint={"Exits account deletion process"}
 									onAccessibilityEscape={onCancel}
 								>
 									<Text type="button-lg" style={pal.textLight}>

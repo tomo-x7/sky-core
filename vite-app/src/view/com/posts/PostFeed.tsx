@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo } from "react";
@@ -551,7 +550,7 @@ let PostFeed = ({
 			} else if (row.type === "loadMoreError") {
 				return (
 					<LoadMoreRetryBtn
-						label={_(msg`There was an issue fetching posts. Tap here to try again.`)}
+						label={"There was an issue fetching posts. Tap here to try again."}
 						onPress={onPressRetryLoadMore}
 					/>
 				);

@@ -78,7 +78,7 @@ export const VideoEmbedInnerNative = React.forwardRef(function VideoEmbedInnerNa
 					setError(e.nativeEvent.error);
 				}}
 				ref={videoRef}
-				accessibilityLabel={embed.alt ? _(msg`Video: ${embed.alt}`) : _(msg`Video`)}
+				accessibilityLabel={embed.alt ? `Video: ${embed.alt}` : "Video"}
 				accessibilityHint=""
 			/>
 			<VideoControls
@@ -127,14 +127,14 @@ function VideoControls({
 			<Pressable
 				onPress={enterFullscreen}
 				style={a.flex_1}
-				accessibilityLabel={_(msg`Video`)}
-				accessibilityHint={_(msg`Enters full screen`)}
+				accessibilityLabel={"Video"}
+				accessibilityHint={"Enters full screen"}
 				accessibilityRole="button"
 			/>
 			<ControlButton
 				onPress={togglePlayback}
-				label={isPlaying ? _(msg`Pause`) : _(msg`Play`)}
-				accessibilityHint={_(msg`Plays or pauses the video`)}
+				label={isPlaying ? "Pause" : "Play"}
+				accessibilityHint={"Plays or pauses the video"}
 				style={{ left: 6 }}
 			>
 				{isPlaying ? (
@@ -152,7 +152,7 @@ function VideoControls({
 						? _(msg({ message: "Unmute", context: "video" }))
 						: _(msg({ message: "Mute", context: "video" }))
 				}
-				accessibilityHint={_(msg`Toggles the sound`)}
+				accessibilityHint={"Toggles the sound"}
 				style={{ right: 6 }}
 			>
 				{muted ? (

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image as ExpoImage } from "react-native";
@@ -59,7 +58,7 @@ export function AvatarCircle({
 			)}
 			<View style={[a.absolute, { bottom: 2, right: 2 }]}>
 				<Button
-					label={_(msg`Select an avatar`)}
+					label={"Select an avatar"}
 					size="large"
 					shape="round"
 					variant="solid"

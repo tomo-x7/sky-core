@@ -1,5 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -75,10 +74,10 @@ export function SubmitView({
 		setSubmitting(false);
 
 		if (results.includes(true)) {
-			Toast.show(_(msg`Thank you. Your report has been sent.`));
+			Toast.show("Thank you. Your report has been sent.");
 			onSubmitComplete();
 		} else {
-			setError(_(msg`There was an issue sending your report. Please check your internet connection.`));
+			setError("There was an issue sending your report. Please check your internet connection.");
 		}
 	}, [_, params, details, selectedReportOption, selectedServices, onSubmitComplete, setError, agent]);
 
@@ -89,7 +88,7 @@ export function SubmitView({
 				variant="solid"
 				color="secondary"
 				shape="round"
-				label={_(msg`Go back to previous step`)}
+				label={"Go back to previous step"}
 				onPress={goBack}
 			>
 				<ButtonIcon icon={ChevronLeft} />
@@ -179,7 +178,7 @@ export function SubmitView({
 					size="large"
 					variant="solid"
 					color="negative"
-					label={_(msg`Send report`)}
+					label={"Send report"}
 					onPress={submit}
 					disabled={!selectedServices.length}
 				>

@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import lande from "lande";
 import { useEffect, useState } from "react";
@@ -59,7 +58,7 @@ export function SuggestedLanguage({ text }: { text: string }) {
 				<Button
 					type="default"
 					onPress={() => setLangPrefs.setPostLanguage(suggestedLanguage)}
-					accessibilityLabel={_(msg`Change post language to ${suggestedLanguageName}`)}
+					accessibilityLabel={`Change post language to ${suggestedLanguageName}`}
 					accessibilityHint=""
 				>
 					<Text type="button" style={[pal.link, s.fw600]}>

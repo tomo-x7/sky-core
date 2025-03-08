@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
@@ -74,10 +73,10 @@ export function EditProfileDialog({
 
 			<Prompt.Basic
 				control={cancelControl}
-				title={_(msg`Discard changes?`)}
-				description={_(msg`Are you sure you want to discard your changes?`)}
+				title={"Discard changes?"}
+				description={"Are you sure you want to discard your changes?"}
 				onConfirm={() => control.close()}
-				confirmButtonCta={_(msg`Discard`)}
+				confirmButtonCta={"Discard"}
 				confirmButtonColor="negative"
 			/>
 		</Dialog.Outer>
@@ -176,7 +175,7 @@ function DialogInner({
 			});
 			onUpdate?.();
 			control.close();
-			Toast.show(_(msg`Profile updated`));
+			Toast.show("Profile updated");
 		} catch (e: any) {
 			logger.error("Failed to update user profile", { message: String(e) });
 		}
@@ -205,7 +204,7 @@ function DialogInner({
 	const cancelButton = useCallback(
 		() => (
 			<Button
-				label={_(msg`Cancel`)}
+				label={"Cancel"}
 				onPress={onPressCancel}
 				size="small"
 				color="primary"
@@ -222,7 +221,7 @@ function DialogInner({
 	const saveButton = useCallback(
 		() => (
 			<Button
-				label={_(msg`Save`)}
+				label={"Save"}
 				onPress={onPressSave}
 				disabled={!dirty || isUpdatingProfile || displayNameTooLong || descriptionTooLong}
 				size="small"
@@ -239,7 +238,7 @@ function DialogInner({
 
 	return (
 		<Dialog.ScrollableInner
-			label={_(msg`Edit profile`)}
+			label={"Edit profile"}
 			style={[a.overflow_hidden]}
 			contentContainerStyle={[a.px_0, a.pt_0]}
 			header={
@@ -284,15 +283,15 @@ function DialogInner({
 						<Dialog.Input
 							defaultValue={displayName}
 							onChangeText={setDisplayName}
-							label={_(msg`Display name`)}
-							placeholder={_(msg`e.g. Alice Lastname`)}
+							label={"Display name"}
+							placeholder={"e.g. Alice Lastname"}
 							testID="editProfileDisplayNameInput"
 						/>
 					</TextField.Root>
 					{displayNameTooLong && (
 						<TextField.SuffixText
 							style={[a.text_sm, a.mt_xs, a.font_bold, { color: t.palette.negative_400 }]}
-							label={_(msg`Display name is too long`)}
+							label={"Display name is too long"}
 						>
 							<>
 								Display name is too long. The maximum number of characters is{" "}
@@ -309,15 +308,15 @@ function DialogInner({
 							defaultValue={description}
 							onChangeText={setDescription}
 							multiline
-							label={_(msg`Display name`)}
-							placeholder={_(msg`Tell us a bit about yourself`)}
+							label={"Display name"}
+							placeholder={"Tell us a bit about yourself"}
 							testID="editProfileDescriptionInput"
 						/>
 					</TextField.Root>
 					{descriptionTooLong && (
 						<TextField.SuffixText
 							style={[a.text_sm, a.mt_xs, a.font_bold, { color: t.palette.negative_400 }]}
-							label={_(msg`Description is too long`)}
+							label={"Description is too long"}
 						>
 							<>
 								Description is too long. The maximum number of characters is {DESCRIPTION_MAX_GRAPHEMES}

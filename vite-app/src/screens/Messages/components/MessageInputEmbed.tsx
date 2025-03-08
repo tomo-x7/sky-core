@@ -1,5 +1,4 @@
 import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, RichText as RichTextAPI, moderatePost } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { type RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -176,7 +175,7 @@ export function MessageInputEmbed({
 		<View style={[a.flex_row, a.gap_sm]}>
 			{content}
 			<Button
-				label={_(msg`Remove embed`)}
+				label={"Remove embed"}
 				onPress={() => {
 					LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 					setEmbed(undefined);

@@ -1,6 +1,5 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { BskyAgent } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import React, { useState } from "react";
@@ -48,7 +47,7 @@ export const ForgotPasswordForm = ({
 
 	const onPressNext = async () => {
 		if (!EmailValidator.validate(email)) {
-			return setError(_(msg`Your email appears to be invalid.`));
+			return setError("Your email appears to be invalid.");
 		}
 
 		setError("");
@@ -63,7 +62,7 @@ export const ForgotPasswordForm = ({
 			logger.warn("Failed to request password reset", { error: e });
 			setIsProcessing(false);
 			if (isNetworkError(e)) {
-				setError(_(msg`Unable to contact your service. Please check your Internet connection.`));
+				setError("Unable to contact your service. Please check your Internet connection.");
 			} else {
 				setError(cleanError(errMsg));
 			}
@@ -86,7 +85,7 @@ export const ForgotPasswordForm = ({
 					<TextField.Icon icon={At} />
 					<TextField.Input
 						testID="forgotPasswordEmail"
-						label={_(msg`Enter your email address`)}
+						label={"Enter your email address"}
 						autoCapitalize="none"
 						autoFocus
 						autoCorrect={false}
@@ -94,7 +93,7 @@ export const ForgotPasswordForm = ({
 						value={email}
 						onChangeText={setEmail}
 						editable={!isProcessing}
-						accessibilityHint={_(msg`Sets email for password reset`)}
+						accessibilityHint={"Sets email for password reset"}
 					/>
 				</TextField.Root>
 			</View>
@@ -107,14 +106,14 @@ export const ForgotPasswordForm = ({
 			<FormError error={error} />
 
 			<View style={[a.flex_row, a.align_center, a.pt_md]}>
-				<Button label={_(msg`Back`)} variant="solid" color="secondary" size="large" onPress={onPressBack}>
+				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{!serviceDescription || isProcessing ? (
 					<ActivityIndicator />
 				) : (
-					<Button label={_(msg`Next`)} variant="solid" color={"primary"} size="large" onPress={onPressNext}>
+					<Button label={"Next"} variant="solid" color={"primary"} size="large" onPress={onPressNext}>
 						<ButtonText>Next</ButtonText>
 					</Button>
 				)}
@@ -126,8 +125,8 @@ export const ForgotPasswordForm = ({
 				<Button
 					testID="skipSendEmailButton"
 					onPress={onEmailSent}
-					label={_(msg`Go to next`)}
-					accessibilityHint={_(msg`Navigates to the next screen`)}
+					label={"Go to next"}
+					accessibilityHint={"Navigates to the next screen"}
 					size="large"
 					variant="ghost"
 					color="secondary"

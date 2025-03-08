@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, AppBskyFeedDefs, ModerationDecision } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -71,7 +70,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			author && (author.viewer?.blocking || author.viewer?.blockedBy || author.viewer?.blockingByList),
 		);
 		if (isBlocked) {
-			Toast.show(_(msg`Cannot interact with a blocked user`), "exclamation-circle");
+			Toast.show("Cannot interact with a blocked user", "exclamation-circle");
 		} else {
 			setState((prevOpts) => {
 				if (prevOpts) {

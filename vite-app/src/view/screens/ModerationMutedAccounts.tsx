@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -73,7 +72,7 @@ export function ModerationMutedAccounts({}: Props) {
 	}) => <ProfileCard testID={`mutedAccount-${index}`} key={item.did} profile={item} noModFilter />;
 	return (
 		<Layout.Screen testID="mutedAccountsScreen">
-			<ViewHeader title={_(msg`Muted Accounts`)} showOnDesktop />
+			<ViewHeader title={"Muted Accounts"} showOnDesktop />
 			<Layout.Center style={[a.flex_1, { paddingBottom: 100 }]}>
 				<Text
 					type="sm"

@@ -147,7 +147,7 @@ export function FeedPage({
 				</FeedFeedbackProvider>
 			</MainScrollProvider>
 			{(isScrolledDown || hasNew) && (
-				<LoadLatestBtn onPress={onPressLoadLatest} label={_(msg`Load new posts`)} showIndicator={hasNew} />
+				<LoadLatestBtn onPress={onPressLoadLatest} label={"Load new posts"} showIndicator={hasNew} />
 			)}
 
 			{hasSession && (

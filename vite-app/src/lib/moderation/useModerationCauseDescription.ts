@@ -38,36 +38,36 @@ export function useModerationCauseDescription(
 		if (!cause) {
 			return {
 				icon: Warning,
-				name: _(msg`Content Warning`),
-				description: _(msg`Moderator has chosen to set a general warning on the content.`),
+				name: "Content Warning",
+				description: "Moderator has chosen to set a general warning on the content.",
 			};
 		}
 		if (cause.type === "blocking") {
 			if (cause.source.type === "list") {
 				return {
 					icon: CircleBanSign,
-					name: _(msg`User Blocked by "${cause.source.list.name}"`),
-					description: _(msg`You have blocked this user. You cannot view their content.`),
+					name: `User Blocked by "${cause.source.list.name}"`,
+					description: "You have blocked this user. You cannot view their content.",
 				};
 			} else {
 				return {
 					icon: CircleBanSign,
-					name: _(msg`User Blocked`),
-					description: _(msg`You have blocked this user. You cannot view their content.`),
+					name: "User Blocked",
+					description: "You have blocked this user. You cannot view their content.",
 				};
 			}
 		}
 		if (cause.type === "blocked-by") {
 			return {
 				icon: CircleBanSign,
-				name: _(msg`User Blocking You`),
-				description: _(msg`This user has blocked you. You cannot view their content.`),
+				name: "User Blocking You",
+				description: "This user has blocked you. You cannot view their content.",
 			};
 		}
 		if (cause.type === "block-other") {
 			return {
 				icon: CircleBanSign,
-				name: _(msg`Content Not Available`),
+				name: "Content Not Available",
 				description: _(
 					msg`This content is not available because one of the users involved has blocked the other.`,
 				),
@@ -77,39 +77,37 @@ export function useModerationCauseDescription(
 			if (cause.source.type === "list") {
 				return {
 					icon: EyeSlash,
-					name: _(msg`Muted by "${cause.source.list.name}"`),
-					description: _(msg`You have muted this user`),
+					name: `Muted by "${cause.source.list.name}"`,
+					description: "You have muted this user",
 				};
 			} else {
 				return {
 					icon: EyeSlash,
-					name: _(msg`Account Muted`),
-					description: _(msg`You have muted this account.`),
+					name: "Account Muted",
+					description: "You have muted this account.",
 				};
 			}
 		}
 		if (cause.type === "mute-word") {
 			return {
 				icon: EyeSlash,
-				name: _(msg`Post Hidden by Muted Word`),
-				description: _(msg`You've chosen to hide a word or tag within this post.`),
+				name: "Post Hidden by Muted Word",
+				description: `You've chosen to hide a word or tag within this post.`,
 			};
 		}
 		if (cause.type === "hidden") {
 			return {
 				icon: EyeSlash,
-				name: _(msg`Post Hidden by You`),
-				description: _(msg`You have hidden this post`),
+				name: "Post Hidden by You",
+				description: "You have hidden this post",
 			};
 		}
 		if (cause.type === "reply-hidden") {
 			const isMe = currentAccount?.did === cause.source.did;
 			return {
 				icon: EyeSlash,
-				name: isMe ? _(msg`Reply Hidden by You`) : _(msg`Reply Hidden by Thread Author`),
-				description: isMe
-					? _(msg`You hid this reply.`)
-					: _(msg`The author of this thread has hidden this reply.`),
+				name: isMe ? "Reply Hidden by You" : "Reply Hidden by Thread Author",
+				description: isMe ? "You hid this reply." : "The author of this thread has hidden this reply.",
 			};
 		}
 		if (cause.type === "label") {
@@ -123,11 +121,11 @@ export function useModerationCauseDescription(
 					source = "moderation.bsky.app";
 					sourceDisplayName = "Bluesky Moderation Service";
 				} else {
-					source = _(msg`an unknown labeler`);
+					source = "an unknown labeler";
 				}
 			}
 			if (def.identifier === "porn" || def.identifier === "sexual") {
-				strings.name = _(msg`Adult Content`);
+				strings.name = "Adult Content";
 			}
 
 			return {

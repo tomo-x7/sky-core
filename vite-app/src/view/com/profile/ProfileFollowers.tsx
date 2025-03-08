@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 
@@ -79,9 +78,7 @@ export function ProfileFollowers({ name }: { name: string }) {
 				isLoading={isDidLoading || isFollowersLoading}
 				isError={isError}
 				emptyType="results"
-				emptyMessage={
-					isMe ? _(msg`You do not have any followers.`) : _(msg`This user doesn't have any followers.`)
-				}
+				emptyMessage={isMe ? "You do not have any followers." : `This user doesn't have any followers.`}
 				errorMessage={cleanError(resolveError || error)}
 				onRetry={isError ? refetch : undefined}
 				sideBorders={false}

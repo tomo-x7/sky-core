@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -53,7 +52,7 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 	}));
 
 	const renderPostsEmpty = React.useCallback(() => {
-		return <EmptyState icon="growth" message={_(msg`No posts yet.`)} />;
+		return <EmptyState icon="growth" message={"No posts yet."} />;
 	}, [_]);
 
 	React.useEffect(() => {
@@ -81,7 +80,7 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 				isVideoFeed={isVideoFeed}
 			/>
 			{(isScrolledDown || hasNew) && (
-				<LoadLatestBtn onPress={onScrollToTop} label={_(msg`Load new posts`)} showIndicator={hasNew} />
+				<LoadLatestBtn onPress={onScrollToTop} label={"Load new posts"} showIndicator={hasNew} />
 			)}
 		</View>
 	);

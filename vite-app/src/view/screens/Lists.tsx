@@ -1,5 +1,5 @@
 import { AtUri } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -61,7 +61,7 @@ export function ListsScreen({}: Props) {
 					<Layout.Header.TitleText>Lists</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button
-					label={_(msg`New list`)}
+					label={"New list"}
 					testID="newUserListBtn"
 					color="secondary"
 					variant="solid"
@@ -76,7 +76,7 @@ export function ListsScreen({}: Props) {
 			</Layout.Header.Outer>
 			<MyLists filter="curate" style={a.flex_grow} />
 			<VerifyEmailDialog
-				reasonText={_(msg`Before creating a list, you must first verify your email.`)}
+				reasonText={"Before creating a list, you must first verify your email."}
 				control={control}
 			/>
 		</Layout.Screen>

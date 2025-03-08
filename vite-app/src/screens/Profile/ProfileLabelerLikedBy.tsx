@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
@@ -26,7 +25,7 @@ export function ProfileLabelerLikedByScreen({
 
 	return (
 		<Layout.Screen>
-			<ViewHeader title={_(msg`Liked By`)} />
+			<ViewHeader title={"Liked By"} />
 			<LikedByList uri={uri} />
 		</Layout.Screen>
 	);

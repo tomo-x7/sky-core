@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useState } from "react";
@@ -108,7 +107,7 @@ export function Component({
 				newUserAvatar,
 				newUserBanner,
 			});
-			Toast.show(_(msg`Profile updated`));
+			Toast.show("Profile updated");
 			onUpdate?.();
 			closeModal();
 		} catch (e: any) {
@@ -153,13 +152,13 @@ export function Component({
 						<TextInput
 							testID="editProfileDisplayNameInput"
 							style={[styles.textInput, pal.border, pal.text]}
-							placeholder={_(msg`e.g. Alice Roberts`)}
+							placeholder={"e.g. Alice Roberts"}
 							placeholderTextColor={colors.gray4}
 							value={displayName}
 							onChangeText={(v) => setDisplayName(enforceLen(v, MAX_DISPLAY_NAME))}
 							accessible={true}
-							accessibilityLabel={_(msg`Display name`)}
-							accessibilityHint={_(msg`Edit your display name`)}
+							accessibilityLabel={"Display name"}
+							accessibilityHint={"Edit your display name"}
 						/>
 					</View>
 					<View style={s.pb10}>
@@ -167,15 +166,15 @@ export function Component({
 						<TextInput
 							testID="editProfileDescriptionInput"
 							style={[styles.textArea, pal.border, pal.text]}
-							placeholder={_(msg`e.g. Artist, dog-lover, and avid reader.`)}
+							placeholder={"e.g. Artist, dog-lover, and avid reader."}
 							placeholderTextColor={colors.gray4}
 							keyboardAppearance={theme.colorScheme}
 							multiline
 							value={description}
 							onChangeText={(v) => setDescription(enforceLen(v, MAX_DESCRIPTION))}
 							accessible={true}
-							accessibilityLabel={_(msg`Description`)}
-							accessibilityHint={_(msg`Edit your profile description`)}
+							accessibilityLabel={"Description"}
+							accessibilityHint={"Edit your profile description"}
 						/>
 					</View>
 					{updateMutation.isPending ? (
@@ -188,8 +187,8 @@ export function Component({
 							style={s.mt10}
 							onPress={onPressSave}
 							accessibilityRole="button"
-							accessibilityLabel={_(msg`Save`)}
-							accessibilityHint={_(msg`Saves any changes to your profile`)}
+							accessibilityLabel={"Save"}
+							accessibilityHint={"Saves any changes to your profile"}
 						>
 							<LinearGradient
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
@@ -208,7 +207,7 @@ export function Component({
 							style={s.mt5}
 							onPress={onPressCancel}
 							accessibilityRole="button"
-							accessibilityLabel={_(msg`Cancel profile editing`)}
+							accessibilityLabel={"Cancel profile editing"}
 							accessibilityHint=""
 							onAccessibilityEscape={onPressCancel}
 						>

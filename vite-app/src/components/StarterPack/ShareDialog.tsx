@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { Image } from "react-native";
@@ -58,16 +57,16 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 		const res = await requestMediaLibraryPermissionsAsync();
 
 		if (!res) {
-			Toast.show(_(msg`You must grant access to your photo library to save the image.`), "xmark");
+			Toast.show("You must grant access to your photo library to save the image.", "xmark");
 			return;
 		}
 
 		try {
 			await saveImageToMediaLibrary({ uri: imageUrl });
-			Toast.show(_(msg`Image saved to your camera roll!`));
+			Toast.show("Image saved to your camera roll!");
 			control.close();
 		} catch (e: unknown) {
-			Toast.show(_(msg`An error occurred while saving the QR code!`), "xmark");
+			Toast.show("An error occurred while saving the QR code!", "xmark");
 			logger.error("Failed to save QR code", { error: e });
 			return;
 		}
@@ -75,7 +74,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 
 	return (
 		<>
-			<Dialog.ScrollableInner label={_(msg`Share link dialog`)}>
+			<Dialog.ScrollableInner label={"Share link dialog"}>
 				{!imageLoaded || !link ? (
 					<View style={[a.p_xl, a.align_center]}>
 						<Loader size="xl" />
@@ -102,7 +101,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 						/>
 						<View style={[a.gap_md, isWeb && [a.gap_sm, a.flex_row_reverse, { marginLeft: "auto" }]]}>
 							<Button
-								label={isWeb ? _(msg`Copy link`) : _(msg`Share link`)}
+								label={isWeb ? "Copy link" : "Share link"}
 								variant="solid"
 								color="secondary"
 								size="small"
@@ -112,7 +111,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								<ButtonText>{isWeb ? <>Copy Link</> : <>Share link</>}</ButtonText>
 							</Button>
 							<Button
-								label={_(msg`Share QR code`)}
+								label={"Share QR code"}
 								variant="solid"
 								color="secondary"
 								size="small"
@@ -127,7 +126,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 							</Button>
 							{isNative && (
 								<Button
-									label={_(msg`Save image`)}
+									label={"Save image"}
 									variant="ghost"
 									color="secondary"
 									size="small"

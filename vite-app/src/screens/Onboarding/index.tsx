@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 
@@ -17,28 +16,28 @@ export function Onboarding() {
 
 	const interestsDisplayNames = React.useMemo(() => {
 		return {
-			news: _(msg`News`),
-			journalism: _(msg`Journalism`),
-			nature: _(msg`Nature`),
-			art: _(msg`Art`),
-			comics: _(msg`Comics`),
-			writers: _(msg`Writers`),
-			culture: _(msg`Culture`),
-			sports: _(msg`Sports`),
-			pets: _(msg`Pets`),
-			animals: _(msg`Animals`),
-			books: _(msg`Books`),
-			education: _(msg`Education`),
-			climate: _(msg`Climate`),
-			science: _(msg`Science`),
-			politics: _(msg`Politics`),
-			fitness: _(msg`Fitness`),
-			tech: _(msg`Tech`),
-			dev: _(msg`Software Dev`),
-			comedy: _(msg`Comedy`),
-			gaming: _(msg`Video Games`),
-			food: _(msg`Food`),
-			cooking: _(msg`Cooking`),
+			news: "News",
+			journalism: "Journalism",
+			nature: "Nature",
+			art: "Art",
+			comics: "Comics",
+			writers: "Writers",
+			culture: "Culture",
+			sports: "Sports",
+			pets: "Pets",
+			animals: "Animals",
+			books: "Books",
+			education: "Education",
+			climate: "Climate",
+			science: "Science",
+			politics: "Politics",
+			fitness: "Fitness",
+			tech: "Tech",
+			dev: "Software Dev",
+			comedy: "Comedy",
+			gaming: "Video Games",
+			food: "Food",
+			cooking: "Cooking",
 		};
 	}, [_]);
 

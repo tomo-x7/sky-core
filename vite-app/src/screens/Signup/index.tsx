@@ -1,5 +1,4 @@
 import { AppBskyGraphStarterpack } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -56,7 +55,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 			dispatch({ type: "setServiceDescription", value: undefined });
 			dispatch({
 				type: "setError",
-				value: _(msg`Unable to contact your service. Please check your Internet connection.`),
+				value: "Unable to contact your service. Please check your Internet connection.",
 			});
 		} else if (serviceInfo) {
 			dispatch({ type: "setServiceDescription", value: serviceInfo });
@@ -77,8 +76,8 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 		<SignupContext.Provider value={{ state, dispatch }}>
 			<LoggedOutLayout
 				leadin=""
-				title={_(msg`Create Account`)}
-				description={_(msg`We're so excited to have you join us!`)}
+				title={"Create Account"}
+				description={`We're so excited to have you join us!`}
 				scrollable
 			>
 				<View testID="createAccount" style={a.flex_1}>
@@ -148,7 +147,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 							<Text style={[t.atoms.text_contrast_medium, !gtMobile && a.text_md]}>
 								Having trouble?{" "}
 								<InlineLinkText
-									label={_(msg`Contact support`)}
+									label={"Contact support"}
 									to={FEEDBACK_FORM_URL({ email: state.email })}
 									style={[!gtMobile && a.text_md]}
 								>

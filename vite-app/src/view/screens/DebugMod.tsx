@@ -14,7 +14,6 @@ import {
 	moderatePost,
 	moderateProfile,
 } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 /* eslint-disable no-restricted-imports */
 import React from "react";
@@ -764,7 +763,7 @@ function MockAccountScreen({
 	const { _ } = useLingui();
 	return (
 		<View style={[t.atoms.border_contrast_medium, a.border, a.mb_md]}>
-			<ScreenHider style={{}} screenDescription={_(msg`profile`)} modui={moderation.ui("profileView")}>
+			<ScreenHider style={{}} screenDescription={"profile"} modui={moderation.ui("profileView")}>
 				<ProfileHeaderStandard
 					// @ts-ignore ProfileViewBasic is close enough -prf
 					profile={profile}

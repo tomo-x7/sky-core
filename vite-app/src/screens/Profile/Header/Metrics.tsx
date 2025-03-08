@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg, plural } from "@lingui/macro";
+import { plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -43,7 +43,7 @@ export function ProfileHeaderMetrics({
 				testID="profileHeaderFollowsButton"
 				style={[a.flex_row, t.atoms.text]}
 				to={makeProfileLink(profile, "follows")}
-				label={_(msg`${following} following`)}
+				label={`${following} following`}
 			>
 				<Text style={[a.font_bold, a.text_md]}>{following} </Text>
 				<Text style={[t.atoms.text_contrast_medium, a.text_md]}>{pluralizedFollowings}</Text>

@@ -1,5 +1,4 @@
 import { TID } from "@atproto/common-web";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -38,14 +37,14 @@ export function NoSavedFeedsOfAnyType() {
 
 			<Button
 				disabled={isPending}
-				label={_(msg`Apply default recommended feeds`)}
+				label={"Apply default recommended feeds"}
 				size="small"
 				variant="solid"
 				color="primary"
 				onPress={addRecommendedFeeds}
 			>
 				<ButtonIcon icon={Plus} position="left" />
-				<ButtonText>{_(msg`Use recommended`)}</ButtonText>
+				<ButtonText>{"Use recommended"}</ButtonText>
 			</Button>
 		</View>
 	);

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View } from "react-native";
@@ -97,11 +96,11 @@ export function NotificationFeed({
 	const renderItem = React.useCallback(
 		({ item, index }: ListRenderItemInfo<any>) => {
 			if (item === EMPTY_FEED_ITEM) {
-				return <EmptyState icon="bell" message={_(msg`No notifications yet!`)} style={styles.emptyState} />;
+				return <EmptyState icon="bell" message={"No notifications yet!"} style={styles.emptyState} />;
 			} else if (item === LOAD_MORE_ERROR_ITEM) {
 				return (
 					<LoadMoreRetryBtn
-						label={_(msg`There was an issue fetching notifications. Tap here to try again.`)}
+						label={"There was an issue fetching notifications. Tap here to try again."}
 						onPress={onPressRetryLoadMore}
 					/>
 				);

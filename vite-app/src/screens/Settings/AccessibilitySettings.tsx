@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -47,7 +46,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 						<SettingsList.ItemText>Alt text</SettingsList.ItemText>
 						<Toggle.Item
 							name="require_alt_text"
-							label={_(msg`Require alt text before posting`)}
+							label={"Require alt text before posting"}
 							value={requireAltTextEnabled ?? false}
 							onChange={(value) => setRequireAltTextEnabled(value)}
 							style={[a.w_full]}
@@ -57,7 +56,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 						</Toggle.Item>
 						<Toggle.Item
 							name="large_alt_badge"
-							label={_(msg`Display larger alt text badges`)}
+							label={"Display larger alt text badges"}
 							value={!!largeAltBadgeEnabled}
 							onChange={(value) => setLargeAltBadgeEnabled(value)}
 							style={[a.w_full]}
@@ -74,7 +73,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 								<SettingsList.ItemText>Haptics</SettingsList.ItemText>
 								<Toggle.Item
 									name="haptics"
-									label={_(msg`Disable haptic feedback`)}
+									label={"Disable haptic feedback"}
 									value={hapticsDisabled ?? false}
 									onChange={(value) => setHapticsDisabled(value)}
 									style={[a.w_full]}
@@ -89,7 +88,7 @@ export function AccessibilitySettingsScreen({}: Props) {
 						<Admonition type="info" style={[a.flex_1]}>
 							<>
 								Autoplay options have moved to the{" "}
-								<InlineLinkText to="/settings/content-and-media" label={_(msg`Content and media`)}>
+								<InlineLinkText to="/settings/content-and-media" label={"Content and media"}>
 									Content and Media settings
 								</InlineLinkText>
 								.

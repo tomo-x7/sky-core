@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
@@ -27,7 +26,7 @@ export const ProfileFeedLikedByScreen = ({ route }: Props) => {
 	return (
 		<Layout.Screen testID="postLikedByScreen">
 			<CenteredView sideBorders={true}>
-				<ViewHeader title={_(msg`Liked By`)} />
+				<ViewHeader title={"Liked By"} />
 				<PostLikedByComponent uri={uri} />
 			</CenteredView>
 		</Layout.Screen>

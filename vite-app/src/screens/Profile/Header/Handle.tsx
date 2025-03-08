@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -42,7 +41,7 @@ export function ProfileHeaderHandle({
 					web({ wordBreak: "break-all" }),
 				]}
 			>
-				{invalidHandle ? _(msg`⚠Invalid Handle`) : `@${profile.handle}`}
+				{invalidHandle ? "⚠Invalid Handle" : `@${profile.handle}`}
 			</Text>
 		</View>
 	);

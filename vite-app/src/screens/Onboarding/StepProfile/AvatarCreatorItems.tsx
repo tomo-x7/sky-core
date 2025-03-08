@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -69,7 +68,7 @@ export function AvatarCreatorItems({
 					? emojiNames.map((emojiName) => (
 							<Button
 								key={emojiName}
-								label={_(msg`Select the ${emojiName} emoji as your avatar`)}
+								label={`Select the ${emojiName} emoji as your avatar`}
 								size="small"
 								shape="round"
 								variant="solid"
@@ -94,7 +93,7 @@ export function AvatarCreatorItems({
 					: avatarColors.map((color) => (
 							<Button
 								key={color}
-								label={_(msg`Choose this color as your avatar`)}
+								label={"Choose this color as your avatar"}
 								size="small"
 								shape="round"
 								variant="solid"

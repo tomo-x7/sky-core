@@ -1,5 +1,5 @@
 import { type AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useMemo, useState } from "react";
@@ -129,7 +129,7 @@ export function Component({
 	const onPressSave = useCallback(async () => {
 		const nameTrimmed = name.trim();
 		if (!nameTrimmed) {
-			setError(_(msg`Name is required`));
+			setError("Name is required");
 			return;
 		}
 		setProcessing(true);
@@ -151,7 +151,7 @@ export function Component({
 					descriptionFacets: richText.facets,
 					avatar: newAvatar,
 				});
-				Toast.show(isCurateList ? _(msg`User list updated`) : _(msg`Moderation list updated`));
+				Toast.show(isCurateList ? "User list updated" : "Moderation list updated");
 				onSave?.(list.uri);
 			} else {
 				const res = await listCreateMutation.mutateAsync({
@@ -161,13 +161,13 @@ export function Component({
 					descriptionFacets: richText.facets,
 					avatar: newAvatar,
 				});
-				Toast.show(isCurateList ? _(msg`User list created`) : _(msg`Moderation list created`));
+				Toast.show(isCurateList ? "User list created" : "Moderation list created");
 				onSave?.(res.uri);
 			}
 			closeModal();
 		} catch (e: any) {
 			if (isNetworkError(e)) {
-				setError(_(msg`Failed to create the list. Check your internet connection and try again.`));
+				setError("Failed to create the list. Check your internet connection and try again.");
 			} else {
 				setError(cleanError(e));
 			}
@@ -234,12 +234,12 @@ export function Component({
 						<TextInput
 							testID="editNameInput"
 							style={[styles.textInput, pal.border, pal.text]}
-							placeholder={isCurateList ? _(msg`e.g. Great Posters`) : _(msg`e.g. Spammers`)}
+							placeholder={isCurateList ? "e.g. Great Posters" : "e.g. Spammers"}
 							placeholderTextColor={colors.gray4}
 							value={name}
 							onChangeText={(v) => setName(enforceLen(v, MAX_NAME))}
 							accessible={true}
-							accessibilityLabel={_(msg`Name`)}
+							accessibilityLabel={"Name"}
 							accessibilityHint=""
 							accessibilityLabelledBy="list-name"
 						/>
@@ -258,8 +258,8 @@ export function Component({
 							style={[styles.textArea, pal.border, pal.text]}
 							placeholder={
 								isCurateList
-									? _(msg`e.g. The posters who never miss.`)
-									: _(msg`e.g. Users that repeatedly reply with ads.`)
+									? "e.g. The posters who never miss."
+									: "e.g. Users that repeatedly reply with ads."
 							}
 							placeholderTextColor={colors.gray4}
 							keyboardAppearance={theme.colorScheme}
@@ -267,7 +267,7 @@ export function Component({
 							value={descriptionRt.text}
 							onChangeText={onDescriptionChange}
 							accessible={true}
-							accessibilityLabel={_(msg`Description`)}
+							accessibilityLabel={"Description"}
 							accessibilityHint=""
 							accessibilityLabelledBy="list-description"
 						/>
@@ -283,7 +283,7 @@ export function Component({
 							disabled={isDescriptionOver}
 							onPress={onPressSave}
 							accessibilityRole="button"
-							accessibilityLabel={_(msg`Save`)}
+							accessibilityLabel={"Save"}
 							accessibilityHint=""
 						>
 							<LinearGradient
@@ -303,7 +303,7 @@ export function Component({
 						style={s.mt5}
 						onPress={onPressCancel}
 						accessibilityRole="button"
-						accessibilityLabel={_(msg`Cancel`)}
+						accessibilityLabel={"Cancel"}
 						accessibilityHint=""
 						onAccessibilityEscape={onPressCancel}
 					>

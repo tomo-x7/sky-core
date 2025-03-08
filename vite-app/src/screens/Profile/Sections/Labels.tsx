@@ -4,7 +4,6 @@ import {
 	type ModerationOpts,
 	interpretLabelValueDefinitions,
 } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View, findNodeHandle } from "react-native";
@@ -78,7 +77,7 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 					<Loader size="xl" />
 				</View>
 			) : labelerError || !labelerInfo ? (
-				<ErrorState error={labelerError?.toString() || _(msg`Something went wrong, please try again.`)} />
+				<ErrorState error={labelerError?.toString() || "Something went wrong, please try again."} />
 			) : (
 				<ProfileLabelsSectionInner
 					moderationOpts={moderationOpts}

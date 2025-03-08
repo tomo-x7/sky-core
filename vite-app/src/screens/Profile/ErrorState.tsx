@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -42,7 +41,7 @@ export function ErrorState({ error }: { error: string }) {
 					size="small"
 					color="secondary"
 					variant="solid"
-					label={_(msg`Go Back`)}
+					label={"Go Back"}
 					accessibilityHint="Returns to previous page"
 					onPress={onPressBack}
 				>

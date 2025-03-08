@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -15,14 +14,14 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 	const { description, help, cta } = React.useMemo(() => {
 		return {
 			[ConvoItemError.FirehoseFailed]: {
-				description: _(msg`This chat was disconnected`),
-				help: _(msg`Press to attempt reconnection`),
-				cta: _(msg`Reconnect`),
+				description: "This chat was disconnected",
+				help: "Press to attempt reconnection",
+				cta: "Reconnect",
 			},
 			[ConvoItemError.HistoryFailed]: {
-				description: _(msg`Failed to load past messages`),
-				help: _(msg`Press to retry`),
-				cta: _(msg`Retry`),
+				description: "Failed to load past messages",
+				help: "Press to retry",
+				cta: "Retry",
 			},
 		}[item.code];
 	}, [_, item.code]);

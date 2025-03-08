@@ -1,5 +1,4 @@
 import Picker from "@emoji-mart/react";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { FocusScope } from "@radix-ui/react-focus-scope";
@@ -133,8 +132,8 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 			>
 				<Pressable
 					accessible
-					accessibilityLabel={_(msg`Close emoji picker`)}
-					accessibilityHint={_(msg`Closes the emoji picker`)}
+					accessibilityLabel={"Close emoji picker"}
+					accessibilityHint={"Closes the emoji picker"}
 					onPress={close}
 					style={[a.fixed, a.inset_0]}
 				/>
@@ -168,8 +167,8 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 
 				<Pressable
 					accessible
-					accessibilityLabel={_(msg`Close emoji picker`)}
-					accessibilityHint={_(msg`Closes the emoji picker`)}
+					accessibilityLabel={"Close emoji picker"}
+					accessibilityHint={"Closes the emoji picker"}
 					onPress={close}
 					style={[a.fixed, a.inset_0]}
 				/>

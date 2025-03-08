@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
@@ -77,7 +76,7 @@ const ImageAltTextInner = ({
 	}, [image, windim]);
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Add alt text`)}>
+		<Dialog.ScrollableInner label={"Add alt text"}>
 			<Dialog.Close />
 
 			<View>
@@ -103,7 +102,7 @@ const ImageAltTextInner = ({
 						<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 						<TextField.Root>
 							<Dialog.Input
-								label={_(msg`Alt text`)}
+								label={"Alt text"}
 								onChangeText={(text) => {
 									setAltText(text);
 								}}
@@ -127,7 +126,7 @@ const ImageAltTextInner = ({
 
 				<AltTextCounterWrapper altText={altText}>
 					<Button
-						label={_(msg`Save`)}
+						label={"Save"}
 						disabled={altText === image.alt}
 						size="large"
 						color="primary"

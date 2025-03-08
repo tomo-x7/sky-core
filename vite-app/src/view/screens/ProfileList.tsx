@@ -153,7 +153,7 @@ function ProfileListScreenLoaded({
 		return moderateUserList(list, moderationOpts);
 	}, [list, moderationOpts]);
 
-	useSetTitle(isHidden ? _(msg`List Hidden`) : list.name);
+	useSetTitle(isHidden ? "List Hidden" : list.name);
 
 	useFocusEffect(
 		useCallback(() => {
@@ -228,7 +228,7 @@ function ProfileListScreenLoaded({
 							onPress={() => openComposer({})}
 							icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
 							accessibilityRole="button"
-							accessibilityLabel={_(msg`New post`)}
+							accessibilityLabel={"New post"}
 							accessibilityHint=""
 						/>
 					</View>
@@ -255,7 +255,7 @@ function ProfileListScreenLoaded({
 						onPress={() => openComposer({})}
 						icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
 						accessibilityRole="button"
-						accessibilityLabel={_(msg`New post`)}
+						accessibilityLabel={"New post"}
 						accessibilityHint=""
 					/>
 				</View>
@@ -315,7 +315,7 @@ function Header({
 						pinned,
 					},
 				]);
-				Toast.show(pinned ? _(msg`Pinned to your feeds`) : _(msg`Unpinned from your feeds`));
+				Toast.show(pinned ? "Pinned to your feeds" : "Unpinned from your feeds");
 			} else {
 				await addSavedFeeds([
 					{
@@ -324,10 +324,10 @@ function Header({
 						pinned: true,
 					},
 				]);
-				Toast.show(_(msg`Saved to your feeds`));
+				Toast.show("Saved to your feeds");
 			}
 		} catch (e) {
-			Toast.show(_(msg`There was an issue contacting the server`), "xmark");
+			Toast.show("There was an issue contacting the server", "xmark");
 			logger.error("Failed to toggle pinned feed", { message: e });
 		}
 	}, [playHaptic, addSavedFeeds, updateSavedFeeds, list.uri, _, savedFeedConfig]);
@@ -337,9 +337,9 @@ function Header({
 		if (!savedFeedConfig) return;
 		try {
 			await removeSavedFeed(savedFeedConfig);
-			Toast.show(_(msg`Removed from your feeds`));
+			Toast.show("Removed from your feeds");
 		} catch (e) {
-			Toast.show(_(msg`There was an issue contacting the server`), "xmark");
+			Toast.show("There was an issue contacting the server", "xmark");
 			logger.error("Failed to remove pinned list", { message: e });
 		}
 	}, [playHaptic, removeSavedFeed, _, savedFeedConfig]);
@@ -347,36 +347,36 @@ function Header({
 	const onSubscribeMute = useCallback(async () => {
 		try {
 			await listMuteMutation.mutateAsync({ uri: list.uri, mute: true });
-			Toast.show(_(msg`List muted`));
+			Toast.show("List muted");
 		} catch {
-			Toast.show(_(msg`There was an issue. Please check your internet connection and try again.`));
+			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
 	}, [list, listMuteMutation, _]);
 
 	const onUnsubscribeMute = useCallback(async () => {
 		try {
 			await listMuteMutation.mutateAsync({ uri: list.uri, mute: false });
-			Toast.show(_(msg`List unmuted`));
+			Toast.show("List unmuted");
 		} catch {
-			Toast.show(_(msg`There was an issue. Please check your internet connection and try again.`));
+			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
 	}, [list, listMuteMutation, _]);
 
 	const onSubscribeBlock = useCallback(async () => {
 		try {
 			await listBlockMutation.mutateAsync({ uri: list.uri, block: true });
-			Toast.show(_(msg`List blocked`));
+			Toast.show("List blocked");
 		} catch {
-			Toast.show(_(msg`There was an issue. Please check your internet connection and try again.`));
+			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
 	}, [list, listBlockMutation, _]);
 
 	const onUnsubscribeBlock = useCallback(async () => {
 		try {
 			await listBlockMutation.mutateAsync({ uri: list.uri, block: false });
-			Toast.show(_(msg`List unblocked`));
+			Toast.show("List unblocked");
 		} catch {
-			Toast.show(_(msg`There was an issue. Please check your internet connection and try again.`));
+			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
 	}, [list, listBlockMutation, _]);
 
@@ -394,7 +394,7 @@ function Header({
 			await removeSavedFeed(savedFeedConfig);
 		}
 
-		Toast.show(_(msg`List deleted`));
+		Toast.show("List deleted");
 		if (navigation.canGoBack()) {
 			navigation.goBack();
 		} else {
@@ -415,7 +415,7 @@ function Header({
 		const items: DropdownItem[] = [
 			{
 				testID: "listHeaderDropdownShareBtn",
-				label: isWeb ? _(msg`Copy link to list`) : _(msg`Share`),
+				label: isWeb ? "Copy link to list" : "Share",
 				onPress: onPressShare,
 				icon: {
 					ios: {
@@ -430,7 +430,7 @@ function Header({
 		if (savedFeedConfig) {
 			items.push({
 				testID: "listHeaderDropdownRemoveFromFeedsBtn",
-				label: _(msg`Remove from my feeds`),
+				label: "Remove from my feeds",
 				onPress: onRemoveFromSavedFeeds,
 				icon: {
 					ios: {
@@ -446,7 +446,7 @@ function Header({
 			items.push({ label: "separator" });
 			items.push({
 				testID: "listHeaderDropdownEditBtn",
-				label: _(msg`Edit list details`),
+				label: "Edit list details",
 				onPress: onPressEdit,
 				icon: {
 					ios: {
@@ -458,7 +458,7 @@ function Header({
 			});
 			items.push({
 				testID: "listHeaderDropdownDeleteBtn",
-				label: _(msg`Delete List`),
+				label: "Delete List",
 				onPress: deleteListPromptControl.open,
 				icon: {
 					ios: {
@@ -472,7 +472,7 @@ function Header({
 			items.push({ label: "separator" });
 			items.push({
 				testID: "listHeaderDropdownReportBtn",
-				label: _(msg`Report List`),
+				label: "Report List",
 				onPress: onPressReport,
 				icon: {
 					ios: {
@@ -487,7 +487,7 @@ function Header({
 			items.push({ label: "separator" });
 			items.push({
 				testID: "listHeaderDropdownUnpinBtn",
-				label: _(msg`Unpin moderation list`),
+				label: "Unpin moderation list",
 				onPress: isPending || !savedFeedConfig ? undefined : () => removeSavedFeed(savedFeedConfig),
 				icon: {
 					ios: {
@@ -504,7 +504,7 @@ function Header({
 			if (isMuting) {
 				items.push({
 					testID: "listHeaderDropdownMuteBtn",
-					label: _(msg`Un-mute list`),
+					label: "Un-mute list",
 					onPress: onUnsubscribeMute,
 					icon: {
 						ios: {
@@ -519,7 +519,7 @@ function Header({
 			if (isBlocking) {
 				items.push({
 					testID: "listHeaderDropdownBlockBtn",
-					label: _(msg`Un-block list`),
+					label: "Un-block list",
 					onPress: onUnsubscribeBlock,
 					icon: {
 						ios: {
@@ -556,7 +556,7 @@ function Header({
 		return [
 			{
 				testID: "subscribeDropdownMuteBtn",
-				label: _(msg`Mute accounts`),
+				label: "Mute accounts",
 				onPress: subscribeMutePromptControl.open,
 				icon: {
 					ios: {
@@ -568,7 +568,7 @@ function Header({
 			},
 			{
 				testID: "subscribeDropdownBlockBtn",
-				label: _(msg`Block accounts`),
+				label: "Block accounts",
 				onPress: subscribeBlockPromptControl.open,
 				icon: {
 					ios: {
@@ -614,25 +614,20 @@ function Header({
 					<Button
 						testID={isPinned ? "unpinBtn" : "pinBtn"}
 						type={isPinned ? "default" : "inverted"}
-						label={isPinned ? _(msg`Unpin`) : _(msg`Pin to home`)}
+						label={isPinned ? "Unpin" : "Pin to home"}
 						onPress={onTogglePinned}
 						disabled={isPending}
 					/>
 				) : isModList ? (
 					isBlocking ? (
-						<Button
-							testID="unblockBtn"
-							type="default"
-							label={_(msg`Unblock`)}
-							onPress={onUnsubscribeBlock}
-						/>
+						<Button testID="unblockBtn" type="default" label={"Unblock"} onPress={onUnsubscribeBlock} />
 					) : isMuting ? (
-						<Button testID="unmuteBtn" type="default" label={_(msg`Unmute`)} onPress={onUnsubscribeMute} />
+						<Button testID="unmuteBtn" type="default" label={"Unmute"} onPress={onUnsubscribeMute} />
 					) : (
 						<NativeDropdown
 							testID="subscribeBtn"
 							items={subscribeDropdownItems}
-							accessibilityLabel={_(msg`Subscribe to this list`)}
+							accessibilityLabel={"Subscribe to this list"}
 							accessibilityHint=""
 						>
 							<View style={[palInverted.view, styles.btn]}>
@@ -644,7 +639,7 @@ function Header({
 				<NativeDropdown
 					testID="headerDropdownBtn"
 					items={dropdownItems}
-					accessibilityLabel={_(msg`More options`)}
+					accessibilityLabel={"More options"}
 					accessibilityHint=""
 				>
 					<View style={[pal.viewLight, styles.btn]}>
@@ -654,31 +649,31 @@ function Header({
 
 				<Prompt.Basic
 					control={deleteListPromptControl}
-					title={_(msg`Delete this list?`)}
-					description={_(msg`If you delete this list, you won't be able to recover it.`)}
+					title={"Delete this list?"}
+					description={`If you delete this list, you won't be able to recover it.`}
 					onConfirm={onPressDelete}
-					confirmButtonCta={_(msg`Delete`)}
+					confirmButtonCta={"Delete"}
 					confirmButtonColor="negative"
 				/>
 
 				<Prompt.Basic
 					control={subscribeMutePromptControl}
-					title={_(msg`Mute these accounts?`)}
+					title={"Mute these accounts?"}
 					description={_(
 						msg`Muting is private. Muted accounts can interact with you, but you will not see their posts or receive notifications from them.`,
 					)}
 					onConfirm={onSubscribeMute}
-					confirmButtonCta={_(msg`Mute list`)}
+					confirmButtonCta={"Mute list"}
 				/>
 
 				<Prompt.Basic
 					control={subscribeBlockPromptControl}
-					title={_(msg`Block these accounts?`)}
+					title={"Block these accounts?"}
 					description={_(
 						msg`Blocking is public. Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`,
 					)}
 					onConfirm={onSubscribeBlock}
-					confirmButtonCta={_(msg`Block list`)}
+					confirmButtonCta={"Block list"}
 					confirmButtonColor="negative"
 				/>
 			</ProfileSubpageHeader>
@@ -731,10 +726,10 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 	const renderPostsEmpty = useCallback(() => {
 		return (
 			<View style={[a.gap_xl, a.align_center]}>
-				<EmptyState icon="hashtag" message={_(msg`This feed is empty.`)} />
+				<EmptyState icon="hashtag" message={"This feed is empty."} />
 				{isOwner && (
 					<NewButton
-						label={_(msg`Start adding people`)}
+						label={"Start adding people"}
 						onPress={onPressAddUser}
 						color="primary"
 						size="small"
@@ -763,7 +758,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 				headerOffset={headerHeight}
 			/>
 			{(isScrolledDown || hasNew) && (
-				<LoadLatestBtn onPress={onScrollToTop} label={_(msg`Load new posts`)} showIndicator={hasNew} />
+				<LoadLatestBtn onPress={onScrollToTop} label={"Load new posts"} showIndicator={hasNew} />
 			)}
 		</View>
 	);
@@ -805,7 +800,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				<View style={[a.px_sm, a.py_sm]}>
 					<NewButton
 						testID="addUserBtn"
-						label={_(msg`Add a user to this list`)}
+						label={"Add a user to this list"}
 						onPress={onPressAddUser}
 						color="primary"
 						size="small"
@@ -822,7 +817,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 			<View style={[a.px_lg, a.py_md, a.flex_row_reverse]}>
 				<NewButton
 					testID="addUserBtn"
-					label={_(msg`Add a user to this list`)}
+					label={"Add a user to this list"}
 					onPress={onPressAddUser}
 					color="primary"
 					size="small"
@@ -839,11 +834,11 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 	const renderEmptyState = useCallback(() => {
 		return (
 			<View style={[a.gap_xl, a.align_center]}>
-				<EmptyState icon="users-slash" message={_(msg`This list is empty.`)} />
+				<EmptyState icon="users-slash" message={"This list is empty."} />
 				{isOwner && (
 					<NewButton
 						testID="emptyStateAddUserBtn"
-						label={_(msg`Start adding people`)}
+						label={"Start adding people"}
 						onPress={onPressAddUser}
 						color="primary"
 						size="small"
@@ -868,9 +863,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				headerOffset={headerHeight}
 				onScrolledDownChange={setIsScrolledDown}
 			/>
-			{isScrolledDown && (
-				<LoadLatestBtn onPress={onScrollToTop} label={_(msg`Scroll to top`)} showIndicator={false} />
-			)}
+			{isScrolledDown && <LoadLatestBtn onPress={onScrollToTop} label={"Scroll to top"} showIndicator={false} />}
 		</View>
 	);
 });
@@ -909,8 +902,8 @@ function ErrorScreen({ error }: { error: string }) {
 			<View style={{ flexDirection: "row" }}>
 				<Button
 					type="default"
-					accessibilityLabel={_(msg`Go back`)}
-					accessibilityHint={_(msg`Returns to previous page`)}
+					accessibilityLabel={"Go back"}
+					accessibilityHint={"Returns to previous page"}
 					onPress={onPressBack}
 					style={{ flexShrink: 1 }}
 				>

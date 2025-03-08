@@ -1,6 +1,6 @@
 import { AppBskyFeedDefs, type AppBskyFeedGetPostThread, type BskyAgent, type RichText } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ImagePickerAsset } from "expo-image-picker";
@@ -305,13 +305,13 @@ export const ComposePost = ({
 			const media = thread.posts[i].embed.media;
 			if (media) {
 				if (media.type === "images" && media.images.some((img) => !img.alt)) {
-					return _(msg`One or more images is missing alt text.`);
+					return "One or more images is missing alt text.";
 				}
 				if (media.type === "gif" && !media.alt) {
-					return _(msg`One or more GIFs is missing alt text.`);
+					return "One or more GIFs is missing alt text.";
 				}
 				if (media.type === "video" && media.video.status !== "error" && !media.video.altText) {
-					return _(msg`One or more videos is missing alt text.`);
+					return "One or more videos is missing alt text.";
 				}
 			}
 		}
@@ -379,9 +379,9 @@ export const ComposePost = ({
 
 			let err = cleanError(e.message);
 			if (err.includes("not locate record")) {
-				err = _(msg`We're sorry! The post you are replying to has been deleted.`);
+				err = `We're sorry! The post you are replying to has been deleted.`;
 			} else if (e instanceof EmbeddingDisabledError) {
-				err = _(msg`This post's author has disabled quote posts.`);
+				err = `This post's author has disabled quote posts.`;
 			}
 			setError(err);
 			setIsPublishing(false);
@@ -432,10 +432,10 @@ export const ComposePost = ({
 		onClose();
 		Toast.show(
 			thread.posts.length > 1
-				? _(msg`Your posts have been published`)
+				? "Your posts have been published"
 				: replyTo
-					? _(msg`Your reply has been published`)
-					: _(msg`Your post has been published`),
+					? "Your reply has been published"
+					: "Your post has been published",
 		);
 	}, [
 		_,
@@ -564,7 +564,7 @@ export const ComposePost = ({
 				onCloseWithoutVerifying={() => {
 					onClose();
 				}}
-				reasonText={_(msg`Before creating a post, you must first verify your email.`)}
+				reasonText={"Before creating a post, you must first verify your email."}
 			/>
 			<KeyboardAvoidingView
 				testID="composePostView"
@@ -632,10 +632,10 @@ export const ComposePost = ({
 
 				<Prompt.Basic
 					control={discardPromptControl}
-					title={_(msg`Discard draft?`)}
-					description={_(msg`Are you sure you'd like to discard this draft?`)}
+					title={"Discard draft?"}
+					description={`Are you sure you'd like to discard this draft?`}
 					onConfirm={onClose}
-					confirmButtonCta={_(msg`Discard`)}
+					confirmButtonCta={"Discard"}
 					confirmButtonColor="negative"
 				/>
 			</KeyboardAvoidingView>
@@ -679,11 +679,7 @@ const ComposerPost = React.memo(function ComposerPost({
 	const richtext = post.richtext;
 	const isTextOnly = !post.embed.link && !post.embed.quote && !post.embed.media;
 	const forceMinHeight = isWeb && isTextOnly && isActive;
-	const selectTextInputPlaceholder = isReply
-		? isFirstPost
-			? _(msg`Write your reply`)
-			: _(msg`Add another post`)
-		: _(msg`What's up?`);
+	const selectTextInputPlaceholder = isReply ? (isFirstPost ? "Write your reply" : "Add another post") : `What's up?`;
 	const discardPromptControl = Prompt.usePromptControl();
 
 	const dispatchPost = useCallback(
@@ -720,7 +716,7 @@ const ComposerPost = React.memo(function ComposerPost({
 				if (isNative) return; // web only
 				const [mimeType] = uri.slice("data:".length).split(";");
 				if (!SUPPORTED_MIME_TYPES.includes(mimeType as SupportedMimeTypes)) {
-					Toast.show(_(msg`Unsupported video type`), "xmark");
+					Toast.show("Unsupported video type", "xmark");
 					return;
 				}
 				const name = `pasted.${mimeToExt(mimeType)}`;
@@ -769,15 +765,15 @@ const ComposerPost = React.memo(function ComposerPost({
 					onError={onError}
 					onPressPublish={onPublish}
 					accessible={true}
-					accessibilityLabel={_(msg`Write post`)}
-					accessibilityHint={_(msg`Compose posts up to ${MAX_GRAPHEME_LENGTH} characters in length`)}
+					accessibilityLabel={"Write post"}
+					accessibilityHint={`Compose posts up to ${MAX_GRAPHEME_LENGTH} characters in length`}
 				/>
 			</View>
 
 			{canRemovePost && isActive && (
 				<>
 					<Button
-						label={_(msg`Delete post`)}
+						label={"Delete post"}
 						size="small"
 						color="secondary"
 						variant="ghost"
@@ -803,15 +799,15 @@ const ComposerPost = React.memo(function ComposerPost({
 					</Button>
 					<Prompt.Basic
 						control={discardPromptControl}
-						title={_(msg`Discard post?`)}
-						description={_(msg`Are you sure you'd like to discard this post?`)}
+						title={"Discard post?"}
+						description={`Are you sure you'd like to discard this post?`}
 						onConfirm={() => {
 							dispatch({
 								type: "remove_post",
 								postId: post.id,
 							});
 						}}
-						confirmButtonCta={_(msg`Discard`)}
+						confirmButtonCta={"Discard"}
 						confirmButtonColor="negative"
 					/>
 				</>
@@ -1161,8 +1157,8 @@ function ComposerFooter({
 							<Button
 								onPress={onEmojiButtonPress}
 								style={a.p_sm}
-								label={_(msg`Open emoji picker`)}
-								accessibilityHint={_(msg`Opens emoji picker`)}
+								label={"Open emoji picker"}
+								accessibilityHint={"Opens emoji picker"}
 								variant="ghost"
 								shape="round"
 								color="primary"
@@ -1176,7 +1172,7 @@ function ComposerFooter({
 			<View style={[a.flex_row, a.align_center, a.justify_between]}>
 				{showAddButton && (
 					<Button
-						label={_(msg`Add new post`)}
+						label={"Add new post"}
 						onPress={onAddPost}
 						style={[a.p_sm, a.m_2xs]}
 						variant="ghost"
@@ -1442,7 +1438,7 @@ function ErrorBanner({
 					<CircleInfo fill={t.palette.negative_400} />
 					<NewText style={[a.flex_1, a.leading_snug, { paddingTop: 1 }]}>{error}</NewText>
 					<Button
-						label={_(msg`Dismiss error`)}
+						label={"Dismiss error"}
 						size="tiny"
 						color="secondary"
 						variant="ghost"
@@ -1510,20 +1506,20 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 
 	switch (state.status) {
 		case "compressing":
-			text = _(msg`Compressing video...`);
+			text = "Compressing video...";
 			break;
 		case "uploading":
-			text = _(msg`Uploading video...`);
+			text = "Uploading video...";
 			break;
 		case "processing":
-			text = _(msg`Processing video...`);
+			text = "Processing video...";
 			break;
 		case "error":
-			text = _(msg`Error`);
+			text = "Error";
 			wheelProgress = 100;
 			break;
 		case "done":
-			text = _(msg`Video uploaded`);
+			text = "Video uploaded";
 			break;
 	}
 

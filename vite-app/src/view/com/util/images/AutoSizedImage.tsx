@@ -1,5 +1,4 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { Image } from "react-native";
@@ -194,7 +193,7 @@ export function AutoSizedImage({
 				onPressIn={onPressIn}
 				// alt here is what screen readers actually use
 				accessibilityLabel={image.alt}
-				accessibilityHint={_(msg`Views full image`)}
+				accessibilityHint={"Views full image"}
 				style={[a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25, { aspectRatio: max ?? 1 }]}
 			>
 				{contents}
@@ -209,7 +208,7 @@ export function AutoSizedImage({
 					onPressIn={onPressIn}
 					// alt here is what screen readers actually use
 					accessibilityLabel={image.alt}
-					accessibilityHint={_(msg`Views full image`)}
+					accessibilityHint={"Views full image"}
 					style={[a.h_full]}
 				>
 					{contents}

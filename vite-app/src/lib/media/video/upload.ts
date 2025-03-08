@@ -1,6 +1,5 @@
 import type { AppBskyVideoDefs, BskyAgent } from "@atproto/api";
 import type { I18n } from "@lingui/core";
-import { msg } from "@lingui/macro";
 import { FileSystemUploadType, createUploadTask } from "expo-file-system";
 import { nanoid } from "nanoid/non-secure";
 
@@ -69,7 +68,7 @@ export async function uploadVideo({
 	const responseBody = JSON.parse(res.body) as AppBskyVideoDefs.JobStatus;
 
 	if (!responseBody.jobId) {
-		throw new ServerError(responseBody.error || _(msg`Failed to upload video`));
+		throw new ServerError(responseBody.error || "Failed to upload video");
 	}
 
 	if (signal.aborted) {

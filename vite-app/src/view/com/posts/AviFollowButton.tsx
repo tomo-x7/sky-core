@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type React from "react";
@@ -39,12 +38,12 @@ export function AviFollowButton({
 
 	function onPress() {
 		follow();
-		Toast.show(_(msg`Following ${name}`));
+		Toast.show(`Following ${name}`);
 	}
 
 	const items: DropdownItem[] = [
 		{
-			label: _(msg`View profile`),
+			label: "View profile",
 			onPress: () => {
 				navigation.navigate("Profile", { name: profile.did });
 			},
@@ -57,7 +56,7 @@ export function AviFollowButton({
 			},
 		},
 		{
-			label: _(msg`Follow ${name}`),
+			label: `Follow ${name}`,
 			onPress: onPress,
 			icon: {
 				ios: {
@@ -75,7 +74,7 @@ export function AviFollowButton({
 
 			{!isFollowing && (
 				<Button
-					label={_(msg`Open ${name} profile shortcut menu`)}
+					label={`Open ${name} profile shortcut menu`}
 					style={[
 						a.rounded_full,
 						a.absolute,

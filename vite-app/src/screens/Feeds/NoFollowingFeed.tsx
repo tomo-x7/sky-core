@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -38,7 +37,7 @@ export function NoFollowingFeed() {
 					Looks like you're missing a following feed.{" "}
 					<InlineLinkText
 						to="/"
-						label={_(msg`Add the default feed of only people you follow`)}
+						label={"Add the default feed of only people you follow"}
 						onPress={addRecommendedFeeds}
 						style={[a.leading_snug]}
 					>

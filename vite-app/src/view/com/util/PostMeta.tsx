@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import type React from "react";
@@ -67,7 +66,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 				<Text numberOfLines={1} style={[isAndroid ? a.flex_1 : a.flex_shrink]}>
 					<WebOnlyInlineLinkText
 						to={profileLink}
-						label={_(msg`View profile`)}
+						label={"View profile"}
 						disableMismatchWarning
 						onPress={onBeforePressAuthor}
 						style={[t.atoms.text]}
@@ -78,7 +77,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 					</WebOnlyInlineLinkText>
 					<WebOnlyInlineLinkText
 						to={profileLink}
-						label={_(msg`View profile`)}
+						label={"View profile"}
 						disableMismatchWarning
 						disableUnderline
 						onPress={onBeforePressAuthor}

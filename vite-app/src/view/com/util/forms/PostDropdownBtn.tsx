@@ -1,5 +1,4 @@
 import type { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, RichText as RichTextAPI } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { memo, useMemo, useState } from "react";
@@ -58,7 +57,7 @@ let PostDropdownBtn = ({
 	return (
 		<EventStopper onKeyDown={false}>
 			<Menu.Root control={lazyMenuControl}>
-				<Menu.Trigger label={_(msg`Open post options menu`)}>
+				<Menu.Trigger label={"Open post options menu"}>
 					{({ props, state }) => {
 						return (
 							<Pressable

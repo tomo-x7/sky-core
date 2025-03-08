@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -42,19 +41,19 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<SettingsList.Container>
-					<SettingsList.LinkItem to="/settings/saved-feeds" label={_(msg`Manage saved feeds`)}>
+					<SettingsList.LinkItem to="/settings/saved-feeds" label={"Manage saved feeds"}>
 						<SettingsList.ItemIcon icon={HashtagIcon} />
 						<SettingsList.ItemText>Manage saved feeds</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/threads" label={_(msg`Thread preferences`)}>
+					<SettingsList.LinkItem to="/settings/threads" label={"Thread preferences"}>
 						<SettingsList.ItemIcon icon={BubblesIcon} />
 						<SettingsList.ItemText>Thread preferences</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/following-feed" label={_(msg`Following feed preferences`)}>
+					<SettingsList.LinkItem to="/settings/following-feed" label={"Following feed preferences"}>
 						<SettingsList.ItemIcon icon={HomeIcon} />
 						<SettingsList.ItemText>Following feed preferences</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.LinkItem to="/settings/external-embeds" label={_(msg`External media`)}>
+					<SettingsList.LinkItem to="/settings/external-embeds" label={"External media"}>
 						<SettingsList.ItemIcon icon={MacintoshIcon} />
 						<SettingsList.ItemText>External media</SettingsList.ItemText>
 					</SettingsList.LinkItem>
@@ -62,7 +61,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 					{isNative && (
 						<Toggle.Item
 							name="use_in_app_browser"
-							label={_(msg`Use in-app browser to open links`)}
+							label={"Use in-app browser to open links"}
 							value={inAppBrowserPref ?? false}
 							onChange={(value) => setUseInAppBrowser(value)}
 						>
@@ -75,7 +74,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 					)}
 					<Toggle.Item
 						name="disable_autoplay"
-						label={_(msg`Autoplay videos and GIFs`)}
+						label={"Autoplay videos and GIFs"}
 						value={!autoplayDisabledPref}
 						onChange={(value) => setAutoplayDisabledPref(!value)}
 					>
@@ -90,7 +89,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 							<SettingsList.Divider />
 							<Toggle.Item
 								name="show_trending_topics"
-								label={_(msg`Enable trending topics`)}
+								label={"Enable trending topics"}
 								value={!trendingDisabled}
 								onChange={(value) => {
 									const hide = Boolean(!value);
@@ -110,7 +109,7 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 							</Toggle.Item>
 							<Toggle.Item
 								name="show_trending_videos"
-								label={_(msg`Enable trending videos in your Discover feed.`)}
+								label={"Enable trending videos in your Discover feed."}
 								value={!trendingVideoDisabled}
 								onChange={(value) => {
 									const hide = Boolean(!value);

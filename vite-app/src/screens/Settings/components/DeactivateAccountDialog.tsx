@@ -56,7 +56,7 @@ function DeactivateAccountDialogInner({
 					);
 					break;
 				default:
-					setError(_(msg`Something went wrong, please try again`));
+					setError("Something went wrong, please try again");
 					break;
 			}
 
@@ -70,7 +70,7 @@ function DeactivateAccountDialogInner({
 
 	return (
 		<>
-			<Prompt.TitleText>{_(msg`Deactivate account`)}</Prompt.TitleText>
+			<Prompt.TitleText>{"Deactivate account"}</Prompt.TitleText>
 			<Prompt.DescriptionText>
 				Your profile, posts, feeds, and lists will no longer be visible to other Bluesky users. You can
 				reactivate your account at any time by logging in.
@@ -94,10 +94,10 @@ function DeactivateAccountDialogInner({
 					variant="solid"
 					color="negative"
 					size={gtMobile ? "small" : "large"}
-					label={_(msg`Yes, deactivate`)}
+					label={"Yes, deactivate"}
 					onPress={handleDeactivate}
 				>
-					<ButtonText>{_(msg`Yes, deactivate`)}</ButtonText>
+					<ButtonText>{"Yes, deactivate"}</ButtonText>
 					{pending && <ButtonIcon icon={Loader} position="right" />}
 				</Button>
 				<Prompt.Cancel />

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useState } from "react";
 
@@ -35,17 +34,17 @@ export function useAccountSwitcher() {
 					}
 					await resumeSession(account);
 					logEvent("account:loggedIn", { logContext, withPassword: false });
-					Toast.show(_(msg`Signed in as @${account.handle}`));
+					Toast.show(`Signed in as @${account.handle}`);
 				} else {
 					requestSwitchToAccount({ requestedAccount: account.did });
-					Toast.show(_(msg`Please sign in as @${account.handle}`), "circle-exclamation");
+					Toast.show(`Please sign in as @${account.handle}`, "circle-exclamation");
 				}
 			} catch (e: any) {
 				logger.error("switch account: selectAccount failed", {
 					message: e.message,
 				});
 				requestSwitchToAccount({ requestedAccount: account.did });
-				Toast.show(_(msg`Please sign in as @${account.handle}`), "circle-exclamation");
+				Toast.show(`Please sign in as @${account.handle}`, "circle-exclamation");
 			} finally {
 				setPendingDid(null);
 			}

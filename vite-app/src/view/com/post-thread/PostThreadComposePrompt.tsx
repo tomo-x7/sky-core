@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -27,8 +26,8 @@ export function PostThreadComposePrompt({
 	return (
 		<PressableScale
 			accessibilityRole="button"
-			accessibilityLabel={_(msg`Compose reply`)}
-			accessibilityHint={_(msg`Opens composer`)}
+			accessibilityLabel={"Compose reply"}
+			accessibilityHint={"Opens composer"}
 			style={[
 				gtMobile ? a.py_xs : { paddingTop: 8, paddingBottom: 11 },
 				a.px_sm,

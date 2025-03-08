@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -32,7 +31,7 @@ export function BackNextButtons({
 	return (
 		<View style={[a.flex_row, a.justify_between, a.pb_lg, a.pt_3xl]}>
 			<Button
-				label={_(msg`Go back to previous step`)}
+				label={"Go back to previous step"}
 				variant="solid"
 				color="secondary"
 				size="large"
@@ -43,7 +42,7 @@ export function BackNextButtons({
 			{!hideNext &&
 				(showRetry ? (
 					<Button
-						label={_(msg`Press to retry`)}
+						label={"Press to retry"}
 						variant="solid"
 						color="primary"
 						size="large"
@@ -55,7 +54,7 @@ export function BackNextButtons({
 				) : (
 					<Button
 						testID="nextBtn"
-						label={_(msg`Continue to next step`)}
+						label={"Continue to next step"}
 						variant="solid"
 						color="primary"
 						size="large"

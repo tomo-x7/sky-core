@@ -1,5 +1,4 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useCallback, useState } from "react";
 import { ImageBackground } from "react-native";
@@ -122,7 +121,7 @@ function InnerWrapper({ embed }: Props) {
 						onPress={() => {
 							ref.current?.togglePlayback();
 						}}
-						label={_(msg`Play video`)}
+						label={"Play video"}
 						color="secondary"
 					>
 						{showSpinner ? (

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -59,7 +58,7 @@ function Inner() {
 					<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>What people are posting about.</Text>
 				</View>
 				<Button
-					label={_(msg`Hide trending topics`)}
+					label={"Hide trending topics"}
 					size="small"
 					variant="ghost"
 					color="secondary"
@@ -101,9 +100,9 @@ function Inner() {
 
 			<Prompt.Basic
 				control={trendingPrompt}
-				title={_(msg`Hide trending topics?`)}
-				description={_(msg`You can update this later from your settings.`)}
-				confirmButtonCta={_(msg`Hide`)}
+				title={"Hide trending topics?"}
+				description={"You can update this later from your settings."}
+				confirmButtonCta={"Hide"}
 				onConfirm={onConfirmHide}
 			/>
 		</>

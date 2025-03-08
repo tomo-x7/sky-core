@@ -7,7 +7,7 @@ import {
 	moderatePost,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useMemo, useState } from "react";
@@ -220,7 +220,7 @@ function PostInner({
 							</View>
 						) : undefined}
 						{limitLines ? (
-							<TextLink text={_(msg`Show More`)} style={pal.link} onPress={onPressShowMore} href="#" />
+							<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 						) : undefined}
 						{post.embed ? (
 							<PostEmbeds

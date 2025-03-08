@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
@@ -39,7 +38,7 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 	return hasSession ? (
 		<EventStopper onKeyDown={false}>
 			<Menu.Root>
-				<Menu.Trigger label={_(msg`Repost or quote post`)}>
+				<Menu.Trigger label={"Repost or quote post"}>
 					{({ props, state }) => {
 						return (
 							<Pressable
@@ -63,22 +62,20 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 				</Menu.Trigger>
 				<Menu.Outer style={{ minWidth: 170 }}>
 					<Menu.Item
-						label={isReposted ? _(msg`Undo repost`) : _(msg`Repost`)}
+						label={isReposted ? "Undo repost" : "Repost"}
 						testID="repostDropdownRepostBtn"
 						onPress={onRepost}
 					>
-						<Menu.ItemText>{isReposted ? _(msg`Undo repost`) : _(msg`Repost`)}</Menu.ItemText>
+						<Menu.ItemText>{isReposted ? "Undo repost" : "Repost"}</Menu.ItemText>
 						<Menu.ItemIcon icon={Repost} position="right" />
 					</Menu.Item>
 					<Menu.Item
 						disabled={embeddingDisabled}
-						label={embeddingDisabled ? _(msg`Quote posts disabled`) : _(msg`Quote post`)}
+						label={embeddingDisabled ? "Quote posts disabled" : "Quote post"}
 						testID="repostDropdownQuoteBtn"
 						onPress={onQuote}
 					>
-						<Menu.ItemText>
-							{embeddingDisabled ? _(msg`Quote posts disabled`) : _(msg`Quote post`)}
-						</Menu.ItemText>
+						<Menu.ItemText>{embeddingDisabled ? "Quote posts disabled" : "Quote post"}</Menu.ItemText>
 						<Menu.ItemIcon icon={Quote} position="right" />
 					</Menu.Item>
 				</Menu.Outer>
@@ -89,7 +86,7 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 			onPress={() => {
 				requireAuth(() => {});
 			}}
-			label={_(msg`Repost or quote post`)}
+			label={"Repost or quote post"}
 			style={{ padding: 0 }}
 			hoverStyle={t.atoms.bg_contrast_25}
 			shape="round"

@@ -1,5 +1,4 @@
 import { type $Typed, ComAtprotoLabelDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -73,7 +72,7 @@ export function PwiOptOut() {
 				disabled={!canToggle || updateProfile.isPending}
 				value={isOptedOut}
 				onChange={onToggleOptOut}
-				label={_(msg`Discourage apps from showing my account to logged-out users`)}
+				label={"Discourage apps from showing my account to logged-out users"}
 				style={[a.w_full]}
 			>
 				<Toggle.LabelText style={[a.flex_1]}>

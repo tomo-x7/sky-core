@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import {
@@ -99,8 +98,8 @@ function LightboxInner({
 			<TouchableWithoutFeedback
 				onPress={onClose}
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Close image viewer`)}
-				accessibilityHint={_(msg`Exits image view`)}
+				accessibilityLabel={"Close image viewer"}
+				accessibilityHint={"Exits image view"}
 				onAccessibilityEscape={onClose}
 			>
 				{isAvi ? (
@@ -132,7 +131,7 @@ function LightboxInner({
 								onPress={onPressLeft}
 								style={[styles.btn, btnStyle, styles.leftBtn, styles.blurredBackground]}
 								accessibilityRole="button"
-								accessibilityLabel={_(msg`Previous image`)}
+								accessibilityLabel={"Previous image"}
 								accessibilityHint=""
 							>
 								<FontAwesomeIcon
@@ -147,7 +146,7 @@ function LightboxInner({
 								onPress={onPressRight}
 								style={[styles.btn, btnStyle, styles.rightBtn, styles.blurredBackground]}
 								accessibilityRole="button"
-								accessibilityLabel={_(msg`Next image`)}
+								accessibilityLabel={"Next image"}
 								accessibilityHint=""
 							>
 								<FontAwesomeIcon
@@ -163,8 +162,8 @@ function LightboxInner({
 			{img.alt ? (
 				<View style={styles.footer}>
 					<Pressable
-						accessibilityLabel={_(msg`Expand alt text`)}
-						accessibilityHint={_(msg`If alt text is long, toggles alt text expanded state`)}
+						accessibilityLabel={"Expand alt text"}
+						accessibilityHint={"If alt text is long, toggles alt text expanded state"}
 						onPress={() => {
 							setAltExpanded(!isAltExpanded);
 						}}

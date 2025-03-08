@@ -1,4 +1,4 @@
-import { msg, plural } from "@lingui/macro";
+import { plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -65,7 +65,7 @@ export function SignupQueued() {
 			variant="solid"
 			color="primary"
 			size="large"
-			label={_(msg`Check my status`)}
+			label={"Check my status"}
 			onPress={checkStatus}
 			disabled={isProcessing}
 		>
@@ -79,7 +79,7 @@ export function SignupQueued() {
 			variant="ghost"
 			size="large"
 			color="primary"
-			label={_(msg`Sign out`)}
+			label={"Sign out"}
 			onPress={() => logoutCurrentAccount("SignupQueued")}
 		>
 			<ButtonText>Sign out</ButtonText>

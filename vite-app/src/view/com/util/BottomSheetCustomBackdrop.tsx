@@ -1,5 +1,4 @@
 import type { BottomSheetBackdropProps } from "@discord/bottom-sheet/src";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useMemo } from "react";
@@ -25,7 +24,7 @@ export function createCustomBackdrop(onClose?: (() => void) | undefined): React.
 		return (
 			<TouchableWithoutFeedback
 				onPress={onClose}
-				accessibilityLabel={_(msg`Close bottom drawer`)}
+				accessibilityLabel={"Close bottom drawer"}
 				accessibilityHint=""
 				onAccessibilityEscape={() => {
 					if (onClose !== undefined) {

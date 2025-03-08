@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -43,8 +42,8 @@ export function RichTextTag({
 		reset: resetRemove,
 	} = useRemoveMutedWordsMutation();
 	const navigation = useNavigation<NavigationProp>();
-	const label = _(msg`Hashtag ${tag}`);
-	const hint = isNative ? _(msg`Long press to open tag menu for #${tag}`) : _(msg`Click to open tag menu for ${tag}`);
+	const label = `Hashtag ${tag}`;
+	const hint = isNative ? `Long press to open tag menu for #${tag}` : `Click to open tag menu for ${tag}`;
 
 	const isMuted = Boolean(
 		(preferences?.moderationPrefs.mutedWords?.find((m) => m.value === tag && m.targets.includes("tag")) ??
@@ -94,7 +93,7 @@ export function RichTextTag({
 			<Menu.Outer>
 				<Menu.Group>
 					<Menu.Item
-						label={_(msg`See ${tag} posts`)}
+						label={`See ${tag} posts`}
 						onPress={() => {
 							navigation.push("Hashtag", {
 								tag: encodeURIComponent(tag),
@@ -108,7 +107,7 @@ export function RichTextTag({
 					</Menu.Item>
 					{authorHandle && !isInvalidHandle(authorHandle) && (
 						<Menu.Item
-							label={_(msg`See ${tag} posts by user`)}
+							label={`See ${tag} posts by user`}
 							onPress={() => {
 								navigation.push("Hashtag", {
 									tag: encodeURIComponent(tag),
@@ -125,7 +124,7 @@ export function RichTextTag({
 				</Menu.Group>
 				<Menu.Divider />
 				<Menu.Item
-					label={isMuted ? _(msg`Unmute ${tag}`) : _(msg`Mute ${tag}`)}
+					label={isMuted ? `Unmute ${tag}` : `Mute ${tag}`}
 					onPress={() => {
 						if (isMuted) {
 							resetUpsert();
@@ -136,7 +135,7 @@ export function RichTextTag({
 						}
 					}}
 				>
-					<Menu.ItemText>{isMuted ? _(msg`Unmute ${tag}`) : _(msg`Mute ${tag}`)}</Menu.ItemText>
+					<Menu.ItemText>{isMuted ? `Unmute ${tag}` : `Mute ${tag}`}</Menu.ItemText>
 					<Menu.ItemIcon icon={isPreferencesLoading ? Loader : Mute} />
 				</Menu.Item>
 			</Menu.Outer>

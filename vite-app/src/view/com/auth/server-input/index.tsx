@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useImperativeHandle, useRef, useState } from "react";
 import { View } from "react-native";
@@ -127,11 +126,11 @@ function DialogInner({
 					values={[fixedOption]}
 					onChange={(values) => setFixedOption(values[0])}
 				>
-					<ToggleButton.Button name={BSKY_SERVICE} label={_(msg`Bluesky`)}>
-						<ToggleButton.ButtonText>{_(msg`Bluesky`)}</ToggleButton.ButtonText>
+					<ToggleButton.Button name={BSKY_SERVICE} label={"Bluesky"}>
+						<ToggleButton.ButtonText>{"Bluesky"}</ToggleButton.ButtonText>
 					</ToggleButton.Button>
-					<ToggleButton.Button testID="customSelectBtn" name="custom" label={_(msg`Custom`)}>
-						<ToggleButton.ButtonText>{_(msg`Custom`)}</ToggleButton.ButtonText>
+					<ToggleButton.Button testID="customSelectBtn" name="custom" label={"Custom"}>
+						<ToggleButton.ButtonText>{"Custom"}</ToggleButton.ButtonText>
 					</ToggleButton.Button>
 				</ToggleButton.Group>
 
@@ -187,7 +186,7 @@ function DialogInner({
 							</>
 						)}{" "}
 						<InlineLinkText
-							label={_(msg`Learn more about self hosting your PDS.`)}
+							label={"Learn more about self hosting your PDS."}
 							to="https://atproto.com/guides/self-hosting"
 						>
 							Learn more.
@@ -202,9 +201,9 @@ function DialogInner({
 						color="primary"
 						size="small"
 						onPress={() => control.close()}
-						label={_(msg`Done`)}
+						label={"Done"}
 					>
-						<ButtonText>{_(msg`Done`)}</ButtonText>
+						<ButtonText>{"Done"}</ButtonText>
 					</Button>
 				</View>
 			</View>

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";
@@ -85,23 +84,23 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 								email: currentAccount?.email,
 								handle: currentAccount?.handle,
 							})}
-							label={_(msg`Feedback`)}
+							label={"Feedback"}
 						>
-							{_(msg`Feedback`)}
+							{"Feedback"}
 						</InlineLinkText>
 						{" • "}
 					</>
 				)}
-				<InlineLinkText to="https://bsky.social/about/support/privacy-policy" label={_(msg`Privacy`)}>
-					{_(msg`Privacy`)}
+				<InlineLinkText to="https://bsky.social/about/support/privacy-policy" label={"Privacy"}>
+					{"Privacy"}
 				</InlineLinkText>
 				{" • "}
-				<InlineLinkText to="https://bsky.social/about/support/tos" label={_(msg`Terms`)}>
-					{_(msg`Terms`)}
+				<InlineLinkText to="https://bsky.social/about/support/tos" label={"Terms"}>
+					{"Terms"}
 				</InlineLinkText>
 				{" • "}
-				<InlineLinkText label={_(msg`Help`)} to={HELP_DESK_URL}>
-					{_(msg`Help`)}
+				<InlineLinkText label={"Help"} to={HELP_DESK_URL}>
+					{"Help"}
 				</InlineLinkText>
 			</Text>
 
@@ -110,7 +109,7 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 					<>
 						Logo by{" "}
 						<InlineLinkText
-							label={_(msg`Logo by @sawaratsuki.bsky.social`)}
+							label={"Logo by @sawaratsuki.bsky.social"}
 							to="/profile/sawaratsuki.bsky.social"
 						>
 							@sawaratsuki.bsky.social

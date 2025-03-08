@@ -1,5 +1,4 @@
 import type { ModerationCause } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
@@ -47,12 +46,12 @@ function ModerationDetailsDialogInner({
 	let name;
 	let description;
 	if (!modcause) {
-		name = _(msg`Content Warning`);
-		description = _(msg`Moderator has chosen to set a general warning on the content.`);
+		name = "Content Warning";
+		description = "Moderator has chosen to set a general warning on the content.";
 	} else if (modcause.type === "blocking") {
 		if (modcause.source.type === "list") {
 			const list = modcause.source.list;
-			name = _(msg`User Blocked by List`);
+			name = "User Blocked by List";
 			description = (
 				<>
 					This user is included in the{" "}
@@ -63,19 +62,19 @@ function ModerationDetailsDialogInner({
 				</>
 			);
 		} else {
-			name = _(msg`User Blocked`);
-			description = _(msg`You have blocked this user. You cannot view their content.`);
+			name = "User Blocked";
+			description = "You have blocked this user. You cannot view their content.";
 		}
 	} else if (modcause.type === "blocked-by") {
-		name = _(msg`User Blocks You`);
-		description = _(msg`This user has blocked you. You cannot view their content.`);
+		name = "User Blocks You";
+		description = "This user has blocked you. You cannot view their content.";
 	} else if (modcause.type === "block-other") {
-		name = _(msg`Content Not Available`);
-		description = _(msg`This content is not available because one of the users involved has blocked the other.`);
+		name = "Content Not Available";
+		description = "This content is not available because one of the users involved has blocked the other.";
 	} else if (modcause.type === "muted") {
 		if (modcause.source.type === "list") {
 			const list = modcause.source.list;
-			name = _(msg`Account Muted by List`);
+			name = "Account Muted by List";
 			description = (
 				<>
 					This user is included in the{" "}
@@ -86,19 +85,19 @@ function ModerationDetailsDialogInner({
 				</>
 			);
 		} else {
-			name = _(msg`Account Muted`);
-			description = _(msg`You have muted this account.`);
+			name = "Account Muted";
+			description = "You have muted this account.";
 		}
 	} else if (modcause.type === "mute-word") {
-		name = _(msg`Post Hidden by Muted Word`);
-		description = _(msg`You've chosen to hide a word or tag within this post.`);
+		name = "Post Hidden by Muted Word";
+		description = `You've chosen to hide a word or tag within this post.`;
 	} else if (modcause.type === "hidden") {
-		name = _(msg`Post Hidden by You`);
-		description = _(msg`You have hidden this post.`);
+		name = "Post Hidden by You";
+		description = "You have hidden this post.";
 	} else if (modcause.type === "reply-hidden") {
 		const isYou = currentAccount?.did === modcause.source.did;
-		name = isYou ? _(msg`Reply Hidden by You`) : _(msg`Reply Hidden by Thread Author`);
-		description = isYou ? _(msg`You hid this reply.`) : _(msg`The author of this thread has hidden this reply.`);
+		name = isYou ? "Reply Hidden by You" : "Reply Hidden by Thread Author";
+		description = isYou ? "You hid this reply." : "The author of this thread has hidden this reply.";
 	} else if (modcause.type === "label") {
 		name = desc.name;
 		description = (
@@ -112,11 +111,11 @@ function ModerationDetailsDialogInner({
 		description = "";
 	}
 
-	const sourceName = desc.source || desc.sourceDisplayName || _(msg`an unknown labeler`);
+	const sourceName = desc.source || desc.sourceDisplayName || "an unknown labeler";
 
 	return (
 		<Dialog.ScrollableInner
-			label={_(msg`Moderation details`)}
+			label={"Moderation details"}
 			contentContainerStyle={{
 				paddingLeft: 0,
 				paddingRight: 0,

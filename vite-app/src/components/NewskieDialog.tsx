@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { differenceInSeconds } from "date-fns";
 import React from "react";
@@ -40,7 +39,7 @@ export function NewskieDialog({
 		const name = profile.displayName || profile.handle;
 
 		if (isMe) {
-			return _(msg`You`);
+			return "You";
 		}
 
 		if (!moderationOpts) return name;
@@ -61,7 +60,7 @@ export function NewskieDialog({
 		<View style={[a.pr_2xs]}>
 			<Button
 				disabled={disabled}
-				label={_(msg`This user is new here. Press for more info about when they joined.`)}
+				label={"This user is new here. Press for more info about when they joined."}
 				hitSlop={HITSLOP_10}
 				onPress={control.open}
 			>
@@ -79,7 +78,7 @@ export function NewskieDialog({
 			<Dialog.Outer control={control}>
 				<Dialog.Handle />
 				<Dialog.ScrollableInner
-					label={_(msg`New user info dialog`)}
+					label={"New user info dialog"}
 					style={[{ width: "auto", maxWidth: 400, minWidth: 200 }]}
 				>
 					<View style={[a.gap_md]}>
@@ -134,7 +133,7 @@ export function NewskieDialog({
 
 						{isNative && (
 							<Button
-								label={_(msg`Close`)}
+								label={"Close"}
 								variant="solid"
 								color="secondary"
 								size="small"

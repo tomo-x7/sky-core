@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as DynamicAppIcon from "@mozzius/expo-dynamic-app-icon";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -30,16 +29,16 @@ export function AppIconSettingsScreen({}: Props) {
 		if (isAndroid) {
 			const next = sets.defaults.find((i) => i.id === icon) ?? sets.core.find((i) => i.id === icon);
 			Alert.alert(
-				next ? _(msg`Change app icon to "${next.name}"`) : _(msg`Change app icon`),
+				next ? `Change app icon to "${next.name}"` : "Change app icon",
 				// to determine - can we stop this happening? -sfn
-				_(msg`The app will be restarted`),
+				"The app will be restarted",
 				[
 					{
-						text: _(msg`Cancel`),
+						text: "Cancel",
 						style: "cancel",
 					},
 					{
-						text: _(msg`OK`),
+						text: "OK",
 						onPress: () => {
 							setCurrentAppIcon(setAppIcon(icon));
 						},
@@ -63,7 +62,7 @@ export function AppIconSettingsScreen({}: Props) {
 			</Layout.Header.Outer>
 
 			<Layout.Content contentContainerStyle={[a.p_lg]}>
-				<Group label={_(msg`Default icons`)} value={currentAppIcon} onChange={onSetAppIcon}>
+				<Group label={"Default icons"} value={currentAppIcon} onChange={onSetAppIcon}>
 					{sets.defaults.map((icon, i) => (
 						<Row key={icon.id} icon={icon} isEnd={i === sets.defaults.length - 1}>
 							<AppIcon icon={icon} key={icon.id} size={40} />
@@ -77,7 +76,7 @@ export function AppIconSettingsScreen({}: Props) {
 						<Text style={[a.text_md, a.mt_xl, a.mb_sm, a.font_bold, t.atoms.text_contrast_medium]}>
 							Bluesky+
 						</Text>
-						<Group label={_(msg`Bluesky+ icons`)} value={currentAppIcon} onChange={onSetAppIcon}>
+						<Group label={"Bluesky+ icons"} value={currentAppIcon} onChange={onSetAppIcon}>
 							{sets.core.map((icon, i) => (
 								<Row key={icon.id} icon={icon} isEnd={i === sets.core.length - 1}>
 									<AppIcon icon={icon} key={icon.id} size={40} />
@@ -147,7 +146,7 @@ function Row({
 	const { _ } = useLingui();
 
 	return (
-		<Toggle.Item label={_(msg`Set app icon to ${icon.name}`)} name={icon.id}>
+		<Toggle.Item label={`Set app icon to ${icon.name}`} name={icon.id}>
 			{({ hovered, pressed }) => (
 				<View
 					style={[
@@ -184,17 +183,17 @@ function AppIcon({ icon, size = 50 }: { icon: AppIconSet; size: number }) {
 	return (
 		<PressableScale
 			accessibilityLabel={icon.name}
-			accessibilityHint={_(msg`Changes app icon`)}
+			accessibilityHint={"Changes app icon"}
 			targetScale={0.95}
 			onPress={() => {
 				if (isAndroid) {
-					Alert.alert(_(msg`Change app icon to "${icon.name}"`), _(msg`The app will be restarted`), [
+					Alert.alert(`Change app icon to "${icon.name}"`, "The app will be restarted", [
 						{
-							text: _(msg`Cancel`),
+							text: "Cancel",
 							style: "cancel",
 						},
 						{
-							text: _(msg`OK`),
+							text: "OK",
 							onPress: () => {
 								DynamicAppIcon.setAppIcon(icon.id);
 							},

@@ -544,7 +544,7 @@ function ModerationOverlay({
 					<Eye width={36} fill="white" />
 					<Text style={[a.text_center, a.leading_snug, a.pb_xs]}>Hidden by your moderation settings.</Text>
 					<Button
-						label={_(msg`Show anyway`)}
+						label={"Show anyway"}
 						size="small"
 						variant="solid"
 						color="secondary_inverted"
@@ -569,7 +569,7 @@ function ModerationOverlay({
 					<Divider style={{ borderColor: "white" }} />
 					<View>
 						<Button
-							label={_(msg`View details`)}
+							label={"View details"}
 							onPress={() => {
 								hider.showInfoDialog();
 							}}
@@ -702,12 +702,8 @@ function Overlay({
 								{/* show button based on non-reactive version, so it doesn't hide on press */}
 								{post.author.did !== currentAccount?.did && !post.author.viewer?.following && (
 									<Button
-										label={
-											profile.viewer?.following
-												? _(msg`Following ${handle}`)
-												: _(msg`Follow ${handle}`)
-										}
-										accessibilityHint={profile.viewer?.following ? _(msg`Unfollows the user`) : ""}
+										label={profile.viewer?.following ? `Following ${handle}` : `Follow ${handle}`}
+										accessibilityHint={profile.viewer?.following ? "Unfollows the user" : ""}
 										size="small"
 										variant="solid"
 										color="secondary_inverted"
@@ -820,8 +816,8 @@ function ExpandableRichTextView({
 			/>
 			{constrained && !screenReaderEnabled && (
 				<Pressable
-					accessibilityHint={_(msg`Expands or collapses post text`)}
-					accessibilityLabel={expanded ? _(msg`Read less`) : _(msg`Read more`)}
+					accessibilityHint={"Expands or collapses post text"}
+					accessibilityLabel={expanded ? "Read less" : "Read more"}
 					hitSlop={HITSLOP_20}
 					onPress={() => setExpanded((prev) => !prev)}
 					style={[a.absolute, a.inset_0]}
@@ -915,9 +911,9 @@ function PlayPauseTapArea({
 	return (
 		<Button
 			disabled={!player}
-			aria-valuetext={isPlaying ? _(msg`Video is playing`) : _(msg`Video is paused`)}
+			aria-valuetext={isPlaying ? "Video is playing" : "Video is paused"}
 			label={_(`Video from ${sanitizeHandle(post.author.handle, "@")}. Tap to play or pause the video`)}
-			accessibilityHint={_(msg`Double tap to like`)}
+			accessibilityHint={"Double tap to like"}
 			onPress={onPress}
 			style={[a.absolute, a.inset_0, a.z_10]}
 		>
@@ -961,8 +957,8 @@ function EndMessage() {
 				variant="solid"
 				color="secondary_inverted"
 				size="small"
-				label={_(msg`Go back`)}
-				accessibilityHint={_(msg`Returns to previous page`)}
+				label={"Go back"}
+				accessibilityHint={"Returns to previous page"}
 			>
 				<ButtonIcon icon={ArrowLeftIcon} />
 				<ButtonText>Go back</ButtonText>

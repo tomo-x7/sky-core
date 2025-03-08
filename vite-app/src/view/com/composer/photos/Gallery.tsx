@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
@@ -161,7 +160,7 @@ const GalleryItem = ({
 			<TouchableOpacity
 				testID="altTextButton"
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Add alt text`)}
+				accessibilityLabel={"Add alt text"}
 				accessibilityHint=""
 				onPress={onAltTextEdit}
 				style={[styles.altTextControl, altTextControlStyle]}
@@ -179,7 +178,7 @@ const GalleryItem = ({
 				<TouchableOpacity
 					testID="editPhotoButton"
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Edit image`)}
+					accessibilityLabel={"Edit image"}
 					accessibilityHint=""
 					onPress={onImageEdit}
 					style={styles.imageControl}
@@ -189,7 +188,7 @@ const GalleryItem = ({
 				<TouchableOpacity
 					testID="removePhotoButton"
 					accessibilityRole="button"
-					accessibilityLabel={_(msg`Remove image`)}
+					accessibilityLabel={"Remove image"}
 					accessibilityHint=""
 					onPress={onRemove}
 					style={styles.imageControl}
@@ -199,7 +198,7 @@ const GalleryItem = ({
 			</View>
 			<TouchableOpacity
 				accessibilityRole="button"
-				accessibilityLabel={_(msg`Add alt text`)}
+				accessibilityLabel={"Add alt text"}
 				accessibilityHint=""
 				onPress={onAltTextEdit}
 				style={styles.altTextHiddenRegion}

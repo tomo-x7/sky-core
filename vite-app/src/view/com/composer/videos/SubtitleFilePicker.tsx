@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useRef } from "react";
@@ -38,7 +37,7 @@ export function SubtitleFilePicker({
 				logger.error("Invalid subtitle file type", {
 					safeMessage: `File: ${selectedFile.name} (${selectedFile.type})`,
 				});
-				Toast.show(_(msg`Only WebVTT (.vtt) files are supported`));
+				Toast.show("Only WebVTT (.vtt) files are supported");
 			}
 		}
 	};

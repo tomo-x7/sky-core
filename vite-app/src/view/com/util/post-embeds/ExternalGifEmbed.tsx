@@ -1,5 +1,4 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
@@ -93,8 +92,8 @@ export function ExternalGifEmbed({
 				]}
 				onPress={onPlayPress}
 				accessibilityRole="button"
-				accessibilityHint={_(msg`Plays the GIF`)}
-				accessibilityLabel={_(msg`Play ${link.title}`)}
+				accessibilityHint={"Plays the GIF"}
+				accessibilityLabel={`Play ${link.title}`}
 			>
 				<Image
 					source={{

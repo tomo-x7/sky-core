@@ -1,6 +1,6 @@
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Plural, msg } from "@lingui/macro";
+import { Plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Linking, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
@@ -111,9 +111,9 @@ export function FeedSourceCardLoaded({
 					pinned: pinOnSave,
 				},
 			]);
-			Toast.show(_(msg`Added to my feeds`));
+			Toast.show("Added to my feeds");
 		} catch (e) {
-			Toast.show(_(msg`There was an issue contacting your server`), "xmark");
+			Toast.show("There was an issue contacting your server", "xmark");
 			logger.error("Failed to save feed", { message: e });
 		}
 	}, [_, feed, pinOnSave, addSavedFeeds, isSaved]);
@@ -124,9 +124,9 @@ export function FeedSourceCardLoaded({
 		try {
 			await removeFeed(savedFeedConfig);
 			// await item.unsave()
-			Toast.show(_(msg`Removed from my feeds`));
+			Toast.show("Removed from my feeds");
 		} catch (e) {
-			Toast.show(_(msg`There was an issue contacting your server`), "xmark");
+			Toast.show("There was an issue contacting your server", "xmark");
 			logger.error("Failed to unsave feed", { message: e });
 		}
 	}, [_, removeFeed, savedFeedConfig]);
@@ -170,7 +170,7 @@ export function FeedSourceCardLoaded({
 						testID={`feed-${feedUri}-toggleSave`}
 						disabled={isRemovePending}
 						accessibilityRole="button"
-						accessibilityLabel={_(msg`Remove from my feeds`)}
+						accessibilityLabel={"Remove from my feeds"}
 						accessibilityHint=""
 						onPress={onUnsave}
 						hitSlop={15}
@@ -240,7 +240,7 @@ export function FeedSourceCardLoaded({
 								testID={`feed-${feed.displayName}-toggleSave`}
 								disabled={isAddSavedFeedPending || isRemovePending}
 								accessibilityRole="button"
-								accessibilityLabel={isSaved ? _(msg`Remove from my feeds`) : _(msg`Add to my feeds`)}
+								accessibilityLabel={isSaved ? "Remove from my feeds" : "Add to my feeds"}
 								accessibilityHint=""
 								onPress={onToggleSaved}
 								hitSlop={15}
@@ -275,10 +275,10 @@ export function FeedSourceCardLoaded({
 
 			<Prompt.Basic
 				control={removePromptControl}
-				title={_(msg`Remove from your feeds?`)}
-				description={_(msg`Are you sure you want to remove ${feed.displayName} from your feeds?`)}
+				title={"Remove from your feeds?"}
+				description={`Are you sure you want to remove ${feed.displayName} from your feeds?`}
 				onConfirm={onUnsave}
-				confirmButtonCta={_(msg`Remove`)}
+				confirmButtonCta={"Remove"}
 				confirmButtonColor="negative"
 			/>
 		</>

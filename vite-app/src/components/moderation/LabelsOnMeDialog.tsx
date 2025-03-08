@@ -54,8 +54,8 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 		<Dialog.ScrollableInner
 			label={
 				isAccount
-					? _(msg`The following labels were applied to your account.`)
-					: _(msg`The following labels were applied to your content.`)
+					? "The following labels were applied to your account."
+					: "The following labels were applied to your content."
 			}
 		>
 			{appealingLabel ? (
@@ -128,7 +128,7 @@ function Label({
 							variant="solid"
 							color="secondary"
 							size="small"
-							label={_(msg`Appeal`)}
+							label={"Appeal"}
 							onPress={() => onPressAppeal(label)}
 						>
 							<ButtonText>Appeal</ButtonText>
@@ -210,11 +210,11 @@ function AppealForm({
 		},
 		onError: (err) => {
 			logger.error("Failed to submit label appeal", { message: err });
-			Toast.show(_(msg`Failed to submit appeal, please try again.`), "xmark");
+			Toast.show("Failed to submit appeal, please try again.", "xmark");
 		},
 		onSuccess: () => {
 			control.close();
-			Toast.show(_(msg`Appeal submitted`));
+			Toast.show("Appeal submitted");
 		},
 	});
 
@@ -243,7 +243,7 @@ function AppealForm({
 			</View>
 			<View style={[a.my_md]}>
 				<Dialog.Input
-					label={_(msg`Text input field`)}
+					label={"Text input field"}
 					placeholder={_(
 						msg`Please explain why you think this label was incorrectly applied by ${
 							labeler ? sanitizeHandle(labeler.creator.handle, "@") : label.src
@@ -265,9 +265,9 @@ function AppealForm({
 					color="secondary"
 					size="large"
 					onPress={onPressBack}
-					label={_(msg`Back`)}
+					label={"Back"}
 				>
-					<ButtonText>{_(msg`Back`)}</ButtonText>
+					<ButtonText>{"Back"}</ButtonText>
 				</Button>
 				<Button
 					testID="submitBtn"
@@ -275,9 +275,9 @@ function AppealForm({
 					color="primary"
 					size="large"
 					onPress={onSubmit}
-					label={_(msg`Submit`)}
+					label={"Submit"}
 				>
-					<ButtonText>{_(msg`Submit`)}</ButtonText>
+					<ButtonText>{"Submit"}</ButtonText>
 					{isPending && <ButtonIcon icon={Loader} />}
 				</Button>
 			</View>

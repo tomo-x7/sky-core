@@ -1,6 +1,5 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type React from "react";
 import { type PropsWithChildren, useMemo, useRef } from "react";
@@ -138,7 +137,7 @@ export function DropdownButton({
 				hitSlop={hitSlop}
 				ref={ref1}
 				accessibilityRole="button"
-				accessibilityLabel={accessibilityLabel || _(msg`Opens ${numItems} options`)}
+				accessibilityLabel={accessibilityLabel || `Opens ${numItems} options`}
 				accessibilityHint=""
 			>
 				{children}
@@ -216,7 +215,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 			{/* This TouchableWithoutFeedback renders the background so if the user clicks outside, the dropdown closes */}
 			<TouchableWithoutFeedback
 				onPress={onOuterPress}
-				accessibilityLabel={_(msg`Toggle dropdown`)}
+				accessibilityLabel={"Toggle dropdown"}
 				accessibilityHint=""
 			>
 				<Animated.View
@@ -250,7 +249,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 								onPress={() => onPressItem(index)}
 								accessibilityRole="button"
 								accessibilityLabel={item.label}
-								accessibilityHint={_(msg`Selects option ${index + 1} of ${numItems}`)}
+								accessibilityHint={`Selects option ${index + 1} of ${numItems}`}
 							>
 								{item.icon && (
 									<FontAwesomeIcon

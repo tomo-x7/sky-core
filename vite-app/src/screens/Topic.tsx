@@ -1,5 +1,4 @@
 import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -66,11 +65,11 @@ export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavi
 	const sections = React.useMemo(() => {
 		return [
 			{
-				title: _(msg`Top`),
+				title: "Top",
 				component: <TopicScreenTab topic={topic} sort="top" active={activeTab === 0} />,
 			},
 			{
-				title: _(msg`Latest`),
+				title: "Latest",
 				component: <TopicScreenTab topic={topic} sort="latest" active={activeTab === 1} />,
 			},
 		];
@@ -89,7 +88,7 @@ export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavi
 							</Layout.Header.Content>
 							<Layout.Header.Slot>
 								<Button
-									label={_(msg`Share`)}
+									label={"Share"}
 									size="small"
 									variant="ghost"
 									color="primary"
@@ -158,7 +157,7 @@ function TopicScreenTab({
 					isError={isError}
 					onRetry={refetch}
 					emptyType="results"
-					emptyMessage={_(msg`We couldn't find any results for that topic.`)}
+					emptyMessage={`We couldn't find any results for that topic.`}
 				/>
 			) : (
 				<List

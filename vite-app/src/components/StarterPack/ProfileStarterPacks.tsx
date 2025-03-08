@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
@@ -127,7 +126,7 @@ function CreateAnother() {
 	return (
 		<View style={[a.pr_md, a.pt_lg, a.gap_lg, a.border_t, t.atoms.border_contrast_low]}>
 			<Button
-				label={_(msg`Create a starter pack`)}
+				label={"Create a starter pack"}
 				variant="solid"
 				color="secondary"
 				size="small"
@@ -194,7 +193,7 @@ function Empty() {
 			</View>
 			<View style={[a.flex_row, a.gap_md, { marginLeft: "auto" }]}>
 				<Button
-					label={_(msg`Create a starter pack for me`)}
+					label={"Create a starter pack for me"}
 					variant="ghost"
 					color="primary"
 					size="small"
@@ -212,7 +211,7 @@ function Empty() {
 					{isGenerating && <Loader size="md" />}
 				</Button>
 				<Button
-					label={_(msg`Create a starter pack`)}
+					label={"Create a starter pack"}
 					variant="ghost"
 					color="primary"
 					size="small"
@@ -241,10 +240,10 @@ function Empty() {
 					Bluesky will choose a set of recommended accounts from people in your network.
 				</Prompt.DescriptionText>
 				<Prompt.Actions>
-					<Prompt.Action color="primary" cta={_(msg`Choose for me`)} onPress={generate} />
+					<Prompt.Action color="primary" cta={"Choose for me"} onPress={generate} />
 					<Prompt.Action
 						color="secondary"
-						cta={_(msg`Let me choose`)}
+						cta={"Let me choose"}
 						onPress={() => {
 							navigation.navigate("StarterPackWizard");
 						}}
@@ -253,20 +252,20 @@ function Empty() {
 			</Prompt.Outer>
 			<Prompt.Basic
 				control={followersDialogControl}
-				title={_(msg`Oops!`)}
-				description={_(msg`You must be following at least seven other people to generate a starter pack.`)}
+				title={"Oops!"}
+				description={"You must be following at least seven other people to generate a starter pack."}
 				onConfirm={() => {}}
 				showCancel={false}
 			/>
 			<Prompt.Basic
 				control={errorDialogControl}
-				title={_(msg`Oops!`)}
-				description={_(msg`An error occurred while generating your starter pack. Want to try again?`)}
+				title={"Oops!"}
+				description={"An error occurred while generating your starter pack. Want to try again?"}
 				onConfirm={generate}
-				confirmButtonCta={_(msg`Retry`)}
+				confirmButtonCta={"Retry"}
 			/>
 			<VerifyEmailDialog
-				reasonText={_(msg`Before creating a starter pack, you must first verify your email.`)}
+				reasonText={"Before creating a starter pack, you must first verify your email."}
 				control={verifyEmailControl}
 			/>
 		</LinearGradientBackground>

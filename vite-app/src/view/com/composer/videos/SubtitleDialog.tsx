@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useCallback, useState } from "react";
 import { Keyboard, type StyleProp, View, type ViewStyle } from "react-native";
@@ -84,13 +83,13 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 	const subtitleMissingLanguage = captions.some((sub) => sub.lang === "");
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Video settings`)}>
+		<Dialog.ScrollableInner label={"Video settings"}>
 			<View style={a.gap_md}>
 				<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>Alt text</Text>
 				<TextField.Root>
 					<Dialog.Input
-						label={_(msg`Alt text`)}
-						placeholder={_(msg`Add alt text (optional)`)}
+						label={"Alt text"}
+						placeholder={"Add alt text (optional)"}
 						value={altText}
 						onChangeText={(evt) => setAltText(enforceLen(evt, MAX_ALT_TEXT))}
 						maxLength={MAX_ALT_TEXT * 10}
@@ -139,7 +138,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 
 				<View style={web([a.flex_row, a.justify_end])}>
 					<Button
-						label={_(msg`Done`)}
+						label={"Done"}
 						size={isWeb ? "small" : "large"}
 						color="primary"
 						variant="solid"
@@ -197,7 +196,7 @@ function SubtitleFileRow({
 					</Text>
 					<RNPickerSelect
 						placeholder={{
-							label: _(msg`Select language...`),
+							label: "Select language...",
 							value: "",
 						}}
 						value={language}
@@ -212,7 +211,7 @@ function SubtitleFileRow({
 			</View>
 
 			<Button
-				label={_(msg`Remove subtitle file`)}
+				label={"Remove subtitle file"}
 				size="tiny"
 				shape="round"
 				variant="outline"

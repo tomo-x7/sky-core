@@ -1,5 +1,4 @@
 import { ComAtprotoServerCreateAccount, type ComAtprotoServerDescribeServer } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import React, { useCallback } from "react";
@@ -203,28 +202,28 @@ export function useSubmitSignup() {
 				dispatch({ type: "setStep", value: SignupStep.INFO });
 				return dispatch({
 					type: "setError",
-					value: _(msg`Please enter your email.`),
+					value: "Please enter your email.",
 				});
 			}
 			if (!EmailValidator.validate(state.email)) {
 				dispatch({ type: "setStep", value: SignupStep.INFO });
 				return dispatch({
 					type: "setError",
-					value: _(msg`Your email appears to be invalid.`),
+					value: "Your email appears to be invalid.",
 				});
 			}
 			if (!state.password) {
 				dispatch({ type: "setStep", value: SignupStep.INFO });
 				return dispatch({
 					type: "setError",
-					value: _(msg`Please choose your password.`),
+					value: "Please choose your password.",
 				});
 			}
 			if (!state.handle) {
 				dispatch({ type: "setStep", value: SignupStep.HANDLE });
 				return dispatch({
 					type: "setError",
-					value: _(msg`Please choose your handle.`),
+					value: "Please choose your handle.",
 				});
 			}
 			if (state.serviceDescription?.phoneVerificationRequired && !state.pendingSubmit?.verificationCode) {
@@ -235,7 +234,7 @@ export function useSubmitSignup() {
 				});
 				return dispatch({
 					type: "setError",
-					value: _(msg`Please complete the verification captcha.`),
+					value: "Please complete the verification captcha.",
 				});
 			}
 			dispatch({ type: "setError", value: "" });
@@ -261,7 +260,7 @@ export function useSubmitSignup() {
 				if (e instanceof ComAtprotoServerCreateAccount.InvalidInviteCodeError) {
 					dispatch({
 						type: "setError",
-						value: _(msg`Invite code not accepted. Check that you input it correctly and try again.`),
+						value: "Invite code not accepted. Check that you input it correctly and try again.",
 					});
 					dispatch({ type: "setStep", value: SignupStep.INFO });
 					return;

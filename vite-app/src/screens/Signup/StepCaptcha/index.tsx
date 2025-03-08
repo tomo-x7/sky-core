@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { nanoid } from "nanoid/non-secure";
 import React from "react";
@@ -50,7 +49,7 @@ export function StepCaptcha() {
 		(error?: unknown) => {
 			dispatch({
 				type: "setError",
-				value: _(msg`Error receiving captcha response.`),
+				value: "Error receiving captcha response.",
 			});
 			logEvent("signup:captchaFailure", {});
 			logger.error("Signup Flow Error", {

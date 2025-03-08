@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
@@ -37,8 +36,8 @@ export function ErrorMessage({
 						style={styles.btn}
 						onPress={onPressTryAgain}
 						accessibilityRole="button"
-						accessibilityLabel={_(msg`Retry`)}
-						accessibilityHint={_(msg`Retries the last action, which errored out`)}
+						accessibilityLabel={"Retry"}
+						accessibilityHint={"Retries the last action, which errored out"}
 					>
 						<FontAwesomeIcon icon="arrows-rotate" style={{ color: theme.palette.error.icon }} size={18} />
 					</TouchableOpacity>

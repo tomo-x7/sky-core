@@ -260,18 +260,12 @@ let DrawerFooter = ({
 				},
 			]}
 		>
-			<Button
-				label={_(msg`Send feedback`)}
-				size="small"
-				variant="solid"
-				color="secondary"
-				onPress={onPressFeedback}
-			>
+			<Button label={"Send feedback"} size="small" variant="solid" color="secondary" onPress={onPressFeedback}>
 				<ButtonIcon icon={Message} position="left" />
 				<ButtonText>Feedback</ButtonText>
 			</Button>
 			<Button
-				label={_(msg`Get help`)}
+				label={"Get help"}
 				size="small"
 				variant="outline"
 				color="secondary"
@@ -312,7 +306,7 @@ let SearchMenuItem = ({
 					<MagnifyingGlass style={[t.atoms.text]} width={iconWidth} />
 				)
 			}
-			label={_(msg`Search`)}
+			label={"Search"}
 			bold={isActive}
 			onPress={onPress}
 		/>
@@ -363,7 +357,7 @@ let ChatMenuItem = ({
 					<Message style={[t.atoms.text]} width={iconWidth} />
 				)
 			}
-			label={_(msg`Chat`)}
+			label={"Chat"}
 			bold={isActive}
 			onPress={onPress}
 		/>
@@ -390,7 +384,7 @@ let NotificationsMenuItem = ({
 					<Bell style={[t.atoms.text]} width={iconWidth} />
 				)
 			}
-			label={_(msg`Notifications`)}
+			label={"Notifications"}
 			accessibilityHint={
 				numUnreadNotifications === ""
 					? ""
@@ -427,7 +421,7 @@ let FeedsMenuItem = ({
 					<Hashtag width={iconWidth} style={[t.atoms.text]} />
 				)
 			}
-			label={_(msg`Feeds`)}
+			label={"Feeds"}
 			bold={isActive}
 			onPress={onPress}
 		/>
@@ -439,9 +433,7 @@ let ListsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode => {
 	const { _ } = useLingui();
 	const t = useTheme();
 
-	return (
-		<MenuItem icon={<List style={[t.atoms.text]} width={iconWidth} />} label={_(msg`Lists`)} onPress={onPress} />
-	);
+	return <MenuItem icon={<List style={[t.atoms.text]} width={iconWidth} />} label={"Lists"} onPress={onPress} />;
 };
 ListsMenuItem = React.memo(ListsMenuItem);
 
@@ -463,7 +455,7 @@ let ProfileMenuItem = ({
 					<UserCircle style={[t.atoms.text]} width={iconWidth} />
 				)
 			}
-			label={_(msg`Profile`)}
+			label={"Profile"}
 			onPress={onPress}
 		/>
 	);
@@ -474,11 +466,7 @@ let SettingsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode =
 	const { _ } = useLingui();
 	const t = useTheme();
 	return (
-		<MenuItem
-			icon={<Settings style={[t.atoms.text]} width={iconWidth} />}
-			label={_(msg`Settings`)}
-			onPress={onPress}
-		/>
+		<MenuItem icon={<Settings style={[t.atoms.text]} width={iconWidth} />} label={"Settings"} onPress={onPress} />
 	);
 };
 SettingsMenuItem = React.memo(SettingsMenuItem);
@@ -548,17 +536,13 @@ function ExtraLinks() {
 
 	return (
 		<View style={[a.flex_col, a.gap_md, a.flex_wrap]}>
-			<InlineLinkText
-				style={[a.text_md]}
-				label={_(msg`Terms of Service`)}
-				to="https://bsky.social/about/support/tos"
-			>
+			<InlineLinkText style={[a.text_md]} label={"Terms of Service"} to="https://bsky.social/about/support/tos">
 				Terms of Service
 			</InlineLinkText>
 			<InlineLinkText
 				style={[a.text_md]}
 				to="https://bsky.social/about/support/privacy-policy"
-				label={_(msg`Privacy Policy`)}
+				label={"Privacy Policy"}
 			>
 				Privacy Policy
 			</InlineLinkText>

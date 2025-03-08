@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -63,7 +62,7 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 			<ErrorBoundary>
 				{onDismiss && screenState === ScreenState.S_LoginOrCreateAccount ? (
 					<Button
-						label={_(msg`Go back`)}
+						label={"Go back"}
 						variant="solid"
 						color="secondary_inverted"
 						size="small"

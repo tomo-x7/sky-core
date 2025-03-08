@@ -1,5 +1,4 @@
 import { type ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import { StatusBar } from "expo-status-bar";
@@ -67,7 +66,7 @@ export function Takendown() {
 				variant="solid"
 				color="primary"
 				size="large"
-				label={_(msg`Submit appeal`)}
+				label={"Submit appeal"}
 				onPress={() => submitAppeal(reason)}
 				disabled={isPending || reasonGraphemeLength > MAX_REPORT_REASON_GRAPHEME_LENGTH}
 			>
@@ -79,7 +78,7 @@ export function Takendown() {
 				variant="solid"
 				size="large"
 				color="secondary_inverted"
-				label={_(msg`Sign out`)}
+				label={"Sign out"}
 				onPress={() => logoutCurrentAccount("Takendown")}
 			>
 				<ButtonText>Sign Out</ButtonText>
@@ -92,7 +91,7 @@ export function Takendown() {
 				variant="ghost"
 				size="large"
 				color="secondary"
-				label={_(msg`Cancel`)}
+				label={"Cancel"}
 				onPress={() => setIsAppealling(false)}
 			>
 				<ButtonText>Cancel</ButtonText>
@@ -103,7 +102,7 @@ export function Takendown() {
 			variant="ghost"
 			size="large"
 			color="secondary"
-			label={_(msg`Appeal suspension`)}
+			label={"Appeal suspension"}
 			onPress={() => setIsAppealling(true)}
 		>
 			<ButtonText>Appeal Suspension</ButtonText>
@@ -144,10 +143,10 @@ export function Takendown() {
 											}
 										>
 											<TextField.Input
-												label={_(msg`Reason for appeal`)}
+												label={"Reason for appeal"}
 												defaultValue={reason}
 												onChangeText={setReason}
-												placeholder={_(msg`Why are you appealing?`)}
+												placeholder={"Why are you appealing?"}
 												multiline
 												numberOfLines={5}
 												autoFocus
@@ -193,7 +192,7 @@ export function Takendown() {
 								<>
 									Your account was found to be in violation of the{" "}
 									<InlineLinkText
-										label={_(msg`Bluesky Social Terms of Service`)}
+										label={"Bluesky Social Terms of Service"}
 										to="https://bsky.social/about/support/tos"
 										style={[a.text_md, a.leading_normal]}
 										overridePresentation

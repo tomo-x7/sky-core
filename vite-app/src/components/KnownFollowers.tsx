@@ -1,5 +1,5 @@
 import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
-import { Plural, msg } from "@lingui/macro";
+import { Plural } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
@@ -114,7 +114,7 @@ function KnownFollowersInner({
 
 	return (
 		<Link
-			label={_(msg`Press to view followers of this account that you also follow`)}
+			label={"Press to view followers of this account that you also follow"}
 			onPress={onLinkPress}
 			to={makeProfileLink(profile, "known-followers")}
 			style={[a.flex_row, minimal ? a.gap_sm : a.gap_md, a.align_center, { marginLeft: -AVI_BORDER }]}

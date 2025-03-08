@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
@@ -41,7 +40,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 	const ref = React.useRef<ScrollView>(null);
 
 	return (
-		<Dialog.ScrollableInner label={_(msg`Report dialog`)} ref={ref}>
+		<Dialog.ScrollableInner label={"Report dialog"} ref={ref}>
 			{isLoading ? (
 				<View style={[a.align_center, { height: 100 }]}>
 					<Loader size="xl" />

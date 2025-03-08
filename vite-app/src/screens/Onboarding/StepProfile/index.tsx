@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import React from "react";
@@ -99,7 +98,7 @@ export function StepProfile() {
 							!asset.mimeType?.endsWith("jpg") &&
 							!asset.mimeType?.endsWith("png"))
 					) {
-						setError(_(msg`Only .jpg and .png files are supported`));
+						setError("Only .jpg and .png files are supported");
 						return false;
 					}
 					return true;
@@ -245,7 +244,7 @@ export function StepProfile() {
 							variant="gradient"
 							color="gradient_sky"
 							size="large"
-							label={_(msg`Continue to next step`)}
+							label={"Continue to next step"}
 							onPress={onContinue}
 						>
 							<ButtonText>Continue</ButtonText>
@@ -255,7 +254,7 @@ export function StepProfile() {
 							variant="ghost"
 							color="primary"
 							size="large"
-							label={_(msg`Open avatar creator`)}
+							label={"Open avatar creator"}
 							onPress={onSecondaryPress}
 						>
 							<ButtonText>
@@ -285,13 +284,7 @@ export function StepProfile() {
 						<AvatarCreatorItems type="colors" avatar={avatar} setAvatar={setAvatar} />
 					</View>
 					<View style={[a.pt_4xl]}>
-						<Button
-							variant="solid"
-							color="primary"
-							size="large"
-							label={_(msg`Done`)}
-							onPress={onDoneCreating}
-						>
+						<Button variant="solid" color="primary" size="large" label={"Done"} onPress={onDoneCreating}>
 							<ButtonText>Done</ButtonText>
 						</Button>
 					</View>

@@ -1,4 +1,3 @@
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import type { ImagePickerAsset } from "expo-image-picker";
 import { useCallback } from "react";
@@ -54,18 +53,18 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 					if (isWeb) {
 						// asset.duration is null for gifs (see the TODO in pickVideo.web.ts)
 						if (asset.duration && asset.duration > VIDEO_MAX_DURATION) {
-							throw Error(_(msg`Videos must be less than 60 seconds long`));
+							throw Error("Videos must be less than 60 seconds long");
 						}
 						// compression step on native converts to mp4, so no need to check there
 						if (!SUPPORTED_MIME_TYPES.includes(asset.mimeType as SupportedMimeTypes)) {
-							throw Error(_(msg`Unsupported video type: ${asset.mimeType}`));
+							throw Error(`Unsupported video type: ${asset.mimeType}`);
 						}
 					} else {
 						if (typeof asset.duration !== "number") {
 							throw Error("Asset is not a video");
 						}
 						if (asset.duration > VIDEO_MAX_DURATION) {
-							throw Error(_(msg`Videos must be less than 60 seconds long`));
+							throw Error("Videos must be less than 60 seconds long");
 						}
 					}
 					onSelectVideo(asset);
@@ -73,7 +72,7 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 					if (err instanceof Error) {
 						setError(err.message);
 					} else {
-						setError(_(msg`An error occurred while selecting the video`));
+						setError("An error occurred while selecting the video");
 					}
 				}
 			}
@@ -85,8 +84,8 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 			<Button
 				testID="openGifBtn"
 				onPress={onPressSelectVideo}
-				label={_(msg`Select video`)}
-				accessibilityHint={_(msg`Opens video picker`)}
+				label={"Select video"}
+				accessibilityHint={"Opens video picker"}
 				style={a.p_sm}
 				variant="ghost"
 				shape="round"
@@ -108,9 +107,9 @@ function VerifyEmailPrompt({ control }: { control: Prompt.PromptControlProps }) 
 		<>
 			<Prompt.Basic
 				control={control}
-				title={_(msg`Verified email required`)}
-				description={_(msg`To upload videos to Bluesky, you must first verify your email.`)}
-				confirmButtonCta={_(msg`Verify now`)}
+				title={"Verified email required"}
+				description={"To upload videos to Bluesky, you must first verify your email."}
+				confirmButtonCta={"Verify now"}
 				confirmButtonColor="primary"
 				onConfirm={() => {
 					verifyEmailDialogControl.open();

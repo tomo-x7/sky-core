@@ -93,7 +93,7 @@ let ProfileHeaderLabeler = ({
 			}
 		} catch (e: any) {
 			Toast.show(
-				_(msg`There was an issue contacting the server, please check your internet connection and try again.`),
+				"There was an issue contacting the server, please check your internet connection and try again.",
 				"xmark",
 			);
 			logger.error("Failed to toggle labeler like", { message: e.message });
@@ -156,7 +156,7 @@ let ProfileHeaderLabeler = ({
 								color="secondary"
 								variant="solid"
 								onPress={onPressEditProfile}
-								label={_(msg`Edit profile`)}
+								label={"Edit profile"}
 								style={a.rounded_full}
 							>
 								<ButtonText>Edit Profile</ButtonText>
@@ -167,11 +167,7 @@ let ProfileHeaderLabeler = ({
 						<>
 							<Button
 								testID="toggleSubscribeBtn"
-								label={
-									isSubscribed
-										? _(msg`Unsubscribe from this labeler`)
-										: _(msg`Subscribe to this labeler`)
-								}
+								label={isSubscribed ? "Unsubscribe from this labeler" : "Subscribe to this labeler"}
 								onPress={onPressSubscribe}
 							>
 								{(state) => (
@@ -238,7 +234,7 @@ let ProfileHeaderLabeler = ({
 									color="secondary"
 									variant="solid"
 									shape="round"
-									label={_(msg`Like this labeler`)}
+									label={"Like this labeler"}
 									disabled={!hasSession || isLikePending || isUnlikePending}
 									onPress={onToggleLiked}
 								>
@@ -309,7 +305,7 @@ function CantSubscribePrompt({
 				We're sorry! You can only subscribe to twenty labelers, and you've reached your limit of twenty.
 			</Prompt.DescriptionText>
 			<Prompt.Actions>
-				<Prompt.Action onPress={() => control.close()} cta={_(msg`OK`)} />
+				<Prompt.Action onPress={() => control.close()} cta={"OK"} />
 			</Prompt.Actions>
 		</Prompt.Outer>
 	);

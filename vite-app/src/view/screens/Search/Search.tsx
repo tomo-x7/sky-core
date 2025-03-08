@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -185,7 +184,7 @@ let SearchScreenPostResults = ({
 
 	return error ? (
 		<EmptyState
-			message={_(msg`We're sorry, but your search could not be completed. Please try again in a few minutes.`)}
+			message={`We're sorry, but your search could not be completed. Please try again in a few minutes.`}
 			error={error.toString()}
 		/>
 	) : (
@@ -210,7 +209,7 @@ let SearchScreenPostResults = ({
 							contentContainerStyle={{ paddingBottom: 100 }}
 						/>
 					) : (
-						<EmptyState message={_(msg`No results found for ${query}`)} />
+						<EmptyState message={`No results found for ${query}`} />
 					)}
 				</>
 			) : (
@@ -246,7 +245,7 @@ let SearchScreenUserResults = ({
 					contentContainerStyle={{ paddingBottom: 100 }}
 				/>
 			) : (
-				<EmptyState message={_(msg`No results found for ${query}`)} />
+				<EmptyState message={`No results found for ${query}`} />
 			)}
 		</>
 	) : (
@@ -285,7 +284,7 @@ let SearchScreenFeedsResults = ({
 					contentContainerStyle={{ paddingBottom: 100 }}
 				/>
 			) : (
-				<EmptyState message={_(msg`No results found for ${query}`)} />
+				<EmptyState message={`No results found for ${query}`} />
 			)}
 		</>
 	) : (
@@ -340,11 +339,11 @@ function SearchLanguageDropdown({
 			});
 	}, [appLanguage, contentLanguages]);
 
-	const currentLanguageLabel = languages.find((lang) => lang.value === value)?.label ?? _(msg`All languages`);
+	const currentLanguageLabel = languages.find((lang) => lang.value === value)?.label ?? "All languages";
 
 	return (
 		<Menu.Root>
-			<Menu.Trigger label={_(msg`Filter search by language (currently: ${currentLanguageLabel})`)}>
+			<Menu.Trigger label={`Filter search by language (currently: ${currentLanguageLabel})`}>
 				{({ props }) => (
 					<Button
 						{...props}
@@ -367,7 +366,7 @@ function SearchLanguageDropdown({
 			</Menu.Trigger>
 			<Menu.Outer>
 				<Menu.LabelText>Filter search by language</Menu.LabelText>
-				<Menu.Item label={_(msg`All languages`)} onPress={() => onChange("")}>
+				<Menu.Item label={"All languages"} onPress={() => onChange("")}>
 					<Menu.ItemText>All languages</Menu.ItemText>
 					<Menu.ItemRadio selected={value === ""} />
 				</Menu.Item>
@@ -462,19 +461,19 @@ let SearchScreenInner = ({
 		const noParams = queryWithParams === query;
 		return [
 			{
-				title: _(msg`Top`),
+				title: "Top",
 				component: <SearchScreenPostResults query={queryWithParams} sort="top" active={activeTab === 0} />,
 			},
 			{
-				title: _(msg`Latest`),
+				title: "Latest",
 				component: <SearchScreenPostResults query={queryWithParams} sort="latest" active={activeTab === 1} />,
 			},
 			noParams && {
-				title: _(msg`People`),
+				title: "People",
 				component: <SearchScreenUserResults query={query} active={activeTab === 2} />,
 			},
 			noParams && {
-				title: _(msg`Feeds`),
+				title: "Feeds",
 				component: <SearchScreenFeedsResults query={query} active={activeTab === 3} />,
 			},
 		].filter(Boolean) as {
@@ -785,13 +784,13 @@ export function SearchScreenShell({
 										onChangeText={onChangeText}
 										onClearText={onPressClearQuery}
 										onSubmitEditing={onSubmit}
-										placeholder={inputPlaceholder ?? _(msg`Search for posts, users, or feeds`)}
+										placeholder={inputPlaceholder ?? "Search for posts, users, or feeds"}
 										hitSlop={{ ...HITSLOP_20, top: 0 }}
 									/>
 								</View>
 								{showAutocomplete && (
 									<Button
-										label={_(msg`Cancel search`)}
+										label={"Cancel search"}
 										size="large"
 										variant="ghost"
 										color="secondary"
@@ -876,7 +875,7 @@ let AutocompleteResults = ({
 			) : (
 				<Layout.Content keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
 					<SearchLinkCard
-						label={_(msg`Search for "${searchText}"`)}
+						label={`Search for "${searchText}"`}
 						onPress={isNative ? onSubmit : undefined}
 						to={isNative ? undefined : `/search?q=${encodeURIComponent(searchText)}`}
 						style={{ borderBottomWidth: 1 }}
@@ -960,8 +959,8 @@ function SearchHistory({
 									</Link>
 									<Pressable
 										accessibilityRole="button"
-										accessibilityLabel={_(msg`Remove profile`)}
-										accessibilityHint={_(msg`Removes profile from search history`)}
+										accessibilityLabel={"Remove profile"}
+										accessibilityHint={"Removes profile from search history"}
 										onPress={() => onRemoveProfileClick(profile)}
 										hitSlop={createHitslop(6)}
 										style={styles.profileRemoveBtn}
@@ -986,7 +985,7 @@ function SearchHistory({
 									<Text style={[a.text_md]}>{historyItem}</Text>
 								</Pressable>
 								<Button
-									label={_(msg`Remove ${historyItem}`)}
+									label={`Remove ${historyItem}`}
 									onPress={() => onRemoveItemClick(historyItem)}
 									size="small"
 									variant="ghost"
