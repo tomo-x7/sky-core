@@ -1,6 +1,4 @@
 import { type AppBskyActorDefs, AppBskyFeedGetAuthorFeed, AtUri } from "@atproto/api";
-import { msg as msgLingui } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
@@ -9,7 +7,6 @@ import * as Prompt from "#/components/Prompt";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { useRemoveFeedMutation } from "#/state/queries/preferences";
 import { EmptyState } from "../util/EmptyState";
@@ -102,7 +99,7 @@ function FeedgenErrorMessage({
 			})[knownError],
 		[_l, knownError],
 	);
-	const [_, uri] = feedDesc.split("|");
+	const [uri] = feedDesc.split("|");
 	const [ownerDid] = safeParseFeedgenUri(uri);
 	const removePromptControl = Prompt.usePromptControl();
 	const { mutateAsync: removeFeed } = useRemoveFeedMutation();
@@ -126,7 +123,7 @@ function FeedgenErrorMessage({
 				),
 				"exclamation-circle",
 			);
-			logger.error("Failed to remove feed", { message: err });
+			console.error("Failed to remove feed", { message: err });
 		}
 	}, [removeFeed, _l, savedFeedConfig]);
 

@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
@@ -16,7 +15,6 @@ export const snapPoints = [350];
 export function Component({ href }: { href: string }) {
 	const pal = usePalette("default");
 	const { closeModal } = useModalControls();
-	const { _ } = useLingui();
 	const setInAppBrowser = useSetInAppBrowser();
 	const openLink = useOpenLink();
 

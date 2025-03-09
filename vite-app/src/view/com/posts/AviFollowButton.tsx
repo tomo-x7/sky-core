@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type React from "react";
 import { View } from "react-native";
@@ -24,7 +23,6 @@ export function AviFollowButton({
 	moderation: ModerationDecision;
 	children: React.ReactNode;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const profile = useProfileShadow(author);
 	const { follow } = useFollowMethods({

@@ -1,5 +1,4 @@
 import { ComAtprotoServerCreateSession, type ComAtprotoServerDescribeServer } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React, { useRef, useState } from "react";
 import { ActivityIndicator, Keyboard, LayoutAnimation, type TextInput, View } from "react-native";
 
@@ -17,7 +16,6 @@ import { useRequestNotificationsPermission } from "#/lib/notifications/notificat
 import { isNetworkError } from "#/lib/strings/errors";
 import { cleanError } from "#/lib/strings/errors";
 import { createFullHandle } from "#/lib/strings/handles";
-import { logger } from "#/logger";
 import { useSetHasCheckedForStarterPack } from "#/state/preferences/used-starter-packs";
 import { useSessionApi } from "#/state/session";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
@@ -58,7 +56,6 @@ export const LoginForm = ({
 	const passwordValueRef = useRef<string>("");
 	const authFactorTokenValueRef = useRef<string>("");
 	const passwordRef = useRef<TextInput>(null);
-	const { _ } = useLingui();
 	const { login } = useSessionApi();
 	const requestNotificationsPermission = useRequestNotificationsPermission();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
@@ -133,23 +130,15 @@ export const LoginForm = ({
 			} else {
 				onAttemptFailed();
 				if (errMsg.includes("Token is invalid")) {
-					logger.debug("Failed to login due to invalid 2fa token", {
-						error: errMsg,
-					});
 					setError("Invalid 2FA confirmation code.");
 				} else if (
 					errMsg.includes("Authentication Required") ||
 					errMsg.includes("Invalid identifier or password")
 				) {
-					logger.debug("Failed to login due to invalid credentials", {
-						error: errMsg,
-					});
 					setError("Incorrect username or password");
 				} else if (isNetworkError(e)) {
-					logger.warn("Failed to login due to network error", { error: errMsg });
 					setError("Unable to contact your service. Please check your Internet connection.");
 				} else {
-					logger.warn("Failed to login", { error: errMsg });
 					setError(cleanError(errMsg));
 				}
 			}

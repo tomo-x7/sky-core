@@ -1,11 +1,9 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View } from "react-native";
 
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useNotificationFeedQuery } from "#/state/queries/notifications/feed";
 import { EmptyState } from "#/view/com/util/EmptyState";
@@ -38,7 +36,6 @@ export function NotificationFeed({
 }) {
 	const initialNumToRender = useInitialNumToRender();
 	const [isPTRing, setIsPTRing] = React.useState(false);
-	const { _ } = useLingui();
 	const moderationOpts = useModerationOpts();
 	const { data, isFetching, isFetched, isError, error, hasNextPage, isFetchingNextPage, fetchNextPage } =
 		useNotificationFeedQuery({
@@ -71,7 +68,7 @@ export function NotificationFeed({
 			setIsPTRing(true);
 			await refreshNotifications();
 		} catch (err) {
-			logger.error("Failed to refresh notifications feed", {
+			console.error("Failed to refresh notifications feed", {
 				message: err,
 			});
 		} finally {
@@ -85,7 +82,7 @@ export function NotificationFeed({
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more notifications", { message: err });
+			console.error("Failed to load more notifications", { message: err });
 		}
 	}, [isFetching, hasNextPage, isError, fetchNextPage]);
 
@@ -116,7 +113,7 @@ export function NotificationFeed({
 				/>
 			);
 		},
-		[moderationOpts, _, onPressRetryLoadMore, filter],
+		[moderationOpts, onPressRetryLoadMore, filter],
 	);
 
 	const FeedFooter = React.useCallback(

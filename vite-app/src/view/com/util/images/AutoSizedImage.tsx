@@ -1,5 +1,4 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { Image } from "react-native";
 import { type DimensionValue, Pressable, View } from "react-native";
@@ -73,7 +72,6 @@ export function AutoSizedImage({
 	onPressIn?: () => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const largeAlt = useLargeAltBadgeEnabled();
 	const containerRef = useHandleRef();
 	const fetchedDimsRef = useRef<{ width: number; height: number } | null>(null);

@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import type Hls from "hls.js";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -68,7 +66,6 @@ export function Controls({
 		canPlay,
 	} = useVideoElement(videoRef);
 	const t = useTheme();
-	const { _ } = useLingui();
 	const subtitlesEnabled = useSubtitlesEnabled();
 	const setSubtitlesEnabled = useSetSubtitlesEnabled();
 	const { state: hovered, onIn: onHover, onOut: onEndHover } = useInteractionState();
@@ -299,7 +296,7 @@ export function Controls({
 				onPointerEnter={onPointerMoveEmptySpace}
 				onPointerMove={onPointerMoveEmptySpace}
 				onPointerLeave={onPointerLeaveEmptySpace}
-				accessibilityLabel={_(!focused ? msg`Unmute video` : playing ? msg`Pause video` : msg`Play video`)}
+				accessibilityLabel={!focused ? msg`Unmute video` : playing ? msg`Pause video` : msg`Play video`}
 				accessibilityHint=""
 				style={[a.flex_1, web({ cursor: showCursor || !playing ? "pointer" : "none" })]}
 				onPress={onPressEmptySpace}

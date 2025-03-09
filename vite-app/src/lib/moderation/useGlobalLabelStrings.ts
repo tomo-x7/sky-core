@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useMemo } from "react";
 
 export type GlobalLabelStrings = Record<
@@ -10,7 +9,6 @@ export type GlobalLabelStrings = Record<
 >;
 
 export function useGlobalLabelStrings(): GlobalLabelStrings {
-	const { _ } = useLingui();
 	return useMemo(
 		() => ({
 			"!hide": {
@@ -46,6 +44,6 @@ export function useGlobalLabelStrings(): GlobalLabelStrings {
 				description: "Explicit or potentially disturbing media.",
 			},
 		}),
-		[_],
+		[],
 	);
 }

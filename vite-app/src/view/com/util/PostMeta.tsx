@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import type React from "react";
 import { memo, useCallback } from "react";

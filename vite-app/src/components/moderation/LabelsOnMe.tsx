@@ -46,12 +46,12 @@ export function LabelsOnMe({
 				<ButtonText style={[a.leading_snug]}>
 					{type === "account" ? (
 						<>
-							<Plural value={labels.length} one="# label has" other="# labels have" /> been placed on this
+							{labels.length} {labels.length === 1 ? "label has" : "labels have"} been placed on this
 							account
 						</>
 					) : (
 						<>
-							<Plural value={labels.length} one="# label has" other="# labels have" /> been placed on this
+							{labels.length} {labels.length === 1 ? "label has" : "labels have"} been placed on this
 							content
 						</>
 					)}

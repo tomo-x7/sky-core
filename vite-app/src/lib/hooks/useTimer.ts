@@ -4,7 +4,7 @@ import * as React from "react";
  * Helper hook to run persistent timers on views
  */
 export function useTimer(time: number, handler: () => void) {
-	const timer = React.useRef<undefined | NodeJS.Timeout>(undefined);
+	const timer = React.useRef<undefined | number>(undefined);
 
 	// function to restart the timer
 	const reset = React.useCallback(() => {
@@ -12,7 +12,7 @@ export function useTimer(time: number, handler: () => void) {
 			clearTimeout(timer.current);
 		}
 		timer.current = setTimeout(handler, time);
-	}, [time, timer, handler]);
+	}, [time, handler]);
 
 	// function to cancel the timer
 	const cancel = React.useCallback(() => {
@@ -20,12 +20,12 @@ export function useTimer(time: number, handler: () => void) {
 			clearTimeout(timer.current);
 			timer.current = undefined;
 		}
-	}, [timer]);
+	}, []);
 
 	// start the timer immediately
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	React.useEffect(() => {
 		reset();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return [reset, cancel];

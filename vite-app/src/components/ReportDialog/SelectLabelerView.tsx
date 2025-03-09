@@ -1,5 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -17,7 +16,6 @@ export function SelectLabelerView({
 	onSelectLabeler: (v: string) => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 
 	return (

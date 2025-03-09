@@ -1,6 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { Trans, msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useLinkProps, useNavigation, useNavigationState } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -51,7 +49,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { getCurrentRoute, isTab } from "#/lib/routes/helpers";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
-import { useGate } from "#/lib/statsig/statsig";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { isInvalidHandle, sanitizeHandle } from "#/lib/strings/handles";
 import { emitSoftReset } from "#/state/events";
@@ -82,7 +79,6 @@ function ProfileCard() {
 	const profiles = data?.profiles;
 	const signOutPromptControl = Prompt.usePromptControl();
 	const { leftNavMinimal } = useLayoutBreakpoints();
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	const size = 48;
@@ -216,7 +212,6 @@ function SwitchMenuItems({
 		| undefined;
 	signOutPromptControl: DialogControlProps;
 }) {
-	const { _ } = useLingui();
 	const { onPressSwitchAccount, pendingDid } = useAccountSwitcher();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
 	const closeEverything = useCloseAllActiveElements();
@@ -236,12 +231,10 @@ function SwitchMenuItems({
 								disabled={!!pendingDid}
 								style={[{ minWidth: 150 }]}
 								key={other.account.did}
-								label={_(
-									msg`Switch to ${sanitizeHandle(
-										other.profile?.handle ?? other.account.handle,
-										"@",
-									)}`,
-								)}
+								label={`Switch to ${sanitizeHandle(
+									other.profile?.handle ?? other.account.handle,
+									"@",
+								)}`}
 								onPress={() => onPressSwitchAccount(other.account, "SwitchAccount")}
 							>
 								<View style={[{ marginLeft: tokens.space._2xs * -1 }]}>
@@ -282,7 +275,6 @@ interface NavItemProps {
 }
 function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const { leftNavMinimal } = useLayoutBreakpoints();
 	const [pathName] = React.useMemo(() => router.matchPath(href), [href]);
@@ -350,12 +342,10 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 						]}
 					>
 						<Text
-							accessibilityLabel={_(
-								msg`${plural(count, {
-									one: "# unread item",
-									other: "# unread items",
-								})}`,
-							)}
+							accessibilityLabel={`${plural(count, {
+								one: "# unread item",
+								other: "# unread items",
+							})}`}
 							accessibilityHint=""
 							accessible={true}
 							numberOfLines={1}
@@ -416,7 +406,6 @@ function ComposeBtn() {
 	const { currentAccount } = useSession();
 	const { getState } = useNavigation();
 	const { openComposer } = useComposerControls();
-	const { _ } = useLingui();
 	const { leftNavMinimal } = useLayoutBreakpoints();
 	const [isFetchingHandle, setIsFetchingHandle] = React.useState(false);
 	const fetchHandle = useFetchHandle();
@@ -475,7 +464,6 @@ function ComposeBtn() {
 
 function ChatNavItem() {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const numUnreadMessages = useUnreadMessageCount();
 
 	return (
@@ -493,7 +481,6 @@ function ChatNavItem() {
 export function DesktopLeftNav() {
 	const { hasSession, currentAccount } = useSession();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { isDesktop } = useWebMediaQueries();
 	const { leftNavMinimal, centerColumnOffset } = useLayoutBreakpoints();
 	const numUnreadNotifications = useUnreadNotifications();

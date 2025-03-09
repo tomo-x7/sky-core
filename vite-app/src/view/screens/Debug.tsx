@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { ScrollView, View } from "react-native";
 
@@ -44,7 +43,6 @@ function DebugInner({
 }) {
 	const [currentView, setCurrentView] = React.useState<number>(0);
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 
 	const renderItem = (item: any) => {
 		return (

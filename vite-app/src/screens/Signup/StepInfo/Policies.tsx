@@ -1,5 +1,4 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import type { ReactElement } from "react";
 import { View } from "react-native";
 
@@ -18,7 +17,6 @@ export const Policies = ({
 	under13: boolean;
 }) => {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	if (!serviceDescription) {
 		return <View />;

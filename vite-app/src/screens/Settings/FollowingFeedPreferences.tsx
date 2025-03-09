@@ -1,5 +1,3 @@
-import { useLingui } from "@lingui/react";
-
 import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
@@ -13,9 +11,7 @@ import { usePreferencesQuery, useSetFeedViewPreferencesMutation } from "#/state/
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "PreferencesFollowingFeed">;
-export function FollowingFeedPreferencesScreen({}: Props) {
-	const { _ } = useLingui();
-
+export function FollowingFeedPreferencesScreen(props: Props) {
 	const { data: preferences } = usePreferencesQuery();
 	const { mutate: setFeedViewPref, variables } = useSetFeedViewPreferencesMutation();
 

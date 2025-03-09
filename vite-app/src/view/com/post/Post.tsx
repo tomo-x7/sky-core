@@ -7,8 +7,6 @@ import {
 	moderatePost,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useMemo, useState } from "react";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
@@ -109,7 +107,6 @@ function PostInner({
 }) {
 	const queryClient = useQueryClient();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { openComposer } = useComposerControls();
 	const [limitLines, setLimitLines] = useState(() => countLines(richText?.text) >= MAX_POST_LINES);
 	const itemUrip = new AtUri(post.uri);

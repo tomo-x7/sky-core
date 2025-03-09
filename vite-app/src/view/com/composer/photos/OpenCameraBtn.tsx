@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import * as MediaLibrary from "expo-media-library";
 import { useCallback } from "react";
 
@@ -8,7 +7,6 @@ import { Camera_Stroke2_Corner0_Rounded as Camera } from "#/components/icons/Cam
 import { POST_IMG_MAX } from "#/lib/constants";
 import { useCameraPermission } from "#/lib/hooks/usePermissions";
 import { openCamera } from "#/lib/media/picker";
-import { logger } from "#/logger";
 import { isMobileWeb, isNative } from "#/platform/detection";
 import { type ComposerImage, createComposerImage } from "#/state/gallery";
 
@@ -18,7 +16,6 @@ type Props = {
 };
 
 export function OpenCameraBtn({ disabled, onAdd }: Props) {
-	const { _ } = useLingui();
 	const { requestCameraAccessIfNeeded } = useCameraPermission();
 	const [mediaPermissionRes, requestMediaPermission] = MediaLibrary.usePermissions({
 		granularPermissions: ["photo"],

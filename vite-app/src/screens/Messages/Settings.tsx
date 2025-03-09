@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
 import { View } from "react-native";
@@ -20,8 +19,7 @@ import { useBackgroundNotificationPreferences } from "../../../modules/expo-back
 type AllowIncoming = "all" | "none" | "following";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "MessagesSettings">;
-export function MessagesSettingsScreen({}: Props) {
-	const { _ } = useLingui();
+export function MessagesSettingsScreen(props: Props) {
 	const { currentAccount } = useSession();
 	const { data: profile } = useProfileQuery({
 		did: currentAccount!.did,

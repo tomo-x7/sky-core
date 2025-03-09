@@ -20,6 +20,7 @@ export async function until<T>(
 			}
 		}
 		await timeout(delay);
+		//biome-ignore lint/style/noParameterAssign:
 		retries--;
 	}
 	return false;

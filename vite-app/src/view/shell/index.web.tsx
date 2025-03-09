@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
@@ -30,7 +29,6 @@ function ShellInner() {
 	const { isDesktop } = useWebMediaQueries();
 	const navigator = useNavigation<NavigationProp>();
 	const closeAllActiveElements = useCloseAllActiveElements();
-	const { _ } = useLingui();
 	const showDrawer = !isDesktop && isDrawerOpen;
 	const [showDrawerDelayedExit, setShowDrawerDelayedExit] = useState(showDrawer);
 

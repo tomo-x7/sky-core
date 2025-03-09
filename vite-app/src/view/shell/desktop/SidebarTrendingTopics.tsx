@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -10,7 +9,6 @@ import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/compo
 import { Text } from "#/components/Typography";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
-import { logEvent } from "#/lib/statsig/statsig";
 import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences/trending";
 import { useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
 import { useTrendingConfig } from "#/state/trending-config";
@@ -25,7 +23,6 @@ export function SidebarTrendingTopics() {
 
 function Inner() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const trendingPrompt = Prompt.usePromptControl();
 	const { setTrendingDisabled } = useTrendingSettingsApi();
 	const { data: trending, error, isLoading } = useTrendingTopics();

@@ -1,22 +1,17 @@
-import { useLingui } from "@lingui/react";
 import { useCallback, useState } from "react";
 
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { type SessionAccount, useSessionApi } from "#/state/session";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import * as Toast from "#/view/com/util/Toast";
-import { logEvent } from "../statsig/statsig";
-import type { LogEvents } from "../statsig/statsig";
 
 export function useAccountSwitcher() {
 	const [pendingDid, setPendingDid] = useState<string | null>(null);
-	const { _ } = useLingui();
 	const { resumeSession } = useSessionApi();
 	const { requestSwitchToAccount } = useLoggedOutViewControls();
 
 	const onPressSwitchAccount = useCallback(
-		async (account: SessionAccount, logContext: LogEvents["account:loggedIn"]["logContext"]) => {
+		async (account: SessionAccount) => {
 			if (pendingDid) {
 				// The session API isn't resilient to race conditions so let's just ignore this.
 				return;
@@ -33,14 +28,14 @@ export function useAccountSwitcher() {
 						history.pushState(null, "", "/");
 					}
 					await resumeSession(account);
-					logEvent("account:loggedIn", { logContext, withPassword: false });
 					Toast.show(`Signed in as @${account.handle}`);
 				} else {
 					requestSwitchToAccount({ requestedAccount: account.did });
 					Toast.show(`Please sign in as @${account.handle}`, "circle-exclamation");
 				}
-			} catch (e: any) {
-				logger.error("switch account: selectAccount failed", {
+			} catch (e) {
+				console.error("switch account: selectAccount failed", {
+					//@ts-ignore
 					message: e.message,
 				});
 				requestSwitchToAccount({ requestedAccount: account.did });
@@ -49,7 +44,7 @@ export function useAccountSwitcher() {
 				setPendingDid(null);
 			}
 		},
-		[_, resumeSession, requestSwitchToAccount, pendingDid],
+		[resumeSession, requestSwitchToAccount, pendingDid],
 	);
 
 	return { onPressSwitchAccount, pendingDid };

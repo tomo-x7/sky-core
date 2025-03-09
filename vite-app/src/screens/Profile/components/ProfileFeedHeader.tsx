@@ -1,6 +1,4 @@
 import { AtUri } from "@atproto/api";
-import { Plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -26,13 +24,11 @@ import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Pl
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
-import { useHaptics } from "#/lib/haptics";
 import { makeProfileLink } from "#/lib/routes/links";
 import { makeCustomFeedLink } from "#/lib/routes/links";
 import { shareUrl } from "#/lib/sharing";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { toShareUrl } from "#/lib/strings/url-helpers";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import type { FeedSourceFeedInfo } from "#/state/queries/feed";
 import { useLikeMutation, useUnlikeMutation } from "#/state/queries/like";
@@ -78,11 +74,9 @@ export function ProfileFeedHeaderSkeleton() {
 
 export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
 	const { hasSession } = useSession();
 	const { gtMobile } = useBreakpoints();
 	const infoControl = Dialog.useDialogControl();
-	const playHaptic = useHaptics();
 
 	const { data: preferences } = usePreferencesQuery();
 
@@ -101,8 +95,6 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 
 	const onToggleSaved = React.useCallback(async () => {
 		try {
-			playHaptic();
-
 			if (savedFeedConfig) {
 				await removeFeed(savedFeedConfig);
 				Toast.show("Removed from your feeds");
@@ -121,14 +113,12 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 				"There was an issue updating your feeds, please check your internet connection and try again.",
 				"xmark",
 			);
-			logger.error("Failed to update feeds", { message: err });
+			console.error("Failed to update feeds", { message: err });
 		}
-	}, [_, playHaptic, info, removeFeed, addSavedFeeds, savedFeedConfig]);
+	}, [info, removeFeed, addSavedFeeds, savedFeedConfig]);
 
 	const onTogglePinned = React.useCallback(async () => {
 		try {
-			playHaptic();
-
 			if (savedFeedConfig) {
 				const pinned = !savedFeedConfig.pinned;
 				await updateSavedFeeds([
@@ -155,12 +145,13 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 			}
 		} catch (e) {
 			Toast.show("There was an issue contacting the server", "xmark");
-			logger.error("Failed to toggle pinned feed", { message: e });
+			console.error("Failed to toggle pinned feed", { message: e });
 		}
-	}, [playHaptic, info, _, savedFeedConfig, updateSavedFeeds, addSavedFeeds]);
+	}, [info, savedFeedConfig, updateSavedFeeds, addSavedFeeds]);
 
 	return (
 		<>
+			{/*//@ts-ignore*/}
 			<Layout.Center style={[t.atoms.bg, a.z_10, web([a.sticky, a.z_10, { top: 0 }])]}>
 				<Layout.Header.Outer>
 					<Layout.Header.BackButton />
@@ -175,7 +166,6 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 								},
 							]}
 							onPress={() => {
-								playHaptic();
 								infoControl.open();
 							}}
 						>
@@ -185,7 +175,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 										style={[
 											a.absolute,
 											a.inset_0,
-											a.rounded_sm,
+											a.rounded_sm, //@ts-ignore
 											a.transition_all,
 											t.atoms.bg_contrast_25,
 											{
@@ -245,7 +235,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 														]}
 														numberOfLines={1}
 													>
-														{formatCount(i18n, likeCount)}
+														{formatCount(likeCount)}
 													</Text>
 												</View>
 											</View>
@@ -356,9 +346,7 @@ function DialogInner({
 	isFeedStateChangePending: boolean;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { hasSession } = useSession();
-	const playHaptic = useHaptics();
 	const control = Dialog.useDialogContext();
 	const reportDialogControl = useReportDialogControl();
 	const [rt] = useRichText(info.description.text);
@@ -370,8 +358,6 @@ function DialogInner({
 
 	const onToggleLiked = React.useCallback(async () => {
 		try {
-			playHaptic();
-
 			if (isLiked && likeUri) {
 				await unlikeFeed({ uri: likeUri });
 				setLikeUri("");
@@ -384,15 +370,14 @@ function DialogInner({
 				"There was an issue contacting the server, please check your internet connection and try again.",
 				"xmark",
 			);
-			logger.error("Failed to toggle like", { message: err });
+			console.error("Failed to toggle like", { message: err });
 		}
-	}, [playHaptic, isLiked, likeUri, unlikeFeed, setLikeUri, likeFeed, info, _]);
+	}, [isLiked, likeUri, unlikeFeed, setLikeUri, likeFeed, info]);
 
 	const onPressShare = React.useCallback(() => {
-		playHaptic();
 		const url = toShareUrl(info.route.href);
 		shareUrl(url);
-	}, [info, playHaptic]);
+	}, [info]);
 
 	const onPressReport = React.useCallback(() => {
 		reportDialogControl.open();
@@ -449,7 +434,7 @@ function DialogInner({
 						onPress={() => control.close()}
 					>
 						<>
-							Liked by <Plural value={likeCount} one="# user" other="# users" />
+							Liked by {likeCount ?? 0} {likeCount === 1 ? "user" : "users"}
 						</>
 					</InlineLinkText>
 				)}

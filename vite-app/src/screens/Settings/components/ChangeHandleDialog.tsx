@@ -1,6 +1,4 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
 import { View, useWindowDimensions } from "react-native";
@@ -58,7 +56,6 @@ export function ChangeHandleDialog({
 
 function ChangeHandleDialogInner() {
 	const control = Dialog.useDialogContext();
-	const { _ } = useLingui();
 	const agent = useAgent();
 	const { data: serviceInfo, error: serviceInfoError, refetch } = useServiceQuery(agent.serviceUrl.toString());
 
@@ -77,7 +74,7 @@ function ChangeHandleDialogInner() {
 				<ButtonText style={[a.text_md]}>Cancel</ButtonText>
 			</Button>
 		),
-		[control, _],
+		[control],
 	);
 
 	return (
@@ -130,7 +127,6 @@ function ProvidedHandlePage({
 	serviceInfo: ComAtprotoServerDescribeServer.OutputSchema;
 	goToOwnHandle: () => void;
 }) {
-	const { _ } = useLingui();
 	const [subdomain, setSubdomain] = useState("");
 	const agent = useAgent();
 	const control = Dialog.useDialogContext();
@@ -242,7 +238,6 @@ function ProvidedHandlePage({
 }
 
 function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const [dnsPanel, setDNSPanel] = useState(true);
@@ -374,7 +369,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								<CopyButton
 									variant="solid"
 									color="secondary"
-									value={"did=" + currentAccount?.did}
+									value={`did=${currentAccount?.did}`}
 									label={"Copy TXT record value"}
 									hoverStyle={[a.bg_transparent]}
 									hitSlop={HITSLOP_10}
@@ -498,8 +493,6 @@ class DidMismatchError extends Error {
 }
 
 function ChangeHandleError({ error }: { error: unknown }) {
-	const { _ } = useLingui();
-
 	let message = "Failed to change handle. Please try again.";
 
 	if (error instanceof Error) {
@@ -512,9 +505,7 @@ function ChangeHandleError({ error }: { error: unknown }) {
 		} else if (error.message === "Input/handle must be a valid handle") {
 			message = "Invalid handle. Please try a different one.";
 		} else if (error.message === "Rate Limit Exceeded") {
-			message = _(
-				msg`Rate limit exceeded – you've tried to change your handle too many times in a short period. Please wait a minute before trying again.`,
-			);
+			message = `Rate limit exceeded – you've tried to change your handle too many times in a short period. Please wait a minute before trying again.`;
 		}
 	}
 

@@ -1,6 +1,5 @@
 import type { ComAtprotoServerDefs } from "@atproto/api";
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -39,7 +38,6 @@ export function Component() {
 
 export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { closeModal } = useModalControls();
 	const { isTabletOrDesktop } = useWebMediaQueries();
 
@@ -112,7 +110,6 @@ function InviteCode({
 	invites: InviteCodesQueryResponse;
 }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const invitesState = useInvitesState();
 	const { setInviteCopied } = useInvitesAPI();
 	const uses = invite.uses;
@@ -121,7 +118,7 @@ function InviteCode({
 		setStringAsync(invite.code);
 		Toast.show("Copied to clipboard", "clipboard-check");
 		setInviteCopied(invite.code);
-	}, [setInviteCopied, invite, _]);
+	}, [setInviteCopied, invite]);
 
 	return (
 		<View style={[pal.border, { borderBottomWidth: 1, paddingHorizontal: 20, paddingVertical: 14 }]}>

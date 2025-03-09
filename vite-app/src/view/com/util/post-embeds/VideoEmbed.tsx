@@ -1,5 +1,4 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React, { useCallback, useState } from "react";
 import { ImageBackground } from "react-native";
 import { ActivityIndicator, View } from "react-native";
@@ -76,7 +75,6 @@ export function VideoEmbed({ embed, crop }: Props) {
 }
 
 function InnerWrapper({ embed }: Props) {
-	const { _ } = useLingui();
 	const ref = React.useRef<{ togglePlayback: () => void }>(null);
 
 	const [status, setStatus] = React.useState<"playing" | "paused" | "pending">("pending");

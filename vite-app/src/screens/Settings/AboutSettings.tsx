@@ -1,9 +1,5 @@
-import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { setStringAsync } from "expo-clipboard";
-import { useMemo } from "react";
 import { Platform } from "react-native";
-import { Statsig } from "statsig-react-native-expo";
 
 import * as Layout from "#/components/Layout";
 import { CodeLines_Stroke2_Corner2_Rounded as CodeLinesIcon } from "#/components/icons/CodeLines";
@@ -18,10 +14,8 @@ import { useDevModeEnabled } from "#/state/preferences/dev-mode";
 import * as Toast from "#/view/com/util/Toast";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "AboutSettings">;
-export function AboutSettingsScreen({}: Props) {
-	const { _ } = useLingui();
+export function AboutSettingsScreen(props: Props) {
 	const [devModeEnabled, setDevModeEnabled] = useDevModeEnabled();
-	const stableID = useMemo(() => Statsig.getStableID(), []);
 
 	return (
 		<Layout.Screen>
@@ -63,8 +57,8 @@ export function AboutSettingsScreen({}: Props) {
 							Toast.show(newDevModeEnabled ? "Developer mode enabled" : "Developer mode disabled");
 						}}
 						onPress={() => {
-							setStringAsync(
-								`Build version: ${appVersion}; Bundle info: ${bundleInfo}; Bundle date: ${BUNDLE_DATE}; Platform: ${Platform.OS}; Platform version: ${Platform.Version}; Anonymous ID: ${stableID}`,
+							new Clipboard().writeText(
+								`Build version: ${appVersion}; Bundle info: ${bundleInfo}; Bundle date: ${BUNDLE_DATE}; Platform: ${Platform.OS}; Platform version: ${Platform.Version};`,
 							);
 							Toast.show("Copied build version to clipboard");
 						}}

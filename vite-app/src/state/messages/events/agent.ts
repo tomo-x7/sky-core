@@ -3,7 +3,6 @@ import EventEmitter from "eventemitter3";
 import { nanoid } from "nanoid/non-secure";
 
 import { networkRetry } from "#/lib/async/retry";
-import { Logger } from "#/logger";
 import { BACKGROUND_POLL_INTERVAL, DEFAULT_POLL_INTERVAL } from "#/state/messages/events/const";
 import {
 	type MessagesEventBusDispatch,
@@ -249,7 +248,7 @@ export class MessagesEventBus {
 
 			this.dispatch({ event: MessagesEventBusDispatchEvent.Ready });
 		} catch (e: any) {
-			logger.error(e, {
+			console.error(e, {
 				message: `${LOGGER_CONTEXT}: init failed`,
 			});
 
@@ -362,13 +361,13 @@ export class MessagesEventBus {
 				try {
 					this.emitter.emit("event", { type: "logs", logs: batch });
 				} catch (e: any) {
-					logger.error(e, {
+					console.error(e, {
 						message: `${LOGGER_CONTEXT}: process latest events`,
 					});
 				}
 			}
 		} catch (e: any) {
-			logger.error(e, { message: `${LOGGER_CONTEXT}: poll events failed` });
+			console.error(e, { message: `${LOGGER_CONTEXT}: poll events failed` });
 
 			this.dispatch({
 				event: MessagesEventBusDispatchEvent.Error,

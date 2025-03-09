@@ -5,8 +5,6 @@ import {
 	AtUri,
 	type RichText as RichTextAPI,
 } from "@atproto/api";
-import { msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import * as Clipboard from "expo-clipboard";
 import React, { memo, useCallback } from "react";
 import { Pressable, type PressableStateCallbackType, type StyleProp, View, type ViewStyle } from "react-native";
@@ -23,7 +21,6 @@ import { AnimatedLikeIcon } from "#/lib/custom-animations/LikeIcon";
 import { useHaptics } from "#/lib/haptics";
 import { makeProfileLink } from "#/lib/routes/links";
 import { shareUrl } from "#/lib/sharing";
-import { useGate } from "#/lib/statsig/statsig";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import type { Shadow } from "#/state/cache/types";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
@@ -154,7 +151,7 @@ let PostCtrls = ({
 				throw e;
 			}
 		}
-	}, [_, post.uri, post.viewer?.repost, queueRepost, queueUnrepost, sendInteraction, feedContext, isBlocked]);
+	}, [post.uri, post.viewer?.repost, queueRepost, queueUnrepost, sendInteraction, feedContext, isBlocked]);
 
 	const onQuote = useCallback(() => {
 		if (isBlocked) {
@@ -171,7 +168,7 @@ let PostCtrls = ({
 			quote: post,
 			onPost: onPostReply,
 		});
-	}, [_, sendInteraction, post, feedContext, openComposer, onPostReply, isBlocked]);
+	}, [sendInteraction, post, feedContext, openComposer, onPostReply, isBlocked]);
 
 	const onShare = useCallback(() => {
 		const urip = new AtUri(post.uri);
@@ -217,12 +214,10 @@ let PostCtrls = ({
 						}
 					}}
 					accessibilityRole="button"
-					accessibilityLabel={_(
-						msg`Reply (${plural(post.replyCount || 0, {
-							one: "# reply",
-							other: "# replies",
-						})})`,
-					)}
+					accessibilityLabel={`Reply (${plural(post.replyCount || 0, {
+						one: "# reply",
+						other: "# replies",
+					})})`}
 					accessibilityHint=""
 					hitSlop={POST_CTRL_HITSLOP}
 				>
@@ -252,18 +247,14 @@ let PostCtrls = ({
 					accessibilityRole="button"
 					accessibilityLabel={
 						post.viewer?.like
-							? _(
-									msg`Unlike (${plural(post.likeCount || 0, {
-										one: "# like",
-										other: "# likes",
-									})})`,
-								)
-							: _(
-									msg`Like (${plural(post.likeCount || 0, {
-										one: "# like",
-										other: "# likes",
-									})})`,
-								)
+							? `Unlike (${plural(post.likeCount || 0, {
+									one: "# like",
+									other: "# likes",
+								})})`
+							: `Like (${plural(post.likeCount || 0, {
+									one: "# like",
+									other: "# likes",
+								})})`
 					}
 					accessibilityHint=""
 					hitSlop={POST_CTRL_HITSLOP}
@@ -305,9 +296,7 @@ let PostCtrls = ({
 					<Prompt.Basic
 						control={loggedOutWarningPromptControl}
 						title={"Note about sharing"}
-						description={_(
-							msg`This post is only visible to logged-in users. It won't be visible to people who aren't signed in.`,
-						)}
+						description={`This post is only visible to logged-in users. It won't be visible to people who aren't signed in.`}
 						onConfirm={onShare}
 						confirmButtonCta={"Share anyway"}
 					/>

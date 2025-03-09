@@ -1,6 +1,4 @@
 import type { ChatBskyConvoDefs, ChatBskyConvoListConvos } from "@atproto/api";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
@@ -21,7 +19,6 @@ import { useAppState } from "#/lib/hooks/useAppState";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import type { CommonNavigatorParams, NativeStackScreenProps, NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { isNative } from "#/platform/detection";
 import { MESSAGE_SCREEN_POLL_INTERVAL } from "#/state/messages/convo/const";
 import { useMessagesEventBus } from "#/state/messages/events";
@@ -35,7 +32,7 @@ import { FAB } from "#/view/com/util/fab/FAB";
 import { RequestListItem } from "./components/RequestListItem";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "MessagesInbox">;
-export function MessagesInboxScreen({}: Props) {
+export function MessagesInboxScreen(props: Props) {
 	const { gtTablet } = useBreakpoints();
 
 	const listConvosQuery = useListConvosQuery({ status: "request" });
@@ -86,7 +83,6 @@ function RequestList({
 	conversations: ChatBskyConvoDefs.ConvoView[];
 	hasUnreadConvos: boolean;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const navigation = useNavigation<NavigationProp>();
 
@@ -116,17 +112,17 @@ function RequestList({
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh conversations", { message: err });
+			console.error("Failed to refresh conversations", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch]);
 
 	const onEndReached = useCallback(async () => {
 		if (isFetchingNextPage || !hasNextPage || isError) return;
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more conversations", { message: err });
+			console.error("Failed to load more conversations", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 
@@ -171,11 +167,7 @@ function RequestList({
 							<>
 								<View style={[a.pt_3xl, a.align_center]}>
 									<MessageIcon width={48} fill={t.palette.primary_500} />
-									<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>
-										<Trans comment="Title message shown in chat requests inbox when it's empty">
-											Inbox zero!
-										</Trans>
-									</Text>
+									<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Inbox zero!</Text>
 									<Text
 										style={[
 											a.text_md,
@@ -250,7 +242,6 @@ function renderItem({ item }: { item: ChatBskyConvoDefs.ConvoView }) {
 }
 
 function MarkAllReadFAB() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { mutate: markAllRead } = useUpdateAllRead("request", {
 		onMutate: () => {
@@ -274,7 +265,6 @@ function MarkAllReadFAB() {
 }
 
 function MarkAsReadHeaderButton() {
-	const { _ } = useLingui();
 	const { mutate: markAllRead } = useUpdateAllRead("request", {
 		onMutate: () => {
 			Toast.show("Marked all as read", "check");

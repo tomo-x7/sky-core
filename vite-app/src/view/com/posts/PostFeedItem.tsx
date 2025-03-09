@@ -8,8 +8,6 @@ import {
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -149,7 +147,6 @@ let FeedItemInner = ({
 	const queryClient = useQueryClient();
 	const { openComposer } = useComposerControls();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 
 	const href = useMemo(() => {
 		const urip = new AtUri(post.uri);
@@ -289,11 +286,7 @@ let FeedItemInner = ({
 							title={
 								isOwner
 									? "Reposted by you"
-									: _(
-											msg`Reposted by ${sanitizeDisplayName(
-												reason.by.displayName || reason.by.handle,
-											)}`,
-										)
+									: `Reposted by ${sanitizeDisplayName(reason.by.displayName || reason.by.handle)}`
 							}
 							onBeforePress={onOpenReposter}
 						>
@@ -420,7 +413,6 @@ let PostContent = ({
 	threadgateRecord?: AppBskyFeedThreadgate.Record;
 }): React.ReactNode => {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const [limitLines, setLimitLines] = useState(() => countLines(richText.text) >= MAX_POST_LINES);
 	const threadgateHiddenReplies = useMergedThreadgateHiddenReplies({

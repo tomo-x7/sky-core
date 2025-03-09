@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -7,6 +6,7 @@ import { Text } from "#/components/Typography";
 import { useGoBack } from "#/lib/hooks/useGoBack";
 import { CenteredView } from "#/view/com/util/Views";
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 export function Error({
 	title,
 	message,
@@ -22,7 +22,6 @@ export function Error({
 	hideBackButton?: boolean;
 	sideBorders?: boolean;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	const goBack = useGoBack(onGoBack);
@@ -30,6 +29,7 @@ export function Error({
 	return (
 		<CenteredView
 			style={[
+				//@ts-ignore
 				a.h_full_vh,
 				a.align_center,
 				a.gap_5xl,

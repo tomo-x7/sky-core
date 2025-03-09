@@ -1,6 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -16,17 +14,10 @@ export function ProfileHeaderMetrics({
 	profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>;
 }) {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
-	const following = formatCount(i18n, profile.followsCount || 0);
-	const followers = formatCount(i18n, profile.followersCount || 0);
-	const pluralizedFollowers = plural(profile.followersCount || 0, {
-		one: "follower",
-		other: "followers",
-	});
-	const pluralizedFollowings = plural(profile.followsCount || 0, {
-		one: "following",
-		other: "following",
-	});
+	const following = formatCount(profile.followsCount || 0);
+	const followers = formatCount(profile.followersCount || 0);
+	const pluralizedFollowers = profile.followersCount === 1 ? "follower" : "followers";
+	const pluralizedFollowings = profile.followsCount === 1 ? "following" : "following";
 
 	return (
 		<View style={[a.flex_row, a.gap_sm, a.align_center]} pointerEvents="box-none">
@@ -49,9 +40,9 @@ export function ProfileHeaderMetrics({
 				<Text style={[t.atoms.text_contrast_medium, a.text_md]}>{pluralizedFollowings}</Text>
 			</InlineLinkText>
 			<Text style={[a.font_bold, t.atoms.text, a.text_md]}>
-				{formatCount(i18n, profile.postsCount || 0)}{" "}
+				{formatCount(profile.postsCount || 0)}{" "}
 				<Text style={[t.atoms.text_contrast_medium, a.font_normal, a.text_md]}>
-					{plural(profile.postsCount || 0, { one: "post", other: "posts" })}
+					{profile.postsCount === 1 ? "post" : "posts"}
 				</Text>
 			</Text>
 		</View>

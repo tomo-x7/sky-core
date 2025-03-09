@@ -1,6 +1,5 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { type PropsWithChildren, useMemo, useRef } from "react";
 import {
@@ -82,8 +81,6 @@ export function DropdownButton({
 	hitSlop = HITSLOP_10,
 	accessibilityLabel,
 }: PropsWithChildren<DropdownButtonProps>) {
-	const { _ } = useLingui();
-
 	const ref1 = useRef<View>(null);
 	const ref2 = useRef<View>(null);
 
@@ -198,7 +195,6 @@ type DropDownItemProps = {
 const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, openUpwards }: DropDownItemProps) => {
 	const pal = usePalette("default");
 	const theme = useTheme();
-	const { _ } = useLingui();
 	const { height: screenHeight } = useWindowDimensions();
 	const dropDownBackgroundColor = theme.colorScheme === "dark" ? pal.btn : pal.view;
 	const separatorColor = theme.colorScheme === "dark" ? pal.borderDark : pal.border;

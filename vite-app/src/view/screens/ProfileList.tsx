@@ -1,7 +1,5 @@
 import { AppBskyGraphDefs, AtUri, type ModerationOpts, RichText as RichTextAPI, moderateUserList } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -30,7 +28,6 @@ import { shareUrl } from "#/lib/sharing";
 import { cleanError } from "#/lib/strings/errors";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
 import { ListHiddenScreen } from "#/screens/List/ListHiddenScreen";
 import { listenSoftReset } from "#/state/events";
@@ -81,7 +78,6 @@ export function ProfileListScreen(props: Props) {
 }
 
 function ProfileListScreenInner(props: Props) {
-	const { _ } = useLingui();
 	const { name: handleOrDid, rkey } = props.route.params;
 	const { data: resolvedUri, error: resolveError } = useResolveUriQuery(
 		AtUri.make(handleOrDid, "app.bsky.graph.list", rkey).toString(),
@@ -94,9 +90,7 @@ function ProfileListScreenInner(props: Props) {
 		return (
 			<Layout.Content>
 				<ErrorScreen
-					error={_(
-						msg`We're sorry, but we were unable to resolve this list. If this persists, please contact the list creator, @${handleOrDid}.`,
-					)}
+					error={`We're sorry, but we were unable to resolve this list. If this persists, please contact the list creator, @${handleOrDid}.`}
 				/>
 			</Layout.Content>
 		);
@@ -134,7 +128,6 @@ function ProfileListScreenLoaded({
 	moderationOpts: ModerationOpts;
 	preferences: UsePreferencesQueryResponse;
 }) {
-	const { _ } = useLingui();
 	const queryClient = useQueryClient();
 	const { openComposer } = useComposerControls();
 	const setMinimalShellMode = useSetMinimalShellMode();
@@ -275,7 +268,6 @@ function Header({
 }) {
 	const pal = usePalette("default");
 	const palInverted = usePalette("inverted");
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 	const { currentAccount } = useSession();
 	const reportDialogControl = useReportDialogControl();
@@ -328,9 +320,9 @@ function Header({
 			}
 		} catch (e) {
 			Toast.show("There was an issue contacting the server", "xmark");
-			logger.error("Failed to toggle pinned feed", { message: e });
+			console.error("Failed to toggle pinned feed", { message: e });
 		}
-	}, [playHaptic, addSavedFeeds, updateSavedFeeds, list.uri, _, savedFeedConfig]);
+	}, [playHaptic, addSavedFeeds, updateSavedFeeds, list.uri, savedFeedConfig]);
 
 	const onRemoveFromSavedFeeds = React.useCallback(async () => {
 		playHaptic();
@@ -340,9 +332,9 @@ function Header({
 			Toast.show("Removed from your feeds");
 		} catch (e) {
 			Toast.show("There was an issue contacting the server", "xmark");
-			logger.error("Failed to remove pinned list", { message: e });
+			console.error("Failed to remove pinned list", { message: e });
 		}
-	}, [playHaptic, removeSavedFeed, _, savedFeedConfig]);
+	}, [playHaptic, removeSavedFeed, savedFeedConfig]);
 
 	const onSubscribeMute = useCallback(async () => {
 		try {
@@ -351,7 +343,7 @@ function Header({
 		} catch {
 			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
-	}, [list, listMuteMutation, _]);
+	}, [list, listMuteMutation]);
 
 	const onUnsubscribeMute = useCallback(async () => {
 		try {
@@ -360,7 +352,7 @@ function Header({
 		} catch {
 			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
-	}, [list, listMuteMutation, _]);
+	}, [list, listMuteMutation]);
 
 	const onSubscribeBlock = useCallback(async () => {
 		try {
@@ -369,7 +361,7 @@ function Header({
 		} catch {
 			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
-	}, [list, listBlockMutation, _]);
+	}, [list, listBlockMutation]);
 
 	const onUnsubscribeBlock = useCallback(async () => {
 		try {
@@ -378,7 +370,7 @@ function Header({
 		} catch {
 			Toast.show("There was an issue. Please check your internet connection and try again.");
 		}
-	}, [list, listBlockMutation, _]);
+	}, [list, listBlockMutation]);
 
 	const onPressEdit = useCallback(() => {
 		openModal({
@@ -400,7 +392,7 @@ function Header({
 		} else {
 			navigation.navigate("Home");
 		}
-	}, [list, listDeleteMutation, navigation, _, removeSavedFeed, savedFeedConfig]);
+	}, [list, listDeleteMutation, navigation, removeSavedFeed, savedFeedConfig]);
 
 	const onPressReport = useCallback(() => {
 		reportDialogControl.open();
@@ -579,7 +571,7 @@ function Header({
 				},
 			},
 		];
-	}, [_, subscribeMutePromptControl.open, subscribeBlockPromptControl.open]);
+	}, [subscribeMutePromptControl.open, subscribeBlockPromptControl.open]);
 
 	const descriptionRT = useMemo(
 		() =>
@@ -659,9 +651,7 @@ function Header({
 				<Prompt.Basic
 					control={subscribeMutePromptControl}
 					title={"Mute these accounts?"}
-					description={_(
-						msg`Muting is private. Muted accounts can interact with you, but you will not see their posts or receive notifications from them.`,
-					)}
+					description={`Muting is private. Muted accounts can interact with you, but you will not see their posts or receive notifications from them.`}
 					onConfirm={onSubscribeMute}
 					confirmButtonCta={"Mute list"}
 				/>
@@ -669,9 +659,7 @@ function Header({
 				<Prompt.Basic
 					control={subscribeBlockPromptControl}
 					title={"Block these accounts?"}
-					description={_(
-						msg`Blocking is public. Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`,
-					)}
+					description={`Blocking is public. Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`}
 					onConfirm={onSubscribeBlock}
 					confirmButtonCta={"Block list"}
 					confirmButtonColor="negative"
@@ -702,7 +690,6 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 	const [hasNew, setHasNew] = React.useState(false);
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
 	const isScreenFocused = useIsFocused();
-	const { _ } = useLingui();
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
@@ -741,7 +728,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 				)}
 			</View>
 		);
-	}, [_, onPressAddUser, isOwner]);
+	}, [onPressAddUser, isOwner]);
 
 	return (
 		<View>
@@ -774,7 +761,6 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 	{ list, onPressAddUser, headerHeight, scrollElRef },
 	ref,
 ) {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const { isMobile } = useWebMediaQueries();
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
@@ -829,7 +815,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				</NewButton>
 			</View>
 		);
-	}, [isOwner, _, onPressAddUser, isMobile]);
+	}, [isOwner, onPressAddUser, isMobile]);
 
 	const renderEmptyState = useCallback(() => {
 		return (
@@ -850,7 +836,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				)}
 			</View>
 		);
-	}, [_, onPressAddUser, isOwner]);
+	}, [onPressAddUser, isOwner]);
 
 	return (
 		<View>
@@ -871,7 +857,6 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 function ErrorScreen({ error }: { error: string }) {
 	const pal = usePalette("default");
 	const navigation = useNavigation<NavigationProp>();
-	const { _ } = useLingui();
 	const onPressBack = useCallback(() => {
 		if (navigation.canGoBack()) {
 			navigation.goBack();

@@ -1,6 +1,3 @@
-import type { I18n } from "@lingui/core";
-import { defineMessage, msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { differenceInSeconds } from "date-fns";
 import { useCallback } from "react";
 
@@ -20,13 +17,12 @@ const DAY = HOUR * 24;
 const MONTH_30 = DAY * 30;
 
 export function useGetTimeAgo({ future = false }: { future?: boolean } = {}) {
-	const { i18n } = useLingui();
 	return useCallback(
 		(earlier: number | string | Date, later: number | string | Date, options?: { format: DateDiffFormat }) => {
 			const diff = dateDiff(earlier, later, future ? "up" : "down");
-			return formatDateDiff({ diff, i18n, format: options?.format });
+			return formatDateDiff({ diff, format: options?.format });
 		},
-		[i18n, future],
+		[future],
 	);
 }
 
@@ -106,70 +102,33 @@ export function dateDiff(
 export function formatDateDiff({
 	diff,
 	format = "short",
-	i18n,
 }: {
 	diff: DateDiff;
 	format?: DateDiffFormat;
-	i18n: I18n;
 }): string {
 	const long = format === "long";
 
 	switch (diff.unit) {
 		case "now": {
-			return i18n._(msg`now`);
+			return "now";
 		}
 		case "second": {
-			return long
-				? i18n._(plural(diff.value, { one: "# second", other: "# seconds" }))
-				: i18n._(
-						defineMessage({
-							message: `${diff.value}s`,
-							comment: "How many seconds have passed, displayed in a narrow form",
-						}),
-					);
+			return long ? `${diff.value} ${diff.value === 1 ? "second" : "seconds"}` : `${diff.value}s`;
 		}
 		case "minute": {
-			return long
-				? i18n._(plural(diff.value, { one: "# minute", other: "# minutes" }))
-				: i18n._(
-						defineMessage({
-							message: `${diff.value}m`,
-							comment: "How many minutes have passed, displayed in a narrow form",
-						}),
-					);
+			return long ? `${diff.value} ${diff.value === 1 ? "minute" : "minutes"}` : `${diff.value}m`;
 		}
 		case "hour": {
-			return long
-				? i18n._(plural(diff.value, { one: "# hour", other: "# hours" }))
-				: i18n._(
-						defineMessage({
-							message: `${diff.value}h`,
-							comment: "How many hours have passed, displayed in a narrow form",
-						}),
-					);
+			return long ? `${diff.value} ${diff.value === 1 ? "hour" : "hours"}` : `${diff.value}h`;
 		}
 		case "day": {
-			return long
-				? i18n._(plural(diff.value, { one: "# day", other: "# days" }))
-				: i18n._(
-						defineMessage({
-							message: `${diff.value}d`,
-							comment: "How many days have passed, displayed in a narrow form",
-						}),
-					);
+			return long ? `${diff.value} ${diff.value === 1 ? "day" : "days"}` : `${diff.value}d`;
 		}
 		case "month": {
 			if (diff.value < 12) {
-				return long
-					? i18n._(plural(diff.value, { one: "# month", other: "# months" }))
-					: i18n._(
-							defineMessage({
-								message: plural(diff.value, { one: "#mo", other: "#mo" }),
-								comment: "How many months have passed, displayed in a narrow form",
-							}),
-						);
+				return long ? `${diff.value} ${diff.value === 1 ? "month" : "months"}` : `${diff.value}mo`;
 			}
-			return i18n.date(new Date(diff.earlier));
+			return new Date(diff.earlier).toLocaleDateString();
 		}
 	}
 }

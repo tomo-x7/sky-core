@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
@@ -25,7 +24,6 @@ function PlaybackControls({
 	isPlaying: boolean;
 	isLoaded: boolean;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	return (
@@ -78,7 +76,6 @@ export function GifEmbed({
 	style?: StyleProp<ViewStyle>;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const autoplayDisabled = useAutoplayDisabled();
 
 	const playerRef = React.useRef<GifView>(null);
@@ -155,7 +152,6 @@ function AltText({ text }: { text: string }) {
 	const control = Prompt.usePromptControl();
 	const largeAltBadge = useLargeAltBadgeEnabled();
 
-	const { _ } = useLingui();
 	return (
 		<>
 			<TouchableOpacity

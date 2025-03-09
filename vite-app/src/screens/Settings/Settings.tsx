@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
@@ -53,8 +52,7 @@ import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Settings">;
-export function SettingsScreen({}: Props) {
-	const { _ } = useLingui();
+export function SettingsScreen(props: Props) {
 	const reducedMotion = useReducedMotion();
 	const { logoutEveryAccount } = useSessionApi();
 	const { accounts, currentAccount } = useSession();
@@ -241,7 +239,6 @@ function ProfilePreview({
 }
 
 function DevOptions() {
-	const { _ } = useLingui();
 	const onboardingDispatch = useOnboardingDispatch();
 	const navigation = useNavigation<NavigationProp>();
 	const { mutate: deleteChatDeclarationRecord } = useDeleteActorDeclaration();
@@ -285,7 +282,6 @@ function DevOptions() {
 }
 
 function AddAccountRow() {
-	const { _ } = useLingui();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
 	const closeEverything = useCloseAllActiveElements();
 
@@ -313,7 +309,6 @@ function AccountRow({
 	pendingDid: string | null;
 	onPressSwitchAccount: (account: SessionAccount, logContext: "Settings") => void;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	const moderationOpts = useModerationOpts();

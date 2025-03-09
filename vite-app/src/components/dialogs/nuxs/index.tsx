@@ -5,7 +5,6 @@ import React from "react";
  * NUXs
  */
 import { isSnoozed, snooze, unsnooze } from "#/components/dialogs/nuxs/snoozing";
-import { useGate } from "#/lib/statsig/statsig";
 import { type Nux, useNuxs, useResetNuxs, useSaveNux } from "#/state/queries/nuxs";
 import { type UsePreferencesQueryResponse, usePreferencesQuery } from "#/state/queries/preferences";
 import { useProfileQuery } from "#/state/queries/profile";

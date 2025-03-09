@@ -1,5 +1,5 @@
+import { motion } from "framer-motion";
 import { View } from "react-native";
-import * as Progress from "react-native-progress";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "../Typography";
@@ -25,12 +25,12 @@ export function ProgressGuideTask({
 			{current === total ? (
 				<AnimatedCheck playOnMount fill={t.palette.primary_500} width={20} />
 			) : (
-				<Progress.Circle
+				<ProgressCircle
 					progress={current / total}
 					color={t.palette.primary_400}
 					size={20}
 					thickness={3}
-					borderWidth={0}
+					// borderWidth={0}
 					unfilledColor={t.palette.contrast_50}
 				/>
 			)}
@@ -49,5 +49,39 @@ export function ProgressGuideTask({
 				{subtitle && <Text style={[a.text_sm, t.atoms.text_contrast_medium, a.leading_tight]}>{subtitle}</Text>}
 			</View>
 		</View>
+	);
+}
+
+function ProgressCircle({
+	progress: p,
+	color,
+	size,
+	thickness,
+	unfilledColor,
+}: { progress: number; color: string; size: number; thickness: number; unfilledColor: string }) {
+	const radius = (size - thickness) / 2;
+	const circumference = 2 * Math.PI * radius;
+	const progress = p * circumference;
+
+	return (
+		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+			<title>progress</title>
+			{/* 背景の円 */}
+			<circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={unfilledColor} strokeWidth={thickness} />
+			{/* 進捗の円 */}
+			<motion.circle
+				cx={size / 2}
+				cy={size / 2}
+				r={radius}
+				fill="none"
+				stroke={color}
+				strokeWidth={thickness}
+				strokeDasharray={circumference}
+				strokeDashoffset={circumference}
+				animate={{ strokeDashoffset: circumference - progress }}
+				transition={{ duration: 0.5, ease: "easeOut" }}
+				strokeLinecap="round"
+			/>
+		</svg>
 	);
 }

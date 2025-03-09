@@ -1,5 +1,4 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image } from "react-native";
@@ -40,8 +39,6 @@ function PlaceholderOverlay({
 	isPlayerActive: boolean;
 	onPress: (event: GestureResponderEvent) => void;
 }) {
-	const { _ } = useLingui();
-
 	// If the player is active and not loading, we don't want to show the overlay.
 	if (isPlayerActive && !isLoading) return null;
 

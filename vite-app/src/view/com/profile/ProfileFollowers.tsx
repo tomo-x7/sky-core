@@ -1,11 +1,9 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { useProfileFollowersQuery } from "#/state/queries/profile-followers";
 import { useResolveDidQuery } from "#/state/queries/resolve-uri";
 import { useSession } from "#/state/session";
@@ -27,7 +25,6 @@ function keyExtractor(item: ActorDefs.ProfileViewBasic) {
 }
 
 export function ProfileFollowers({ name }: { name: string }) {
-	const { _ } = useLingui();
 	const initialNumToRender = useInitialNumToRender();
 	const { currentAccount } = useSession();
 
@@ -58,7 +55,7 @@ export function ProfileFollowers({ name }: { name: string }) {
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh followers", { message: err });
+			console.error("Failed to refresh followers", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);
@@ -68,7 +65,7 @@ export function ProfileFollowers({ name }: { name: string }) {
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more followers", { message: err });
+			console.error("Failed to load more followers", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, error, fetchNextPage]);
 

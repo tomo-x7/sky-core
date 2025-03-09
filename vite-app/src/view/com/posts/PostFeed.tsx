@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo } from "react";
 import {
@@ -20,8 +19,6 @@ import { TrendingInterstitial } from "#/components/interstitials/Trending";
 import { TrendingVideos as TrendingVideosInterstitial } from "#/components/interstitials/TrendingVideos";
 import { DISCOVER_FEED_URI, KNOWN_SHUTDOWN_FEEDS } from "#/lib/constants";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
 import { isIOS, isNative, isWeb } from "#/platform/detection";
 import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 import { listenPostCreated } from "#/state/events";
@@ -182,7 +179,6 @@ let PostFeed = ({
 	initialNumToRender?: number;
 	isVideoFeed?: boolean;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const queryClient = useQueryClient();
 	const { currentAccount, hasSession } = useSession();
 	const initialNumToRender = useInitialNumToRender();
@@ -221,7 +217,7 @@ let PostFeed = ({
 				}
 			}
 		} catch (e) {
-			logger.error("Poll latest failed", { feed, message: String(e) });
+			console.error("Poll latest failed", { feed, message: String(e) });
 		}
 	}, [feed, data, isFetching, isEmpty, onHasNew, enabled, disablePoll, refetch]);
 
@@ -502,7 +498,7 @@ let PostFeed = ({
 			await refetch();
 			onHasNew?.(false);
 		} catch (err) {
-			logger.error("Failed to refresh posts feed", { message: err });
+			console.error("Failed to refresh posts feed", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing, onHasNew, feed, feedType]);
@@ -518,7 +514,7 @@ let PostFeed = ({
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more posts", { message: err });
+			console.error("Failed to load more posts", { message: err });
 		}
 	}, [isFetching, hasNextPage, isError, fetchNextPage, feed, feedType, feedItems.length]);
 

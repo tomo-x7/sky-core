@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -10,7 +9,6 @@ import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/compo
 import { Text } from "#/components/Typography";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { Trending2_Stroke2_Corner2_Rounded as Trending } from "#/components/icons/Trending2";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences/trending";
 import { DEFAULT_LIMIT as TRENDING_TOPICS_COUNT, useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
@@ -24,7 +22,6 @@ export function ExploreTrendingTopics() {
 
 function Inner() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const gutters = useGutters([0, "compact"]);
 	const { data: trending, error, isLoading } = useTrendingTopics();
 	const noTopics = !isLoading && !error && !trending?.topics?.length;
@@ -32,7 +29,6 @@ function Inner() {
 	const trendingPrompt = Prompt.usePromptControl();
 
 	const onConfirmHide = React.useCallback(() => {
-		logEvent("trendingTopics:hide", { context: "explore:trending" });
 		setTrendingDisabled(true);
 	}, [setTrendingDisabled]);
 
@@ -74,17 +70,11 @@ function Inner() {
 					{isLoading ? (
 						Array(TRENDING_TOPICS_COUNT)
 							.fill(0)
-							.map((_, i) => <TrendingTopicSkeleton key={i} index={i} />)
+							.map((_, i) => <TrendingTopicSkeleton key={i.toString()} index={i} />)
 					) : !trending?.topics ? null : (
 						<>
 							{trending.topics.map((topic) => (
-								<TrendingTopicLink
-									key={topic.link}
-									topic={topic}
-									onPress={() => {
-										logEvent("trendingTopic:click", { context: "explore" });
-									}}
-								>
+								<TrendingTopicLink key={topic.link} topic={topic}>
 									{({ hovered }) => (
 										<TrendingTopic
 											topic={topic}

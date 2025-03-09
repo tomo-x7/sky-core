@@ -49,13 +49,17 @@ type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0]
 	 *
 	 * DO NOT use this for navigation, that's what the `to` prop is for.
 	 */
-	onPress?: (e: GestureResponderEvent) => undefined | false;
+
+	// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
+	onPress?: (e: GestureResponderEvent) => void | false;
 
 	/**
 	 * Callback for when the link is long pressed (on native). Prevent default
 	 * and return `false` to exit early and prevent default long press hander.
 	 */
-	onLongPress?: (e: GestureResponderEvent) => undefined | false;
+
+	// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
+	onLongPress?: (e: GestureResponderEvent) => void | false;
 
 	/**
 	 * Web-only attribute. Sets `download` attr on web.
@@ -226,8 +230,10 @@ export function Link({
 		<Button
 			{...rest}
 			style={[a.justify_start, flatten(rest.style)]}
+			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="link"
 			accessibilityRole="link"
+			//@ts-ignore
 			href={href}
 			onPress={download ? undefined : onPress}
 			onLongPress={onLongPress}
@@ -310,9 +316,11 @@ export function InlineLinkText({
 					},
 				flattenedStyle,
 			]}
+			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="link"
 			onPress={download ? undefined : onPress}
 			onLongPress={onLongPress}
+			//@ts-ignore
 			onMouseEnter={onHoverIn}
 			onMouseLeave={onHoverOut}
 			accessibilityRole="link"

@@ -1,5 +1,4 @@
 import type { AtUri } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -13,13 +12,13 @@ import { PressableScale } from "#/lib/custom-animations/PressableScale";
 // import {Hashtag_Stroke2_Corner0_Rounded as Hashtag} from '#/components/icons/Hashtag'
 // import {CloseQuote_Filled_Stroke2_Corner0_Rounded as Quote} from '#/components/icons/Quote'
 // import {UserAvatar} from '#/view/com/util/UserAvatar'
-import type { TrendingTopic } from "#/state/queries/trending/useTrendingTopics";
+import type { TrendingTopic as TrendingTopicType } from "#/state/queries/trending/useTrendingTopics";
 
 export function TrendingTopic({
 	topic: raw,
 	size,
 	style,
-}: { topic: TrendingTopic; size?: "large" | "small" } & ViewStyleProp) {
+}: { topic: TrendingTopicType; size?: "large" | "small" } & ViewStyleProp) {
 	const t = useTheme();
 	const topic = useTopic(raw);
 
@@ -129,7 +128,7 @@ export function TrendingTopicLink({
 	children,
 	...rest
 }: {
-	topic: TrendingTopic;
+	topic: TrendingTopicType;
 } & Omit<LinkProps, "to" | "label">) {
 	const topic = useTopic(raw);
 
@@ -156,8 +155,7 @@ type ParsedTrendingTopic =
 			uri: AtUri;
 	  };
 
-export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
-	const { _ } = useLingui();
+export function useTopic(raw: TrendingTopicType): ParsedTrendingTopic {
 	return React.useMemo(() => {
 		const { topic: displayName, link } = raw;
 
@@ -223,5 +221,5 @@ export function useTopic(raw: TrendingTopic): ParsedTrendingTopic {
 			uri: undefined,
 			url: link,
 		};
-	}, [_, raw]);
+	}, [raw]);
 }

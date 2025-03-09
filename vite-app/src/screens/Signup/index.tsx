@@ -1,5 +1,4 @@
 import { AppBskyGraphStarterpack } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 import Animated, { FadeIn, LayoutAnimationConfig } from "react-native-reanimated";
@@ -22,7 +21,6 @@ import * as bsky from "#/types/bsky";
 import { LoggedOutLayout } from "#/view/com/util/layouts/LoggedOutLayout";
 
 export function Signup({ onPressBack }: { onPressBack: () => void }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	const { gtMobile } = useBreakpoints();
@@ -61,7 +59,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 			dispatch({ type: "setServiceDescription", value: serviceInfo });
 			dispatch({ type: "setError", value: "" });
 		}
-	}, [_, serviceInfo, isError]);
+	}, [serviceInfo, isError]);
 
 	React.useEffect(() => {
 		if (state.pendingSubmit) {
@@ -70,7 +68,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 				submit(state, dispatch);
 			}
 		}
-	}, [state, dispatch, submit]);
+	}, [state, submit]);
 
 	return (
 		<SignupContext.Provider value={{ state, dispatch }}>

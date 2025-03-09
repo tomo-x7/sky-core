@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { View } from "react-native";
@@ -13,9 +12,7 @@ import { ArrowRotateCounterClockwise_Stroke2_Corner0_Rounded as ArrowRotateCount
 import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
 import { EmojiSad_Stroke2_Corner0_Rounded as EmojiSad } from "#/components/icons/Emoji";
 import { Hashtag_Stroke2_Corner0_Rounded as Hashtag } from "#/components/icons/Hashtag";
-import { logEvent } from "#/lib/statsig/statsig";
 import { capitalize } from "#/lib/strings/capitalize";
-import { logger } from "#/logger";
 import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
 import { InterestButton } from "#/screens/Onboarding/StepInterests/InterestButton";
 import { type ApiResponseMap, Context, useInterestsDisplayNames } from "#/screens/Onboarding/state";
@@ -23,7 +20,6 @@ import { useAgent } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
 
 export function StepInterests() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	const interestsDisplayNames = useInterestsDisplayNames();
@@ -74,8 +70,7 @@ export function StepInterests() {
 					} as ApiResponseMap,
 				);
 			} catch (e: any) {
-				logger.info("onboarding: getTaggedSuggestions fetch or processing failed");
-				logger.error(e);
+				console.error(e);
 
 				throw new Error("a network error occurred");
 			}
@@ -93,15 +88,10 @@ export function StepInterests() {
 				selectedInterests: interests,
 			});
 			dispatch({ type: "next" });
-			logEvent("onboarding:interests:nextPressed", {
-				selectedInterests: interests,
-				selectedInterestsLength: interests.length,
-			});
 		} catch (e: any) {
-			logger.info("onboading: error saving interests");
-			logger.error(e);
+			console.error(e);
 		}
-	}, [interests, data, setSaving, dispatch]);
+	}, [interests, data, dispatch]);
 
 	const skipOnboarding = React.useCallback(() => {
 		onboardDispatch({ type: "finish" });

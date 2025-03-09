@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 /* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { useCallback } from "react";
 
@@ -18,7 +17,6 @@ type Props = {
 };
 
 export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
-	const { _ } = useLingui();
 	const { requestPhotoAccessIfNeeded } = usePhotoLibraryPermission();
 	const t = useTheme();
 	const sheetWrapper = useSheetWrapper();

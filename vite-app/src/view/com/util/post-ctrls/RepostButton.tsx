@@ -1,5 +1,3 @@
-import { Trans, msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { memo, useCallback } from "react";
 import { View } from "react-native";
 
@@ -51,18 +49,14 @@ let RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, embedding
 				hoverStyle={t.atoms.bg_contrast_25}
 				label={
 					isReposted
-						? _(
-								msg`Undo repost (${plural(repostCount || 0, {
-									one: "# repost",
-									other: "# reposts",
-								})})`,
-							)
-						: _(
-								msg`Repost (${plural(repostCount || 0, {
-									one: "# repost",
-									other: "# reposts",
-								})})`,
-							)
+						? `Undo repost (${plural(repostCount || 0, {
+								one: "# repost",
+								other: "# reposts",
+							})})`
+						: `Repost (${plural(repostCount || 0, {
+								one: "# repost",
+								other: "# reposts",
+							})})`
 				}
 				shape="round"
 				variant="ghost"
@@ -106,7 +100,6 @@ let RepostButtonDialogInner = ({
 	embeddingDisabled: boolean;
 }): React.ReactNode => {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const playHaptic = useHaptics();
 	const control = Dialog.useDialogContext();
 
@@ -133,7 +126,7 @@ let RepostButtonDialogInner = ({
 				<View style={a.gap_xs}>
 					<Button
 						style={[a.justify_start, a.px_md]}
-						label={isReposted ? "Remove repost" : _(msg({ message: "Repost", context: "action" }))}
+						label={isReposted ? "Remove repost" : msg({ message: "Repost", context: "action" })}
 						onPress={onPressRepost}
 						size="large"
 						variant="ghost"

@@ -13,7 +13,6 @@ import { NewMessagesPill } from "#/components/dms/NewMessagesPill";
 import { ScrollProvider } from "#/lib/ScrollContext";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
 import { convertBskyAppUrlIfNeeded, isBskyPostUrl } from "#/lib/strings/url-helpers";
-import { logger } from "#/logger";
 import { isNative } from "#/platform/detection";
 import { isWeb } from "#/platform/detection";
 import { ChatDisabled } from "#/screens/Messages/components/ChatDisabled";
@@ -237,6 +236,7 @@ export function MessagesList({
 
 	useKeyboardHandler(
 		{
+			//@ts-ignore
 			onStart: (e) => {
 				"worklet";
 				// Immediate updates - like opening the emoji picker - will have a duration of zero. In those cases, we should
@@ -247,14 +247,14 @@ export function MessagesList({
 				} else {
 					keyboardIsOpening.set(true);
 				}
-			},
+			}, //@ts-ignore
 			onMove: (e) => {
 				"worklet";
 				keyboardHeight.set(e.height);
 				if (e.height > footerHeight.get()) {
 					scrollTo(flatListRef, 0, 1e7, false);
 				}
-			},
+			}, //@ts-ignore
 			onEnd: (e) => {
 				"worklet";
 				keyboardHeight.set(e.height);
@@ -329,7 +329,7 @@ export function MessagesList({
 						}
 					}
 				} catch (error) {
-					logger.error("Failed to get post as quote for DM", { error });
+					console.error("Failed to get post as quote for DM", { error });
 				}
 			}
 

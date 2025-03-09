@@ -6,8 +6,6 @@ import {
 	type ModerationDecision,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { type RouteProp, useFocusEffect, useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useEvent } from "expo";
@@ -518,7 +516,6 @@ function ModerationOverlay({
 	embed: AppBskyEmbedVideo.View;
 	onPressShow: () => void;
 }) {
-	const { _ } = useLingui();
 	const hider = Hider.useHider();
 	const { bottom } = useSafeAreaInsets();
 
@@ -610,7 +607,6 @@ function Overlay({
 	moderation: ModerationDecision;
 	feedContext: string | undefined;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { openComposer } = useComposerControls();
 	const { currentAccount } = useSession();
@@ -678,11 +674,9 @@ function Overlay({
 						<Animated.View style={[a.px_md, animatedStyle]}>
 							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_md]}>
 								<Link
-									label={_(
-										msg`View ${sanitizeDisplayName(
-											post.author.displayName || post.author.handle,
-										)}'s profile`,
-									)}
+									label={`View ${sanitizeDisplayName(
+										post.author.displayName || post.author.handle,
+									)}'s profile`}
 									to={{
 										screen: "Profile",
 										params: { name: post.author.did },
@@ -780,7 +774,6 @@ function ExpandableRichTextView({
 	const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
 	const [constrained, setConstrained] = useState(false);
 	const [contentHeight, setContentHeight] = useState(0);
-	const { _ } = useLingui();
 	const { screenReaderEnabled } = useA11y();
 
 	if (expanded && !hasBeenExpanded) {
@@ -873,7 +866,6 @@ function PlayPauseTapArea({
 	post: Shadow<AppBskyFeedDefs.PostView>;
 	feedContext: string | undefined;
 }) {
-	const { _ } = useLingui();
 	const doubleTapRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const playHaptic = useHaptics();
 	const [queueLike] = usePostLikeMutationQueue(post, "ImmersiveVideo");
@@ -912,7 +904,7 @@ function PlayPauseTapArea({
 		<Button
 			disabled={!player}
 			aria-valuetext={isPlaying ? "Video is playing" : "Video is paused"}
-			label={_(`Video from ${sanitizeHandle(post.author.handle, "@")}. Tap to play or pause the video`)}
+			label={`Video from ${sanitizeHandle(post.author.handle, "@")}. Tap to play or pause the video`}
 			accessibilityHint={"Double tap to like"}
 			onPress={onPress}
 			style={[a.absolute, a.inset_0, a.z_10]}
@@ -924,7 +916,6 @@ function PlayPauseTapArea({
 
 function EndMessage() {
 	const navigation = useNavigation<NavigationProp>();
-	const { _ } = useLingui();
 	const t = useTheme();
 	return (
 		<View style={[a.w_full, a.gap_3xl, a.px_lg, a.mx_auto, a.align_center, { maxWidth: 350 }]}>

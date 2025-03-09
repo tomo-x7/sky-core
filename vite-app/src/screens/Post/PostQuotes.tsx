@@ -1,4 +1,3 @@
-import { Plural } from "@lingui/macro";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -16,7 +15,7 @@ export const PostQuotesScreen = ({ route }: Props) => {
 	const uri = makeRecordUri(name, "app.bsky.feed.post", rkey);
 	const { data: post } = usePostThreadQuery(uri);
 
-	let quoteCount;
+	let quoteCount: number | undefined;
 	if (post?.thread.type === "post") {
 		quoteCount = post.thread.post.quoteCount;
 	}
@@ -36,7 +35,7 @@ export const PostQuotesScreen = ({ route }: Props) => {
 						<>
 							<Layout.Header.TitleText>Quotes</Layout.Header.TitleText>
 							<Layout.Header.SubtitleText>
-								<Plural value={quoteCount ?? 0} one="# quote" other="# quotes" />
+								{quoteCount ?? 0} {quoteCount === 1 ? "quote" : "quotes"}
 							</Layout.Header.SubtitleText>
 						</>
 					)}

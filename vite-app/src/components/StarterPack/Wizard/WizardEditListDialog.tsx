@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { useLingui } from "@lingui/react";
 import { useRef } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import { View } from "react-native";
@@ -33,7 +32,6 @@ export function WizardEditListDialog({
 	moderationOpts: ModerationOpts;
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const initialNumToRender = useInitialNumToRender();
@@ -115,6 +113,7 @@ export function WizardEditListDialog({
 				}
 				stickyHeaderIndices={[0]}
 				style={[
+					//@ts-ignore
 					web([a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]),
 					native({
 						height: "100%",

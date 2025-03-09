@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -19,7 +18,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { colors, s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { NoFollowingFeed } from "#/screens/Feeds/NoFollowingFeed";
 import { NoSavedFeedsOfAnyType } from "#/screens/Feeds/NoSavedFeedsOfAnyType";
 import { useOverwriteSavedFeedsMutation, usePreferencesQuery } from "#/state/queries/preferences";
@@ -45,7 +43,6 @@ function SavedFeedsInner({
 	preferences: UsePreferencesQueryResponse;
 }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { isMobile, isDesktop } = useWebMediaQueries();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { mutateAsync: overwriteSavedFeeds, isPending: isOverwritePending } = useOverwriteSavedFeedsMutation();
@@ -75,9 +72,9 @@ function SavedFeedsInner({
 			navigation.navigate("Feeds");
 		} catch (e) {
 			Toast.show("There was an issue contacting the server", "xmark");
-			logger.error("Failed to toggle pinned feed", { message: e });
+			console.error("Failed to toggle pinned feed", { message: e });
 		}
-	}, [_, overwriteSavedFeeds, currentFeeds, navigation]);
+	}, [overwriteSavedFeeds, currentFeeds, navigation]);
 
 	return (
 		<Layout.Screen>
@@ -201,7 +198,6 @@ function ListItem({
 	setCurrentFeeds: React.Dispatch<AppBskyActorDefs.SavedFeed[]>;
 	preferences: UsePreferencesQueryResponse;
 }) {
-	const { _ } = useLingui();
 	const pal = usePalette("default");
 	const playHaptic = useHaptics();
 	const feedUri = feed.value;

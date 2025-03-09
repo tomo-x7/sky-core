@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useCallback, useMemo } from "react";
 import { View } from "react-native";
 import RNPickerSelect, { type PickerSelectProps } from "react-native-picker-select";
@@ -18,8 +17,7 @@ import { useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences";
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "LanguageSettings">;
-export function LanguageSettingsScreen({}: Props) {
-	const { _ } = useLingui();
+export function LanguageSettingsScreen(props: Props) {
 	const langPrefs = useLanguagePrefs();
 	const setLangPrefs = useLanguagePrefsApi();
 	const t = useTheme();
@@ -34,6 +32,7 @@ export function LanguageSettingsScreen({}: Props) {
 		(value: Parameters<PickerSelectProps["onValueChange"]>[0]) => {
 			if (!value) return;
 			if (langPrefs.primaryLanguage !== value) {
+				//@ts-ignore
 				setLangPrefs.setPrimaryLanguage(value);
 			}
 		},
@@ -44,6 +43,7 @@ export function LanguageSettingsScreen({}: Props) {
 		(value: Parameters<PickerSelectProps["onValueChange"]>[0]) => {
 			if (!value) return;
 			if (langPrefs.appLanguage !== value) {
+				//@ts-ignore
 				setLangPrefs.setAppLanguage(sanitizeAppLanguageSetting(value));
 			}
 		},

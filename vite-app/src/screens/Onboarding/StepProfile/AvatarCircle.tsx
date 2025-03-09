@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image as ExpoImage } from "react-native";
 import { View } from "react-native";
@@ -17,7 +16,6 @@ export function AvatarCircle({
 	openLibrary: () => unknown;
 	openCreator: () => unknown;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { avatar } = useAvatar();
 
@@ -46,6 +44,7 @@ export function AvatarCircle({
 				<AvatarCreatorCircle avatar={avatar} size={200} />
 			) : avatar.image ? (
 				<ExpoImage
+					//@ts-ignore
 					source={avatar.image.path}
 					style={styles.imageContainer}
 					accessibilityIgnoresInvertColors

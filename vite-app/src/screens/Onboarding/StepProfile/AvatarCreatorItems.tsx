@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -33,7 +32,6 @@ export function AvatarCreatorItems({
 	avatar: Avatar;
 	setAvatar: React.Dispatch<React.SetStateAction<Avatar>>;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const isEmojis = type === "emojis";
 

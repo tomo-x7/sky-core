@@ -5,14 +5,7 @@ import { isWeb } from "#/platform/detection";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
-const IFRAME_HOST = isWeb
-	? // @ts-ignore only for web
-		window.location.host === "localhost:8100"
-		? "http://localhost:8100"
-		: "https://bsky.app"
-	: __DEV__ && !process.env.JEST_WORKER_ID
-		? "http://localhost:8100"
-		: "https://bsky.app";
+const IFRAME_HOST = window.location.host === "localhost:8100" ? "http://localhost:8100" : "https://bsky.app";
 
 export const embedPlayerSources = [
 	"youtube",
@@ -76,7 +69,7 @@ const giphyRegex = /media(?:[0-4]\.giphy\.com|\.giphy\.com)/i;
 const gifFilenameRegex = /^(\S+)\.(webp|gif|mp4)$/i;
 
 export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefined {
-	let urlp;
+	let urlp: URL;
 	try {
 		urlp = new URL(url);
 	} catch (e) {
@@ -103,7 +96,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 		urlp.hostname === "m.youtube.com" ||
 		urlp.hostname === "music.youtube.com"
 	) {
-		const [_, page, shortOrLiveVideoId] = urlp.pathname.split("/");
+		const [page, shortOrLiveVideoId] = urlp.pathname.split("/");
 
 		const isShorts = page === "shorts";
 		const isLive = page === "live";
@@ -128,7 +121,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 				window.location.hostname
 			: "localhost";
 
-		const [_, channelOrVideo, clipOrId, id] = urlp.pathname.split("/");
+		const [channelOrVideo, clipOrId, id] = urlp.pathname.split("/");
 
 		if (channelOrVideo === "videos") {
 			return {
@@ -153,7 +146,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 
 	// spotify
 	if (urlp.hostname === "open.spotify.com") {
-		const [_, typeOrLocale, idOrType, id] = urlp.pathname.split("/");
+		const [typeOrLocale, idOrType, id] = urlp.pathname.split("/");
 
 		if (idOrType) {
 			if (typeOrLocale === "playlist" || idOrType === "playlist") {
@@ -196,7 +189,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 
 	// soundcloud
 	if (urlp.hostname === "soundcloud.com" || urlp.hostname === "www.soundcloud.com") {
-		const [_, user, trackOrSets, set] = urlp.pathname.split("/");
+		const [user, trackOrSets, set] = urlp.pathname.split("/");
 
 		if (user && trackOrSets) {
 			if (trackOrSets === "sets" && set) {
@@ -224,7 +217,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 
 		if (pathParams.length === 5 && (type === "playlist" || type === "album")) {
 			// We want to append the songId to the end of the url if it exists
-			const embedUri = `https://embed.music.apple.com${urlp.pathname}${urlp.search ? "?i=" + songId : ""}`;
+			const embedUri = `https://embed.music.apple.com${urlp.pathname}${urlp.search ? `?i=${songId}` : ""}`;
 
 			if (type === "playlist") {
 				return {
@@ -251,7 +244,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 	}
 
 	if (urlp.hostname === "vimeo.com" || urlp.hostname === "www.vimeo.com") {
-		const [_, videoId] = urlp.pathname.split("/");
+		const [videoId] = urlp.pathname.split("/");
 		if (videoId) {
 			return {
 				type: "vimeo_video",
@@ -262,7 +255,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 	}
 
 	if (urlp.hostname === "giphy.com" || urlp.hostname === "www.giphy.com") {
-		const [_, gifs, nameAndId] = urlp.pathname.split("/");
+		const [gifs, nameAndId] = urlp.pathname.split("/");
 
 		/*
 		 * nameAndId is a string that consists of the name (dash separated) and the id of the gif (the last part of the name)
@@ -290,7 +283,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 	// These can include (presumably) a tracking id in the path name, so we have to check for that as well
 	if (giphyRegex.test(urlp.hostname)) {
 		// We can link directly to the gif, if its a proper link
-		const [_, media, trackingOrId, idOrFilename, filename] = urlp.pathname.split("/");
+		const [media, trackingOrId, idOrFilename, filename] = urlp.pathname.split("/");
 
 		if (media === "media") {
 			if (idOrFilename && gifFilenameRegex.test(idOrFilename)) {
@@ -318,7 +311,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 	// Finally, we should see if it is a link to i.giphy.com. These links don't necessarily end in .gif but can also
 	// be .webp
 	if (urlp.hostname === "i.giphy.com" || urlp.hostname === "www.i.giphy.com") {
-		const [_, mediaOrFilename, filename] = urlp.pathname.split("/");
+		const [mediaOrFilename, filename] = urlp.pathname.split("/");
 
 		if (mediaOrFilename === "media" && filename) {
 			const gifId = filename.split(".")[0];
@@ -367,7 +360,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 		const path_components = urlp.pathname.slice(1, i + 1).split("/");
 		if (path_components.length === 4) {
 			// discard username - it's not relevant
-			const [photos, _, albums, id] = path_components;
+			const [photos, albums, id] = path_components;
 			if (photos === "photos" && albums === "albums") {
 				// this at least has the shape of a valid photo-album URL!
 				return {
@@ -395,7 +388,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 	// link shortened flickr path
 	if (urlp.hostname === "flic.kr") {
 		const b58alph = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
-		const [_, type, idBase58Enc] = urlp.pathname.split("/");
+		const [type, idBase58Enc] = urlp.pathname.split("/");
 		let id = 0n;
 		for (const char of idBase58Enc) {
 			const nextIdx = b58alph.indexOf(char);
@@ -408,7 +401,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 		}
 
 		switch (type) {
-			case "go":
+			case "go": {
 				const formattedGroupId = `${id}`;
 				return {
 					type: "flickr_album",
@@ -418,6 +411,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 						-2,
 					)}@N${formattedGroupId.slice(-2)}`,
 				};
+			}
 			case "s":
 				return {
 					type: "flickr_album",
@@ -502,7 +496,7 @@ export function parseTenorGif(urlp: URL):
 		return { success: false };
 	}
 
-	let [_, id, filename] = urlp.pathname.split("/");
+	let [id, filename] = urlp.pathname.split("/");
 
 	if (!id || !filename) {
 		return { success: false };

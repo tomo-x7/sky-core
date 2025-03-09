@@ -1,7 +1,5 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
 import { BlueskyVideoView } from "@haileyok/bluesky-video";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
 
@@ -31,7 +29,6 @@ export const VideoEmbedInnerNative = React.forwardRef(function VideoEmbedInnerNa
 	},
 	ref: React.Ref<{ togglePlayback: () => void }>,
 ) {
-	const { _ } = useLingui();
 	const videoRef = useRef<BlueskyVideoView>(null);
 	const autoplayDisabled = useAutoplayDisabled();
 	const isWithinMessage = useIsWithinMessage();
@@ -112,7 +109,6 @@ function VideoControls({
 	timeRemaining: number;
 	isPlaying: boolean;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const [muted] = useVideoMuteState();
 
@@ -148,9 +144,7 @@ function VideoControls({
 			<ControlButton
 				onPress={toggleMuted}
 				label={
-					muted
-						? _(msg({ message: "Unmute", context: "video" }))
-						: _(msg({ message: "Mute", context: "video" }))
+					muted ? msg({ message: "Unmute", context: "video" }) : msg({ message: "Mute", context: "video" })
 				}
 				accessibilityHint={"Toggles the sound"}
 				style={{ right: 6 }}

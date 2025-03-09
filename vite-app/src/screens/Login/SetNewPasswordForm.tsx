@@ -1,5 +1,4 @@
 import { BskyAgent } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 
@@ -10,11 +9,9 @@ import { FormError } from "#/components/forms/FormError";
 import * as TextField from "#/components/forms/TextField";
 import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isNetworkError } from "#/lib/strings/errors";
 import { cleanError } from "#/lib/strings/errors";
 import { checkAndFormatResetCode } from "#/lib/strings/password";
-import { logger } from "#/logger";
 import { FormContainer } from "./FormContainer";
 
 export const SetNewPasswordForm = ({
@@ -30,7 +27,6 @@ export const SetNewPasswordForm = ({
 	onPressBack: () => void;
 	onPasswordSet: () => void;
 }) => {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -44,7 +40,6 @@ export const SetNewPasswordForm = ({
 
 		if (!formattedCode) {
 			setError("You have entered an invalid code. It should look like XXXXX-XXXXX.");
-			logEvent("signin:passwordResetFailure", {});
 			return;
 		}
 
@@ -64,11 +59,8 @@ export const SetNewPasswordForm = ({
 				password,
 			});
 			onPasswordSet();
-			logEvent("signin:passwordResetSuccess", {});
 		} catch (e: any) {
 			const errMsg = e.toString();
-			logger.warn("Failed to set new password", { error: e });
-			logEvent("signin:passwordResetFailure", {});
 			setIsProcessing(false);
 			if (isNetworkError(e)) {
 				setError("Unable to contact your service. Please check your Internet connection.");

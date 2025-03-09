@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import React, { useRef } from "react";
 import { type TextInput, View } from "react-native";
@@ -14,9 +13,7 @@ import * as TextField from "#/components/forms/TextField";
 import { Envelope_Stroke2_Corner0_Rounded as Envelope } from "#/components/icons/Envelope";
 import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isEmailMaybeInvalid } from "#/lib/strings/email";
-import { logger } from "#/logger";
 import { ScreenTransition } from "#/screens/Login/ScreenTransition";
 import { Policies } from "#/screens/Signup/StepInfo/Policies";
 import { is13, is18, useSignupContext } from "#/screens/Signup/state";
@@ -24,7 +21,7 @@ import { BackNextButtons } from "../BackNextButtons";
 
 function sanitizeDate(date: Date): Date {
 	if (!date || date.toString() === "Invalid Date") {
-		logger.error("Create account: handled invalid date for birthDate", {
+		console.error("Create account: handled invalid date for birthDate", {
 			hasDate: !!date,
 		});
 		return new Date();
@@ -43,7 +40,6 @@ export function StepInfo({
 	refetchServer: () => void;
 	isLoadingStarterPack: boolean;
 }) {
-	const { _ } = useLingui();
 	const { state, dispatch } = useSignupContext();
 
 	const inviteCodeValueRef = useRef<string>(state.inviteCode);
@@ -57,7 +53,7 @@ export function StepInfo({
 
 	const [hasWarnedEmail, setHasWarnedEmail] = React.useState<boolean>(false);
 
-	const tldtsRef = React.useRef<typeof tldts>();
+	const tldtsRef = React.useRef<typeof tldts>(null);
 	React.useEffect(() => {
 		// @ts-expect-error - valid path
 		import("tldts/dist/index.cjs.min.js").then((tldts) => {
@@ -131,9 +127,6 @@ export function StepInfo({
 		dispatch({ type: "setEmail", value: email });
 		dispatch({ type: "setPassword", value: password });
 		dispatch({ type: "next" });
-		logEvent("signup:nextPressed", {
-			activeStep: state.activeStep,
-		});
 	};
 
 	return (

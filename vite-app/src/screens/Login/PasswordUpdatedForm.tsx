@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useBreakpoints } from "#/alf";
@@ -11,7 +10,6 @@ export const PasswordUpdatedForm = ({
 }: {
 	onPressNext: () => void;
 }) => {
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 
 	return (

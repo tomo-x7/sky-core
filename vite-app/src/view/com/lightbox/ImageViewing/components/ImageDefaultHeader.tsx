@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 /**
  * Copyright (c) JOB TODAY S.A. and its affiliates.
  *
@@ -19,7 +18,6 @@ type Props = {
 const HIT_SLOP = createHitslop(16);
 
 const ImageDefaultHeader = ({ onRequestClose }: Props) => {
-	const { _ } = useLingui();
 	return (
 		<SafeAreaView style={styles.root}>
 			<TouchableOpacity

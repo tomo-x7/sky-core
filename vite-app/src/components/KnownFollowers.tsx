@@ -1,6 +1,4 @@
 import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
-import { Plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -86,7 +84,6 @@ function KnownFollowersInner({
 	showIfEmpty?: boolean;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	const textStyle = [a.text_sm, a.leading_snug, t.atoms.text_contrast_medium];
 
@@ -183,7 +180,7 @@ function KnownFollowersInner({
 									<Text emoji key={slice[1].profile.did} style={textStyle}>
 										{slice[1].profile.displayName}
 									</Text>
-									, and <Plural value={serverCount - 2} one="# other" other="# others" />
+									, and {serverCount - 2} {serverCount - 2 === 1 ? "other" : "others"}
 								</>
 							) : (
 								// only 2
@@ -205,7 +202,7 @@ function KnownFollowersInner({
 								<Text emoji key={slice[0].profile.did} style={textStyle}>
 									{slice[0].profile.displayName}
 								</Text>{" "}
-								and <Plural value={serverCount - 1} one="# other" other="# others" />
+								and {serverCount - 1} {serverCount - 1 === 1 ? "other" : "others"}
 							</>
 						) : (
 							// only 1

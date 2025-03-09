@@ -11,7 +11,6 @@ import * as TextField from "#/components/forms/TextField";
 import { useThrottledValue } from "#/components/hooks/useThrottledValue";
 import { ArrowLeft_Stroke2_Corner0_Rounded as Arrow } from "#/components/icons/Arrow";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
-import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
 import { isWeb } from "#/platform/detection";
 import { type Gif, useFeaturedGifsQuery, useGifSearchQuery } from "#/state/queries/tenor";

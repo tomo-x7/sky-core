@@ -5,8 +5,6 @@ import {
 	type RichText as RichTextAPI,
 	moderateProfile,
 } from "@atproto/api";
-import { Plural, msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { memo, useMemo } from "react";
 import { View } from "react-native";
 import { atoms as a, tokens, useTheme } from "#/alf";
@@ -20,9 +18,7 @@ import {
 	Heart2_Stroke2_Corner0_Rounded as Heart,
 	Heart2_Filled_Stroke2_Corner0_Rounded as HeartFilled,
 } from "#/components/icons/Heart2";
-import { useHaptics } from "#/lib/haptics";
 import { isAppLabeler } from "#/lib/moderation";
-import { logger } from "#/logger";
 import { isIOS, isWeb } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import type { Shadow } from "#/state/cache/types";
@@ -58,10 +54,8 @@ let ProfileHeaderLabeler = ({
 }: Props): React.ReactNode => {
 	const profile: Shadow<AppBskyActorDefs.ProfileViewDetailed> = useProfileShadow(profileUnshadowed);
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { currentAccount, hasSession } = useSession();
 	const requireAuth = useRequireAuth();
-	const playHaptic = useHaptics();
 	const cantSubscribePrompt = Prompt.usePromptControl();
 	const isSelf = currentAccount?.did === profile.did;
 
@@ -80,8 +74,6 @@ let ProfileHeaderLabeler = ({
 			return;
 		}
 		try {
-			playHaptic();
-
 			if (likeUri) {
 				await unlikeMod({ uri: likeUri });
 				setLikeCount((c) => c - 1);
@@ -96,9 +88,9 @@ let ProfileHeaderLabeler = ({
 				"There was an issue contacting the server, please check your internet connection and try again.",
 				"xmark",
 			);
-			logger.error("Failed to toggle labeler like", { message: e.message });
+			console.error("Failed to toggle labeler like", { message: e.message });
 		}
-	}, [labeler, playHaptic, likeUri, unlikeMod, likeMod, _]);
+	}, [labeler, likeUri, unlikeMod, likeMod]);
 
 	const { openModal } = useModalControls();
 	const editProfileControl = useDialogControl();
@@ -128,7 +120,7 @@ let ProfileHeaderLabeler = ({
 						cantSubscribePrompt.open();
 						return;
 					}
-					logger.error("Failed to subscribe to labeler", { message: e.message });
+					console.error("Failed to subscribe to labeler", { message: e.message });
 				}
 			}),
 		[requireAuth, toggleSubscription, isSubscribed, profile, cantSubscribePrompt, reset],
@@ -254,12 +246,7 @@ let ProfileHeaderLabeler = ({
 											},
 										}}
 										size="tiny"
-										label={_(
-											msg`Liked by ${plural(likeCount, {
-												one: "# user",
-												other: "# users",
-											})}`,
-										)}
+										label={`Liked by ${likeCount} ${likeCount === 1 ? "user" : "users"}`}
 									>
 										{({ hovered, focused, pressed }) => (
 											<Text
@@ -271,7 +258,7 @@ let ProfileHeaderLabeler = ({
 												]}
 											>
 												<>
-													Liked by <Plural value={likeCount} one="# user" other="# users" />
+													Liked by {likeCount} {likeCount === 1 ? "user" : "users"}
 												</>
 											</Text>
 										)}
@@ -297,7 +284,6 @@ function CantSubscribePrompt({
 }: {
 	control: DialogOuterProps["control"];
 }) {
-	const { _ } = useLingui();
 	return (
 		<Prompt.Outer control={control}>
 			<Prompt.TitleText>Unable to subscribe</Prompt.TitleText>

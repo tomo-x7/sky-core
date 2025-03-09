@@ -11,7 +11,6 @@ import { canBeMessaged } from "#/components/dms/util";
 import { Message_Stroke2_Corner0_Rounded as Message } from "#/components/icons/Message";
 import { useEmail } from "#/lib/hooks/useEmail";
 import type { NavigationProp } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
 import { useGetConvoAvailabilityQuery } from "#/state/queries/messages/get-convo-availability";
 import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
 import * as Toast from "#/view/com/util/Toast";

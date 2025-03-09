@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type { ImagePickerAsset } from "expo-image-picker";
 import { useCallback } from "react";
 import { Keyboard } from "react-native";
@@ -27,7 +26,6 @@ type Props = {
 };
 
 export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { requestVideoAccessIfNeeded } = useVideoLibraryPermission();
 	const control = Prompt.usePromptControl();
@@ -77,7 +75,7 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 				}
 			}
 		}
-	}, [requestVideoAccessIfNeeded, currentAccount, control, setError, _, onSelectVideo]);
+	}, [requestVideoAccessIfNeeded, currentAccount, control, setError, onSelectVideo]);
 
 	return (
 		<>
@@ -100,7 +98,6 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 }
 
 function VerifyEmailPrompt({ control }: { control: Prompt.PromptControlProps }) {
-	const { _ } = useLingui();
 	const verifyEmailDialogControl = useDialogControl();
 
 	return (

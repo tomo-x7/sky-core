@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -12,7 +11,6 @@ import { useCloseAllActiveElements } from "#/state/util";
 import { Logo } from "#/view/icons/Logo";
 
 let NavSignupCard = ({}: {}): React.ReactNode => {
-	const { _ } = useLingui();
 	const { requestSwitchToAccount } = useLoggedOutViewControls();
 	const closeAllActiveElements = useCloseAllActiveElements();
 

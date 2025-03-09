@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
@@ -35,7 +34,6 @@ function useWebQueryParams() {
 
 export function DesktopRightNav({ routeName }: { routeName: string }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { hasSession, currentAccount } = useSession();
 	const kawaii = useKawaiiMode();
 	const gutters = useGutters(["base", 0, "base", "wide"]);

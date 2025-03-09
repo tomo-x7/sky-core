@@ -12,7 +12,6 @@ import {
 } from "@atproto/api";
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
@@ -223,7 +222,6 @@ export function QuoteEmbed({
 }
 
 export function QuoteX({ onRemove }: { onRemove: () => void }) {
-	const { _ } = useLingui();
 	return (
 		<TouchableOpacity
 			style={[

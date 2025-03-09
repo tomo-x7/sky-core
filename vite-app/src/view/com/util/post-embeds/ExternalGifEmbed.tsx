@@ -1,5 +1,4 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
 import { ActivityIndicator, type GestureResponderEvent, Pressable } from "react-native";
@@ -22,7 +21,6 @@ export function ExternalGifEmbed({
 }) {
 	const t = useTheme();
 	const externalEmbedsPrefs = useExternalEmbedsPrefs();
-	const { _ } = useLingui();
 	const consentDialogControl = useDialogControl();
 
 	// Tracking if the placer has been activated

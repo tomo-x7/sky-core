@@ -15,6 +15,7 @@ export function dedupArray<T>(arr: T[]): T[] {
  * If not, it will replace any deeply equal children of `b` with those of `a`.
  * This can be used for structural sharing between JSON values for example.
  */
+
 export function replaceEqualDeep(a: any, b: any): any {
 	if (a === b) {
 		return a;
@@ -59,6 +60,7 @@ export function isPlainArray(value: unknown) {
 }
 
 // Copied from: https://github.com/jonschlinkert/is-plain-object
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
 export function isPlainObject(o: any): o is Object {
 	if (!hasObjectPrototype(o)) {
 		return false;
@@ -77,7 +79,7 @@ export function isPlainObject(o: any): o is Object {
 	}
 
 	// If constructor does not have an Object-specific method
-	if (!prot.hasOwnProperty("isPrototypeOf")) {
+	if (!Object.prototype.hasOwnProperty.call(prot, "isPrototypeOf")) {
 		return false;
 	}
 

@@ -1,8 +1,8 @@
-import { useLingui } from "@lingui/react";
 import { Text } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { Error } from "#/components/Error";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
@@ -14,9 +14,7 @@ import { useNotificationSettingsMutation } from "#/state/queries/notifications/s
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<AllNavigatorParams, "NotificationSettings">;
-export function NotificationSettingsScreen({}: Props) {
-	const { _ } = useLingui();
-
+export function NotificationSettingsScreen(props: Props) {
 	const {
 		data,
 		isError: isQueryError,

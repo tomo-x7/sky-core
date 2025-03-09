@@ -32,13 +32,14 @@ export async function getLinkMeta(agent: BskyAgent, url: string, timeout = 15e3)
 		};
 	}
 
-	let urlp;
+	let urlp: URL;
 	try {
 		urlp = new URL(url);
 
 		// Get Giphy meta uri if this is any form of giphy link
 		const giphyMetaUri = getGiphyMetaUri(urlp);
 		if (giphyMetaUri) {
+			//biome-ignore lint/style/noParameterAssign:
 			url = giphyMetaUri;
 			urlp = new URL(url);
 		}
@@ -90,6 +91,7 @@ export async function getLinkMeta(agent: BskyAgent, url: string, timeout = 15e3)
 export function getLikelyType(url: URL | string): LikelyType {
 	if (typeof url === "string") {
 		try {
+			//biome-ignore lint/style/noParameterAssign:
 			url = new URL(url);
 		} catch (e) {
 			return LikelyType.Other;

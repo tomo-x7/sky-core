@@ -1,5 +1,4 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
@@ -165,8 +164,6 @@ function ViewportObserver({
 }
 
 function VideoError({ error, retry }: { error: unknown; retry: () => void }) {
-	const { _ } = useLingui();
-
 	let showRetryButton = true;
 	let text = null;
 

@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -14,7 +13,6 @@ export const ConfirmLanguagesButton = ({
 	extraText?: string;
 }) => {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { isMobile } = useWebMediaQueries();
 	return (
 		<View

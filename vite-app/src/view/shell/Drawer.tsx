@@ -245,7 +245,6 @@ let DrawerFooter = ({
 	onPressFeedback: () => void;
 	onPressHelp: () => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const insets = useSafeAreaInsets();
 	return (
 		<View
@@ -295,7 +294,6 @@ let SearchMenuItem = ({
 	isActive: boolean;
 	onPress: () => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	return (
 		<MenuItem
@@ -346,7 +344,6 @@ let ChatMenuItem = ({
 	isActive: boolean;
 	onPress: () => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	return (
 		<MenuItem
@@ -372,7 +369,6 @@ let NotificationsMenuItem = ({
 	isActive: boolean;
 	onPress: () => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const numUnreadNotifications = useUnreadNotifications();
 	return (
@@ -388,12 +384,10 @@ let NotificationsMenuItem = ({
 			accessibilityHint={
 				numUnreadNotifications === ""
 					? ""
-					: _(
-							msg`${plural(numUnreadNotifications ?? 0, {
-								one: "../.. unread item",
-								other: "../.. unread items",
-							})}` || "",
-						)
+					: `${plural(numUnreadNotifications ?? 0, {
+							one: "../.. unread item",
+							other: "../.. unread items",
+						})}`
 			}
 			count={numUnreadNotifications}
 			bold={isActive}
@@ -410,7 +404,6 @@ let FeedsMenuItem = ({
 	isActive: boolean;
 	onPress: () => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	return (
 		<MenuItem
@@ -430,7 +423,6 @@ let FeedsMenuItem = ({
 FeedsMenuItem = React.memo(FeedsMenuItem);
 
 let ListsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	return <MenuItem icon={<List style={[t.atoms.text]} width={iconWidth} />} label={"Lists"} onPress={onPress} />;
@@ -444,7 +436,6 @@ let ProfileMenuItem = ({
 	isActive: boolean;
 	onPress: () => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	return (
 		<MenuItem
@@ -463,7 +454,6 @@ let ProfileMenuItem = ({
 ProfileMenuItem = React.memo(ProfileMenuItem);
 
 let SettingsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	return (
 		<MenuItem icon={<Settings style={[t.atoms.text]} width={iconWidth} />} label={"Settings"} onPress={onPress} />
@@ -530,7 +520,6 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 }
 
 function ExtraLinks() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const kawaii = useKawaiiMode();
 

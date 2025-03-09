@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -10,7 +9,6 @@ import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { Download_Stroke2_Corner0_Rounded as DownloadIcon } from "#/components/icons/Download";
 import { saveBytesToDisk } from "#/lib/media/manip";
-import { logger } from "#/logger";
 import { useAgent } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
 
@@ -19,7 +17,6 @@ export function ExportCarDialog({
 }: {
 	control: Dialog.DialogOuterProps["control"];
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const agent = useAgent();
 	const [loading, setLoading] = React.useState(false);
@@ -42,13 +39,13 @@ export function ExportCarDialog({
 				Toast.show("File saved successfully!");
 			}
 		} catch (e) {
-			logger.error("Error occurred while downloading CAR file", { message: e });
+			console.error("Error occurred while downloading CAR file", { message: e });
 			Toast.show("Error occurred while saving file", "xmark");
 		} finally {
 			setLoading(false);
 			control.close();
 		}
-	}, [_, control, agent]);
+	}, [control, agent]);
 
 	return (
 		<Dialog.Outer control={control}>

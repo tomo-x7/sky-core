@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -19,7 +18,6 @@ export const SplashScreen = ({
 	onPressCreateAccount: () => void;
 }) => {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	const insets = useSafeAreaInsets();
 

@@ -13,7 +13,6 @@ import Animated, {
 	useAnimatedReaction,
 	useAnimatedStyle,
 } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a } from "#/alf";
 import { isIOS } from "#/platform/detection";
@@ -62,7 +61,6 @@ function GrowableBannerInner({
 	backButton?: React.ReactNode;
 	children: React.ReactNode;
 }) {
-	const { top: topInset } = useSafeAreaInsets();
 	const isFetching = useIsProfileFetching();
 	const animateSpinner = useShouldAnimateSpinner({ isFetching, scrollY });
 
@@ -113,11 +111,10 @@ function GrowableBannerInner({
 				]}
 			>
 				{children}
+				{/*//@ts-expect-error */}
 				<AnimatedBlurView style={[a.absolute, a.inset_0]} tint="dark" animatedProps={animatedBlurViewProps} />
 			</Animated.View>
-			<View
-				style={[a.absolute, a.inset_0, { top: topInset - (isIOS ? 15 : 0) }, a.justify_center, a.align_center]}
-			>
+			<View style={[a.absolute, a.inset_0, { top: 0 }, a.justify_center, a.align_center]}>
 				<Animated.View style={[animatedSpinnerStyle]}>
 					<ActivityIndicator
 						key={animateSpinner ? "spin" : "stop"}

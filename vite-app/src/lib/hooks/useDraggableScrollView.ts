@@ -74,7 +74,7 @@ export function useDraggableScroll<Scrollable extends ScrollView = ScrollView>({
 		};
 	}, [cursor]);
 
-	const refs = useMemo(() => mergeRefs(outerRef ? [ref, outerRef] : [ref]), [ref, outerRef]);
+	const refs = useMemo(() => mergeRefs(outerRef ? [ref, outerRef] : [ref]), [outerRef]);
 
 	return {
 		refs,

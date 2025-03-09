@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -8,7 +7,6 @@ import { InlineLinkText } from "#/components/Link";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
-import { logger } from "#/logger";
 import {
 	usePreferencesQuery,
 	useRemoveFeedMutation,
@@ -19,7 +17,6 @@ import * as Toast from "#/view/com/util/Toast";
 
 export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const setSelectedFeed = useSetSelectedFeed();
 	const { data: preferences } = usePreferencesQuery();
 	const { mutateAsync: removeFeed, isPending: isRemovePending } = useRemoveFeedMutation();
@@ -45,9 +42,9 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 				"There was an issue updating your feeds, please check your internet connection and try again.",
 				"exclamation-circle",
 			);
-			logger.error("Failed to update feeds", { message: err });
+			console.error("Failed to update feeds", { message: err });
 		}
-	}, [removeFeed, feedConfig, _, hasDiscoverPinned, setSelectedFeed]);
+	}, [removeFeed, feedConfig, hasDiscoverPinned, setSelectedFeed]);
 
 	const onReplaceFeed = React.useCallback(async () => {
 		try {
@@ -62,9 +59,9 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 				"There was an issue updating your feeds, please check your internet connection and try again.",
 				"exclamation-circle",
 			);
-			logger.error("Failed to update feeds", { message: err });
+			console.error("Failed to update feeds", { message: err });
 		}
-	}, [replaceFeedWithDiscover, discoverFeedConfig, feedConfig, setSelectedFeed, _]);
+	}, [replaceFeedWithDiscover, discoverFeedConfig, feedConfig, setSelectedFeed]);
 
 	const isProcessing = isReplacePending || isRemovePending;
 	return (

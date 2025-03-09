@@ -1,5 +1,4 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
 import { type GestureResponderEvent, View } from "react-native";
@@ -17,9 +16,7 @@ import { Envelope_Open_Stroke2_Corner0_Rounded as EnvelopeOpen } from "#/compone
 import { Trash_Stroke2_Corner0_Rounded } from "#/components/icons/Trash";
 import { PostAlerts } from "#/components/moderation/PostAlerts";
 import { GestureActionView } from "#/lib/custom-animations/GestureActionView";
-import { useHaptics } from "#/lib/haptics";
 import { decrementBadgeCount } from "#/lib/notifications/notifications";
-import { logEvent } from "#/lib/statsig/statsig";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { postUriToRelativePath, toBskyAppUrl, toShortUrl } from "#/lib/strings/url-helpers";
 import { isNative } from "#/platform/detection";
@@ -73,7 +70,6 @@ function ChatListItemReady({
 	children?: React.ReactNode;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const menuControl = useMenuControl();
 	const leaveConvoControl = useDialogControl();
@@ -81,7 +77,6 @@ function ChatListItemReady({
 	const profile = useProfileShadow(profileUnshadowed);
 	const { mutate: markAsRead } = useMarkAsReadMutation();
 	const moderation = React.useMemo(() => moderateProfile(profile, moderationOpts), [profile, moderationOpts]);
-	const playHaptic = useHaptics();
 	const queryClient = useQueryClient();
 	const isUnread = convo.unreadCount > 0;
 
@@ -163,7 +158,7 @@ function ChatListItemReady({
 			lastMessageSentAt,
 			latestReportableMessage,
 		};
-	}, [_, convo.lastMessage, currentAccount?.did, isDeletedAccount]);
+	}, [convo.lastMessage, currentAccount?.did, isDeletedAccount]);
 
 	const [showActions, setShowActions] = useState(false);
 
@@ -190,16 +185,14 @@ function ChatListItemReady({
 				menuControl.open();
 				return false;
 			} else {
-				logEvent("chat:open", { logContext: "ChatsList" });
 			}
 		},
 		[isDeletedAccount, menuControl, queryClient, profile, convo],
 	);
 
 	const onLongPress = useCallback(() => {
-		playHaptic();
 		menuControl.open();
-	}, [playHaptic, menuControl]);
+	}, [menuControl]);
 
 	const markReadAction = {
 		threshold: 120,
@@ -304,7 +297,7 @@ function ChatListItemReady({
 													style={[
 														a.text_sm,
 														{ lineHeight: 21 },
-														t.atoms.text_contrast_medium,
+														t.atoms.text_contrast_medium, //@ts-ignore
 														web({ whiteSpace: "preserve nowrap" }),
 													]}
 												>
@@ -319,7 +312,7 @@ function ChatListItemReady({
 											style={[
 												a.text_sm,
 												{ lineHeight: 21 },
-												t.atoms.text_contrast_medium,
+												t.atoms.text_contrast_medium, //@ts-ignore
 												web({ whiteSpace: "preserve nowrap" }),
 											]}
 										>

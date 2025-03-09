@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import {
@@ -15,7 +14,6 @@ import { atoms as a, ios, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
 import { usePreferencesQuery } from "#/state/queries/preferences";
 import { RQKEY, useProfileFeedgensQuery } from "#/state/queries/profile-feedgens";
@@ -48,7 +46,6 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	{ did, scrollElRef, headerOffset, enabled, style, testID, setScrollViewTag },
 	ref,
 ) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const [isPTRing, setIsPTRing] = React.useState(false);
 	const opts = React.useMemo(() => ({ enabled }), [enabled]);
@@ -99,7 +96,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh feeds", { message: err });
+			console.error("Failed to refresh feeds", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);
@@ -110,7 +107,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more feeds", { message: err });
+			console.error("Failed to load more feeds", { message: err });
 		}
 	}, [isFetching, hasNextPage, isError, fetchNextPage]);
 
@@ -146,7 +143,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 			}
 			return null;
 		},
-		[_, t, error, refetch, onPressRetryLoadMore, preferences],
+		[t, error, refetch, onPressRetryLoadMore, preferences],
 	);
 
 	React.useEffect(() => {

@@ -1,24 +1,23 @@
-import { t } from "@lingui/macro";
-
 export function cleanError(str: any): string {
 	if (!str) {
 		return "";
 	}
 	if (typeof str !== "string") {
+		//biome-ignore lint/style/noParameterAssign:
 		str = str.toString();
 	}
 	if (isNetworkError(str)) {
-		return t`Unable to connect. Please check your internet connection and try again.`;
+		return "Unable to connect. Please check your internet connection and try again.";
 	}
 	if (
 		str.includes("Upstream Failure") ||
 		str.includes("NotEnoughResources") ||
 		str.includes("pipethrough network error")
 	) {
-		return t`The server appears to be experiencing issues. Please try again in a few moments.`;
+		return "The server appears to be experiencing issues. Please try again in a few moments.";
 	}
 	if (str.includes("Bad token scope")) {
-		return t`This feature is not available while using an App Password. Please sign in with your main password.`;
+		return "This feature is not available while using an App Password. Please sign in with your main password.";
 	}
 	if (str.startsWith("Error: ")) {
 		return str.slice("Error: ".length);

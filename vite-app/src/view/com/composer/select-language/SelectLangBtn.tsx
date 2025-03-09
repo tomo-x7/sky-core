@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { useCallback, useMemo } from "react";
 import { Keyboard, StyleSheet } from "react-native";
 
@@ -14,7 +13,6 @@ import { codeToLanguageName } from "../../../../locale/helpers";
 
 export function SelectLangBtn() {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { openModal } = useModalControls();
 	const langPrefs = useLanguagePrefs();
 	const setLangPrefs = useLanguagePrefsApi();
@@ -78,7 +76,7 @@ export function SelectLangBtn() {
 				onPress: onPressMore,
 			},
 		];
-	}, [onPressMore, langPrefs, setLangPrefs, postLanguagesPref, _]);
+	}, [onPressMore, langPrefs, setLangPrefs, postLanguagesPref]);
 
 	return (
 		<DropdownButton

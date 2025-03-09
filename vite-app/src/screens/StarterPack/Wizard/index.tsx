@@ -1,7 +1,5 @@
 import { type AppBskyActorDefs, type AppBskyGraphDefs, AtUri, type ModerationOpts } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { Plural, Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
@@ -22,12 +20,10 @@ import { STARTER_PACK_MAX_SIZE } from "#/lib/constants";
 import { useEnableKeyboardControllerScreen } from "#/lib/hooks/useEnableKeyboardController";
 import { createSanitizedDisplayName } from "#/lib/moderation/create-sanitized-display-name";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { enforceLen } from "#/lib/strings/helpers";
 import { getStarterPackOgCard, parseStarterPackUri } from "#/lib/strings/starter-pack";
-import { logger } from "#/logger";
 import { isNative } from "#/platform/detection";
 import { type WizardStep, useWizardState } from "#/screens/StarterPack/Wizard/State";
 import { StepDetails } from "#/screens/StarterPack/Wizard/StepDetails";
@@ -54,8 +50,6 @@ export function Wizard({
 	const { rkey } = route.params ?? {};
 	const { currentAccount } = useSession();
 	const moderationOpts = useModerationOpts();
-
-	const { _ } = useLingui();
 
 	const {
 		data: starterPack,
@@ -123,7 +117,6 @@ function WizardInner({
 	moderationOpts: ModerationOpts;
 }) {
 	const navigation = useNavigation<NavigationProp>();
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const [state, dispatch] = useWizardState();
 	const { currentAccount } = useSession();
@@ -203,7 +196,7 @@ function WizardInner({
 	const { mutate: createStarterPack } = useCreateStarterPackMutation({
 		onSuccess: onSuccessCreate,
 		onError: (e) => {
-			logger.error("Failed to create starter pack", { safeMessage: e });
+			console.error("Failed to create starter pack", { safeMessage: e });
 			dispatch({ type: "SetProcessing", processing: false });
 			Toast.show("Failed to create starter pack", "xmark");
 		},
@@ -211,7 +204,7 @@ function WizardInner({
 	const { mutate: editStarterPack } = useEditStarterPackMutation({
 		onSuccess: onSuccessEdit,
 		onError: (e) => {
-			logger.error("Failed to edit starter pack", { safeMessage: e });
+			console.error("Failed to edit starter pack", { safeMessage: e });
 			dispatch({ type: "SetProcessing", processing: false });
 			Toast.show("Failed to create starter pack", "xmark");
 		},
@@ -296,7 +289,6 @@ function WizardInner({
 }
 
 function Container({ children }: { children: React.ReactNode }) {
-	const { _ } = useLingui();
 	const [state, dispatch] = useWizardState();
 
 	if (state.currentStep === "Profiles" || state.currentStep === "Feeds") {
@@ -333,7 +325,6 @@ function Footer({
 	moderationOpts: ModerationOpts;
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const [state, dispatch] = useWizardState();
 	const editDialogControl = useDialogControl();

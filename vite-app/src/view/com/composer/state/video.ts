@@ -1,7 +1,6 @@
 import type { AppBskyVideoDefs, BlobRef, BskyAgent } from "@atproto/api";
 import type { JobStatus } from "@atproto/api/dist/client/types/app/bsky/video/defs";
 import type { I18n } from "@lingui/core";
-import { msg } from "@lingui/macro";
 import type { ImagePickerAsset } from "expo-image-picker";
 
 import { AbortError } from "#/lib/async/cancelable";
@@ -10,7 +9,6 @@ import { ServerError, UploadLimitError, VideoTooLargeError } from "#/lib/media/v
 import type { CompressedVideo } from "#/lib/media/video/types";
 import { uploadVideo } from "#/lib/media/video/upload";
 import { createVideoAgent } from "#/lib/media/video/util";
-import { logger } from "#/logger";
 
 type CaptionsTrack = { lang: string; file: File };
 
@@ -328,7 +326,7 @@ export async function processVideo(
 				}
 			}
 
-			logger.error("Error processing video", { safeMessage: e });
+			console.error("Error processing video", { safeMessage: e });
 			dispatch({
 				type: "to_error",
 				error: "Video failed to process",
@@ -367,7 +365,7 @@ function getCompressErrorMessage(e: unknown, _: I18n["_"]): string | null {
 	if (e instanceof VideoTooLargeError) {
 		return "The selected video is larger than 50MB.";
 	}
-	logger.error("Error compressing video", { safeMessage: e });
+	console.error("Error compressing video", { safeMessage: e });
 	return "An error occurred while compressing the video.";
 }
 
@@ -375,16 +373,14 @@ function getUploadErrorMessage(e: unknown, _: I18n["_"]): string | null {
 	if (e instanceof AbortError) {
 		return null;
 	}
-	logger.error("Error uploading video", { safeMessage: e });
+	console.error("Error uploading video", { safeMessage: e });
 	if (e instanceof ServerError || e instanceof UploadLimitError) {
 		// https://github.com/bluesky-social/tango/blob/lumi/lumi/worker/permissions.go#L77
 		switch (e.message) {
 			case "User is not allowed to upload videos":
 				return "You are not allowed to upload videos.";
 			case "Uploading is disabled at the moment":
-				return _(
-					msg`Hold up! We’re gradually giving access to video, and you’re still waiting in line. Check back soon!`,
-				);
+				return `Hold up! We’re gradually giving access to video, and you’re still waiting in line. Check back soon!`;
 			case "Failed to get user's upload stats":
 				return "We were unable to determine if you are allowed to upload videos. Please try again.";
 			case "User has exceeded daily upload bytes limit":

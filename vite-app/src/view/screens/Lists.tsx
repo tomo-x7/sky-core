@@ -1,6 +1,4 @@
 import { AtUri } from "@atproto/api";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
 
@@ -19,7 +17,6 @@ import { MyLists } from "#/view/com/lists/MyLists";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Lists">;
 export function ListsScreen({}: Props) {
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const navigation = useNavigation<NavigationProp>();
 	const { openModal } = useModalControls();

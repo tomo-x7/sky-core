@@ -1,4 +1,3 @@
-import { Plural } from "@lingui/macro";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -16,7 +15,7 @@ export const PostRepostedByScreen = ({ route }: Props) => {
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { data: post } = usePostThreadQuery(uri);
 
-	let quoteCount;
+	let quoteCount: number | undefined;
 	if (post?.thread.type === "post") {
 		quoteCount = post.thread.post.repostCount;
 	}
@@ -36,7 +35,7 @@ export const PostRepostedByScreen = ({ route }: Props) => {
 						<>
 							<Layout.Header.TitleText>Reposted By</Layout.Header.TitleText>
 							<Layout.Header.SubtitleText>
-								<Plural value={quoteCount ?? 0} one="# repost" other="# reposts" />
+								{quoteCount ?? 0} {quoteCount === 1 ? "repost" : "reposts"}
 							</Layout.Header.SubtitleText>
 						</>
 					)}

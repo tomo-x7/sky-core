@@ -6,7 +6,6 @@ import type {
 	ComAtprotoRepoApplyWrites,
 	Facet,
 } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 
 import { until } from "#/lib/async/until";
@@ -63,7 +62,6 @@ export function useGenerateStarterPackMutation({
 	onSuccess: ({ uri, cid }: { uri: string; cid: string }) => void;
 	onError: (e: Error) => void;
 }) {
-	const { _ } = useLingui();
 	const agent = useAgent();
 
 	return useMutation<{ uri: string; cid: string }, Error, void>({

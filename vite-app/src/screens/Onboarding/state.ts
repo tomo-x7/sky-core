@@ -1,7 +1,5 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 
-import { logger } from "#/logger";
 import type { AvatarColor, Emoji } from "#/screens/Onboarding/StepProfile/types";
 
 export type OnboardingState = {
@@ -85,8 +83,6 @@ export const popularInterests = [
 ];
 
 export function useInterestsDisplayNames() {
-	const { _ } = useLingui();
-
 	return React.useMemo<Record<string, string>>(() => {
 		return {
 			// Keep this alphabetized
@@ -114,7 +110,7 @@ export function useInterestsDisplayNames() {
 			tv: "TV",
 			writers: "Writers",
 		};
-	}, [_]);
+	}, []);
 }
 
 export const initialState: OnboardingState = {
@@ -198,20 +194,6 @@ export function reducer(s: OnboardingState, a: OnboardingAction): OnboardingStat
 		...next,
 		hasPrev: next.activeStep !== "profile",
 	};
-
-	logger.debug("onboarding", {
-		hasPrev: state.hasPrev,
-		activeStep: state.activeStep,
-		activeStepIndex: state.activeStepIndex,
-		interestsStepResults: {
-			selectedInterests: state.interestsStepResults.selectedInterests,
-		},
-		profileStepResults: state.profileStepResults,
-	});
-
-	if (s.activeStep !== state.activeStep) {
-		logger.debug("onboarding: step changed", { activeStep: state.activeStep });
-	}
 
 	return state;
 }

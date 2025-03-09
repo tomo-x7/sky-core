@@ -87,7 +87,6 @@ const RadixTriggerPassThrough = React.forwardRef(
 		props: {
 			children: (
 				props: RadixPassThroughTriggerProps & {
-					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					ref: React.Ref<any>;
 				},
 			) => React.ReactNode;

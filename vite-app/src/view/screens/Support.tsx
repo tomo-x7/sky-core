@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -17,7 +16,6 @@ type Props = NativeStackScreenProps<CommonNavigatorParams, "Support">;
 export const SupportScreen = (_props: Props) => {
 	const pal = usePalette("default");
 	const setMinimalShellMode = useSetMinimalShellMode();
-	const { _ } = useLingui();
 
 	useFocusEffect(
 		React.useCallback(() => {

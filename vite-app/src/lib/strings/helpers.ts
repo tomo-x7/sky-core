@@ -2,14 +2,15 @@ import Graphemer from "graphemer";
 import { useCallback, useMemo } from "react";
 
 export function enforceLen(str: string, len: number, ellipsis = false, mode: "end" | "middle" = "end"): string {
+	//biome-ignore lint/style/noParameterAssign:
 	str = str || "";
 	if (str.length > len) {
 		if (ellipsis) {
 			if (mode === "end") {
-				return str.slice(0, len) + "…";
+				return `${str.slice(0, len)}…`;
 			} else if (mode === "middle") {
 				const half = Math.floor(len / 2);
-				return str.slice(0, half) + "…" + str.slice(-half);
+				return `${str.slice(0, half)}…${str.slice(-half)}`;
 			} else {
 				// fallback
 				return str.slice(0, len);
@@ -52,9 +53,9 @@ export function useWarnMaxGraphemeCount({
 
 // https://stackoverflow.com/a/52171480
 export function toHashCode(str: string, seed = 0): number {
-	let h1 = 0xdeadbeef ^ seed,
-		h2 = 0x41c6ce57 ^ seed;
-	for (let i = 0, ch; i < str.length; i++) {
+	let h1 = 0xdeadbeef ^ seed;
+	let h2 = 0x41c6ce57 ^ seed;
+	for (let i = 0, ch: number; i < str.length; i++) {
 		ch = str.charCodeAt(i);
 		h1 = Math.imul(h1 ^ ch, 2654435761);
 		h2 = Math.imul(h2 ^ ch, 1597334677);

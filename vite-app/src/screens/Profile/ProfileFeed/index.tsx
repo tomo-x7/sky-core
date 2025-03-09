@@ -1,5 +1,4 @@
 import { AppBskyFeedDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
@@ -47,7 +46,6 @@ export function ProfileFeedScreen(props: Props) {
 			}
 		: undefined;
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 
 	const uri = useMemo(() => makeRecordUri(handleOrDid, "app.bsky.feed.generator", rkey), [rkey, handleOrDid]);
@@ -142,7 +140,6 @@ export function ProfileFeedScreenInner({
 	feedInfo: FeedSourceFeedInfo;
 	feedParams: FeedParams | undefined;
 }) {
-	const { _ } = useLingui();
 	const { hasSession } = useSession();
 	const { openComposer } = useComposerControls();
 	const isScreenFocused = useIsFocused();
@@ -164,7 +161,7 @@ export function ProfileFeedScreenInner({
 		});
 		truncateAndInvalidate(queryClient, FEED_RQKEY(feed));
 		setHasNew(false);
-	}, [scrollElRef, queryClient, feed, setHasNew]);
+	}, [scrollElRef, queryClient, feed]);
 
 	React.useEffect(() => {
 		if (!isScreenFocused) {
@@ -175,7 +172,7 @@ export function ProfileFeedScreenInner({
 
 	const renderPostsEmpty = useCallback(() => {
 		return <EmptyState icon="hashtag" message={"This feed is empty."} />;
-	}, [_]);
+	}, []);
 
 	const isVideoFeed = React.useMemo(() => {
 		const isBskyVideoFeed = VIDEO_FEED_URIS.includes(feedInfo.uri);

@@ -1,5 +1,4 @@
 import type { ChatBskyActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -16,7 +15,6 @@ export function InboxPreview({
 	profiles: ChatBskyActorDefs.ProfileViewBasic[];
 	count: number;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	return (
 		<Link

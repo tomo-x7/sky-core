@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
@@ -26,8 +25,6 @@ export function BackNextButtons({
 	onRetryPress,
 	overrideNextText,
 }: BackNextButtonsProps) {
-	const { _ } = useLingui();
-
 	return (
 		<View style={[a.flex_row, a.justify_between, a.pb_lg, a.pt_3xl]}>
 			<Button

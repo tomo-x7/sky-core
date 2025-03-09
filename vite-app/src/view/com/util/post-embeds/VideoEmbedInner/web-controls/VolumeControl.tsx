@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useCallback } from "react";
 import { View } from "react-native";
@@ -27,7 +25,6 @@ export function VolumeControl({
 	onEndHover: () => void;
 	drawFocus: () => void;
 }) {
-	const { _ } = useLingui();
 	const [volume, setVolume] = useVideoVolumeState();
 
 	const onVolumeChange = useCallback(
@@ -91,8 +88,8 @@ export function VolumeControl({
 			)}
 			<ControlButton
 				active={muted || volume === 0}
-				activeLabel={_(msg({ message: "Unmute", context: "video" }))}
-				inactiveLabel={_(msg({ message: "Mute", context: "video" }))}
+				activeLabel={msg({ message: "Unmute", context: "video" })}
+				inactiveLabel={msg({ message: "Mute", context: "video" })}
 				activeIcon={MuteIcon}
 				inactiveIcon={UnmuteIcon}
 				onPress={onPressMute}

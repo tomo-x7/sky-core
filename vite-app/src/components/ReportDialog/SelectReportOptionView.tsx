@@ -1,5 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -26,7 +25,6 @@ export function SelectReportOptionView(props: {
 	goBack: () => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const allReportOptions = useReportOptions();
 	const reportOptions = allReportOptions[props.params.type];
@@ -59,7 +57,7 @@ export function SelectReportOptionView(props: {
 			title,
 			description,
 		};
-	}, [_, props.params.type]);
+	}, [props.params.type]);
 
 	return (
 		<View style={[a.gap_lg]}>

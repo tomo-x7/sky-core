@@ -1,4 +1,3 @@
-import { i18n } from "@lingui/core";
 import React from "react";
 import { View } from "react-native";
 import { useReducedMotion } from "react-native-reanimated";
@@ -55,8 +54,8 @@ export function CountWheel({
 
 	const [prevCount, setPrevCount] = React.useState(likeCount);
 	const prevIsLiked = React.useRef(isLiked);
-	const formattedCount = formatCount(i18n, likeCount);
-	const formattedPrevCount = formatCount(i18n, prevCount);
+	const formattedCount = formatCount(likeCount);
+	const formattedPrevCount = formatCount(prevCount);
 
 	React.useEffect(() => {
 		if (isLiked === prevIsLiked.current) {

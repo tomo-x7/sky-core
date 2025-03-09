@@ -3,16 +3,12 @@ import * as Notifications from "expo-notifications";
 import { getBadgeCountAsync, setBadgeCountAsync } from "expo-notifications";
 import React from "react";
 
-import { logEvent } from "#/lib/statsig/statsig";
-import { Logger } from "#/logger";
 import { devicePlatform, isAndroid, isNative } from "#/platform/detection";
 import { type SessionAccount, useAgent, useSession } from "#/state/session";
 import BackgroundNotificationHandler from "../../../modules/expo-background-notification-handler";
 
 const SERVICE_DID = (serviceUrl?: string) =>
 	serviceUrl?.includes("staging") ? "did:web:api.staging.bsky.dev" : "did:web:api.bsky.app";
-
-const logger = Logger.create(Logger.Context.Notifications);
 
 async function registerPushToken(agent: BskyAgent, account: SessionAccount, token: Notifications.DevicePushToken) {
 	try {
@@ -22,12 +18,8 @@ async function registerPushToken(agent: BskyAgent, account: SessionAccount, toke
 			token: token.data,
 			appId: "xyz.blueskyweb.app",
 		});
-		logger.debug("Notifications: Sent push token (init)", {
-			tokenType: token.type,
-			token: token.data,
-		});
 	} catch (error) {
-		logger.error("Notifications: Failed to set push token", { message: error });
+		console.error("Notifications: Failed to set push token", { message: error });
 	}
 }
 
@@ -66,6 +58,7 @@ export function useNotificationsRegistration() {
 
 		// According to the Expo docs, there is a chance that the token will change while the app is open in some rare
 		// cases. This will fire `registerPushToken` whenever that happens.
+		//@ts-ignore
 		const subscription = Notifications.addPushTokenListener(async (newToken) => {
 			registerPushToken(agent, currentAccount, newToken);
 		});
@@ -98,10 +91,6 @@ export function useRequestNotificationsPermission() {
 		}
 
 		const res = await Notifications.requestPermissionsAsync();
-		logEvent("notifications:request", {
-			context: context,
-			status: res.status,
-		});
 
 		if (res.granted) {
 			// This will fire a pushTokenEvent, which will handle registration of the token

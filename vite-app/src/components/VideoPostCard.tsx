@@ -5,7 +5,6 @@ import {
 	AppBskyFeedPost,
 	type ModerationDecision,
 } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useMemo } from "react";
 import { Image } from "react-native";
@@ -51,7 +50,6 @@ export function VideoPostCard({
 	onInteract?: () => void;
 }) {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
 	const embed = post.embed;
 	const { state: pressed, onIn: onPressIn, onOut: onPressOut } = useInteractionState();
 
@@ -209,7 +207,7 @@ export function VideoPostCard({
 										<View style={[a.flex_row, a.align_center, a.gap_xs]}>
 											<Heart size="sm" fill="white" />
 											<Text style={[a.text_sm, a.font_bold, { color: "white" }]}>
-												{formatCount(i18n, likeCount)}
+												{formatCount(likeCount)}
 											</Text>
 										</View>
 									)}
@@ -217,7 +215,7 @@ export function VideoPostCard({
 										<View style={[a.flex_row, a.align_center, a.gap_xs]}>
 											<Repost size="sm" fill="white" />
 											<Text style={[a.text_sm, a.font_bold, { color: "white" }]}>
-												{formatCount(i18n, repostCount)}
+												{formatCount(repostCount)}
 											</Text>
 										</View>
 									)}
@@ -343,7 +341,6 @@ export function CompactVideoPostCard({
 	onInteract?: () => void;
 }) {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
 	const embed = post.embed;
 	const { state: pressed, onIn: onPressIn, onOut: onPressOut } = useInteractionState();
 
@@ -479,7 +476,7 @@ export function CompactVideoPostCard({
 										<View style={[a.flex_row, a.align_center, a.gap_xs]}>
 											<Heart size="sm" fill="white" />
 											<Text style={[a.text_sm, a.font_bold, { color: "white" }]}>
-												{formatCount(i18n, likeCount)}
+												{formatCount(likeCount)}
 											</Text>
 										</View>
 									)}

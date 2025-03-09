@@ -4,10 +4,8 @@ import {
 	type ModerationOpts,
 	interpretLabelValueDefinitions,
 } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View, findNodeHandle } from "react-native";
-import { useSafeAreaFrame } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
@@ -47,9 +45,6 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 	},
 	ref,
 ) {
-	const { _ } = useLingui();
-	const { height: minHeight } = useSafeAreaFrame();
-
 	const onScrollToTop = React.useCallback(() => {
 		// @ts-ignore TODO fix this
 		scrollElRef.current?.scrollTo({
@@ -71,7 +66,8 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 	}, [isFocused, scrollElRef, setScrollViewTag]);
 
 	return (
-		<Layout.Center style={{ flex: 1, minHeight }}>
+		//@ts-ignore
+		<Layout.Center style={{ flex: 1, minHeight: "100dvh" }}>
 			{isLabelerLoading ? (
 				<View style={[a.w_full, a.align_center]}>
 					<Loader size="xl" />

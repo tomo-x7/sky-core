@@ -1,5 +1,4 @@
 import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { createAssetAsync } from "expo-media-library";
 import * as Sharing from "expo-sharing";
@@ -13,8 +12,6 @@ import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { QrCode } from "#/components/StarterPack/QrCode";
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
 import * as bsky from "#/types/bsky";
 import * as Toast from "#/view/com/util/Toast";
@@ -28,7 +25,6 @@ export function QrCodeDialog({
 	link?: string;
 	control: DialogControlProps;
 }) {
-	const { _ } = useLingui();
 	const [isProcessing, setIsProcessing] = React.useState(false);
 
 	const ref = React.useRef<ViewShot>(null);
@@ -64,7 +60,7 @@ export function QrCodeDialog({
 					await createAssetAsync(`file://${uri}`);
 				} catch (e: unknown) {
 					Toast.show("An error occurred while saving the QR code!", "xmark");
-					logger.error("Failed to save QR code", { error: e });
+					console.error("Failed to save QR code", { error: e });
 					return;
 				}
 			} else {
@@ -82,12 +78,6 @@ export function QrCodeDialog({
 				link.setAttribute("href", imgHref);
 				link.click();
 			}
-
-			logEvent("starterPack:share", {
-				starterPack: starterPack.uri,
-				shareType: "qrcode",
-				qrShareType: "save",
-			});
 			setIsProcessing(false);
 			Toast.show(isWeb ? "QR code has been downloaded!" : "QR code saved to your camera roll!");
 			control.close();
@@ -103,12 +93,6 @@ export function QrCodeDialog({
 				const item = new ClipboardItem({ "image/png": blob });
 				navigator.clipboard.write([item]);
 			});
-
-			logEvent("starterPack:share", {
-				starterPack: starterPack.uri,
-				shareType: "qrcode",
-				qrShareType: "copy",
-			});
 			Toast.show("QR code copied to your clipboard!");
 			setIsProcessing(false);
 			control.close();
@@ -117,15 +101,7 @@ export function QrCodeDialog({
 
 	const onSharePress = async () => {
 		ref.current?.capture?.().then(async (uri: string) => {
-			control.close(() => {
-				Sharing.shareAsync(uri, { mimeType: "image/png", UTI: "image/png" }).then(() => {
-					logEvent("starterPack:share", {
-						starterPack: starterPack.uri,
-						shareType: "qrcode",
-						qrShareType: "share",
-					});
-				});
-			});
+			control.close(() => Sharing.shareAsync(uri, { mimeType: "image/png", UTI: "image/png" }));
 		});
 	};
 

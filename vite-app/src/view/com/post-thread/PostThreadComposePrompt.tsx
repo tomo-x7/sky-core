@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, ios, useBreakpoints, useTheme } from "#/alf";
@@ -17,7 +16,6 @@ export function PostThreadComposePrompt({
 }) {
 	const { currentAccount } = useSession();
 	const { data: profile } = useProfileQuery({ did: currentAccount?.did });
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
 	const playHaptic = useHaptics();

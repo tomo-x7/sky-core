@@ -58,7 +58,7 @@ export default function (ctx: AppContext, app: Express) {
           }),
       )
       const images = new Map(
-        imageEntries.filter(([_, image]) => image !== null).slice(0, 7),
+        imageEntries.filter(([ image]) => image !== null).slice(0, 7),
       )
       const svg = await satori(
         <StarterPack starterPack={starterPack} images={images} />,

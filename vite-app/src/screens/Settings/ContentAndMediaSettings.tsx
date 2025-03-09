@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import * as Layout from "#/components/Layout";
@@ -11,7 +10,6 @@ import { Play_Stroke2_Corner2_Rounded as PlayIcon } from "#/components/icons/Pla
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
 import { Window_Stroke2_Corner2_Rounded as WindowIcon } from "#/components/icons/Window";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isNative } from "#/platform/detection";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { useAutoplayDisabled, useSetAutoplayDisabled } from "#/state/preferences";
@@ -20,8 +18,7 @@ import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences
 import { useTrendingConfig } from "#/state/trending-config";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ContentAndMediaSettings">;
-export function ContentAndMediaSettingsScreen({}: Props) {
-	const { _ } = useLingui();
+export function ContentAndMediaSettingsScreen(props: Props) {
 	const autoplayDisabledPref = useAutoplayDisabled();
 	const setAutoplayDisabledPref = useSetAutoplayDisabled();
 	const inAppBrowserPref = useInAppBrowser();
@@ -93,11 +90,6 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 								value={!trendingDisabled}
 								onChange={(value) => {
 									const hide = Boolean(!value);
-									if (hide) {
-										logEvent("trendingTopics:hide", { context: "settings" });
-									} else {
-										logEvent("trendingTopics:show", { context: "settings" });
-									}
 									setTrendingDisabled(hide);
 								}}
 							>
@@ -113,11 +105,6 @@ export function ContentAndMediaSettingsScreen({}: Props) {
 								value={!trendingVideoDisabled}
 								onChange={(value) => {
 									const hide = Boolean(!value);
-									if (hide) {
-										logEvent("trendingVideos:hide", { context: "settings" });
-									} else {
-										logEvent("trendingVideos:show", { context: "settings" });
-									}
 									setTrendingVideoDisabled(hide);
 								}}
 							>

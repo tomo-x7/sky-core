@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,7 +6,6 @@ import { atoms as a, native, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
-import { logEvent } from "#/lib/statsig/statsig";
 import { Login } from "#/screens/Login";
 import { Signup } from "#/screens/Signup";
 import { LandingScreen } from "#/screens/StarterPack/StarterPackLandingScreen";
@@ -25,7 +23,6 @@ enum ScreenState {
 export { ScreenState as LoggedOutScreenState };
 
 export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const insets = useSafeAreaInsets();
 	const setMinimalShellMode = useSetMinimalShellMode();

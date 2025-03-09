@@ -1,5 +1,3 @@
-import { msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { StackActions } from "@react-navigation/native";
 import React, { type ComponentProps } from "react";
@@ -33,7 +31,6 @@ import { useNavigationTabState } from "#/lib/hooks/useNavigationTabState";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { clamp } from "#/lib/numbers";
 import { TabState, getTabState } from "#/lib/routes/helpers";
-import { useGate } from "#/lib/statsig/statsig";
 import { emitSoftReset } from "#/state/events";
 import { useHomeBadge } from "#/state/home-badge";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
@@ -54,7 +51,6 @@ type TabOptions = "Home" | "Search" | "Notifications" | "MyProfile" | "Feeds" | 
 export function BottomBar({ navigation }: BottomTabBarProps) {
 	const { hasSession, currentAccount } = useSession();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const safeAreaInsets = useSafeAreaInsets();
 	const { footerHeight } = useShellLayout();
 	const { isAtHome, isAtSearch, isAtNotifications, isAtMyProfile, isAtMessages } = useNavigationTabState();
@@ -190,12 +186,10 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							accessibilityLabel={"Chat"}
 							accessibilityHint={
 								numUnreadMessages.count > 0
-									? _(
-											msg`${plural(numUnreadMessages.numUnread ?? 0, {
-												one: "# unread item",
-												other: "# unread items",
-											})}` || "",
-										)
+									? `${plural(numUnreadMessages.numUnread ?? 0, {
+											one: "# unread item",
+											other: "# unread items",
+										})}`
 									: ""
 							}
 						/>
@@ -219,12 +213,10 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							accessibilityHint={
 								numUnreadNotifications === ""
 									? ""
-									: _(
-											msg`${plural(numUnreadNotifications ?? 0, {
-												one: "# unread item",
-												other: "# unread items",
-											})}` || "",
-										)
+									: `${plural(numUnreadNotifications ?? 0, {
+											one: "# unread item",
+											other: "# unread items",
+										})}`
 							}
 						/>
 						<Btn

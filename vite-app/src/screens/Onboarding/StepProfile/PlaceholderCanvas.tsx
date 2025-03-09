@@ -18,6 +18,7 @@ export interface PlaceholderCanvasRef {
 
 // This component is supposed to be invisible to the user. We only need this for ViewShot to have something to
 // "screenshot".
+// biome-ignore lint/complexity/noBannedTypes lint/correctness/noEmptyPattern: <explanation>
 export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(function PlaceholderCanvas({}, ref) {
 	const { avatar } = useAvatar();
 	const viewshotRef = React.useRef<ViewShot>(null);

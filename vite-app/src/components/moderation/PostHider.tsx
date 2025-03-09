@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationUI } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type ComponentProps } from "react";
 import { Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
@@ -40,7 +39,6 @@ export function PostHider({
 }: Props) {
 	const queryClient = useQueryClient();
 	const t = useTheme();
-	const { _ } = useLingui();
 	const [override, setOverride] = React.useState(false);
 	const control = useModerationDetailsDialogControl();
 	const blur = modui.blurs[0] || (interpretFilterAsBlur ? getBlurrableFilter(modui) : undefined);

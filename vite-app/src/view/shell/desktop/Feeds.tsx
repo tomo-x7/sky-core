@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { View } from "react-native";
 
@@ -12,7 +11,6 @@ import { useSelectedFeed, useSetSelectedFeed } from "#/state/shell/selected-feed
 
 export function DesktopFeeds() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { data: pinnedFeedInfos, error, isLoading } = usePinnedFeedsInfos();
 	const selectedFeed = useSelectedFeed();
 	const setSelectedFeed = useSetSelectedFeed();

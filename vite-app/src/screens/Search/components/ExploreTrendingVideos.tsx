@@ -1,5 +1,4 @@
 import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -16,7 +15,6 @@ import { Pin_Stroke2_Corner0_Rounded as Pin } from "#/components/icons/Pin";
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
 import { VIDEO_FEED_URI } from "#/lib/constants";
 import { makeCustomFeedLink } from "#/lib/routes/links";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import { useSavedFeeds } from "#/state/queries/feed";
 import { RQKEY, usePostFeedQuery } from "#/state/queries/post-feed";
@@ -34,7 +32,6 @@ const FEED_PARAMS: {
 
 export function ExploreTrendingVideos() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const gutters = useGutters([0, "base"]);
 	const { data, isLoading, error } = usePostFeedQuery(FEED_DESC, FEED_PARAMS);
 
@@ -122,7 +119,7 @@ export function ExploreTrendingVideos() {
 							Array(10)
 								.fill(0)
 								.map((_, i) => (
-									<View key={i} style={[{ width: CARD_WIDTH }]}>
+									<View key={i.toString()} style={[{ width: CARD_WIDTH }]}>
 										<CompactVideoPostCardPlaceholder />
 									</View>
 								))
@@ -163,7 +160,6 @@ function VideoCards({
 	data: Exclude<ReturnType<typeof usePostFeedQuery>["data"], undefined>;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const items = React.useMemo(() => {
 		return data.pages
 			.flatMap((page) => page.slices)
@@ -188,11 +184,6 @@ function VideoCards({
 							type: "feedgen",
 							uri: VIDEO_FEED_URI,
 							sourceInterstitial: "explore",
-						}}
-						onInteract={() => {
-							logEvent("videoCard:click", {
-								context: "interstitial:explore",
-							});
 						}}
 					/>
 				</View>

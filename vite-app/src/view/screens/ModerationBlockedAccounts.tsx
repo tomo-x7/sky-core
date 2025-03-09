@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
@@ -11,7 +10,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { useMyBlockedAccountsQuery } from "#/state/queries/my-blocked-accounts";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { ProfileCard } from "#/view/com/profile/ProfileCard";
@@ -22,7 +20,6 @@ import { Text } from "#/view/com/util/text/Text";
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ModerationBlockedAccounts">;
 export function ModerationBlockedAccounts({}: Props) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { isTabletOrDesktop } = useWebMediaQueries();
 
@@ -48,7 +45,7 @@ export function ModerationBlockedAccounts({}: Props) {
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh my muted accounts", { message: err });
+			console.error("Failed to refresh my muted accounts", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);
@@ -59,7 +56,7 @@ export function ModerationBlockedAccounts({}: Props) {
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more of my muted accounts", { message: err });
+			console.error("Failed to load more of my muted accounts", { message: err });
 		}
 	}, [isFetching, hasNextPage, isError, fetchNextPage]);
 

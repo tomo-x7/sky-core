@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { View } from "react-native";
 
@@ -9,7 +8,6 @@ import { useThrottledValue } from "#/components/hooks/useThrottledValue";
 import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { TimesLarge_Stroke2_Corner0_Rounded as Times } from "#/components/icons/Times";
-import { logEvent } from "#/lib/statsig/statsig";
 import { MAX_SERVICE_HANDLE_LENGTH, createFullHandle, validateServiceHandle } from "#/lib/strings/handles";
 import { ScreenTransition } from "#/screens/Login/ScreenTransition";
 import { useSignupContext } from "#/screens/Signup/state";
@@ -17,7 +15,6 @@ import { useAgent } from "#/state/session";
 import { BackNextButtons } from "./BackNextButtons";
 
 export function StepHandle() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { state, dispatch } = useSignupContext();
 	const agent = useAgent();
@@ -56,11 +53,6 @@ export function StepHandle() {
 		} finally {
 			dispatch({ type: "setIsLoading", value: false });
 		}
-
-		logEvent("signup:nextPressed", {
-			activeStep: state.activeStep,
-			phoneVerificationRequired: state.serviceDescription?.phoneVerificationRequired,
-		});
 		// phoneVerificationRequired is actually whether a captcha is required
 		if (!state.serviceDescription?.phoneVerificationRequired) {
 			dispatch({
@@ -70,7 +62,7 @@ export function StepHandle() {
 			return;
 		}
 		dispatch({ type: "next" });
-	}, [_, dispatch, state.activeStep, state.serviceDescription?.phoneVerificationRequired, state.userDomain, agent]);
+	}, [dispatch, state.serviceDescription?.phoneVerificationRequired, state.userDomain, agent]);
 
 	const onBackPress = React.useCallback(() => {
 		const handle = handleValueRef.current.trim();
@@ -79,10 +71,7 @@ export function StepHandle() {
 			value: handle,
 		});
 		dispatch({ type: "prev" });
-		logEvent("signup:backPressed", {
-			activeStep: state.activeStep,
-		});
-	}, [dispatch, state.activeStep]);
+	}, [dispatch]);
 
 	const validCheck = validateServiceHandle(draftValue, state.userDomain);
 	return (

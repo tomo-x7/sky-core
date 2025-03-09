@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
 import {
@@ -130,7 +129,6 @@ const GalleryItem = ({
 	onChange,
 	onRemove,
 }: GalleryItemProps): React.ReactNode => {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	const altTextControl = Dialog.useDialogControl();

@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useCallback, useState } from "react";
 import { Keyboard, type StyleProp, View, type ViewStyle } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
@@ -32,13 +31,12 @@ interface Props {
 
 export function SubtitleDialogBtn(props: Props) {
 	const control = Dialog.useDialogControl();
-	const { _ } = useLingui();
 
 	return (
 		<View style={[a.flex_row, a.my_xs]}>
 			<Button
-				label={isWeb ? _("Captions & alt text") : _("Alt text")}
-				accessibilityHint={isWeb ? _("Opens captions and alt text dialog") : _("Opens alt text dialog")}
+				label={isWeb ? "Captions & alt text") : _("Alt text"}
+				accessibilityHint={isWeb ? "Opens captions and alt text dialog") : _("Opens alt text dialog"}
 				size="small"
 				color="secondary"
 				variant="ghost"
@@ -60,7 +58,6 @@ export function SubtitleDialogBtn(props: Props) {
 
 function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaptions }: Props) {
 	const control = Dialog.useDialogContext();
-	const { _ } = useLingui();
 	const t = useTheme();
 	const enforceLen = useEnforceMaxGraphemeCount();
 	const { primaryLanguage } = useLanguagePrefs();
@@ -170,7 +167,6 @@ function SubtitleFileRow({
 	setCaptions: (updater: (prev: CaptionsTrack[]) => CaptionsTrack[]) => void;
 	style: StyleProp<ViewStyle>;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 
 	const handleValueChange = useCallback(

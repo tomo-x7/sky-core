@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { Keyboard, View } from "react-native";
 
 import { atoms as a, native, useTheme, web } from "#/alf";
@@ -25,7 +24,6 @@ export function LabelsBtn({
 	onChange: (v: SelfLabel[]) => void;
 }) {
 	const control = Dialog.useDialogControl();
-	const { _ } = useLingui();
 
 	const hasLabel = labels.length > 0;
 
@@ -86,7 +84,6 @@ function DialogInner({
 	updateAdultLabels: (labels: AdultSelfLabel[]) => void;
 	updateOtherLabels: (labels: OtherSelfLabel[]) => void;
 }) {
-	const { _ } = useLingui();
 	const control = Dialog.useDialogContext();
 	const t = useTheme();
 

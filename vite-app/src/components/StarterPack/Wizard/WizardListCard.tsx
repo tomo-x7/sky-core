@@ -7,7 +7,6 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { useLingui } from "@lingui/react";
 import { Keyboard, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -47,7 +46,6 @@ function WizardListCard({
 	moderationUi: ModerationUI;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	return (
 		<Toggle.Item

@@ -1,5 +1,4 @@
 import type { ModerationUI } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { type StyleProp, TouchableWithoutFeedback, View, type ViewStyle } from "react-native";
@@ -31,7 +30,6 @@ export function ScreenHider({
 	containerStyle?: StyleProp<ViewStyle>;
 }>) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const [override, setOverride] = React.useState(false);
 	const navigation = useNavigation<NavigationProp>();
 	const { isMobile } = useWebMediaQueries();

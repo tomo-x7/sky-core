@@ -1,6 +1,4 @@
 import { BSKY_LABELER_DID, type ModerationCause, type ModerationCauseSource } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 
 import type { AppModerationCause } from "#/components/Pills";
@@ -30,7 +28,6 @@ export function useModerationCauseDescription(
 	cause: ModerationCause | AppModerationCause | undefined,
 ): ModerationCauseDescription {
 	const { currentAccount } = useSession();
-	const { _, i18n } = useLingui();
 	const { labelDefs, labelers } = useLabelDefinitions();
 	const globalLabelStrings = useGlobalLabelStrings();
 
@@ -68,9 +65,7 @@ export function useModerationCauseDescription(
 			return {
 				icon: CircleBanSign,
 				name: "Content Not Available",
-				description: _(
-					msg`This content is not available because one of the users involved has blocked the other.`,
-				),
+				description: "This content is not available because one of the users involved has blocked the other.",
 			};
 		}
 		if (cause.type === "muted") {
@@ -112,7 +107,7 @@ export function useModerationCauseDescription(
 		}
 		if (cause.type === "label") {
 			const def = cause.labelDef || getDefinition(labelDefs, cause.label);
-			const strings = getLabelStrings(i18n.locale, globalLabelStrings, def);
+			const strings = getLabelStrings(globalLabelStrings, def);
 			const labeler = labelers.find((l) => l.creator.did === cause.label.src);
 			let source = labeler ? sanitizeHandle(labeler.creator.handle, "@") : undefined;
 			let sourceDisplayName = labeler?.creator.displayName;
@@ -150,5 +145,5 @@ export function useModerationCauseDescription(
 			name: "",
 			description: "",
 		};
-	}, [labelDefs, labelers, globalLabelStrings, cause, _, i18n.locale, currentAccount?.did]);
+	}, [labelDefs, labelers, globalLabelStrings, cause, currentAccount?.did]);
 }

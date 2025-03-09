@@ -1,6 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
 
@@ -26,7 +24,6 @@ export const SplashScreen = ({
 	onPressSignin: () => void;
 	onPressCreateAccount: () => void;
 }) => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { isTabletOrMobile: isMobileWeb } = useWebMediaQueries();
 	const [showClipOverlay, setShowClipOverlay] = React.useState(false);
@@ -134,7 +131,6 @@ export const SplashScreen = ({
 
 function Footer() {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	return (
 		<View

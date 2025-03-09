@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { type RouteProp, useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useCallback } from "react";
@@ -7,6 +6,7 @@ import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { Error } from "#/components/Error";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
@@ -65,7 +65,6 @@ export function MessagesConversationScreen({ route }: Props) {
 function Inner() {
 	const t = useTheme();
 	const convoState = useConvo();
-	const { _ } = useLingui();
 
 	const moderationOpts = useModerationOpts();
 	const { data: recipientUnshadowed } = useProfileQuery({
@@ -151,7 +150,6 @@ function InnerReady({
 	hasScrolled: boolean;
 	setHasScrolled: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-	const { _ } = useLingui();
 	const convoState = useConvo();
 	const navigation = useNavigation<NavigationProp>();
 	const { params } = useRoute<RouteProp<CommonNavigatorParams, "MessagesConversation">>();

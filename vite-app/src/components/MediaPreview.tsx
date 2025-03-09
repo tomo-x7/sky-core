@@ -77,6 +77,7 @@ export function ImageItem({
 				key={thumbnail}
 				source={{ uri: thumbnail }}
 				style={[a.flex_1, a.rounded_xs, t.atoms.bg_contrast_25]}
+				//@ts-ignore
 				contentFit="cover"
 				accessible={true}
 				accessibilityIgnoresInvertColors

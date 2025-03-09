@@ -1,6 +1,5 @@
 import { AppBskyGraphDefs, AppBskyGraphStarterpack, AtUri, type ModerationOpts } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
@@ -20,7 +19,6 @@ import { useRichText } from "#/components/hooks/useRichText";
 import { isAndroidWeb } from "#/lib/browser";
 import { JOINED_THIS_WEEK } from "#/lib/constants";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { logEvent } from "#/lib/statsig/statsig";
 import { createStarterPackGooglePlayUri } from "#/lib/strings/starter-pack";
 import { isWeb } from "#/platform/detection";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";

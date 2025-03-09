@@ -6,8 +6,6 @@ import React from "react";
 import { resetToTab } from "#/Navigation";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
 import type { NavigationProp } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
-import { Logger } from "#/logger";
 import { isAndroid } from "#/platform/detection";
 import { useCurrentConvoId } from "#/state/messages/current-convo-id";
 import { RQKEY as RQKEY_NOTIFS } from "#/state/queries/notifications/feed";
@@ -49,8 +47,6 @@ const DEFAULT_HANDLER_OPTIONS = {
 // These need to stay outside the hook to persist between account switches
 let storedPayload: NotificationPayload | undefined;
 let prevDate = 0;
-
-const logger = Logger.create(Logger.Context.Notifications);
 
 export function useNotificationsHandler() {
 	const queryClient = useQueryClient();
@@ -98,11 +94,12 @@ export function useNotificationsHandler() {
 
 					const account = accounts.find((a) => a.did === payload.recipientDid);
 					if (account) {
-						onPressSwitchAccount(account, "Notification");
+						onPressSwitchAccount(account);
 					} else {
 						setShowLoggedOut(true);
 					}
 				} else {
+					//@ts-ignore
 					navigation.dispatch((state) => {
 						if (state.routes[0].name === "Messages") {
 							if (state.routes[state.routes.length - 1].name === "MessagesConversation") {
@@ -175,6 +172,7 @@ export function useNotificationsHandler() {
 		};
 
 		Notifications.setNotificationHandler({
+			//@ts-ignore
 			handleNotification: async (e) => {
 				if (
 					e.request.trigger == null ||
@@ -184,8 +182,6 @@ export function useNotificationsHandler() {
 				) {
 					return DEFAULT_HANDLER_OPTIONS;
 				}
-
-				logger.debug("Notifications: received", { e });
 
 				const payload = e.request.trigger.payload as NotificationPayload;
 				if (payload.reason === "chat-message" && payload.recipientDid === currentAccount?.did) {
@@ -201,16 +197,12 @@ export function useNotificationsHandler() {
 				return DEFAULT_HANDLER_OPTIONS;
 			},
 		});
-
+		//@ts-ignore
 		const responseReceivedListener = Notifications.addNotificationResponseReceivedListener((e) => {
 			if (e.notification.date === prevDate) {
 				return;
 			}
 			prevDate = e.notification.date;
-
-			logger.debug("Notifications: response received", {
-				actionIdentifier: e.actionIdentifier,
-			});
 
 			if (
 				e.actionIdentifier === Notifications.DEFAULT_ACTION_IDENTIFIER &&
@@ -219,18 +211,12 @@ export function useNotificationsHandler() {
 				"type" in e.notification.request.trigger &&
 				e.notification.request.trigger.type === "push"
 			) {
-				logger.debug("User pressed a notification, opening notifications tab", {});
-				logEvent("notifications:openApp", {});
 				invalidateCachedUnreadPage();
 				const payload = e.notification.request.trigger.payload as NotificationPayload;
 				truncateAndInvalidate(queryClient, RQKEY_NOTIFS("all"));
 				if (payload.reason === "mention" || payload.reason === "quote" || payload.reason === "reply") {
 					truncateAndInvalidate(queryClient, RQKEY_NOTIFS("mentions"));
 				}
-				logger.debug("Notifications: handleNotification", {
-					content: e.notification.request.content,
-					payload: e.notification.request.trigger.payload,
-				});
 				handleNotification(payload);
 				Notifications.dismissAllNotificationsAsync();
 			}

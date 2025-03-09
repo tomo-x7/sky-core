@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import deepEqual from "lodash.isequal";
 import React from "react";
 import { View } from "react-native";
@@ -8,7 +7,6 @@ import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
 import { PostInteractionSettingsForm } from "#/components/dialogs/PostInteractionSettingsDialog";
-import { logger } from "#/logger";
 import { usePostInteractionSettingsMutation } from "#/state/queries/post-interaction-settings";
 import { createPostgateRecord } from "#/state/queries/postgate/util";
 import { type UsePreferencesQueryResponse, usePreferencesQuery } from "#/state/queries/preferences";
@@ -50,7 +48,6 @@ export function Screen() {
 }
 
 function Inner({ preferences }: { preferences: UsePreferencesQueryResponse }) {
-	const { _ } = useLingui();
 	const { mutateAsync: setPostInteractionSettings, isPending } = usePostInteractionSettingsMutation();
 	const [error, setError] = React.useState<string | undefined>(undefined);
 
@@ -89,13 +86,13 @@ function Inner({ preferences }: { preferences: UsePreferencesQueryResponse }) {
 			});
 			Toast.show("Settings saved");
 		} catch (e: any) {
-			logger.error("Failed to save post interaction settings", {
+			console.error("Failed to save post interaction settings", {
 				source: "ModerationInteractionSettingsScreen",
 				safeMessage: e.message,
 			});
 			setError("Failed to save settings. Please try again.");
 		}
-	}, [_, maybeEditedPostgate, maybeEditedAllowUI, setPostInteractionSettings]);
+	}, [maybeEditedPostgate, maybeEditedAllowUI, setPostInteractionSettings]);
 
 	return (
 		<>

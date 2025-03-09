@@ -2,7 +2,6 @@ import { moderateProfile } from "@atproto/api";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
-import { logger } from "#/logger";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useProfilesQuery } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
@@ -83,7 +82,7 @@ export function AvatarStackWithFetch({
 
 	if (error) {
 		if (error.name !== "AbortError") {
-			logger.error("Error fetching profiles for AvatarStack", {
+			console.error("Error fetching profiles for AvatarStack", {
 				safeMessage: error,
 			});
 		}

@@ -1,11 +1,9 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type ModerationDecision, moderatePost } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useCallback, useState } from "react";
 
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { usePostQuotesQuery } from "#/state/queries/post-quotes";
 import { useResolveUriQuery } from "#/state/queries/resolve-uri";
@@ -35,7 +33,6 @@ function keyExtractor(item: {
 }
 
 export function PostQuotes({ uri }: { uri: string }) {
-	const { _ } = useLingui();
 	const initialNumToRender = useInitialNumToRender();
 	const [isPTRing, setIsPTRing] = useState(false);
 
@@ -72,7 +69,7 @@ export function PostQuotes({ uri }: { uri: string }) {
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh quotes", { message: err });
+			console.error("Failed to refresh quotes", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);
@@ -82,7 +79,7 @@ export function PostQuotes({ uri }: { uri: string }) {
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more quotes", { message: err });
+			console.error("Failed to load more quotes", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 

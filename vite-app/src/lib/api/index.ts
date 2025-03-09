@@ -16,7 +16,6 @@ import {
 } from "@atproto/api";
 import { TID } from "@atproto/common-web";
 import * as dcbor from "@ipld/dag-cbor";
-import { t } from "@lingui/macro";
 import type { QueryClient } from "@tanstack/react-query";
 import { sha256 } from "js-sha256";
 import { CID } from "multiformats/cid";
@@ -24,7 +23,6 @@ import * as Hasher from "multiformats/hashes/hasher";
 
 import { isNetworkError } from "#/lib/strings/errors";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
-import { logger } from "#/logger";
 import { compressImage } from "#/state/gallery";
 import { fetchResolveGifQuery, fetchResolveLinkQuery } from "#/state/queries/resolve-link";
 import { createThreadgateRecord, threadgateAllowUISettingToAllowRecordValue } from "#/state/queries/threadgate";
@@ -43,7 +41,7 @@ interface PostOpts {
 
 export async function post(agent: BskyAgent, queryClient: QueryClient, opts: PostOpts) {
 	const thread = opts.thread;
-	opts.onStateChange?.(t`Processing...`);
+	opts.onStateChange?.("Processing...");
 
 	let replyPromise: Promise<AppBskyFeedPost.Record["reply"]> | AppBskyFeedPost.Record["reply"] | undefined;
 	if (opts.replyTo) {
@@ -152,12 +150,12 @@ export async function post(agent: BskyAgent, queryClient: QueryClient, opts: Pos
 			writes: writes,
 			validate: true,
 		});
-	} catch (e: any) {
-		logger.error("Failed to create post", {
-			safeMessage: e.message,
+	} catch (e) {
+		console.error("Failed to create post", {
+			safeMessage: (e as { message: string }).message,
 		});
 		if (isNetworkError(e)) {
-			throw new Error(t`Post failed to upload. Please check your Internet connection and try again.`);
+			throw new Error("Post failed to upload. Please check your Internet connection and try again.");
 		} else {
 			throw e;
 		}
@@ -257,15 +255,10 @@ async function resolveMedia(
 > {
 	if (embedDraft.media?.type === "images") {
 		const imagesDraft = embedDraft.media.images;
-		logger.debug("Uploading images", {
-			count: imagesDraft.length,
-		});
-		onStateChange?.(t`Uploading images...`);
+		onStateChange?.("Uploading images...");
 		const images: AppBskyEmbedImages.Image[] = await Promise.all(
 			imagesDraft.map(async (image, i) => {
-				logger.debug(`Compressing image #${i}`);
 				const { path, width, height, mime } = await compressImage(image);
-				logger.debug(`Uploading image #${i}`);
 				const res = await uploadBlob(agent, path, mime);
 				return {
 					image: res.data.blob,
@@ -307,7 +300,7 @@ async function resolveMedia(
 		const resolvedGif = await fetchResolveGifQuery(queryClient, agent, gifDraft.gif);
 		let blob: BlobRef | undefined;
 		if (resolvedGif.thumb) {
-			onStateChange?.(t`Uploading link thumbnail...`);
+			onStateChange?.("Uploading link thumbnail...");
 			const { path, mime } = resolvedGif.thumb.source;
 			const response = await uploadBlob(agent, path, mime);
 			blob = response.data.blob;
@@ -327,7 +320,7 @@ async function resolveMedia(
 		if (resolvedLink.type === "external") {
 			let blob: BlobRef | undefined;
 			if (resolvedLink.thumb) {
-				onStateChange?.(t`Uploading link thumbnail...`);
+				onStateChange?.("Uploading link thumbnail...");
 				const { path, mime } = resolvedLink.thumb.source;
 				const response = await uploadBlob(agent, path, mime);
 				blob = response.data.blob;
@@ -353,7 +346,7 @@ async function resolveRecord(
 ): Promise<ComAtprotoRepoStrongRef.Main> {
 	const resolvedLink = await fetchResolveLinkQuery(queryClient, agent, uri);
 	if (resolvedLink.type !== "record") {
-		throw Error(t`Expected uri to resolve to a record`);
+		throw Error("Expected uri to resolve to a record");
 	}
 	return resolvedLink.record;
 }
@@ -397,6 +390,7 @@ function prepareForHashing(v: any): any {
 	if (Array.isArray(v)) {
 		let pure = true;
 		const mapped = v.map((value) => {
+			// biome-ignore lint/suspicious/noAssignInExpressions lint/style/noParameterAssign: <explanation>
 			if (value !== (value = prepareForHashing(value))) {
 				pure = false;
 			}
@@ -417,6 +411,7 @@ function prepareForHashing(v: any): any {
 				continue;
 			}
 			// `prepareObject` returned a value that's different from what we had before
+			// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 			if (value !== (value = prepareForHashing(value))) {
 				pure = false;
 			}
@@ -428,7 +423,7 @@ function prepareForHashing(v: any): any {
 	return v;
 }
 
-function isPlainObject(v: any): boolean {
+function isPlainObject(v: unknown): boolean {
 	if (typeof v !== "object" || v === null) {
 		return false;
 	}

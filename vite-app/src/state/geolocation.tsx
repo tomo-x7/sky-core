@@ -2,7 +2,6 @@ import EventEmitter from "eventemitter3";
 import React from "react";
 
 import { networkRetry } from "#/lib/async/retry";
-import { logger } from "#/logger";
 import { type Device, device } from "#/storage";
 
 const events = new EventEmitter();
@@ -81,7 +80,7 @@ export function beginResolveGeolocation() {
 				throw new Error("geolocation: nothing returned from initial request");
 			}
 		} catch (e: any) {
-			logger.error("geolocation: failed initial request", {
+			console.error("geolocation: failed initial request", {
 				safeMessage: e.message,
 			});
 
@@ -102,7 +101,7 @@ export function beginResolveGeolocation() {
 				})
 				.catch((e: any) => {
 					// complete fail closed
-					logger.error("geolocation: failed retries", { safeMessage: e.message });
+					console.error("geolocation: failed retries", { safeMessage: e.message });
 				});
 		} finally {
 			resolve(undefined);

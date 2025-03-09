@@ -1,12 +1,10 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React, { memo } from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { atoms as a, platform, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeftIcon } from "#/components/icons/Arrow";
 import { LabelsOnMe } from "#/components/moderation/LabelsOnMe";
 import { ProfileHeaderAlerts } from "#/components/moderation/ProfileHeaderAlerts";
@@ -40,10 +38,8 @@ let ProfileHeaderShell = ({
 }: React.PropsWithChildren<Props>): React.ReactNode => {
 	const t = useTheme();
 	const { currentAccount } = useSession();
-	const { _ } = useLingui();
 	const { openLightbox } = useLightboxControls();
 	const navigation = useNavigation<NavigationProp>();
-	const { top: topInset } = useSafeAreaInsets();
 
 	const aviRef = useHandleRef();
 
@@ -112,10 +108,7 @@ let ProfileHeaderShell = ({
 									style={[
 										styles.backBtnWrapper,
 										{
-											top: platform({
-												web: 10,
-												default: topInset,
-											}),
+											top: 10,
 										},
 									]}
 								>

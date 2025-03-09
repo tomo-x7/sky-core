@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -15,7 +13,6 @@ import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { type SessionAccount, useAgent, useSession, useSessionApi } from "#/state/session";
 import { useSetMinimalShellMode } from "#/state/shell";
@@ -25,7 +22,6 @@ import { Logo } from "#/view/icons/Logo";
 const COL_WIDTH = 400;
 
 export function Deactivated() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const insets = useSafeAreaInsets();
 	const { currentAccount, accounts } = useSession();
@@ -80,9 +76,7 @@ export function Deactivated() {
 			switch (e.message) {
 				case "Bad token scope":
 					setError(
-						_(
-							msg`You're signed in with an App Password. Please sign in with your main password to continue deactivating your account.`,
-						),
+						`You're signed in with an App Password. Please sign in with your main password to continue deactivating your account.`,
 					);
 					break;
 				default:
@@ -90,13 +84,13 @@ export function Deactivated() {
 					break;
 			}
 
-			logger.error(e, {
+			console.error(e, {
 				message: "Failed to activate account",
 			});
 		} finally {
 			setPending(false);
 		}
-	}, [_, agent, setPending, setError, queryClient]);
+	}, [agent, setPending, setError, queryClient]);
 
 	return (
 		<View style={[a.util_screen_outer, a.flex_1]}>

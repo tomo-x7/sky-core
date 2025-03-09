@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { View } from "react-native";
 
@@ -37,8 +36,6 @@ export function Text({ children }: { children: React.ReactNode }) {
 }
 
 export function RetryButton({ onPress }: { onPress: () => void }) {
-	const { _ } = useLingui();
-
 	return (
 		<Button onPress={onPress} size="small" color="secondary_inverted" variant="solid" label={"Retry"}>
 			<ButtonText>Retry</ButtonText>

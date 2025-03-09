@@ -1,5 +1,4 @@
 import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
 import { View } from "react-native";
@@ -33,8 +32,7 @@ import { AddAppPasswordDialog } from "./components/AddAppPasswordDialog";
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "AppPasswords">;
-export function AppPasswordsScreen({}: Props) {
-	const { _ } = useLingui();
+export function AppPasswordsScreen(props: Props) {
 	const { data: appPasswords, error } = useAppPasswordsQuery();
 	const createAppPasswordControl = useDialogControl();
 
@@ -121,14 +119,13 @@ function AppPasswordCard({
 	appPassword: ComAtprotoServerListAppPasswords.AppPassword;
 }) {
 	const t = useTheme();
-	const { i18n, _ } = useLingui();
 	const deleteControl = Prompt.usePromptControl();
 	const { mutateAsync: deleteMutation } = useAppPasswordDeleteMutation();
 
 	const onDelete = useCallback(async () => {
 		await deleteMutation({ name: appPassword.name });
 		Toast.show("App password deleted");
-	}, [deleteMutation, appPassword.name, _]);
+	}, [deleteMutation, appPassword.name]);
 
 	return (
 		<View
@@ -148,7 +145,7 @@ function AppPasswordCard({
 					<Text style={[t.atoms.text_contrast_medium]}>
 						<>
 							Created{" "}
-							{i18n.date(appPassword.createdAt, {
+							{new Date(appPassword.createdAt).toLocaleDateString(undefined, {
 								year: "numeric",
 								month: "numeric",
 								day: "numeric",

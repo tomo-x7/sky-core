@@ -1,5 +1,4 @@
 import { type ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import { StatusBar } from "expo-status-bar";
 import Graphemer from "graphemer";
@@ -25,7 +24,6 @@ import { Logo } from "#/view/icons/Logo";
 const COL_WIDTH = 400;
 
 export function Takendown() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const insets = useSafeAreaInsets();
 	const { gtMobile } = useBreakpoints();

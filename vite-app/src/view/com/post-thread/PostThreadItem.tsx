@@ -6,8 +6,6 @@ import {
 	type ModerationDecision,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { Plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { memo, useMemo } from "react";
 import { type GestureResponderEvent, Text as RNText, StyleSheet, View } from "react-native";
 

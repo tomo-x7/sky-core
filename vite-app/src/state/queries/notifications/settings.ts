@@ -1,15 +1,12 @@
-import { useLingui } from "@lingui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { until } from "#/lib/async/until";
-import { logger } from "#/logger";
 import { RQKEY as RQKEY_NOTIFS } from "#/state/queries/notifications/feed";
 import { invalidateCachedUnreadPage } from "#/state/queries/notifications/unread";
 import { useAgent } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
 
 export function useNotificationSettingsMutation() {
-	const { _ } = useLingui();
 	const agent = useAgent();
 	const queryClient = useQueryClient();
 
@@ -31,7 +28,7 @@ export function useNotificationSettingsMutation() {
 			eagerlySetCachedPriority(queryClient, enabled);
 		},
 		onError: (err) => {
-			logger.error("Failed to save notification preferences", {
+			console.error("Failed to save notification preferences", {
 				safeMessage: err,
 			});
 			Toast.show("Failed to save notification preferences, please try again", "xmark");

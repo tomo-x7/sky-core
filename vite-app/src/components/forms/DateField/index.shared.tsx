@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { Pressable, View } from "react-native";
 
 import { atoms as a, native, useTheme, web } from "#/alf";

@@ -1,5 +1,4 @@
 import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, RichText as RichTextAPI, moderatePost } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { type RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { LayoutAnimation, View } from "react-native";
@@ -85,7 +84,6 @@ export function MessageInputEmbed({
 	setEmbed: (embedUrl: string | undefined) => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	const { data: post, status } = usePostQuery(embedUri);
 
@@ -129,7 +127,7 @@ export function MessageInputEmbed({
 				</View>
 			);
 			break;
-		case "success":
+		case "success": {
 			const itemUrip = new AtUri(post.uri);
 			const itemHref = makeProfileLink(post.author, "post", itemUrip.rkey);
 
@@ -147,7 +145,7 @@ export function MessageInputEmbed({
 						author={post.author}
 						moderation={moderation}
 						timestamp={post.indexedAt}
-						postHref={itemHref}
+						postHref={itemHref} //@ts-ignore
 						style={a.flex_0}
 					/>
 					<ContentHider modui={moderation.ui("contentView")}>
@@ -169,6 +167,7 @@ export function MessageInputEmbed({
 				</View>
 			);
 			break;
+		}
 	}
 
 	return (

@@ -1,6 +1,5 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { BskyAgent } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import React, { useState } from "react";
 import { ActivityIndicator, Keyboard, View } from "react-native";
@@ -14,7 +13,6 @@ import * as TextField from "#/components/forms/TextField";
 import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
 import { isNetworkError } from "#/lib/strings/errors";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { FormContainer } from "./FormContainer";
 
 type ServiceDescription = ComAtprotoServerDescribeServer.OutputSchema;
@@ -39,7 +37,6 @@ export const ForgotPasswordForm = ({
 	const t = useTheme();
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
 	const [email, setEmail] = useState<string>("");
-	const { _ } = useLingui();
 
 	const onPressSelectService = React.useCallback(() => {
 		Keyboard.dismiss();
@@ -59,7 +56,6 @@ export const ForgotPasswordForm = ({
 			onEmailSent();
 		} catch (e: any) {
 			const errMsg = e.toString();
-			logger.warn("Failed to request password reset", { error: e });
 			setIsProcessing(false);
 			if (isNetworkError(e)) {
 				setError("Unable to contact your service. Please check your Internet connection.");

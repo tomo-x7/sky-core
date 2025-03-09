@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { View } from "react-native";
 
@@ -27,7 +26,6 @@ export function AccountList({
 }) {
 	const { currentAccount, accounts } = useSession();
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { data: profiles } = useProfilesQuery({
 		handles: accounts.map((acc) => acc.did),
 	});
@@ -94,7 +92,6 @@ function AccountItem({
 	isPendingAccount: boolean;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	const onPress = useCallback(() => {
 		onSelect(account);

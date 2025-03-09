@@ -1,4 +1,3 @@
-import { Plural } from "@lingui/macro";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -37,7 +36,7 @@ export const ProfileFollowsScreen = ({ route }: Props) => {
 								{sanitizeDisplayName(profile.displayName || profile.handle)}
 							</Layout.Header.TitleText>
 							<Layout.Header.SubtitleText>
-								<Plural value={profile.followsCount ?? 0} one="# following" other="# following" />
+								{profile.followsCount ?? 0} {profile.followsCount === 1 ? "following" : "following"}
 							</Layout.Header.SubtitleText>
 						</>
 					)}

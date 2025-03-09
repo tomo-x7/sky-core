@@ -1,6 +1,4 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { ActivityIndicator, StyleSheet, View, useWindowDimensions } from "react-native";
 
@@ -43,7 +41,6 @@ export function Component({
 	const { closeModal } = useModalControls();
 	const pal = usePalette("default");
 	const { height: screenHeight } = useWindowDimensions();
-	const { _ } = useLingui();
 	const { data: memberships } = useDangerousListMembershipsQuery();
 
 	const onPressDone = useCallback(() => {
@@ -105,10 +102,10 @@ export function Component({
 					type="default"
 					onPress={onPressDone}
 					style={styles.footerBtn}
-					accessibilityLabel={_(msg({ message: "Done", context: "action" }))}
+					accessibilityLabel={msg({ message: "Done", context: "action" })}
 					accessibilityHint=""
 					onAccessibilityEscape={onPressDone}
-					label={_(msg({ message: "Done", context: "action" }))}
+					label={msg({ message: "Done", context: "action" })}
 				/>
 			</View>
 		</View>
@@ -133,7 +130,6 @@ function ListItem({
 	onRemove?: (listUri: string) => void;
 }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const [isProcessing, setIsProcessing] = React.useState(false);
 	const membership = React.useMemo(

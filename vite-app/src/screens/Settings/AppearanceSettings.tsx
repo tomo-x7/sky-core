@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useCallback } from "react";
 import Animated, { FadeInUp, FadeOutUp, LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
@@ -12,19 +11,13 @@ import { Phone_Stroke2_Corner0_Rounded as PhoneIcon } from "#/components/icons/P
 import { TextSize_Stroke2_Corner0_Rounded as TextSize } from "#/components/icons/TextSize";
 import { TitleCase_Stroke2_Corner0_Rounded as Aa } from "#/components/icons/TitleCase";
 import type { Props as SVGIconProps } from "#/components/icons/common";
-import { IS_INTERNAL } from "#/lib/app-info";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { useGate } from "#/lib/statsig/statsig";
-import { isNative } from "#/platform/detection";
-import { SettingsListItem as AppIconSettingsListItem } from "#/screens/Settings/AppIconSettings/SettingsListItem";
 import { useSetThemePrefs, useThemePrefs } from "#/state/shell";
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "AppearanceSettings">;
-export function AppearanceSettingsScreen({}: Props) {
-	const { _ } = useLingui();
+export function AppearanceSettingsScreen(props: Props) {
 	const { fonts } = useAlf();
-	const gate = useGate();
 
 	const { colorMode, darkTheme } = useThemePrefs();
 	const { setColorMode, setDarkTheme } = useSetThemePrefs();
@@ -158,13 +151,6 @@ export function AppearanceSettingsScreen({}: Props) {
 								values={[fonts.scale]}
 								onChange={onChangeFontScale}
 							/>
-
-							{isNative && IS_INTERNAL && gate("debug_subscriptions") && (
-								<>
-									<SettingsList.Divider />
-									<AppIconSettingsListItem />
-								</>
-							)}
 						</Animated.View>
 					</SettingsList.Container>
 				</Layout.Content>

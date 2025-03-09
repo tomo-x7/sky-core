@@ -1,6 +1,5 @@
 import { BskyAgent } from "@atproto/api";
 
-import { logger } from "#/logger";
 import { device } from "#/storage";
 
 export const BR_LABELER = "did:plc:ekitcvx7uwnauoqy5oest3hm";

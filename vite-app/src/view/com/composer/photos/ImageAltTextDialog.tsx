@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
 import { type ImageStyle, View, useWindowDimensions } from "react-native";

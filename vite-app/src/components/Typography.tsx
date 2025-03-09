@@ -2,7 +2,6 @@ import { UITextView } from "react-native-uitextview";
 
 import { atoms, flatten, useAlf, useTheme, web } from "#/alf";
 import { type TextProps, childHasEmoji, normalizeTextStyles, renderChildrenWithEmoji } from "#/alf/typography";
-import { logger } from "#/logger";
 export type { TextProps };
 
 /**

@@ -1,6 +1,4 @@
 import { type ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
@@ -39,7 +37,6 @@ export function RejectMenu({
 	showDeleteConvo?: boolean;
 	currentScreen: "list" | "conversation";
 }) {
-	const { _ } = useLingui();
 	const shadowedProfile = useProfileShadow(profile);
 	const navigation = useNavigation<NavigationProp>();
 	const { mutate: leaveConvo } = useLeaveConvo(convo.id, {
@@ -49,22 +46,22 @@ export function RejectMenu({
 			}
 		},
 		onError: () => {
-			Toast.show(_("Failed to delete chat"), "xmark");
+			Toast.show("Failed to delete chat", "xmark");
 		},
 	});
 	const [queueBlock] = useProfileBlockMutationQueue(shadowedProfile);
 
 	const onPressDelete = useCallback(() => {
-		Toast.show(_("Chat deleted"), "check");
+		Toast.show("Chat deleted", "check");
 		leaveConvo();
-	}, [leaveConvo, _]);
+	}, [leaveConvo]);
 
 	const onPressBlock = useCallback(() => {
-		Toast.show(_("Account blocked"), "check");
+		Toast.show("Account blocked", "check");
 		// block and also delete convo
 		queueBlock();
 		leaveConvo();
-	}, [queueBlock, leaveConvo, _]);
+	}, [queueBlock, leaveConvo]);
 
 	const reportControl = useDialogControl();
 
@@ -84,13 +81,7 @@ export function RejectMenu({
 							variant={variant}
 							size={size}
 						>
-							<ButtonText>
-								{label || (
-									<Trans comment="Reject a chat request, this opens a menu with options">
-										Reject
-									</Trans>
-								)}
-							</ButtonText>
+							<ButtonText>{label || "Reject"}</ButtonText>
 						</Button>
 					)}
 				</Menu.Trigger>
@@ -148,7 +139,6 @@ export function AcceptChatButton({
 	onAcceptConvo?: () => void;
 	currentScreen: "list" | "conversation";
 }) {
-	const { _ } = useLingui();
 	const queryClient = useQueryClient();
 	const navigation = useNavigation<NavigationProp>();
 
@@ -168,7 +158,7 @@ export function AcceptChatButton({
 			// no difference if the request failed - when they send a message, the convo will be accepted
 			// automatically. The only difference is that when they back out of the convo (without sending a message), the conversation will be rejected.
 			// the list will still have this chat in it -sfn
-			Toast.show(_("Failed to accept chat"), "xmark");
+			Toast.show("Failed to accept chat", "xmark");
 		},
 	});
 
@@ -186,11 +176,7 @@ export function AcceptChatButton({
 			style={a.flex_1}
 			onPress={onPressAccept}
 		>
-			{isPending ? (
-				<ButtonIcon icon={Loader} />
-			) : (
-				<ButtonText>{label || <Trans comment="Accept a chat request">Accept</Trans>}</ButtonText>
-			)}
+			{isPending ? <ButtonIcon icon={Loader} /> : <ButtonText>{label || "Accept"}</ButtonText>}
 		</Button>
 	);
 }
@@ -208,7 +194,6 @@ export function DeleteChatButton({
 	convo: ChatBskyConvoDefs.ConvoView;
 	currentScreen: "list" | "conversation";
 }) {
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 
 	const { mutate: leaveConvo } = useLeaveConvo(convo.id, {
@@ -218,14 +203,14 @@ export function DeleteChatButton({
 			}
 		},
 		onError: () => {
-			Toast.show(_("Failed to delete chat"), "xmark");
+			Toast.show("Failed to delete chat", "xmark");
 		},
 	});
 
 	const onPressDelete = useCallback(() => {
-		Toast.show(_("Chat deleted"), "check");
+		Toast.show("Chat deleted", "check");
 		leaveConvo();
-	}, [leaveConvo, _]);
+	}, [leaveConvo]);
 
 	return (
 		<Button

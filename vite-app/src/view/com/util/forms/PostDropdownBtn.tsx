@@ -1,5 +1,4 @@
 import type { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, RichText as RichTextAPI } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { memo, useMemo, useState } from "react";
 import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
@@ -38,7 +37,6 @@ let PostDropdownBtn = ({
 }): React.ReactNode => {
 	const theme = useTheme();
 	const alf = useAlf();
-	const { _ } = useLingui();
 	const defaultCtrlColor = theme.palette.default.postCtrl;
 	const menuControl = useMenuControl();
 	const [hasBeenOpen, setHasBeenOpen] = useState(false);

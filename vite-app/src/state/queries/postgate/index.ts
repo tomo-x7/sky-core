@@ -10,7 +10,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 import { networkRetry, retry } from "#/lib/async/retry";
-import { logger } from "#/logger";
 import { updatePostShadow } from "#/state/cache/post-shadow";
 import { STALE } from "#/state/queries";
 import { useGetPosts } from "#/state/queries/post";
@@ -227,7 +226,7 @@ export function useToggleQuoteDetachmentMutation() {
 					});
 				} catch (e: any) {
 					// ok if this fails, it's just optimistic UI
-					logger.error("Postgate: failed to get quote post for re-attachment", {
+					console.error("Postgate: failed to get quote post for re-attachment", {
 						safeMessage: e.message,
 					});
 				}

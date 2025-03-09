@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import {
 	Image,
@@ -48,7 +47,6 @@ function LightboxInner({
 	initialIndex: number;
 	onClose: () => void;
 }) {
-	const { _ } = useLingui();
 	const [index, setIndex] = useState<number>(initialIndex);
 	const [isAltExpanded, setAltExpanded] = useState(false);
 

@@ -9,7 +9,6 @@ import { AppState } from "react-native";
 
 import BroadcastChannel from "#/lib/broadcast";
 import { resetBadgeCount } from "#/lib/notifications/notifications";
-import { logger } from "#/logger";
 import { useAgent, useSession } from "#/state/session";
 import { useModerationOpts } from "../../preferences/moderation-opts";
 import { truncateAndInvalidate } from "../util";

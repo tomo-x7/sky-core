@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
@@ -24,7 +23,6 @@ export function HomeHeaderLayoutMobile({
 	tabBarAnchor: JSX.Element | null | undefined;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { headerHeight } = useShellLayout();
 	const headerMinimalShellTransform = useMinimalShellHeaderTransform();
 	const { hasSession } = useSession();

@@ -4,12 +4,9 @@ import { ActivityIndicator, StyleSheet } from "react-native";
 
 import * as Layout from "#/components/Layout";
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
-import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { useOTAUpdates } from "#/lib/hooks/useOTAUpdates";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
 import type { HomeTabNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import { NoFeedsPinned } from "#/screens/Home/NoFeedsPinned";
 import { emitSoftReset } from "#/state/events";
@@ -78,6 +75,7 @@ function HomeScreenReady({
 	preferences: UsePreferencesQueryResponse;
 	pinnedFeedInfos: SavedFeedSourceInfo[];
 }) {
+	//@ts-ignore
 	const allFeeds = React.useMemo(() => pinnedFeedInfos.map((f) => f.feedDescriptor), [pinnedFeedInfos]);
 	const maybeRawSelectedFeed: FeedDescriptor | undefined = useSelectedFeed() ?? allFeeds[0];
 	const setSelectedFeed = useSetSelectedFeed();
@@ -87,7 +85,6 @@ function HomeScreenReady({
 	const requestNotificationsPermission = useRequestNotificationsPermission();
 
 	useSetTitle(pinnedFeedInfos[selectedIndex]?.displayName);
-	useOTAUpdates();
 
 	React.useEffect(() => {
 		requestNotificationsPermission("Home");
@@ -113,19 +110,6 @@ function HomeScreenReady({
 		}, [setMinimalShellMode]),
 	);
 
-	useFocusEffect(
-		useNonReactiveCallback(() => {
-			if (maybeSelectedFeed) {
-				logEvent("home:feedDisplayed", {
-					index: selectedIndex,
-					feedType: maybeSelectedFeed.split("|")[0],
-					feedUrl: maybeSelectedFeed,
-					reason: "focus",
-				});
-			}
-		}),
-	);
-
 	const onPageSelected = React.useCallback(
 		(index: number) => {
 			setMinimalShellMode(false);
@@ -135,14 +119,6 @@ function HomeScreenReady({
 			// above from starting a loop on Android when swiping back and forth.
 			lastPagerReportedIndexRef.current = index;
 			setSelectedFeed(maybeFeed);
-
-			if (maybeFeed) {
-				logEvent("home:feedDisplayed", {
-					index,
-					feedType: maybeFeed.split("|")[0],
-					feedUrl: maybeFeed,
-				});
-			}
 		},
 		[setSelectedFeed, setMinimalShellMode, allFeeds],
 	);
@@ -188,7 +164,11 @@ function HomeScreenReady({
 		return {
 			mergeFeedEnabled: Boolean(preferences.feedViewPrefs.lab_mergeFeedEnabled),
 			mergeFeedSources: preferences.feedViewPrefs.lab_mergeFeedEnabled
-				? preferences.savedFeeds.filter((f) => f.type === "feed" || f.type === "list").map((f) => f.value)
+				? preferences.savedFeeds
+						//@ts-ignore
+						.filter((f) => f.type === "feed" || f.type === "list")
+						//@ts-ignore
+						.map((f) => f.value)
 				: [],
 		};
 	}, [preferences]);
@@ -204,6 +184,7 @@ function HomeScreenReady({
 			renderTabBar={renderTabBar}
 		>
 			{pinnedFeedInfos.length ? (
+				//@ts-ignore
 				pinnedFeedInfos.map((feedInfo, index) => {
 					const feed = feedInfo.feedDescriptor;
 					if (feed === "following") {

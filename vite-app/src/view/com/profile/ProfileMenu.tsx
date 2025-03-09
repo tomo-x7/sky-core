@@ -1,6 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo } from "react";
@@ -27,7 +25,6 @@ import { makeProfileLink } from "#/lib/routes/links";
 import type { NavigationProp } from "#/lib/routes/types";
 import { shareText, shareUrl } from "#/lib/sharing";
 import { toShareUrl } from "#/lib/strings/url-helpers";
-import { logger } from "#/logger";
 import type { Shadow } from "#/state/cache/types";
 import { useModalControls } from "#/state/modals";
 import { useDevModeEnabled } from "#/state/preferences/dev-mode";
@@ -46,7 +43,6 @@ let ProfileMenu = ({
 }: {
 	profile: Shadow<AppBskyActorDefs.ProfileViewDetailed>;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const { currentAccount, hasSession } = useSession();
 	const { openModal } = useModalControls();
 	const reportDialogControl = useReportDialogControl();
@@ -101,7 +97,7 @@ let ProfileMenu = ({
 				Toast.show("Account unmuted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to unmute account", { message: e });
+					console.error("Failed to unmute account", { message: e });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
@@ -111,12 +107,12 @@ let ProfileMenu = ({
 				Toast.show("Account muted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to mute account", { message: e });
+					console.error("Failed to mute account", { message: e });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		}
-	}, [profile.viewer?.muted, queueUnmute, _, queueMute]);
+	}, [profile.viewer?.muted, queueUnmute, queueMute]);
 
 	const blockAccount = React.useCallback(async () => {
 		if (profile.viewer?.blocking) {
@@ -125,7 +121,7 @@ let ProfileMenu = ({
 				Toast.show("Account unblocked");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to unblock account", { message: e });
+					console.error("Failed to unblock account", { message: e });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
@@ -135,12 +131,12 @@ let ProfileMenu = ({
 				Toast.show("Account blocked");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to block account", { message: e });
+					console.error("Failed to block account", { message: e });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		}
-	}, [profile.viewer?.blocking, _, queueUnblock, queueBlock]);
+	}, [profile.viewer?.blocking, queueUnblock, queueBlock]);
 
 	const onPressFollowAccount = React.useCallback(async () => {
 		try {
@@ -148,11 +144,11 @@ let ProfileMenu = ({
 			Toast.show("Account followed");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
-				logger.error("Failed to follow account", { message: e });
+				console.error("Failed to follow account", { message: e });
 				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
-	}, [_, queueFollow]);
+	}, [queueFollow]);
 
 	const onPressUnfollowAccount = React.useCallback(async () => {
 		try {
@@ -160,11 +156,11 @@ let ProfileMenu = ({
 			Toast.show("Account unfollowed");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
-				logger.error("Failed to unfollow account", { message: e });
+				console.error("Failed to unfollow account", { message: e });
 				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
-	}, [_, queueUnfollow]);
+	}, [queueUnfollow]);
 
 	const onPressReportAccount = React.useCallback(() => {
 		reportDialogControl.open();
@@ -185,7 +181,7 @@ let ProfileMenu = ({
 	return (
 		<EventStopper onKeyDown={false}>
 			<Menu.Root>
-				<Menu.Trigger label={_("More options")}>
+				<Menu.Trigger label={"More options"}>
 					{({ props }) => {
 						return (
 							<Button
@@ -340,12 +336,8 @@ let ProfileMenu = ({
 					profile.viewer?.blocking
 						? "The account will be able to interact with you after unblocking."
 						: profile.associated?.labeler
-							? _(
-									msg`Blocking will not prevent labels from being applied on your account, but it will stop this account from replying in your threads or interacting with you.`,
-								)
-							: _(
-									msg`Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`,
-								)
+							? `Blocking will not prevent labels from being applied on your account, but it will stop this account from replying in your threads or interacting with you.`
+							: `Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`
 				}
 				onConfirm={blockAccount}
 				confirmButtonCta={profile.viewer?.blocking ? "Unblock" : "Block"}
@@ -355,9 +347,7 @@ let ProfileMenu = ({
 			<Prompt.Basic
 				control={loggedOutWarningPromptControl}
 				title={"Note about sharing"}
-				description={_(
-					msg`This profile is only visible to logged-in users. It won't be visible to people who aren't signed in.`,
-				)}
+				description={`This profile is only visible to logged-in users. It won't be visible to people who aren't signed in.`}
 				onConfirm={onPressShare}
 				confirmButtonCta={"Share anyway"}
 			/>

@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 
 import * as Dialog from "#/components/Dialog";
-import { logEvent } from "#/lib/statsig/statsig";
 import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
 import * as Toast from "#/view/com/util/Toast";
 import { SearchablePeopleList } from "./SearchablePeopleList";

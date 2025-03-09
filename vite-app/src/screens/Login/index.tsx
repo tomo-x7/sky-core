@@ -1,12 +1,9 @@
-import { useLingui } from "@lingui/react";
 import React, { useRef } from "react";
 import { KeyboardAvoidingView } from "react-native";
 import { LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
 import { DEFAULT_SERVICE } from "#/lib/constants";
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
 import { ForgotPasswordForm } from "#/screens/Login/ForgotPasswordForm";
 import { LoginForm } from "#/screens/Login/LoginForm";
 import { PasswordUpdatedForm } from "#/screens/Login/PasswordUpdatedForm";
@@ -27,7 +24,6 @@ enum Forms {
 }
 
 export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
-	const { _ } = useLingui();
 	const failedAttemptCountRef = useRef(0);
 	const startTimeRef = useRef(Date.now());
 
@@ -60,35 +56,16 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 	React.useEffect(() => {
 		if (serviceError) {
 			setError("Unable to contact your service. Please check your Internet connection.");
-			logger.warn(`Failed to fetch service description for ${serviceUrl}`, {
-				error: String(serviceError),
-			});
-			logEvent("signin:hostingProviderFailedResolution", {});
 		} else {
 			setError("");
 		}
-	}, [serviceError, serviceUrl, _]);
+	}, [serviceError]);
 
-	const onPressForgotPassword = () => {
-		setCurrentForm(Forms.ForgotPassword);
-		logEvent("signin:forgotPasswordPressed", {});
-	};
+	const onPressForgotPassword = () => setCurrentForm(Forms.ForgotPassword);
 
-	const handlePressBack = () => {
-		onPressBack();
-		logEvent("signin:backPressed", {
-			failedAttemptsCount: failedAttemptCountRef.current,
-		});
-	};
+	const handlePressBack = () => onPressBack();
 
-	const onAttemptSuccess = () => {
-		logEvent("signin:success", {
-			isUsingCustomProvider: serviceUrl !== DEFAULT_SERVICE,
-			timeTakenSeconds: Math.round((Date.now() - startTimeRef.current) / 1000),
-			failedAttemptsCount: failedAttemptCountRef.current,
-		});
-		setCurrentForm(Forms.Login);
-	};
+	const onAttemptSuccess = () => setCurrentForm(Forms.Login);
 
 	const onAttemptFailed = () => {
 		failedAttemptCountRef.current += 1;

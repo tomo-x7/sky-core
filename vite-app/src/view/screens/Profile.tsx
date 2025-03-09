@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type ModerationOpts, RichText as RichTextAPI, moderateProfile } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
@@ -53,7 +52,6 @@ export function ProfileScreen(props: Props) {
 }
 
 function ProfileScreenInner({ route }: Props) {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const queryClient = useQueryClient();
 	const name = route.params.name === "me" ? currentAccount?.did : route.params.name;
@@ -168,7 +166,6 @@ function ProfileScreenLoaded({
 		enabled: !!profile.associated?.labeler,
 	});
 	const [currentPage, setCurrentPage] = React.useState(0);
-	const { _ } = useLingui();
 
 	const [scrollViewTag, setScrollViewTag] = React.useState<number | null>(null);
 

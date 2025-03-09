@@ -1,5 +1,3 @@
-import { plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Modal, ScrollView, View } from "react-native";
@@ -9,7 +7,6 @@ import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { P, Text } from "#/components/Typography";
-import { logger } from "#/logger";
 import { isIOS, isWeb } from "#/platform/detection";
 import { isSignupQueued, useAgent, useSessionApi } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
@@ -18,7 +15,6 @@ import { Logo } from "#/view/icons/Logo";
 const COL_WIDTH = 400;
 
 export function SignupQueued() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const insets = useSafeAreaInsets();
 	const { gtMobile } = useBreakpoints();
@@ -48,7 +44,7 @@ export function SignupQueued() {
 				}
 			}
 		} catch (e: any) {
-			logger.error("Failed to check signup queue", { err: e.toString() });
+			console.error("Failed to check signup queue", { err: e.toString() });
 		} finally {
 			setProcessing(false);
 		}

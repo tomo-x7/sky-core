@@ -1,10 +1,10 @@
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { memo } from "react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { Error } from "#/components/Error";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -71,7 +71,6 @@ function ListFooterMaybeError({
 	onRetry?: () => Promise<unknown>;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	if (!error) return null;
 
@@ -124,13 +123,13 @@ let ListMaybePlaceholder = ({
 	topBorder?: boolean;
 }): React.ReactNode => {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { gtMobile, gtTablet } = useBreakpoints();
 
 	if (isLoading) {
 		return (
 			<CenteredView
 				style={[
+					//@ts-ignore
 					a.h_full_vh,
 					a.align_center,
 					!gtMobile ? a.justify_between : a.gap_5xl,

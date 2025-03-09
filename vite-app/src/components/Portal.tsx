@@ -19,7 +19,7 @@ export function createPortalGroup() {
 		remove: () => {},
 	});
 
-	function Provider(props: React.PropsWithChildren<{}>) {
+	function Provider(props: React.PropsWithChildren) {
 		const map = React.useRef<ComponentMap>({});
 		const [outlet, setOutlet] = React.useState<ContextType["outlet"]>(null);
 
@@ -51,7 +51,7 @@ export function createPortalGroup() {
 		return ctx.outlet;
 	}
 
-	function Portal({ children }: React.PropsWithChildren<{}>) {
+	function Portal({ children }: React.PropsWithChildren) {
 		const { append, remove } = React.useContext(Context);
 		const id = React.useId();
 		React.useEffect(() => {

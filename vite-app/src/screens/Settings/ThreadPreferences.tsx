@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -13,8 +12,7 @@ import { usePreferencesQuery, useSetThreadViewPreferencesMutation } from "#/stat
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "PreferencesThreads">;
-export function ThreadPreferencesScreen({}: Props) {
-	const { _ } = useLingui();
+export function ThreadPreferencesScreen(props: Props) {
 	const t = useTheme();
 
 	const { data: preferences } = usePreferencesQuery();

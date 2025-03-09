@@ -1,5 +1,3 @@
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -31,7 +29,6 @@ export function Component({}: {}) {
 	const { currentAccount } = useSession();
 	const agent = useAgent();
 	const { removeAccount } = useSessionApi();
-	const { _ } = useLingui();
 	const { closeModal } = useModalControls();
 	const { isMobile } = useWebMediaQueries();
 	const [isEmailSent, setIsEmailSent] = React.useState<boolean>(false);

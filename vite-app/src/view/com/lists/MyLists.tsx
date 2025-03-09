@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import {
 	ActivityIndicator,
@@ -17,7 +16,6 @@ import { BulletList_Stroke2_Corner0_Rounded as ListIcon } from "#/components/ico
 import { usePalette } from "#/lib/hooks/usePalette";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { type MyListsFilter, useMyListsQuery } from "#/state/queries/my-lists";
 import { List } from "../util/List";
@@ -42,7 +40,6 @@ export function MyLists({
 }) {
 	const pal = usePalette("default");
 	const t = useTheme();
-	const { _ } = useLingui();
 	const moderationOpts = useModerationOpts();
 	const [isPTRing, setIsPTRing] = React.useState(false);
 	const { data, isFetching, isFetched, isError, error, refetch } = useMyListsQuery(filter);
@@ -84,7 +81,7 @@ export function MyLists({
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh lists", { message: err });
+			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);

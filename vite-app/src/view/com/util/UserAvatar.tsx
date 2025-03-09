@@ -1,6 +1,5 @@
 import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
 import { Image, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
@@ -23,7 +22,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useCameraPermission, usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { makeProfileLink } from "#/lib/routes/links";
 import { colors } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isAndroid, isNative, isWeb } from "#/platform/detection";
 import { precacheProfile } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
@@ -238,7 +236,6 @@ let EditableUserAvatar = ({
 }: EditableUserAvatarProps): React.ReactNode => {
 	const t = useTheme();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { requestCameraAccessIfNeeded } = useCameraPermission();
 	const { requestPhotoAccessIfNeeded } = usePhotoLibraryPermission();
 	const sheetWrapper = useSheetWrapper();
@@ -302,7 +299,7 @@ let EditableUserAvatar = ({
 		} catch (e: any) {
 			// Don't log errors for cancelling selection to sentry on ios or android
 			if (!String(e).toLowerCase().includes("cancel")) {
-				logger.error("Failed to crop banner", { error: e });
+				console.error("Failed to crop banner", { error: e });
 			}
 		}
 	}, [onSelectNewAvatar, requestPhotoAccessIfNeeded, sheetWrapper]);
@@ -350,11 +347,7 @@ let EditableUserAvatar = ({
 					<>
 						<Menu.Divider />
 						<Menu.Group>
-							<Menu.Item
-								testID="changeAvatarRemoveBtn"
-								label={_("Remove Avatar")}
-								onPress={onRemoveAvatar}
-							>
+							<Menu.Item testID="changeAvatarRemoveBtn" label={"Remove Avatar"} onPress={onRemoveAvatar}>
 								<Menu.ItemText>Remove Avatar</Menu.ItemText>
 								<Menu.ItemIcon icon={Trash} />
 							</Menu.Item>
@@ -376,7 +369,6 @@ let PreviewableUserAvatar = ({
 	onBeforePress,
 	...rest
 }: PreviewableUserAvatarProps): React.ReactNode => {
-	const { _ } = useLingui();
 	const queryClient = useQueryClient();
 
 	const onPress = React.useCallback(() => {

@@ -2,7 +2,6 @@ import type { AtpSessionEvent, BskyAgent } from "@atproto/api";
 import React from "react";
 
 import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import * as persisted from "#/state/persisted";
 import { useCloseAllActiveElements } from "#/state/util";

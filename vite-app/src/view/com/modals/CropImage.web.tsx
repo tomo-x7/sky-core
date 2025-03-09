@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
@@ -27,7 +26,6 @@ export function Component({
 	onSelect: (img?: RNImage) => void;
 }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 
 	const { closeModal } = useModalControls();
 	const { isMobile } = useWebMediaQueries();

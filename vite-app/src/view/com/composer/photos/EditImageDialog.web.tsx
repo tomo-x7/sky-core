@@ -1,5 +1,4 @@
 import "react-image-crop/dist/ReactCrop.css";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
 import { View } from "react-native";
@@ -21,8 +20,6 @@ export const EditImageDialog = (props: EditImageDialogProps) => {
 };
 
 const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
-	const { _ } = useLingui();
-
 	const source = image.source;
 
 	const initialCrop = getInitialCrop(source, image.manips);

@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { View } from "react-native";
 
@@ -35,7 +34,6 @@ function HomeHeaderLayoutDesktopAndTablet({
 	const t = useTheme();
 	const { headerHeight } = useShellLayout();
 	const { hasSession } = useSession();
-	const { _ } = useLingui();
 	const kawaii = useKawaiiMode();
 	const gutters = useGutters([0, "base"]);
 

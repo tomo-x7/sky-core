@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -11,7 +9,6 @@ import { Loader } from "#/components/Loader";
 import * as Prompt from "#/components/Prompt";
 import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { logger } from "#/logger";
 import { useAgent, useSessionApi } from "#/state/session";
 
 export function DeactivateAccountDialog({
@@ -33,7 +30,6 @@ function DeactivateAccountDialogInner({
 }) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
-	const { _ } = useLingui();
 	const agent = useAgent();
 	const { logoutCurrentAccount } = useSessionApi();
 	const [pending, setPending] = React.useState(false);
@@ -50,9 +46,7 @@ function DeactivateAccountDialogInner({
 			switch (e.message) {
 				case "Bad token scope":
 					setError(
-						_(
-							msg`You're signed in with an App Password. Please sign in with your main password to continue deactivating your account.`,
-						),
+						`You're signed in with an App Password. Please sign in with your main password to continue deactivating your account.`,
 					);
 					break;
 				default:
@@ -60,13 +54,13 @@ function DeactivateAccountDialogInner({
 					break;
 			}
 
-			logger.error(e, {
+			console.error(e, {
 				message: "Failed to deactivate account",
 			});
 		} finally {
 			setPending(false);
 		}
-	}, [agent, control, logoutCurrentAccount, _, setPending]);
+	}, [agent, control, logoutCurrentAccount]);
 
 	return (
 		<>

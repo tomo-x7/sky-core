@@ -1,6 +1,4 @@
 import { type AppBskyFeedDefs, type AppBskyGraphDefs, AtUri, RichText as RichTextApi } from "@atproto/api";
-import { Plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { type GestureResponderEvent, View } from "react-native";
@@ -16,7 +14,6 @@ import { Text } from "#/components/Typography";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { logger } from "#/logger";
 import { precacheFeedFromGeneratorView } from "#/state/queries/feed";
 import { useAddSavedFeedsMutation, usePreferencesQuery, useRemoveFeedMutation } from "#/state/queries/preferences";
 import { useSession } from "#/state/session";
@@ -175,7 +172,7 @@ export function Likes({ count }: { count: number }) {
 	return (
 		<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
 			<>
-				Liked by <Plural value={count || 0} one="# user" other="# users" />
+				Liked by {count || 0} {count === 1 ? "user" : "users"}
 			</>
 		</Text>
 	);
@@ -200,7 +197,6 @@ function SaveButtonInner({
 	view: AppBskyFeedDefs.GeneratorView | AppBskyGraphDefs.ListView;
 	pin?: boolean;
 }) {
-	const { _ } = useLingui();
 	const { data: preferences } = usePreferencesQuery();
 	const { isPending: isAddSavedFeedPending, mutateAsync: saveFeeds } = useAddSavedFeedsMutation();
 	const { isPending: isRemovePending, mutateAsync: removeFeed } = useRemoveFeedMutation();
@@ -232,12 +228,12 @@ function SaveButtonInner({
 					]);
 				}
 				Toast.show("Feeds updated!");
-			} catch (err: any) {
-				logger.error(err, { message: "FeedCard: failed to update feeds", pin });
+			} catch (err) {
+				console.error(err, { message: "FeedCard: failed to update feeds", pin });
 				Toast.show("Failed to update feeds", "xmark");
 			}
 		},
-		[_, pin, saveFeeds, removeFeed, uri, savedFeedConfig, type],
+		[pin, saveFeeds, removeFeed, uri, savedFeedConfig, type],
 	);
 
 	const onPrompRemoveFeed = React.useCallback(

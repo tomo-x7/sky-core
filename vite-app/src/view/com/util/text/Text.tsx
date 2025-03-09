@@ -6,7 +6,6 @@ import { applyFonts, useAlf } from "#/alf";
 import { type StringChild, childHasEmoji, renderChildrenWithEmoji } from "#/alf/typography";
 import { type TypographyVariant, useTheme } from "#/lib/ThemeContext";
 import { lh, s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isIOS, isWeb } from "#/platform/detection";
 
 export type CustomTextProps = Omit<TextProps, "children"> & {

@@ -1,5 +1,4 @@
 import { ComAtprotoModerationDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { View } from "react-native";
@@ -9,7 +8,6 @@ import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
-import { logger } from "#/logger";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
 
@@ -32,7 +30,6 @@ export function ChatDisabled() {
 
 function AppealDialog() {
 	const control = Dialog.useDialogControl();
-	const { _ } = useLingui();
 
 	return (
 		<>
@@ -57,7 +54,6 @@ function AppealDialog() {
 }
 
 function DialogInner() {
-	const { _ } = useLingui();
 	const control = Dialog.useDialogContext();
 	const [details, setDetails] = useState("");
 	const { gtMobile } = useBreakpoints();
@@ -77,7 +73,7 @@ function DialogInner() {
 			});
 		},
 		onError: (err) => {
-			logger.error("Failed to submit chat appeal", { message: err });
+			console.error("Failed to submit chat appeal", { message: err });
 			Toast.show("Failed to submit appeal, please try again.", "xmark");
 		},
 		onSuccess: () => {

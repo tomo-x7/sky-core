@@ -1,5 +1,4 @@
 import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
@@ -33,7 +32,6 @@ const keyExtractor = (item: PostView, index: number) => {
 
 export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavigatorParams, "Topic">) {
 	const { topic } = route.params;
-	const { _ } = useLingui();
 
 	const headerTitle = React.useMemo(() => {
 		return enforceLen(decodeURIComponent(topic), 24, true, "middle");
@@ -73,7 +71,7 @@ export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavi
 				component: <TopicScreenTab topic={topic} sort="latest" active={activeTab === 1} />,
 			},
 		];
-	}, [_, topic, activeTab]);
+	}, [topic, activeTab]);
 
 	return (
 		<Layout.Screen>
@@ -123,7 +121,6 @@ function TopicScreenTab({
 	sort: "top" | "latest";
 	active: boolean;
 }) {
-	const { _ } = useLingui();
 	const initialNumToRender = useInitialNumToRender();
 	const [isPTR, setIsPTR] = React.useState(false);
 

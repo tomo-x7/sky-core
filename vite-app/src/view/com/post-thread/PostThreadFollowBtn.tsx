@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
@@ -7,7 +6,6 @@ import { atoms as a, useBreakpoints } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import { logger } from "#/logger";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useProfileFollowMutationQueue, useProfileQuery } from "#/state/queries/profile";
 import { useRequireAuth } from "#/state/session";
@@ -29,7 +27,6 @@ function PostThreadFollowBtnLoaded({
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
 	const navigation = useNavigation();
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const profile = useProfileShadow(profileUnshadowed);
 	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile, "PostThreadItem");
@@ -76,7 +73,7 @@ function PostThreadFollowBtnLoaded({
 					await queueFollow();
 				} catch (e: any) {
 					if (e?.name !== "AbortError") {
-						logger.error("Failed to follow", { message: String(e) });
+						console.error("Failed to follow", { message: String(e) });
 						Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 					}
 				}
@@ -87,13 +84,13 @@ function PostThreadFollowBtnLoaded({
 					await queueUnfollow();
 				} catch (e: any) {
 					if (e?.name !== "AbortError") {
-						logger.error("Failed to unfollow", { message: String(e) });
+						console.error("Failed to unfollow", { message: String(e) });
 						Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 					}
 				}
 			});
 		}
-	}, [isFollowing, requireAuth, queueFollow, _, queueUnfollow]);
+	}, [isFollowing, requireAuth, queueFollow, queueUnfollow]);
 
 	if (!showFollowBtn) return null;
 

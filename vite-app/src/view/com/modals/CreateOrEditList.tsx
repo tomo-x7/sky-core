@@ -1,6 +1,4 @@
 import { type AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useMemo, useState } from "react";
 import {
@@ -50,7 +48,6 @@ export function Component({
 	const [error, setError] = useState<string>("");
 	const pal = usePalette("default");
 	const theme = useTheme();
-	const { _ } = useLingui();
 	const listCreateMutation = useListCreateMutation();
 	const listMetadataMutation = useListMetadataMutation();
 	const agent = useAgent();

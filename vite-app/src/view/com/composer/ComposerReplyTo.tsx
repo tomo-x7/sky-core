@@ -1,5 +1,4 @@
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
 import { LayoutAnimation, Pressable, StyleSheet, View } from "react-native";
@@ -14,7 +13,6 @@ import { Text } from "#/view/com/util/text/Text";
 
 export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { embed } = replyTo;
 
 	const [showFull, setShowFull] = React.useState(false);

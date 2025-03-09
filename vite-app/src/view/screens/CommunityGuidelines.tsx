@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
@@ -16,7 +15,6 @@ import { ViewHeader } from "../com/util/ViewHeader";
 type Props = NativeStackScreenProps<CommonNavigatorParams, "CommunityGuidelines">;
 export const CommunityGuidelinesScreen = (_props: Props) => {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 
 	useFocusEffect(

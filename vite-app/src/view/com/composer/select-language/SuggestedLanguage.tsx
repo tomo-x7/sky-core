@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import lande from "lande";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -20,7 +19,6 @@ export function SuggestedLanguage({ text }: { text: string }) {
 	const langPrefs = useLanguagePrefs();
 	const setLangPrefs = useLanguagePrefsApi();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 
 	useEffect(() => {
 		const textTrimmed = text.trim();

@@ -1,13 +1,10 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { Dimensions, type StyleProp, View, type ViewStyle } from "react-native";
 
 import { ListFooter } from "#/components/Lists";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { useModalControls } from "#/state/modals";
 import { useListMembersQuery } from "#/state/queries/list-members";
 import { useSession } from "#/state/session";
@@ -47,7 +44,6 @@ export function ListMembers({
 	headerOffset?: number;
 	desktopFixedHeightOffset?: number;
 }) {
-	const { _ } = useLingui();
 	const [isRefreshing, setIsRefreshing] = React.useState(false);
 	const { isMobile } = useWebMediaQueries();
 	const { openModal } = useModalControls();
@@ -88,7 +84,7 @@ export function ListMembers({
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh lists", { message: err });
+			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsRefreshing(false);
 	}, [refetch, setIsRefreshing]);
@@ -98,7 +94,7 @@ export function ListMembers({
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more lists", { message: err });
+			console.error("Failed to load more lists", { message: err });
 		}
 	}, [isFetching, hasNextPage, isError, fetchNextPage]);
 
@@ -130,12 +126,12 @@ export function ListMembers({
 				<Button
 					testID={`user-${profile.handle}-editBtn`}
 					type="default"
-					label={_(msg({ message: "Edit", context: "action" }))}
+					label={msg({ message: "Edit", context: "action" })}
 					onPress={() => onPressEditMembership(profile)}
 				/>
 			);
 		},
-		[isOwner, onPressEditMembership, _],
+		[isOwner, onPressEditMembership],
 	);
 
 	const renderItem = React.useCallback(
@@ -164,7 +160,7 @@ export function ListMembers({
 				/>
 			);
 		},
-		[renderMemberButton, renderEmptyState, error, onPressTryAgain, onPressRetryLoadMore, isMobile, _],
+		[renderMemberButton, renderEmptyState, error, onPressTryAgain, onPressRetryLoadMore, isMobile],
 	);
 
 	const renderFooter = useCallback(() => {

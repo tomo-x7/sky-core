@@ -1,5 +1,4 @@
 import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
@@ -15,8 +14,6 @@ import { ArrowRight_Stroke2_Corner0_Rounded as Arrow } from "#/components/icons/
 import { Hashtag_Stroke2_Corner0_Rounded as Hashtag } from "#/components/icons/Hashtag";
 import { PersonPlus_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
 import type { NavigationProp } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useGetPopularFeedsQuery } from "#/state/queries/feed";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
@@ -217,7 +214,6 @@ export function ProfileGrid({
 	viewContext: "profile" | "feed";
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const moderationOpts = useModerationOpts();
 	const navigation = useNavigation<NavigationProp>();
 	const { gtMobile } = useBreakpoints();
@@ -228,7 +224,8 @@ export function ProfileGrid({
 		Array(maxLength)
 			.fill(0)
 			.map((_, i) => (
-				<View key={i} style={[gtMobile && web([a.flex_0, { width: "calc(50% - 6px)" }])]}>
+				//@ts-ignore
+				<View key={i.toString()} style={[gtMobile && web([a.flex_0, { width: "calc(50% - 6px)" }])]}>
 					<SuggestedFollowPlaceholder />
 				</View>
 			))
@@ -238,13 +235,7 @@ export function ProfileGrid({
 				<ProfileCard.Link
 					key={profile.did}
 					profile={profile}
-					onPress={() => {
-						logEvent("suggestedUser:press", {
-							logContext: viewContext === "feed" ? "InterstitialDiscover" : "InterstitialProfile",
-							recId,
-							position: index,
-						});
-					}}
+					//@ts-ignore
 					style={[a.flex_1, gtMobile && web([a.flex_0, { width: "calc(50% - 6px)" }])]}
 				>
 					{({ hovered, pressed }) => (
@@ -259,17 +250,6 @@ export function ProfileGrid({
 										logContext="FeedInterstitial"
 										shape="round"
 										colorInverted
-										onFollow={() => {
-											logEvent("suggestedUser:follow", {
-												logContext:
-													viewContext === "feed"
-														? "InterstitialDiscover"
-														: "InterstitialProfile",
-												location: "Card",
-												recId,
-												position: index,
-											});
-										}}
 									/>
 								</ProfileCard.Header>
 								<ProfileCard.Description profile={profile} numberOfLines={2} />
@@ -282,7 +262,6 @@ export function ProfileGrid({
 	);
 
 	if (error || (!isLoading && profiles.length < 4)) {
-		logger.debug("Not enough profiles to show suggested follows");
 		return null;
 	}
 
@@ -350,7 +329,6 @@ export function ProfileGrid({
 export function SuggestedFeeds() {
 	const numFeedsToDisplay = 3;
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { data, isLoading, error } = useGetPopularFeedsQuery({
 		limit: numFeedsToDisplay,
 	});
@@ -374,17 +352,11 @@ export function SuggestedFeeds() {
 	const content = isLoading ? (
 		Array(numFeedsToDisplay)
 			.fill(0)
-			.map((_, i) => <SuggestedFeedsCardPlaceholder key={i} />)
+			.map((_, i) => <SuggestedFeedsCardPlaceholder key={i.toString()} />)
 	) : error || !feeds ? null : (
 		<>
 			{feeds.slice(0, numFeedsToDisplay).map((feed) => (
-				<FeedCard.Link
-					key={feed.uri}
-					view={feed}
-					onPress={() => {
-						logEvent("feed:interstitial:feedCard:press", {});
-					}}
-				>
+				<FeedCard.Link key={feed.uri} view={feed}>
 					{({ hovered, pressed }) => (
 						<CardOuter style={[a.flex_1, (hovered || pressed) && t.atoms.border_contrast_high]}>
 							<FeedCard.Outer>

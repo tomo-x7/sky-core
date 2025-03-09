@@ -53,7 +53,7 @@ export function CaptchaWebView({
 		}
 	}, [stateParam, onSuccess, onError]);
 
-	return <iframe src={url} style={styles.iframe} id="captcha-iframe" onLoad={onLoad} />;
+	return <iframe src={url} style={styles.iframe} id="captcha-iframe" onLoad={onLoad} title="captcha" />;
 }
 
 const styles = StyleSheet.create({

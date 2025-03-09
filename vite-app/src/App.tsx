@@ -13,8 +13,6 @@ import { useStarterPackEntry } from "./components/hooks/useStarterPackEntry";
 import { Provider as IntentDialogProvider } from "./components/intents/IntentDialogs";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { QueryProvider } from "./lib/react-query";
-import { Provider as StatsigProvider } from "./lib/statsig/statsig";
-import I18nProvider from "./locale/i18nProvider";
 import { Provider as A11yProvider } from "./state/a11y";
 import { Provider as MutedThreadsProvider } from "./state/cache/thread-mutes";
 import { Provider as DialogStateProvider } from "./state/dialogs";
@@ -101,37 +99,35 @@ function InnerApp() {
 							>
 								<QueryProvider currentDid={currentAccount?.did}>
 									<ComposerProvider>
-										<StatsigProvider>
-											<MessagesProvider>
-												{/* LabelDefsProvider MUST come before ModerationOptsProvider */}
-												<LabelDefsProvider>
-													<ModerationOptsProvider>
-														<LoggedOutViewProvider>
-															<SelectedFeedProvider>
-																<HiddenRepliesProvider>
-																	<HomeBadgeProvider>
-																		<UnreadNotifsProvider>
-																			<BackgroundNotificationPreferencesProvider>
-																				<MutedThreadsProvider>
-																					<ProgressGuideProvider>
-																						<TrendingConfigProvider>
-																							<IntentDialogProvider>
-																								<Shell />
-																								<NuxDialogs />
-																							</IntentDialogProvider>
-																						</TrendingConfigProvider>
-																					</ProgressGuideProvider>
-																				</MutedThreadsProvider>
-																			</BackgroundNotificationPreferencesProvider>
-																		</UnreadNotifsProvider>
-																	</HomeBadgeProvider>
-																</HiddenRepliesProvider>
-															</SelectedFeedProvider>
-														</LoggedOutViewProvider>
-													</ModerationOptsProvider>
-												</LabelDefsProvider>
-											</MessagesProvider>
-										</StatsigProvider>
+										<MessagesProvider>
+											{/* LabelDefsProvider MUST come before ModerationOptsProvider */}
+											<LabelDefsProvider>
+												<ModerationOptsProvider>
+													<LoggedOutViewProvider>
+														<SelectedFeedProvider>
+															<HiddenRepliesProvider>
+																<HomeBadgeProvider>
+																	<UnreadNotifsProvider>
+																		<BackgroundNotificationPreferencesProvider>
+																			<MutedThreadsProvider>
+																				<ProgressGuideProvider>
+																					<TrendingConfigProvider>
+																						<IntentDialogProvider>
+																							<Shell />
+																							<NuxDialogs />
+																						</IntentDialogProvider>
+																					</TrendingConfigProvider>
+																				</ProgressGuideProvider>
+																			</MutedThreadsProvider>
+																		</BackgroundNotificationPreferencesProvider>
+																	</UnreadNotifsProvider>
+																</HomeBadgeProvider>
+															</HiddenRepliesProvider>
+														</SelectedFeedProvider>
+													</LoggedOutViewProvider>
+												</ModerationOptsProvider>
+											</LabelDefsProvider>
+										</MessagesProvider>
 									</ComposerProvider>
 								</QueryProvider>
 								<ToastContainer />
@@ -164,25 +160,23 @@ function App() {
 			<A11yProvider>
 				<SessionProvider>
 					<PrefsStateProvider>
-						<I18nProvider>
-							<ShellStateProvider>
-								<InvitesStateProvider>
-									<ModalStateProvider>
-										<DialogStateProvider>
-											<LightboxStateProvider>
-												<PortalProvider>
-													<StarterPackProvider>
-														<LightStatusBarProvider>
-															<InnerApp />
-														</LightStatusBarProvider>
-													</StarterPackProvider>
-												</PortalProvider>
-											</LightboxStateProvider>
-										</DialogStateProvider>
-									</ModalStateProvider>
-								</InvitesStateProvider>
-							</ShellStateProvider>
-						</I18nProvider>
+						<ShellStateProvider>
+							<InvitesStateProvider>
+								<ModalStateProvider>
+									<DialogStateProvider>
+										<LightboxStateProvider>
+											<PortalProvider>
+												<StarterPackProvider>
+													<LightStatusBarProvider>
+														<InnerApp />
+													</LightStatusBarProvider>
+												</StarterPackProvider>
+											</PortalProvider>
+										</LightboxStateProvider>
+									</DialogStateProvider>
+								</ModalStateProvider>
+							</InvitesStateProvider>
+						</ShellStateProvider>
 					</PrefsStateProvider>
 				</SessionProvider>
 			</A11yProvider>

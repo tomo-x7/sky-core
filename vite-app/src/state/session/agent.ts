@@ -9,9 +9,7 @@ import {
 	PUBLIC_BSKY_SERVICE,
 	TIMELINE_SAVED_FEED,
 } from "#/lib/constants";
-import { tryFetchGates } from "#/lib/statsig/statsig";
 import { getAge } from "#/lib/strings/time";
-import { logger } from "#/logger";
 import { snoozeEmailConfirmationPrompt } from "#/state/shell/reminders";
 import { emitNetworkConfirmed, emitNetworkLost } from "../events";
 import { addSessionErrorLog } from "./logging";
@@ -41,7 +39,7 @@ export async function createAgentAndResume(
 		agent.sessionManager.session = prevSession;
 		if (!storedAccount.signupQueued) {
 			networkRetry(3, () => agent.resumeSession(prevSession)).catch((e: any) => {
-				logger.error("networkRetry failed to resume session", {
+				console.error("networkRetry failed to resume session", {
 					status: e?.status || "unknown",
 					// this field name is ignored by Sentry scrubbers
 					safeMessage: e?.message || "unknown",
@@ -148,7 +146,7 @@ export async function createAgentAndCreateAccount(
 				}
 			});
 		} catch (e: any) {
-			logger.error(e, {
+			console.error(e, {
 				message: "session: createAgentAndCreateAccount failed to save personal details and feeds",
 			});
 		}
@@ -160,7 +158,7 @@ export async function createAgentAndCreateAccount(
 		// snooze first prompt after signup, defer to next prompt
 		snoozeEmailConfirmationPrompt();
 	} catch (e: any) {
-		logger.error(e, { message: "session: failed snoozeEmailConfirmationPrompt" });
+		console.error(e, { message: "session: failed snoozeEmailConfirmationPrompt" });
 	}
 
 	return agent.prepare(gates, moderation, onSessionChange);

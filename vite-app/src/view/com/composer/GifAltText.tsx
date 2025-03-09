@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 
@@ -61,7 +60,6 @@ export function GifAltTextDialogLoaded({
 	thumb: string | undefined;
 }) {
 	const control = Dialog.useDialogControl();
-	const { _ } = useLingui();
 	const t = useTheme();
 	const [altTextDraft, setAltTextDraft] = useState(altText || vendorAltText);
 	return (

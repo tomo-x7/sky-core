@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -10,7 +9,6 @@ import { useAddSavedFeedsMutation } from "#/state/queries/preferences";
 
 export function NoFollowingFeed() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { mutateAsync: addSavedFeeds } = useAddSavedFeedsMutation();
 
 	const addRecommendedFeeds = React.useCallback(

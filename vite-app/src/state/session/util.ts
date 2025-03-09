@@ -1,7 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
 import { hasProp } from "#/lib/type-guards";
-import { logger } from "#/logger";
 import * as persisted from "#/state/persisted";
 import type { SessionAccount } from "./types";
 
@@ -28,7 +27,7 @@ export function isSessionExpired(account: SessionAccount) {
 			}
 		}
 	} catch (e) {
-		logger.error("session: could not decode jwt");
+		console.error("session: could not decode jwt");
 	}
 	return true;
 }

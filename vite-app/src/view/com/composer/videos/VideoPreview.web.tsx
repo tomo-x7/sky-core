@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type { ImagePickerAsset } from "expo-image-picker";
 import { View } from "react-native";
 
@@ -21,7 +20,6 @@ export function VideoPreview({
 
 	clear: () => void;
 }) {
-	const { _ } = useLingui();
 	// TODO: figure out how to pause a GIF for reduced motion
 	// it's not possible using an img tag -sfn
 	const autoplayDisabled = useAutoplayDisabled();

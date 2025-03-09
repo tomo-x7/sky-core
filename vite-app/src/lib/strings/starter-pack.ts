@@ -5,9 +5,9 @@ import type * as bsky from "#/types/bsky";
 export function createStarterPackLinkFromAndroidReferrer(referrerQueryString: string): string | null {
 	try {
 		// The referrer string is just some URL parameters, so lets add them to a fake URL
-		const url = new URL("http://throwaway.com/?" + referrerQueryString);
-		const utmContent = url.searchParams.get("utm_content");
-		const utmSource = url.searchParams.get("utm_source");
+		const searchParams = new URLSearchParams(referrerQueryString);
+		const utmContent = searchParams.get("utm_content");
+		const utmSource = searchParams.get("utm_source");
 
 		if (!utmContent) return null;
 		if (utmSource !== "bluesky") return null;
@@ -44,7 +44,7 @@ export function parseStarterPackUri(uri?: string): {
 		} else {
 			const url = new URL(uri);
 			const parts = url.pathname.split("/");
-			const [_, path, name, rkey] = parts;
+			const [path, name, rkey] = parts;
 
 			if (parts.length !== 4) return null;
 			if (path !== "starter-pack" && path !== "start") return null;

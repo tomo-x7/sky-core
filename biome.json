@@ -14,10 +14,13 @@
 	"linter": {
 		"rules": {
 			"a11y": { "useKeyWithClickEvents": "off" },
-			"style": { "noUselessElse": "off", "useImportType": "info","noNonNullAssertion":"off","noUnusedTemplateLiteral":"error" },
+			"style": {
+				"noUselessElse": "off",
+				"useImportType": "info",
+				"noNonNullAssertion": "info"
+			},
 			"correctness": { "noUnusedImports": "info" },
-			"recommended": false,
-			"complexity": { "noUselessFragments": "error" }
+			"suspicious": { "noExplicitAny": "info", "noImplicitAnyLet": "info" }
 		}
 	},
 	"overrides": [{ "include": ["tsconfig.*"], "json": { "parser": { "allowComments": true } } }]

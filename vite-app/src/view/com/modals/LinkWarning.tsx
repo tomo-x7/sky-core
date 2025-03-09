@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 
@@ -29,7 +28,6 @@ export function Component({
 	const pal = usePalette("default");
 	const { closeModal } = useModalControls();
 	const { isMobile } = useWebMediaQueries();
-	const { _ } = useLingui();
 	const potentiallyMisleading = isPossiblyAUrl(text);
 	const openLink = useOpenLink();
 

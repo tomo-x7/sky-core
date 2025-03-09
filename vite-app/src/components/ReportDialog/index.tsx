@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
 import type { ScrollView } from "react-native-gesture-handler";
@@ -29,7 +28,6 @@ export function ReportDialog(props: ReportDialogProps) {
 }
 
 function ReportDialogInner(props: ReportDialogProps) {
-	const { _ } = useLingui();
 	const {
 		isLoading: isLabelerLoading,
 		data: labelers,

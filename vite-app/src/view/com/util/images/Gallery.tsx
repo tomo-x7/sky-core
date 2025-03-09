@@ -1,5 +1,4 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { Image, type ImageStyle } from "react-native";
 import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
@@ -40,7 +39,6 @@ export function GalleryItem({
 	thumbDimsRef,
 }: Props) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const largeAltBadge = useLargeAltBadgeEnabled();
 	const image = images[index];
 	const hasAlt = !!image.alt;

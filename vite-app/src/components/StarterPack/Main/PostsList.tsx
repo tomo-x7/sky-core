@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { View } from "react-native";
 
@@ -20,7 +19,6 @@ export const PostsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 	ref,
 ) {
 	const feed: FeedDescriptor = `list|${listUri}`;
-	const { _ } = useLingui();
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
@@ -35,7 +33,7 @@ export const PostsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 
 	const renderPostsEmpty = useCallback(() => {
 		return <EmptyState icon="hashtag" message={"This feed is empty."} />;
-	}, [_]);
+	}, []);
 
 	return (
 		<View>

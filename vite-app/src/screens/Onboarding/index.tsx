@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 
 import { Portal } from "#/components/Portal";
@@ -9,7 +8,6 @@ import { StepProfile } from "#/screens/Onboarding/StepProfile";
 import { Context, initialState, reducer } from "#/screens/Onboarding/state";
 
 export function Onboarding() {
-	const { _ } = useLingui();
 	const [state, dispatch] = React.useReducer(reducer, {
 		...initialState,
 	});
@@ -39,7 +37,7 @@ export function Onboarding() {
 			food: "Food",
 			cooking: "Cooking",
 		};
-	}, [_]);
+	}, []);
 
 	return (
 		<Portal>
@@ -47,7 +45,7 @@ export function Onboarding() {
 				<Context.Provider
 					value={React.useMemo(
 						() => ({ state, dispatch, interestsDisplayNames }),
-						[state, dispatch, interestsDisplayNames],
+						[state, interestsDisplayNames],
 					)}
 				>
 					<Layout>

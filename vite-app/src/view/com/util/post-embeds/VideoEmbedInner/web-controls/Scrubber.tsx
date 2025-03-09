@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
@@ -31,7 +29,6 @@ export function Scrubber({
 	togglePlayPause: () => void;
 	drawFocus: () => void;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const [scrubberActive, setScrubberActive] = useState(false);
 	const { state: hovered, onIn: onStartHover, onOut: onEndHover } = useInteractionState();
@@ -182,9 +179,7 @@ export function Scrubber({
 				</View>
 				<div
 					ref={circleRef}
-					aria-label={_(
-						msg`Seek slider. Use the arrow keys to seek forwards and backwards, and space to play/pause`,
-					)}
+					aria-label={`Seek slider. Use the arrow keys to seek forwards and backwards, and space to play/pause`}
 					role="slider"
 					aria-valuemax={duration}
 					aria-valuemin={0}

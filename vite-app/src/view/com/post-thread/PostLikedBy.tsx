@@ -1,11 +1,9 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useCallback, useMemo, useState } from "react";
 
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { useLikedByQuery } from "#/state/queries/post-liked-by";
 import { useResolveUriQuery } from "#/state/queries/resolve-uri";
 import { ProfileCardWithFollowBtn } from "#/view/com/profile/ProfileCard";
@@ -20,7 +18,6 @@ function keyExtractor(item: GetLikes.Like) {
 }
 
 export function PostLikedBy({ uri }: { uri: string }) {
-	const { _ } = useLingui();
 	const initialNumToRender = useInitialNumToRender();
 
 	const [isPTRing, setIsPTRing] = useState(false);
@@ -50,7 +47,7 @@ export function PostLikedBy({ uri }: { uri: string }) {
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh likes", { message: err });
+			console.error("Failed to refresh likes", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);
@@ -60,7 +57,7 @@ export function PostLikedBy({ uri }: { uri: string }) {
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more likes", { message: err });
+			console.error("Failed to load more likes", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 

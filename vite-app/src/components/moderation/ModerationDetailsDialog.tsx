@@ -1,5 +1,4 @@
 import type { ModerationCause } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";
@@ -38,13 +37,12 @@ function ModerationDetailsDialogInner({
 }) {
 	const t = useTheme();
 	const xGutters = useGutters([0, "base"]);
-	const { _ } = useLingui();
 	const desc = useModerationCauseDescription(modcause);
 	const { currentAccount } = useSession();
 	const timeDiff = useGetTimeAgo({ future: true });
 
-	let name;
-	let description;
+	let name: string;
+	let description: React.ReactNode;
 	if (!modcause) {
 		name = "Content Warning";
 		description = "Moderator has chosen to set a general warning on the content.";
@@ -162,7 +160,7 @@ function ModerationDetailsDialogInner({
 												did: modcause.label.src,
 												handle: "",
 											})}
-											onPress={() => control.close()}
+											onPress={() => void control.close()}
 										>
 											{sourceName}
 										</InlineLinkText>

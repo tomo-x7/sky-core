@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useCallback, useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
@@ -12,7 +11,6 @@ import * as TextField from "#/components/forms/TextField";
 import { compressIfNeeded } from "#/lib/media/manip";
 import { cleanError } from "#/lib/strings/errors";
 import { useWarnMaxGraphemeCount } from "#/lib/strings/helpers";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { useProfileUpdateMutation } from "#/state/queries/profile";
 import * as Toast from "#/view/com/util/Toast";
@@ -34,7 +32,6 @@ export function EditProfileDialog({
 	control: Dialog.DialogControlProps;
 	onUpdate?: () => void;
 }) {
-	const { _ } = useLingui();
 	const cancelControl = Dialog.useDialogControl();
 	const [dirty, setDirty] = useState(false);
 
@@ -94,7 +91,6 @@ function DialogInner({
 	setDirty: (dirty: boolean) => void;
 	onPressCancel: () => void;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const control = Dialog.useDialogContext();
 	const {
@@ -123,43 +119,37 @@ function DialogInner({
 		setDirty(dirty);
 	}, [dirty, setDirty]);
 
-	const onSelectNewAvatar = useCallback(
-		async (img: RNImage | null) => {
-			setImageError("");
-			if (img === null) {
-				setNewUserAvatar(null);
-				setUserAvatar(null);
-				return;
-			}
-			try {
-				const finalImg = await compressIfNeeded(img, 1000000);
-				setNewUserAvatar(finalImg);
-				setUserAvatar(finalImg.path);
-			} catch (e: any) {
-				setImageError(cleanError(e));
-			}
-		},
-		[setNewUserAvatar, setUserAvatar, setImageError],
-	);
+	const onSelectNewAvatar = useCallback(async (img: RNImage | null) => {
+		setImageError("");
+		if (img === null) {
+			setNewUserAvatar(null);
+			setUserAvatar(null);
+			return;
+		}
+		try {
+			const finalImg = await compressIfNeeded(img, 1000000);
+			setNewUserAvatar(finalImg);
+			setUserAvatar(finalImg.path);
+		} catch (e: any) {
+			setImageError(cleanError(e));
+		}
+	}, []);
 
-	const onSelectNewBanner = useCallback(
-		async (img: RNImage | null) => {
-			setImageError("");
-			if (!img) {
-				setNewUserBanner(null);
-				setUserBanner(null);
-				return;
-			}
-			try {
-				const finalImg = await compressIfNeeded(img, 1000000);
-				setNewUserBanner(finalImg);
-				setUserBanner(finalImg.path);
-			} catch (e: any) {
-				setImageError(cleanError(e));
-			}
-		},
-		[setNewUserBanner, setUserBanner, setImageError],
-	);
+	const onSelectNewBanner = useCallback(async (img: RNImage | null) => {
+		setImageError("");
+		if (!img) {
+			setNewUserBanner(null);
+			setUserBanner(null);
+			return;
+		}
+		try {
+			const finalImg = await compressIfNeeded(img, 1000000);
+			setNewUserBanner(finalImg);
+			setUserBanner(finalImg.path);
+		} catch (e: any) {
+			setImageError(cleanError(e));
+		}
+	}, []);
 
 	const onPressSave = useCallback(async () => {
 		setImageError("");
@@ -177,20 +167,9 @@ function DialogInner({
 			control.close();
 			Toast.show("Profile updated");
 		} catch (e: any) {
-			logger.error("Failed to update user profile", { message: String(e) });
+			console.error("Failed to update user profile", { message: String(e) });
 		}
-	}, [
-		updateProfileMutation,
-		profile,
-		onUpdate,
-		control,
-		displayName,
-		description,
-		newUserAvatar,
-		newUserBanner,
-		setImageError,
-		_,
-	]);
+	}, [updateProfileMutation, profile, onUpdate, control, displayName, description, newUserAvatar, newUserBanner]);
 
 	const displayNameTooLong = useWarnMaxGraphemeCount({
 		text: displayName,
@@ -215,7 +194,7 @@ function DialogInner({
 				<ButtonText style={[a.text_md]}>Cancel</ButtonText>
 			</Button>
 		),
-		[onPressCancel, _],
+		[onPressCancel],
 	);
 
 	const saveButton = useCallback(
@@ -233,7 +212,7 @@ function DialogInner({
 				<ButtonText style={[a.text_md, !dirty && t.atoms.text_contrast_low]}>Save</ButtonText>
 			</Button>
 		),
-		[_, t, dirty, onPressSave, isUpdatingProfile, displayNameTooLong, descriptionTooLong],
+		[t, dirty, onPressSave, isUpdatingProfile, displayNameTooLong, descriptionTooLong],
 	);
 
 	return (

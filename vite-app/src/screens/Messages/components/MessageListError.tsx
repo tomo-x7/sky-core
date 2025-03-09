@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -10,7 +9,6 @@ import { type ConvoItem, ConvoItemError } from "#/state/messages/convo/types";
 
 export function MessageListError({ item }: { item: ConvoItem & { type: "error" } }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { description, help, cta } = React.useMemo(() => {
 		return {
 			[ConvoItemError.FirehoseFailed]: {
@@ -24,7 +22,7 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 				cta: "Retry",
 			},
 		}[item.code];
-	}, [_, item.code]);
+	}, [item.code]);
 
 	return (
 		<View style={[a.py_md, a.w_full, a.flex_row, a.justify_center]}>

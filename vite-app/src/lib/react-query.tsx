@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { QueryClient, focusManager, onlineManager } from "@tanstack/react-query";
 import { PersistQueryClientProvider, type PersistQueryClientProviderProps } from "@tanstack/react-query-persist-client";
@@ -164,7 +163,7 @@ function QueryProviderInner({
 	const [queryClient, _setQueryClient] = useState(() => createQueryClient());
 	const [persistOptions, _setPersistOptions] = useState(() => {
 		const asyncPersister = createAsyncStoragePersister({
-			storage: AsyncStorage,
+			storage: localStorage,
 			key: `queryClient-${currentDid ?? "logged-out"}`,
 		});
 		return {

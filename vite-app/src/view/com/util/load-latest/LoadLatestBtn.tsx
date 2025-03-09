@@ -11,7 +11,6 @@ import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransfor
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
-import { useGate } from "#/lib/statsig/statsig";
 import { colors } from "#/lib/styles";
 import { isWeb } from "#/platform/detection";
 import { useSession } from "#/state/session";

@@ -1,5 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
 import * as Layout from "#/components/Layout";
@@ -20,7 +19,6 @@ export function ErrorMessage({
 }) {
 	const theme = useTheme();
 	const pal = usePalette("error");
-	const { _ } = useLingui();
 	return (
 		<Layout.Center>
 			<View testID="errorMessageView" style={[styles.outer, pal.view, style]}>

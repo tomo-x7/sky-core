@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import {
@@ -15,7 +14,6 @@ import { atoms as a, ios, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
 import { RQKEY, useProfileListsQuery } from "#/state/queries/profile-lists";
 import { EmptyState } from "#/view/com/util/EmptyState";
@@ -48,7 +46,6 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 	ref,
 ) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const [isPTRing, setIsPTRing] = React.useState(false);
 	const opts = React.useMemo(() => ({ enabled }), [enabled]);
 	const { data, isFetching, isFetched, hasNextPage, fetchNextPage, isFetchingNextPage, isError, error, refetch } =
@@ -98,7 +95,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh lists", { message: err });
+			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);
@@ -108,7 +105,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more lists", { message: err });
+			console.error("Failed to load more lists", { message: err });
 		}
 	}, [isFetching, hasNextPage, isError, fetchNextPage]);
 
@@ -141,7 +138,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 				</View>
 			);
 		},
-		[error, refetch, onPressRetryLoadMore, _, t.atoms.border_contrast_low],
+		[error, refetch, onPressRetryLoadMore, t.atoms.border_contrast_low],
 	);
 
 	React.useEffect(() => {

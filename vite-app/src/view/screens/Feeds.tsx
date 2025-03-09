@@ -1,5 +1,4 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import debounce from "lodash.debounce";
 import React from "react";
@@ -120,7 +119,6 @@ export function FeedsScreen(_props: Props) {
 		isFetchingNextPage: isPopularFeedsFetchingNextPage,
 		hasNextPage: hasNextPopularFeedsPage,
 	} = useGetPopularFeedsQuery();
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const {
 		data: searchResults,
@@ -470,7 +468,7 @@ export function FeedsScreen(_props: Props) {
 			}
 			return null;
 		},
-		[_, pal.border, pal.textLight, query, onChangeQuery, onPressCancelSearch, onSubmitQuery, onChangeSearchFocus],
+		[pal.border, pal.textLight, query, onChangeQuery, onPressCancelSearch, onSubmitQuery, onChangeSearchFocus],
 	);
 
 	return (
@@ -534,7 +532,6 @@ function FeedOrFollowing({ savedFeed }: { savedFeed: SavedFeedItem }) {
 
 function FollowingFeed() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	return (
 		<View style={[a.flex_1, a.px_lg, a.py_md, a.border_b, t.atoms.border_contrast_low]}>
 			<FeedCard.Header>

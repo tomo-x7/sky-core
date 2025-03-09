@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
@@ -18,7 +17,6 @@ import { Text } from "#/view/com/util/text/Text";
 
 export function LogScreen({}: NativeStackScreenProps<CommonNavigatorParams, "Log">) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const [expanded, setExpanded] = React.useState<string[]>([]);
 	const timeAgo = useGetTimeAgo();

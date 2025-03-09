@@ -1,6 +1,4 @@
 import { type ModerationOpts, RichText as RichTextApi, moderateProfile } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { type GestureResponderEvent, View } from "react-native";
 
@@ -11,7 +9,6 @@ import { RichText } from "#/components/RichText";
 import { Text } from "#/components/Typography";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import type { LogEvents } from "#/lib/statsig/statsig";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
@@ -54,7 +51,7 @@ export function Card({
 			<Header>
 				<Avatar profile={profile} moderationOpts={moderationOpts} />
 				<NameAndHandle profile={profile} moderationOpts={moderationOpts} />
-				<FollowButton profile={profile} moderationOpts={moderationOpts} logContext={logContext} />
+				<FollowButton profile={profile} moderationOpts={moderationOpts} />
 			</Header>
 
 			<ProfileCardPills followedBy={Boolean(profile.viewer?.followedBy)} moderation={moderation} />
@@ -88,7 +85,6 @@ export function Link({
 }: {
 	profile: bsky.profile.AnyProfileView;
 } & Omit<LinkProps, "to" | "label">) {
-	const { _ } = useLingui();
 	return (
 		<InternalLink
 			label={`View ${profile.displayName || sanitizeHandle(profile.handle)}'s profile`}
@@ -232,7 +228,7 @@ export function DescriptionPlaceholder({
 				.fill(0)
 				.map((_, i) => (
 					<View
-						key={i}
+						key={i.toString()}
 						style={[
 							a.rounded_xs,
 							a.w_full,
@@ -248,7 +244,6 @@ export function DescriptionPlaceholder({
 export type FollowButtonProps = {
 	profile: bsky.profile.AnyProfileView;
 	moderationOpts: ModerationOpts;
-	logContext: LogEvents["profile:follow"]["logContext"] & LogEvents["profile:unfollow"]["logContext"];
 	colorInverted?: boolean;
 	onFollow?: () => void;
 } & Partial<ButtonProps>;
@@ -262,16 +257,14 @@ export function FollowButton(props: FollowButtonProps) {
 export function FollowButtonInner({
 	profile: profileUnshadowed,
 	moderationOpts,
-	logContext,
 	onPress: onPressProp,
 	onFollow,
 	colorInverted,
 	...rest
 }: FollowButtonProps) {
-	const { _ } = useLingui();
 	const profile = useProfileShadow(profileUnshadowed);
 	const moderation = moderateProfile(profile, moderationOpts);
-	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile, logContext);
+	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 	const isRound = Boolean(rest.shape && rest.shape === "round");
 
 	const onPressFollow = async (e: GestureResponderEvent) => {
@@ -280,17 +273,12 @@ export function FollowButtonInner({
 		try {
 			await queueFollow();
 			Toast.show(
-				_(
-					msg`Following ${sanitizeDisplayName(
-						profile.displayName || profile.handle,
-						moderation.ui("displayName"),
-					)}`,
-				),
+				`Following ${sanitizeDisplayName(profile.displayName || profile.handle, moderation.ui("displayName"))}`,
 			);
 			onPressProp?.(e);
 			onFollow?.();
-		} catch (err: any) {
-			if (err?.name !== "AbortError") {
+		} catch (err) {
+			if ((err as { name: string })?.name !== "AbortError") {
 				Toast.show("An issue occurred, please try again.", "xmark");
 			}
 		}
@@ -302,33 +290,21 @@ export function FollowButtonInner({
 		try {
 			await queueUnfollow();
 			Toast.show(
-				_(
-					msg`No longer following ${sanitizeDisplayName(
-						profile.displayName || profile.handle,
-						moderation.ui("displayName"),
-					)}`,
-				),
+				`No longer following ${sanitizeDisplayName(
+					profile.displayName || profile.handle,
+					moderation.ui("displayName"),
+				)}`,
 			);
 			onPressProp?.(e);
-		} catch (err: any) {
-			if (err?.name !== "AbortError") {
+		} catch (err) {
+			if ((err as { name: string })?.name !== "AbortError") {
 				Toast.show("An issue occurred, please try again.", "xmark");
 			}
 		}
 	};
 
-	const unfollowLabel = _(
-		msg({
-			message: "Following",
-			comment: "User is following this account, click to unfollow",
-		}),
-	);
-	const followLabel = _(
-		msg({
-			message: "Follow",
-			comment: "User is not following this account, click to follow",
-		}),
-	);
+	const unfollowLabel = "Following";
+	const followLabel = "Follow";
 
 	if (!profile.viewer) return null;
 	if (profile.viewer.blockedBy || profile.viewer.blocking || profile.viewer.blockingByList) return null;

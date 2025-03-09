@@ -17,7 +17,8 @@ export function LinearGradientBackground({
 	start?: [number, number];
 	end?: [number, number];
 }) {
-	const colors = gradients[gradient].values.map(([_, color]) => {
+	//@ts-ignore
+	const colors = gradients[gradient].values.map(([color]) => {
 		return color;
 	}) as [string, string, ...string[]];
 

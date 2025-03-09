@@ -1,8 +1,6 @@
 import type { InterpretedLabelValueDefinition, LabelPreference } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 
 export function useLabelBehaviorDescription(labelValueDef: InterpretedLabelValueDefinition, pref: LabelPreference) {
-	const { _ } = useLingui();
 	if (pref === "ignore") {
 		return "Off";
 	}
@@ -30,7 +28,6 @@ export function useLabelBehaviorDescription(labelValueDef: InterpretedLabelValue
 }
 
 export function useLabelLongBehaviorDescription(labelValueDef: InterpretedLabelValueDefinition, pref: LabelPreference) {
-	const { _ } = useLingui();
 	if (pref === "ignore") {
 		return "Disabled";
 	}

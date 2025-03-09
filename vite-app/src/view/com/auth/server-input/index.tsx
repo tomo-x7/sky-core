@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useCallback, useImperativeHandle, useRef, useState } from "react";
 import { View } from "react-native";
 import { useWindowDimensions } from "react-native";
@@ -13,7 +12,6 @@ import * as TextField from "#/components/forms/TextField";
 import * as ToggleButton from "#/components/forms/ToggleButton";
 import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe";
 import { BSKY_SERVICE } from "#/lib/constants";
-import { logEvent } from "#/lib/statsig/statsig";
 import * as persisted from "#/state/persisted";
 import { useSession } from "#/state/session";
 
@@ -71,7 +69,6 @@ function DialogInner({
 	initialCustomAddress: string;
 }) {
 	const control = Dialog.useDialogContext();
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { accounts } = useSession();
 	const { gtMobile } = useBreakpoints();

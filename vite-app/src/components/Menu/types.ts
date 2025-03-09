@@ -14,7 +14,6 @@ export type ItemContextType = {
 };
 
 export type RadixPassThroughTriggerProps = {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	ref: React.RefObject<any>;
 	id: string;
 	type: "button";

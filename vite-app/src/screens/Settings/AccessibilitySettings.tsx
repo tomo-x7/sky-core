@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { atoms as a } from "#/alf";
@@ -20,9 +19,7 @@ import {
 import { useLargeAltBadgeEnabled, useSetLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "AccessibilitySettings">;
-export function AccessibilitySettingsScreen({}: Props) {
-	const { _ } = useLingui();
-
+export function AccessibilitySettingsScreen(props: Props) {
 	const requireAltTextEnabled = useRequireAltTextEnabled();
 	const setRequireAltTextEnabled = useSetRequireAltTextEnabled();
 	const hapticsDisabled = useHapticsDisabled();

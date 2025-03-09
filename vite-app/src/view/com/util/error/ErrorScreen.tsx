@@ -1,6 +1,4 @@
 import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -27,7 +25,6 @@ export function ErrorScreen({
 }) {
 	const t = useTheme();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 
 	return (
 		<Layout.Center testID={testID}>

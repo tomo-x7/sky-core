@@ -1,5 +1,4 @@
 import type { AppBskyFeedPostgate } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { Keyboard, type StyleProp, type ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
 
@@ -26,7 +25,6 @@ export function ThreadgateBtn({
 
 	style?: StyleProp<AnimatedStyle<ViewStyle>>;
 }) {
-	const { _ } = useLingui();
 	const control = Dialog.useDialogControl();
 
 	const onPress = () => {

@@ -8,8 +8,9 @@ export function detectLinkables(text: string): DetectedLinkable[] {
 	const re =
 		/((^|\s|\()@[a-z0-9.-]*)|((^|\s|\()https?:\/\/[\S]+)|((^|\s|\()(?<domain>[a-z][a-z0-9]*(\.[a-z0-9]+)+)[\S]*)/gi;
 	const segments = [];
-	let match;
+	let match: RegExpExecArray | null;
 	let start = 0;
+	// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 	while ((match = re.exec(text))) {
 		let matchIndex = match.index;
 		let matchValue = match[0];

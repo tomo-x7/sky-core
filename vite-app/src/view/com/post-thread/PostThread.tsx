@@ -1,6 +1,4 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { memo, useRef, useState } from "react";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
 import { runOnJS } from "react-native-reanimated";
@@ -86,7 +84,6 @@ const keyExtractor = (item: RowItem) => {
 
 export function PostThread({ uri }: { uri: string | undefined }) {
 	const { hasSession, currentAccount } = useSession();
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { isMobile } = useWebMediaQueries();
 	const initialNumToRender = useInitialNumToRender();
@@ -253,7 +250,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 		}
 
 		return null;
-	}, [thread, skeleton?.highlightedPost, isThreadError, _, threadError]);
+	}, [thread, skeleton?.highlightedPost, isThreadError, threadError]);
 
 	// construct content
 	const posts = React.useMemo(() => {
@@ -539,7 +536,6 @@ let ThreadMenu = ({
 	setSortReplies: (newValue: string) => void;
 	setTreeViewEnabled: (newValue: boolean) => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	return (
 		<Menu.Root>
 			<Menu.Trigger label={"Thread options"}>

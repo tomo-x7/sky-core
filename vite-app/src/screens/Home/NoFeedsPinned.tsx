@@ -1,5 +1,4 @@
 import { TID } from "@atproto/common-web";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -20,7 +19,6 @@ export function NoFeedsPinned({
 }: {
 	preferences: UsePreferencesQueryResponse;
 }) {
-	const { _ } = useLingui();
 	const headerOffset = useHeaderOffset();
 	const { isPending, mutateAsync: overwriteSavedFeeds } = useOverwriteSavedFeedsMutation();
 
@@ -58,10 +56,12 @@ export function NoFeedsPinned({
 	}, [overwriteSavedFeeds, preferences.savedFeeds]);
 
 	return (
+		//@ts-ignore
 		<CenteredView sideBorders style={[a.h_full_vh]}>
 			<View
 				style={[
 					a.align_center,
+					//@ts-ignore
 					a.h_full_vh,
 					a.py_3xl,
 					a.px_xl,

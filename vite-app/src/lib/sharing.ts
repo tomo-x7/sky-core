@@ -1,10 +1,3 @@
-// TODO: replace global i18n instance with one returned from useLingui -sfn
-import { t } from "@lingui/macro";
-// import * as Sharing from 'expo-sharing'
-import { setStringAsync } from "expo-clipboard";
-import { Share } from "react-native";
-
-import { isAndroid, isIOS } from "#/platform/detection";
 import * as Toast from "#/view/com/util/Toast";
 
 /**
@@ -14,16 +7,11 @@ import * as Toast from "#/view/com/util/Toast";
  * clipboard.
  */
 export async function shareUrl(url: string) {
-	if (isAndroid) {
-		await Share.share({ message: url });
-	} else if (isIOS) {
-		await Share.share({ url });
-	} else {
-		// React Native Share is not supported by web. Web Share API
-		// has increasing but not full support, so default to clipboard
-		setStringAsync(url);
-		Toast.show(t`Copied to clipboard`, "clipboard-check");
-	}
+	//TODO: Web Share APIに対応している場合はそれを使う
+	// React Native Share is not supported by web. Web Share API
+	// has increasing but not full support, so default to clipboard
+	await new Clipboard().writeText(url);
+	Toast.show("Copied to clipboard", "clipboard-check");
 }
 
 /**
@@ -34,10 +22,7 @@ export async function shareUrl(url: string) {
  * clipboard.
  */
 export async function shareText(text: string) {
-	if (isAndroid || isIOS) {
-		await Share.share({ message: text });
-	} else {
-		await setStringAsync(text);
-		Toast.show(t`Copied to clipboard`, "clipboard-check");
-	}
+	//TODO: Web Share APIに対応している場合はそれを使う
+	await new Clipboard().writeText(text);
+	Toast.show("Copied to clipboard", "clipboard-check");
 }

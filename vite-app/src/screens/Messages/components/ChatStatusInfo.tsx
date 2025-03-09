@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useCallback } from "react";
 import { View } from "react-native";
 
@@ -13,7 +12,6 @@ import { AcceptChatButton, DeleteChatButton, RejectMenu } from "./RequestButtons
 
 export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const moderationOpts = useModerationOpts();
 	const { currentAccount } = useSession();
 	const leaveConvoControl = usePromptControl();

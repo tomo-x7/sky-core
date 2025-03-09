@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Pressable, View } from "react-native";
@@ -46,7 +45,6 @@ export function ProfileSubpageHeader({
 	avatarType: UserAvatarType | "starter-pack";
 }>) {
 	const navigation = useNavigation<NavigationProp>();
-	const { _ } = useLingui();
 	const { isMobile } = useWebMediaQueries();
 	const { openLightbox } = useLightboxControls();
 	const pal = usePalette("default");

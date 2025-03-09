@@ -10,7 +10,6 @@ import EventEmitter from "eventemitter3";
 import { nanoid } from "nanoid/non-secure";
 
 import { networkRetry } from "#/lib/async/retry";
-import { Logger } from "#/logger";
 import { isNative } from "#/platform/detection";
 import {
 	ACTIVE_POLL_INTERVAL,
@@ -456,7 +455,7 @@ export class Convo {
 				this.dispatch({ event: ConvoDispatchEvent.Ready });
 			}
 		} catch (e: any) {
-			logger.error(e, { message: "Convo: setup failed" });
+			console.error(e, { message: "Convo: setup failed" });
 
 			this.dispatch({
 				event: ConvoDispatchEvent.Error,
@@ -561,7 +560,7 @@ export class Convo {
 			this.sender = sender || this.sender;
 			this.recipients = recipients || this.recipients;
 		} catch (e: any) {
-			logger.error(e, { message: "Convo: failed to refresh convo" });
+			console.error(e, { message: "Convo: failed to refresh convo" });
 		}
 	}
 
@@ -622,7 +621,7 @@ export class Convo {
 				}
 			}
 		} catch (e: any) {
-			logger.error("Convo: failed to fetch message history");
+			console.error("Convo: failed to fetch message history");
 
 			this.fetchMessageHistoryError = {
 				retry: () => {
@@ -825,7 +824,7 @@ export class Convo {
 			// continue queue processing
 			await this.processPendingMessages();
 		} catch (e: any) {
-			logger.error(e, { message: "Convo: failed to send message" });
+			console.error(e, { message: "Convo: failed to send message" });
 			this.handleSendMessageFailure(e);
 			this.isProcessingPendingMessages = false;
 		}
@@ -864,7 +863,7 @@ export class Convo {
 			}
 		} else {
 			this.pendingMessageFailure = "unrecoverable";
-			logger.error(e, {
+			console.error(e, {
 				message: "Convo handleSendMessageFailure received unknown error",
 			});
 		}
@@ -914,7 +913,7 @@ export class Convo {
 
 			logger.debug(`Convo: sent ${this.pendingMessages.size} pending messages`, {});
 		} catch (e: any) {
-			logger.error(e, { message: "Convo: failed to batch retry messages" });
+			console.error(e, { message: "Convo: failed to batch retry messages" });
 			this.handleSendMessageFailure(e);
 		}
 	}
@@ -936,7 +935,7 @@ export class Convo {
 				);
 			});
 		} catch (e: any) {
-			logger.error(e, { message: "Convo: failed to delete message" });
+			console.error(e, { message: "Convo: failed to delete message" });
 			this.deletedMessages.delete(messageId);
 			this.commit();
 			throw e;

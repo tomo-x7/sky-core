@@ -5,7 +5,6 @@ import TLDs from "tlds";
 import { BSKY_SERVICE } from "#/lib/constants";
 import { isInvalidHandle } from "#/lib/strings/handles";
 import { startUriToStarterPackUri } from "#/lib/strings/starter-pack";
-import { logger } from "#/logger";
 
 export const BSKY_APP_HOST = "https://bsky.app";
 const BSKY_TRUSTED_HOSTS = [
@@ -60,7 +59,7 @@ export function toShortUrl(url: string): string {
 		}
 		const path = (urlp.pathname === "/" ? "" : urlp.pathname) + urlp.search + urlp.hash;
 		if (path.length > 15) {
-			return urlp.host + path.slice(0, 13) + "...";
+			return `${urlp.host + path.slice(0, 13)}...`;
 		}
 		return urlp.host + path;
 	} catch (e) {
@@ -72,6 +71,7 @@ export function toShareUrl(url: string): string {
 	if (!url.startsWith("https")) {
 		const urlp = new URL("https://bsky.app");
 		urlp.pathname = url;
+		//biome-ignore lint/style/noParameterAssign:
 		url = urlp.toString();
 	}
 	return url;
@@ -228,7 +228,7 @@ export function linkRequiresWarning(uri: string, label: string) {
 		return false;
 	}
 
-	let urip;
+	let urip: URL;
 	try {
 		urip = new URL(uri);
 	} catch {
@@ -263,12 +263,13 @@ export function labelToDomain(label: string): string | undefined {
 		return new URL(label).hostname.toLowerCase();
 	} catch {}
 	try {
-		return new URL("https://" + label).hostname.toLowerCase();
+		return new URL(`https://${label}`).hostname.toLowerCase();
 	} catch {}
 	return undefined;
 }
 
 export function isPossiblyAUrl(str: string): boolean {
+	//biome-ignore lint/style/noParameterAssign:
 	str = str.trim();
 	if (str.startsWith("http://")) {
 		return true;
@@ -294,7 +295,7 @@ export function createBskyAppAbsoluteUrl(path: string): string {
 }
 
 export function createProxiedUrl(url: string): string {
-	let u;
+	let u: URL | null;
 	try {
 		u = URL.parse(url);
 	} catch {
@@ -323,13 +324,13 @@ export function shortLinkToHref(url: string): string {
 		}
 		return url;
 	} catch (e) {
-		logger.error("Failed to parse possible short link", { safeMessage: e });
+		console.error("Failed to parse possible short link", { safeMessage: e });
 		return url;
 	}
 }
 
 export function getHostnameFromUrl(url: string | URL): string | null {
-	let urlp;
+	let urlp: URL;
 	try {
 		urlp = new URL(url);
 	} catch (e) {

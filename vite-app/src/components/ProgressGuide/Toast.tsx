@@ -1,8 +1,6 @@
-import { useLingui } from "@lingui/react";
 import React, { useImperativeHandle } from "react";
 import { Pressable, View, useWindowDimensions } from "react-native";
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Portal } from "#/components/Portal";
@@ -24,13 +22,11 @@ export interface ProgressGuideToastProps {
 export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, ProgressGuideToastProps>(
 	function ProgressGuideToast({ title, subtitle, visibleDuration }, ref) {
 		const t = useTheme();
-		const { _ } = useLingui();
-		const insets = useSafeAreaInsets();
 		const [isOpen, setIsOpen] = React.useState(false);
 		const translateY = useSharedValue(0);
 		const opacity = useSharedValue(0);
 		const animatedCheckRef = React.useRef<AnimatedCheckRef | null>(null);
-		const timeoutRef = React.useRef<NodeJS.Timeout | undefined>();
+		const timeoutRef = React.useRef<number | undefined>(undefined);
 		const winDim = useWindowDimensions();
 
 		/**
@@ -56,7 +52,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 					() => runOnJS(setIsntOpen)(),
 				),
 			);
-		}, [setIsOpen, opacity]);
+		}, [opacity]);
 
 		const open = React.useCallback(() => {
 			// set isOpen=true to render
@@ -77,7 +73,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 			);
 			translateY.set(0);
 			translateY.set(() =>
-				withTiming(insets.top + 10, {
+				withTiming(10, {
 					duration: 500,
 					easing: Easing.out(Easing.cubic),
 				}),
@@ -85,7 +81,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 
 			// start the countdown timer to autoclose
 			timeoutRef.current = setTimeout(close, visibleDuration || 5e3);
-		}, [setIsOpen, translateY, opacity, insets, close, visibleDuration]);
+		}, [translateY, opacity, close, visibleDuration]);
 
 		useImperativeHandle(
 			ref,

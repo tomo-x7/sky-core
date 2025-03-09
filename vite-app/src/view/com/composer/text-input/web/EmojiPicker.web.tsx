@@ -1,5 +1,4 @@
 import Picker from "@emoji-mart/react";
-import { useLingui } from "@lingui/react";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React from "react";
@@ -49,7 +48,6 @@ interface IProps {
 }
 
 export function EmojiPicker({ state, close, pinToTop }: IProps) {
-	const { _ } = useLingui();
 	const { height, width } = useWindowDimensions();
 
 	const isShiftDown = React.useRef(false);

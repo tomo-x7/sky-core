@@ -21,5 +21,5 @@ export function useTabFocusEffect(tabName: string, cb: (isInside: boolean) => vo
 			setIsInside(v);
 			cb(v);
 		}
-	}, [state, isInside, setIsInside, tabName, cb]);
+	}, [state, isInside, tabName, cb]);
 }

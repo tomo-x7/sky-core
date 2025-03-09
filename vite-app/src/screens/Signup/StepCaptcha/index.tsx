@@ -1,13 +1,10 @@
-import { useLingui } from "@lingui/react";
 import { nanoid } from "nanoid/non-secure";
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { FormError } from "#/components/forms/FormError";
-import { logEvent } from "#/lib/statsig/statsig";
 import { createFullHandle } from "#/lib/strings/handles";
-import { logger } from "#/logger";
 import { ScreenTransition } from "#/screens/Login/ScreenTransition";
 import { CaptchaWebView } from "#/screens/Signup/StepCaptcha/CaptchaWebView";
 import { useSignupContext } from "#/screens/Signup/state";
@@ -16,7 +13,6 @@ import { BackNextButtons } from "../BackNextButtons";
 const CAPTCHA_PATH = "/gate/signup";
 
 export function StepCaptcha() {
-	const { _ } = useLingui();
 	const theme = useTheme();
 	const { state, dispatch } = useSignupContext();
 
@@ -36,7 +32,6 @@ export function StepCaptcha() {
 	const onSuccess = React.useCallback(
 		(code: string) => {
 			setCompleted(true);
-			logEvent("signup:captchaSuccess", {});
 			dispatch({
 				type: "submit",
 				task: { verificationCode: code, mutableProcessed: false },
@@ -51,17 +46,16 @@ export function StepCaptcha() {
 				type: "setError",
 				value: "Error receiving captcha response.",
 			});
-			logEvent("signup:captchaFailure", {});
-			logger.error("Signup Flow Error", {
+			console.error("Signup Flow Error", {
 				registrationHandle: state.handle,
 				error,
 			});
 		},
-		[_, dispatch, state.handle],
+		[dispatch, state.handle],
 	);
 
 	const onBackPress = React.useCallback(() => {
-		logger.error("Signup Flow Error", {
+		console.error("Signup Flow Error", {
 			errorMessage: "User went back from captcha step. Possibly encountered an error.",
 			registrationHandle: state.handle,
 		});

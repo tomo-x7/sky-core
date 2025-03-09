@@ -1,11 +1,10 @@
 import React from "react";
 import { Pressable, View } from "react-native";
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { ScaleAndFadeIn, ScaleAndFadeOut } from "#/lib/custom-animations/ScaleAndFade";
-import { useHaptics } from "#/lib/haptics";
 import { isAndroid, isIOS, isWeb } from "#/platform/detection";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -16,7 +15,6 @@ export function NewMessagesPill({
 	onPress: () => void;
 }) {
 	const t = useTheme();
-	const playHaptic = useHaptics();
 	const bottomBarHeight = isIOS ? 42 : isAndroid ? 60 : 0;
 	const bottomOffset = isWeb ? 0 : bottomBarHeight;
 
@@ -33,9 +31,8 @@ export function NewMessagesPill({
 	}, [scale]);
 
 	const onPress = React.useCallback(() => {
-		runOnJS(playHaptic)();
 		onPressInner?.();
-	}, [onPressInner, playHaptic]);
+	}, [onPressInner]);
 
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ scale: scale.get() }],

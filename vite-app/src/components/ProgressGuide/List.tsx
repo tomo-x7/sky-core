@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -11,7 +10,6 @@ import { ProgressGuideTask } from "./Task";
 
 export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const followProgressGuide = useProgressGuide("follow-10");
 	const followAndLikeProgressGuide = useProgressGuide("like-10-and-follow-7");
 	const guide = followProgressGuide || followAndLikeProgressGuide;

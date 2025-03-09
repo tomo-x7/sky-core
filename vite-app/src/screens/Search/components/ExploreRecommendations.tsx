@@ -5,7 +5,6 @@ import { atoms as a, useGutters, useTheme } from "#/alf";
 import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
 import { Text } from "#/components/Typography";
 import { Hashtag_Stroke2_Corner0_Rounded } from "#/components/icons/Hashtag";
-import { logEvent } from "#/lib/statsig/statsig";
 import { isWeb } from "#/platform/detection";
 import { DEFAULT_LIMIT as RECOMMENDATIONS_COUNT, useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
 import { useTrendingConfig } from "#/state/trending-config";
@@ -56,17 +55,11 @@ function Inner() {
 					{isLoading ? (
 						Array(RECOMMENDATIONS_COUNT)
 							.fill(0)
-							.map((_, i) => <TrendingTopicSkeleton key={i} index={i} />)
+							.map((_, i) => <TrendingTopicSkeleton key={i.toString()} index={i} />)
 					) : !trending?.suggested ? null : (
 						<>
 							{trending.suggested.map((topic) => (
-								<TrendingTopicLink
-									key={topic.link}
-									topic={topic}
-									onPress={() => {
-										logEvent("recommendedTopic:click", { context: "explore" });
-									}}
-								>
+								<TrendingTopicLink key={topic.link} topic={topic}>
 									{({ hovered }) => (
 										<TrendingTopic
 											topic={topic}

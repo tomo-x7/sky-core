@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { View } from "react-native";
 
@@ -25,7 +24,6 @@ export function DisableEmail2FADialog({
 }: {
 	control: Dialog.DialogOuterProps["control"];
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	const { currentAccount } = useSession();

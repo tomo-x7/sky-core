@@ -1,7 +1,5 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { type TextStyleProp, atoms as a, flatten, native, useBreakpoints, useTheme, web } from "#/alf";
 import { leading } from "#/alf/typography";
@@ -17,10 +15,8 @@ const COL_WIDTH = 420;
 
 export const OnboardingControls = createPortalGroup();
 
-export function Layout({ children }: React.PropsWithChildren<{}>) {
-	const { _ } = useLingui();
+export function Layout({ children }: React.PropsWithChildren) {
 	const t = useTheme();
-	const insets = useSafeAreaInsets();
 	const { gtMobile } = useBreakpoints();
 	const onboardDispatch = useOnboardingDispatch();
 	const { state, dispatch } = React.useContext(Context);
@@ -40,6 +36,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 	return (
 		<View
 			aria-modal
+			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="dialog"
 			aria-role="dialog"
 			aria-label={dialogLabel}
@@ -54,7 +51,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 			]}
 		>
 			{__DEV__ && (
-				<View style={[a.absolute, a.p_xl, a.z_10, { right: 0, top: insets.top }]}>
+				<View style={[a.absolute, a.p_xl, a.z_10, { right: 0, top: 0 }]}>
 					<Button
 						variant="ghost"
 						color="negative"
@@ -79,7 +76,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 						a.z_20,
 						a.px_xl,
 						{
-							top: paddingTop.paddingTop + insets.top - 1,
+							top: paddingTop.paddingTop - 1,
 						},
 					]}
 				>
@@ -102,7 +99,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 
 			<ScrollView
 				ref={scrollview}
-				style={[a.h_full, a.w_full, { paddingTop: insets.top }]}
+				style={[a.h_full, a.w_full, { paddingTop: 0 }]}
 				contentContainerStyle={{ borderWidth: 0 }}
 				// @ts-ignore web only --prf
 				dataSet={{ "stable-gutters": 1 }}
@@ -115,7 +112,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 									.fill(0)
 									.map((_, i) => (
 										<View
-											key={i}
+											key={i.toString()}
 											style={[
 												a.flex_1,
 												a.pt_xs,
@@ -154,7 +151,7 @@ export function Layout({ children }: React.PropsWithChildren<{}>) {
 						? a.py_2xl
 						: {
 								paddingTop: a.pt_lg.paddingTop,
-								paddingBottom: insets.bottom + 10,
+								paddingBottom: 10,
 							},
 				]}
 			>

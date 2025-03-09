@@ -1,7 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { logger } from "#/logger";
 import { useAgent, useSession } from "#/state/session";
 import { RQKEY as PROFILE_RKEY } from "../profile";
 
@@ -50,7 +49,7 @@ export function useUpdateActorDeclaration({
 		},
 		onSuccess,
 		onError: (error) => {
-			logger.error(error);
+			console.error(error);
 			if (currentAccount) {
 				queryClient.invalidateQueries({
 					queryKey: PROFILE_RKEY(currentAccount.did),

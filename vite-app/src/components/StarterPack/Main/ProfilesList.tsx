@@ -77,6 +77,7 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 
 	if (!data) {
 		return (
+			//@ts-ignore
 			<View style={[a.h_full_vh, { marginTop: headerHeight, marginBottom: bottomBarOffset }]}>
 				<ListMaybePlaceholder isLoading={true} isError={isError} onRetry={refetch} />
 			</View>

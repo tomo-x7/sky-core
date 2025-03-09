@@ -1,11 +1,9 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useCallback, useMemo, useState } from "react";
 
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { usePostRepostedByQuery } from "#/state/queries/post-reposted-by";
 import { useResolveUriQuery } from "#/state/queries/resolve-uri";
 import { ProfileCardWithFollowBtn } from "#/view/com/profile/ProfileCard";
@@ -26,7 +24,6 @@ function keyExtractor(item: ActorDefs.ProfileViewBasic) {
 }
 
 export function PostRepostedBy({ uri }: { uri: string }) {
-	const { _ } = useLingui();
 	const initialNumToRender = useInitialNumToRender();
 
 	const [isPTRing, setIsPTRing] = useState(false);
@@ -56,7 +53,7 @@ export function PostRepostedBy({ uri }: { uri: string }) {
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh reposts", { message: err });
+			console.error("Failed to refresh reposts", { message: err });
 		}
 		setIsPTRing(false);
 	}, [refetch, setIsPTRing]);
@@ -66,7 +63,7 @@ export function PostRepostedBy({ uri }: { uri: string }) {
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more reposts", { message: err });
+			console.error("Failed to load more reposts", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 

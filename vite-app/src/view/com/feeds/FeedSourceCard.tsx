@@ -1,7 +1,5 @@
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Linking, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
@@ -14,7 +12,6 @@ import { useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { type FeedSourceInfo, useFeedSourceInfoQuery } from "#/state/queries/feed";
 import {
 	type UsePreferencesQueryResponse,
@@ -90,7 +87,6 @@ export function FeedSourceCardLoaded({
 }) {
 	const t = useTheme();
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const removePromptControl = Prompt.usePromptControl();
 	const navigation = useNavigationDeduped();
 
@@ -114,9 +110,9 @@ export function FeedSourceCardLoaded({
 			Toast.show("Added to my feeds");
 		} catch (e) {
 			Toast.show("There was an issue contacting your server", "xmark");
-			logger.error("Failed to save feed", { message: e });
+			console.error("Failed to save feed", { message: e });
 		}
-	}, [_, feed, pinOnSave, addSavedFeeds, isSaved]);
+	}, [feed, pinOnSave, addSavedFeeds, isSaved]);
 
 	const onUnsave = React.useCallback(async () => {
 		if (!savedFeedConfig) return;
@@ -127,9 +123,9 @@ export function FeedSourceCardLoaded({
 			Toast.show("Removed from my feeds");
 		} catch (e) {
 			Toast.show("There was an issue contacting your server", "xmark");
-			logger.error("Failed to unsave feed", { message: e });
+			console.error("Failed to unsave feed", { message: e });
 		}
-	}, [_, removeFeed, savedFeedConfig]);
+	}, [removeFeed, savedFeedConfig]);
 
 	const onToggleSaved = React.useCallback(async () => {
 		if (isSaved) {

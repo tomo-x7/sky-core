@@ -64,7 +64,6 @@ export interface BottomSheetModalMethods extends BottomSheetMethods {
 	 * @param data to be passed to the modal.
 	 */
 
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	present: (data?: any) => void;
 	/**
 	 * Close and unmount the bottom sheet modal.
@@ -116,7 +115,6 @@ export type GestureEventContextType = {
 	didStart?: boolean;
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export type GestureEventHandlerCallbackType<C = any> = (
 	source: GESTURE_SOURCE,
 	payload: GestureEventPayloadType,
@@ -129,7 +127,6 @@ export type GestureEventsHandlersHookType = () => {
 	handleOnEnd: GestureEventHandlerCallbackType;
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type ScrollEventHandlerCallbackType<C = any> = (payload: NativeScrollEvent, context: C) => void;
 
 export type ScrollEventsHandlersHookType = (

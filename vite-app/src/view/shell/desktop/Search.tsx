@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -125,7 +124,6 @@ SearchProfileCard = React.memo(SearchProfileCard);
 export { SearchProfileCard };
 
 export function DesktopSearch() {
-	const { _ } = useLingui();
 	const pal = usePalette("default");
 	const navigation = useNavigation<NavigationProp>();
 	const [isActive, setIsActive] = React.useState<boolean>(false);

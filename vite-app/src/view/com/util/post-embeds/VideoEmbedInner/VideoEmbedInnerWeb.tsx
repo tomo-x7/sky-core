@@ -1,5 +1,4 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import type * as HlsTypes from "hls.js";
 import React, { useEffect, useId, useRef, useState } from "react";
 import { View } from "react-native";
@@ -28,7 +27,6 @@ export function VideoEmbedInnerWeb({
 	const [hasSubtitleTrack, setHasSubtitleTrack] = useState(false);
 	const [hlsLoading, setHlsLoading] = React.useState(false);
 	const figId = useId();
-	const { _ } = useLingui();
 
 	// send error up to error boundary
 	const [error, setError] = useState<Error | null>(null);

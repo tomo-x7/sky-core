@@ -1,4 +1,3 @@
-import { Plural } from "@lingui/macro";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -16,7 +15,7 @@ export const PostLikedByScreen = ({ route }: Props) => {
 	const uri = makeRecordUri(name, "app.bsky.feed.post", rkey);
 	const { data: post } = usePostThreadQuery(uri);
 
-	let likeCount;
+	let likeCount: number | undefined;
 	if (post?.thread.type === "post") {
 		likeCount = post.thread.post.likeCount;
 	}
@@ -36,7 +35,7 @@ export const PostLikedByScreen = ({ route }: Props) => {
 						<>
 							<Layout.Header.TitleText>Liked By</Layout.Header.TitleText>
 							<Layout.Header.SubtitleText>
-								<Plural value={likeCount ?? 0} one="# like" other="# likes" />
+								{likeCount ?? 0} {likeCount === 1 ? "like" : "likes"}
 							</Layout.Header.SubtitleText>
 						</>
 					)}

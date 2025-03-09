@@ -1,6 +1,4 @@
 import { type ComAtprotoLabelDefs, ComAtprotoModerationDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { View } from "react-native";
@@ -15,7 +13,6 @@ import { useLabelSubject } from "#/lib/moderation";
 import { useLabelInfo } from "#/lib/moderation/useLabelInfo";
 import { makeProfileLink } from "#/lib/routes/links";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { logger } from "#/logger";
 import { isAndroid } from "#/platform/detection";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
@@ -40,7 +37,6 @@ export function LabelsOnMeDialog(props: LabelsOnMeDialogProps) {
 }
 
 function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const [appealingLabel, setAppealingLabel] = React.useState<ComAtprotoLabelDefs.Label | undefined>(undefined);
 	const { labels } = props;
@@ -107,7 +103,6 @@ function Label({
 	onPressAppeal: (label: ComAtprotoLabelDefs.Label) => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { labeler, strings } = useLabelInfo(label);
 	const sourceName = labeler ? sanitizeHandle(labeler.creator.handle, "@") : label.src;
 	const timeDiff = useGetTimeAgo({ future: true });
@@ -150,7 +145,7 @@ function Label({
 								<InlineLinkText
 									label={sourceName}
 									to={makeProfileLink(labeler ? labeler.creator : { did: label.src, handle: "" })}
-									onPress={() => control.close()}
+									onPress={() => void control.close()}
 								>
 									{sourceName}
 								</InlineLinkText>
@@ -179,7 +174,6 @@ function AppealForm({
 	control: Dialog.DialogOuterProps["control"];
 	onPressBack: () => void;
 }) {
-	const { _ } = useLingui();
 	const { labeler, strings } = useLabelInfo(label);
 	const { gtMobile } = useBreakpoints();
 	const [details, setDetails] = React.useState("");
@@ -209,7 +203,7 @@ function AppealForm({
 			);
 		},
 		onError: (err) => {
-			logger.error("Failed to submit label appeal", { message: err });
+			console.error("Failed to submit label appeal", { message: err });
 			Toast.show("Failed to submit appeal, please try again.", "xmark");
 		},
 		onSuccess: () => {
@@ -232,7 +226,7 @@ function AppealForm({
 						<InlineLinkText
 							label={sourceName}
 							to={makeProfileLink(labeler ? labeler.creator : { did: label.src, handle: "" })}
-							onPress={() => control.close()}
+							onPress={() => void control.close()}
 							style={[a.text_md, a.leading_snug]}
 						>
 							{sourceName}
@@ -244,11 +238,9 @@ function AppealForm({
 			<View style={[a.my_md]}>
 				<Dialog.Input
 					label={"Text input field"}
-					placeholder={_(
-						msg`Please explain why you think this label was incorrectly applied by ${
-							labeler ? sanitizeHandle(labeler.creator.handle, "@") : label.src
-						}`,
-					)}
+					placeholder={`Please explain why you think this label was incorrectly applied by ${
+						labeler ? sanitizeHandle(labeler.creator.handle, "@") : label.src
+					}`}
 					value={details}
 					onChangeText={setDetails}
 					autoFocus={true}

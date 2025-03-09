@@ -3,7 +3,6 @@ import { useIsFocused } from "@react-navigation/native";
 import React, { memo, useState } from "react";
 import { type LayoutChangeEvent, StyleSheet, View } from "react-native";
 import Animated, { runOnJS, useAnimatedReaction, useAnimatedStyle, withTiming } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme } from "#/alf";
 import { isNative } from "#/platform/detection";
@@ -13,7 +12,7 @@ import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { ProfileHeaderLabeler } from "./ProfileHeaderLabeler";
 import { ProfileHeaderStandard } from "./ProfileHeaderStandard";
 
-let ProfileHeaderLoading = (_props: {}): React.ReactNode => {
+const ProfileHeaderLoading = (): React.ReactNode => {
 	const t = useTheme();
 	return (
 		<View style={t.atoms.bg}>
@@ -29,8 +28,8 @@ let ProfileHeaderLoading = (_props: {}): React.ReactNode => {
 		</View>
 	);
 };
-ProfileHeaderLoading = memo(ProfileHeaderLoading);
-export { ProfileHeaderLoading };
+const MemoedProfileHeaderLoading = memo(ProfileHeaderLoading);
+export { MemoedProfileHeaderLoading as ProfileHeaderLoading };
 
 interface Props {
 	profile: AppBskyActorDefs.ProfileViewDetailed;
@@ -43,7 +42,7 @@ interface Props {
 }
 
 let ProfileHeader = ({ setMinimumHeight, ...props }: Props): React.ReactNode => {
-	let content;
+	let content: React.ReactNode;
 	if (props.profile.associated?.labeler) {
 		if (!props.labeler) {
 			content = <ProfileHeaderLoading />;
@@ -78,7 +77,6 @@ const MinimalHeader = React.memo(function MinimalHeader({
 	hideBackButton?: boolean;
 }) {
 	const t = useTheme();
-	const insets = useSafeAreaInsets();
 	const ctx = usePagerHeaderContext();
 	const [visible, setVisible] = useState(false);
 	const [minimalHeaderHeight, setMinimalHeaderHeight] = React.useState(0);
@@ -133,7 +131,7 @@ const MinimalHeader = React.memo(function MinimalHeader({
 					top: 0,
 					left: 0,
 					right: 0,
-					paddingTop: insets.top,
+					paddingTop: 0,
 				},
 				animatedStyle,
 			]}

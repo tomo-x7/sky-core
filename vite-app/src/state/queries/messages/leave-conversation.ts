@@ -2,7 +2,6 @@ import type { ChatBskyConvoLeaveConvo, ChatBskyConvoListConvos } from "@atproto/
 import { useMutation, useMutationState, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 
-import { logger } from "#/logger";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent } from "#/state/session";
 import { RQKEY_ROOT as CONVO_LIST_KEY } from "./list-conversations";
@@ -68,7 +67,7 @@ export function useLeaveConvo(
 			onSuccess?.(data);
 		},
 		onError: (error, _, context) => {
-			logger.error(error);
+			console.error(error);
 			queryClient.setQueryData(
 				[CONVO_LIST_KEY],
 				(old?: {

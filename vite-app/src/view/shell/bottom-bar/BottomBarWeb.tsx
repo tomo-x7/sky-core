@@ -1,5 +1,3 @@
-import { msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigationState } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
@@ -30,7 +28,6 @@ import { useMinimalShellFooterTransform } from "#/lib/hooks/useMinimalShellTrans
 import { getCurrentRoute, isTab } from "#/lib/routes/helpers";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
-import { useGate } from "#/lib/statsig/statsig";
 import { useHomeBadge } from "#/state/home-badge";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
 import { useUnreadNotifications } from "#/state/queries/notifications/unread";
@@ -43,7 +40,6 @@ import { Logotype } from "#/view/icons/Logotype";
 import { styles } from "./BottomBarStyles";
 
 export function BottomBarWeb() {
-	const { _ } = useLingui();
 	const { hasSession, currentAccount } = useSession();
 	const t = useTheme();
 	const footerMinimalShellTransform = useMinimalShellFooterTransform();
@@ -221,7 +217,6 @@ const NavItem: React.FC<{
 	hasNew?: boolean;
 	notificationCount?: string;
 }> = ({ children, href, routeName, hasNew, notificationCount }) => {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const currentRoute = useNavigationState((state) => {
 		if (!state) {
@@ -258,12 +253,10 @@ const NavItem: React.FC<{
 			{notificationCount ? (
 				<View
 					style={styles.notificationCount}
-					aria-label={_(
-						msg`${plural(notificationCount, {
-							one: "# unread item",
-							other: "# unread items",
-						})}`,
-					)}
+					aria-label={`${plural(notificationCount, {
+						one: "# unread item",
+						other: "# unread items",
+					})}`}
 				>
 					<Text style={styles.notificationCountLabel}>{notificationCount}</Text>
 				</View>

@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, AppBskyFeedDefs, ModerationDecision } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
@@ -45,7 +44,6 @@ const controlsContext = React.createContext<ControlsContext>({
 });
 
 export function Provider({ children }: React.PropsWithChildren<{}>) {
-	const { _ } = useLingui();
 	const [state, setState] = React.useState<StateContext>();
 	const queryClient = useQueryClient();
 

@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import React, { useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
 import { Circle, Path, Svg } from "react-native-svg";
@@ -8,7 +7,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
@@ -36,7 +34,6 @@ export function Component({
 	const pal = usePalette("default");
 	const agent = useAgent();
 	const { currentAccount } = useSession();
-	const { _ } = useLingui();
 	const [stage, setStage] = useState<Stages>(showReminder ? Stages.Reminder : Stages.Email);
 	const [confirmationCode, setConfirmationCode] = useState<string>("");
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -46,7 +43,7 @@ export function Component({
 
 	React.useEffect(() => {
 		if (!currentAccount) {
-			logger.error("VerifyEmail modal opened without currentAccount");
+			console.error("VerifyEmail modal opened without currentAccount");
 			closeModal();
 		}
 	}, [currentAccount, closeModal]);

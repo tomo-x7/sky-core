@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useState } from "react";
 import {
@@ -21,7 +20,6 @@ import { compressIfNeeded } from "#/lib/media/manip";
 import { cleanError } from "#/lib/strings/errors";
 import { enforceLen } from "#/lib/strings/helpers";
 import { colors, gradients, s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useProfileUpdateMutation } from "#/state/queries/profile";
@@ -44,7 +42,6 @@ export function Component({
 }) {
 	const pal = usePalette("default");
 	const theme = useTheme();
-	const { _ } = useLingui();
 	const { closeModal } = useModalControls();
 	const updateMutation = useProfileUpdateMutation();
 	const [imageError, setImageError] = useState<string>("");
@@ -111,7 +108,7 @@ export function Component({
 			onUpdate?.();
 			closeModal();
 		} catch (e: any) {
-			logger.error("Failed to update user profile", { message: String(e) });
+			console.error("Failed to update user profile", { message: String(e) });
 		}
 	}, [
 		updateMutation,

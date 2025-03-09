@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme, web } from "#/alf";
@@ -17,7 +16,6 @@ export function ProfileHeaderHandle({
 	disableTaps?: boolean;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const invalidHandle = isInvalidHandle(profile.handle);
 	const blockHide = profile.viewer?.blocking || profile.viewer?.blockedBy;
 	return (
@@ -37,7 +35,7 @@ export function ProfileHeaderHandle({
 				style={[
 					invalidHandle
 						? [a.border, a.text_xs, a.px_sm, a.py_xs, a.rounded_xs, { borderColor: t.palette.contrast_200 }]
-						: [a.text_md, a.leading_snug, t.atoms.text_contrast_medium],
+						: [a.text_md, a.leading_snug, t.atoms.text_contrast_medium], //@ts-expect-error
 					web({ wordBreak: "break-all" }),
 				]}
 			>

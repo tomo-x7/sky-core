@@ -11,7 +11,7 @@ import { useExternalEmbedsPrefs, useSetExternalEmbedPref } from "#/state/prefere
 import * as SettingsList from "./components/SettingsList";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "PreferencesExternalEmbeds">;
-export function ExternalMediaPreferencesScreen({}: Props) {
+export function ExternalMediaPreferencesScreen(props: Props) {
 	return (
 		<Layout.Screen testID="externalMediaPreferencesScreen">
 			<Layout.Header.Outer>

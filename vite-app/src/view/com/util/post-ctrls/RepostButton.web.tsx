@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Pressable, View } from "react-native";
 
@@ -24,7 +23,6 @@ interface Props {
 
 export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, embeddingDisabled }: Props) => {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { hasSession } = useSession();
 	const requireAuth = useRequireAuth();
 

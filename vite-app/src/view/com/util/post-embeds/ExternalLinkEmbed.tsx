@@ -1,5 +1,4 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React, { useCallback } from "react";
 import { Image } from "react-native";
 import { type StyleProp, View, type ViewStyle } from "react-native";
@@ -30,7 +29,6 @@ export const ExternalLinkEmbed = ({
 	style?: StyleProp<ViewStyle>;
 	hideAlt?: boolean;
 }) => {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const externalEmbedPrefs = useExternalEmbedsPrefs();
 	const niceUrl = toNiceDomain(link.uri);

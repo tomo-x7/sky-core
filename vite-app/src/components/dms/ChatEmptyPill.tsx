@@ -1,12 +1,11 @@
 import React from "react";
 import { Pressable, View } from "react-native";
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { ScaleAndFadeIn } from "#/lib/custom-animations/ScaleAndFade";
 import { ShrinkAndPop } from "#/lib/custom-animations/ShrinkAndPop";
-import { useHaptics } from "#/lib/haptics";
 import { isWeb } from "#/platform/detection";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -15,7 +14,6 @@ let lastIndex = 0;
 
 export function ChatEmptyPill() {
 	const t = useTheme();
-	const playHaptic = useHaptics();
 	const [promptIndex, setPromptIndex] = React.useState(lastIndex);
 
 	const scale = useSharedValue(1);
@@ -43,14 +41,13 @@ export function ChatEmptyPill() {
 	}, [scale]);
 
 	const onPress = React.useCallback(() => {
-		runOnJS(playHaptic)();
 		let randomPromptIndex = Math.floor(Math.random() * prompts.length);
 		while (randomPromptIndex === lastIndex) {
 			randomPromptIndex = Math.floor(Math.random() * prompts.length);
 		}
 		setPromptIndex(randomPromptIndex);
 		lastIndex = randomPromptIndex;
-	}, [playHaptic, prompts.length]);
+	}, [prompts.length]);
 
 	const animatedStyle = useAnimatedStyle(() => ({
 		transform: [{ scale: scale.get() }],

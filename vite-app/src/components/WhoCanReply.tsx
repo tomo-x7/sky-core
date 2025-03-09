@@ -1,5 +1,4 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Keyboard, Platform, type StyleProp, View, type ViewStyle } from "react-native";
 
@@ -30,7 +29,6 @@ interface WhoCanReplyProps {
 }
 
 export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const infoDialogControl = useDialogControl();
 	const editDialogControl = useDialogControl();
@@ -147,7 +145,6 @@ function WhoCanReplyDialog({
 	settings: ThreadgateAllowUISetting[];
 	embeddingDisabled: boolean;
 }) {
-	const { _ } = useLingui();
 	return (
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />
@@ -188,7 +185,7 @@ function Rules({
 					<>
 						Only{" "}
 						{settings.map((rule, i) => (
-							<React.Fragment key={`rule-${i}`}>
+							<React.Fragment key={`rule-${i.toString()}`}>
 								<Rule rule={rule} post={post} lists={post.threadgate?.lists} />
 								<Separator i={i} length={settings.length} />
 							</React.Fragment>

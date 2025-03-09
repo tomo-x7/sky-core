@@ -4,8 +4,6 @@ import {
 	type RichText as RichTextAPI,
 	moderateProfile,
 } from "@atproto/api";
-import { Trans, msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { memo, useMemo } from "react";
 import { View } from "react-native";
 
@@ -19,7 +17,6 @@ import { MessageProfileButton } from "#/components/dms/MessageProfileButton";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { logger } from "#/logger";
 import { isIOS, isWeb } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import type { Shadow } from "#/state/cache/types";
@@ -51,7 +48,6 @@ let ProfileHeaderStandard = ({
 }: Props): React.ReactNode => {
 	const profile: Shadow<AppBskyActorDefs.ProfileViewDetailed> = useProfileShadow(profileUnshadowed);
 	const { currentAccount, hasSession } = useSession();
-	const { _ } = useLingui();
 	const moderation = useMemo(() => moderateProfile(profile, moderationOpts), [profile, moderationOpts]);
 	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 	const [_queueBlock, queueUnblock] = useProfileBlockMutationQueue(profile);
@@ -78,16 +74,14 @@ let ProfileHeaderStandard = ({
 			try {
 				await queueFollow();
 				Toast.show(
-					_(
-						msg`Following ${sanitizeDisplayName(
-							profile.displayName || profile.handle,
-							moderation.ui("displayName"),
-						)}`,
-					),
+					`Following ${sanitizeDisplayName(
+						profile.displayName || profile.handle,
+						moderation.ui("displayName"),
+					)}`,
 				);
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to follow", { message: String(e) });
+					console.error("Failed to follow", { message: String(e) });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
@@ -99,16 +93,14 @@ let ProfileHeaderStandard = ({
 			try {
 				await queueUnfollow();
 				Toast.show(
-					_(
-						msg`No longer following ${sanitizeDisplayName(
-							profile.displayName || profile.handle,
-							moderation.ui("displayName"),
-						)}`,
-					),
+					`No longer following ${sanitizeDisplayName(
+						profile.displayName || profile.handle,
+						moderation.ui("displayName"),
+					)}`,
 				);
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to unfollow", { message: String(e) });
+					console.error("Failed to unfollow", { message: String(e) });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
@@ -121,11 +113,11 @@ let ProfileHeaderStandard = ({
 			Toast.show("Account unblocked");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
-				logger.error("Failed to unblock account", { message: e });
+				console.error("Failed to unblock account", { message: e });
 				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
-	}, [_, queueUnblock]);
+	}, [queueUnblock]);
 
 	const isMe = React.useMemo(() => currentAccount?.did === profile.did, [currentAccount, profile]);
 
@@ -176,9 +168,7 @@ let ProfileHeaderStandard = ({
 								onPress={() => unblockPromptControl.open()}
 								style={[a.rounded_full]}
 							>
-								<ButtonText>
-									<Trans context="action">Unblock</Trans>
-								</ButtonText>
+								<ButtonText>Unblock</ButtonText>
 							</Button>
 						)
 					) : !profile.viewer?.blockedBy ? (

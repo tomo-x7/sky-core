@@ -1,10 +1,4 @@
-import type { I18n } from "@lingui/core";
-
-export const formatCount = (i18n: I18n, num: number) => {
-	return i18n.number(num, {
-		notation: "compact",
-		maximumFractionDigits: 1,
-		// @ts-expect-error - roundingMode not in the types
-		roundingMode: "trunc",
-	});
+const formatter = new Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 });
+export const formatCount = (num: number) => {
+	return formatter.format(Math.trunc(num * 10) / 10);
 };

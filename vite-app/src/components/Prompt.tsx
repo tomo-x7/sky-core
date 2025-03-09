@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { type GestureResponderEvent, View } from "react-native";
 
@@ -58,7 +57,7 @@ export function Outer({
 	);
 }
 
-export function TitleText({ children }: React.PropsWithChildren<{}>) {
+export function TitleText({ children }: React.PropsWithChildren) {
 	const { titleId } = React.useContext(Context);
 	return (
 		<Text nativeID={titleId} style={[a.text_2xl, a.font_bold, a.pb_sm, a.leading_snug]}>
@@ -81,7 +80,7 @@ export function DescriptionText({ children, selectable }: React.PropsWithChildre
 	);
 }
 
-export function Actions({ children }: React.PropsWithChildren<{}>) {
+export function Actions({ children }: React.PropsWithChildren) {
 	const { gtMobile } = useBreakpoints();
 
 	return (
@@ -106,7 +105,6 @@ export function Cancel({
 	 */
 	cta?: string;
 }) {
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const { close } = Dialog.useDialogContext();
 	const onPress = React.useCallback(() => {
@@ -147,7 +145,6 @@ export function Action({
 	cta?: string;
 	testID?: string;
 }) {
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const { close } = Dialog.useDialogContext();
 	const handleOnPress = React.useCallback(

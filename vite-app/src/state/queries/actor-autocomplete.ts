@@ -3,7 +3,6 @@ import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/react-quer
 import React from "react";
 
 import { isJustAMute, moduiContainsHideableOffense } from "#/lib/moderation";
-import { logger } from "#/logger";
 import { STALE } from "#/state/queries";
 import { useAgent } from "#/state/session";
 import { useModerationOpts } from "../preferences/moderation-opts";
@@ -75,7 +74,7 @@ export function useActorAutocompleteFn() {
 							}),
 					});
 				} catch (e) {
-					logger.error("useActorSearch: searchActorsTypeahead failed", {
+					console.error("useActorSearch: searchActorsTypeahead failed", {
 						message: e,
 					});
 				}

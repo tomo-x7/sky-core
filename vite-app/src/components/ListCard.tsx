@@ -1,5 +1,4 @@
 import { type AppBskyGraphDefs, AtUri, type ModerationUI, moderateUserList } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View } from "react-native";
@@ -92,7 +91,6 @@ export function TitleAndByline({
 	modUi?: ModerationUI;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 
 	return (

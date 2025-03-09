@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -8,7 +7,6 @@ import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { useProfileKnownFollowersQuery } from "#/state/queries/known-followers";
 import { useResolveDidQuery } from "#/state/queries/resolve-uri";
 import { useSetMinimalShellMode } from "#/state/shell";
@@ -32,7 +30,6 @@ function keyExtractor(item: AppBskyActorDefs.ProfileViewBasic) {
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileKnownFollowers">;
 export const ProfileKnownFollowersScreen = ({ route }: Props) => {
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const initialNumToRender = useInitialNumToRender();
 
@@ -55,17 +52,17 @@ export const ProfileKnownFollowersScreen = ({ route }: Props) => {
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh followers", { message: err });
+			console.error("Failed to refresh followers", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetchingNextPage || !hasNextPage || !!error) return;
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more followers", { message: err });
+			console.error("Failed to load more followers", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, error, fetchNextPage]);
 

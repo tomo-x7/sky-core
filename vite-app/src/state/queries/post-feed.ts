@@ -23,7 +23,6 @@ import type { FeedAPI, ReasonFeedSource } from "#/lib/api/feed/types";
 import { aggregateUserInterests } from "#/lib/api/feed/utils";
 import { DISCOVER_FEED_URI } from "#/lib/constants";
 import { BSKY_FEED_OWNER_DIDS } from "#/lib/constants";
-import { logger } from "#/logger";
 import { STALE } from "#/state/queries";
 import { DEFAULT_LOGGED_OUT_PREFERENCES } from "#/state/queries/preferences/const";
 import { useAgent } from "#/state/session";
@@ -195,7 +194,7 @@ export function usePostFeedQuery(
 				const feedOwnerDid = new AtUri(feedDescParts[1]).hostname;
 
 				if (feedDescParts[0] === "feedgen" && BSKY_FEED_OWNER_DIDS.includes(feedOwnerDid)) {
-					logger.error(`Bluesky feed may be offline: ${feedOwnerDid}`, {
+					console.error(`Bluesky feed may be offline: ${feedOwnerDid}`, {
 						feedDesc,
 						jsError: e,
 					});
@@ -434,20 +433,20 @@ function createApi({
 			}
 		}
 	} else if (feedDesc.startsWith("author")) {
-		const [_, actor, filter] = feedDesc.split("|");
+		const [actor, filter] = feedDesc.split("|");
 		return new AuthorFeedAPI({ agent, feedParams: { actor, filter } });
 	} else if (feedDesc.startsWith("likes")) {
-		const [_, actor] = feedDesc.split("|");
+		const [actor] = feedDesc.split("|");
 		return new LikesFeedAPI({ agent, feedParams: { actor } });
 	} else if (feedDesc.startsWith("feedgen")) {
-		const [_, feed] = feedDesc.split("|");
+		const [feed] = feedDesc.split("|");
 		return new CustomFeedAPI({
 			agent,
 			feedParams: { feed },
 			userInterests,
 		});
 	} else if (feedDesc.startsWith("list")) {
-		const [_, list] = feedDesc.split("|");
+		const [list] = feedDesc.split("|");
 		return new ListFeedAPI({ agent, feedParams: { list } });
 	} else {
 		// shouldnt happen

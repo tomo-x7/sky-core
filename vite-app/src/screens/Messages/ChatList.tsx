@@ -1,5 +1,4 @@
 import type { ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -24,7 +23,6 @@ import { useAppState } from "#/lib/hooks/useAppState";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import type { MessagesTabNavigatorParams } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { isNative } from "#/platform/detection";
 import { listenSoftReset } from "#/state/events";
 import { MESSAGE_SCREEN_POLL_INTERVAL } from "#/state/messages/convo/const";
@@ -63,7 +61,6 @@ function keyExtractor(item: ListItem) {
 
 type Props = NativeStackScreenProps<MessagesTabNavigatorParams, "Messages">;
 export function MessagesScreen({ navigation, route }: Props) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const newChatControl = useDialogControl();
@@ -145,17 +142,17 @@ export function MessagesScreen({ navigation, route }: Props) {
 		try {
 			await Promise.all([refetch(), refetchInbox()]);
 		} catch (err) {
-			logger.error("Failed to refresh conversations", { message: err });
+			console.error("Failed to refresh conversations", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, refetchInbox, setIsPTRing]);
+	}, [refetch, refetchInbox]);
 
 	const onEndReached = useCallback(async () => {
 		if (isFetchingNextPage || !hasNextPage || isError) return;
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more conversations", { message: err });
+			console.error("Failed to load more conversations", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 
@@ -172,7 +169,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh conversations", { message: err });
+			console.error("Failed to refresh conversations", { message: err });
 		}
 	}, [scrollElRef, refetch]);
 
@@ -285,7 +282,6 @@ export function MessagesScreen({ navigation, route }: Props) {
 }
 
 function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 
 	const settingsLink = (

@@ -1,8 +1,6 @@
-import { useLingui } from "@lingui/react";
 import React, { useMemo } from "react";
 
 import { ProgressGuideToast, type ProgressGuideToastRef } from "#/components/ProgressGuide/Toast";
-import { logEvent } from "#/lib/statsig/statsig";
 import { usePreferencesQuery, useSetActiveProgressGuideMutation } from "../queries/preferences";
 
 export enum ProgressGuideAction {
@@ -59,7 +57,6 @@ export function useProgressGuideControls() {
 }
 
 export function Provider({ children }: React.PropsWithChildren<{}>) {
-	const { _ } = useLingui();
 	const { data: preferences } = usePreferencesQuery();
 	const { mutateAsync, variables, isPending } = useSetActiveProgressGuideMutation();
 

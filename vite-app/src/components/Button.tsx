@@ -143,7 +143,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				}));
 				onPressInOuter?.(e);
 			},
-			[setState, onPressInOuter],
+			[onPressInOuter],
 		);
 		const onPressOut = React.useCallback(
 			(e: GestureResponderEvent) => {
@@ -153,7 +153,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				}));
 				onPressOutOuter?.(e);
 			},
-			[setState, onPressOutOuter],
+			[onPressOutOuter],
 		);
 		const onHoverIn = React.useCallback(
 			(e: MouseEvent) => {
@@ -163,7 +163,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				}));
 				onHoverInOuter?.(e);
 			},
-			[setState, onHoverInOuter],
+			[onHoverInOuter],
 		);
 		const onHoverOut = React.useCallback(
 			(e: MouseEvent) => {
@@ -173,7 +173,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				}));
 				onHoverOutOuter?.(e);
 			},
-			[setState, onHoverOutOuter],
+			[onHoverOutOuter],
 		);
 		const onFocus = React.useCallback(
 			(e: NativeSyntheticEvent<TargetedEvent>) => {
@@ -183,7 +183,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				}));
 				onFocusOuter?.(e);
 			},
-			[setState, onFocusOuter],
+			[onFocusOuter],
 		);
 		const onBlur = React.useCallback(
 			(e: NativeSyntheticEvent<TargetedEvent>) => {
@@ -193,7 +193,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				}));
 				onBlurOuter?.(e);
 			},
-			[setState, onBlurOuter],
+			[onBlurOuter],
 		);
 
 		const { baseStyles, hoverStyles } = React.useMemo(() => {
@@ -438,9 +438,10 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				}
 
 				return {
-					colors: gradient.values.map(([_, color]) => color) as [string, string, ...string[]],
+					//@ts-ignore
+					colors: gradient.values.map(([color]) => color) as [string, string, ...string[]],
 					hoverColors: gradient.values.map((_) => gradient.hover_value) as [string, string, ...string[]],
-					locations: gradient.values.map(([location, _]) => location) as [number, number, ...number[]],
+					locations: gradient.values.map(([location]) => location) as [number, number, ...number[]],
 				};
 			}
 		}, [variant, color]);
@@ -460,6 +461,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 
 		return (
 			<PressableComponent
+				// biome-ignore lint/a11y/useSemanticElements: <explanation>
 				role="button"
 				accessibilityHint={undefined} // optional
 				{...rest}

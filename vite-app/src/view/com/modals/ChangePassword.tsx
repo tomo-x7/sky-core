@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import { useState } from "react";
 import { ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -9,7 +8,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError, isNetworkError } from "#/lib/strings/errors";
 import { checkAndFormatResetCode } from "#/lib/strings/password";
 import { colors, s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isAndroid, isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
@@ -31,7 +29,6 @@ export function Component() {
 	const pal = usePalette("default");
 	const { currentAccount } = useSession();
 	const agent = useAgent();
-	const { _ } = useLingui();
 	const [stage, setStage] = useState<Stages>(Stages.RequestCode);
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
 	const [resetCode, setResetCode] = useState<string>("");

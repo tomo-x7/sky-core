@@ -1,5 +1,4 @@
 import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
@@ -34,7 +33,6 @@ const keyExtractor = (item: PostView, index: number) => {
 
 export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNavigatorParams, "Hashtag">) {
 	const { tag, author } = route.params;
-	const { _ } = useLingui();
 
 	const fullTag = React.useMemo(() => {
 		return `#${decodeURIComponent(tag)}`;
@@ -88,7 +86,7 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 				),
 			},
 		];
-	}, [_, fullTag, author, activeTab]);
+	}, [fullTag, author, activeTab]);
 
 	return (
 		<Layout.Screen>
@@ -145,7 +143,6 @@ function HashtagScreenTab({
 	sort: "top" | "latest";
 	active: boolean;
 }) {
-	const { _ } = useLingui();
 	const initialNumToRender = useInitialNumToRender();
 	const [isPTR, setIsPTR] = React.useState(false);
 

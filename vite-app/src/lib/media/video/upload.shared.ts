@@ -1,5 +1,4 @@
 import type { BskyAgent } from "@atproto/api";
-import type { I18n } from "@lingui/core";
 
 import { VIDEO_SERVICE_DID } from "#/lib/constants";
 import { UploadLimitError } from "#/lib/media/video/errors";
@@ -29,7 +28,7 @@ export async function getServiceAuthToken({
 	return serviceAuth.token;
 }
 
-export async function getVideoUploadLimits(agent: BskyAgent, _: I18n["_"]) {
+export async function getVideoUploadLimits(agent: BskyAgent) {
 	const token = await getServiceAuthToken({
 		agent,
 		lxm: "app.bsky.video.getUploadLimits",

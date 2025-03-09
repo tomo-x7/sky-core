@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -15,7 +14,6 @@ export function PostThreadShowHiddenReplies({
 	onPress: () => void;
 	hideTopBorder?: boolean;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const label = type === "muted" ? "Show muted replies" : "Show hidden replies";
 

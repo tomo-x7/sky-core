@@ -1,5 +1,4 @@
 import { AppBskyGraphStarterpack, AtUri } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Image } from "react-native";
@@ -53,7 +52,6 @@ export function Card({
 }) {
 	const { record, creator, joinedAllTimeCount } = starterPack;
 
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { currentAccount } = useSession();
 
@@ -96,7 +94,6 @@ export function Link({
 	onPress?: () => void;
 	children: BaseLinkProps["children"];
 }) {
-	const { _ } = useLingui();
 	const queryClient = useQueryClient();
 	const { record } = starterPack;
 	const { rkey, handleOrDid } = React.useMemo(() => {
@@ -137,6 +134,7 @@ export function Embed({
 		<View style={[a.border, a.rounded_sm, a.overflow_hidden, t.atoms.border_contrast_low]}>
 			<Link starterPack={starterPack}>
 				<Image
+					//@ts-ignore
 					source={imageUri}
 					style={[a.w_full, { aspectRatio: 1.91 }]}
 					accessibilityIgnoresInvertColors={true}

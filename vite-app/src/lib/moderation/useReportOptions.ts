@@ -1,5 +1,4 @@
 import { ComAtprotoModerationDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useMemo } from "react";
 
 export interface ReportOption {
@@ -19,7 +18,6 @@ interface ReportOptions {
 }
 
 export function useReportOptions(): ReportOptions {
-	const { _ } = useLingui();
 	return useMemo(() => {
 		const other = {
 			reason: ComAtprotoModerationDefs.REASONOTHER,
@@ -115,5 +113,5 @@ export function useReportOptions(): ReportOptions {
 			],
 			other: common,
 		};
-	}, [_]);
+	}, []);
 }

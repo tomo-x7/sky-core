@@ -1,9 +1,6 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 
-import { logger } from "#/logger";
 import { CenteredView } from "./Views";
 import { ErrorScreen } from "./error/ErrorScreen";
 
@@ -29,7 +26,7 @@ export class ErrorBoundary extends Component<Props, State> {
 	}
 
 	public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-		logger.error(error, { errorInfo });
+		console.error(error, { errorInfo });
 	}
 
 	public render() {
@@ -50,14 +47,10 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 
 function TranslatedErrorScreen({ details }: { details?: string }) {
-	const { _ } = useLingui();
-
 	return (
 		<ErrorScreen
 			title={"Oh no!"}
-			message={_(
-				msg`There was an unexpected issue in the application. Please let us know if this happened to you!`,
-			)}
+			message={`There was an unexpected issue in the application. Please let us know if this happened to you!`}
 			details={details}
 		/>
 	);

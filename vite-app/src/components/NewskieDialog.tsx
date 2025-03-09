@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { differenceInSeconds } from "date-fns";
 import React from "react";
 import { View } from "react-native";
@@ -25,7 +24,6 @@ export function NewskieDialog({
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 	disabled?: boolean;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const moderationOpts = useModerationOpts();
 	const { currentAccount } = useSession();
@@ -46,7 +44,7 @@ export function NewskieDialog({
 		const moderation = moderateProfile(profile, moderationOpts);
 
 		return sanitizeDisplayName(name, moderation.ui("displayName"));
-	}, [_, isMe, moderationOpts, profile]);
+	}, [isMe, moderationOpts, profile]);
 
 	const [now] = React.useState(() => Date.now());
 	const daysOld = React.useMemo(() => {

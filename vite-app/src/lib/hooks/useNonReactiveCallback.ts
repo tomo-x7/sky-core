@@ -8,16 +8,14 @@ import { useCallback, useInsertionEffect, useRef } from "react";
 //
 // Also, you should avoid calling the returned function during rendering
 // since the values captured by it are going to lag behind.
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
 export function useNonReactiveCallback<T extends Function>(fn: T): T {
 	const ref = useRef(fn);
 	useInsertionEffect(() => {
 		ref.current = fn;
 	}, [fn]);
-	return useCallback(
-		(...args: any) => {
-			const latestFn = ref.current;
-			return latestFn(...args);
-		},
-		[ref],
-	) as unknown as T;
+	return useCallback((...args: any) => {
+		const latestFn = ref.current;
+		return latestFn(...args);
+	}, []) as unknown as T;
 }

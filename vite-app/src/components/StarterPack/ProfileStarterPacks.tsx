@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { type ListRenderItemInfo, type StyleProp, View, type ViewStyle, findNodeHandle } from "react-native";
@@ -20,7 +19,6 @@ import { useEmail } from "#/lib/hooks/useEmail";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { NavigationProp } from "#/lib/routes/types";
 import { parseStarterPackUri } from "#/lib/strings/starter-pack";
-import { logger } from "#/logger";
 import { useActorStarterPacksQuery } from "#/state/queries/actor-starter-packs";
 import { List, type ListRef } from "#/view/com/util/List";
 import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
@@ -65,10 +63,10 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 		try {
 			await refetch();
 		} catch (err) {
-			logger.error("Failed to refresh starter packs", { message: err });
+			console.error("Failed to refresh starter packs", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch]);
 
 	const onEndReached = useCallback(async () => {
 		if (isFetching || !hasNextPage) return;
@@ -76,7 +74,7 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more starter packs", { message: err });
+			console.error("Failed to load more starter packs", { message: err });
 		}
 	}, [isFetching, hasNextPage, fetchNextPage]);
 
@@ -119,7 +117,6 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 });
 
 function CreateAnother() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const navigation = useNavigation<NavigationProp>();
 
@@ -141,7 +138,6 @@ function CreateAnother() {
 }
 
 function Empty() {
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 	const confirmDialogControl = useDialogControl();
 	const followersDialogControl = useDialogControl();
@@ -164,7 +160,7 @@ function Empty() {
 			setIsGenerating(false);
 		},
 		onError: (e) => {
-			logger.error("Failed to generate starter pack", { safeMessage: e });
+			console.error("Failed to generate starter pack", { safeMessage: e });
 			setIsGenerating(false);
 			if (e.name === "NOT_ENOUGH_FOLLOWERS") {
 				followersDialogControl.open();

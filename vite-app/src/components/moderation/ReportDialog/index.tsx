@@ -140,7 +140,6 @@ function Inner(props: ReportDialogProps) {
 			setTimeout(() => {
 				props.control.close();
 			}, 1e3);
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		} catch (e: any) {
 			dispatch({
 				type: "setError",

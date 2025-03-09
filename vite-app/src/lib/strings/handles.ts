@@ -8,14 +8,18 @@ export const MAX_SERVICE_HANDLE_LENGTH = 18;
 
 export function makeValidHandle(str: string): string {
 	if (str.length > 20) {
+		//biome-ignore lint/style/noParameterAssign:
 		str = str.slice(0, 20);
 	}
+	//biome-ignore lint/style/noParameterAssign:
 	str = str.toLowerCase();
 	return str.replace(/^[^a-z0-9]+/g, "").replace(/[^a-z0-9-]/g, "");
 }
 
 export function createFullHandle(name: string, domain: string): string {
+	//biome-ignore lint/style/noParameterAssign:
 	name = (name || "").replace(/[.]+$/, "");
+	//biome-ignore lint/style/noParameterAssign:
 	domain = (domain || "").replace(/^[.]+/, "");
 	return `${name}.${domain}`;
 }

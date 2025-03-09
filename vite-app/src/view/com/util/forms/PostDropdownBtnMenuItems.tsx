@@ -5,8 +5,6 @@ import {
 	AtUri,
 	type RichText as RichTextAPI,
 } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import React, { memo, useCallback } from "react";
@@ -51,11 +49,9 @@ import { getCurrentRoute } from "#/lib/routes/helpers";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { shareText, shareUrl } from "#/lib/sharing";
-import { logEvent } from "#/lib/statsig/statsig";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { getTranslatorLink } from "#/locale/helpers";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import type { Shadow } from "#/state/cache/post-shadow";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
@@ -94,7 +90,6 @@ let PostDropdownMenuItems = ({
 }): React.ReactNode => {
 	const { hasSession, currentAccount } = useSession();
 	const { gtMobile } = useBreakpoints();
-	const { _ } = useLingui();
 	const langPrefs = useLanguagePrefs();
 	const { mutateAsync: deletePostMutate } = usePostDeleteMutation();
 	const { mutateAsync: pinPostMutate, isPending: isPinPending } = usePinnedPostMutation();
@@ -178,11 +173,11 @@ let PostDropdownMenuItems = ({
 				}
 			},
 			(e) => {
-				logger.error("Failed to delete post", { message: e });
+				console.error("Failed to delete post", { message: e });
 				Toast.show("Failed to delete post, please try again", "xmark");
 			},
 		);
-	}, [navigation, postUri, deletePostMutate, postAuthor, currentAccount, isAuthor, href, _]);
+	}, [navigation, postUri, deletePostMutate, postAuthor, currentAccount, isAuthor, href]);
 
 	const onToggleThreadMute = React.useCallback(() => {
 		try {
@@ -195,18 +190,18 @@ let PostDropdownMenuItems = ({
 			}
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
-				logger.error("Failed to toggle thread mute", { message: e });
+				console.error("Failed to toggle thread mute", { message: e });
 				Toast.show("Failed to toggle thread mute, please try again", "xmark");
 			}
 		}
-	}, [isThreadMuted, unmuteThread, _, muteThread]);
+	}, [isThreadMuted, unmuteThread, muteThread]);
 
 	const onCopyPostText = React.useCallback(() => {
 		const str = richTextToString(richText, true);
 
 		Clipboard.setStringAsync(str);
 		Toast.show("Copied to clipboard", "clipboard-check");
-	}, [_, richText]);
+	}, [richText]);
 
 	const onPressTranslate = React.useCallback(async () => {
 		await openLink(translatorUrl, true);
@@ -234,7 +229,7 @@ let PostDropdownMenuItems = ({
 			feedContext: postFeedContext,
 		});
 		Toast.show("Feedback sent!");
-	}, [feedFeedback, postUri, postFeedContext, _]);
+	}, [feedFeedback, postUri, postFeedContext]);
 
 	const onPressShowLess = React.useCallback(() => {
 		feedFeedback.sendInteraction({
@@ -243,7 +238,7 @@ let PostDropdownMenuItems = ({
 			feedContext: postFeedContext,
 		});
 		Toast.show("Feedback sent!");
-	}, [feedFeedback, postUri, postFeedContext, _]);
+	}, [feedFeedback, postUri, postFeedContext]);
 
 	const onSelectChatToShareTo = React.useCallback(
 		(conversation: string) => {
@@ -270,9 +265,9 @@ let PostDropdownMenuItems = ({
 			Toast.show(isDetach ? "Quote post was successfully detached" : "Quote post was re-attached");
 		} catch (e: any) {
 			Toast.show("Updating quote attachment failed");
-			logger.error(`Failed to ${action} quote`, { safeMessage: e.message });
+			console.error(`Failed to ${action} quote`, { safeMessage: e.message });
 		}
-	}, [_, quoteEmbed, post, toggleQuoteDetachment]);
+	}, [quoteEmbed, post, toggleQuoteDetachment]);
 
 	const canHidePostForMe = !isAuthor && !isPostHidden;
 	const canEmbed = isWeb && gtMobile && !hideInPWI;
@@ -295,9 +290,9 @@ let PostDropdownMenuItems = ({
 			Toast.show(isHide ? "Reply was successfully hidden" : "Reply visibility updated");
 		} catch (e: any) {
 			Toast.show("Updating reply visibility failed");
-			logger.error(`Failed to ${action} reply`, { safeMessage: e.message });
+			console.error(`Failed to ${action} reply`, { safeMessage: e.message });
 		}
-	}, [_, isReplyHiddenByThreadgate, rootUri, postUri, canHideReplyForEveryone, toggleReplyVisibility]);
+	}, [isReplyHiddenByThreadgate, rootUri, postUri, canHideReplyForEveryone, toggleReplyVisibility]);
 
 	const onPressPin = useCallback(() => {
 		logEvent(isPinned ? "post:unpin" : "post:pin", {});
@@ -314,11 +309,11 @@ let PostDropdownMenuItems = ({
 			Toast.show("Account blocked");
 		} catch (e: any) {
 			if (e?.name !== "AbortError") {
-				logger.error("Failed to block account", { message: e });
+				console.error("Failed to block account", { message: e });
 				Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 			}
 		}
-	}, [_, queueBlock]);
+	}, [queueBlock]);
 
 	const onMuteAuthor = useCallback(async () => {
 		if (postAuthor.viewer?.muted) {
@@ -327,7 +322,7 @@ let PostDropdownMenuItems = ({
 				Toast.show("Account unmuted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to unmute account", { message: e });
+					console.error("Failed to unmute account", { message: e });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
@@ -337,12 +332,12 @@ let PostDropdownMenuItems = ({
 				Toast.show("Account muted");
 			} catch (e: any) {
 				if (e?.name !== "AbortError") {
-					logger.error("Failed to mute account", { message: e });
+					console.error("Failed to mute account", { message: e });
 					Toast.show(`There was an issue! ${e.toString()}`, "xmark");
 				}
 			}
 		}
-	}, [_, queueMute, queueUnmute, postAuthor.viewer?.muted]);
+	}, [queueMute, queueUnmute, postAuthor.viewer?.muted]);
 
 	const onShareATURI = useCallback(() => {
 		shareText(postUri);
@@ -669,9 +664,7 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={loggedOutWarningPromptControl}
 				title={"Note about sharing"}
-				description={_(
-					msg`This post is only visible to logged-in users. It won't be visible to people who aren't signed in.`,
-				)}
+				description={`This post is only visible to logged-in users. It won't be visible to people who aren't signed in.`}
 				onConfirm={onSharePost}
 				confirmButtonCta={"Share anyway"}
 			/>
@@ -699,9 +692,7 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={quotePostDetachConfirmControl}
 				title={"Detach quote post?"}
-				description={_(
-					msg`This will remove your post from this quote post for all users, and replace it with a placeholder.`,
-				)}
+				description={`This will remove your post from this quote post for all users, and replace it with a placeholder.`}
 				onConfirm={onToggleQuotePostAttachment}
 				confirmButtonCta={"Yes, detach"}
 			/>
@@ -709,9 +700,7 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={hideReplyConfirmControl}
 				title={"Hide this reply?"}
-				description={_(
-					msg`This reply will be sorted into a hidden section at the bottom of your thread and will mute notifications for subsequent replies - both for yourself and others.`,
-				)}
+				description={`This reply will be sorted into a hidden section at the bottom of your thread and will mute notifications for subsequent replies - both for yourself and others.`}
 				onConfirm={onToggleReplyVisibility}
 				confirmButtonCta={"Yes, hide"}
 			/>
@@ -719,9 +708,7 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={blockPromptControl}
 				title={"Block Account?"}
-				description={_(
-					msg`Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`,
-				)}
+				description={`Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`}
 				onConfirm={onBlockAuthor}
 				confirmButtonCta={"Block"}
 				confirmButtonColor="negative"

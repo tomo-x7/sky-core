@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useMemo } from "react";
 
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
@@ -10,7 +9,6 @@ import { SearchScreenShell } from "#/view/screens/Search/Search";
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileSearch">;
 export const ProfileSearchScreen = ({ route }: Props) => {
 	const { name, q: queryParam = "" } = route.params;
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 
 	const { data: resolvedDid } = useResolveDidQuery(name);

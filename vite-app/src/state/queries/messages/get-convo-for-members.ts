@@ -1,7 +1,6 @@
 import type { ChatBskyConvoGetConvoForMembers } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { logger } from "#/logger";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent } from "#/state/session";
 import { precacheConvoQuery } from "./conversation";
@@ -30,7 +29,7 @@ export function useGetConvoForMembers({
 			onSuccess?.(data);
 		},
 		onError: (error) => {
-			logger.error(error);
+			console.error(error);
 			onError?.(error);
 		},
 	});

@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -15,7 +14,6 @@ export const ProfileFeedLikedByScreen = ({ route }: Props) => {
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { name, rkey } = route.params;
 	const uri = makeRecordUri(name, "app.bsky.feed.generator", rkey);
-	const { _ } = useLingui();
 
 	useFocusEffect(
 		React.useCallback(() => {

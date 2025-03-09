@@ -79,7 +79,7 @@ export class HomeFeedAPI implements FeedAPI {
 			this.reset();
 		}
 
-		let returnCursor;
+		let returnCursor: string | undefined;
 		let posts: AppBskyFeedDefs.FeedViewPost[] = [];
 
 		if (!this.usingDiscover) {

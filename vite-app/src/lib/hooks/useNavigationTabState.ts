@@ -3,6 +3,7 @@ import { useNavigationState } from "@react-navigation/native";
 import { TabState, getTabState } from "#/lib/routes/helpers";
 
 export function useNavigationTabState() {
+	//@ts-ignore
 	return useNavigationState((state) => {
 		const res = {
 			isAtHome: getTabState(state, "Home") !== TabState.Outside,

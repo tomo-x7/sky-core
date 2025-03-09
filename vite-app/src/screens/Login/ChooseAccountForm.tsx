@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -6,8 +5,6 @@ import { atoms as a } from "#/alf";
 import { AccountList } from "#/components/AccountList";
 import { Button, ButtonText } from "#/components/Button";
 import * as TextField from "#/components/forms/TextField";
-import { logEvent } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
 import { type SessionAccount, useSession, useSessionApi } from "#/state/session";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import * as Toast from "#/view/com/util/Toast";
@@ -21,7 +18,6 @@ export const ChooseAccountForm = ({
 	onPressBack: () => void;
 }) => {
 	const [pendingDid, setPendingDid] = React.useState<string | null>(null);
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const { resumeSession } = useSessionApi();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
@@ -45,13 +41,9 @@ export const ChooseAccountForm = ({
 			try {
 				setPendingDid(account.did);
 				await resumeSession(account);
-				logEvent("account:loggedIn", {
-					logContext: "ChooseAccountForm",
-					withPassword: false,
-				});
 				Toast.show(`Signed in as @${account.handle}`);
 			} catch (e: any) {
-				logger.error("choose account: initSession failed", {
+				console.error("choose account: initSession failed", {
 					message: e.message,
 				});
 				// Move to login form.
@@ -60,7 +52,7 @@ export const ChooseAccountForm = ({
 				setPendingDid(null);
 			}
 		},
-		[currentAccount, resumeSession, pendingDid, onSelectAccount, setShowLoggedOut, _],
+		[currentAccount, resumeSession, pendingDid, onSelectAccount, setShowLoggedOut],
 	);
 
 	return (

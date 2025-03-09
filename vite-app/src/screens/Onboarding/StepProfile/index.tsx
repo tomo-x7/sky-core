@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import React from "react";
 import { Image as ExpoImage } from "react-native";
@@ -18,7 +17,6 @@ import { compressIfNeeded } from "#/lib/media/manip";
 import { openCropper } from "#/lib/media/picker";
 import { getDataUriSize } from "#/lib/media/util";
 import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
-import { logEvent, useGate } from "#/lib/statsig/statsig";
 import { isNative, isWeb } from "#/platform/detection";
 import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
 import { AvatarCircle } from "#/screens/Onboarding/StepProfile/AvatarCircle";
@@ -52,11 +50,9 @@ export const useAvatar = () => React.useContext(AvatarContext);
 const randomColor = avatarColors[Math.floor(Math.random() * avatarColors.length)];
 
 export function StepProfile() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	const { requestPhotoAccessIfNeeded } = usePhotoLibraryPermission();
-	const gate = useGate();
 	const requestNotificationsPermission = useRequestNotificationsPermission();
 
 	const creatorControl = Dialog.useDialogControl();
@@ -74,7 +70,7 @@ export function StepProfile() {
 
 	React.useEffect(() => {
 		requestNotificationsPermission("StartOnboarding");
-	}, [gate, requestNotificationsPermission]);
+	}, [requestNotificationsPermission]);
 
 	const sheetWrapper = useSheetWrapper();
 	const openPicker = React.useCallback(
@@ -89,29 +85,34 @@ export function StepProfile() {
 				}),
 			);
 
-			return (response.assets ?? [])
-				.slice(0, 1)
-				.filter((asset) => {
-					if (
-						!asset.mimeType?.startsWith("image/") ||
-						(!asset.mimeType?.endsWith("jpeg") &&
-							!asset.mimeType?.endsWith("jpg") &&
-							!asset.mimeType?.endsWith("png"))
-					) {
-						setError("Only .jpg and .png files are supported");
-						return false;
-					}
-					return true;
-				})
-				.map((image) => ({
-					mime: "image/jpeg",
-					height: image.height,
-					width: image.width,
-					path: image.uri,
-					size: getDataUriSize(image.uri),
-				}));
+			return (
+				//@ts-expect-error
+				(response.assets ?? [])
+					.slice(0, 1)
+					//@ts-expect-error
+					.filter((asset) => {
+						if (
+							!asset.mimeType?.startsWith("image/") ||
+							(!asset.mimeType?.endsWith("jpeg") &&
+								!asset.mimeType?.endsWith("jpg") &&
+								!asset.mimeType?.endsWith("png"))
+						) {
+							setError("Only .jpg and .png files are supported");
+							return false;
+						}
+						return true;
+					})
+					//@ts-expect-error
+					.map((image) => ({
+						mime: "image/jpeg",
+						height: image.height,
+						width: image.width,
+						path: image.uri,
+						size: getDataUriSize(image.uri),
+					}))
+			);
 		},
-		[_, setError, sheetWrapper],
+		[sheetWrapper],
 	);
 
 	const onContinue = React.useCallback(async () => {
@@ -139,7 +140,6 @@ export function StepProfile() {
 		}
 
 		dispatch({ type: "next" });
-		logEvent("onboarding:profile:nextPressed", {});
 	}, [avatar, dispatch]);
 
 	const onDoneCreating = React.useCallback(() => {
@@ -188,7 +188,7 @@ export function StepProfile() {
 			image,
 			useCreatedAvatar: false,
 		}));
-	}, [requestPhotoAccessIfNeeded, setAvatar, openPicker, setError, sheetWrapper]);
+	}, [requestPhotoAccessIfNeeded, openPicker, sheetWrapper]);
 
 	const onSecondaryPress = React.useCallback(() => {
 		if (avatar.useCreatedAvatar) {

@@ -1,5 +1,4 @@
 import { TID } from "@atproto/common-web";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -17,7 +16,6 @@ import { useOverwriteSavedFeedsMutation } from "#/state/queries/preferences";
  */
 export function NoSavedFeedsOfAnyType() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { isPending, mutateAsync: overwriteSavedFeeds } = useOverwriteSavedFeedsMutation();
 
 	const addRecommendedFeeds = React.useCallback(async () => {

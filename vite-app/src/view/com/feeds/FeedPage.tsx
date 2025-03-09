@@ -1,6 +1,4 @@
 import { type AppBskyActorDefs, AppBskyFeedDefs } from "@atproto/api";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -11,7 +9,6 @@ import { VIDEO_FEED_URIS } from "#/lib/constants";
 import { ComposeIcon2 } from "#/lib/icons";
 import { TabState, getRootNavigation, getTabState } from "#/lib/routes/helpers";
 import type { AllNavigatorParams } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
 import { s } from "#/lib/styles";
 import { isNative } from "#/platform/detection";
 import { listenSoftReset } from "#/state/events";
@@ -54,7 +51,6 @@ export function FeedPage({
 	feedInfo: SavedFeedSourceInfo;
 }) {
 	const { hasSession } = useSession();
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp<AllNavigatorParams>>();
 	const queryClient = useQueryClient();
 	const { openComposer } = useComposerControls();
@@ -156,7 +152,7 @@ export function FeedPage({
 					onPress={onPressCompose}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 					accessibilityRole="button"
-					accessibilityLabel={_(msg({ message: "New post", context: "action" }))}
+					accessibilityLabel={msg({ message: "New post", context: "action" })}
 					accessibilityHint=""
 				/>
 			)}

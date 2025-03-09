@@ -1,5 +1,4 @@
 import { LABELS } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Fragment, useCallback } from "react";
 import { Linking, View } from "react-native";
@@ -27,7 +26,6 @@ import type { Props as SVGIconProps } from "#/components/icons/common";
 import { GlobalLabelPreference } from "#/components/moderation/LabelPreference";
 import { getLabelingServiceTitle } from "#/lib/moderation";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { logger } from "#/logger";
 import { isIOS } from "#/platform/detection";
 import {
 	type UsePreferencesQueryResponse,
@@ -55,7 +53,6 @@ function ErrorState({ error }: { error: string }) {
 }
 
 export function ModerationScreen(_props: NativeStackScreenProps<CommonNavigatorParams, "Moderation">) {
-	const { _ } = useLingui();
 	const { isLoading: isPreferencesLoading, error: preferencesError, data: preferences } = usePreferencesQuery();
 
 	const isLoading = isPreferencesLoading;
@@ -102,7 +99,6 @@ export function ModerationScreenInner({
 }: {
 	preferences: UsePreferencesQueryResponse;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { gtMobile } = useBreakpoints();
@@ -119,7 +115,7 @@ export function ModerationScreenInner({
 	const { mutateAsync: setAdultContentPref, variables: optimisticAdultContent } =
 		usePreferencesSetAdultContentMutation();
 	const adultContentEnabled = !!(
-		(optimisticAdultContent && optimisticAdultContent.enabled) ||
+		optimisticAdultContent?.enabled ||
 		(!optimisticAdultContent && preferences.moderationPrefs.adultContentEnabled)
 	);
 	const ageNotSet = !preferences.userAge;
@@ -132,7 +128,7 @@ export function ModerationScreenInner({
 					enabled: selected,
 				});
 			} catch (e: any) {
-				logger.error("Failed to set adult content pref", {
+				console.error("Failed to set adult content pref", {
 					message: e.message,
 				});
 			}

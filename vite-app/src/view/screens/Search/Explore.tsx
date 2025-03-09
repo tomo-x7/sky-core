@@ -5,7 +5,6 @@ import {
 	type ModerationOpts,
 	moderateProfile,
 } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -19,9 +18,7 @@ import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/i
 import { ListSparkle_Stroke2_Corner0_Rounded as ListSparkle } from "#/components/icons/ListSparkle";
 import { UserCircle_Stroke2_Corner0_Rounded as Person } from "#/components/icons/UserCircle";
 import type { Props as SVGIconProps } from "#/components/icons/common";
-import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
 import { ExploreRecommendations } from "#/screens/Search/components/ExploreRecommendations";
 import { ExploreTrendingTopics } from "#/screens/Search/components/ExploreTrendingTopics";
@@ -91,7 +88,6 @@ function LoadMore({
 	moderationOpts?: ModerationOpts;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const items: LoadMoreItem[] = React.useMemo(() => {
 		return item.items
 			.map((_item) => {
@@ -264,7 +260,6 @@ type ExploreScreenItems =
 	  };
 
 export function Explore() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { data: preferences, error: preferencesError } = usePreferencesQuery();
 	const moderationOpts = useModerationOpts();
@@ -291,7 +286,7 @@ export function Explore() {
 		try {
 			await fetchNextProfilesPage();
 		} catch (err) {
-			logger.error("Failed to load more suggested follows", { message: err });
+			console.error("Failed to load more suggested follows", { message: err });
 		}
 	}, [isFetchingNextProfilesPage, hasNextProfilesPage, profilesError, fetchNextProfilesPage]);
 
@@ -301,7 +296,7 @@ export function Explore() {
 		try {
 			await fetchNextFeedsPage();
 		} catch (err) {
-			logger.error("Failed to load more suggested follows", { message: err });
+			console.error("Failed to load more suggested follows", { message: err });
 		}
 	}, [isFetchingNextFeedsPage, hasNextFeedsPage, feedsError, fetchNextFeedsPage]);
 

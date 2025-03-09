@@ -1,5 +1,4 @@
 import { type $Typed, ComAtprotoLabelDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -12,7 +11,6 @@ import * as bsky from "#/types/bsky";
 
 export function PwiOptOut() {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const { data: profile } = useProfileQuery({ did: currentAccount?.did });
 	const updateProfile = useProfileUpdateMutation();
@@ -51,6 +49,7 @@ export function PwiOptOut() {
 
 				// delete if no longer needed
 				if (labels.values.length === 0) {
+					// biome-ignore lint/performance/noDelete: <explanation>
 					delete existing.labels;
 				} else {
 					existing.labels = labels;

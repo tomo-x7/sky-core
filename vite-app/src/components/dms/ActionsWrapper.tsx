@@ -14,7 +14,6 @@ import { atoms as a } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
 import { MessageMenu } from "#/components/dms/MessageMenu";
 import { HITSLOP_10 } from "#/lib/constants";
-import { useHaptics } from "#/lib/haptics";
 
 export function ActionsWrapper({
 	message,
@@ -25,7 +24,6 @@ export function ActionsWrapper({
 	isFromSelf: boolean;
 	children: React.ReactNode;
 }) {
-	const playHaptic = useHaptics();
 	const menuControl = useMenuControl();
 
 	const scale = useSharedValue(1);
@@ -35,10 +33,9 @@ export function ActionsWrapper({
 	}));
 
 	const open = React.useCallback(() => {
-		playHaptic();
 		Keyboard.dismiss();
 		menuControl.open();
-	}, [menuControl, playHaptic]);
+	}, [menuControl]);
 
 	const shrink = React.useCallback(() => {
 		"worklet";

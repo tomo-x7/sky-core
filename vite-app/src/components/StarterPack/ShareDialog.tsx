@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { Image } from "react-native";
 import { View } from "react-native";
@@ -13,9 +12,7 @@ import { Text } from "#/components/Typography";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { saveImageToMediaLibrary } from "#/lib/media/manip";
 import { shareUrl } from "#/lib/sharing";
-import { logEvent } from "#/lib/statsig/statsig";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
-import { logger } from "#/logger";
 import { isNative, isWeb } from "#/platform/detection";
 import * as Toast from "#/view/com/util/Toast";
 
@@ -37,7 +34,6 @@ export function ShareDialog(props: Props) {
 }
 
 function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, control }: Props) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { isTabletOrDesktop } = useWebMediaQueries();
 
@@ -46,10 +42,6 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 	const onShareLink = async () => {
 		if (!link) return;
 		shareUrl(link);
-		logEvent("starterPack:share", {
-			starterPack: starterPack.uri,
-			shareType: "link",
-		});
 		control.close();
 	};
 
@@ -67,7 +59,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 			control.close();
 		} catch (e: unknown) {
 			Toast.show("An error occurred while saving the QR code!", "xmark");
-			logger.error("Failed to save QR code", { error: e });
+			console.error("Failed to save QR code", { error: e });
 			return;
 		}
 	};

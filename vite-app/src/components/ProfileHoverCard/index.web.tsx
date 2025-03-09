@@ -1,7 +1,5 @@
 import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import { flip, offset, shift, size, useFloating } from "@floating-ui/react-dom";
-import { plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -364,26 +362,18 @@ function Inner({
 	hide: () => void;
 }) {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
 	const { currentAccount } = useSession();
 	const moderation = React.useMemo(() => moderateProfile(profile, moderationOpts), [profile, moderationOpts]);
 	const [descriptionRT] = useRichText(profile.description ?? "");
 	const profileShadow = useProfileShadow(profile);
 	const { follow, unfollow } = useFollowMethods({
 		profile: profileShadow,
-		logContext: "ProfileHoverCard",
 	});
 	const isBlockedUser = profile.viewer?.blocking || profile.viewer?.blockedBy || profile.viewer?.blockingByList;
-	const following = formatCount(i18n, profile.followsCount || 0);
-	const followers = formatCount(i18n, profile.followersCount || 0);
-	const pluralizedFollowers = plural(profile.followersCount || 0, {
-		one: "follower",
-		other: "followers",
-	});
-	const pluralizedFollowings = plural(profile.followsCount || 0, {
-		one: "following",
-		other: "following",
-	});
+	const following = formatCount(profile.followsCount || 0);
+	const followers = formatCount(profile.followersCount || 0);
+	const pluralizedFollowers = profile.followersCount === 1 ? "follower" : "followers";
+	const pluralizedFollowings = profile.followsCount === 1 ? "follower" : "followers";
 	const profileURL = makeProfileLink({
 		did: profile.did,
 		handle: profile.handle,

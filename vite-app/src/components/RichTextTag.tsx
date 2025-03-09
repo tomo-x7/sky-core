@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
@@ -29,7 +28,6 @@ export function RichTextTag({
 	authorHandle?: string;
 	textStyle: StyleProp<TextStyle>;
 }) {
-	const { _ } = useLingui();
 	const { isLoading: isPreferencesLoading, data: preferences } = usePreferencesQuery();
 	const {
 		mutateAsync: upsertMutedWord,

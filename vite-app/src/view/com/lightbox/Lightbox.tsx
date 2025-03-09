@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import * as MediaLibrary from "expo-media-library";
 import React from "react";
 
@@ -15,7 +14,6 @@ export function Lightbox() {
 		closeLightbox();
 	}, [closeLightbox]);
 
-	const { _ } = useLingui();
 	const [permissionResponse, requestPermission] = MediaLibrary.usePermissions({
 		granularPermissions: ["photo"],
 	});
@@ -40,7 +38,7 @@ export function Lightbox() {
 				Toast.show(`Failed to save image: ${String(e)}`, "xmark");
 			}
 		},
-		[permissionResponse, requestPermission, _],
+		[permissionResponse, requestPermission],
 	);
 
 	return (

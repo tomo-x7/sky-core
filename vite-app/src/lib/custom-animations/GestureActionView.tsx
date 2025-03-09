@@ -15,8 +15,6 @@ import Animated, {
 	withTiming,
 } from "react-native-reanimated";
 
-import { useHaptics } from "#/lib/haptics";
-
 interface GestureAction {
 	color: ColorValue;
 	action: () => void;
@@ -49,7 +47,6 @@ export function GestureActionView({
 		"leftFirst" | "leftSecond" | "rightFirst" | "rightSecond" | null
 	>(null);
 
-	const haptic = useHaptics();
 	const isReducedMotion = useReducedMotion();
 
 	const transX = useSharedValue(0);
@@ -107,6 +104,7 @@ export function GestureActionView({
 			"worklet";
 			isActive.set(true);
 		})
+		//@ts-ignore
 		.onChange((e) => {
 			"worklet";
 			transX.set(e.translationX);
@@ -116,7 +114,6 @@ export function GestureActionView({
 				if (actions.leftSecond) {
 					if (e.translationX <= -actions.leftSecond.threshold && !hitSecond.get()) {
 						runPopAnimation();
-						runOnJS(haptic)();
 						hitSecond.set(true);
 					} else if (hitSecond.get() && e.translationX > -actions.leftSecond.threshold) {
 						runPopAnimation();
@@ -127,7 +124,6 @@ export function GestureActionView({
 				if (!hitSecond.get() && actions.leftFirst) {
 					if (e.translationX <= -actions.leftFirst.threshold && !hitFirst.get()) {
 						runPopAnimation();
-						runOnJS(haptic)();
 						hitFirst.set(true);
 					} else if (hitFirst.get() && e.translationX > -actions.leftFirst.threshold) {
 						hitFirst.set(false);
@@ -138,7 +134,6 @@ export function GestureActionView({
 				if (actions.rightSecond) {
 					if (e.translationX >= actions.rightSecond.threshold && !hitSecond.get()) {
 						runPopAnimation();
-						runOnJS(haptic)();
 						hitSecond.set(true);
 					} else if (hitSecond.get() && e.translationX < actions.rightSecond.threshold) {
 						runPopAnimation();
@@ -149,7 +144,6 @@ export function GestureActionView({
 				if (!hitSecond.get() && actions.rightFirst) {
 					if (e.translationX >= actions.rightFirst.threshold && !hitFirst.get()) {
 						runPopAnimation();
-						runOnJS(haptic)();
 						hitFirst.set(true);
 					} else if (hitFirst.get() && e.translationX < actions.rightFirst.threshold) {
 						hitFirst.set(false);
@@ -157,6 +151,7 @@ export function GestureActionView({
 				}
 			}
 		})
+		//@ts-ignore
 		.onEnd((e) => {
 			"worklet";
 			if (e.translationX < 0) {
@@ -330,7 +325,10 @@ function createInterpolation({
 		}
 	}
 
-	let res;
+	let res: {
+		inputRange: number[];
+		outputRange: ColorValue[];
+	};
 	if (secondThreshold) {
 		res = {
 			inputRange: [0, firstThreshold, firstThreshold + offset - 20, secondThreshold],

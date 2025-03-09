@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View, findNodeHandle } from "react-native";
@@ -29,7 +28,6 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 	{ feed, headerHeight, isFocused, scrollElRef, ignoreFilterFor, setScrollViewTag },
 	ref,
 ) {
-	const { _ } = useLingui();
 	const queryClient = useQueryClient();
 	const [hasNew, setHasNew] = React.useState(false);
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
@@ -46,14 +44,14 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 		});
 		truncateAndInvalidate(queryClient, FEED_RQKEY(feed));
 		setHasNew(false);
-	}, [scrollElRef, headerHeight, queryClient, feed, setHasNew]);
+	}, [scrollElRef, headerHeight, queryClient, feed]);
 	React.useImperativeHandle(ref, () => ({
 		scrollToTop: onScrollToTop,
 	}));
 
 	const renderPostsEmpty = React.useCallback(() => {
 		return <EmptyState icon="growth" message={"No posts yet."} />;
-	}, [_]);
+	}, []);
 
 	React.useEffect(() => {
 		if (isFocused && scrollElRef.current) {

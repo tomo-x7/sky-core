@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { View } from "react-native";
 
@@ -17,8 +16,7 @@ import { Email2FAToggle } from "./components/Email2FAToggle";
 import { PwiOptOut } from "./components/PwiOptOut";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "PrivacyAndSecuritySettings">;
-export function PrivacyAndSecuritySettingsScreen({}: Props) {
-	const { _ } = useLingui();
+export function PrivacyAndSecuritySettingsScreen(props: Props) {
 	const t = useTheme();
 	const { data: appPasswords } = useAppPasswordsQuery();
 	const { currentAccount } = useSession();

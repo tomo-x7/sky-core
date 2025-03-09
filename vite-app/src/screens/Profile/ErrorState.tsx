@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
@@ -11,7 +10,6 @@ import type { NavigationProp } from "#/lib/routes/types";
 
 export function ErrorState({ error }: { error: string }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 
 	const onPressBack = React.useCallback(() => {

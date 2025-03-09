@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import React from "react";
 
 import { useDialogControl } from "#/components/Dialog";
@@ -9,7 +8,6 @@ import { DisableEmail2FADialog } from "./DisableEmail2FADialog";
 import * as SettingsList from "./SettingsList";
 
 export function Email2FAToggle() {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const { openModal } = useModalControls();
 	const disableDialogControl = useDialogControl();

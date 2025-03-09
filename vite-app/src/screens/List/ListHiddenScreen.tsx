@@ -1,5 +1,4 @@
 import { AppBskyGraphDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View } from "react-native";
@@ -12,7 +11,6 @@ import { EyeSlash_Stroke2_Corner0_Rounded as EyeSlash } from "#/components/icons
 import { useHider } from "#/components/moderation/Hider";
 import { useGoBack } from "#/lib/hooks/useGoBack";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { logger } from "#/logger";
 import { RQKEY_ROOT as listQueryRoot } from "#/state/queries/list";
 import { useListBlockMutation, useListMuteMutation } from "#/state/queries/list";
 import { type UsePreferencesQueryResponse, useRemoveFeedMutation } from "#/state/queries/preferences";
@@ -27,7 +25,6 @@ export function ListHiddenScreen({
 	list: AppBskyGraphDefs.ListView;
 	preferences: UsePreferencesQueryResponse;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const { gtMobile } = useBreakpoints();
@@ -53,7 +50,7 @@ export function ListHiddenScreen({
 				await listMuteMutation.mutateAsync({ uri: list.uri, mute: false });
 			} catch (e) {
 				setIsProcessing(false);
-				logger.error("Failed to unmute list", { message: e });
+				console.error("Failed to unmute list", { message: e });
 				Toast.show("There was an issue. Please check your internet connection and try again.");
 				return;
 			}
@@ -63,7 +60,7 @@ export function ListHiddenScreen({
 				await listBlockMutation.mutateAsync({ uri: list.uri, block: false });
 			} catch (e) {
 				setIsProcessing(false);
-				logger.error("Failed to unblock list", { message: e });
+				console.error("Failed to unblock list", { message: e });
 				Toast.show("There was an issue. Please check your internet connection and try again.");
 				return;
 			}
@@ -81,7 +78,7 @@ export function ListHiddenScreen({
 			await removeSavedFeed(savedFeedConfig);
 			Toast.show("Removed from saved feeds");
 		} catch (e) {
-			logger.error("Failed to remove list from saved feeds", { message: e });
+			console.error("Failed to remove list from saved feeds", { message: e });
 			Toast.show("There was an issue. Please check your internet connection and try again.");
 		} finally {
 			setIsProcessing(false);

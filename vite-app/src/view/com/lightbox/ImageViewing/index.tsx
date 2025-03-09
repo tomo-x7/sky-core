@@ -9,7 +9,6 @@
 // https://github.com/jobtoday/react-native-image-viewing
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans } from "@lingui/macro";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useMemo, useState } from "react";

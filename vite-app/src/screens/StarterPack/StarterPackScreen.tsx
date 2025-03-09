@@ -6,7 +6,6 @@ import {
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
@@ -40,10 +39,8 @@ import { HITSLOP_20 } from "#/lib/constants";
 import { isBlockedOrBlocking, isMuted } from "#/lib/moderation/blocked-and-muted";
 import { makeProfileLink, makeStarterPackLink } from "#/lib/routes/links";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
-import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
-import { logger } from "#/logger";
 import { bulkWriteFollows } from "#/screens/Onboarding/util";
 import { updateProfileShadow } from "#/state/cache/profile-shadow";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -74,7 +71,6 @@ export function StarterPackScreen({ route }: StarterPackScreeProps) {
 }
 
 export function StarterPackScreenShort({ route }: StarterPackScreenShortProps) {
-	const { _ } = useLingui();
 	const {
 		data: resolvedStarterPack,
 		isLoading,
@@ -108,7 +104,6 @@ export function StarterPackScreenInner({
 	routeParams: StarterPackScreeProps["route"]["params"];
 }) {
 	const { name, rkey } = routeParams;
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 
 	const moderationOpts = useModerationOpts();
@@ -157,7 +152,6 @@ function StarterPackScreenLoaded({
 	const showPeopleTab = Boolean(starterPack.list);
 	const showFeedsTab = Boolean(starterPack.feeds?.length);
 	const showPostsTab = Boolean(starterPack.list);
-	const { _ } = useLingui();
 
 	const tabs = [
 		...(showPeopleTab ? ["People"] : []),
@@ -266,7 +260,6 @@ function Header({
 	routeParams: StarterPackScreeProps["route"]["params"];
 	onOpenShareDialog: () => void;
 }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { currentAccount, hasSession } = useSession();
 	const agent = useAgent();
@@ -315,7 +308,7 @@ function Header({
 		} catch (e) {
 			setIsProcessing(false);
 			Toast.show("An error occurred while trying to follow all", "xmark");
-			logger.error("Failed to get list members for starter pack", {
+			console.error("Failed to get list members for starter pack", {
 				safeMessage: e,
 			});
 			return;
@@ -337,7 +330,7 @@ function Header({
 		} catch (e) {
 			setIsProcessing(false);
 			Toast.show("An error occurred while trying to follow all", "xmark");
-			logger.error("Failed to follow all accounts", { safeMessage: e });
+			console.error("Failed to follow all accounts", { safeMessage: e });
 		}
 
 		setIsProcessing(false);
@@ -462,7 +455,6 @@ function OverflowMenu({
 	onOpenShareDialog: () => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { gtMobile } = useBreakpoints();
 	const { currentAccount } = useSession();
 	const reportDialogControl = useReportDialogControl();
@@ -485,7 +477,7 @@ function OverflowMenu({
 			});
 		},
 		onError: (e) => {
-			logger.error("Failed to delete starter pack", { safeMessage: e });
+			console.error("Failed to delete starter pack", { safeMessage: e });
 		},
 	});
 
@@ -493,7 +485,7 @@ function OverflowMenu({
 
 	const onDeleteStarterPack = async () => {
 		if (!starterPack.list) {
-			logger.error("Unable to delete starterpack because list is missing");
+			console.error("Unable to delete starterpack because list is missing");
 			return;
 		}
 
@@ -619,7 +611,6 @@ function OverflowMenu({
 }
 
 function InvalidStarterPack({ rkey }: { rkey: string }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const navigation = useNavigation<NavigationProp>();
 	const { gtMobile } = useBreakpoints();
@@ -640,7 +631,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 		},
 		onError: (e) => {
 			setIsProcessing(false);
-			logger.error("Failed to delete invalid starter pack", { safeMessage: e });
+			console.error("Failed to delete invalid starter pack", { safeMessage: e });
 			Toast.show("Failed to delete starter pack", "xmark");
 		},
 	});

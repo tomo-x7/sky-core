@@ -1,7 +1,6 @@
-import { type AppBskyActorProfile, type AppBskyGraphDefs, AppBskyGraphStarterpack, type Un$Typed } from "@atproto/api";
+import type { AppBskyActorProfile, AppBskyGraphDefs, Un$Typed } from "@atproto/api";
 import type { SavedFeed } from "@atproto/api/dist/client/types/app/bsky/actor/defs";
 import { TID } from "@atproto/common-web";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View } from "react-native";
@@ -16,10 +15,8 @@ import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Gro
 import { News2_Stroke2_Corner0_Rounded as News } from "#/components/icons/News2";
 import { Trending2_Stroke2_Corner2_Rounded as Trending } from "#/components/icons/Trending2";
 import { uploadBlob } from "#/lib/api";
-import { BSKY_APP_ACCOUNT_DID, DISCOVER_SAVED_FEED, TIMELINE_SAVED_FEED, VIDEO_SAVED_FEED } from "#/lib/constants";
+import { BSKY_APP_ACCOUNT_DID, DISCOVER_SAVED_FEED, TIMELINE_SAVED_FEED } from "#/lib/constants";
 import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
-import { logEvent, useGate } from "#/lib/statsig/statsig";
-import { logger } from "#/logger";
 import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
 import { Context } from "#/screens/Onboarding/state";
 import { bulkWriteFollows } from "#/screens/Onboarding/util";
@@ -31,10 +28,8 @@ import { useAgent } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
 import { useProgressGuideControls } from "#/state/shell/progress-guide";
 import { useActiveStarterPack, useSetActiveStarterPack } from "#/state/shell/starter-pack";
-import * as bsky from "#/types/bsky";
 
 export function StepFinished() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const { state, dispatch } = React.useContext(Context);
 	const onboardDispatch = useOnboardingDispatch();
@@ -46,7 +41,6 @@ export function StepFinished() {
 	const setActiveStarterPack = useSetActiveStarterPack();
 	const setHasCheckedForStarterPack = useSetHasCheckedForStarterPack();
 	const { startProgressGuide } = useProgressGuideControls();
-	const gate = useGate();
 
 	const finishOnboarding = React.useCallback(async () => {
 		setSaving(true);
@@ -61,7 +55,7 @@ export function StepFinished() {
 				});
 				starterPack = spRes.data.starterPack;
 			} catch (e) {
-				logger.error("Failed to fetch starter pack", { safeMessage: e });
+				console.error("Failed to fetch starter pack", { safeMessage: e });
 				// don't tell the user, just get them through onboarding.
 			}
 			try {
@@ -69,7 +63,7 @@ export function StepFinished() {
 					listItems = await getAllListMembers(agent, starterPack.list.uri);
 				}
 			} catch (e) {
-				logger.error("Failed to fetch starter pack list items", {
+				console.error("Failed to fetch starter pack list items", {
 					safeMessage: e,
 				});
 				// don't tell the user, just get them through onboarding.
@@ -97,15 +91,9 @@ export function StepFinished() {
 							id: TID.nextStr(),
 						},
 					];
-					if (gate("onboarding_add_video_feed")) {
-						feedsToSave.push({
-							...VIDEO_SAVED_FEED,
-							id: TID.nextStr(),
-						});
-					}
 
 					// Any starter pack feeds will be pinned _after_ the defaults
-					if (starterPack && starterPack.feeds?.length) {
+					if (starterPack?.feeds?.length) {
 						feedsToSave.push(
 							...starterPack.feeds.map((f) => ({
 								type: "feed",
@@ -147,20 +135,11 @@ export function StepFinished() {
 						next.createdAt = new Date().toISOString();
 						return next;
 					});
-
-					logEvent("onboarding:finished:avatarResult", {
-						avatarResult: profileStepResults.isCreatedAvatar
-							? "created"
-							: profileStepResults.image
-								? "uploaded"
-								: "default",
-					});
 				})(),
 				requestNotificationsPermission("AfterOnboarding"),
 			]);
 		} catch (e: any) {
-			logger.info("onboarding: bulk save failed");
-			logger.error(e);
+			console.error(e);
 			// don't alert the user, just let them into their account
 		}
 
@@ -173,38 +152,16 @@ export function StepFinished() {
 				queryKey: profileRQKey(agent.session?.did ?? ""),
 			}),
 		]).catch((e) => {
-			logger.error(e);
+			console.error(e);
 			// Keep going.
 		});
 
 		setSaving(false);
 		setActiveStarterPack(undefined);
 		setHasCheckedForStarterPack(true);
-		startProgressGuide(gate("old_postonboarding") ? "like-10-and-follow-7" : "follow-10");
+		startProgressGuide("follow-10");
 		dispatch({ type: "finish" });
 		onboardDispatch({ type: "finish" });
-		logEvent("onboarding:finished:nextPressed", {
-			usedStarterPack: Boolean(starterPack),
-			starterPackName:
-				starterPack &&
-				bsky.dangerousIsType<AppBskyGraphStarterpack.Record>(
-					starterPack.record,
-					AppBskyGraphStarterpack.isRecord,
-				)
-					? starterPack.record.name
-					: undefined,
-			starterPackCreator: starterPack?.creator.did,
-			starterPackUri: starterPack?.uri,
-			profilesFollowed: listItems?.length ?? 0,
-			feedsPinned: starterPack?.feeds?.length ?? 0,
-		});
-		if (starterPack && listItems?.length) {
-			logEvent("starterPack:followAll", {
-				logContext: "Onboarding",
-				starterPack: starterPack.uri,
-				count: listItems?.length,
-			});
-		}
 	}, [
 		queryClient,
 		agent,
@@ -216,7 +173,6 @@ export function StepFinished() {
 		setActiveStarterPack,
 		setHasCheckedForStarterPack,
 		startProgressGuide,
-		gate,
 	]);
 
 	return (

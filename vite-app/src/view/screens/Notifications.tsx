@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -15,7 +14,6 @@ import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { ComposeIcon2 } from "#/lib/icons";
 import type { NativeStackScreenProps, NotificationsTabNavigatorParams } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isNative } from "#/platform/detection";
 import { emitSoftReset, listenSoftReset } from "#/state/events";
 import { RQKEY as NOTIFS_RQKEY } from "#/state/queries/notifications/feed";
@@ -38,7 +36,6 @@ let lastActiveTab = 0;
 
 type Props = NativeStackScreenProps<NotificationsTabNavigatorParams, "Notifications">;
 export function NotificationsScreen({}: Props) {
-	const { _ } = useLingui();
 	const { openComposer } = useComposerControls();
 	const unreadNotifs = useUnreadNotifications();
 	const hasNew = !!unreadNotifs;
@@ -99,7 +96,7 @@ export function NotificationsScreen({}: Props) {
 				),
 			},
 		];
-	}, [_, hasNew, checkUnreadAll, checkUnreadMentions, activeTab, isLoadingAll, isLoadingMentions]);
+	}, [hasNew, checkUnreadAll, checkUnreadMentions, activeTab, isLoadingAll, isLoadingMentions]);
 
 	return (
 		<Layout.Screen testID="notificationsScreen">
@@ -166,7 +163,6 @@ function NotificationsTab({
 	checkUnread: ({ invalidate }: { invalidate: boolean }) => Promise<void>;
 	setIsLoadingLatest: (v: boolean) => void;
 }) {
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
 	const scrollElRef = React.useRef<ListMethods>(null);

@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ScrollView, TextInput, View, useWindowDimensions } from "react-native";
 import Animated, { LayoutAnimationConfig, LinearTransition, ZoomInEasyDown } from "react-native-reanimated";
@@ -14,9 +13,7 @@ import { MagnifyingGlass2_Stroke2_Corner0_Rounded as SearchIcon } from "#/compon
 import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/components/icons/Person";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -51,7 +48,6 @@ type Item =
 	  };
 
 export function FollowDialog({ guide }: { guide: Follow10ProgressGuide }) {
-	const { _ } = useLingui();
 	const control = Dialog.useDialogControl();
 	const { gtMobile } = useBreakpoints();
 	const { height: minHeight } = useWindowDimensions();
@@ -62,7 +58,6 @@ export function FollowDialog({ guide }: { guide: Follow10ProgressGuide }) {
 				label={"Find people to follow"}
 				onPress={() => {
 					control.open();
-					logEvent("progressGuide:followDialog:open", {});
 				}}
 				size={gtMobile ? "small" : "large"}
 				color="primary"
@@ -84,7 +79,6 @@ let lastSelectedInterest = "";
 let lastSearchText = "";
 
 function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
-	const { _ } = useLingui();
 	const interestsDisplayNames = useInterestsDisplayNames();
 	const { data: preferences } = usePreferencesQuery();
 	const personalizedInterests = preferences?.interests?.tags;
@@ -203,7 +197,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 		}
 
 		return _items;
-	}, [_, searchResults, isError, currentAccount?.did, hasSearchText, selectedInterest, suggestedAccounts, query]);
+	}, [searchResults, isError, currentAccount?.did, hasSearchText, selectedInterest, suggestedAccounts, query]);
 
 	if (searchText && !isFetching && !items.length && !isError) {
 		items.push({ type: "empty", key: "empty", message: "No results" });
@@ -236,23 +230,22 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 		[moderationOpts],
 	);
 
-	const onSelectTab = useCallback(
-		(interest: string) => {
-			setSelectedInterest(interest);
-			inputRef.current?.clear();
-			setSearchText("");
-			listRef.current?.scrollToOffset({
-				offset: 0,
-				animated: false,
-			});
-		},
-		[setSelectedInterest, setSearchText],
-	);
+	const onSelectTab = useCallback((interest: string) => {
+		setSelectedInterest(interest);
+		inputRef.current?.clear();
+		setSearchText("");
+		listRef.current?.scrollToOffset({
+			offset: 0,
+			animated: false,
+		});
+	}, []);
 
 	const listHeader = (
 		<Header
 			guide={guide}
+			//@ts-ignore
 			inputRef={inputRef}
+			//@ts-ignore
 			listRef={listRef}
 			searchText={searchText}
 			onSelectTab={onSelectTab}
@@ -269,7 +262,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 		try {
 			await fetchNextPage();
 		} catch (err) {
-			logger.error("Failed to load more people to follow", { message: err });
+			console.error("Failed to load more people to follow", { message: err });
 		}
 	}, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 
@@ -281,6 +274,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
+			//@ts-ignore
 			style={[a.px_0, web([a.py_0, { height: "100vh", maxHeight: 600 }]), native({ height: "100%" })]}
 			webInnerContentContainerStyle={a.py_0}
 			webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
@@ -361,7 +355,6 @@ let Header = ({
 Header = memo(Header);
 
 function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const control = Dialog.useDialogContext();
 	return (
@@ -515,7 +508,6 @@ let Tab = ({
 	interestsDisplayName: string;
 	onLayout: (index: number, x: number, width: number) => void;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const activeText = active ? " (active)" : "";
 	return (
 		<View key={interest} onLayout={(e) => onLayout(index, e.nativeEvent.layout.x, e.nativeEvent.layout.width)}>
@@ -639,7 +631,6 @@ function SearchInput({
 	defaultValue: string;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { state: hovered, onIn: onMouseEnter, onOut: onMouseLeave } = useInteractionState();
 	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
 	const interacted = hovered || focused;

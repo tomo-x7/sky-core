@@ -5,7 +5,6 @@ import {
 	LABELS,
 	interpretLabelValueDefinition,
 } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import * as bcp47Match from "bcp-47-match";
 
 import { type GlobalLabelStrings, useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
@@ -19,14 +18,13 @@ export interface LabelInfo {
 }
 
 export function useLabelInfo(label: ComAtprotoLabelDefs.Label): LabelInfo {
-	const { i18n } = useLingui();
 	const { labelDefs, labelers } = useLabelDefinitions();
 	const globalLabelStrings = useGlobalLabelStrings();
 	const def = getDefinition(labelDefs, label);
 	return {
 		label,
 		def,
-		strings: getLabelStrings(i18n.locale, globalLabelStrings, def),
+		strings: getLabelStrings(globalLabelStrings, def),
 		labeler: labelers.find((labeler) => label.src === labeler.creator.did),
 	};
 }
@@ -63,7 +61,6 @@ export function getDefinition(
 }
 
 export function getLabelStrings(
-	locale: string,
 	globalLabelStrings: GlobalLabelStrings,
 	def: InterpretedLabelValueDefinition,
 ): ComAtprotoLabelDefs.LabelValueDefinitionStrings {
@@ -74,7 +71,7 @@ export function getLabelStrings(
 		}
 	} else {
 		// try to find locale match in the definition's strings
-		const localeMatch = def.locales.find((strings) => bcp47Match.basicFilter(locale, strings.lang).length > 0);
+		const localeMatch = def.locales.find((strings) => bcp47Match.basicFilter("ja", strings.lang).length > 0);
 		if (localeMatch) {
 			return localeMatch;
 		}
@@ -84,7 +81,7 @@ export function getLabelStrings(
 		}
 	}
 	return {
-		lang: locale,
+		lang: "locale",
 		name: def.identifier,
 		description: `Labeled "${def.identifier}"`,
 	};

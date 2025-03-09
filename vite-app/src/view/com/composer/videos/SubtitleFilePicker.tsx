@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import type React from "react";
 import { useRef } from "react";
 import { View } from "react-native";
@@ -6,7 +5,6 @@ import { View } from "react-native";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { CC_Stroke2_Corner0_Rounded as CCIcon } from "#/components/icons/CC";
-import { logger } from "#/logger";
 import * as Toast from "#/view/com/util/Toast";
 
 export function SubtitleFilePicker({
@@ -16,7 +14,6 @@ export function SubtitleFilePicker({
 	onSelectFile: (file: File) => void;
 	disabled?: boolean;
 }) {
-	const { _ } = useLingui();
 	const ref = useRef<HTMLInputElement>(null);
 
 	const handleClick = () => {
@@ -34,7 +31,7 @@ export function SubtitleFilePicker({
 			) {
 				onSelectFile(selectedFile);
 			} else {
-				logger.error("Invalid subtitle file type", {
+				console.error("Invalid subtitle file type", {
 					safeMessage: `File: ${selectedFile.name} (${selectedFile.type})`,
 				});
 				Toast.show("Only WebVTT (.vtt) files are supported");
@@ -56,7 +53,7 @@ export function SubtitleFilePicker({
 			<View style={a.flex_row}>
 				<Button
 					onPress={handleClick}
-					label={_("Select subtitle file (.vtt)")}
+					label={"Select subtitle file (.vtt)"}
 					size="large"
 					color="primary"
 					variant="solid"

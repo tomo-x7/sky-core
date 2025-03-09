@@ -1,5 +1,4 @@
 import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
@@ -124,7 +123,6 @@ let SearchScreenPostResults = ({
 	sort?: "top" | "latest";
 	active: boolean;
 }): React.ReactNode => {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const [isPTR, setIsPTR] = React.useState(false);
 
@@ -227,8 +225,6 @@ let SearchScreenUserResults = ({
 	query: string;
 	active: boolean;
 }): React.ReactNode => {
-	const { _ } = useLingui();
-
 	const { data: results, isFetched } = useActorSearch({
 		query,
 		enabled: active,
@@ -262,7 +258,6 @@ let SearchScreenFeedsResults = ({
 	active: boolean;
 }): React.ReactNode => {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	const { data: results, isFetched } = usePopularFeedsSearch({
 		query,
@@ -300,7 +295,6 @@ function SearchLanguageDropdown({
 	value: string;
 	onChange(value: string): void;
 }) {
-	const { _ } = useLingui();
 	const { appLanguage, contentLanguages } = useLanguagePrefs();
 
 	const languages = useMemo(() => {
@@ -446,7 +440,6 @@ let SearchScreenInner = ({
 	const { hasSession } = useSession();
 	const { gtTablet } = useBreakpoints();
 	const [activeTab, setActiveTab] = React.useState(0);
-	const { _ } = useLingui();
 
 	const onPageSelected = React.useCallback(
 		(index: number) => {
@@ -480,7 +473,7 @@ let SearchScreenInner = ({
 			title: string;
 			component: React.ReactNode;
 		}[];
-	}, [_, query, queryWithParams, activeTab]);
+	}, [query, queryWithParams, activeTab]);
 
 	return queryWithParams ? (
 		<Pager
@@ -547,7 +540,6 @@ export function SearchScreenShell({
 	const navigation = useNavigation<NavigationProp>();
 	const route = useRoute();
 	const textInput = React.useRef<TextInput>(null);
-	const { _ } = useLingui();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { currentAccount } = useSession();
 	const queryClient = useQueryClient();
@@ -867,7 +859,6 @@ let AutocompleteResults = ({
 	onProfileClick: (profile: AppBskyActorDefs.ProfileViewBasic) => void;
 }): React.ReactNode => {
 	const moderationOpts = useModerationOpts();
-	const { _ } = useLingui();
 	return (
 		<>
 			{(isAutocompleteFetching && !autocompleteData?.length) || !moderationOpts ? (
@@ -916,7 +907,6 @@ function SearchHistory({
 }) {
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	return (
 		<Layout.Content keyboardDismissMode="interactive" keyboardShouldPersistTaps="handled">

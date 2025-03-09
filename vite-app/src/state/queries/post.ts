@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 
 import { useToggleMutationQueue } from "#/lib/hooks/useToggleMutationQueue";
-import { type LogEvents, logEvent, toClout } from "#/lib/statsig/statsig";
 import { updatePostShadow } from "#/state/cache/post-shadow";
 import type { Shadow } from "#/state/cache/types";
 import { useAgent, useSession } from "#/state/session";

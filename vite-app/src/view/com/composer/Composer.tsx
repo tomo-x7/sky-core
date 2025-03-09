@@ -1,7 +1,5 @@
 import { AppBskyFeedDefs, type AppBskyFeedGetPostThread, type BskyAgent, type RichText } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Trans } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
@@ -60,10 +58,8 @@ import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { mimeToExt } from "#/lib/media/video/util";
-import { logEvent } from "#/lib/statsig/statsig";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isAndroid, isIOS, isNative, isWeb } from "#/platform/detection";
 import { useDialogStateControlContext } from "#/state/dialogs";
 import { emitPostCreated } from "#/state/events";
@@ -138,7 +134,6 @@ export const ComposePost = ({
 	const queryClient = useQueryClient();
 	const currentDid = currentAccount!.did;
 	const { closeComposer } = useComposerControls();
-	const { _ } = useLingui();
 	const requireAltTextEnabled = useRequireAltTextEnabled();
 	const langPrefs = useLanguagePrefs();
 	const setLangPrefs = useLanguagePrefsApi();
@@ -209,7 +204,7 @@ export const ComposePost = ({
 				_,
 			);
 		},
-		[_, agent, currentDid, composerDispatch],
+		[agent, currentDid, composerDispatch],
 	);
 
 	const onInitVideo = useNonReactiveCallback(() => {
@@ -315,7 +310,7 @@ export const ComposePost = ({
 				}
 			}
 		}
-	}, [thread, requireAltTextEnabled, _]);
+	}, [thread, requireAltTextEnabled]);
 
 	const canPost =
 		!missingAltError &&
@@ -366,13 +361,13 @@ export const ComposePost = ({
 					return AppBskyFeedDefs.isThreadViewPost(postedThread);
 				});
 			} catch (waitErr: any) {
-				logger.error(waitErr, {
+				console.error(waitErr, {
 					message: "Waiting for app view failed",
 				});
 				// Keep going because the post *was* published.
 			}
 		} catch (e: any) {
-			logger.error(e, {
+			console.error(e, {
 				message: "Composer: create post failed",
 				hasImages: thread.posts.some((p) => p.embed.media?.type === "images"),
 			});
@@ -674,7 +669,6 @@ const ComposerPost = React.memo(function ComposerPost({
 }) {
 	const { currentAccount } = useSession();
 	const currentDid = currentAccount!.did;
-	const { _ } = useLingui();
 	const { data: currentProfile } = useProfileQuery({ did: currentDid });
 	const richtext = post.richtext;
 	const isTextOnly = !post.embed.link && !post.embed.quote && !post.embed.media;
@@ -729,7 +723,7 @@ const ComposerPost = React.memo(function ComposerPost({
 				onImageAdd([res]);
 			}
 		},
-		[post.id, onSelectVideo, onImageAdd, _],
+		[post.id, onSelectVideo, onImageAdd],
 	);
 
 	return (
@@ -1098,7 +1092,6 @@ function ComposerFooter({
 	onAddPost: () => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const { isMobile } = useWebMediaQueries();
 
 	const media = post.embed.media;
@@ -1416,7 +1409,6 @@ function ErrorBanner({
 	clearVideo: () => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 
 	const videoError = videoState.status === "error" ? videoState.error : undefined;
 	const error = standardError || videoError;
@@ -1478,7 +1470,6 @@ function ToolbarWrapper({
 
 function VideoUploadToolbar({ state }: { state: VideoState }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const progress = state.progress;
 	const shouldRotate = state.status === "processing" && (progress === 0 || progress === 1);
 	let wheelProgress = shouldRotate ? 0.33 : progress;

@@ -1,7 +1,6 @@
 import type { ChatBskyConvoAcceptConvo, ChatBskyConvoListConvos } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { logger } from "#/logger";
 import { useAgent } from "#/state/session";
 import { DM_SERVICE_HEADERS } from "./const";
 import { RQKEY as CONVO_LIST_KEY, RQKEY_ROOT as CONVO_LIST_ROOT_KEY } from "./list-conversations";
@@ -93,7 +92,7 @@ export function useAcceptConversation(
 			onSuccess?.(data);
 		},
 		onError: (error, _, context) => {
-			logger.error(error);
+			console.error(error);
 			queryClient.setQueryData(
 				CONVO_LIST_KEY("accepted"),
 				(old?: {

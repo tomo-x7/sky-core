@@ -1,5 +1,4 @@
 import { ComAtprotoServerCreateAccount, type ComAtprotoServerDescribeServer } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import * as EmailValidator from "email-validator";
 import React, { useCallback } from "react";
 import { LayoutAnimation } from "react-native";
@@ -8,7 +7,6 @@ import { DEFAULT_SERVICE } from "#/lib/constants";
 import { cleanError } from "#/lib/strings/errors";
 import { createFullHandle } from "#/lib/strings/handles";
 import { getAge } from "#/lib/strings/time";
-import { logger } from "#/logger";
 import { useSessionApi } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
 
@@ -175,12 +173,6 @@ export function reducer(s: SignupState, a: SignupAction): SignupState {
 
 	next.hasPrev = next.activeStep !== SignupStep.INFO;
 
-	logger.debug("signup", next);
-
-	if (s.activeStep !== next.activeStep) {
-		logger.debug("signup: step changed", { activeStep: next.activeStep });
-	}
-
 	return next;
 }
 
@@ -192,7 +184,6 @@ export const SignupContext = React.createContext<IContext>({} as IContext);
 export const useSignupContext = () => React.useContext(SignupContext);
 
 export function useSubmitSignup() {
-	const { _ } = useLingui();
 	const { createAccount } = useSessionApi();
 	const onboardingDispatch = useOnboardingDispatch();
 
@@ -228,7 +219,7 @@ export function useSubmitSignup() {
 			}
 			if (state.serviceDescription?.phoneVerificationRequired && !state.pendingSubmit?.verificationCode) {
 				dispatch({ type: "setStep", value: SignupStep.CAPTCHA });
-				logger.error("Signup Flow Error", {
+				console.error("Signup Flow Error", {
 					errorMessage: "Verification captcha code was not set.",
 					registrationHandle: state.handle,
 				});
@@ -273,7 +264,7 @@ export function useSubmitSignup() {
 				dispatch({ type: "setError", value: error });
 				dispatch({ type: "setStep", value: isHandleError ? 2 : 1 });
 
-				logger.error("Signup Flow Error", {
+				console.error("Signup Flow Error", {
 					errorMessage: error,
 					registrationHandle: state.handle,
 				});
@@ -281,6 +272,6 @@ export function useSubmitSignup() {
 				dispatch({ type: "setIsLoading", value: false });
 			}
 		},
-		[_, onboardingDispatch, createAccount],
+		[onboardingDispatch, createAccount],
 	);
 }

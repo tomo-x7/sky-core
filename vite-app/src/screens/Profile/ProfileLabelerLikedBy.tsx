@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
@@ -15,7 +14,6 @@ export function ProfileLabelerLikedByScreen({
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { name: handleOrDid } = route.params;
 	const uri = makeRecordUri(handleOrDid, "app.bsky.labeler.service", "self");
-	const { _ } = useLingui();
 
 	useFocusEffect(
 		React.useCallback(() => {

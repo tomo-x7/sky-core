@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { type GestureResponderEvent, View } from "react-native";
@@ -127,7 +126,6 @@ export function FeedHeader({
 
 // TODO: This customization should be a part of the layout component
 export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 
 	const onPressBack = useCallback(

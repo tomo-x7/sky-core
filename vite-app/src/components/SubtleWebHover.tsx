@@ -1,5 +1,5 @@
 import type { ViewStyleProp } from "#/alf";
 
-export function SubtleWebHover({}: ViewStyleProp & { hover: boolean }) {
+export function SubtleWebHover(p: ViewStyleProp & { hover: boolean }) {
 	return null;
 }

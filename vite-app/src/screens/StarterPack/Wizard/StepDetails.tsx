@@ -1,5 +1,3 @@
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -12,7 +10,6 @@ import { useProfileQuery } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
 
 export function StepDetails() {
-	const { _ } = useLingui();
 	const t = useTheme();
 	const [state, dispatch] = useWizardState();
 
@@ -40,7 +37,7 @@ export function StepDetails() {
 							value={state.name}
 							onChangeText={(text) => dispatch({ type: "SetName", name: text })}
 						/>
-						<TextField.SuffixText label={_(`${state.name?.length} out of 50`)}>
+						<TextField.SuffixText label={`${state.name?.length} out of 50`}>
 							<Text style={[t.atoms.text_contrast_medium]}>{state.name?.length ?? 0}/50</Text>
 						</TextField.SuffixText>
 					</TextField.Root>
@@ -49,11 +46,9 @@ export function StepDetails() {
 					<TextField.LabelText>Tell us a little more</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Input
-							label={_(
-								msg`${
-									currentProfile?.displayName || currentProfile?.handle
-								}'s favorite feeds and people - join me!`,
-							)}
+							label={`${
+								currentProfile?.displayName || currentProfile?.handle
+							}'s favorite feeds and people - join me!`}
 							value={state.description}
 							onChangeText={(text) => dispatch({ type: "SetDescription", description: text })}
 							multiline

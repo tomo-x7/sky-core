@@ -9,8 +9,6 @@ import {
 } from "@atproto/api";
 import { AtUri } from "@atproto/api";
 import { TID } from "@atproto/common-web";
-import { Plural, Trans, msg, plural } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, type ReactElement, useEffect, useMemo, useState } from "react";
@@ -22,15 +20,12 @@ import { Link as NewLink } from "#/components/Link";
 import * as MediaPreview from "#/components/MediaPreview";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
 import { Notification as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
-import { SubtleWebHover } from "#/components/SubtleWebHover";
 import {
 	ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon,
 	ChevronTop_Stroke2_Corner0_Rounded as ChevronUpIcon,
 } from "#/components/icons/Chevron";
 import { Heart2_Filled_Stroke2_Corner0_Rounded as HeartIconFilled } from "#/components/icons/Heart2";
-import { PersonPlus_Filled_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
 import { Repost_Stroke2_Corner2_Rounded as RepostIcon } from "#/components/icons/Repost";
-import { StarterPack } from "#/components/icons/StarterPack";
 import { useAnimatedValue } from "#/lib/hooks/useAnimatedValue";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -40,7 +35,6 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { niceDate } from "#/lib/strings/time";
 import { colors, s } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isWeb } from "#/platform/detection";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import type { FeedNotification } from "#/state/queries/notifications/feed";
@@ -191,11 +185,8 @@ let NotificationFeedItem = ({
 
 	if (item.type === "post-like") {
 		a11yLabel = hasMultipleAuthors
-			? _(
-					msg`${firstAuthorName} and ${plural(additionalAuthorsCount, {
-						one: `${formattedAuthorsCount} other`,
-						other: `${formattedAuthorsCount} others`,
-					})} liked your post`,
+			? `${firstAuthorName} and ${plural(additionalAuthorsCount, {
+						one: `} liked your post`,
 				)
 			: `${firstAuthorName} liked your post`;
 		notificationContent = hasMultipleAuthors ? (
@@ -204,8 +195,8 @@ let NotificationFeedItem = ({
 				<Text style={[pal.text, s.bold]}>
 					<Plural
 						value={additionalAuthorsCount}
-						one={`${formattedAuthorsCount} other`}
-						other={`${formattedAuthorsCount} others`}
+						one={`$formattedAuthorsCountother`}
+						other={`$formattedAuthorsCountothers`}
 					/>
 				</Text>{" "}
 				liked your post
@@ -215,11 +206,8 @@ let NotificationFeedItem = ({
 		);
 	} else if (item.type === "repost") {
 		a11yLabel = hasMultipleAuthors
-			? _(
-					msg`${firstAuthorName} and ${plural(additionalAuthorsCount, {
-						one: `${formattedAuthorsCount} other`,
-						other: `${formattedAuthorsCount} others`,
-					})} reposted your post`,
+			? `$firstAuthorNameand $plural(additionalAuthorsCount, {
+						one: `} reposted your post`,
 				)
 			: `${firstAuthorName} reposted your post`;
 		notificationContent = hasMultipleAuthors ? (
@@ -237,8 +225,7 @@ let NotificationFeedItem = ({
 		) : (
 			<>{firstAuthorLink} reposted your post</>
 		);
-		icon = <RepostIcon size="xl" style={{ color: t.palette.positive_600 }} />;
-	} else if (item.type === "follow") {
+		icon = <RepostIcon size="xl" style={{ color: t.palette.positive_600 }} />;else if (item.type === "follow") {
 		let isFollowBack = false;
 
 		if (
@@ -268,11 +255,8 @@ let NotificationFeedItem = ({
 			notificationContent = <>{firstAuthorLink} followed you back</>;
 		} else {
 			a11yLabel = hasMultipleAuthors
-				? _(
-						msg`${firstAuthorName} and ${plural(additionalAuthorsCount, {
-							one: `${formattedAuthorsCount} other`,
-							other: `${formattedAuthorsCount} others`,
-						})} followed you`,
+				? `${firstAuthorName} and ${plural(additionalAuthorsCount, {
+							one: `} followed you`,
 					)
 				: `${firstAuthorName} followed you`;
 			notificationContent = hasMultipleAuthors ? (
@@ -281,8 +265,8 @@ let NotificationFeedItem = ({
 					<Text style={[pal.text, s.bold]}>
 						<Plural
 							value={additionalAuthorsCount}
-							one={`${formattedAuthorsCount} other`}
-							other={`${formattedAuthorsCount} others`}
+							one={`$formattedAuthorsCountother`}
+							other={`$formattedAuthorsCountothers`}
 						/>
 					</Text>{" "}
 					followed you
@@ -294,11 +278,8 @@ let NotificationFeedItem = ({
 		icon = <PersonPlusIcon size="xl" style={{ color: t.palette.primary_500 }} />;
 	} else if (item.type === "feedgen-like") {
 		a11yLabel = hasMultipleAuthors
-			? _(
-					msg`${firstAuthorName} and ${plural(additionalAuthorsCount, {
-						one: `${formattedAuthorsCount} other`,
-						other: `${formattedAuthorsCount} others`,
-					})} liked your custom feed`,
+			? `$firstAuthorNameand $plural(additionalAuthorsCount, {
+						one: `} liked your custom feed`,
 				)
 			: `${firstAuthorName} liked your custom feed`;
 		notificationContent = hasMultipleAuthors ? (
@@ -315,14 +296,10 @@ let NotificationFeedItem = ({
 			</>
 		) : (
 			<>{firstAuthorLink} liked your custom feed</>
-		);
-	} else if (item.type === "starterpack-joined") {
+		);else if (item.type === "starterpack-joined") {
 		a11yLabel = hasMultipleAuthors
-			? _(
-					msg`${firstAuthorName} and ${plural(additionalAuthorsCount, {
-						one: `${formattedAuthorsCount} other`,
-						other: `${formattedAuthorsCount} others`,
-					})} signed up with your starter pack`,
+			? `${firstAuthorName} and ${plural(additionalAuthorsCount, {
+						one: `} signed up with your starter pack`,
 				)
 			: `${firstAuthorName} signed up with your starter pack`;
 		notificationContent = hasMultipleAuthors ? (
@@ -331,8 +308,8 @@ let NotificationFeedItem = ({
 				<Text style={[pal.text, s.bold]}>
 					<Plural
 						value={additionalAuthorsCount}
-						one={`${formattedAuthorsCount} other`}
-						other={`${formattedAuthorsCount} others`}
+						one={`$formattedAuthorsCountother`}
+						other={`$formattedAuthorsCountothers`}
 					/>
 				</Text>{" "}
 				signed up with your starter pack
@@ -348,11 +325,11 @@ let NotificationFeedItem = ({
 	} else {
 		return null;
 	}
-	a11yLabel += ` · ${niceTimestamp}`;
+	a11yLabel += ` · $niceTimestamp`;
 
 	return (
 		<Link
-			testID={`feedItem-by-${item.notification.author.handle}`}
+			testID={`feedItem-by-$item.notification.author.handle`}
 			style={[
 				styles.outer,
 				pal.border,
@@ -381,9 +358,7 @@ let NotificationFeedItem = ({
 					: [
 							{
 								name: "viewProfile",
-								label: _(
-									msg`View ${authors[0].profile.displayName || authors[0].profile.handle}'s profile`,
-								),
+								label: `View $authors[0].profile.displayName || authors[0].profile.handle's profile`,
 							},
 						]
 			}
@@ -484,7 +459,6 @@ function ExpandListPressable({
 }
 
 function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
-	const { _ } = useLingui();
 	const agent = useAgent();
 	const navigation = useNavigation<NavigationProp>();
 	const [isLoading, setIsLoading] = React.useState(false);
@@ -517,7 +491,7 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 						conversation: res.data.convo.id,
 					});
 				} catch (e) {
-					logger.error("Failed to get conversation", { safeMessage: e });
+					console.error("Failed to get conversation", { safeMessage: e });
 				} finally {
 					setIsLoading(false);
 				}
@@ -540,7 +514,6 @@ function CondensedAuthorsList({
 	showDmButton?: boolean;
 }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 
 	if (!visible) {
 		return (
@@ -602,7 +575,6 @@ function ExpandedAuthorsList({
 	visible: boolean;
 	authors: Author[];
 }) {
-	const { _ } = useLingui();
 	const pal = usePalette("default");
 	const heightInterp = useAnimatedValue(visible ? 1 : 0);
 	const targetHeight = authors.length * (EXPANDED_AUTHOR_EL_HEIGHT + 10); /*10=margin*/

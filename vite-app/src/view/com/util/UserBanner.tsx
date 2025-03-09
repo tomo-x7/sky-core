@@ -1,5 +1,4 @@
 import type { ModerationUI } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { Image } from "react-native";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -18,7 +17,6 @@ import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useCameraPermission, usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { colors } from "#/lib/styles";
-import { logger } from "#/logger";
 import { isAndroid, isNative } from "#/platform/detection";
 import { EventStopper } from "#/view/com/util/EventStopper";
 import { openCamera, openCropper, openPicker } from "../../../lib/media/picker";
@@ -37,7 +35,6 @@ export function UserBanner({
 	const pal = usePalette("default");
 	const theme = useTheme();
 	const t = useAlfTheme();
-	const { _ } = useLingui();
 	const { requestCameraAccessIfNeeded } = useCameraPermission();
 	const { requestPhotoAccessIfNeeded } = usePhotoLibraryPermission();
 	const sheetWrapper = useSheetWrapper();
@@ -75,7 +72,7 @@ export function UserBanner({
 			);
 		} catch (e: any) {
 			if (!String(e).includes("Canceled")) {
-				logger.error("Failed to crop banner", { error: e });
+				console.error("Failed to crop banner", { error: e });
 			}
 		}
 	}, [onSelectNewBanner, requestPhotoAccessIfNeeded, sheetWrapper]);
@@ -141,7 +138,7 @@ export function UserBanner({
 							<Menu.Group>
 								<Menu.Item
 									testID="changeBannerRemoveBtn"
-									label={_("Remove Banner")}
+									label={"Remove Banner"}
 									onPress={onRemoveBanner}
 								>
 									<Menu.ItemText>Remove Banner</Menu.ItemText>

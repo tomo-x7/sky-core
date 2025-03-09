@@ -1,7 +1,5 @@
 import type { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import React, { useCallback, useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
 
@@ -39,7 +37,6 @@ export function Component({
 	onChange?: (type: "add" | "remove", profile: AppBskyActorDefs.ProfileViewBasic) => void;
 }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const { closeModal } = useModalControls();
 	const { isMobile } = useWebMediaQueries();
 	const [query, setQuery] = useState("");
@@ -116,7 +113,7 @@ export function Component({
 						}}
 						accessibilityLabel={"Done"}
 						accessibilityHint=""
-						label={_(msg({ message: "Done", context: "action" }))}
+						label={msg({ message: "Done", context: "action" })}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 						labelStyle={[s.f18]}
 					/>
@@ -140,7 +137,6 @@ function UserResult({
 	onChange?: (type: "add" | "remove", profile: AppBskyActorDefs.ProfileViewBasic) => void | undefined;
 }) {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const membership = React.useMemo(
 		() => getMembership(memberships, list.uri, profile.did),

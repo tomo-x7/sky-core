@@ -1,4 +1,3 @@
-import * as Clipboard from "expo-clipboard";
 import { useCallback, useEffect, useState } from "react";
 import { type GestureResponderEvent, View } from "react-native";
 import Animated, { FadeOutUp, useReducedMotion, ZoomIn } from "react-native-reanimated";
@@ -21,7 +20,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 
 	const onPress = useCallback(
 		(evt: GestureResponderEvent) => {
-			Clipboard.setStringAsync(value);
+			new Clipboard().writeText(value);
 			setHasBeenCopied(true);
 			onPressProp?.(evt);
 		},

@@ -1,5 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 import React from "react";
 import { View } from "react-native";
 
@@ -35,7 +34,6 @@ export function SubmitView({
 	onSubmitComplete: () => void;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	const agent = useAgent();
 	const [details, setDetails] = React.useState<string>("");
 	const [submitting, setSubmitting] = React.useState<boolean>(false);
@@ -79,7 +77,7 @@ export function SubmitView({
 		} else {
 			setError("There was an issue sending your report. Please check your internet connection.");
 		}
-	}, [_, params, details, selectedReportOption, selectedServices, onSubmitComplete, setError, agent]);
+	}, [params, details, selectedReportOption, selectedServices, onSubmitComplete, agent]);
 
 	return (
 		<View style={[a.gap_2xl]}>

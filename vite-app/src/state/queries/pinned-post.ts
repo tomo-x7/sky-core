@@ -1,7 +1,5 @@
-import { useLingui } from "@lingui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { logger } from "#/logger";
 import { RQKEY as FEED_RQKEY } from "#/state/queries/post-feed";
 import * as Toast from "#/view/com/util/Toast";
 import { updatePostShadow } from "../cache/post-shadow";
@@ -9,7 +7,6 @@ import { useAgent, useSession } from "../session";
 import { useProfileUpdateMutation } from "./profile";
 
 export function usePinnedPostMutation() {
-	const { _ } = useLingui();
 	const { currentAccount } = useSession();
 	const agent = useAgent();
 	const queryClient = useQueryClient();
@@ -64,7 +61,7 @@ export function usePinnedPostMutation() {
 				});
 			} catch (e: any) {
 				Toast.show("Failed to pin post");
-				logger.error("Failed to pin post", { message: String(e) });
+				console.error("Failed to pin post", { message: String(e) });
 				// revert optimistic update
 				updatePostShadow(queryClient, postUri, {
 					pinned: !pinCurrentPost,

@@ -204,7 +204,6 @@ export const ScrollableInner = Inner;
 
 export const InnerFlatList = React.forwardRef<
 	FlatList,
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	FlatListProps<any> & { label: string } & {
 		webInnerStyle?: StyleProp<ViewStyle>;
 		webInnerContentContainerStyle?: StyleProp<ViewStyle>;

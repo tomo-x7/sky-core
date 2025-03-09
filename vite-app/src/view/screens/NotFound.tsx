@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { StackActions, useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -14,7 +13,6 @@ import { Text } from "#/view/com/util/text/Text";
 
 export const NotFoundScreen = () => {
 	const pal = usePalette("default");
-	const { _ } = useLingui();
 	const navigation = useNavigation<NavigationProp>();
 	const setMinimalShellMode = useSetMinimalShellMode();
 

@@ -15,7 +15,6 @@ import type { Image as RNImage } from "react-native-image-crop-picker";
 import { uploadBlob } from "#/lib/api";
 import { until } from "#/lib/async/until";
 import { useToggleMutationQueue } from "#/lib/hooks/useToggleMutationQueue";
-import { type LogEvents, logEvent, toClout } from "#/lib/statsig/statsig";
 import type { Shadow } from "#/state/cache/types";
 import { STALE } from "#/state/queries";
 import { resetProfilePostsQueries } from "#/state/queries/post-feed";

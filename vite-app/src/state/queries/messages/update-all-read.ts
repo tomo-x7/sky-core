@@ -1,7 +1,6 @@
 import type { ChatBskyConvoListConvos } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { logger } from "#/logger";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent } from "#/state/session";
 import { RQKEY as CONVO_LIST_KEY } from "./list-conversations";
@@ -83,7 +82,7 @@ export function useUpdateAllRead(
 			onSuccess?.();
 		},
 		onError: (error, _, context) => {
-			logger.error(error);
+			console.error(error);
 			queryClient.setQueryData(
 				CONVO_LIST_KEY(status),
 				(old?: {

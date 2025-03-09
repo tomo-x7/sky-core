@@ -2,7 +2,6 @@ import { z } from "zod";
 
 import { deviceLanguageCodes, deviceLocales } from "#/locale/deviceLocales";
 import { findSupportedAppLanguage } from "#/locale/helpers";
-import { logger } from "#/logger";
 import { PlatformInfo } from "../../../modules/expo-bluesky-swiss-army";
 
 const externalEmbedOptions = ["show", "hide"] as const;
@@ -176,7 +175,7 @@ export function tryParse(rawData: string): Schema | undefined {
 	try {
 		objData = JSON.parse(rawData);
 	} catch (e) {
-		logger.error("persisted state: failed to parse root state from storage", {
+		console.error("persisted state: failed to parse root state from storage", {
 			message: e,
 		});
 	}
@@ -194,7 +193,7 @@ export function tryParse(rawData: string): Schema | undefined {
 				expected: e?.expected,
 				path: e.path?.join("."),
 			})) || [];
-		logger.error("persisted store: data failed validation on read", { errors });
+		console.error("persisted store: data failed validation on read", { errors });
 		return undefined;
 	}
 }
@@ -204,7 +203,7 @@ export function tryStringify(value: Schema): string | undefined {
 		schema.parse(value);
 		return JSON.stringify(value);
 	} catch (e) {
-		logger.error("persisted state: failed stringifying root state", {
+		console.error("persisted state: failed stringifying root state", {
 			message: e,
 		});
 		return undefined;

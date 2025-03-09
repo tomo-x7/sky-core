@@ -14,7 +14,6 @@ import {
 	moderatePost,
 	moderateProfile,
 } from "@atproto/api";
-import { useLingui } from "@lingui/react";
 /* eslint-disable no-restricted-imports */
 import React from "react";
 import { View } from "react-native";
@@ -760,7 +759,6 @@ function MockAccountScreen({
 	moderationOpts: ModerationOpts;
 }) {
 	const t = useTheme();
-	const { _ } = useLingui();
 	return (
 		<View style={[t.atoms.border_contrast_medium, a.border, a.mb_md]}>
 			<ScreenHider style={{}} screenDescription={"profile"} modui={moderation.ui("profileView")}>
