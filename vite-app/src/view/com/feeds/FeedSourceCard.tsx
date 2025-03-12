@@ -1,5 +1,5 @@
 import { AtUri } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Linking, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
@@ -172,6 +172,7 @@ export function FeedSourceCardLoaded({
 						hitSlop={15}
 						style={styles.btn}
 					>
+						{/* @ts-ignore */}
 						<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
 					</Pressable>
 				)}
@@ -243,8 +244,10 @@ export function FeedSourceCardLoaded({
 								style={styles.btn}
 							>
 								{isSaved ? (
+									//@ts-ignore
 									<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
 								) : (
+									//@ts-ignore
 									<FontAwesomeIcon icon="plus" size={18} color={pal.colors.link} />
 								)}
 							</Pressable>
@@ -263,7 +266,7 @@ export function FeedSourceCardLoaded({
 				{showLikes && feed.type === "feed" ? (
 					<Text type="sm-medium" style={[pal.text, pal.textLight]}>
 						<>
-							Liked by <Plural value={feed.likeCount || 0} one="# user" other="# users" />
+							Liked by {feed.likeCount || 0} {feed.likeCount === 1 ? "user" : "users"}
 						</>
 					</Text>
 				) : null}

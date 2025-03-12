@@ -1,5 +1,5 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { ComponentProps } from "react";
 import { TextInput as RNTextInput, StyleSheet, View } from "react-native";
 
@@ -17,7 +17,8 @@ export function TextInput({ testID, icon, onChange, ...props }: Props) {
 	const pal = usePalette("default");
 	return (
 		<View style={[pal.border, styles.container]}>
-			<FontAwesomeIcon icon={icon} style={[pal.textLight, styles.icon]} />
+			{/* @ts-ignore */}
+			<FontAwesomeIcon icon={icon} style={{...pal.textLight, ...styles.icon}} />
 			<RNTextInput
 				testID={testID}
 				style={[pal.text, styles.textInput]}

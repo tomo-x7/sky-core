@@ -15,7 +15,7 @@ import { LanguageToggle } from "./LanguageToggle";
 
 export const snapPoints = ["100%"];
 
-export function Component({}: {}) {
+export function Component(props: {}) {
 	const { closeModal } = useModalControls();
 	const langPrefs = useLanguagePrefs();
 	const setLangPrefs = useLanguagePrefsApi();
@@ -31,7 +31,9 @@ export function Component({}: {}) {
 		);
 		// sort so that device & selected languages are on top, then alphabetically
 		langs.sort((a, b) => {
+			//@ts-ignore
 			const hasA = langPrefs.contentLanguages.includes(a.code2) || deviceLanguageCodes.includes(a.code2);
+			//@ts-ignore
 			const hasB = langPrefs.contentLanguages.includes(b.code2) || deviceLanguageCodes.includes(b.code2);
 			if (hasA === hasB) return a.name.localeCompare(b.name);
 			if (hasA) return -1;

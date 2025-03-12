@@ -24,7 +24,7 @@ const LightboxControlContext = React.createContext<{
 	closeLightbox: () => false,
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [activeLightbox, setActiveLightbox] = React.useState<Lightbox | null>(null);
 
 	const openLightbox = useNonReactiveCallback((lightbox: Omit<Lightbox, "id">) => {

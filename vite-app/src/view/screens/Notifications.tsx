@@ -35,7 +35,7 @@ import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
 let lastActiveTab = 0;
 
 type Props = NativeStackScreenProps<NotificationsTabNavigatorParams, "Notifications">;
-export function NotificationsScreen({}: Props) {
+export function NotificationsScreen(props: Props) {
 	const { openComposer } = useComposerControls();
 	const unreadNotifs = useUnreadNotifications();
 	const hasNew = !!unreadNotifs;
@@ -51,7 +51,7 @@ export function NotificationsScreen({}: Props) {
 			setActiveTab(index);
 			lastActiveTab = index;
 		},
-		[setActiveTab],
+		[],
 	);
 
 	const queryClient = useQueryClient();
@@ -122,6 +122,7 @@ export function NotificationsScreen({}: Props) {
 			<Pager
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
+					// @ts-ignore
 					<Layout.Center style={[a.z_10, web([a.sticky, { top: 0 }])]}>
 						<TabBar
 							{...props}
@@ -175,7 +176,7 @@ function NotificationsTab({
 	const scrollToTop = React.useCallback(() => {
 		scrollElRef.current?.scrollToOffset({ animated: isNative, offset: 0 });
 		setMinimalShellMode(false);
-	}, [scrollElRef, setMinimalShellMode]);
+	}, [ setMinimalShellMode]);
 
 	const onPressLoadLatest = React.useCallback(() => {
 		scrollToTop();
@@ -211,7 +212,6 @@ function NotificationsTab({
 		React.useCallback(() => {
 			if (isFocusedAndActive) {
 				setMinimalShellMode(false);
-				logger.debug("NotificationsScreen: Focus");
 				onFocusCheckLatest();
 			}
 		}, [setMinimalShellMode, onFocusCheckLatest, isFocusedAndActive]),

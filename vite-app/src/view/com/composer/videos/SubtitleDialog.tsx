@@ -35,8 +35,8 @@ export function SubtitleDialogBtn(props: Props) {
 	return (
 		<View style={[a.flex_row, a.my_xs]}>
 			<Button
-				label={isWeb ? "Captions & alt text") : _("Alt text"}
-				accessibilityHint={isWeb ? "Opens captions and alt text dialog") : _("Opens alt text dialog"}
+				label={isWeb ? "Captions & alt text" : "Alt text"}
+				accessibilityHint={isWeb ? "Opens captions and alt text dialog" : "Opens alt text dialog"}
 				size="small"
 				color="secondary"
 				variant="ghost"

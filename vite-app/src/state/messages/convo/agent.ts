@@ -33,8 +33,6 @@ import type { MessagesEventBus } from "#/state/messages/events/agent";
 import type { MessagesEventBusError } from "#/state/messages/events/types";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 
-const logger = Logger.create(Logger.Context.ConversationAgent);
-
 export function isConvoItemMessage(item: ConvoItem): item is ConvoItem & { type: "message" } {
 	if (!item) return false;
 	return item.type === "message" || item.type === "deleted-message" || item.type === "pending-message";
@@ -367,12 +365,6 @@ export class Convo {
 				break;
 		}
 
-		logger.debug(`Convo: dispatch '${action.event}'`, {
-			id: this.id,
-			prev: prevStatus,
-			next: this.status,
-		});
-
 		this.updateLastActiveTimestamp();
 		this.commit();
 	}
@@ -520,34 +512,51 @@ export class Convo {
 	async fetchConvo() {
 		if (this.pendingFetchConvo) return this.pendingFetchConvo;
 
-		this.pendingFetchConvo = new Promise<{
-			convo: ChatBskyConvoDefs.ConvoView;
-			sender: ChatBskyActorDefs.ProfileViewBasic | undefined;
-			recipients: ChatBskyActorDefs.ProfileViewBasic[];
-		}>(async (resolve, reject) => {
+		// this.pendingFetchConvo = new Promise<{
+		// 	convo: ChatBskyConvoDefs.ConvoView;
+		// 	sender: ChatBskyActorDefs.ProfileViewBasic | undefined;
+		// 	recipients: ChatBskyActorDefs.ProfileViewBasic[];
+		// }>(async (resolve, reject) => {
+		// 	try {
+		// 		const response = await networkRetry(2, () => {
+		// 			return this.agent.api.chat.bsky.convo.getConvo(
+		// 				{
+		// 					convoId: this.convoId,
+		// 				},
+		// 				{ headers: DM_SERVICE_HEADERS },
+		// 			);
+		// 		});
+
+		// 		const convo = response.data.convo;
+
+		// 		resolve({
+		// 			convo,
+		// 			sender: convo.members.find((m) => m.did === this.senderUserDid),
+		// 			recipients: convo.members.filter((m) => m.did !== this.senderUserDid),
+		// 		});
+		// 	} catch (e) {
+		// 		reject(e);
+		// 	} finally {
+		// 		this.pendingFetchConvo = undefined;
+		// 	}
+		// });
+
+		this.pendingFetchConvo = (async () => {
 			try {
-				const response = await networkRetry(2, () => {
-					return this.agent.api.chat.bsky.convo.getConvo(
-						{
-							convoId: this.convoId,
-						},
-						{ headers: DM_SERVICE_HEADERS },
-					);
-				});
+				const response = await networkRetry(2, () =>
+					this.agent.api.chat.bsky.convo.getConvo({ convoId: this.convoId }, { headers: DM_SERVICE_HEADERS }),
+				);
 
 				const convo = response.data.convo;
-
-				resolve({
+				return {
 					convo,
 					sender: convo.members.find((m) => m.did === this.senderUserDid),
 					recipients: convo.members.filter((m) => m.did !== this.senderUserDid),
-				});
-			} catch (e) {
-				reject(e);
+				};
 			} finally {
 				this.pendingFetchConvo = undefined;
 			}
-		});
+		})();
 
 		return this.pendingFetchConvo;
 	}
@@ -570,7 +579,6 @@ export class Convo {
 		  }
 		| undefined;
 	async fetchMessageHistory() {
-		logger.debug("Convo: fetch message history", {});
 
 		/*
 		 * If oldestRev is null, we've fetched all history.
@@ -748,7 +756,6 @@ export class Convo {
 		// Ignore empty messages for now since they have no other purpose atm
 		if (!message.text.trim() && !message.embed) return;
 
-		logger.debug("Convo: send message", {});
 
 		const tempId = nanoid();
 
@@ -781,7 +788,6 @@ export class Convo {
 	}
 
 	async processPendingMessages() {
-		logger.debug(`Convo: processing messages (${this.pendingMessages.size} remaining)`, {});
 
 		const pendingMessage = Array.from(this.pendingMessages.values()).shift();
 
@@ -854,10 +860,6 @@ export class Convo {
 					case "recipient has disabled incoming messages":
 						break;
 					default:
-						logger.warn("Convo handleSendMessageFailure could not handle error", {
-							status: e.status,
-							message: e.message,
-						});
 						break;
 				}
 			}
@@ -880,7 +882,6 @@ export class Convo {
 		this.pendingMessageFailure = null;
 		this.commit();
 
-		logger.debug(`Convo: batch retrying ${this.pendingMessages.size} pending messages`, {});
 
 		try {
 			const { data } = await this.agent.api.chat.bsky.convo.sendMessageBatch(
@@ -911,7 +912,6 @@ export class Convo {
 
 			this.commit();
 
-			logger.debug(`Convo: sent ${this.pendingMessages.size} pending messages`, {});
 		} catch (e: any) {
 			console.error(e, { message: "Convo: failed to batch retry messages" });
 			this.handleSendMessageFailure(e);
@@ -919,7 +919,6 @@ export class Convo {
 	}
 
 	async deleteMessage(messageId: string) {
-		logger.debug("Convo: delete message", {});
 
 		this.deletedMessages.add(messageId);
 		this.commit();

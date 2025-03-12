@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
 		paddingRight: 10,
 	},
 	bottomBarWeb: {
+		//@ts-ignore
 		position: "fixed",
 	},
 	ctrl: {

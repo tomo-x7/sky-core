@@ -68,7 +68,7 @@ function reducer(state: StateContext, action: Action): StateContext {
 	}
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, dispatch] = React.useReducer(reducer, compute(persisted.get("onboarding")));
 
 	React.useEffect(() => {
@@ -82,7 +82,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 				});
 			}
 		});
-	}, [state, dispatch]);
+	}, [state, ]);
 
 	return (
 		<stateContext.Provider value={state}>

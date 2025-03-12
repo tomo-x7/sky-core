@@ -1,4 +1,4 @@
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
 import lande from "lande";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -42,7 +42,8 @@ export function SuggestedLanguage({ text }: { text: string }) {
 
 		return (
 			<View style={[pal.border, styles.infoBar]}>
-				<FontAwesomeIcon icon="language" style={pal.text as FontAwesomeIconStyle} size={24} />
+				{/* @ts-ignore */}
+				<FontAwesomeIcon icon="language" style={pal.text} size={24} />
 				<Text style={[pal.text, s.flex1]}>
 					<>
 						Are you writing in{" "}

@@ -1,5 +1,5 @@
 import type { ModerationUI } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
 import { Image, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
@@ -174,6 +174,7 @@ let UserAvatar = ({
 		}
 		return (
 			<View style={[styles.alertIconContainer, pal.view]}>
+				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="exclamation-circle" style={styles.alertIcon} size={Math.floor(size / 3)} />
 			</View>
 		);
@@ -207,6 +208,7 @@ let UserAvatar = ({
 				<HighPriorityImage
 					testID="userAvatarImage"
 					style={aviStyle}
+					// @ts-ignore
 					contentFit="cover"
 					source={{
 						uri: hackModifyThumbnailPath(avatar, size < 90),

@@ -6,7 +6,7 @@ import {
 	RichText as RichTextAPI,
 	moderatePost,
 } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useMemo, useState } from "react";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
@@ -132,7 +132,7 @@ function PostInner({
 
 	const onPressShowMore = React.useCallback(() => {
 		setLimitLines(false);
-	}, [setLimitLines]);
+	}, []);
 
 	const onBeforePress = React.useCallback(() => {
 		precacheProfile(queryClient, post.author);
@@ -158,14 +158,12 @@ function PostInner({
 			{showReplyLine && <View style={styles.replyLine} />}
 			<View style={styles.layout}>
 				<View style={styles.layoutAvi}>
-					<AviFollowButton author={post.author} moderation={moderation}>
 						<PreviewableUserAvatar
 							size={42}
 							profile={post.author}
 							moderation={moderation.ui("avatar")}
 							type={post.author.associated?.labeler ? "labeler" : "user"}
 						/>
-					</AviFollowButton>
 				</View>
 				<View style={styles.layoutContent}>
 					<PostMeta
@@ -176,12 +174,13 @@ function PostInner({
 					/>
 					{replyAuthorDid !== "" && (
 						<View style={[s.flexRow, s.mb2, s.alignCenter]}>
+							{/* @ts-ignore */}
 							<FontAwesomeIcon icon="reply" size={9} style={[pal.textLight, s.mr5]} />
 							<Text type="sm" style={[pal.textLight, s.mr2]} lineHeight={1.2} numberOfLines={1}>
 								{isMe ? (
-									<Trans context="description">Reply to you</Trans>
+									<>Reply to you</>
 								) : (
-									<Trans context="description">
+									<>
 										Reply to{" "}
 										<ProfileHoverCard inline did={replyAuthorDid}>
 											<UserInfoText
@@ -191,7 +190,7 @@ function PostInner({
 												style={[pal.textLight]}
 											/>
 										</ProfileHoverCard>
-									</Trans>
+									</>
 								)}
 							</Text>
 						</View>

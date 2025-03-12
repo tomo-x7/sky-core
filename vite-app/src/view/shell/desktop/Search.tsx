@@ -140,7 +140,7 @@ export function DesktopSearch() {
 	const onPressCancelSearch = React.useCallback(() => {
 		setQuery("");
 		setIsActive(false);
-	}, [setQuery]);
+	}, []);
 
 	const onSubmit = React.useCallback(() => {
 		setIsActive(false);

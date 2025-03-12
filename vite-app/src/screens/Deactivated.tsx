@@ -2,7 +2,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme } from "#/alf";
 import { AccountList } from "#/components/AccountList";
@@ -23,7 +22,6 @@ const COL_WIDTH = 400;
 
 export function Deactivated() {
 	const t = useTheme();
-	const insets = useSafeAreaInsets();
 	const { currentAccount, accounts } = useSession();
 	const { onPressSwitchAccount, pendingDid } = useAccountSwitcher();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
@@ -44,7 +42,7 @@ export function Deactivated() {
 	const onSelectAccount = React.useCallback(
 		(account: SessionAccount) => {
 			if (account.did !== currentAccount?.did) {
-				onPressSwitchAccount(account, "SwitchAccount");
+				onPressSwitchAccount(account,);
 			}
 		},
 		[currentAccount, onPressSwitchAccount],
@@ -90,7 +88,7 @@ export function Deactivated() {
 		} finally {
 			setPending(false);
 		}
-	}, [agent, setPending, setError, queryClient]);
+	}, [agent,   queryClient]);
 
 	return (
 		<View style={[a.util_screen_outer, a.flex_1]}>
@@ -99,8 +97,8 @@ export function Deactivated() {
 				contentContainerStyle={[
 					a.px_2xl,
 					{
-						paddingTop: isWeb ? 64 : insets.top + 16,
-						paddingBottom: isWeb ? 64 : insets.bottom,
+						paddingTop: 64,
+						paddingBottom: 64
 					},
 				]}
 			>

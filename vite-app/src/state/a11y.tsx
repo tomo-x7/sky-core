@@ -13,7 +13,7 @@ export function useA11y() {
 	return React.useContext(Context);
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [reduceMotionEnabled, setReduceMotionEnabled] = React.useState(() =>
 		PlatformInfo.getIsReducedMotionEnabled(),
 	);

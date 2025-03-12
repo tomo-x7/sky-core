@@ -102,10 +102,10 @@ export function Component({
 					type="default"
 					onPress={onPressDone}
 					style={styles.footerBtn}
-					accessibilityLabel={msg({ message: "Done", context: "action" })}
+					accessibilityLabel={"Done"}
 					accessibilityHint=""
 					onAccessibilityEscape={onPressDone}
-					label={msg({ message: "Done", context: "action" })}
+					label={"Done"}
 				/>
 			</View>
 		</View>
@@ -167,11 +167,9 @@ function ListItem({
 			setIsProcessing(false);
 		}
 	}, [
-		_,
 		list,
 		subject,
 		membership,
-		setIsProcessing,
 		onAdd,
 		onRemove,
 		listMembershipAddMutation,

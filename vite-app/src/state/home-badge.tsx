@@ -6,7 +6,7 @@ type ApiContext = (hasNew: boolean) => void;
 const stateContext = React.createContext<StateContext>(false);
 const apiContext = React.createContext<ApiContext>((_: boolean) => {});
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(false);
 	return (
 		<stateContext.Provider value={state}>

@@ -153,7 +153,6 @@ export function usePostFeedQuery(
 		staleTime: STALE.INFINITY,
 		queryKey: RQKEY(feedDesc, params),
 		async queryFn({ pageParam }: { pageParam: RQPageParam }) {
-			logger.debug("usePostFeedQuery", { feedDesc, cursor: pageParam?.cursor });
 			const { api, cursor } = pageParam
 				? pageParam
 				: {
@@ -226,7 +225,7 @@ export function usePostFeedQuery(
 					const { data: lastData, args: lastArgs, result: lastResult } = lastRun.current;
 					let canReuse = true;
 					for (const key in selectArgs) {
-						if (selectArgs.hasOwnProperty(key)) {
+						if (Object.prototype.hasOwnProperty.call(selectArgs,key)) {
 							if ((selectArgs as any)[key] !== (lastArgs as any)[key]) {
 								// Can't do reuse anything if any input has changed.
 								canReuse = false;
@@ -388,7 +387,6 @@ export async function pollLatest(page: FeedPage | undefined) {
 		return;
 	}
 
-	logger.debug("usePostFeedQuery: pollLatest");
 	const post = await page.api.peekLatest();
 	if (post) {
 		const slices = page.tuner.tune([post], {
@@ -467,7 +465,7 @@ export function* findAllPostsInQueryData(
 		if (!queryData?.pages) {
 			continue;
 		}
-		for (const page of queryData?.pages) {
+		for (const page of queryData.pages) {
 			for (const item of page.feed) {
 				if (didOrHandleUriMatches(atUri, item.post)) {
 					yield item.post;
@@ -515,7 +513,7 @@ export function* findAllProfilesInQueryData(
 		if (!queryData?.pages) {
 			continue;
 		}
-		for (const page of queryData?.pages) {
+		for (const page of queryData.pages) {
 			for (const item of page.feed) {
 				if (item.post.author.did === did) {
 					yield item.post.author;

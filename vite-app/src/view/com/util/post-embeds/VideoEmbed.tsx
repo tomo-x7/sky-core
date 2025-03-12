@@ -1,26 +1,52 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
-import React, { useCallback, useState } from "react";
-import { ImageBackground } from "react-native";
-import { ActivityIndicator, View } from "react-native";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
-import { Button } from "#/components/Button";
-import { useThrottledValue } from "#/components/hooks/useThrottledValue";
-import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
+import { atoms as a } from "#/alf";
+import { useIsWithinMessage } from "#/components/dms/MessageContext";
+import { useFullscreen } from "#/components/hooks/useFullscreen";
+import { isFirefox } from "#/lib/browser";
 import { ConstrainedImage } from "#/view/com/util/images/AutoSizedImage";
-import { VideoEmbedInnerNative } from "#/view/com/util/post-embeds/VideoEmbedInner/VideoEmbedInnerNative";
+import {
+	HLSUnsupportedError,
+	VideoEmbedInnerWeb,
+	VideoNotFoundError,
+} from "#/view/com/util/post-embeds/VideoEmbedInner/VideoEmbedInnerWeb";
 import { ErrorBoundary } from "../ErrorBoundary";
+import { useActiveVideoWeb } from "./ActiveVideoWebContext";
 import * as VideoFallback from "./VideoEmbedInner/VideoFallback";
 
-interface Props {
+export function VideoEmbed({
+	embed,
+	crop,
+}: {
 	embed: AppBskyEmbedVideo.View;
 	crop?: "none" | "square" | "constrained";
-}
+}) {
+	const ref = useRef<HTMLDivElement>(null);
+	const { active, setActive, sendPosition, currentActiveView } = useActiveVideoWeb();
+	const [onScreen, setOnScreen] = useState(false);
+	const [isFullscreen] = useFullscreen();
+	const lastKnownTime = useRef<number | undefined>(undefined);
 
-export function VideoEmbed({ embed, crop }: Props) {
-	const t = useTheme();
+	useEffect(() => {
+		if (!ref.current) return;
+		if (isFullscreen && !isFirefox) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const entry = entries[0];
+				if (!entry) return;
+				setOnScreen(entry.isIntersecting);
+				sendPosition(entry.boundingClientRect.y + entry.boundingClientRect.height / 2);
+			},
+			{ threshold: 0.5 },
+		);
+		observer.observe(ref.current);
+		return () => observer.disconnect();
+	}, [sendPosition, isFullscreen]);
+
 	const [key, setKey] = useState(0);
-
 	const renderError = useCallback(
 		(error: unknown) => <VideoError error={error} retry={() => setKey(key + 1)} />,
 		[key],
@@ -45,26 +71,25 @@ export function VideoEmbed({ embed, crop }: Props) {
 	const cropDisabled = crop === "none";
 
 	const contents = (
-		<ErrorBoundary renderError={renderError} key={key}>
-			<InnerWrapper embed={embed} />
-		</ErrorBoundary>
+		<div ref={ref} style={{ display: "flex", flex: 1, cursor: "default" }} onClick={(evt) => evt.stopPropagation()}>
+			<ErrorBoundary renderError={renderError} key={key}>
+				<ViewportObserver sendPosition={sendPosition} isAnyViewActive={currentActiveView !== null}>
+					<VideoEmbedInnerWeb
+						embed={embed}
+						active={active}
+						setActive={setActive}
+						onScreen={onScreen}
+						lastKnownTime={lastKnownTime}
+					/>
+				</ViewportObserver>
+			</ErrorBoundary>
+		</div>
 	);
 
 	return (
 		<View style={[a.pt_xs]}>
 			{cropDisabled ? (
-				<View
-					style={[
-						a.w_full,
-						a.overflow_hidden,
-						{ aspectRatio: max ?? 1 },
-						a.rounded_md,
-						a.overflow_hidden,
-						t.atoms.bg_contrast_25,
-					]}
-				>
-					{contents}
-				</View>
+				<View style={[a.w_full, a.overflow_hidden, { aspectRatio: max ?? 1 }]}>{contents}</View>
 			) : (
 				<ConstrainedImage fullBleed={crop === "square"} aspectRatio={constrained || 1}>
 					{contents}
@@ -74,73 +99,87 @@ export function VideoEmbed({ embed, crop }: Props) {
 	);
 }
 
-function InnerWrapper({ embed }: Props) {
-	const ref = React.useRef<{ togglePlayback: () => void }>(null);
+/**
+ * Renders a 100vh tall div and watches it with an IntersectionObserver to
+ * send the position of the div when it's near the screen.
+ */
+function ViewportObserver({
+	children,
+	sendPosition,
+	isAnyViewActive,
+}: {
+	children: React.ReactNode;
+	sendPosition: (position: number) => void;
+	isAnyViewActive: boolean;
+}) {
+	const ref = useRef<HTMLDivElement>(null);
+	const [nearScreen, setNearScreen] = useState(false);
+	const [isFullscreen] = useFullscreen();
+	const isWithinMessage = useIsWithinMessage();
 
-	const [status, setStatus] = React.useState<"playing" | "paused" | "pending">("pending");
-	const [isLoading, setIsLoading] = React.useState(false);
-	const [isActive, setIsActive] = React.useState(false);
-	const showSpinner = useThrottledValue(isActive && isLoading, 100);
+	// Send position when scrolling. This is done with an IntersectionObserver
+	// observing a div of 100vh height
+	useEffect(() => {
+		if (!ref.current) return;
+		if (isFullscreen && !isFirefox) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const entry = entries[0];
+				if (!entry) return;
+				const position = entry.boundingClientRect.y + entry.boundingClientRect.height / 2;
+				sendPosition(position);
+				setNearScreen(entry.isIntersecting);
+			},
+			{ threshold: Array.from({ length: 101 }, (_, i) => i / 100) },
+		);
+		observer.observe(ref.current);
+		return () => observer.disconnect();
+	}, [sendPosition, isFullscreen]);
 
-	const showOverlay = !isActive || isLoading || (status === "paused" && !isActive) || status === "pending";
-
-	React.useEffect(() => {
-		if (!isActive && status !== "pending") {
-			setStatus("pending");
+	// In case scrolling hasn't started yet, send up the position
+	useEffect(() => {
+		if (ref.current && !isAnyViewActive) {
+			const rect = ref.current.getBoundingClientRect();
+			const position = rect.y + rect.height / 2;
+			sendPosition(position);
 		}
-	}, [isActive, status]);
+	}, [isAnyViewActive, sendPosition]);
 
 	return (
-		<>
-			<VideoEmbedInnerNative
-				embed={embed}
-				setStatus={setStatus}
-				setIsLoading={setIsLoading}
-				setIsActive={setIsActive}
+		<View style={[a.flex_1, a.flex_row]}>
+			{nearScreen && children}
+			<div
 				ref={ref}
+				style={{
+					// Don't escape bounds when in a message
+					...(isWithinMessage ? { top: 0, height: "100%" } : { top: "calc(50% - 50vh)", height: "100vh" }),
+					position: "absolute",
+					left: "50%",
+					width: 1,
+					pointerEvents: "none",
+				}}
 			/>
-			<ImageBackground
-				source={{ uri: embed.thumbnail }}
-				accessibilityIgnoresInvertColors
-				style={[
-					a.absolute,
-					a.inset_0,
-					{
-						backgroundColor: "transparent", // If you don't add `backgroundColor` to the styles here,
-						// the play button won't show up on the first render on android 🥴😮‍💨
-						display: showOverlay ? "flex" : "none",
-					},
-				]}
-				cachePolicy="memory-disk" // Preferring memory cache helps to avoid flicker when re-displaying on android
-			>
-				{showOverlay && (
-					<Button
-						style={[a.flex_1, a.align_center, a.justify_center]}
-						onPress={() => {
-							ref.current?.togglePlayback();
-						}}
-						label={"Play video"}
-						color="secondary"
-					>
-						{showSpinner ? (
-							<View style={[a.rounded_full, a.p_xs, a.align_center, a.justify_center]}>
-								<ActivityIndicator size="large" color="white" />
-							</View>
-						) : (
-							<PlayButtonIcon />
-						)}
-					</Button>
-				)}
-			</ImageBackground>
-		</>
+		</View>
 	);
 }
 
-function VideoError({ retry }: { error: unknown; retry: () => void }) {
+function VideoError({ error, retry }: { error: unknown; retry: () => void }) {
+	let showRetryButton = true;
+	let text = null;
+
+	if (error instanceof VideoNotFoundError) {
+		text = "Video not found.";
+	} else if (error instanceof HLSUnsupportedError) {
+		showRetryButton = false;
+		text = "Your browser does not support the video format. Please try a different browser.";
+	} else {
+		text = "An error occurred while loading the video. Please try again.";
+	}
+
 	return (
 		<VideoFallback.Container>
-			<VideoFallback.Text>An error occurred while loading the video. Please try again later.</VideoFallback.Text>
-			<VideoFallback.RetryButton onPress={retry} />
+			<VideoFallback.Text>{text}</VideoFallback.Text>
+			{showRetryButton && <VideoFallback.RetryButton onPress={retry} />}
 		</VideoFallback.Container>
 	);
 }

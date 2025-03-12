@@ -6,7 +6,6 @@ import {
 	type RichText as RichTextAPI,
 } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
-import * as Clipboard from "expo-clipboard";
 import React, { memo, useCallback } from "react";
 import { Platform, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
 
@@ -126,7 +125,7 @@ let PostDropdownMenuItems = ({
 	const rootUri = record.reply?.root?.uri || postUri;
 	const isReply = Boolean(record.reply);
 	const [isThreadMuted, muteThread, unmuteThread] = useThreadMuteMutationQueue(post, rootUri);
-	const isPostHidden = hiddenPosts && hiddenPosts.includes(postUri);
+	const isPostHidden = hiddenPosts?.includes(postUri);
 	const isAuthor = postAuthor.did === currentAccount?.did;
 	const isRootPostAuthor = new AtUri(rootUri).host === currentAccount?.did;
 	const threadgateHiddenReplies = useMergedThreadgateHiddenReplies({
@@ -198,8 +197,7 @@ let PostDropdownMenuItems = ({
 
 	const onCopyPostText = React.useCallback(() => {
 		const str = richTextToString(richText, true);
-
-		Clipboard.setStringAsync(str);
+		new Clipboard().writeText(str)
 		Toast.show("Copied to clipboard", "clipboard-check");
 	}, [richText]);
 
@@ -272,7 +270,7 @@ let PostDropdownMenuItems = ({
 	const canHidePostForMe = !isAuthor && !isPostHidden;
 	const canEmbed = isWeb && gtMobile && !hideInPWI;
 	const canHideReplyForEveryone = !isAuthor && isRootPostAuthor && !isPostHidden && isReply;
-	const canDetachQuote = quoteEmbed && quoteEmbed.isOwnedByViewer;
+	const canDetachQuote = quoteEmbed?.isOwnedByViewer;
 
 	const onToggleReplyVisibility = React.useCallback(async () => {
 		// TODO no threadgate?
@@ -295,7 +293,6 @@ let PostDropdownMenuItems = ({
 	}, [isReplyHiddenByThreadgate, rootUri, postUri, canHideReplyForEveryone, toggleReplyVisibility]);
 
 	const onPressPin = useCallback(() => {
-		logEvent(isPinned ? "post:unpin" : "post:pin", {});
 		pinPostMutate({
 			postUri,
 			postCid,
@@ -692,7 +689,7 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={quotePostDetachConfirmControl}
 				title={"Detach quote post?"}
-				description={`This will remove your post from this quote post for all users, and replace it with a placeholder.`}
+				description={"This will remove your post from this quote post for all users, and replace it with a placeholder."}
 				onConfirm={onToggleQuotePostAttachment}
 				confirmButtonCta={"Yes, detach"}
 			/>
@@ -700,7 +697,7 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={hideReplyConfirmControl}
 				title={"Hide this reply?"}
-				description={`This reply will be sorted into a hidden section at the bottom of your thread and will mute notifications for subsequent replies - both for yourself and others.`}
+				description={"This reply will be sorted into a hidden section at the bottom of your thread and will mute notifications for subsequent replies - both for yourself and others."}
 				onConfirm={onToggleReplyVisibility}
 				confirmButtonCta={"Yes, hide"}
 			/>
@@ -708,7 +705,7 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={blockPromptControl}
 				title={"Block Account?"}
-				description={`Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`}
+				description={"Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you."}
 				onConfirm={onBlockAuthor}
 				confirmButtonCta={"Block"}
 				confirmButtonColor="negative"

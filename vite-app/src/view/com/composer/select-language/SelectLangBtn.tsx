@@ -1,4 +1,4 @@
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
 import { useCallback, useMemo } from "react";
 import { Keyboard, StyleSheet } from "react-native";
 
@@ -94,7 +94,8 @@ export function SelectLangBtn() {
 					{postLanguagesPref.map((lang) => codeToLanguageName(lang, langPrefs.appLanguage)).join(", ")}
 				</Text>
 			) : (
-				<FontAwesomeIcon icon="language" style={pal.link as FontAwesomeIconStyle} size={26} />
+				// @ts-ignore
+				<FontAwesomeIcon icon="language" style={pal.link} size={26} />
 			)}
 		</DropdownButton>
 	);

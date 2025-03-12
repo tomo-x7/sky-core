@@ -50,7 +50,7 @@ function TranslatedErrorScreen({ details }: { details?: string }) {
 	return (
 		<ErrorScreen
 			title={"Oh no!"}
-			message={`There was an unexpected issue in the application. Please let us know if this happened to you!`}
+			message={"There was an unexpected issue in the application. Please let us know if this happened to you!"}
 			details={details}
 		/>
 	);

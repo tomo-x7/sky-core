@@ -6,14 +6,10 @@ import * as Layout from "#/components/Layout";
 import { InlineLinkText } from "#/components/Link";
 import * as Toggle from "#/components/forms/Toggle";
 import { Accessibility_Stroke2_Corner2_Rounded as AccessibilityIcon } from "#/components/icons/Accessibility";
-import { Haptic_Stroke2_Corner2_Rounded as HapticIcon } from "#/components/icons/Haptic";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
-import { isNative } from "#/platform/detection";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import {
-	useHapticsDisabled,
 	useRequireAltTextEnabled,
-	useSetHapticsDisabled,
 	useSetRequireAltTextEnabled,
 } from "#/state/preferences";
 import { useLargeAltBadgeEnabled, useSetLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
@@ -22,8 +18,6 @@ type Props = NativeStackScreenProps<CommonNavigatorParams, "AccessibilitySetting
 export function AccessibilitySettingsScreen(props: Props) {
 	const requireAltTextEnabled = useRequireAltTextEnabled();
 	const setRequireAltTextEnabled = useSetRequireAltTextEnabled();
-	const hapticsDisabled = useHapticsDisabled();
-	const setHapticsDisabled = useSetHapticsDisabled();
 	const largeAltBadgeEnabled = useLargeAltBadgeEnabled();
 	const setLargeAltBadgeEnabled = useSetLargeAltBadgeEnabled();
 
@@ -62,25 +56,6 @@ export function AccessibilitySettingsScreen(props: Props) {
 							<Toggle.Platform />
 						</Toggle.Item>
 					</SettingsList.Group>
-					{isNative && (
-						<>
-							<SettingsList.Divider />
-							<SettingsList.Group contentContainerStyle={[a.gap_sm]}>
-								<SettingsList.ItemIcon icon={HapticIcon} />
-								<SettingsList.ItemText>Haptics</SettingsList.ItemText>
-								<Toggle.Item
-									name="haptics"
-									label={"Disable haptic feedback"}
-									value={hapticsDisabled ?? false}
-									onChange={(value) => setHapticsDisabled(value)}
-									style={[a.w_full]}
-								>
-									<Toggle.LabelText style={[a.flex_1]}>Disable haptic feedback</Toggle.LabelText>
-									<Toggle.Platform />
-								</Toggle.Item>
-							</SettingsList.Group>
-						</>
-					)}
 					<SettingsList.Item>
 						<Admonition type="info" style={[a.flex_1]}>
 							<>

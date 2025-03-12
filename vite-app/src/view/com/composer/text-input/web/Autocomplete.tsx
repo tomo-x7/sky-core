@@ -111,6 +111,7 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 		selectItem(selectedIndex);
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => setSelectedIndex(0), [props.items]);
 
 	useImperativeHandle(ref, () => ({

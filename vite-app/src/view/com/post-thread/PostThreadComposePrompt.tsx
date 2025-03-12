@@ -4,7 +4,6 @@ import { atoms as a, ios, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
-import { useHaptics } from "#/lib/haptics";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
@@ -18,7 +17,6 @@ export function PostThreadComposePrompt({
 	const { data: profile } = useProfileQuery({ did: currentAccount?.did });
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
-	const playHaptic = useHaptics();
 	const { state: hovered, onIn: onHoverIn, onOut: onHoverOut } = useInteractionState();
 
 	return (
@@ -35,12 +33,7 @@ export function PostThreadComposePrompt({
 			]}
 			onPress={() => {
 				onPressCompose();
-				playHaptic("Light");
 			}}
-			onLongPress={ios(() => {
-				onPressCompose();
-				playHaptic("Heavy");
-			})}
 			onHoverIn={onHoverIn}
 			onHoverOut={onHoverOut}
 		>
@@ -52,6 +45,7 @@ export function PostThreadComposePrompt({
 					a.gap_sm,
 					a.rounded_full,
 					(!gtMobile || hovered) && t.atoms.bg_contrast_25,
+					//@ts-ignore
 					a.transition_color,
 				]}
 			>

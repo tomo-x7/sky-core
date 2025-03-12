@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 /**
  * Copyright (c) JOB TODAY S.A. and its affiliates.
  *

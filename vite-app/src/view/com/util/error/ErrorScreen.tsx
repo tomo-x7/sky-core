@@ -1,4 +1,4 @@
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -48,11 +48,8 @@ export function ErrorScreen({
 							{ backgroundColor: t.palette.contrast_950 },
 						]}
 					>
-						<FontAwesomeIcon
-							icon="exclamation"
-							style={pal.textInverted as FontAwesomeIconStyle}
-							size={24}
-						/>
+						{/* @ts-ignore */}
+						<FontAwesomeIcon icon="exclamation" style={pal.textInverted} size={24} />
 					</View>
 				</View>
 				<Text style={[a.text_center, a.font_heavy, a.text_2xl, a.mb_md]}>{title}</Text>
@@ -92,7 +89,7 @@ export function ErrorScreen({
 						>
 							<ButtonIcon icon={ArrowRotateCounterClockwiseIcon} />
 							<ButtonText>
-								<Trans context="action">Try again</Trans>
+								Try again
 							</ButtonText>
 						</Button>
 					</View>

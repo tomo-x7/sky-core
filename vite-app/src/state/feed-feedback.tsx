@@ -62,9 +62,7 @@ export function useFeedFeedback(feed: FeedDescriptor, hasSession: boolean) {
 					},
 				},
 			)
-			.catch((e: any) => {
-				logger.warn("Failed to send feed interactions", { error: e });
-			});
+			.catch((e: any) => {});
 
 		// Send to Statsig
 		if (aggregatedStats.current === null) {
@@ -159,6 +157,7 @@ function isDiscoverFeed(feed: FeedDescriptor) {
 	return FEEDBACK_FEEDS.includes(feed);
 }
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 function toString(interaction: AppBskyFeedDefs.Interaction): string {
 	return `${interaction.item}|${interaction.event}|${interaction.feedContext || ""}`;
 }
@@ -188,15 +187,9 @@ function sendOrAggregateInteractionsForStats(stats: AggregatedStats, interaction
 			// Pressing "Show more" / "Show less" is relatively uncommon so we won't aggregate them.
 			// This lets us send the feed context together with them.
 			case "app.bsky.feed.defs#requestLess": {
-				logEvent("discover:showLess", {
-					feedContext: interaction.feedContext ?? "",
-				});
 				break;
 			}
 			case "app.bsky.feed.defs#requestMore": {
-				logEvent("discover:showMore", {
-					feedContext: interaction.feedContext ?? "",
-				});
 				break;
 			}
 
@@ -230,23 +223,14 @@ function flushToStatsig(stats: AggregatedStats | null) {
 	}
 
 	if (stats.clickthroughCount > 0) {
-		logEvent("discover:clickthrough", {
-			count: stats.clickthroughCount,
-		});
 		stats.clickthroughCount = 0;
 	}
 
 	if (stats.engagedCount > 0) {
-		logEvent("discover:engaged", {
-			count: stats.engagedCount,
-		});
 		stats.engagedCount = 0;
 	}
 
 	if (stats.seenCount > 0) {
-		logEvent("discover:seen", {
-			count: stats.seenCount,
-		});
 		stats.seenCount = 0;
 	}
 }

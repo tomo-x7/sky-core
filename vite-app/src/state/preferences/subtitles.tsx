@@ -16,14 +16,14 @@ export function Provider({ children }: { children: React.ReactNode }) {
 			setState(Boolean(subtitlesEnabled));
 			persisted.write("subtitlesEnabled", subtitlesEnabled);
 		},
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("subtitlesEnabled", (nextSubtitlesEnabled) => {
 			setState(Boolean(nextSubtitlesEnabled));
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

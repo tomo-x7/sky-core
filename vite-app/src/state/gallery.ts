@@ -1,12 +1,9 @@
-import { cacheDirectory, deleteAsync, makeDirectoryAsync, moveAsync } from "expo-file-system";
 import { type Action, type ActionCrop, SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { nanoid } from "nanoid/non-secure";
 
 import { POST_IMG_MAX } from "#/lib/constants";
 import { getImageDim } from "#/lib/media/manip";
-import { openCropper } from "#/lib/media/picker";
 import { getDataUriSize } from "#/lib/media/util";
-import { isIOS, isNative } from "#/platform/detection";
 
 export type ImageTransformation = {
 	crop?: ActionCrop["crop"];
@@ -38,15 +35,7 @@ type ComposerImageWithTransformation = ComposerImageBase & {
 
 export type ComposerImage = ComposerImageWithoutTransformation | ComposerImageWithTransformation;
 
-let _imageCacheDirectory: string;
 
-function getImageCacheDirectory(): string | null {
-	if (isNative) {
-		return (_imageCacheDirectory ??= joinPath(cacheDirectory!, "bsky-composer"));
-	}
-
-	return null;
-}
 
 export async function createComposerImage(raw: ImageMeta): Promise<ComposerImageWithoutTransformation> {
 	return {
@@ -100,48 +89,7 @@ export async function pasteImage(uri: string): Promise<ComposerImageWithoutTrans
 }
 
 export async function cropImage(img: ComposerImage): Promise<ComposerImage> {
-	if (!isNative) {
-		return img;
-	}
-
-	// NOTE
-	// on ios, react-native-image-crop-picker gives really bad quality
-	// without specifying width and height. on android, however, the
-	// crop stretches incorrectly if you do specify it. these are
-	// both separate bugs in the library. we deal with that by
-	// providing width & height for ios only
-	// -prf
-
-	const source = img.source;
-	const [w, h] = containImageRes(source.width, source.height, POST_IMG_MAX);
-
-	// @todo: we're always passing the original image here, does image-cropper
-	// allows for setting initial crop dimensions? -mary
-	try {
-		const cropped = await openCropper({
-			mediaType: "photo",
-			path: source.path,
-			freeStyleCropEnabled: true,
-			...(isIOS ? { width: w, height: h } : {}),
-		});
-
-		return {
-			alt: img.alt,
-			source: source,
-			transformed: {
-				path: await moveIfNecessary(cropped.path),
-				width: cropped.width,
-				height: cropped.height,
-				mime: cropped.mime,
-			},
-		};
-	} catch (e) {
-		if (e instanceof Error && e.message.includes("User cancelled")) {
-			return img;
-		}
-
-		throw e;
-	}
+	return img;
 }
 
 export async function manipulateImage(img: ComposerImage, trans: ImageTransformation): Promise<ComposerImage> {
@@ -187,7 +135,6 @@ export async function compressImage(img: ComposerImage): Promise<ImageMeta> {
 	const source = img.transformed || img.source;
 
 	const [w, h] = containImageRes(source.width, source.height, POST_IMG_MAX);
-	const cacheDir = isNative && getImageCacheDirectory();
 
 	for (let i = 10; i > 0; i--) {
 		// Float precision
@@ -209,51 +156,18 @@ export async function compressImage(img: ComposerImage): Promise<ImageMeta> {
 				mime: "image/jpeg",
 			};
 		}
-
-		if (cacheDir) {
-			await deleteAsync(res.uri);
-		}
 	}
 
 	throw new Error("Unable to compress image");
 }
 
 async function moveIfNecessary(from: string) {
-	const cacheDir = isNative && getImageCacheDirectory();
-
-	if (cacheDir && from.startsWith(cacheDir)) {
-		const to = joinPath(cacheDir, nanoid(36));
-
-		await makeDirectoryAsync(cacheDir, { intermediates: true });
-		await moveAsync({ from, to });
-
-		return to;
-	}
-
 	return from;
 }
 
 /** Purge files that were created to accomodate image manipulation */
-export async function purgeTemporaryImageFiles() {
-	const cacheDir = isNative && getImageCacheDirectory();
+export async function purgeTemporaryImageFiles() {}
 
-	if (cacheDir) {
-		await deleteAsync(cacheDir, { idempotent: true });
-		await makeDirectoryAsync(cacheDir);
-	}
-}
-
-function joinPath(a: string, b: string) {
-	if (a.endsWith("/")) {
-		if (b.startsWith("/")) {
-			return a.slice(0, -1) + b;
-		}
-		return a + b;
-	} else if (b.startsWith("/")) {
-		return a + b;
-	}
-	return a + "/" + b;
-}
 
 function containImageRes(
 	w: number,

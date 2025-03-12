@@ -1,11 +1,9 @@
 import { type ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
-import { StatusBar } from "expo-status-bar";
 import Graphemer from "graphemer";
 import { useMemo, useState } from "react";
 import { Modal, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -25,7 +23,6 @@ const COL_WIDTH = 400;
 
 export function Takendown() {
 	const t = useTheme();
-	const insets = useSafeAreaInsets();
 	const { gtMobile } = useBreakpoints();
 	const { currentAccount } = useSession();
 	const { logoutCurrentAccount } = useSessionApi();
@@ -113,7 +110,6 @@ export function Takendown() {
 
 	return (
 		<Modal visible animationType={native("slide")} presentationStyle="formSheet" style={[web(a.util_screen_outer)]}>
-			{isIOS && <StatusBar style="light" />}
 			<KeyboardAwareScrollView style={[a.flex_1, t.atoms.bg]} centerContent>
 				<View style={[a.flex_row, a.justify_center, gtMobile ? a.pt_4xl : [a.px_xl, a.pt_4xl]]}>
 					<View style={[a.flex_1, { maxWidth: COL_WIDTH, minHeight: COL_WIDTH }]}>
@@ -220,7 +216,7 @@ export function Takendown() {
 						a.align_center,
 						t.atoms.bg,
 						gtMobile ? a.px_5xl : a.px_xl,
-						{ paddingBottom: Math.max(insets.bottom, a.pb_5xl.paddingBottom) },
+						{ paddingBottom: ( a.pb_5xl.paddingBottom) },
 					]}
 				>
 					<View style={[a.w_full, a.gap_sm, { maxWidth: COL_WIDTH }]}>

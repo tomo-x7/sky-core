@@ -41,14 +41,14 @@ export function Controls({
 	hlsLoading,
 	hasSubtitleTrack,
 }: {
-	videoRef: React.RefObject<HTMLVideoElement>;
+	videoRef: React.RefObject<HTMLVideoElement | null>;
 	hlsRef: React.RefObject<Hls | undefined>;
 	active: boolean;
 	setActive: () => void;
 	focused: boolean;
 	setFocused: (focused: boolean) => void;
 	onScreen: boolean;
-	fullscreenRef: React.RefObject<HTMLDivElement>;
+	fullscreenRef: React.RefObject<HTMLDivElement | null>;
 	hlsLoading: boolean;
 	hasSubtitleTrack: boolean;
 }) {
@@ -216,7 +216,7 @@ export function Controls({
 	}, [onSeek, videoRef]);
 
 	const [showCursor, setShowCursor] = useState(true);
-	const cursorTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+	const cursorTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 	const onPointerMoveEmptySpace = useCallback(() => {
 		setShowCursor(true);
 		if (cursorTimeoutRef.current) {
@@ -243,16 +243,16 @@ export function Controls({
 			if (evt.pointerType !== "mouse" && !hovered) {
 				evt.preventDefault();
 			}
-			clearTimeout(timeoutRef.current);
+			clearTimeout(timeoutRef.current ?? undefined);
 		},
 		[hovered],
 	);
 
-	const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+	const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
 	const onHoverWithTimeout = useCallback(() => {
 		onHover();
-		clearTimeout(timeoutRef.current);
+		clearTimeout(timeoutRef.current ?? undefined);
 	}, [onHover]);
 
 	const onEndHoverWithTimeout = useCallback(
@@ -296,8 +296,9 @@ export function Controls({
 				onPointerEnter={onPointerMoveEmptySpace}
 				onPointerMove={onPointerMoveEmptySpace}
 				onPointerLeave={onPointerLeaveEmptySpace}
-				accessibilityLabel={!focused ? msg`Unmute video` : playing ? msg`Pause video` : msg`Play video`}
+				accessibilityLabel={!focused ? "Unmute video" : playing ? "Pause video" : "Play video"}
 				accessibilityHint=""
+				// @ts-ignore
 				style={[a.flex_1, web({ cursor: showCursor || !playing ? "pointer" : "none" })]}
 				onPress={onPressEmptySpace}
 			/>
@@ -307,10 +308,12 @@ export function Controls({
 					a.flex_shrink_0,
 					a.w_full,
 					a.px_xs,
+					//@ts-ignore
 					web({
 						background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7))",
 					}),
 					{ opacity: showControls ? 1 : 0 },
+					//@ts-ignore
 					{ transition: "opacity 0.2s ease-in-out" },
 				]}
 			>

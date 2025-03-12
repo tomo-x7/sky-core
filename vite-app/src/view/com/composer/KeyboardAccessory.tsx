@@ -1,14 +1,11 @@
 import type React from "react";
 import { View } from "react-native";
-import { KeyboardStickyView } from "react-native-keyboard-controller";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme } from "#/alf";
 import { isWeb } from "#/platform/detection";
 
 export function KeyboardAccessory({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
-	const { bottom } = useSafeAreaInsets();
 
 	const style = [
 		a.flex_row,
@@ -22,13 +19,6 @@ export function KeyboardAccessory({ children }: { children: React.ReactNode }) {
 	];
 
 	// todo: when iPad support is added, it should also not use the KeyboardStickyView
-	if (isWeb) {
-		return <View style={style}>{children}</View>;
-	}
 
-	return (
-		<KeyboardStickyView offset={{ closed: -bottom }} style={style}>
-			{children}
-		</KeyboardStickyView>
-	);
+	return <View style={style}>{children}</View>;
 }

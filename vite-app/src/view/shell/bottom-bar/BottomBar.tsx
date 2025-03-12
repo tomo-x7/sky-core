@@ -1,9 +1,8 @@
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { StackActions } from "@react-navigation/native";
-import React, { type ComponentProps } from "react";
+import React, { JSX, type ComponentProps } from "react";
 import { type GestureResponderEvent, View } from "react-native";
 import Animated from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -24,7 +23,6 @@ import {
 	Message_Stroke2_Corner0_Rounded_Filled as MessageFilled,
 } from "#/components/icons/Message";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
-import { useHaptics } from "#/lib/haptics";
 import { useDedupe } from "#/lib/hooks/useDedupe";
 import { useMinimalShellFooterTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { useNavigationTabState } from "#/lib/hooks/useNavigationTabState";
@@ -51,7 +49,6 @@ type TabOptions = "Home" | "Search" | "Notifications" | "MyProfile" | "Feeds" | 
 export function BottomBar({ navigation }: BottomTabBarProps) {
 	const { hasSession, currentAccount } = useSession();
 	const pal = usePalette("default");
-	const safeAreaInsets = useSafeAreaInsets();
 	const { footerHeight } = useShellLayout();
 	const { isAtHome, isAtSearch, isAtNotifications, isAtMyProfile, isAtMessages } = useNavigationTabState();
 	const numUnreadNotifications = useUnreadNotifications();
@@ -62,9 +59,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 	const closeAllActiveElements = useCloseAllActiveElements();
 	const dedupe = useDedupe();
 	const accountSwitchControl = useDialogControl();
-	const playHaptic = useHaptics();
 	const hasHomeBadge = useHomeBadge();
-	const gate = useGate();
 	const iconWidth = 28;
 
 	const showSignIn = React.useCallback(() => {
@@ -103,9 +98,8 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 	}, [onPressTab]);
 
 	const onLongPressProfile = React.useCallback(() => {
-		playHaptic();
 		accountSwitchControl.open();
-	}, [accountSwitchControl, playHaptic]);
+	}, [accountSwitchControl]);
 
 	return (
 		<>
@@ -116,7 +110,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 					styles.bottomBar,
 					pal.view,
 					pal.border,
-					{ paddingBottom: clamp(safeAreaInsets.bottom, 15, 60) },
+					{ paddingBottom: clamp(0, 15, 60) },
 					footerMinimalShellTransform,
 				]}
 				onLayout={(e) => {
@@ -137,7 +131,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 									<Home width={iconWidth + 1} style={[styles.ctrlIcon, pal.text, styles.homeIcon]} />
 								)
 							}
-							hasNew={hasHomeBadge && gate("remove_show_latest_button")}
+							// hasNew={hasHomeBadge && gate("remove_show_latest_button")}
 							onPress={onPressHome}
 							accessibilityRole="tab"
 							accessibilityLabel={"Home"}
@@ -186,10 +180,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							accessibilityLabel={"Chat"}
 							accessibilityHint={
 								numUnreadMessages.count > 0
-									? `${plural(numUnreadMessages.numUnread ?? 0, {
-											one: "# unread item",
-											other: "# unread items",
-										})}`
+									? `${numUnreadMessages.numUnread ?? 0} unread ${numUnreadMessages.numUnread === "1" ? "item" : "items"}`
 									: ""
 							}
 						/>
@@ -213,10 +204,7 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							accessibilityHint={
 								numUnreadNotifications === ""
 									? ""
-									: `${plural(numUnreadNotifications ?? 0, {
-											one: "# unread item",
-											other: "# unread items",
-										})}`
+									: `${numUnreadNotifications ?? 0} unread ${numUnreadNotifications === "1" ? "item" : "items"}`
 							}
 						/>
 						<Btn

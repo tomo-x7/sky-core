@@ -7,7 +7,6 @@ import { atoms as a, useTheme } from "#/alf";
 import { clamp } from "#/lib/numbers";
 import { isWeb } from "#/platform/detection";
 import { ExternalEmbedRemoveBtn } from "../ExternalEmbedRemoveBtn";
-import { VideoTranscodeBackdrop } from "./VideoTranscodeBackdrop";
 
 export function VideoTranscodeProgress({
 	asset,
@@ -24,7 +23,7 @@ export function VideoTranscodeProgress({
 
 	let aspectRatio = asset.width / asset.height;
 
-	if (isNaN(aspectRatio)) {
+	if (Number.isNaN(aspectRatio)) {
 		aspectRatio = 16 / 9;
 	}
 
@@ -32,7 +31,6 @@ export function VideoTranscodeProgress({
 
 	return (
 		<View style={[a.w_full, t.atoms.bg_contrast_50, a.rounded_md, a.overflow_hidden, { aspectRatio }]}>
-			<VideoTranscodeBackdrop uri={asset.uri} />
 			<View style={[a.flex_1, a.align_center, a.justify_center, a.gap_lg, a.absolute, a.inset_0]}>
 				<ProgressPie
 					size={48}

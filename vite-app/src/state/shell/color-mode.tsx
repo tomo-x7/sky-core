@@ -17,7 +17,7 @@ const stateContext = React.createContext<StateContext>({
 });
 const setContext = React.createContext<SetContext>({} as SetContext);
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [colorMode, setColorMode] = React.useState(persisted.get("colorMode"));
 	const [darkTheme, setDarkTheme] = React.useState(persisted.get("darkTheme"));
 

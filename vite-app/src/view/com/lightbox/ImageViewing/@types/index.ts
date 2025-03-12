@@ -29,4 +29,4 @@ export type ImageSource = {
 	type: "image" | "circle-avi" | "rect-avi";
 };
 
-export type Transform = Exclude<TransformsStyle["transform"], string | undefined>;
+export type Transform = Exclude<>;

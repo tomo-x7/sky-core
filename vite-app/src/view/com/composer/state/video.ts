@@ -1,6 +1,5 @@
 import type { AppBskyVideoDefs, BlobRef, BskyAgent } from "@atproto/api";
 import type { JobStatus } from "@atproto/api/dist/client/types/app/bsky/video/defs";
-import type { I18n } from "@lingui/core";
 import type { ImagePickerAsset } from "expo-image-picker";
 
 import { AbortError } from "#/lib/async/cancelable";
@@ -223,7 +222,7 @@ export function videoReducer(state: VideoState, action: VideoAction): VideoState
 			};
 		}
 	}
-	console.error("Unexpected video action (" + action.type + ") while in " + state.status + " state");
+	console.error(`Unexpected video action (${action.type}) while in ${state.status} state`);
 	return state;
 }
 
@@ -237,7 +236,6 @@ export async function processVideo(
 	agent: BskyAgent,
 	did: string,
 	signal: AbortSignal,
-	_: I18n["_"],
 ) {
 	let video: CompressedVideo | undefined;
 	try {
@@ -248,7 +246,7 @@ export async function processVideo(
 			signal,
 		});
 	} catch (e) {
-		const message = getCompressErrorMessage(e, _);
+		const message = getCompressErrorMessage(e);
 		if (message !== null) {
 			dispatch({
 				type: "to_error",
@@ -271,13 +269,12 @@ export async function processVideo(
 			agent,
 			did,
 			signal,
-			_,
 			setProgress: (p) => {
 				dispatch({ type: "update_progress", progress: p, signal });
 			},
 		});
 	} catch (e) {
-		const message = getUploadErrorMessage(e, _);
+		const message = getUploadErrorMessage(e);
 		if (message !== null) {
 			dispatch({
 				type: "to_error",
@@ -358,7 +355,7 @@ export async function processVideo(
 	}
 }
 
-function getCompressErrorMessage(e: unknown, _: I18n["_"]): string | null {
+function getCompressErrorMessage(e: unknown): string | null {
 	if (e instanceof AbortError) {
 		return null;
 	}
@@ -369,7 +366,7 @@ function getCompressErrorMessage(e: unknown, _: I18n["_"]): string | null {
 	return "An error occurred while compressing the video.";
 }
 
-function getUploadErrorMessage(e: unknown, _: I18n["_"]): string | null {
+function getUploadErrorMessage(e: unknown): string | null {
 	if (e instanceof AbortError) {
 		return null;
 	}
@@ -380,7 +377,7 @@ function getUploadErrorMessage(e: unknown, _: I18n["_"]): string | null {
 			case "User is not allowed to upload videos":
 				return "You are not allowed to upload videos.";
 			case "Uploading is disabled at the moment":
-				return `Hold up! We’re gradually giving access to video, and you’re still waiting in line. Check back soon!`;
+				return "Hold up! We’re gradually giving access to video, and you’re still waiting in line. Check back soon!";
 			case "Failed to get user's upload stats":
 				return "We were unable to determine if you are allowed to upload videos. Please try again.";
 			case "User has exceeded daily upload bytes limit":

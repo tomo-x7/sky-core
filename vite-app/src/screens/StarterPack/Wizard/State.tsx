@@ -68,7 +68,7 @@ function reducer(state: State, action: Action): State {
 			break;
 		case "AddProfile":
 			if (state.profiles.length > STARTER_PACK_MAX_SIZE) {
-				Toast.show(msg`You may only add up to ${STARTER_PACK_MAX_SIZE} profiles`.message ?? "", "info");
+				Toast.show(`You may only add up to ${STARTER_PACK_MAX_SIZE} profiles` , "info");
 			} else {
 				updatedState = { ...state, profiles: [...state.profiles, action.profile] };
 			}
@@ -81,7 +81,7 @@ function reducer(state: State, action: Action): State {
 			break;
 		case "AddFeed":
 			if (state.feeds.length >= 3) {
-				Toast.show(msg`You may only add up to 3 feeds`.message ?? "", "info");
+				Toast.show("You may only add up to 3 feeds" , "info");
 			} else {
 				updatedState = { ...state, feeds: [...state.feeds, action.feed] };
 			}

@@ -16,7 +16,7 @@ export function useModerationOpts() {
 	return useContext(moderationOptsContext);
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const override = useContext(moderationOptsOverrideContext);
 	const { currentAccount } = useSession();
 	const prefs = usePreferencesQuery();

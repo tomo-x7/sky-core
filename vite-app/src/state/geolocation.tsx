@@ -67,6 +67,7 @@ export function beginResolveGeolocation() {
 		return;
 	}
 
+	// biome-ignore lint/suspicious/noAsyncPromiseExecutor: <explanation>
 	geolocationResolution = new Promise(async (resolve) => {
 		try {
 			// Try once, fail fast
@@ -74,7 +75,6 @@ export function beginResolveGeolocation() {
 			if (geolocation) {
 				device.set(["geolocation"], geolocation);
 				emitGeolocationUpdate(geolocation);
-				logger.debug("geolocation: success", { geolocation });
 			} else {
 				// endpoint should throw on all failures, this is insurance
 				throw new Error("geolocation: nothing returned from initial request");
@@ -93,7 +93,6 @@ export function beginResolveGeolocation() {
 					if (geolocation) {
 						device.set(["geolocation"], geolocation);
 						emitGeolocationUpdate(geolocation);
-						logger.debug("geolocation: success", { geolocation });
 					} else {
 						// endpoint should throw on all failures, this is insurance
 						throw new Error("geolocation: nothing returned from retries");
@@ -121,13 +120,8 @@ export async function ensureGeolocationResolved() {
 
 	const cached = device.get(["geolocation"]);
 	if (cached) {
-		logger.debug("geolocation: using cache", { cached });
 	} else {
-		logger.debug("geolocation: no cache");
 		await geolocationResolution;
-		logger.debug("geolocation: resolved", {
-			resolved: device.get(["geolocation"]),
-		});
 	}
 }
 

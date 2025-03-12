@@ -15,7 +15,7 @@ const apiContext = React.createContext<ApiContext>({
 	unhidePost: () => {},
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("hiddenPosts"));
 
 	const setStateWrapped = React.useCallback(
@@ -24,7 +24,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			setState(s);
 			persisted.write("hiddenPosts", s);
 		},
-		[setState],
+		[],
 	);
 
 	const api = React.useMemo(
@@ -43,7 +43,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 		return persisted.onUpdate("hiddenPosts", (nextHiddenPosts) => {
 			setState(nextHiddenPosts);
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

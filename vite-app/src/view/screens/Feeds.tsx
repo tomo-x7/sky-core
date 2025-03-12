@@ -151,13 +151,13 @@ export function FeedsScreen(_props: Props) {
 				resetSearch();
 			}
 		},
-		[setQuery, refetchPopularFeeds, debouncedSearch, resetSearch],
+		[ refetchPopularFeeds, debouncedSearch, resetSearch],
 	);
 	const onPressCancelSearch = React.useCallback(() => {
 		setQuery("");
 		refetchPopularFeeds();
 		resetSearch();
-	}, [refetchPopularFeeds, setQuery, resetSearch]);
+	}, [refetchPopularFeeds,  resetSearch]);
 	const onSubmitQuery = React.useCallback(() => {
 		debouncedSearch(query);
 	}, [query, debouncedSearch]);
@@ -168,7 +168,7 @@ export function FeedsScreen(_props: Props) {
 			refetchPopularFeeds().catch((_e) => undefined),
 		]);
 		setIsPTR(false);
-	}, [setIsPTR, refetchSavedFeeds, refetchPopularFeeds]);
+	}, [ refetchSavedFeeds, refetchPopularFeeds]);
 	const onEndReached = React.useCallback(() => {
 		if (isPopularFeedsFetching || isUserSearching || !hasNextPopularFeedsPage || popularFeedsError) return;
 		fetchNextPopularFeedsPage();

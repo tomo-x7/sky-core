@@ -97,14 +97,13 @@ export function useGetPosts() {
 
 export function usePostLikeMutationQueue(
 	post: Shadow<AppBskyFeedDefs.PostView>,
-	logContext: LogEvents["post:like"]["logContext"] & LogEvents["post:unlike"]["logContext"],
 ) {
 	const queryClient = useQueryClient();
 	const postUri = post.uri;
 	const postCid = post.cid;
 	const initialLikeUri = post.viewer?.like;
-	const likeMutation = usePostLikeMutation(logContext, post);
-	const unlikeMutation = usePostUnlikeMutation(logContext);
+	const likeMutation = usePostLikeMutation( post);
+	const unlikeMutation = usePostUnlikeMutation();
 
 	const queueToggle = useToggleMutationQueue({
 		initialState: initialLikeUri,
@@ -154,7 +153,7 @@ export function usePostLikeMutationQueue(
 	return [queueLike, queueUnlike];
 }
 
-function usePostLikeMutation(logContext: LogEvents["post:like"]["logContext"], post: Shadow<AppBskyFeedDefs.PostView>) {
+function usePostLikeMutation( post: Shadow<AppBskyFeedDefs.PostView>) {
 	const { currentAccount } = useSession();
 	const queryClient = useQueryClient();
 	const postAuthor = post.author;
@@ -169,26 +168,15 @@ function usePostLikeMutation(logContext: LogEvents["post:like"]["logContext"], p
 			if (currentAccount) {
 				ownProfile = findProfileQueryData(queryClient, currentAccount.did);
 			}
-			logEvent("post:like", {
-				logContext,
-				doesPosterFollowLiker: postAuthor.viewer ? Boolean(postAuthor.viewer.followedBy) : undefined,
-				doesLikerFollowPoster: postAuthor.viewer ? Boolean(postAuthor.viewer.following) : undefined,
-				likerClout: toClout(ownProfile?.followersCount),
-				postClout:
-					post.likeCount != null && post.repostCount != null && post.replyCount != null
-						? toClout(post.likeCount + post.repostCount + post.replyCount)
-						: undefined,
-			});
 			return agent.like(uri, cid);
 		},
 	});
 }
 
-function usePostUnlikeMutation(logContext: LogEvents["post:unlike"]["logContext"]) {
+function usePostUnlikeMutation() {
 	const agent = useAgent();
 	return useMutation<void, Error, { postUri: string; likeUri: string }>({
 		mutationFn: ({ likeUri }) => {
-			logEvent("post:unlike", { logContext });
 			return agent.deleteLike(likeUri);
 		},
 	});
@@ -196,14 +184,13 @@ function usePostUnlikeMutation(logContext: LogEvents["post:unlike"]["logContext"
 
 export function usePostRepostMutationQueue(
 	post: Shadow<AppBskyFeedDefs.PostView>,
-	logContext: LogEvents["post:repost"]["logContext"] & LogEvents["post:unrepost"]["logContext"],
 ) {
 	const queryClient = useQueryClient();
 	const postUri = post.uri;
 	const postCid = post.cid;
 	const initialRepostUri = post.viewer?.repost;
-	const repostMutation = usePostRepostMutation(logContext);
-	const unrepostMutation = usePostUnrepostMutation(logContext);
+	const repostMutation = usePostRepostMutation();
+	const unrepostMutation = usePostUnrepostMutation();
 
 	const queueToggle = useToggleMutationQueue({
 		initialState: initialRepostUri,
@@ -251,7 +238,7 @@ export function usePostRepostMutationQueue(
 	return [queueRepost, queueUnrepost];
 }
 
-function usePostRepostMutation(logContext: LogEvents["post:repost"]["logContext"]) {
+function usePostRepostMutation() {
 	const agent = useAgent();
 	return useMutation<
 		{ uri: string }, // responds with the uri of the repost
@@ -259,17 +246,15 @@ function usePostRepostMutation(logContext: LogEvents["post:repost"]["logContext"
 		{ uri: string; cid: string } // the post's uri and cid
 	>({
 		mutationFn: (post) => {
-			logEvent("post:repost", { logContext });
 			return agent.repost(post.uri, post.cid);
 		},
 	});
 }
 
-function usePostUnrepostMutation(logContext: LogEvents["post:unrepost"]["logContext"]) {
+function usePostUnrepostMutation() {
 	const agent = useAgent();
 	return useMutation<void, Error, { postUri: string; repostUri: string }>({
 		mutationFn: ({ repostUri }) => {
-			logEvent("post:unrepost", { logContext });
 			return agent.deleteRepost(repostUri);
 		},
 	});
@@ -338,7 +323,6 @@ function useThreadMuteMutation() {
 		{ uri: string } // the root post's uri
 	>({
 		mutationFn: ({ uri }) => {
-			logEvent("post:mute", {});
 			return agent.api.app.bsky.graph.muteThread({ root: uri });
 		},
 	});
@@ -348,7 +332,6 @@ function useThreadUnmuteMutation() {
 	const agent = useAgent();
 	return useMutation<{}, Error, { uri: string }>({
 		mutationFn: ({ uri }) => {
-			logEvent("post:unmute", {});
 			return agent.api.app.bsky.graph.unmuteThread({ root: uri });
 		},
 	});

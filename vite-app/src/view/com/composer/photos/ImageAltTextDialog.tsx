@@ -51,7 +51,6 @@ const ImageAltTextInner = ({
 	control: DialogControlProps;
 	image: Props["image"];
 }): React.ReactNode => {
-	const { _, i18n } = useLingui();
 	const t = useTheme();
 	const windim = useWindowDimensions();
 
@@ -87,6 +86,7 @@ const ImageAltTextInner = ({
 						source={{
 							uri: (image.transformed ?? image.source).path,
 						}}
+						//@ts-ignore
 						contentFit="contain"
 						accessible={true}
 						accessibilityIgnoresInvertColors
@@ -117,7 +117,7 @@ const ImageAltTextInner = ({
 						<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
 							<CircleInfo fill={t.palette.negative_500} />
 							<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-								<>Alt text will be truncated. Limit: {i18n.number(MAX_ALT_TEXT)} characters.</>
+								<>Alt text will be truncated. Limit: {(MAX_ALT_TEXT).toLocaleString()} characters.</>
 							</Text>
 						</View>
 					)}

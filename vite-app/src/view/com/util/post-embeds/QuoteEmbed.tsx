@@ -11,7 +11,7 @@ import {
 	moderatePost,
 } from "@atproto/api";
 import { AtUri } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
@@ -243,6 +243,7 @@ export function QuoteX({ onRemove }: { onRemove: () => void }) {
 			onAccessibilityEscape={onRemove}
 			hitSlop={HITSLOP_20}
 		>
+			{/* @ts-ignore */}
 			<FontAwesomeIcon size={12} icon="xmark" style={s.white} />
 		</TouchableOpacity>
 	);

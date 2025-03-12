@@ -88,8 +88,8 @@ export function VolumeControl({
 			)}
 			<ControlButton
 				active={muted || volume === 0}
-				activeLabel={msg({ message: "Unmute", context: "video" })}
-				inactiveLabel={msg({ message: "Mute", context: "video" })}
+				activeLabel={"Unmute"}
+				inactiveLabel={"Mute"}
 				activeIcon={MuteIcon}
 				inactiveIcon={UnmuteIcon}
 				onPress={onPressMute}

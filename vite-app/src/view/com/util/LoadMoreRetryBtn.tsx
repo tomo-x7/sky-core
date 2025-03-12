@@ -1,4 +1,4 @@
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
 import { StyleSheet } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -15,7 +15,8 @@ export function LoadMoreRetryBtn({
 	const pal = usePalette("default");
 	return (
 		<Button type="default-light" onPress={onPress} style={styles.loadMoreRetry}>
-			<FontAwesomeIcon icon="arrow-rotate-left" style={pal.textLight as FontAwesomeIconStyle} size={18} />
+			{/* @ts-ignore */}
+			<FontAwesomeIcon icon="arrow-rotate-left" style={pal.textLight} size={18} />
 			<Text style={[pal.textLight, styles.label]}>{label}</Text>
 		</Button>
 	);

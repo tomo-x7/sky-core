@@ -23,7 +23,7 @@ export function GifSelectDialog({
 	onClose,
 	onSelectGif: onSelectGifProp,
 }: {
-	controlRef: React.RefObject<{ open: () => void }>;
+	controlRef: React.RefObject<{ open: () => void }|null>;
 	onClose?: () => void;
 	onSelectGif: (gif: Gif) => void;
 }) {
@@ -254,7 +254,6 @@ export function GifPreview({
 	const t = useTheme();
 
 	const onPress = useCallback(() => {
-		logEvent("composer:gif:select", {});
 		onSelectGif(gif);
 	}, [onSelectGif, gif]);
 

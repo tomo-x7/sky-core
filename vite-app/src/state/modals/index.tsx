@@ -149,7 +149,7 @@ export let unstable__closeModal: () => boolean = () => {
 	throw new Error("ModalContext is not initialized");
 };
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [activeModals, setActiveModals] = React.useState<Modal[]>([]);
 
 	const openModal = useNonReactiveCallback((modal: Modal) => {

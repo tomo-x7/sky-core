@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
 
@@ -44,12 +44,13 @@ export function Component({
 	const { data: memberships } = useDangerousListMembershipsQuery();
 	const [isKeyboardVisible] = useIsKeyboardVisible();
 
-	const onPressCancelSearch = useCallback(() => setQuery(""), [setQuery]);
+	const onPressCancelSearch = useCallback(() => setQuery(""), []);
 
 	return (
 		<SafeAreaView testID="listAddUserModal" style={[pal.view, isWeb ? styles.fixedHeight : s.flex1]}>
 			<View style={[s.flex1, isMobile && { paddingHorizontal: 18 }]}>
 				<View style={[styles.searchContainer, pal.border]}>
+					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="search" size={16} />
 					<TextInput
 						testID="searchInput"
@@ -76,6 +77,7 @@ export function Component({
 							onAccessibilityEscape={onPressCancelSearch}
 							hitSlop={HITSLOP_20}
 						>
+							{/* @ts-ignore */}
 							<FontAwesomeIcon icon="xmark" size={16} color={pal.colors.textLight} />
 						</Pressable>
 					) : undefined}
@@ -113,7 +115,7 @@ export function Component({
 						}}
 						accessibilityLabel={"Done"}
 						accessibilityHint=""
-						label={msg({ message: "Done", context: "action" })}
+						label={"Done"}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
 						labelStyle={[s.f18]}
 					/>
@@ -173,11 +175,9 @@ function UserResult({
 			setIsProcessing(false);
 		}
 	}, [
-		_,
 		list,
 		profile,
 		membership,
-		setIsProcessing,
 		onChange,
 		listMembershipAddMutation,
 		listMembershipRemoveMutation,

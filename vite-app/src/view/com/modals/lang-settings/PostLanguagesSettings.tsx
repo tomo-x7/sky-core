@@ -31,7 +31,9 @@ export function Component() {
 		);
 		// sort so that device & selected languages are on top, then alphabetically
 		langs.sort((a, b) => {
+			//@ts-ignore
 			const hasA = hasPostLanguage(langPrefs.postLanguage, a.code2) || deviceLanguageCodes.includes(a.code2);
+			//@ts-ignore
 			const hasB = hasPostLanguage(langPrefs.postLanguage, b.code2) || deviceLanguageCodes.includes(b.code2);
 			if (hasA === hasB) return a.name.localeCompare(b.name);
 			if (hasA) return -1;

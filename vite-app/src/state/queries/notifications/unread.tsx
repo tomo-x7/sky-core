@@ -41,7 +41,7 @@ const apiContext = React.createContext<ApiContext>({
 	getCachedUnreadPage: () => undefined,
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const { hasSession } = useSession();
 	const agent = useAgent();
 	const queryClient = useQueryClient();
@@ -94,7 +94,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 		return () => {
 			broadcast.removeEventListener("message", listener);
 		};
-	}, [setNumUnread]);
+	}, []);
 
 	const isFetchingRef = useRef(false);
 
@@ -166,7 +166,6 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 					}
 					broadcast.postMessage({ event: unreadCountStr });
 				} catch (e) {
-					logger.warn("Failed to check unread notifications", { error: e });
 				} finally {
 					isFetchingRef.current = false;
 				}
@@ -179,7 +178,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 				}
 			},
 		};
-	}, [setNumUnread, queryClient, moderationOpts, agent]);
+	}, [ queryClient, moderationOpts, agent]);
 	checkUnreadRef.current = api.checkUnread;
 
 	return (

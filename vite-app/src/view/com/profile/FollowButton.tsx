@@ -11,17 +11,15 @@ export function FollowButton({
 	followedType = "default",
 	profile,
 	labelStyle,
-	logContext,
 	onFollow,
 }: {
 	unfollowedType?: ButtonType;
 	followedType?: ButtonType;
 	profile: Shadow<bsky.profile.AnyProfileView>;
 	labelStyle?: StyleProp<TextStyle>;
-	logContext: "ProfileCard" | "StarterPackProfilesList";
 	onFollow?: () => void;
 }) {
-	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile, logContext);
+	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 
 	const onPressFollow = async () => {
 		try {
@@ -49,31 +47,10 @@ export function FollowButton({
 	}
 
 	if (profile.viewer.following) {
-		return (
-			<Button
-				type={followedType}
-				labelStyle={labelStyle}
-				onPress={onPressUnfollow}
-				label={msg({ message: "Unfollow", context: "action" })}
-			/>
-		);
+		return <Button type={followedType} labelStyle={labelStyle} onPress={onPressUnfollow} label={"Unfollow"} />;
 	} else if (!profile.viewer.followedBy) {
-		return (
-			<Button
-				type={unfollowedType}
-				labelStyle={labelStyle}
-				onPress={onPressFollow}
-				label={msg({ message: "Follow", context: "action" })}
-			/>
-		);
+		return <Button type={unfollowedType} labelStyle={labelStyle} onPress={onPressFollow} label={"Follow"} />;
 	} else {
-		return (
-			<Button
-				type={unfollowedType}
-				labelStyle={labelStyle}
-				onPress={onPressFollow}
-				label={msg({ message: "Follow Back", context: "action" })}
-			/>
-		);
+		return <Button type={unfollowedType} labelStyle={labelStyle} onPress={onPressFollow} label={"Follow Back"} />;
 	}
 }

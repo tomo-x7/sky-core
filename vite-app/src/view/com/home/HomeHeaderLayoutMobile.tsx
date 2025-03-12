@@ -9,12 +9,12 @@ import { Link } from "#/components/Link";
 import { Hashtag_Stroke2_Corner0_Rounded as FeedsIcon } from "#/components/icons/Hashtag";
 import { HITSLOP_10 } from "#/lib/constants";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
-import { useHaptics } from "#/lib/haptics";
 import { useMinimalShellHeaderTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { emitSoftReset } from "#/state/events";
 import { useSession } from "#/state/session";
 import { useShellLayout } from "#/state/shell/shell-layout";
 import { Logo } from "#/view/icons/Logo";
+import { JSX } from "react";
 
 export function HomeHeaderLayoutMobile({
 	children,
@@ -26,7 +26,6 @@ export function HomeHeaderLayoutMobile({
 	const { headerHeight } = useShellLayout();
 	const headerMinimalShellTransform = useMinimalShellHeaderTransform();
 	const { hasSession } = useSession();
-	const playHaptic = useHaptics();
 
 	return (
 		<Animated.View
@@ -55,12 +54,6 @@ export function HomeHeaderLayoutMobile({
 						targetScale={0.9}
 						onPress={() => {
 							emitSoftReset();
-						}}
-						onPressIn={() => {
-							playHaptic("Heavy");
-						}}
-						onPressOut={() => {
-							playHaptic("Light");
 						}}
 					>
 						<Logo width={30} />

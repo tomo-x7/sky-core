@@ -9,7 +9,7 @@ type SetContext = (source: EmbedPlayerSource, value: "show" | "hide" | undefined
 const stateContext = React.createContext<StateContext>(persisted.defaults.externalEmbeds);
 const setContext = React.createContext<SetContext>({} as SetContext);
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("externalEmbeds"));
 
 	const setStateWrapped = React.useCallback(
@@ -26,14 +26,14 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 				};
 			});
 		},
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("externalEmbeds", (nextExternalEmbeds) => {
 			setState(nextExternalEmbeds);
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

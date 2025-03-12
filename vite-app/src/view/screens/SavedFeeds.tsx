@@ -1,5 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -13,7 +13,6 @@ import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
 import { FilterTimeline_Stroke2_Corner0_Rounded as FilterTimeline } from "#/components/icons/FilterTimeline";
 import { FloppyDisk_Stroke2_Corner0_Rounded as SaveIcon } from "#/components/icons/FloppyDisk";
-import { useHaptics } from "#/lib/haptics";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
@@ -29,7 +28,7 @@ import * as Toast from "#/view/com/util/Toast";
 import { Text } from "#/view/com/util/text/Text";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "SavedFeeds">;
-export function SavedFeeds({}: Props) {
+export function SavedFeeds(props: Props) {
 	const { data: preferences } = usePreferencesQuery();
 	if (!preferences) {
 		return <View />;
@@ -199,13 +198,11 @@ function ListItem({
 	preferences: UsePreferencesQueryResponse;
 }) {
 	const pal = usePalette("default");
-	const playHaptic = useHaptics();
 	const feedUri = feed.value;
 
 	const onTogglePinned = React.useCallback(async () => {
-		playHaptic();
 		setCurrentFeeds(currentFeeds.map((f) => (f.id === feed.id ? { ...feed, pinned: !feed.pinned } : f)));
-	}, [playHaptic, feed, currentFeeds, setCurrentFeeds]);
+	}, [ feed, currentFeeds, setCurrentFeeds]);
 
 	const onPressUp = React.useCallback(async () => {
 		if (!isPinned) return;
@@ -236,9 +233,8 @@ function ListItem({
 	}, [feed, isPinned, setCurrentFeeds, currentFeeds]);
 
 	const onPressRemove = React.useCallback(async () => {
-		playHaptic();
 		setCurrentFeeds(currentFeeds.filter((f) => f.id !== feed.id));
-	}, [playHaptic, feed, currentFeeds, setCurrentFeeds]);
+	}, [ feed, currentFeeds, setCurrentFeeds]);
 
 	return (
 		<Animated.View style={[styles.itemContainer, pal.border]} layout={LinearTransition.duration(100)}>
@@ -269,6 +265,7 @@ function ListItem({
 						})}
 						testID={`feed-${feed.type}-moveUp`}
 					>
+						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="arrow-up" size={14} style={[pal.textLight]} />
 					</Pressable>
 					<Pressable
@@ -285,6 +282,7 @@ function ListItem({
 						})}
 						testID={`feed-${feed.type}-moveDown`}
 					>
+						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="arrow-down" size={14} style={[pal.textLight]} />
 					</Pressable>
 				</>
@@ -304,6 +302,7 @@ function ListItem({
 						opacity: state.hovered || state.focused ? 0.5 : 1,
 					})}
 				>
+					{/* @ts-ignore */}
 					<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
 				</Pressable>
 			)}
@@ -321,6 +320,7 @@ function ListItem({
 					})}
 					testID={`feed-${feed.type}-togglePin`}
 				>
+					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="thumb-tack" size={14} color={isPinned ? colors.blue3 : pal.colors.icon} />
 				</Pressable>
 			</View>

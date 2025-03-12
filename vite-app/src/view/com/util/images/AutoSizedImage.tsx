@@ -105,6 +105,7 @@ export function AutoSizedImage({
 			<Image
 				contentFit={isContain ? "contain" : "cover"}
 				style={[a.w_full, a.h_full]}
+				//@ts-ignore
 				source={image.thumb}
 				accessible={true} // Must set for `accessibilityLabel` to work
 				accessibilityIgnoresInvertColors
@@ -113,7 +114,9 @@ export function AutoSizedImage({
 				onLoad={(e) => {
 					if (!isContain) {
 						fetchedDimsRef.current = {
+							//@ts-ignore
 							width: e.source.width,
+							//@ts-ignore
 							height: e.source.height,
 						};
 					}

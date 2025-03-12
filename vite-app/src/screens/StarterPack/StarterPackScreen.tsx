@@ -5,7 +5,7 @@ import {
 	type ModerationOpts,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
@@ -166,12 +166,6 @@ function StarterPackScreenLoaded({
 	const [link, setLink] = React.useState<string>();
 	const [imageLoaded, setImageLoaded] = React.useState(false);
 
-	React.useEffect(() => {
-		logEvent("starterPack:opened", {
-			starterPack: starterPack.uri,
-		});
-	}, [starterPack.uri]);
-
 	const onOpenShareDialog = React.useCallback(() => {
 		const rkey = new AtUri(starterPack.uri).rkey;
 		shortenLink(makeStarterPackLink(starterPack.creator.did, rkey)).then((res) => {
@@ -191,7 +185,7 @@ function StarterPackScreenLoaded({
 		if (routeParams.new) {
 			onOpenShareDialog();
 		}
-	}, [onOpenShareDialog, routeParams.new, shareDialogControl]);
+	}, [onOpenShareDialog, routeParams.new, ]);
 
 	return (
 		<>
@@ -343,11 +337,6 @@ function Header({
 		});
 		Toast.show("All accounts have been followed!");
 		captureAction(ProgressGuideAction.Follow, dids.length);
-		logEvent("starterPack:followAll", {
-			logContext: "StarterPackProfilesList",
-			starterPack: starterPack.uri,
-			count: dids.length,
-		});
 	};
 
 	if (!bsky.dangerousIsType<AppBskyGraphStarterpack.Record>(record, AppBskyGraphStarterpack.isRecord)) {
@@ -431,6 +420,7 @@ function Header({
 						<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
+								//@ts-ignore
 								size={12}
 								color={t.atoms.text_contrast_medium.color}
 							/>
@@ -467,7 +457,6 @@ function OverflowMenu({
 		error: deleteError,
 	} = useDeleteStarterPackMutation({
 		onSuccess: () => {
-			logEvent("starterPack:delete", {});
 			deleteDialogControl.close(() => {
 				if (navigation.canGoBack()) {
 					navigation.popToTop();
@@ -493,7 +482,6 @@ function OverflowMenu({
 			rkey: routeParams.rkey,
 			listUri: starterPack.list.uri,
 		});
-		logEvent("starterPack:delete", {});
 	};
 
 	return (

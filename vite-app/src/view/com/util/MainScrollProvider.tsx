@@ -171,12 +171,14 @@ if (isWeb) {
 	const originalScroll = window.scroll;
 	window.scroll = function () {
 		emitter.emit("forced-scroll");
+		// biome-ignore lint/style/noArguments: <explanation>
 		return originalScroll.apply(this, arguments as any);
 	};
 
 	const originalScrollTo = window.scrollTo;
 	window.scrollTo = function () {
 		emitter.emit("forced-scroll");
+		// biome-ignore lint/style/noArguments: <explanation>
 		return originalScrollTo.apply(this, arguments as any);
 	};
 }

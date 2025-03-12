@@ -63,7 +63,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 		} else if (isEmpty) {
 			items = items.concat([EMPTY]);
 		} else if (data?.pages) {
-			for (const page of data?.pages) {
+			for (const page of data.pages) {
 				items = items.concat(page.lists);
 			}
 		}
@@ -98,7 +98,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch, ]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

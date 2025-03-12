@@ -31,7 +31,7 @@ const stateContext = React.createContext<StateContext>({
 });
 const setContext = React.createContext<SetContext>((_: boolean) => {});
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const headerMode = useSharedValue(0);
 	const footerMode = useSharedValue(0);
 	const setMode = React.useCallback(

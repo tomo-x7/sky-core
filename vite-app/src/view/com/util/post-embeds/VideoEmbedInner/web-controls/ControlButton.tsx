@@ -26,6 +26,7 @@ export function ControlButton({
 			accessibilityLabel={active ? activeLabel : inactiveLabel}
 			accessibilityHint=""
 			onPress={onPress}
+			//@ts-ignore
 			style={[a.p_xs, a.rounded_full, web({ transition: "background-color 0.1s" })]}
 			hoverStyle={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
 		>

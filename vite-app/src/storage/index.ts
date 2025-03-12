@@ -118,11 +118,3 @@ export const device = new Storage<[], Device>({ id: "bsky_device" });
  * Account data that's specific to the account on this device
  */
 export const account = new Storage<[string], Account>({ id: "bsky_account" });
-
-if (__DEV__ && typeof window !== "undefined") {
-	// @ts-expect-error - dev global
-	window.bsky_storage = {
-		device,
-		account,
-	};
-}

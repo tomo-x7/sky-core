@@ -336,8 +336,8 @@ let ProfileMenu = ({
 					profile.viewer?.blocking
 						? "The account will be able to interact with you after unblocking."
 						: profile.associated?.labeler
-							? `Blocking will not prevent labels from being applied on your account, but it will stop this account from replying in your threads or interacting with you.`
-							: `Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`
+							? "Blocking will not prevent labels from being applied on your account, but it will stop this account from replying in your threads or interacting with you."
+							: "Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you."
 				}
 				onConfirm={blockAccount}
 				confirmButtonCta={profile.viewer?.blocking ? "Unblock" : "Block"}

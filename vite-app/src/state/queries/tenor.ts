@@ -1,5 +1,4 @@
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { getLocales } from "expo-localization";
 import { Platform } from "react-native";
 
 import { GIF_FEATURED, GIF_SEARCH } from "#/lib/constants";
@@ -58,10 +57,10 @@ function createTenorApi<Input extends object>(
 
 		params.set("media_filter", (["preview", "gif", "tinygif"] satisfies ContentFormats[]).join(","));
 
-		const locale = getLocales?.()?.[0];
+		const locale = navigator.language || 'ja-JP';
 
 		if (locale) {
-			params.set("locale", locale.languageTag.replace("-", "_"));
+			params.set("locale", locale.replace("-", "_"));
 		}
 
 		for (const [key, value] of Object.entries(input)) {

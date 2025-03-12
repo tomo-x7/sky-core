@@ -18,7 +18,7 @@ import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 import { Text } from "#/view/com/util/text/Text";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ModerationMutedAccounts">;
-export function ModerationMutedAccounts({}: Props) {
+export function ModerationMutedAccounts(props: Props) {
 	const pal = usePalette("default");
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { isTabletOrDesktop } = useWebMediaQueries();
@@ -48,7 +48,7 @@ export function ModerationMutedAccounts({}: Props) {
 			console.error("Failed to refresh my muted accounts", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch, ]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

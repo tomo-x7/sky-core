@@ -11,7 +11,6 @@ import {
 	useWindowDimensions,
 } from "react-native";
 import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -108,7 +107,6 @@ export function ExternalPlayer({
 }) {
 	const t = useTheme();
 	const navigation = useNavigation<NavigationProp>();
-	const insets = useSafeAreaInsets();
 	const windowDims = useWindowDimensions();
 	const externalEmbedsPrefs = useExternalEmbedsPrefs();
 	const consentDialogControl = useDialogControl();
@@ -132,17 +130,13 @@ export function ExternalPlayer({
 		const { height: winHeight, width: winWidth } = windowDims;
 
 		// Get the proper screen height depending on what is going on
-		const realWinHeight = isNative // If it is native, we always want the larger number
-			? winHeight > winWidth
-				? winHeight
-				: winWidth
-			: winHeight; // On web, we always want the actual screen height
+		const realWinHeight = winHeight; // On web, we always want the actual screen height
 
 		const top = measurement.pageY;
 		const bot = measurement.pageY + measurement.height;
 
 		// We can use the same logic on all platforms against the screenHeight that we get above
-		const isVisible = top <= realWinHeight - insets.bottom && bot >= insets.top;
+		const isVisible = top <= realWinHeight && bot >= 0;
 
 		if (!isVisible) {
 			runOnJS(setPlayerActive)(false);

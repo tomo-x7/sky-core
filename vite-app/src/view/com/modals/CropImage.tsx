@@ -82,7 +82,7 @@ export function Component({
 					onChange={(_pixelCrop, percentCrop) => setCrop(percentCrop)}
 					circularCrop={circular}
 				>
-					<img ref={imageRef} src={uri} style={{ maxHeight: "75vh" }} />
+					<img ref={imageRef} src={uri} style={{ maxHeight: "75vh" }} alt="" />
 				</ReactCrop>
 			</View>
 			<View style={[styles.btns, isMobile && { paddingHorizontal: 16 }]}>

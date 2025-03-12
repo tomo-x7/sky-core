@@ -200,8 +200,8 @@ export function useProfileFollowMutationQueue(profile: Shadow<bsky.profile.AnyPr
 	const queryClient = useQueryClient();
 	const did = profile.did;
 	const initialFollowingUri = profile.viewer?.following;
-	const followMutation = useProfileFollowMutation(logContext, profile);
-	const unfollowMutation = useProfileUnfollowMutation(logContext);
+	const followMutation = useProfileFollowMutation(profile);
+	const unfollowMutation = useProfileUnfollowMutation();
 
 	const queueToggle = useToggleMutationQueue({
 		initialState: initialFollowingUri,
@@ -264,10 +264,7 @@ export function useProfileFollowMutationQueue(profile: Shadow<bsky.profile.AnyPr
 	return [queueFollow, queueUnfollow];
 }
 
-function useProfileFollowMutation(
-	logContext: LogEvents["profile:follow"]["logContext"],
-	profile: Shadow<bsky.profile.AnyProfileView>,
-) {
+function useProfileFollowMutation(profile: Shadow<bsky.profile.AnyProfileView>) {
 	const { currentAccount } = useSession();
 	const agent = useAgent();
 	const queryClient = useQueryClient();
@@ -280,22 +277,15 @@ function useProfileFollowMutation(
 				ownProfile = findProfileQueryData(queryClient, currentAccount.did);
 			}
 			captureAction(ProgressGuideAction.Follow);
-			logEvent("profile:follow", {
-				logContext,
-				didBecomeMutual: profile.viewer ? Boolean(profile.viewer.followedBy) : undefined,
-				followeeClout: "followersCount" in profile ? toClout(profile.followersCount) : undefined,
-				followerClout: toClout(ownProfile?.followersCount),
-			});
 			return await agent.follow(did);
 		},
 	});
 }
 
-function useProfileUnfollowMutation(logContext: LogEvents["profile:unfollow"]["logContext"]) {
+function useProfileUnfollowMutation() {
 	const agent = useAgent();
 	return useMutation<void, Error, { did: string; followUri: string }>({
 		mutationFn: async ({ followUri }) => {
-			logEvent("profile:unfollow", { logContext });
 			return await agent.deleteFollow(followUri);
 		},
 	});

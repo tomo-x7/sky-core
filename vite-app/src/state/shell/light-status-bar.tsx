@@ -27,7 +27,7 @@ export function useSetLightStatusBar(enabled: boolean) {
 	}, [enabled, setRefCount]);
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [refCount, setRefCount] = useState(0);
 
 	return (

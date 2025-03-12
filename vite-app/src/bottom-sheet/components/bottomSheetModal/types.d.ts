@@ -40,7 +40,7 @@ export interface BottomSheetModalProps extends Omit<BottomSheetProps, "container
 	 * @type React.ComponentType
 	 * @default undefined
 	 */
-	containerComponent?: React.ComponentType<React.PropsWithChildren<{}>>;
+	containerComponent?: React.ComponentType<React.PropsWithChildren>;
 
 	// callbacks
 	/**

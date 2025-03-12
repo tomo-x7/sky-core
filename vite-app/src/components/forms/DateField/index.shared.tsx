@@ -23,7 +23,6 @@ export function DateFieldButton({
 	isInvalid?: boolean;
 	accessibilityHint?: string;
 }) {
-	const { i18n } = useLingui();
 	const t = useTheme();
 
 	const { state: pressed, onIn: onPressIn, onOut: onPressOut } = useInteractionState();

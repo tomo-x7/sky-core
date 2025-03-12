@@ -187,7 +187,6 @@ let PostThreadItemLoaded = ({
 }): React.ReactNode => {
 	const t = useTheme();
 	const pal = usePalette("default");
-	const { _, i18n } = useLingui();
 	const langPrefs = useLanguagePrefs();
 	const { openComposer } = useComposerControls();
 	const [limitLines, setLimitLines] = React.useState(() => countLines(richText?.text) >= MAX_POST_LINES);
@@ -259,7 +258,7 @@ let PostThreadItemLoaded = ({
 
 	const onPressShowMore = React.useCallback(() => {
 		setLimitLines(false);
-	}, [setLimitLines]);
+	}, []);
 
 	if (!record) {
 		return <ErrorMessage message={"Invalid or unsupported post record"} />;
@@ -386,9 +385,9 @@ let PostThreadItemLoaded = ({
 											style={[a.text_md, t.atoms.text_contrast_medium]}
 										>
 											<Text style={[a.text_md, a.font_bold, t.atoms.text]}>
-												{formatCount(i18n, post.repostCount)}
+												{formatCount( post.repostCount)}
 											</Text>{" "}
-											<Plural value={post.repostCount} one="repost" other="reposts" />
+											{post.repostCount===1?"repost":"reposts"}
 										</Text>
 									</Link>
 								) : null}
@@ -399,9 +398,9 @@ let PostThreadItemLoaded = ({
 											style={[a.text_md, t.atoms.text_contrast_medium]}
 										>
 											<Text style={[a.text_md, a.font_bold, t.atoms.text]}>
-												{formatCount(i18n, post.quoteCount)}
+												{formatCount( post.quoteCount)}
 											</Text>{" "}
-											<Plural value={post.quoteCount} one="quote" other="quotes" />
+											{post.quoteCount===1?"quote":"quotes"}
 										</Text>
 									</Link>
 								) : null}
@@ -412,9 +411,9 @@ let PostThreadItemLoaded = ({
 											style={[a.text_md, t.atoms.text_contrast_medium]}
 										>
 											<Text style={[a.text_md, a.font_bold, t.atoms.text]}>
-												{formatCount(i18n, post.likeCount)}
+												{formatCount( post.likeCount)}
 											</Text>{" "}
-											<Plural value={post.likeCount} one="like" other="likes" />
+											{post.likeCount===1?"like":"likes"}
 										</Text>
 									</Link>
 								) : null}
@@ -692,7 +691,6 @@ function ExpandedPostDetails({
 }) {
 	const t = useTheme();
 	const pal = usePalette("default");
-	const { _, i18n } = useLingui();
 	const openLink = useOpenLink();
 	const isRootPost = !("reply" in post.record);
 
@@ -732,7 +730,6 @@ function ExpandedPostDetails({
 
 function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
 	const control = Prompt.usePromptControl();
 
 	const indexedAt = new Date(post.indexedAt);

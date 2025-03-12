@@ -1,5 +1,5 @@
 import { AppBskyGraphDefs, AppBskyGraphStarterpack, AtUri, type ModerationOpts } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Pressable, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
@@ -102,7 +102,6 @@ function LandingScreenLoaded({
 	moderationOpts: ModerationOpts;
 }) {
 	const { creator, listItemsSample, feeds } = starterPack;
-	const { _, i18n } = useLingui();
 	const t = useTheme();
 	const activeStarterPack = useActiveStarterPack();
 	const setActiveStarterPack = useSetActiveStarterPack();
@@ -129,9 +128,6 @@ function LandingScreenLoaded({
 		} else {
 			onContinue();
 		}
-		logEvent("starterPack:ctaPress", {
-			starterPack: starterPack.uri,
-		});
 	};
 
 	const onJoinWithoutPress = () => {
@@ -186,11 +182,12 @@ function LandingScreenLoaded({
 						<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
+								//@ts-ignore
 								size={12}
 								color={t.atoms.text_contrast_medium.color}
 							/>
 							<Text style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]} numberOfLines={1}>
-								<>{formatCount(i18n, JOINED_THIS_WEEK)} joined this week</>
+								<>{formatCount( JOINED_THIS_WEEK)} joined this week</>
 							</Text>
 						</View>
 					</View>

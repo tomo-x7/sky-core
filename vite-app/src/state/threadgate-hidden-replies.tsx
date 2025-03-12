@@ -49,7 +49,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
 				setRecentlyUnhiddenUris((prev) => new Set(prev.add(uri)));
 			},
 		}),
-		[setHiddenReplyUris],
+		[],
 	);
 
 	return (

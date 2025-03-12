@@ -93,6 +93,7 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 			<Pager
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
+					//@ts-ignore
 					<Layout.Center style={[a.z_10, web([a.sticky, { top: 0 }])]}>
 						<Layout.Header.Outer noBottomBorder>
 							<Layout.Header.BackButton />

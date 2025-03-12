@@ -1,6 +1,6 @@
 import { sanitizeUrl } from "@braintree/sanitize-url";
 import { StackActions, useLinkProps } from "@react-navigation/native";
-import React, { type ComponentProps, memo, useMemo } from "react";
+import React, { type ComponentProps, JSX, memo, useMemo } from "react";
 import {
 	type GestureResponderEvent,
 	Platform,
@@ -332,10 +332,12 @@ const EXEMPT_PATHS = ["/robots.txt", "/security.txt", "/.well-known/"];
 // needed customizations
 // -prf
 function onPressInner(
-	closeModal = () => {},
+	// biome-ignore lint/style/useDefaultParameterLast: <explanation>
+	closeModal= () => {},
 	navigation: DebouncedNavigationProp,
 	href: string,
-	navigationAction: "push" | "replace" | "navigate" = "push",
+	// biome-ignore lint/style/useDefaultParameterLast: <explanation>
+	navigationAction: "push" | "replace" | "navigate" | undefined = "push",
 	openLink: (href: string) => void,
 	e?: Event,
 ) {

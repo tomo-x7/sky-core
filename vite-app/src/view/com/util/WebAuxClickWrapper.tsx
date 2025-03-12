@@ -16,7 +16,7 @@ const onMouseDown = (e: React.MouseEvent) => {
 	e.preventDefault();
 };
 
-export function WebAuxClickWrapper({ children }: React.PropsWithChildren<{}>) {
+export function WebAuxClickWrapper({ children }: React.PropsWithChildren) {
 	if (Platform.OS !== "web") return children;
 
 	return (

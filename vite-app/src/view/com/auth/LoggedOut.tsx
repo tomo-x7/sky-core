@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, native, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -24,7 +23,6 @@ export { ScreenState as LoggedOutScreenState };
 
 export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 	const t = useTheme();
-	const insets = useSafeAreaInsets();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { requestedAccountSwitchTo } = useLoggedOutView();
 	const [screenState, setScreenState] = React.useState<ScreenState>(() => {
@@ -52,10 +50,7 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 	}, [clearRequestedAccount, onDismiss]);
 
 	return (
-		<View
-			testID="noSessionView"
-			style={[a.util_screen_outer, t.atoms.bg, { paddingTop: insets.top, paddingBottom: insets.bottom }]}
-		>
+		<View testID="noSessionView" style={[a.util_screen_outer, t.atoms.bg, { paddingTop: 0, paddingBottom: 0 }]}>
 			<ErrorBoundary>
 				{onDismiss && screenState === ScreenState.S_LoginOrCreateAccount ? (
 					<Button
@@ -68,7 +63,7 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 						style={[
 							a.absolute,
 							{
-								top: insets.top + tokens.space.xl,
+								top: tokens.space.xl,
 								right: tokens.space.xl,
 								zIndex: 100,
 							},
@@ -85,11 +80,9 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 					<SplashScreen
 						onPressSignin={() => {
 							setScreenState(ScreenState.S_Login);
-							logEvent("splash:signInPressed", {});
 						}}
 						onPressCreateAccount={() => {
 							setScreenState(ScreenState.S_CreateAccount);
-							logEvent("splash:createAccountPressed", {});
 						}}
 					/>
 				) : undefined}

@@ -20,7 +20,7 @@ export function Dialogs() {
 	const unmountTestDialog = Dialog.useDialogControl();
 	const [reducedMotionEnabled, setReducedMotionEnabled] = React.useState<boolean>();
 	const [shouldRenderUnmountTest, setShouldRenderUnmountTest] = React.useState(false);
-	const unmountTestInterval = React.useRef<number>();
+	const unmountTestInterval = React.useRef<number>(null);
 
 	const onUnmountTestStartPressWithClose = () => {
 		setShouldRenderUnmountTest(true);
@@ -52,7 +52,7 @@ export function Dialogs() {
 
 	const onUnmountTestEndPress = () => {
 		setShouldRenderUnmountTest(false);
-		clearInterval(unmountTestInterval.current);
+		clearInterval(unmountTestInterval.current??undefined);
 	};
 
 	return (

@@ -12,7 +12,7 @@ const Context = React.createContext<Context>({
 	enabled: false,
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const langPrefs = useLanguagePrefs();
 	const { data: config, isLoading: isInitialLoad } = useServiceConfigQuery();
 	const ctx = React.useMemo<Context>(() => {

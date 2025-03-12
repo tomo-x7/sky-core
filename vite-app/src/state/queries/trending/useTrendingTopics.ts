@@ -44,13 +44,13 @@ export function useTrendingTopics() {
 					topics: data.topics.filter((t) => {
 						return !hasMutedWord({
 							mutedWords,
-							text: t.topic + " " + t.displayName + " " + t.description,
+							text: `${t.topic} ${t.displayName} ${t.description}`,
 						});
 					}),
 					suggested: data.suggested.filter((t) => {
 						return !hasMutedWord({
 							mutedWords,
-							text: t.topic + " " + t.displayName + " " + t.description,
+							text: `${t.topic} ${t.displayName} ${t.description}`,
 						});
 					}),
 				};

@@ -1,4 +1,4 @@
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -37,7 +37,8 @@ export function CustomFeedEmptyState() {
 				<Text type="lg-medium" style={palInverted.text}>
 					Find accounts to follow
 				</Text>
-				<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
+				{/* @ts-ignore */}
+				<FontAwesomeIcon icon="angle-right" style={palInverted.text } size={14} />
 			</Button>
 		</View>
 	);

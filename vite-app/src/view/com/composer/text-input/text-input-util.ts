@@ -56,7 +56,6 @@ export function suggestLinkCardUri(
 			// "google.com.foo" -> "google.com. foo".
 			// This means you're not typing the link anymore, so we can linkify it.
 			suggestedUris.add(uri);
-			continue;
 		}
 	}
 	for (const uri of pastSuggestedUris) {

@@ -37,10 +37,7 @@ export function ServerInputDialog({
 				setPreviousCustomAddress(result);
 			}
 		}
-		logEvent("signin:hostingProviderPressed", {
-			hostingProviderDidChange: fixedOption !== BSKY_SERVICE,
-		});
-	}, [onSelect, fixedOption]);
+	}, [onSelect]);
 
 	return (
 		<Dialog.Outer control={control} onClose={onClose} nativeOptions={{ minHeight: height / 2 }}>

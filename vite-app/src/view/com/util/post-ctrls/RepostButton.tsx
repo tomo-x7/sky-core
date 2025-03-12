@@ -1,15 +1,15 @@
-import React, { memo, useCallback } from "react";
-import { View } from "react-native";
+import React from "react";
+import { Pressable, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
+import { Button } from "#/components/Button";
+import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
 import { CloseQuote_Stroke2_Corner1_Rounded as Quote } from "#/components/icons/Quote";
 import { Repost_Stroke2_Corner2_Rounded as Repost } from "#/components/icons/Repost";
-import { POST_CTRL_HITSLOP } from "#/lib/constants";
-import { useHaptics } from "#/lib/haptics";
 import { useRequireAuth } from "#/state/session";
+import { useSession } from "#/state/session";
+import { EventStopper } from "../EventStopper";
 import { formatCount } from "../numeric/format";
 
 interface Props {
@@ -21,153 +21,101 @@ interface Props {
 	embeddingDisabled: boolean;
 }
 
-let RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, embeddingDisabled }: Props): React.ReactNode => {
+export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, embeddingDisabled }: Props) => {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
+	const { hasSession } = useSession();
 	const requireAuth = useRequireAuth();
-	const dialogControl = Dialog.useDialogControl();
-	const playHaptic = useHaptics();
+
 	const color = React.useMemo(
 		() => ({
 			color: isReposted ? t.palette.positive_600 : t.palette.contrast_500,
 		}),
 		[t, isReposted],
 	);
-	return (
-		<>
-			<Button
-				testID="repostBtn"
-				onPress={() => {
-					playHaptic("Light");
-					requireAuth(() => dialogControl.open());
-				}}
-				onLongPress={() => {
-					playHaptic("Heavy");
-					requireAuth(() => onQuote());
-				}}
-				style={[a.flex_row, a.align_center, a.gap_xs, a.bg_transparent, { padding: 5 }]}
-				hoverStyle={t.atoms.bg_contrast_25}
-				label={
-					isReposted
-						? `Undo repost (${plural(repostCount || 0, {
-								one: "# repost",
-								other: "# reposts",
-							})})`
-						: `Repost (${plural(repostCount || 0, {
-								one: "# repost",
-								other: "# reposts",
-							})})`
-				}
-				shape="round"
-				variant="ghost"
-				color="secondary"
-				hitSlop={POST_CTRL_HITSLOP}
-			>
-				<Repost style={color} width={big ? 22 : 18} />
-				{typeof repostCount !== "undefined" && repostCount > 0 ? (
-					<Text
-						testID="repostCount"
-						style={[color, big ? a.text_md : { fontSize: 15 }, isReposted && a.font_bold]}
+
+	return hasSession ? (
+		<EventStopper onKeyDown={false}>
+			<Menu.Root>
+				<Menu.Trigger label={"Repost or quote post"}>
+					{({ props, state }) => {
+						return (
+							<Pressable
+								{...props}
+								style={[
+									a.rounded_full,
+									(state.hovered || state.pressed) && {
+										backgroundColor: t.palette.contrast_25,
+									},
+								]}
+							>
+								<RepostInner
+									isReposted={isReposted}
+									color={color}
+									repostCount={repostCount}
+									big={big}
+								/>
+							</Pressable>
+						);
+					}}
+				</Menu.Trigger>
+				<Menu.Outer style={{ minWidth: 170 }}>
+					<Menu.Item
+						label={isReposted ? "Undo repost" : "Repost"}
+						testID="repostDropdownRepostBtn"
+						onPress={onRepost}
 					>
-						{formatCount(i18n, repostCount)}
-					</Text>
-				) : undefined}
-			</Button>
-			<Dialog.Outer control={dialogControl} nativeOptions={{ preventExpansion: true }}>
-				<Dialog.Handle />
-				<RepostButtonDialogInner
-					isReposted={isReposted}
-					onRepost={onRepost}
-					onQuote={onQuote}
-					embeddingDisabled={embeddingDisabled}
-				/>
-			</Dialog.Outer>
-		</>
+						<Menu.ItemText>{isReposted ? "Undo repost" : "Repost"}</Menu.ItemText>
+						<Menu.ItemIcon icon={Repost} position="right" />
+					</Menu.Item>
+					<Menu.Item
+						disabled={embeddingDisabled}
+						label={embeddingDisabled ? "Quote posts disabled" : "Quote post"}
+						testID="repostDropdownQuoteBtn"
+						onPress={onQuote}
+					>
+						<Menu.ItemText>{embeddingDisabled ? "Quote posts disabled" : "Quote post"}</Menu.ItemText>
+						<Menu.ItemIcon icon={Quote} position="right" />
+					</Menu.Item>
+				</Menu.Outer>
+			</Menu.Root>
+		</EventStopper>
+	) : (
+		<Button
+			onPress={() => {
+				requireAuth(() => {});
+			}}
+			label={"Repost or quote post"}
+			style={{ padding: 0 }}
+			hoverStyle={t.atoms.bg_contrast_25}
+			shape="round"
+		>
+			<RepostInner isReposted={isReposted} color={color} repostCount={repostCount} big={big} />
+		</Button>
 	);
 };
-RepostButton = memo(RepostButton);
-export { RepostButton };
 
-let RepostButtonDialogInner = ({
+const RepostInner = ({
 	isReposted,
-	onRepost,
-	onQuote,
-	embeddingDisabled,
+	color,
+	repostCount,
+	big,
 }: {
 	isReposted: boolean;
-	onRepost: () => void;
-	onQuote: () => void;
-	embeddingDisabled: boolean;
-}): React.ReactNode => {
-	const t = useTheme();
-	const playHaptic = useHaptics();
-	const control = Dialog.useDialogContext();
-
-	const onPressRepost = useCallback(() => {
-		if (!isReposted) playHaptic();
-
-		control.close(() => {
-			onRepost();
-		});
-	}, [control, isReposted, onRepost, playHaptic]);
-
-	const onPressQuote = useCallback(() => {
-		playHaptic();
-		control.close(() => {
-			onQuote();
-		});
-	}, [control, onQuote, playHaptic]);
-
-	const onPressClose = useCallback(() => control.close(), [control]);
-
+	color: { color: string };
+	repostCount?: number;
+	big?: boolean;
+}) => {
 	return (
-		<Dialog.ScrollableInner label={"Repost or quote post"}>
-			<View style={a.gap_xl}>
-				<View style={a.gap_xs}>
-					<Button
-						style={[a.justify_start, a.px_md]}
-						label={isReposted ? "Remove repost" : msg({ message: "Repost", context: "action" })}
-						onPress={onPressRepost}
-						size="large"
-						variant="ghost"
-						color="primary"
-					>
-						<Repost size="lg" fill={t.palette.primary_500} />
-						<Text style={[a.font_bold, a.text_xl]}>
-							{isReposted ? <>Remove repost</> : <Trans context="action">Repost</Trans>}
-						</Text>
-					</Button>
-					<Button
-						disabled={embeddingDisabled}
-						testID="quoteBtn"
-						style={[a.justify_start, a.px_md]}
-						label={embeddingDisabled ? "Quote posts disabled" : "Quote post"}
-						onPress={onPressQuote}
-						size="large"
-						variant="ghost"
-						color="primary"
-					>
-						<Quote
-							size="lg"
-							fill={embeddingDisabled ? t.atoms.text_contrast_low.color : t.palette.primary_500}
-						/>
-						<Text style={[a.font_bold, a.text_xl, embeddingDisabled && t.atoms.text_contrast_low]}>
-							{embeddingDisabled ? <>Quote posts disabled</> : <>Quote post</>}
-						</Text>
-					</Button>
-				</View>
-				<Button
-					label={"Cancel quote post"}
-					onPress={onPressClose}
-					size="large"
-					variant="outline"
-					color="primary"
+		<View style={[a.flex_row, a.align_center, a.gap_xs, { padding: 5 }]}>
+			<Repost style={color} width={big ? 22 : 18} />
+			{typeof repostCount !== "undefined" && repostCount > 0 ? (
+				<Text
+					testID="repostCount"
+					style={[color, big ? a.text_md : { fontSize: 15 }, isReposted && [a.font_bold], a.user_select_none]}
 				>
-					<ButtonText>Cancel</ButtonText>
-				</Button>
-			</View>
-		</Dialog.ScrollableInner>
+					{formatCount(repostCount)}
+				</Text>
+			) : undefined}
+		</View>
 	);
 };
-RepostButtonDialogInner = memo(RepostButtonDialogInner);
-export { RepostButtonDialogInner };

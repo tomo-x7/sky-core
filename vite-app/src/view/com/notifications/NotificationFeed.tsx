@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View } from "react-native";
 
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
@@ -50,7 +50,7 @@ export function NotificationFeed({
 			if (isEmpty) {
 				arr = arr.concat([EMPTY_FEED_ITEM]);
 			} else if (data) {
-				for (const page of data?.pages) {
+				for (const page of data.pages) {
 					arr = arr.concat(page.items);
 				}
 			}
@@ -74,7 +74,7 @@ export function NotificationFeed({
 		} finally {
 			setIsPTRing(false);
 		}
-	}, [refreshNotifications, setIsPTRing]);
+	}, [refreshNotifications, ]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

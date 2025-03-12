@@ -37,7 +37,7 @@ function getInitialFeed(): FeedDescriptor | null {
 	return null;
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(() => getInitialFeed());
 
 	const saveState = React.useCallback((feed: FeedDescriptor) => {

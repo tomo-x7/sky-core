@@ -26,7 +26,7 @@ const apiContext = React.createContext<ApiContext>({
 	setAppLanguage: (_: AppLanguage) => {},
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("languagePrefs"));
 
 	const setStateWrapped = React.useCallback(
@@ -35,14 +35,14 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			setState(s);
 			persisted.write("languagePrefs", s);
 		},
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("languagePrefs", (nextLanguagePrefs) => {
 			setState(nextLanguagePrefs);
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	const api = React.useMemo(
 		() => ({

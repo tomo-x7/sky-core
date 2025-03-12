@@ -17,9 +17,9 @@ export function useResolveUriQuery(uri: string | undefined): UriUseQueryResult {
 		return {
 			...res,
 			data: { did: urip.host, uri: urip.toString() },
-		} as UriUseQueryResult;
+		} as unknown as UriUseQueryResult;
 	}
-	return res as UriUseQueryResult;
+	return res as unknown as UriUseQueryResult;
 }
 
 export function useResolveDidQuery(didOrHandle: string | undefined) {

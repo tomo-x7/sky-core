@@ -308,13 +308,6 @@ export function Explore() {
 			key: "trending-topics",
 		});
 
-		if (isNative) {
-			i.push({
-				type: "trendingVideos",
-				key: "trending-videos",
-			});
-		}
-
 		i.push({
 			type: "recommendations",
 			key: "recommendations",
@@ -452,7 +445,6 @@ export function Explore() {
 
 		return i;
 	}, [
-		_,
 		profiles,
 		feeds,
 		preferences,
@@ -497,21 +489,6 @@ export function Explore() {
 								noBg
 								noBorder
 								showKnownFollowers
-								onPress={() => {
-									logEvent("suggestedUser:press", {
-										logContext: "Explore",
-										recId: item.recId,
-										position: index,
-									});
-								}}
-								onFollow={() => {
-									logEvent("suggestedUser:follow", {
-										logContext: "Explore",
-										location: "Card",
-										recId: item.recId,
-										position: index,
-									});
-								}}
 							/>
 						</View>
 					);

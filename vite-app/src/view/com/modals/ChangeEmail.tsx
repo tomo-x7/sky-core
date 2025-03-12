@@ -58,7 +58,7 @@ export function Component() {
 			// you can remove this any time after Oct2023
 			// -prf
 			if (err === "email must be confirmed (temporary)") {
-				err = `Please confirm your email before changing it. This is a temporary requirement while email-updating tools are added, and it will soon be removed.`;
+				err = "Please confirm your email before changing it. This is a temporary requirement while email-updating tools are added, and it will soon be removed.";
 			}
 			setError(err);
 		} finally {

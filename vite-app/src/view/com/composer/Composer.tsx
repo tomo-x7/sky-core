@@ -1,5 +1,5 @@
 import { AppBskyFeedDefs, type AppBskyFeedGetPostThread, type BskyAgent, type RichText } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
@@ -36,7 +36,6 @@ import Animated, {
 	ZoomIn,
 	ZoomOut,
 } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, native, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -60,7 +59,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { mimeToExt } from "#/lib/media/video/util";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
-import { isAndroid, isIOS, isNative, isWeb } from "#/platform/detection";
 import { useDialogStateControlContext } from "#/state/dialogs";
 import { emitPostCreated } from "#/state/events";
 import { type ComposerImage, pasteImage } from "#/state/gallery";
@@ -108,7 +106,6 @@ import {
 	createComposerState,
 } from "./state/composer";
 import { NO_VIDEO, type NoVideoState, type VideoState, processVideo } from "./state/video";
-import { clearThumbnailCache } from "./videos/VideoTranscodeBackdrop";
 import { getVideoMetadata } from "./videos/pickVideo";
 
 type CancelRef = {
@@ -127,7 +124,7 @@ export const ComposePost = ({
 	videoUri: initVideoUri,
 	cancelRef,
 }: Props & {
-	cancelRef?: React.RefObject<CancelRef>;
+	cancelRef?: React.RefObject<CancelRef|null>;
 }) => {
 	const { currentAccount } = useSession();
 	const agent = useAgent();
@@ -201,10 +198,9 @@ export const ComposePost = ({
 				agent,
 				currentDid,
 				abortController.signal,
-				_,
 			);
 		},
-		[agent, currentDid, composerDispatch],
+		[agent, currentDid],
 	);
 
 	const onInitVideo = useNonReactiveCallback(() => {
@@ -217,41 +213,28 @@ export const ComposePost = ({
 		onInitVideo();
 	}, [onInitVideo]);
 
-	const clearVideo = React.useCallback(
-		(postId: string) => {
-			composerDispatch({
-				type: "update_post",
-				postId: postId,
-				postAction: {
-					type: "embed_remove_video",
-				},
-			});
-		},
-		[composerDispatch],
-	);
+	const clearVideo = React.useCallback((postId: string) => {
+		composerDispatch({
+			type: "update_post",
+			postId: postId,
+			postAction: {
+				type: "embed_remove_video",
+			},
+		});
+	}, []);
 
 	const [publishOnUpload, setPublishOnUpload] = useState(false);
 
 	const onClose = useCallback(() => {
 		closeComposer();
-		clearThumbnailCache(queryClient);
-	}, [closeComposer, queryClient]);
+	}, [closeComposer]);
 
-	const insets = useSafeAreaInsets();
 	const viewStyles = useMemo(
 		() => ({
-			paddingTop: isAndroid ? insets.top : 0,
-			paddingBottom:
-				// iOS - when keyboard is closed, keep the bottom bar in the safe area
-				(isIOS && !isKeyboardVisible) ||
-				// Android - Android >=35 KeyboardAvoidingView adds double padding when
-				// keyboard is closed, so we subtract that in the offset and add it back
-				// here when the keyboard is open
-				(isAndroid && isKeyboardVisible)
-					? insets.bottom
-					: 0,
+			paddingTop: 0,
+			paddingBottom: 0,
 		}),
-		[insets, isKeyboardVisible],
+		[],
 	);
 
 	const onPressCancel = useCallback(() => {
@@ -265,23 +248,6 @@ export const ComposePost = ({
 	}, [thread, closeAllDialogs, discardPromptControl, onClose]);
 
 	useImperativeHandle(cancelRef, () => ({ onPressCancel }));
-
-	// On Android, pressing Back should ask confirmation.
-	useEffect(() => {
-		if (!isAndroid) {
-			return;
-		}
-		const backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
-			if (closeAllDialogs() || closeAllModals()) {
-				return true;
-			}
-			onPressCancel();
-			return true;
-		});
-		return () => {
-			backHandler.remove();
-		};
-	}, [onPressCancel, closeAllDialogs, closeAllModals]);
 
 	const { needsEmailVerification } = useEmail();
 	const emailVerificationControl = useDialogControl();
@@ -381,28 +347,6 @@ export const ComposePost = ({
 			setError(err);
 			setIsPublishing(false);
 			return;
-		} finally {
-			if (postUri) {
-				let index = 0;
-				for (const post of thread.posts) {
-					logEvent("post:create", {
-						imageCount: post.embed.media?.type === "images" ? post.embed.media.images.length : 0,
-						isReply: index > 0 || !!replyTo,
-						isPartOfThread: thread.posts.length > 1,
-						hasLink: !!post.embed.link,
-						hasQuote: !!post.embed.quote,
-						langs: langPrefs.postLanguage,
-						logContext: "Composer",
-					});
-					index++;
-				}
-			}
-			if (thread.posts.length > 1) {
-				logEvent("thread:create", {
-					postCount: thread.posts.length,
-					isReply: !!replyTo,
-				});
-			}
 		}
 		if (postUri && !replyTo) {
 			emitPostCreated();
@@ -433,7 +377,6 @@ export const ComposePost = ({
 					: "Your post has been published",
 		);
 	}, [
-		_,
 		agent,
 		thread,
 		canPost,
@@ -503,11 +446,7 @@ export const ComposePost = ({
 	useEffect(() => {
 		if (composerState.mutableNeedsFocusActive) {
 			composerState.mutableNeedsFocusActive = false;
-			// On Android, this risks getting the cursor stuck behind the keyboard.
-			// Not worth it.
-			if (!isAndroid) {
-				textInput.current?.focus();
-			}
+			textInput.current?.focus();
 		}
 	}, [composerState]);
 
@@ -551,7 +490,7 @@ export const ComposePost = ({
 		</>
 	);
 
-	const isWebFooterSticky = !isNative && thread.posts.length > 1;
+	const isWebFooterSticky = thread.posts.length > 1;
 	return (
 		<BottomSheetPortalProvider>
 			<VerifyEmailDialog
@@ -563,7 +502,7 @@ export const ComposePost = ({
 			/>
 			<KeyboardAvoidingView
 				testID="composePostView"
-				behavior={isIOS ? "padding" : "height"}
+				behavior={"height"}
 				keyboardVerticalOffset={keyboardVerticalOffset}
 				style={a.flex_1}
 			>
@@ -672,7 +611,7 @@ const ComposerPost = React.memo(function ComposerPost({
 	const { data: currentProfile } = useProfileQuery({ did: currentDid });
 	const richtext = post.richtext;
 	const isTextOnly = !post.embed.link && !post.embed.quote && !post.embed.media;
-	const forceMinHeight = isWeb && isTextOnly && isActive;
+	const forceMinHeight = isTextOnly && isActive;
 	const selectTextInputPlaceholder = isReply ? (isFirstPost ? "Write your reply" : "Add another post") : `What's up?`;
 	const discardPromptControl = Prompt.usePromptControl();
 
@@ -707,7 +646,6 @@ const ComposerPost = React.memo(function ComposerPost({
 	const onPhotoPasted = useCallback(
 		async (uri: string) => {
 			if (uri.startsWith("data:video/") || uri.startsWith("data:image/gif")) {
-				if (isNative) return; // web only
 				const [mimeType] = uri.slice("data:".length).split(";");
 				if (!SUPPORTED_MIME_TYPES.includes(mimeType as SupportedMimeTypes)) {
 					Toast.show("Unsupported video type", "xmark");
@@ -727,8 +665,8 @@ const ComposerPost = React.memo(function ComposerPost({
 	);
 
 	return (
-		<View style={[a.mx_lg, !isActive && styles.inactivePost, isTextOnly && isNative && a.flex_grow]}>
-			<View style={[a.flex_row, isNative && a.flex_1]}>
+		<View style={[a.mx_lg, !isActive && styles.inactivePost]}>
+			<View style={[a.flex_row]}>
 				<UserAvatar
 					avatar={currentProfile?.avatar}
 					size={50}
@@ -737,6 +675,7 @@ const ComposerPost = React.memo(function ComposerPost({
 				/>
 				<TextInput
 					ref={textInput}
+					//@ts-ignore
 					style={[a.pt_xs]}
 					richtext={richtext}
 					placeholder={selectTextInputPlaceholder}
@@ -746,6 +685,7 @@ const ComposerPost = React.memo(function ComposerPost({
 					hasRightPadding={isPartOfThread}
 					isActive={isActive}
 					setRichText={(rt) => {
+						//@ts-ignore
 						dispatchPost({ type: "update_richtext", richtext: rt });
 					}}
 					onFocus={() => {
@@ -878,13 +818,7 @@ function ComposerTopBar({
 						disabled={!canPost || isPublishQueued}
 					>
 						<ButtonText style={[a.text_md]}>
-							{isReply ? (
-								<Trans context="action">Reply</Trans>
-							) : isThread ? (
-								<Trans context="action">Post All</Trans>
-							) : (
-								<Trans context="action">Post</Trans>
-							)}
+							{isReply ? <>Reply</> : isThread ? <>Post All</> : <>Post</>}
 						</ButtonText>
 					</Button>
 				)}
@@ -899,6 +833,7 @@ function AltTextReminder({ error }: { error: string }) {
 	return (
 		<View style={[styles.reminderLine, pal.viewLight]}>
 			<View style={styles.errorIcon}>
+				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="exclamation" style={{ color: colors.red4 }} size={10} />
 			</View>
 			<Text style={[pal.text, a.flex_1]}>{error}</Text>
@@ -961,6 +896,7 @@ function ComposerEmbeds({
 								<VideoPreview
 									asset={video.asset}
 									video={video.video}
+									//@ts-ignore
 									isActivePost={isActivePost}
 									clear={clearVideo}
 								/>
@@ -994,7 +930,7 @@ function ComposerEmbeds({
 			</LayoutAnimationConfig>
 			{embed.quote?.uri ? (
 				<View style={!video ? [a.mt_md] : []}>
-					<View style={[s.mt5, s.mb2, isWeb && s.mb10]}>
+					<View style={[s.mt5, s.mb2, s.mb10]}>
 						<View style={{ pointerEvents: "none" }}>
 							<LazyQuoteEmbed uri={embed.quote.uri} />
 						</View>
@@ -1144,21 +1080,18 @@ function ComposerFooter({
 							disabled={!!media}
 							setError={onError}
 						/>
-						<OpenCameraBtn disabled={media?.type === "images" ? isMaxImages : !!media} onAdd={onImageAdd} />
 						<SelectGifBtn onSelectGif={onSelectGif} disabled={!!media} />
-						{!isMobile ? (
-							<Button
-								onPress={onEmojiButtonPress}
-								style={a.p_sm}
-								label={"Open emoji picker"}
-								accessibilityHint={"Opens emoji picker"}
-								variant="ghost"
-								shape="round"
-								color="primary"
-							>
-								<EmojiSmile size="lg" />
-							</Button>
-						) : null}
+						<Button
+							onPress={onEmojiButtonPress}
+							style={a.p_sm}
+							label={"Open emoji picker"}
+							accessibilityHint={"Opens emoji picker"}
+							variant="ghost"
+							shape="round"
+							color="primary"
+						>
+							<EmojiSmile size="lg" />
+						</Button>
 					</ToolbarWrapper>
 				)}
 			</View>
@@ -1172,6 +1105,7 @@ function ComposerFooter({
 						shape="round"
 						color="primary"
 					>
+						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="add" size={20} color={t.palette.primary_500} />
 					</Button>
 				)}
@@ -1299,20 +1233,9 @@ function useScrollTracker({
 }
 
 function useKeyboardVerticalOffset() {
-	const { top, bottom } = useSafeAreaInsets();
-
-	// Android etc
-	if (!isIOS) {
-		// if Android <35 or web, bottom is 0 anyway. if >=35, this is needed to account
-		// for the edge-to-edge nav bar
-		return bottom * -1;
-	}
-
-	// iPhone SE
-	if (top === 20) return 40;
-
-	// all other iPhones
-	return top + 10;
+	// if Android <35 or web, bottom is 0 anyway. if >=35, this is needed to account
+	// for the edge-to-edge nav bar
+	return 0;
 }
 
 async function whenAppViewReady(
@@ -1351,6 +1274,7 @@ const styles = StyleSheet.create({
 		marginLeft: 12,
 	},
 	stickyFooterWeb: {
+		//@ts-ignore
 		position: "sticky",
 		bottom: 0,
 	},
@@ -1460,12 +1384,7 @@ function ToolbarWrapper({
 	style: StyleProp<ViewStyle>;
 	children: React.ReactNode;
 }) {
-	if (isWeb) return children;
-	return (
-		<Animated.View style={style} entering={FadeIn.duration(400)} exiting={FadeOut.duration(400)}>
-			{children}
-		</Animated.View>
-	);
+	return children;
 }
 
 function VideoUploadToolbar({ state }: { state: VideoState }) {

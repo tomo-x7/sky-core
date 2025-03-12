@@ -1,5 +1,5 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
 import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
@@ -30,11 +30,8 @@ export function EmptyState({
 				) : icon === "growth" ? (
 					<Growth width={iconSize} fill={pal.colors.emptyStateIcon} />
 				) : (
-					<FontAwesomeIcon
-						icon={icon}
-						size={iconSize}
-						style={[{ color: pal.colors.emptyStateIcon } as FontAwesomeIconStyle]}
-					/>
+					// @ts-ignore
+					<FontAwesomeIcon icon={icon} size={iconSize} style={[{ color: pal.colors.emptyStateIcon }]} />
 				)}
 			</View>
 			<Text type="xl" style={[{ color: pal.colors.textLight }, styles.text]}>

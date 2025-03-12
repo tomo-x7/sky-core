@@ -63,7 +63,9 @@ export function GalleryItem({
 					accessibilityIgnoresInvertColors
 					onLoad={(e) => {
 						thumbDimsRef.current[index] = {
+							//@ts-ignore
 							width: e.source.width,
+							//@ts-ignore
 							height: e.source.height,
 						};
 					}}

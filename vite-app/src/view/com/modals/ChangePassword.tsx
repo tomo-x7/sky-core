@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as EmailValidator from "email-validator";
 import { useState } from "react";
 import { ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -51,7 +51,6 @@ export function Component() {
 			setStage(Stages.ChangePassword);
 		} catch (e: any) {
 			const errMsg = e.toString();
-			logger.warn("Failed to request password reset", { error: e });
 			if (isNetworkError(e)) {
 				setError("Unable to contact your service. Please check your Internet connection.");
 			} else {
@@ -87,7 +86,6 @@ export function Component() {
 			setStage(Stages.Done);
 		} catch (e: any) {
 			const errMsg = e.toString();
-			logger.warn("Failed to set new password", { error: e });
 			if (isNetworkError(e)) {
 				setError("Unable to contact your service. Please check your Internet connection.");
 			} else {
@@ -151,6 +149,7 @@ export function Component() {
 					{stage === Stages.ChangePassword && (
 						<View style={[pal.border, styles.group]}>
 							<View style={[styles.groupContent]}>
+								{/* @ts-ignore */}
 								<FontAwesomeIcon icon="ticket" style={[pal.textLight, styles.groupContentIcon]} />
 								<TextInput
 									testID="codeInput"
@@ -170,6 +169,7 @@ export function Component() {
 								/>
 							</View>
 							<View style={[pal.borderDark, styles.groupContent, styles.groupBottom]}>
+								{/* @ts-ignore */}
 								<FontAwesomeIcon icon="lock" style={[pal.textLight, styles.groupContentIcon]} />
 								<TextInput
 									testID="codeInput"

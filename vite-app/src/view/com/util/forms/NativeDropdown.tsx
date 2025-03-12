@@ -1,99 +1,38 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
-import { Platform, Pressable, StyleSheet, View, type ViewStyle } from "react-native";
-import * as DropdownMenu from "zeego/dropdown-menu";
-import type { MenuItemCommonProps } from "zeego/lib/typescript/menu";
+import { Pressable, StyleSheet, Text, type View, type ViewStyle } from "react-native";
 
-import { Portal } from "#/components/Portal";
 import { useTheme } from "#/lib/ThemeContext";
+import { HITSLOP_10 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
-import { isIOS } from "#/platform/detection";
 
 // Custom Dropdown Menu Components
 // ==
 export const DropdownMenuRoot = DropdownMenu.Root;
-// export const DropdownMenuTrigger = DropdownMenu.Trigger
 export const DropdownMenuContent = DropdownMenu.Content;
 
-type TriggerProps = Omit<React.ComponentProps<(typeof DropdownMenu)["Trigger"]>, "children"> &
-	React.PropsWithChildren<{
-		testID?: string;
-		accessibilityLabel?: string;
-		accessibilityHint?: string;
-	}>;
-export const DropdownMenuTrigger = DropdownMenu.create((props: TriggerProps) => {
-	const theme = useTheme();
-	const defaultCtrlColor = theme.palette.default.postCtrl;
-
-	return (
-		// This Pressable doesn't actually do anything other than
-		// provide the "pressed state" visual feedback.
-		<Pressable
-			testID={props.testID}
-			accessibilityRole="button"
-			accessibilityLabel={props.accessibilityLabel}
-			accessibilityHint={props.accessibilityHint}
-			style={({ pressed }) => [{ opacity: pressed ? 0.8 : 1 }]}
-		>
-			<DropdownMenu.Trigger action="press">
-				<View>
-					{props.children ? (
-						props.children
-					) : (
-						<FontAwesomeIcon icon="ellipsis" size={20} color={defaultCtrlColor} />
-					)}
-				</View>
-			</DropdownMenu.Trigger>
-		</Pressable>
-	);
-}, "Trigger");
-
 type ItemProps = React.ComponentProps<(typeof DropdownMenu)["Item"]>;
-export const DropdownMenuItem = DropdownMenu.create((props: ItemProps & { testID?: string }) => {
+export const DropdownMenuItem = (props: ItemProps & { testID?: string }) => {
 	const theme = useTheme();
 	const [focused, setFocused] = React.useState(false);
 	const backgroundColor = theme.colorScheme === "dark" ? "#fff1" : "#0001";
 
 	return (
 		<DropdownMenu.Item
+			className="nativeDropdown-item"
 			{...props}
-			style={[styles.item, focused && { backgroundColor: backgroundColor }]}
+			style={StyleSheet.flatten([styles.item, focused && { backgroundColor: backgroundColor }])}
 			onFocus={() => {
 				setFocused(true);
-				props.onFocus && props.onFocus();
 			}}
 			onBlur={() => {
 				setFocused(false);
-				props.onBlur && props.onBlur();
 			}}
 		/>
 	);
-}, "Item");
-
-type TitleProps = React.ComponentProps<(typeof DropdownMenu)["ItemTitle"]>;
-export const DropdownMenuItemTitle = DropdownMenu.create((props: TitleProps) => {
-	const pal = usePalette("default");
-	return <DropdownMenu.ItemTitle {...props} style={[props.style, pal.text, styles.itemTitle]} />;
-}, "ItemTitle");
-
-type IconProps = React.ComponentProps<(typeof DropdownMenu)["ItemIcon"]>;
-export const DropdownMenuItemIcon = DropdownMenu.create((props: IconProps) => {
-	return <DropdownMenu.ItemIcon {...props} />;
-}, "ItemIcon");
-
-type SeparatorProps = React.ComponentProps<(typeof DropdownMenu)["Separator"]>;
-export const DropdownMenuSeparator = DropdownMenu.create((props: SeparatorProps) => {
-	const pal = usePalette("default");
-	const theme = useTheme();
-	const { borderColor: separatorColor } = theme.colorScheme === "dark" ? pal.borderDark : pal.border;
-	return (
-		<DropdownMenu.Separator
-			{...props}
-			style={[props.style, styles.separator, { backgroundColor: separatorColor }]}
-		/>
-	);
-}, "Separator");
+};
 
 // Types for Dropdown Menu and Items
 export type DropdownItem = {
@@ -101,7 +40,7 @@ export type DropdownItem = {
 	onPress?: () => void;
 	testID?: string;
 	icon?: {
-		ios: MenuItemCommonProps["ios"];
+		ios: unknown;
 		android: string;
 		web: IconProp;
 	};
@@ -114,105 +53,155 @@ type Props = {
 	triggerStyle?: ViewStyle;
 };
 
-/* The `NativeDropdown` function uses native iOS and Android dropdown menus.
- * It also creates a animated custom dropdown for web that uses
- * Radix UI primitives under the hood
- * @prop {DropdownItem[]} items - An array of dropdown items
- * @prop {React.ReactNode} children - A custom dropdown trigger
- */
 export function NativeDropdown({
 	items,
 	children,
 	testID,
 	accessibilityLabel,
 	accessibilityHint,
+	triggerStyle,
 }: React.PropsWithChildren<Props>) {
-	const pal = usePalette("default");
-	const theme = useTheme();
-	const [isOpen, setIsOpen] = React.useState(false);
-	const dropDownBackgroundColor = theme.colorScheme === "dark" ? pal.btn : pal.viewLight;
+	const [open, setOpen] = React.useState(false);
+	const buttonRef = React.useRef<HTMLButtonElement>(null);
+	const menuRef = React.useRef<HTMLDivElement>(null);
+
+	React.useEffect(() => {
+		if (!open) {
+			return;
+		}
+
+		function clickHandler(e: MouseEvent) {
+			const t = e.target;
+
+			if (!open) return;
+			if (!t) return;
+			if (!buttonRef.current || !menuRef.current) return;
+
+			if (
+				t !== buttonRef.current &&
+				!buttonRef.current.contains(t as Node) &&
+				t !== menuRef.current &&
+				!menuRef.current.contains(t as Node)
+			) {
+				// prevent clicking through to links beneath dropdown
+				// only applies to mobile web
+				e.preventDefault();
+				e.stopPropagation();
+
+				// close menu
+				setOpen(false);
+			}
+		}
+
+		function keydownHandler(e: KeyboardEvent) {
+			if (e.key === "Escape" && open) {
+				setOpen(false);
+			}
+		}
+
+		document.addEventListener("click", clickHandler, true);
+		window.addEventListener("keydown", keydownHandler, true);
+		return () => {
+			document.removeEventListener("click", clickHandler, true);
+			window.removeEventListener("keydown", keydownHandler, true);
+		};
+	}, [open, ]);
 
 	return (
-		<>
-			{isIOS && isOpen && (
-				<Portal>
-					<Backdrop />
-				</Portal>
-			)}
-			<DropdownMenuRoot onOpenWillChange={setIsOpen}>
-				<DropdownMenuTrigger
-					action="press"
+		<DropdownMenuRoot open={open} onOpenChange={(o) => setOpen(o)}>
+			<DropdownMenu.Trigger asChild>
+				<Pressable
+					ref={buttonRef as unknown as React.Ref<View>}
 					testID={testID}
+					accessibilityRole="button"
 					accessibilityLabel={accessibilityLabel}
 					accessibilityHint={accessibilityHint}
+					onPointerDown={(e) => {
+						// Prevent false positive that interpret mobile scroll as a tap.
+						// This requires the custom onPress handler below to compensate.
+						// https://github.com/radix-ui/primitives/issues/1912
+						e.preventDefault();
+					}}
+					onPress={() => {
+						if (window.event instanceof KeyboardEvent) {
+							// The onPointerDown hack above is not relevant to this press, so don't do anything.
+							return;
+						}
+						// Compensate for the disabled onPointerDown above by triggering it manually.
+						setOpen((o) => !o);
+					}}
+					hitSlop={HITSLOP_10}
+					style={triggerStyle}
 				>
 					{children}
-				</DropdownMenuTrigger>
-				{/* @ts-ignore inheriting props from Radix, which is only for web */}
-				<DropdownMenuContent style={[styles.content, dropDownBackgroundColor]} loop>
-					{items.map((item, index) => {
-						if (item.label === "separator") {
-							return <DropdownMenuSeparator key={getKey(item.label, index, item.testID)} />;
-						}
-						if (index > 1 && items[index - 1].label === "separator") {
-							return (
-								<DropdownMenu.Group key={getKey(item.label, index, item.testID)}>
-									<DropdownMenuItem
-										key={getKey(item.label, index, item.testID)}
-										onSelect={item.onPress}
-									>
-										<DropdownMenuItemTitle>{item.label}</DropdownMenuItemTitle>
-										{item.icon && (
-											<DropdownMenuItemIcon
-												ios={item.icon.ios}
-												// androidIconName={item.icon.android} TODO: Add custom android icon support, because these ones are based on https://developer.android.com/reference/android/R.drawable.html and they are ugly
-											>
-												<FontAwesomeIcon icon={item.icon.web} size={20} style={[pal.text]} />
-											</DropdownMenuItemIcon>
-										)}
-									</DropdownMenuItem>
-								</DropdownMenu.Group>
-							);
-						}
-						return (
-							<DropdownMenuItem key={getKey(item.label, index, item.testID)} onSelect={item.onPress}>
-								<DropdownMenuItemTitle>{item.label}</DropdownMenuItemTitle>
-								{item.icon && (
-									<DropdownMenuItemIcon
-										ios={item.icon.ios}
-										// androidIconName={item.icon.android}
-									>
-										<FontAwesomeIcon icon={item.icon.web} size={20} style={[pal.text]} />
-									</DropdownMenuItemIcon>
-								)}
-							</DropdownMenuItem>
-						);
-					})}
-				</DropdownMenuContent>
-			</DropdownMenuRoot>
-		</>
+				</Pressable>
+			</DropdownMenu.Trigger>
+
+			<DropdownMenu.Portal>
+				<DropdownContent items={items} menuRef={menuRef} />
+			</DropdownMenu.Portal>
+		</DropdownMenuRoot>
 	);
 }
 
-function Backdrop() {
-	// Not visible but it eats the click outside.
-	// Only necessary for iOS.
+function DropdownContent({
+	items,
+	menuRef,
+}: {
+	items: DropdownItem[];
+	menuRef: React.RefObject<HTMLDivElement|null>;
+}) {
+	const pal = usePalette("default");
+	const theme = useTheme();
+	const dropDownBackgroundColor = theme.colorScheme === "dark" ? pal.btn : pal.view;
+	const { borderColor: separatorColor } = theme.colorScheme === "dark" ? pal.borderDark : pal.border;
+
 	return (
-		<Pressable
-			accessibilityRole="button"
-			accessibilityLabel="Dialog backdrop"
-			accessibilityHint="Press the backdrop to close the dialog"
-			style={{
-				top: 0,
-				left: 0,
-				right: 0,
-				bottom: 0,
-				position: "absolute",
-			}}
-			onPress={() => {
-				/* noop */
-			}}
-		/>
+		<DropdownMenu.Content
+			ref={menuRef}
+			style={StyleSheet.flatten([styles.content, dropDownBackgroundColor]) as React.CSSProperties}
+			loop
+		>
+			{items.map((item, index) => {
+				if (item.label === "separator") {
+					return (
+						<DropdownMenu.Separator
+							key={getKey(item.label, index, item.testID)}
+							style={
+								StyleSheet.flatten([
+									styles.separator,
+									{ backgroundColor: separatorColor },
+								]) as React.CSSProperties
+							}
+						/>
+					);
+				}
+				if (index > 1 && items[index - 1].label === "separator") {
+					return (
+						<DropdownMenu.Group key={getKey(item.label, index, item.testID)}>
+							<DropdownMenuItem key={getKey(item.label, index, item.testID)} onSelect={item.onPress}>
+								<Text selectable={false} style={[pal.text, styles.itemTitle]}>
+									{item.label}
+								</Text>
+								{item.icon && (
+									// @ts-ignore
+									<FontAwesomeIcon icon={item.icon.web} size={20} color={pal.colors.textLight} />
+								)}
+							</DropdownMenuItem>
+						</DropdownMenu.Group>
+					);
+				}
+				return (
+					<DropdownMenuItem key={getKey(item.label, index, item.testID)} onSelect={item.onPress}>
+						<Text selectable={false} style={[pal.text, styles.itemTitle]}>
+							{item.label}
+						</Text>
+						{/* @ts-ignore */}
+						{item.icon && <FontAwesomeIcon icon={item.icon.web} size={20} color={pal.colors.textLight} />}
+					</DropdownMenuItem>
+				);
+			})}
+		</DropdownMenu.Content>
 	);
 }
 
@@ -226,40 +215,43 @@ const getKey = (label: string, index: number, id?: string) => {
 const styles = StyleSheet.create({
 	separator: {
 		height: 1,
-		marginVertical: 4,
+		marginTop: 4,
+		marginBottom: 4,
 	},
 	content: {
 		backgroundColor: "#f0f0f0",
 		borderRadius: 8,
-		paddingVertical: 4,
-		paddingHorizontal: 4,
+		paddingTop: 4,
+		paddingBottom: 4,
+		paddingLeft: 4,
+		paddingRight: 4,
 		marginTop: 6,
-		...Platform.select({
-			web: {
-				animationDuration: "400ms",
-				animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-				willChange: "transform, opacity",
-				animationKeyframes: {
-					"0%": { opacity: 0, transform: [{ scale: 0.5 }] },
-					"100%": { opacity: 1, transform: [{ scale: 1 }] },
-				},
-				boxShadow: "0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)",
-				transformOrigin: "var(--radix-dropdown-menu-content-transform-origin)",
-			},
-		}),
+
+		// @ts-ignore web only -prf
+		boxShadow: "rgba(0, 0, 0, 0.3) 0px 5px 20px",
 	},
 	item: {
+		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
 		columnGap: 20,
 		// @ts-ignore -web
 		cursor: "pointer",
-		paddingVertical: 8,
-		paddingHorizontal: 12,
+		paddingTop: 8,
+		paddingBottom: 8,
+		paddingLeft: 12,
+		paddingRight: 12,
 		borderRadius: 8,
+		fontFamily:
+			'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Liberation Sans", Helvetica, Arial, sans-serif',
+			//@ts-ignore
+		outline: 0,
+		border: 0,
 	},
 	itemTitle: {
-		fontSize: 18,
+		fontSize: 16,
+		fontWeight: "600",
+		paddingRight: 10,
 	},
 });

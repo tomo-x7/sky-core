@@ -91,7 +91,7 @@ function NativeStackNavigator({
 	const { showLoggedOut } = useLoggedOutView();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
 	const { isMobile, isTabletOrMobile } = useWebMediaQueries();
-	if (!hasSession && (!PWI_ENABLED || activeRouteRequiresAuth || isNative)) {
+	if (!hasSession && (!PWI_ENABLED || activeRouteRequiresAuth)) {
 		return <LoggedOut />;
 	}
 	if (hasSession && currentAccount?.signupQueued) {
@@ -131,6 +131,7 @@ function NativeStackNavigator({
 
 	return (
 		<NavigationContent>
+			{/* biome-ignore lint/a11y/useSemanticElements: <explanation> */}
 			<View role="main" style={a.flex_1}>
 				<NativeStackView {...rest} state={state} navigation={navigation} descriptors={newDescriptors} />
 			</View>

@@ -1,14 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import type ViewShot from "react-native-view-shot";
+// import ViewShot from "react-native-view-shot";
 
 import { atoms as a } from "#/alf";
 import { useAvatar } from "#/screens/Onboarding/StepProfile/index";
-
-const LazyViewShot = React.lazy(
-	// @ts-expect-error dynamic import
-	() => import("react-native-view-shot/src/index"),
-);
 
 const SIZE_MULTIPLIER = 5;
 
@@ -21,7 +16,7 @@ export interface PlaceholderCanvasRef {
 // biome-ignore lint/complexity/noBannedTypes lint/correctness/noEmptyPattern: <explanation>
 export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(function PlaceholderCanvas({}, ref) {
 	const { avatar } = useAvatar();
-	const viewshotRef = React.useRef<ViewShot>(null);
+	// const viewshotRef = React.useRef<ViewShot>(null);
 	const Icon = avatar.placeholder.component;
 
 	const styles = React.useMemo(
@@ -38,16 +33,17 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 
 	React.useImperativeHandle(ref, () => ({
 		capture: async () => {
-			if (viewshotRef.current?.capture) {
-				return await viewshotRef.current.capture();
-			}
+			// if (viewshotRef.current?.capture) {
+			// 	return await viewshotRef.current.capture();
+			// }
+			return ""
 		},
 	}));
 
 	return (
 		<View style={styles.container}>
 			<React.Suspense fallback={null}>
-				<LazyViewShot
+				{/* <ViewShot
 					// @ts-ignore this library doesn't have types
 					ref={viewshotRef}
 					options={{
@@ -57,14 +53,14 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 						height: 150 * SIZE_MULTIPLIER,
 						width: 150 * SIZE_MULTIPLIER,
 					}}
-				>
+				> */}
 					<View
 						style={[styles.imageContainer, { backgroundColor: avatar.backgroundColor }]}
 						collapsable={false}
 					>
 						<Icon height={85 * SIZE_MULTIPLIER} width={85 * SIZE_MULTIPLIER} style={{ color: "white" }} />
 					</View>
-				</LazyViewShot>
+				{/* </ViewShot> */}
 			</React.Suspense>
 		</View>
 	);

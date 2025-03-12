@@ -29,18 +29,18 @@ function usePersistedBooleanValue<T extends keyof persisted.Schema>(key: T) {
 			_set(Boolean(hidden));
 			persisted.write(key, hidden);
 		},
-		[key, _set],
+		[key, ],
 	);
 	React.useEffect(() => {
 		return persisted.onUpdate(key, (hidden) => {
 			_set(Boolean(hidden));
 		});
-	}, [key, _set]);
+	}, [key, ]);
 
 	return [value, set] as const;
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [trendingDisabled, setTrendingDisabled] = usePersistedBooleanValue("trendingDisabled");
 	const [trendingVideoDisabled, setTrendingVideoDisabled] = usePersistedBooleanValue("trendingVideoDisabled");
 

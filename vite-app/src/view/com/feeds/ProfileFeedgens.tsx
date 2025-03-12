@@ -65,7 +65,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 		} else if (isEmpty) {
 			items = items.concat([EMPTY]);
 		} else if (data?.pages) {
-			for (const page of data?.pages) {
+			for (const page of data.pages) {
 				items = items.concat(page.feeds);
 			}
 		} else if (isError && !isEmpty) {
@@ -99,7 +99,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 			console.error("Failed to refresh feeds", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch, ]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

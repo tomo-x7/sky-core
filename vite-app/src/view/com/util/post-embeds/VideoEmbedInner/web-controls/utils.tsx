@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { isSafari } from "#/lib/browser";
 import { useVideoVolumeState } from "../../VideoVolumeContext";
 
-export function useVideoElement(ref: React.RefObject<HTMLVideoElement>) {
+export function useVideoElement(ref: React.RefObject<HTMLVideoElement|null>) {
 	const [playing, setPlaying] = useState(false);
 	const [muted, setMuted] = useState(true);
 	const [currentTime, setCurrentTime] = useState(0);
@@ -219,7 +219,7 @@ export function useVideoElement(ref: React.RefObject<HTMLVideoElement>) {
 }
 
 export function formatTime(time: number) {
-	if (isNaN(time)) {
+	if (Number.isNaN(time)) {
 		return "--";
 	}
 

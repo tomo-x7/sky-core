@@ -1,7 +1,7 @@
 import { type AppBskyActorDefs, AppBskyFeedDefs } from "@atproto/api";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { JSX } from "react";
 import { View } from "react-native";
 
 import { useHeaderOffset } from "#/components/hooks/useHeaderOffset";
@@ -88,13 +88,8 @@ export function FeedPage({
 			scrollToTop();
 			truncateAndInvalidate(queryClient, FEED_RQKEY(feed));
 			setHasNew(false);
-			logEvent("feed:refresh", {
-				feedType: feed.split("|")[0],
-				feedUrl: feed,
-				reason: "soft-reset",
-			});
 		}
-	}, [navigation, isPageFocused, scrollToTop, queryClient, feed, setHasNew]);
+	}, [navigation, isPageFocused, scrollToTop, queryClient, feed]);
 
 	// fires when page within screen is activated/deactivated
 	React.useEffect(() => {
@@ -112,12 +107,7 @@ export function FeedPage({
 		scrollToTop();
 		truncateAndInvalidate(queryClient, FEED_RQKEY(feed));
 		setHasNew(false);
-		logEvent("feed:refresh", {
-			feedType: feed.split("|")[0],
-			feedUrl: feed,
-			reason: "load-latest",
-		});
-	}, [scrollToTop, feed, queryClient, setHasNew]);
+	}, [scrollToTop, feed, queryClient]);
 
 	const shouldPrefetch = isNative && isPageAdjacent;
 	return (
@@ -152,7 +142,7 @@ export function FeedPage({
 					onPress={onPressCompose}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 					accessibilityRole="button"
-					accessibilityLabel={msg({ message: "New post", context: "action" })}
+					accessibilityLabel={"New Post"}
 					accessibilityHint=""
 				/>
 			)}

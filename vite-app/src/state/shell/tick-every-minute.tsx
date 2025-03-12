@@ -4,7 +4,7 @@ type StateContext = number;
 
 const stateContext = React.createContext<StateContext>(0);
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [tick, setTick] = React.useState(Date.now());
 	React.useEffect(() => {
 		const i = setInterval(() => {

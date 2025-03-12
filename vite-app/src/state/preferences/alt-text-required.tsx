@@ -8,7 +8,7 @@ type SetContext = (v: persisted.Schema["requireAltTextEnabled"]) => void;
 const stateContext = React.createContext<StateContext>(persisted.defaults.requireAltTextEnabled);
 const setContext = React.createContext<SetContext>((_: persisted.Schema["requireAltTextEnabled"]) => {});
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("requireAltTextEnabled"));
 
 	const setStateWrapped = React.useCallback(
@@ -16,14 +16,14 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			setState(requireAltTextEnabled);
 			persisted.write("requireAltTextEnabled", requireAltTextEnabled);
 		},
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("requireAltTextEnabled", (nextRequireAltTextEnabled) => {
 			setState(nextRequireAltTextEnabled);
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

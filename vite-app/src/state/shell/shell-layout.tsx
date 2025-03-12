@@ -29,7 +29,7 @@ const stateContext = React.createContext<StateContext>({
 	},
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const headerHeight = useSharedValue(0);
 	const footerHeight = useSharedValue(0);
 

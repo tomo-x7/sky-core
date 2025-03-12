@@ -14,11 +14,6 @@ export function shouldRequestEmailConfirmation(account: SessionAccount) {
 	const snoozedAt = persisted.get("reminders").lastEmailConfirm;
 	const today = new Date();
 
-	logger.debug("Checking email confirmation reminder", {
-		today,
-		snoozedAt,
-	});
-
 	// never been snoozed, new account
 	if (!snoozedAt) {
 		return true;
@@ -34,9 +29,7 @@ export function shouldRequestEmailConfirmation(account: SessionAccount) {
 
 export function snoozeEmailConfirmationPrompt() {
 	const lastEmailConfirm = new Date().toISOString();
-	logger.debug("Snoozing email confirmation reminder", {
-		snoozedAt: lastEmailConfirm,
-	});
+
 	persisted.write("reminders", {
 		...persisted.get("reminders"),
 		lastEmailConfirm,

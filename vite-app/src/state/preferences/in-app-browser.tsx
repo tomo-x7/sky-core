@@ -8,7 +8,7 @@ type SetContext = (v: persisted.Schema["useInAppBrowser"]) => void;
 const stateContext = React.createContext<StateContext>(persisted.defaults.useInAppBrowser);
 const setContext = React.createContext<SetContext>((_: persisted.Schema["useInAppBrowser"]) => {});
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("useInAppBrowser"));
 
 	const setStateWrapped = React.useCallback(
@@ -16,14 +16,14 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			setState(inAppBrowser);
 			persisted.write("useInAppBrowser", inAppBrowser);
 		},
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("useInAppBrowser", (nextUseInAppBrowser) => {
 			setState(nextUseInAppBrowser);
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

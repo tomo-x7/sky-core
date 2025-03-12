@@ -50,7 +50,6 @@ export function BottomBarWeb() {
 	const unreadMessageCount = useUnreadMessageCount();
 	const notificationCountStr = useUnreadNotifications();
 	const hasHomeBadge = useHomeBadge();
-	const gate = useGate();
 
 	const showSignIn = React.useCallback(() => {
 		closeAllActiveElements();
@@ -65,6 +64,7 @@ export function BottomBarWeb() {
 
 	return (
 		<Animated.View
+			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="navigation"
 			style={[
 				styles.bottomBar,
@@ -76,7 +76,7 @@ export function BottomBarWeb() {
 		>
 			{hasSession ? (
 				<>
-					<NavItem routeName="Home" href="/" hasNew={hasHomeBadge && gate("remove_show_latest_button")}>
+					<NavItem routeName="Home" href="/" /*hasNew={hasHomeBadge && gate("remove_show_latest_button")}*/>
 						{({ isActive }) => {
 							const Icon = isActive ? HomeFilled : Home;
 							return (
@@ -211,7 +211,7 @@ export function BottomBarWeb() {
 }
 
 const NavItem: React.FC<{
-	children: (props: { isActive: boolean }) => React.ReactChild;
+	children: (props: { isActive: boolean }) => React.ReactNode;
 	href: string;
 	routeName: string;
 	hasNew?: boolean;
@@ -253,10 +253,7 @@ const NavItem: React.FC<{
 			{notificationCount ? (
 				<View
 					style={styles.notificationCount}
-					aria-label={`${plural(notificationCount, {
-						one: "# unread item",
-						other: "# unread items",
-					})}`}
+					aria-label={`${notificationCount ?? 0} unread ${notificationCount === "1" ? "item" : "items"}`}
 				>
 					<Text style={styles.notificationCountLabel}>{notificationCount}</Text>
 				</View>

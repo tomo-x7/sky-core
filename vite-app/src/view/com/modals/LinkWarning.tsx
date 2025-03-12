@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 
@@ -46,6 +46,7 @@ export function Component({
 				<View style={styles.titleSection}>
 					{potentiallyMisleading ? (
 						<>
+						{/* @ts-ignore */}
 							<FontAwesomeIcon icon="circle-exclamation" color={pal.colors.text} size={18} />
 							<Text type="title-lg" style={[pal.text, styles.title]}>
 								Potentially Misleading Link

@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
 import { Circle, Path, Svg } from "react-native-svg";
@@ -123,6 +123,7 @@ export function Component({
 				{stage === Stages.Email ? (
 					<>
 						<View style={styles.emailContainer}>
+							{/* @ts-ignore */}
 							<FontAwesomeIcon icon="envelope" color={pal.colors.text} size={16} />
 							<Text type="xl-medium" style={[pal.text, s.flex1, { minWidth: 0 }]}>
 								{currentAccount?.email || "(no email)"}

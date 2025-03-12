@@ -59,14 +59,8 @@ export function ExternalGifEmbed({
 			// Control animation on native
 			setIsAnimating((prev) => {
 				if (prev) {
-					if (isNative) {
-						imageRef.current?.stopAnimating();
-					}
 					return false;
 				} else {
-					if (isNative) {
-						imageRef.current?.startAnimating();
-					}
 					return true;
 				}
 			});
@@ -99,6 +93,7 @@ export function ExternalGifEmbed({
 					}} // Web uses the thumb to control playback
 					style={{ flex: 1 }}
 					ref={imageRef}
+					//@ts-ignore
 					autoplay={isAnimating}
 					contentFit="contain"
 					accessibilityIgnoresInvertColors

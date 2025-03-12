@@ -43,7 +43,7 @@ const controlsContext = React.createContext<ControlsContext>({
 	},
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState<StateContext>();
 	const queryClient = useQueryClient();
 

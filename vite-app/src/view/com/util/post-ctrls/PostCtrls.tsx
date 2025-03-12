@@ -5,7 +5,6 @@ import {
 	AtUri,
 	type RichText as RichTextAPI,
 } from "@atproto/api";
-import * as Clipboard from "expo-clipboard";
 import React, { memo, useCallback } from "react";
 import { Pressable, type PressableStateCallbackType, type StyleProp, View, type ViewStyle } from "react-native";
 
@@ -18,7 +17,6 @@ import { IS_INTERNAL } from "#/lib/app-info";
 import { POST_CTRL_HITSLOP } from "#/lib/constants";
 import { CountWheel } from "#/lib/custom-animations/CountWheel";
 import { AnimatedLikeIcon } from "#/lib/custom-animations/LikeIcon";
-import { useHaptics } from "#/lib/haptics";
 import { makeProfileLink } from "#/lib/routes/links";
 import { shareUrl } from "#/lib/sharing";
 import { toShareUrl } from "#/lib/strings/url-helpers";
@@ -43,7 +41,6 @@ let PostCtrls = ({
 	style,
 	onPressReply,
 	onPostReply,
-	logContext,
 	threadgateRecord,
 }: {
 	big?: boolean;
@@ -54,22 +51,17 @@ let PostCtrls = ({
 	style?: StyleProp<ViewStyle>;
 	onPressReply: () => void;
 	onPostReply?: (postUri: string | undefined) => void;
-	logContext: "FeedItem" | "PostThreadItem" | "Post" | "ImmersiveVideo";
 	threadgateRecord?: AppBskyFeedThreadgate.Record;
 }): React.ReactNode => {
 	const t = useTheme();
-	const { _, i18n } = useLingui();
 	const { openComposer } = useComposerControls();
 	const { currentAccount } = useSession();
-	const [queueLike, queueUnlike] = usePostLikeMutationQueue(post, logContext);
-	const [queueRepost, queueUnrepost] = usePostRepostMutationQueue(post, logContext);
+	const [queueLike, queueUnlike] = usePostLikeMutationQueue(post);
+	const [queueRepost, queueUnrepost] = usePostRepostMutationQueue(post);
 	const requireAuth = useRequireAuth();
 	const loggedOutWarningPromptControl = useDialogControl();
 	const { sendInteraction } = useFeedFeedbackContext();
 	const { captureAction } = useProgressGuideControls();
-	const playHaptic = useHaptics();
-	const gate = useGate();
-	const isDiscoverDebugUser = IS_INTERNAL || gate("debug_show_feedcontext");
 	const isBlocked = Boolean(
 		post.author.viewer?.blocking || post.author.viewer?.blockedBy || post.author.viewer?.blockingByList,
 	);
@@ -100,7 +92,6 @@ let PostCtrls = ({
 		try {
 			setHasLikeIconBeenToggled(true);
 			if (!post.viewer?.like) {
-				playHaptic("Light");
 				sendInteraction({
 					item: post.uri,
 					event: "app.bsky.feed.defs#interactionLike",
@@ -116,18 +107,7 @@ let PostCtrls = ({
 				throw e;
 			}
 		}
-	}, [
-		_,
-		playHaptic,
-		post.uri,
-		post.viewer?.like,
-		queueLike,
-		queueUnlike,
-		sendInteraction,
-		captureAction,
-		feedContext,
-		isBlocked,
-	]);
+	}, [post.uri, post.viewer?.like, queueLike, queueUnlike, sendInteraction, captureAction, feedContext, isBlocked]);
 
 	const onRepost = useCallback(async () => {
 		if (isBlocked) {
@@ -209,22 +189,18 @@ let PostCtrls = ({
 					style={btnStyle}
 					onPress={() => {
 						if (!replyDisabled) {
-							playHaptic("Light");
 							requireAuth(() => onPressReply());
 						}
 					}}
 					accessibilityRole="button"
-					accessibilityLabel={`Reply (${plural(post.replyCount || 0, {
-						one: "# reply",
-						other: "# replies",
-					})})`}
+					accessibilityLabel={`Reply (${post.replyCount || 0} ${post.replyCount === 1 ? "reply" : "replies"})`}
 					accessibilityHint=""
 					hitSlop={POST_CTRL_HITSLOP}
 				>
 					<Bubble style={[defaultCtrlColor, { pointerEvents: "none" }]} width={big ? 22 : 18} />
 					{typeof post.replyCount !== "undefined" && post.replyCount > 0 ? (
 						<Text style={[defaultCtrlColor, big ? a.text_md : { fontSize: 15 }, a.user_select_none]}>
-							{formatCount(i18n, post.replyCount)}
+							{formatCount(post.replyCount)}
 						</Text>
 					) : undefined}
 				</Pressable>
@@ -247,14 +223,8 @@ let PostCtrls = ({
 					accessibilityRole="button"
 					accessibilityLabel={
 						post.viewer?.like
-							? `Unlike (${plural(post.likeCount || 0, {
-									one: "# like",
-									other: "# likes",
-								})})`
-							: `Like (${plural(post.likeCount || 0, {
-									one: "# like",
-									other: "# likes",
-								})})`
+							? `Unlike (${post.likeCount || 0} ${post.likeCount === 1 ? "like" : "likes"})`
+							: `Like (${post.likeCount || 0} ${post.likeCount === 1 ? "like" : "likes"})`
 					}
 					accessibilityHint=""
 					hitSlop={POST_CTRL_HITSLOP}
@@ -315,33 +285,6 @@ let PostCtrls = ({
 					threadgateRecord={threadgateRecord}
 				/>
 			</View>
-			{isDiscoverDebugUser && feedContext && (
-				<Pressable
-					accessible={false}
-					style={{
-						position: "absolute",
-						top: 0,
-						bottom: 0,
-						right: 0,
-						display: "flex",
-						justifyContent: "center",
-					}}
-					onPress={(e) => {
-						e.stopPropagation();
-						Clipboard.setStringAsync(feedContext);
-						Toast.show("Copied to clipboard", "clipboard-check");
-					}}
-				>
-					<Text
-						style={{
-							color: t.palette.contrast_400,
-							fontSize: 7,
-						}}
-					>
-						{feedContext}
-					</Text>
-				</Pressable>
-			)}
 		</View>
 	);
 };

@@ -1,5 +1,4 @@
 import "./view/icons";
-import "./style.css";
 
 import React, { useEffect, useState } from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
@@ -44,7 +43,7 @@ import { Provider as StarterPackProvider } from "./state/shell/starter-pack";
 import { Provider as HiddenRepliesProvider } from "./state/threadgate-hidden-replies";
 import { Provider as TrendingConfigProvider } from "./state/trending-config";
 import * as Toast from "./view/com/util/Toast";
-import { ToastContainer } from "./view/com/util/Toast.web";
+import { ToastContainer } from "./view/com/util/Toast";
 import { Provider as ActiveVideoProvider } from "./view/com/util/post-embeds/ActiveVideoWebContext";
 import { Provider as VideoVolumeProvider } from "./view/com/util/post-embeds/VideoVolumeContext";
 import { Shell } from "./view/shell/index";

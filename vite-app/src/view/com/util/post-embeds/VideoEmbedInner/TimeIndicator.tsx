@@ -17,7 +17,7 @@ export function TimeIndicator({
 }) {
 	const t = useTheme();
 
-	if (isNaN(time)) {
+	if (Number.isNaN(time)) {
 		return null;
 	}
 
@@ -27,10 +27,7 @@ export function TimeIndicator({
 	return (
 		<View
 			pointerEvents="none"
-			accessibilityLabel={`Time remaining: ${plural(Number(time) || 0, {
-				one: "# second",
-				other: "# seconds",
-			})}`}
+			accessibilityLabel={`Time remaining: ${Number(time) || 0} ${Number(time) === 1 ? "second" : "seconds"}`}
 			accessibilityHint=""
 			style={[
 				{

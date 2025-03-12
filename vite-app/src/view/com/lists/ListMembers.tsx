@@ -1,5 +1,5 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import React, { useCallback } from "react";
+import React, { JSX, useCallback } from "react";
 import { Dimensions, type StyleProp, View, type ViewStyle } from "react-native";
 
 import { ListFooter } from "#/components/Lists";
@@ -87,7 +87,7 @@ export function ListMembers({
 			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsRefreshing(false);
-	}, [refetch, setIsRefreshing]);
+	}, [refetch, ]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;
@@ -126,7 +126,7 @@ export function ListMembers({
 				<Button
 					testID={`user-${profile.handle}-editBtn`}
 					type="default"
-					label={msg({ message: "Edit", context: "action" })}
+					label={"Edit"}
 					onPress={() => onPressEditMembership(profile)}
 				/>
 			);

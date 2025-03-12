@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import {
 	type NativeScrollEvent,
 	type NativeSyntheticEvent,
@@ -57,6 +57,7 @@ export const ViewSelector = React.forwardRef<
 ) {
 	const pal = usePalette("default");
 	const [selectedIndex, setSelectedIndex] = useState<number>(0);
+	//@ts-expect-error
 	const flatListRef = React.useRef<FlatList_INTERNAL>(null);
 
 	// events
@@ -66,7 +67,7 @@ export const ViewSelector = React.forwardRef<
 
 	const onPressSelection = React.useCallback(
 		(index: number) => setSelectedIndex(clamp(index, 0, sections.length)),
-		[setSelectedIndex, sections],
+		[ sections],
 	);
 	useEffect(() => {
 		onSelectView?.(selectedIndex);
@@ -100,7 +101,6 @@ export const ViewSelector = React.forwardRef<
 	const data = React.useMemo(() => [HEADER_ITEM, SELECTOR_ITEM, ...items], [items]);
 	return (
 		<FlatList_INTERNAL
-			// @ts-expect-error FlatList_INTERNAL ref type is wrong -sfn
 			ref={flatListRef}
 			data={data}
 			keyExtractor={keyExtractor}

@@ -16,14 +16,14 @@ export function Provider({ children }: { children: React.ReactNode }) {
 			setState(Boolean(autoplayDisabled));
 			persisted.write("disableAutoplay", autoplayDisabled);
 		},
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("disableAutoplay", (nextDisableAutoplay) => {
 			setState(Boolean(nextDisableAutoplay));
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

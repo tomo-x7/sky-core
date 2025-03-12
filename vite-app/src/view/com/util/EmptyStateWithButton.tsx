@@ -1,5 +1,5 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon,} from "@fortawesome/react-fontawesome";
 import { StyleSheet, View } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -22,6 +22,7 @@ export function EmptyStateWithButton(props: Props) {
 	return (
 		<View testID={props.testID} style={styles.container}>
 			<View style={styles.iconContainer}>
+				{/* @ts-ignore */}
 				<FontAwesomeIcon icon={props.icon} style={[styles.icon, pal.text]} size={62} />
 			</View>
 			<Text type="xl-medium" style={[s.textCenter, pal.text]}>
@@ -34,7 +35,8 @@ export function EmptyStateWithButton(props: Props) {
 					style={styles.btn}
 					onPress={props.onPress}
 				>
-					<FontAwesomeIcon icon="plus" style={palInverted.text as FontAwesomeIconStyle} size={14} />
+					{/* @ts-ignore */}
+					<FontAwesomeIcon icon="plus" style={palInverted.text } size={14} />
 					<Text type="lg-medium" style={palInverted.text}>
 						{props.buttonLabel}
 					</Text>

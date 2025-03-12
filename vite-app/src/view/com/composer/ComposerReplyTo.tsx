@@ -97,6 +97,7 @@ function ComposerReplyToImages({
 				<Image
 					source={{ uri: images[0].thumb }}
 					style={[a.flex_1]}
+					//@ts-ignore
 					cachePolicy="memory-disk"
 					accessibilityIgnoresInvertColors
 				/>
@@ -105,13 +106,13 @@ function ComposerReplyToImages({
 					<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
 						<Image
 							source={{ uri: images[0].thumb }}
-							style={[a.flex_1]}
+							style={[a.flex_1]} //@ts-ignore
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
 						<Image
 							source={{ uri: images[1].thumb }}
-							style={[a.flex_1]}
+							style={[a.flex_1]} //@ts-ignore
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
@@ -121,20 +122,20 @@ function ComposerReplyToImages({
 					<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
 						<Image
 							source={{ uri: images[0].thumb }}
-							style={[a.flex_1]}
+							style={[a.flex_1]} //@ts-ignore
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
 						<View style={[a.flex_1, a.gap_2xs]}>
 							<Image
 								source={{ uri: images[1].thumb }}
-								style={[a.flex_1]}
+								style={[a.flex_1]} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[2].thumb }}
-								style={[a.flex_1]}
+								style={[a.flex_1]} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
@@ -146,13 +147,13 @@ function ComposerReplyToImages({
 						<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
 							<Image
 								source={{ uri: images[0].thumb }}
-								style={[a.flex_1]}
+								style={[a.flex_1]} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[1].thumb }}
-								style={[a.flex_1]}
+								style={[a.flex_1]} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
@@ -160,13 +161,13 @@ function ComposerReplyToImages({
 						<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
 							<Image
 								source={{ uri: images[2].thumb }}
-								style={[a.flex_1]}
+								style={[a.flex_1]} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[3].thumb }}
-								style={[a.flex_1]}
+								style={[a.flex_1]} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>

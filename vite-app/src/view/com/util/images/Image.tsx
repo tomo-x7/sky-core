@@ -1,11 +1,3 @@
-import { Image, type ImageProps, type ImageSource } from "react-native";
+import { Image } from "react-native";
 
-interface HighPriorityImageProps extends ImageProps {
-	source: ImageSource;
-}
-export function HighPriorityImage({ source, ...props }: HighPriorityImageProps) {
-	const updatedSource = {
-		uri: typeof source === "object" && source ? source.uri : "",
-	} satisfies ImageSource;
-	return <Image accessibilityIgnoresInvertColors source={updatedSource} {...props} />;
-}
+export const HighPriorityImage = Image;

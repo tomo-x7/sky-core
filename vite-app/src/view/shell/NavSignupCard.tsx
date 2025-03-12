@@ -10,7 +10,7 @@ import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import { useCloseAllActiveElements } from "#/state/util";
 import { Logo } from "#/view/icons/Logo";
 
-let NavSignupCard = ({}: {}): React.ReactNode => {
+let NavSignupCard = (props: unknown): React.ReactNode => {
 	const { requestSwitchToAccount } = useLoggedOutViewControls();
 	const closeAllActiveElements = useCloseAllActiveElements();
 

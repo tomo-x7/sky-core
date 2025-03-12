@@ -1,5 +1,5 @@
 import { AppBskyGraphDefs, AtUri, type ModerationOpts, RichText as RichTextAPI, moderateUserList } from "@atproto/api";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
@@ -16,7 +16,6 @@ import { RichText } from "#/components/RichText";
 import { PersonPlus_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
 import * as Hider from "#/components/moderation/Hider";
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
-import { useHaptics } from "#/lib/haptics";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -138,7 +137,7 @@ function ProfileListScreenLoaded({
 	const { openModal } = useModalControls();
 	const isCurateList = list.purpose === AppBskyGraphDefs.CURATELIST;
 	const isScreenFocused = useIsFocused();
-	const isHidden = list.labels?.findIndex((l) => l.val === "!hide") !== -1;
+	const isHidden = (list as AppBskyGraphDefs.ListView).labels?.findIndex((l) => l.val === "!hide") !== -1;
 	const isOwner = currentAccount?.did === list.creator.did;
 	const scrollElRef = useAnimatedRef();
 
@@ -166,16 +165,13 @@ function ProfileListScreenLoaded({
 		});
 	}, [openModal, list, isCurateList, queryClient]);
 
-	const onCurrentPageSelected = React.useCallback(
-		(index: number) => {
-			if (index === 0) {
-				feedSectionRef.current?.scrollToTop();
-			} else if (index === 1) {
-				aboutSectionRef.current?.scrollToTop();
-			}
-		},
-		[feedSectionRef],
-	);
+	const onCurrentPageSelected = React.useCallback((index: number) => {
+		if (index === 0) {
+			feedSectionRef.current?.scrollToTop();
+		} else if (index === 1) {
+			aboutSectionRef.current?.scrollToTop();
+		}
+	}, []);
 
 	const renderHeader = useCallback(() => {
 		return <Header rkey={rkey} list={list} preferences={preferences} />;
@@ -280,7 +276,6 @@ function Header({
 	const isBlocking = !!list.viewer?.blocked;
 	const isMuting = !!list.viewer?.muted;
 	const isOwner = list.creator.did === currentAccount?.did;
-	const playHaptic = useHaptics();
 
 	const { mutateAsync: addSavedFeeds, isPending: isAddSavedFeedPending } = useAddSavedFeedsMutation();
 	const { mutateAsync: removeSavedFeed, isPending: isRemovePending } = useRemoveFeedMutation();
@@ -296,8 +291,6 @@ function Header({
 	const isPinned = Boolean(savedFeedConfig?.pinned);
 
 	const onTogglePinned = React.useCallback(async () => {
-		playHaptic();
-
 		try {
 			if (savedFeedConfig) {
 				const pinned = !savedFeedConfig.pinned;
@@ -322,10 +315,9 @@ function Header({
 			Toast.show("There was an issue contacting the server", "xmark");
 			console.error("Failed to toggle pinned feed", { message: e });
 		}
-	}, [playHaptic, addSavedFeeds, updateSavedFeeds, list.uri, savedFeedConfig]);
+	}, [addSavedFeeds, updateSavedFeeds, list.uri, savedFeedConfig]);
 
 	const onRemoveFromSavedFeeds = React.useCallback(async () => {
-		playHaptic();
 		if (!savedFeedConfig) return;
 		try {
 			await removeSavedFeed(savedFeedConfig);
@@ -334,7 +326,7 @@ function Header({
 			Toast.show("There was an issue contacting the server", "xmark");
 			console.error("Failed to remove pinned list", { message: e });
 		}
-	}, [playHaptic, removeSavedFeed, savedFeedConfig]);
+	}, [removeSavedFeed, savedFeedConfig]);
 
 	const onSubscribeMute = useCallback(async () => {
 		try {
@@ -525,7 +517,6 @@ function Header({
 		}
 		return items;
 	}, [
-		_,
 		onPressShare,
 		isOwner,
 		isModList,
@@ -635,6 +626,7 @@ function Header({
 					accessibilityHint=""
 				>
 					<View style={[pal.viewLight, styles.btn]}>
+						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="ellipsis" size={20} color={pal.colors.text} />
 					</View>
 				</NativeDropdown>
@@ -651,7 +643,9 @@ function Header({
 				<Prompt.Basic
 					control={subscribeMutePromptControl}
 					title={"Mute these accounts?"}
-					description={`Muting is private. Muted accounts can interact with you, but you will not see their posts or receive notifications from them.`}
+					description={
+						"Muting is private. Muted accounts can interact with you, but you will not see their posts or receive notifications from them."
+					}
 					onConfirm={onSubscribeMute}
 					confirmButtonCta={"Mute list"}
 				/>
@@ -659,7 +653,9 @@ function Header({
 				<Prompt.Basic
 					control={subscribeBlockPromptControl}
 					title={"Block these accounts?"}
-					description={`Blocking is public. Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you.`}
+					description={
+						"Blocking is public. Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you."
+					}
 					onConfirm={onSubscribeBlock}
 					confirmButtonCta={"Block list"}
 					confirmButtonColor="negative"
@@ -698,7 +694,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 		});
 		queryClient.resetQueries({ queryKey: FEED_RQKEY(feed) });
 		setHasNew(false);
-	}, [scrollElRef, headerHeight, queryClient, feed, setHasNew]);
+	}, [scrollElRef, headerHeight, queryClient, feed]);
 	React.useImperativeHandle(ref, () => ({
 		scrollToTop: onScrollToTop,
 	}));

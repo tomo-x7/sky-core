@@ -1,4 +1,4 @@
-import type { BottomSheetBackdropProps } from "@discord/bottom-sheet/src";
+import type { BottomSheetBackdropProps } from "#/bottom-sheet";
 import type React from "react";
 import { useMemo } from "react";
 import { TouchableWithoutFeedback } from "react-native";

@@ -16,7 +16,7 @@ import { useSetMinimalShellMode } from "#/state/shell";
 import { MyLists } from "#/view/com/lists/MyLists";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Lists">;
-export function ListsScreen({}: Props) {
+export function ListsScreen(props: Props) {
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const navigation = useNavigation<NavigationProp>();
 	const { openModal } = useModalControls();
@@ -67,7 +67,7 @@ export function ListsScreen({}: Props) {
 				>
 					<ButtonIcon icon={PlusIcon} />
 					<ButtonText>
-						<Trans context="action">New</Trans>
+						New
 					</ButtonText>
 				</Button>
 			</Layout.Header.Outer>

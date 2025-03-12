@@ -7,7 +7,7 @@ import {
 	type ModerationDecision,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -266,17 +266,15 @@ let FeedItemInner = ({
 					{isReasonFeedSource(reason) ? (
 						<Link href={reason.href}>
 							<Text type="sm-bold" style={pal.textLight} lineHeight={1.2} numberOfLines={1}>
-								<Trans context="from-feed">
-									From{" "}
-									<FeedNameText
-										type="sm-bold"
-										uri={reason.uri}
-										href={reason.href}
-										lineHeight={1.2}
-										numberOfLines={1}
-										style={pal.textLight}
-									/>
-								</Trans>
+								From{" "}
+								<FeedNameText
+									type="sm-bold"
+									uri={reason.uri}
+									href={reason.href}
+									lineHeight={1.2}
+									numberOfLines={1}
+									style={pal.textLight}
+								/>
 							</Text>
 						</Link>
 					) : AppBskyFeedDefs.isReasonRepost(reason) ? (
@@ -336,15 +334,13 @@ let FeedItemInner = ({
 
 			<View style={styles.layout}>
 				<View style={styles.layoutAvi}>
-					<AviFollowButton author={post.author} moderation={moderation}>
-						<PreviewableUserAvatar
-							size={42}
-							profile={post.author}
-							moderation={moderation.ui("avatar")}
-							type={post.author.associated?.labeler ? "labeler" : "user"}
-							onBeforePress={onOpenAuthor}
-						/>
-					</AviFollowButton>
+					<PreviewableUserAvatar
+						size={42}
+						profile={post.author}
+						moderation={moderation.ui("avatar")}
+						type={post.author.associated?.labeler ? "labeler" : "user"}
+						onBeforePress={onOpenAuthor}
+					/>
 					{isThreadParent && (
 						<View
 							style={[
@@ -437,7 +433,7 @@ let PostContent = ({
 
 	const onPressShowMore = React.useCallback(() => {
 		setLimitLines(false);
-	}, [setLimitLines]);
+	}, []);
 
 	return (
 		<ContentHider
@@ -494,18 +490,18 @@ function ReplyToLabel({
 	const pal = usePalette("default");
 	const { currentAccount } = useSession();
 
-	let label;
+	let label: React.ReactNode;
 	if (blocked) {
-		label = <Trans context="description">Reply to a blocked post</Trans>;
+		label = "Reply to a blocked post";
 	} else if (notFound) {
-		label = <Trans context="description">Reply to a post</Trans>;
+		label = "Reply to a post";
 	} else if (profile != null) {
 		const isMe = profile.did === currentAccount?.did;
 		if (isMe) {
-			label = <Trans context="description">Reply to you</Trans>;
+			label = "Reply to you";
 		} else {
 			label = (
-				<Trans context="description">
+				<>
 					Reply to{" "}
 					<ProfileHoverCard inline did={profile.did}>
 						<TextLinkOnWebOnly
@@ -523,7 +519,7 @@ function ReplyToLabel({
 							}
 						/>
 					</ProfileHoverCard>
-				</Trans>
+				</>
 			);
 		}
 	}
@@ -535,11 +531,8 @@ function ReplyToLabel({
 
 	return (
 		<View style={[s.flexRow, s.mb2, s.alignCenter]}>
-			<FontAwesomeIcon
-				icon="reply"
-				size={9}
-				style={[{ color: pal.colors.textLight } as FontAwesomeIconStyle, s.mr5]}
-			/>
+			{/* @ts-ignore */}
+			<FontAwesomeIcon icon="reply" size={9} style={[{ color: pal.colors.textLight }, s.mr5]} />
 			<Text type="md" style={[pal.textLight, s.mr2]} lineHeight={1.2} numberOfLines={1}>
 				{label}
 			</Text>

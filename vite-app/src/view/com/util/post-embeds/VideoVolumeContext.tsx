@@ -20,7 +20,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
 			volume,
 			setVolume,
 		}),
-		[muted, setMuted, volume, setVolume],
+		[muted, volume],
 	);
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

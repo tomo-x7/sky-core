@@ -1,7 +1,6 @@
 import { StackActions, useNavigation } from "@react-navigation/native";
-import React, { type ComponentProps } from "react";
+import React, { JSX, type ComponentProps } from "react";
 import { Linking, ScrollView, TouchableOpacity, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, tokens, useTheme, web } from "../../alf";
 import { Button, ButtonIcon, ButtonText } from "../../components/Button";
@@ -87,13 +86,13 @@ let DrawerProfileCard = ({
 			</View>
 			<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
 				<>
-					<Text style={[a.text_md, a.font_bold]}>{formatCount(i18n, profile?.followersCount ?? 0)}</Text>{" "}
-					<Plural value={profile?.followersCount || 0} one="follower" other="followers" />
+					<Text style={[a.text_md, a.font_bold]}>{formatCount(profile?.followersCount ?? 0)}</Text>{" "}
+					{profile?.followersCount === 1 ? "follower" : "followers"}
 				</>{" "}
 				&middot;{" "}
 				<>
-					<Text style={[a.text_md, a.font_bold]}>{formatCount(i18n, profile?.followsCount ?? 0)}</Text>{" "}
-					<Plural value={profile?.followsCount || 0} one="following" other="following" />
+					<Text style={[a.text_md, a.font_bold]}>{formatCount(profile?.followsCount ?? 0)}</Text>{" "}
+					{profile?.followsCount === 1 ? "following" : "following"}
 				</>
 			</Text>
 		</TouchableOpacity>
@@ -102,9 +101,8 @@ let DrawerProfileCard = ({
 DrawerProfileCard = React.memo(DrawerProfileCard);
 export { DrawerProfileCard };
 
-let DrawerContent = ({}: React.PropsWithoutRef<{}>): React.ReactNode => {
+let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	const t = useTheme();
-	const insets = useSafeAreaInsets();
 	const setDrawerOpen = useSetDrawerOpen();
 	const navigation = useNavigation<NavigationProp>();
 	const { isAtHome, isAtSearch, isAtFeeds, isAtNotifications, isAtMyProfile, isAtMessages } = useNavigationTabState();
@@ -190,7 +188,7 @@ let DrawerContent = ({}: React.PropsWithoutRef<{}>): React.ReactNode => {
 				style={[a.flex_1]}
 				contentContainerStyle={[
 					{
-						paddingTop: Math.max(insets.top + a.pt_xl.paddingTop, a.pt_xl.paddingTop),
+						paddingTop: a.pt_xl.paddingTop,
 					},
 				]}
 			>
@@ -245,7 +243,6 @@ let DrawerFooter = ({
 	onPressFeedback: () => void;
 	onPressHelp: () => void;
 }): React.ReactNode => {
-	const insets = useSafeAreaInsets();
 	return (
 		<View
 			style={[
@@ -255,7 +252,7 @@ let DrawerFooter = ({
 				a.pl_xl,
 				a.pt_md,
 				{
-					paddingBottom: Math.max(insets.bottom + tokens.space.xs, tokens.space.xl),
+					paddingBottom: tokens.space.xl,
 				},
 			]}
 		>
@@ -384,10 +381,7 @@ let NotificationsMenuItem = ({
 			accessibilityHint={
 				numUnreadNotifications === ""
 					? ""
-					: `${plural(numUnreadNotifications ?? 0, {
-							one: "../.. unread item",
-							other: "../.. unread items",
-						})}`
+					: `${numUnreadNotifications === "1" ? "../.. unread item" : "../.. unread items"}`
 			}
 			count={numUnreadNotifications}
 			bold={isActive}

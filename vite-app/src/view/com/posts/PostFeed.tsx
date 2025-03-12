@@ -1,6 +1,6 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { memo } from "react";
+import React, { JSX, memo } from "react";
 import {
 	ActivityIndicator,
 	AppState,
@@ -248,9 +248,11 @@ let PostFeed = ({
 				checkForNewRef.current();
 			}
 		}
-	}, [enabled, disablePoll, feed, queryClient, scrollElRef, isEmpty]);
+	}, [enabled, disablePoll,    isEmpty]);
 	React.useEffect(() => {
-		let cleanup1: () => void | undefined, cleanup2: () => void | undefined;
+		// biome-ignore lint/style/useConst: <explanation>
+		let cleanup1: () => void | undefined;
+		let cleanup2: () => void | undefined;
 		const subscription = AppState.addEventListener("change", (nextAppState) => {
 			// check for new on app foreground
 			if (nextAppState === "active") {
@@ -351,7 +353,7 @@ let PostFeed = ({
 						});
 					}
 				} else {
-					for (const page of data?.pages) {
+					for (const page of data.pages) {
 						for (const slice of page.slices) {
 							sliceIndex++;
 
@@ -361,33 +363,33 @@ let PostFeed = ({
 										if (showProgressIntersitial) {
 											arr.push({
 												type: "interstitialProgressGuide",
-												key: "interstitial-" + sliceIndex + "-" + lastFetchedAt,
+												key: `interstitial-${sliceIndex}-${lastFetchedAt}`,
 											});
 										}
 										if (!rightNavVisible && !trendingDisabled) {
 											arr.push({
 												type: "interstitialTrending",
-												key: "interstitial2-" + sliceIndex + "-" + lastFetchedAt,
+												key: `interstitial2-${sliceIndex}-${lastFetchedAt}`,
 											});
 										}
 									} else if (sliceIndex === 15) {
 										if (areVideoFeedsEnabled && !trendingVideoDisabled) {
 											arr.push({
 												type: "interstitialTrendingVideos",
-												key: "interstitial-" + sliceIndex + "-" + lastFetchedAt,
+												key: `interstitial-${sliceIndex}-${lastFetchedAt}`,
 											});
 										}
 									} else if (sliceIndex === 30) {
 										arr.push({
 											type: "interstitialFollows",
-											key: "interstitial-" + sliceIndex + "-" + lastFetchedAt,
+											key: `interstitial-${sliceIndex}-${lastFetchedAt}`,
 										});
 									}
 								} else if (feedKind === "profile") {
 									if (sliceIndex === 5) {
 										arr.push({
 											type: "interstitialFollows",
-											key: "interstitial-" + sliceIndex + "-" + lastFetchedAt,
+											key: `interstitial-${sliceIndex}-${lastFetchedAt}`,
 										});
 									}
 								}
@@ -396,7 +398,7 @@ let PostFeed = ({
 							if (slice.isFallbackMarker) {
 								arr.push({
 									type: "fallbackMarker",
-									key: "sliceFallbackMarker-" + sliceIndex + "-" + lastFetchedAt,
+									key: `sliceFallbackMarker-${sliceIndex}-${lastFetchedAt}`,
 								});
 							} else if (slice.isIncompleteThread && slice.items.length >= 3) {
 								const beforeLast = slice.items.length - 2;
@@ -410,7 +412,7 @@ let PostFeed = ({
 								});
 								arr.push({
 									type: "sliceViewFullThread",
-									key: slice._reactKey + "-viewFullThread",
+									key: `${slice._reactKey}-viewFullThread`,
 									uri: slice.items[0].uri,
 								});
 								arr.push({
@@ -488,11 +490,6 @@ let PostFeed = ({
 	// =
 
 	const onRefresh = React.useCallback(async () => {
-		logEvent("feed:refresh", {
-			feedType: feedType,
-			feedUrl: feed,
-			reason: "pull-to-refresh",
-		});
 		setIsPTRing(true);
 		try {
 			await refetch();
@@ -501,22 +498,17 @@ let PostFeed = ({
 			console.error("Failed to refresh posts feed", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing, onHasNew, feed, feedType]);
+	}, [refetch,  onHasNew,  ]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;
 
-		logEvent("feed:endReached", {
-			feedType: feedType,
-			feedUrl: feed,
-			itemCount: feedItems.length,
-		});
 		try {
 			await fetchNextPage();
 		} catch (err) {
 			console.error("Failed to load more posts", { message: err });
 		}
-	}, [isFetching, hasNextPage, isError, fetchNextPage, feed, feedType, feedItems.length]);
+	}, [isFetching, hasNextPage, isError, fetchNextPage,  ]);
 
 	const onPressTryAgain = React.useCallback(() => {
 		refetch();
@@ -629,7 +621,6 @@ let PostFeed = ({
 			error,
 			onPressTryAgain,
 			savedFeedConfig,
-			_,
 			onPressRetryLoadMore,
 			feedType,
 			feedUriOrActorDid,

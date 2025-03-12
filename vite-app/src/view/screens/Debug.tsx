@@ -20,7 +20,7 @@ import { Text } from "#/view/com/util/text/Text";
 
 const MAIN_VIEWS = ["Base", "Controls", "Error", "Notifs"];
 
-export const DebugScreen = ({}: NativeStackScreenProps<CommonNavigatorParams, "Debug">) => {
+export const DebugScreen = (props: NativeStackScreenProps<CommonNavigatorParams, "Debug">) => {
 	const [colorScheme, setColorScheme] = React.useState<"light" | "dark">("light");
 	const onToggleColorScheme = () => {
 		setColorScheme(colorScheme === "light" ? "dark" : "light");

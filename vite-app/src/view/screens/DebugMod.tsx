@@ -46,7 +46,7 @@ import { ProfileCard } from "../com/profile/ProfileCard";
 
 const LABEL_VALUES: (keyof typeof LABELS)[] = Object.keys(LABELS) as (keyof typeof LABELS)[];
 
-export const DebugModScreen = ({}: NativeStackScreenProps<CommonNavigatorParams, "DebugMod">) => {
+export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorParams, "DebugMod">) => {
 	const t = useTheme();
 	const [scenario, setScenario] = React.useState<string[]>(["label"]);
 	const [scenarioSwitches, setScenarioSwitches] = React.useState<string[]>([]);
@@ -618,6 +618,7 @@ function SmallToggler({ label, children }: React.PropsWithChildren<{ label: stri
 	);
 }
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 function DataView({ label, data }: { label: string; data: any }) {
 	return (
 		<Toggler label={label}>

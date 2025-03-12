@@ -145,7 +145,7 @@ let SearchScreenPostResults = ({
 		setIsPTR(true);
 		await refetch();
 		setIsPTR(false);
-	}, [setIsPTR, refetch]);
+	}, [refetch]);
 	const onEndReached = React.useCallback(() => {
 		if (isFetching || !hasNextPage || error) return;
 		fetchNextPage();
@@ -411,7 +411,7 @@ function useQueryManager({
 		() => ({
 			setLang,
 		}),
-		[setLang],
+		[],
 	);
 
 	return React.useMemo(() => {
@@ -479,6 +479,7 @@ let SearchScreenInner = ({
 		<Pager
 			onPageSelected={onPageSelected}
 			renderTabBar={(props) => (
+				// @ts-ignore
 				<Layout.Center style={[a.z_10, web([a.sticky, { top: headerHeight }])]}>
 					<TabBar items={sections.map((section) => section.title)} {...props} />
 				</Layout.Center>
@@ -637,7 +638,6 @@ export function SearchScreenShell({
 			updateSearchHistory(item);
 
 			if (isWeb) {
-				// @ts-expect-error route is not typesafe
 				navigation.push(route.name, { ...route.params, q: item });
 			} else {
 				textInput.current?.blur();
@@ -658,7 +658,7 @@ export function SearchScreenShell({
 			setSearchText("");
 			navigation.setParams({ q: "" });
 		}
-	}, [setShowAutocomplete, setSearchText, navigation]);
+	}, [navigation]);
 
 	const onSubmit = React.useCallback(() => {
 		navigateToItem(searchText);
@@ -698,7 +698,6 @@ export function SearchScreenShell({
 			const { q: _q, ...parameters } = (route.params ?? {}) as {
 				[key: string]: string;
 			};
-			// @ts-expect-error route is not typesafe
 			navigation.replace(route.name, parameters);
 		} else {
 			setSearchText("");
@@ -724,7 +723,7 @@ export function SearchScreenShell({
 		} else {
 			setShowAutocomplete(true);
 		}
-	}, [setShowAutocomplete]);
+	}, []);
 
 	const showHeader = !gtMobile || navButton !== "menu";
 
@@ -738,6 +737,7 @@ export function SearchScreenShell({
 				style={[
 					a.relative,
 					a.z_10,
+					//@ts-ignore
 					web({
 						position: "sticky",
 						top: 0,

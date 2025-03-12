@@ -24,15 +24,9 @@ export function configureAdditionalModerationAuthorities() {
 	if (geolocation?.countryCode) {
 		additionalLabelers = ADDITIONAL_LABELERS_MAP[geolocation.countryCode] ?? [];
 	} else {
-		logger.info("no geolocation, cannot apply mod authorities");
 	}
 
 	const appLabelers = Array.from(new Set([...BskyAgent.appLabelers, ...additionalLabelers]));
-
-	logger.info("applying mod authorities", {
-		additionalLabelers,
-		appLabelers,
-	});
 
 	BskyAgent.configure({ appLabelers });
 }

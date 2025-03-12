@@ -309,7 +309,7 @@ function getHotness(threadPost: ThreadPost, fetchedAt: number) {
 	const likeOrder = Math.log(3 + likeCount) * (hasOPLike ? 1.45 : 1.0);
 	const timePenaltyExponent = 1.5 + 1.5 / (1 + Math.log(1 + likeCount));
 	const opLikeBoost = hasOPLike ? 0.8 : 1.0;
-	const timePenalty = Math.pow(hoursAgo + 2, timePenaltyExponent * opLikeBoost);
+	const timePenalty = (hoursAgo + 2) ** (timePenaltyExponent * opLikeBoost);
 	return likeOrder / timePenalty;
 }
 

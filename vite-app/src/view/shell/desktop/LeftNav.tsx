@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useLinkProps, useNavigation, useNavigationState } from "@react-navigation/native";
-import React from "react";
+import React, { JSX } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { atoms as a, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
@@ -104,7 +104,9 @@ function ProfileCard() {
 									{...props}
 									style={[
 										a.w_full,
+										//@ts-ignore
 										a.transition_color,
+										//@ts-ignore
 										active ? t.atoms.bg_contrast_25 : a.transition_delay_50ms,
 										a.rounded_full,
 										a.justify_between,
@@ -116,6 +118,7 @@ function ProfileCard() {
 								>
 									<View
 										style={[
+											//@ts-ignore
 											!PlatformInfo.getIsReducedMotionEnabled() && [
 												a.transition_transform,
 												{ transitionDuration: "250ms" },
@@ -142,7 +145,9 @@ function ProfileCard() {
 											<View
 												style={[
 													a.flex_1,
+													//@ts-ignore
 													a.transition_opacity,
+													//@ts-ignore
 													!active && a.transition_delay_50ms,
 													{
 														marginLeft: tokens.space.xl * -1,
@@ -167,6 +172,7 @@ function ProfileCard() {
 												aria-hidden={true}
 												style={[
 													t.atoms.text_contrast_medium,
+													//@ts-ignore
 													a.transition_opacity,
 													{ opacity: active ? 1 : 0 },
 												]}
@@ -191,7 +197,7 @@ function ProfileCard() {
 				control={signOutPromptControl}
 				title={"Sign out?"}
 				description={"You will be signed out of all your accounts."}
-				onConfirm={() => logoutEveryAccount("Settings")}
+				onConfirm={() => logoutEveryAccount()}
 				confirmButtonCta={"Sign out"}
 				cancelButtonCta={"Cancel"}
 				confirmButtonColor="negative"
@@ -235,7 +241,7 @@ function SwitchMenuItems({
 									other.profile?.handle ?? other.account.handle,
 									"@",
 								)}`}
-								onPress={() => onPressSwitchAccount(other.account, "SwitchAccount")}
+								onPress={() => onPressSwitchAccount(other.account, )}
 							>
 								<View style={[{ marginLeft: tokens.space._2xs * -1 }]}>
 									<UserAvatar
@@ -307,12 +313,14 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 
 	return (
 		<PressableWithHover
+		//@ts-ignore
 			style={[a.flex_row, a.align_center, a.p_md, a.rounded_sm, a.gap_sm, a.outline_inset_1, a.transition_color]}
 			hoverStyle={t.atoms.bg_contrast_25}
 			// @ts-expect-error the function signature differs on web -prf
 			onPress={onPressWrapped}
 			href={href}
 			dataSet={{ noUnderline: 1 }}
+			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="link"
 			accessibilityLabel={label}
 			accessibilityHint=""
@@ -342,10 +350,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 						]}
 					>
 						<Text
-							accessibilityLabel={`${plural(count, {
-								one: "# unread item",
-								other: "# unread items",
-							})}`}
+							accessibilityLabel={`${count} unread ${count==="1"?"item":"items"}`}
 							accessibilityHint=""
 							accessible={true}
 							numberOfLines={1}
@@ -455,7 +460,7 @@ function ComposeBtn() {
 			>
 				<ButtonIcon icon={EditBig} position="left" />
 				<ButtonText>
-					<Trans context="action">New Post</Trans>
+					New Post
 				</ButtonText>
 			</Button>
 		</View>
@@ -485,7 +490,6 @@ export function DesktopLeftNav() {
 	const { leftNavMinimal, centerColumnOffset } = useLayoutBreakpoints();
 	const numUnreadNotifications = useUnreadNotifications();
 	const hasHomeBadge = useHomeBadge();
-	const gate = useGate();
 
 	if (!hasSession && !isDesktop) {
 		return null;
@@ -493,6 +497,7 @@ export function DesktopLeftNav() {
 
 	return (
 		<View
+			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="navigation"
 			style={[
 				a.px_xl,
@@ -519,7 +524,7 @@ export function DesktopLeftNav() {
 				<>
 					<NavItem
 						href="/"
-						hasNew={hasHomeBadge && gate("remove_show_latest_button")}
+						// hasNew={hasHomeBadge && gate("remove_show_latest_button")}
 						icon={<Home aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						iconFilled={<HomeFilled aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						label={"Home"}
@@ -574,6 +579,7 @@ export function DesktopLeftNav() {
 
 const styles = StyleSheet.create({
 	leftNav: {
+		//@ts-ignore
 		position: "fixed",
 		top: 0,
 		paddingTop: 10,
@@ -592,6 +598,7 @@ const styles = StyleSheet.create({
 		height: "100%",
 		width: 86,
 		alignItems: "center",
+		//@ts-ignore
 		overflowX: "hidden",
 	},
 	backBtn: {

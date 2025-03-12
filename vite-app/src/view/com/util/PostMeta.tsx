@@ -32,7 +32,6 @@ interface PostMetaOpts {
 
 let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 	const t = useTheme();
-	const { i18n, _ } = useLingui();
 
 	const displayName = opts.author.displayName || opts.author.handle;
 	const handle = opts.author.handle;
@@ -47,7 +46,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 		precacheProfile(queryClient, opts.author);
 	}, [queryClient, opts.author]);
 
-	const timestampLabel = niceDate(i18n, opts.timestamp);
+	const timestampLabel = niceDate( opts.timestamp);
 
 	return (
 		<View style={[a.flex_1, a.flex_row, a.align_center, a.pb_2xs, a.gap_xs, a.z_10, opts.style]}>
@@ -108,6 +107,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 							a.text_md,
 							t.atoms.text_contrast_medium,
 							a.leading_snug,
+							//@ts-ignore
 							web({
 								whiteSpace: "nowrap",
 							}),

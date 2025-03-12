@@ -6,7 +6,6 @@ import React from "react";
 import { Image } from "react-native";
 import { Keyboard, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme, web } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -167,13 +166,7 @@ function WizardInner({
 
 	const onSuccessCreate = (data: { uri: string; cid: string }) => {
 		const rkey = new AtUri(data.uri).rkey;
-		logEvent("starterPack:create", {
-			setName: state.name != null,
-			setDescription: state.description != null,
-			profilesCount: state.profiles.length,
-			feedsCount: state.feeds.length,
-		});
-		Image.prefetch([getStarterPackOgCard(currentProfile!.did, rkey)]);
+		Image.prefetch(getStarterPackOgCard(currentProfile!.did, rkey));
 		dispatch({ type: "SetProcessing", processing: false });
 		navigation.replace("StarterPack", {
 			name: currentAccount!.handle,
@@ -328,7 +321,6 @@ function Footer({
 	const t = useTheme();
 	const [state, dispatch] = useWizardState();
 	const editDialogControl = useDialogControl();
-	const { bottom: bottomInset } = useSafeAreaInsets();
 
 	const items = state.currentStep === "Profiles" ? [profile, ...state.profiles] : state.feeds;
 
@@ -350,7 +342,7 @@ function Footer({
 				t.atoms.bg,
 				t.atoms.border_contrast_medium,
 				{
-					paddingBottom: a.pb_lg.paddingBottom + bottomInset,
+					paddingBottom: a.pb_lg.paddingBottom,
 				},
 				isNative && [
 					a.border_l,
@@ -374,7 +366,7 @@ function Footer({
 			<View style={[a.flex_row, a.gap_xs]}>
 				{items.slice(0, 6).map((p, index) => (
 					<UserAvatar
-						key={index}
+						key={index.toString()}
 						avatar={p.avatar}
 						size={32}
 						type={state.currentStep === "Profiles" ? "user" : "algo"}
@@ -398,16 +390,16 @@ function Footer({
 									are included in your starter pack
 								</>
 							) : items.length > 2 ? (
-								<Trans context="profiles">
+								<>
 									<Text style={[a.font_bold, textStyles]} emoji>
 										{getName(items[1] /* [0] is self, skip it */)},{" "}
 									</Text>
 									<Text style={[a.font_bold, textStyles]} emoji>
 										{getName(items[2])},{" "}
 									</Text>
-									and <Plural value={items.length - 2} one="# other" other="# others" /> are included
-									in your starter pack
-								</Trans>
+									and {items.length - 2} {items.length - 2 === 1 ? "other" : "others"} are included in
+									your starter pack
+								</>
 							) : null /* Should not happen. */
 						}
 					</Text>
@@ -444,16 +436,16 @@ function Footer({
 										are included in your starter pack
 									</>
 								) : items.length > 2 ? (
-									<Trans context="feeds">
+									<>
 										<Text style={[a.font_bold, textStyles]} emoji>
 											{getName(items[0])},{" "}
 										</Text>
 										<Text style={[a.font_bold, textStyles]} emoji>
 											{getName(items[1])},{" "}
 										</Text>
-										and <Plural value={items.length - 2} one="# other" other="# others" /> are
+										and {items.length - 2} {items.length - 2 === 1 ? "other" : "others"} are
 										included in your starter pack
-									</Trans>
+									</>
 								) : null /* Should not happen. */
 							}
 						</Text>

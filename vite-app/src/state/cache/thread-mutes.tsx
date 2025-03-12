@@ -9,7 +9,7 @@ type SetStateContext = (uri: string, value: boolean) => void;
 const stateContext = React.createContext<StateContext>(new Map());
 const setStateContext = React.createContext<SetStateContext>((_: string) => false);
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState<StateContext>(() => new Map());
 
 	const setThreadMute = React.useCallback(
@@ -20,7 +20,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 				return next;
 			});
 		},
-		[setState],
+		[],
 	);
 
 	useMigrateMutes(setThreadMute);

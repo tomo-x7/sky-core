@@ -12,7 +12,7 @@ const apiContext = React.createContext<ApiContext>({
 	setInviteCopied(_: string) {},
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("invites"));
 
 	const api = React.useMemo(
@@ -30,14 +30,14 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 				});
 			},
 		}),
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("invites", (nextInvites) => {
 			setState(nextInvites);
 		});
-	}, [setState]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

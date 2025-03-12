@@ -29,7 +29,6 @@ function Inner() {
 	const noTopics = !isLoading && !error && !trending?.topics?.length;
 
 	const onConfirmHide = React.useCallback(() => {
-		logEvent("trendingTopics:hide", { context: "sidebar" });
 		setTrendingDisabled(true);
 	}, [setTrendingDisabled]);
 
@@ -62,9 +61,6 @@ function Inner() {
 								<TrendingTopicLink
 									key={topic.link}
 									topic={topic}
-									onPress={() => {
-										logEvent("trendingTopic:click", { context: "sidebar" });
-									}}
 								>
 									{({ hovered }) => (
 										<TrendingTopic

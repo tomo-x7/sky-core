@@ -8,7 +8,7 @@
 // Original code copied and simplified from the link below as the codebase is currently not maintained:
 // https://github.com/jobtoday/react-native-image-viewing
 
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -45,25 +45,21 @@ import { Text } from "#/view/com/util/text/Text";
 import { PlatformInfo } from "../../../../../modules/expo-bluesky-swiss-army";
 import type { ImageSource, Transform } from "./@types";
 import ImageDefaultHeader from "./components/ImageDefaultHeader";
-import ImageItem from "./components/ImageItem/ImageItem";
 
 type Rect = { x: number; y: number; width: number; height: number };
 
 const PORTRAIT_UP = ScreenOrientation.OrientationLock.PORTRAIT_UP;
 const PIXEL_RATIO = PixelRatio.get();
-const EDGES =
-	Platform.OS === "android" && Platform.Version < 35
-		? (["top", "bottom", "left", "right"] satisfies Edge[])
-		: ([] satisfies Edge[]); // iOS or Android 15+ bleeds into safe area
+const EDGES = [] satisfies Edge[]; // iOS or Android 15+ bleeds into safe area
 
 const SLOW_SPRING: WithSpringConfig = {
-	mass: isIOS ? 1.25 : 0.75,
+	mass:  0.75,
 	damping: 300,
 	stiffness: 800,
 	restDisplacementThreshold: 0.01,
 };
 const FAST_SPRING: WithSpringConfig = {
-	mass: isIOS ? 1.25 : 0.75,
+	mass:  0.75,
 	damping: 150,
 	stiffness: 900,
 	restDisplacementThreshold: 0.01,
@@ -165,7 +161,7 @@ export default function ImageViewRoot({
 			>
 				{activeLightbox && (
 					<ImageView
-						key={activeLightbox.id + "-" + orientation}
+						key={`${activeLightbox.id}-${orientation}`}
 						lightbox={activeLightbox}
 						orientation={orientation}
 						onRequestClose={onRequestClose}
@@ -236,7 +232,7 @@ function ImageView({
 			const dragProgress = Math.min(Math.abs(dismissSwipeTranslateY.get()) / (screenSize.height / 2), 1);
 			opacity -= dragProgress;
 		}
-		const factor = isIOS ? 100 : 50;
+		const factor =  50;
 		return {
 			opacity: Math.round(opacity * factor) / factor,
 		};
@@ -494,20 +490,7 @@ function LightboxImage({
 		});
 
 	return (
-		<ImageItem
-			imageSrc={imageSrc}
-			onTap={onTap}
-			onZoom={onZoom}
-			onRequestClose={onRequestClose}
-			onLoad={setFetchedDims}
-			isScrollViewBeingDragged={isScrollViewBeingDragged}
-			showControls={showControls}
-			measureSafeArea={measureSafeArea}
-			imageAspect={imageAspect}
-			imageDimensions={dims ?? undefined}
-			dismissSwipePan={dismissSwipePan}
-			transforms={transforms}
-		/>
+		<View />
 	);
 }
 
@@ -570,13 +553,13 @@ function LightboxFooter({
 					<Button type="primary-outline" style={styles.footerBtn} onPress={() => onPressSave(uri)}>
 						<FontAwesomeIcon icon={["far", "floppy-disk"]} style={s.white} />
 						<Text type="xl" style={s.white}>
-							<Trans context="action">Save</Trans>
+							<>Save</>
 						</Text>
 					</Button>
 					<Button type="primary-outline" style={styles.footerBtn} onPress={() => onPressShare(uri)}>
 						<FontAwesomeIcon icon="arrow-up-from-bracket" style={s.white} />
 						<Text type="xl" style={s.white}>
-							<Trans context="action">Share</Trans>
+							<>Share</>
 						</Text>
 					</Button>
 				</View>
@@ -642,7 +625,7 @@ const styles = StyleSheet.create({
 		maxHeight: "100%",
 	},
 	footerText: {
-		paddingBottom: isIOS ? 20 : 16,
+		paddingBottom: 16,
 	},
 	footerBtns: {
 		flexDirection: "row",

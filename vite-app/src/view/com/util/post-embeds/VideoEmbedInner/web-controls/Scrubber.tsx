@@ -101,7 +101,7 @@ export function Scrubber({
 				document.body.classList.remove("force-no-clicks");
 			};
 		}
-	}, [scrubberActive, onSeekEnd]);
+	}, [scrubberActive, ]);
 
 	useEffect(() => {
 		if (!circleRef.current) return;
@@ -168,6 +168,7 @@ export function Scrubber({
 						a.overflow_hidden,
 						{ backgroundColor: "rgba(255, 255, 255, 0.4)" },
 						{ height: hovered || scrubberActive ? 6 : 3 },
+						//@ts-ignore
 						web({ transition: "height 0.1s ease" }),
 					]}
 				>
@@ -179,7 +180,7 @@ export function Scrubber({
 				</View>
 				<div
 					ref={circleRef}
-					aria-label={`Seek slider. Use the arrow keys to seek forwards and backwards, and space to play/pause`}
+					aria-label={"Seek slider. Use the arrow keys to seek forwards and backwards, and space to play/pause"}
 					role="slider"
 					aria-valuemax={duration}
 					aria-valuemin={0}

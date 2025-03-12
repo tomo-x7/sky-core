@@ -107,8 +107,7 @@ export function useCreateStarterPackMutation({
 				descriptionFacets = rt.facets;
 			}
 
-			let listRes;
-			listRes = await createStarterPackList({
+			const listRes = await createStarterPackList({
 				name,
 				description,
 				profiles,

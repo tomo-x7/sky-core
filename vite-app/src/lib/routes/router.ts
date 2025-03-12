@@ -7,7 +7,6 @@ export class Router {
 			if (typeof pattern === "string") {
 				this.routes.push([screen, createRoute(pattern)]);
 			} else {
-				// biome-ignore lint/complexity/noForEach: <explanation>
 				pattern.forEach((subPattern) => {
 					this.routes.push([screen, createRoute(subPattern)]);
 				});
@@ -47,7 +46,7 @@ function createRoute(pattern: string): Route {
 	const matcherRe = new RegExp(`^${matcherReInternal}([?]|$)`, "i");
 	return {
 		match(path: string) {
-			const { pathname, searchParams } = new URL(path, "http://throwaway.com");
+			const { pathname, searchParams } = new URL(path, "http://example.com");
 			const addedParams = Object.fromEntries(searchParams.entries());
 
 			const res = matcherRe.exec(pathname);

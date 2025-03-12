@@ -46,7 +46,7 @@ const ControlsContext = React.createContext<Controls>({
 	clearRequestedAccount: () => {},
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const activeStarterPack = useActiveStarterPack();
 	const { hasSession } = useSession();
 	const shouldShowStarterPack = Boolean(activeStarterPack?.uri) && !hasSession;
@@ -77,7 +77,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 				}));
 			},
 		}),
-		[setState],
+		[],
 	);
 
 	return (

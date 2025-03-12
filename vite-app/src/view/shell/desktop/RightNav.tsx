@@ -27,7 +27,7 @@ function useWebQueryParams() {
 				setParams(lastRoute.params);
 			} catch (err) {}
 		});
-	}, [navigation, setParams]);
+	}, [navigation, ]);
 
 	return params;
 }
@@ -52,6 +52,7 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 			style={[
 				gutters,
 				a.gap_lg,
+				//@ts-ignore
 				web({
 					position: "fixed",
 					left: "50%",

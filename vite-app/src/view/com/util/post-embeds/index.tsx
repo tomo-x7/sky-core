@@ -148,6 +148,7 @@ export function PostEmbeds({
 			};
 			const onPressIn = (_: number) => {
 				InteractionManager.runAfterInteractions(() => {
+					//@ts-ignore
 					Image.prefetch(items.map((i) => i.uri));
 				});
 			};

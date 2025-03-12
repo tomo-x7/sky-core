@@ -1,4 +1,4 @@
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
 import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
 
 import * as Layout from "#/components/Layout";
@@ -23,7 +23,8 @@ export function ErrorMessage({
 		<Layout.Center>
 			<View testID="errorMessageView" style={[styles.outer, pal.view, style]}>
 				<View style={[styles.errorIcon, { backgroundColor: theme.palette.error.icon }]}>
-					<FontAwesomeIcon icon="exclamation" style={pal.text as FontAwesomeIconStyle} size={16} />
+					{/* @ts-ignore */}
+					<FontAwesomeIcon icon="exclamation" style={pal.text } size={16} />
 				</View>
 				<Text type="sm-medium" style={[styles.message, pal.text]} numberOfLines={numberOfLines}>
 					{message}
@@ -37,6 +38,7 @@ export function ErrorMessage({
 						accessibilityLabel={"Retry"}
 						accessibilityHint={"Retries the last action, which errored out"}
 					>
+						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="arrows-rotate" style={{ color: theme.palette.error.icon }} size={18} />
 					</TouchableOpacity>
 				)}

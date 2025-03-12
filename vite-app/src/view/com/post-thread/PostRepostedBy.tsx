@@ -56,7 +56,7 @@ export function PostRepostedBy({ uri }: { uri: string }) {
 			console.error("Failed to refresh reposts", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch, ]);
 
 	const onEndReached = useCallback(async () => {
 		if (isFetchingNextPage || !hasNextPage || isError) return;

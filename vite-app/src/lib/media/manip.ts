@@ -156,3 +156,7 @@ async function downloadUrl(href: string, filename: string) {
 export async function safeDeleteAsync() {
 	// no-op
 }
+
+export function saveImageToMediaLibrary(...param:unknown[]){
+	throw new Error("????")
+}

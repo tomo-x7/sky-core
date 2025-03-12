@@ -122,7 +122,7 @@ export function useNotificationFeedQuery(opts: {
 					const { data: lastData, args: lastArgs, result: lastResult } = lastRun.current;
 					let canReuse = true;
 					for (const key in selectArgs) {
-						if (selectArgs.hasOwnProperty(key)) {
+						if (Object.prototype.hasOwnProperty.call(selectArgs,key)) {
 							if ((selectArgs as any)[key] !== (lastArgs as any)[key]) {
 								// Can't do reuse anything if any input has changed.
 								canReuse = false;
@@ -261,6 +261,7 @@ export function* findAllPostsInQueryData(
 			continue;
 		}
 
+		// biome-ignore lint/correctness/noUnsafeOptionalChaining: <explanation>
 		for (const page of queryData?.pages) {
 			for (const item of page.items) {
 				if (item.type !== "starterpack-joined") {
@@ -291,6 +292,7 @@ export function* findAllProfilesInQueryData(
 		if (!queryData?.pages) {
 			continue;
 		}
+		// biome-ignore lint/correctness/noUnsafeOptionalChaining: <explanation>
 		for (const page of queryData?.pages) {
 			for (const item of page.items) {
 				if (item.type !== "starterpack-joined" && item.subject?.author.did === did) {

@@ -58,7 +58,7 @@ export function ProfileFollows({ name }: { name: string }) {
 			console.error("Failed to refresh follows", { error: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, setIsPTRing]);
+	}, [refetch, ]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetchingNextPage || !hasNextPage || !!error) return;

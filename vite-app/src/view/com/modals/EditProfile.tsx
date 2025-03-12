@@ -54,43 +54,37 @@ export function Component({
 	const onPressCancel = () => {
 		closeModal();
 	};
-	const onSelectNewAvatar = useCallback(
-		async (img: RNImage | null) => {
-			setImageError("");
-			if (img === null) {
-				setNewUserAvatar(null);
-				setUserAvatar(null);
-				return;
-			}
-			try {
-				const finalImg = await compressIfNeeded(img, 1000000);
-				setNewUserAvatar(finalImg);
-				setUserAvatar(finalImg.path);
-			} catch (e: any) {
-				setImageError(cleanError(e));
-			}
-		},
-		[setNewUserAvatar, setUserAvatar, setImageError],
-	);
+	const onSelectNewAvatar = useCallback(async (img: RNImage | null) => {
+		setImageError("");
+		if (img === null) {
+			setNewUserAvatar(null);
+			setUserAvatar(null);
+			return;
+		}
+		try {
+			const finalImg = await compressIfNeeded(img, 1000000);
+			setNewUserAvatar(finalImg);
+			setUserAvatar(finalImg.path);
+		} catch (e: any) {
+			setImageError(cleanError(e));
+		}
+	}, []);
 
-	const onSelectNewBanner = useCallback(
-		async (img: RNImage | null) => {
-			setImageError("");
-			if (!img) {
-				setNewUserBanner(null);
-				setUserBanner(null);
-				return;
-			}
-			try {
-				const finalImg = await compressIfNeeded(img, 1000000);
-				setNewUserBanner(finalImg);
-				setUserBanner(finalImg.path);
-			} catch (e: any) {
-				setImageError(cleanError(e));
-			}
-		},
-		[setNewUserBanner, setUserBanner, setImageError],
-	);
+	const onSelectNewBanner = useCallback(async (img: RNImage | null) => {
+		setImageError("");
+		if (!img) {
+			setNewUserBanner(null);
+			setUserBanner(null);
+			return;
+		}
+		try {
+			const finalImg = await compressIfNeeded(img, 1000000);
+			setNewUserBanner(finalImg);
+			setUserBanner(finalImg.path);
+		} catch (e: any) {
+			setImageError(cleanError(e));
+		}
+	}, []);
 
 	const onPressSave = useCallback(async () => {
 		setImageError("");
@@ -110,18 +104,7 @@ export function Component({
 		} catch (e: any) {
 			console.error("Failed to update user profile", { message: String(e) });
 		}
-	}, [
-		updateMutation,
-		profile,
-		onUpdate,
-		closeModal,
-		displayName,
-		description,
-		newUserAvatar,
-		newUserBanner,
-		setImageError,
-		_,
-	]);
+	}, [updateMutation, profile, onUpdate, closeModal, displayName, description, newUserAvatar, newUserBanner]);
 
 	return (
 		<KeyboardAvoidingView style={s.flex1} behavior="height">

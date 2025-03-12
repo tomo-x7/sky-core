@@ -164,7 +164,7 @@ export function useToggleQuoteDetachmentMutation() {
 	const agent = useAgent();
 	const queryClient = useQueryClient();
 	const getPosts = useGetPosts();
-	const prevEmbed = React.useRef<AppBskyFeedDefs.PostView["embed"]>();
+	const prevEmbed = React.useRef<AppBskyFeedDefs.PostView["embed"]>(null);
 
 	return useMutation({
 		mutationFn: async ({

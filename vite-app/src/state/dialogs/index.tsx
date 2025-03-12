@@ -40,10 +40,10 @@ export function useDialogStateControlContext() {
 	return React.useContext(DialogControlContext);
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [fullyExpandedCount, setFullyExpandedCount] = React.useState(0);
 
-	const activeDialogs = React.useRef<Map<string, React.MutableRefObject<DialogControlRefProps>>>(new Map());
+	const activeDialogs = React.useRef<Map<string, React.RefObject<DialogControlRefProps>>>(new Map());
 	const openDialogs = React.useRef<Set<string>>(new Set());
 
 	const closeAllDialogs = React.useCallback(() => {
@@ -73,7 +73,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			activeDialogs,
 			openDialogs,
 		}),
-		[activeDialogs, openDialogs],
+		[ ],
 	);
 	const controls = React.useMemo(
 		() => ({
@@ -82,7 +82,7 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			fullyExpandedCount,
 			setFullyExpandedCount,
 		}),
-		[closeAllDialogs, setDialogIsOpen, fullyExpandedCount, setFullyExpandedCount],
+		[closeAllDialogs, setDialogIsOpen, fullyExpandedCount, ],
 	);
 
 	return (

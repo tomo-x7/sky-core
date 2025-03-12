@@ -1,7 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Modal, ScrollView, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -16,7 +14,6 @@ const COL_WIDTH = 400;
 
 export function SignupQueued() {
 	const t = useTheme();
-	const insets = useSafeAreaInsets();
 	const { gtMobile } = useBreakpoints();
 	const onboardingDispatch = useOnboardingDispatch();
 	const { logoutCurrentAccount } = useSessionApi();
@@ -48,7 +45,7 @@ export function SignupQueued() {
 		} finally {
 			setProcessing(false);
 		}
-	}, [setProcessing, setEstimatedTime, setPlaceInQueue, onboardingDispatch, agent]);
+	}, [onboardingDispatch, agent]);
 
 	React.useEffect(() => {
 		checkStatus();
@@ -86,7 +83,6 @@ export function SignupQueued() {
 
 	return (
 		<Modal visible animationType={native("slide")} presentationStyle="formSheet" style={[web(a.util_screen_outer)]}>
-			{isIOS && <StatusBar style="light" />}
 			<ScrollView style={[a.flex_1, t.atoms.bg]} contentContainerStyle={{ borderWidth: 0 }} bounces={false}>
 				<View style={[a.flex_row, a.justify_center, gtMobile ? a.pt_4xl : [a.px_xl, a.pt_xl]]}>
 					<View style={[a.flex_1, { maxWidth: COL_WIDTH }]}>
@@ -140,7 +136,7 @@ export function SignupQueued() {
 						a.align_center,
 						t.atoms.bg,
 						gtMobile ? a.px_5xl : a.px_xl,
-						{ paddingBottom: Math.max(insets.bottom, a.pb_5xl.paddingBottom) },
+						{ paddingBottom: a.pb_5xl.paddingBottom },
 					]}
 				>
 					<View style={[a.w_full, a.gap_sm, { maxWidth: COL_WIDTH }]}>
@@ -163,16 +159,10 @@ function msToString(ms: number | undefined): string | undefined {
 				return undefined;
 			}
 			// hours
-			return `${estimatedTimeHrs} ${plural(estimatedTimeHrs, {
-				one: "hour",
-				other: "hours",
-			})}`;
+			return `${estimatedTimeHrs} ${estimatedTimeHrs === 1 ? "hour" : "hours"}`;
 		}
 		// minutes
-		return `${estimatedTimeMins} ${plural(estimatedTimeMins, {
-			one: "minute",
-			other: "minutes",
-		})}`;
+		return `${estimatedTimeMins} ${estimatedTimeMins === 1 ? "minute" : "minutes"}`;
 	}
 	return undefined;
 }

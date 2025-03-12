@@ -22,7 +22,7 @@ import { ScrollView, TextInput } from "./util";
 
 export const snapPoints = isAndroid ? ["90%"] : ["55%"];
 
-export function Component({}: {}) {
+export function Component(props: {}) {
 	const pal = usePalette("default");
 	const theme = useTheme();
 	const t = useNewTheme();
@@ -134,7 +134,7 @@ export function Component({}: {}) {
 										style={[styles.btn]}
 									>
 										<Text type="button-lg" style={[s.white, s.bold]}>
-											<Trans context="action">Send Email</Trans>
+											Send Email
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
@@ -147,7 +147,7 @@ export function Component({}: {}) {
 									onAccessibilityEscape={onCancel}
 								>
 									<Text type="button-lg" style={pal.textLight}>
-										<Trans context="action">Cancel</Trans>
+										Cancel
 									</Text>
 								</TouchableOpacity>
 							</>
@@ -245,7 +245,7 @@ export function Component({}: {}) {
 									onAccessibilityEscape={onCancel}
 								>
 									<Text type="button-lg" style={pal.textLight}>
-										<Trans context="action">Cancel</Trans>
+										Cancel
 									</Text>
 								</TouchableOpacity>
 							</>

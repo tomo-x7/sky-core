@@ -1,33 +1,32 @@
-import { BlueskyVideoView } from "@haileyok/bluesky-video";
 import type { ImagePickerAsset } from "expo-image-picker";
-import React from "react";
 import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a } from "#/alf";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { CompressedVideo } from "#/lib/media/video/types";
 import { clamp } from "#/lib/numbers";
 import { useAutoplayDisabled } from "#/state/preferences";
 import { ExternalEmbedRemoveBtn } from "#/view/com/composer/ExternalEmbedRemoveBtn";
-import { VideoTranscodeBackdrop } from "./VideoTranscodeBackdrop";
+import * as Toast from "#/view/com/util/Toast";
 
 export function VideoPreview({
 	asset,
 	video,
+
 	clear,
-	isActivePost,
 }: {
 	asset: ImagePickerAsset;
 	video: CompressedVideo;
-	isActivePost: boolean;
+
 	clear: () => void;
 }) {
-	const t = useTheme();
-	const playerRef = React.useRef<BlueskyVideoView>(null);
+	// TODO: figure out how to pause a GIF for reduced motion
+	// it's not possible using an img tag -sfn
 	const autoplayDisabled = useAutoplayDisabled();
+
 	let aspectRatio = asset.width / asset.height;
 
-	if (isNaN(aspectRatio)) {
+	if (Number.isNaN(aspectRatio)) {
 		aspectRatio = 16 / 9;
 	}
 
@@ -40,28 +39,34 @@ export function VideoPreview({
 				a.rounded_sm,
 				{ aspectRatio },
 				a.overflow_hidden,
-				a.border,
-				t.atoms.border_contrast_low,
 				{ backgroundColor: "black" },
+				a.relative,
 			]}
 		>
-			<View style={[a.absolute, a.inset_0]}>
-				<VideoTranscodeBackdrop uri={asset.uri} />
-			</View>
-			{isActivePost && (
-				<BlueskyVideoView
-					url={video.uri}
-					autoplay={!autoplayDisabled}
-					beginMuted={true}
-					forceTakeover={true}
-					ref={playerRef}
-				/>
-			)}
 			<ExternalEmbedRemoveBtn onRemove={clear} />
-			{autoplayDisabled && (
-				<View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
-					<PlayButtonIcon />
-				</View>
+			{video.mimeType === "image/gif" ? (
+				<img src={video.uri} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="GIF" />
+			) : (
+				<>
+					<video
+						src={video.uri}
+						style={{ width: "100%", height: "100%", objectFit: "cover" }}
+						autoPlay={!autoplayDisabled}
+						loop
+						muted
+						playsInline
+						onError={(err) => {
+							console.error("Error loading video", err);
+							Toast.show("Could not process your video", "xmark");
+							clear();
+						}}
+					/>
+					{autoplayDisabled && (
+						<View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
+							<PlayButtonIcon />
+						</View>
+					)}
+				</>
 			)}
 		</View>
 	);

@@ -1,35 +1,23 @@
+import React, { memo, type ReactElement, useEffect, useMemo, useState } from "react";
+import { Animated, Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
 import {
-	type AppBskyActorDefs,
-	type AppBskyFeedDefs,
+	AppBskyActorDefs,
+	AppBskyFeedDefs,
 	AppBskyFeedPost,
 	AppBskyGraphFollow,
-	type ModerationDecision,
-	type ModerationOpts,
 	moderateProfile,
+	ModerationDecision,
+	ModerationOpts,
 } from "@atproto/api";
 import { AtUri } from "@atproto/api";
 import { TID } from "@atproto/common-web";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { memo, type ReactElement, useEffect, useMemo, useState } from "react";
-import { Animated, Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import { Link as NewLink } from "#/components/Link";
-import * as MediaPreview from "#/components/MediaPreview";
-import { ProfileHoverCard } from "#/components/ProfileHoverCard";
-import { Notification as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
-import {
-	ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon,
-	ChevronTop_Stroke2_Corner0_Rounded as ChevronUpIcon,
-} from "#/components/icons/Chevron";
-import { Heart2_Filled_Stroke2_Corner0_Rounded as HeartIconFilled } from "#/components/icons/Heart2";
-import { Repost_Stroke2_Corner2_Rounded as RepostIcon } from "#/components/icons/Repost";
 import { useAnimatedValue } from "#/lib/hooks/useAnimatedValue";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { NavigationProp } from "#/lib/routes/types";
+import { NavigationProp } from "#/lib/routes/types";
 import { forceLTR } from "#/lib/strings/bidi";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -37,17 +25,32 @@ import { niceDate } from "#/lib/strings/time";
 import { colors, s } from "#/lib/styles";
 import { isWeb } from "#/platform/detection";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
-import type { FeedNotification } from "#/state/queries/notifications/feed";
+import { FeedNotification } from "#/state/queries/notifications/feed";
 import { precacheProfile } from "#/state/queries/profile";
 import { useAgent } from "#/state/session";
+import { atoms as a, useTheme } from "#/alf";
+import { Button, ButtonText } from "#/components/Button";
+import {
+	ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon,
+	ChevronTop_Stroke2_Corner0_Rounded as ChevronUpIcon,
+} from "#/components/icons/Chevron";
+import { Heart2_Filled_Stroke2_Corner0_Rounded as HeartIconFilled } from "#/components/icons/Heart2";
+import { PersonPlus_Filled_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
+import { Repost_Stroke2_Corner2_Rounded as RepostIcon } from "#/components/icons/Repost";
+import { StarterPack } from "#/components/icons/StarterPack";
+import { Link as NewLink } from "#/components/Link";
+import * as MediaPreview from "#/components/MediaPreview";
+import { ProfileHoverCard } from "#/components/ProfileHoverCard";
+import { Notification as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
+import { SubtleWebHover } from "#/components/SubtleWebHover";
 import * as bsky from "#/types/bsky";
 import { FeedSourceCard } from "../feeds/FeedSourceCard";
 import { Post } from "../post/Post";
 import { Link, TextLink } from "../util/Link";
-import { TimeElapsed } from "../util/TimeElapsed";
-import { PreviewableUserAvatar, UserAvatar } from "../util/UserAvatar";
 import { formatCount } from "../util/numeric/format";
 import { Text } from "../util/text/Text";
+import { TimeElapsed } from "../util/TimeElapsed";
+import { PreviewableUserAvatar, UserAvatar } from "../util/UserAvatar";
 
 const MAX_AUTHORS = 5;
 
@@ -72,7 +75,6 @@ let NotificationFeedItem = ({
 }): React.ReactNode => {
 	const queryClient = useQueryClient();
 	const pal = usePalette("default");
-	const { _, i18n } = useLingui();
 	const t = useTheme();
 	const [isAuthorsExpanded, setAuthorsExpanded] = useState<boolean>(false);
 	const itemHref = useMemo(() => {
@@ -169,7 +171,7 @@ let NotificationFeedItem = ({
 	);
 	const additionalAuthorsCount = authors.length - 1;
 	const hasMultipleAuthors = additionalAuthorsCount > 0;
-	const formattedAuthorsCount = hasMultipleAuthors ? formatCount(i18n, additionalAuthorsCount) : "";
+	const formattedAuthorsCount = hasMultipleAuthors ? formatCount(additionalAuthorsCount) : "";
 
 	let a11yLabel = "";
 	let notificationContent: ReactElement;
@@ -185,19 +187,13 @@ let NotificationFeedItem = ({
 
 	if (item.type === "post-like") {
 		a11yLabel = hasMultipleAuthors
-			? `${firstAuthorName} and ${plural(additionalAuthorsCount, {
-						one: `} liked your post`,
-				)
+			? `${firstAuthorName} and ${formattedAuthorsCount} ${additionalAuthorsCount === 1 ? "other" : "others"} liked your post`
 			: `${firstAuthorName} liked your post`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
-					<Plural
-						value={additionalAuthorsCount}
-						one={`$formattedAuthorsCountother`}
-						other={`$formattedAuthorsCountothers`}
-					/>
+					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				liked your post
 			</>
@@ -206,26 +202,21 @@ let NotificationFeedItem = ({
 		);
 	} else if (item.type === "repost") {
 		a11yLabel = hasMultipleAuthors
-			? `$firstAuthorNameand $plural(additionalAuthorsCount, {
-						one: `} reposted your post`,
-				)
+			? `${firstAuthorName} and ${formattedAuthorsCount} ${additionalAuthorsCount === 1 ? "other" : "others"} reposted your post`
 			: `${firstAuthorName} reposted your post`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
-					<Plural
-						value={additionalAuthorsCount}
-						one={`${formattedAuthorsCount} other`}
-						other={`${formattedAuthorsCount} others`}
-					/>
+					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				reposted your post
 			</>
 		) : (
 			<>{firstAuthorLink} reposted your post</>
 		);
-		icon = <RepostIcon size="xl" style={{ color: t.palette.positive_600 }} />;else if (item.type === "follow") {
+		icon = <RepostIcon size="xl" style={{ color: t.palette.positive_600 }} />;
+	} else if (item.type === "follow") {
 		let isFollowBack = false;
 
 		if (
@@ -255,19 +246,13 @@ let NotificationFeedItem = ({
 			notificationContent = <>{firstAuthorLink} followed you back</>;
 		} else {
 			a11yLabel = hasMultipleAuthors
-				? `${firstAuthorName} and ${plural(additionalAuthorsCount, {
-							one: `} followed you`,
-					)
+				? `${firstAuthorName} and ${formattedAuthorsCount} ${additionalAuthorsCount === 1 ? "other" : "others"} followed you`
 				: `${firstAuthorName} followed you`;
 			notificationContent = hasMultipleAuthors ? (
 				<>
 					{firstAuthorLink} and{" "}
 					<Text style={[pal.text, s.bold]}>
-						<Plural
-							value={additionalAuthorsCount}
-							one={`$formattedAuthorsCountother`}
-							other={`$formattedAuthorsCountothers`}
-						/>
+						{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 					</Text>{" "}
 					followed you
 				</>
@@ -278,39 +263,28 @@ let NotificationFeedItem = ({
 		icon = <PersonPlusIcon size="xl" style={{ color: t.palette.primary_500 }} />;
 	} else if (item.type === "feedgen-like") {
 		a11yLabel = hasMultipleAuthors
-			? `$firstAuthorNameand $plural(additionalAuthorsCount, {
-						one: `} liked your custom feed`,
-				)
+			? `${firstAuthorName} and ${formattedAuthorsCount} ${additionalAuthorsCount === 1 ? "other" : "others"} liked your custom feed`
 			: `${firstAuthorName} liked your custom feed`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
-					<Plural
-						value={additionalAuthorsCount}
-						one={`${formattedAuthorsCount} other`}
-						other={`${formattedAuthorsCount} others`}
-					/>
+					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				liked your custom feed
 			</>
 		) : (
 			<>{firstAuthorLink} liked your custom feed</>
-		);else if (item.type === "starterpack-joined") {
+		);
+	} else if (item.type === "starterpack-joined") {
 		a11yLabel = hasMultipleAuthors
-			? `${firstAuthorName} and ${plural(additionalAuthorsCount, {
-						one: `} signed up with your starter pack`,
-				)
+			? `${firstAuthorName} and ${formattedAuthorsCount} ${additionalAuthorsCount === 1 ? "other" : "others"} signed up with your starter pack`
 			: `${firstAuthorName} signed up with your starter pack`;
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
 				<Text style={[pal.text, s.bold]}>
-					<Plural
-						value={additionalAuthorsCount}
-						one={`$formattedAuthorsCountother`}
-						other={`$formattedAuthorsCountothers`}
-					/>
+					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				signed up with your starter pack
 			</>
@@ -325,11 +299,11 @@ let NotificationFeedItem = ({
 	} else {
 		return null;
 	}
-	a11yLabel += ` · $niceTimestamp`;
+	a11yLabel += ` · ${niceTimestamp}`;
 
 	return (
 		<Link
-			testID={`feedItem-by-$item.notification.author.handle`}
+			testID={`feedItem-by-${item.notification.author.handle}`}
 			style={[
 				styles.outer,
 				pal.border,
@@ -347,6 +321,7 @@ let NotificationFeedItem = ({
 			accessibilityHint=""
 			accessibilityLabel={a11yLabel}
 			accessible={!isAuthorsExpanded}
+			// @ts-ignore
 			accessibilityActions={
 				hasMultipleAuthors
 					? [
@@ -358,7 +333,7 @@ let NotificationFeedItem = ({
 					: [
 							{
 								name: "viewProfile",
-								label: `View $authors[0].profile.displayName || authors[0].profile.handle's profile`,
+								label: `View ${authors[0].profile.displayName || authors[0].profile.handle}'s profile`,
 							},
 						]
 			}
@@ -380,7 +355,7 @@ let NotificationFeedItem = ({
 			<SubtleWebHover hover={hover} />
 			<View style={[styles.layoutIcon, a.pr_sm]}>
 				{/* TODO: Prevent conditional rendering and move toward composable
-        notifications for clearer accessibility labeling */}
+		  notifications for clearer accessibility labeling */}
 				{icon}
 			</View>
 			<View style={styles.layoutContent}>
@@ -491,7 +466,6 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 						conversation: res.data.convo.id,
 					});
 				} catch (e) {
-					console.error("Failed to get conversation", { safeMessage: e });
 				} finally {
 					setIsLoading(false);
 				}
@@ -527,7 +501,7 @@ function CondensedAuthorsList({
 				>
 					<ChevronUpIcon size="md" style={[styles.expandedAuthorsCloseBtnIcon, pal.text]} />
 					<Text type="sm-medium" style={pal.text}>
-						<Trans context="action">Hide</Trans>
+						Hide
 					</Text>
 				</TouchableOpacity>
 			</View>

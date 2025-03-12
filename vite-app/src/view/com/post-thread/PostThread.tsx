@@ -3,7 +3,6 @@ import React, { memo, useRef, useState } from "react";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
 import { runOnJS } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -473,7 +472,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 				<Header.BackButton />
 				<Header.Content>
 					<Header.TitleText>
-						<Trans context="description">Post</Trans>
+						Post
 					</Header.TitleText>
 				</Header.Content>
 				<Header.Slot>
@@ -631,7 +630,6 @@ let ThreadMenu = ({
 ThreadMenu = memo(ThreadMenu);
 
 function MobileComposePrompt({ onPressReply }: { onPressReply: () => unknown }) {
-	const safeAreaInsets = useSafeAreaInsets();
 	const fabMinimalShellTransform = useMinimalShellFabTransform();
 	return (
 		<Animated.View
@@ -639,7 +637,7 @@ function MobileComposePrompt({ onPressReply }: { onPressReply: () => unknown }) 
 				styles.prompt,
 				fabMinimalShellTransform,
 				{
-					bottom: clamp(safeAreaInsets.bottom, 13, 60),
+					bottom: clamp(0, 13, 60),
 				},
 			]}
 		>

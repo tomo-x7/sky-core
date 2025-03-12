@@ -28,7 +28,7 @@ export function MessagesListBlockedFooter({
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	const recipient = useProfileShadow(initialRecipient);
-	const [_ queueUnblock] = useProfileBlockMutationQueue(recipient);
+	const [_, queueUnblock] = useProfileBlockMutationQueue(recipient);
 
 	const leaveConvoControl = useDialogControl();
 	const reportControl = useDialogControl();

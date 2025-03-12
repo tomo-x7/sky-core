@@ -154,6 +154,7 @@ export function UserBanner({
 		<Image
 			testID="userBannerImage"
 			style={[styles.bannerImage, { backgroundColor: theme.palette.default.backgroundLight }]}
+			// @ts-ignore
 			contentFit="cover"
 			source={{ uri: banner }}
 			blurRadius={moderation?.blur ? 100 : 0}

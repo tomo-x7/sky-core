@@ -1,61 +1,142 @@
-import { useEffect } from "react";
-import { Animated, Easing } from "react-native";
+import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
+import { useFocusGuards } from "@radix-ui/react-focus-guards";
+import { FocusScope } from "@radix-ui/react-focus-scope";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { RemoveScrollBar } from "react-remove-scroll-bar";
 
-import { atoms as a, useTheme } from "#/alf";
-import { useAnimatedValue } from "#/lib/hooks/useAnimatedValue";
-import { useComposerState } from "#/state/shell/composer";
-import { ComposePost } from "../com/composer/Composer";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useA11y } from "#/state/a11y";
+import { useModals } from "#/state/modals";
+import { type ComposerOpts, useComposerState } from "#/state/shell/composer";
+import {
+	EmojiPicker,
+	type EmojiPickerPosition,
+	type EmojiPickerState,
+} from "#/view/com/composer/text-input/web/EmojiPicker.web";
+import { ComposePost, useComposerCancelRef } from "../com/composer/Composer";
 
-export function Composer({ winHeight }: { winHeight: number }) {
+const BOTTOM_BAR_HEIGHT = 61;
+
+export function Composer(props: { winHeight: number }) {
 	const state = useComposerState();
-	const t = useTheme();
-	const initInterp = useAnimatedValue(0);
-
-	useEffect(() => {
-		if (state) {
-			Animated.timing(initInterp, {
-				toValue: 1,
-				duration: 300,
-				easing: Easing.out(Easing.exp),
-				useNativeDriver: true,
-			}).start();
-		} else {
-			initInterp.setValue(0);
-		}
-	}, [initInterp, state]);
-	const wrapperAnimStyle = {
-		transform: [
-			{
-				translateY: initInterp.interpolate({
-					inputRange: [0, 1],
-					outputRange: [winHeight, 0],
-				}),
-			},
-		],
-	};
+	const isActive = !!state;
 
 	// rendering
 	// =
 
-	if (!state) {
+	if (!isActive) {
 		return null;
 	}
 
 	return (
-		<Animated.View
-			style={[a.absolute, a.inset_0, t.atoms.bg, wrapperAnimStyle]}
-			aria-modal
-			accessibilityViewIsModal
-		>
-			<ComposePost
-				replyTo={state.replyTo}
-				onPost={state.onPost}
-				quote={state.quote}
-				mention={state.mention}
-				text={state.text}
-				imageUris={state.imageUris}
-				videoUri={state.videoUri}
-			/>
-		</Animated.View>
+		<>
+			<RemoveScrollBar />
+			<Inner state={state} />
+		</>
 	);
 }
+
+function Inner({ state }: { state: ComposerOpts }) {
+	const ref = useComposerCancelRef();
+	const { isModalActive } = useModals();
+	const t = useTheme();
+	const { gtMobile } = useBreakpoints();
+	const { reduceMotionEnabled } = useA11y();
+	const [pickerState, setPickerState] = React.useState<EmojiPickerState>({
+		isOpen: false,
+		pos: { top: 0, left: 0, right: 0, bottom: 0, nextFocusRef: null },
+	});
+
+	const onOpenPicker = React.useCallback((pos: EmojiPickerPosition | undefined) => {
+		if (!pos) return;
+		setPickerState({
+			isOpen: true,
+			pos,
+		});
+	}, []);
+
+	const onClosePicker = React.useCallback(() => {
+		setPickerState((prev) => ({
+			...prev,
+			isOpen: false,
+		}));
+	}, []);
+
+	useFocusGuards();
+
+	return (
+		<FocusScope loop trapped asChild>
+			<DismissableLayer
+				// biome-ignore lint/a11y/useSemanticElements: <explanation>
+				role="dialog"
+				aria-modal
+				style={flatten([
+					{ position: "fixed" },
+					a.inset_0,
+					{ backgroundColor: "#000c" },
+					a.flex,
+					a.flex_col,
+					a.align_center,
+					!reduceMotionEnabled && a.fade_in,
+				])}
+				onFocusOutside={(evt) => evt.preventDefault()}
+				onInteractOutside={(evt) => evt.preventDefault()}
+				onDismiss={() => {
+					// TEMP: remove when all modals are ALF'd -sfn
+					if (!isModalActive) {
+						ref.current?.onPressCancel();
+					}
+				}}
+			>
+				<View
+					style={[
+						styles.container,
+						!gtMobile && styles.containerMobile,
+						t.atoms.bg,
+						t.atoms.border_contrast_medium,
+						//@ts-ignore
+						!reduceMotionEnabled && [
+							a.zoom_fade_in,
+							{ animationDelay: 0.1 },
+							{ animationFillMode: "backwards" },
+						],
+					]}
+				>
+					<ComposePost
+						cancelRef={ref}
+						replyTo={state.replyTo}
+						quote={state.quote}
+						onPost={state.onPost}
+						mention={state.mention}
+						openEmojiPicker={onOpenPicker}
+						text={state.text}
+						imageUris={state.imageUris}
+					/>
+				</View>
+				<EmojiPicker state={pickerState} close={onClosePicker} />
+			</DismissableLayer>
+		</FocusScope>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		marginTop: 50,
+		maxWidth: 600,
+		width: "100%",
+		paddingVertical: 0,
+		borderRadius: 8,
+		marginBottom: 0,
+		borderWidth: 1,
+		// @ts-expect-error web only
+		maxHeight: "calc(100% - (40px * 2))",
+		overflow: "hidden",
+	},
+	containerMobile: {
+		borderRadius: 0,
+		marginBottom: BOTTOM_BAR_HEIGHT,
+		// @ts-expect-error web only
+		maxHeight: `calc(100% - ${BOTTOM_BAR_HEIGHT}px)`,
+	},
+});

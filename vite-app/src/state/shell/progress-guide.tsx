@@ -56,7 +56,7 @@ export function useProgressGuideControls() {
 	return React.useContext(ProgressGuideControlContext);
 }
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const { data: preferences } = usePreferencesQuery();
 	const { mutateAsync, variables, isPending } = useSetActiveProgressGuideMutation();
 

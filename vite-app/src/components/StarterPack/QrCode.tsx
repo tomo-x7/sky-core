@@ -3,7 +3,7 @@ import React from "react";
 import { View } from "react-native";
 // @ts-expect-error missing types
 import QRCode from "react-native-qrcode-styled";
-import type ViewShot from "react-native-view-shot";
+// import ViewShot from "react-native-view-shot";
 
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
@@ -14,17 +14,13 @@ import * as bsky from "#/types/bsky";
 import { Logo } from "#/view/icons/Logo";
 import { Logotype } from "#/view/icons/Logotype";
 
-const LazyViewShot = React.lazy(
-	// @ts-expect-error dynamic import
-	() => import("react-native-view-shot/src/index"),
-);
-
 interface Props {
 	starterPack: AppBskyGraphDefs.StarterPackView;
 	link: string;
 }
 
-export const QrCode = React.forwardRef<ViewShot, Props>(function QrCode({ starterPack, link }, ref) {
+export const QrCode = //React.forwardRef<ViewShot, Props>
+(function QrCode({ starterPack, link }:Props, ) {
 	const { record } = starterPack;
 
 	if (!bsky.dangerousIsType<AppBskyGraphStarterpack.Record>(record, AppBskyGraphStarterpack.isRecord)) {
@@ -32,7 +28,7 @@ export const QrCode = React.forwardRef<ViewShot, Props>(function QrCode({ starte
 	}
 
 	return (
-		<LazyViewShot ref={ref}>
+		// <ViewShot ref={ref}>
 			<LinearGradientBackground
 				style={[
 					{ width: 300, minHeight: 390 },
@@ -76,7 +72,7 @@ export const QrCode = React.forwardRef<ViewShot, Props>(function QrCode({ starte
 					</Text>
 				</View>
 			</LinearGradientBackground>
-		</LazyViewShot>
+		//  </ViewShot>
 	);
 });
 

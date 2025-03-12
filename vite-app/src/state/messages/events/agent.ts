@@ -15,7 +15,6 @@ import {
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 
 const LOGGER_CONTEXT = "MessagesEventBus";
-const logger = Logger.create(Logger.Context.DMsAgent);
 
 export class MessagesEventBus {
 	private id: string;
@@ -87,17 +86,14 @@ export class MessagesEventBus {
 	}
 
 	background() {
-		logger.debug(`${LOGGER_CONTEXT}: background`, {});
 		this.dispatch({ event: MessagesEventBusDispatchEvent.Background });
 	}
 
 	suspend() {
-		logger.debug(`${LOGGER_CONTEXT}: suspend`, {});
 		this.dispatch({ event: MessagesEventBusDispatchEvent.Suspend });
 	}
 
 	resume() {
-		logger.debug(`${LOGGER_CONTEXT}: resume`, {});
 		this.dispatch({ event: MessagesEventBusDispatchEvent.Resume });
 	}
 
@@ -218,17 +214,9 @@ export class MessagesEventBus {
 			default:
 				break;
 		}
-
-		logger.debug(`${LOGGER_CONTEXT}: dispatch '${action.event}'`, {
-			id: this.id,
-			prev: prevStatus,
-			next: this.status,
-		});
 	}
 
 	private async init() {
-		logger.debug(`${LOGGER_CONTEXT}: init`, {});
-
 		try {
 			const response = await networkRetry(2, () => {
 				return this.agent.chat.bsky.convo.getLog({}, { headers: DM_SERVICE_HEADERS });
@@ -270,7 +258,7 @@ export class MessagesEventBus {
 	 */
 
 	private isPolling = false;
-	private pollIntervalRef: NodeJS.Timeout | undefined;
+	private pollIntervalRef: number | undefined;
 
 	private getPollInterval() {
 		switch (this.status) {
@@ -346,6 +334,8 @@ export class MessagesEventBus {
 					/*
 					 * We only care about new events
 					 */
+
+					// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 					if (ev.rev > (this.latestRev = this.latestRev || ev.rev)) {
 						/*
 						 * Update rev regardless of if it's a ev type we care about or not

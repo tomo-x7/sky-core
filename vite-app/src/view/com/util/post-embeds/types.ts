@@ -5,5 +5,6 @@ export enum PostEmbedViewContext {
 }
 
 export enum QuoteEmbedViewContext {
+	// biome-ignore lint/style/useLiteralEnumMembers: <explanation>
 	FeedEmbedRecordWithMedia = PostEmbedViewContext.FeedEmbedRecordWithMedia,
 }

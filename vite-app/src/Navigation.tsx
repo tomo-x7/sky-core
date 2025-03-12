@@ -26,12 +26,9 @@ import type {
 	SearchTabNavigatorParams,
 } from "./lib/routes/types";
 import type { RouteParams, State } from "./lib/routes/types";
-import { attachRouteToLogEvents } from "./lib/statsig/statsig";
 import { bskyTitle } from "./lib/strings/headings";
-import { logger } from "./logger";
 import { isNative } from "./platform/detection";
 import { router } from "./routes";
-import { SharedPreferencesTesterScreen } from "./screens/E2E/SharedPreferencesTesterScreen";
 import HashtagScreen from "./screens/Hashtag";
 import { MessagesScreen } from "./screens/Messages/ChatList";
 import { MessagesConversationScreen } from "./screens/Messages/Conversation";
@@ -51,7 +48,6 @@ import { ProfileSearchScreen } from "./screens/Profile/ProfileSearch";
 import { AboutSettingsScreen } from "./screens/Settings/AboutSettings";
 import { AccessibilitySettingsScreen } from "./screens/Settings/AccessibilitySettings";
 import { AccountSettingsScreen } from "./screens/Settings/AccountSettings";
-import { AppIconSettingsScreen } from "./screens/Settings/AppIconSettings";
 import { AppPasswordsScreen } from "./screens/Settings/AppPasswords";
 import { AppearanceSettingsScreen } from "./screens/Settings/AppearanceSettings";
 import { ContentAndMediaSettingsScreen } from "./screens/Settings/ContentAndMediaSettings";
@@ -65,7 +61,6 @@ import { ThreadPreferencesScreen } from "./screens/Settings/ThreadPreferences";
 import { StarterPackScreen, StarterPackScreenShort } from "./screens/StarterPack/StarterPackScreen";
 import { Wizard } from "./screens/StarterPack/Wizard";
 import TopicScreen from "./screens/Topic";
-import { VideoFeed } from "./screens/VideoFeed";
 import { useModalControls } from "./state/modals";
 import { useUnreadNotifications } from "./state/queries/notifications/unread";
 import { useSession } from "./state/session";
@@ -247,11 +242,6 @@ function commonScreens(Stack: typeof HomeTab, unreadCountLabel?: string) {
 				options={{ title: title("Moderation states"), requireAuth: true }}
 			/>
 			<Stack.Screen
-				name="SharedPreferencesTester"
-				getComponent={() => SharedPreferencesTesterScreen}
-				options={{ title: title("Shared Preferences Tester") }}
-			/>
-			<Stack.Screen
 				name="Log"
 				getComponent={() => LogScreen}
 				options={{ title: title("Log"), requireAuth: true }}
@@ -356,14 +346,6 @@ function commonScreens(Stack: typeof HomeTab, unreadCountLabel?: string) {
 					requireAuth: true,
 				}}
 			/>
-			<Stack.Screen
-				name="AppIconSettings"
-				getComponent={() => AppIconSettingsScreen}
-				options={{
-					title: title("App Icon"),
-					requireAuth: true,
-				}}
-			/>
 			<Stack.Screen name="Hashtag" getComponent={() => HashtagScreen} options={{ title: title("Hashtag") }} />
 			<Stack.Screen name="Topic" getComponent={() => TopicScreen} options={{ title: title("Topic") }} />
 			<Stack.Screen
@@ -406,14 +388,6 @@ function commonScreens(Stack: typeof HomeTab, unreadCountLabel?: string) {
 				name="StarterPackEdit"
 				getComponent={() => Wizard}
 				options={{ title: title("Edit your starter pack"), requireAuth: true }}
-			/>
-			<Stack.Screen
-				name="VideoFeed"
-				getComponent={() => VideoFeed}
-				options={{
-					title: title("Video Feed"),
-					requireAuth: true,
-				}}
 			/>
 		</>
 	);
@@ -680,16 +654,11 @@ function RoutesContainer({ children }: React.PropsWithChildren) {
 			linking={LINKING}
 			theme={theme}
 			onStateChange={() => {
-				logger.metric("router:navigate", {
-					from: prevLoggedRouteName.current,
-				});
 				prevLoggedRouteName.current = getCurrentRouteName();
 			}}
 			onReady={() => {
-				attachRouteToLogEvents(getCurrentRouteName);
 				logModuleInitTime();
 				onReady();
-				logger.metric("router:navigate", {});
 			}}
 		>
 			{children}

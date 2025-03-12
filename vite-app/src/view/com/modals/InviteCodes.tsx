@@ -1,5 +1,5 @@
 import type { ComAtprotoServerDefs } from "@atproto/api";
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-native-fontawesome";
+import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-fontawesome";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from "react-native";

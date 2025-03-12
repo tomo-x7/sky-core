@@ -177,7 +177,6 @@ function HomeScreenReady({
 		<Pager
 			key={allFeeds.join(",")}
 			ref={pagerRef}
-			testID="homeScreen"
 			initialPage={selectedIndex}
 			onPageSelected={onPageSelected}
 			onPageScrollStateChanged={onPageScrollStateChanged}
@@ -222,7 +221,6 @@ function HomeScreenReady({
 		</Pager>
 	) : (
 		<Pager
-			testID="homeScreen"
 			onPageSelected={onPageSelected}
 			onPageScrollStateChanged={onPageScrollStateChanged}
 			renderTabBar={renderTabBar}

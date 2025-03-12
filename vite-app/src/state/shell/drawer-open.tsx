@@ -6,7 +6,7 @@ type SetContext = (v: boolean) => void;
 const stateContext = React.createContext<StateContext>(false);
 const setContext = React.createContext<SetContext>((_: boolean) => {});
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(false);
 
 	return (

@@ -13,7 +13,7 @@ const stateContext = React.createContext<StateContext>({
 	labelers: [],
 });
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const state = useLabelDefinitionsQuery();
 	return <stateContext.Provider value={state}>{children}</stateContext.Provider>;
 }

@@ -8,7 +8,7 @@ type SetContext = (v: persisted.Schema["largeAltBadgeEnabled"]) => void;
 const stateContext = React.createContext<StateContext>(persisted.defaults.largeAltBadgeEnabled);
 const setContext = React.createContext<SetContext>((_: persisted.Schema["largeAltBadgeEnabled"]) => {});
 
-export function Provider({ children }: React.PropsWithChildren<{}>) {
+export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("largeAltBadgeEnabled"));
 
 	const setStateWrapped = React.useCallback(
@@ -16,14 +16,14 @@ export function Provider({ children }: React.PropsWithChildren<{}>) {
 			setState(largeAltBadgeEnabled);
 			persisted.write("largeAltBadgeEnabled", largeAltBadgeEnabled);
 		},
-		[setState],
+		[],
 	);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("largeAltBadgeEnabled", (nextLargeAltBadgeEnabled) => {
 			setState(nextLargeAltBadgeEnabled);
 		});
-	}, [setStateWrapped]);
+	}, []);
 
 	return (
 		<stateContext.Provider value={state}>

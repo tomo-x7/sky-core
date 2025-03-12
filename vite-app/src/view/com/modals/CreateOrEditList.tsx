@@ -91,37 +91,31 @@ export function Component({
 	const [avatar, setAvatar] = useState<string | undefined>(list?.avatar);
 	const [newAvatar, setNewAvatar] = useState<RNImage | undefined | null>();
 
-	const onDescriptionChange = useCallback(
-		(newText: string) => {
-			const richText = new RichTextAPI({ text: newText });
-			richText.detectFacetsWithoutResolution();
+	const onDescriptionChange = useCallback((newText: string) => {
+		const richText = new RichTextAPI({ text: newText });
+		richText.detectFacetsWithoutResolution();
 
-			setDescriptionRt(richText);
-		},
-		[setDescriptionRt],
-	);
+		setDescriptionRt(richText);
+	}, []);
 
 	const onPressCancel = useCallback(() => {
 		closeModal();
 	}, [closeModal]);
 
-	const onSelectNewAvatar = useCallback(
-		async (img: RNImage | null) => {
-			if (!img) {
-				setNewAvatar(null);
-				setAvatar(undefined);
-				return;
-			}
-			try {
-				const finalImg = await compressIfNeeded(img, 1000000);
-				setNewAvatar(finalImg);
-				setAvatar(finalImg.path);
-			} catch (e: any) {
-				setError(cleanError(e));
-			}
-		},
-		[setNewAvatar, setAvatar, setError],
-	);
+	const onSelectNewAvatar = useCallback(async (img: RNImage | null) => {
+		if (!img) {
+			setNewAvatar(null);
+			setAvatar(undefined);
+			return;
+		}
+		try {
+			const finalImg = await compressIfNeeded(img, 1000000);
+			setNewAvatar(finalImg);
+			setAvatar(finalImg.path);
+		} catch (e: any) {
+			setError(cleanError(e));
+		}
+	}, []);
 
 	const onPressSave = useCallback(async () => {
 		const nameTrimmed = name.trim();
@@ -171,8 +165,6 @@ export function Component({
 		}
 		setProcessing(false);
 	}, [
-		setProcessing,
-		setError,
 		error,
 		onSave,
 		closeModal,
@@ -184,7 +176,7 @@ export function Component({
 		list,
 		listMetadataMutation,
 		listCreateMutation,
-		_,
+
 		agent,
 	]);
 
@@ -289,9 +281,7 @@ export function Component({
 								end={{ x: 1, y: 1 }}
 								style={styles.btn}
 							>
-								<Text style={[s.white, s.bold]}>
-									<Trans context="action">Save</Trans>
-								</Text>
+								<Text style={[s.white, s.bold]}>Save</Text>
 							</LinearGradient>
 						</TouchableOpacity>
 					)}
@@ -305,9 +295,7 @@ export function Component({
 						onAccessibilityEscape={onPressCancel}
 					>
 						<View style={[styles.btn]}>
-							<Text style={[s.black, s.bold, pal.text]}>
-								<Trans context="action">Cancel</Trans>
-							</Text>
+							<Text style={[s.black, s.bold, pal.text]}>Cancel</Text>
 						</View>
 					</TouchableOpacity>
 				</View>
