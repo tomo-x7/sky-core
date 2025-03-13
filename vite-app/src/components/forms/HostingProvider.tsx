@@ -8,7 +8,6 @@ import { Text } from "#/components/Typography";
 import { Globe_Stroke2_Corner0_Rounded as GlobeIcon } from "#/components/icons/Globe";
 import { PencilLine_Stroke2_Corner0_Rounded as PencilIcon } from "#/components/icons/Pencil";
 import { toNiceDomain } from "#/lib/strings/url-helpers";
-import { isAndroid } from "#/platform/detection";
 import { ServerInputDialog } from "#/view/com/auth/server-input";
 
 export function HostingProvider({
@@ -67,7 +66,7 @@ export function HostingProvider({
 						a.pl_md,
 						a.pr_sm,
 						a.gap_xs,
-						{ paddingVertical: isAndroid ? 14 : 8 },
+						{ paddingVertical: 8 },
 					]}
 					onPress={onPressSelectService}
 				>

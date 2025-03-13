@@ -2,12 +2,12 @@ import * as React from "react";
 import { type ScrollView, View } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
+import type { JSX } from "react";
 import { atoms as a, web } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Pager, type PagerRef, type RenderTabBarFnProps } from "#/view/com/pager/Pager";
 import type { ListMethods } from "../util/List";
 import { TabBar } from "./TabBar";
-import { JSX } from "react";
 
 export interface PagerWithHeaderChildParams {
 	headerHeight: number;
@@ -69,16 +69,11 @@ export const PagerWithHeader = React.forwardRef<PagerRef, PagerWithHeaderProps>(
 			setCurrentPage(index);
 			onPageSelected?.(index);
 		},
-		[onPageSelected, ],
+		[onPageSelected],
 	);
 
 	return (
-		<Pager
-			ref={ref}
-			initialPage={initialPage}
-			onPageSelected={onPageSelectedInner}
-			renderTabBar={renderTabBar}
-		>
+		<Pager ref={ref} initialPage={initialPage} onPageSelected={onPageSelectedInner} renderTabBar={renderTabBar}>
 			{toArray(children)
 				.filter(Boolean)
 				.map((child, i) => {

@@ -7,7 +7,7 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { s } from "#/lib/styles";
-import { isAndroid, isMobileWeb, isWeb } from "#/platform/detection";
+import { isMobileWeb, isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import {
 	type ListMembersip,
@@ -166,15 +166,7 @@ function ListItem({
 		} finally {
 			setIsProcessing(false);
 		}
-	}, [
-		list,
-		subject,
-		membership,
-		onAdd,
-		onRemove,
-		listMembershipAddMutation,
-		listMembershipRemoveMutation,
-	]);
+	}, [list, subject, membership, onAdd, onRemove, listMembershipAddMutation, listMembershipRemoveMutation]);
 
 	return (
 		<View
@@ -230,7 +222,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		gap: 10,
 		paddingTop: 10,
-		paddingBottom: isAndroid ? 10 : 0,
+		paddingBottom: 0,
 		borderTopWidth: StyleSheet.hairlineWidth,
 	},
 	footerBtn: {

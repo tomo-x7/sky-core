@@ -51,7 +51,7 @@ export function PostFeedErrorMessage({
 	}
 
 	if (knownError === KnownError.Block) {
-		return <EmptyState icon="ban" message={("Posts hidden")} style={{ paddingVertical: 40 }} />;
+		return <EmptyState icon="ban" message={"Posts hidden"} style={{ paddingVertical: 40 }} />;
 	}
 
 	return <ErrorMessage message={cleanError(error)} onPressTryAgain={onPressTryAgain} />;
@@ -75,27 +75,20 @@ function FeedgenErrorMessage({
 			({
 				[KnownError.Unknown]: "",
 				[KnownError.Block]: "",
-				[KnownError.FeedgenDoesNotExist]: (
-					`Hmm, we're having trouble finding this feed. It may have been deleted.`
-				),
-				[KnownError.FeedgenMisconfigured]: (
-					"Hmm, the feed server appears to be misconfigured. Please let the feed owner know about this issue."
-				),
-				[KnownError.FeedgenBadResponse]: (
-					"Hmm, the feed server gave a bad response. Please let the feed owner know about this issue."
-				),
-				[KnownError.FeedgenOffline]: (
-					"Hmm, the feed server appears to be offline. Please let the feed owner know about this issue."
-				),
-				[KnownError.FeedSignedInOnly]: ("This content is not viewable without a Bluesky account."),
-				[KnownError.FeedgenUnknown]: (
-					"Hmm, some kind of issue occurred when contacting the feed server. Please let the feed owner know about this issue."
-				),
-				[KnownError.FeedTooManyRequests]: (
-					"This feed is currently receiving high traffic and is temporarily unavailable. Please try again later."
-				),
+				[KnownError.FeedgenDoesNotExist]: `Hmm, we're having trouble finding this feed. It may have been deleted.`,
+				[KnownError.FeedgenMisconfigured]:
+					"Hmm, the feed server appears to be misconfigured. Please let the feed owner know about this issue.",
+				[KnownError.FeedgenBadResponse]:
+					"Hmm, the feed server gave a bad response. Please let the feed owner know about this issue.",
+				[KnownError.FeedgenOffline]:
+					"Hmm, the feed server appears to be offline. Please let the feed owner know about this issue.",
+				[KnownError.FeedSignedInOnly]: "This content is not viewable without a Bluesky account.",
+				[KnownError.FeedgenUnknown]:
+					"Hmm, some kind of issue occurred when contacting the feed server. Please let the feed owner know about this issue.",
+				[KnownError.FeedTooManyRequests]:
+					"This feed is currently receiving high traffic and is temporarily unavailable. Please try again later.",
 			})[knownError],
-		[ knownError],
+		[knownError],
 	);
 	const [uri] = feedDesc.split("|");
 	const [ownerDid] = safeParseFeedgenUri(uri);
@@ -116,14 +109,12 @@ function FeedgenErrorMessage({
 			await removeFeed(savedFeedConfig);
 		} catch (err) {
 			Toast.show(
-				(
-					"There was an issue removing this feed. Please check your internet connection and try again."
-				),
+				"There was an issue removing this feed. Please check your internet connection and try again.",
 				"exclamation-circle",
 			);
 			console.error("Failed to remove feed", { message: err });
 		}
-	}, [removeFeed,  savedFeedConfig]);
+	}, [removeFeed, savedFeedConfig]);
 
 	const cta = React.useMemo(() => {
 		switch (knownError) {
@@ -138,14 +129,14 @@ function FeedgenErrorMessage({
 				return (
 					<View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
 						{knownError === KnownError.FeedgenDoesNotExist && savedFeedConfig && (
-							<Button type="inverted" label={("Remove feed")} onPress={onRemoveFeed} />
+							<Button type="inverted" label={"Remove feed"} onPress={onRemoveFeed} />
 						)}
-						<Button type="default-light" label={("View profile")} onPress={onViewProfile} />
+						<Button type="default-light" label={"View profile"} onPress={onViewProfile} />
 					</View>
 				);
 			}
 		}
-	}, [knownError, onViewProfile, onRemoveFeed,  savedFeedConfig]);
+	}, [knownError, onViewProfile, onRemoveFeed, savedFeedConfig]);
 
 	return (
 		<>
@@ -174,10 +165,10 @@ function FeedgenErrorMessage({
 
 			<Prompt.Basic
 				control={removePromptControl}
-				title={("Remove feed?")}
-				description={("Remove this feed from your saved feeds")}
+				title={"Remove feed?"}
+				description={"Remove this feed from your saved feeds"}
 				onConfirm={onPressRemoveFeed}
-				confirmButtonCta={("Remove")}
+				confirmButtonCta={"Remove"}
 				confirmButtonColor="negative"
 			/>
 		</>

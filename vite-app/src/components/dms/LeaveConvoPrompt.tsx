@@ -3,7 +3,6 @@ import { StackActions, useNavigation } from "@react-navigation/native";
 import type { DialogOuterProps } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
 import type { NavigationProp } from "#/lib/routes/types";
-import { isNative } from "#/platform/detection";
 import { useLeaveConvo } from "#/state/queries/messages/leave-conversation";
 import * as Toast from "#/view/com/util/Toast";
 
@@ -23,7 +22,7 @@ export function LeaveConvoPrompt({
 	const { mutate: leaveConvo } = useLeaveConvo(convoId, {
 		onMutate: () => {
 			if (currentScreen === "conversation") {
-				navigation.dispatch(StackActions.replace("Messages", isNative ? { animation: "pop" } : {}));
+				navigation.dispatch(StackActions.replace("Messages", {}));
 			}
 		},
 		onError: () => {

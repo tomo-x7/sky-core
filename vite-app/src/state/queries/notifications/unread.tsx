@@ -178,7 +178,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 				}
 			},
 		};
-	}, [ queryClient, moderationOpts, agent]);
+	}, [queryClient, moderationOpts, agent]);
 	checkUnreadRef.current = api.checkUnread;
 
 	return (

@@ -12,22 +12,19 @@ const setContext = React.createContext<SetContext>({} as SetContext);
 export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("externalEmbeds"));
 
-	const setStateWrapped = React.useCallback(
-		(source: EmbedPlayerSource, value: "show" | "hide" | undefined) => {
-			setState((prev) => {
-				persisted.write("externalEmbeds", {
-					...prev,
-					[source]: value,
-				});
-
-				return {
-					...prev,
-					[source]: value,
-				};
+	const setStateWrapped = React.useCallback((source: EmbedPlayerSource, value: "show" | "hide" | undefined) => {
+		setState((prev) => {
+			persisted.write("externalEmbeds", {
+				...prev,
+				[source]: value,
 			});
-		},
-		[],
-	);
+
+			return {
+				...prev,
+				[source]: value,
+			};
+		});
+	}, []);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("externalEmbeds", (nextExternalEmbeds) => {

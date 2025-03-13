@@ -24,7 +24,6 @@ import { ChevronLeft_Stroke2_Corner0_Rounded as Chevron } from "#/components/ico
 import { PaperPlane_Stroke2_Corner0_Rounded as SendIcon } from "#/components/icons/PaperPlane";
 import type { ReportOption } from "#/lib/moderation/useReportOptions";
 import type { NavigationProp } from "#/lib/routes/types";
-import { isNative } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useLeaveConvo } from "#/state/queries/messages/leave-conversation";
 import { useProfileBlockMutationQueue, useProfileQuery } from "#/state/queries/profile";
@@ -274,7 +273,7 @@ function DoneStep({
 	const { mutate: leaveConvo } = useLeaveConvo(convoId, {
 		onMutate: () => {
 			if (currentScreen === "conversation") {
-				navigation.dispatch(StackActions.replace("Messages", isNative ? { animation: "pop" } : {}));
+				navigation.dispatch(StackActions.replace("Messages", {}));
 			}
 		},
 		onError: () => {

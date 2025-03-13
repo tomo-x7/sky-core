@@ -2,7 +2,6 @@ import type React from "react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
-import { isWeb } from "#/platform/detection";
 
 export function KeyboardAccessory({ children }: { children: React.ReactNode }) {
 	const t = useTheme();

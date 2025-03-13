@@ -1,16 +1,14 @@
-import { type AppBskyActorDefs, AppBskyFeedDefs } from "@atproto/api";
+import type { AppBskyActorDefs } from "@atproto/api";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { JSX } from "react";
+import React, { type JSX } from "react";
 import { View } from "react-native";
 
 import { useHeaderOffset } from "#/components/hooks/useHeaderOffset";
-import { VIDEO_FEED_URIS } from "#/lib/constants";
 import { ComposeIcon2 } from "#/lib/icons";
 import { TabState, getRootNavigation, getTabState } from "#/lib/routes/helpers";
 import type { AllNavigatorParams } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
-import { isNative } from "#/platform/detection";
 import { listenSoftReset } from "#/state/events";
 import { FeedFeedbackProvider, useFeedFeedback } from "#/state/feed-feedback";
 import { useSetHomeBadge } from "#/state/home-badge";
@@ -61,12 +59,7 @@ export function FeedPage({
 	const scrollElRef = React.useRef<ListMethods>(null);
 	const [hasNew, setHasNew] = React.useState(false);
 	const setHomeBadge = useSetHomeBadge();
-	const isVideoFeed = React.useMemo(() => {
-		const isBskyVideoFeed = VIDEO_FEED_URIS.includes(feedInfo.uri);
-		const feedIsVideoMode = feedInfo.contentMode === AppBskyFeedDefs.CONTENTMODEVIDEO;
-		const _isVideoFeed = isBskyVideoFeed || feedIsVideoMode;
-		return isNative && _isVideoFeed;
-	}, [feedInfo]);
+	const isVideoFeed = false;
 
 	React.useEffect(() => {
 		if (isPageFocused) {
@@ -76,7 +69,7 @@ export function FeedPage({
 
 	const scrollToTop = React.useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerOffset,
 		});
 		setMinimalShellMode(false);
@@ -109,7 +102,7 @@ export function FeedPage({
 		setHasNew(false);
 	}, [scrollToTop, feed, queryClient]);
 
-	const shouldPrefetch = isNative && isPageAdjacent;
+	const shouldPrefetch = false;
 	return (
 		<View testID={testID}>
 			<MainScrollProvider>

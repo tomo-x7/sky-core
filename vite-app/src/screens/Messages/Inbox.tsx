@@ -19,7 +19,6 @@ import { useAppState } from "#/lib/hooks/useAppState";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import type { CommonNavigatorParams, NativeStackScreenProps, NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { isNative } from "#/platform/detection";
 import { MESSAGE_SCREEN_POLL_INTERVAL } from "#/state/messages/convo/const";
 import { useMessagesEventBus } from "#/state/messages/events";
 import { useLeftConvos } from "#/state/queries/messages/leave-conversation";
@@ -222,7 +221,7 @@ function RequestList({
 						hasNextPage={hasNextPage}
 					/>
 				}
-				onEndReachedThreshold={isNative ? 1.5 : 0}
+				onEndReachedThreshold={0}
 				initialNumToRender={initialNumToRender}
 				windowSize={11}
 				desktopFixedHeight

@@ -16,7 +16,6 @@ import { Hashtag_Stroke2_Corner0_Rounded as Hashtag } from "#/components/icons/H
 import { PageText_Stroke2_Corner0_Rounded as PageText } from "#/components/icons/PageText";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import { isNative } from "#/platform/detection";
 import {
 	usePreferencesQuery,
 	useRemoveMutedWordMutation,
@@ -305,8 +304,6 @@ function MutedWordsInner() {
 						</View>
 					)}
 				</View>
-
-				{isNative && <View style={{ height: 20 }} />}
 			</View>
 
 			<Dialog.Close />

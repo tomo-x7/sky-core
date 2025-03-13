@@ -21,7 +21,7 @@ import { View } from "react-native";
 import { atoms as a } from "#/alf";
 import { PWI_ENABLED } from "#/lib/build-flags";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { Deactivated } from "#/screens/Deactivated";
 import { Onboarding } from "#/screens/Onboarding";
 import { SignupQueued } from "#/screens/SignupQueued";

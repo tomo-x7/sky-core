@@ -4,12 +4,10 @@ import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
-import { Divider } from "#/components/Divider";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
-import { isNative } from "#/platform/detection";
 import { useUpdateActorDeclaration } from "#/state/queries/messages/actor-declaration";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
@@ -86,33 +84,6 @@ export function MessagesSettingsScreen(props: Props) {
 					<Admonition type="tip">
 						You can continue ongoing conversations regardless of which setting you choose.
 					</Admonition>
-					{isNative && (
-						<>
-							<Divider style={a.my_md} />
-							<Text style={[a.text_lg, a.font_bold]}>Notification Sounds</Text>
-							<Toggle.Group
-								label={"Notification sounds"}
-								type="radio"
-								values={[preferences.playSoundChat ? "enabled" : "disabled"]}
-								onChange={onSelectSoundSetting}
-							>
-								<View>
-									<Toggle.Item name="enabled" label={"Enabled"} style={[a.justify_between, a.py_sm]}>
-										<Toggle.LabelText>Enabled</Toggle.LabelText>
-										<Toggle.Radio />
-									</Toggle.Item>
-									<Toggle.Item
-										name="disabled"
-										label={"Disabled"}
-										style={[a.justify_between, a.py_sm]}
-									>
-										<Toggle.LabelText>Disabled</Toggle.LabelText>
-										<Toggle.Radio />
-									</Toggle.Item>
-								</View>
-							</Toggle.Group>
-						</>
-					)}
 				</View>
 			</Layout.Content>
 		</Layout.Screen>

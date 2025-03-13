@@ -19,14 +19,12 @@ export type SessionApiContext = {
 		verificationPhone?: string;
 		verificationCode?: string;
 	}) => Promise<void>;
-	login: (
-		props: {
-			service: string;
-			identifier: string;
-			password: string;
-			authFactorToken?: string | undefined;
-		},
-	) => Promise<void>;
+	login: (props: {
+		service: string;
+		identifier: string;
+		password: string;
+		authFactorToken?: string | undefined;
+	}) => Promise<void>;
 	logoutCurrentAccount: () => void;
 	logoutEveryAccount: () => void;
 	resumeSession: (account: SessionAccount) => Promise<void>;

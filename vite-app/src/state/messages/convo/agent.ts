@@ -10,7 +10,6 @@ import EventEmitter from "eventemitter3";
 import { nanoid } from "nanoid/non-secure";
 
 import { networkRetry } from "#/lib/async/retry";
-import { isNative } from "#/platform/detection";
 import {
 	ACTIVE_POLL_INTERVAL,
 	BACKGROUND_POLL_INTERVAL,
@@ -579,7 +578,6 @@ export class Convo {
 		  }
 		| undefined;
 	async fetchMessageHistory() {
-
 		/*
 		 * If oldestRev is null, we've fetched all history.
 		 */
@@ -606,7 +604,7 @@ export class Convo {
 					{
 						cursor: nextCursor,
 						convoId: this.convoId,
-						limit: isNative ? 30 : 60,
+						limit: 60,
 					},
 					{ headers: DM_SERVICE_HEADERS },
 				);
@@ -756,7 +754,6 @@ export class Convo {
 		// Ignore empty messages for now since they have no other purpose atm
 		if (!message.text.trim() && !message.embed) return;
 
-
 		const tempId = nanoid();
 
 		this.pendingMessageFailure = null;
@@ -788,7 +785,6 @@ export class Convo {
 	}
 
 	async processPendingMessages() {
-
 		const pendingMessage = Array.from(this.pendingMessages.values()).shift();
 
 		/*
@@ -882,7 +878,6 @@ export class Convo {
 		this.pendingMessageFailure = null;
 		this.commit();
 
-
 		try {
 			const { data } = await this.agent.api.chat.bsky.convo.sendMessageBatch(
 				{
@@ -911,7 +906,6 @@ export class Convo {
 			}
 
 			this.commit();
-
 		} catch (e: any) {
 			console.error(e, { message: "Convo: failed to batch retry messages" });
 			this.handleSendMessageFailure(e);
@@ -919,7 +913,6 @@ export class Convo {
 	}
 
 	async deleteMessage(messageId: string) {
-
 		this.deletedMessages.add(messageId);
 		this.commit();
 

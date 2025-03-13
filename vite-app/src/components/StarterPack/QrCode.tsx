@@ -1,5 +1,4 @@
 import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import React from "react";
 import { View } from "react-native";
 // @ts-expect-error missing types
 import QRCode from "react-native-qrcode-styled";
@@ -20,15 +19,15 @@ interface Props {
 }
 
 export const QrCode = //React.forwardRef<ViewShot, Props>
-(function QrCode({ starterPack, link }:Props, ) {
-	const { record } = starterPack;
+	function QrCode({ starterPack, link }: Props) {
+		const { record } = starterPack;
 
-	if (!bsky.dangerousIsType<AppBskyGraphStarterpack.Record>(record, AppBskyGraphStarterpack.isRecord)) {
-		return null;
-	}
+		if (!bsky.dangerousIsType<AppBskyGraphStarterpack.Record>(record, AppBskyGraphStarterpack.isRecord)) {
+			return null;
+		}
 
-	return (
-		// <ViewShot ref={ref}>
+		return (
+			// <ViewShot ref={ref}>
 			<LinearGradientBackground
 				style={[
 					{ width: 300, minHeight: 390 },
@@ -72,9 +71,9 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					</Text>
 				</View>
 			</LinearGradientBackground>
-		//  </ViewShot>
-	);
-});
+			//  </ViewShot>
+		);
+	};
 
 export function QrCodeInner({ link }: { link: string }) {
 	const t = useTheme();

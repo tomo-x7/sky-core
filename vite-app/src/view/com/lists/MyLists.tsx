@@ -1,5 +1,5 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
-import React, { JSX } from "react";
+import React, { type JSX } from "react";
 import {
 	ActivityIndicator,
 	FlatList as RNFlatList,
@@ -84,7 +84,7 @@ export function MyLists({
 			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, ]);
+	}, [refetch]);
 
 	// rendering
 	// =

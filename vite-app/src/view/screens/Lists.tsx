@@ -66,9 +66,7 @@ export function ListsScreen(props: Props) {
 					onPress={onPressNewList}
 				>
 					<ButtonIcon icon={PlusIcon} />
-					<ButtonText>
-						New
-					</ButtonText>
+					<ButtonText>New</ButtonText>
 				</Button>
 			</Layout.Header.Outer>
 			<MyLists filter="curate" style={a.flex_grow} />

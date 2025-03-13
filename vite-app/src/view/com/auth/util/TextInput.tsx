@@ -18,7 +18,7 @@ export function TextInput({ testID, icon, onChange, ...props }: Props) {
 	return (
 		<View style={[pal.border, styles.container]}>
 			{/* @ts-ignore */}
-			<FontAwesomeIcon icon={icon} style={{...pal.textLight, ...styles.icon}} />
+			<FontAwesomeIcon icon={icon} style={{ ...pal.textLight, ...styles.icon }} />
 			<RNTextInput
 				testID={testID}
 				style={[pal.text, styles.textInput]}

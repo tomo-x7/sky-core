@@ -23,7 +23,6 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { enforceLen } from "#/lib/strings/helpers";
 import { getStarterPackOgCard, parseStarterPackUri } from "#/lib/strings/starter-pack";
-import { isNative } from "#/platform/detection";
 import { type WizardStep, useWizardState } from "#/screens/StarterPack/Wizard/State";
 import { StepDetails } from "#/screens/StarterPack/Wizard/StepDetails";
 import { StepFeeds } from "#/screens/StarterPack/Wizard/StepFeeds";
@@ -344,15 +343,6 @@ function Footer({
 				{
 					paddingBottom: a.pb_lg.paddingBottom,
 				},
-				isNative && [
-					a.border_l,
-					a.border_r,
-					t.atoms.shadow_md,
-					{
-						borderTopLeftRadius: 14,
-						borderTopRightRadius: 14,
-					},
-				],
 			]}
 		>
 			{items.length > minimumItems && (
@@ -453,7 +443,7 @@ function Footer({
 				) : null /* Should not happen. */
 			}
 
-			<View style={[a.flex_row, a.w_full, a.justify_between, a.align_center, isNative ? a.mt_sm : a.mt_md]}>
+			<View style={[a.flex_row, a.w_full, a.justify_between, a.align_center, a.mt_md]}>
 				{isEditEnabled ? (
 					<Button
 						label={"Edit"}

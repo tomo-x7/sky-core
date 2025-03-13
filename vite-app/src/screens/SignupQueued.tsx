@@ -5,7 +5,7 @@ import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { P, Text } from "#/components/Typography";
-import { isIOS, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { isSignupQueued, useAgent, useSessionApi } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
 import { Logo } from "#/view/icons/Logo";

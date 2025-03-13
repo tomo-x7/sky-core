@@ -105,7 +105,7 @@ export function NativeDropdown({
 			document.removeEventListener("click", clickHandler, true);
 			window.removeEventListener("keydown", keydownHandler, true);
 		};
-	}, [open, ]);
+	}, [open]);
 
 	return (
 		<DropdownMenuRoot open={open} onOpenChange={(o) => setOpen(o)}>
@@ -149,7 +149,7 @@ function DropdownContent({
 	menuRef,
 }: {
 	items: DropdownItem[];
-	menuRef: React.RefObject<HTMLDivElement|null>;
+	menuRef: React.RefObject<HTMLDivElement | null>;
 }) {
 	const pal = usePalette("default");
 	const theme = useTheme();
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		fontFamily:
 			'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Liberation Sans", Helvetica, Arial, sans-serif',
-			//@ts-ignore
+		//@ts-ignore
 		outline: 0,
 		border: 0,
 	},

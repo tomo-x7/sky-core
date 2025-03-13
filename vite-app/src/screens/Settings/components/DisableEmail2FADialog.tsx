@@ -9,7 +9,6 @@ import { P, Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { cleanError } from "#/lib/strings/errors";
-import { isNative } from "#/platform/detection";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
@@ -170,8 +169,6 @@ export function DisableEmail2FADialog({
 							</View>
 						</View>
 					) : undefined}
-
-					{!gtMobile && isNative && <View style={{ height: 40 }} />}
 				</View>
 			</Dialog.ScrollableInner>
 		</Dialog.Outer>

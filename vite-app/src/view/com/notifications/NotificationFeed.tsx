@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React, { type JSX } from "react";
 import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View } from "react-native";
 
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
@@ -74,7 +74,7 @@ export function NotificationFeed({
 		} finally {
 			setIsPTRing(false);
 		}
-	}, [refreshNotifications, ]);
+	}, [refreshNotifications]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

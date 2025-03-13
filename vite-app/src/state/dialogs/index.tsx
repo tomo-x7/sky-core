@@ -73,7 +73,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 			activeDialogs,
 			openDialogs,
 		}),
-		[ ],
+		[],
 	);
 	const controls = React.useMemo(
 		() => ({
@@ -82,7 +82,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 			fullyExpandedCount,
 			setFullyExpandedCount,
 		}),
-		[closeAllDialogs, setDialogIsOpen, fullyExpandedCount, ],
+		[closeAllDialogs, setDialogIsOpen, fullyExpandedCount],
 	);
 
 	return (

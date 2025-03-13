@@ -11,7 +11,7 @@ import * as TextField from "#/components/forms/TextField";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { MAX_ALT_TEXT } from "#/lib/constants";
 import { enforceLen } from "#/lib/strings/helpers";
-import { isAndroid, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import type { ComposerImage } from "#/state/gallery";
 import { AltTextCounterWrapper } from "#/view/com/composer/AltTextCounterWrapper";
 
@@ -117,7 +117,7 @@ const ImageAltTextInner = ({
 						<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
 							<CircleInfo fill={t.palette.negative_500} />
 							<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-								<>Alt text will be truncated. Limit: {(MAX_ALT_TEXT).toLocaleString()} characters.</>
+								<>Alt text will be truncated. Limit: {MAX_ALT_TEXT.toLocaleString()} characters.</>
 							</Text>
 						</View>
 					)}
@@ -139,8 +139,6 @@ const ImageAltTextInner = ({
 					</Button>
 				</AltTextCounterWrapper>
 			</View>
-			{/* Maybe fix this later -h */}
-			{isAndroid ? <View style={{ height: 300 }} /> : null}
 		</Dialog.ScrollableInner>
 	);
 };

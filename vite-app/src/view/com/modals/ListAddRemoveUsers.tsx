@@ -174,14 +174,7 @@ function UserResult({
 		} finally {
 			setIsProcessing(false);
 		}
-	}, [
-		list,
-		profile,
-		membership,
-		onChange,
-		listMembershipAddMutation,
-		listMembershipRemoveMutation,
-	]);
+	}, [list, profile, membership, onChange, listMembershipAddMutation, listMembershipRemoveMutation]);
 
 	return (
 		<View

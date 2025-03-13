@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Keyboard } from "react-native";
 
-import { isIOS } from "#/platform/detection";
-
 export function useIsKeyboardVisible({
 	iosUseWillEvents,
 }: {
@@ -13,8 +11,8 @@ export function useIsKeyboardVisible({
 	// NOTE
 	// only iOS supports the "will" events
 	// -prf
-	const showEvent = isIOS && iosUseWillEvents ? "keyboardWillShow" : "keyboardDidShow";
-	const hideEvent = isIOS && iosUseWillEvents ? "keyboardWillHide" : "keyboardDidHide";
+	const showEvent = "keyboardDidShow";
+	const hideEvent = "keyboardDidHide";
 
 	useEffect(() => {
 		const keyboardShowListener = Keyboard.addListener(showEvent, () => setKeyboardVisible(true));
@@ -24,7 +22,7 @@ export function useIsKeyboardVisible({
 			keyboardHideListener.remove();
 			keyboardShowListener.remove();
 		};
-	}, [showEvent, hideEvent]);
+	}, []);
 
 	return [isKeyboardVisible];
 }

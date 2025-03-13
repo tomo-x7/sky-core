@@ -10,7 +10,7 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, gradients, s } from "#/lib/styles";
-import { isAndroid, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent, useSession, useSessionApi } from "#/state/session";
@@ -20,7 +20,7 @@ import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Text } from "../util/text/Text";
 import { ScrollView, TextInput } from "./util";
 
-export const snapPoints = isAndroid ? ["90%"] : ["55%"];
+export const snapPoints = ["55%"];
 
 export function Component(props: {}) {
 	const pal = usePalette("default");

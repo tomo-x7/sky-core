@@ -9,9 +9,7 @@ import {
 	View,
 	type ViewStyle,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { isIOS } from "#/platform/detection";
 import type { BottomSheetState, BottomSheetViewProps } from "./BottomSheet.types";
 import { BottomSheetPortalProvider } from "./BottomSheetPortal";
 import { Context as PortalContext } from "./BottomSheetPortal";
@@ -128,10 +126,9 @@ function BottomSheetNativeComponentInner({
 	nativeViewRef: React.RefObject<View>;
 	onLayout: (event: LayoutChangeEvent) => void;
 }) {
-	const insets = useSafeAreaInsets();
 	const cornerRadius = rest.cornerRadius ?? 0;
 
-	const sheetHeight = isIOS ? screenHeight - insets.top : screenHeight;
+	const sheetHeight = screenHeight;
 
 	return (
 		<NativeView

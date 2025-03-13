@@ -13,7 +13,6 @@ import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
 import { ArrowOutOfBox_Stroke2_Corner0_Rounded as ArrowOutOfBox } from "#/components/icons/ArrowOutOfBox";
 import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
-import { IS_INTERNAL } from "#/lib/app-info";
 import { POST_CTRL_HITSLOP } from "#/lib/constants";
 import { CountWheel } from "#/lib/custom-animations/CountWheel";
 import { AnimatedLikeIcon } from "#/lib/custom-animations/LikeIcon";

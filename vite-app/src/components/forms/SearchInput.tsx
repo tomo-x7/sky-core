@@ -7,7 +7,6 @@ import * as TextField from "#/components/forms/TextField";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlassIcon } from "#/components/icons/MagnifyingGlass2";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { HITSLOP_10 } from "#/lib/constants";
-import { isNative } from "#/platform/detection";
 
 type SearchInputProps = Omit<TextField.InputProps, "label"> & {
 	label?: TextField.InputProps["label"];
@@ -35,7 +34,7 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 					placeholder={"Search"}
 					returnKeyType="search"
 					keyboardAppearance={t.scheme}
-					selectTextOnFocus={isNative}
+					selectTextOnFocus={false}
 					autoFocus={false}
 					accessibilityRole="search"
 					autoCorrect={false}

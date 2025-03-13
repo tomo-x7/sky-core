@@ -1,5 +1,5 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import React, { JSX, useCallback } from "react";
+import React, { type JSX, useCallback } from "react";
 import { Dimensions, type StyleProp, View, type ViewStyle } from "react-native";
 
 import { ListFooter } from "#/components/Lists";
@@ -87,7 +87,7 @@ export function ListMembers({
 			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsRefreshing(false);
-	}, [refetch, ]);
+	}, [refetch]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

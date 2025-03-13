@@ -11,13 +11,10 @@ const setContext = React.createContext<SetContext>((_: persisted.Schema["largeAl
 export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("largeAltBadgeEnabled"));
 
-	const setStateWrapped = React.useCallback(
-		(largeAltBadgeEnabled: persisted.Schema["largeAltBadgeEnabled"]) => {
-			setState(largeAltBadgeEnabled);
-			persisted.write("largeAltBadgeEnabled", largeAltBadgeEnabled);
-		},
-		[],
-	);
+	const setStateWrapped = React.useCallback((largeAltBadgeEnabled: persisted.Schema["largeAltBadgeEnabled"]) => {
+		setState(largeAltBadgeEnabled);
+		persisted.write("largeAltBadgeEnabled", largeAltBadgeEnabled);
+	}, []);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("largeAltBadgeEnabled", (nextLargeAltBadgeEnabled) => {

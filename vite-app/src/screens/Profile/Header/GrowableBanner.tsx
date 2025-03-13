@@ -3,24 +3,13 @@ import { BlurView } from "expo-blur";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import { ActivityIndicator } from "react-native";
-import Animated, {
-	Extrapolation,
-	interpolate,
-	runOnJS,
-	type SharedValue,
-	useAnimatedProps,
-	useAnimatedReaction,
-	useAnimatedStyle,
-} from "react-native-reanimated";
+import Animated, { runOnJS, type SharedValue, useAnimatedReaction } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
-import { isIOS } from "#/platform/detection";
 import { RQKEY_ROOT as STARTERPACK_RQKEY_ROOT } from "#/state/queries/actor-starter-packs";
 import { RQKEY_ROOT as FEED_RQKEY_ROOT } from "#/state/queries/post-feed";
 import { RQKEY_ROOT as FEEDGEN_RQKEY_ROOT } from "#/state/queries/profile-feedgens";
 import { RQKEY_ROOT as LIST_RQKEY_ROOT } from "#/state/queries/profile-lists";
-import { usePagerHeaderContext } from "#/view/com/pager/PagerHeaderContext";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
@@ -31,102 +20,13 @@ export function GrowableBanner({
 	backButton?: React.ReactNode;
 	children: React.ReactNode;
 }) {
-	const pagerContext = usePagerHeaderContext();
-
 	// plain non-growable mode for Android/Web
-	if (!pagerContext || !isIOS) {
-		return (
-			<View style={[a.w_full, a.h_full]}>
-				{children}
-				{backButton}
-			</View>
-		);
-	}
-
-	const { scrollY } = pagerContext;
 
 	return (
-		<GrowableBannerInner scrollY={scrollY} backButton={backButton}>
+		<View style={[a.w_full, a.h_full]}>
 			{children}
-		</GrowableBannerInner>
-	);
-}
-
-function GrowableBannerInner({
-	scrollY,
-	backButton,
-	children,
-}: {
-	scrollY: SharedValue<number>;
-	backButton?: React.ReactNode;
-	children: React.ReactNode;
-}) {
-	const isFetching = useIsProfileFetching();
-	const animateSpinner = useShouldAnimateSpinner({ isFetching, scrollY });
-
-	const animatedStyle = useAnimatedStyle(() => ({
-		transform: [
-			{
-				scale: interpolate(scrollY.get(), [-150, 0], [2, 1], {
-					extrapolateRight: Extrapolation.CLAMP,
-				}),
-			},
-		],
-	}));
-
-	const animatedBlurViewProps = useAnimatedProps(() => {
-		return {
-			intensity: interpolate(scrollY.get(), [-300, -65, -15], [50, 40, 0], Extrapolation.CLAMP),
-		};
-	});
-
-	const animatedSpinnerStyle = useAnimatedStyle(() => {
-		const scrollYValue = scrollY.get();
-		return {
-			display: scrollYValue < 0 ? "flex" : "none",
-			opacity: interpolate(scrollYValue, [-60, -15], [1, 0], Extrapolation.CLAMP),
-			transform: [{ translateY: interpolate(scrollYValue, [-150, 0], [-75, 0]) }, { rotate: "90deg" }],
-		};
-	});
-
-	const animatedBackButtonStyle = useAnimatedStyle(() => ({
-		transform: [
-			{
-				translateY: interpolate(scrollY.get(), [-150, 10], [-150, 10], {
-					extrapolateRight: Extrapolation.CLAMP,
-				}),
-			},
-		],
-	}));
-
-	return (
-		<>
-			<Animated.View
-				style={[
-					a.absolute,
-					{ left: 0, right: 0, bottom: 0 },
-					{ height: 150 },
-					{ transformOrigin: "bottom" },
-					animatedStyle,
-				]}
-			>
-				{children}
-				{/*//@ts-expect-error */}
-				<AnimatedBlurView style={[a.absolute, a.inset_0]} tint="dark" animatedProps={animatedBlurViewProps} />
-			</Animated.View>
-			<View style={[a.absolute, a.inset_0, { top: 0 }, a.justify_center, a.align_center]}>
-				<Animated.View style={[animatedSpinnerStyle]}>
-					<ActivityIndicator
-						key={animateSpinner ? "spin" : "stop"}
-						size="large"
-						color="white"
-						animating={animateSpinner}
-						hidesWhenStopped={false}
-					/>
-				</Animated.View>
-			</View>
-			<Animated.View style={[animatedBackButtonStyle]}>{backButton}</Animated.View>
-		</>
+			{backButton}
+		</View>
 	);
 }
 

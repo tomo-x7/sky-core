@@ -187,7 +187,7 @@ function LandingScreenLoaded({
 								color={t.atoms.text_contrast_medium.color}
 							/>
 							<Text style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]} numberOfLines={1}>
-								<>{formatCount( JOINED_THIS_WEEK)} joined this week</>
+								<>{formatCount(JOINED_THIS_WEEK)} joined this week</>
 							</Text>
 						</View>
 					</View>

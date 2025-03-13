@@ -3,9 +3,7 @@ import { QueryClient, focusManager, onlineManager } from "@tanstack/react-query"
 import { PersistQueryClientProvider, type PersistQueryClientProviderProps } from "@tanstack/react-query-persist-client";
 import type React from "react";
 import { useRef, useState } from "react";
-import { AppState, type AppStateStatus } from "react-native";
-
-import { isNative } from "#/platform/detection";
+import { AppState } from "react-native";
 import { listenNetworkConfirmed, listenNetworkLost } from "#/state/events";
 
 // any query keys in this array will be persisted to AsyncStorage
@@ -77,13 +75,7 @@ setInterval(() => {
 }, 2000);
 
 focusManager.setEventListener((onFocus) => {
-	if (isNative) {
-		const subscription = AppState.addEventListener("change", (status: AppStateStatus) => {
-			focusManager.setFocused(status === "active");
-		});
-
-		return () => subscription.remove();
-	} else if (typeof window !== "undefined" && window.addEventListener) {
+	if (typeof window !== "undefined" && window.addEventListener) {
 		// these handlers are a bit redundant but focus catches when the browser window
 		// is blurred/focused while visibilitychange seems to only handle when the
 		// window minimizes (both of them catch tab changes)

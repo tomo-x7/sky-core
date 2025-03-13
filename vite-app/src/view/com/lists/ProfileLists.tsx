@@ -14,7 +14,7 @@ import { atoms as a, ios, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { RQKEY, useProfileListsQuery } from "#/state/queries/profile-lists";
 import { EmptyState } from "#/view/com/util/EmptyState";
 import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
@@ -80,7 +80,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 
 	const onScrollToTop = React.useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerOffset,
 		});
 		queryClient.invalidateQueries({ queryKey: RQKEY(did) });
@@ -98,7 +98,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 			console.error("Failed to refresh lists", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, ]);
+	}, [refetch]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

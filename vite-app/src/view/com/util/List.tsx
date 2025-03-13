@@ -1,4 +1,4 @@
-import React, { isValidElement, JSX, memo, startTransition, useRef } from "react";
+import React, { isValidElement, type JSX, memo, startTransition, useRef } from "react";
 import { type FlatListProps, StyleSheet, View, type ViewProps } from "react-native";
 import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 

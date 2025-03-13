@@ -13,7 +13,6 @@ import { BSKY_SERVICE } from "#/lib/constants";
 import { useVideoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { getHostnameFromUrl } from "#/lib/strings/url-helpers";
 import { isWeb } from "#/platform/detection";
-import { isNative } from "#/platform/detection";
 import { useSession } from "#/state/session";
 import { pickVideo } from "./pickVideo";
 
@@ -32,10 +31,6 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 	const { currentAccount } = useSession();
 
 	const onPressSelectVideo = useCallback(async () => {
-		if (isNative && !(await requestVideoAccessIfNeeded())) {
-			return;
-		}
-
 		if (
 			currentAccount &&
 			!currentAccount.emailConfirmed &&
@@ -75,7 +70,7 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 				}
 			}
 		}
-	}, [requestVideoAccessIfNeeded, currentAccount, control, setError, onSelectVideo]);
+	}, [currentAccount, control, setError, onSelectVideo]);
 
 	return (
 		<>

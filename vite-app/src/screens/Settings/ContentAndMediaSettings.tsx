@@ -8,9 +8,7 @@ import { Home_Stroke2_Corner2_Rounded as HomeIcon } from "#/components/icons/Hom
 import { Macintosh_Stroke2_Corner2_Rounded as MacintoshIcon } from "#/components/icons/Macintosh";
 import { Play_Stroke2_Corner2_Rounded as PlayIcon } from "#/components/icons/Play";
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
-import { Window_Stroke2_Corner2_Rounded as WindowIcon } from "#/components/icons/Window";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
-import { isNative } from "#/platform/detection";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { useAutoplayDisabled, useSetAutoplayDisabled } from "#/state/preferences";
 import { useInAppBrowser, useSetInAppBrowser } from "#/state/preferences/in-app-browser";
@@ -55,20 +53,7 @@ export function ContentAndMediaSettingsScreen(props: Props) {
 						<SettingsList.ItemText>External media</SettingsList.ItemText>
 					</SettingsList.LinkItem>
 					<SettingsList.Divider />
-					{isNative && (
-						<Toggle.Item
-							name="use_in_app_browser"
-							label={"Use in-app browser to open links"}
-							value={inAppBrowserPref ?? false}
-							onChange={(value) => setUseInAppBrowser(value)}
-						>
-							<SettingsList.Item>
-								<SettingsList.ItemIcon icon={WindowIcon} />
-								<SettingsList.ItemText>Use in-app browser to open links</SettingsList.ItemText>
-								<Toggle.Platform />
-							</SettingsList.Item>
-						</Toggle.Item>
-					)}
+
 					<Toggle.Item
 						name="disable_autoplay"
 						label={"Autoplay videos and GIFs"}

@@ -17,7 +17,7 @@ import { MessageProfileButton } from "#/components/dms/MessageProfileButton";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { isIOS, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import type { Shadow } from "#/state/cache/types";
 import { useModalControls } from "#/state/modals";
@@ -128,7 +128,7 @@ let ProfileHeaderStandard = ({
 			hideBackButton={hideBackButton}
 			isPlaceholderProfile={isPlaceholderProfile}
 		>
-			<View style={[a.px_lg, a.pt_md, a.pb_sm, a.overflow_hidden]} pointerEvents={isIOS ? "auto" : "box-none"}>
+			<View style={[a.px_lg, a.pt_md, a.pb_sm, a.overflow_hidden]} pointerEvents={"box-none"}>
 				<View
 					style={[
 						{ paddingLeft: 90 },
@@ -139,7 +139,7 @@ let ProfileHeaderStandard = ({
 						a.pb_sm,
 						a.flex_wrap,
 					]}
-					pointerEvents={isIOS ? "auto" : "box-none"}
+					pointerEvents={"box-none"}
 				>
 					{isMe ? (
 						<>

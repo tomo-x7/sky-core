@@ -1,7 +1,6 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
 import React, { memo, useRef, useState } from "react";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
-import { runOnJS } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -20,7 +19,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
-import { isAndroid, isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import {
 	type ThreadBlocked,
@@ -170,7 +169,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 	// This ensures that the first render contains no parents--even if they are already available in the cache.
 	// We need to delay showing them so that we can use maintainVisibleContentPosition to keep the main post on screen.
 	// On the web this is not necessary because we can synchronously adjust the scroll in onContentSizeChange instead.
-	const [deferParents, setDeferParents] = React.useState(isNative);
+	const [deferParents, setDeferParents] = React.useState(false);
 
 	const currentDid = currentAccount?.did;
 	const threadModerationCache = React.useMemo(() => {
@@ -326,20 +325,9 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 			needsBumpMaxParents.current = true;
 		}
 	}, [maxParents, skeleton?.parents]);
-	const bumpMaxParentsIfNeeded = React.useCallback(() => {
-		if (!isNative) {
-			return;
-		}
-		if (needsBumpMaxParents.current) {
-			needsBumpMaxParents.current = false;
-			setMaxParents((n) => n + PARENTS_CHUNK_SIZE);
-		}
-	}, []);
+	const bumpMaxParentsIfNeeded = undefined;
 	const onScrollToTop = bumpMaxParentsIfNeeded;
-	const onMomentumEnd = React.useCallback(() => {
-		"worklet";
-		runOnJS(bumpMaxParentsIfNeeded)();
-	}, [bumpMaxParentsIfNeeded]);
+	const onMomentumEnd = undefined;
 
 	const onEndReached = React.useCallback(() => {
 		if (isFetching || posts.length < maxReplies) return;
@@ -471,9 +459,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 			<Header.Outer headerRef={headerRef}>
 				<Header.BackButton />
 				<Header.Content>
-					<Header.TitleText>
-						Post
-					</Header.TitleText>
+					<Header.TitleText>Post</Header.TitleText>
 				</Header.Content>
 				<Header.Slot>
 					<ThreadMenu
@@ -491,17 +477,15 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 					data={posts}
 					renderItem={renderItem}
 					keyExtractor={keyExtractor}
-					onContentSizeChange={isNative ? undefined : onContentSizeChangeWeb}
+					onContentSizeChange={onContentSizeChangeWeb}
 					onStartReached={onStartReached}
 					onEndReached={onEndReached}
 					onEndReachedThreshold={2}
 					onScrollToTop={onScrollToTop}
-					maintainVisibleContentPosition={
-						isNative && hasParents ? MAINTAIN_VISIBLE_CONTENT_POSITION : undefined
-					}
+					maintainVisibleContentPosition={undefined}
 					// @ts-ignore our .web version only -prf
 					desktopFixedHeight
-					removeClippedSubviews={isAndroid ? false : undefined}
+					removeClippedSubviews={undefined}
 					ListFooterComponent={
 						<ListFooter
 							// Using `isFetching` over `isFetchingNextPage` is done on purpose here so we get the loader on

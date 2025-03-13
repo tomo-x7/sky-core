@@ -5,7 +5,6 @@ import { atoms as a, useTheme, web } from "#/alf";
 import { NewskieDialog } from "#/components/NewskieDialog";
 import { Text } from "#/components/Typography";
 import { isInvalidHandle } from "#/lib/strings/handles";
-import { isIOS } from "#/platform/detection";
 import type { Shadow } from "#/state/cache/types";
 
 export function ProfileHeaderHandle({
@@ -21,7 +20,7 @@ export function ProfileHeaderHandle({
 	return (
 		<View
 			style={[a.flex_row, a.gap_xs, a.align_center, { maxWidth: "100%" }]}
-			pointerEvents={disableTaps ? "none" : isIOS ? "auto" : "box-none"}
+			pointerEvents={disableTaps ? "none" : "box-none"}
 		>
 			<NewskieDialog profile={profile} disabled={disableTaps} />
 			{profile.viewer?.followedBy && !blockHide ? (

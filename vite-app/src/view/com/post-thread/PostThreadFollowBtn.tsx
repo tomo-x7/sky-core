@@ -29,7 +29,7 @@ function PostThreadFollowBtnLoaded({
 	const navigation = useNavigation();
 	const { gtMobile } = useBreakpoints();
 	const profile = useProfileShadow(profileUnshadowed);
-	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile, );
+	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 	const requireAuth = useRequireAuth();
 
 	const isFollowing = !!profile.viewer?.following;

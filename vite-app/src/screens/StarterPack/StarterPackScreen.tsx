@@ -185,7 +185,7 @@ function StarterPackScreenLoaded({
 		if (routeParams.new) {
 			onOpenShareDialog();
 		}
-	}, [onOpenShareDialog, routeParams.new, ]);
+	}, [onOpenShareDialog, routeParams.new]);
 
 	return (
 		<>

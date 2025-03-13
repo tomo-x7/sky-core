@@ -2,10 +2,7 @@
  * Note: the dataSet properties are used to leverage custom CSS in public/index.html
  */
 
-import {
-	FontAwesomeIcon,
-	type Props as FontAwesomeProps,
-} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon, type Props as FontAwesomeProps } from "@fortawesome/react-fontawesome";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -38,7 +35,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = () => {
 			{activeToast && (
 				<View style={styles.container}>
 					{/* @ts-ignore */}
-					<FontAwesomeIcon icon={activeToast.icon} size={20} style={styles.icon } />
+					<FontAwesomeIcon icon={activeToast.icon} size={20} style={styles.icon} />
 					<Text style={styles.text}>{activeToast.text}</Text>
 					<Pressable
 						style={styles.dismissBackdrop}

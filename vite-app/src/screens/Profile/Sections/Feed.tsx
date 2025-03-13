@@ -5,7 +5,6 @@ import { View, findNodeHandle } from "react-native";
 import { ios } from "#/alf";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { usePalette } from "#/lib/hooks/usePalette";
-import { isNative } from "#/platform/detection";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { RQKEY as FEED_RQKEY } from "#/state/queries/post-feed";
 import { truncateAndInvalidate } from "#/state/queries/util";
@@ -32,14 +31,14 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 	const [hasNew, setHasNew] = React.useState(false);
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
 	const shouldUseAdjustedNumToRender = feed.endsWith("posts_and_author_threads");
-	const isVideoFeed = isNative && feed.endsWith("posts_with_video");
+	const isVideoFeed = false;
 	const adjustedInitialNumToRender = useInitialNumToRender({
 		screenHeightOffset: headerHeight,
 	});
 
 	const onScrollToTop = React.useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerHeight,
 		});
 		truncateAndInvalidate(queryClient, FEED_RQKEY(feed));

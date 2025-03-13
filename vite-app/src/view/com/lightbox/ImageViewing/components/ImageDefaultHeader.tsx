@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  *
  */
 import { StyleSheet, TouchableOpacity, type ViewStyle } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "#/lib/safe-area-context";
 
 import { createHitslop } from "#/lib/constants";
 
@@ -29,6 +29,7 @@ const ImageDefaultHeader = ({ onRequestClose }: Props) => {
 				accessibilityHint={"Closes viewer for header image"}
 				onAccessibilityEscape={onRequestClose}
 			>
+				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="close" color={"#fff"} size={22} />
 			</TouchableOpacity>
 		</SafeAreaView>

@@ -58,10 +58,7 @@ function Inner() {
 					) : !trending?.topics ? null : (
 						<>
 							{trending.topics.slice(0, TRENDING_LIMIT).map((topic) => (
-								<TrendingTopicLink
-									key={topic.link}
-									topic={topic}
-								>
+								<TrendingTopicLink key={topic.link} topic={topic}>
 									{({ hovered }) => (
 										<TrendingTopic
 											size="small"

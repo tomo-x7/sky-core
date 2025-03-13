@@ -1,4 +1,4 @@
-import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -54,7 +54,7 @@ export function FollowingEmptyState() {
 						Discover new custom feeds
 					</Text>
 					{/* @ts-ignore */}
-					<FontAwesomeIcon icon="angle-right" style={palInverted.text } size={14} />
+					<FontAwesomeIcon icon="angle-right" style={palInverted.text} size={14} />
 				</Button>
 			</View>
 		</View>

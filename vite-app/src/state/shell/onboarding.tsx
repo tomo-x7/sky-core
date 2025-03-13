@@ -82,7 +82,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 				});
 			}
 		});
-	}, [state, ]);
+	}, [state]);
 
 	return (
 		<stateContext.Provider value={state}>

@@ -202,7 +202,7 @@ function ListItem({
 
 	const onTogglePinned = React.useCallback(async () => {
 		setCurrentFeeds(currentFeeds.map((f) => (f.id === feed.id ? { ...feed, pinned: !feed.pinned } : f)));
-	}, [ feed, currentFeeds, setCurrentFeeds]);
+	}, [feed, currentFeeds, setCurrentFeeds]);
 
 	const onPressUp = React.useCallback(async () => {
 		if (!isPinned) return;
@@ -234,7 +234,7 @@ function ListItem({
 
 	const onPressRemove = React.useCallback(async () => {
 		setCurrentFeeds(currentFeeds.filter((f) => f.id !== feed.id));
-	}, [ feed, currentFeeds, setCurrentFeeds]);
+	}, [feed, currentFeeds, setCurrentFeeds]);
 
 	return (
 		<Animated.View style={[styles.itemContainer, pal.border]} layout={LinearTransition.duration(100)}>

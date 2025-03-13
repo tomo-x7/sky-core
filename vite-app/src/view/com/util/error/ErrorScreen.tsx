@@ -88,9 +88,7 @@ export function ErrorScreen({
 							accessibilityHint={"Retries the last action, which errored out"}
 						>
 							<ButtonIcon icon={ArrowRotateCounterClockwiseIcon} />
-							<ButtonText>
-								Try again
-							</ButtonText>
+							<ButtonText>Try again</ButtonText>
 						</Button>
 					</View>
 				)}

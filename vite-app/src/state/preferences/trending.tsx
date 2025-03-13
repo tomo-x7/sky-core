@@ -29,13 +29,13 @@ function usePersistedBooleanValue<T extends keyof persisted.Schema>(key: T) {
 			_set(Boolean(hidden));
 			persisted.write(key, hidden);
 		},
-		[key, ],
+		[key],
 	);
 	React.useEffect(() => {
 		return persisted.onUpdate(key, (hidden) => {
 			_set(Boolean(hidden));
 		});
-	}, [key, ]);
+	}, [key]);
 
 	return [value, set] as const;
 }

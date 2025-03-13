@@ -10,7 +10,6 @@ import { useGetTimeAgo } from "#/lib/hooks/useTimeAgo";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
 import { makeProfileLink } from "#/lib/routes/links";
 import { listUriToHref } from "#/lib/strings/url-helpers";
-import { isNative } from "#/platform/detection";
 import { useSession } from "#/state/session";
 
 export { useDialogControl as useModerationDetailsDialogControl } from "#/components/Dialog";
@@ -133,7 +132,7 @@ function ModerationDetailsDialogInner({
 						xGutters,
 						a.py_md,
 						a.border_t,
-						!isNative && t.atoms.bg_contrast_25,
+						t.atoms.bg_contrast_25,
 						t.atoms.border_contrast_low,
 						{
 							borderBottomLeftRadius: a.rounded_md.borderRadius,
@@ -180,8 +179,6 @@ function ModerationDetailsDialogInner({
 					)}
 				</View>
 			)}
-
-			{isNative && <View style={{ height: 40 }} />}
 
 			<Dialog.Close />
 		</Dialog.ScrollableInner>

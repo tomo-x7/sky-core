@@ -10,7 +10,6 @@ import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { ArrowRotateCounterClockwise_Stroke2_Corner0_Rounded as Resend } from "#/components/icons/ArrowRotateCounterClockwise";
 import { useIntentDialogs } from "#/components/intents/IntentDialogs";
-import { isNative } from "#/platform/detection";
 import { useAgent, useSession } from "#/state/session";
 
 export function VerifyEmailIntentDialog() {
@@ -68,7 +67,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 						<Loader size="xl" fill={t.atoms.text_contrast_low.color} />
 					</View>
 				) : status === "success" ? (
-					<View style={[a.gap_sm, isNative && a.pb_xl]}>
+					<View style={[a.gap_sm]}>
 						<Text style={[a.font_heavy, a.text_2xl]}>Email Verified</Text>
 						<Text style={[a.text_md, a.leading_snug]}>
 							Thanks, you have successfully verified your email address. You can close this dialog.
@@ -83,7 +82,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 						</Text>
 					</View>
 				) : (
-					<View style={[a.gap_sm, isNative && a.pb_xl]}>
+					<View style={[a.gap_sm]}>
 						<Text style={[a.font_heavy, a.text_2xl]}>Email Resent</Text>
 						<Text style={[a.text_md, a.leading_snug]}>
 							We have sent another verification email to{" "}

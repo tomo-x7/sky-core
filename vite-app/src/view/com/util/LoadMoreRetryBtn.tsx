@@ -1,4 +1,4 @@
-import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyleSheet } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";

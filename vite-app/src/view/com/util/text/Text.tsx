@@ -1,12 +1,12 @@
-import React from "react";
+import type React from "react";
 import { StyleSheet, type TextProps } from "react-native";
 import { UITextView } from "react-native-uitextview";
 
 import { applyFonts, useAlf } from "#/alf";
-import { type StringChild, childHasEmoji, renderChildrenWithEmoji } from "#/alf/typography";
+import { type StringChild, renderChildrenWithEmoji } from "#/alf/typography";
 import { type TypographyVariant, useTheme } from "#/lib/ThemeContext";
 import { lh, s } from "#/lib/styles";
-import { isIOS, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 
 export type CustomTextProps = Omit<TextProps, "children"> & {
 	type?: TypographyVariant;
@@ -61,7 +61,7 @@ function Text_DEPRECATED({
 	}
 
 	const textProps = {
-		uiTextView: selectable && isIOS,
+		uiTextView: false,
 		selectable,
 		style: flattened,
 		dataSet: isWeb ? Object.assign({ tooltip: title }, dataSet || {}) : undefined,

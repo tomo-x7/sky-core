@@ -171,11 +171,7 @@ export function ProfileCardWithFollowBtn({
 			noBg={noBg}
 			noBorder={noBorder}
 			renderButton={
-				isMe
-					? undefined
-					: (profileShadow) => (
-							<FollowButton profile={profileShadow}  onFollow={onFollow} />
-						)
+				isMe ? undefined : (profileShadow) => <FollowButton profile={profileShadow} onFollow={onFollow} />
 			}
 			onPress={onPress}
 			showKnownFollowers={!isMe && showKnownFollowers}

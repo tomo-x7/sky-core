@@ -1,6 +1,6 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { JSX, memo } from "react";
+import React, { type JSX, memo } from "react";
 import {
 	ActivityIndicator,
 	AppState,
@@ -19,7 +19,7 @@ import { TrendingInterstitial } from "#/components/interstitials/Trending";
 import { TrendingVideos as TrendingVideosInterstitial } from "#/components/interstitials/TrendingVideos";
 import { DISCOVER_FEED_URI, KNOWN_SHUTDOWN_FEEDS } from "#/lib/constants";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import { isIOS, isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 import { listenPostCreated } from "#/state/events";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
@@ -189,7 +189,7 @@ let PostFeed = ({
 	const [feedType, feedUriOrActorDid, feedTab] = feed.split("|");
 	const { gtMobile } = useBreakpoints();
 	const { rightNavVisible } = useLayoutBreakpoints();
-	const areVideoFeedsEnabled = isNative;
+	const areVideoFeedsEnabled = false;
 
 	const feedCacheKey = feedParams?.feedCacheKey;
 	const opts = React.useMemo(() => ({ enabled, ignoreFilterFor }), [enabled, ignoreFilterFor]);
@@ -248,7 +248,7 @@ let PostFeed = ({
 				checkForNewRef.current();
 			}
 		}
-	}, [enabled, disablePoll,    isEmpty]);
+	}, [enabled, disablePoll, isEmpty]);
 	React.useEffect(() => {
 		// biome-ignore lint/style/useConst: <explanation>
 		let cleanup1: () => void | undefined;
@@ -483,7 +483,6 @@ let PostFeed = ({
 		rightNavVisible,
 		gtMobile,
 		isVideoFeed,
-		areVideoFeedsEnabled,
 	]);
 
 	// events
@@ -498,7 +497,7 @@ let PostFeed = ({
 			console.error("Failed to refresh posts feed", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch,  onHasNew,  ]);
+	}, [refetch, onHasNew]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;
@@ -508,7 +507,7 @@ let PostFeed = ({
 		} catch (err) {
 			console.error("Failed to load more posts", { message: err });
 		}
-	}, [isFetching, hasNextPage, isError, fetchNextPage,  ]);
+	}, [isFetching, hasNextPage, isError, fetchNextPage]);
 
 	const onPressTryAgain = React.useCallback(() => {
 		refetch();
@@ -676,7 +675,7 @@ let PostFeed = ({
 				desktopFixedHeight={desktopFixedHeightOffset ? desktopFixedHeightOffset : true}
 				initialNumToRender={initialNumToRenderOverride ?? initialNumToRender}
 				windowSize={9}
-				maxToRenderPerBatch={isIOS ? 5 : 1}
+				maxToRenderPerBatch={1}
 				updateCellsBatchingPeriod={40}
 				onItemSeen={feedFeedback.onItemSeen}
 			/>

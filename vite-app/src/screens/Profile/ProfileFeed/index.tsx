@@ -1,4 +1,3 @@
-import { AppBskyFeedDefs } from "@atproto/api";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
@@ -7,7 +6,6 @@ import { StyleSheet, View } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import * as Layout from "#/components/Layout";
-import { VIDEO_FEED_URIS } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { ComposeIcon2 } from "#/lib/icons";
@@ -15,7 +13,6 @@ import type { CommonNavigatorParams } from "#/lib/routes/types";
 import type { NavigationProp } from "#/lib/routes/types";
 import { makeRecordUri } from "#/lib/strings/url-helpers";
 import { s } from "#/lib/styles";
-import { isNative } from "#/platform/detection";
 import { ProfileFeedHeader, ProfileFeedHeaderSkeleton } from "#/screens/Profile/components/ProfileFeedHeader";
 import { listenSoftReset } from "#/state/events";
 import { FeedFeedbackProvider, useFeedFeedback } from "#/state/feed-feedback";
@@ -156,7 +153,7 @@ export function ProfileFeedScreenInner({
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: 0, // -headerHeight,
 		});
 		truncateAndInvalidate(queryClient, FEED_RQKEY(feed));
@@ -174,12 +171,7 @@ export function ProfileFeedScreenInner({
 		return <EmptyState icon="hashtag" message={"This feed is empty."} />;
 	}, []);
 
-	const isVideoFeed = React.useMemo(() => {
-		const isBskyVideoFeed = VIDEO_FEED_URIS.includes(feedInfo.uri);
-		const feedIsVideoMode = feedInfo.contentMode === AppBskyFeedDefs.CONTENTMODEVIDEO;
-		const _isVideoFeed = isBskyVideoFeed || feedIsVideoMode;
-		return isNative && _isVideoFeed;
-	}, [feedInfo]);
+	const isVideoFeed = false;
 
 	return (
 		<>

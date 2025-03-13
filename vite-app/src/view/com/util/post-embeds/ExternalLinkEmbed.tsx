@@ -1,5 +1,5 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import React, { useCallback } from "react";
+import React from "react";
 import { Image } from "react-native";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
@@ -9,10 +9,8 @@ import { Link } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { Earth_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe";
 import { parseAltFromGIFDescription } from "#/lib/gif-alt-text";
-import { shareUrl } from "#/lib/sharing";
 import { parseEmbedPlayerFromUrl } from "#/lib/strings/embed-player";
 import { toNiceDomain } from "#/lib/strings/url-helpers";
-import { isNative } from "#/platform/detection";
 import { useExternalEmbedsPrefs } from "#/state/preferences";
 import { ExternalGifEmbed } from "#/view/com/util/post-embeds/ExternalGifEmbed";
 import { ExternalPlayer } from "#/view/com/util/post-embeds/ExternalPlayerEmbed";
@@ -42,12 +40,6 @@ export const ExternalLinkEmbed = ({
 	}, [link.uri, externalEmbedPrefs]);
 	const hasMedia = Boolean(imageUri || embedPlayerParams);
 
-	const onShareExternal = useCallback(() => {
-		if (link.uri && isNative) {
-			shareUrl(link.uri);
-		}
-	}, [link.uri]);
-
 	if (embedPlayerParams?.source === "tenor") {
 		const parsedAlt = parseAltFromGIFDescription(link.description);
 		return (
@@ -64,13 +56,7 @@ export const ExternalLinkEmbed = ({
 	}
 
 	return (
-		<Link
-			label={link.title || `Open link to ${niceUrl}`}
-			to={link.uri}
-			shouldProxy={true}
-			onPress={onOpen}
-			onLongPress={onShareExternal}
-		>
+		<Link label={link.title || `Open link to ${niceUrl}`} to={link.uri} shouldProxy={true} onPress={onOpen}>
 			{({ hovered }) => (
 				<View
 					style={[

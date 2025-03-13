@@ -1,10 +1,9 @@
 import React from "react";
 
-import { createStarterPackLinkFromAndroidReferrer, httpStarterPackUriToAtUri } from "#/lib/strings/starter-pack";
-import { isAndroid } from "#/platform/detection";
+import { httpStarterPackUriToAtUri } from "#/lib/strings/starter-pack";
 import { useHasCheckedForStarterPack } from "#/state/preferences/used-starter-packs";
 import { useSetActiveStarterPack } from "#/state/shell/starter-pack";
-import { Referrer, SharedPrefs } from "../../../modules/expo-bluesky-swiss-army";
+import { SharedPrefs } from "../../../modules/expo-bluesky-swiss-army";
 
 export function useStarterPackEntry() {
 	const [ready, setReady] = React.useState(false);
@@ -28,18 +27,10 @@ export function useStarterPackEntry() {
 		(async () => {
 			let uri: string | null | undefined;
 
-			if (isAndroid) {
-				const res = await Referrer.getGooglePlayReferrerInfoAsync();
-
-				if (res?.installReferrer) {
-					uri = createStarterPackLinkFromAndroidReferrer(res.installReferrer);
-				}
-			} else {
-				const starterPackUri = SharedPrefs.getString("starterPackUri");
-				if (starterPackUri) {
-					uri = httpStarterPackUriToAtUri(starterPackUri);
-					SharedPrefs.setValue("starterPackUri", null);
-				}
+			const starterPackUri = SharedPrefs.getString("starterPackUri");
+			if (starterPackUri) {
+				uri = httpStarterPackUriToAtUri(starterPackUri);
+				SharedPrefs.setValue("starterPackUri", null);
 			}
 
 			if (uri) {

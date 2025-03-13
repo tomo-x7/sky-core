@@ -22,7 +22,6 @@ import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Time
 import { wait } from "#/lib/async/wait";
 import { getLabelingServiceTitle } from "#/lib/moderation";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { isNative } from "#/platform/detection";
 import { useMyLabelersQuery } from "#/state/queries/preferences";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
@@ -152,7 +151,7 @@ function Inner(props: ReportDialogProps) {
 
 	return (
 		<Dialog.ScrollableInner label={"Report dialog"} ref={ref} style={[a.w_full, { maxWidth: 500 }]}>
-			<View style={[a.gap_2xl, isNative && a.pt_md]}>
+			<View style={[a.gap_2xl]}>
 				<StepOuter>
 					<StepTitle index={1} title={copy.subtitle} activeIndex1={state.activeStepIndex1} />
 					{isLoading ? (

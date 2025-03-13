@@ -13,7 +13,6 @@ import { PlusSmall_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Pl
 import { HITSLOP_10, MAX_ALT_TEXT } from "#/lib/constants";
 import { parseAltFromGIFDescription } from "#/lib/gif-alt-text";
 import { type EmbedPlayerParams, parseEmbedPlayerFromUrl } from "#/lib/strings/embed-player";
-import { isAndroid } from "#/platform/detection";
 import { useResolveGifQuery } from "#/state/queries/resolve-link";
 import type { Gif } from "#/state/queries/tenor";
 import { AltTextCounterWrapper } from "#/view/com/composer/AltTextCounterWrapper";
@@ -162,7 +161,7 @@ function AltTextInner({
 							<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
 								<CircleInfo fill={t.palette.negative_500} />
 								<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
-									<>Alt text will be truncated. Limit: {(MAX_ALT_TEXT).toLocaleString()} characters.</>
+									<>Alt text will be truncated. Limit: {MAX_ALT_TEXT.toLocaleString()} characters.</>
 								</Text>
 							</View>
 						)}
@@ -199,8 +198,6 @@ function AltTextInner({
 				</View>
 			</View>
 			<Dialog.Close />
-			{/* Maybe fix this later -h */}
-			{isAndroid ? <View style={{ height: 300 }} /> : null}
 		</Dialog.ScrollableInner>
 	);
 }

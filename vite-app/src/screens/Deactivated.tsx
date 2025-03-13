@@ -42,7 +42,7 @@ export function Deactivated() {
 	const onSelectAccount = React.useCallback(
 		(account: SessionAccount) => {
 			if (account.did !== currentAccount?.did) {
-				onPressSwitchAccount(account,);
+				onPressSwitchAccount(account);
 			}
 		},
 		[currentAccount, onPressSwitchAccount],
@@ -88,7 +88,7 @@ export function Deactivated() {
 		} finally {
 			setPending(false);
 		}
-	}, [agent,   queryClient]);
+	}, [agent, queryClient]);
 
 	return (
 		<View style={[a.util_screen_outer, a.flex_1]}>
@@ -98,7 +98,7 @@ export function Deactivated() {
 					a.px_2xl,
 					{
 						paddingTop: 64,
-						paddingBottom: 64
+						paddingBottom: 64,
 					},
 				]}
 			>

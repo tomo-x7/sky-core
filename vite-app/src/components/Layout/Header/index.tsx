@@ -20,7 +20,6 @@ import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeft } from "#/components/ico
 import { Menu_Stroke2_Corner0_Rounded as Menu } from "#/components/icons/Menu";
 import { HITSLOP_30 } from "#/lib/constants";
 import type { NavigationProp } from "#/lib/routes/types";
-import { isIOS } from "#/platform/detection";
 import { useSetDrawerOpen } from "#/state/shell";
 
 export function Outer({
@@ -81,14 +80,7 @@ export function Content({
 	align?: "platform" | "left";
 }) {
 	return (
-		<View
-			style={[
-				a.flex_1,
-				a.justify_center,
-				isIOS && align === "platform" && a.align_center,
-				{ minHeight: HEADER_SLOT_SIZE },
-			]}
-		>
+		<View style={[a.flex_1, a.justify_center, { minHeight: HEADER_SLOT_SIZE }]}>
 			<AlignmentContext.Provider value={align}>{children}</AlignmentContext.Provider>
 		</View>
 	);
@@ -164,18 +156,7 @@ export function TitleText({ children, style }: { children: React.ReactNode } & T
 	const { gtMobile } = useBreakpoints();
 	const align = useContext(AlignmentContext);
 	return (
-		<Text
-			style={[
-				a.text_lg,
-				a.font_heavy,
-				a.leading_tight,
-				isIOS && align === "platform" && a.text_center,
-				gtMobile && a.text_xl,
-				style,
-			]}
-			numberOfLines={2}
-			emoji
-		>
+		<Text style={[a.text_lg, a.font_heavy, a.leading_tight, gtMobile && a.text_xl, style]} numberOfLines={2} emoji>
 			{children}
 		</Text>
 	);
@@ -185,15 +166,7 @@ export function SubtitleText({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
 	const align = useContext(AlignmentContext);
 	return (
-		<Text
-			style={[
-				a.text_sm,
-				a.leading_snug,
-				isIOS && align === "platform" && a.text_center,
-				t.atoms.text_contrast_medium,
-			]}
-			numberOfLines={2}
-		>
+		<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={2}>
 			{children}
 		</Text>
 	);

@@ -20,7 +20,6 @@ import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { NavigationProp } from "#/lib/routes/types";
 import { type EmbedPlayerParams, getPlayerAspect } from "#/lib/strings/embed-player";
-import { isNative } from "#/platform/detection";
 import { useExternalEmbedsPrefs } from "#/state/preferences";
 import { EventStopper } from "../EventStopper";
 

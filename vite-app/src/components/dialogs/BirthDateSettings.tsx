@@ -8,7 +8,7 @@ import { Text } from "#/components/Typography";
 import { DateField } from "#/components/forms/DateField";
 import { cleanError } from "#/lib/strings/errors";
 import { getDateAgo } from "#/lib/strings/time";
-import { isIOS, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import {
 	type UsePreferencesQueryResponse,
 	usePreferencesQuery,
@@ -80,7 +80,7 @@ function BirthdayInner({
 
 	return (
 		<View style={a.gap_lg} testID="birthDateSettingsDialog">
-			<View style={isIOS && [a.w_full, a.align_center]}>
+			<View>
 				<DateField
 					testID="birthdayInput"
 					value={date}

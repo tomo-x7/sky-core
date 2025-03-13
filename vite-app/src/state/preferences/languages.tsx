@@ -29,14 +29,11 @@ const apiContext = React.createContext<ApiContext>({
 export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("languagePrefs"));
 
-	const setStateWrapped = React.useCallback(
-		(fn: SetStateCb) => {
-			const s = fn(persisted.get("languagePrefs"));
-			setState(s);
-			persisted.write("languagePrefs", s);
-		},
-		[],
-	);
+	const setStateWrapped = React.useCallback((fn: SetStateCb) => {
+		const s = fn(persisted.get("languagePrefs"));
+		setState(s);
+		persisted.write("languagePrefs", s);
+	}, []);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("languagePrefs", (nextLanguagePrefs) => {

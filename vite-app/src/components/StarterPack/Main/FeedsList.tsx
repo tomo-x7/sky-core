@@ -6,7 +6,7 @@ import { type ListRenderItemInfo, View } from "react-native";
 import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import type { SectionRef } from "#/screens/Profile/Sections/types";
 import { List, type ListRef } from "#/view/com/util/List";
 
@@ -30,7 +30,7 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerHeight,
 		});
 	}, [scrollElRef, headerHeight]);

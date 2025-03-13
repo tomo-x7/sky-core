@@ -1,5 +1,5 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon,} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyleSheet, View } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -36,7 +36,7 @@ export function EmptyStateWithButton(props: Props) {
 					onPress={props.onPress}
 				>
 					{/* @ts-ignore */}
-					<FontAwesomeIcon icon="plus" style={palInverted.text } size={14} />
+					<FontAwesomeIcon icon="plus" style={palInverted.text} size={14} />
 					<Text type="lg-medium" style={palInverted.text}>
 						{props.buttonLabel}
 					</Text>

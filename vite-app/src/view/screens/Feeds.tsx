@@ -24,7 +24,7 @@ import { ComposeIcon2 } from "#/lib/icons";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { NoFollowingFeed } from "#/screens/Feeds/NoFollowingFeed";
 import { NoSavedFeedsOfAnyType } from "#/screens/Feeds/NoSavedFeedsOfAnyType";
 import {
@@ -151,13 +151,13 @@ export function FeedsScreen(_props: Props) {
 				resetSearch();
 			}
 		},
-		[ refetchPopularFeeds, debouncedSearch, resetSearch],
+		[refetchPopularFeeds, debouncedSearch, resetSearch],
 	);
 	const onPressCancelSearch = React.useCallback(() => {
 		setQuery("");
 		refetchPopularFeeds();
 		resetSearch();
-	}, [refetchPopularFeeds,  resetSearch]);
+	}, [refetchPopularFeeds, resetSearch]);
 	const onSubmitQuery = React.useCallback(() => {
 		debouncedSearch(query);
 	}, [query, debouncedSearch]);
@@ -168,7 +168,7 @@ export function FeedsScreen(_props: Props) {
 			refetchPopularFeeds().catch((_e) => undefined),
 		]);
 		setIsPTR(false);
-	}, [ refetchSavedFeeds, refetchPopularFeeds]);
+	}, [refetchSavedFeeds, refetchPopularFeeds]);
 	const onEndReached = React.useCallback(() => {
 		if (isPopularFeedsFetching || isUserSearching || !hasNextPopularFeedsPage || popularFeedsError) return;
 		fetchNextPopularFeedsPage();
@@ -361,23 +361,15 @@ export function FeedsScreen(_props: Props) {
 	const onChangeSearchFocus = React.useCallback(
 		(focus: boolean) => {
 			if (focus && searchBarIndex > -1) {
-				if (isNative) {
-					// scrollToIndex scrolls the exact right amount, so use if available
-					listRef.current?.scrollToIndex({
-						index: searchBarIndex,
-						animated: true,
-					});
-				} else {
-					// web implementation only supports scrollToOffset
-					// thus, we calculate the offset based on the index
-					// pixel values are estimates, I wasn't able to get it pixel perfect :(
-					const headerHeight = isMobile ? 43 : 53;
-					const feedItemHeight = isMobile ? 49 : 58;
-					listRef.current?.scrollToOffset({
-						offset: searchBarIndex * feedItemHeight - headerHeight,
-						animated: true,
-					});
-				}
+				// web implementation only supports scrollToOffset
+				// thus, we calculate the offset based on the index
+				// pixel values are estimates, I wasn't able to get it pixel perfect :(
+				const headerHeight = isMobile ? 43 : 53;
+				const feedItemHeight = isMobile ? 49 : 58;
+				listRef.current?.scrollToOffset({
+					offset: searchBarIndex * feedItemHeight - headerHeight,
+					animated: true,
+				});
 			}
 		},
 		[searchBarIndex, isMobile],

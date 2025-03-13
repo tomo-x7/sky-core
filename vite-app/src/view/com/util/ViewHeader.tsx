@@ -1,5 +1,5 @@
+import type { JSX } from "react";
 import { Header } from "#/components/Layout";
-import { JSX } from "react";
 
 /**
  * Legacy ViewHeader component. Use Layout.Header going forward.

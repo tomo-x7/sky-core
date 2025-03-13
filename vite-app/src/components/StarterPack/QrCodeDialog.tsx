@@ -1,7 +1,4 @@
-import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
-import { createAssetAsync } from "expo-media-library";
-import * as Sharing from "expo-sharing";
+import type { AppBskyGraphDefs } from "@atproto/api";
 import React from "react";
 import { View } from "react-native";
 // import type ViewShot from "react-native-view-shot";
@@ -12,9 +9,7 @@ import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { QrCode } from "#/components/StarterPack/QrCode";
-import { isNative, isWeb } from "#/platform/detection";
-import * as bsky from "#/types/bsky";
-import * as Toast from "#/view/com/util/Toast";
+import { isWeb } from "#/platform/detection";
 
 export function QrCodeDialog({
 	starterPack,

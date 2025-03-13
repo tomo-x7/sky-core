@@ -37,7 +37,7 @@ import type { NativeStackScreenProps, SearchTabNavigatorParams } from "#/lib/rou
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { augmentSearchQuery } from "#/lib/strings/helpers";
 import { languageName } from "#/locale/helpers";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { type Params, makeSearchQuery, parseSearchQuery } from "#/screens/Search/utils";
 import { listenSoftReset } from "#/state/events";
 import { useLanguagePrefs } from "#/state/preferences/languages";
@@ -636,13 +636,8 @@ export function SearchScreenShell({
 			scrollToTopWeb();
 			setShowAutocomplete(false);
 			updateSearchHistory(item);
-
-			if (isWeb) {
-				navigation.push(route.name, { ...route.params, q: item });
-			} else {
-				textInput.current?.blur();
-				navigation.setParams({ q: item });
-			}
+			// @ts-ignore
+			navigation.push(route.name, { ...route.params, q: item });
 		},
 		[updateSearchHistory, navigation, route],
 	);
@@ -692,18 +687,13 @@ export function SearchScreenShell({
 	);
 
 	const onSoftReset = React.useCallback(() => {
-		if (isWeb) {
-			// Empty params resets the URL to be /search rather than /search?q=
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const { q: _q, ...parameters } = (route.params ?? {}) as {
-				[key: string]: string;
-			};
-			navigation.replace(route.name, parameters);
-		} else {
-			setSearchText("");
-			navigation.setParams({ q: "" });
-			textInput.current?.focus();
-		}
+		// Empty params resets the URL to be /search rather than /search?q=
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { q: _q, ...parameters } = (route.params ?? {}) as {
+			[key: string]: string;
+		};
+		// @ts-ignore
+		navigation.replace(route.name, parameters);
 	}, [navigation, route]);
 
 	useFocusEffect(
@@ -867,8 +857,8 @@ let AutocompleteResults = ({
 				<Layout.Content keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
 					<SearchLinkCard
 						label={`Search for "${searchText}"`}
-						onPress={isNative ? onSubmit : undefined}
-						to={isNative ? undefined : `/search?q=${encodeURIComponent(searchText)}`}
+						onPress={undefined}
+						to={`/search?q=${encodeURIComponent(searchText)}`}
 						style={{ borderBottomWidth: 1 }}
 					/>
 					{autocompleteData?.map((item) => (

@@ -16,8 +16,7 @@ import * as Dialog from "#/components/Dialog";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { Dimensions } from "#/lib/media/types";
 import { colors, s } from "#/lib/styles";
-import { isNative } from "#/platform/detection";
-import { type ComposerImage, cropImage } from "#/state/gallery";
+import type { ComposerImage } from "#/state/gallery";
 import { Text } from "#/view/com/util/text/Text";
 import type { PostAction } from "../state/composer";
 import { EditImageDialog } from "./EditImageDialog";
@@ -135,13 +134,7 @@ const GalleryItem = ({
 	const editControl = Dialog.useDialogControl();
 
 	const onImageEdit = () => {
-		if (isNative) {
-			cropImage(image).then((next) => {
-				onChange(next);
-			});
-		} else {
-			editControl.open();
-		}
+		editControl.open();
 	};
 
 	const onAltTextEdit = () => {
@@ -164,8 +157,10 @@ const GalleryItem = ({
 				style={[styles.altTextControl, altTextControlStyle]}
 			>
 				{image.alt.length !== 0 ? (
+					//@ts-ignore
 					<FontAwesomeIcon icon="check" size={10} style={{ color: t.palette.white }} />
 				) : (
+					//@ts-ignore
 					<FontAwesomeIcon icon="plus" size={10} style={{ color: t.palette.white }} />
 				)}
 				<Text style={styles.altTextControlLabel} accessible={false}>
@@ -181,6 +176,7 @@ const GalleryItem = ({
 					onPress={onImageEdit}
 					style={styles.imageControl}
 				>
+					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="pen" size={12} style={{ color: colors.white }} />
 				</TouchableOpacity>
 				<TouchableOpacity
@@ -191,6 +187,7 @@ const GalleryItem = ({
 					onPress={onRemove}
 					style={styles.imageControl}
 				>
+					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="xmark" size={16} style={{ color: colors.white }} />
 				</TouchableOpacity>
 			</View>
@@ -224,6 +221,7 @@ export function AltTextReminder() {
 	return (
 		<View style={[styles.reminder]}>
 			<View style={[styles.infoIcon, t.atoms.bg_contrast_25]}>
+				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
 			</View>
 			<Text type="sm" style={[t.atoms.text_contrast_medium, s.flex1]}>

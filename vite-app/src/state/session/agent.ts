@@ -261,7 +261,7 @@ class BskyAppAgent extends BskyAgent {
 
 			onSessionChange(this, account.did, event);
 			if (event !== "create" && event !== "update") {
-				console.error("sessionerror",account.did,event)
+				console.error("sessionerror", account.did, event);
 			}
 		};
 		return { account, agent: this };

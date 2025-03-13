@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import * as Layout from "#/components/Layout";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -12,7 +11,6 @@ import { useTickEveryMinute } from "#/state/shell";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { ScrollView } from "#/view/com/util/Views";
-import { Text } from "#/view/com/util/text/Text";
 
 export function LogScreen(props: NativeStackScreenProps<CommonNavigatorParams, "Log">) {
 	const pal = usePalette("default");
@@ -39,7 +37,6 @@ export function LogScreen(props: NativeStackScreenProps<CommonNavigatorParams, "
 		<Layout.Screen>
 			<ViewHeader title="Log" />
 			<ScrollView style={s.flex1}>
-				
 				<View style={s.footerSpacer} />
 			</ScrollView>
 		</Layout.Screen>

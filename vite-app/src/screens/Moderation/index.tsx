@@ -26,7 +26,6 @@ import type { Props as SVGIconProps } from "#/components/icons/common";
 import { GlobalLabelPreference } from "#/components/moderation/LabelPreference";
 import { getLabelingServiceTitle } from "#/lib/moderation";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { isIOS } from "#/platform/detection";
 import {
 	type UsePreferencesQueryResponse,
 	useMyLabelersQuery,
@@ -136,7 +135,7 @@ export function ModerationScreenInner({
 		[setAdultContentPref],
 	);
 
-	const disabledOnIOS = isIOS && !adultContentEnabled;
+	const disabledOnIOS = false;
 
 	return (
 		<View style={[a.pt_2xl, a.px_lg, gtMobile && a.px_2xl]}>

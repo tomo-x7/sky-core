@@ -44,7 +44,6 @@ import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
 import { Text } from "#/view/com/util/text/Text";
 import { Link, TextLink, TextLinkOnWebOnly } from "../util/Link";
-import { AviFollowButton } from "./AviFollowButton";
 
 interface FeedItemProps {
 	record: AppBskyFeedPost.Record;

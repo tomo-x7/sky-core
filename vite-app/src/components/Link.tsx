@@ -18,7 +18,7 @@ import {
 	isExternalUrl,
 	linkRequiresWarning,
 } from "#/lib/strings/url-helpers";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { router } from "#/routes";
 import { useModalControls } from "#/state/modals";
 
@@ -50,7 +50,6 @@ type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0]
 	 * DO NOT use this for navigation, that's what the `to` prop is for.
 	 */
 
-	// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 	onPress?: (e: GestureResponderEvent) => void | false;
 
 	/**
@@ -58,7 +57,6 @@ type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0]
 	 * and return `false` to exit early and prevent default long press hander.
 	 */
 
-	// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 	onLongPress?: (e: GestureResponderEvent) => void | false;
 
 	/**
@@ -110,9 +108,7 @@ export function useLink({
 				!disableMismatchWarning && displayText && isExternal && linkRequiresWarning(href, displayText),
 			);
 
-			if (isWeb) {
-				e.preventDefault();
-			}
+			e.preventDefault();
 
 			if (requiresWarning) {
 				openModal({
@@ -184,9 +180,9 @@ export function useLink({
 		(e: GestureResponderEvent) => {
 			const exitEarlyIfFalse = outerOnLongPress?.(e);
 			if (exitEarlyIfFalse === false) return;
-			return isNative && shareOnLongPress ? handleLongPress() : undefined;
+			return undefined;
 		},
-		[outerOnLongPress, handleLongPress, shareOnLongPress],
+		[outerOnLongPress],
 	);
 
 	return {
@@ -343,12 +339,10 @@ export function InlineLinkText({
 }
 
 export function WebOnlyInlineLinkText({ children, to, onPress, ...props }: Omit<InlineLinkProps, "onLongPress">) {
-	return isWeb ? (
+	return (
 		<InlineLinkText {...props} to={to} onPress={onPress}>
 			{children}
 		</InlineLinkText>
-	) : (
-		<Text {...props}>{children}</Text>
 	);
 }
 
@@ -387,7 +381,7 @@ export function createStaticClickIfUnmodified(onPressHandler: Exclude<BaseLinkPr
 } {
 	return {
 		onPress(e: GestureResponderEvent) {
-			if (!isWeb || !isModifiedClickEvent(e)) {
+			if (!isModifiedClickEvent(e)) {
 				e.preventDefault();
 				onPressHandler(e);
 				return false;
@@ -401,7 +395,6 @@ export function createStaticClickIfUnmodified(onPressHandler: Exclude<BaseLinkPr
  * intends to deviate from default behavior.
  */
 export function isClickEventWithMetaKey(e: GestureResponderEvent) {
-	if (!isWeb) return false;
 	const event = e as unknown as MouseEvent;
 	return event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
 }
@@ -410,7 +403,6 @@ export function isClickEventWithMetaKey(e: GestureResponderEvent) {
  * Determines if the web click target is anything other than `_self`
  */
 export function isClickTargetExternal(e: GestureResponderEvent) {
-	if (!isWeb) return false;
 	const event = e as unknown as MouseEvent;
 	const el = event.currentTarget as HTMLAnchorElement;
 	return el?.target && el.target !== "_self";
@@ -422,7 +414,6 @@ export function isClickTargetExternal(e: GestureResponderEvent) {
  * {@link https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button}
  */
 export function isModifiedClickEvent(e: GestureResponderEvent): boolean {
-	if (!isWeb) return false;
 	const event = e as unknown as MouseEvent;
 	const isPrimaryButton = event.button === 0;
 	return isClickEventWithMetaKey(e) || isClickTargetExternal(e) || !isPrimaryButton;
@@ -434,7 +425,6 @@ export function isModifiedClickEvent(e: GestureResponderEvent): boolean {
  * {@link https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button}
  */
 export function shouldClickOpenNewTab(e: GestureResponderEvent) {
-	if (!isWeb) return false;
 	const event = e as unknown as MouseEvent;
 	const isMiddleClick = isWeb && event.button === 1;
 	return isClickEventWithMetaKey(e) || isClickTargetExternal(e) || isMiddleClick;

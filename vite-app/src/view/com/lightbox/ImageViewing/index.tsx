@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { LayoutAnimation, PixelRatio, Platform, StyleSheet, View } from "react-native";
+import { LayoutAnimation, PixelRatio, StyleSheet, View } from "react-native";
 import { Gesture } from "react-native-gesture-handler";
 import PagerView from "react-native-pager-view";
 import Animated, {
@@ -31,13 +31,12 @@ import Animated, {
 	withSpring,
 	type WithSpringConfig,
 } from "react-native-reanimated";
-import { type Edge, SafeAreaView, useSafeAreaFrame, useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaFrame } from "#/lib/safe-area-context";
 
 import { ios, useTheme } from "#/alf";
 import { setNavigationBar } from "#/alf/util/navigationBar";
 import type { Dimensions } from "#/lib/media/types";
 import { colors, s } from "#/lib/styles";
-import { isIOS } from "#/platform/detection";
 import type { Lightbox } from "#/state/lightbox";
 import { ScrollView } from "#/view/com/util/Views";
 import { Button } from "#/view/com/util/forms/Button";
@@ -50,16 +49,15 @@ type Rect = { x: number; y: number; width: number; height: number };
 
 const PORTRAIT_UP = ScreenOrientation.OrientationLock.PORTRAIT_UP;
 const PIXEL_RATIO = PixelRatio.get();
-const EDGES = [] satisfies Edge[]; // iOS or Android 15+ bleeds into safe area
 
 const SLOW_SPRING: WithSpringConfig = {
-	mass:  0.75,
+	mass: 0.75,
 	damping: 300,
 	stiffness: 800,
 	restDisplacementThreshold: 0.01,
 };
 const FAST_SPRING: WithSpringConfig = {
-	mass:  0.75,
+	mass: 0.75,
 	damping: 150,
 	stiffness: 900,
 	restDisplacementThreshold: 0.01,
@@ -145,9 +143,8 @@ export default function ImageViewRoot({
 		// Keep it always mounted to avoid flicker on the first frame.
 		<SafeAreaView
 			style={[styles.screen, !activeLightbox && styles.screenHidden]}
-			edges={EDGES}
 			aria-modal
-			accessibilityViewIsModal
+			// accessibilityViewIsModal
 			aria-hidden={!activeLightbox}
 		>
 			<Animated.View
@@ -232,7 +229,7 @@ function ImageView({
 			const dragProgress = Math.min(Math.abs(dismissSwipeTranslateY.get()) / (screenSize.height / 2), 1);
 			opacity -= dragProgress;
 		}
-		const factor =  50;
+		const factor = 50;
 		return {
 			opacity: Math.round(opacity * factor) / factor,
 		};
@@ -399,7 +396,6 @@ function LightboxImage({
 	}
 
 	const safeFrameDelayedForJSThreadOnly = useSafeAreaFrame();
-	const safeInsetsDelayedForJSThreadOnly = useSafeAreaInsets();
 	const measureSafeArea = React.useCallback(() => {
 		"worklet";
 		let safeArea: Rect | null = measure(safeAreaRef);
@@ -408,16 +404,15 @@ function LightboxImage({
 				console.error("Expected to always be able to measure safe area.");
 			}
 			const frame = safeFrameDelayedForJSThreadOnly;
-			const insets = safeInsetsDelayedForJSThreadOnly;
 			safeArea = {
-				x: frame.x + insets.left,
-				y: frame.y + insets.top,
-				width: frame.width - insets.left - insets.right,
-				height: frame.height - insets.top - insets.bottom,
+				x: frame.x,
+				y: frame.y,
+				width: frame.width,
+				height: frame.height,
 			};
 		}
 		return safeArea;
-	}, [safeFrameDelayedForJSThreadOnly, safeInsetsDelayedForJSThreadOnly, safeAreaRef]);
+	}, [safeFrameDelayedForJSThreadOnly, safeAreaRef]);
 
 	const { thumbRect } = imageSrc;
 	const transforms = useDerivedValue(() => {
@@ -489,9 +484,7 @@ function LightboxImage({
 			}
 		});
 
-	return (
-		<View />
-	);
+	return <View />;
 }
 
 function LightboxFooter({
@@ -553,13 +546,13 @@ function LightboxFooter({
 					<Button type="primary-outline" style={styles.footerBtn} onPress={() => onPressSave(uri)}>
 						<FontAwesomeIcon icon={["far", "floppy-disk"]} style={s.white} />
 						<Text type="xl" style={s.white}>
-							<>Save</>
+							Save
 						</Text>
 					</Button>
 					<Button type="primary-outline" style={styles.footerBtn} onPress={() => onPressShare(uri)}>
 						<FontAwesomeIcon icon="arrow-up-from-bracket" style={s.white} />
 						<Text type="xl" style={s.white}>
-							<>Share</>
+							Share
 						</Text>
 					</Button>
 				</View>

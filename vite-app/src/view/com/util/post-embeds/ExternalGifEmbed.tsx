@@ -9,7 +9,7 @@ import { Fill } from "#/components/Fill";
 import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
-import { isIOS, isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { useExternalEmbedsPrefs } from "#/state/preferences";
 
 export function ExternalGifEmbed({
@@ -99,7 +99,7 @@ export function ExternalGifEmbed({
 					accessibilityIgnoresInvertColors
 					accessibilityLabel={link.title}
 					accessibilityHint={link.title}
-					cachePolicy={isIOS ? "disk" : "memory-disk"} // cant control playback with memory-disk on ios
+					cachePolicy={"memory-disk"} // cant control playback with memory-disk on ios
 				/>
 
 				{(!isPrefetched || !isAnimating) && (

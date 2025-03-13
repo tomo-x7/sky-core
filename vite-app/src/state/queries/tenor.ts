@@ -57,7 +57,7 @@ function createTenorApi<Input extends object>(
 
 		params.set("media_filter", (["preview", "gif", "tinygif"] satisfies ContentFormats[]).join(","));
 
-		const locale = navigator.language || 'ja-JP';
+		const locale = navigator.language || "ja-JP";
 
 		if (locale) {
 			params.set("locale", locale.replace("-", "_"));

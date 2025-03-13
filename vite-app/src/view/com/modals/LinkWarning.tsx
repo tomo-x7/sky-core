@@ -46,7 +46,7 @@ export function Component({
 				<View style={styles.titleSection}>
 					{potentiallyMisleading ? (
 						<>
-						{/* @ts-ignore */}
+							{/* @ts-ignore */}
 							<FontAwesomeIcon icon="circle-exclamation" color={pal.colors.text} size={18} />
 							<Text type="title-lg" style={[pal.text, styles.title]}>
 								Potentially Misleading Link

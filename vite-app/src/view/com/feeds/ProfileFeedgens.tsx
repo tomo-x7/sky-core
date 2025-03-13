@@ -14,7 +14,7 @@ import { atoms as a, ios, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { usePreferencesQuery } from "#/state/queries/preferences";
 import { RQKEY, useProfileFeedgensQuery } from "#/state/queries/profile-feedgens";
 import { EmptyState } from "#/view/com/util/EmptyState";
@@ -81,7 +81,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 
 	const onScrollToTop = React.useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerOffset,
 		});
 		queryClient.invalidateQueries({ queryKey: RQKEY(did) });
@@ -99,7 +99,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 			console.error("Failed to refresh feeds", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, ]);
+	}, [refetch]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

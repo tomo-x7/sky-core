@@ -27,7 +27,7 @@ function useWebQueryParams() {
 				setParams(lastRoute.params);
 			} catch (err) {}
 		});
-	}, [navigation, ]);
+	}, [navigation]);
 
 	return params;
 }

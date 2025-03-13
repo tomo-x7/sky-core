@@ -10,7 +10,7 @@ import { Mute_Stroke2_Corner0_Rounded as Mute } from "#/components/icons/Mute";
 import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
 import type { NavigationProp } from "#/lib/routes/types";
 import { isInvalidHandle } from "#/lib/strings/handles";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import {
 	usePreferencesQuery,
 	useRemoveMutedWordsMutation,
@@ -41,7 +41,7 @@ export function RichTextTag({
 	} = useRemoveMutedWordsMutation();
 	const navigation = useNavigation<NavigationProp>();
 	const label = `Hashtag ${tag}`;
-	const hint = isNative ? `Long press to open tag menu for #${tag}` : `Click to open tag menu for ${tag}`;
+	const hint = `Click to open tag menu for ${tag}`;
 
 	const isMuted = Boolean(
 		(preferences?.moderationPrefs.mutedWords?.find((m) => m.value === tag && m.targets.includes("tag")) ??
@@ -73,9 +73,7 @@ export function RichTextTag({
 						onPress={(e) => {
 							if (isWeb) {
 								return createStaticClickIfUnmodified(() => {
-									if (!isNative) {
-										menuProps.onPress();
-									}
+									menuProps.onPress();
 								}).onPress(e);
 							}
 						}}
@@ -84,7 +82,7 @@ export function RichTextTag({
 						label={label}
 						style={textStyle}
 					>
-						{isNative ? display : <RNText ref={menuProps.ref}>{display}</RNText>}
+						{<RNText ref={menuProps.ref}>{display}</RNText>}
 					</InlineLinkText>
 				)}
 			</Menu.Trigger>

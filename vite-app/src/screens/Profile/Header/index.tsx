@@ -1,13 +1,9 @@
 import type { AppBskyActorDefs, AppBskyLabelerDefs, ModerationOpts, RichText as RichTextAPI } from "@atproto/api";
-import { useIsFocused } from "@react-navigation/native";
-import React, { memo, useState } from "react";
-import { type LayoutChangeEvent, StyleSheet, View } from "react-native";
-import Animated, { runOnJS, useAnimatedReaction, useAnimatedStyle, withTiming } from "react-native-reanimated";
+import type React from "react";
+import { memo } from "react";
+import { StyleSheet, View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
-import { isNative } from "#/platform/detection";
-import { useSetLightStatusBar } from "#/state/shell/light-status-bar";
-import { usePagerHeaderContext } from "#/view/com/pager/PagerHeaderContext";
+import { useTheme } from "#/alf";
 import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { ProfileHeaderLabeler } from "./ProfileHeaderLabeler";
 import { ProfileHeaderStandard } from "./ProfileHeaderStandard";
@@ -53,92 +49,10 @@ let ProfileHeader = ({ setMinimumHeight, ...props }: Props): React.ReactNode => 
 		content = <ProfileHeaderStandard {...props} />;
 	}
 
-	return (
-		<>
-			{isNative && (
-				<MinimalHeader
-					onLayout={(evt) => setMinimumHeight(evt.nativeEvent.layout.height)}
-					profile={props.profile}
-					hideBackButton={props.hideBackButton}
-				/>
-			)}
-			{content}
-		</>
-	);
+	return <>{content}</>;
 };
 ProfileHeader = memo(ProfileHeader);
 export { ProfileHeader };
-
-const MinimalHeader = React.memo(function MinimalHeader({
-	onLayout,
-}: {
-	onLayout: (e: LayoutChangeEvent) => void;
-	profile: AppBskyActorDefs.ProfileViewDetailed;
-	hideBackButton?: boolean;
-}) {
-	const t = useTheme();
-	const ctx = usePagerHeaderContext();
-	const [visible, setVisible] = useState(false);
-	const [minimalHeaderHeight, setMinimalHeaderHeight] = React.useState(0);
-	const isScreenFocused = useIsFocused();
-	if (!ctx) throw new Error("MinimalHeader cannot be used on web");
-	const { scrollY, headerHeight } = ctx;
-
-	const animatedStyle = useAnimatedStyle(() => {
-		// if we don't yet have the min header height in JS, hide
-		if (!_WORKLET || minimalHeaderHeight === 0) {
-			return {
-				opacity: 0,
-			};
-		}
-		const pastThreshold = scrollY.get() > 100;
-		return {
-			opacity: pastThreshold ? withTiming(1, { duration: 75 }) : withTiming(0, { duration: 75 }),
-			transform: [
-				{
-					translateY: Math.min(scrollY.get(), headerHeight - minimalHeaderHeight),
-				},
-			],
-		};
-	});
-
-	useAnimatedReaction(
-		() => scrollY.get() > 100,
-		(value, prev) => {
-			if (prev !== value) {
-				runOnJS(setVisible)(value);
-			}
-		},
-	);
-
-	useSetLightStatusBar(isScreenFocused && !visible);
-
-	return (
-		<Animated.View
-			pointerEvents={visible ? "auto" : "none"}
-			aria-hidden={!visible}
-			accessibilityElementsHidden={!visible}
-			importantForAccessibility={visible ? "auto" : "no-hide-descendants"}
-			onLayout={(evt) => {
-				setMinimalHeaderHeight(evt.nativeEvent.layout.height);
-				onLayout(evt);
-			}}
-			style={[
-				a.absolute,
-				a.z_50,
-				t.atoms.bg,
-				{
-					top: 0,
-					left: 0,
-					right: 0,
-					paddingTop: 0,
-				},
-				animatedStyle,
-			]}
-		/>
-	);
-});
-MinimalHeader.displayName = "MinimalHeader";
 
 const styles = StyleSheet.create({
 	avi: {

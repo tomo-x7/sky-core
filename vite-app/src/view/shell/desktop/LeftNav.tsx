@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useLinkProps, useNavigation, useNavigationState } from "@react-navigation/native";
-import React, { JSX } from "react";
+import React, { type JSX } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { atoms as a, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
@@ -241,7 +241,7 @@ function SwitchMenuItems({
 									other.profile?.handle ?? other.account.handle,
 									"@",
 								)}`}
-								onPress={() => onPressSwitchAccount(other.account, )}
+								onPress={() => onPressSwitchAccount(other.account)}
 							>
 								<View style={[{ marginLeft: tokens.space._2xs * -1 }]}>
 									<UserAvatar
@@ -313,7 +313,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 
 	return (
 		<PressableWithHover
-		//@ts-ignore
+			//@ts-ignore
 			style={[a.flex_row, a.align_center, a.p_md, a.rounded_sm, a.gap_sm, a.outline_inset_1, a.transition_color]}
 			hoverStyle={t.atoms.bg_contrast_25}
 			// @ts-expect-error the function signature differs on web -prf
@@ -350,7 +350,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 						]}
 					>
 						<Text
-							accessibilityLabel={`${count} unread ${count==="1"?"item":"items"}`}
+							accessibilityLabel={`${count} unread ${count === "1" ? "item" : "items"}`}
 							accessibilityHint=""
 							accessible={true}
 							numberOfLines={1}
@@ -459,9 +459,7 @@ function ComposeBtn() {
 				style={[a.rounded_full]}
 			>
 				<ButtonIcon icon={EditBig} position="left" />
-				<ButtonText>
-					New Post
-				</ButtonText>
+				<ButtonText>New Post</ButtonText>
 			</Button>
 		</View>
 	);

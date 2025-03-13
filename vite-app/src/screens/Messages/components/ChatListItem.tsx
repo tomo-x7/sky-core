@@ -16,10 +16,8 @@ import { Envelope_Open_Stroke2_Corner0_Rounded as EnvelopeOpen } from "#/compone
 import { Trash_Stroke2_Corner0_Rounded } from "#/components/icons/Trash";
 import { PostAlerts } from "#/components/moderation/PostAlerts";
 import { GestureActionView } from "#/lib/custom-animations/GestureActionView";
-import { decrementBadgeCount } from "#/lib/notifications/notifications";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { postUriToRelativePath, toBskyAppUrl, toShortUrl } from "#/lib/strings/url-helpers";
-import { isNative } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { precacheConvoQuery, useMarkAsReadMutation } from "#/state/queries/messages/conversation";
@@ -179,7 +177,6 @@ function ChatListItemReady({
 		(e: GestureResponderEvent) => {
 			precacheProfile(queryClient, profile);
 			precacheConvoQuery(queryClient, convo);
-			decrementBadgeCount(convo.unreadCount);
 			if (isDeletedAccount) {
 				e.preventDefault();
 				menuControl.open();
@@ -247,16 +244,9 @@ function ChatListItemReady({
 							? `Go to conversation with ${profile.handle}`
 							: "This conversation is with a deleted or a deactivated account. Press for options"
 					}
-					accessibilityActions={
-						isNative
-							? [
-									{ name: "magicTap", label: "Open conversation options" },
-									{ name: "longpress", label: "Open conversation options" },
-								]
-							: undefined
-					}
+					accessibilityActions={undefined}
 					onPress={onPress}
-					onLongPress={isNative ? onLongPress : undefined}
+					onLongPress={undefined}
 					onAccessibilityAction={onLongPress}
 				>
 					{({ hovered, pressed, focused }) => (
@@ -374,7 +364,7 @@ function ChatListItemReady({
 						control={menuControl}
 						currentScreen="list"
 						showMarkAsRead={convo.unreadCount > 0}
-						hideTrigger={isNative}
+						hideTrigger={false}
 						blockInfo={blockInfo}
 						style={[
 							a.absolute,

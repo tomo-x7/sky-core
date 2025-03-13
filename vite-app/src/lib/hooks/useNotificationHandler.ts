@@ -6,7 +6,6 @@ import React from "react";
 import { resetToTab } from "#/Navigation";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
 import type { NavigationProp } from "#/lib/routes/types";
-import { isAndroid } from "#/platform/detection";
 import { useCurrentConvoId } from "#/state/messages/current-convo-id";
 import { RQKEY as RQKEY_NOTIFS } from "#/state/queries/notifications/feed";
 import { invalidateCachedUnreadPage } from "#/state/queries/notifications/unread";
@@ -56,32 +55,6 @@ export function useNotificationsHandler() {
 	const { currentConvoId } = useCurrentConvoId();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
 	const closeAllActiveElements = useCloseAllActiveElements();
-
-	// On Android, we cannot control which sound is used for a notification on Android
-	// 28 or higher. Instead, we have to configure a notification channel ahead of time
-	// which has the sounds we want in the configuration for that channel. These two
-	// channels allow for the mute/unmute functionality we want for the background
-	// handler.
-	React.useEffect(() => {
-		if (!isAndroid) return;
-		Notifications.setNotificationChannelAsync("chat-messages", {
-			name: "Chat",
-			importance: Notifications.AndroidImportance.MAX,
-			sound: "dm.mp3",
-			showBadge: true,
-			vibrationPattern: [250],
-			lockscreenVisibility: Notifications.AndroidNotificationVisibility.PRIVATE,
-		});
-
-		Notifications.setNotificationChannelAsync("chat-messages-muted", {
-			name: "Chat - Muted",
-			importance: Notifications.AndroidImportance.MAX,
-			sound: null,
-			showBadge: true,
-			vibrationPattern: [250],
-			lockscreenVisibility: Notifications.AndroidNotificationVisibility.PRIVATE,
-		});
-	}, []);
 
 	React.useEffect(() => {
 		const handleNotification = (payload?: NotificationPayload) => {

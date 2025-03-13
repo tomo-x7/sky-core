@@ -50,7 +50,7 @@ let PostDropdownBtn = ({
 				setTimeout(menuControl.open);
 			},
 		}),
-		[menuControl, ],
+		[menuControl],
 	);
 	return (
 		<EventStopper onKeyDown={false}>

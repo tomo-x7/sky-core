@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, type TextInput, type TextInputProps } from "react-native";
 // @ts-expect-error untyped
-import { unstable_createElement } from "react-native-web";
+import { unstable_createElement } from "react-native";
 
 import type { DateFieldProps } from "#/components/forms/DateField/types";
 import { toSimpleDateString } from "#/components/forms/DateField/utils";

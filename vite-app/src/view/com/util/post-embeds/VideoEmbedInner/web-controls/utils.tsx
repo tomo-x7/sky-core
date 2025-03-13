@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { isSafari } from "#/lib/browser";
 import { useVideoVolumeState } from "../../VideoVolumeContext";
 
-export function useVideoElement(ref: React.RefObject<HTMLVideoElement|null>) {
+export function useVideoElement(ref: React.RefObject<HTMLVideoElement | null>) {
 	const [playing, setPlaying] = useState(false);
 	const [muted, setMuted] = useState(true);
 	const [currentTime, setCurrentTime] = useState(0);

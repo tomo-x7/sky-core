@@ -1,10 +1,9 @@
-import { FontAwesomeIcon,  } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useMemo } from "react";
-import { Keyboard, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { LANG_DROPDOWN_HITSLOP } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
-import { isNative } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { hasPostLanguage, toPostLanguages, useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences/languages";
 import { DropdownButton, type DropdownItem, type DropdownItemButton } from "#/view/com/util/forms/DropdownButton";
@@ -18,11 +17,6 @@ export function SelectLangBtn() {
 	const setLangPrefs = useLanguagePrefsApi();
 
 	const onPressMore = useCallback(async () => {
-		if (isNative) {
-			if (Keyboard.isVisible()) {
-				Keyboard.dismiss();
-			}
-		}
 		openModal({ name: "post-languages-settings" });
 	}, [openModal]);
 

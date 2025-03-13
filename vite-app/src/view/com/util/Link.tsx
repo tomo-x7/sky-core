@@ -1,6 +1,6 @@
 import { sanitizeUrl } from "@braintree/sanitize-url";
 import { StackActions, useLinkProps } from "@react-navigation/native";
-import React, { type ComponentProps, JSX, memo, useMemo } from "react";
+import React, { type ComponentProps, type JSX, memo, useMemo } from "react";
 import {
 	type GestureResponderEvent,
 	Platform,
@@ -19,7 +19,7 @@ import { type DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
 import { TabState, getTabState } from "#/lib/routes/helpers";
 import { convertBskyAppUrlIfNeeded, isExternalUrl, linkRequiresWarning } from "#/lib/strings/url-helpers";
-import { isAndroid, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { emitSoftReset } from "#/state/events";
 import { useModalControls } from "#/state/modals";
 import { WebAuxClickWrapper } from "#/view/com/util/WebAuxClickWrapper";
@@ -100,7 +100,7 @@ export const Link = memo(function Link({
 					android_ripple={{
 						color: t.atoms.bg_contrast_25.backgroundColor,
 					}}
-					unstable_pressDelay={isAndroid ? 90 : undefined}
+					unstable_pressDelay={undefined}
 				>
 					{/* @ts-ignore web only -prf */}
 					<View style={style} href={anchorHref}>
@@ -333,7 +333,7 @@ const EXEMPT_PATHS = ["/robots.txt", "/security.txt", "/.well-known/"];
 // -prf
 function onPressInner(
 	// biome-ignore lint/style/useDefaultParameterLast: <explanation>
-	closeModal= () => {},
+	closeModal = () => {},
 	navigation: DebouncedNavigationProp,
 	href: string,
 	// biome-ignore lint/style/useDefaultParameterLast: <explanation>

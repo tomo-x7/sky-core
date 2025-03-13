@@ -5,7 +5,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-na
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { ScaleAndFadeIn, ScaleAndFadeOut } from "#/lib/custom-animations/ScaleAndFade";
-import { isAndroid, isIOS, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -15,7 +15,7 @@ export function NewMessagesPill({
 	onPress: () => void;
 }) {
 	const t = useTheme();
-	const bottomBarHeight = isIOS ? 42 : isAndroid ? 60 : 0;
+	const bottomBarHeight = 0;
 	const bottomOffset = isWeb ? 0 : bottomBarHeight;
 
 	const scale = useSharedValue(1);

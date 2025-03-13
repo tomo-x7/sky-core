@@ -127,16 +127,6 @@ function HomeScreenReady({
 		emitSoftReset();
 	}, []);
 
-	const onPageScrollStateChanged = React.useCallback(
-		(state: "idle" | "dragging" | "settling") => {
-			"worklet";
-			if (state === "dragging") {
-				setMinimalShellMode(false);
-			}
-		},
-		[setMinimalShellMode],
-	);
-
 	const renderTabBar = React.useCallback(
 		(props: RenderTabBarFnProps) => {
 			return (
@@ -179,7 +169,6 @@ function HomeScreenReady({
 			ref={pagerRef}
 			initialPage={selectedIndex}
 			onPageSelected={onPageSelected}
-			onPageScrollStateChanged={onPageScrollStateChanged}
 			renderTabBar={renderTabBar}
 		>
 			{pinnedFeedInfos.length ? (
@@ -220,11 +209,7 @@ function HomeScreenReady({
 			)}
 		</Pager>
 	) : (
-		<Pager
-			onPageSelected={onPageSelected}
-			onPageScrollStateChanged={onPageScrollStateChanged}
-			renderTabBar={renderTabBar}
-		>
+		<Pager onPageSelected={onPageSelected} renderTabBar={renderTabBar}>
 			<FeedPage
 				testID="customFeedPage"
 				isPageFocused

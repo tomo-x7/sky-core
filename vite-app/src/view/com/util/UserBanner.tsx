@@ -7,17 +7,13 @@ import type { Image as RNImage } from "react-native-image-crop-picker";
 import { tokens, useTheme as useAlfTheme } from "#/alf";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 import * as Menu from "#/components/Menu";
-import {
-	Camera_Stroke2_Corner0_Rounded as Camera,
-	Camera_Filled_Stroke2_Corner0_Rounded as CameraFilled,
-} from "#/components/icons/Camera";
+import { Camera_Filled_Stroke2_Corner0_Rounded as CameraFilled } from "#/components/icons/Camera";
 import { StreamingLive_Stroke2_Corner0_Rounded as Library } from "#/components/icons/StreamingLive";
 import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash";
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useCameraPermission, usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { colors } from "#/lib/styles";
-import { isAndroid, isNative } from "#/platform/detection";
 import { EventStopper } from "#/view/com/util/EventStopper";
 import { openCamera, openCropper, openPicker } from "../../../lib/media/picker";
 
@@ -110,25 +106,12 @@ export function UserBanner({
 				</Menu.Trigger>
 				<Menu.Outer showCancel>
 					<Menu.Group>
-						{isNative && (
-							<Menu.Item
-								testID="changeBannerCameraBtn"
-								label={"Upload from Camera"}
-								onPress={onOpenCamera}
-							>
-								<Menu.ItemText>Upload from Camera</Menu.ItemText>
-								<Menu.ItemIcon icon={Camera} />
-							</Menu.Item>
-						)}
-
 						<Menu.Item
 							testID="changeBannerLibraryBtn"
 							label={"Upload from Library"}
 							onPress={onOpenLibrary}
 						>
-							<Menu.ItemText>
-								{isNative ? <>Upload from Library</> : <>Upload from Files</>}
-							</Menu.ItemText>
+							<Menu.ItemText>{"Upload from Files"}</Menu.ItemText>
 							<Menu.ItemIcon icon={Library} />
 						</Menu.Item>
 					</Menu.Group>
@@ -150,7 +133,7 @@ export function UserBanner({
 				</Menu.Outer>
 			</Menu.Root>
 		</EventStopper>
-	) : banner && !((moderation?.blur && isAndroid) /* android crashes with blur */) ? (
+	) : banner ? (
 		<Image
 			testID="userBannerImage"
 			style={[styles.bannerImage, { backgroundColor: theme.palette.default.backgroundLight }]}

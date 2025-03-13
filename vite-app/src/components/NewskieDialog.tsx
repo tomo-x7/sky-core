@@ -4,7 +4,7 @@ import React from "react";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
+import { Button } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { useDialogControl } from "#/components/Dialog";
 import * as StarterPackCard from "#/components/StarterPack/StarterPackCard";
@@ -13,7 +13,6 @@ import { Newskie } from "#/components/icons/Newskie";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useGetTimeAgo } from "#/lib/hooks/useTimeAgo";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { isNative } from "#/platform/detection";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useSession } from "#/state/session";
 
@@ -128,19 +127,6 @@ export function NewskieDialog({
 								</View>
 							</StarterPackCard.Link>
 						) : null}
-
-						{isNative && (
-							<Button
-								label={"Close"}
-								variant="solid"
-								color="secondary"
-								size="small"
-								style={[a.mt_sm]}
-								onPress={() => control.close()}
-							>
-								<ButtonText>Close</ButtonText>
-							</Button>
-						)}
 					</View>
 
 					<Dialog.Close />

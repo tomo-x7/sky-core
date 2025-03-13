@@ -34,15 +34,15 @@ export function Provider({ children }: React.PropsWithChildren) {
 					<ExternalEmbedsProvider>
 						<HiddenPostsProvider>
 							<InAppBrowserProvider>
-									<AutoplayProvider>
-										<UsedStarterPacksProvider>
-											<SubtitlesProvider>
-												<TrendingSettingsProvider>
-													<KawaiiProvider>{children}</KawaiiProvider>
-												</TrendingSettingsProvider>
-											</SubtitlesProvider>
-										</UsedStarterPacksProvider>
-									</AutoplayProvider>
+								<AutoplayProvider>
+									<UsedStarterPacksProvider>
+										<SubtitlesProvider>
+											<TrendingSettingsProvider>
+												<KawaiiProvider>{children}</KawaiiProvider>
+											</TrendingSettingsProvider>
+										</SubtitlesProvider>
+									</UsedStarterPacksProvider>
+								</AutoplayProvider>
 							</InAppBrowserProvider>
 						</HiddenPostsProvider>
 					</ExternalEmbedsProvider>

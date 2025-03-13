@@ -13,7 +13,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { saveImageToMediaLibrary } from "#/lib/media/manip";
 import { shareUrl } from "#/lib/sharing";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import * as Toast from "#/view/com/util/Toast";
 
 interface Props {
@@ -116,18 +116,6 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 							>
 								<ButtonText>Share QR code</ButtonText>
 							</Button>
-							{isNative && (
-								<Button
-									label={"Save image"}
-									variant="ghost"
-									color="secondary"
-									size="small"
-									style={[isWeb && a.self_center]}
-									onPress={onSave}
-								>
-									<ButtonText>Save image</ButtonText>
-								</Button>
-							)}
 						</View>
 					</View>
 				)}

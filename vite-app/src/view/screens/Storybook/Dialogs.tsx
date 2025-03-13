@@ -52,7 +52,7 @@ export function Dialogs() {
 
 	const onUnmountTestEndPress = () => {
 		setShouldRenderUnmountTest(false);
-		clearInterval(unmountTestInterval.current??undefined);
+		clearInterval(unmountTestInterval.current ?? undefined);
 	};
 
 	return (

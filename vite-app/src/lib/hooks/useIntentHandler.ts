@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useIntentDialogs } from "#/components/intents/IntentDialogs";
-import { isNative } from "#/platform/detection";
 import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell";
 import { useCloseAllActiveElements } from "#/state/util";
@@ -110,7 +109,7 @@ export function useComposeIntent() {
 			setTimeout(() => {
 				openComposer({
 					text: text ?? undefined,
-					imageUris: isNative ? imageUris : undefined,
+					imageUris: undefined,
 				});
 			}, 500);
 		},

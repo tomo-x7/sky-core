@@ -17,7 +17,6 @@ import { LabelerLabelPreference } from "#/components/moderation/LabelPreference"
 import { useScrollHandlers } from "#/lib/ScrollContext";
 import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
 import { isLabelerSubscribed, lookupLabelValueDefinition } from "#/lib/moderation";
-import { isNative } from "#/platform/detection";
 import type { ListRef } from "#/view/com/util/List";
 import { ErrorState } from "../ErrorState";
 import type { SectionRef } from "./types";
@@ -48,7 +47,7 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 	const onScrollToTop = React.useCallback(() => {
 		// @ts-ignore TODO fix this
 		scrollElRef.current?.scrollTo({
-			animated: isNative,
+			animated: false,
 			x: 0,
 			y: -headerHeight,
 		});

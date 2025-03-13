@@ -10,13 +10,10 @@ const stateContext = React.createContext<StateContext>(persisted.defaults.kawaii
 export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState(persisted.get("kawaii"));
 
-	const setStateWrapped = React.useCallback(
-		(kawaii: persisted.Schema["kawaii"]) => {
-			setState(kawaii);
-			persisted.write("kawaii", kawaii);
-		},
-		[],
-	);
+	const setStateWrapped = React.useCallback((kawaii: persisted.Schema["kawaii"]) => {
+		setState(kawaii);
+		persisted.write("kawaii", kawaii);
+	}, []);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("kawaii", (nextKawaii) => {

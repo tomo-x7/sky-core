@@ -14,7 +14,6 @@ import { NON_BREAKING_SPACE } from "#/lib/strings/constants";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { niceDate } from "#/lib/strings/time";
-import { isAndroid } from "#/platform/detection";
 import { precacheProfile } from "#/state/queries/profile";
 import { TimeElapsed } from "./TimeElapsed";
 import { PreviewableUserAvatar } from "./UserAvatar";
@@ -46,7 +45,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 		precacheProfile(queryClient, opts.author);
 	}, [queryClient, opts.author]);
 
-	const timestampLabel = niceDate( opts.timestamp);
+	const timestampLabel = niceDate(opts.timestamp);
 
 	return (
 		<View style={[a.flex_1, a.flex_row, a.align_center, a.pb_2xs, a.gap_xs, a.z_10, opts.style]}>
@@ -61,7 +60,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 				</View>
 			)}
 			<ProfileHoverCard inline did={opts.author.did}>
-				<Text numberOfLines={1} style={[isAndroid ? a.flex_1 : a.flex_shrink]}>
+				<Text numberOfLines={1} style={[a.flex_shrink]}>
 					<WebOnlyInlineLinkText
 						to={profileLink}
 						label={"View profile"}
@@ -88,11 +87,11 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 				</Text>
 			</ProfileHoverCard>
 
-			{!isAndroid && (
+			{
 				<Text style={[a.text_md, t.atoms.text_contrast_medium]} accessible={false}>
 					&middot;
 				</Text>
-			)}
+			}
 
 			<TimeElapsed timestamp={opts.timestamp}>
 				{({ timeElapsed }) => (

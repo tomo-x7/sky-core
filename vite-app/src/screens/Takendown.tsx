@@ -14,7 +14,7 @@ import * as TextField from "#/components/forms/TextField";
 import { MAX_REPORT_REASON_GRAPHEME_LENGTH } from "#/lib/constants";
 import { useEnableKeyboardController } from "#/lib/hooks/useEnableKeyboardController";
 import { cleanError } from "#/lib/strings/errors";
-import { isIOS, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { useAgent, useSession, useSessionApi } from "#/state/session";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import { Logo } from "#/view/icons/Logo";
@@ -216,7 +216,7 @@ export function Takendown() {
 						a.align_center,
 						t.atoms.bg,
 						gtMobile ? a.px_5xl : a.px_xl,
-						{ paddingBottom: ( a.pb_5xl.paddingBottom) },
+						{ paddingBottom: a.pb_5xl.paddingBottom },
 					]}
 				>
 					<View style={[a.w_full, a.gap_sm, { maxWidth: COL_WIDTH }]}>

@@ -3,7 +3,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "#/lib/safe-area-context";
 
 import { navigate } from "#/Navigation";
 import { atoms as a } from "#/alf";
@@ -348,6 +348,7 @@ function ProfileScreenLoaded({
 				onPageSelected={onPageSelected}
 				onCurrentPageSelected={onCurrentPageSelected}
 				renderHeader={renderHeader}
+				//@ts-ignore
 				allowHeaderOverScroll
 			>
 				{showFiltersTab

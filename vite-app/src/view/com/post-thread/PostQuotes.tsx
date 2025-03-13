@@ -72,7 +72,7 @@ export function PostQuotes({ uri }: { uri: string }) {
 			console.error("Failed to refresh quotes", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, ]);
+	}, [refetch]);
 
 	const onEndReached = useCallback(async () => {
 		if (isFetchingNextPage || !hasNextPage || isError) return;

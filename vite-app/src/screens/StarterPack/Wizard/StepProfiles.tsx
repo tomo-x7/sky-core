@@ -9,7 +9,6 @@ import { ScreenTransition } from "#/components/StarterPack/Wizard/ScreenTransiti
 import { WizardProfileCard } from "#/components/StarterPack/Wizard/WizardListCard";
 import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
-import { isNative } from "#/platform/detection";
 import { useWizardState } from "#/screens/StarterPack/Wizard/State";
 import { useA11y } from "#/state/a11y";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
@@ -74,7 +73,7 @@ export function StepProfiles({
 				sideBorders={false}
 				style={[a.flex_1]}
 				onEndReached={!query && !screenReaderEnabled ? () => fetchNextPage() : undefined}
-				onEndReachedThreshold={isNative ? 2 : 0.25}
+				onEndReachedThreshold={0.25}
 				keyboardDismissMode="on-drag"
 				ListEmptyComponent={
 					<View style={[a.flex_1, a.align_center, a.mt_lg, a.px_lg]}>

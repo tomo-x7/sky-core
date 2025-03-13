@@ -35,8 +35,6 @@ type ComposerImageWithTransformation = ComposerImageBase & {
 
 export type ComposerImage = ComposerImageWithoutTransformation | ComposerImageWithTransformation;
 
-
-
 export async function createComposerImage(raw: ImageMeta): Promise<ComposerImageWithoutTransformation> {
 	return {
 		alt: "",
@@ -167,7 +165,6 @@ async function moveIfNecessary(from: string) {
 
 /** Purge files that were created to accomodate image manipulation */
 export async function purgeTemporaryImageFiles() {}
-
 
 function containImageRes(
 	w: number,

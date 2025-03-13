@@ -1,5 +1,5 @@
 import type { AppBskyFeedPostgate } from "@atproto/api";
-import { Keyboard, type StyleProp, type ViewStyle } from "react-native";
+import type { StyleProp, ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
 
 import { native } from "#/alf";
@@ -8,7 +8,6 @@ import * as Dialog from "#/components/Dialog";
 import { PostInteractionSettingsControlledDialog } from "#/components/dialogs/PostInteractionSettingsDialog";
 import { Earth_Stroke2_Corner0_Rounded as Earth } from "#/components/icons/Globe";
 import { Group3_Stroke2_Corner0_Rounded as Group } from "#/components/icons/Group";
-import { isNative } from "#/platform/detection";
 import type { ThreadgateAllowUISetting } from "#/state/queries/threadgate";
 
 export function ThreadgateBtn({
@@ -28,10 +27,6 @@ export function ThreadgateBtn({
 	const control = Dialog.useDialogControl();
 
 	const onPress = () => {
-		if (isNative && Keyboard.isVisible()) {
-			Keyboard.dismiss();
-		}
-
 		control.open();
 	};
 

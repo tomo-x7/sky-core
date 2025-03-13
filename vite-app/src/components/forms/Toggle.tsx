@@ -7,7 +7,6 @@ import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { CheckThick_Stroke2_Corner0_Rounded as Checkmark } from "#/components/icons/Check";
 import { HITSLOP_10 } from "#/lib/constants";
-import { isNative } from "#/platform/detection";
 
 export type ItemState = {
 	name: string;
@@ -433,4 +432,4 @@ export function Radio() {
 	);
 }
 
-export const Platform = isNative ? Switch : Checkbox;
+export const Platform = Checkbox;

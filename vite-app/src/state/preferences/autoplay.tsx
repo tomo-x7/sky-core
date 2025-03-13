@@ -11,13 +11,10 @@ const setContext = React.createContext<SetContext>((_: boolean) => {});
 export function Provider({ children }: { children: React.ReactNode }) {
 	const [state, setState] = React.useState(Boolean(persisted.get("disableAutoplay")));
 
-	const setStateWrapped = React.useCallback(
-		(autoplayDisabled: persisted.Schema["disableAutoplay"]) => {
-			setState(Boolean(autoplayDisabled));
-			persisted.write("disableAutoplay", autoplayDisabled);
-		},
-		[],
-	);
+	const setStateWrapped = React.useCallback((autoplayDisabled: persisted.Schema["disableAutoplay"]) => {
+		setState(Boolean(autoplayDisabled));
+		persisted.write("disableAutoplay", autoplayDisabled);
+	}, []);
 
 	React.useEffect(() => {
 		return persisted.onUpdate("disableAutoplay", (nextDisableAutoplay) => {

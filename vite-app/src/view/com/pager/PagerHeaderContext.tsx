@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import type { SharedValue } from "react-native-reanimated";
-
-import { isNative } from "#/platform/detection";
 
 export const PagerHeaderContext = React.createContext<{
 	scrollY: SharedValue<number>;
@@ -28,13 +26,5 @@ export function PagerHeaderProvider({
 }
 
 export function usePagerHeaderContext() {
-	const ctx = useContext(PagerHeaderContext);
-	if (isNative) {
-		if (!ctx) {
-			throw new Error("usePagerHeaderContext must be used within a HeaderProvider");
-		}
-		return ctx;
-	} else {
-		return null;
-	}
+	return null;
 }

@@ -27,7 +27,7 @@ import { shareUrl } from "#/lib/sharing";
 import { cleanError } from "#/lib/strings/errors";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { s } from "#/lib/styles";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { ListHiddenScreen } from "#/screens/List/ListHiddenScreen";
 import { listenSoftReset } from "#/state/events";
 import { useModalControls } from "#/state/modals";
@@ -689,7 +689,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerHeight,
 		});
 		queryClient.resetQueries({ queryKey: FEED_RQKEY(feed) });
@@ -764,7 +764,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerHeight,
 		});
 	}, [scrollElRef, headerHeight]);

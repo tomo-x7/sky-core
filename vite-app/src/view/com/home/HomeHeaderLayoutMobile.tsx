@@ -2,6 +2,7 @@ import type React from "react";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
 
+import type { JSX } from "react";
 import { atoms as a, useTheme } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
@@ -14,7 +15,6 @@ import { emitSoftReset } from "#/state/events";
 import { useSession } from "#/state/session";
 import { useShellLayout } from "#/state/shell/shell-layout";
 import { Logo } from "#/view/icons/Logo";
-import { JSX } from "react";
 
 export function HomeHeaderLayoutMobile({
 	children,

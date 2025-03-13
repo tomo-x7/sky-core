@@ -197,7 +197,7 @@ let PostDropdownMenuItems = ({
 
 	const onCopyPostText = React.useCallback(() => {
 		const str = richTextToString(richText, true);
-		new Clipboard().writeText(str)
+		new Clipboard().writeText(str);
 		Toast.show("Copied to clipboard", "clipboard-check");
 	}, [richText]);
 
@@ -689,7 +689,9 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={quotePostDetachConfirmControl}
 				title={"Detach quote post?"}
-				description={"This will remove your post from this quote post for all users, and replace it with a placeholder."}
+				description={
+					"This will remove your post from this quote post for all users, and replace it with a placeholder."
+				}
 				onConfirm={onToggleQuotePostAttachment}
 				confirmButtonCta={"Yes, detach"}
 			/>
@@ -697,7 +699,9 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={hideReplyConfirmControl}
 				title={"Hide this reply?"}
-				description={"This reply will be sorted into a hidden section at the bottom of your thread and will mute notifications for subsequent replies - both for yourself and others."}
+				description={
+					"This reply will be sorted into a hidden section at the bottom of your thread and will mute notifications for subsequent replies - both for yourself and others."
+				}
 				onConfirm={onToggleReplyVisibility}
 				confirmButtonCta={"Yes, hide"}
 			/>
@@ -705,7 +709,9 @@ let PostDropdownMenuItems = ({
 			<Prompt.Basic
 				control={blockPromptControl}
 				title={"Block Account?"}
-				description={"Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you."}
+				description={
+					"Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you."
+				}
 				onConfirm={onBlockAuthor}
 				confirmButtonCta={"Block"}
 				confirmButtonColor="negative"

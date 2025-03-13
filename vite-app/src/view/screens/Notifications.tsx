@@ -14,7 +14,6 @@ import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { ComposeIcon2 } from "#/lib/icons";
 import type { NativeStackScreenProps, NotificationsTabNavigatorParams } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
-import { isNative } from "#/platform/detection";
 import { emitSoftReset, listenSoftReset } from "#/state/events";
 import { RQKEY as NOTIFS_RQKEY } from "#/state/queries/notifications/feed";
 import { useUnreadNotifications, useUnreadNotificationsApi } from "#/state/queries/notifications/unread";
@@ -46,13 +45,10 @@ export function NotificationsScreen(props: Props) {
 	const [activeTab, setActiveTab] = React.useState(initialActiveTab);
 	const isLoading = activeTab === 0 ? isLoadingAll : isLoadingMentions;
 
-	const onPageSelected = React.useCallback(
-		(index: number) => {
-			setActiveTab(index);
-			lastActiveTab = index;
-		},
-		[],
-	);
+	const onPageSelected = React.useCallback((index: number) => {
+		setActiveTab(index);
+		lastActiveTab = index;
+	}, []);
 
 	const queryClient = useQueryClient();
 	const checkUnreadMentions = React.useCallback(
@@ -174,9 +170,9 @@ function NotificationsTab({
 	// event handlers
 	// =
 	const scrollToTop = React.useCallback(() => {
-		scrollElRef.current?.scrollToOffset({ animated: isNative, offset: 0 });
+		scrollElRef.current?.scrollToOffset({ animated: false, offset: 0 });
 		setMinimalShellMode(false);
-	}, [ setMinimalShellMode]);
+	}, [setMinimalShellMode]);
 
 	const onPressLoadLatest = React.useCallback(() => {
 		scrollToTop();
@@ -195,14 +191,11 @@ function NotificationsTab({
 	const onFocusCheckLatest = useNonReactiveCallback(() => {
 		// on focus, check for latest, but only invalidate if the user
 		// isnt scrolled down to avoid moving content underneath them
-		let currentIsScrolledDown;
-		if (isNative) {
-			currentIsScrolledDown = isScrolledDown;
-		} else {
-			// On the web, this isn't always updated in time so
-			// we're just going to look it up synchronously.
-			currentIsScrolledDown = window.scrollY > 200;
-		}
+
+		// On the web, this isn't always updated in time so
+		// we're just going to look it up synchronously.
+		const currentIsScrolledDown = window.scrollY > 200;
+
 		checkUnread({ invalidate: !currentIsScrolledDown });
 	});
 

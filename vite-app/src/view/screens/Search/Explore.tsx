@@ -19,7 +19,7 @@ import { ListSparkle_Stroke2_Corner0_Rounded as ListSparkle } from "#/components
 import { UserCircle_Stroke2_Corner0_Rounded as Person } from "#/components/icons/UserCircle";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 import { cleanError } from "#/lib/strings/errors";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { ExploreRecommendations } from "#/screens/Search/components/ExploreRecommendations";
 import { ExploreTrendingTopics } from "#/screens/Search/components/ExploreTrendingTopics";
 import { ExploreTrendingVideos } from "#/screens/Search/components/ExploreTrendingVideos";
@@ -484,12 +484,7 @@ export function Explore() {
 				case "profile": {
 					return (
 						<View style={[a.border_b, t.atoms.border_contrast_low]}>
-							<ProfileCardWithFollowBtn
-								profile={item.profile}
-								noBg
-								noBorder
-								showKnownFollowers
-							/>
+							<ProfileCardWithFollowBtn profile={item.profile} noBg noBorder showKnownFollowers />
 						</View>
 					);
 				}

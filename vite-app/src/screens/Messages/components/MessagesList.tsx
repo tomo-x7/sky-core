@@ -13,7 +13,6 @@ import { NewMessagesPill } from "#/components/dms/NewMessagesPill";
 import { ScrollProvider } from "#/lib/ScrollContext";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
 import { convertBskyAppUrlIfNeeded, isBskyPostUrl } from "#/lib/strings/url-helpers";
-import { isNative } from "#/platform/detection";
 import { isWeb } from "#/platform/detection";
 import { ChatDisabled } from "#/screens/Messages/components/ChatDisabled";
 import { MessageInput } from "#/screens/Messages/components/MessageInput";
@@ -386,7 +385,7 @@ export function MessagesList({
 					disableVirtualization={true}
 					style={animatedListStyle}
 					// The extra two items account for the header and the footer components
-					initialNumToRender={isNative ? 32 : 62}
+					initialNumToRender={62}
 					maxToRenderPerBatch={isWeb ? 32 : 62}
 					keyboardDismissMode="on-drag"
 					keyboardShouldPersistTaps="handled"

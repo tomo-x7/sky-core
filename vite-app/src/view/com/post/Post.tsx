@@ -26,7 +26,6 @@ import { precacheProfile } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
 import * as bsky from "#/types/bsky";
-import { AviFollowButton } from "#/view/com/posts/AviFollowButton";
 import { ContentHider } from "../../../components/moderation/ContentHider";
 import { LabelsOnMyPost } from "../../../components/moderation/LabelsOnMe";
 import { PostAlerts } from "../../../components/moderation/PostAlerts";
@@ -158,12 +157,12 @@ function PostInner({
 			{showReplyLine && <View style={styles.replyLine} />}
 			<View style={styles.layout}>
 				<View style={styles.layoutAvi}>
-						<PreviewableUserAvatar
-							size={42}
-							profile={post.author}
-							moderation={moderation.ui("avatar")}
-							type={post.author.associated?.labeler ? "labeler" : "user"}
-						/>
+					<PreviewableUserAvatar
+						size={42}
+						profile={post.author}
+						moderation={moderation.ui("avatar")}
+						type={post.author.associated?.labeler ? "labeler" : "user"}
+					/>
 				</View>
 				<View style={styles.layoutContent}>
 					<PostMeta

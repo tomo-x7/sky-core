@@ -48,7 +48,7 @@ export function ModerationBlockedAccounts(props: Props) {
 			console.error("Failed to refresh my muted accounts", { message: err });
 		}
 		setIsPTRing(false);
-	}, [refetch, ]);
+	}, [refetch]);
 
 	const onEndReached = React.useCallback(async () => {
 		if (isFetching || !hasNextPage || isError) return;

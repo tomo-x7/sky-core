@@ -8,7 +8,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError, isNetworkError } from "#/lib/strings/errors";
 import { checkAndFormatResetCode } from "#/lib/strings/password";
 import { colors, s } from "#/lib/styles";
-import { isAndroid, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import { ErrorMessage } from "../util/error/ErrorMessage";
@@ -23,7 +23,7 @@ enum Stages {
 	Done = 2,
 }
 
-export const snapPoints = isAndroid ? ["90%"] : ["45%"];
+export const snapPoints = ["45%"];
 
 export function Component() {
 	const pal = usePalette("default");

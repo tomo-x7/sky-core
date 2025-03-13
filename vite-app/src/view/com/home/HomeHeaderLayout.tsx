@@ -1,6 +1,7 @@
 import type React from "react";
 import { View } from "react-native";
 
+import type { JSX } from "react";
 import { atoms as a, useBreakpoints, useGutters, useTheme } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
@@ -11,7 +12,6 @@ import { useSession } from "#/state/session";
 import { useShellLayout } from "#/state/shell/shell-layout";
 import { HomeHeaderLayoutMobile } from "#/view/com/home/HomeHeaderLayoutMobile";
 import { Logo } from "#/view/icons/Logo";
-import { JSX } from "react";
 
 export function HomeHeaderLayout(props: {
 	children: React.ReactNode;
@@ -64,7 +64,7 @@ function HomeHeaderLayoutDesktopAndTablet({
 			)}
 			{tabBarAnchor}
 			<Layout.Center
-			//@ts-ignore
+				//@ts-ignore
 				style={[a.sticky, a.z_10, a.align_center, t.atoms.bg, { top: 0 }]}
 				onLayout={(e) => {
 					headerHeight.set(e.nativeEvent.layout.height);

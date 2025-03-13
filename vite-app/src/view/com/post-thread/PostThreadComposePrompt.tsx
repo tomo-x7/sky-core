@@ -1,6 +1,6 @@
 import { View } from "react-native";
 
-import { atoms as a, ios, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";

@@ -23,7 +23,7 @@ export function GifSelectDialog({
 	onClose,
 	onSelectGif: onSelectGifProp,
 }: {
-	controlRef: React.RefObject<{ open: () => void }|null>;
+	controlRef: React.RefObject<{ open: () => void } | null>;
 	onClose?: () => void;
 	onSelectGif: (gif: Gif) => void;
 }) {

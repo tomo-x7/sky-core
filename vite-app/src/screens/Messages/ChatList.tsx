@@ -23,7 +23,6 @@ import { useAppState } from "#/lib/hooks/useAppState";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import type { MessagesTabNavigatorParams } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { isNative } from "#/platform/detection";
 import { listenSoftReset } from "#/state/events";
 import { MESSAGE_SCREEN_POLL_INTERVAL } from "#/state/messages/convo/const";
 import { useMessagesEventBus } from "#/state/messages/events";
@@ -163,7 +162,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 
 	const onSoftReset = useCallback(async () => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: 0,
 		});
 		try {
@@ -271,7 +270,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 						hasNextPage={hasNextPage}
 					/>
 				}
-				onEndReachedThreshold={isNative ? 1.5 : 0}
+				onEndReachedThreshold={0}
 				initialNumToRender={initialNumToRender}
 				windowSize={11}
 				desktopFixedHeight

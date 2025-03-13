@@ -13,7 +13,6 @@ import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components
 import { PaperPlane_Stroke2_Corner0_Rounded as SendIcon } from "#/components/icons/PaperPlane";
 import { getLabelingServiceTitle } from "#/lib/moderation";
 import type { ReportOption } from "#/lib/moderation/useReportOptions";
-import { isAndroid } from "#/platform/detection";
 import { useAgent } from "#/state/session";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import * as Toast from "#/view/com/util/Toast";
@@ -184,8 +183,6 @@ export function SubmitView({
 					<ButtonIcon icon={submitting ? Loader : SendIcon} />
 				</Button>
 			</View>
-			{/* Maybe fix this later -h */}
-			{isAndroid ? <View style={{ height: 300 }} /> : null}
 		</View>
 	);
 }

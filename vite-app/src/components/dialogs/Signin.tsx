@@ -6,7 +6,6 @@ import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
 import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
-import { isNative } from "#/platform/detection";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
 import { useCloseAllActiveElements } from "#/state/util";
 import { Logo } from "#/view/icons/Logo";
@@ -43,7 +42,7 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 			label="Sign in to Bluesky or create a new account"
 			style={[gtMobile ? { width: "auto", maxWidth: 420 } : a.w_full]}
 		>
-			<View style={[!isNative && a.p_2xl]}>
+			<View style={[a.p_2xl]}>
 				<View style={[a.flex_row, a.align_center, a.justify_center, a.gap_sm, a.pb_lg]}>
 					<Logo width={36} />
 					<View style={{ paddingTop: 6 }}>
@@ -82,8 +81,6 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 						<ButtonText>Sign in</ButtonText>
 					</Button>
 				</View>
-
-				{isNative && <View style={{ height: 10 }} />}
 			</View>
 
 			<Dialog.Close />

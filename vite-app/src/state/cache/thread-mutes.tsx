@@ -12,16 +12,13 @@ const setStateContext = React.createContext<SetStateContext>((_: string) => fals
 export function Provider({ children }: React.PropsWithChildren) {
 	const [state, setState] = React.useState<StateContext>(() => new Map());
 
-	const setThreadMute = React.useCallback(
-		(uri: string, value: boolean) => {
-			setState((prev) => {
-				const next = new Map(prev);
-				next.set(uri, value);
-				return next;
-			});
-		},
-		[],
-	);
+	const setThreadMute = React.useCallback((uri: string, value: boolean) => {
+		setState((prev) => {
+			const next = new Map(prev);
+			next.set(uri, value);
+			return next;
+		});
+	}, []);
 
 	useMigrateMutes(setThreadMute);
 

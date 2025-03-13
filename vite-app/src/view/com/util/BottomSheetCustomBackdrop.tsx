@@ -1,8 +1,8 @@
-import type { BottomSheetBackdropProps } from "#/bottom-sheet";
 import type React from "react";
 import { useMemo } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import Animated, { Extrapolation, interpolate, useAnimatedStyle } from "react-native-reanimated";
+import type { BottomSheetBackdropProps } from "#/bottom-sheet";
 
 export function createCustomBackdrop(onClose?: (() => void) | undefined): React.FC<BottomSheetBackdropProps> {
 	const CustomBackdrop = ({ animatedIndex, style }: BottomSheetBackdropProps) => {

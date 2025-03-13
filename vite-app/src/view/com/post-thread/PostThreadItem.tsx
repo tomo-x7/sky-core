@@ -385,9 +385,9 @@ let PostThreadItemLoaded = ({
 											style={[a.text_md, t.atoms.text_contrast_medium]}
 										>
 											<Text style={[a.text_md, a.font_bold, t.atoms.text]}>
-												{formatCount( post.repostCount)}
+												{formatCount(post.repostCount)}
 											</Text>{" "}
-											{post.repostCount===1?"repost":"reposts"}
+											{post.repostCount === 1 ? "repost" : "reposts"}
 										</Text>
 									</Link>
 								) : null}
@@ -398,9 +398,9 @@ let PostThreadItemLoaded = ({
 											style={[a.text_md, t.atoms.text_contrast_medium]}
 										>
 											<Text style={[a.text_md, a.font_bold, t.atoms.text]}>
-												{formatCount( post.quoteCount)}
+												{formatCount(post.quoteCount)}
 											</Text>{" "}
-											{post.quoteCount===1?"quote":"quotes"}
+											{post.quoteCount === 1 ? "quote" : "quotes"}
 										</Text>
 									</Link>
 								) : null}
@@ -411,9 +411,9 @@ let PostThreadItemLoaded = ({
 											style={[a.text_md, t.atoms.text_contrast_medium]}
 										>
 											<Text style={[a.text_md, a.font_bold, t.atoms.text]}>
-												{formatCount( post.likeCount)}
+												{formatCount(post.likeCount)}
 											</Text>{" "}
-											{post.likeCount===1?"like":"likes"}
+											{post.likeCount === 1 ? "like" : "likes"}
 										</Text>
 									</Link>
 								) : null}

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useWindowDimensions } from "react-native";
 
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 
 const Context = React.createContext<{
 	activeViewId: string | null;
@@ -39,8 +39,6 @@ export function Provider({ children }: { children: React.ReactNode }) {
 
 	const sendViewPosition = useCallback(
 		(viewId: string, y: number) => {
-			if (isNative) return;
-
 			if (viewId === activeViewIdRef.current) {
 				activeViewLocationRef.current = y;
 			} else {

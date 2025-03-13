@@ -9,7 +9,6 @@ import { Text } from "#/components/Typography";
 import { ArrowsDiagonalOut_Stroke2_Corner0_Rounded as Fullscreen } from "#/components/icons/ArrowsDiagonal";
 import { type HandleRef, useHandleRef } from "#/lib/hooks/useHandleRef";
 import type { Dimensions } from "#/lib/media/types";
-import { isNative } from "#/platform/detection";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 
 export function ConstrainedImage({
@@ -28,10 +27,9 @@ export function ConstrainedImage({
 	 * the height of the image.
 	 */
 	const outerAspectRatio = React.useMemo<DimensionValue>(() => {
-		const ratio =
-			isNative || !gtMobile
-				? Math.min(1 / aspectRatio, 16 / 9) // 9:16 bounding box
-				: Math.min(1 / aspectRatio, 1); // 1:1 bounding box
+		const ratio = !gtMobile
+			? Math.min(1 / aspectRatio, 16 / 9) // 9:16 bounding box
+			: Math.min(1 / aspectRatio, 1); // 1:1 bounding box
 		return `${ratio * 100}%`;
 	}, [aspectRatio, gtMobile]);
 

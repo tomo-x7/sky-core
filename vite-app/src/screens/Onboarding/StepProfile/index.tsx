@@ -1,6 +1,5 @@
 import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import React from "react";
-import { Image as ExpoImage } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -17,7 +16,7 @@ import { compressIfNeeded } from "#/lib/media/manip";
 import { openCropper } from "#/lib/media/picker";
 import { getDataUriSize } from "#/lib/media/util";
 import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
-import { isNative, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
 import { AvatarCircle } from "#/screens/Onboarding/StepProfile/AvatarCircle";
 import { AvatarCreatorCircle } from "#/screens/Onboarding/StepProfile/AvatarCreatorCircle";
@@ -85,32 +84,27 @@ export function StepProfile() {
 				}),
 			);
 
-			return (
-				//@ts-expect-error
-				(response.assets ?? [])
-					.slice(0, 1)
-					//@ts-expect-error
-					.filter((asset) => {
-						if (
-							!asset.mimeType?.startsWith("image/") ||
-							(!asset.mimeType?.endsWith("jpeg") &&
-								!asset.mimeType?.endsWith("jpg") &&
-								!asset.mimeType?.endsWith("png"))
-						) {
-							setError("Only .jpg and .png files are supported");
-							return false;
-						}
-						return true;
-					})
-					//@ts-expect-error
-					.map((image) => ({
-						mime: "image/jpeg",
-						height: image.height,
-						width: image.width,
-						path: image.uri,
-						size: getDataUriSize(image.uri),
-					}))
-			);
+			return (response.assets ?? [])
+				.slice(0, 1)
+				.filter((asset) => {
+					if (
+						!asset.mimeType?.startsWith("image/") ||
+						(!asset.mimeType?.endsWith("jpeg") &&
+							!asset.mimeType?.endsWith("jpg") &&
+							!asset.mimeType?.endsWith("png"))
+					) {
+						setError("Only .jpg and .png files are supported");
+						return false;
+					}
+					return true;
+				})
+				.map((image) => ({
+					mime: "image/jpeg",
+					height: image.height,
+					width: image.width,
+					path: image.uri,
+					size: getDataUriSize(image.uri),
+				}));
 		},
 		[sheetWrapper],
 	);
@@ -176,12 +170,6 @@ export function StepProfile() {
 			});
 		}
 		image = await compressIfNeeded(image, 1000000);
-
-		// If we are on mobile, prefetching the image will load the image into memory before we try and display it,
-		// stopping any brief flickers.
-		if (isNative) {
-			await ExpoImage.prefetch(image.path);
-		}
 
 		setAvatar((prev) => ({
 			...prev,

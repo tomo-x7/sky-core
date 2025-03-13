@@ -36,7 +36,7 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 			// if (viewshotRef.current?.capture) {
 			// 	return await viewshotRef.current.capture();
 			// }
-			return ""
+			return "";
 		},
 	}));
 
@@ -54,12 +54,9 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 						width: 150 * SIZE_MULTIPLIER,
 					}}
 				> */}
-					<View
-						style={[styles.imageContainer, { backgroundColor: avatar.backgroundColor }]}
-						collapsable={false}
-					>
-						<Icon height={85 * SIZE_MULTIPLIER} width={85 * SIZE_MULTIPLIER} style={{ color: "white" }} />
-					</View>
+				<View style={[styles.imageContainer, { backgroundColor: avatar.backgroundColor }]} collapsable={false}>
+					<Icon height={85 * SIZE_MULTIPLIER} width={85 * SIZE_MULTIPLIER} style={{ color: "white" }} />
+				</View>
 				{/* </ViewShot> */}
 			</React.Suspense>
 		</View>

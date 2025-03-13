@@ -66,9 +66,7 @@ export function ModerationModlistsScreen(props: Props) {
 					onPress={onPressNewList}
 				>
 					<ButtonIcon icon={PlusIcon} />
-					<ButtonText>
-						New
-					</ButtonText>
+					<ButtonText>New</ButtonText>
 				</Button>
 			</Layout.Header.Outer>
 			<MyLists filter="mod" style={a.flex_grow} />

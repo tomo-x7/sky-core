@@ -157,6 +157,6 @@ export async function safeDeleteAsync() {
 	// no-op
 }
 
-export function saveImageToMediaLibrary(...param:unknown[]){
-	throw new Error("????")
+export function saveImageToMediaLibrary(...param: unknown[]) {
+	throw new Error("????");
 }

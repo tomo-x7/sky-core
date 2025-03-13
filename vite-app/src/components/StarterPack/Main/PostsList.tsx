@@ -1,7 +1,5 @@
 import React, { useCallback } from "react";
 import { View } from "react-native";
-
-import { isNative } from "#/platform/detection";
 import type { SectionRef } from "#/screens/Profile/Sections/types";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { PostFeed } from "#/view/com/posts/PostFeed";
@@ -22,7 +20,7 @@ export const PostsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
-			animated: isNative,
+			animated: false,
 			offset: -headerHeight,
 		});
 	}, [scrollElRef, headerHeight]);

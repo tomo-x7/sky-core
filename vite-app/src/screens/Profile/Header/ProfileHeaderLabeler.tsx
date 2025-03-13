@@ -19,7 +19,7 @@ import {
 	Heart2_Filled_Stroke2_Corner0_Rounded as HeartFilled,
 } from "#/components/icons/Heart2";
 import { isAppLabeler } from "#/lib/moderation";
-import { isIOS, isWeb } from "#/platform/detection";
+import { isWeb } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import type { Shadow } from "#/state/cache/types";
 import { useModalControls } from "#/state/modals";
@@ -135,11 +135,8 @@ let ProfileHeaderLabeler = ({
 			hideBackButton={hideBackButton}
 			isPlaceholderProfile={isPlaceholderProfile}
 		>
-			<View style={[a.px_lg, a.pt_md, a.pb_sm]} pointerEvents={isIOS ? "auto" : "box-none"}>
-				<View
-					style={[a.flex_row, a.justify_end, a.align_center, a.gap_xs, a.pb_lg]}
-					pointerEvents={isIOS ? "auto" : "box-none"}
-				>
+			<View style={[a.px_lg, a.pt_md, a.pb_sm]} pointerEvents={"box-none"}>
+				<View style={[a.flex_row, a.justify_end, a.align_center, a.gap_xs, a.pb_lg]} pointerEvents={"box-none"}>
 					{isMe ? (
 						<>
 							<Button

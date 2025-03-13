@@ -5,7 +5,6 @@ import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
 import {
 	ActivityIndicator,
-	BackHandler,
 	Keyboard,
 	KeyboardAvoidingView,
 	type LayoutChangeEvent,
@@ -77,7 +76,6 @@ import { GifAltTextDialog } from "#/view/com/composer/GifAltText";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import { LabelsBtn } from "#/view/com/composer/labels/LabelsBtn";
 import { Gallery } from "#/view/com/composer/photos/Gallery";
-import { OpenCameraBtn } from "#/view/com/composer/photos/OpenCameraBtn";
 import { SelectGifBtn } from "#/view/com/composer/photos/SelectGifBtn";
 import { SelectPhotoBtn } from "#/view/com/composer/photos/SelectPhotoBtn";
 import { SelectLangBtn } from "#/view/com/composer/select-language/SelectLangBtn";
@@ -124,7 +122,7 @@ export const ComposePost = ({
 	videoUri: initVideoUri,
 	cancelRef,
 }: Props & {
-	cancelRef?: React.RefObject<CancelRef|null>;
+	cancelRef?: React.RefObject<CancelRef | null>;
 }) => {
 	const { currentAccount } = useSession();
 	const agent = useAgent();

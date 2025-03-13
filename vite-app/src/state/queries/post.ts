@@ -95,14 +95,12 @@ export function useGetPosts() {
 	);
 }
 
-export function usePostLikeMutationQueue(
-	post: Shadow<AppBskyFeedDefs.PostView>,
-) {
+export function usePostLikeMutationQueue(post: Shadow<AppBskyFeedDefs.PostView>) {
 	const queryClient = useQueryClient();
 	const postUri = post.uri;
 	const postCid = post.cid;
 	const initialLikeUri = post.viewer?.like;
-	const likeMutation = usePostLikeMutation( post);
+	const likeMutation = usePostLikeMutation(post);
 	const unlikeMutation = usePostUnlikeMutation();
 
 	const queueToggle = useToggleMutationQueue({
@@ -153,7 +151,7 @@ export function usePostLikeMutationQueue(
 	return [queueLike, queueUnlike];
 }
 
-function usePostLikeMutation( post: Shadow<AppBskyFeedDefs.PostView>) {
+function usePostLikeMutation(post: Shadow<AppBskyFeedDefs.PostView>) {
 	const { currentAccount } = useSession();
 	const queryClient = useQueryClient();
 	const postAuthor = post.author;
@@ -182,9 +180,7 @@ function usePostUnlikeMutation() {
 	});
 }
 
-export function usePostRepostMutationQueue(
-	post: Shadow<AppBskyFeedDefs.PostView>,
-) {
+export function usePostRepostMutationQueue(post: Shadow<AppBskyFeedDefs.PostView>) {
 	const queryClient = useQueryClient();
 	const postUri = post.uri;
 	const postCid = post.cid;

@@ -1,5 +1,5 @@
 import { StackActions, useNavigation } from "@react-navigation/native";
-import React, { JSX, type ComponentProps } from "react";
+import React, { type JSX, type ComponentProps } from "react";
 import { Linking, ScrollView, TouchableOpacity, View } from "react-native";
 
 import { atoms as a, tokens, useTheme, web } from "../../alf";
@@ -118,7 +118,6 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 			if (isWeb) {
 				// hack because we have flat navigator for web and MyProfile does not exist on the web navigator -ansh
 				if (tab === "MyProfile") {
-					// biome-ignore lint/style/noNonNullAssertion: <explanation>
 					navigation.navigate("Profile", { name: currentAccount!.handle });
 				} else {
 					// @ts-ignore must be Home, Search, Notifications, or MyProfile

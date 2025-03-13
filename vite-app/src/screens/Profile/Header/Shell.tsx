@@ -11,7 +11,6 @@ import { ProfileHeaderAlerts } from "#/components/moderation/ProfileHeaderAlerts
 import { BACK_HITSLOP } from "#/lib/constants";
 import { measureHandle, useHandleRef } from "#/lib/hooks/useHandleRef";
 import type { NavigationProp } from "#/lib/routes/types";
-import { isIOS } from "#/platform/detection";
 import type { Shadow } from "#/state/cache/types";
 import { useLightboxControls } from "#/state/lightbox";
 import { useSession } from "#/state/session";
@@ -90,8 +89,8 @@ let ProfileHeaderShell = ({
 	const isMe = React.useMemo(() => currentAccount?.did === profile.did, [currentAccount, profile]);
 
 	return (
-		<View style={t.atoms.bg} pointerEvents={isIOS ? "auto" : "box-none"}>
-			<View pointerEvents={isIOS ? "auto" : "box-none"} style={[a.relative, { height: 150 }]}>
+		<View style={t.atoms.bg} pointerEvents={"box-none"}>
+			<View pointerEvents={"box-none"} style={[a.relative, { height: 150 }]}>
 				<StatusBarShadow />
 				<GrowableBanner
 					backButton={
@@ -133,7 +132,7 @@ let ProfileHeaderShell = ({
 			{children}
 
 			{!isPlaceholderProfile && (
-				<View style={[a.px_lg, a.py_xs]} pointerEvents={isIOS ? "auto" : "box-none"}>
+				<View style={[a.px_lg, a.py_xs]} pointerEvents={"box-none"}>
 					{isMe ? (
 						<LabelsOnMe type="account" labels={profile.labels} />
 					) : (

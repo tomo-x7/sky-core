@@ -1,6 +1,6 @@
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { StackActions } from "@react-navigation/native";
-import React, { JSX, type ComponentProps } from "react";
+import React, { type JSX, type ComponentProps } from "react";
 import { type GestureResponderEvent, View } from "react-native";
 import Animated from "react-native-reanimated";
 

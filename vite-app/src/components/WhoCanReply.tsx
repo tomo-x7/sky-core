@@ -1,6 +1,6 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
 import React from "react";
-import { Keyboard, Platform, type StyleProp, View, type ViewStyle } from "react-native";
+import { Platform, type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -17,7 +17,6 @@ import { Earth_Stroke2_Corner0_Rounded as Earth } from "#/components/icons/Globe
 import { Group3_Stroke2_Corner0_Rounded as Group } from "#/components/icons/Group";
 import { HITSLOP_10 } from "#/lib/constants";
 import { makeListLink, makeProfileLink } from "#/lib/routes/links";
-import { isNative } from "#/platform/detection";
 import { type ThreadgateAllowUISetting, threadgateViewToAllowUISetting } from "#/state/queries/threadgate";
 import * as bsky from "#/types/bsky";
 import { PencilLine_Stroke2_Corner0_Rounded as PencilLine } from "./icons/Pencil";
@@ -59,9 +58,6 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 			: "Some people can reply";
 
 	const onPressOpen = () => {
-		if (isNative && Keyboard.isVisible()) {
-			Keyboard.dismiss();
-		}
 		if (isThreadAuthor) {
 			editDialogControl.open();
 		} else {

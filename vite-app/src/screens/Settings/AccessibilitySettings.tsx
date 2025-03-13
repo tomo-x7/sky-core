@@ -8,10 +8,7 @@ import * as Toggle from "#/components/forms/Toggle";
 import { Accessibility_Stroke2_Corner2_Rounded as AccessibilityIcon } from "#/components/icons/Accessibility";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
-import {
-	useRequireAltTextEnabled,
-	useSetRequireAltTextEnabled,
-} from "#/state/preferences";
+import { useRequireAltTextEnabled, useSetRequireAltTextEnabled } from "#/state/preferences";
 import { useLargeAltBadgeEnabled, useSetLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "AccessibilitySettings">;

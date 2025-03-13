@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useState } from "react";
+import React, { type JSX, useEffect, useState } from "react";
 import {
 	type NativeScrollEvent,
 	type NativeSyntheticEvent,
@@ -13,7 +13,6 @@ import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { clamp } from "#/lib/numbers";
 import { colors, s } from "#/lib/styles";
-import { isAndroid } from "#/platform/detection";
 import { FlatList_INTERNAL } from "./Views";
 import { Text } from "./text/Text";
 
@@ -67,7 +66,7 @@ export const ViewSelector = React.forwardRef<
 
 	const onPressSelection = React.useCallback(
 		(index: number) => setSelectedIndex(clamp(index, 0, sections.length)),
-		[ sections],
+		[sections],
 	);
 	useEffect(() => {
 		onSelectView?.(selectedIndex);
@@ -106,8 +105,7 @@ export const ViewSelector = React.forwardRef<
 			keyExtractor={keyExtractor}
 			renderItem={renderItemInternal}
 			ListFooterComponent={ListFooterComponent}
-			// NOTE sticky header disabled on android due to major performance issues -prf
-			stickyHeaderIndices={isAndroid ? undefined : STICKY_HEADER_INDICES}
+			stickyHeaderIndices={STICKY_HEADER_INDICES}
 			onScroll={onScroll}
 			onEndReached={onEndReached}
 			refreshControl={
