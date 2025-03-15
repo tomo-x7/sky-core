@@ -8,7 +8,6 @@ import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
 import { LinearGradientBackground } from "#/components/LinearGradientBackground";
 import { Text } from "#/components/Typography";
-import { isWeb } from "#/platform/detection";
 import * as bsky from "#/types/bsky";
 import { Logo } from "#/view/icons/Logo";
 import { Logotype } from "#/view/icons/Logotype";
@@ -82,10 +81,10 @@ export function QrCodeInner({ link }: { link: string }) {
 		<QRCode
 			data={link}
 			style={[a.rounded_sm, { height: 225, width: 225, backgroundColor: "#f3f3f3" }]}
-			pieceSize={isWeb ? 8 : 6}
+			pieceSize={8}
 			padding={20}
 			// pieceLiquidRadius={2}
-			pieceBorderRadius={isWeb ? 4.5 : 3.5}
+			pieceBorderRadius={4.5}
 			outerEyesOptions={{
 				topLeft: {
 					borderRadius: [12, 12, 0, 12],

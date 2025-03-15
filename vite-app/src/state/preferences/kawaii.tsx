@@ -1,6 +1,4 @@
 import React from "react";
-
-import { isWeb } from "#/platform/detection";
 import * as persisted from "#/state/persisted";
 
 type StateContext = persisted.Schema["kawaii"];
@@ -24,16 +22,14 @@ export function Provider({ children }: React.PropsWithChildren) {
 	React.useEffect(() => {
 		// dumb and stupid but it's web only so just refresh the page if you want to change it
 
-		if (isWeb) {
-			const kawaii = new URLSearchParams(window.location.search).get("kawaii");
-			switch (kawaii) {
-				case "true":
-					setStateWrapped(true);
-					break;
-				case "false":
-					setStateWrapped(false);
-					break;
-			}
+		const kawaii = new URLSearchParams(window.location.search).get("kawaii");
+		switch (kawaii) {
+			case "true":
+				setStateWrapped(true);
+				break;
+			case "false":
+				setStateWrapped(false);
+				break;
 		}
 	}, [setStateWrapped]);
 

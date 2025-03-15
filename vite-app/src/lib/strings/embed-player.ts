@@ -1,7 +1,6 @@
 import { Dimensions } from "react-native";
 
 import { isSafari } from "#/lib/browser";
-import { isWeb } from "#/platform/detection";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -116,10 +115,7 @@ export function parseEmbedPlayerFromUrl(url: string): EmbedPlayerParams | undefi
 
 	// twitch
 	if (urlp.hostname === "twitch.tv" || urlp.hostname === "www.twitch.tv" || urlp.hostname === "m.twitch.tv") {
-		const parent = isWeb
-			? // @ts-ignore only for web
-				window.location.hostname
-			: "localhost";
+		const parent = window.location.hostname;
 
 		const [channelOrVideo, clipOrId, id] = urlp.pathname.split("/");
 
@@ -518,16 +514,12 @@ export function parseTenorGif(urlp: URL):
 		width: Number(w),
 	};
 
-	if (isWeb) {
-		if (isSafari) {
-			id = id.replace("AAAAC", "AAAP1");
-			filename = filename.replace(".gif", ".mp4");
-		} else {
-			id = id.replace("AAAAC", "AAAP3");
-			filename = filename.replace(".gif", ".webm");
-		}
+	if (isSafari) {
+		id = id.replace("AAAAC", "AAAP1");
+		filename = filename.replace(".gif", ".mp4");
 	} else {
-		id = id.replace("AAAAC", "AAAAM");
+		id = id.replace("AAAAC", "AAAP3");
+		filename = filename.replace(".gif", ".webm");
 	}
 
 	return {

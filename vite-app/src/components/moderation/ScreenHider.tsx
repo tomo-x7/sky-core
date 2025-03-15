@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { type StyleProp, TouchableWithoutFeedback, View, type ViewStyle } from "react-native";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import {
@@ -101,12 +101,8 @@ export function ScreenHider({
 								style={[
 									a.text_lg,
 									a.leading_snug,
-									{
-										color: t.palette.primary_500,
-									},
-									web({
-										cursor: "pointer",
-									}),
+									{ color: t.palette.primary_500 },
+									{ cursor: "pointer" },
 								]}
 							>
 								Learn More

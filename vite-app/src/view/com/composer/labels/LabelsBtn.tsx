@@ -1,6 +1,6 @@
 import { Keyboard, View } from "react-native";
 
-import { atoms as a, native, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -14,7 +14,6 @@ import {
 	type OtherSelfLabel,
 	type SelfLabel,
 } from "#/lib/moderation";
-import { isWeb } from "#/platform/detection";
 
 export function LabelsBtn({
 	labels,
@@ -52,12 +51,6 @@ export function LabelsBtn({
 				}}
 				label={"Content warnings"}
 				accessibilityHint={"Opens a dialog to add a content warning to your post"}
-				style={[
-					native({
-						paddingHorizontal: 8,
-						paddingVertical: 6,
-					}),
-				]}
 			>
 				<ButtonIcon icon={hasLabel ? Check : Shield_Stroke2_Corner0_Rounded} />
 				<ButtonText numberOfLines={1}>{labels.length > 0 ? <>Labels added</> : <>Labels</>}</ButtonText>
@@ -168,12 +161,12 @@ function DialogInner({
 				</View>
 			</View>
 
-			<View style={[a.mt_sm, web([a.flex_row, a.ml_auto])]}>
+			<View style={[a.mt_sm, a.flex_row, a.ml_auto]}>
 				<Button
 					label={"Done"}
 					onPress={() => control.close()}
 					color="primary"
-					size={isWeb ? "small" : "large"}
+					size={"small"}
 					variant="solid"
 					testID="confirmBtn"
 				>

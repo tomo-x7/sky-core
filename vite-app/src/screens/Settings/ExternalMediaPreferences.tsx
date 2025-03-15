@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { View } from "react-native";
 
-import { atoms as a, native } from "#/alf";
+import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import * as Toggle from "#/components/forms/Toggle";
@@ -32,14 +32,12 @@ export function ExternalMediaPreferencesScreen(props: Props) {
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Enable media players for</SettingsList.ItemText>
 						<View style={[a.mt_sm, a.w_full]}>
-							{native(<SettingsList.Divider style={[a.my_0]} />)}
 							{Object.entries(externalEmbedLabels)
 								// TODO: Remove special case when we disable the old integration.
 								.filter(([key]) => key !== "tenor")
 								.map(([key, label]) => (
 									<Fragment key={key}>
 										<PrefSelector source={key as EmbedPlayerSource} label={label} key={key} />
-										{native(<SettingsList.Divider style={[a.my_0]} />)}
 									</Fragment>
 								))}
 						</View>
@@ -67,7 +65,7 @@ function PrefSelector({
 			type="checkbox"
 			value={sources?.[source] === "show"}
 			onChange={() => setExternalEmbedPref(source, sources?.[source] === "show" ? "hide" : "show")}
-			style={[a.flex_1, a.py_md, native([a.justify_between, a.flex_row_reverse])]}
+			style={[a.flex_1, a.py_md]}
 		>
 			<Toggle.Platform />
 			<Toggle.LabelText style={[a.text_md]}>{label}</Toggle.LabelText>

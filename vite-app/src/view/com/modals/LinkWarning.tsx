@@ -8,7 +8,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { shareUrl } from "#/lib/sharing";
 import { isPossiblyAUrl, splitApexDomain } from "#/lib/strings/url-helpers";
 import { colors, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { Button } from "#/view/com/util/forms/Button";
 import { Text } from "#/view/com/util/text/Text";
@@ -129,15 +128,15 @@ function LinkBox({ href }: { href: string }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingBottom: isWeb ? 0 : 40,
+		paddingBottom: 0,
 	},
 	titleSection: {
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
 		gap: 6,
-		paddingTop: isWeb ? 0 : 4,
-		paddingBottom: isWeb ? 14 : 10,
+		paddingTop: 0,
+		paddingBottom: 14,
 	},
 	title: {
 		textAlign: "center",

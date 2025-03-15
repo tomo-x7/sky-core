@@ -1,5 +1,5 @@
 import type { ComAtprotoServerDefs } from "@atproto/api";
-import { FontAwesomeIcon, type FontAwesomeIconStyle } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -8,7 +8,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { makeProfileLink } from "#/lib/routes/links";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { useInvitesAPI, useInvitesState } from "#/state/invites";
 import { useModalControls } from "#/state/modals";
 import { type InviteCodesQueryResponse, useInviteCodesQuery } from "#/state/queries/invites";
@@ -145,7 +144,8 @@ function InviteCode({
 				{!used && invitesState.copiedInvites.includes(invite.code) && (
 					<Text style={[pal.textLight, styles.codeCopied]}>Copied</Text>
 				)}
-				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text as FontAwesomeIconStyle} />}
+				{/* @ts-ignore */}
+				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text} />}
 			</TouchableOpacity>
 			{uses.length > 0 ? (
 				<View
@@ -179,7 +179,7 @@ function InviteCode({
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingBottom: isWeb ? 0 : 50,
+		paddingBottom: 0,
 	},
 	title: {
 		textAlign: "center",

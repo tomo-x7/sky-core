@@ -22,7 +22,6 @@ export function MessagesSettingsScreen(props: Props) {
 	const { data: profile } = useProfileQuery({
 		did: currentAccount!.did,
 	});
-	const { preferences, setPref } = useBackgroundNotificationPreferences();
 
 	const { mutate: updateDeclaration } = useUpdateActorDeclaration({
 		onError: () => {
@@ -37,15 +36,6 @@ export function MessagesSettingsScreen(props: Props) {
 			updateDeclaration(key as AllowIncoming);
 		},
 		[updateDeclaration],
-	);
-
-	const onSelectSoundSetting = useCallback(
-		(keys: string[]) => {
-			const key = keys[0];
-			if (!key) return;
-			setPref("playSoundChat", key === "enabled");
-		},
-		[setPref],
 	);
 
 	return (

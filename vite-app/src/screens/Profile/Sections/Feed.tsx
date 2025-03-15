@@ -1,8 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View, findNodeHandle } from "react-native";
-
-import { ios } from "#/alf";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
@@ -70,7 +68,6 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 				onScrolledDownChange={setIsScrolledDown}
 				renderEmptyState={renderPostsEmpty}
 				headerOffset={headerHeight}
-				progressViewOffset={ios(0)}
 				renderEndOfFeed={isVideoFeed ? undefined : ProfileEndOfFeed}
 				ignoreFilterFor={ignoreFilterFor}
 				initialNumToRender={shouldUseAdjustedNumToRender ? adjustedInitialNumToRender : undefined}

@@ -10,7 +10,6 @@ import { Mute_Stroke2_Corner0_Rounded as Mute } from "#/components/icons/Mute";
 import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
 import type { NavigationProp } from "#/lib/routes/types";
 import { isInvalidHandle } from "#/lib/strings/handles";
-import { isWeb } from "#/platform/detection";
 import {
 	usePreferencesQuery,
 	useRemoveMutedWordsMutation,
@@ -71,11 +70,9 @@ export function RichTextTag({
 						}}
 						{...menuProps}
 						onPress={(e) => {
-							if (isWeb) {
-								return createStaticClickIfUnmodified(() => {
-									menuProps.onPress();
-								}).onPress(e);
-							}
+							return createStaticClickIfUnmodified(() => {
+								menuProps.onPress();
+							}).onPress(e);
 						}}
 						onLongPress={createStaticClick(menuProps.onPress).onPress}
 						accessibilityHint={hint}

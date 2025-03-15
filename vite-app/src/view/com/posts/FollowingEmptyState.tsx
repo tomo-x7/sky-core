@@ -7,7 +7,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { MagnifyingGlassIcon } from "#/lib/icons";
 import type { NavigationProp } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { Button } from "../util/forms/Button";
 import { Text } from "../util/text/Text";
 
@@ -17,12 +16,7 @@ export function FollowingEmptyState() {
 	const navigation = useNavigation<NavigationProp>();
 
 	const onPressFindAccounts = React.useCallback(() => {
-		if (isWeb) {
-			navigation.navigate("Search", {});
-		} else {
-			navigation.navigate("SearchTab");
-			navigation.popToTop();
-		}
+		navigation.navigate("Search", {});
 	}, [navigation]);
 
 	const onPressDiscoverFeeds = React.useCallback(() => {

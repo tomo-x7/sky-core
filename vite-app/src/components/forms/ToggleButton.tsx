@@ -1,7 +1,7 @@
 import React from "react";
 import { type AccessibilityProps, type TextStyle, View, type ViewStyle } from "react-native";
 
-import { atoms as a, native, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 
@@ -91,9 +91,6 @@ function ButtonInner({ children }: React.PropsWithChildren) {
 				},
 				a.flex_grow,
 				a.py_md,
-				native({
-					paddingBottom: 10,
-				}),
 				a.px_md,
 				t.atoms.bg,
 				t.atoms.border_contrast_low,

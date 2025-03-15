@@ -38,7 +38,6 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { niceDate } from "#/lib/strings/time";
 import { colors, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import type { FeedNotification } from "#/state/queries/notifications/feed";
 import { precacheProfile } from "#/state/queries/profile";
@@ -622,12 +621,9 @@ function AdditionalPostText({ post }: { post?: AppBskyFeedDefs.PostView }) {
 }
 
 const styles = StyleSheet.create({
-	pointer: isWeb
-		? {
-				// @ts-ignore web only
-				cursor: "pointer",
-			}
-		: {},
+	pointer: {
+		cursor: "pointer",
+	},
 
 	outer: {
 		padding: 10,

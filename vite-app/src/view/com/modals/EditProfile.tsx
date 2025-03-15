@@ -11,7 +11,7 @@ import {
 	View,
 } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
-import Animated, { FadeOut } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 
 import { useTheme } from "#/lib/ThemeContext";
 import { MAX_DESCRIPTION, MAX_DISPLAY_NAME } from "#/lib/constants";
@@ -20,7 +20,6 @@ import { compressIfNeeded } from "#/lib/media/manip";
 import { cleanError } from "#/lib/strings/errors";
 import { enforceLen } from "#/lib/strings/helpers";
 import { colors, gradients, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useProfileUpdateMutation } from "#/state/queries/profile";
 import * as Toast from "#/view/com/util/Toast";
@@ -182,7 +181,7 @@ export function Component({
 					)}
 					{!updateMutation.isPending && (
 						<AnimatedTouchableOpacity
-							exiting={!isWeb ? FadeOut : undefined}
+							exiting={undefined}
 							testID="editProfileCancelBtn"
 							style={s.mt5}
 							onPress={onPressCancel}

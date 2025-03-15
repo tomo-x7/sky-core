@@ -5,7 +5,6 @@ import { atoms as a, useGutters, useTheme } from "#/alf";
 import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
 import { Text } from "#/components/Typography";
 import { Hashtag_Stroke2_Corner0_Rounded } from "#/components/icons/Hashtag";
-import { isWeb } from "#/platform/detection";
 import { DEFAULT_LIMIT as RECOMMENDATIONS_COUNT, useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
 import { useTrendingConfig } from "#/state/trending-config";
 
@@ -23,14 +22,7 @@ function Inner() {
 
 	return error || noRecs ? null : (
 		<>
-			<View
-				style={[
-					a.flex_row,
-					isWeb ? [a.px_lg, a.py_lg, a.pt_2xl, a.gap_md] : [a.p_lg, a.pt_2xl, a.gap_md],
-					a.border_b,
-					t.atoms.border_contrast_low,
-				]}
-			>
+			<View style={[a.flex_row, [a.px_lg, a.py_lg, a.pt_2xl, a.gap_md], a.border_b, t.atoms.border_contrast_low]}>
 				<View style={[a.flex_1, a.gap_sm]}>
 					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 						<Hashtag_Stroke2_Corner0_Rounded

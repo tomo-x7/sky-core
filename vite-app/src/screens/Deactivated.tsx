@@ -12,7 +12,6 @@ import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
-import { isWeb } from "#/platform/detection";
 import { type SessionAccount, useAgent, useSession, useSessionApi } from "#/state/session";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { useLoggedOutViewControls } from "#/state/shell/logged-out";
@@ -53,15 +52,14 @@ export function Deactivated() {
 	}, [setShowLoggedOut]);
 
 	const onPressLogout = React.useCallback(() => {
-		if (isWeb) {
-			// We're switching accounts, which remounts the entire app.
-			// On mobile, this gets us Home, but on the web we also need reset the URL.
-			// We can't change the URL via a navigate() call because the navigator
-			// itself is about to unmount, and it calls pushState() too late.
-			// So we change the URL ourselves. The navigator will pick it up on remount.
-			history.pushState(null, "", "/");
-		}
-		logoutCurrentAccount("Deactivated");
+		// We're switching accounts, which remounts the entire app.
+		// On mobile, this gets us Home, but on the web we also need reset the URL.
+		// We can't change the URL via a navigate() call because the navigator
+		// itself is about to unmount, and it calls pushState() too late.
+		// So we change the URL ourselves. The navigator will pick it up on remount.
+		history.pushState(null, "", "/");
+
+		logoutCurrentAccount();
 	}, [logoutCurrentAccount]);
 
 	const handleActivate = React.useCallback(async () => {

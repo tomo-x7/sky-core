@@ -4,7 +4,7 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { type ListRenderItemInfo, View } from "react-native";
 
-import { atoms as a, web } from "#/alf";
+import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
@@ -78,7 +78,8 @@ export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavi
 			<Pager
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
-					<Layout.Center style={[a.z_10, web([a.sticky, { top: 0 }])]}>
+					// @ts-ignore
+					<Layout.Center style={[a.z_10, a.sticky, { top: 0 }]}>
 						<Layout.Header.Outer noBottomBorder>
 							<Layout.Header.BackButton />
 							<Layout.Header.Content>

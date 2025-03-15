@@ -10,11 +10,10 @@ import {
 	findNodeHandle,
 } from "react-native";
 
-import { atoms as a, ios, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { usePreferencesQuery } from "#/state/queries/preferences";
 import { RQKEY, useProfileFeedgensQuery } from "#/state/queries/profile-feedgens";
 import { EmptyState } from "#/view/com/util/EmptyState";
@@ -136,7 +135,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 			}
 			if (preferences) {
 				return (
-					<View style={[(index !== 0 || isWeb) && a.border_t, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
+					<View style={[a.border_t, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
 						<FeedCard.Default view={item} />
 					</View>
 				);
@@ -169,7 +168,6 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 				refreshing={isPTRing}
 				onRefresh={onRefresh}
 				headerOffset={headerOffset}
-				progressViewOffset={ios(0)}
 				contentContainerStyle={isMobile && { paddingBottom: headerOffset + 100 }}
 				removeClippedSubviews={true}
 				desktopFixedHeight

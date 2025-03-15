@@ -2,18 +2,9 @@ import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
 import { View, useWindowDimensions } from "react-native";
-import Animated, {
-	FadeIn,
-	FadeOut,
-	LayoutAnimationConfig,
-	LinearTransition,
-	SlideInLeft,
-	SlideInRight,
-	SlideOutLeft,
-	SlideOutRight,
-} from "react-native-reanimated";
+import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
-import { atoms as a, native, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -98,14 +89,14 @@ function ChangeHandleDialogInner() {
 				) : serviceInfo ? (
 					<LayoutAnimationConfig skipEntering skipExiting>
 						{page === "provided-handle" ? (
-							<Animated.View key={page} entering={native(SlideInLeft)} exiting={native(SlideOutLeft)}>
+							<Animated.View key={page}>
 								<ProvidedHandlePage
 									serviceInfo={serviceInfo}
 									goToOwnHandle={() => setPage("own-handle")}
 								/>
 							</Animated.View>
 						) : (
-							<Animated.View key={page} entering={native(SlideInRight)} exiting={native(SlideOutRight)}>
+							<Animated.View key={page}>
 								<OwnHandlePage goToServiceHandle={() => setPage("provided-handle")} />
 							</Animated.View>
 						)}
@@ -168,7 +159,7 @@ function ProvidedHandlePage({
 						<ChangeHandleError error={error} />
 					</Animated.View>
 				)}
-				<Animated.View layout={native(LinearTransition)} style={[a.flex_1, a.gap_md]}>
+				<Animated.View style={[a.flex_1, a.gap_md]}>
 					<View>
 						<TextField.LabelText>New handle</TextField.LabelText>
 						<TextField.Root isInvalid={isInvalid}>
@@ -303,7 +294,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					</Admonition>
 				</Animated.View>
 			)}
-			<Animated.View layout={native(LinearTransition)} style={[a.flex_1, a.gap_md, a.overflow_hidden]}>
+			<Animated.View style={[a.flex_1, a.gap_md, a.overflow_hidden]}>
 				<View>
 					<TextField.LabelText>Enter the domain you want to use</TextField.LabelText>
 					<TextField.Root>
@@ -422,11 +413,11 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 				)}
 			</Animated.View>
 			{isVerified && (
-				<Animated.View entering={FadeIn} exiting={FadeOut} layout={native(LinearTransition)}>
+				<Animated.View entering={FadeIn} exiting={FadeOut}>
 					<SuccessMessage text={"Domain verified!"} />
 				</Animated.View>
 			)}
-			<Animated.View layout={native(LinearTransition)}>
+			<Animated.View>
 				{currentAccount?.handle?.endsWith(".bsky.social") && (
 					<Admonition type="info" style={[a.mb_md]}>
 						<>

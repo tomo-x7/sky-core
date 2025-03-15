@@ -11,7 +11,6 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { colors, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import {
@@ -47,7 +46,7 @@ export function Component({
 	const onPressCancelSearch = useCallback(() => setQuery(""), []);
 
 	return (
-		<SafeAreaView testID="listAddUserModal" style={[pal.view, isWeb ? styles.fixedHeight : s.flex1]}>
+		<SafeAreaView testID="listAddUserModal" style={[pal.view, styles.fixedHeight]}>
 			<View style={[s.flex1, isMobile && { paddingHorizontal: 18 }]}>
 				<View style={[styles.searchContainer, pal.border]}>
 					{/* @ts-ignore */}
@@ -234,8 +233,8 @@ const styles = StyleSheet.create({
 		height: "80vh",
 	},
 	titleSection: {
-		paddingTop: isWeb ? 0 : 4,
-		paddingBottom: isWeb ? 14 : 10,
+		paddingTop: 0,
+		paddingBottom: 14,
 	},
 	title: {
 		textAlign: "center",

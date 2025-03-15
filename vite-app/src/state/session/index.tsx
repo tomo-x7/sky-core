@@ -2,7 +2,6 @@ import type { AtpSessionEvent, BskyAgent } from "@atproto/api";
 import React from "react";
 
 import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
-import { isWeb } from "#/platform/detection";
 import * as persisted from "#/state/persisted";
 import { useCloseAllActiveElements } from "#/state/util";
 import { emitSessionDropped } from "../events";
@@ -218,9 +217,6 @@ export function Provider({ children }: React.PropsWithChildren) {
 		}),
 		[createAccount, login, logoutCurrentAccount, logoutEveryAccount, resumeSession, removeAccount],
 	);
-
-	// @ts-expect-error window type is not declared, debug only
-	if (__DEV__ && isWeb) window.agent = state.currentAgentState.agent;
 
 	const agent = state.currentAgentState.agent as BskyAppAgent;
 	const currentAgentRef = React.useRef(agent);

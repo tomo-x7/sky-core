@@ -13,10 +13,7 @@ import { CircleInfo_Stroke2_Corner0_Rounded } from "#/components/icons/CircleInf
 import { StreamingLive_Stroke2_Corner0_Rounded as StreamingLive } from "#/components/icons/StreamingLive";
 import { usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { compressIfNeeded } from "#/lib/media/manip";
-import { openCropper } from "#/lib/media/picker";
 import { getDataUriSize } from "#/lib/media/util";
-import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
-import { isWeb } from "#/platform/detection";
 import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
 import { AvatarCircle } from "#/screens/Onboarding/StepProfile/AvatarCircle";
 import { AvatarCreatorCircle } from "#/screens/Onboarding/StepProfile/AvatarCreatorCircle";
@@ -52,7 +49,6 @@ export function StepProfile() {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	const { requestPhotoAccessIfNeeded } = usePhotoLibraryPermission();
-	const requestNotificationsPermission = useRequestNotificationsPermission();
 
 	const creatorControl = Dialog.useDialogControl();
 	const [error, setError] = React.useState("");
@@ -66,10 +62,6 @@ export function StepProfile() {
 	});
 
 	const canvasRef = React.useRef<PlaceholderCanvasRef>(null);
-
-	React.useEffect(() => {
-		requestNotificationsPermission("StartOnboarding");
-	}, [requestNotificationsPermission]);
 
 	const sheetWrapper = useSheetWrapper();
 	const openPicker = React.useCallback(
@@ -160,15 +152,6 @@ export function StepProfile() {
 		let image = items[0];
 		if (!image) return;
 
-		if (!isWeb) {
-			image = await openCropper({
-				mediaType: "photo",
-				cropperCircleOverlay: true,
-				height: 1000,
-				width: 1000,
-				path: image.path,
-			});
-		}
 		image = await compressIfNeeded(image, 1000000);
 
 		setAvatar((prev) => ({

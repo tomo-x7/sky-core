@@ -1,7 +1,7 @@
 import React from "react";
 import { type TextStyle, View, type ViewStyle } from "react-native";
 
-import { atoms as a, native, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import { capitalize } from "#/lib/strings/capitalize";
@@ -62,16 +62,7 @@ export function InterestButton({ interest }: { interest: string }) {
 				ctx.selected && (ctx.hovered || ctx.focused || ctx.pressed) ? styles.selectedHover : {},
 			]}
 		>
-			<Text
-				style={[
-					{
-						color: t.palette.contrast_900,
-					},
-					a.font_bold,
-					native({ paddingTop: 2 }),
-					ctx.selected ? styles.textSelected : {},
-				]}
-			>
+			<Text style={[{ color: t.palette.contrast_900 }, a.font_bold, ctx.selected ? styles.textSelected : {}]}>
 				{interestsDisplayNames[interest] || capitalize(interest)}
 			</Text>
 		</View>

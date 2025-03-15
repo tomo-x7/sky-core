@@ -1,9 +1,9 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ScrollView, TextInput, View, useWindowDimensions } from "react-native";
-import Animated, { LayoutAnimationConfig, LinearTransition, ZoomInEasyDown } from "react-native-reanimated";
+import Animated, { LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
-import { type ViewStyleProp, atoms as a, native, tokens, useBreakpoints, useTheme, web } from "#/alf";
+import { type ViewStyleProp, atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import * as ProfileCard from "#/components/ProfileCard";
@@ -14,7 +14,6 @@ import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/compon
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorSearchPaginated } from "#/state/queries/actor-search";
@@ -275,7 +274,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
 			//@ts-ignore
-			style={[a.px_0, web([a.py_0, { height: "100vh", maxHeight: 600 }]), native({ height: "100%" })]}
+			style={[a.px_0, a.py_0, { height: "100vh", maxHeight: 600 }]}
 			webInnerContentContainerStyle={a.py_0}
 			webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
 			keyboardDismissMode="on-drag"
@@ -319,19 +318,11 @@ let Header = ({
 	return (
 		<View
 			onLayout={(evt) => setHeaderHeight(evt.nativeEvent.layout.height)}
-			style={[
-				a.relative,
-				web(a.pt_lg),
-				native(a.pt_4xl),
-				a.pb_xs,
-				a.border_b,
-				t.atoms.border_contrast_low,
-				t.atoms.bg,
-			]}
+			style={[a.relative, a.pt_lg, a.pb_xs, a.border_b, t.atoms.border_contrast_low, t.atoms.bg]}
 		>
 			<HeaderTop guide={guide} />
 
-			<View style={[web(a.pt_xs), a.pb_xs]}>
+			<View style={[a.pt_xs, a.pb_xs]}>
 				<SearchInput
 					inputRef={inputRef}
 					defaultValue={searchText}
@@ -362,7 +353,7 @@ function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
 			<Text style={[a.z_10, a.text_lg, a.font_heavy, a.leading_tight, t.atoms.text_contrast_high]}>
 				Find people to follow
 			</Text>
-			<View style={isWeb && { paddingRight: 36 }}>
+			<View style={{ paddingRight: 36 }}>
 				<ProgressGuideTask
 					current={guide.numFollows + 1}
 					total={10 + 1}
@@ -370,25 +361,17 @@ function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
 					tabularNumsTitle
 				/>
 			</View>
-			{isWeb ? (
-				<Button
-					label={"Close"}
-					size="small"
-					shape="round"
-					variant={isWeb ? "ghost" : "solid"}
-					color="secondary"
-					style={[
-						a.absolute,
-						a.z_20,
-						web({ right: -4 }),
-						native({ right: 0 }),
-						native({ height: 32, width: 32, borderRadius: 16 }),
-					]}
-					onPress={() => control.close()}
-				>
-					<ButtonIcon icon={X} size="md" />
-				</Button>
-			) : null}
+			<Button
+				label={"Close"}
+				size="small"
+				shape="round"
+				variant={"ghost"}
+				color="secondary"
+				style={[a.absolute, a.z_20, { right: -4 }]}
+				onPress={() => control.close()}
+			>
+				<ButtonIcon icon={X} size="md" />
+			</Button>
 		</View>
 	);
 }
@@ -561,7 +544,7 @@ let FollowProfileCard = ({
 
 	return (
 		<LayoutAnimationConfig skipEntering={!isSuggestion}>
-			<Animated.View entering={native(ZoomInEasyDown)}>
+			<Animated.View>
 				<FollowProfileCardInner
 					profile={profile}
 					moderationOpts={moderationOpts}
@@ -600,7 +583,6 @@ function FollowProfileCardInner({
 							<ProfileCard.FollowButton
 								profile={profile}
 								moderationOpts={moderationOpts}
-								logContext="PostOnboardingFindFollows"
 								shape="round"
 								onPress={onFollow}
 								colorInverted
@@ -637,10 +619,10 @@ function SearchInput({
 
 	return (
 		<View
-			{...web({
+			{...{
 				onMouseEnter,
 				onMouseLeave,
-			})}
+			}}
 			style={[a.flex_row, a.align_center, a.gap_sm, a.px_lg, a.py_xs]}
 		>
 			<SearchIcon size="md" fill={interacted ? t.palette.primary_500 : t.palette.contrast_300} />

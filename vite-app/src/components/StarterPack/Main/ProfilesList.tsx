@@ -9,7 +9,6 @@ import { Default as ProfileCard } from "#/components/ProfileCard";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { isBlockedOrBlocking } from "#/lib/moderation/blocked-and-muted";
-import { isWeb } from "#/platform/detection";
 import type { SectionRef } from "#/screens/Profile/Sections/types";
 import { useAllListMembersQuery } from "#/state/queries/list-members";
 import { useSession } from "#/state/session";
@@ -69,7 +68,7 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<AppBskyActorDefs.ProfileViewBasic>) => {
 		return (
-			<View style={[a.p_lg, t.atoms.border_contrast_low, (isWeb || index !== 0) && a.border_t]}>
+			<View style={[a.p_lg, t.atoms.border_contrast_low, a.border_t]}>
 				<ProfileCard profile={item} moderationOpts={moderationOpts} logContext="StarterPackProfilesList" />
 			</View>
 		);
@@ -87,6 +86,7 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 	if (data)
 		return (
 			<List
+				// @ts-expect-error
 				data={getSortedProfiles()}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}

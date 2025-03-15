@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { Keyboard, type StyleProp, View, type ViewStyle } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -14,7 +14,6 @@ import { Warning_Stroke2_Corner0_Rounded as WarningIcon } from "#/components/ico
 import { MAX_ALT_TEXT } from "#/lib/constants";
 import { useEnforceMaxGraphemeCount } from "#/lib/strings/helpers";
 import { LANGUAGES } from "#/locale/languages";
-import { isWeb } from "#/platform/detection";
 import { useLanguagePrefs } from "#/state/preferences";
 import { SubtitleFilePicker } from "./SubtitleFilePicker";
 
@@ -35,8 +34,8 @@ export function SubtitleDialogBtn(props: Props) {
 	return (
 		<View style={[a.flex_row, a.my_xs]}>
 			<Button
-				label={isWeb ? "Captions & alt text" : "Alt text"}
-				accessibilityHint={isWeb ? "Opens captions and alt text dialog" : "Opens alt text dialog"}
+				label={"Captions & alt text"}
+				accessibilityHint={"Opens captions and alt text dialog"}
 				size="small"
 				color="secondary"
 				variant="ghost"
@@ -46,7 +45,7 @@ export function SubtitleDialogBtn(props: Props) {
 				}}
 			>
 				<ButtonIcon icon={CCIcon} />
-				<ButtonText>{isWeb ? <>Captions & alt text</> : <>Alt text</>}</ButtonText>
+				<ButtonText>Captions & alt text</ButtonText>
 			</Button>
 			<Dialog.Outer control={control}>
 				<Dialog.Handle />
@@ -101,42 +100,38 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 					/>
 				</TextField.Root>
 
-				{isWeb && (
-					<>
-						<View style={[a.border_t, a.w_full, t.atoms.border_contrast_medium, a.my_md]} />
-						<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>Captions (.vtt)</Text>
-						<SubtitleFilePicker
-							onSelectFile={handleSelectFile}
-							disabled={subtitleMissingLanguage || captions.length >= MAX_NUM_CAPTIONS}
+				<View style={[a.border_t, a.w_full, t.atoms.border_contrast_medium, a.my_md]} />
+				<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>Captions (.vtt)</Text>
+				<SubtitleFilePicker
+					onSelectFile={handleSelectFile}
+					disabled={subtitleMissingLanguage || captions.length >= MAX_NUM_CAPTIONS}
+				/>
+				<View>
+					{captions.map((subtitle, i) => (
+						<SubtitleFileRow
+							key={subtitle.lang}
+							language={subtitle.lang}
+							file={subtitle.file}
+							setCaptions={setCaptions}
+							otherLanguages={LANGUAGES.filter(
+								(lang) =>
+									langCode(lang) === subtitle.lang ||
+									!captions.some((s) => s.lang === langCode(lang)),
+							)}
+							style={[i % 2 === 0 && t.atoms.bg_contrast_25]}
 						/>
-						<View>
-							{captions.map((subtitle, i) => (
-								<SubtitleFileRow
-									key={subtitle.lang}
-									language={subtitle.lang}
-									file={subtitle.file}
-									setCaptions={setCaptions}
-									otherLanguages={LANGUAGES.filter(
-										(lang) =>
-											langCode(lang) === subtitle.lang ||
-											!captions.some((s) => s.lang === langCode(lang)),
-									)}
-									style={[i % 2 === 0 && t.atoms.bg_contrast_25]}
-								/>
-							))}
-						</View>
-						{subtitleMissingLanguage && (
-							<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
-								Ensure you have selected a language for each subtitle file.
-							</Text>
-						)}
-					</>
+					))}
+				</View>
+				{subtitleMissingLanguage && (
+					<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
+						Ensure you have selected a language for each subtitle file.
+					</Text>
 				)}
 
-				<View style={web([a.flex_row, a.justify_end])}>
+				<View style={[a.flex_row, a.justify_end]}>
 					<Button
 						label={"Done"}
-						size={isWeb ? "small" : "large"}
+						size={"small"}
 						color="primary"
 						variant="solid"
 						onPress={() => {

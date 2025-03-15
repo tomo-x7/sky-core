@@ -1,110 +1,76 @@
+import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
+import { useFocusGuards } from "@radix-ui/react-focus-guards";
+import { FocusScope } from "@radix-ui/react-focus-scope";
 import React, { useImperativeHandle } from "react";
-import { Pressable, type ScrollView, type StyleProp, TextInput, View, type ViewStyle } from "react-native";
-import { KeyboardAwareScrollView, useKeyboardHandler } from "react-native-keyboard-controller";
-import { runOnJS } from "react-native-reanimated";
-import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
+import {
+	FlatList,
+	type FlatListProps,
+	type StyleProp,
+	TouchableWithoutFeedback,
+	View,
+	type ViewStyle,
+} from "react-native";
+import { RemoveScrollBar } from "react-remove-scroll-bar";
 
-import { BottomSheet, BottomSheetSnapPoint } from "#/../modules/bottom-sheet";
-import type {
-	BottomSheetSnapPointChangeEvent,
-	BottomSheetStateChangeEvent,
-} from "#/../modules/bottom-sheet/src/BottomSheet.types";
-import type { BottomSheetNativeComponent } from "#/../modules/bottom-sheet/src/BottomSheetNativeComponent";
-import { atoms as a, tokens, useTheme } from "#/alf";
-import { useThemeName } from "#/alf/util/useColorModeTheme";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { Button, ButtonIcon } from "#/components/Button";
+import { Context } from "#/components/Dialog/context";
 import type { DialogControlProps, DialogInnerProps, DialogOuterProps } from "#/components/Dialog/types";
-import { createInput } from "#/components/forms/TextField";
-import { ScrollProvider } from "#/lib/ScrollContext";
-import { useEnableKeyboardController } from "#/lib/hooks/useEnableKeyboardController";
+import { Portal } from "#/components/Portal";
+import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useA11y } from "#/state/a11y";
 import { useDialogStateControlContext } from "#/state/dialogs";
-import { List, type ListMethods, type ListProps } from "#/view/com/util/List";
-import { Context, useDialogContext } from "./context";
 
 export { useDialogContext, useDialogControl } from "#/components/Dialog/context";
 export * from "#/components/Dialog/shared";
 export * from "#/components/Dialog/types";
 export * from "#/components/Dialog/utils";
+export { Input } from "#/components/forms/TextField";
 
-export const Input = createInput(TextInput);
+function stopPropagation<T extends { stopPropagation: () => void } = Event>(e: T) {
+	return e.stopPropagation();
+}
+function preventDefault<T extends { preventDefault: () => void } = Event>(e: T) {
+	e.preventDefault();
+}
 
-export function Outer({
-	children,
-	control,
-	onClose,
-	nativeOptions,
-	testID,
-}: React.PropsWithChildren<DialogOuterProps>) {
-	const themeName = useThemeName();
-	const t = useTheme(themeName);
-	const ref = React.useRef<BottomSheetNativeComponent>(null);
-	const closeCallbacks = React.useRef<(() => void)[]>([]);
-	const { setDialogIsOpen, setFullyExpandedCount } = useDialogStateControlContext();
+export function Outer({ children, control, onClose, webOptions }: React.PropsWithChildren<DialogOuterProps>) {
+	const { gtMobile } = useBreakpoints();
+	const [isOpen, setIsOpen] = React.useState(false);
+	const { setDialogIsOpen } = useDialogStateControlContext();
 
-	const prevSnapPoint = React.useRef<BottomSheetSnapPoint>(BottomSheetSnapPoint.Hidden);
-
-	const [disableDrag, setDisableDrag] = React.useState(false);
-	const [snapPoint, setSnapPoint] = React.useState<BottomSheetSnapPoint>(BottomSheetSnapPoint.Partial);
-
-	const callQueuedCallbacks = React.useCallback(() => {
-		for (const cb of closeCallbacks.current) {
-			try {
-				cb();
-			} catch (e: unknown) {
-				console.error(e || "Error running close callback");
-			}
-		}
-
-		closeCallbacks.current = [];
-	}, []);
-
-	const open = React.useCallback<DialogControlProps["open"]>(() => {
-		// Run any leftover callbacks that might have been queued up before calling `.open()`
-		callQueuedCallbacks();
+	const open = React.useCallback(() => {
 		setDialogIsOpen(control.id, true);
-		ref.current?.present();
-	}, [setDialogIsOpen, control.id, callQueuedCallbacks]);
+		setIsOpen(true);
+	}, [setDialogIsOpen, control.id]);
 
-	// This is the function that we call when we want to dismiss the dialog.
-	const close = React.useCallback<DialogControlProps["close"]>((cb) => {
-		if (typeof cb === "function") {
-			closeCallbacks.current.push(cb);
-		}
-		ref.current?.dismiss();
-	}, []);
+	const close = React.useCallback<DialogControlProps["close"]>(
+		(cb) => {
+			setDialogIsOpen(control.id, false);
+			setIsOpen(false);
 
-	// This is the actual thing we are doing once we "confirm" the dialog. We want the dialog's close animation to
-	// happen before we run this. It is passed to the `BottomSheet` component.
-	const onCloseAnimationComplete = React.useCallback(() => {
-		// This removes the dialog from our list of stored dialogs. Not super necessary on iOS, but on Android this
-		// tells us that we need to toggle the accessibility overlay setting
-		setDialogIsOpen(control.id, false);
-		callQueuedCallbacks();
-		onClose?.();
-	}, [callQueuedCallbacks, control.id, onClose, setDialogIsOpen]);
-
-	const onSnapPointChange = (e: BottomSheetSnapPointChangeEvent) => {
-		const { snapPoint } = e.nativeEvent;
-		setSnapPoint(snapPoint);
-
-		if (snapPoint === BottomSheetSnapPoint.Full && prevSnapPoint.current !== BottomSheetSnapPoint.Full) {
-			setFullyExpandedCount((c) => c + 1);
-		} else if (snapPoint !== BottomSheetSnapPoint.Full && prevSnapPoint.current === BottomSheetSnapPoint.Full) {
-			setFullyExpandedCount((c) => c - 1);
-		}
-		prevSnapPoint.current = snapPoint;
-	};
-
-	const onStateChange = (e: BottomSheetStateChangeEvent) => {
-		if (e.nativeEvent.state === "closed") {
-			onCloseAnimationComplete();
-
-			if (prevSnapPoint.current === BottomSheetSnapPoint.Full) {
-				setFullyExpandedCount((c) => c - 1);
+			try {
+				if (cb && typeof cb === "function") {
+					// This timeout ensures that the callback runs at the same time as it would on native. I.e.
+					// console.log('Step 1') -> close(() => console.log('Step 3')) -> console.log('Step 2')
+					// This should always output 'Step 1', 'Step 2', 'Step 3', but without the timeout it would output
+					// 'Step 1', 'Step 3', 'Step 2'.
+					setTimeout(cb);
+				}
+			} catch (e: unknown) {
+				console.error("Dialog closeCallback failed", {
+					message: (e as { message: unknown }).message,
+				});
 			}
-			prevSnapPoint.current = BottomSheetSnapPoint.Hidden;
-		}
-	};
+
+			onClose?.();
+		},
+		[control.id, onClose, setDialogIsOpen],
+	);
+
+	const handleBackgroundPress = React.useCallback(async () => {
+		close();
+	}, [close]);
 
 	useImperativeHandle(
 		control.ref,
@@ -112,164 +78,196 @@ export function Outer({
 			open,
 			close,
 		}),
-		[open, close],
+		[close, open],
 	);
 
 	const context = React.useMemo(
 		() => ({
 			close,
-			isNativeDialog: true,
-			nativeSnapPoint: snapPoint,
-			disableDrag,
-			setDisableDrag,
+			isNativeDialog: false,
+			nativeSnapPoint: 0,
+			disableDrag: false,
+			setDisableDrag: () => {},
 			isWithinDialog: true,
 		}),
-		[close, snapPoint, disableDrag],
+		[close],
 	);
 
-	return (
-		<BottomSheet
-			ref={ref}
-			cornerRadius={20}
-			backgroundColor={t.atoms.bg.backgroundColor}
-			{...nativeOptions}
-			onSnapPointChange={onSnapPointChange}
-			onStateChange={onStateChange}
-			disableDrag={disableDrag}
-		>
-			<Context.Provider value={context}>
-				<View testID={testID} style={[a.relative]}>
-					{children}
-				</View>
-			</Context.Provider>
-		</BottomSheet>
-	);
-}
-
-export function Inner({ children, style, header }: DialogInnerProps) {
 	return (
 		<>
-			{header}
-			<View
-				style={[
-					a.pt_2xl,
-					a.px_xl,
-					{
-						paddingBottom: 0,
-					},
-					style,
-				]}
-			>
-				{children}
-			</View>
+			{isOpen && (
+				<Portal>
+					<Context.Provider value={context}>
+						<RemoveScrollBar />
+						<TouchableWithoutFeedback
+							accessibilityHint={undefined}
+							accessibilityLabel={"Close active dialog"}
+							onPress={handleBackgroundPress}
+						>
+							<View
+								style={[
+									a.fixed,
+									a.inset_0,
+									a.z_10,
+									a.px_xl,
+									webOptions?.alignCenter ? a.justify_center : undefined,
+									a.align_center,
+									{
+										//@ts-ignore
+										overflowY: "auto",
+										paddingVertical: gtMobile ? "10vh" : a.pt_xl.paddingTop,
+									},
+								]}
+							>
+								<Backdrop />
+								{/**
+								 * This is needed to prevent centered dialogs from overflowing
+								 * above the screen, and provides a "natural" centering so that
+								 * stacked dialogs appear relatively aligned.
+								 */}
+								<View
+									style={[
+										a.w_full,
+										a.z_20,
+										a.align_center,
+										//@ts-ignore
+										{ minHeight: "60vh", position: "static" },
+									]}
+								>
+									{children}
+								</View>
+							</View>
+						</TouchableWithoutFeedback>
+					</Context.Provider>
+				</Portal>
+			)}
 		</>
 	);
 }
 
-export const ScrollableInner = React.forwardRef<ScrollView, DialogInnerProps>(function ScrollableInner(
-	{ children, contentContainerStyle, header, ...props },
-	ref,
-) {
-	const { nativeSnapPoint } = useDialogContext();
-
-	useEnableKeyboardController(false);
-
-	const [keyboardHeight, setKeyboardHeight] = React.useState(0);
-
-	useKeyboardHandler(
-		{
-			onEnd: (e) => {
-				"worklet";
-				runOnJS(setKeyboardHeight)(e.height);
-			},
-		},
-		[],
-	);
-
-	let paddingBottom = 0;
-	paddingBottom += keyboardHeight;
-	if (nativeSnapPoint === BottomSheetSnapPoint.Full) {
-		paddingBottom += 0;
-	}
-	paddingBottom += Math.max(0, tokens.space._5xl) + tokens.space._2xl;
-
+export function Inner({
+	children,
+	style,
+	label,
+	accessibilityLabelledBy,
+	accessibilityDescribedBy,
+	header,
+	contentContainerStyle,
+}: DialogInnerProps) {
+	const t = useTheme();
+	const { close } = React.useContext(Context);
+	const { gtMobile } = useBreakpoints();
+	const { reduceMotionEnabled } = useA11y();
+	useFocusGuards();
 	return (
-		<KeyboardAwareScrollView
-			contentContainerStyle={[a.pt_2xl, a.px_xl, { paddingBottom }, contentContainerStyle]}
-			ref={ref}
-			{...props}
-			bounces={nativeSnapPoint === BottomSheetSnapPoint.Full}
-			bottomOffset={30}
-			scrollEventThrottle={50}
-			onScroll={undefined}
-			keyboardShouldPersistTaps="handled"
-			stickyHeaderIndices={header ? [0] : undefined}
-		>
-			{header}
-			{children}
-		</KeyboardAwareScrollView>
+		<FocusScope loop asChild trapped>
+			<dialog
+				aria-label={label}
+				aria-labelledby={accessibilityLabelledBy}
+				aria-describedby={accessibilityDescribedBy}
+				onClick={stopPropagation}
+				onStartShouldSetResponder={() => true}
+				onTouchEnd={stopPropagation}
+				//@ts-ignore
+				style={flatten([
+					a.relative,
+					a.rounded_md,
+					a.w_full,
+					a.border,
+					t.atoms.bg,
+					{
+						maxWidth: 600,
+						borderColor: t.palette.contrast_200,
+						shadowColor: t.palette.black,
+						shadowOpacity: t.name === "light" ? 0.1 : 0.4,
+						shadowRadius: 30,
+					},
+					!reduceMotionEnabled && a.zoom_fade_in,
+					style,
+				])}
+			>
+				<DismissableLayer
+					onInteractOutside={preventDefault}
+					onFocusOutside={preventDefault}
+					onDismiss={close}
+					style={{ display: "flex", flexDirection: "column" }}
+				>
+					{header}
+					<View style={[gtMobile ? a.p_2xl : a.p_xl, contentContainerStyle]}>{children}</View>
+				</DismissableLayer>
+			</dialog>
+		</FocusScope>
 	);
-});
+}
+
+export const ScrollableInner = Inner;
 
 export const InnerFlatList = React.forwardRef<
-	ListMethods,
-	ListProps<any> & {
+	FlatList,
+	FlatListProps<any> & { label: string } & {
 		webInnerStyle?: StyleProp<ViewStyle>;
 		webInnerContentContainerStyle?: StyleProp<ViewStyle>;
 	}
->(function InnerFlatList({ style, ...props }, ref) {
-	const { nativeSnapPoint, disableDrag, setDisableDrag } = useDialogContext();
-
-	const onScroll = (e: ReanimatedScrollEvent) => {
-		"worklet";
-		return;
-	};
-
+>(function InnerFlatList({ label, style, webInnerStyle, webInnerContentContainerStyle, ...props }, ref) {
+	const { gtMobile } = useBreakpoints();
 	return (
-		<ScrollProvider onScroll={onScroll}>
-			<List
-				keyboardShouldPersistTaps="handled"
-				bounces={nativeSnapPoint === BottomSheetSnapPoint.Full}
-				ListFooterComponent={<View style={{ height: a.pt_5xl.paddingTop }} />}
-				ref={ref}
-				{...props}
-				style={[style]}
-			/>
-		</ScrollProvider>
+		<Inner
+			label={label}
+			style={[
+				a.overflow_hidden,
+				a.px_0,
+				// 100 minus 10vh of paddingVertical
+				//@ts-ignore
+				{ maxHeight: "80vh" },
+				webInnerStyle,
+			]}
+			contentContainerStyle={[a.px_0, webInnerContentContainerStyle]}
+		>
+			<FlatList ref={ref} style={[gtMobile ? a.px_2xl : a.px_xl, flatten(style)]} {...props} />
+		</Inner>
 	);
 });
 
-export function Handle() {
-	const t = useTheme();
-	const { screenReaderEnabled } = useA11y();
-	const { close } = useDialogContext();
-
+export function Close() {
+	const { close } = React.useContext(Context);
 	return (
-		<View style={[a.absolute, a.w_full, a.align_center, a.z_10, { height: 20 }]}>
-			<Pressable
-				accessible={screenReaderEnabled}
+		<View
+			style={[
+				a.absolute,
+				a.z_10,
+				{
+					top: a.pt_md.paddingTop,
+					right: a.pr_md.paddingRight,
+				},
+			]}
+		>
+			<Button
+				size="small"
+				variant="ghost"
+				color="secondary"
+				shape="round"
 				onPress={() => close()}
-				accessibilityLabel={"Dismiss"}
-				accessibilityHint={"Double tap to close the dialog"}
+				label={"Close active dialog"}
 			>
-				<View
-					style={[
-						a.rounded_sm,
-						{
-							top: tokens.space._2xl / 2 - 2.5,
-							width: 35,
-							height: 5,
-							alignSelf: "center",
-							backgroundColor: t.palette.contrast_975,
-							opacity: 0.5,
-						},
-					]}
-				/>
-			</Pressable>
+				<ButtonIcon icon={X} size="md" />
+			</Button>
 		</View>
 	);
 }
 
-export function Close() {
+export function Handle() {
 	return null;
+}
+
+function Backdrop() {
+	const t = useTheme();
+	const { reduceMotionEnabled } = useA11y();
+	return (
+		<View style={{ opacity: 0.8 }}>
+			<View
+				//@ts-ignore
+				style={[a.fixed, a.inset_0, { backgroundColor: t.palette.black }, !reduceMotionEnabled && a.fade_in]}
+			/>
+		</View>
+	);
 }

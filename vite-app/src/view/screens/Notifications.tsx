@@ -4,7 +4,6 @@ import React from "react";
 import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
-import { web } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
@@ -119,7 +118,7 @@ export function NotificationsScreen(props: Props) {
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
 					// @ts-ignore
-					<Layout.Center style={[a.z_10, web([a.sticky, { top: 0 }])]}>
+					<Layout.Center style={[a.z_10, a.sticky, { top: 0 }]}>
 						<TabBar
 							{...props}
 							items={sections.map((section) => section.title)}

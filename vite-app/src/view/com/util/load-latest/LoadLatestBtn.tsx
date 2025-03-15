@@ -11,7 +11,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
 import { colors } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { useSession } from "#/state/session";
 
 export function LoadLatestBtn({
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
 	loadLatest: {
 		zIndex: 20,
 		// @ts-ignore
-		position: isWeb ? "fixed" : "absolute",
+		position: "fixed",
 		left: 18,
 		borderWidth: StyleSheet.hairlineWidth,
 		width: 52,

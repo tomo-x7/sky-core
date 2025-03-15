@@ -16,7 +16,6 @@ import { News2_Stroke2_Corner0_Rounded as News } from "#/components/icons/News2"
 import { Trending2_Stroke2_Corner2_Rounded as Trending } from "#/components/icons/Trending2";
 import { uploadBlob } from "#/lib/api";
 import { BSKY_APP_ACCOUNT_DID, DISCOVER_SAVED_FEED, TIMELINE_SAVED_FEED } from "#/lib/constants";
-import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
 import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
 import { Context } from "#/screens/Onboarding/state";
 import { bulkWriteFollows } from "#/screens/Onboarding/util";
@@ -36,7 +35,6 @@ export function StepFinished() {
 	const [saving, setSaving] = React.useState(false);
 	const queryClient = useQueryClient();
 	const agent = useAgent();
-	const requestNotificationsPermission = useRequestNotificationsPermission();
 	const activeStarterPack = useActiveStarterPack();
 	const setActiveStarterPack = useSetActiveStarterPack();
 	const setHasCheckedForStarterPack = useSetHasCheckedForStarterPack();
@@ -136,7 +134,6 @@ export function StepFinished() {
 						return next;
 					});
 				})(),
-				requestNotificationsPermission("AfterOnboarding"),
 			]);
 		} catch (e: any) {
 			console.error(e);
@@ -169,7 +166,6 @@ export function StepFinished() {
 		onboardDispatch,
 		activeStarterPack,
 		state,
-		requestNotificationsPermission,
 		setActiveStarterPack,
 		setHasCheckedForStarterPack,
 		startProgressGuide,

@@ -9,11 +9,11 @@ import { Text } from "#/components/Typography";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import { HITSLOP_20 } from "#/lib/constants";
 import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
-import { isWeb } from "#/platform/detection";
 import { useAutoplayDisabled } from "#/state/preferences";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 import { GifView } from "../../../../../modules/expo-bluesky-gif-view";
 import type { GifViewStateChangeEvent } from "../../../../../modules/expo-bluesky-gif-view/src/GifView.types";
+import { GifViewHandle } from "../../../../../modules/expo-bluesky-gif-view/src/GifView";
 
 function PlaybackControls({
 	onPress,
@@ -78,7 +78,7 @@ export function GifEmbed({
 	const t = useTheme();
 	const autoplayDisabled = useAutoplayDisabled();
 
-	const playerRef = React.useRef<GifView>(null);
+	const playerRef:React.Ref<GifViewHandle|null>  = React.useRef(null);
 
 	const [playerState, setPlayerState] = React.useState<{
 		isPlaying: boolean;
@@ -125,7 +125,7 @@ export function GifEmbed({
 				<GifView
 					source={params.playerUri}
 					placeholderSource={thumb}
-					style={[a.flex_1]}
+					style={{flex:1}}
 					autoplay={!autoplayDisabled}
 					onPlayerStateChange={onPlayerStateChange}
 					ref={playerRef}
@@ -182,18 +182,18 @@ const styles = StyleSheet.create({
 	altContainer: {
 		backgroundColor: "rgba(0, 0, 0, 0.75)",
 		borderRadius: 6,
-		paddingHorizontal: isWeb ? 8 : 6,
-		paddingVertical: isWeb ? 6 : 3,
+		paddingHorizontal: 8,
+		paddingVertical: 6,
 		position: "absolute",
 		// Related to margin/gap hack. This keeps the alt label in the same position
 		// on all platforms
-		right: isWeb ? 8 : 5,
-		bottom: isWeb ? 8 : 5,
+		right: 8,
+		bottom: 8,
 		zIndex: 2,
 	},
 	alt: {
 		color: "white",
-		fontSize: isWeb ? 10 : 7,
+		fontSize: 10,
 		fontWeight: "600",
 	},
 });

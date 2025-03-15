@@ -15,7 +15,6 @@ import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/W
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { getTranslatorLink } from "#/locale/helpers";
-import { isWeb } from "#/platform/detection";
 import { useConvoActive } from "#/state/messages/convo";
 import { useLanguagePrefs } from "#/state/preferences";
 import { useSession } from "#/state/session";
@@ -70,24 +69,22 @@ export let MessageMenu = ({
 	return (
 		<>
 			<Menu.Root control={control}>
-				{isWeb && (
-					<View style={{ opacity: triggerOpacity }}>
-						<Menu.Trigger label={"Chat settings"}>
-							{({ props, state }) => (
-								<Pressable
-									{...props}
-									style={[
-										a.p_sm,
-										a.rounded_full,
-										(state.hovered || state.pressed) && t.atoms.bg_contrast_25,
-									]}
-								>
-									<DotsHorizontal size="md" style={t.atoms.text} />
-								</Pressable>
-							)}
-						</Menu.Trigger>
-					</View>
-				)}
+				<View style={{ opacity: triggerOpacity }}>
+					<Menu.Trigger label={"Chat settings"}>
+						{({ props, state }) => (
+							<Pressable
+								{...props}
+								style={[
+									a.p_sm,
+									a.rounded_full,
+									(state.hovered || state.pressed) && t.atoms.bg_contrast_25,
+								]}
+							>
+								<DotsHorizontal size="md" style={t.atoms.text} />
+							</Pressable>
+						)}
+					</Menu.Trigger>
+				</View>
 
 				<Menu.Outer>
 					{message.text.length > 0 && (

@@ -2,14 +2,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import type { ComponentProps, JSX } from "react";
 import { StyleSheet, type TouchableWithoutFeedback } from "react-native";
 import Animated from "react-native-reanimated";
-
-import { ios } from "#/alf";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
 import { gradients } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 
 export interface FABProps extends ComponentProps<typeof TouchableWithoutFeedback> {
 	testID?: string;
@@ -31,9 +28,6 @@ export function FABInner({ testID, icon, onPress, ...props }: FABProps) {
 				onPress={(evt) => {
 					onPress?.(evt);
 				}}
-				onLongPress={ios((evt: any) => {
-					onPress?.(evt);
-				})}
 				targetScale={0.9}
 				{...props}
 			>
@@ -63,7 +57,7 @@ const styles = StyleSheet.create({
 	},
 	outer: {
 		// @ts-ignore web-only
-		position: isWeb ? "fixed" : "absolute",
+		position: "fixed",
 		zIndex: 1,
 		cursor: "pointer",
 	},

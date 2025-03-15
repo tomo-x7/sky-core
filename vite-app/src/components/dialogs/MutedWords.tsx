@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, sanitizeMutedWordValue } from "@atproto/api";
 import React from "react";
 import { View } from "react-native";
 
-import { type ViewStyleProp, atoms as a, native, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -265,9 +265,7 @@ function MutedWordsInner() {
 								},
 							]}
 						>
-							<Text style={[a.italic, { color: t.palette.white }, native({ marginTop: 2 })]}>
-								{error}
-							</Text>
+							<Text style={[a.italic, { color: t.palette.white }]}>{error}</Text>
 						</View>
 					)}
 				</View>

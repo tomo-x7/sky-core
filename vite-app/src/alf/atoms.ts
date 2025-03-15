@@ -2,7 +2,6 @@ import { Platform, type StyleProp, StyleSheet, type ViewStyle } from "react-nati
 
 import * as Layout from "../components/Layout";
 import * as tokens from "./tokens";
-import { ios, native, platform, web } from "./util/platform";
 
 export const atoms = {
 	debug: {
@@ -22,9 +21,9 @@ export const atoms = {
 	relative: {
 		position: "relative",
 	},
-	sticky: web({
+	sticky: {
 		position: "sticky",
-	}),
+	},
 	inset_0: {
 		top: 0,
 		left: 0,
@@ -65,9 +64,9 @@ export const atoms = {
 	/**
 	 * @platform web
 	 */
-	overflow_auto: web({
+	overflow_auto: {
 		overflow: "auto",
-	}),
+	},
 
 	/*
 	 * Width
@@ -78,22 +77,19 @@ export const atoms = {
 	h_full: {
 		height: "100%",
 	},
-	h_full_vh: web({
+	h_full_vh: {
 		height: "100vh",
-	}),
+	},
 
 	/**
 	 * Used for the outermost components on screens, to ensure that they can fill
 	 * the screen and extend beyond.
 	 */
 	util_screen_outer: [
-		web({
+		{
 			minHeight: "100vh",
-		}),
-		native({
-			height: "100%",
-		}),
-	] as StyleProp<ViewStyle>,
+		},
+	] as unknown as StyleProp<ViewStyle>,
 
 	/*
 	 * Theme-independent bg colors
@@ -182,7 +178,7 @@ export const atoms = {
 		flexWrap: "nowrap",
 	},
 	flex_0: {
-		flex: web("0 0 auto") || (native(0) as number),
+		flex: "0 0 auto",
 	},
 	flex_1: {
 		flex: 1,
@@ -352,12 +348,6 @@ export const atoms = {
 	border_r: {
 		borderRightWidth: StyleSheet.hairlineWidth,
 	},
-	curve_circular: ios({
-		borderCurve: "circular",
-	}),
-	curve_continuous: ios({
-		borderCurve: "continuous",
-	}),
 
 	/*
 	 * Shadow
@@ -935,7 +925,7 @@ export const atoms = {
 	},
 	outline_inset_1: {
 		outlineOffset: "-1px",
-	} as StyleProp<ViewStyle>,
+	} as unknown as StyleProp<ViewStyle>,
 
 	/*
 	 * Text decoration
@@ -957,74 +947,69 @@ export const atoms = {
 	/*
 	 * Transition
 	 */
-	transition_none: web({
+	transition_none: {
 		transitionProperty: "none",
-	}),
-	transition_all: web({
+	},
+	transition_all: {
 		transitionProperty: "all",
 		transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
 		transitionDuration: "100ms",
-	}),
-	transition_color: web({
+	},
+	transition_color: {
 		transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
 		transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
 		transitionDuration: "100ms",
-	}),
-	transition_opacity: web({
+	},
+	transition_opacity: {
 		transitionProperty: "opacity",
 		transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
 		transitionDuration: "100ms",
-	}),
-	transition_transform: web({
+	},
+	transition_transform: {
 		transitionProperty: "transform",
 		transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
 		transitionDuration: "100ms",
-	}),
-	transition_delay_50ms: web({
+	},
+	transition_delay_50ms: {
 		transitionDelay: "50ms",
-	}),
+	},
 
 	/*
 	 * Animaations
 	 */
-	fade_in: web({
+	fade_in: {
 		animation: "fadeIn ease-out 0.15s",
-	}),
-	fade_out: web({
+	},
+	fade_out: {
 		animation: "fadeOut ease-out 0.15s",
-	}),
-	zoom_in: web({
+	},
+	zoom_in: {
 		animation: "zoomIn ease-out 0.1s",
-	}),
-	zoom_out: web({
+	},
+	zoom_out: {
 		animation: "zoomOut ease-out 0.1s",
-	}),
-	slide_in_left: web({
+	},
+	slide_in_left: {
 		// exponential easing function
 		animation: "slideInLeft cubic-bezier(0.16, 1, 0.3, 1) 0.5s",
-	}),
-	slide_out_left: web({
+	},
+	slide_out_left: {
 		animation: "slideOutLeft ease-in 0.15s",
 		animationFillMode: "forwards",
-	}),
+	},
 	// special composite animation for dialogs
-	zoom_fade_in: web({
+	zoom_fade_in: {
 		animation: "zoomIn ease-out 0.1s, fadeIn ease-out 0.1s",
-	}),
+	},
 
 	/**
 	 * {@link Layout.SCROLLBAR_OFFSET}
 	 */
-	scrollbar_offset: platform({
-		web: {
-			transform: [
-				{
-					translateX: Layout.SCROLLBAR_OFFSET,
-				},
-			],
-		},
-		native: {
-			transform: [],
-		},
-	}) as { transform: Exclude<ViewStyle["transform"], string | undefined> },
+	scrollbar_offset: {
+		transform: [
+			{
+				translateX: Layout.SCROLLBAR_OFFSET,
+			},
+		],
+	},
 } as const;

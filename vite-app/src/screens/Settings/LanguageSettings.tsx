@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { View } from "react-native";
 import RNPickerSelect, { type PickerSelectProps } from "react-native-picker-select";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -78,7 +78,7 @@ export function LanguageSettingsScreen(props: Props) {
 							<Text style={[a.leading_snug]}>
 								Select which language to use for the app's user interface.
 							</Text>
-							<View style={[a.relative, web([a.w_full, { maxWidth: 400 }])]}>
+							<View style={[a.relative, [a.w_full, { maxWidth: 400 }]]}>
 								<RNPickerSelect
 									darkTheme={t.scheme === "dark"}
 									placeholder={{}}
@@ -161,7 +161,7 @@ export function LanguageSettingsScreen(props: Props) {
 							<Text style={[a.leading_snug]}>
 								Select your preferred language for translations in your feed.
 							</Text>
-							<View style={[a.relative, web([a.w_full, { maxWidth: 400 }])]}>
+							<View style={[a.relative, [a.w_full, { maxWidth: 400 }]]}>
 								<RNPickerSelect
 									darkTheme={t.scheme === "dark"}
 									placeholder={{}}
@@ -250,7 +250,7 @@ export function LanguageSettingsScreen(props: Props) {
 								color="secondary"
 								variant="solid"
 								onPress={onPressContentLanguages}
-								style={[a.justify_start, web({ maxWidth: 400 })]}
+								style={[a.justify_start, { maxWidth: 400 }]}
 							>
 								<ButtonIcon icon={myLanguages.length > 0 ? CheckIcon : PlusIcon} />
 								<ButtonText style={[t.atoms.text, a.text_md, a.flex_1, a.text_left]} numberOfLines={1}>

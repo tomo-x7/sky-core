@@ -3,7 +3,7 @@ import { type ScrollView, View } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import type { JSX } from "react";
-import { atoms as a, web } from "#/alf";
+import { atoms as a } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Pager, type PagerRef, type RenderTabBarFnProps } from "#/view/com/pager/Pager";
 import type { ListMethods } from "../util/List";
@@ -125,13 +125,8 @@ let PagerTabBar = ({
 				style={[
 					a.z_10,
 					//@ts-ignore
-					web([
-						a.sticky,
-						{
-							top: 0,
-							display: isHeaderReady ? undefined : "none",
-						},
-					]),
+					a.sticky,
+					{ top: 0, display: isHeaderReady ? undefined : "none" },
 				]}
 			>
 				<TabBar
@@ -140,8 +135,6 @@ let PagerTabBar = ({
 					selectedPage={currentPage}
 					onSelect={onSelect}
 					onPressSelected={onCurrentPageSelected}
-					dragProgress={undefined as any /* native-only */}
-					dragState={undefined as any /* native-only */}
 				/>
 			</Layout.Center>
 		</>

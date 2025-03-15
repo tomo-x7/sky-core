@@ -1,8 +1,6 @@
 import type { AppBskyFeedPostgate } from "@atproto/api";
 import type { StyleProp, ViewStyle } from "react-native";
 import type { AnimatedStyle } from "react-native-reanimated";
-
-import { native } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { PostInteractionSettingsControlledDialog } from "#/components/dialogs/PostInteractionSettingsDialog";
@@ -45,12 +43,6 @@ export function ThreadgateBtn({
 				onPress={onPress}
 				label={label}
 				accessibilityHint={"Opens a dialog to choose who can reply to this thread"}
-				style={[
-					native({
-						paddingHorizontal: 8,
-						paddingVertical: 6,
-					}),
-				]}
 			>
 				<ButtonIcon icon={anyoneCanInteract ? Earth : Group} />
 				<ButtonText numberOfLines={1}>{label}</ButtonText>

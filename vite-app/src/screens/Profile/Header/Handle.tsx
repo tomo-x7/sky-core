@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { View } from "react-native";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { NewskieDialog } from "#/components/NewskieDialog";
 import { Text } from "#/components/Typography";
 import { isInvalidHandle } from "#/lib/strings/handles";
@@ -35,7 +35,7 @@ export function ProfileHeaderHandle({
 					invalidHandle
 						? [a.border, a.text_xs, a.px_sm, a.py_xs, a.rounded_xs, { borderColor: t.palette.contrast_200 }]
 						: [a.text_md, a.leading_snug, t.atoms.text_contrast_medium], //@ts-expect-error
-					web({ wordBreak: "break-all" }),
+					{ wordBreak: "break-all" },
 				]}
 			>
 				{invalidHandle ? "⚠Invalid Handle" : `@${profile.handle}`}

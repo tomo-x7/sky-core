@@ -11,7 +11,6 @@ import * as TextField from "#/components/forms/TextField";
 import { compressIfNeeded } from "#/lib/media/manip";
 import { cleanError } from "#/lib/strings/errors";
 import { useWarnMaxGraphemeCount } from "#/lib/strings/helpers";
-import { isWeb } from "#/platform/detection";
 import { useProfileUpdateMutation } from "#/state/queries/profile";
 import * as Toast from "#/view/com/util/Toast";
 import { EditableUserAvatar } from "#/view/com/util/UserAvatar";
@@ -37,7 +36,7 @@ export function EditProfileDialog({
 
 	// 'You might lose unsaved changes' warning
 	useEffect(() => {
-		if (isWeb && dirty) {
+		if (dirty) {
 			const abortController = new AbortController();
 			const { signal } = abortController;
 			window.addEventListener("beforeunload", (evt) => evt.preventDefault(), {

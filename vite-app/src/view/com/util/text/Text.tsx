@@ -6,7 +6,6 @@ import { applyFonts, useAlf } from "#/alf";
 import { type StringChild, renderChildrenWithEmoji } from "#/alf/typography";
 import { type TypographyVariant, useTheme } from "#/lib/ThemeContext";
 import { lh, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 
 export type CustomTextProps = Omit<TextProps, "children"> & {
 	type?: TypographyVariant;
@@ -64,7 +63,7 @@ function Text_DEPRECATED({
 		uiTextView: false,
 		selectable,
 		style: flattened,
-		dataSet: isWeb ? Object.assign({ tooltip: title }, dataSet || {}) : undefined,
+		dataSet: Object.assign({ tooltip: title }, dataSet || {}),
 		...props,
 	};
 

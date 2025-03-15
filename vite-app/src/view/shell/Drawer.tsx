@@ -1,8 +1,8 @@
-import { StackActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React, { type JSX, type ComponentProps } from "react";
 import { Linking, ScrollView, TouchableOpacity, View } from "react-native";
 
-import { atoms as a, tokens, useTheme, web } from "../../alf";
+import { atoms as a, tokens, useTheme } from "../../alf";
 import { Button, ButtonIcon, ButtonText } from "../../components/Button";
 import { Divider } from "../../components/Divider";
 import { InlineLinkText } from "../../components/Link";
@@ -34,12 +34,9 @@ import {
 import { FEEDBACK_FORM_URL, HELP_DESK_URL } from "../../lib/constants";
 import type { PressableScale } from "../../lib/custom-animations/PressableScale";
 import { useNavigationTabState } from "../../lib/hooks/useNavigationTabState";
-import { TabState, getTabState } from "../../lib/routes/helpers";
 import type { NavigationProp } from "../../lib/routes/types";
 import { sanitizeHandle } from "../../lib/strings/handles";
 import { colors } from "../../lib/styles";
-import { isWeb } from "../../platform/detection";
-import { emitSoftReset } from "../../state/events";
 import { useKawaiiMode } from "../../state/preferences/kawaii";
 import { useUnreadNotifications } from "../../state/queries/notifications/unread";
 import { useProfileQuery } from "../../state/queries/profile";
@@ -115,24 +112,12 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 		(tab: string) => {
 			const state = navigation.getState();
 			setDrawerOpen(false);
-			if (isWeb) {
-				// hack because we have flat navigator for web and MyProfile does not exist on the web navigator -ansh
-				if (tab === "MyProfile") {
-					navigation.navigate("Profile", { name: currentAccount!.handle });
-				} else {
-					// @ts-ignore must be Home, Search, Notifications, or MyProfile
-					navigation.navigate(tab);
-				}
+			// hack because we have flat navigator for web and MyProfile does not exist on the web navigator -ansh
+			if (tab === "MyProfile") {
+				navigation.navigate("Profile", { name: currentAccount!.handle });
 			} else {
-				const tabState = getTabState(state, tab);
-				if (tabState === TabState.InsideAtRoot) {
-					emitSoftReset();
-				} else if (tabState === TabState.Inside) {
-					navigation.dispatch(StackActions.popToTop());
-				} else {
-					// @ts-ignore must be Home, Search, Notifications, or MyProfile
-					navigation.navigate(`${tab}Tab`);
-				}
+				// @ts-ignore must be Home, Search, Notifications, or MyProfile
+				navigation.navigate(tab);
 			}
 		},
 		[navigation, setDrawerOpen, currentAccount],
@@ -503,7 +488,7 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 							</View>
 						) : undefined}
 					</View>
-					<Text style={[a.flex_1, a.text_2xl, bold && a.font_heavy, web(a.leading_snug)]} numberOfLines={1}>
+					<Text style={[a.flex_1, a.text_2xl, bold && a.font_heavy, a.leading_snug]} numberOfLines={1}>
 						{label}
 					</Text>
 				</View>

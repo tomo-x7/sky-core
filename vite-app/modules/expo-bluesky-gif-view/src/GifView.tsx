@@ -1,34 +1,93 @@
-import { requireNativeModule } from "expo";
-import { requireNativeViewManager } from "expo-modules-core";
-import React from "react";
-
+import * as React from "react";
+import { StyleSheet } from "react-native";
 import type { GifViewProps } from "./GifView.types";
 
-const NativeModule = requireNativeModule("ExpoBlueskyGifView");
-const NativeView: React.ComponentType<GifViewProps & { ref: React.RefObject<any> }> =
-	requireNativeViewManager("ExpoBlueskyGifView");
+export type GifViewHandle = {
+	playAsync: () => Promise<void>;
+	pauseAsync: () => Promise<void>;
+	toggleAsync: () => Promise<void>;
+};
 
-export class GifView extends React.PureComponent<GifViewProps> {
-	// TODO native types, should all be the same as those in this class
-	private nativeRef: React.RefObject<any> = React.createRef();
+const GifView = React.memo(
+	React.forwardRef<GifViewHandle, GifViewProps>((props, ref) => {
+		const videoPlayerRef = React.useRef<HTMLVideoElement>(null);
+		// isLoaded は再描画の必要がないため useRef で管理
+		const isLoadedRef = React.useRef(false);
+		// 前回の autoplay 値を保持
+		const prevAutoplayRef = React.useRef(props.autoplay);
 
-	static async prefetchAsync(sources: string[]): Promise<void> {
-		return await NativeModule.prefetchAsync(sources);
-	}
+		// インスタンスメソッド相当の関数を定義
+		const playAsync = React.useCallback(async () => {
+			videoPlayerRef.current?.play();
+		}, []);
 
-	async playAsync(): Promise<void> {
-		await this.nativeRef.current.playAsync();
-	}
+		const pauseAsync = React.useCallback(async () => {
+			videoPlayerRef.current?.pause();
+		}, []);
 
-	async pauseAsync(): Promise<void> {
-		await this.nativeRef.current.pauseAsync();
-	}
+		const toggleAsync = React.useCallback(async () => {
+			if (videoPlayerRef.current?.paused) {
+				await playAsync();
+			} else {
+				await pauseAsync();
+			}
+		}, [playAsync, pauseAsync]);
 
-	async toggleAsync(): Promise<void> {
-		await this.nativeRef.current.toggleAsync();
-	}
+		// 外部からメソッド呼び出しできるように公開
+		React.useImperativeHandle(ref, () => ({
+			playAsync,
+			pauseAsync,
+			toggleAsync,
+		}));
 
-	render() {
-		return <NativeView {...this.props} ref={this.nativeRef} />;
-	}
-}
+		// プレイヤー状態の変更を外部に通知する関数
+		const firePlayerStateChangeEvent = React.useCallback(() => {
+			props.onPlayerStateChange?.({
+				nativeEvent: {
+					isPlaying: !!(videoPlayerRef.current && !videoPlayerRef.current.paused),
+					isLoaded: isLoadedRef.current,
+				},
+			});
+		}, [props]);
+
+		// onLoad（初回のみ実行）
+		const onLoad = React.useCallback(() => {
+			if (isLoadedRef.current) {
+				return;
+			}
+			isLoadedRef.current = true;
+			firePlayerStateChangeEvent();
+		}, [firePlayerStateChangeEvent]);
+
+		// autoplay プロパティ変更時に再生/停止を制御（componentDidUpdate 相当）
+		React.useEffect(() => {
+			if (prevAutoplayRef.current !== props.autoplay) {
+				if (props.autoplay) {
+					playAsync();
+				} else {
+					pauseAsync();
+				}
+				prevAutoplayRef.current = props.autoplay;
+			}
+		}, [props.autoplay, playAsync, pauseAsync]);
+
+		return (
+			<video
+				src={props.source}
+				autoPlay={props.autoplay ? true : undefined}
+				preload={props.autoplay ? "auto" : undefined}
+				playsInline
+				loop
+				muted
+				style={StyleSheet.flatten(props.style)}
+				onCanPlay={onLoad}
+				onPlay={firePlayerStateChangeEvent}
+				onPause={firePlayerStateChangeEvent}
+				aria-label={props.accessibilityLabel}
+				ref={videoPlayerRef}
+			/>
+		);
+	}),
+);
+
+export { GifView };

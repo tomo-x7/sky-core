@@ -24,7 +24,6 @@ import { ComposeIcon2 } from "#/lib/icons";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { NoFollowingFeed } from "#/screens/Feeds/NoFollowingFeed";
 import { NoSavedFeedsOfAnyType } from "#/screens/Feeds/NoSavedFeedsOfAnyType";
 import {
@@ -609,13 +608,7 @@ function FeedsSavedHeader() {
 	const t = useTheme();
 
 	return (
-		<View
-			style={
-				isWeb
-					? [a.flex_row, a.px_md, a.py_lg, a.gap_md, a.border_b, t.atoms.border_contrast_low]
-					: [{ flexDirection: "row-reverse" }, a.p_lg, a.gap_md, a.border_b, t.atoms.border_contrast_low]
-			}
-		>
+		<View style={[a.flex_row, a.px_md, a.py_lg, a.gap_md, a.border_b, t.atoms.border_contrast_low]}>
 			<IconCircle icon={ListSparkle_Stroke2_Corner0_Rounded} size="lg" />
 			<View style={[a.flex_1, a.gap_xs]}>
 				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>My Feeds</Text>
@@ -629,13 +622,7 @@ function FeedsAboutHeader() {
 	const t = useTheme();
 
 	return (
-		<View
-			style={
-				isWeb
-					? [a.flex_row, a.px_md, a.pt_lg, a.pb_lg, a.gap_md]
-					: [{ flexDirection: "row-reverse" }, a.p_lg, a.gap_md]
-			}
-		>
+		<View style={[a.flex_row, a.px_md, a.pt_lg, a.pb_lg, a.gap_md]}>
 			<IconCircle icon={ListMagnifyingGlass_Stroke2_Corner0_Rounded} size="lg" />
 			<View style={[a.flex_1, a.gap_sm]}>
 				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>Discover New Feeds</Text>

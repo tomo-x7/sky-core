@@ -21,7 +21,6 @@ import { View } from "react-native";
 import { atoms as a } from "#/alf";
 import { PWI_ENABLED } from "#/lib/build-flags";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { isWeb } from "#/platform/detection";
 import { Deactivated } from "#/screens/Deactivated";
 import { Onboarding } from "#/screens/Onboarding";
 import { SignupQueued } from "#/screens/SignupQueued";
@@ -135,12 +134,9 @@ function NativeStackNavigator({
 			<View role="main" style={a.flex_1}>
 				<NativeStackView {...rest} state={state} navigation={navigation} descriptors={newDescriptors} />
 			</View>
-			{isWeb && (
-				<>
-					{showBottomBar ? <BottomBarWeb /> : <DesktopLeftNav />}
-					{!isMobile && <DesktopRightNav routeName={activeRoute.name} />}
-				</>
-			)}
+
+			{showBottomBar ? <BottomBarWeb /> : <DesktopLeftNav />}
+			{!isMobile && <DesktopRightNav routeName={activeRoute.name} />}
 		</NavigationContent>
 	);
 }

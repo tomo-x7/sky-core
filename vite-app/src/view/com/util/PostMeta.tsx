@@ -4,7 +4,7 @@ import type React from "react";
 import { memo, useCallback } from "react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { WebOnlyInlineLinkText } from "#/components/Link";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
 import { Text } from "#/components/Typography";
@@ -107,9 +107,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 							t.atoms.text_contrast_medium,
 							a.leading_snug,
 							//@ts-ignore
-							web({
-								whiteSpace: "nowrap",
-							}),
+							{ whiteSpace: "nowrap" },
 						]}
 					>
 						{timeElapsed}

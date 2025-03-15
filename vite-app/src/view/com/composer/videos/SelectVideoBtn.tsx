@@ -12,7 +12,6 @@ import { SUPPORTED_MIME_TYPES, type SupportedMimeTypes } from "#/lib/constants";
 import { BSKY_SERVICE } from "#/lib/constants";
 import { useVideoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { getHostnameFromUrl } from "#/lib/strings/url-helpers";
-import { isWeb } from "#/platform/detection";
 import { useSession } from "#/state/session";
 import { pickVideo } from "./pickVideo";
 
@@ -43,23 +42,15 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 			if (response.assets && response.assets.length > 0) {
 				const asset = response.assets[0];
 				try {
-					if (isWeb) {
-						// asset.duration is null for gifs (see the TODO in pickVideo.web.ts)
-						if (asset.duration && asset.duration > VIDEO_MAX_DURATION) {
-							throw Error("Videos must be less than 60 seconds long");
-						}
-						// compression step on native converts to mp4, so no need to check there
-						if (!SUPPORTED_MIME_TYPES.includes(asset.mimeType as SupportedMimeTypes)) {
-							throw Error(`Unsupported video type: ${asset.mimeType}`);
-						}
-					} else {
-						if (typeof asset.duration !== "number") {
-							throw Error("Asset is not a video");
-						}
-						if (asset.duration > VIDEO_MAX_DURATION) {
-							throw Error("Videos must be less than 60 seconds long");
-						}
+					// asset.duration is null for gifs (see the TODO in pickVideo.web.ts)
+					if (asset.duration && asset.duration > VIDEO_MAX_DURATION) {
+						throw Error("Videos must be less than 60 seconds long");
 					}
+					// compression step on native converts to mp4, so no need to check there
+					if (!SUPPORTED_MIME_TYPES.includes(asset.mimeType as SupportedMimeTypes)) {
+						throw Error(`Unsupported video type: ${asset.mimeType}`);
+					}
+
 					onSelectVideo(asset);
 				} catch (err) {
 					if (err instanceof Error) {

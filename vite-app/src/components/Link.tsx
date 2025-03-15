@@ -3,7 +3,7 @@ import { StackActions, useLinkProps } from "@react-navigation/native";
 import React from "react";
 import type { GestureResponderEvent } from "react-native";
 
-import { type TextStyleProp, atoms as a, flatten, useTheme, web } from "#/alf";
+import { type TextStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Button, type ButtonProps } from "#/components/Button";
 import { Text, type TextProps } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
@@ -18,7 +18,6 @@ import {
 	isExternalUrl,
 	linkRequiresWarning,
 } from "#/lib/strings/url-helpers";
-import { isWeb } from "#/platform/detection";
 import { router } from "#/routes";
 import { useModalControls } from "#/state/modals";
 
@@ -233,7 +232,7 @@ export function Link({
 			href={href}
 			onPress={download ? undefined : onPress}
 			onLongPress={onLongPress}
-			{...web({
+			{...{
 				hrefAttrs: {
 					target: download ? undefined : isExternal ? "blank" : undefined,
 					rel: isExternal ? "noopener noreferrer" : undefined,
@@ -243,7 +242,7 @@ export function Link({
 					// no underline, only `InlineLink` has underlines
 					noUnderline: "1",
 				},
-			})}
+			}}
 		>
 			{children}
 		</Button>
@@ -304,11 +303,11 @@ export function InlineLinkText({
 				{ color: t.palette.primary_500 },
 				hovered &&
 					!disableUnderline && {
-						...web({
+						...{
 							outline: 0,
 							textDecorationLine: "underline",
 							textDecorationColor: flattenedStyle.color ?? t.palette.primary_500,
-						}),
+						},
 					},
 				flattenedStyle,
 			]}
@@ -321,7 +320,7 @@ export function InlineLinkText({
 			onMouseLeave={onHoverOut}
 			accessibilityRole="link"
 			href={href}
-			{...web({
+			{...{
 				hrefAttrs: {
 					target: download ? undefined : isExternal ? "blank" : undefined,
 					rel: isExternal ? "noopener noreferrer" : undefined,
@@ -331,7 +330,7 @@ export function InlineLinkText({
 					// default to no underline, apply this ourselves
 					noUnderline: "1",
 				},
-			})}
+			}}
 		>
 			{children}
 		</Text>
@@ -426,6 +425,6 @@ export function isModifiedClickEvent(e: GestureResponderEvent): boolean {
  */
 export function shouldClickOpenNewTab(e: GestureResponderEvent) {
 	const event = e as unknown as MouseEvent;
-	const isMiddleClick = isWeb && event.button === 1;
+	const isMiddleClick = event.button === 1;
 	return isClickEventWithMetaKey(e) || isClickTargetExternal(e) || isMiddleClick;
 }

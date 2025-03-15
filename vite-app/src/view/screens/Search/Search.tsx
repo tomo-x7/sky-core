@@ -13,17 +13,14 @@ import {
 } from "react-native";
 import { ScrollView as RNGHScrollView } from "react-native-gesture-handler";
 
-import { atoms as a, native, platform, tokens, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
 import * as Layout from "#/components/Layout";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
-import {
-	ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon,
-	ChevronTopBottom_Stroke2_Corner0_Rounded as ChevronUpDownIcon,
-} from "#/components/icons/Chevron";
+import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon } from "#/components/icons/Chevron";
 import { Earth_Stroke2_Corner0_Rounded as EarthIcon } from "#/components/icons/Globe";
 import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
 import { APP_LANGUAGES, LANGUAGES } from "#/lib/../locale/languages";
@@ -37,7 +34,6 @@ import type { NativeStackScreenProps, SearchTabNavigatorParams } from "#/lib/rou
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { augmentSearchQuery } from "#/lib/strings/helpers";
 import { languageName } from "#/locale/helpers";
-import { isWeb } from "#/platform/detection";
 import { type Params, makeSearchQuery, parseSearchQuery } from "#/screens/Search/utils";
 import { listenSoftReset } from "#/state/events";
 import { useLanguagePrefs } from "#/state/preferences/languages";
@@ -339,22 +335,10 @@ function SearchLanguageDropdown({
 		<Menu.Root>
 			<Menu.Trigger label={`Filter search by language (currently: ${currentLanguageLabel})`}>
 				{({ props }) => (
-					<Button
-						{...props}
-						label={props.accessibilityLabel}
-						size="small"
-						color={platform({ native: "primary", default: "secondary" })}
-						variant={platform({ native: "ghost", default: "solid" })}
-						style={native([a.py_sm, a.px_sm, { marginRight: tokens.space.sm * -1 }])}
-					>
+					<Button {...props} label={props.accessibilityLabel} size="small" color="secondary" variant="solid">
 						<ButtonIcon icon={EarthIcon} />
 						<ButtonText>{currentLanguageLabel}</ButtonText>
-						<ButtonIcon
-							icon={platform({
-								native: ChevronUpDownIcon,
-								default: ChevronDownIcon,
-							})}
-						/>
+						<ButtonIcon icon={ChevronDownIcon} />
 					</Button>
 				)}
 			</Menu.Trigger>
@@ -480,7 +464,7 @@ let SearchScreenInner = ({
 			onPageSelected={onPageSelected}
 			renderTabBar={(props) => (
 				// @ts-ignore
-				<Layout.Center style={[a.z_10, web([a.sticky, { top: headerHeight }])]}>
+				<Layout.Center style={[a.z_10, a.sticky, { top: headerHeight }]}>
 					<TabBar items={sections.map((section) => section.title)} {...props} />
 				</Layout.Center>
 			)}
@@ -605,18 +589,14 @@ export function SearchScreenShell({
 	const [headerHeight, setHeaderHeight] = React.useState(0);
 	const headerRef = React.useRef(null);
 	useLayoutEffect(() => {
-		if (isWeb) {
-			if (!headerRef.current) return;
-			const measurement = (headerRef.current as Element).getBoundingClientRect();
-			setHeaderHeight(measurement.height);
-		}
+		if (!headerRef.current) return;
+		const measurement = (headerRef.current as Element).getBoundingClientRect();
+		setHeaderHeight(measurement.height);
 	}, []);
 
 	useFocusEffect(
 		useNonReactiveCallback(() => {
-			if (isWeb) {
-				setSearchText(queryParam);
-			}
+			setSearchText(queryParam);
 		}),
 	);
 
@@ -646,13 +626,8 @@ export function SearchScreenShell({
 		scrollToTopWeb();
 		textInput.current?.blur();
 		setShowAutocomplete(false);
-		if (isWeb) {
-			// Empty params resets the URL to be /search rather than /search?q=
-			navigation.replace("Search", {});
-		} else {
-			setSearchText("");
-			navigation.setParams({ q: "" });
-		}
+		// Empty params resets the URL to be /search rather than /search?q=
+		navigation.replace("Search", {});
 	}, [navigation]);
 
 	const onSubmit = React.useCallback(() => {
@@ -660,11 +635,7 @@ export function SearchScreenShell({
 	}, [navigateToItem, searchText]);
 
 	const onAutocompleteResultPress = React.useCallback(() => {
-		if (isWeb) {
-			setShowAutocomplete(false);
-		} else {
-			textInput.current?.blur();
-		}
+		setShowAutocomplete(false);
 	}, []);
 
 	const handleHistoryItemClick = React.useCallback(
@@ -704,15 +675,11 @@ export function SearchScreenShell({
 	);
 
 	const onSearchInputFocus = React.useCallback(() => {
-		if (isWeb) {
-			// Prevent a jump on iPad by ensuring that
-			// the initial focused render has no result list.
-			requestAnimationFrame(() => {
-				setShowAutocomplete(true);
-			});
-		} else {
+		// Prevent a jump on iPad by ensuring that
+		// the initial focused render has no result list.
+		requestAnimationFrame(() => {
 			setShowAutocomplete(true);
-		}
+		});
 	}, []);
 
 	const showHeader = !gtMobile || navButton !== "menu";
@@ -722,16 +689,13 @@ export function SearchScreenShell({
 			<View
 				ref={headerRef}
 				onLayout={(evt) => {
-					if (isWeb) setHeaderHeight(evt.nativeEvent.layout.height);
+					setHeaderHeight(evt.nativeEvent.layout.height);
 				}}
 				style={[
 					a.relative,
 					a.z_10,
 					//@ts-ignore
-					web({
-						position: "sticky",
-						top: 0,
-					}),
+					{ position: "sticky", top: 0 },
 				]}
 			>
 				<Layout.Center style={t.atoms.bg}>
@@ -984,9 +948,7 @@ function SearchHistory({
 }
 
 function scrollToTopWeb() {
-	if (isWeb) {
-		window.scrollTo(0, 0);
-	}
+	window.scrollTo(0, 0);
 }
 
 const styles = StyleSheet.create({

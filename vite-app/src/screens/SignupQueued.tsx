@@ -1,11 +1,10 @@
 import React from "react";
 import { Modal, ScrollView, View } from "react-native";
 
-import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { P, Text } from "#/components/Typography";
-import { isWeb } from "#/platform/detection";
 import { isSignupQueued, useAgent, useSessionApi } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
 import { Logo } from "#/view/icons/Logo";
@@ -68,21 +67,15 @@ export function SignupQueued() {
 	);
 
 	const logoutBtn = (
-		<Button
-			variant="ghost"
-			size="large"
-			color="primary"
-			label={"Sign out"}
-			onPress={() => logoutCurrentAccount("SignupQueued")}
-		>
+		<Button variant="ghost" size="large" color="primary" label={"Sign out"} onPress={() => logoutCurrentAccount()}>
 			<ButtonText>Sign out</ButtonText>
 		</Button>
 	);
 
-	const webLayout = isWeb && gtMobile;
+	const webLayout = gtMobile;
 
 	return (
-		<Modal visible animationType={native("slide")} presentationStyle="formSheet" style={[web(a.util_screen_outer)]}>
+		<Modal visible presentationStyle="formSheet" style={[a.util_screen_outer]}>
 			<ScrollView style={[a.flex_1, t.atoms.bg]} contentContainerStyle={{ borderWidth: 0 }} bounces={false}>
 				<View style={[a.flex_row, a.justify_center, gtMobile ? a.pt_4xl : [a.px_xl, a.pt_xl]]}>
 					<View style={[a.flex_1, { maxWidth: COL_WIDTH }]}>

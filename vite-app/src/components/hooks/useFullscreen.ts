@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 import { isFirefox, isSafari } from "#/lib/browser";
-import { isWeb } from "#/platform/detection";
 
 function fullscreenSubscribe(onChange: () => void) {
 	document.addEventListener("fullscreenchange", onChange);
@@ -9,7 +8,6 @@ function fullscreenSubscribe(onChange: () => void) {
 }
 
 export function useFullscreen(ref?: React.RefObject<HTMLElement | null>) {
-	if (!isWeb) throw new Error("'useFullscreen' is a web-only hook");
 	const isFullscreen = useSyncExternalStore(fullscreenSubscribe, () => Boolean(document.fullscreenElement));
 	const scrollYRef = useRef<null | number>(null);
 	const [prevIsFullscreen, setPrevIsFullscreen] = useState(isFullscreen);

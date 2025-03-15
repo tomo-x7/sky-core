@@ -2,8 +2,6 @@ import type React from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import Animated, { FadeIn, FadeOut, SlideInLeft, SlideInRight } from "react-native-reanimated";
 
-import { isWeb } from "#/platform/detection";
-
 export function ScreenTransition({
 	direction,
 	style,
@@ -17,7 +15,7 @@ export function ScreenTransition({
 
 	return (
 		<Animated.View
-			entering={isWeb ? FadeIn.duration(90) : entering}
+			entering={FadeIn.duration(90)}
 			exiting={FadeOut.duration(90)} // Totally vibes based
 			style={style}
 		>

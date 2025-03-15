@@ -9,7 +9,6 @@ import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { QrCode } from "#/components/StarterPack/QrCode";
-import { isWeb } from "#/platform/detection";
 
 export function QrCodeDialog({
 	starterPack,
@@ -110,15 +109,15 @@ export function QrCodeDialog({
 										<Loader size="xl" />
 									</View>
 								) : (
-									<View style={[a.w_full, a.gap_md, isWeb && [a.flex_row_reverse]]}>
+									<View style={[a.w_full, a.gap_md, [a.flex_row_reverse]]}>
 										<Button
 											label={"Copy QR code"}
 											variant="solid"
 											color="secondary"
 											size="small"
-											onPress={isWeb ? onCopyPress : onSharePress}
+											onPress={onCopyPress}
 										>
-											<ButtonText>{isWeb ? <>Copy</> : <>Share</>}</ButtonText>
+											<ButtonText>Copy</ButtonText>
 										</Button>
 										<Button
 											label={"Save QR code"}

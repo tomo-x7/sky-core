@@ -2,16 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { createContext, useCallback, useContext } from "react";
 import { type GestureResponderEvent, Keyboard, View } from "react-native";
 
-import {
-	type TextStyleProp,
-	atoms as a,
-	platform,
-	useBreakpoints,
-	useGutters,
-	useLayoutBreakpoints,
-	useTheme,
-	web,
-} from "#/alf";
+import { type TextStyleProp, atoms as a, useBreakpoints, useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, type ButtonProps } from "#/components/Button";
 import { BUTTON_VISUAL_ALIGNMENT_OFFSET, HEADER_SLOT_SIZE, SCROLLBAR_OFFSET } from "#/components/Layout/const";
 import { ScrollbarOffsetContext } from "#/components/Layout/context";
@@ -49,19 +40,14 @@ export function Outer({
 				a.align_center,
 				a.gap_sm,
 				//@ts-ignore
-				sticky && web([a.sticky, { top: 0 }, a.z_10, t.atoms.bg]),
+				sticky && [a.sticky, { top: 0 }, a.z_10, t.atoms.bg],
 				gutters,
-				platform({
-					native: [a.pb_xs, { minHeight: 48 }],
-					web: [a.py_xs, { minHeight: 52 }],
-				}),
+				a.py_xs,
+				{ minHeight: 52 },
 				t.atoms.border_contrast_low,
 				gtMobile && [a.mx_auto, { maxWidth: 600 }],
 				!isWithinOffsetView && {
-					transform: [
-						{ translateX: centerColumnOffset ? -150 : 0 },
-						{ translateX: web(SCROLLBAR_OFFSET) ?? 0 },
-					],
+					transform: [{ translateX: centerColumnOffset ? -150 : 0 }, { translateX: SCROLLBAR_OFFSET ?? 0 }],
 				},
 			]}
 		>

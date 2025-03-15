@@ -2,16 +2,9 @@ import type { ComAtprotoServerCreateAppPassword } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { View, useWindowDimensions } from "react-native";
-import Animated, {
-	FadeIn,
-	FadeOut,
-	LayoutAnimationConfig,
-	LinearTransition,
-	SlideInRight,
-	SlideOutLeft,
-} from "react-native-reanimated";
+import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
-import { atoms as a, native, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -20,7 +13,6 @@ import * as TextInput from "#/components/forms/TextField";
 import * as Toggle from "#/components/forms/Toggle";
 import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
 import { SquareBehindSquare4_Stroke2_Corner0_Rounded as CopyIcon } from "#/components/icons/SquareBehindSquare4";
-import { isWeb } from "#/platform/detection";
 import { useAppPasswordCreateMutation } from "#/state/queries/app-passwords";
 import { CopyButton } from "./CopyButton";
 
@@ -85,10 +77,10 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 
 	return (
 		<Dialog.ScrollableInner label={"Add app password"}>
-			<View style={[native(a.pt_md)]}>
+			<View>
 				<LayoutAnimationConfig skipEntering skipExiting>
 					{!data ? (
-						<Animated.View style={[a.gap_lg]} exiting={native(SlideOutLeft)} key={0}>
+						<Animated.View style={[a.gap_lg]} key={0}>
 							<Text style={[a.text_2xl, a.font_bold]}>Add App Password</Text>
 							<Text style={[a.text_md, a.leading_snug]}>
 								Please enter a unique name for this app password or use our randomly generated one.
@@ -114,7 +106,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									<Admonition type="error">{error.message}</Admonition>
 								</Animated.View>
 							)}
-							<Animated.View style={[a.gap_lg]} layout={native(LinearTransition)}>
+							<Animated.View style={[a.gap_lg]}>
 								<Toggle.Item
 									name="privileged"
 									type="checkbox"
@@ -151,7 +143,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 							</Animated.View>
 						</Animated.View>
 					) : (
-						<Animated.View style={[a.gap_lg]} entering={isWeb ? FadeIn.delay(200) : SlideInRight} key={1}>
+						<Animated.View style={[a.gap_lg]} entering={FadeIn.delay(200)} key={1}>
 							<Text style={[a.text_2xl, a.font_bold]}>Here is your app password!</Text>
 							<Text style={[a.text_md, a.leading_snug]}>
 								Use this to sign in to the other app along with your handle.

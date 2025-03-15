@@ -1,6 +1,4 @@
 import React from "react";
-
-import { isWeb } from "#/platform/detection";
 import * as persisted from "#/state/persisted";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
 
@@ -11,21 +9,19 @@ const stateContext = React.createContext<StateContext>(null);
 const setContext = React.createContext<SetContext>((_: string) => {});
 
 function getInitialFeed(): FeedDescriptor | null {
-	if (isWeb) {
-		if (window.location.pathname === "/") {
-			const params = new URLSearchParams(window.location.search);
-			const feedFromUrl = params.get("feed");
-			if (feedFromUrl) {
-				// If explicitly booted from a link like /?feed=..., prefer that.
-				return feedFromUrl as FeedDescriptor;
-			}
+	if (window.location.pathname === "/") {
+		const params = new URLSearchParams(window.location.search);
+		const feedFromUrl = params.get("feed");
+		if (feedFromUrl) {
+			// If explicitly booted from a link like /?feed=..., prefer that.
+			return feedFromUrl as FeedDescriptor;
 		}
+	}
 
-		const feedFromSession = sessionStorage.getItem("lastSelectedHomeFeed");
-		if (feedFromSession) {
-			// Fall back to a previously chosen feed for this browser tab.
-			return feedFromSession as FeedDescriptor;
-		}
+	const feedFromSession = sessionStorage.getItem("lastSelectedHomeFeed");
+	if (feedFromSession) {
+		// Fall back to a previously chosen feed for this browser tab.
+		return feedFromSession as FeedDescriptor;
 	}
 
 	const feedFromPersisted = persisted.get("lastSelectedHomeFeed");
@@ -42,11 +38,10 @@ export function Provider({ children }: React.PropsWithChildren) {
 
 	const saveState = React.useCallback((feed: FeedDescriptor) => {
 		setState(feed);
-		if (isWeb) {
-			try {
-				sessionStorage.setItem("lastSelectedHomeFeed", feed);
-			} catch {}
-		}
+		try {
+			sessionStorage.setItem("lastSelectedHomeFeed", feed);
+		} catch {}
+
 		persisted.write("lastSelectedHomeFeed", feed);
 	}, []);
 

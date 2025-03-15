@@ -10,7 +10,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, gradients, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent, useSession, useSessionApi } from "#/state/session";
@@ -153,7 +152,7 @@ export function Component(props: {}) {
 							</>
 						)}
 
-						<View style={[!isWeb && a.px_xl]}>
+						<View>
 							<View
 								style={[
 									a.w_full,

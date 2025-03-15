@@ -4,7 +4,6 @@ import type { NativeScrollEvent } from "react-native";
 import { useSharedValue, withSpring } from "react-native-reanimated";
 
 import { ScrollProvider } from "#/lib/ScrollContext";
-import { isWeb } from "#/platform/detection";
 import { useMinimalShellMode } from "#/state/shell";
 import { useShellLayout } from "#/state/shell/shell-layout";
 
@@ -35,13 +34,11 @@ export function MainScrollProvider({ children }: { children: React.ReactNode }) 
 	);
 
 	useEffect(() => {
-		if (isWeb) {
-			return listenToForcedWindowScroll(() => {
-				startDragOffset.set(null);
-				startMode.set(null);
-				didJustRestoreScroll.set(true);
-			});
-		}
+		return listenToForcedWindowScroll(() => {
+			startDragOffset.set(null);
+			startMode.set(null);
+			didJustRestoreScroll.set(true);
+		});
 	});
 
 	const onScroll = useCallback(
@@ -73,21 +70,19 @@ export function MainScrollProvider({ children }: { children: React.ReactNode }) 
 
 const emitter = new EventEmitter();
 
-if (isWeb) {
-	const originalScroll = window.scroll;
-	window.scroll = function () {
-		emitter.emit("forced-scroll");
-		// biome-ignore lint/style/noArguments: <explanation>
-		return originalScroll.apply(this, arguments as any);
-	};
+const originalScroll = window.scroll;
+window.scroll = function () {
+	emitter.emit("forced-scroll");
+	// biome-ignore lint/style/noArguments: <explanation>
+	return originalScroll.apply(this, arguments as any);
+};
 
-	const originalScrollTo = window.scrollTo;
-	window.scrollTo = function () {
-		emitter.emit("forced-scroll");
-		// biome-ignore lint/style/noArguments: <explanation>
-		return originalScrollTo.apply(this, arguments as any);
-	};
-}
+const originalScrollTo = window.scrollTo;
+window.scrollTo = function () {
+	emitter.emit("forced-scroll");
+	// biome-ignore lint/style/noArguments: <explanation>
+	return originalScrollTo.apply(this, arguments as any);
+};
 
 function listenToForcedWindowScroll(listener: () => void) {
 	emitter.addListener("forced-scroll", listener);

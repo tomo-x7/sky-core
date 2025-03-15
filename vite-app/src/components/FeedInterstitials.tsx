@@ -4,7 +4,7 @@ import React from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
 import { InlineLinkText } from "#/components/Link";
@@ -225,7 +225,7 @@ export function ProfileGrid({
 			.fill(0)
 			.map((_, i) => (
 				//@ts-ignore
-				<View key={i.toString()} style={[gtMobile && web([a.flex_0, { width: "calc(50% - 6px)" }])]}>
+				<View key={i.toString()} style={[gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]]}>
 					<SuggestedFollowPlaceholder />
 				</View>
 			))
@@ -236,7 +236,7 @@ export function ProfileGrid({
 					key={profile.did}
 					profile={profile}
 					//@ts-ignore
-					style={[a.flex_1, gtMobile && web([a.flex_0, { width: "calc(50% - 6px)" }])]}
+					style={[a.flex_1, gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]]}
 				>
 					{({ hovered, pressed }) => (
 						<CardOuter style={[a.flex_1, (hovered || pressed) && t.atoms.border_contrast_high]}>
@@ -247,7 +247,6 @@ export function ProfileGrid({
 									<ProfileCard.FollowButton
 										profile={profile}
 										moderationOpts={moderationOpts}
-										logContext="FeedInterstitial"
 										shape="round"
 										colorInverted
 									/>

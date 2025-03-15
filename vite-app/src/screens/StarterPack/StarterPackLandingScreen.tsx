@@ -20,7 +20,6 @@ import { isAndroidWeb } from "#/lib/browser";
 import { JOINED_THIS_WEEK } from "#/lib/constants";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { createStarterPackGooglePlayUri } from "#/lib/strings/starter-pack";
-import { isWeb } from "#/platform/detection";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useStarterPackQuery } from "#/state/queries/starter-packs";
 import { useActiveStarterPack, useSetActiveStarterPack } from "#/state/shell/starter-pack";
@@ -286,12 +285,10 @@ function LandingScreenLoaded({
 					<Prompt.Action cta="Continue on web" color="secondary" onPress={onContinue} />
 				</Prompt.Actions>
 			</Prompt.Outer>
-			{isWeb && (
-				<meta
-					name="apple-itunes-app"
-					content="app-id=xyz.blueskyweb.app, app-clip-bundle-id=xyz.blueskyweb.app.AppClip, app-clip-display=card"
-				/>
-			)}
+			<meta
+				name="apple-itunes-app"
+				content="app-id=xyz.blueskyweb.app, app-clip-bundle-id=xyz.blueskyweb.app.AppClip, app-clip-display=card"
+			/>
 		</View>
 	);
 }

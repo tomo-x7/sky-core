@@ -12,7 +12,6 @@ import * as TextField from "#/components/forms/TextField";
 import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
 import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
-import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
 import { isNetworkError } from "#/lib/strings/errors";
 import { cleanError } from "#/lib/strings/errors";
 import { createFullHandle } from "#/lib/strings/handles";
@@ -57,7 +56,6 @@ export const LoginForm = ({
 	const authFactorTokenValueRef = useRef<string>("");
 	const passwordRef = useRef<TextInput>(null);
 	const { login } = useSessionApi();
-	const requestNotificationsPermission = useRequestNotificationsPermission();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
 	const setHasCheckedForStarterPack = useSetHasCheckedForStarterPack();
 
@@ -108,19 +106,15 @@ export const LoginForm = ({
 			}
 
 			// TODO remove double login
-			await login(
-				{
-					service: serviceUrl,
-					identifier: fullIdent,
-					password,
-					authFactorToken: authFactorToken.trim(),
-				},
-				"LoginForm",
-			);
+			await login({
+				service: serviceUrl,
+				identifier: fullIdent,
+				password,
+				authFactorToken: authFactorToken.trim(),
+			});
 			onAttemptSuccess();
 			setShowLoggedOut(false);
 			setHasCheckedForStarterPack(true);
-			requestNotificationsPermission("Login");
 		} catch (e: any) {
 			const errMsg = e.toString();
 			LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);

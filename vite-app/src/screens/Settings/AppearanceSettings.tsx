@@ -1,8 +1,8 @@
 import type React from "react";
 import { useCallback } from "react";
-import Animated, { FadeInUp, FadeOutUp, LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
+import Animated, { LayoutAnimationConfig } from "react-native-reanimated";
 
-import { atoms as a, native, useAlf, useTheme } from "#/alf";
+import { atoms as a, useAlf, useTheme } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import * as ToggleButton from "#/components/forms/ToggleButton";
@@ -90,7 +90,7 @@ export function AppearanceSettingsScreen(props: Props) {
 						/>
 
 						{colorMode !== "light" && (
-							<Animated.View entering={native(FadeInUp)} exiting={native(FadeOutUp)}>
+							<Animated.View>
 								<AppearanceToggleButtonGroup
 									title={"Dark theme"}
 									icon={MoonIcon}
@@ -110,7 +110,7 @@ export function AppearanceSettingsScreen(props: Props) {
 							</Animated.View>
 						)}
 
-						<Animated.View layout={native(LinearTransition)}>
+						<Animated.View>
 							<SettingsList.Divider />
 
 							<AppearanceToggleButtonGroup

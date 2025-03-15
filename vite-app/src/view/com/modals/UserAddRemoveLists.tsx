@@ -7,7 +7,7 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { s } from "#/lib/styles";
-import { isMobileWeb, isWeb } from "#/platform/detection";
+import { isMobileWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import {
 	type ListMembersip,
@@ -50,11 +50,9 @@ export function Component({
 	const listStyle = React.useMemo(() => {
 		if (isMobileWeb) {
 			return [pal.border, { height: screenHeight / 2 }];
-		} else if (isWeb) {
+		} else {
 			return [pal.border, { height: screenHeight / 1.5 }];
 		}
-
-		return [pal.border, { flex: 1, borderTopWidth: StyleSheet.hairlineWidth }];
 	}, [pal.border, screenHeight]);
 
 	const headerStyles = [
@@ -213,7 +211,7 @@ function ListItem({
 
 const styles = StyleSheet.create({
 	container: {
-		paddingHorizontal: isWeb ? 0 : 16,
+		paddingHorizontal: 0,
 	},
 	btns: {
 		position: "relative",

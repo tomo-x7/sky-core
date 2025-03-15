@@ -4,13 +4,12 @@ import { useRef } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import { View } from "react-native";
 
-import { atoms as a, native, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { WizardFeedCard, WizardProfileCard } from "#/components/StarterPack/Wizard/WizardListCard";
 import { Text } from "#/components/Typography";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import { isWeb } from "#/platform/detection";
 import type { WizardAction, WizardState } from "#/screens/StarterPack/Wizard/State";
 import { useSession } from "#/state/session";
 import type { ListMethods } from "#/view/com/util/List";
@@ -74,7 +73,6 @@ export function WizardEditListDialog({
 				ListHeaderComponent={
 					<View
 						style={[
-							native(a.pt_4xl),
 							a.flex_row,
 							a.justify_between,
 							a.border_b,
@@ -82,14 +80,9 @@ export function WizardEditListDialog({
 							a.mb_sm,
 							t.atoms.bg,
 							t.atoms.border_contrast_medium,
-							isWeb
-								? [
-										a.align_center,
-										{
-											height: 48,
-										},
-									]
-								: [a.pb_sm, a.align_end],
+
+							a.align_center,
+							{ height: 48 },
 						]}
 					>
 						<View style={{ width: 60 }} />
@@ -97,31 +90,21 @@ export function WizardEditListDialog({
 							{state.currentStep === "Profiles" ? <>Edit People</> : <>Edit Feeds</>}
 						</Text>
 						<View style={{ width: 60 }}>
-							{isWeb && (
-								<Button
-									label={"Close"}
-									variant="ghost"
-									color="primary"
-									size="small"
-									onPress={() => control.close()}
-								>
-									<ButtonText>Close</ButtonText>
-								</Button>
-							)}
+							<Button
+								label={"Close"}
+								variant="ghost"
+								color="primary"
+								size="small"
+								onPress={() => control.close()}
+							>
+								<ButtonText>Close</ButtonText>
+							</Button>
 						</View>
 					</View>
 				}
 				stickyHeaderIndices={[0]}
-				style={[
-					//@ts-ignore
-					web([a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]),
-					native({
-						height: "100%",
-						paddingHorizontal: 0,
-						marginTop: 0,
-						paddingTop: 0,
-					}),
-				]}
+				// @ts-ignore
+				style={[a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]}
 				webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
 				keyboardDismissMode="on-drag"
 				removeClippedSubviews={true}

@@ -4,11 +4,10 @@ import type { StyleProp } from "react-native";
 import { KeyboardAwareScrollView, type KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
 import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
 
-import { atoms as a, useBreakpoints, useLayoutBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useLayoutBreakpoints, useTheme } from "#/alf";
 import { useDialogContext } from "#/components/Dialog";
 import { SCROLLBAR_OFFSET } from "#/components/Layout/const";
 import { ScrollbarOffsetContext } from "#/components/Layout/context";
-import { isWeb } from "#/platform/detection";
 import { useShellLayout } from "#/state/shell/shell-layout";
 
 export * from "#/components/Layout/const";
@@ -25,7 +24,7 @@ export type ScreenProps = React.ComponentProps<typeof View> & {
 export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }: ScreenProps) {
 	return (
 		<>
-			{isWeb && <WebCenterBorders />}
+			<WebCenterBorders />
 			<View style={[a.util_screen_outer, { paddingTop: 0 }, style]} {...props} />
 		</>
 	);
@@ -70,14 +69,10 @@ export const Content = React.memo(function Content({
 			contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
 			{...props}
 		>
-			{isWeb ? (
-				<Center ignoreTabletLayoutOffset={ignoreTabletLayoutOffset}>
-					{/* @ts-expect-error web only -esb */}
-					{children}
-				</Center>
-			) : (
-				children
-			)}
+			<Center ignoreTabletLayoutOffset={ignoreTabletLayoutOffset}>
+				{/* @ts-expect-error web only -esb */}
+				{children}
+			</Center>
 		</Animated.ScrollView>
 	);
 });
@@ -114,7 +109,7 @@ export const KeyboardAwareContent = React.memo(function LayoutScrollView({
 			keyboardShouldPersistTaps="handled"
 			{...props}
 		>
-			{isWeb ? <Center>{children}</Center> : children}
+			<Center>{children}</Center>
 		</KeyboardAwareScrollView>
 	);
 });
@@ -146,7 +141,7 @@ export const Center = React.memo(function LayoutContent({
 						{
 							translateX: centerColumnOffset && !ignoreTabletLayoutOffset && !isWithinDialog ? -150 : 0,
 						},
-						{ translateX: web(SCROLLBAR_OFFSET) ?? 0 },
+						{ translateX: SCROLLBAR_OFFSET ?? 0 },
 					],
 				},
 				style,
@@ -173,7 +168,7 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 				a.border_l,
 				a.border_r,
 				t.atoms.border_contrast_low,
-				web({
+				{
 					width: 602,
 					left: "50%",
 					transform: [
@@ -181,7 +176,7 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 						{ translateX: centerColumnOffset ? -150 : 0 },
 						...a.scrollbar_offset.transform,
 					],
-				}),
+				},
 			]}
 		/>
 	) : null;

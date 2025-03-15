@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { type TextInput, View } from "react-native";
 import type tldts from "tldts";
 
-import { atoms as a, native } from "#/alf";
+import { atoms as a } from "#/alf";
 import { Loader } from "#/components/Loader";
 import * as DateField from "#/components/forms/DateField";
 import type { DateFieldRef } from "#/components/forms/DateField/types";
@@ -159,8 +159,6 @@ export function StepInfo({
 										autoComplete="email"
 										keyboardType="email-address"
 										returnKeyType="next"
-										submitBehavior={native("submit")}
-										onSubmitEditing={native(() => emailInputRef.current?.focus())}
 									/>
 								</TextField.Root>
 							</View>
@@ -191,8 +189,6 @@ export function StepInfo({
 									autoComplete="email"
 									keyboardType="email-address"
 									returnKeyType="next"
-									submitBehavior={native("submit")}
-									onSubmitEditing={native(() => passwordInputRef.current?.focus())}
 								/>
 							</TextField.Root>
 						</View>
@@ -215,8 +211,6 @@ export function StepInfo({
 									autoComplete="new-password"
 									autoCapitalize="none"
 									returnKeyType="next"
-									submitBehavior={native("blurAndSubmit")}
-									onSubmitEditing={native(() => birthdateInputRef.current?.focus())}
 									passwordRules="minlength: 8;"
 								/>
 							</TextField.Root>

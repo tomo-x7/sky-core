@@ -51,7 +51,6 @@ import { shareText, shareUrl } from "#/lib/sharing";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { getTranslatorLink } from "#/locale/helpers";
-import { isWeb } from "#/platform/detection";
 import type { Shadow } from "#/state/cache/post-shadow";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
@@ -268,7 +267,7 @@ let PostDropdownMenuItems = ({
 	}, [quoteEmbed, post, toggleQuoteDetachment]);
 
 	const canHidePostForMe = !isAuthor && !isPostHidden;
-	const canEmbed = isWeb && gtMobile && !hideInPWI;
+	const canEmbed = gtMobile && !hideInPWI;
 	const canHideReplyForEveryone = !isAuthor && isRootPostAuthor && !isPostHidden && isReply;
 	const canDetachQuote = quoteEmbed?.isOwnedByViewer;
 
@@ -396,7 +395,7 @@ let PostDropdownMenuItems = ({
 
 					<Menu.Item
 						testID="postDropdownShareBtn"
-						label={isWeb ? "Copy link to post" : "Share"}
+						label={"Copy link to post"}
 						onPress={() => {
 							if (showLoggedOutWarning) {
 								loggedOutWarningPromptControl.open();
@@ -405,7 +404,7 @@ let PostDropdownMenuItems = ({
 							}
 						}}
 					>
-						<Menu.ItemText>{isWeb ? "Copy link to post" : "Share"}</Menu.ItemText>
+						<Menu.ItemText>{"Copy link to post"}</Menu.ItemText>
 						<Menu.ItemIcon icon={Share} position="right" />
 					</Menu.Item>
 

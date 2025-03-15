@@ -8,7 +8,6 @@ import React, { useRef } from "react";
 import { AppState } from "react-native";
 
 import BroadcastChannel from "#/lib/broadcast";
-import { resetBadgeCount } from "#/lib/notifications/notifications";
 import { useAgent, useSession } from "#/state/session";
 import { useModerationOpts } from "../../preferences/moderation-opts";
 import { truncateAndInvalidate } from "../util";
@@ -108,7 +107,6 @@ export function Provider({ children }: React.PropsWithChildren) {
 				// update & broadcast
 				setNumUnread("");
 				broadcast.postMessage({ event: "" });
-				resetBadgeCount();
 			},
 
 			async checkUnread({ invalidate, isPoll }: { invalidate?: boolean; isPoll?: boolean } = {}) {

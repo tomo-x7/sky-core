@@ -13,7 +13,6 @@ import { NewMessagesPill } from "#/components/dms/NewMessagesPill";
 import { ScrollProvider } from "#/lib/ScrollContext";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
 import { convertBskyAppUrlIfNeeded, isBskyPostUrl } from "#/lib/strings/url-helpers";
-import { isWeb } from "#/platform/detection";
 import { ChatDisabled } from "#/screens/Messages/components/ChatDisabled";
 import { MessageInput } from "#/screens/Messages/components/MessageInput";
 import { MessageListError } from "#/screens/Messages/components/MessageListError";
@@ -130,7 +129,7 @@ export function MessagesList({
 		(_: number, height: number) => {
 			// Because web does not have `maintainVisibleContentPosition` support, we will need to manually scroll to the
 			// previous off whenever we add new content to the previous offset whenever we add new content to the list.
-			if (isWeb && isAtTop.get() && hasScrolled) {
+			if (isAtTop.get() && hasScrolled) {
 				flatListRef.current?.scrollToOffset({
 					offset: height - prevContentHeight.current,
 					animated: false,
@@ -355,14 +354,12 @@ export function MessagesList({
 		(e: LayoutChangeEvent) => {
 			layoutHeight.set(e.nativeEvent.layout.height);
 
-			if (isWeb || !keyboardIsOpening.get()) {
-				flatListRef.current?.scrollToEnd({
-					animated: !layoutScrollWithoutAnimation.get(),
-				});
-				layoutScrollWithoutAnimation.set(false);
-			}
+			flatListRef.current?.scrollToEnd({
+				animated: !layoutScrollWithoutAnimation.get(),
+			});
+			layoutScrollWithoutAnimation.set(false);
 		},
-		[flatListRef, keyboardIsOpening, layoutScrollWithoutAnimation, layoutHeight],
+		[flatListRef, layoutScrollWithoutAnimation, layoutHeight],
 	);
 
 	const scrollToEndOnPress = React.useCallback(() => {
@@ -386,7 +383,7 @@ export function MessagesList({
 					style={animatedListStyle}
 					// The extra two items account for the header and the footer components
 					initialNumToRender={62}
-					maxToRenderPerBatch={isWeb ? 32 : 62}
+					maxToRenderPerBatch={32}
 					keyboardDismissMode="on-drag"
 					keyboardShouldPersistTaps="handled"
 					maintainVisibleContentPosition={{
@@ -437,13 +434,11 @@ export function MessagesList({
 				)}
 			</Animated.View>
 
-			{isWeb && (
-				<EmojiPicker
-					pinToTop
-					state={emojiPickerState}
-					close={() => setEmojiPickerState((prev) => ({ ...prev, isOpen: false }))}
-				/>
-			)}
+			<EmojiPicker
+				pinToTop
+				state={emojiPickerState}
+				close={() => setEmojiPickerState((prev) => ({ ...prev, isOpen: false }))}
+			/>
 
 			{newMessagesPill.show && <NewMessagesPill onPress={scrollToEndOnPress} />}
 		</>

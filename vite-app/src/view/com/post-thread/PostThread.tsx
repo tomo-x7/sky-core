@@ -19,7 +19,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import {
 	type ThreadBlocked,
@@ -154,7 +153,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 	// Values used for proper rendering of parents
 	const ref = useRef<ListMethods>(null);
 	const highlightedPostRef = useRef<View | null>(null);
-	const [maxParents, setMaxParents] = React.useState(isWeb ? Number.POSITIVE_INFINITY : PARENTS_CHUNK_SIZE);
+	const [maxParents, setMaxParents] = React.useState(Number.POSITIVE_INFINITY);
 	const [maxReplies, setMaxReplies] = React.useState(50);
 
 	useSetTitle(
@@ -788,7 +787,7 @@ function hasBranchingReplies(node?: ThreadNode) {
 const styles = StyleSheet.create({
 	prompt: {
 		// @ts-ignore web-only
-		position: isWeb ? "fixed" : "absolute",
+		position: "fixed",
 		left: 0,
 		right: 0,
 	},

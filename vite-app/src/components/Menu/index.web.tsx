@@ -2,7 +2,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
 import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
 
-import { atoms as a, flatten, useTheme, web } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import type * as Dialog from "#/components/Dialog";
 import { Context, ItemContext, useMenuContext, useMenuItemContext } from "#/components/Menu/context";
 import type {
@@ -235,19 +235,19 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 					a.py_sm,
 					a.rounded_xs,
 					{ minHeight: 32, paddingHorizontal: 10 },
-					web({ outline: 0 }),
+					{ outline: 0 },
 					//@ts-ignore
 					(hovered || focused) &&
 						!rest.disabled && [
-							web({ outline: "0 !important" }),
+							{ outline: "0 !important" },
 							t.name === "light" ? t.atoms.bg_contrast_25 : t.atoms.bg_contrast_50,
 						],
 					style,
 				])}
-				{...web({
+				{...{
 					onMouseEnter,
 					onMouseLeave,
-				})}
+				}}
 			>
 				<ItemContext.Provider value={{ disabled: Boolean(rest.disabled) }}>{children}</ItemContext.Provider>
 			</Pressable>

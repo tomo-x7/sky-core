@@ -2,7 +2,7 @@ import type { AppBskyLabelerDefs } from "@atproto/api";
 import React from "react";
 import { View } from "react-native";
 
-import { atoms as a, native, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -207,10 +207,7 @@ function LabelerToggle({ title }: { title: string }) {
 		>
 			<Toggle.Checkbox />
 			<View style={[a.flex_row, a.align_center, a.justify_between, a.gap_lg, a.z_10]}>
-				<Text
-					emoji
-					style={[native({ marginTop: 2 }), t.atoms.text_contrast_medium, ctx.selected && t.atoms.text]}
-				>
+				<Text emoji style={[t.atoms.text_contrast_medium, ctx.selected && t.atoms.text]}>
 					{title}
 				</Text>
 			</View>

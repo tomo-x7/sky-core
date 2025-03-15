@@ -2,8 +2,6 @@ import React from "react";
 
 import type { DialogControlRefProps } from "#/components/Dialog";
 import { Provider as GlobalDialogsProvider } from "#/components/dialogs/Context";
-import { isWeb } from "#/platform/detection";
-import { BottomSheetNativeComponent } from "../../../modules/bottom-sheet";
 
 interface IDialogContext {
 	/**
@@ -47,17 +45,12 @@ export function Provider({ children }: React.PropsWithChildren) {
 	const openDialogs = React.useRef<Set<string>>(new Set());
 
 	const closeAllDialogs = React.useCallback(() => {
-		if (isWeb) {
-			openDialogs.current.forEach((id) => {
-				const dialog = activeDialogs.current.get(id);
-				if (dialog) dialog.current.close();
-			});
+		openDialogs.current.forEach((id) => {
+			const dialog = activeDialogs.current.get(id);
+			if (dialog) dialog.current.close();
+		});
 
-			return openDialogs.current.size > 0;
-		} else {
-			BottomSheetNativeComponent.dismissAll();
-			return false;
-		}
+		return openDialogs.current.size > 0;
 	}, []);
 
 	const setDialogIsOpen = React.useCallback((id: string, isOpen: boolean) => {

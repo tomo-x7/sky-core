@@ -19,7 +19,6 @@ import { type DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
 import { TabState, getTabState } from "#/lib/routes/helpers";
 import { convertBskyAppUrlIfNeeded, isExternalUrl, linkRequiresWarning } from "#/lib/strings/url-helpers";
-import { isWeb } from "#/platform/detection";
 import { emitSoftReset } from "#/state/events";
 import { useModalControls } from "#/state/modals";
 import { WebAuxClickWrapper } from "#/view/com/util/WebAuxClickWrapper";
@@ -196,7 +195,7 @@ export const TextLink = memo(function TextLink({
 					href,
 				});
 			}
-			if (isWeb && href !== "#" && e != null && isModifiedEvent(e as React.MouseEvent)) {
+			if (href !== "#" && e != null && isModifiedEvent(e as React.MouseEvent)) {
 				// Let the browser handle opening in new tab etc.
 				return;
 			}
@@ -285,36 +284,21 @@ export const TextLinkOnWebOnly = memo(function DesktopWebTextLink({
 	onBeforePress,
 	...props
 }: TextLinkOnWebOnlyProps) {
-	if (isWeb) {
-		return (
-			<TextLink
-				testID={testID}
-				type={type}
-				style={style}
-				href={href}
-				text={text}
-				numberOfLines={numberOfLines}
-				lineHeight={lineHeight}
-				title={props.title}
-				navigationAction={navigationAction}
-				disableMismatchWarning={disableMismatchWarning}
-				onBeforePress={onBeforePress}
-				{...props}
-			/>
-		);
-	}
 	return (
-		<Text
+		<TextLink
 			testID={testID}
 			type={type}
 			style={style}
+			href={href}
+			text={text}
 			numberOfLines={numberOfLines}
 			lineHeight={lineHeight}
 			title={props.title}
+			navigationAction={navigationAction}
+			disableMismatchWarning={disableMismatchWarning}
+			onBeforePress={onBeforePress}
 			{...props}
-		>
-			{text}
-		</Text>
+		/>
 	);
 });
 

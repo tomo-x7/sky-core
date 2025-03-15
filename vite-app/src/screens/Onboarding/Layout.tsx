@@ -1,13 +1,12 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
 
-import { type TextStyleProp, atoms as a, flatten, native, useBreakpoints, useTheme, web } from "#/alf";
+import { type TextStyleProp, atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { leading } from "#/alf/typography";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { createPortalGroup } from "#/components/Portal";
 import { P, Text } from "#/components/Typography";
 import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components/icons/Chevron";
-import { isWeb } from "#/platform/detection";
 import { Context } from "#/screens/Onboarding/state";
 import { useOnboardingDispatch } from "#/state/shell";
 
@@ -42,13 +41,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 			aria-label={dialogLabel}
 			accessibilityLabel={dialogLabel}
 			accessibilityHint={"Customizes your Bluesky experience"}
-			style={[
-				// @ts-ignore web only -prf
-				isWeb ? a.fixed : a.absolute,
-				a.inset_0,
-				a.flex_1,
-				t.atoms.bg,
-			]}
+			style={[a.fixed, a.inset_0, a.flex_1, t.atoms.bg]}
 		>
 			{__DEV__ && (
 				<View style={[a.absolute, a.p_xl, a.z_10, { right: 0, top: 0 }]}>
@@ -68,8 +61,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 			{!gtMobile && state.hasPrev && (
 				<View
 					style={[
-						web(a.fixed),
-						native(a.absolute),
+						a.fixed,
 						a.flex_row,
 						a.w_full,
 						a.justify_center,
@@ -139,20 +131,14 @@ export function Layout({ children }: React.PropsWithChildren) {
 
 			<View
 				style={[
-					// @ts-ignore web only -prf
-					isWeb ? a.fixed : a.absolute,
+					a.fixed,
 					{ bottom: 0, left: 0, right: 0 },
 					t.atoms.bg,
 					t.atoms.border_contrast_low,
 					a.border_t,
 					a.align_center,
 					gtMobile ? a.px_5xl : a.px_xl,
-					isWeb
-						? a.py_2xl
-						: {
-								paddingTop: a.pt_lg.paddingTop,
-								paddingBottom: 10,
-							},
+					a.py_2xl,
 				]}
 			>
 				<View style={[a.w_full, { maxWidth: COL_WIDTH }, gtMobile && [a.flex_row, a.justify_between]]}>

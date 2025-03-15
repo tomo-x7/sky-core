@@ -4,7 +4,6 @@ import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming
 
 import { atoms as a, useTheme } from "#/alf";
 import { Portal } from "#/components/Portal";
-import { isWeb } from "#/platform/detection";
 import { Text } from "../Typography";
 import { AnimatedCheck, type AnimatedCheckRef } from "../anim/AnimatedCheck";
 
@@ -95,11 +94,11 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 		const containerStyle = React.useMemo(() => {
 			let left = 10;
 			let right = 10;
-			if (isWeb && winDim.width > 400) {
+			if (winDim.width > 400) {
 				left = right = (winDim.width - 380) / 2;
 			}
 			return {
-				position: isWeb ? "fixed" : "absolute",
+				position: "fixed",
 				top: 0,
 				left,
 				right,

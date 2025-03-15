@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, View, type ViewStyle } from "react-native";
 import Animated, { LinearTransition } from "react-native-reanimated";
 
-import { type TextStyleProp, type ViewStyleProp, atoms as a, flatten, native, useTheme } from "#/alf";
+import { type TextStyleProp, type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { CheckThick_Stroke2_Corner0_Rounded as Checkmark } from "#/components/icons/Check";
@@ -223,9 +223,6 @@ export function LabelText({ children, style }: React.PropsWithChildren<TextStyle
 					userSelect: "none",
 					color: disabled ? t.atoms.text_contrast_low.color : t.atoms.text_contrast_high.color,
 				},
-				native({
-					paddingTop: 2,
-				}),
 				flatten(style),
 			]}
 		>

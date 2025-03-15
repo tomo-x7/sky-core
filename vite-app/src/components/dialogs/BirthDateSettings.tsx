@@ -8,7 +8,6 @@ import { Text } from "#/components/Typography";
 import { DateField } from "#/components/forms/DateField";
 import { cleanError } from "#/lib/strings/errors";
 import { getDateAgo } from "#/lib/strings/time";
-import { isWeb } from "#/platform/detection";
 import {
 	type UsePreferencesQueryResponse,
 	usePreferencesQuery,
@@ -93,7 +92,7 @@ function BirthdayInner({
 
 			{isError ? <ErrorMessage message={cleanError(error)} style={[a.rounded_sm]} /> : undefined}
 
-			<View style={isWeb && [a.flex_row, a.justify_end]}>
+			<View style={[a.flex_row, a.justify_end]}>
 				<Button
 					label={hasChanged ? "Save birthday" : "Done"}
 					size="large"

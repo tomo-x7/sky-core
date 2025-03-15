@@ -2,11 +2,10 @@ import type { AtUri } from "@atproto/api";
 import React from "react";
 import { View } from "react-native";
 
-import { type ViewStyleProp, atoms as a, native, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
-import { PressableScale } from "#/lib/custom-animations/PressableScale";
 // import {makeProfileLink} from '#/lib/routes/links'
 // import {feedUriToHref} from '#/lib/strings/url-helpers'
 // import {Hashtag_Stroke2_Corner0_Rounded as Hashtag} from '#/components/icons/Hashtag'
@@ -133,7 +132,7 @@ export function TrendingTopicLink({
 	const topic = useTopic(raw);
 
 	return (
-		<InternalLink label={topic.label} to={topic.url} PressableComponent={native(PressableScale)} {...rest}>
+		<InternalLink label={topic.label} to={topic.url} {...rest}>
 			{children}
 		</InternalLink>
 	);

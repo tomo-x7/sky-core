@@ -11,7 +11,7 @@ import type React from "react";
 import { memo, useMemo, useState } from "react";
 import { View } from "react-native";
 
-import { atoms as a, platform, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -329,7 +329,7 @@ function DoneStep({
 				</View>
 			</Toggle.Group>
 
-			<View style={[a.gap_md, web([a.flex_row_reverse])]}>
+			<View style={[a.gap_md, [a.flex_row_reverse]]}>
 				<Button
 					label={btnText}
 					onPress={onPressPrimaryAction}
@@ -339,16 +339,7 @@ function DoneStep({
 				>
 					<ButtonText>{btnText}</ButtonText>
 				</Button>
-				<Button
-					label={"Close"}
-					onPress={() => control.close()}
-					size={platform({ native: "small", web: "large" })}
-					variant={platform({
-						native: "ghost",
-						web: "solid",
-					})}
-					color="secondary"
-				>
+				<Button label={"Close"} onPress={() => control.close()} size="large" variant="solid" color="secondary">
 					<ButtonText>Close</ButtonText>
 				</Button>
 			</View>

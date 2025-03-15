@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { type ListRenderItemInfo, type StyleProp, View, type ViewStyle, findNodeHandle } from "react-native";
 
-import { atoms as a, ios, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { LinearGradientBackground } from "#/components/LinearGradientBackground";
@@ -98,12 +98,12 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 			<List
 				testID={testID ? `${testID}-flatlist` : undefined}
 				ref={scrollElRef}
+				// @ts-ignore
 				data={items}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}
 				refreshing={isPTRing}
 				headerOffset={headerOffset}
-				progressViewOffset={ios(0)}
 				contentContainerStyle={{ paddingBottom: headerOffset + bottomBarOffset }}
 				removeClippedSubviews={true}
 				desktopFixedHeight

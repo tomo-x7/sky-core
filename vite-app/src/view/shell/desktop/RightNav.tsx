@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
-import { atoms as a, useGutters, useLayoutBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
 import { Divider } from "#/components/Divider";
 import { InlineLinkText } from "#/components/Link";
@@ -53,14 +53,14 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 				gutters,
 				a.gap_lg,
 				//@ts-ignore
-				web({
+				{
 					position: "fixed",
 					left: "50%",
 					transform: [{ translateX: centerColumnOffset ? 150 : 300 }, ...a.scrollbar_offset.transform],
 					width: 300 + gutters.paddingLeft,
 					maxHeight: "100%",
 					overflowY: "auto",
-				}),
+				},
 			]}
 		>
 			{!isSearchScreen && <DesktopSearch />}

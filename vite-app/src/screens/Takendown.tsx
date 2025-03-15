@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { Modal, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
-import { atoms as a, native, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { InlineLinkText } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -14,7 +14,6 @@ import * as TextField from "#/components/forms/TextField";
 import { MAX_REPORT_REASON_GRAPHEME_LENGTH } from "#/lib/constants";
 import { useEnableKeyboardController } from "#/lib/hooks/useEnableKeyboardController";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { useAgent, useSession, useSessionApi } from "#/state/session";
 import { CharProgress } from "#/view/com/composer/char-progress/CharProgress";
 import { Logo } from "#/view/icons/Logo";
@@ -74,7 +73,7 @@ export function Takendown() {
 				size="large"
 				color="secondary_inverted"
 				label={"Sign out"}
-				onPress={() => logoutCurrentAccount("Takendown")}
+				onPress={() => logoutCurrentAccount()}
 			>
 				<ButtonText>Sign Out</ButtonText>
 			</Button>
@@ -104,12 +103,12 @@ export function Takendown() {
 		</Button>
 	);
 
-	const webLayout = isWeb && gtMobile;
+	const webLayout = gtMobile;
 
 	useEnableKeyboardController(true);
 
 	return (
-		<Modal visible animationType={native("slide")} presentationStyle="formSheet" style={[web(a.util_screen_outer)]}>
+		<Modal visible presentationStyle="formSheet" style={[a.util_screen_outer]}>
 			<KeyboardAwareScrollView style={[a.flex_1, t.atoms.bg]} centerContent>
 				<View style={[a.flex_row, a.justify_center, gtMobile ? a.pt_4xl : [a.px_xl, a.pt_4xl]]}>
 					<View style={[a.flex_1, { maxWidth: COL_WIDTH, minHeight: COL_WIDTH }]}>

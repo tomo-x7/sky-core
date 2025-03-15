@@ -1,12 +1,11 @@
 import React from "react";
 import { Pressable, View } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { ScaleAndFadeIn } from "#/lib/custom-animations/ScaleAndFade";
 import { ShrinkAndPop } from "#/lib/custom-animations/ShrinkAndPop";
-import { isWeb } from "#/platform/detection";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -29,16 +28,6 @@ export function ChatEmptyPill() {
 			"Clip 🐴 clop 🐴",
 		];
 	}, []);
-
-	const onPressIn = React.useCallback(() => {
-		if (isWeb) return;
-		scale.set(() => withTiming(1.075, { duration: 100 }));
-	}, [scale]);
-
-	const onPressOut = React.useCallback(() => {
-		if (isWeb) return;
-		scale.set(() => withTiming(1, { duration: 100 }));
-	}, [scale]);
 
 	const onPress = React.useCallback(() => {
 		let randomPromptIndex = Math.floor(Math.random() * prompts.length);
@@ -70,8 +59,6 @@ export function ChatEmptyPill() {
 				entering={ScaleAndFadeIn}
 				exiting={ShrinkAndPop}
 				onPress={onPress}
-				onPressIn={onPressIn}
-				onPressOut={onPressOut}
 			>
 				<Text style={[a.font_bold, a.pointer_events_none]} selectable={false}>
 					{prompts[promptIndex]}

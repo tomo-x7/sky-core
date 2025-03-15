@@ -6,7 +6,6 @@ import { type ListRenderItemInfo, View } from "react-native";
 import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
-import { isWeb } from "#/platform/detection";
 import type { SectionRef } from "#/screens/Profile/Sections/types";
 import { List, type ListRef } from "#/view/com/util/List";
 
@@ -41,7 +40,7 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<GeneratorView>) => {
 		return (
-			<View style={[a.p_lg, (isWeb || index !== 0) && a.border_t, t.atoms.border_contrast_low]}>
+			<View style={[a.p_lg, a.border_t, t.atoms.border_contrast_low]}>
 				<FeedCard.Default view={item} />
 			</View>
 		);

@@ -7,7 +7,7 @@ import { Image } from "react-native";
 import { Keyboard, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -90,7 +90,7 @@ export function Wizard({
 	}
 
 	return (
-		<Layout.Screen testID="starterPackWizardScreen" style={web([{ minHeight: 0 }, a.flex_1])}>
+		<Layout.Screen testID="starterPackWizardScreen" style={[{ minHeight: 0 }, a.flex_1]}>
 			<Provider starterPack={starterPack} listItems={listItems}>
 				<WizardInner
 					currentStarterPack={starterPack}

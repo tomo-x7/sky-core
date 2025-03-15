@@ -1,6 +1,6 @@
 import React from "react";
 import { Image } from "react-native";
-import { type ImageStyle, View, useWindowDimensions } from "react-native";
+import { type ImageStyle, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -11,7 +11,6 @@ import * as TextField from "#/components/forms/TextField";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { MAX_ALT_TEXT } from "#/lib/constants";
 import { enforceLen } from "#/lib/strings/helpers";
-import { isWeb } from "#/platform/detection";
 import type { ComposerImage } from "#/state/gallery";
 import { AltTextCounterWrapper } from "#/view/com/composer/AltTextCounterWrapper";
 
@@ -52,10 +51,9 @@ const ImageAltTextInner = ({
 	image: Props["image"];
 }): React.ReactNode => {
 	const t = useTheme();
-	const windim = useWindowDimensions();
 
 	const imageStyle = React.useMemo<ImageStyle>(() => {
-		const maxWidth = isWeb ? 450 : windim.width;
+		const maxWidth = 450;
 		const source = image.transformed ?? image.source;
 
 		if (source.height > source.width) {
@@ -71,7 +69,7 @@ const ImageAltTextInner = ({
 			height: (maxWidth / source.width) * source.height,
 			borderRadius: 8,
 		};
-	}, [image, windim]);
+	}, [image]);
 
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>

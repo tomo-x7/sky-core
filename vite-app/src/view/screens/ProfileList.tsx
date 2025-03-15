@@ -27,7 +27,6 @@ import { shareUrl } from "#/lib/sharing";
 import { cleanError } from "#/lib/strings/errors";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { ListHiddenScreen } from "#/screens/List/ListHiddenScreen";
 import { listenSoftReset } from "#/state/events";
 import { useModalControls } from "#/state/modals";
@@ -399,7 +398,7 @@ function Header({
 		const items: DropdownItem[] = [
 			{
 				testID: "listHeaderDropdownShareBtn",
-				label: isWeb ? "Copy link to list" : "Share",
+				label: "Copy link to list",
 				onPress: onPressShare,
 				icon: {
 					ios: {

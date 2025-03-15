@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { TouchableOpacity, View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Link } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { ConvoMenu } from "#/components/dms/ConvoMenu";
@@ -14,13 +14,12 @@ import { BACK_HITSLOP } from "#/lib/constants";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { NavigationProp } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { isWeb } from "#/platform/detection";
 import type { Shadow } from "#/state/cache/profile-shadow";
 import { isConvoActive, useConvo } from "#/state/messages/convo";
 import type { ConvoItem } from "#/state/messages/convo/types";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 
-const PFP_SIZE = isWeb ? 40 : 34;
+const PFP_SIZE = 40;
 
 export let MessagesListHeader = ({
 	profile,
@@ -71,7 +70,7 @@ export let MessagesListHeader = ({
 				testID="conversationHeaderBackBtn"
 				onPress={onPressBack}
 				hitSlop={BACK_HITSLOP}
-				style={{ width: 30, height: 30, marginTop: isWeb ? 6 : 4 }}
+				style={{ width: 30, height: 30, marginTop: 6 }}
 				accessibilityRole="button"
 				accessibilityLabel={"Back"}
 				accessibilityHint=""
@@ -151,20 +150,12 @@ function HeaderReady({
 						/>
 					</View>
 					<View style={a.flex_1}>
-						<Text
-							emoji
-							style={[a.text_md, a.font_bold, a.self_start, web(a.leading_normal)]}
-							numberOfLines={1}
-						>
+						<Text emoji style={[a.text_md, a.font_bold, a.self_start, a.leading_normal]} numberOfLines={1}>
 							{displayName}
 						</Text>
 						{!isDeletedAccount && (
 							<Text
-								style={[
-									t.atoms.text_contrast_medium,
-									a.text_sm,
-									web([a.leading_normal, { marginTop: -2 }]),
-								]}
+								style={[t.atoms.text_contrast_medium, a.text_sm, [a.leading_normal, { marginTop: -2 }]]}
 								numberOfLines={1}
 							>
 								@{profile.handle}

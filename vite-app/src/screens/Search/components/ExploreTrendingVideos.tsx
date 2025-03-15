@@ -15,7 +15,6 @@ import { Pin_Stroke2_Corner0_Rounded as Pin } from "#/components/icons/Pin";
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
 import { VIDEO_FEED_URI } from "#/lib/constants";
 import { makeCustomFeedLink } from "#/lib/routes/links";
-import { isWeb } from "#/platform/detection";
 import { useSavedFeeds } from "#/state/queries/feed";
 import { RQKEY, usePostFeedQuery } from "#/state/queries/post-feed";
 import { useAddSavedFeedsMutation } from "#/state/queries/preferences";
@@ -76,14 +75,7 @@ export function ExploreTrendingVideos() {
 
 	return (
 		<View style={[a.pb_xl]}>
-			<View
-				style={[
-					a.flex_row,
-					isWeb ? [a.px_lg, a.py_lg, a.pt_2xl, a.gap_md] : [a.p_lg, a.pt_xl, a.gap_md],
-					a.border_b,
-					t.atoms.border_contrast_low,
-				]}
-			>
+			<View style={[a.flex_row, [a.px_lg, a.py_lg, a.pt_2xl, a.gap_md], a.border_b, t.atoms.border_contrast_low]}>
 				<View style={[a.flex_1, a.gap_sm]}>
 					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
 						<Graph size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />

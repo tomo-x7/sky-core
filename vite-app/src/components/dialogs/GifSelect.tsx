@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { type TextInput, View } from "react-native";
 import { useWindowDimensions } from "react-native";
 
-import { atoms as a, ios, native, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
@@ -12,7 +12,6 @@ import { useThrottledValue } from "#/components/hooks/useThrottledValue";
 import { ArrowLeft_Stroke2_Corner0_Rounded as Arrow } from "#/components/icons/Arrow";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { type Gif, useFeaturedGifsQuery, useGifSearchQuery } from "#/state/queries/tenor";
 import { ErrorBoundary } from "#/view/com/util/ErrorBoundary";
 import type { ListMethods } from "#/view/com/util/List";
@@ -49,8 +48,6 @@ export function GifSelectDialog({
 			nativeOptions={{
 				//@ts-ignore
 				bottomInset: 0,
-				// use system corner radius on iOS
-				...ios({ cornerRadius: undefined }),
 			}}
 		>
 			<Dialog.Handle />
@@ -115,9 +112,7 @@ function GifList({
 
 	const listHeader = useMemo(() => {
 		return (
-			<View
-				style={[native(a.pt_4xl), a.relative, a.mb_lg, a.flex_row, a.align_center, !gtMobile && web(a.gap_md)]}
-			>
+			<View style={[a.relative, a.mb_lg, a.flex_row, a.align_center, !gtMobile && a.gap_md]}>
 				{/* cover top corners */}
 				<View
 					style={[
@@ -131,7 +126,7 @@ function GifList({
 					]}
 				/>
 
-				{!gtMobile && isWeb && (
+				{!gtMobile && (
 					<Button
 						size="small"
 						variant="ghost"
@@ -179,9 +174,9 @@ function GifList({
 				numColumns={gtMobile ? 3 : 2}
 				columnWrapperStyle={[a.gap_sm]}
 				//@ts-ignore
-				contentContainerStyle={[web(a.h_full_vh)]}
+				contentContainerStyle={[a.h_full_vh]}
 				//@ts-ignore
-				style={[web(a.h_full_vh)]}
+				style={[a.h_full_vh]}
 				ListHeaderComponent={
 					<>
 						{listHeader}

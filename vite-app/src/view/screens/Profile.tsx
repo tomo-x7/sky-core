@@ -320,7 +320,6 @@ function ProfileScreenLoaded({
 		setMinimumHeight: (height: number) => void;
 	}) => {
 		return (
-			<ExpoScrollForwarderView scrollViewTag={scrollViewTag}>
 				<ProfileHeader
 					profile={profile}
 					labeler={labelerInfo}
@@ -330,7 +329,6 @@ function ProfileScreenLoaded({
 					isPlaceholderProfile={showPlaceholder}
 					setMinimumHeight={setMinimumHeight}
 				/>
-			</ExpoScrollForwarderView>
 		);
 	};
 

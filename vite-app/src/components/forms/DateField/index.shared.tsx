@@ -1,6 +1,6 @@
 import { Pressable, View } from "react-native";
 
-import { atoms as a, native, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
@@ -34,10 +34,10 @@ export function DateFieldButton({
 	return (
 		<View
 			style={[a.relative, a.w_full]}
-			{...web({
+			{...{
 				onMouseOver: onHoverIn,
 				onMouseOut: onHoverOut,
-			})}
+			}}
 		>
 			<Pressable
 				aria-label={label}
@@ -55,11 +55,7 @@ export function DateFieldButton({
 						borderColor: "transparent",
 						borderWidth: 2,
 					},
-					native({
-						paddingTop: 10,
-						paddingBottom: 10,
-					}),
-					web(a.py_md),
+					a.py_md,
 					a.flex_row,
 					a.flex_1,
 					a.w_full,

@@ -1,7 +1,7 @@
 import type React from "react";
 import type { SvgProps } from "react-native-svg";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { PressableWithHover } from "../../../PressableWithHover";
 
 export function ControlButton({
@@ -27,7 +27,7 @@ export function ControlButton({
 			accessibilityHint=""
 			onPress={onPress}
 			//@ts-ignore
-			style={[a.p_xs, a.rounded_full, web({ transition: "background-color 0.1s" })]}
+			style={[a.p_xs, a.rounded_full, { transition: "background-color 0.1s" }]}
 			hoverStyle={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
 		>
 			{active ? (

@@ -2,7 +2,7 @@ import { AtUri } from "@atproto/api";
 import React from "react";
 import { View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -29,7 +29,6 @@ import { makeCustomFeedLink } from "#/lib/routes/links";
 import { shareUrl } from "#/lib/sharing";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { toShareUrl } from "#/lib/strings/url-helpers";
-import { isWeb } from "#/platform/detection";
 import type { FeedSourceFeedInfo } from "#/state/queries/feed";
 import { useLikeMutation, useUnlikeMutation } from "#/state/queries/like";
 import {
@@ -152,7 +151,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 	return (
 		<>
 			{/*//@ts-ignore*/}
-			<Layout.Center style={[t.atoms.bg, a.z_10, web([a.sticky, a.z_10, { top: 0 }])]}>
+			<Layout.Center style={[t.atoms.bg, a.z_10, [a.sticky, a.z_10, { top: 0 }]]}>
 				<Layout.Header.Outer>
 					<Layout.Header.BackButton />
 					<Layout.Header.Content align="left">
@@ -161,7 +160,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 							style={[
 								a.justify_start,
 								{
-									paddingVertical: isWeb ? 2 : 4,
+									paddingVertical: 2,
 									paddingRight: 8,
 								},
 							]}
@@ -180,7 +179,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 											t.atoms.bg_contrast_25,
 											{
 												opacity: 0,
-												left: isWeb ? -2 : -4,
+												left: -2,
 												right: 0,
 											},
 											pressed && {

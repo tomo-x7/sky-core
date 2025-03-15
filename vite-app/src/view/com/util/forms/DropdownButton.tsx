@@ -14,16 +14,13 @@ import {
 	type ViewStyle,
 	useWindowDimensions,
 } from "react-native";
-import Animated, { FadeIn, FadeInDown, FadeInUp } from "react-native-reanimated";
+import Animated, { FadeIn } from "react-native-reanimated";
 import RootSiblings from "react-native-root-siblings";
-
-import { native } from "#/alf";
 import { FullWindowOverlay } from "#/components/FullWindowOverlay";
 import { useTheme } from "#/lib/ThemeContext";
 import { HITSLOP_10 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { colors } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { Text } from "../text/Text";
 import { Button, type ButtonType } from "./Button";
 
@@ -219,22 +216,11 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 					style={[
 						styles.bg,
 						// On web we need to adjust the top and bottom relative to the scroll position
-						isWeb
-							? {
-									top: -pageY,
-									bottom: pageY - screenHeight,
-								}
-							: {
-									top: 0,
-									bottom: 0,
-								},
+						{ top: -pageY, bottom: pageY - screenHeight },
 					]}
 				/>
 			</TouchableWithoutFeedback>
-			<Animated.View
-				entering={native(openUpwards ? FadeInDown.springify(1000) : FadeInUp.springify(1000))}
-				style={[styles.menu, { left: x, top: y, width }, dropDownBackgroundColor]}
-			>
+			<Animated.View style={[styles.menu, { left: x, top: y, width }, dropDownBackgroundColor]}>
 				{items.map((item, index) => {
 					if (isBtn(item)) {
 						return (

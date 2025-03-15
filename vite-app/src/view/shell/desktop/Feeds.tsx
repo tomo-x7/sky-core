@@ -1,7 +1,7 @@
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { View } from "react-native";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { InlineLinkText, createStaticClick } from "#/components/Link";
 import { getCurrentRoute } from "#/lib/routes/helpers";
 import type { NavigationProp } from "#/lib/routes/types";
@@ -57,15 +57,16 @@ export function DesktopFeeds() {
 	return (
 		<View
 			style={[
-				web({
+				{
 					gap: 10,
 					/*
 					 * Small padding prevents overflow prior to actually overflowing the
 					 * height of the screen with lots of feeds.
 					 */
 					paddingVertical: 2,
+					// @ts-ignore
 					overflowY: "auto",
-				}),
+				},
 			]}
 		>
 			{pinnedFeedInfos.map((feedInfo) => {

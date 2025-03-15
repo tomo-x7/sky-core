@@ -5,9 +5,7 @@ import { ActivityIndicator, StyleSheet } from "react-native";
 import * as Layout from "#/components/Layout";
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
-import { useRequestNotificationsPermission } from "#/lib/notifications/notifications";
 import type { HomeTabNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import { isWeb } from "#/platform/detection";
 import { NoFeedsPinned } from "#/screens/Home/NoFeedsPinned";
 import { emitSoftReset } from "#/state/events";
 import { type SavedFeedSourceInfo, usePinnedFeedsInfos } from "#/state/queries/feed";
@@ -33,7 +31,7 @@ export function HomeScreen(props: Props) {
 	const { data: pinnedFeedInfos, isLoading: isPinnedFeedsLoading } = usePinnedFeedsInfos();
 
 	React.useEffect(() => {
-		if (isWeb && !currentAccount) {
+		if (!currentAccount) {
 			const getParams = new URLSearchParams(window.location.search);
 			const splash = getParams.get("splash");
 			if (splash === "true") {
@@ -82,13 +80,8 @@ function HomeScreenReady({
 	const maybeFoundIndex = allFeeds.indexOf(maybeRawSelectedFeed);
 	const selectedIndex = Math.max(0, maybeFoundIndex);
 	const maybeSelectedFeed: FeedDescriptor | undefined = allFeeds[selectedIndex];
-	const requestNotificationsPermission = useRequestNotificationsPermission();
 
 	useSetTitle(pinnedFeedInfos[selectedIndex]?.displayName);
-
-	React.useEffect(() => {
-		requestNotificationsPermission("Home");
-	}, [requestNotificationsPermission]);
 
 	const pagerRef = React.useRef<PagerRef>(null);
 	const lastPagerReportedIndexRef = React.useRef(selectedIndex);

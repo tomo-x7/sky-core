@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
 import { type GestureResponderEvent, View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import * as tokens from "#/alf/tokens";
 import { useDialogControl } from "#/components/Dialog";
 import { Link } from "#/components/Link";
@@ -264,9 +264,9 @@ function ChatListItemReady({
 							{/* Avatar goes here */}
 							<View style={{ width: 52, height: 52 }} />
 
-							<View style={[a.flex_1, a.justify_center, web({ paddingRight: 45 })]}>
+							<View style={[a.flex_1, a.justify_center, { paddingRight: 45 }]}>
 								<View style={[a.w_full, a.flex_row, a.align_end, a.pb_2xs]}>
-									<Text numberOfLines={1} style={[{ maxWidth: "85%" }, web([a.leading_normal])]}>
+									<Text numberOfLines={1} style={[{ maxWidth: "85%" }, [a.leading_normal]]}>
 										<Text
 											emoji
 											style={[
@@ -288,7 +288,7 @@ function ChatListItemReady({
 														a.text_sm,
 														{ lineHeight: 21 },
 														t.atoms.text_contrast_medium, //@ts-ignore
-														web({ whiteSpace: "preserve nowrap" }),
+														{ whiteSpace: "preserve nowrap" },
 													]}
 												>
 													{" "}
@@ -303,7 +303,7 @@ function ChatListItemReady({
 												a.text_sm,
 												{ lineHeight: 21 },
 												t.atoms.text_contrast_medium, //@ts-ignore
-												web({ whiteSpace: "preserve nowrap" }),
+												{ whiteSpace: "preserve nowrap" },
 											]}
 										>
 											{" "}

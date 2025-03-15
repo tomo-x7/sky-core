@@ -19,7 +19,6 @@ import { TrendingInterstitial } from "#/components/interstitials/Trending";
 import { TrendingVideos as TrendingVideosInterstitial } from "#/components/interstitials/TrendingVideos";
 import { DISCOVER_FEED_URI, KNOWN_SHUTDOWN_FEEDS } from "#/lib/constants";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import { isWeb } from "#/platform/detection";
 import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
 import { listenPostCreated } from "#/state/events";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
@@ -635,7 +634,7 @@ let PostFeed = ({
 		 * reach the end, so that content isn't cut off by the bottom of the
 		 * screen.
 		 */
-		const offset = Math.max(headerOffset, 32) * (isWeb ? 1 : 2);
+		const offset = Math.max(headerOffset, 32);
 
 		return isFetchingNextPage ? (
 			<View style={[styles.feedFooter]}>

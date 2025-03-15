@@ -1,7 +1,7 @@
 import { UITextView } from "react-native-uitextview";
 
-import { atoms, flatten, useAlf, useTheme, web } from "#/alf";
-import { type TextProps, childHasEmoji, normalizeTextStyles, renderChildrenWithEmoji } from "#/alf/typography";
+import { atoms, flatten, useAlf, useTheme } from "#/alf";
+import { type TextProps, normalizeTextStyles, renderChildrenWithEmoji } from "#/alf/typography";
 export type { TextProps };
 
 /**
@@ -16,12 +16,6 @@ export function Text({ children, emoji, style, selectable, title, dataSet, ...re
 		flags,
 	});
 
-	if (__DEV__) {
-		if (!emoji && childHasEmoji(children)) {
-			logger.warn(`Text: emoji detected but emoji not enabled: "${children}"\n\nPlease add <Text emoji />'`);
-		}
-	}
-
 	const shared = {
 		uiTextView: true,
 		selectable,
@@ -35,11 +29,11 @@ export function Text({ children, emoji, style, selectable, title, dataSet, ...re
 
 function createHeadingElement({ level }: { level: number }) {
 	return function HeadingElement({ style, ...rest }: TextProps) {
-		const attr =
-			web({
-				role: "heading",
-				"aria-level": level,
-			}) || {};
+		const attr = {
+			role: "heading",
+			"aria-level": level,
+		} as const;
+
 		return <Text {...attr} {...rest} style={style} />;
 	};
 }
@@ -54,9 +48,9 @@ export const H4 = createHeadingElement({ level: 4 });
 export const H5 = createHeadingElement({ level: 5 });
 export const H6 = createHeadingElement({ level: 6 });
 export function P({ style, ...rest }: TextProps) {
-	const attr =
-		web({
-			role: "paragraph",
-		}) || {};
+	const attr = {
+		role: "paragraph",
+	};
+	// @ts-ignore
 	return <Text {...attr} {...rest} style={[atoms.text_md, atoms.leading_normal, flatten(style)]} />;
 }

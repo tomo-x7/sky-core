@@ -19,7 +19,6 @@ import { ListSparkle_Stroke2_Corner0_Rounded as ListSparkle } from "#/components
 import { UserCircle_Stroke2_Corner0_Rounded as Person } from "#/components/icons/UserCircle";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { ExploreRecommendations } from "#/screens/Search/components/ExploreRecommendations";
 import { ExploreTrendingTopics } from "#/screens/Search/components/ExploreTrendingTopics";
 import { ExploreTrendingVideos } from "#/screens/Search/components/ExploreTrendingVideos";
@@ -46,14 +45,7 @@ function SuggestedItemsHeader({
 
 	return (
 		<View
-			style={[
-				isWeb
-					? [a.flex_row, a.px_lg, a.py_lg, a.pt_2xl, a.gap_md]
-					: [{ flexDirection: "row-reverse" }, a.p_lg, a.pt_2xl, a.gap_md],
-				a.border_b,
-				t.atoms.border_contrast_low,
-				style,
-			]}
+			style={[a.flex_row, a.px_lg, a.py_lg, a.pt_2xl, a.gap_md, a.border_b, t.atoms.border_contrast_low, style]}
 		>
 			<View style={[a.flex_1, a.gap_sm]}>
 				<View style={[a.flex_row, a.align_center, a.gap_sm]}>

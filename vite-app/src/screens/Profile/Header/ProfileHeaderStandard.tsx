@@ -17,7 +17,6 @@ import { MessageProfileButton } from "#/components/dms/MessageProfileButton";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
-import { isWeb } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import type { Shadow } from "#/state/cache/types";
 import { useModalControls } from "#/state/modals";
@@ -58,16 +57,12 @@ let ProfileHeaderStandard = ({
 	const { openModal } = useModalControls();
 	const editProfileControl = useDialogControl();
 	const onPressEditProfile = React.useCallback(() => {
-		if (isWeb) {
-			// temp, while we figure out the nested dialog bug
-			openModal({
-				name: "edit-profile",
-				profile,
-			});
-		} else {
-			editProfileControl.open();
-		}
-	}, [editProfileControl, openModal, profile]);
+		// temp, while we figure out the nested dialog bug
+		openModal({
+			name: "edit-profile",
+			profile,
+		});
+	}, [openModal, profile]);
 
 	const onPressFollow = () => {
 		requireAuth(async () => {

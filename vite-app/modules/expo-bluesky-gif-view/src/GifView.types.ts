@@ -7,9 +7,12 @@ export interface GifViewStateChangeEvent {
 	};
 }
 
-export interface GifViewProps extends ViewProps {
+export interface GifViewProps {
 	autoplay?: boolean;
 	source?: string;
 	placeholderSource?: string;
 	onPlayerStateChange?: (event: GifViewStateChangeEvent) => void;
+	style: React.CSSProperties;
+	accessibilityLabel: string;
+	accessibilityHint:string
 }

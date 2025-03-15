@@ -8,7 +8,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError, isNetworkError } from "#/lib/strings/errors";
 import { checkAndFormatResetCode } from "#/lib/strings/password";
 import { colors, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import { ErrorMessage } from "../util/error/ErrorMessage";
@@ -249,8 +248,8 @@ const styles = StyleSheet.create({
 		paddingBottom: 35,
 	},
 	titleSection: {
-		paddingTop: isWeb ? 0 : 4,
-		paddingBottom: isWeb ? 14 : 10,
+		paddingTop: 0,
+		paddingBottom: 14,
 	},
 	title: {
 		textAlign: "center",

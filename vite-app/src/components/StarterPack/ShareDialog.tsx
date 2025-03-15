@@ -13,7 +13,6 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { saveImageToMediaLibrary } from "#/lib/media/manip";
 import { shareUrl } from "#/lib/sharing";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
-import { isWeb } from "#/platform/detection";
 import * as Toast from "#/view/com/util/Toast";
 
 interface Props {
@@ -91,23 +90,23 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 							]}
 							accessibilityIgnoresInvertColors={true}
 						/>
-						<View style={[a.gap_md, isWeb && [a.gap_sm, a.flex_row_reverse, { marginLeft: "auto" }]]}>
+						<View style={[a.gap_md, [a.gap_sm, a.flex_row_reverse, { marginLeft: "auto" }]]}>
 							<Button
-								label={isWeb ? "Copy link" : "Share link"}
+								label={"Copy link"}
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={[isWeb && a.self_center]}
+								style={[a.self_center]}
 								onPress={onShareLink}
 							>
-								<ButtonText>{isWeb ? <>Copy Link</> : <>Share link</>}</ButtonText>
+								<ButtonText>Copy Link</ButtonText>
 							</Button>
 							<Button
 								label={"Share QR code"}
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={[isWeb && a.self_center]}
+								style={[a.self_center]}
 								onPress={() => {
 									control.close(() => {
 										qrDialogControl.open();

@@ -33,7 +33,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { SafeAreaView, useSafeAreaFrame } from "#/lib/safe-area-context";
 
-import { ios, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { setNavigationBar } from "#/alf/util/navigationBar";
 import type { Dimensions } from "#/lib/media/types";
 import { colors, s } from "#/lib/styles";
@@ -297,15 +297,7 @@ function ImageView({
 
 	return (
 		<Animated.View style={[styles.container, containerStyle]}>
-			<StatusBar
-				animated
-				style="light"
-				hideTransitionAnimation="slide"
-				backgroundColor="black"
-				// hiding causes layout shifts on android,
-				// so avoid until we add edge-to-edge mode
-				hidden={ios(isScaled || !showControls)}
-			/>
+			<StatusBar animated style="light" hideTransitionAnimation="slide" backgroundColor="black" />
 			<Animated.View style={[styles.backdrop, backdropStyle]} renderToHardwareTextureAndroid />
 			<PagerView
 				scrollEnabled={!isScaled}

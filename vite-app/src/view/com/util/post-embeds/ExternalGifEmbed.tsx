@@ -9,7 +9,6 @@ import { Fill } from "#/components/Fill";
 import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
-import { isWeb } from "#/platform/detection";
 import { useExternalEmbedsPrefs } from "#/state/preferences";
 
 export function ExternalGifEmbed({
@@ -89,7 +88,7 @@ export function ExternalGifEmbed({
 			>
 				<Image
 					source={{
-						uri: !isPrefetched || (isWeb && !isAnimating) ? link.thumb : params.playerUri,
+						uri: !isPrefetched || !isAnimating ? link.thumb : params.playerUri,
 					}} // Web uses the thumb to control playback
 					style={{ flex: 1 }}
 					ref={imageRef}

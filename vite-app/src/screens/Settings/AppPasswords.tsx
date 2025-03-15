@@ -2,13 +2,7 @@ import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
 import { View } from "react-native";
-import Animated, {
-	FadeIn,
-	FadeOut,
-	LayoutAnimationConfig,
-	LinearTransition,
-	StretchOutY,
-} from "react-native-reanimated";
+import Animated, { FadeIn, FadeOut, LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Admonition, colors } from "#/components/Admonition";
@@ -23,7 +17,6 @@ import { Trash_Stroke2_Corner0_Rounded as TrashIcon } from "#/components/icons/T
 import { Warning_Stroke2_Corner0_Rounded as WarningIcon } from "#/components/icons/Warning";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { useAppPasswordDeleteMutation, useAppPasswordsQuery } from "#/state/queries/app-passwords";
 import { EmptyState } from "#/view/com/util/EmptyState";
 import * as Toast from "#/view/com/util/Toast";
@@ -83,7 +76,7 @@ export function AppPasswordsScreen(props: Props) {
 												key={appPassword.name}
 												style={a.w_full}
 												entering={FadeIn}
-												exiting={isWeb ? FadeOut : StretchOutY}
+												exiting={FadeOut}
 												layout={LinearTransition.delay(150)}
 											>
 												<SettingsList.Item>

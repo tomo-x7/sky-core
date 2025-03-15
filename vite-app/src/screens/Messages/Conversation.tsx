@@ -4,7 +4,7 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useCallback } from "react";
 import { View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { Error } from "#/components/Error";
@@ -16,7 +16,6 @@ import { MessagesListHeader } from "#/components/dms/MessagesListHeader";
 import { useEmail } from "#/lib/hooks/useEmail";
 import { useEnableKeyboardControllerScreen } from "#/lib/hooks/useEnableKeyboardController";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
-import { isWeb } from "#/platform/detection";
 import { MessagesList } from "#/screens/Messages/components/MessagesList";
 import { type Shadow, useMaybeProfileShadow } from "#/state/cache/profile-shadow";
 import { ConvoProvider, isConvoActive, useConvo } from "#/state/messages/convo";
@@ -40,7 +39,7 @@ export function MessagesConversationScreen({ route }: Props) {
 		useCallback(() => {
 			setCurrentConvoId(convoId);
 
-			if (isWeb && !gtMobile) {
+			if (!gtMobile) {
 				setMinimalShellMode(true);
 			} else {
 				setMinimalShellMode(false);
@@ -54,7 +53,7 @@ export function MessagesConversationScreen({ route }: Props) {
 	);
 
 	return (
-		<Layout.Screen testID="convoScreen" style={web([{ minHeight: 0 }, a.flex_1])}>
+		<Layout.Screen testID="convoScreen" style={[{ minHeight: 0 }, a.flex_1]}>
 			<ConvoProvider key={convoId} convoId={convoId}>
 				<Inner />
 			</ConvoProvider>

@@ -1,6 +1,4 @@
 import React from "react";
-
-import { isWeb } from "#/platform/detection";
 import { useSession } from "#/state/session";
 import { useActiveStarterPack } from "#/state/shell/starter-pack";
 
@@ -52,7 +50,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 	const shouldShowStarterPack = Boolean(activeStarterPack?.uri) && !hasSession;
 	const [state, setState] = React.useState<State>({
 		showLoggedOut: shouldShowStarterPack,
-		requestedAccountSwitchTo: shouldShowStarterPack ? (isWeb ? "starterpack" : "new") : undefined,
+		requestedAccountSwitchTo: shouldShowStarterPack ? "starterpack" : undefined,
 	});
 
 	const controls = React.useMemo<Controls>(

@@ -2,7 +2,7 @@ import type { ModerationUI } from "@atproto/api";
 import React from "react";
 import { type StyleProp, View, type ViewStyle } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme, web } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import {
@@ -158,9 +158,9 @@ function ContentHiderActive({
 								a.leading_snug,
 								gtMobile && [a.font_bold],
 								t.atoms.text_contrast_medium,
-								web({
+								{
 									marginBottom: 1,
-								}),
+								},
 							]}
 							numberOfLines={2}
 						>
@@ -173,9 +173,9 @@ function ContentHiderActive({
 									a.leading_snug,
 									gtMobile && [a.font_bold],
 									t.atoms.text_contrast_high,
-									web({
+									{
 										marginBottom: 1,
-									}),
+									},
 								]}
 							>
 								{override ? <>Hide</> : <>Show</>}
@@ -217,7 +217,7 @@ function ContentHiderActive({
 									{ color: t.palette.primary_500 },
 									a.text_sm,
 									//@ts-ignore
-									state.hovered && [web({ textDecoration: "underline" })],
+									state.hovered && { textDecoration: "underline" },
 								]}
 							>
 								Learn more.

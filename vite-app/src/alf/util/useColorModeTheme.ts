@@ -1,7 +1,5 @@
 import React from "react";
 import { type ColorSchemeName, useColorScheme } from "react-native";
-
-import { isWeb } from "../../platform/detection";
 import { useThemePrefs } from "../../state/shell";
 import { dark, dim, light } from "../themes";
 import type { ThemeName } from "../types";
@@ -32,11 +30,8 @@ function getThemeName(colorScheme: ColorSchemeName, colorMode: "system" | "light
 }
 
 function updateDocument(theme: ThemeName) {
-	// @ts-ignore web only
-	if (isWeb && typeof window !== "undefined") {
-		// @ts-ignore web only
+	if (typeof window !== "undefined") {
 		const html = window.document.documentElement;
-		// @ts-ignore web only
 		const meta = window.document.querySelector('meta[name="theme-color"]');
 
 		// remove any other color mode classes

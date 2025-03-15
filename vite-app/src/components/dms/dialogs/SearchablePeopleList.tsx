@@ -3,7 +3,7 @@ import type React from "react";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { TextInput, View } from "react-native";
 
-import { atoms as a, native, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -13,7 +13,6 @@ import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { isWeb } from "#/platform/detection";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { useListConvosQuery } from "#/state/queries/messages/list-conversations";
@@ -207,54 +206,35 @@ export function SearchablePeopleList({
 	);
 
 	useLayoutEffect(() => {
-		if (isWeb) {
-			setImmediate(() => {
-				inputRef?.current?.focus();
-			});
-		}
+		setImmediate(() => {
+			inputRef?.current?.focus();
+		});
 	}, []);
 
 	const listHeader = useMemo(() => {
 		return (
 			<View
 				onLayout={(evt) => setHeaderHeight(evt.nativeEvent.layout.height)}
-				style={[
-					a.relative,
-					web(a.pt_lg),
-					native(a.pt_4xl),
-					a.pb_xs,
-					a.px_lg,
-					a.border_b,
-					t.atoms.border_contrast_low,
-					t.atoms.bg,
-				]}
+				style={[a.relative, a.pt_lg, a.pb_xs, a.px_lg, a.border_b, t.atoms.border_contrast_low, t.atoms.bg]}
 			>
-				<View style={[a.relative, native(a.align_center), a.justify_center]}>
+				<View style={[a.relative, a.justify_center]}>
 					<Text style={[a.z_10, a.text_lg, a.font_heavy, a.leading_tight, t.atoms.text_contrast_high]}>
 						{title}
 					</Text>
-					{isWeb ? (
-						<Button
-							label={"Close"}
-							size="small"
-							shape="round"
-							variant={isWeb ? "ghost" : "solid"}
-							color="secondary"
-							style={[
-								a.absolute,
-								a.z_20,
-								web({ right: -4 }),
-								native({ right: 0 }),
-								native({ height: 32, width: 32, borderRadius: 16 }),
-							]}
-							onPress={() => control.close()}
-						>
-							<ButtonIcon icon={X} size="md" />
-						</Button>
-					) : null}
+					<Button
+						label={"Close"}
+						size="small"
+						shape="round"
+						variant={"ghost"}
+						color="secondary"
+						style={[a.absolute, a.z_20, { right: -4 }]}
+						onPress={() => control.close()}
+					>
+						<ButtonIcon icon={X} size="md" />
+					</Button>
 				</View>
 
-				<View style={web([a.pt_xs])}>
+				<View style={[a.pt_xs]}>
 					<SearchInput
 						inputRef={inputRef as React.RefObject<TextInput>}
 						value={searchText}
@@ -278,7 +258,7 @@ export function SearchablePeopleList({
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
 			//@ts-ignore
-			style={[web([a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0])]}
+			style={[[a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]]}
 			webInnerContentContainerStyle={a.py_0}
 			webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
 			scrollIndicatorInsets={{ top: headerHeight }}
@@ -374,7 +354,6 @@ function Empty({ message }: { message: string }) {
 	return (
 		<View style={[a.p_lg, a.py_xl, a.align_center, a.gap_md]}>
 			<Text style={[a.text_sm, a.italic, t.atoms.text_contrast_high]}>{message}</Text>
-
 			<Text style={[a.text_xs, t.atoms.text_contrast_low]}>(╯°□°)╯︵ ┻━┻</Text>
 		</View>
 	);
@@ -398,10 +377,10 @@ function SearchInput({
 
 	return (
 		<View
-			{...web({
+			{...{
 				onMouseEnter,
 				onMouseLeave,
-			})}
+			}}
 			style={[a.flex_row, a.align_center, a.gap_sm]}
 		>
 			<Search size="md" fill={interacted ? t.palette.primary_500 : t.palette.contrast_300} />

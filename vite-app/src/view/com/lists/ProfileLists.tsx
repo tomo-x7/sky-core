@@ -10,11 +10,10 @@ import {
 	findNodeHandle,
 } from "react-native";
 
-import { atoms as a, ios, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
-import { isWeb } from "#/platform/detection";
 import { RQKEY, useProfileListsQuery } from "#/state/queries/profile-lists";
 import { EmptyState } from "#/view/com/util/EmptyState";
 import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
@@ -133,7 +132,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 				return <FeedLoadingPlaceholder />;
 			}
 			return (
-				<View style={[(index !== 0 || isWeb) && a.border_t, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
+				<View style={[a.border_t, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
 					<ListCard.Default view={item} />
 				</View>
 			);
@@ -164,7 +163,6 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 				refreshing={isPTRing}
 				onRefresh={onRefresh}
 				headerOffset={headerOffset}
-				progressViewOffset={ios(0)}
 				contentContainerStyle={isMobile && { paddingBottom: headerOffset + 100 }}
 				removeClippedSubviews={true}
 				desktopFixedHeight

@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useWindowDimensions } from "react-native";
 
-import { isWeb } from "#/platform/detection";
-
 const Context = React.createContext<{
 	activeViewId: string | null;
 	setActiveView: (viewId: string) => void;
@@ -10,10 +8,6 @@ const Context = React.createContext<{
 } | null>(null);
 
 export function Provider({ children }: { children: React.ReactNode }) {
-	if (!isWeb) {
-		throw new Error("ActiveVideoWebContext may only be used on web.");
-	}
-
 	const [activeViewId, setActiveViewId] = useState<string | null>(null);
 	const activeViewLocationRef = useRef(Number.POSITIVE_INFINITY);
 	const { height: windowHeight } = useWindowDimensions();

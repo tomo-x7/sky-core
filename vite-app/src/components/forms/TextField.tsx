@@ -9,7 +9,7 @@ import {
 	type ViewStyle,
 } from "react-native";
 
-import { type TextStyleProp, atoms as a, android, applyFonts, ios, useAlf, useTheme, web } from "#/alf";
+import { type TextStyleProp, atoms as a, applyFonts, useAlf, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import type { Props as SVGIconProps } from "#/components/icons/common";
@@ -61,11 +61,11 @@ export function Root({ children, isInvalid = false }: RootProps) {
 		<Context.Provider value={context}>
 			<View
 				style={[a.flex_row, a.align_center, a.relative, a.w_full, a.px_md]}
-				{...web({
+				{...{
 					onClick: () => inputRef.current?.focus(),
 					onMouseOver: onHoverIn,
 					onMouseOut: onHoverOut,
-				})}
+				}}
 			>
 				{children}
 			</View>
@@ -174,15 +174,13 @@ export function createInput(Component: typeof TextInput) {
 				minHeight: rest.multiline ? 80 : undefined,
 				minWidth: 0,
 			},
-			ios({ paddingTop: 12, paddingBottom: 13 }),
-			android(a.py_sm),
 			// fix for autofill styles covering border
-			web({
+			{
 				paddingTop: 10,
 				paddingBottom: 11,
 				marginTop: 2,
 				marginBottom: 2,
-			}),
+			},
 			style,
 		]);
 		//@ts-ignore
@@ -326,7 +324,7 @@ export function SuffixText({
 				a.text_md,
 				t.atoms.text_contrast_medium,
 				a.pointer_events_none,
-				web([{ marginTop: -2 }, a.leading_snug]),
+				[{ marginTop: -2 }, a.leading_snug],
 				(ctx.hovered || ctx.focused) && { color: t.palette.contrast_800 },
 				style,
 			]}

@@ -23,7 +23,6 @@ import Animated, {
 	FadeOut,
 	interpolateColor,
 	LayoutAnimationConfig,
-	LinearTransition,
 	runOnUI,
 	scrollTo,
 	useAnimatedRef,
@@ -32,11 +31,9 @@ import Animated, {
 	useSharedValue,
 	withRepeat,
 	withTiming,
-	ZoomIn,
-	ZoomOut,
 } from "react-native-reanimated";
 
-import { atoms as a, native, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
@@ -87,7 +84,6 @@ import { ThreadgateBtn } from "#/view/com/composer/threadgate/ThreadgateBtn";
 import { SelectVideoBtn } from "#/view/com/composer/videos/SelectVideoBtn";
 import { SubtitleDialogBtn } from "#/view/com/composer/videos/SubtitleDialog";
 import { VideoPreview } from "#/view/com/composer/videos/VideoPreview";
-import { VideoTranscodeProgress } from "#/view/com/composer/videos/VideoTranscodeProgress";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { LazyQuoteEmbed, QuoteX } from "#/view/com/util/post-embeds/QuoteEmbed";
@@ -490,7 +486,7 @@ export const ComposePost = ({
 
 	const isWebFooterSticky = thread.posts.length > 1;
 	return (
-		<BottomSheetPortalProvider>
+		<>
 			<VerifyEmailDialog
 				control={emailVerificationControl}
 				onCloseWithoutVerifying={() => {
@@ -527,7 +523,6 @@ export const ComposePost = ({
 
 					<Animated.ScrollView
 						ref={scrollViewRef}
-						layout={native(LinearTransition)}
 						onScroll={scrollHandler}
 						contentContainerStyle={a.flex_grow}
 						style={a.flex_1}
@@ -571,7 +566,7 @@ export const ComposePost = ({
 					confirmButtonColor="negative"
 				/>
 			</KeyboardAvoidingView>
-		</BottomSheetPortalProvider>
+		</>
 	);
 };
 
@@ -781,7 +776,7 @@ function ComposerTopBar({
 }) {
 	const pal = usePalette("default");
 	return (
-		<Animated.View style={topBarAnimatedStyle} layout={native(LinearTransition)}>
+		<Animated.View style={topBarAnimatedStyle}>
 			<View style={styles.topbarInner}>
 				<Button
 					label="Cancel"
@@ -882,23 +877,16 @@ function ComposerEmbeds({
 
 			<LayoutAnimationConfig skipExiting>
 				{video && (
-					<Animated.View style={[a.w_full, a.mt_lg]} entering={native(ZoomIn)} exiting={native(ZoomOut)}>
-						{video.asset &&
-							(video.status === "compressing" ? (
-								<VideoTranscodeProgress
-									asset={video.asset}
-									progress={video.progress}
-									clear={clearVideo}
-								/>
-							) : video.video ? (
-								<VideoPreview
-									asset={video.asset}
-									video={video.video}
-									//@ts-ignore
-									isActivePost={isActivePost}
-									clear={clearVideo}
-								/>
-							) : null)}
+					<Animated.View style={[a.w_full, a.mt_lg]}>
+						{video.asset && video.status !== "compressing" && video.video && (
+							<VideoPreview
+								asset={video.asset}
+								video={video.video}
+								//@ts-ignore
+								isActivePost={isActivePost}
+								clear={clearVideo}
+							/>
+						)}
 						<SubtitleDialogBtn
 							defaultAltText={video.altText}
 							saveAltText={(altText) =>

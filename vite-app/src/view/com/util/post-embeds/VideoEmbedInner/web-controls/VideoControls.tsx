@@ -3,7 +3,7 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Pressable, View } from "react-native";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { useIsWithinMessage } from "#/components/dms/MessageContext";
@@ -299,7 +299,7 @@ export function Controls({
 				accessibilityLabel={!focused ? "Unmute video" : playing ? "Pause video" : "Play video"}
 				accessibilityHint=""
 				// @ts-ignore
-				style={[a.flex_1, web({ cursor: showCursor || !playing ? "pointer" : "none" })]}
+				style={[a.flex_1, { cursor: showCursor || !playing ? "pointer" : "none" }]}
 				onPress={onPressEmptySpace}
 			/>
 			{!showControls && !focused && duration > 0 && <TimeIndicator time={Math.floor(duration - currentTime)} />}
@@ -309,9 +309,7 @@ export function Controls({
 					a.w_full,
 					a.px_xs,
 					//@ts-ignore
-					web({
-						background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7))",
-					}),
+					{ background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7))" },
 					{ opacity: showControls ? 1 : 0 },
 					//@ts-ignore
 					{ transition: "opacity 0.2s ease-in-out" },

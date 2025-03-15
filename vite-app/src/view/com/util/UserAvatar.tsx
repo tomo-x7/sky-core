@@ -19,7 +19,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useCameraPermission, usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { makeProfileLink } from "#/lib/routes/links";
 import { colors } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { precacheProfile } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
 import { HighPriorityImage } from "#/view/com/util/images/Image";
@@ -54,7 +53,7 @@ interface PreviewableUserAvatarProps extends BaseUserAvatarProps {
 	onBeforePress?: () => void;
 }
 
-const BLUR_AMOUNT = isWeb ? 5 : 100;
+const BLUR_AMOUNT = 5;
 
 let DefaultAvatar = ({
 	type,

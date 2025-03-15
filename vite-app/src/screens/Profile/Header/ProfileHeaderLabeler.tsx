@@ -19,7 +19,6 @@ import {
 	Heart2_Filled_Stroke2_Corner0_Rounded as HeartFilled,
 } from "#/components/icons/Heart2";
 import { isAppLabeler } from "#/lib/moderation";
-import { isWeb } from "#/platform/detection";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import type { Shadow } from "#/state/cache/types";
 import { useModalControls } from "#/state/modals";
@@ -95,16 +94,12 @@ let ProfileHeaderLabeler = ({
 	const { openModal } = useModalControls();
 	const editProfileControl = useDialogControl();
 	const onPressEditProfile = React.useCallback(() => {
-		if (isWeb) {
-			// temp, while we figure out the nested dialog bug
-			openModal({
-				name: "edit-profile",
-				profile,
-			});
-		} else {
-			editProfileControl.open();
-		}
-	}, [editProfileControl, openModal, profile]);
+		// temp, while we figure out the nested dialog bug
+		openModal({
+			name: "edit-profile",
+			profile,
+		});
+	}, [openModal, profile]);
 
 	const onPressSubscribe = React.useCallback(
 		() =>

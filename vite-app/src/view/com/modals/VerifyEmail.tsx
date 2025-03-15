@@ -7,7 +7,6 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
-import { isWeb } from "#/platform/detection";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "../util/Toast";
@@ -268,8 +267,8 @@ function ReminderIllustration() {
 
 const styles = StyleSheet.create({
 	titleSection: {
-		paddingTop: isWeb ? 0 : 4,
-		paddingBottom: isWeb ? 14 : 10,
+		paddingTop: 0,
+		paddingBottom: 14,
 	},
 	title: {
 		textAlign: "center",

@@ -2,7 +2,7 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 
-import { atoms as a, useTheme, web } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { isFirefox, isTouchDevice } from "#/lib/browser";
 import { clamp } from "#/lib/numbers";
@@ -169,7 +169,7 @@ export function Scrubber({
 						{ backgroundColor: "rgba(255, 255, 255, 0.4)" },
 						{ height: hovered || scrubberActive ? 6 : 3 },
 						//@ts-ignore
-						web({ transition: "height 0.1s ease" }),
+						{ transition: "height 0.1s ease" },
 					]}
 				>
 					{duration > 0 && (
