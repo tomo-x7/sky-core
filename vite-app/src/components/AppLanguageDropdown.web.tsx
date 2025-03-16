@@ -43,13 +43,13 @@ export function AppLanguageDropdown({ style }: ViewStyleProp) {
 				style,
 			]}
 		>
-			<View style={[a.flex_row, a.gap_sm, a.align_center, a.flex_shrink, a.h_full, t.atoms.bg]}>
+			<div style={{...a.flex_row, ...a.gap_sm, ...a.align_center, ...a.flex_shrink, ...a.h_full, ...t.atoms.bg}}>
 				<Text aria-hidden={true} style={t.atoms.text_contrast_medium}>
 					{APP_LANGUAGES.find((l) => l.code2 === sanitizedLang)?.name}
 				</Text>
 				{/*@ts-ignore*/}
 				<ChevronDown fill={t.atoms.text.color} size="xs" style={a.flex_0} />
-			</View>
+			</div>
 
 			<select
 				value={sanitizedLang}

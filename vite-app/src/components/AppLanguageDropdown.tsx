@@ -32,7 +32,7 @@ export function AppLanguageDropdown(_props: ViewStyleProp) {
 	);
 
 	return (
-		<View style={a.relative}>
+		<div style={a.relative}>
 			<RNPickerSelect
 				darkTheme={t.scheme === "dark"}
 				placeholder={{}}
@@ -70,6 +70,6 @@ export function AppLanguageDropdown(_props: ViewStyleProp) {
 			>
 				<ChevronDown fill={t.atoms.text.color} size="xs" />
 			</View>
-		</View>
+		</div>
 	);
 }

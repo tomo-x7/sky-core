@@ -61,11 +61,11 @@ export function Link({ view, children, ...props }: Props & Omit<LinkProps, "to" 
 }
 
 export function Outer({ children }: { children: React.ReactNode }) {
-	return <View style={[a.w_full, a.gap_md]}>{children}</View>;
+	return <div style={{ ...a.w_full, ...a.gap_md }}>{children}</div>;
 }
 
 export function Header({ children }: { children: React.ReactNode }) {
-	return <View style={[a.flex_row, a.align_center, a.gap_md]}>{children}</View>;
+	return <div style={{ ...a.flex_row, ...a.align_center, ...a.gap_md }}>{children}</div>;
 }
 
 export type AvatarProps = { src: string | undefined; size?: number };
@@ -100,7 +100,7 @@ export function TitleAndByline({
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_1]}>
+		<div style={a.flex_1}>
 			<Text emoji style={[a.text_md, a.font_bold, a.leading_snug]} numberOfLines={1}>
 				{title}
 			</Text>
@@ -109,7 +109,7 @@ export function TitleAndByline({
 					<>Feed by {sanitizeHandle(creator.handle, "@")}</>
 				</Text>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -117,7 +117,7 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_1, a.gap_xs]}>
+		<div style={{ ...a.flex_1, ...a.gap_xs }}>
 			<View
 				style={[
 					a.rounded_xs,
@@ -141,7 +141,7 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 					]}
 				/>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -159,11 +159,11 @@ export function Description({ description, ...rest }: { description?: string } &
 export function DescriptionPlaceholder() {
 	const t = useTheme();
 	return (
-		<View style={[a.gap_xs]}>
-			<View style={[a.rounded_xs, a.w_full, t.atoms.bg_contrast_50, { height: 12 }]} />
-			<View style={[a.rounded_xs, a.w_full, t.atoms.bg_contrast_50, { height: 12 }]} />
-			<View style={[a.rounded_xs, a.w_full, t.atoms.bg_contrast_50, { height: 12, width: 100 }]} />
-		</View>
+		<div style={a.gap_xs}>
+			<div style={{ ...a.rounded_xs, ...a.w_full, ...t.atoms.bg_contrast_50, height: 12 }} />
+			<div style={{ ...a.rounded_xs, ...a.w_full, ...t.atoms.bg_contrast_50, height: 12 }} />
+			<div style={{ ...a.rounded_xs, ...a.w_full, ...t.atoms.bg_contrast_50, height: 12, width: 100 }} />
+		</div>
 	);
 }
 

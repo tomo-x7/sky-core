@@ -9,11 +9,11 @@ interface BottomSheetDebugViewProps {
 
 const BottomSheetDebugView = ({ values }: BottomSheetDebugViewProps) => {
 	return (
-		<View pointerEvents="none" style={styles.container}>
+		<div  style={{...styles.container,pointerEvents:"none"}}>
 			{Object.keys(values).map((key) => (
 				<ReText key={`item-${key}`} value={values[key]} style={styles.text} text={key} />
 			))}
-		</View>
+		</div>
 	);
 };
 

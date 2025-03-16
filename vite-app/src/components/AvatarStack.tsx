@@ -37,7 +37,7 @@ export function AvatarStack({
 			}));
 
 	return (
-		<View style={[a.flex_row, a.align_center, a.relative, { width: size + (items.length - 1) * halfSize }]}>
+		<div style={{...a.flex_row, ...a.align_center, ...a.relative,  width: size + (items.length - 1) * halfSize }}>
 			{items.map((item, i) => (
 				<View
 					key={item.key}
@@ -65,7 +65,7 @@ export function AvatarStack({
 					)}
 				</View>
 			))}
-		</View>
+		</div>
 	);
 }
 

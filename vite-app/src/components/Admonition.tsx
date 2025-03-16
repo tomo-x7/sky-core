@@ -59,7 +59,7 @@ export function Button({ children, ...props }: Omit<ButtonProps, "size" | "varia
 }
 
 export function Row({ children }: { children: React.ReactNode }) {
-	return <View style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>{children}</View>;
+	return <div style={{...a.flex_1, ...a.flex_row, ...a.align_center, ...a.gap_sm}}>{children}</div>;
 }
 
 export function Outer({

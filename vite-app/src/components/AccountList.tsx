@@ -48,7 +48,7 @@ export function AccountList({
 						isCurrentAccount={account.did === currentAccount?.did}
 						isPendingAccount={account.did === pendingDid}
 					/>
-					<View style={[{ borderBottomWidth: 1 }, t.atoms.border_contrast_low]} />
+					<div style={{ borderBottomWidth: 1, ...t.atoms.border_contrast_low }} />
 				</React.Fragment>
 			))}
 			<Button
@@ -119,13 +119,13 @@ function AccountItem({
 						(hovered || pressed || isPendingAccount) && t.atoms.bg_contrast_25,
 					]}
 				>
-					<View style={a.p_md}>
+					<div style={a.p_md}>
 						<UserAvatar
 							avatar={profile?.avatar}
 							size={24}
 							type={profile?.associated?.labeler ? "labeler" : "user"}
 						/>
-					</View>
+					</div>
 					<Text style={[a.align_baseline, a.flex_1, a.flex_row, a.py_sm]}>
 						<Text emoji style={[a.font_bold]}>
 							{sanitizeDisplayName(profile?.displayName || profile?.handle || account.handle)}

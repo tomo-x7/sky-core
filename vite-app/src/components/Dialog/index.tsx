@@ -20,6 +20,7 @@ import { Portal } from "#/components/Portal";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useA11y } from "#/state/a11y";
 import { useDialogStateControlContext } from "#/state/dialogs";
+import hexRgb from "hex-rgb"
 
 export { useDialogContext, useDialogControl } from "#/components/Dialog/context";
 export * from "#/components/Dialog/shared";
@@ -166,25 +167,24 @@ export function Inner({
 				aria-labelledby={accessibilityLabelledBy}
 				aria-describedby={accessibilityDescribedBy}
 				onClick={stopPropagation}
+				//@ts-ignore
 				onStartShouldSetResponder={() => true}
 				onTouchEnd={stopPropagation}
-				//@ts-ignore
-				style={flatten([
-					a.relative,
-					a.rounded_md,
-					a.w_full,
-					a.border,
-					t.atoms.bg,
-					{
-						maxWidth: 600,
-						borderColor: t.palette.contrast_200,
-						shadowColor: t.palette.black,
-						shadowOpacity: t.name === "light" ? 0.1 : 0.4,
-						shadowRadius: 30,
-					},
-					!reduceMotionEnabled && a.zoom_fade_in,
-					style,
-				])}
+				style={{
+					...a.relative,
+					...a.rounded_md,
+					...a.w_full,
+					...a.border,
+					...t.atoms.bg,
+
+					maxWidth: 600,
+					borderColor: t.palette.contrast_200,
+					// TODO:2pxは適当に決めたので要チェック
+					boxShadow:`2px 2px 30px ${hexRgb(t.palette.black,{alpha:t.name === "light" ? 0.1 : 0.4,format:"css"})}`,
+
+					...(!reduceMotionEnabled ? a.zoom_fade_in : {}),
+					...style,
+				}}
 			>
 				<DismissableLayer
 					onInteractOutside={preventDefault}
@@ -193,7 +193,7 @@ export function Inner({
 					style={{ display: "flex", flexDirection: "column" }}
 				>
 					{header}
-					<View style={[gtMobile ? a.p_2xl : a.p_xl, contentContainerStyle]}>{children}</View>
+					<div style={{ ...(gtMobile ? a.p_2xl : a.p_xl), ...contentContainerStyle }}>{children}</div>
 				</DismissableLayer>
 			</dialog>
 		</FocusScope>
@@ -205,23 +205,22 @@ export const ScrollableInner = Inner;
 export const InnerFlatList = React.forwardRef<
 	FlatList,
 	FlatListProps<any> & { label: string } & {
-		webInnerStyle?: StyleProp<ViewStyle>;
-		webInnerContentContainerStyle?: StyleProp<ViewStyle>;
+		webInnerStyle?: { style: React.CSSProperties };
+		webInnerContentContainerStyle?: { style: React.CSSProperties };
 	}
 >(function InnerFlatList({ label, style, webInnerStyle, webInnerContentContainerStyle, ...props }, ref) {
 	const { gtMobile } = useBreakpoints();
 	return (
 		<Inner
 			label={label}
-			style={[
-				a.overflow_hidden,
-				a.px_0,
+			style={{
+				...a.overflow_hidden,
+				...a.px_0,
 				// 100 minus 10vh of paddingVertical
-				//@ts-ignore
-				{ maxHeight: "80vh" },
-				webInnerStyle,
-			]}
-			contentContainerStyle={[a.px_0, webInnerContentContainerStyle]}
+				maxHeight: "80vh",
+				...webInnerStyle,
+			}}
+			contentContainerStyle={{ ...a.px_0, ...webInnerContentContainerStyle }}
 		>
 			<FlatList ref={ref} style={[gtMobile ? a.px_2xl : a.px_xl, flatten(style)]} {...props} />
 		</Inner>

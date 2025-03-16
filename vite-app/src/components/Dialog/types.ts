@@ -69,7 +69,7 @@ export type DialogInnerProps =
 			accessibilityLabelledBy: A11yProps["aria-labelledby"];
 			accessibilityDescribedBy: string;
 			keyboardDismissMode?: ScrollViewProps["keyboardDismissMode"];
-			contentContainerStyle?: StyleProp<ViewStyle>;
+			contentContainerStyle?: {style?:React.CSSProperties};
 			header?: React.ReactNode;
 	  }>
 	| DialogInnerPropsBase<{
@@ -77,6 +77,6 @@ export type DialogInnerProps =
 			accessibilityLabelledBy?: undefined;
 			accessibilityDescribedBy?: undefined;
 			keyboardDismissMode?: ScrollViewProps["keyboardDismissMode"];
-			contentContainerStyle?: StyleProp<ViewStyle>;
+			contentContainerStyle?: {style?:React.CSSProperties};
 			header?: React.ReactNode;
 	  }>;

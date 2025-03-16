@@ -32,29 +32,29 @@ function CardOuter({ children, style }: { children: React.ReactNode | React.Reac
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	return (
-		<View
-			style={[
-				a.w_full,
-				a.p_lg,
-				a.rounded_md,
-				a.border,
-				t.atoms.bg,
-				t.atoms.border_contrast_low,
-				!gtMobile && {
+		<div
+			style={{
+				...a.w_full,
+				...a.p_lg,
+				...a.rounded_md,
+				...a.border,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_low,
+				...(!gtMobile ? {
 					width: MOBILE_CARD_WIDTH,
-				},
-				style,
-			]}
+				}:{}),
+				...style,
+			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
 export function SuggestedFollowPlaceholder() {
 	const t = useTheme();
 	return (
-		<CardOuter style={[a.gap_md, t.atoms.border_contrast_low]}>
+		<CardOuter style={{...a.gap_md, ...t.atoms.border_contrast_low}}>
 			<ProfileCard.Header>
 				<ProfileCard.AvatarPlaceholder />
 				<ProfileCard.NameAndHandlePlaceholder />
@@ -68,7 +68,7 @@ export function SuggestedFollowPlaceholder() {
 export function SuggestedFeedsCardPlaceholder() {
 	const t = useTheme();
 	return (
-		<CardOuter style={[a.gap_sm, t.atoms.border_contrast_low]}>
+		<CardOuter style={{...a.gap_sm, ...t.atoms.border_contrast_low}}>
 			<FeedCard.Header>
 				<FeedCard.AvatarPlaceholder />
 				<FeedCard.TitleAndBylinePlaceholder creator />
@@ -224,10 +224,9 @@ export function ProfileGrid({
 		Array(maxLength)
 			.fill(0)
 			.map((_, i) => (
-				//@ts-ignore
-				<View key={i.toString()} style={[gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]]}>
+				<div key={i.toString()} style={gtMobile ? { ...a.flex_0, width: "calc(50% - 6px)" } : undefined}>
 					<SuggestedFollowPlaceholder />
-				</View>
+				</div>
 			))
 	) : error || !profiles.length ? null : (
 		<>
@@ -239,7 +238,7 @@ export function ProfileGrid({
 					style={[a.flex_1, gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]]}
 				>
 					{({ hovered, pressed }) => (
-						<CardOuter style={[a.flex_1, (hovered || pressed) && t.atoms.border_contrast_high]}>
+						<CardOuter style={{ ...a.flex_1, ...(hovered || pressed ? t.atoms.border_contrast_high : {}) }}>
 							<ProfileCard.Outer>
 								<ProfileCard.Header>
 									<ProfileCard.Avatar profile={profile} moderationOpts={moderationOpts} />
@@ -265,16 +264,16 @@ export function ProfileGrid({
 	}
 
 	return (
-		<View style={[a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
-			<View style={[a.p_lg, a.pb_xs, a.flex_row, a.align_center, a.justify_between]}>
+		<div style={{...a.border_t, ...t.atoms.border_contrast_low, ...t.atoms.bg_contrast_25}}>
+			<div style={{...a.p_lg, ...a.pb_xs, ...a.flex_row, ...a.align_center, ...a.justify_between}}>
 				<Text style={[a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>
 					{viewContext === "profile" ? <>Similar accounts</> : <>Suggested for you</>}
 				</Text>
 				<Person fill={t.atoms.text_contrast_low.color} size="sm" />
-			</View>
+			</div>
 
 			{gtMobile ? (
-				<View style={[a.flex_1, a.px_lg, a.pt_sm, a.pb_lg, a.gap_md]}>
+				<View style={{...a.flex_1, ...a.px_lg, ...a.pt_sm, ...a.pb_lg, ...a.gap_md}}>
 					<View style={[a.flex_1, a.flex_row, a.flex_wrap, a.gap_sm]}>{content}</View>
 
 					<View style={[a.flex_row, a.justify_end, a.align_center, a.gap_md]}>
@@ -305,7 +304,7 @@ export function ProfileGrid({
 									navigation.navigate("SearchTab");
 								}}
 							>
-								<CardOuter style={[a.flex_1, { borderWidth: 0 }]}>
+								<CardOuter style={{...a.flex_1,  borderWidth: 0 }}>
 									<View style={[a.flex_1, a.justify_center]}>
 										<View style={[a.flex_row, a.px_lg]}>
 											<Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>
@@ -321,7 +320,7 @@ export function ProfileGrid({
 					</ScrollView>
 				</BlockDrawerGesture>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -357,7 +356,7 @@ export function SuggestedFeeds() {
 			{feeds.slice(0, numFeedsToDisplay).map((feed) => (
 				<FeedCard.Link key={feed.uri} view={feed}>
 					{({ hovered, pressed }) => (
-						<CardOuter style={[a.flex_1, (hovered || pressed) && t.atoms.border_contrast_high]}>
+						<CardOuter style={{...a.flex_1, ...(hovered || pressed) ? t.atoms.border_contrast_high:{}}}>
 							<FeedCard.Outer>
 								<FeedCard.Header>
 									<FeedCard.Avatar src={feed.avatar} />
@@ -414,7 +413,7 @@ export function SuggestedFeeds() {
 								}}
 								style={[a.flex_col]}
 							>
-								<CardOuter style={[a.flex_1]}>
+								<CardOuter style={a.flex_1}>
 									<View style={[a.flex_1, a.justify_center]}>
 										<View style={[a.flex_row, a.px_lg]}>
 											<Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>

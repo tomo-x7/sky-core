@@ -15,6 +15,7 @@ import Animated, {
 import darkSplashImagePointer from "./assets/splash-dark.png";
 import splashImagePointer from "./assets/splash.png";
 import { Logotype } from "./view/icons/Logotype";
+import { useOnLayout } from "./lib/onLayout";
 const splashImageUri = RNImage.resolveAssetSource(splashImagePointer).uri;
 const darkSplashImageUri = RNImage.resolveAssetSource(darkSplashImagePointer).uri;
 
@@ -147,9 +148,9 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 	const logoBg = isDarkMode ? "#0F1824" : "#fff";
 
 	return (
-		<View style={{ flex: 1 }} onLayout={onLayout}>
+		<div style={{ flex: 1 }} ref={useOnLayout(onLayout)}>
 			{!isAnimationComplete && (
-				<View style={StyleSheet.absoluteFillObject}>
+				<div style={StyleSheet.absoluteFillObject}>
 					<Image
 						accessibilityIgnoresInvertColors
 						onLoadEnd={onLoadEnd}
@@ -173,7 +174,7 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 					>
 						<Logotype fill="#fff" width={90} />
 					</Animated.View>
-				</View>
+				</div>
 			)}
 
 			{isReady && (
@@ -200,6 +201,6 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 					)}
 				</>
 			)}
-		</View>
+		</div>
 	);
 }

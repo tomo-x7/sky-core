@@ -39,7 +39,7 @@ export function Error({
 			]}
 			sideBorders={sideBorders}
 		>
-			<View style={[a.w_full, a.align_center, a.gap_lg]}>
+			<div style={{ ...a.w_full, ...a.align_center, ...a.gap_lg }}>
 				<Text style={[a.font_bold, a.text_3xl]}>{title}</Text>
 				<Text
 					style={[
@@ -52,8 +52,8 @@ export function Error({
 				>
 					{message}
 				</Text>
-			</View>
-			<View style={[a.gap_md, gtMobile ? { width: 350 } : [a.w_full, a.px_lg]]}>
+			</div>
+			<div style={{ ...a.gap_md, ...(gtMobile ? { width: 350 } : { ...a.w_full, ...a.px_lg }) }}>
 				{onRetry && (
 					<Button
 						variant="solid"
@@ -78,7 +78,7 @@ export function Error({
 						<ButtonText>Go Back</ButtonText>
 					</Button>
 				)}
-			</View>
+			</div>
 		</CenteredView>
 	);
 }

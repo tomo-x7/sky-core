@@ -5,7 +5,7 @@ export type TextStyleProp = {
 };
 
 export type ViewStyleProp = {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 };
 
 export type ThemeName = "light" | "dim" | "dark";

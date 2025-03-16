@@ -55,6 +55,7 @@
 		"fast-text-encoding": "^1.0.6",
 		"framer-motion": "^12.4.10",
 		"graphemer": "^1.4.0",
+		"hex-rgb": "^5.0.0",
 		"history": "^5.3.0",
 		"hls.js": "^1.5.20",
 		"js-sha256": "^0.11.0",
@@ -113,6 +114,7 @@
 		"expo-notifications": "^0.29.14",
 		"expo-screen-orientation": "^8.0.4",
 		"expo-sharing": "^13.0.1",
+		"expo-splash-screen": "^0.29.22",
 		"expo-status-bar": "^2.0.1",
 		"react-native": "^0.78.0",
 		"react-native-date-picker": "^5.0.10",
@@ -134,7 +136,10 @@
 		"vite": "^6.2.0"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["@swc/core", "esbuild"]
+		"onlyBuiltDependencies": [
+			"@swc/core",
+			"esbuild"
+		]
 	},
 	"resolutions": {
 		"react-is": "^18.0.0"
