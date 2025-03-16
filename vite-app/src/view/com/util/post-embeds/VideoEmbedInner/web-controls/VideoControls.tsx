@@ -299,21 +299,27 @@ export function Controls({
 				accessibilityLabel={!focused ? "Unmute video" : playing ? "Pause video" : "Play video"}
 				accessibilityHint=""
 				// @ts-ignore
-				style={[a.flex_1, { cursor: showCursor || !playing ? "pointer" : "none" }]}
+				style={{
+					...a.flex_1,
+					...{ cursor: showCursor || !playing ? "pointer" : "none" },
+				}}
 				onPress={onPressEmptySpace}
 			/>
 			{!showControls && !focused && duration > 0 && <TimeIndicator time={Math.floor(duration - currentTime)} />}
 			<View
-				style={[
-					a.flex_shrink_0,
-					a.w_full,
-					a.px_xs,
-					//@ts-ignore
+				style={{
+					...a.flex_shrink_0,
+					...a.w_full,
+					...a.px_xs,
+
+					...//@ts-ignore
 					{ background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7))" },
-					{ opacity: showControls ? 1 : 0 },
-					//@ts-ignore
+
+					...{ opacity: showControls ? 1 : 0 },
+
+					...//@ts-ignore
 					{ transition: "opacity 0.2s ease-in-out" },
-				]}
+				}}
 			>
 				{(!volumeHovered || isTouchDevice) && (
 					<Scrubber
@@ -328,7 +334,16 @@ export function Controls({
 						drawFocus={drawFocus}
 					/>
 				)}
-				<View style={[a.flex_1, a.px_xs, a.pb_sm, a.gap_sm, a.flex_row, a.align_center]}>
+				<View
+					style={{
+						...a.flex_1,
+						...a.px_xs,
+						...a.pb_sm,
+						...a.gap_sm,
+						...a.flex_row,
+						...a.align_center,
+					}}
+				>
 					<ControlButton
 						active={playing}
 						activeLabel={"Pause"}
@@ -338,7 +353,12 @@ export function Controls({
 						onPress={onPressPlayPause}
 					/>
 					<View style={a.flex_1} />
-					<Text style={[a.px_xs, { color: t.palette.white, fontVariant: ["tabular-nums"] }]}>
+					<Text
+						style={{
+							...a.px_xs,
+							...{ color: t.palette.white, fontVariant: ["tabular-nums"] },
+						}}
+					>
 						{formatTime(currentTime)} / {formatTime(duration)}
 					</Text>
 					{hasSubtitleTrack && (
@@ -372,7 +392,15 @@ export function Controls({
 				</View>
 			</View>
 			{(showSpinner || error) && (
-				<View pointerEvents="none" style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
+				<View
+					pointerEvents="none"
+					style={{
+						...a.absolute,
+						...a.inset_0,
+						...a.justify_center,
+						...a.align_center,
+					}}
+				>
 					{showSpinner && <Loader fill={t.palette.white} size="lg" />}
 					{error && <Text style={{ color: t.palette.white }}>An error occurred</Text>}
 				</View>

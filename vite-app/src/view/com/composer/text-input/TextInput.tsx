@@ -315,11 +315,15 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 
 	return (
 		<>
-			<View style={[styles.container, hasRightPadding && styles.rightPadding]}>
+			<View
+				style={{
+					...styles.container,
+					...(hasRightPadding && styles.rightPadding),
+				}}
+			>
 				{/* @ts-ignore inputStyle is fine */}
 				<EditorContent editor={editor} style={inputStyle} />
 			</View>
-
 			{isDropping && (
 				<Portal>
 					<Animated.View
@@ -327,8 +331,21 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 						entering={FadeIn.duration(80)}
 						exiting={FadeOut.duration(80)}
 					>
-						<View style={[pal.view, pal.border, styles.dropModal]}>
-							<Text type="lg" style={[pal.text, pal.borderDark, styles.dropText]}>
+						<View
+							style={{
+								...pal.view,
+								...pal.border,
+								...styles.dropModal,
+							}}
+						>
+							<Text
+								type="lg"
+								style={{
+									...pal.text,
+									...pal.borderDark,
+									...styles.dropText,
+								}}
+							>
 								Drop to add images
 							</Text>
 						</View>

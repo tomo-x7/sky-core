@@ -70,31 +70,35 @@ export function GifAltTextDialogLoaded({
 				accessibilityHint=""
 				hitSlop={HITSLOP_10}
 				onPress={control.open}
-				style={[
-					a.absolute,
-					{ top: 8, left: 8 },
-					{ borderRadius: 6 },
-					a.pl_xs,
-					a.pr_sm,
-					a.py_2xs,
-					a.flex_row,
-					a.gap_xs,
-					a.align_center,
-					{ backgroundColor: "rgba(0, 0, 0, 0.75)" },
-				]}
+				style={{
+					...a.absolute,
+					...{ top: 8, left: 8 },
+					...{ borderRadius: 6 },
+					...a.pl_xs,
+					...a.pr_sm,
+					...a.py_2xs,
+					...a.flex_row,
+					...a.gap_xs,
+					...a.align_center,
+					...{ backgroundColor: "rgba(0, 0, 0, 0.75)" },
+				}}
 			>
 				{altText ? (
 					<Check size="xs" fill={t.palette.white} style={a.ml_xs} />
 				) : (
 					<Plus size="sm" fill={t.palette.white} />
 				)}
-				<Text style={[a.font_bold, { color: t.palette.white }]} accessible={false}>
+				<Text
+					style={{
+						...a.font_bold,
+						...{ color: t.palette.white },
+					}}
+					accessible={false}
+				>
 					ALT
 				</Text>
 			</TouchableOpacity>
-
 			<AltTextReminder />
-
 			<Dialog.Outer
 				control={control}
 				onClose={() => {
@@ -135,9 +139,14 @@ function AltTextInner({
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>
 			<View style={a.flex_col_reverse}>
-				<View style={[a.mt_md, a.gap_md]}>
-					<View style={[a.gap_sm]}>
-						<View style={[a.relative]}>
+				<View
+					style={{
+						...a.mt_md,
+						...a.gap_md,
+					}}
+				>
+					<View style={a.gap_sm}>
+						<View style={a.relative}>
 							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
@@ -158,9 +167,21 @@ function AltTextInner({
 						</View>
 
 						{altText.length > MAX_ALT_TEXT && (
-							<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
+							<View
+								style={{
+									...a.pb_sm,
+									...a.flex_row,
+									...a.gap_xs,
+								}}
+							>
 								<CircleInfo fill={t.palette.negative_500} />
-								<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
+								<Text
+									style={{
+										...a.italic,
+										...a.leading_snug,
+										...t.atoms.text_contrast_medium,
+									}}
+								>
 									<>Alt text will be truncated. Limit: {MAX_ALT_TEXT.toLocaleString()} characters.</>
 								</Text>
 							</View>
@@ -176,7 +197,7 @@ function AltTextInner({
 							onPress={() => {
 								control.close();
 							}}
-							style={[a.flex_grow]}
+							style={a.flex_grow}
 						>
 							<ButtonText>Save</ButtonText>
 						</Button>
@@ -184,15 +205,24 @@ function AltTextInner({
 				</View>
 				{/* below the text input to force tab order */}
 				<View>
-					<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>Add alt text</Text>
-					<View style={[a.align_center]}>
+					<Text
+						style={{
+							...a.text_2xl,
+							...a.font_bold,
+							...a.leading_tight,
+							...a.pb_sm,
+						}}
+					>
+						Add alt text
+					</Text>
+					<View style={a.align_center}>
 						<GifEmbed
 							thumb={thumb}
 							altText={altText}
 							isPreferredAltText={true}
 							params={params}
 							hideAlt
-							style={[{ height: 225 }]}
+							style={{ height: 225 }}
 						/>
 					</View>
 				</View>

@@ -122,32 +122,65 @@ export function Inner({
 	return (
 		<Dialog.ScrollableInner
 			label="Verify email dialog"
-			style={[gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full]}
+			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
 			<Dialog.Close />
-			<View style={[a.gap_xl]}>
-				<View style={[a.gap_sm]}>
-					<Text style={[a.font_heavy, a.text_2xl]}>{uiStrings[currentStep].title}</Text>
+			<View style={a.gap_xl}>
+				<View style={a.gap_sm}>
+					<Text
+						style={{
+							...a.font_heavy,
+							...a.text_2xl,
+						}}
+					>
+						{uiStrings[currentStep].title}
+					</Text>
 					{error ? (
-						<View style={[a.rounded_sm, a.overflow_hidden]}>
+						<View
+							style={{
+								...a.rounded_sm,
+								...a.overflow_hidden,
+							}}
+						>
 							<ErrorMessage message={error} />
 						</View>
 					) : null}
 					{currentStep === "StepOne" ? (
 						<View>
 							{reasonText ? (
-								<View style={[a.gap_sm]}>
-									<Text style={[a.text_md, a.leading_snug]}>{reasonText}</Text>
-									<Text style={[a.text_md, a.leading_snug]}>
+								<View style={a.gap_sm}>
+									<Text
+										style={{
+											...a.text_md,
+											...a.leading_snug,
+										}}
+									>
+										{reasonText}
+									</Text>
+									<Text
+										style={{
+											...a.text_md,
+											...a.leading_snug,
+										}}
+									>
 										Don't have access to{" "}
-										<Text style={[a.text_md, a.leading_snug, a.font_bold]}>
+										<Text
+											style={{
+												...a.text_md,
+												...a.leading_snug,
+												...a.font_bold,
+											}}
+										>
 											{currentAccount?.email}
 										</Text>
 										?{" "}
 										<InlineLinkText
 											to="#"
 											label="Change email address"
-											style={[a.text_md, a.leading_snug]}
+											style={{
+												...a.text_md,
+												...a.leading_snug,
+											}}
 											onPress={(e) => {
 												e.preventDefault();
 												control.close(() => {
@@ -162,10 +195,21 @@ export function Inner({
 									</Text>
 								</View>
 							) : (
-								<Text style={[a.text_md, a.leading_snug]}>
+								<Text
+									style={{
+										...a.text_md,
+										...a.leading_snug,
+									}}
+								>
 									<>
 										You'll receive an email at{" "}
-										<Text style={[a.text_md, a.leading_snug, a.font_bold]}>
+										<Text
+											style={{
+												...a.text_md,
+												...a.leading_snug,
+												...a.font_bold,
+											}}
+										>
 											{currentAccount?.email}
 										</Text>{" "}
 										to verify it's you.
@@ -173,7 +217,10 @@ export function Inner({
 									<InlineLinkText
 										to="#"
 										label="Change email address"
-										style={[a.text_md, a.leading_snug]}
+										style={{
+											...a.text_md,
+											...a.leading_snug,
+										}}
 										onPress={(e) => {
 											e.preventDefault();
 											control.close(() => {
@@ -188,7 +235,14 @@ export function Inner({
 							)}
 						</View>
 					) : (
-						<Text style={[a.text_md, a.leading_snug]}>{uiStrings[currentStep].message}</Text>
+						<Text
+							style={{
+								...a.text_md,
+								...a.leading_snug,
+							}}
+						>
+							{uiStrings[currentStep].message}
+						</Text>
 					)}
 				</View>
 				{currentStep === "StepTwo" ? (
@@ -203,7 +257,12 @@ export function Inner({
 						</TextField.Root>
 					</View>
 				) : null}
-				<View style={[a.gap_sm, gtMobile && [a.flex_row_reverse, a.ml_auto]]}>
+				<View
+					style={{
+						...a.gap_sm,
+						...(gtMobile && [a.flex_row_reverse, a.ml_auto]),
+					}}
+				>
 					{currentStep === "StepOne" ? (
 						<>
 							<Button
@@ -215,7 +274,7 @@ export function Inner({
 								onPress={onSendEmail}
 							>
 								<ButtonText>Send Confirmation</ButtonText>
-								{isProcessing ? <Loader size="sm" style={[{ color: "white" }]} /> : null}
+								{isProcessing ? <Loader size="sm" style={{ color: "white" }} /> : null}
 							</Button>
 							<Button
 								label="I Have a Code"
@@ -239,7 +298,7 @@ export function Inner({
 								onPress={onVerifyEmail}
 							>
 								<ButtonText>Confirm</ButtonText>
-								{isProcessing ? <Loader size="sm" style={[{ color: "white" }]} /> : null}
+								{isProcessing ? <Loader size="sm" style={{ color: "white" }} /> : null}
 							</Button>
 							<Button
 								label="Resend Email"

@@ -90,7 +90,13 @@ export function Wizard({
 	}
 
 	return (
-		<Layout.Screen testID="starterPackWizardScreen" style={[{ minHeight: 0 }, a.flex_1]}>
+		<Layout.Screen
+			testID="starterPackWizardScreen"
+			style={{
+				...{ minHeight: 0 },
+				...a.flex_1,
+			}}
+		>
 			<Provider starterPack={starterPack} listItems={listItems}>
 				<WizardInner
 					currentStarterPack={starterPack}
@@ -240,7 +246,7 @@ function WizardInner({
 	};
 
 	return (
-		<Layout.Center style={[a.flex_1]}>
+		<Layout.Center style={a.flex_1}>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton
 					label={"Back"}
@@ -257,7 +263,6 @@ function WizardInner({
 				</Layout.Header.Content>
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
-
 			<Container>
 				{state.currentStep === "Details" ? (
 					<StepDetails />
@@ -267,7 +272,6 @@ function WizardInner({
 					<StepFeeds moderationOpts={moderationOpts} />
 				) : null}
 			</Container>
-
 			{state.currentStep !== "Details" && (
 				<Footer
 					onNext={onNext}
@@ -284,11 +288,11 @@ function Container({ children }: { children: React.ReactNode }) {
 	const [state, dispatch] = useWizardState();
 
 	if (state.currentStep === "Profiles" || state.currentStep === "Feeds") {
-		return <View style={[a.flex_1]}>{children}</View>;
+		return <View style={a.flex_1}>{children}</View>;
 	}
 
 	return (
-		<KeyboardAwareScrollView style={[a.flex_1]} keyboardShouldPersistTaps="handled">
+		<KeyboardAwareScrollView style={a.flex_1} keyboardShouldPersistTaps="handled">
 			{children}
 			{state.currentStep === "Details" && (
 				<Button
@@ -296,7 +300,11 @@ function Container({ children }: { children: React.ReactNode }) {
 					variant="solid"
 					color="primary"
 					size="large"
-					style={[a.mx_xl, a.mb_lg, { marginTop: 35 }]}
+					style={{
+						...a.mx_xl,
+						...a.mb_lg,
+						...{ marginTop: 35 },
+					}}
 					onPress={() => dispatch({ type: "Next" })}
 				>
 					<ButtonText>Next</ButtonText>
@@ -332,28 +340,38 @@ function Footer({
 
 	return (
 		<View
-			style={[
-				a.border_t,
-				a.align_center,
-				a.px_lg,
-				a.pt_xl,
-				a.gap_md,
-				t.atoms.bg,
-				t.atoms.border_contrast_medium,
-				{
+			style={{
+				...a.border_t,
+				...a.align_center,
+				...a.px_lg,
+				...a.pt_xl,
+				...a.gap_md,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_medium,
+
+				...{
 					paddingBottom: a.pb_lg.paddingBottom,
 				},
-			]}
+			}}
 		>
 			{items.length > minimumItems && (
-				<View style={[a.absolute, { right: 14, top: 31 }]}>
-					<Text style={[a.font_bold]}>
+				<View
+					style={{
+						...a.absolute,
+						...{ right: 14, top: 31 },
+					}}
+				>
+					<Text style={a.font_bold}>
 						{items.length}/{state.currentStep === "Profiles" ? STARTER_PACK_MAX_SIZE : 3}
 					</Text>
 				</View>
 			)}
-
-			<View style={[a.flex_row, a.gap_xs]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_xs,
+				}}
+			>
 				{items.slice(0, 6).map((p, index) => (
 					<UserAvatar
 						key={index.toString()}
@@ -363,28 +381,58 @@ function Footer({
 					/>
 				))}
 			</View>
-
 			{
 				state.currentStep === "Profiles" ? (
-					<Text style={[a.text_center, textStyles]}>
+					<Text
+						style={{
+							...a.text_center,
+							...textStyles,
+						}}
+					>
 						{
 							items.length < 2 ? (
 								<>It's just you right now! Add more people to your starter pack by searching above.</>
 							) : items.length === 2 ? (
 								<>
-									<Text style={[a.font_bold, textStyles]}>You</Text> and
+									<Text
+										style={{
+											...a.font_bold,
+											...textStyles,
+										}}
+									>
+										You
+									</Text>{" "}
+									and
 									<Text> </Text>
-									<Text style={[a.font_bold, textStyles]} emoji>
+									<Text
+										style={{
+											...a.font_bold,
+											...textStyles,
+										}}
+										emoji
+									>
 										{getName(items[1] /* [0] is self, skip it */)}{" "}
 									</Text>
 									are included in your starter pack
 								</>
 							) : items.length > 2 ? (
 								<>
-									<Text style={[a.font_bold, textStyles]} emoji>
+									<Text
+										style={{
+											...a.font_bold,
+											...textStyles,
+										}}
+										emoji
+									>
 										{getName(items[1] /* [0] is self, skip it */)},{" "}
 									</Text>
-									<Text style={[a.font_bold, textStyles]} emoji>
+									<Text
+										style={{
+											...a.font_bold,
+											...textStyles,
+										}}
+										emoji
+									>
 										{getName(items[2])},{" "}
 									</Text>
 									and {items.length - 2} {items.length - 2 === 1 ? "other" : "others"} are included in
@@ -395,42 +443,88 @@ function Footer({
 					</Text>
 				) : state.currentStep === "Feeds" ? (
 					items.length === 0 ? (
-						<View style={[a.gap_sm]}>
-							<Text style={[a.font_bold, a.text_center, textStyles]}>
+						<View style={a.gap_sm}>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_center,
+									...textStyles,
+								}}
+							>
 								Add some feeds to your starter pack!
 							</Text>
-							<Text style={[a.text_center, textStyles]}>
+							<Text
+								style={{
+									...a.text_center,
+									...textStyles,
+								}}
+							>
 								Search for feeds that you want to suggest to others.
 							</Text>
 						</View>
 					) : (
-						<Text style={[a.text_center, textStyles]}>
+						<Text
+							style={{
+								...a.text_center,
+								...textStyles,
+							}}
+						>
 							{
 								items.length === 1 ? (
 									<>
-										<Text style={[a.font_bold, textStyles]} emoji>
+										<Text
+											style={{
+												...a.font_bold,
+												...textStyles,
+											}}
+											emoji
+										>
 											{getName(items[0])}
 										</Text>{" "}
 										is included in your starter pack
 									</>
 								) : items.length === 2 ? (
 									<>
-										<Text style={[a.font_bold, textStyles]} emoji>
+										<Text
+											style={{
+												...a.font_bold,
+												...textStyles,
+											}}
+											emoji
+										>
 											{getName(items[0])}
 										</Text>{" "}
 										and
 										<Text> </Text>
-										<Text style={[a.font_bold, textStyles]} emoji>
+										<Text
+											style={{
+												...a.font_bold,
+												...textStyles,
+											}}
+											emoji
+										>
 											{getName(items[1])}{" "}
 										</Text>
 										are included in your starter pack
 									</>
 								) : items.length > 2 ? (
 									<>
-										<Text style={[a.font_bold, textStyles]} emoji>
+										<Text
+											style={{
+												...a.font_bold,
+												...textStyles,
+											}}
+											emoji
+										>
 											{getName(items[0])},{" "}
 										</Text>
-										<Text style={[a.font_bold, textStyles]} emoji>
+										<Text
+											style={{
+												...a.font_bold,
+												...textStyles,
+											}}
+											emoji
+										>
 											{getName(items[1])},{" "}
 										</Text>
 										and {items.length - 2} {items.length - 2 === 1 ? "other" : "others"} are
@@ -442,8 +536,15 @@ function Footer({
 					)
 				) : null /* Should not happen. */
 			}
-
-			<View style={[a.flex_row, a.w_full, a.justify_between, a.align_center, a.mt_md]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.w_full,
+					...a.justify_between,
+					...a.align_center,
+					...a.mt_md,
+				}}
+			>
 				{isEditEnabled ? (
 					<Button
 						label={"Edit"}
@@ -460,7 +561,13 @@ function Footer({
 				)}
 				{state.currentStep === "Profiles" && items.length < 8 ? (
 					<>
-						<Text style={[a.font_bold, textStyles, t.atoms.text_contrast_medium]}>
+						<Text
+							style={{
+								...a.font_bold,
+								...textStyles,
+								...t.atoms.text_contrast_medium,
+							}}
+						>
 							<>Add {8 - items.length} more to continue</>
 						</Text>
 						<View style={{ width: 70 }} />
@@ -479,7 +586,6 @@ function Footer({
 					</Button>
 				)}
 			</View>
-
 			<WizardEditListDialog
 				control={editDialogControl}
 				state={state}

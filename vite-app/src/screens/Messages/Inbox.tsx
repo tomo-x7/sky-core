@@ -134,18 +134,32 @@ function RequestList({
 					<>
 						{isError ? (
 							<>
-								<View style={[a.pt_3xl, a.align_center]}>
+								<View
+									style={{
+										...a.pt_3xl,
+										...a.align_center,
+									}}
+								>
 									<CircleInfoIcon width={48} fill={t.atoms.text_contrast_low.color} />
-									<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Whoops!</Text>
 									<Text
-										style={[
-											a.text_md,
-											a.pb_xl,
-											a.text_center,
-											a.leading_snug,
-											t.atoms.text_contrast_medium,
-											{ maxWidth: 360 },
-										]}
+										style={{
+											...a.pt_md,
+											...a.pb_sm,
+											...a.text_2xl,
+											...a.font_bold,
+										}}
+									>
+										Whoops!
+									</Text>
+									<Text
+										style={{
+											...a.text_md,
+											...a.pb_xl,
+											...a.text_center,
+											...a.leading_snug,
+											...t.atoms.text_contrast_medium,
+											...{ maxWidth: 360 },
+										}}
 									>
 										{cleanError(error) || "Failed to load conversations"}
 									</Text>
@@ -164,17 +178,31 @@ function RequestList({
 							</>
 						) : (
 							<>
-								<View style={[a.pt_3xl, a.align_center]}>
+								<View
+									style={{
+										...a.pt_3xl,
+										...a.align_center,
+									}}
+								>
 									<MessageIcon width={48} fill={t.palette.primary_500} />
-									<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Inbox zero!</Text>
 									<Text
-										style={[
-											a.text_md,
-											a.pb_xl,
-											a.text_center,
-											a.leading_snug,
-											t.atoms.text_contrast_medium,
-										]}
+										style={{
+											...a.pt_md,
+											...a.pb_sm,
+											...a.text_2xl,
+											...a.font_bold,
+										}}
+									>
+										Inbox zero!
+									</Text>
+									<Text
+										style={{
+											...a.text_md,
+											...a.pb_xl,
+											...a.text_center,
+											...a.leading_snug,
+											...t.atoms.text_contrast_medium,
+										}}
 									>
 										You don't have any chat requests at the moment.
 									</Text>

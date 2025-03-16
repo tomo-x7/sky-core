@@ -25,11 +25,32 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 	}, [item.code]);
 
 	return (
-		<View style={[a.py_md, a.w_full, a.flex_row, a.justify_center]}>
-			<View style={[a.flex_1, a.flex_row, a.align_center, a.justify_center, a.gap_sm, { maxWidth: 400 }]}>
+		<View
+			style={{
+				...a.py_md,
+				...a.w_full,
+				...a.flex_row,
+				...a.justify_center,
+			}}
+		>
+			<View
+				style={{
+					...a.flex_1,
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_center,
+					...a.gap_sm,
+					...{ maxWidth: 400 },
+				}}
+			>
 				<CircleInfo size="sm" fill={t.palette.negative_400} />
 
-				<Text style={[a.leading_snug, t.atoms.text_contrast_medium]}>
+				<Text
+					style={{
+						...a.leading_snug,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					{description} &middot;{" "}
 					{item.retry && (
 						<InlineLinkText

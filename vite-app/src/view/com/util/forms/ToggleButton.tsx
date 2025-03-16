@@ -131,13 +131,28 @@ export function ToggleButton({
 	return (
 		<Button testID={testID} type={type} onPress={onPress} style={style}>
 			<View style={styles.outer}>
-				<View style={[circleStyle, styles.circle]}>
+				<View
+					style={{
+						...circleStyle,
+						...styles.circle,
+					}}
+				>
 					<View
-						style={[circleFillStyle, styles.circleFill, isSelected ? styles.circleFillSelected : undefined]}
+						style={{
+							...circleFillStyle,
+							...styles.circleFill,
+							...(isSelected ? styles.circleFillSelected : undefined),
+						}}
 					/>
 				</View>
 				{label === "" ? null : (
-					<Text type={labelType || "button"} style={[labelStyle, styles.label]}>
+					<Text
+						type={labelType || "button"}
+						style={{
+							...labelStyle,
+							...styles.label,
+						}}
+					>
 						{label}
 					</Text>
 				)}

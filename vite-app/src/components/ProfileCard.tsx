@@ -66,7 +66,17 @@ export function Outer({
 }: {
 	children: React.ReactElement | React.ReactElement[];
 }) {
-	return <View style={[a.w_full, a.flex_1, a.gap_xs]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.w_full,
+				...a.flex_1,
+				...a.gap_xs,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 export function Header({
@@ -74,7 +84,17 @@ export function Header({
 }: {
 	children: React.ReactElement | React.ReactElement[];
 }) {
-	return <View style={[a.flex_row, a.align_center, a.gap_sm]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_sm,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 export function Link({
@@ -92,7 +112,10 @@ export function Link({
 				screen: "Profile",
 				params: { name: profile.did },
 			}}
-			style={[a.flex_col, style]}
+			style={{
+				...a.flex_col,
+				...style,
+			}}
 			{...rest}
 		>
 			{children}
@@ -123,14 +146,15 @@ export function AvatarPlaceholder() {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.rounded_full,
-				t.atoms.bg_contrast_50,
-				{
+			style={{
+				...a.rounded_full,
+				...t.atoms.bg_contrast_50,
+
+				...{
 					width: 42,
 					height: 42,
 				},
-			]}
+			}}
 		/>
 	);
 }
@@ -151,11 +175,27 @@ export function NameAndHandle({
 	const handle = sanitizeHandle(profile.handle, "@");
 
 	return (
-		<View style={[a.flex_1]}>
-			<Text emoji style={[a.text_md, a.font_bold, a.leading_snug, a.self_start]} numberOfLines={1}>
+		<View style={a.flex_1}>
+			<Text
+				emoji
+				style={{
+					...a.text_md,
+					...a.font_bold,
+					...a.leading_snug,
+					...a.self_start,
+				}}
+				numberOfLines={1}
+			>
 				{name}
 			</Text>
-			<Text emoji style={[a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
+			<Text
+				emoji
+				style={{
+					...a.leading_snug,
+					...t.atoms.text_contrast_medium,
+				}}
+				numberOfLines={1}
+			>
 				{handle}
 			</Text>
 		</View>
@@ -166,27 +206,33 @@ export function NameAndHandlePlaceholder() {
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_1, a.gap_xs]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.gap_xs,
+			}}
+		>
 			<View
-				style={[
-					a.rounded_xs,
-					t.atoms.bg_contrast_50,
-					{
+				style={{
+					...a.rounded_xs,
+					...t.atoms.bg_contrast_50,
+
+					...{
 						width: "60%",
 						height: 14,
 					},
-				]}
+				}}
 			/>
-
 			<View
-				style={[
-					a.rounded_xs,
-					t.atoms.bg_contrast_50,
-					{
+				style={{
+					...a.rounded_xs,
+					...t.atoms.bg_contrast_50,
+
+					...{
 						width: "40%",
 						height: 10,
 					},
-				]}
+				}}
 			/>
 		</View>
 	);
@@ -210,8 +256,8 @@ export function Description({
 	if (profile.viewer && (profile.viewer.blockedBy || profile.viewer.blocking || profile.viewer.blockingByList))
 		return null;
 	return (
-		<View style={[a.pt_xs]}>
-			<RichText value={rt} style={[a.leading_snug]} numberOfLines={numberOfLines} disableLinks />
+		<View style={a.pt_xs}>
+			<RichText value={rt} style={a.leading_snug} numberOfLines={numberOfLines} disableLinks />
 		</View>
 	);
 }
@@ -223,18 +269,18 @@ export function DescriptionPlaceholder({
 }) {
 	const t = useTheme();
 	return (
-		<View style={[{ gap: 8 }]}>
+		<View style={{ gap: 8 }}>
 			{Array(numberOfLines)
 				.fill(0)
 				.map((_, i) => (
 					<View
 						key={i.toString()}
-						style={[
-							a.rounded_xs,
-							a.w_full,
-							t.atoms.bg_contrast_50,
-							{ height: 12, width: i + 1 === numberOfLines ? "60%" : "100%" },
-						]}
+						style={{
+							...a.rounded_xs,
+							...a.w_full,
+							...t.atoms.bg_contrast_50,
+							...{ height: 12, width: i + 1 === numberOfLines ? "60%" : "100%" },
+						}}
 					/>
 				))}
 		</View>

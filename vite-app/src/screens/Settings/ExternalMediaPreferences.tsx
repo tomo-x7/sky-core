@@ -24,14 +24,19 @@ export function ExternalMediaPreferencesScreen(props: Props) {
 			<Layout.Content>
 				<SettingsList.Container>
 					<SettingsList.Item>
-						<Admonition type="info" style={[a.flex_1]}>
+						<Admonition type="info" style={a.flex_1}>
 							External media may allow websites to collect information about you and your device. No
 							information is sent or requested until you press the "play" button.
 						</Admonition>
 					</SettingsList.Item>
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Enable media players for</SettingsList.ItemText>
-						<View style={[a.mt_sm, a.w_full]}>
+						<View
+							style={{
+								...a.mt_sm,
+								...a.w_full,
+							}}
+						>
 							{Object.entries(externalEmbedLabels)
 								// TODO: Remove special case when we disable the old integration.
 								.filter(([key]) => key !== "tenor")
@@ -65,10 +70,13 @@ function PrefSelector({
 			type="checkbox"
 			value={sources?.[source] === "show"}
 			onChange={() => setExternalEmbedPref(source, sources?.[source] === "show" ? "hide" : "show")}
-			style={[a.flex_1, a.py_md]}
+			style={{
+				...a.flex_1,
+				...a.py_md,
+			}}
 		>
 			<Toggle.Platform />
-			<Toggle.LabelText style={[a.text_md]}>{label}</Toggle.LabelText>
+			<Toggle.LabelText style={a.text_md}>{label}</Toggle.LabelText>
 		</Toggle.Item>
 	);
 }

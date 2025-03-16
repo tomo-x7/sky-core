@@ -135,7 +135,14 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 			}
 			if (preferences) {
 				return (
-					<View style={[a.border_t, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
+					<View
+						style={{
+							...a.border_t,
+							...t.atoms.border_contrast_low,
+							...a.px_lg,
+							...a.py_lg,
+						}}
+					>
 						<FeedCard.Default view={item} />
 					</View>
 				);
@@ -153,7 +160,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	}, [enabled, scrollElRef, setScrollViewTag]);
 
 	const ProfileFeedgensFooter = React.useCallback(() => {
-		return isFetchingNextPage ? <ActivityIndicator style={[styles.footer]} /> : null;
+		return isFetchingNextPage ? <ActivityIndicator style={styles.footer} /> : null;
 	}, [isFetchingNextPage]);
 
 	return (

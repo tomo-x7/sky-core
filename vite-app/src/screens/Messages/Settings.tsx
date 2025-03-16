@@ -47,8 +47,20 @@ export function MessagesSettingsScreen(props: Props) {
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
 			<Layout.Content>
-				<View style={[a.p_lg, a.gap_md]}>
-					<Text style={[a.text_lg, a.font_bold]}>Allow new messages from</Text>
+				<View
+					style={{
+						...a.p_lg,
+						...a.gap_md,
+					}}
+				>
+					<Text
+						style={{
+							...a.text_lg,
+							...a.font_bold,
+						}}
+					>
+						Allow new messages from
+					</Text>
 					<Toggle.Group
 						label={"Allow new messages from"}
 						type="radio"
@@ -56,15 +68,36 @@ export function MessagesSettingsScreen(props: Props) {
 						onChange={onSelectMessagesFrom}
 					>
 						<View>
-							<Toggle.Item name="all" label={"Everyone"} style={[a.justify_between, a.py_sm]}>
+							<Toggle.Item
+								name="all"
+								label={"Everyone"}
+								style={{
+									...a.justify_between,
+									...a.py_sm,
+								}}
+							>
 								<Toggle.LabelText>Everyone</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
-							<Toggle.Item name="following" label={"Users I follow"} style={[a.justify_between, a.py_sm]}>
+							<Toggle.Item
+								name="following"
+								label={"Users I follow"}
+								style={{
+									...a.justify_between,
+									...a.py_sm,
+								}}
+							>
 								<Toggle.LabelText>Users I follow</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
-							<Toggle.Item name="none" label={"No one"} style={[a.justify_between, a.py_sm]}>
+							<Toggle.Item
+								name="none"
+								label={"No one"}
+								style={{
+									...a.justify_between,
+									...a.py_sm,
+								}}
+							>
 								<Toggle.LabelText>No one</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>

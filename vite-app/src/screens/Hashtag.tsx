@@ -94,7 +94,13 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
 					//@ts-ignore
-					<Layout.Center style={[a.z_10, a.sticky, { top: 0 }]}>
+					<Layout.Center
+						style={{
+							...a.z_10,
+							...a.sticky,
+							...{ top: 0 },
+						}}
+					>
 						<Layout.Header.Outer noBottomBorder>
 							<Layout.Header.BackButton />
 							<Layout.Header.Content>
@@ -114,7 +120,7 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 									shape="round"
 									onPress={onShare}
 									hitSlop={HITSLOP_10}
-									style={[{ right: -3 }]}
+									style={{ right: -3 }}
 								>
 									<ButtonIcon icon={Share} size="md" />
 								</Button>

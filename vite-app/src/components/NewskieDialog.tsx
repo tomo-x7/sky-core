@@ -54,7 +54,7 @@ export function NewskieDialog({
 	if (!createdAt || daysOld > 7) return null;
 
 	return (
-		<View style={[a.pr_2xs]}>
+		<View style={a.pr_2xs}>
 			<Button
 				disabled={disabled}
 				label={"This user is new here. Press for more info about when they joined."}
@@ -71,30 +71,46 @@ export function NewskieDialog({
 					/>
 				)}
 			</Button>
-
 			<Dialog.Outer control={control}>
 				<Dialog.Handle />
 				<Dialog.ScrollableInner
 					label={"New user info dialog"}
-					style={[{ width: "auto", maxWidth: 400, minWidth: 200 }]}
+					style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 				>
-					<View style={[a.gap_md]}>
-						<View style={[a.align_center]}>
+					<View style={a.gap_md}>
+						<View style={a.align_center}>
 							<View
-								style={[
-									{
-										height: 60,
-										width: 64,
-									},
-								]}
+								style={{
+									height: 60,
+									width: 64,
+								}}
 							>
-								<Newskie width={64} height={64} fill="#FFC404" style={[a.absolute, a.inset_0]} />
+								<Newskie
+									width={64}
+									height={64}
+									fill="#FFC404"
+									style={{
+										...a.absolute,
+										...a.inset_0,
+									}}
+								/>
 							</View>
-							<Text style={[a.font_bold, a.text_xl]}>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_xl,
+								}}
+							>
 								{isMe ? <>Welcome, friend!</> : <>Say hello!</>}
 							</Text>
 						</View>
-						<Text style={[a.text_md, a.text_center, a.leading_snug]}>
+						<Text
+							style={{
+								...a.text_md,
+								...a.text_center,
+								...a.leading_snug,
+							}}
+						>
 							{profile.joinedViaStarterPack ? (
 								<>
 									{profileName} joined Bluesky using a starter pack{" "}
@@ -114,14 +130,14 @@ export function NewskieDialog({
 								}}
 							>
 								<View
-									style={[
-										a.w_full,
-										a.mt_sm,
-										a.p_lg,
-										a.border,
-										a.rounded_sm,
-										t.atoms.border_contrast_low,
-									]}
+									style={{
+										...a.w_full,
+										...a.mt_sm,
+										...a.p_lg,
+										...a.border,
+										...a.rounded_sm,
+										...t.atoms.border_contrast_low,
+									}}
 								>
 									<StarterPackCard.Card starterPack={profile.joinedViaStarterPack} />
 								</View>

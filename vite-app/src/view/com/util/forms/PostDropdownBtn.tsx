@@ -62,11 +62,11 @@ let PostDropdownBtn = ({
 								{...props}
 								hitSlop={hitSlop}
 								testID={testID}
-								style={[
-									style,
-									a.rounded_full,
-									(state.hovered || state.pressed) && [alf.atoms.bg_contrast_25],
-								]}
+								style={{
+									...style,
+									...a.rounded_full,
+									...((state.hovered || state.pressed) && [alf.atoms.bg_contrast_25]),
+								}}
 							>
 								<DotsHorizontal fill={defaultCtrlColor} style={{ pointerEvents: "none" }} size={size} />
 							</Pressable>

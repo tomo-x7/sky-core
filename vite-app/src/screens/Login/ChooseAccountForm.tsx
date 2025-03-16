@@ -65,11 +65,11 @@ export const ChooseAccountForm = ({
 					pendingDid={pendingDid}
 				/>
 			</View>
-			<View style={[a.flex_row]}>
+			<View style={a.flex_row}>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>{"Back"}</ButtonText>
 				</Button>
-				<View style={[a.flex_1]} />
+				<View style={a.flex_1} />
 			</View>
 		</FormContainer>
 	);

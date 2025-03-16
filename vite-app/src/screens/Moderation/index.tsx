@@ -39,13 +39,36 @@ import { ViewHeader } from "#/view/com/util/ViewHeader";
 function ErrorState({ error }: { error: string }) {
 	const t = useTheme();
 	return (
-		<View style={[a.p_xl]}>
-			<Text style={[a.text_md, a.leading_normal, a.pb_md, t.atoms.text_contrast_medium]}>
+		<View style={a.p_xl}>
+			<Text
+				style={{
+					...a.text_md,
+					...a.leading_normal,
+					...a.pb_md,
+					...t.atoms.text_contrast_medium,
+				}}
+			>
 				Hmmmm, it seems we're having trouble loading this data. See below for more details. If this issue
 				persists, please contact us.
 			</Text>
-			<View style={[a.relative, a.py_md, a.px_lg, a.rounded_md, a.mb_2xl, t.atoms.bg_contrast_25]}>
-				<Text style={[a.text_md, a.leading_normal]}>{error}</Text>
+			<View
+				style={{
+					...a.relative,
+					...a.py_md,
+					...a.px_lg,
+					...a.rounded_md,
+					...a.mb_2xl,
+					...t.atoms.bg_contrast_25,
+				}}
+			>
+				<Text
+					style={{
+						...a.text_md,
+						...a.leading_normal,
+					}}
+				>
+					{error}
+				</Text>
 			</View>
 		</View>
 	);
@@ -83,12 +106,42 @@ function SubItem({
 }) {
 	const t = useTheme();
 	return (
-		<View style={[a.w_full, a.flex_row, a.align_center, a.justify_between, a.p_lg, a.gap_sm, style]}>
-			<View style={[a.flex_row, a.align_center, a.gap_md]}>
-				<Icon size="md" style={[t.atoms.text_contrast_medium]} />
-				<Text style={[a.text_sm, a.font_bold]}>{title}</Text>
+		<View
+			style={{
+				...a.w_full,
+				...a.flex_row,
+				...a.align_center,
+				...a.justify_between,
+				...a.p_lg,
+				...a.gap_sm,
+				...style,
+			}}
+		>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.gap_md,
+				}}
+			>
+				<Icon size="md" style={t.atoms.text_contrast_medium} />
+				<Text
+					style={{
+						...a.text_sm,
+						...a.font_bold,
+					}}
+				>
+					{title}
+				</Text>
 			</View>
-			<ChevronRight size="sm" style={[t.atoms.text_contrast_low, a.self_end, { paddingBottom: 2 }]} />
+			<ChevronRight
+				size="sm"
+				style={{
+					...t.atoms.text_contrast_low,
+					...a.self_end,
+					...{ paddingBottom: 2 },
+				}}
+			/>
 		</View>
 	);
 }
@@ -138,10 +191,31 @@ export function ModerationScreenInner({
 	const disabledOnIOS = false;
 
 	return (
-		<View style={[a.pt_2xl, a.px_lg, gtMobile && a.px_2xl]}>
-			<Text style={[a.text_md, a.font_bold, a.pb_md, t.atoms.text_contrast_high]}>Moderation tools</Text>
-
-			<View style={[a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25]}>
+		<View
+			style={{
+				...a.pt_2xl,
+				...a.px_lg,
+				...(gtMobile && a.px_2xl),
+			}}
+		>
+			<Text
+				style={{
+					...a.text_md,
+					...a.font_bold,
+					...a.pb_md,
+					...t.atoms.text_contrast_high,
+				}}
+			>
+				Moderation tools
+			</Text>
+			<View
+				style={{
+					...a.w_full,
+					...a.rounded_md,
+					...a.overflow_hidden,
+					...t.atoms.bg_contrast_25,
+				}}
+			>
 				<Link
 					label={"View your default post interaction settings"}
 					testID="interactionSettingsBtn"
@@ -151,7 +225,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Interaction settings"}
 							icon={EditBig}
-							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
+							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
 						/>
 					)}
 				</Link>
@@ -165,7 +239,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Muted words & tags"}
 							icon={Filter}
-							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
+							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
 						/>
 					)}
 				</Button>
@@ -175,7 +249,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Moderation lists"}
 							icon={Group}
-							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
+							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
 						/>
 					)}
 				</Link>
@@ -185,7 +259,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Muted accounts"}
 							icon={Person}
-							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
+							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
 						/>
 					)}
 				</Link>
@@ -199,15 +273,23 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Blocked accounts"}
 							icon={CircleBanSign}
-							style={[(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]]}
+							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
 						/>
 					)}
 				</Link>
 			</View>
-
-			<Text style={[a.pt_2xl, a.pb_md, a.text_md, a.font_bold, t.atoms.text_contrast_high]}>Content filters</Text>
-
-			<View style={[a.gap_md]}>
+			<Text
+				style={{
+					...a.pt_2xl,
+					...a.pb_md,
+					...a.text_md,
+					...a.font_bold,
+					...t.atoms.text_contrast_high,
+				}}
+			>
+				Content filters
+			</Text>
+			<View style={a.gap_md}>
 				{ageNotSet && (
 					<>
 						<Button
@@ -218,7 +300,12 @@ export function ModerationScreenInner({
 							onPress={() => {
 								birthdateDialogControl.open();
 							}}
-							style={[a.justify_between, a.rounded_md, a.px_lg, a.py_lg]}
+							style={{
+								...a.justify_between,
+								...a.rounded_md,
+								...a.px_lg,
+								...a.py_lg,
+							}}
 						>
 							<ButtonText>Confirm your age:</ButtonText>
 							<ButtonText>Set birthdate</ButtonText>
@@ -227,20 +314,34 @@ export function ModerationScreenInner({
 						<BirthDateSettingsDialog control={birthdateDialogControl} />
 					</>
 				)}
-				<View style={[a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25]}>
+				<View
+					style={{
+						...a.w_full,
+						...a.rounded_md,
+						...a.overflow_hidden,
+						...t.atoms.bg_contrast_25,
+					}}
+				>
 					{!ageNotSet && !isUnderage && (
 						<>
 							<View
-								style={[
-									a.py_lg,
-									a.px_lg,
-									a.flex_row,
-									a.align_center,
-									a.justify_between,
-									disabledOnIOS && { opacity: 0.5 },
-								]}
+								style={{
+									...a.py_lg,
+									...a.px_lg,
+									...a.flex_row,
+									...a.align_center,
+									...a.justify_between,
+									...(disabledOnIOS && { opacity: 0.5 }),
+								}}
 							>
-								<Text style={[a.font_bold, t.atoms.text_contrast_high]}>Enable adult content</Text>
+								<Text
+									style={{
+										...a.font_bold,
+										...t.atoms.text_contrast_high,
+									}}
+								>
+									Enable adult content
+								</Text>
 								<Toggle.Item
 									label={"Toggle to enable or disable adult content"}
 									disabled={disabledOnIOS}
@@ -248,8 +349,14 @@ export function ModerationScreenInner({
 									value={adultContentEnabled}
 									onChange={onToggleAdultContentEnabled}
 								>
-									<View style={[a.flex_row, a.align_center, a.gap_sm]}>
-										<Text style={[t.atoms.text_contrast_medium]}>
+									<View
+										style={{
+											...a.flex_row,
+											...a.align_center,
+											...a.gap_sm,
+										}}
+									>
+										<Text style={t.atoms.text_contrast_medium}>
 											{adultContentEnabled ? <>Enabled</> : <>Disabled</>}
 										</Text>
 										<Toggle.Switch />
@@ -257,7 +364,12 @@ export function ModerationScreenInner({
 								</Toggle.Item>
 							</View>
 							{disabledOnIOS && (
-								<View style={[a.pb_lg, a.px_lg]}>
+								<View
+									style={{
+										...a.pb_lg,
+										...a.px_lg,
+									}}
+								>
 									<Text>
 										<>
 											Adult content can only be enabled via the Web at{" "}
@@ -293,19 +405,44 @@ export function ModerationScreenInner({
 					<GlobalLabelPreference labelDefinition={LABELS.nudity} />
 				</View>
 			</View>
-
-			<Text style={[a.text_md, a.font_bold, a.pt_2xl, a.pb_md, t.atoms.text_contrast_high]}>Advanced</Text>
-
+			<Text
+				style={{
+					...a.text_md,
+					...a.font_bold,
+					...a.pt_2xl,
+					...a.pb_md,
+					...t.atoms.text_contrast_high,
+				}}
+			>
+				Advanced
+			</Text>
 			{isLabelersLoading ? (
-				<View style={[a.w_full, a.align_center, a.p_lg]}>
+				<View
+					style={{
+						...a.w_full,
+						...a.align_center,
+						...a.p_lg,
+					}}
+				>
 					<Loader size="xl" />
 				</View>
 			) : labelersError || !labelers ? (
-				<View style={[a.p_lg, a.rounded_sm, t.atoms.bg_contrast_25]}>
+				<View
+					style={{
+						...a.p_lg,
+						...a.rounded_sm,
+						...t.atoms.bg_contrast_25,
+					}}
+				>
 					<Text>We were unable to load your configured labelers at this time.</Text>
 				</View>
 			) : (
-				<View style={[a.rounded_sm, t.atoms.bg_contrast_25]}>
+				<View
+					style={{
+						...a.rounded_sm,
+						...t.atoms.bg_contrast_25,
+					}}
+				>
 					{labelers.map((labeler, i) => {
 						return (
 							<Fragment key={labeler.creator.did}>
@@ -313,17 +450,19 @@ export function ModerationScreenInner({
 								<LabelingService.Link labeler={labeler}>
 									{(state) => (
 										<LabelingService.Outer
-											style={[
-												i === 0 && {
+											style={{
+												...(i === 0 && {
 													borderTopLeftRadius: a.rounded_sm.borderRadius,
 													borderTopRightRadius: a.rounded_sm.borderRadius,
-												},
-												i === labelers.length - 1 && {
+												}),
+
+												...(i === labelers.length - 1 && {
 													borderBottomLeftRadius: a.rounded_sm.borderRadius,
 													borderBottomRightRadius: a.rounded_sm.borderRadius,
-												},
-												(state.hovered || state.pressed) && [t.atoms.bg_contrast_50],
-											]}
+												}),
+
+												...((state.hovered || state.pressed) && [t.atoms.bg_contrast_50]),
+											}}
 										>
 											<LabelingService.Avatar avatar={labeler.creator.avatar} />
 											<LabelingService.Content>

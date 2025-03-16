@@ -52,21 +52,36 @@ export function Component() {
 	return (
 		<View
 			testID="postLanguagesModal"
-			style={[
-				pal.view,
-				styles.container,
-				// @ts-ignore vh is on web only
-				isMobile
+			style={{
+				...pal.view,
+				...styles.container,
+
+				...// @ts-ignore vh is on web only
+				(isMobile
 					? {
 							paddingTop: 20,
 						}
 					: {
 							maxHeight: "90vh",
-						},
-			]}
+						}),
+			}}
 		>
-			<Text style={[pal.text, styles.title]}>Post Languages</Text>
-			<Text style={[pal.text, styles.description]}>Which languages are used in this post?</Text>
+			<Text
+				style={{
+					...pal.text,
+					...styles.title,
+				}}
+			>
+				Post Languages
+			</Text>
+			<Text
+				style={{
+					...pal.text,
+					...styles.description,
+				}}
+			>
+				Which languages are used in this post?
+			</Text>
 			<ScrollView style={styles.scrollContainer}>
 				{languages.map((lang) => {
 					const isSelected = hasPostLanguage(langPrefs.postLanguage, lang.code2);
@@ -83,7 +98,11 @@ export function Component() {
 							label={languageName(lang, langPrefs.appLanguage)}
 							isSelected={isSelected}
 							onPress={() => (isDisabled ? undefined : onPress(lang.code2))}
-							style={[pal.border, styles.languageToggle, isDisabled && styles.dimmed]}
+							style={{
+								...pal.border,
+								...styles.languageToggle,
+								...(isDisabled && styles.dimmed),
+							}}
 						/>
 					);
 				})}

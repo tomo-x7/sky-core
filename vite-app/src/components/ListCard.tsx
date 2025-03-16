@@ -94,26 +94,48 @@ export function TitleAndByline({
 	const { currentAccount } = useSession();
 
 	return (
-		<View style={[a.flex_1]}>
+		<View style={a.flex_1}>
 			<Hider.Outer
 				modui={modUi}
 				isContentVisibleInitialState={creator && currentAccount?.did === creator.did}
 				allowOverride={creator && currentAccount?.did === creator.did}
 			>
 				<Hider.Mask>
-					<Text style={[a.text_md, a.font_bold, a.leading_snug, a.italic]} numberOfLines={1}>
+					<Text
+						style={{
+							...a.text_md,
+							...a.font_bold,
+							...a.leading_snug,
+							...a.italic,
+						}}
+						numberOfLines={1}
+					>
 						Hidden list
 					</Text>
 				</Hider.Mask>
 				<Hider.Content>
-					<Text emoji style={[a.text_md, a.font_bold, a.leading_snug]} numberOfLines={1}>
+					<Text
+						emoji
+						style={{
+							...a.text_md,
+							...a.font_bold,
+							...a.leading_snug,
+						}}
+						numberOfLines={1}
+					>
 						{title}
 					</Text>
 				</Hider.Content>
 			</Hider.Outer>
-
 			{creator && (
-				<Text emoji style={[a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
+				<Text
+					emoji
+					style={{
+						...a.leading_snug,
+						...t.atoms.text_contrast_medium,
+					}}
+					numberOfLines={1}
+				>
 					{purpose === MODLIST
 						? `Moderation list by ${sanitizeHandle(creator.handle, "@")}`
 						: `List by ${sanitizeHandle(creator.handle, "@")}`}

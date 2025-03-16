@@ -130,7 +130,13 @@ export function MessagesScreen({ navigation, route }: Props) {
 					count: inboxPreviewConvos.length,
 					profiles: inboxPreviewConvos.slice(0, 3),
 				},
-				...conversations.map((convo) => ({ type: "CONVERSATION", conversation: convo }) as const),
+				...conversations.map(
+					(convo) =>
+						({
+							type: "CONVERSATION",
+							conversation: convo,
+						}) as const,
+				),
 			] satisfies ListItem[];
 		}
 		return [];
@@ -193,18 +199,32 @@ export function MessagesScreen({ navigation, route }: Props) {
 						<>
 							{isError ? (
 								<>
-									<View style={[a.pt_3xl, a.align_center]}>
+									<View
+										style={{
+											...a.pt_3xl,
+											...a.align_center,
+										}}
+									>
 										<CircleInfo width={48} fill={t.atoms.text_contrast_low.color} />
-										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Whoops!</Text>
 										<Text
-											style={[
-												a.text_md,
-												a.pb_xl,
-												a.text_center,
-												a.leading_snug,
-												t.atoms.text_contrast_medium,
-												{ maxWidth: 360 },
-											]}
+											style={{
+												...a.pt_md,
+												...a.pb_sm,
+												...a.text_2xl,
+												...a.font_bold,
+											}}
+										>
+											Whoops!
+										</Text>
+										<Text
+											style={{
+												...a.text_md,
+												...a.pb_xl,
+												...a.text_center,
+												...a.leading_snug,
+												...t.atoms.text_contrast_medium,
+												...{ maxWidth: 360 },
+											}}
 										>
 											{cleanError(error) || "Failed to load conversations"}
 										</Text>
@@ -223,17 +243,31 @@ export function MessagesScreen({ navigation, route }: Props) {
 								</>
 							) : (
 								<>
-									<View style={[a.pt_3xl, a.align_center]}>
+									<View
+										style={{
+											...a.pt_3xl,
+											...a.align_center,
+										}}
+									>
 										<Message width={48} fill={t.palette.primary_500} />
-										<Text style={[a.pt_md, a.pb_sm, a.text_2xl, a.font_bold]}>Nothing here</Text>
 										<Text
-											style={[
-												a.text_md,
-												a.pb_xl,
-												a.text_center,
-												a.leading_snug,
-												t.atoms.text_contrast_medium,
-											]}
+											style={{
+												...a.pt_md,
+												...a.pb_sm,
+												...a.text_2xl,
+												...a.font_bold,
+											}}
+										>
+											Nothing here
+										</Text>
+										<Text
+											style={{
+												...a.text_md,
+												...a.pb_xl,
+												...a.text_center,
+												...a.leading_snug,
+												...t.atoms.text_contrast_medium,
+											}}
 										>
 											You have no conversations yet. Start one!
 										</Text>
@@ -243,7 +277,6 @@ export function MessagesScreen({ navigation, route }: Props) {
 						</>
 					)}
 				</Layout.Center>
-
 				{!isLoading && !isError && <NewChat onNewChat={onNewChat} control={newChatControl} />}
 			</Layout.Screen>
 		);
@@ -291,7 +324,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 			variant="ghost"
 			color="secondary"
 			shape="square"
-			style={[a.justify_center]}
+			style={a.justify_center}
 		>
 			<ButtonIcon icon={SettingsSlider} size="md" />
 		</Link>
@@ -305,7 +338,13 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 						<Layout.Header.TitleText>Chats</Layout.Header.TitleText>
 					</Layout.Header.Content>
 
-					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.gap_sm,
+						}}
+					>
 						{settingsLink}
 						<Button
 							label={"New chat"}

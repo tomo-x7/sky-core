@@ -139,7 +139,13 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 
 	return (
 		<div className="items">
-			<View style={[pal.borderDark, pal.view, styles.container]}>
+			<View
+				style={{
+					...pal.borderDark,
+					...pal.view,
+					...styles.container,
+				}}
+			>
 				{items.length > 0 ? (
 					items.map((item, index) => {
 						const { name: displayName } = getGraphemeString(
@@ -151,16 +157,17 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 						return (
 							<Pressable
 								key={item.handle}
-								style={[
-									isSelected ? pal.viewLight : undefined,
-									pal.borderDark,
-									styles.mentionContainer,
-									index === 0
+								style={{
+									...(isSelected ? pal.viewLight : undefined),
+									...pal.borderDark,
+									...styles.mentionContainer,
+
+									...(index === 0
 										? styles.firstMention
 										: index === items.length - 1
 											? styles.lastMention
-											: undefined,
-								]}
+											: undefined),
+								}}
 								onPress={() => {
 									selectItem(index);
 								}}
@@ -183,7 +190,13 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 						);
 					})
 				) : (
-					<Text type="sm" style={[pal.text, styles.noResult]}>
+					<Text
+						type="sm"
+						style={{
+							...pal.text,
+							...styles.noResult,
+						}}
+					>
 						No result
 					</Text>
 				)}

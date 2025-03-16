@@ -179,38 +179,55 @@ export function StepProfile() {
 
 	return (
 		<AvatarContext.Provider value={value}>
-			<View style={[a.align_start, t.atoms.bg, a.justify_between]}>
-				<IconCircle icon={StreamingLive} style={[a.mb_2xl]} />
+			<View
+				style={{
+					...a.align_start,
+					...t.atoms.bg,
+					...a.justify_between,
+				}}
+			>
+				<IconCircle icon={StreamingLive} style={a.mb_2xl} />
 				<TitleText>Give your profile a face</TitleText>
 				<DescriptionText>
 					Help people know you're not a bot by uploading a picture or creating an avatar.
 				</DescriptionText>
-				<View style={[a.w_full, a.align_center, { paddingTop: gtMobile ? 80 : 40 }]}>
+				<View
+					style={{
+						...a.w_full,
+						...a.align_center,
+						...{ paddingTop: gtMobile ? 80 : 40 },
+					}}
+				>
 					<AvatarCircle openLibrary={openLibrary} openCreator={creatorControl.open} />
 
 					{error && (
 						<View
-							style={[
-								a.flex_row,
-								a.gap_sm,
-								a.align_center,
-								a.mt_xl,
-								a.py_md,
-								a.px_lg,
-								a.border,
-								a.rounded_md,
-								t.atoms.bg_contrast_25,
-								t.atoms.border_contrast_low,
-							]}
+							style={{
+								...a.flex_row,
+								...a.gap_sm,
+								...a.align_center,
+								...a.mt_xl,
+								...a.py_md,
+								...a.px_lg,
+								...a.border,
+								...a.rounded_md,
+								...t.atoms.bg_contrast_25,
+								...t.atoms.border_contrast_low,
+							}}
 						>
 							<CircleInfo_Stroke2_Corner0_Rounded size="sm" />
-							<Text style={[a.leading_snug]}>{error}</Text>
+							<Text style={a.leading_snug}>{error}</Text>
 						</View>
 					)}
 				</View>
 
 				<OnboardingControls.Portal>
-					<View style={[a.gap_md, gtMobile && { flexDirection: "row-reverse" }]}>
+					<View
+						style={{
+							...a.gap_md,
+							...(gtMobile && { flexDirection: "row-reverse" }),
+						}}
+					>
 						<Button
 							variant="gradient"
 							color="gradient_sky"
@@ -235,33 +252,39 @@ export function StepProfile() {
 					</View>
 				</OnboardingControls.Portal>
 			</View>
-
 			<Dialog.Outer control={creatorControl}>
 				<Dialog.Inner
 					label="Avatar creator"
-					style={[
-						{
-							width: "auto",
-							maxWidth: 410,
-						},
-					]}
+					style={{
+						width: "auto",
+						maxWidth: 410,
+					}}
 				>
-					<View style={[a.align_center, { paddingTop: 20 }]}>
+					<View
+						style={{
+							...a.align_center,
+							...{ paddingTop: 20 },
+						}}
+					>
 						<AvatarCreatorCircle avatar={avatar} />
 					</View>
 
-					<View style={[a.pt_3xl, a.gap_lg]}>
+					<View
+						style={{
+							...a.pt_3xl,
+							...a.gap_lg,
+						}}
+					>
 						<AvatarCreatorItems type="emojis" avatar={avatar} setAvatar={setAvatar} />
 						<AvatarCreatorItems type="colors" avatar={avatar} setAvatar={setAvatar} />
 					</View>
-					<View style={[a.pt_4xl]}>
+					<View style={a.pt_4xl}>
 						<Button variant="solid" color="primary" size="large" label={"Done"} onPress={onDoneCreating}>
 							<ButtonText>Done</ButtonText>
 						</Button>
 					</View>
 				</Dialog.Inner>
 			</Dialog.Outer>
-
 			<PlaceholderCanvas ref={canvasRef} />
 		</AvatarContext.Provider>
 	);

@@ -38,16 +38,16 @@ export function LoadLatestBtn({
 	const bottomPosition = isTablet ? { bottom: 50 } : { bottom: clamp(0, 15, 60) + 15 };
 
 	return (
-		<Animated.View style={[showBottomBar && fabMinimalShellTransform]}>
+		<Animated.View style={showBottomBar && fabMinimalShellTransform}>
 			<PressableScale
-				style={[
-					styles.loadLatest,
-					isDesktop && (isTallViewport ? styles.loadLatestOutOfLine : styles.loadLatestInline),
-					isTablet && (centerColumnOffset ? styles.loadLatestInlineOffset : styles.loadLatestInline),
-					pal.borderDark,
-					pal.view,
-					bottomPosition,
-				]}
+				style={{
+					...styles.loadLatest,
+					...(isDesktop && (isTallViewport ? styles.loadLatestOutOfLine : styles.loadLatestInline)),
+					...(isTablet && (centerColumnOffset ? styles.loadLatestInlineOffset : styles.loadLatestInline)),
+					...pal.borderDark,
+					...pal.view,
+					...bottomPosition,
+				}}
 				onPress={onPress}
 				hitSlop={HITSLOP_20}
 				accessibilityLabel={label}
@@ -56,7 +56,14 @@ export function LoadLatestBtn({
 			>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="angle-up" color={pal.colors.text} size={19} />
-				{showIndicator && <View style={[styles.indicator, pal.borderDark]} />}
+				{showIndicator && (
+					<View
+						style={{
+							...styles.indicator,
+							...pal.borderDark,
+						}}
+					/>
+				)}
 			</PressableScale>
 		</Animated.View>
 	);

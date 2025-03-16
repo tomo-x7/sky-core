@@ -66,7 +66,6 @@ function ShellInner() {
 			<SigninDialog />
 			<Lightbox />
 			<PortalOutlet />
-
 			{showDrawerDelayedExit && (
 				<>
 					<RemoveScrollBar />
@@ -81,9 +80,10 @@ function ShellInner() {
 						accessibilityHint=""
 					>
 						<View
-							style={[
-								styles.drawerMask,
-								{
+							style={{
+								...styles.drawerMask,
+
+								...{
 									backgroundColor: showDrawer
 										? select(t.name, {
 												light: "rgba(0, 57, 117, 0.1)",
@@ -92,12 +92,18 @@ function ShellInner() {
 											})
 										: "transparent",
 								},
-								//@ts-ignore
+
+								...//@ts-ignore
 								a.transition_color,
-							]}
+							}}
 						>
 							{/* @ts-ignore */}
-							<View style={[styles.drawerContainer, showDrawer ? a.slide_in_left : a.slide_out_left]}>
+							<View
+								style={{
+									...styles.drawerContainer,
+									...(showDrawer ? a.slide_in_left : a.slide_out_left),
+								}}
+							>
 								<DrawerContent />
 							</View>
 						</View>
@@ -111,7 +117,12 @@ function ShellInner() {
 export const Shell: React.FC = function ShellImpl() {
 	const pageBg = useColorSchemeStyle(styles.bgLight, styles.bgDark);
 	return (
-		<View style={[a.util_screen_outer, pageBg]}>
+		<View
+			style={{
+				...a.util_screen_outer,
+				...pageBg,
+			}}
+		>
 			<RoutesContainer>
 				<ShellInner />
 			</RoutesContainer>

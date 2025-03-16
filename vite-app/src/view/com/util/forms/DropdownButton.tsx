@@ -213,21 +213,28 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 			>
 				<Animated.View
 					entering={FadeIn}
-					style={[
-						styles.bg,
-						// On web we need to adjust the top and bottom relative to the scroll position
+					style={{
+						...styles.bg,
+
+						...// On web we need to adjust the top and bottom relative to the scroll position
 						{ top: -pageY, bottom: pageY - screenHeight },
-					]}
+					}}
 				/>
 			</TouchableWithoutFeedback>
-			<Animated.View style={[styles.menu, { left: x, top: y, width }, dropDownBackgroundColor]}>
+			<Animated.View
+				style={{
+					...styles.menu,
+					...{ left: x, top: y, width },
+					...dropDownBackgroundColor,
+				}}
+			>
 				{items.map((item, index) => {
 					if (isBtn(item)) {
 						return (
 							<TouchableOpacity
 								testID={item.testID}
 								key={index}
-								style={[styles.menuItem]}
+								style={styles.menuItem}
 								onPress={() => onPressItem(index)}
 								accessibilityRole="button"
 								accessibilityLabel={item.label}
@@ -240,15 +247,43 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 										color={pal.text.color as string}
 									/>
 								)}
-								<Text style={[styles.label, pal.text]}>{item.label}</Text>
+								<Text
+									style={{
+										...styles.label,
+										...pal.text,
+									}}
+								>
+									{item.label}
+								</Text>
 							</TouchableOpacity>
 						);
 					} else if (isSep(item)) {
-						return <View key={index} style={[styles.separator, separatorColor]} />;
+						return (
+							<View
+								key={index}
+								style={{
+									...styles.separator,
+									...separatorColor,
+								}}
+							/>
+						);
 					} else if (isHeading(item)) {
 						return (
-							<View style={[styles.heading, pal.border]} key={index}>
-								<Text style={[pal.text, styles.headingLabel]}>{item.label}</Text>
+							<View
+								style={{
+									...styles.heading,
+									...pal.border,
+								}}
+								key={index}
+							>
+								<Text
+									style={{
+										...pal.text,
+										...styles.headingLabel,
+									}}
+								>
+									{item.label}
+								</Text>
 							</View>
 						);
 					}

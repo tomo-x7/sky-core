@@ -389,12 +389,13 @@ export function FeedsScreen(_props: Props) {
 			} else if (item.type === "savedFeedNoResults") {
 				return (
 					<View
-						style={[
-							pal.border,
-							{
+						style={{
+							...pal.border,
+
+							...{
 								borderBottomWidth: 1,
 							},
-						]}
+						}}
 					>
 						<NoSavedFeedsOfAnyType />
 					</View>
@@ -424,7 +425,13 @@ export function FeedsScreen(_props: Props) {
 				return <FeedFeedLoadingPlaceholder />;
 			} else if (item.type === "popularFeed") {
 				return (
-					<View style={[a.px_lg, a.pt_lg, a.gap_lg]}>
+					<View
+						style={{
+							...a.px_lg,
+							...a.pt_lg,
+							...a.gap_lg,
+						}}
+					>
 						<FeedCard.Default view={item.feed} />
 						<Divider />
 					</View>
@@ -446,12 +453,13 @@ export function FeedsScreen(_props: Props) {
 			} else if (item.type === "noFollowingFeed") {
 				return (
 					<View
-						style={[
-							pal.border,
-							{
+						style={{
+							...pal.border,
+
+							...{
 								borderBottomWidth: 1,
 							},
-						]}
+						}}
 					>
 						<NoFollowingFeed />
 					</View>
@@ -479,7 +487,10 @@ export function FeedsScreen(_props: Props) {
 							variant="ghost"
 							color="secondary"
 							shape="round"
-							style={[a.justify_center, { right: -3 }]}
+							style={{
+								...a.justify_center,
+								...{ right: -3 },
+							}}
 						>
 							<ButtonIcon icon={Gear} size="lg" />
 						</Link>
@@ -502,7 +513,6 @@ export function FeedsScreen(_props: Props) {
 					sideBorders={false}
 				/>
 			</Layout.Center>
-
 			{hasSession && (
 				<FAB
 					testID="composeFAB"
@@ -524,27 +534,34 @@ function FeedOrFollowing({ savedFeed }: { savedFeed: SavedFeedItem }) {
 function FollowingFeed() {
 	const t = useTheme();
 	return (
-		<View style={[a.flex_1, a.px_lg, a.py_md, a.border_b, t.atoms.border_contrast_low]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.px_lg,
+				...a.py_md,
+				...a.border_b,
+				...t.atoms.border_contrast_low,
+			}}
+		>
 			<FeedCard.Header>
 				<View
-					style={[
-						a.align_center,
-						a.justify_center,
-						{
+					style={{
+						...a.align_center,
+						...a.justify_center,
+
+						...{
 							width: 28,
 							height: 28,
 							borderRadius: 3,
 							backgroundColor: t.palette.primary_500,
 						},
-					]}
+					}}
 				>
 					<FilterTimeline
-						style={[
-							{
-								width: 18,
-								height: 18,
-							},
-						]}
+						style={{
+							width: 18,
+							height: 18,
+						}}
 						fill={t.palette.white}
 					/>
 				</View>
@@ -566,7 +583,12 @@ function SavedFeed({
 	return savedFeed.type === "feed" ? (
 		<FeedCard.Link testID={`saved-feed-${savedFeed.view.displayName}`} {...savedFeed}>
 			{({ hovered, pressed }) => (
-				<View style={[commonStyle, (hovered || pressed) && t.atoms.bg_contrast_25]}>
+				<View
+					style={{
+						...commonStyle,
+						...((hovered || pressed) && t.atoms.bg_contrast_25),
+					}}
+				>
 					<FeedCard.Header>
 						<FeedCard.Avatar src={savedFeed.view.avatar} size={28} />
 						<FeedCard.TitleAndByline title={savedFeed.view.displayName} />
@@ -579,7 +601,12 @@ function SavedFeed({
 	) : (
 		<ListCard.Link testID={`saved-feed-${savedFeed.view.name}`} {...savedFeed}>
 			{({ hovered, pressed }) => (
-				<View style={[commonStyle, (hovered || pressed) && t.atoms.bg_contrast_25]}>
+				<View
+					style={{
+						...commonStyle,
+						...((hovered || pressed) && t.atoms.bg_contrast_25),
+					}}
+				>
 					<ListCard.Header>
 						<ListCard.Avatar src={savedFeed.view.avatar} size={28} />
 						<ListCard.TitleAndByline title={savedFeed.view.name} />
@@ -595,7 +622,15 @@ function SavedFeed({
 function SavedFeedPlaceholder() {
 	const t = useTheme();
 	return (
-		<View style={[a.flex_1, a.px_lg, a.py_md, a.border_b, t.atoms.border_contrast_low]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.px_lg,
+				...a.py_md,
+				...a.border_b,
+				...t.atoms.border_contrast_low,
+			}}
+		>
 			<FeedCard.Header>
 				<FeedCard.AvatarPlaceholder size={28} />
 				<FeedCard.TitleAndBylinePlaceholder />
@@ -608,11 +643,34 @@ function FeedsSavedHeader() {
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_row, a.px_md, a.py_lg, a.gap_md, a.border_b, t.atoms.border_contrast_low]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.px_md,
+				...a.py_lg,
+				...a.gap_md,
+				...a.border_b,
+				...t.atoms.border_contrast_low,
+			}}
+		>
 			<IconCircle icon={ListSparkle_Stroke2_Corner0_Rounded} size="lg" />
-			<View style={[a.flex_1, a.gap_xs]}>
-				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>My Feeds</Text>
-				<Text style={[t.atoms.text_contrast_high]}>All the feeds you've saved, right in one place.</Text>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_xs,
+				}}
+			>
+				<Text
+					style={{
+						...a.flex_1,
+						...a.text_2xl,
+						...a.font_heavy,
+						...t.atoms.text,
+					}}
+				>
+					My Feeds
+				</Text>
+				<Text style={t.atoms.text_contrast_high}>All the feeds you've saved, right in one place.</Text>
 			</View>
 		</View>
 	);
@@ -622,11 +680,33 @@ function FeedsAboutHeader() {
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_row, a.px_md, a.pt_lg, a.pb_lg, a.gap_md]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.px_md,
+				...a.pt_lg,
+				...a.pb_lg,
+				...a.gap_md,
+			}}
+		>
 			<IconCircle icon={ListMagnifyingGlass_Stroke2_Corner0_Rounded} size="lg" />
-			<View style={[a.flex_1, a.gap_sm]}>
-				<Text style={[a.flex_1, a.text_2xl, a.font_heavy, t.atoms.text]}>Discover New Feeds</Text>
-				<Text style={[t.atoms.text_contrast_high]}>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_sm,
+				}}
+			>
+				<Text
+					style={{
+						...a.flex_1,
+						...a.text_2xl,
+						...a.font_heavy,
+						...t.atoms.text,
+					}}
+				>
+					Discover New Feeds
+				</Text>
+				<Text style={t.atoms.text_contrast_high}>
 					Choose your own timeline! Feeds built by the community help you find content you love.
 				</Text>
 			</View>

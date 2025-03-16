@@ -49,28 +49,70 @@ export const LoggedOutLayout = ({
 	}
 	return (
 		<View style={styles.container}>
-			<View style={[styles.side, sideBg]}>
-				<Text style={[pal.textLight, styles.leadinText, isTabletOrMobile && styles.leadinTextSmall]}>
+			<View
+				style={{
+					...styles.side,
+					...sideBg,
+				}}
+			>
+				<Text
+					style={{
+						...pal.textLight,
+						...styles.leadinText,
+						...(isTabletOrMobile && styles.leadinTextSmall),
+					}}
+				>
 					{leadin}
 				</Text>
-				<Text style={[pal.link, styles.titleText, isTabletOrMobile && styles.titleTextSmall]}>{title}</Text>
-				<Text type="2xl-medium" style={[pal.textLight, styles.descriptionText]}>
+				<Text
+					style={{
+						...pal.link,
+						...styles.titleText,
+						...(isTabletOrMobile && styles.titleTextSmall),
+					}}
+				>
+					{title}
+				</Text>
+				<Text
+					type="2xl-medium"
+					style={{
+						...pal.textLight,
+						...styles.descriptionText,
+					}}
+				>
 					{description}
 				</Text>
 			</View>
 			{scrollable ? (
-				<View style={[styles.scrollableContent, contentBg]}>
+				<View
+					style={{
+						...styles.scrollableContent,
+						...contentBg,
+					}}
+				>
 					<ScrollView
 						style={a.flex_1}
 						contentContainerStyle={styles.scrollViewContentContainer}
 						keyboardShouldPersistTaps="handled"
 						keyboardDismissMode="on-drag"
 					>
-						<View style={[styles.contentWrapper, a.my_auto]}>{children}</View>
+						<View
+							style={{
+								...styles.contentWrapper,
+								...a.my_auto,
+							}}
+						>
+							{children}
+						</View>
 					</ScrollView>
 				</View>
 			) : (
-				<View style={[styles.content, contentBg]}>
+				<View
+					style={{
+						...styles.content,
+						...contentBg,
+					}}
+				>
 					<View style={styles.contentWrapper}>{children}</View>
 				</View>
 			)}

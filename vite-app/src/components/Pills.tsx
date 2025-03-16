@@ -38,7 +38,19 @@ export function Row({
 				return [{ gap: 3 }];
 		}
 	}, [size]);
-	return <View style={[a.flex_row, a.flex_wrap, a.gap_xs, styles, style]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.flex_row,
+				...a.flex_wrap,
+				...a.gap_xs,
+				...styles,
+				...style,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 export type LabelProps = {
@@ -100,13 +112,13 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 			>
 				{({ hovered, pressed }) => (
 					<View
-						style={[
-							a.flex_row,
-							a.align_center,
-							a.rounded_full,
-							outer,
-							(hovered || pressed) && t.atoms.bg_contrast_50,
-						]}
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.rounded_full,
+							...outer,
+							...((hovered || pressed) && t.atoms.bg_contrast_50),
+						}}
 					>
 						{isBlueskyLabel || !isLabeler ? (
 							<desc.icon width={avi} fill={t.atoms.text_contrast_medium.color} />
@@ -116,20 +128,19 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 
 						<Text
 							emoji
-							style={[
-								text,
-								a.font_bold,
-								a.leading_tight,
-								t.atoms.text_contrast_medium,
-								{ paddingRight: 3 },
-							]}
+							style={{
+								...text,
+								...a.font_bold,
+								...a.leading_tight,
+								...t.atoms.text_contrast_medium,
+								...{ paddingRight: 3 },
+							}}
 						>
 							{desc.name}
 						</Text>
 					</View>
 				)}
 			</Button>
-
 			{!disableDetailsDialog && <ModerationDetailsDialog control={control} modcause={cause} />}
 		</>
 	);
@@ -152,8 +163,21 @@ export function FollowsYou({ size = "sm" }: CommonProps) {
 	}, [size]);
 
 	return (
-		<View style={[variantStyles, a.justify_center, t.atoms.bg_contrast_25]}>
-			<Text style={[a.text_xs, a.leading_tight]}>Follows You</Text>
+		<View
+			style={{
+				...variantStyles,
+				...a.justify_center,
+				...t.atoms.bg_contrast_25,
+			}}
+		>
+			<Text
+				style={{
+					...a.text_xs,
+					...a.leading_tight,
+				}}
+			>
+				Follows You
+			</Text>
 		</View>
 	);
 }

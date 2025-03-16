@@ -197,6 +197,7 @@ function ListImpl<ItemT>(
 						behavior: animated ? "smooth" : "instant",
 					});
 				},
+
 				scrollToEnd({ animated = true }: { animated?: boolean }) {
 					const element = getScrollableNode();
 					element?.scrollTo({
@@ -289,14 +290,15 @@ function ListImpl<ItemT>(
 	return (
 		<View
 			{...props}
-			style={[
-				style,
-				disableFullWindowScroll && {
+			style={{
+				...style,
+
+				...(disableFullWindowScroll && {
 					flex: 1,
 					// @ts-expect-error web only
 					"overflow-y": "scroll",
-				},
-			]}
+				}),
+			}}
 			ref={nativeRef as any}
 		>
 			<Visibility
@@ -310,12 +312,18 @@ function ListImpl<ItemT>(
 			<Layout.Center>
 				<View
 					ref={containerRef}
-					style={[contentContainerStyle, desktopFixedHeight ? styles.minHeightViewport : null]}
+					style={{
+						...contentContainerStyle,
+						...(desktopFixedHeight ? styles.minHeightViewport : null),
+					}}
 				>
 					<Visibility
 						root={disableFullWindowScroll ? nativeRef : null}
 						onVisibleChange={handleAboveTheFoldVisibleChange}
-						style={[styles.aboveTheFoldDetector, { height: headerOffset }]}
+						style={{
+							...styles.aboveTheFoldDetector,
+							...{ height: headerOffset },
+						}}
 					/>
 					{onStartReached && !isEmpty && (
 						<EdgeVisibility

@@ -142,33 +142,61 @@ function LandingScreenLoaded({
 	};
 
 	return (
-		<View style={[a.flex_1]}>
+		<View style={a.flex_1}>
 			<Layout.Content ignoreTabletLayoutOffset>
 				<LinearGradientBackground
-					style={[
-						a.align_center,
-						a.gap_sm,
-						a.px_lg,
-						a.py_2xl,
-						isTabletOrDesktop && [a.mt_2xl, a.rounded_md],
-						activeStarterPack?.isClip && {
+					style={{
+						...a.align_center,
+						...a.gap_sm,
+						...a.px_lg,
+						...a.py_2xl,
+						...(isTabletOrDesktop && [a.mt_2xl, a.rounded_md]),
+
+						...(activeStarterPack?.isClip && {
 							paddingTop: 100,
-						},
-					]}
+						}),
+					}}
 				>
-					<View style={[a.flex_row, a.gap_md, a.pb_sm]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.gap_md,
+							...a.pb_sm,
+						}}
+					>
 						<Logo width={76} fill="white" />
 					</View>
-					<Text style={[a.font_bold, a.text_4xl, a.text_center, a.leading_tight, { color: "white" }]}>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_4xl,
+							...a.text_center,
+							...a.leading_tight,
+							...{ color: "white" },
+						}}
+					>
 						{record.name}
 					</Text>
-					<Text style={[a.text_center, a.font_bold, a.text_md, { color: "white" }]}>
+					<Text
+						style={{
+							...a.text_center,
+							...a.font_bold,
+							...a.text_md,
+							...{ color: "white" },
+						}}
+					>
 						Starter pack by {`@${creator.handle}`}
 					</Text>
 				</LinearGradientBackground>
-				<View style={[a.gap_2xl, a.mx_lg, a.my_2xl]}>
-					{record.description ? <RichText value={descriptionRt} style={[a.text_md]} /> : null}
-					<View style={[a.gap_sm]}>
+				<View
+					style={{
+						...a.gap_2xl,
+						...a.mx_lg,
+						...a.my_2xl,
+					}}
+				>
+					{record.description ? <RichText value={descriptionRt} style={a.text_md} /> : null}
+					<View style={a.gap_sm}>
 						<Button
 							label={"Join Bluesky"}
 							onPress={onJoinPress}
@@ -176,24 +204,42 @@ function LandingScreenLoaded({
 							color="primary"
 							size="large"
 						>
-							<ButtonText style={[a.text_lg]}>Join Bluesky</ButtonText>
+							<ButtonText style={a.text_lg}>Join Bluesky</ButtonText>
 						</Button>
-						<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_sm,
+							}}
+						>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
 								//@ts-ignore
 								size={12}
 								color={t.atoms.text_contrast_medium.color}
 							/>
-							<Text style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]} numberOfLines={1}>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_sm,
+									...t.atoms.text_contrast_medium,
+								}}
+								numberOfLines={1}
+							>
 								<>{formatCount(JOINED_THIS_WEEK)} joined this week</>
 							</Text>
 						</View>
 					</View>
-					<View style={[a.gap_3xl]}>
+					<View style={a.gap_3xl}>
 						{Boolean(listItemsSample?.length) && (
-							<View style={[a.gap_md]}>
-								<Text style={[a.font_heavy, a.text_lg]}>
+							<View style={a.gap_md}>
+								<Text
+									style={{
+										...a.font_heavy,
+										...a.text_lg,
+									}}
+								>
 									{listItemsCount <= 8 ? (
 										<>You'll follow these people right away</>
 									) : (
@@ -209,13 +255,13 @@ function LandingScreenLoaded({
 										.map((item, i) => (
 											<View
 												key={item.subject.did}
-												style={[
-													a.py_lg,
-													a.px_md,
-													(!isTabletOrDesktop || i !== 0) && a.border_t,
-													t.atoms.border_contrast_low,
-													{ pointerEvents: "none" },
-												]}
+												style={{
+													...a.py_lg,
+													...a.px_md,
+													...((!isTabletOrDesktop || i !== 0) && a.border_t),
+													...t.atoms.border_contrast_low,
+													...{ pointerEvents: "none" },
+												}}
 											>
 												<ProfileCard profile={item.subject} moderationOpts={moderationOpts} />
 											</View>
@@ -224,23 +270,30 @@ function LandingScreenLoaded({
 							</View>
 						)}
 						{feeds?.length ? (
-							<View style={[a.gap_md]}>
-								<Text style={[a.font_heavy, a.text_lg]}>You'll stay updated with these feeds</Text>
+							<View style={a.gap_md}>
+								<Text
+									style={{
+										...a.font_heavy,
+										...a.text_lg,
+									}}
+								>
+									You'll stay updated with these feeds
+								</Text>
 
 								<View
-									style={[
-										{ pointerEvents: "none" },
-										isTabletOrDesktop && [a.border, a.rounded_md, t.atoms.border_contrast_low],
-									]}
+									style={{
+										...{ pointerEvents: "none" },
+										...(isTabletOrDesktop && [a.border, a.rounded_md, t.atoms.border_contrast_low]),
+									}}
 								>
 									{feeds?.map((feed, i) => (
 										<View
-											style={[
-												a.py_lg,
-												a.px_md,
-												(!isTabletOrDesktop || i !== 0) && a.border_t,
-												t.atoms.border_contrast_low,
-											]}
+											style={{
+												...a.py_lg,
+												...a.px_md,
+												...((!isTabletOrDesktop || i !== 0) && a.border_t),
+												...t.atoms.border_contrast_low,
+											}}
 											key={feed.uri}
 										>
 											<FeedCard.Default view={feed} />
@@ -255,7 +308,7 @@ function LandingScreenLoaded({
 						variant="solid"
 						color="secondary"
 						size="large"
-						style={[a.py_lg]}
+						style={a.py_lg}
 						onPress={onJoinWithoutPress}
 					>
 						<ButtonText>Signup without a starter pack</ButtonText>
@@ -305,25 +358,48 @@ export function AppClipOverlay({
 	return (
 		<AnimatedPressable
 			accessibilityRole="button"
-			style={[
-				a.absolute,
-				a.inset_0,
-				{
+			style={{
+				...a.absolute,
+				...a.inset_0,
+
+				...{
 					backgroundColor: "rgba(0, 0, 0, 0.95)",
 					zIndex: 1,
 				},
-			]}
+			}}
 			entering={FadeIn}
 			exiting={FadeOut}
 			onPress={() => setIsVisible(false)}
 		>
-			<View style={[a.flex_1, a.px_lg, { marginTop: 250 }]}>
+			<View
+				style={{
+					...a.flex_1,
+					...a.px_lg,
+					...{ marginTop: 250 },
+				}}
+			>
 				{/* Webkit needs this to have a zindex of 2? */}
-				<View style={[a.gap_md, { zIndex: 2 }]}>
-					<Text style={[a.font_bold, a.text_4xl, { lineHeight: 40, color: "white" }]}>
+				<View
+					style={{
+						...a.gap_md,
+						...{ zIndex: 2 },
+					}}
+				>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_4xl,
+							...{ lineHeight: 40, color: "white" },
+						}}
+					>
 						Download Bluesky to get started!
 					</Text>
-					<Text style={[a.text_lg, { color: "white" }]}>
+					<Text
+						style={{
+							...a.text_lg,
+							...{ color: "white" },
+						}}
+					>
 						We'll remember the starter pack you chose and use it when you create an account in the app.
 					</Text>
 				</View>

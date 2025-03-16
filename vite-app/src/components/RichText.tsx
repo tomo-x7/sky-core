@@ -61,7 +61,10 @@ export function RichText({
 					emoji
 					selectable={selectable}
 					testID={testID}
-					style={[plainStyles, { fontSize }]}
+					style={{
+						...plainStyles,
+						...{ fontSize },
+					}}
 					onLayout={onLayout}
 					onTextLayout={onTextLayout}
 					// @ts-ignore web only -prf

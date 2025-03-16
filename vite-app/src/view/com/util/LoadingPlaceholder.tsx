@@ -24,15 +24,17 @@ export function LoadingPlaceholder({
 	const theme = useTheme();
 	return (
 		<View
-			style={[
-				styles.loadingPlaceholder,
-				{
+			style={{
+				...styles.loadingPlaceholder,
+
+				...{
 					width,
 					height,
 					backgroundColor: theme.palette.default.backgroundLight,
 				},
-				style,
-			]}
+
+				...style,
+			}}
 		/>
 	);
 }
@@ -45,33 +47,46 @@ export function PostLoadingPlaceholder({
 	const t = useTheme_NEW();
 	const pal = usePalette("default");
 	return (
-		<View style={[styles.post, pal.view, style]}>
+		<View
+			style={{
+				...styles.post,
+				...pal.view,
+				...style,
+			}}
+		>
 			<LoadingPlaceholder
 				width={42}
 				height={42}
-				style={[
-					styles.avatar,
-					{
+				style={{
+					...styles.avatar,
+
+					...{
 						position: "relative",
 						top: -6,
 					},
-				]}
+				}}
 			/>
-			<View style={[s.flex1]}>
+			<View style={s.flex1}>
 				<LoadingPlaceholder width={100} height={6} style={{ marginBottom: 10 }} />
 				<LoadingPlaceholder width="95%" height={6} style={{ marginBottom: 8 }} />
 				<LoadingPlaceholder width="95%" height={6} style={{ marginBottom: 8 }} />
 				<LoadingPlaceholder width="80%" height={6} style={{ marginBottom: 11 }} />
 				<View style={styles.postCtrls}>
-					<View style={[styles.postCtrl, { marginLeft: -6 }]}>
+					<View
+						style={{
+							...styles.postCtrl,
+							...{ marginLeft: -6 },
+						}}
+					>
 						<View style={styles.postBtn}>
 							<Bubble
-								style={[
-									{
+								style={{
+									...{
 										color: t.palette.contrast_500,
 									},
-									{ pointerEvents: "none" },
-								]}
+
+									...{ pointerEvents: "none" },
+								}}
 								width={18}
 							/>
 						</View>
@@ -79,12 +94,13 @@ export function PostLoadingPlaceholder({
 					<View style={styles.postCtrl}>
 						<View style={styles.postBtn}>
 							<Repost
-								style={[
-									{
+								style={{
+									...{
 										color: t.palette.contrast_500,
 									},
-									{ pointerEvents: "none" },
-								]}
+
+									...{ pointerEvents: "none" },
+								}}
 								width={18}
 							/>
 						</View>
@@ -92,18 +108,24 @@ export function PostLoadingPlaceholder({
 					<View style={styles.postCtrl}>
 						<View style={styles.postBtn}>
 							<HeartIconOutline
-								style={[
-									{
+								style={{
+									...{
 										color: t.palette.contrast_500,
 									},
-									{ pointerEvents: "none" },
-								]}
+
+									...{ pointerEvents: "none" },
+								}}
 								width={18}
 							/>
 						</View>
 					</View>
 					<View style={styles.postCtrl}>
-						<View style={[styles.postBtn, { minHeight: 30 }]} />
+						<View
+							style={{
+								...styles.postBtn,
+								...{ minHeight: 30 },
+							}}
+						/>
 					</View>
 				</View>
 			</View>
@@ -133,16 +155,34 @@ export function NotificationLoadingPlaceholder({
 }) {
 	const pal = usePalette("default");
 	return (
-		<View style={[styles.notification, pal.view, style]}>
-			<View style={[{ width: 60 }, a.align_end, a.pr_sm, a.pt_2xs]}>
+		<View
+			style={{
+				...styles.notification,
+				...pal.view,
+				...style,
+			}}
+		>
+			<View
+				style={{
+					...{ width: 60 },
+					...a.align_end,
+					...a.pr_sm,
+					...a.pt_2xs,
+				}}
+			>
 				<HeartIconFilled size="xl" style={{ color: pal.colors.backgroundLight }} />
 			</View>
 			<View style={{ flex: 1 }}>
-				<View style={[a.flex_row, s.mb10]}>
+				<View
+					style={{
+						...a.flex_row,
+						...s.mb10,
+					}}
+				>
 					<LoadingPlaceholder width={35} height={35} style={styles.smallAvatar} />
 				</View>
-				<LoadingPlaceholder width="90%" height={6} style={[s.mb5]} />
-				<LoadingPlaceholder width="70%" height={6} style={[s.mb5]} />
+				<LoadingPlaceholder width="90%" height={6} style={s.mb5} />
+				<LoadingPlaceholder width="70%" height={6} style={s.mb5} />
 			</View>
 		</View>
 	);
@@ -173,12 +213,18 @@ export function ProfileCardLoadingPlaceholder({
 }) {
 	const pal = usePalette("default");
 	return (
-		<View style={[styles.profileCard, pal.view, style]}>
+		<View
+			style={{
+				...styles.profileCard,
+				...pal.view,
+				...style,
+			}}
+		>
 			<LoadingPlaceholder width={40} height={40} style={styles.profileCardAvi} />
 			<View>
-				<LoadingPlaceholder width={140} height={8} style={[s.mb5]} />
-				<LoadingPlaceholder width={120} height={8} style={[s.mb10]} />
-				<LoadingPlaceholder width={220} height={8} style={[s.mb5]} />
+				<LoadingPlaceholder width={140} height={8} style={s.mb5} />
+				<LoadingPlaceholder width={120} height={8} style={s.mb10} />
+				<LoadingPlaceholder width={220} height={8} style={s.mb5} />
 			</View>
 		</View>
 	);
@@ -214,20 +260,40 @@ export function FeedLoadingPlaceholder({
 	const pal = usePalette("default");
 	return (
 		<View
-			style={[
-				{
+			style={{
+				...{
 					paddingHorizontal: 12,
 					paddingVertical: 18,
 					borderTopWidth: showTopBorder ? StyleSheet.hairlineWidth : 0,
 				},
-				pal.border,
-				style,
-			]}
+
+				...pal.border,
+				...style,
+			}}
 		>
-			<View style={[pal.view, { flexDirection: "row" }]}>
-				<LoadingPlaceholder width={36} height={36} style={[styles.avatar, { borderRadius: 6 }]} />
-				<View style={[s.flex1]}>
-					<LoadingPlaceholder width={100} height={8} style={[s.mt5, s.mb10]} />
+			<View
+				style={{
+					...pal.view,
+					...{ flexDirection: "row" },
+				}}
+			>
+				<LoadingPlaceholder
+					width={36}
+					height={36}
+					style={{
+						...styles.avatar,
+						...{ borderRadius: 6 },
+					}}
+				/>
+				<View style={s.flex1}>
+					<LoadingPlaceholder
+						width={100}
+						height={8}
+						style={{
+							...s.mt5,
+							...s.mb10,
+						}}
+					/>
 					<LoadingPlaceholder width={120} height={8} />
 				</View>
 			</View>
@@ -267,7 +333,16 @@ export function ChatListItemLoadingPlaceholder({
 	const t = useTheme_NEW();
 	const random = useMemo(() => Math.random(), []);
 	return (
-		<View style={[a.flex_row, a.gap_md, a.px_lg, a.mt_lg, t.atoms.bg, style]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.gap_md,
+				...a.px_lg,
+				...a.mt_lg,
+				...t.atoms.bg,
+				...style,
+			}}
+		>
 			<LoadingPlaceholder width={52} height={52} style={a.rounded_full} />
 			<View>
 				<LoadingPlaceholder width={140} height={12} style={a.mt_xs} />

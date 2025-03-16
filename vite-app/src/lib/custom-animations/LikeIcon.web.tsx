@@ -77,7 +77,13 @@ export function AnimatedLikeIcon({
 					<HeartIconFilled style={s.likeColor} width={size} />
 				</View>
 			) : (
-				<HeartIconOutline style={[{ color: t.palette.contrast_500 }, { pointerEvents: "none" }]} width={size} />
+				<HeartIconOutline
+					style={{
+						...{ color: t.palette.contrast_500 },
+						...{ pointerEvents: "none" },
+					}}
+					width={size}
+				/>
 			)}
 			<View
 				// @ts-expect-error is div

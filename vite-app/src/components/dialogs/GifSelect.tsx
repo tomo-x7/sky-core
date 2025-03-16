@@ -112,20 +112,29 @@ function GifList({
 
 	const listHeader = useMemo(() => {
 		return (
-			<View style={[a.relative, a.mb_lg, a.flex_row, a.align_center, !gtMobile && a.gap_md]}>
+			<View
+				style={{
+					...a.relative,
+					...a.mb_lg,
+					...a.flex_row,
+					...a.align_center,
+					...(!gtMobile && a.gap_md),
+				}}
+			>
 				{/* cover top corners */}
 				<View
-					style={[
-						a.absolute,
-						a.inset_0,
-						{
+					style={{
+						...a.absolute,
+						...a.inset_0,
+
+						...{
 							borderBottomLeftRadius: 8,
 							borderBottomRightRadius: 8,
 						},
-						t.atoms.bg,
-					]}
-				/>
 
+						...t.atoms.bg,
+					}}
+				/>
 				{!gtMobile && (
 					<Button
 						size="small"
@@ -138,7 +147,6 @@ function GifList({
 						<ButtonIcon icon={Arrow} size="md" />
 					</Button>
 				)}
-
 				<TextField.Root>
 					<TextField.Icon icon={Search} />
 					<TextField.Input
@@ -176,7 +184,7 @@ function GifList({
 				//@ts-ignore
 				contentContainerStyle={[a.h_full_vh]}
 				//@ts-ignore
-				style={[a.h_full_vh]}
+				style={a.h_full_vh}
 				ListHeaderComponent={
 					<>
 						{listHeader}
@@ -255,18 +263,21 @@ export function GifPreview({
 	return (
 		<Button
 			label={`Select GIF "${gif.title}"`}
-			style={[a.flex_1, gtTablet ? { maxWidth: "33%" } : { maxWidth: "50%" }]}
+			style={{
+				...a.flex_1,
+				...(gtTablet ? { maxWidth: "33%" } : { maxWidth: "50%" }),
+			}}
 			onPress={onPress}
 		>
 			{({ pressed }) => (
 				<Image
-					style={[
-						a.flex_1,
-						a.mb_sm,
-						a.rounded_sm,
-						{ aspectRatio: 1, opacity: pressed ? 0.8 : 1 },
-						t.atoms.bg_contrast_25,
-					]}
+					style={{
+						...a.flex_1,
+						...a.mb_sm,
+						...a.rounded_sm,
+						...{ aspectRatio: 1, opacity: pressed ? 0.8 : 1 },
+						...t.atoms.bg_contrast_25,
+					}}
 					source={{
 						uri: gif.media_formats.tinygif.url,
 					}}

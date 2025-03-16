@@ -57,16 +57,15 @@ export function AppLanguageDropdown(_props: ViewStyleProp) {
 					},
 				}}
 			/>
-
 			<View
-				style={[
-					a.absolute,
-					a.inset_0,
-					{ left: "auto" },
-					{ pointerEvents: "none" },
-					a.align_center,
-					a.justify_center,
-				]}
+				style={{
+					...a.absolute,
+					...a.inset_0,
+					...{ left: "auto" },
+					...{ pointerEvents: "none" },
+					...a.align_center,
+					...a.justify_center,
+				}}
 			>
 				<ChevronDown fill={t.atoms.text.color} size="xs" />
 			</View>

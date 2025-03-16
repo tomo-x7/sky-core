@@ -30,9 +30,13 @@ export function LabelsOnMe({
 	}
 
 	return (
-		<View style={[a.flex_row, style]}>
+		<View
+			style={{
+				...a.flex_row,
+				...style,
+			}}
+		>
 			<LabelsOnMeDialog control={control} labels={labels} type={type} />
-
 			<Button
 				variant="solid"
 				color="secondary"
@@ -43,7 +47,7 @@ export function LabelsOnMe({
 				}}
 			>
 				<ButtonIcon position="left" icon={CircleInfo} />
-				<ButtonText style={[a.leading_snug]}>
+				<ButtonText style={a.leading_snug}>
 					{type === "account" ? (
 						<>
 							{labels.length} {labels.length === 1 ? "label has" : "labels have"} been placed on this

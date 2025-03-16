@@ -243,8 +243,22 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 		<Layout.Screen>
 			<moderationOptsOverrideContext.Provider value={modOpts}>
 				<ScrollView>
-					<CenteredView style={[t.atoms.bg, a.px_lg, a.py_lg]}>
-						<H1 style={[a.text_5xl, a.font_bold, a.pb_lg]}>Moderation states</H1>
+					<CenteredView
+						style={{
+							...t.atoms.bg,
+							...a.px_lg,
+							...a.py_lg,
+						}}
+					>
+						<H1
+							style={{
+								...a.text_5xl,
+								...a.font_bold,
+								...a.pb_lg,
+							}}
+						>
+							Moderation states
+						</H1>
 
 						<Heading title="" subtitle="Scenario" />
 						<ToggleButton.Group label="Scenario" values={scenario} onChange={setScenario}>
@@ -262,17 +276,23 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 						{scenario[0] === "label" && (
 							<>
 								<View
-									style={[
-										a.border,
-										a.rounded_sm,
-										a.mt_lg,
-										a.mb_lg,
-										a.p_lg,
-										t.atoms.border_contrast_medium,
-									]}
+									style={{
+										...a.border,
+										...a.rounded_sm,
+										...a.mt_lg,
+										...a.mb_lg,
+										...a.p_lg,
+										...t.atoms.border_contrast_medium,
+									}}
 								>
 									<Toggle.Group label="Toggle" type="radio" values={label} onChange={setLabel}>
-										<View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
+										<View
+											style={{
+												...a.flex_row,
+												...a.gap_md,
+												...a.flex_wrap,
+											}}
+										>
 											{LABEL_VALUES.map((labelValue) => {
 												let targetFixed = target[0];
 												if (targetFixed !== "account" && targetFixed !== "profile") {
@@ -323,7 +343,14 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 											values={scenarioSwitches}
 											onChange={setScenarioSwitches}
 										>
-											<View style={[a.gap_md, a.flex_row, a.flex_wrap, a.pt_md]}>
+											<View
+												style={{
+													...a.gap_md,
+													...a.flex_row,
+													...a.flex_wrap,
+													...a.pt_md,
+												}}
+											>
 												<Toggle.Item name="targetMe" label="Target is me">
 													<Toggle.Checkbox />
 													<Toggle.LabelText>Target is me</Toggle.LabelText>
@@ -348,8 +375,15 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 										</Toggle.Group>
 
 										{LABELS[label[0] as keyof typeof LABELS]?.configurable !== false && (
-											<View style={[a.mt_md]}>
-												<Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pb_sm]}>
+											<View style={a.mt_md}>
+												<Text
+													style={{
+														...a.font_bold,
+														...a.text_xs,
+														...t.atoms.text,
+														...a.pb_sm,
+													}}
+												>
 													Preference
 												</Text>
 												<Toggle.Group
@@ -358,7 +392,14 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 													values={visibility}
 													onChange={setVisiblity}
 												>
-													<View style={[a.flex_row, a.gap_md, a.flex_wrap, a.align_center]}>
+													<View
+														style={{
+															...a.flex_row,
+															...a.gap_md,
+															...a.flex_wrap,
+															...a.align_center,
+														}}
+													>
 														<Toggle.Item name="hide" label="Hide">
 															<Toggle.Radio />
 															<Toggle.LabelText>Hide</Toggle.LabelText>
@@ -378,20 +419,34 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 									</SmallToggler>
 								</View>
 
-								<View style={[a.flex_row, a.flex_wrap, a.gap_md]}>
+								<View
+									style={{
+										...a.flex_row,
+										...a.flex_wrap,
+										...a.gap_md,
+									}}
+								>
 									<View>
-										<Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pl_md, a.pb_xs]}>
+										<Text
+											style={{
+												...a.font_bold,
+												...a.text_xs,
+												...t.atoms.text,
+												...a.pl_md,
+												...a.pb_xs,
+											}}
+										>
 											Target
 										</Text>
 										<View
-											style={[
-												a.border,
-												a.rounded_full,
-												a.px_md,
-												a.py_sm,
-												t.atoms.border_contrast_medium,
-												t.atoms.bg,
-											]}
+											style={{
+												...a.border,
+												...a.rounded_full,
+												...a.px_md,
+												...a.py_sm,
+												...t.atoms.border_contrast_medium,
+												...t.atoms.bg,
+											}}
 										>
 											<Toggle.Group
 												label="Target"
@@ -399,7 +454,13 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 												values={target}
 												onChange={setTarget}
 											>
-												<View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
+												<View
+													style={{
+														...a.flex_row,
+														...a.gap_md,
+														...a.flex_wrap,
+													}}
+												>
 													<Toggle.Item name="account" label="Account">
 														<Toggle.Radio />
 														<Toggle.LabelText>Account</Toggle.LabelText>
@@ -443,7 +504,15 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 							</ToggleButton.Button>
 						</ToggleButton.Group>
 
-						<View style={[a.border, a.rounded_sm, a.mt_lg, a.p_md, t.atoms.border_contrast_medium]}>
+						<View
+							style={{
+								...a.border,
+								...a.rounded_sm,
+								...a.mt_lg,
+								...a.p_md,
+								...t.atoms.border_contrast_medium,
+							}}
+						>
 							{view[0] === "post" && (
 								<>
 									<Heading title="Post" subtitle="in feed" />
@@ -503,8 +572,24 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 function Heading({ title, subtitle }: { title: string; subtitle?: string }) {
 	const t = useTheme();
 	return (
-		<H3 style={[a.text_3xl, a.font_bold, a.pb_md]}>
-			{title} {!!subtitle && <H3 style={[t.atoms.text_contrast_medium, a.text_lg]}>{subtitle}</H3>}
+		<H3
+			style={{
+				...a.text_3xl,
+				...a.font_bold,
+				...a.pb_md,
+			}}
+		>
+			{title}{" "}
+			{!!subtitle && (
+				<H3
+					style={{
+						...t.atoms.text_contrast_medium,
+						...a.text_lg,
+					}}
+				>
+					{subtitle}
+				</H3>
+			)}
 		</H3>
 	);
 }
@@ -518,17 +603,52 @@ function CustomLabelForm({
 }) {
 	const t = useTheme();
 	return (
-		<View style={[a.flex_row, a.flex_wrap, a.gap_md, t.atoms.bg_contrast_25, a.rounded_md, a.p_md, a.mt_md]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.flex_wrap,
+				...a.gap_md,
+				...t.atoms.bg_contrast_25,
+				...a.rounded_md,
+				...a.p_md,
+				...a.mt_md,
+			}}
+		>
 			<View>
-				<Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pl_md, a.pb_xs]}>Blurs</Text>
-				<View style={[a.border, a.rounded_full, a.px_md, a.py_sm, t.atoms.border_contrast_medium, t.atoms.bg]}>
+				<Text
+					style={{
+						...a.font_bold,
+						...a.text_xs,
+						...t.atoms.text,
+						...a.pl_md,
+						...a.pb_xs,
+					}}
+				>
+					Blurs
+				</Text>
+				<View
+					style={{
+						...a.border,
+						...a.rounded_full,
+						...a.px_md,
+						...a.py_sm,
+						...t.atoms.border_contrast_medium,
+						...t.atoms.bg,
+					}}
+				>
 					<Toggle.Group
 						label="Blurs"
 						type="radio"
 						values={[def.blurs]}
 						onChange={(values) => setDef((v) => ({ ...v, blurs: values[0] }))}
 					>
-						<View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.gap_md,
+								...a.flex_wrap,
+							}}
+						>
 							<Toggle.Item name="content" label="Content">
 								<Toggle.Radio />
 								<Toggle.LabelText>Content</Toggle.LabelText>
@@ -546,15 +666,41 @@ function CustomLabelForm({
 				</View>
 			</View>
 			<View>
-				<Text style={[a.font_bold, a.text_xs, t.atoms.text, a.pl_md, a.pb_xs]}>Severity</Text>
-				<View style={[a.border, a.rounded_full, a.px_md, a.py_sm, t.atoms.border_contrast_medium, t.atoms.bg]}>
+				<Text
+					style={{
+						...a.font_bold,
+						...a.text_xs,
+						...t.atoms.text,
+						...a.pl_md,
+						...a.pb_xs,
+					}}
+				>
+					Severity
+				</Text>
+				<View
+					style={{
+						...a.border,
+						...a.rounded_full,
+						...a.px_md,
+						...a.py_sm,
+						...t.atoms.border_contrast_medium,
+						...t.atoms.bg,
+					}}
+				>
 					<Toggle.Group
 						label="Severity"
 						type="radio"
 						values={[def.severity]}
 						onChange={(values) => setDef((v) => ({ ...v, severity: values[0] }))}
 					>
-						<View style={[a.flex_row, a.gap_md, a.flex_wrap, a.align_center]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.gap_md,
+								...a.flex_wrap,
+								...a.align_center,
+							}}
+						>
 							<Toggle.Item name="alert" label="Alert">
 								<Toggle.Radio />
 								<Toggle.LabelText>Alert</Toggle.LabelText>
@@ -580,7 +726,14 @@ function Toggler({ label, children }: React.PropsWithChildren<{ label: string }>
 	const [show, setShow] = React.useState(false);
 	return (
 		<View style={a.mb_md}>
-			<View style={[t.atoms.border_contrast_medium, a.border, a.rounded_sm, a.p_xs]}>
+			<View
+				style={{
+					...t.atoms.border_contrast_medium,
+					...a.border,
+					...a.rounded_sm,
+					...a.p_xs,
+				}}
+			>
 				<Button
 					variant="solid"
 					color="secondary"
@@ -601,7 +754,7 @@ function SmallToggler({ label, children }: React.PropsWithChildren<{ label: stri
 	const [show, setShow] = React.useState(false);
 	return (
 		<View>
-			<View style={[a.flex_row]}>
+			<View style={a.flex_row}>
 				<Button
 					variant="ghost"
 					color="secondary"
@@ -622,7 +775,14 @@ function SmallToggler({ label, children }: React.PropsWithChildren<{ label: stri
 function DataView({ label, data }: { label: string; data: any }) {
 	return (
 		<Toggler label={label}>
-			<Text style={[{ fontFamily: "monospace" }, a.p_md]}>{JSON.stringify(data, null, 2)}</Text>
+			<Text
+				style={{
+					...{ fontFamily: "monospace" },
+					...a.p_md,
+				}}
+			>
+				{JSON.stringify(data, null, 2)}
+			</Text>
 		</Toggler>
 	);
 }
@@ -649,8 +809,21 @@ function ModerationUIView({
 				].map((key) => {
 					const ui = mod.ui(key as keyof ModerationBehavior);
 					return (
-						<View key={key} style={[a.flex_row, a.gap_md]}>
-							<Text style={[a.font_bold, { width: 100 }]}>{key}</Text>
+						<View
+							key={key}
+							style={{
+								...a.flex_row,
+								...a.gap_md,
+							}}
+						>
+							<Text
+								style={{
+									...a.font_bold,
+									...{ width: 100 },
+								}}
+							>
+								{key}
+							</Text>
 							<Flag v={ui.filter} label="Filter" />
 							<Flag v={ui.blur} label="Blur" />
 							<Flag v={ui.alert} label="Alert" />
@@ -677,7 +850,18 @@ function MockPostFeedItem({
 }) {
 	const t = useTheme();
 	if (moderation.ui("contentList").filter) {
-		return <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md, a.mb_lg]}>Filtered from the feed</P>;
+		return (
+			<P
+				style={{
+					...t.atoms.bg_contrast_25,
+					...a.px_lg,
+					...a.py_md,
+					...a.mb_lg,
+				}}
+			>
+				Filtered from the feed
+			</P>
+		);
 	}
 	return (
 		<PostFeedItem
@@ -729,7 +913,17 @@ function MockNotifItem({
 }) {
 	const t = useTheme();
 	if (shouldFilterNotif(notif.notification, moderationOpts)) {
-		return <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md]}>Filtered from the feed</P>;
+		return (
+			<P
+				style={{
+					...t.atoms.bg_contrast_25,
+					...a.px_lg,
+					...a.py_md,
+				}}
+			>
+				Filtered from the feed
+			</P>
+		);
 	}
 	return <NotificationFeedItem item={notif} moderationOpts={moderationOpts} highlightUnread />;
 }
@@ -744,7 +938,18 @@ function MockAccountCard({
 	const t = useTheme();
 
 	if (moderation.ui("profileList").filter) {
-		return <P style={[t.atoms.bg_contrast_25, a.px_lg, a.py_md, a.mb_lg]}>Filtered from the listing</P>;
+		return (
+			<P
+				style={{
+					...t.atoms.bg_contrast_25,
+					...a.px_lg,
+					...a.py_md,
+					...a.mb_lg,
+				}}
+			>
+				Filtered from the listing
+			</P>
+		);
 	}
 
 	return <ProfileCard profile={profile} />;
@@ -761,7 +966,13 @@ function MockAccountScreen({
 }) {
 	const t = useTheme();
 	return (
-		<View style={[t.atoms.border_contrast_medium, a.border, a.mb_md]}>
+		<View
+			style={{
+				...t.atoms.border_contrast_medium,
+				...a.border,
+				...a.mb_md,
+			}}
+		>
 			<ScreenHider style={{}} screenDescription={"profile"} modui={moderation.ui("profileView")}>
 				<ProfileHeaderStandard
 					// @ts-ignore ProfileViewBasic is close enough -prf
@@ -778,20 +989,27 @@ function MockAccountScreen({
 function Flag({ v, label }: { v: boolean | undefined; label: string }) {
 	const t = useTheme();
 	return (
-		<View style={[a.flex_row, a.align_center, a.gap_xs]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_xs,
+			}}
+		>
 			<View
-				style={[
-					a.justify_center,
-					a.align_center,
-					a.rounded_xs,
-					a.border,
-					t.atoms.border_contrast_medium,
-					{
+				style={{
+					...a.justify_center,
+					...a.align_center,
+					...a.rounded_xs,
+					...a.border,
+					...t.atoms.border_contrast_medium,
+
+					...{
 						backgroundColor: t.palette.contrast_25,
 						width: 14,
 						height: 14,
 					},
-				]}
+				}}
 			>
 				{v && <Check size="xs" fill={t.palette.contrast_900} />}
 			</View>

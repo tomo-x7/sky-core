@@ -87,7 +87,13 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<AppBskyGraphDefs.StarterPackView>) => {
 		return (
-			<View style={[a.p_lg, (isTabletOrDesktop || index !== 0) && a.border_t, t.atoms.border_contrast_low]}>
+			<View
+				style={{
+					...a.p_lg,
+					...((isTabletOrDesktop || index !== 0) && a.border_t),
+					...t.atoms.border_contrast_low,
+				}}
+			>
 				<StarterPackCard starterPack={item} />
 			</View>
 		);
@@ -121,13 +127,21 @@ function CreateAnother() {
 	const navigation = useNavigation<NavigationProp>();
 
 	return (
-		<View style={[a.pr_md, a.pt_lg, a.gap_lg, a.border_t, t.atoms.border_contrast_low]}>
+		<View
+			style={{
+				...a.pr_md,
+				...a.pt_lg,
+				...a.gap_lg,
+				...a.border_t,
+				...t.atoms.border_contrast_low,
+			}}
+		>
 			<Button
 				label={"Create a starter pack"}
 				variant="solid"
 				color="secondary"
 				size="small"
-				style={[a.self_center]}
+				style={a.self_center}
 				onPress={() => navigation.navigate("StarterPackWizard")}
 			>
 				<ButtonText>Create another</ButtonText>
@@ -177,17 +191,41 @@ function Empty() {
 
 	return (
 		<LinearGradientBackground
-			style={[a.px_lg, a.py_lg, a.justify_between, a.gap_lg, a.shadow_lg, { marginTop: a.border.borderWidth }]}
+			style={{
+				...a.px_lg,
+				...a.py_lg,
+				...a.justify_between,
+				...a.gap_lg,
+				...a.shadow_lg,
+				...{ marginTop: a.border.borderWidth },
+			}}
 		>
-			<View style={[a.gap_xs]}>
-				<Text style={[a.font_bold, a.text_lg, { color: "white" }]}>
+			<View style={a.gap_xs}>
+				<Text
+					style={{
+						...a.font_bold,
+						...a.text_lg,
+						...{ color: "white" },
+					}}
+				>
 					You haven't created a starter pack yet!
 				</Text>
-				<Text style={[a.text_md, { color: "white" }]}>
+				<Text
+					style={{
+						...a.text_md,
+						...{ color: "white" },
+					}}
+				>
 					Starter packs let you easily share your favorite feeds and people with your friends.
 				</Text>
 			</View>
-			<View style={[a.flex_row, a.gap_md, { marginLeft: "auto" }]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_md,
+					...{ marginLeft: "auto" },
+				}}
+			>
 				<Button
 					label={"Create a starter pack for me"}
 					variant="ghost"
@@ -229,7 +267,6 @@ function Empty() {
 					<ButtonText>Create</ButtonText>
 				</Button>
 			</View>
-
 			<Prompt.Outer control={confirmDialogControl}>
 				<Prompt.TitleText>Generate a starter pack</Prompt.TitleText>
 				<Prompt.DescriptionText>

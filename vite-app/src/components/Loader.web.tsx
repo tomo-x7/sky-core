@@ -9,10 +9,25 @@ export function Loader(props: Props) {
 	const common = useCommonSVGProps(props);
 
 	return (
-		<View style={[a.relative, a.justify_center, a.align_center, { width: common.size, height: common.size }]}>
+		<View
+			style={{
+				...a.relative,
+				...a.justify_center,
+				...a.align_center,
+				...{ width: common.size, height: common.size },
+			}}
+		>
 			{/* css rotation animation - /bskyweb/templates/base.html */}
 			<div className="rotate-500ms">
-				<Icon {...props} style={[a.absolute, a.inset_0, t.atoms.text_contrast_high, flatten(props.style)]} />
+				<Icon
+					{...props}
+					style={{
+						...a.absolute,
+						...a.inset_0,
+						...t.atoms.text_contrast_high,
+						...flatten(props.style),
+					}}
+				/>
 			</div>
 		</View>
 	);

@@ -49,7 +49,14 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 	}, [clearRequestedAccount, onDismiss]);
 
 	return (
-		<View testID="noSessionView" style={[a.util_screen_outer, t.atoms.bg, { paddingTop: 0, paddingBottom: 0 }]}>
+		<View
+			testID="noSessionView"
+			style={{
+				...a.util_screen_outer,
+				...t.atoms.bg,
+				...{ paddingTop: 0, paddingBottom: 0 },
+			}}
+		>
 			<ErrorBoundary>
 				{onDismiss && screenState === ScreenState.S_LoginOrCreateAccount ? (
 					<Button
@@ -58,14 +65,15 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 						color="secondary_inverted"
 						size="small"
 						shape="round"
-						style={[
-							a.absolute,
-							{
+						style={{
+							...a.absolute,
+
+							...{
 								top: tokens.space.xl,
 								right: tokens.space.xl,
 								zIndex: 100,
 							},
-						]}
+						}}
 						onPress={onPressDismiss}
 					>
 						<ButtonIcon icon={XIcon} />

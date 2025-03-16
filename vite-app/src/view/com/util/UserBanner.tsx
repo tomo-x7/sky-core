@@ -95,10 +95,18 @@ export function UserBanner({
 							) : (
 								<View
 									testID="userBannerFallback"
-									style={[styles.bannerImage, t.atoms.bg_contrast_25]}
+									style={{
+										...styles.bannerImage,
+										...t.atoms.bg_contrast_25,
+									}}
 								/>
 							)}
-							<View style={[styles.editButtonContainer, pal.btn]}>
+							<View
+								style={{
+									...styles.editButtonContainer,
+									...pal.btn,
+								}}
+							>
 								<CameraFilled height={14} width={14} style={t.atoms.text} />
 							</View>
 						</Pressable>
@@ -136,7 +144,10 @@ export function UserBanner({
 	) : banner ? (
 		<Image
 			testID="userBannerImage"
-			style={[styles.bannerImage, { backgroundColor: theme.palette.default.backgroundLight }]}
+			style={{
+				...styles.bannerImage,
+				...{ backgroundColor: theme.palette.default.backgroundLight },
+			}}
 			// @ts-ignore
 			contentFit="cover"
 			source={{ uri: banner }}
@@ -147,7 +158,10 @@ export function UserBanner({
 	) : (
 		<View
 			testID="userBannerFallback"
-			style={[styles.bannerImage, type === "labeler" ? styles.labelerBanner : t.atoms.bg_contrast_25]}
+			style={{
+				...styles.bannerImage,
+				...(type === "labeler" ? styles.labelerBanner : t.atoms.bg_contrast_25),
+			}}
 		/>
 	);
 }

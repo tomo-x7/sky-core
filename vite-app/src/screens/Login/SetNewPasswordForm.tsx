@@ -81,10 +81,14 @@ export const SetNewPasswordForm = ({
 
 	return (
 		<FormContainer testID="setNewPasswordForm" titleText={<>Set new password</>}>
-			<Text style={[a.leading_snug, a.mb_sm]}>
+			<Text
+				style={{
+					...a.leading_snug,
+					...a.mb_sm,
+				}}
+			>
 				You will receive an email with a "reset code." Enter that code here, then enter your new password.
 			</Text>
-
 			<View>
 				<TextField.LabelText>Reset code</TextField.LabelText>
 				<TextField.Root>
@@ -105,7 +109,6 @@ export const SetNewPasswordForm = ({
 					/>
 				</TextField.Root>
 			</View>
-
 			<View>
 				<TextField.LabelText>New password</TextField.LabelText>
 				<TextField.Root>
@@ -128,10 +131,14 @@ export const SetNewPasswordForm = ({
 					/>
 				</TextField.Root>
 			</View>
-
 			<FormError error={error} />
-
-			<View style={[a.flex_row, a.align_center, a.pt_lg]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.pt_lg,
+				}}
+			>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
@@ -143,7 +150,16 @@ export const SetNewPasswordForm = ({
 						<ButtonText>Next</ButtonText>
 					</Button>
 				)}
-				{isProcessing ? <Text style={[t.atoms.text_contrast_high, a.pl_md]}>Updating...</Text> : undefined}
+				{isProcessing ? (
+					<Text
+						style={{
+							...t.atoms.text_contrast_high,
+							...a.pl_md,
+						}}
+					>
+						Updating...
+					</Text>
+				) : undefined}
 			</View>
 		</FormContainer>
 	);

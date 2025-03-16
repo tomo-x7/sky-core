@@ -65,14 +65,14 @@ export function StepCaptcha() {
 
 	return (
 		<ScreenTransition>
-			<View style={[a.gap_lg]}>
+			<View style={a.gap_lg}>
 				<View
-					style={[
-						a.w_full,
-						a.overflow_hidden,
-						{ minHeight: 510 },
-						completed && [a.align_center, a.justify_center],
-					]}
+					style={{
+						...a.w_full,
+						...a.overflow_hidden,
+						...{ minHeight: 510 },
+						...(completed && [a.align_center, a.justify_center]),
+					}}
 				>
 					{!completed ? (
 						<CaptchaWebView

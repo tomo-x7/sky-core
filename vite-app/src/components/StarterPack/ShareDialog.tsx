@@ -67,36 +67,64 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 		<>
 			<Dialog.ScrollableInner label={"Share link dialog"}>
 				{!imageLoaded || !link ? (
-					<View style={[a.p_xl, a.align_center]}>
+					<View
+						style={{
+							...a.p_xl,
+							...a.align_center,
+						}}
+					>
 						<Loader size="xl" />
 					</View>
 				) : (
-					<View style={[!isTabletOrDesktop && a.gap_lg]}>
-						<View style={[a.gap_sm, isTabletOrDesktop && a.pb_lg]}>
-							<Text style={[a.font_bold, a.text_2xl]}>Invite people to this starter pack!</Text>
-							<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
+					<View style={!isTabletOrDesktop && a.gap_lg}>
+						<View
+							style={{
+								...a.gap_sm,
+								...(isTabletOrDesktop && a.pb_lg),
+							}}
+						>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_2xl,
+								}}
+							>
+								Invite people to this starter pack!
+							</Text>
+							<Text
+								style={{
+									...a.text_md,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								Share this starter pack and help people join your community on Bluesky.
 							</Text>
 						</View>
 						<Image
 							source={{ uri: imageUrl }}
-							style={[
-								a.rounded_sm,
-								{
+							style={{
+								...a.rounded_sm,
+
+								...{
 									aspectRatio: 1200 / 630,
 									transform: [{ scale: isTabletOrDesktop ? 0.85 : 1 }],
 									marginTop: isTabletOrDesktop ? -20 : 0,
 								},
-							]}
+							}}
 							accessibilityIgnoresInvertColors={true}
 						/>
-						<View style={[a.gap_md, [a.gap_sm, a.flex_row_reverse, { marginLeft: "auto" }]]}>
+						<View
+							style={{
+								...a.gap_md,
+								...[a.gap_sm, a.flex_row_reverse, { marginLeft: "auto" }],
+							}}
+						>
 							<Button
 								label={"Copy link"}
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={[a.self_center]}
+								style={a.self_center}
 								onPress={onShareLink}
 							>
 								<ButtonText>Copy Link</ButtonText>
@@ -106,7 +134,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={[a.self_center]}
+								style={a.self_center}
 								onPress={() => {
 									control.close(() => {
 										qrDialogControl.open();

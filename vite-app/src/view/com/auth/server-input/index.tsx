@@ -111,8 +111,20 @@ function DialogInner({
 
 	return (
 		<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description" accessibilityLabelledBy="dialog-title">
-			<View style={[a.relative, a.gap_md, a.w_full]}>
-				<Text nativeID="dialog-title" style={[a.text_2xl, a.font_bold]}>
+			<View
+				style={{
+					...a.relative,
+					...a.gap_md,
+					...a.w_full,
+				}}
+			>
+				<Text
+					nativeID="dialog-title"
+					style={{
+						...a.text_2xl,
+						...a.font_bold,
+					}}
+				>
 					Choose your account provider
 				</Text>
 				<ToggleButton.Group
@@ -136,7 +148,15 @@ function DialogInner({
 				)}
 
 				{fixedOption === "custom" && (
-					<View style={[a.border, t.atoms.border_contrast_low, a.rounded_sm, a.px_md, a.py_md]}>
+					<View
+						style={{
+							...a.border,
+							...t.atoms.border_contrast_low,
+							...a.rounded_sm,
+							...a.px_md,
+							...a.py_md,
+						}}
+					>
 						<TextField.LabelText nativeID="address-input-label">Server address</TextField.LabelText>
 						<TextField.Root>
 							<TextField.Icon icon={Globe} />
@@ -151,14 +171,25 @@ function DialogInner({
 							/>
 						</TextField.Root>
 						{pdsAddressHistory.length > 0 && (
-							<View style={[a.flex_row, a.flex_wrap, a.mt_xs]}>
+							<View
+								style={{
+									...a.flex_row,
+									...a.flex_wrap,
+									...a.mt_xs,
+								}}
+							>
 								{pdsAddressHistory.map((uri) => (
 									<Button
 										key={uri}
 										variant="ghost"
 										color="primary"
 										label={uri}
-										style={[a.px_sm, a.py_xs, a.rounded_sm, a.gap_sm]}
+										style={{
+											...a.px_sm,
+											...a.py_xs,
+											...a.rounded_sm,
+											...a.gap_sm,
+										}}
 										onPress={() => setCustomAddress(uri)}
 									>
 										<ButtonText>{uri}</ButtonText>
@@ -169,8 +200,15 @@ function DialogInner({
 					</View>
 				)}
 
-				<View style={[a.py_xs]}>
-					<P style={[t.atoms.text_contrast_medium, a.text_sm, a.leading_snug, a.flex_1]}>
+				<View style={a.py_xs}>
+					<P
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.text_sm,
+							...a.leading_snug,
+							...a.flex_1,
+						}}
+					>
 						{isFirstTimeUser ? (
 							<>If you're a developer, you can host your own server.</>
 						) : (

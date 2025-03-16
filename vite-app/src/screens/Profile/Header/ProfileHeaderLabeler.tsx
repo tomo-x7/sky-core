@@ -130,8 +130,24 @@ let ProfileHeaderLabeler = ({
 			hideBackButton={hideBackButton}
 			isPlaceholderProfile={isPlaceholderProfile}
 		>
-			<View style={[a.px_lg, a.pt_md, a.pb_sm]} pointerEvents={"box-none"}>
-				<View style={[a.flex_row, a.justify_end, a.align_center, a.gap_xs, a.pb_lg]} pointerEvents={"box-none"}>
+			<View
+				style={{
+					...a.px_lg,
+					...a.pt_md,
+					...a.pb_sm,
+				}}
+				pointerEvents={"box-none"}
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.justify_end,
+						...a.align_center,
+						...a.gap_xs,
+						...a.pb_lg,
+					}}
+					pointerEvents={"box-none"}
+				>
 					{isMe ? (
 						<>
 							<Button
@@ -156,31 +172,30 @@ let ProfileHeaderLabeler = ({
 							>
 								{(state) => (
 									<View
-										style={[
-											{
-												paddingVertical: 9,
-												paddingHorizontal: 12,
-												borderRadius: 6,
-												gap: 6,
-												backgroundColor: isSubscribed
-													? state.hovered || state.pressed
-														? t.palette.contrast_50
-														: t.palette.contrast_25
-													: state.hovered || state.pressed
-														? tokens.color.temp_purple_dark
-														: tokens.color.temp_purple,
-											},
-										]}
+										style={{
+											paddingVertical: 9,
+											paddingHorizontal: 12,
+											borderRadius: 6,
+											gap: 6,
+											backgroundColor: isSubscribed
+												? state.hovered || state.pressed
+													? t.palette.contrast_50
+													: t.palette.contrast_25
+												: state.hovered || state.pressed
+													? tokens.color.temp_purple_dark
+													: tokens.color.temp_purple,
+										}}
 									>
 										<Text
-											style={[
-												{
+											style={{
+												...{
 													color: isSubscribed ? t.palette.contrast_700 : t.palette.white,
 												},
-												a.font_bold,
-												a.text_center,
-												a.leading_tight,
-											]}
+
+												...a.font_bold,
+												...a.text_center,
+												...a.leading_tight,
+											}}
 										>
 											{isSubscribed ? <>Unsubscribe</> : <>Subscribe to Labeler</>}
 										</Text>
@@ -191,7 +206,14 @@ let ProfileHeaderLabeler = ({
 					) : null}
 					<ProfileMenu profile={profile} />
 				</View>
-				<View style={[a.flex_col, a.gap_2xs, a.pt_2xs, a.pb_md]}>
+				<View
+					style={{
+						...a.flex_col,
+						...a.gap_2xs,
+						...a.pt_2xs,
+						...a.pb_md,
+					}}
+				>
 					<ProfileHeaderDisplayName profile={profile} moderation={moderation} />
 					<ProfileHeaderHandle profile={profile} />
 				</View>
@@ -202,7 +224,7 @@ let ProfileHeaderLabeler = ({
 							<View pointerEvents="auto">
 								<RichText
 									testID="profileHeaderDescription"
-									style={[a.text_md]}
+									style={a.text_md}
 									numberOfLines={15}
 									value={descriptionRT}
 									enableTags
@@ -211,7 +233,14 @@ let ProfileHeaderLabeler = ({
 							</View>
 						) : undefined}
 						{!isAppLabeler(profile.did) && (
-							<View style={[a.flex_row, a.gap_xs, a.align_center, a.pt_lg]}>
+							<View
+								style={{
+									...a.flex_row,
+									...a.gap_xs,
+									...a.align_center,
+									...a.pt_lg,
+								}}
+							>
 								<Button
 									testID="toggleLikeBtn"
 									size="small"
@@ -242,12 +271,12 @@ let ProfileHeaderLabeler = ({
 									>
 										{({ hovered, focused, pressed }) => (
 											<Text
-												style={[
-													a.font_bold,
-													a.text_sm,
-													t.atoms.text_contrast_medium,
-													(hovered || focused || pressed) && t.atoms.text_contrast_high,
-												]}
+												style={{
+													...a.font_bold,
+													...a.text_sm,
+													...t.atoms.text_contrast_medium,
+													...((hovered || focused || pressed) && t.atoms.text_contrast_high),
+												}}
 											>
 												<>
 													Liked by {likeCount} {likeCount === 1 ? "user" : "users"}

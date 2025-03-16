@@ -52,5 +52,15 @@ export function P({ style, ...rest }: TextProps) {
 		role: "paragraph",
 	};
 	// @ts-ignore
-	return <Text {...attr} {...rest} style={[atoms.text_md, atoms.leading_normal, flatten(style)]} />;
+	return (
+		<Text
+			{...attr}
+			{...rest}
+			style={{
+				...atoms.text_md,
+				...atoms.leading_normal,
+				...flatten(style),
+			}}
+		/>
+	);
 }

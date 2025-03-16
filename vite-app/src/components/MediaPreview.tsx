@@ -58,7 +58,17 @@ export function Outer({
 	children?: React.ReactNode;
 	style?: StyleProp<ViewStyle>;
 }) {
-	return <View style={[a.flex_row, a.gap_xs, style]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.flex_row,
+				...a.gap_xs,
+				...style,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 export function ImageItem({
@@ -72,11 +82,21 @@ export function ImageItem({
 }) {
 	const t = useTheme();
 	return (
-		<View style={[a.relative, a.flex_1, { aspectRatio: 1, maxWidth: 100 }]}>
+		<View
+			style={{
+				...a.relative,
+				...a.flex_1,
+				...{ aspectRatio: 1, maxWidth: 100 },
+			}}
+		>
 			<Image
 				key={thumbnail}
 				source={{ uri: thumbnail }}
-				style={[a.flex_1, a.rounded_xs, t.atoms.bg_contrast_25]}
+				style={{
+					...a.flex_1,
+					...a.rounded_xs,
+					...t.atoms.bg_contrast_25,
+				}}
 				//@ts-ignore
 				contentFit="cover"
 				accessible={true}
@@ -84,7 +104,7 @@ export function ImageItem({
 				accessibilityHint={alt}
 				accessibilityLabel=""
 			/>
-			<MediaInsetBorder style={[a.rounded_xs]} />
+			<MediaInsetBorder style={a.rounded_xs} />
 			{children}
 		</View>
 	);
@@ -93,7 +113,14 @@ export function ImageItem({
 export function GifItem({ thumbnail, alt }: { thumbnail: string; alt?: string }) {
 	return (
 		<ImageItem thumbnail={thumbnail} alt={alt}>
-			<View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
+			<View
+				style={{
+					...a.absolute,
+					...a.inset_0,
+					...a.justify_center,
+					...a.align_center,
+				}}
+			>
 				<PlayButtonIcon size={24} />
 			</View>
 			<View style={styles.altContainer}>
@@ -113,13 +140,13 @@ export function VideoItem({
 	if (!thumbnail) {
 		return (
 			<View
-				style={[
-					{ backgroundColor: "black" },
-					a.flex_1,
-					{ aspectRatio: 1, maxWidth: 100 },
-					a.justify_center,
-					a.align_center,
-				]}
+				style={{
+					...{ backgroundColor: "black" },
+					...a.flex_1,
+					...{ aspectRatio: 1, maxWidth: 100 },
+					...a.justify_center,
+					...a.align_center,
+				}}
 			>
 				<PlayButtonIcon size={24} />
 			</View>
@@ -127,7 +154,14 @@ export function VideoItem({
 	}
 	return (
 		<ImageItem thumbnail={thumbnail} alt={alt}>
-			<View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
+			<View
+				style={{
+					...a.absolute,
+					...a.inset_0,
+					...a.justify_center,
+					...a.align_center,
+				}}
+			>
 				<PlayButtonIcon size={24} />
 			</View>
 		</ImageItem>

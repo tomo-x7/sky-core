@@ -61,7 +61,6 @@ export function SuggestedFollowPlaceholder() {
 				<ProfileCard.AvatarPlaceholder />
 				<ProfileCard.NameAndHandlePlaceholder />
 			</ProfileCard.Header>
-
 			<ProfileCard.DescriptionPlaceholder numberOfLines={2} />
 		</CardOuter>
 	);
@@ -75,7 +74,6 @@ export function SuggestedFeedsCardPlaceholder() {
 				<FeedCard.AvatarPlaceholder />
 				<FeedCard.TitleAndBylinePlaceholder creator />
 			</FeedCard.Header>
-
 			<FeedCard.DescriptionPlaceholder />
 		</CardOuter>
 	);
@@ -237,7 +235,10 @@ export function ProfileGrid({
 					key={profile.did}
 					profile={profile}
 					//@ts-ignore
-					style={[a.flex_1, gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]]}
+					style={{
+						...a.flex_1,
+						...(gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]),
+					}}
 				>
 					{({ hovered, pressed }) => (
 						<CardOuter style={{ ...a.flex_1, ...(hovered || pressed ? t.atoms.border_contrast_high : {}) }}>
@@ -268,21 +269,42 @@ export function ProfileGrid({
 	return (
 		<div style={{ ...a.border_t, ...t.atoms.border_contrast_low, ...t.atoms.bg_contrast_25 }}>
 			<div style={{ ...a.p_lg, ...a.pb_xs, ...a.flex_row, ...a.align_center, ...a.justify_between }}>
-				<Text style={[a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>
+				<Text
+					style={{
+						...a.text_sm,
+						...a.font_bold,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					{viewContext === "profile" ? <>Similar accounts</> : <>Suggested for you</>}
 				</Text>
 				<Person fill={t.atoms.text_contrast_low.color} size="sm" />
 			</div>
-
 			{gtMobile ? (
 				<View style={{ ...a.flex_1, ...a.px_lg, ...a.pt_sm, ...a.pb_lg, ...a.gap_md }}>
-					<View style={[a.flex_1, a.flex_row, a.flex_wrap, a.gap_sm]}>{content}</View>
+					<View
+						style={{
+							...a.flex_1,
+							...a.flex_row,
+							...a.flex_wrap,
+							...a.gap_sm,
+						}}
+					>
+						{content}
+					</View>
 
-					<View style={[a.flex_row, a.justify_end, a.align_center, a.gap_md]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.justify_end,
+							...a.align_center,
+							...a.gap_md,
+						}}
+					>
 						<InlineLinkText
 							label={"Browse more suggestions"}
 							to="/search"
-							style={[t.atoms.text_contrast_medium]}
+							style={t.atoms.text_contrast_medium}
 						>
 							Browse more suggestions
 						</InlineLinkText>
@@ -297,7 +319,15 @@ export function ProfileGrid({
 						snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
 						decelerationRate="fast"
 					>
-						<View style={[a.px_lg, a.pt_sm, a.pb_lg, a.flex_row, a.gap_md]}>
+						<View
+							style={{
+								...a.px_lg,
+								...a.pt_sm,
+								...a.pb_lg,
+								...a.flex_row,
+								...a.gap_md,
+							}}
+						>
 							{content}
 
 							<Button
@@ -307,9 +337,25 @@ export function ProfileGrid({
 								}}
 							>
 								<CardOuter style={{ ...a.flex_1, borderWidth: 0 }}>
-									<View style={[a.flex_1, a.justify_center]}>
-										<View style={[a.flex_row, a.px_lg]}>
-											<Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>
+									<View
+										style={{
+											...a.flex_1,
+											...a.justify_center,
+										}}
+									>
+										<View
+											style={{
+												...a.flex_row,
+												...a.px_lg,
+											}}
+										>
+											<Text
+												style={{
+													...a.pr_xl,
+													...a.flex_1,
+													...a.leading_snug,
+												}}
+											>
 												Browse more suggestions on the Explore page
 											</Text>
 
@@ -374,23 +420,59 @@ export function SuggestedFeeds() {
 	);
 
 	return error ? null : (
-		<View style={[a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
-			<View style={[a.pt_2xl, a.px_lg, a.flex_row, a.pb_xs]}>
-				<Text style={[a.flex_1, a.text_lg, a.font_bold, t.atoms.text_contrast_medium]}>
+		<View
+			style={{
+				...a.border_t,
+				...t.atoms.border_contrast_low,
+				...t.atoms.bg_contrast_25,
+			}}
+		>
+			<View
+				style={{
+					...a.pt_2xl,
+					...a.px_lg,
+					...a.flex_row,
+					...a.pb_xs,
+				}}
+			>
+				<Text
+					style={{
+						...a.flex_1,
+						...a.text_lg,
+						...a.font_bold,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					Some other feeds you might like
 				</Text>
 				<Hashtag fill={t.atoms.text_contrast_low.color} />
 			</View>
 
 			{gtMobile ? (
-				<View style={[a.flex_1, a.px_lg, a.pt_md, a.pb_xl, a.gap_md]}>
+				<View
+					style={{
+						...a.flex_1,
+						...a.px_lg,
+						...a.pt_md,
+						...a.pb_xl,
+						...a.gap_md,
+					}}
+				>
 					{content}
 
-					<View style={[a.flex_row, a.justify_end, a.align_center, a.pt_xs, a.gap_md]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.justify_end,
+							...a.align_center,
+							...a.pt_xs,
+							...a.gap_md,
+						}}
+					>
 						<InlineLinkText
 							label={"Browse more suggestions"}
 							to="/search"
-							style={[t.atoms.text_contrast_medium]}
+							style={t.atoms.text_contrast_medium}
 						>
 							Browse more suggestions
 						</InlineLinkText>
@@ -405,7 +487,15 @@ export function SuggestedFeeds() {
 						snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
 						decelerationRate="fast"
 					>
-						<View style={[a.px_lg, a.pt_md, a.pb_xl, a.flex_row, a.gap_md]}>
+						<View
+							style={{
+								...a.px_lg,
+								...a.pt_md,
+								...a.pb_xl,
+								...a.flex_row,
+								...a.gap_md,
+							}}
+						>
 							{content}
 
 							<Button
@@ -413,12 +503,28 @@ export function SuggestedFeeds() {
 								onPress={() => {
 									navigation.navigate("SearchTab");
 								}}
-								style={[a.flex_col]}
+								style={a.flex_col}
 							>
 								<CardOuter style={a.flex_1}>
-									<View style={[a.flex_1, a.justify_center]}>
-										<View style={[a.flex_row, a.px_lg]}>
-											<Text style={[a.pr_xl, a.flex_1, a.leading_snug]}>
+									<View
+										style={{
+											...a.flex_1,
+											...a.justify_center,
+										}}
+									>
+										<View
+											style={{
+												...a.flex_row,
+												...a.px_lg,
+											}}
+										>
+											<Text
+												style={{
+													...a.pr_xl,
+													...a.flex_1,
+													...a.leading_snug,
+												}}
+											>
 												Browse more suggestions on the Explore page
 											</Text>
 
@@ -438,7 +544,14 @@ export function SuggestedFeeds() {
 export function ProgressGuide() {
 	const t = useTheme();
 	return (
-		<View style={[t.atoms.border_contrast_low, a.px_lg, a.py_lg, a.pb_lg]}>
+		<View
+			style={{
+				...t.atoms.border_contrast_low,
+				...a.px_lg,
+				...a.py_lg,
+				...a.pb_lg,
+			}}
+		>
 			<ProgressGuideList />
 		</View>
 	);

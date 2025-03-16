@@ -65,13 +65,14 @@ export function ActionsWrapper({
 	return (
 		<GestureDetector gesture={composedGestures}>
 			<Animated.View
-				style={[
-					{
+				style={{
+					...{
 						maxWidth: "80%",
 					},
-					isFromSelf ? a.self_end : a.self_start,
-					animatedStyle,
-				]}
+
+					...(isFromSelf ? a.self_end : a.self_start),
+					...animatedStyle,
+				}}
 				accessible={true}
 				accessibilityActions={[{ name: "activate", label: "Open message options" }]}
 				onAccessibilityAction={open}

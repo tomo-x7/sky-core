@@ -116,7 +116,7 @@ export function Group({
 	return (
 		<GroupContext.Provider value={context}>
 			<View
-				style={[a.w_full]}
+				style={a.w_full}
 				role={groupRole}
 				{...(groupRole === "radiogroup"
 					? {
@@ -203,7 +203,12 @@ export function Item({
 				onPressOut={onPressOut}
 				onFocus={onFocus}
 				onBlur={onBlur}
-				style={[a.flex_row, a.align_center, a.gap_sm, flatten(style)]}
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.gap_sm,
+					...flatten(style),
+				}}
 			>
 				{typeof children === "function" ? children(state) : children}
 			</Pressable>
@@ -216,15 +221,17 @@ export function LabelText({ children, style }: React.PropsWithChildren<TextStyle
 	const { disabled } = useItemContext();
 	return (
 		<Text
-			style={[
-				a.font_bold,
-				a.leading_tight,
-				{
+			style={{
+				...a.font_bold,
+				...a.leading_tight,
+
+				...{
 					userSelect: "none",
 					color: disabled ? t.atoms.text_contrast_low.color : t.atoms.text_contrast_high.color,
 				},
-				flatten(style),
-			]}
+
+				...flatten(style),
+			}}
 		>
 			{children}
 		</Text>
@@ -312,19 +319,21 @@ export function Checkbox() {
 	});
 	return (
 		<View
-			style={[
-				a.justify_center,
-				a.align_center,
-				a.rounded_xs,
-				t.atoms.border_contrast_high,
-				{
+			style={{
+				...a.justify_center,
+				...a.align_center,
+				...a.rounded_xs,
+				...t.atoms.border_contrast_high,
+
+				...{
 					borderWidth: 1,
 					height: 24,
 					width: 24,
 				},
-				baseStyles,
-				hovered ? baseHoverStyles : {},
-			]}
+
+				...baseStyles,
+				...(hovered ? baseHoverStyles : {}),
+			}}
 		>
 			{selected ? <Checkmark size="xs" fill={t.palette.primary_500} /> : null}
 		</View>
@@ -344,30 +353,34 @@ export function Switch() {
 	});
 	return (
 		<View
-			style={[
-				a.relative,
-				a.rounded_full,
-				t.atoms.bg,
-				t.atoms.border_contrast_high,
-				{
+			style={{
+				...a.relative,
+				...a.rounded_full,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_high,
+
+				...{
 					borderWidth: 1,
 					height: 24,
 					width: 36,
 					padding: 3,
 				},
-				baseStyles,
-				hovered ? baseHoverStyles : {},
-			]}
+
+				...baseStyles,
+				...(hovered ? baseHoverStyles : {}),
+			}}
 		>
 			<Animated.View
 				layout={LinearTransition.duration(100)}
-				style={[
-					a.rounded_full,
-					{
+				style={{
+					...a.rounded_full,
+
+					...{
 						height: 16,
 						width: 16,
 					},
-					selected
+
+					...(selected
 						? {
 								backgroundColor: t.palette.primary_500,
 								alignSelf: "flex-end",
@@ -375,9 +388,10 @@ export function Switch() {
 						: {
 								backgroundColor: t.palette.contrast_400,
 								alignSelf: "flex-start",
-							},
-					indicatorStyles,
-				]}
+							}),
+
+					...indicatorStyles,
+				}}
 			/>
 		</View>
 	);
@@ -396,33 +410,37 @@ export function Radio() {
 	});
 	return (
 		<View
-			style={[
-				a.justify_center,
-				a.align_center,
-				a.rounded_full,
-				t.atoms.border_contrast_high,
-				{
+			style={{
+				...a.justify_center,
+				...a.align_center,
+				...a.rounded_full,
+				...t.atoms.border_contrast_high,
+
+				...{
 					borderWidth: 1,
 					height: 24,
 					width: 24,
 				},
-				baseStyles,
-				hovered ? baseHoverStyles : {},
-			]}
+
+				...baseStyles,
+				...(hovered ? baseHoverStyles : {}),
+			}}
 		>
 			{selected ? (
 				<View
-					style={[
-						a.absolute,
-						a.rounded_full,
-						{ height: 16, width: 16 },
-						selected
+					style={{
+						...a.absolute,
+						...a.rounded_full,
+						...{ height: 16, width: 16 },
+
+						...(selected
 							? {
 									backgroundColor: t.palette.primary_500,
 								}
-							: {},
-						indicatorStyles,
-					]}
+							: {}),
+
+						...indicatorStyles,
+					}}
 				/>
 			) : null}
 		</View>

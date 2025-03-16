@@ -52,7 +52,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={[a.text_sm]}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={a.text_sm}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have blocked.
@@ -75,7 +75,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={[a.text_sm]}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={a.text_sm}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have muted.
@@ -98,7 +98,14 @@ function ModerationDetailsDialogInner({
 	} else if (modcause.type === "label") {
 		name = desc.name;
 		description = (
-			<Text emoji style={[t.atoms.text, a.text_md, a.leading_snug]}>
+			<Text
+				emoji
+				style={{
+					...t.atoms.text,
+					...a.text_md,
+					...a.leading_snug,
+				}}
+			>
 				{desc.description}
 			</Text>
 		);
@@ -119,36 +126,74 @@ function ModerationDetailsDialogInner({
 				paddingBottom: 0,
 			}}
 		>
-			<View style={[xGutters, a.pb_lg]}>
-				<Text emoji style={[t.atoms.text, a.text_2xl, a.font_heavy, a.mb_sm]}>
+			<View
+				style={{
+					...xGutters,
+					...a.pb_lg,
+				}}
+			>
+				<Text
+					emoji
+					style={{
+						...t.atoms.text,
+						...a.text_2xl,
+						...a.font_heavy,
+						...a.mb_sm,
+					}}
+				>
 					{name}
 				</Text>
-				<Text style={[t.atoms.text, a.text_sm, a.leading_snug]}>{description}</Text>
+				<Text
+					style={{
+						...t.atoms.text,
+						...a.text_sm,
+						...a.leading_snug,
+					}}
+				>
+					{description}
+				</Text>
 			</View>
-
 			{modcause?.type === "label" && (
 				<View
-					style={[
-						xGutters,
-						a.py_md,
-						a.border_t,
-						t.atoms.bg_contrast_25,
-						t.atoms.border_contrast_low,
-						{
+					style={{
+						...xGutters,
+						...a.py_md,
+						...a.border_t,
+						...t.atoms.bg_contrast_25,
+						...t.atoms.border_contrast_low,
+
+						...{
 							borderBottomLeftRadius: a.rounded_md.borderRadius,
 							borderBottomRightRadius: a.rounded_md.borderRadius,
 						},
-					]}
+					}}
 				>
 					{modcause.source.type === "user" ? (
-						<Text style={[t.atoms.text, a.text_md, a.leading_snug]}>
+						<Text
+							style={{
+								...t.atoms.text,
+								...a.text_md,
+								...a.leading_snug,
+							}}
+						>
 							This label was applied by the author.
 						</Text>
 					) : (
 						<>
-							<View style={[a.flex_row, a.justify_between, a.gap_xl, { paddingBottom: 1 }]}>
+							<View
+								style={{
+									...a.flex_row,
+									...a.justify_between,
+									...a.gap_xl,
+									...{ paddingBottom: 1 },
+								}}
+							>
 								<Text
-									style={[a.flex_1, a.leading_snug, t.atoms.text_contrast_medium]}
+									style={{
+										...a.flex_1,
+										...a.leading_snug,
+										...t.atoms.text_contrast_medium,
+									}}
 									numberOfLines={1}
 								>
 									<>
@@ -168,7 +213,12 @@ function ModerationDetailsDialogInner({
 								{modcause.label.exp && (
 									<View>
 										<Text
-											style={[a.leading_snug, a.text_sm, a.italic, t.atoms.text_contrast_medium]}
+											style={{
+												...a.leading_snug,
+												...a.text_sm,
+												...a.italic,
+												...t.atoms.text_contrast_medium,
+											}}
 										>
 											<>Expires in {timeDiff(Date.now(), modcause.label.exp)}</>
 										</Text>
@@ -179,7 +229,6 @@ function ModerationDetailsDialogInner({
 					)}
 				</View>
 			)}
-
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

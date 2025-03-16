@@ -60,7 +60,13 @@ export function Root({ children, isInvalid = false }: RootProps) {
 	return (
 		<Context.Provider value={context}>
 			<View
-				style={[a.flex_row, a.align_center, a.relative, a.w_full, a.px_md]}
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.relative,
+					...a.w_full,
+					...a.px_md,
+				}}
 				{...{
 					onClick: () => inputRef.current?.focus(),
 					onMouseOver: onHoverIn,
@@ -220,20 +226,19 @@ export function createInput(Component: typeof TextInput) {
 					//@ts-ignore
 					style={flattened}
 				/>
-
 				<View
-					style={[
-						a.z_10,
-						a.absolute,
-						a.inset_0,
-						a.rounded_sm,
-						t.atoms.bg_contrast_25,
-						{ borderColor: "transparent", borderWidth: 2 },
-						ctx.hovered ? chromeHover : {},
-						ctx.focused ? chromeFocus : {},
-						ctx.isInvalid || isInvalid ? chromeError : {},
-						(ctx.isInvalid || isInvalid) && (ctx.hovered || ctx.focused) ? chromeErrorHover : {},
-					]}
+					style={{
+						...a.z_10,
+						...a.absolute,
+						...a.inset_0,
+						...a.rounded_sm,
+						...t.atoms.bg_contrast_25,
+						...{ borderColor: "transparent", borderWidth: 2 },
+						...(ctx.hovered ? chromeHover : {}),
+						...(ctx.focused ? chromeFocus : {}),
+						...(ctx.isInvalid || isInvalid ? chromeError : {}),
+						...((ctx.isInvalid || isInvalid) && (ctx.hovered || ctx.focused) ? chromeErrorHover : {}),
+					}}
 				/>
 			</>
 		);
@@ -245,7 +250,15 @@ export const Input = createInput(TextInput);
 export function LabelText({ nativeID, children }: React.PropsWithChildren<{ nativeID?: string }>) {
 	const t = useTheme();
 	return (
-		<Text nativeID={nativeID} style={[a.text_sm, a.font_bold, t.atoms.text_contrast_medium, a.mb_sm]}>
+		<Text
+			nativeID={nativeID}
+			style={{
+				...a.text_sm,
+				...a.font_bold,
+				...t.atoms.text_contrast_medium,
+				...a.mb_sm,
+			}}
+		>
 			{children}
 		</Text>
 	);
@@ -285,16 +298,21 @@ export function Icon({ icon: Comp }: { icon: React.ComponentType<SVGIconProps> }
 	}, [t]);
 
 	return (
-		<View style={[a.z_20, a.pr_xs]}>
+		<View
+			style={{
+				...a.z_20,
+				...a.pr_xs,
+			}}
+		>
 			<Comp
 				size="md"
-				style={[
-					{ color: t.palette.contrast_500, pointerEvents: "none", flexShrink: 0 },
-					ctx.hovered ? hover : {},
-					ctx.focused ? focus : {},
-					ctx.isInvalid && ctx.hovered ? errorHover : {},
-					ctx.isInvalid && ctx.focused ? errorFocus : {},
-				]}
+				style={{
+					...{ color: t.palette.contrast_500, pointerEvents: "none", flexShrink: 0 },
+					...(ctx.hovered ? hover : {}),
+					...(ctx.focused ? focus : {}),
+					...(ctx.isInvalid && ctx.hovered ? errorHover : {}),
+					...(ctx.isInvalid && ctx.focused ? errorFocus : {}),
+				}}
 			/>
 		</View>
 	);
@@ -318,16 +336,16 @@ export function SuffixText({
 			accessibilityLabel={label}
 			accessibilityHint={accessibilityHint}
 			numberOfLines={1}
-			style={[
-				a.z_20,
-				a.pr_sm,
-				a.text_md,
-				t.atoms.text_contrast_medium,
-				a.pointer_events_none,
-				[{ marginTop: -2 }, a.leading_snug],
-				(ctx.hovered || ctx.focused) && { color: t.palette.contrast_800 },
-				style,
-			]}
+			style={{
+				...a.z_20,
+				...a.pr_sm,
+				...a.text_md,
+				...t.atoms.text_contrast_medium,
+				...a.pointer_events_none,
+				...[{ marginTop: -2 }, a.leading_snug],
+				...((ctx.hovered || ctx.focused) && { color: t.palette.contrast_800 }),
+				...style,
+			}}
 		>
 			{children}
 		</Text>

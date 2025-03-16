@@ -59,7 +59,7 @@ export function Settings() {
 			<SettingsList.PressableItem destructive onPress={() => Toast.show("Sign out pressed")} label="Sign out">
 				<SettingsList.ItemText>Sign out</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.Item style={[a.mt_xl]}>
+			<SettingsList.Item style={a.mt_xl}>
 				<SettingsList.ItemIcon icon={PizzaIcon} />
 				<SettingsList.ItemText>Not pressable</SettingsList.ItemText>
 			</SettingsList.Item>
@@ -79,12 +79,22 @@ export function Settings() {
 			<SettingsList.PressableItem
 				onPress={() => Toast.show("Pressable pressed")}
 				label="Protect your account"
-				style={[a.my_sm, a.mx_lg, a.rounded_md, { backgroundColor: t.palette.primary_50 }]}
+				style={{
+					...a.my_sm,
+					...a.mx_lg,
+					...a.rounded_md,
+					...{ backgroundColor: t.palette.primary_50 },
+				}}
 				hoverStyle={[{ backgroundColor: t.palette.primary_100 }]}
 				contentContainerStyle={[a.rounded_md, a.px_lg]}
 			>
 				<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
-				<SettingsList.ItemText style={[{ color: t.palette.primary_500 }, a.font_bold]}>
+				<SettingsList.ItemText
+					style={{
+						...{ color: t.palette.primary_500 },
+						...a.font_bold,
+					}}
+				>
 					Protect your account
 				</SettingsList.ItemText>
 				<SettingsList.Chevron color={t.palette.primary_500} />

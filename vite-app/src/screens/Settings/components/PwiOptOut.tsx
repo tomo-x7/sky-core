@@ -65,22 +65,31 @@ export function PwiOptOut() {
 	}, [updateProfile, profile]);
 
 	return (
-		<View style={[a.flex_1, a.gap_sm]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.gap_sm,
+			}}
+		>
 			<Toggle.Item
 				name="logged_out_visibility"
 				disabled={!canToggle || updateProfile.isPending}
 				value={isOptedOut}
 				onChange={onToggleOptOut}
 				label={"Discourage apps from showing my account to logged-out users"}
-				style={[a.w_full]}
+				style={a.w_full}
 			>
-				<Toggle.LabelText style={[a.flex_1]}>
+				<Toggle.LabelText style={a.flex_1}>
 					Discourage apps from showing my account to logged-out users
 				</Toggle.LabelText>
 				<Toggle.Platform />
 			</Toggle.Item>
-
-			<Text style={[a.leading_snug, t.atoms.text_contrast_high]}>
+			<Text
+				style={{
+					...a.leading_snug,
+					...t.atoms.text_contrast_high,
+				}}
+			>
 				Bluesky will not show your profile and posts to logged-out users. Other apps may not honor this request.
 				This does not make your account private.
 			</Text>

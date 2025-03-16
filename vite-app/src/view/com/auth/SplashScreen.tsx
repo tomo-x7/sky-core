@@ -65,38 +65,69 @@ export const SplashScreen = ({
 					/>
 				</Pressable>
 			)}
-
-			<Layout.Center style={[a.h_full, a.flex_1]} ignoreTabletLayoutOffset>
+			<Layout.Center
+				style={{
+					...a.h_full,
+					...a.flex_1,
+				}}
+				ignoreTabletLayoutOffset
+			>
 				<View
 					testID="noSessionView"
-					style={[
-						a.h_full,
-						a.justify_center,
-						// @ts-expect-error web only
+					style={{
+						...a.h_full,
+						...a.justify_center,
+
+						...// @ts-expect-error web only
 						{ paddingBottom: "20vh" },
-						isMobileWeb && a.pb_5xl,
-						t.atoms.border_contrast_medium,
-						a.align_center,
-						a.gap_5xl,
-						a.flex_1,
-					]}
+
+						...(isMobileWeb && a.pb_5xl),
+						...t.atoms.border_contrast_medium,
+						...a.align_center,
+						...a.gap_5xl,
+						...a.flex_1,
+					}}
 				>
 					<ErrorBoundary>
-						<View style={[a.justify_center, a.align_center]}>
+						<View
+							style={{
+								...a.justify_center,
+								...a.align_center,
+							}}
+						>
 							<Logo width={kawaii ? 300 : 92} fill="sky" />
 
 							{!kawaii && (
-								<View style={[a.pb_sm, a.pt_5xl]}>
+								<View
+									style={{
+										...a.pb_sm,
+										...a.pt_5xl,
+									}}
+								>
 									<Logotype width={161} fill={t.atoms.text.color} />
 								</View>
 							)}
 
-							<Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>What's up?</Text>
+							<Text
+								style={{
+									...a.text_md,
+									...a.font_bold,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
+								What's up?
+							</Text>
 						</View>
 
 						<View
 							testID="signinOrCreateAccount"
-							style={[a.w_full, a.px_xl, a.gap_md, a.pb_2xl, { maxWidth: 320 }]}
+							style={{
+								...a.w_full,
+								...a.px_xl,
+								...a.gap_md,
+								...a.pb_2xl,
+								...{ maxWidth: 320 },
+							}}
 						>
 							<Button
 								testID="createAccountButton"
@@ -135,18 +166,18 @@ function Footer() {
 
 	return (
 		<View
-			style={[
-				a.absolute,
-				a.inset_0,
-				{ top: "auto" },
-				a.p_xl,
-				a.border_t,
-				a.flex_row,
-				a.flex_wrap,
-				a.gap_xl,
-				a.flex_1,
-				t.atoms.border_contrast_medium,
-			]}
+			style={{
+				...a.absolute,
+				...a.inset_0,
+				...{ top: "auto" },
+				...a.p_xl,
+				...a.border_t,
+				...a.flex_row,
+				...a.flex_wrap,
+				...a.gap_xl,
+				...a.flex_1,
+				...t.atoms.border_contrast_medium,
+			}}
 		>
 			<InlineLinkText label={"Learn more about Bluesky"} to="https://bsky.social">
 				Business
@@ -157,9 +188,7 @@ function Footer() {
 			<InlineLinkText label={"See jobs at Bluesky"} to="https://bsky.social/about/join">
 				Jobs
 			</InlineLinkText>
-
 			<View style={a.flex_1} />
-
 			<AppLanguageDropdown />
 		</View>
 	);

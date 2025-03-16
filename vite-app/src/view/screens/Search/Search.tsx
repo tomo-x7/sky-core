@@ -60,7 +60,7 @@ import { SearchLinkCard, SearchProfileCard } from "#/view/shell/desktop/Search";
 function Loader() {
 	return (
 		<Layout.Content>
-			<View style={[a.py_xl]}>
+			<View style={a.py_xl}>
 				<ActivityIndicator />
 			</View>
 		</Layout.Content>
@@ -72,25 +72,29 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 
 	return (
 		<Layout.Content>
-			<View style={[a.p_xl]}>
-				<View style={[t.atoms.bg_contrast_25, a.rounded_sm, a.p_lg]}>
-					<Text style={[a.text_md]}>{message}</Text>
+			<View style={a.p_xl}>
+				<View
+					style={{
+						...t.atoms.bg_contrast_25,
+						...a.rounded_sm,
+						...a.p_lg,
+					}}
+				>
+					<Text style={a.text_md}>{message}</Text>
 
 					{error && (
 						<>
 							<View
-								style={[
-									{
-										marginVertical: 12,
-										height: 1,
-										width: "100%",
-										backgroundColor: t.atoms.text.color,
-										opacity: 0.2,
-									},
-								]}
+								style={{
+									marginVertical: 12,
+									height: 1,
+									width: "100%",
+									backgroundColor: t.atoms.text.color,
+									opacity: 0.2,
+								}}
 							/>
 
-							<Text style={[t.atoms.text_contrast_medium]}>Error: {error}</Text>
+							<Text style={t.atoms.text_contrast_medium}>Error: {error}</Text>
 						</>
 					)}
 				</View>
@@ -266,7 +270,14 @@ let SearchScreenFeedsResults = ({
 				<List
 					data={results}
 					renderItem={({ item }) => (
-						<View style={[a.border_b, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
+						<View
+							style={{
+								...a.border_b,
+								...t.atoms.border_contrast_low,
+								...a.px_lg,
+								...a.py_lg,
+							}}
+						>
 							<FeedCard.Default view={item} />
 						</View>
 					)}
@@ -464,7 +475,13 @@ let SearchScreenInner = ({
 			onPageSelected={onPageSelected}
 			renderTabBar={(props) => (
 				// @ts-ignore
-				<Layout.Center style={[a.z_10, a.sticky, { top: headerHeight }]}>
+				<Layout.Center
+					style={{
+						...a.z_10,
+						...a.sticky,
+						...{ top: headerHeight },
+					}}
+				>
 					<TabBar items={sections.map((section) => section.title)} {...props} />
 				</Layout.Center>
 			)}
@@ -480,18 +497,45 @@ let SearchScreenInner = ({
 		<Layout.Center>
 			<View style={a.flex_1}>
 				{gtTablet && (
-					<View style={[a.border_b, t.atoms.border_contrast_low, a.px_lg, a.pt_sm, a.pb_lg]}>
-						<Text style={[a.text_2xl, a.font_heavy]}>Search</Text>
+					<View
+						style={{
+							...a.border_b,
+							...t.atoms.border_contrast_low,
+							...a.px_lg,
+							...a.pt_sm,
+							...a.pb_lg,
+						}}
+					>
+						<Text
+							style={{
+								...a.text_2xl,
+								...a.font_heavy,
+							}}
+						>
+							Search
+						</Text>
 					</View>
 				)}
 
-				<View style={[a.align_center, a.justify_center, a.py_4xl, a.gap_lg]}>
+				<View
+					style={{
+						...a.align_center,
+						...a.justify_center,
+						...a.py_4xl,
+						...a.gap_lg,
+					}}
+				>
 					<MagnifyingGlassIcon
 						strokeWidth={3}
 						size={60}
 						style={t.atoms.text_contrast_medium as StyleProp<ViewStyle>}
 					/>
-					<Text style={[t.atoms.text_contrast_medium, a.text_md]}>
+					<Text
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.text_md,
+						}}
+					>
 						Find posts, users, and feeds on Bluesky
 					</Text>
 				</View>
@@ -691,12 +735,13 @@ export function SearchScreenShell({
 				onLayout={(evt) => {
 					setHeaderHeight(evt.nativeEvent.layout.height);
 				}}
-				style={[
-					a.relative,
-					a.z_10,
-					//@ts-ignore
+				style={{
+					...a.relative,
+					...a.z_10,
+
+					...//@ts-ignore
 					{ position: "sticky", top: 0 },
-				]}
+				}}
 			>
 				<Layout.Center style={t.atoms.bg}>
 					{showHeader && (
@@ -719,10 +764,24 @@ export function SearchScreenShell({
 							</Layout.Header.Outer>
 						</View>
 					)}
-					<View style={[a.px_md, a.pt_sm, a.pb_sm, a.overflow_hidden]}>
-						<View style={[a.gap_sm]}>
-							<View style={[a.w_full, a.flex_row, a.align_stretch, a.gap_xs]}>
-								<View style={[a.flex_1]}>
+					<View
+						style={{
+							...a.px_md,
+							...a.pt_sm,
+							...a.pb_sm,
+							...a.overflow_hidden,
+						}}
+					>
+						<View style={a.gap_sm}>
+							<View
+								style={{
+									...a.w_full,
+									...a.flex_row,
+									...a.align_stretch,
+									...a.gap_xs,
+								}}
+							>
+								<View style={a.flex_1}>
 									<SearchInput
 										ref={textInput}
 										value={searchText}
@@ -740,7 +799,7 @@ export function SearchScreenShell({
 										size="large"
 										variant="ghost"
 										color="secondary"
-										style={[a.px_sm]}
+										style={a.px_sm}
 										onPress={onPressCancelSearch}
 										hitSlop={HITSLOP_10}
 									>
@@ -750,7 +809,14 @@ export function SearchScreenShell({
 							</View>
 
 							{showFilters && !showHeader && (
-								<View style={[a.flex_row, a.align_center, a.justify_between, a.gap_sm]}>
+								<View
+									style={{
+										...a.flex_row,
+										...a.align_center,
+										...a.justify_between,
+										...a.gap_sm,
+									}}
+								>
 									<SearchLanguageDropdown value={params.lang} onChange={params.setLang} />
 								</View>
 							)}
@@ -758,7 +824,6 @@ export function SearchScreenShell({
 					</View>
 				</Layout.Center>
 			</View>
-
 			<View
 				style={{
 					display: showAutocomplete && !fixedParams ? "flex" : "none",
@@ -864,29 +929,58 @@ function SearchHistory({
 
 	return (
 		<Layout.Content keyboardDismissMode="interactive" keyboardShouldPersistTaps="handled">
-			<View style={[a.w_full, a.px_md]}>
+			<View
+				style={{
+					...a.w_full,
+					...a.px_md,
+				}}
+			>
 				{(searchHistory.length > 0 || selectedProfiles.length > 0) && (
-					<Text style={[a.text_md, a.font_bold, a.p_md]}>Recent Searches</Text>
+					<Text
+						style={{
+							...a.text_md,
+							...a.font_bold,
+							...a.p_md,
+						}}
+					>
+						Recent Searches
+					</Text>
 				)}
 				{selectedProfiles.length > 0 && (
 					<View
-						style={[styles.selectedProfilesContainer, !gtMobile && styles.selectedProfilesContainerMobile]}
+						style={{
+							...styles.selectedProfilesContainer,
+							...(!gtMobile && styles.selectedProfilesContainerMobile),
+						}}
 					>
 						<RNGHScrollView
 							keyboardShouldPersistTaps="handled"
 							horizontal={true}
-							style={[a.flex_row, a.flex_nowrap, { marginHorizontal: tokens.space._2xl * -1 }]}
+							style={{
+								...a.flex_row,
+								...a.flex_nowrap,
+								...{ marginHorizontal: tokens.space._2xl * -1 },
+							}}
 							contentContainerStyle={[a.px_2xl, a.border_0]}
 						>
 							{selectedProfiles.slice(0, 5).map((profile, index) => (
-								<View key={index} style={[styles.profileItem, !gtMobile && styles.profileItemMobile]}>
+								<View
+									key={index}
+									style={{
+										...styles.profileItem,
+										...(!gtMobile && styles.profileItemMobile),
+									}}
+								>
 									<Link
 										href={makeProfileLink(profile)}
 										title={profile.handle}
 										asAnchor
 										anchorNoUnderline
 										onBeforePress={() => onProfileClick(profile)}
-										style={[a.align_center, a.w_full]}
+										style={{
+											...a.align_center,
+											...a.w_full,
+										}}
 									>
 										<UserAvatar
 											avatar={profile.avatar}
@@ -895,7 +989,11 @@ function SearchHistory({
 										/>
 										<Text
 											emoji
-											style={[a.text_xs, a.text_center, styles.profileName]}
+											style={{
+												...a.text_xs,
+												...a.text_center,
+												...styles.profileName,
+											}}
 											numberOfLines={1}
 										>
 											{sanitizeDisplayName(profile.displayName || profile.handle)}
@@ -917,16 +1015,32 @@ function SearchHistory({
 					</View>
 				)}
 				{searchHistory.length > 0 && (
-					<View style={[a.pl_md, a.pr_xs, a.mt_md]}>
+					<View
+						style={{
+							...a.pl_md,
+							...a.pr_xs,
+							...a.mt_md,
+						}}
+					>
 						{searchHistory.slice(0, 5).map((historyItem, index) => (
-							<View key={index} style={[a.flex_row, a.align_center, a.mt_xs]}>
+							<View
+								key={index}
+								style={{
+									...a.flex_row,
+									...a.align_center,
+									...a.mt_xs,
+								}}
+							>
 								<Pressable
 									accessibilityRole="button"
 									onPress={() => onItemClick(historyItem)}
 									hitSlop={HITSLOP_10}
-									style={[a.flex_1, a.py_md]}
+									style={{
+										...a.flex_1,
+										...a.py_md,
+									}}
 								>
-									<Text style={[a.text_md]}>{historyItem}</Text>
+									<Text style={a.text_md}>{historyItem}</Text>
 								</Pressable>
 								<Button
 									label={`Remove ${historyItem}`}

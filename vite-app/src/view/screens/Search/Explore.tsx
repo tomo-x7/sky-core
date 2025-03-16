@@ -45,14 +45,49 @@ function SuggestedItemsHeader({
 
 	return (
 		<View
-			style={[a.flex_row, a.px_lg, a.py_lg, a.pt_2xl, a.gap_md, a.border_b, t.atoms.border_contrast_low, style]}
+			style={{
+				...a.flex_row,
+				...a.px_lg,
+				...a.py_lg,
+				...a.pt_2xl,
+				...a.gap_md,
+				...a.border_b,
+				...t.atoms.border_contrast_low,
+				...style,
+			}}
 		>
-			<View style={[a.flex_1, a.gap_sm]}>
-				<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_sm,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_sm,
+					}}
+				>
 					<Icon size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
-					<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>{title}</Text>
+					<Text
+						style={{
+							...a.text_2xl,
+							...a.font_heavy,
+							...t.atoms.text,
+						}}
+					>
+						{title}
+					</Text>
 				</View>
-				<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>{description}</Text>
+				<Text
+					style={{
+						...t.atoms.text_contrast_high,
+						...a.leading_snug,
+					}}
+				>
+					{description}
+				</Text>
 			</View>
 		</View>
 	);
@@ -110,34 +145,43 @@ function LoadMore({
 
 	return (
 		<View style={[]}>
-			<Button label={"Load more"} onPress={item.onLoadMore} style={[a.relative, a.w_full]}>
+			<Button
+				label={"Load more"}
+				onPress={item.onLoadMore}
+				style={{
+					...a.relative,
+					...a.w_full,
+				}}
+			>
 				{({ hovered, pressed }) => (
 					<View
-						style={[
-							a.flex_1,
-							a.flex_row,
-							a.align_center,
-							a.px_lg,
-							a.py_md,
-							(hovered || pressed) && t.atoms.bg_contrast_25,
-						]}
+						style={{
+							...a.flex_1,
+							...a.flex_row,
+							...a.align_center,
+							...a.px_lg,
+							...a.py_md,
+							...((hovered || pressed) && t.atoms.bg_contrast_25),
+						}}
 					>
 						<View
-							style={[
-								a.relative,
-								{
+							style={{
+								...a.relative,
+
+								...{
 									height: 32,
 									width: 32 + 15 * items.length,
 								},
-							]}
+							}}
 						>
 							<View
-								style={[
-									a.align_center,
-									a.justify_center,
-									t.atoms.bg_contrast_25,
-									a.absolute,
-									{
+								style={{
+									...a.align_center,
+									...a.justify_center,
+									...t.atoms.bg_contrast_25,
+									...a.absolute,
+
+									...{
 										width: 30,
 										height: 30,
 										left: 0,
@@ -147,7 +191,7 @@ function LoadMore({
 										borderRadius: type === "profile" ? 999 : 4,
 										zIndex: 4,
 									},
-								]}
+								}}
 							>
 								<ArrowBottom fill={t.palette.white} />
 							</View>
@@ -155,10 +199,11 @@ function LoadMore({
 								return (
 									<View
 										key={_item.key}
-										style={[
-											t.atoms.bg_contrast_25,
-											a.absolute,
-											{
+										style={{
+											...t.atoms.bg_contrast_25,
+											...a.absolute,
+
+											...{
 												width: 30,
 												height: 30,
 												left: (i + 1) * 15,
@@ -167,7 +212,7 @@ function LoadMore({
 												borderRadius: _item.type === "profile" ? 999 : 4,
 												zIndex: 3 - i,
 											},
-										]}
+										}}
 									>
 										{moderationOpts &&
 											(_item.type === "profile" ? (
@@ -185,11 +230,24 @@ function LoadMore({
 							})}
 						</View>
 
-						<Text style={[a.pl_sm, a.leading_snug, hovered ? t.atoms.text : t.atoms.text_contrast_medium]}>
+						<Text
+							style={{
+								...a.pl_sm,
+								...a.leading_snug,
+								...(hovered ? t.atoms.text : t.atoms.text_contrast_medium),
+							}}
+						>
 							{type === "profile" ? <>Load more suggested follows</> : <>Load more suggested feeds</>}
 						</Text>
 
-						<View style={[a.flex_1, a.align_end]}>{item.isLoadingMore && <Loader size="lg" />}</View>
+						<View
+							style={{
+								...a.flex_1,
+								...a.align_end,
+							}}
+						>
+							{item.isLoadingMore && <Loader size="lg" />}
+						</View>
 					</View>
 				)}
 			</Button>
@@ -475,14 +533,26 @@ export function Explore() {
 				}
 				case "profile": {
 					return (
-						<View style={[a.border_b, t.atoms.border_contrast_low]}>
+						<View
+							style={{
+								...a.border_b,
+								...t.atoms.border_contrast_low,
+							}}
+						>
 							<ProfileCardWithFollowBtn profile={item.profile} noBg noBorder showKnownFollowers />
 						</View>
 					);
 				}
 				case "feed": {
 					return (
-						<View style={[a.border_b, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
+						<View
+							style={{
+								...a.border_b,
+								...t.atoms.border_contrast_low,
+								...a.px_lg,
+								...a.py_lg,
+							}}
+						>
 							<FeedCard.Default view={item.feed} />
 						</View>
 					);
@@ -498,12 +568,45 @@ export function Explore() {
 				}
 				case "error": {
 					return (
-						<View style={[a.border_t, a.pt_md, a.px_md, t.atoms.border_contrast_low]}>
-							<View style={[a.flex_row, a.gap_md, a.p_lg, a.rounded_sm, t.atoms.bg_contrast_25]}>
+						<View
+							style={{
+								...a.border_t,
+								...a.pt_md,
+								...a.px_md,
+								...t.atoms.border_contrast_low,
+							}}
+						>
+							<View
+								style={{
+									...a.flex_row,
+									...a.gap_md,
+									...a.p_lg,
+									...a.rounded_sm,
+									...t.atoms.bg_contrast_25,
+								}}
+							>
 								<CircleInfo size="md" fill={t.palette.negative_400} />
-								<View style={[a.flex_1, a.gap_sm]}>
-									<Text style={[a.font_bold, a.leading_snug]}>{item.message}</Text>
-									<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
+								<View
+									style={{
+										...a.flex_1,
+										...a.gap_sm,
+									}}
+								>
+									<Text
+										style={{
+											...a.font_bold,
+											...a.leading_snug,
+										}}
+									>
+										{item.message}
+									</Text>
+									<Text
+										style={{
+											...a.italic,
+											...a.leading_snug,
+											...t.atoms.text_contrast_medium,
+										}}
+									>
 										{item.error}
 									</Text>
 								</View>

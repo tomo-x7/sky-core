@@ -123,17 +123,25 @@ let ProfileHeaderStandard = ({
 			hideBackButton={hideBackButton}
 			isPlaceholderProfile={isPlaceholderProfile}
 		>
-			<View style={[a.px_lg, a.pt_md, a.pb_sm, a.overflow_hidden]} pointerEvents={"box-none"}>
+			<View
+				style={{
+					...a.px_lg,
+					...a.pt_md,
+					...a.pb_sm,
+					...a.overflow_hidden,
+				}}
+				pointerEvents={"box-none"}
+			>
 				<View
-					style={[
-						{ paddingLeft: 90 },
-						a.flex_row,
-						a.align_center,
-						a.justify_end,
-						a.gap_xs,
-						a.pb_sm,
-						a.flex_wrap,
-					]}
+					style={{
+						...{ paddingLeft: 90 },
+						...a.flex_row,
+						...a.align_center,
+						...a.justify_end,
+						...a.gap_xs,
+						...a.pb_sm,
+						...a.flex_wrap,
+					}}
 					pointerEvents={"box-none"}
 				>
 					{isMe ? (
@@ -145,7 +153,7 @@ let ProfileHeaderStandard = ({
 								variant="solid"
 								onPress={onPressEditProfile}
 								label={"Edit profile"}
-								style={[a.rounded_full]}
+								style={a.rounded_full}
 							>
 								<ButtonText>Edit Profile</ButtonText>
 							</Button>
@@ -161,7 +169,7 @@ let ProfileHeaderStandard = ({
 								label={"Unblock"}
 								disabled={!hasSession}
 								onPress={() => unblockPromptControl.open()}
-								style={[a.rounded_full]}
+								style={a.rounded_full}
 							>
 								<ButtonText>Unblock</ButtonText>
 							</Button>
@@ -181,7 +189,7 @@ let ProfileHeaderStandard = ({
 										: `Follow ${profile.handle}`
 								}
 								onPress={profile.viewer?.following ? onPressUnfollow : onPressFollow}
-								style={[a.rounded_full]}
+								style={a.rounded_full}
 							>
 								<ButtonIcon position="left" icon={profile.viewer?.following ? Check : Plus} />
 								<ButtonText>
@@ -198,7 +206,14 @@ let ProfileHeaderStandard = ({
 					) : null}
 					<ProfileMenu profile={profile} />
 				</View>
-				<View style={[a.flex_col, a.gap_2xs, a.pt_2xs, a.pb_sm]}>
+				<View
+					style={{
+						...a.flex_col,
+						...a.gap_2xs,
+						...a.pt_2xs,
+						...a.pb_sm,
+					}}
+				>
 					<ProfileHeaderDisplayName profile={profile} moderation={moderation} />
 					<ProfileHeaderHandle profile={profile} />
 				</View>
@@ -209,7 +224,7 @@ let ProfileHeaderStandard = ({
 							<View pointerEvents="auto">
 								<RichText
 									testID="profileHeaderDescription"
-									style={[a.text_md]}
+									style={a.text_md}
 									numberOfLines={15}
 									value={descriptionRT}
 									enableTags
@@ -219,7 +234,13 @@ let ProfileHeaderStandard = ({
 						) : undefined}
 
 						{!isMe && !isBlockedUser && shouldShowKnownFollowers(profile.viewer?.knownFollowers) && (
-							<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+							<View
+								style={{
+									...a.flex_row,
+									...a.align_center,
+									...a.gap_sm,
+								}}
+							>
 								<KnownFollowers profile={profile} moderationOpts={moderationOpts} />
 							</View>
 						)}

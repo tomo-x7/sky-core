@@ -61,10 +61,22 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 				/>
 			) : (
 				<>
-					<Text style={[a.text_2xl, a.font_heavy, a.pb_xs, a.leading_tight]}>
+					<Text
+						style={{
+							...a.text_2xl,
+							...a.font_heavy,
+							...a.pb_xs,
+							...a.leading_tight,
+						}}
+					>
 						{isAccount ? <>Labels on your account</> : <>Labels on your content</>}
 					</Text>
-					<Text style={[a.text_md, a.leading_snug]}>
+					<Text
+						style={{
+							...a.text_md,
+							...a.leading_snug,
+						}}
+					>
 						{containsSelfLabel ? (
 							<>You may appeal non-self labels if you feel they were placed in error.</>
 						) : (
@@ -72,7 +84,12 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 						)}
 					</Text>
 
-					<View style={[a.py_lg, a.gap_md]}>
+					<View
+						style={{
+							...a.py_lg,
+							...a.gap_md,
+						}}
+					>
 						{labels.map((label) => (
 							<Label
 								key={`${label.val}-${label.src}`}
@@ -106,13 +123,43 @@ function Label({
 	const sourceName = labeler ? sanitizeHandle(labeler.creator.handle, "@") : label.src;
 	const timeDiff = useGetTimeAgo({ future: true });
 	return (
-		<View style={[a.border, t.atoms.border_contrast_low, a.rounded_sm, a.overflow_hidden]}>
-			<View style={[a.p_md, a.gap_sm, a.flex_row]}>
-				<View style={[a.flex_1, a.gap_xs]}>
-					<Text emoji style={[a.font_bold, a.text_md]}>
+		<View
+			style={{
+				...a.border,
+				...t.atoms.border_contrast_low,
+				...a.rounded_sm,
+				...a.overflow_hidden,
+			}}
+		>
+			<View
+				style={{
+					...a.p_md,
+					...a.gap_sm,
+					...a.flex_row,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_1,
+						...a.gap_xs,
+					}}
+				>
+					<Text
+						emoji
+						style={{
+							...a.font_bold,
+							...a.text_md,
+						}}
+					>
 						{strings.name}
 					</Text>
-					<Text emoji style={[t.atoms.text_contrast_medium, a.leading_snug]}>
+					<Text
+						emoji
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.leading_snug,
+						}}
+					>
 						{strings.description}
 					</Text>
 				</View>
@@ -130,15 +177,33 @@ function Label({
 					</View>
 				)}
 			</View>
-
 			<Divider />
-
-			<View style={[a.px_md, a.py_sm, t.atoms.bg_contrast_25]}>
+			<View
+				style={{
+					...a.px_md,
+					...a.py_sm,
+					...t.atoms.bg_contrast_25,
+				}}
+			>
 				{isSelfLabel ? (
-					<Text style={[t.atoms.text_contrast_medium]}>This label was applied by you.</Text>
+					<Text style={t.atoms.text_contrast_medium}>This label was applied by you.</Text>
 				) : (
-					<View style={[a.flex_row, a.justify_between, a.gap_xl, { paddingBottom: 1 }]}>
-						<Text style={[a.flex_1, a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.justify_between,
+							...a.gap_xl,
+							...{ paddingBottom: 1 },
+						}}
+					>
+						<Text
+							style={{
+								...a.flex_1,
+								...a.leading_snug,
+								...t.atoms.text_contrast_medium,
+							}}
+							numberOfLines={1}
+						>
 							<>
 								Source:{" "}
 								<InlineLinkText
@@ -152,7 +217,14 @@ function Label({
 						</Text>
 						{label.exp && (
 							<View>
-								<Text style={[a.leading_snug, a.text_sm, a.italic, t.atoms.text_contrast_medium]}>
+								<Text
+									style={{
+										...a.leading_snug,
+										...a.text_sm,
+										...a.italic,
+										...t.atoms.text_contrast_medium,
+									}}
+								>
 									<>Expires in {timeDiff(Date.now(), label.exp)}</>
 								</Text>
 							</View>
@@ -216,17 +288,32 @@ function AppealForm({
 	return (
 		<>
 			<View>
-				<Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>
+				<Text
+					style={{
+						...a.text_2xl,
+						...a.font_bold,
+						...a.pb_xs,
+						...a.leading_tight,
+					}}
+				>
 					<>Appeal "{strings.name}" label</>
 				</Text>
-				<Text style={[a.text_md, a.leading_snug]}>
+				<Text
+					style={{
+						...a.text_md,
+						...a.leading_snug,
+					}}
+				>
 					<>
 						This appeal will be sent to{" "}
 						<InlineLinkText
 							label={sourceName}
 							to={makeProfileLink(labeler ? labeler.creator : { did: label.src, handle: "" })}
 							onPress={() => void control.close()}
-							style={[a.text_md, a.leading_snug]}
+							style={{
+								...a.text_md,
+								...a.leading_snug,
+							}}
 						>
 							{sourceName}
 						</InlineLinkText>
@@ -234,7 +321,7 @@ function AppealForm({
 					</>
 				</Text>
 			</View>
-			<View style={[a.my_md]}>
+			<View style={a.my_md}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={`Please explain why you think this label was incorrectly applied by ${
@@ -248,7 +335,6 @@ function AppealForm({
 					maxLength={300}
 				/>
 			</View>
-
 			<View style={gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm]}>
 				<Button
 					testID="backBtn"

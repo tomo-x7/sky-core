@@ -57,9 +57,20 @@ export function StepProfiles({
 	};
 
 	return (
-		<ScreenTransition style={[a.flex_1]} direction={state.transitionDirection}>
-			<View style={[a.border_b, t.atoms.border_contrast_medium]}>
-				<View style={[a.py_sm, a.px_md, { height: 60 }]}>
+		<ScreenTransition style={a.flex_1} direction={state.transitionDirection}>
+			<View
+				style={{
+					...a.border_b,
+					...t.atoms.border_contrast_medium,
+				}}
+			>
+				<View
+					style={{
+						...a.py_sm,
+						...a.px_md,
+						...{ height: 60 },
+					}}
+				>
 					<SearchInput value={query} onChangeText={setQuery} onClearText={() => setQuery("")} />
 				</View>
 			</View>
@@ -71,16 +82,31 @@ export function StepProfiles({
 				keyboardShouldPersistTaps="handled"
 				disableFullWindowScroll={true}
 				sideBorders={false}
-				style={[a.flex_1]}
+				style={a.flex_1}
 				onEndReached={!query && !screenReaderEnabled ? () => fetchNextPage() : undefined}
 				onEndReachedThreshold={0.25}
 				keyboardDismissMode="on-drag"
 				ListEmptyComponent={
-					<View style={[a.flex_1, a.align_center, a.mt_lg, a.px_lg]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.align_center,
+							...a.mt_lg,
+							...a.px_lg,
+						}}
+					>
 						{isLoading ? (
 							<Loader size="lg" />
 						) : (
-							<Text style={[a.font_bold, a.text_lg, a.text_center, a.mt_lg, a.leading_snug]}>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_lg,
+									...a.text_center,
+									...a.mt_lg,
+									...a.leading_snug,
+								}}
+							>
 								Nobody was found. Try searching for someone else.
 							</Text>
 						)}

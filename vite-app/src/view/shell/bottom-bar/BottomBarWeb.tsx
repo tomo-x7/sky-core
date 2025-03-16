@@ -66,13 +66,13 @@ export function BottomBarWeb() {
 		<Animated.View
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="navigation"
-			style={[
-				styles.bottomBar,
-				styles.bottomBarWeb,
-				t.atoms.bg,
-				t.atoms.border_contrast_low,
-				footerMinimalShellTransform,
-			]}
+			style={{
+				...styles.bottomBar,
+				...styles.bottomBarWeb,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_low,
+				...footerMinimalShellTransform,
+			}}
 		>
 			{hasSession ? (
 				<>
@@ -83,7 +83,11 @@ export function BottomBarWeb() {
 								<Icon
 									aria-hidden={true}
 									width={iconWidth + 1}
-									style={[styles.ctrlIcon, t.atoms.text, styles.homeIcon]}
+									style={{
+										...styles.ctrlIcon,
+										...t.atoms.text,
+										...styles.homeIcon,
+									}}
 								/>
 							);
 						}}
@@ -95,7 +99,11 @@ export function BottomBarWeb() {
 								<Icon
 									aria-hidden={true}
 									width={iconWidth + 2}
-									style={[styles.ctrlIcon, t.atoms.text, styles.searchIcon]}
+									style={{
+										...styles.ctrlIcon,
+										...t.atoms.text,
+										...styles.searchIcon,
+									}}
 								/>
 							);
 						}}
@@ -115,7 +123,11 @@ export function BottomBarWeb() {
 										<Icon
 											aria-hidden={true}
 											width={iconWidth - 1}
-											style={[styles.ctrlIcon, t.atoms.text, styles.messagesIcon]}
+											style={{
+												...styles.ctrlIcon,
+												...t.atoms.text,
+												...styles.messagesIcon,
+											}}
 										/>
 									);
 								}}
@@ -131,7 +143,11 @@ export function BottomBarWeb() {
 										<Icon
 											aria-hidden={true}
 											width={iconWidth}
-											style={[styles.ctrlIcon, t.atoms.text, styles.bellIcon]}
+											style={{
+												...styles.ctrlIcon,
+												...t.atoms.text,
+												...styles.bellIcon,
+											}}
 										/>
 									);
 								}}
@@ -153,7 +169,11 @@ export function BottomBarWeb() {
 										<Icon
 											aria-hidden={true}
 											width={iconWidth}
-											style={[styles.ctrlIcon, t.atoms.text, styles.profileIcon]}
+											style={{
+												...styles.ctrlIcon,
+												...t.atoms.text,
+												...styles.profileIcon,
+											}}
 										/>
 									);
 								}}
@@ -183,7 +203,13 @@ export function BottomBarWeb() {
 							</View>
 						</View>
 
-						<View style={[a.flex_row, a.flex_wrap, a.gap_sm]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.flex_wrap,
+								...a.gap_sm,
+							}}
+						>
 							<Button
 								onPress={showCreateAccount}
 								label={"Create account"}
@@ -243,7 +269,10 @@ const NavItem: React.FC<{
 	return (
 		<Link
 			href={href}
-			style={[styles.ctrl, a.pb_lg]}
+			style={{
+				...styles.ctrl,
+				...a.pb_lg,
+			}}
 			navigationAction={isOnDifferentProfile ? "push" : "navigate"}
 			aria-role="link"
 			aria-label={routeName}

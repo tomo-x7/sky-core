@@ -127,7 +127,12 @@ function LightboxInner({
 						{canGoLeft && (
 							<TouchableOpacity
 								onPress={onPressLeft}
-								style={[styles.btn, btnStyle, styles.leftBtn, styles.blurredBackground]}
+								style={{
+									...styles.btn,
+									...btnStyle,
+									...styles.leftBtn,
+									...styles.blurredBackground,
+								}}
 								accessibilityRole="button"
 								accessibilityLabel={"Previous image"}
 								accessibilityHint=""
@@ -139,7 +144,12 @@ function LightboxInner({
 						{canGoRight && (
 							<TouchableOpacity
 								onPress={onPressRight}
-								style={[styles.btn, btnStyle, styles.rightBtn, styles.blurredBackground]}
+								style={{
+									...styles.btn,
+									...btnStyle,
+									...styles.rightBtn,
+									...styles.blurredBackground,
+								}}
 								accessibilityRole="button"
 								accessibilityLabel={"Next image"}
 								accessibilityHint=""

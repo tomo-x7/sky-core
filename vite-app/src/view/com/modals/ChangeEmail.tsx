@@ -90,17 +90,40 @@ export function Component() {
 	};
 
 	return (
-		<SafeAreaView style={[pal.view, s.flex1]}>
-			<ScrollView testID="changeEmailModal" style={[s.flex1, isMobile && { paddingHorizontal: 18 }]}>
+		<SafeAreaView
+			style={{
+				...pal.view,
+				...s.flex1,
+			}}
+		>
+			<ScrollView
+				testID="changeEmailModal"
+				style={{
+					...s.flex1,
+					...(isMobile && { paddingHorizontal: 18 }),
+				}}
+			>
 				<View style={styles.titleSection}>
-					<Text type="title-lg" style={[pal.text, styles.title]}>
+					<Text
+						type="title-lg"
+						style={{
+							...pal.text,
+							...styles.title,
+						}}
+					>
 						{stage === Stages.InputEmail ? "Change Your Email" : ""}
 						{stage === Stages.ConfirmCode ? "Security Step Required" : ""}
 						{stage === Stages.Done ? "Email Updated" : ""}
 					</Text>
 				</View>
 
-				<Text type="lg" style={[pal.textLight, { marginBottom: 10 }]}>
+				<Text
+					type="lg"
+					style={{
+						...pal.textLight,
+						...{ marginBottom: 10 },
+					}}
+				>
 					{stage === Stages.InputEmail ? (
 						<>Enter your new email address below.</>
 					) : stage === Stages.ConfirmCode ? (
@@ -116,7 +139,11 @@ export function Component() {
 				{stage === Stages.InputEmail && (
 					<TextInput
 						testID="emailInput"
-						style={[styles.textInput, pal.border, pal.text]}
+						style={{
+							...styles.textInput,
+							...pal.border,
+							...pal.text,
+						}}
 						placeholder="alice@mail.com"
 						placeholderTextColor={pal.colors.textLight}
 						value={email}
@@ -132,7 +159,11 @@ export function Component() {
 				{stage === Stages.ConfirmCode && (
 					<TextInput
 						testID="confirmCodeInput"
-						style={[styles.textInput, pal.border, pal.text]}
+						style={{
+							...styles.textInput,
+							...pal.border,
+							...pal.text,
+						}}
 						placeholder="XXXXX-XXXXX"
 						placeholderTextColor={pal.colors.textLight}
 						value={confirmationCode}
@@ -148,7 +179,7 @@ export function Component() {
 
 				{error ? <ErrorMessage message={error} style={styles.error} /> : undefined}
 
-				<View style={[styles.btnContainer]}>
+				<View style={styles.btnContainer}>
 					{isProcessing ? (
 						<View style={styles.btn}>
 							<ActivityIndicator color="#fff" />

@@ -72,21 +72,25 @@ export function WizardEditListDialog({
 				keyExtractor={keyExtractor}
 				ListHeaderComponent={
 					<View
-						style={[
-							a.flex_row,
-							a.justify_between,
-							a.border_b,
-							a.px_sm,
-							a.mb_sm,
-							t.atoms.bg,
-							t.atoms.border_contrast_medium,
-
-							a.align_center,
-							{ height: 48 },
-						]}
+						style={{
+							...a.flex_row,
+							...a.justify_between,
+							...a.border_b,
+							...a.px_sm,
+							...a.mb_sm,
+							...t.atoms.bg,
+							...t.atoms.border_contrast_medium,
+							...a.align_center,
+							...{ height: 48 },
+						}}
 					>
 						<View style={{ width: 60 }} />
-						<Text style={[a.font_bold, a.text_xl]}>
+						<Text
+							style={{
+								...a.font_bold,
+								...a.text_xl,
+							}}
+						>
 							{state.currentStep === "Profiles" ? <>Edit People</> : <>Edit Feeds</>}
 						</Text>
 						<View style={{ width: 60 }}>
@@ -104,7 +108,11 @@ export function WizardEditListDialog({
 				}
 				stickyHeaderIndices={[0]}
 				// @ts-ignore
-				style={[a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]}
+				style={{
+					...a.py_0,
+					...{ height: "100vh", maxHeight: 600 },
+					...a.px_0,
+				}}
 				webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
 				keyboardDismissMode="on-drag"
 				removeClippedSubviews={true}

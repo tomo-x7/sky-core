@@ -60,7 +60,7 @@ export function SelectReportOptionView(props: {
 	}, [props.params.type]);
 
 	return (
-		<View style={[a.gap_lg]}>
+		<View style={a.gap_lg}>
 			{props.labelers?.length > 1 ? (
 				<Button
 					size="small"
@@ -73,15 +73,31 @@ export function SelectReportOptionView(props: {
 					<ButtonIcon icon={ChevronLeft} />
 				</Button>
 			) : null}
-
-			<View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
-				<Text style={[a.text_2xl, a.font_bold]}>{i18n.title}</Text>
-				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>{i18n.description}</Text>
+			<View
+				style={{
+					...a.justify_center,
+					...(gtMobile ? a.gap_sm : a.gap_xs),
+				}}
+			>
+				<Text
+					style={{
+						...a.text_2xl,
+						...a.font_bold,
+					}}
+				>
+					{i18n.title}
+				</Text>
+				<Text
+					style={{
+						...a.text_md,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
+					{i18n.description}
+				</Text>
 			</View>
-
 			<Divider />
-
-			<View style={[a.gap_sm]}>
+			<View style={a.gap_sm}>
 				{reportOptions.map((reportOption) => {
 					return (
 						<Button
@@ -97,18 +113,25 @@ export function SelectReportOptionView(props: {
 
 				{(props.params.type === "post" || props.params.type === "account") && (
 					<View
-						style={[
-							a.flex_row,
-							a.align_center,
-							a.justify_between,
-							a.gap_lg,
-							a.p_md,
-							a.pl_lg,
-							a.rounded_md,
-							t.atoms.bg_contrast_900,
-						]}
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.justify_between,
+							...a.gap_lg,
+							...a.p_md,
+							...a.pl_lg,
+							...a.rounded_md,
+							...t.atoms.bg_contrast_900,
+						}}
 					>
-						<Text style={[a.flex_1, t.atoms.text_inverted, a.italic, a.leading_snug]}>
+						<Text
+							style={{
+								...a.flex_1,
+								...t.atoms.text_inverted,
+								...a.italic,
+								...a.leading_snug,
+							}}
+						>
 							Need to report a copyright violation?
 						</Text>
 						<Link
@@ -141,24 +164,51 @@ function ReportOptionButton({
 
 	return (
 		<View
-			style={[
-				a.w_full,
-				a.flex_row,
-				a.align_center,
-				a.justify_between,
-				a.p_md,
-				a.rounded_md,
-				{ paddingRight: 70 },
-				t.atoms.bg_contrast_25,
-				interacted && t.atoms.bg_contrast_50,
-			]}
+			style={{
+				...a.w_full,
+				...a.flex_row,
+				...a.align_center,
+				...a.justify_between,
+				...a.p_md,
+				...a.rounded_md,
+				...{ paddingRight: 70 },
+				...t.atoms.bg_contrast_25,
+				...(interacted && t.atoms.bg_contrast_50),
+			}}
 		>
-			<View style={[a.flex_1, a.gap_xs]}>
-				<Text style={[a.text_md, a.font_bold, t.atoms.text_contrast_medium]}>{title}</Text>
-				<Text style={[a.leading_tight, { maxWidth: 400 }]}>{description}</Text>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_xs,
+				}}
+			>
+				<Text
+					style={{
+						...a.text_md,
+						...a.font_bold,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
+					{title}
+				</Text>
+				<Text
+					style={{
+						...a.leading_tight,
+						...{ maxWidth: 400 },
+					}}
+				>
+					{description}
+				</Text>
 			</View>
-
-			<View style={[a.absolute, a.inset_0, a.justify_center, a.pr_md, { left: "auto" }]}>
+			<View
+				style={{
+					...a.absolute,
+					...a.inset_0,
+					...a.justify_center,
+					...a.pr_md,
+					...{ left: "auto" },
+				}}
+			>
 				<ChevronRight size="md" fill={t.atoms.text_contrast_low.color} />
 			</View>
 		</View>

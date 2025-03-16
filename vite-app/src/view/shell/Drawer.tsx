@@ -64,7 +64,7 @@ let DrawerProfileCard = ({
 			accessibilityLabel={"Profile"}
 			accessibilityHint={"Navigates to your profile"}
 			onPress={onPressProfile}
-			style={[a.gap_sm]}
+			style={a.gap_sm}
 		>
 			<UserAvatar
 				size={52}
@@ -73,22 +73,58 @@ let DrawerProfileCard = ({
 				usePlainRNImage={true}
 				type={profile?.associated?.labeler ? "labeler" : "user"}
 			/>
-			<View style={[a.gap_2xs]}>
-				<Text emoji style={[a.font_heavy, a.text_xl, a.mt_2xs, a.leading_tight]} numberOfLines={1}>
+			<View style={a.gap_2xs}>
+				<Text
+					emoji
+					style={{
+						...a.font_heavy,
+						...a.text_xl,
+						...a.mt_2xs,
+						...a.leading_tight,
+					}}
+					numberOfLines={1}
+				>
 					{profile?.displayName || account.handle}
 				</Text>
-				<Text emoji style={[t.atoms.text_contrast_medium, a.text_md, a.leading_tight]} numberOfLines={1}>
+				<Text
+					emoji
+					style={{
+						...t.atoms.text_contrast_medium,
+						...a.text_md,
+						...a.leading_tight,
+					}}
+					numberOfLines={1}
+				>
 					{sanitizeHandle(account.handle, "@")}
 				</Text>
 			</View>
-			<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
+			<Text
+				style={{
+					...a.text_md,
+					...t.atoms.text_contrast_medium,
+				}}
+			>
 				<>
-					<Text style={[a.text_md, a.font_bold]}>{formatCount(profile?.followersCount ?? 0)}</Text>{" "}
+					<Text
+						style={{
+							...a.text_md,
+							...a.font_bold,
+						}}
+					>
+						{formatCount(profile?.followersCount ?? 0)}
+					</Text>{" "}
 					{profile?.followersCount === 1 ? "follower" : "followers"}
 				</>{" "}
 				&middot;{" "}
 				<>
-					<Text style={[a.text_md, a.font_bold]}>{formatCount(profile?.followsCount ?? 0)}</Text>{" "}
+					<Text
+						style={{
+							...a.text_md,
+							...a.font_bold,
+						}}
+					>
+						{formatCount(profile?.followsCount ?? 0)}
+					</Text>{" "}
 					{profile?.followsCount === 1 ? "following" : "following"}
 				</>
 			</Text>
@@ -167,25 +203,38 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	// =
 
 	return (
-		<View testID="drawer" style={[a.flex_1, a.border_r, t.atoms.bg, t.atoms.border_contrast_low]}>
+		<View
+			testID="drawer"
+			style={{
+				...a.flex_1,
+				...a.border_r,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_low,
+			}}
+		>
 			<ScrollView
-				style={[a.flex_1]}
+				style={a.flex_1}
 				contentContainerStyle={[
 					{
 						paddingTop: a.pt_xl.paddingTop,
 					},
 				]}
 			>
-				<View style={[a.px_xl]}>
+				<View style={a.px_xl}>
 					{hasSession && currentAccount ? (
 						<DrawerProfileCard account={currentAccount} onPressProfile={onPressProfile} />
 					) : (
-						<View style={[a.pr_xl]}>
+						<View style={a.pr_xl}>
 							<NavSignupCard />
 						</View>
 					)}
 
-					<Divider style={[a.mt_xl, a.mb_sm]} />
+					<Divider
+						style={{
+							...a.mt_xl,
+							...a.mb_sm,
+						}}
+					/>
 				</View>
 
 				{hasSession ? (
@@ -207,12 +256,16 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 					</>
 				)}
 
-				<View style={[a.px_xl]}>
-					<Divider style={[a.mb_xl, a.mt_sm]} />
+				<View style={a.px_xl}>
+					<Divider
+						style={{
+							...a.mb_xl,
+							...a.mt_sm,
+						}}
+					/>
 					<ExtraLinks />
 				</View>
 			</ScrollView>
-
 			<DrawerFooter onPressFeedback={onPressFeedback} onPressHelp={onPressHelp} />
 		</View>
 	);
@@ -229,16 +282,17 @@ let DrawerFooter = ({
 }): React.ReactNode => {
 	return (
 		<View
-			style={[
-				a.flex_row,
-				a.gap_sm,
-				a.flex_wrap,
-				a.pl_xl,
-				a.pt_md,
-				{
+			style={{
+				...a.flex_row,
+				...a.gap_sm,
+				...a.flex_wrap,
+				...a.pl_xl,
+				...a.pt_md,
+
+				...{
 					paddingBottom: tokens.space.xl,
 				},
-			]}
+			}}
 		>
 			<Button label={"Send feedback"} size="small" variant="solid" color="secondary" onPress={onPressFeedback}>
 				<ButtonIcon icon={Message} position="left" />
@@ -280,9 +334,9 @@ let SearchMenuItem = ({
 		<MenuItem
 			icon={
 				isActive ? (
-					<MagnifyingGlassFilled style={[t.atoms.text]} width={iconWidth} />
+					<MagnifyingGlassFilled style={t.atoms.text} width={iconWidth} />
 				) : (
-					<MagnifyingGlass style={[t.atoms.text]} width={iconWidth} />
+					<MagnifyingGlass style={t.atoms.text} width={iconWidth} />
 				)
 			}
 			label={"Search"}
@@ -305,9 +359,9 @@ let HomeMenuItem = ({
 		<MenuItem
 			icon={
 				isActive ? (
-					<HomeFilled style={[t.atoms.text]} width={iconWidth} />
+					<HomeFilled style={t.atoms.text} width={iconWidth} />
 				) : (
-					<Home style={[t.atoms.text]} width={iconWidth} />
+					<Home style={t.atoms.text} width={iconWidth} />
 				)
 			}
 			label={"Home"}
@@ -330,9 +384,9 @@ let ChatMenuItem = ({
 		<MenuItem
 			icon={
 				isActive ? (
-					<MessageFilled style={[t.atoms.text]} width={iconWidth} />
+					<MessageFilled style={t.atoms.text} width={iconWidth} />
 				) : (
-					<Message style={[t.atoms.text]} width={iconWidth} />
+					<Message style={t.atoms.text} width={iconWidth} />
 				)
 			}
 			label={"Chat"}
@@ -356,9 +410,9 @@ let NotificationsMenuItem = ({
 		<MenuItem
 			icon={
 				isActive ? (
-					<BellFilled style={[t.atoms.text]} width={iconWidth} />
+					<BellFilled style={t.atoms.text} width={iconWidth} />
 				) : (
-					<Bell style={[t.atoms.text]} width={iconWidth} />
+					<Bell style={t.atoms.text} width={iconWidth} />
 				)
 			}
 			label={"Notifications"}
@@ -387,9 +441,9 @@ let FeedsMenuItem = ({
 		<MenuItem
 			icon={
 				isActive ? (
-					<HashtagFilled width={iconWidth} style={[t.atoms.text]} />
+					<HashtagFilled width={iconWidth} style={t.atoms.text} />
 				) : (
-					<Hashtag width={iconWidth} style={[t.atoms.text]} />
+					<Hashtag width={iconWidth} style={t.atoms.text} />
 				)
 			}
 			label={"Feeds"}
@@ -403,7 +457,7 @@ FeedsMenuItem = React.memo(FeedsMenuItem);
 let ListsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode => {
 	const t = useTheme();
 
-	return <MenuItem icon={<List style={[t.atoms.text]} width={iconWidth} />} label={"Lists"} onPress={onPress} />;
+	return <MenuItem icon={<List style={t.atoms.text} width={iconWidth} />} label={"Lists"} onPress={onPress} />;
 };
 ListsMenuItem = React.memo(ListsMenuItem);
 
@@ -419,9 +473,9 @@ let ProfileMenuItem = ({
 		<MenuItem
 			icon={
 				isActive ? (
-					<UserCircleFilled style={[t.atoms.text]} width={iconWidth} />
+					<UserCircleFilled style={t.atoms.text} width={iconWidth} />
 				) : (
-					<UserCircle style={[t.atoms.text]} width={iconWidth} />
+					<UserCircle style={t.atoms.text} width={iconWidth} />
 				)
 			}
 			label={"Profile"}
@@ -433,9 +487,7 @@ ProfileMenuItem = React.memo(ProfileMenuItem);
 
 let SettingsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode => {
 	const t = useTheme();
-	return (
-		<MenuItem icon={<Settings style={[t.atoms.text]} width={iconWidth} />} label={"Settings"} onPress={onPress} />
-	);
+	return <MenuItem icon={<Settings style={t.atoms.text} width={iconWidth} />} label={"Settings"} onPress={onPress} />;
 };
 SettingsMenuItem = React.memo(SettingsMenuItem);
 
@@ -445,41 +497,50 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 		<Button testID={`menuItemButton-${label}`} onPress={onPress} accessibilityRole="tab" label={label}>
 			{({ hovered, pressed }) => (
 				<View
-					style={[
-						a.flex_1,
-						a.flex_row,
-						a.align_center,
-						a.gap_md,
-						a.py_md,
-						a.px_xl,
-						(hovered || pressed) && t.atoms.bg_contrast_25,
-					]}
+					style={{
+						...a.flex_1,
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_md,
+						...a.py_md,
+						...a.px_xl,
+						...((hovered || pressed) && t.atoms.bg_contrast_25),
+					}}
 				>
-					<View style={[a.relative]}>
+					<View style={a.relative}>
 						{icon}
 						{count ? (
-							<View style={[a.absolute, a.inset_0, a.align_end, { top: -4, right: a.gap_sm.gap * -1 }]}>
+							<View
+								style={{
+									...a.absolute,
+									...a.inset_0,
+									...a.align_end,
+									...{ top: -4, right: a.gap_sm.gap * -1 },
+								}}
+							>
 								<View
-									style={[
-										a.rounded_full,
-										{
+									style={{
+										...a.rounded_full,
+
+										...{
 											right: count.length === 1 ? 6 : 0,
 											paddingHorizontal: 4,
 											paddingVertical: 1,
 											backgroundColor: t.palette.primary_500,
 										},
-									]}
+									}}
 								>
 									<Text
-										style={[
-											a.text_xs,
-											a.leading_tight,
-											a.font_bold,
-											{
+										style={{
+											...a.text_xs,
+											...a.leading_tight,
+											...a.font_bold,
+
+											...{
 												fontVariant: ["tabular-nums"],
 												color: colors.white,
 											},
-										]}
+										}}
 										numberOfLines={1}
 									>
 										{count}
@@ -488,7 +549,15 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 							</View>
 						) : undefined}
 					</View>
-					<Text style={[a.flex_1, a.text_2xl, bold && a.font_heavy, a.leading_snug]} numberOfLines={1}>
+					<Text
+						style={{
+							...a.flex_1,
+							...a.text_2xl,
+							...(bold && a.font_heavy),
+							...a.leading_snug,
+						}}
+						numberOfLines={1}
+					>
 						{label}
 					</Text>
 				</View>
@@ -502,12 +571,18 @@ function ExtraLinks() {
 	const kawaii = useKawaiiMode();
 
 	return (
-		<View style={[a.flex_col, a.gap_md, a.flex_wrap]}>
-			<InlineLinkText style={[a.text_md]} label={"Terms of Service"} to="https://bsky.social/about/support/tos">
+		<View
+			style={{
+				...a.flex_col,
+				...a.gap_md,
+				...a.flex_wrap,
+			}}
+		>
+			<InlineLinkText style={a.text_md} label={"Terms of Service"} to="https://bsky.social/about/support/tos">
 				Terms of Service
 			</InlineLinkText>
 			<InlineLinkText
-				style={[a.text_md]}
+				style={a.text_md}
 				to="https://bsky.social/about/support/privacy-policy"
 				label={"Privacy Policy"}
 			>
@@ -518,7 +593,7 @@ function ExtraLinks() {
 					<>
 						Logo by{" "}
 						<InlineLinkText
-							style={[a.text_md]}
+							style={a.text_md}
 							to="/profile/sawaratsuki.bsky.social"
 							label="@sawaratsuki.bsky.social"
 						>

@@ -19,17 +19,32 @@ export function SelectLabelerView({
 	const { gtMobile } = useBreakpoints();
 
 	return (
-		<View style={[a.gap_lg]}>
-			<View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
-				<Text style={[a.text_2xl, a.font_bold]}>Select moderator</Text>
-				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
+		<View style={a.gap_lg}>
+			<View
+				style={{
+					...a.justify_center,
+					...(gtMobile ? a.gap_sm : a.gap_xs),
+				}}
+			>
+				<Text
+					style={{
+						...a.text_2xl,
+						...a.font_bold,
+					}}
+				>
+					Select moderator
+				</Text>
+				<Text
+					style={{
+						...a.text_md,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					To whom would you like to send this report?
 				</Text>
 			</View>
-
 			<Divider />
-
-			<View style={[a.gap_sm]}>
+			<View style={a.gap_sm}>
 				{props.labelers.map((labeler) => {
 					return (
 						<Button
@@ -57,7 +72,12 @@ function LabelerButton({
 
 	return (
 		<LabelingServiceCard.Outer
-			style={[a.p_md, a.rounded_sm, t.atoms.bg_contrast_25, interacted && t.atoms.bg_contrast_50]}
+			style={{
+				...a.p_md,
+				...a.rounded_sm,
+				...t.atoms.bg_contrast_25,
+				...(interacted && t.atoms.bg_contrast_50),
+			}}
 		>
 			<LabelingServiceCard.Avatar avatar={labeler.creator.avatar} />
 			<LabelingServiceCard.Content>
@@ -67,7 +87,15 @@ function LabelerButton({
 						handle: labeler.creator.handle,
 					})}
 				/>
-				<Text style={[t.atoms.text_contrast_medium, a.text_sm, a.font_bold]}>@{labeler.creator.handle}</Text>
+				<Text
+					style={{
+						...t.atoms.text_contrast_medium,
+						...a.text_sm,
+						...a.font_bold,
+					}}
+				>
+					@{labeler.creator.handle}
+				</Text>
 			</LabelingServiceCard.Content>
 		</LabelingServiceCard.Outer>
 	);

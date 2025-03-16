@@ -133,7 +133,10 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 					accessibilityLabel={"Close emoji picker"}
 					accessibilityHint={"Closes the emoji picker"}
 					onPress={close}
-					style={[a.fixed, a.inset_0]}
+					style={{
+						...a.fixed,
+						...a.inset_0,
+					}}
 				/>
 
 				<View
@@ -150,7 +153,12 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 						},
 					])}
 				>
-					<View style={[{ position: "absolute" }, position]}>
+					<View
+						style={{
+							...{ position: "absolute" },
+							...position,
+						}}
+					>
 						<DismissableLayer onFocusOutside={(evt) => evt.preventDefault()} onDismiss={close}>
 							<Picker
 								data={async () => {
@@ -168,7 +176,10 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 					accessibilityLabel={"Close emoji picker"}
 					accessibilityHint={"Closes the emoji picker"}
 					onPress={close}
-					style={[a.fixed, a.inset_0]}
+					style={{
+						...a.fixed,
+						...a.inset_0,
+					}}
 				/>
 			</FocusScope>
 		</Portal>

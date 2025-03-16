@@ -74,11 +74,21 @@ export function LanguageSettingsScreen(props: Props) {
 				<SettingsList.Container>
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>App Language</SettingsList.ItemText>
-						<View style={[a.gap_md, a.w_full]}>
-							<Text style={[a.leading_snug]}>
+						<View
+							style={{
+								...a.gap_md,
+								...a.w_full,
+							}}
+						>
+							<Text style={a.leading_snug}>
 								Select which language to use for the app's user interface.
 							</Text>
-							<View style={[a.relative, [a.w_full, { maxWidth: 400 }]]}>
+							<View
+								style={{
+									...a.relative,
+									...[a.w_full, { maxWidth: 400 }],
+								}}
+							>
 								<RNPickerSelect
 									darkTheme={t.scheme === "dark"}
 									placeholder={{}}
@@ -134,22 +144,23 @@ export function LanguageSettingsScreen(props: Props) {
 								/>
 
 								<View
-									style={[
-										a.absolute,
-										t.atoms.bg_contrast_25,
-										a.rounded_xs,
-										a.pointer_events_none,
-										a.align_center,
-										a.justify_center,
-										{
+									style={{
+										...a.absolute,
+										...t.atoms.bg_contrast_25,
+										...a.rounded_xs,
+										...a.pointer_events_none,
+										...a.align_center,
+										...a.justify_center,
+
+										...{
 											top: 1,
 											right: 1,
 											bottom: 1,
 											width: 40,
 										},
-									]}
+									}}
 								>
-									<ChevronDownIcon style={[t.atoms.text]} />
+									<ChevronDownIcon style={t.atoms.text} />
 								</View>
 							</View>
 						</View>
@@ -157,11 +168,21 @@ export function LanguageSettingsScreen(props: Props) {
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Primary Language</SettingsList.ItemText>
-						<View style={[a.gap_md, a.w_full]}>
-							<Text style={[a.leading_snug]}>
+						<View
+							style={{
+								...a.gap_md,
+								...a.w_full,
+							}}
+						>
+							<Text style={a.leading_snug}>
 								Select your preferred language for translations in your feed.
 							</Text>
-							<View style={[a.relative, [a.w_full, { maxWidth: 400 }]]}>
+							<View
+								style={{
+									...a.relative,
+									...[a.w_full, { maxWidth: 400 }],
+								}}
+							>
 								<RNPickerSelect
 									darkTheme={t.scheme === "dark"}
 									placeholder={{}}
@@ -238,8 +259,8 @@ export function LanguageSettingsScreen(props: Props) {
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Content Languages</SettingsList.ItemText>
-						<View style={[a.gap_md]}>
-							<Text style={[a.leading_snug]}>
+						<View style={a.gap_md}>
+							<Text style={a.leading_snug}>
 								Select which languages you want your subscribed feeds to include. If none are selected,
 								all languages will be shown.
 							</Text>
@@ -250,10 +271,21 @@ export function LanguageSettingsScreen(props: Props) {
 								color="secondary"
 								variant="solid"
 								onPress={onPressContentLanguages}
-								style={[a.justify_start, { maxWidth: 400 }]}
+								style={{
+									...a.justify_start,
+									...{ maxWidth: 400 },
+								}}
 							>
 								<ButtonIcon icon={myLanguages.length > 0 ? CheckIcon : PlusIcon} />
-								<ButtonText style={[t.atoms.text, a.text_md, a.flex_1, a.text_left]} numberOfLines={1}>
+								<ButtonText
+									style={{
+										...t.atoms.text,
+										...a.text_md,
+										...a.flex_1,
+										...a.text_left,
+									}}
+									numberOfLines={1}
+								>
 									{myLanguages.length > 0 ? myLanguages : "Select languages"}
 								</ButtonText>
 							</Button>

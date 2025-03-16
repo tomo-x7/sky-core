@@ -80,7 +80,14 @@ export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected 
 	);
 
 	return (
-		<View testID={testID} style={[t.atoms.bg, styles.outer]} accessibilityRole="tablist">
+		<View
+			testID={testID}
+			style={{
+				...t.atoms.bg,
+				...styles.outer,
+			}}
+			accessibilityRole="tablist"
+		>
 			<DraggableScrollView
 				testID={`${testID}-selector`}
 				horizontal={true}
@@ -104,22 +111,23 @@ export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected 
 								<Text
 									emoji
 									testID={testID ? `${testID}-${item}` : undefined}
-									style={[
-										styles.itemText,
-										selected ? t.atoms.text : t.atoms.text_contrast_medium,
-										a.text_md,
-										a.font_bold,
-										{ lineHeight: 20 },
-									]}
+									style={{
+										...styles.itemText,
+										...(selected ? t.atoms.text : t.atoms.text_contrast_medium),
+										...a.text_md,
+										...a.font_bold,
+										...{ lineHeight: 20 },
+									}}
 								>
 									{item}
 									<View
-										style={[
-											styles.itemIndicator,
-											selected && {
+										style={{
+											...styles.itemIndicator,
+
+											...(selected && {
 												backgroundColor: t.palette.primary_500,
-											},
-										]}
+											}),
+										}}
 									/>
 								</Text>
 							</View>
@@ -127,7 +135,12 @@ export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected 
 					);
 				})}
 			</DraggableScrollView>
-			<View style={[t.atoms.border_contrast_low, styles.outerBottomBorder]} />
+			<View
+				style={{
+					...t.atoms.border_contrast_low,
+					...styles.outerBottomBorder,
+				}}
+			/>
 		</View>
 	);
 }

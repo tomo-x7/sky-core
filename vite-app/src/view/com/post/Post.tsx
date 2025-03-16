@@ -144,7 +144,12 @@ function PostInner({
 	return (
 		<Link
 			href={itemHref}
-			style={[styles.outer, pal.border, !hideTopBorder && { borderTopWidth: StyleSheet.hairlineWidth }, style]}
+			style={{
+				...styles.outer,
+				...pal.border,
+				...(!hideTopBorder && { borderTopWidth: StyleSheet.hairlineWidth }),
+				...style,
+			}}
 			onBeforePress={onBeforePress}
 			onPointerEnter={() => {
 				setHover(true);
@@ -172,10 +177,31 @@ function PostInner({
 						postHref={itemHref}
 					/>
 					{replyAuthorDid !== "" && (
-						<View style={[s.flexRow, s.mb2, s.alignCenter]}>
+						<View
+							style={{
+								...s.flexRow,
+								...s.mb2,
+								...s.alignCenter,
+							}}
+						>
 							{/* @ts-ignore */}
-							<FontAwesomeIcon icon="reply" size={9} style={[pal.textLight, s.mr5]} />
-							<Text type="sm" style={[pal.textLight, s.mr2]} lineHeight={1.2} numberOfLines={1}>
+							<FontAwesomeIcon
+								icon="reply"
+								size={9}
+								style={{
+									...pal.textLight,
+									...s.mr5,
+								}}
+							/>
+							<Text
+								type="sm"
+								style={{
+									...pal.textLight,
+									...s.mr2,
+								}}
+								lineHeight={1.2}
+								numberOfLines={1}
+							>
 								{isMe ? (
 									<>Reply to you</>
 								) : (
@@ -186,7 +212,7 @@ function PostInner({
 												type="sm"
 												did={replyAuthorDid}
 												attr="displayName"
-												style={[pal.textLight]}
+												style={pal.textLight}
 											/>
 										</ProfileHoverCard>
 									</>
@@ -200,7 +226,7 @@ function PostInner({
 						style={styles.contentHider}
 						childContainerStyle={styles.contentHiderChild}
 					>
-						<PostAlerts modui={moderation.ui("contentView")} style={[a.py_xs]} />
+						<PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} />
 						{richText.text ? (
 							<View style={styles.postTextContainer}>
 								<RichText
@@ -208,7 +234,10 @@ function PostInner({
 									testID="postText"
 									value={richText}
 									numberOfLines={limitLines ? MAX_POST_LINES : undefined}
-									style={[a.flex_1, a.text_md]}
+									style={{
+										...a.flex_1,
+										...a.text_md,
+									}}
 									authorHandle={post.author.handle}
 									shouldProxyLinks={true}
 								/>

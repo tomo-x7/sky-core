@@ -69,8 +69,16 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 
 	return (
 		<Dialog.Inner label={"Users that have liked this content or profile"}>
-			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_lg]}>Liked by</Text>
-
+			<Text
+				style={{
+					...a.text_2xl,
+					...a.font_bold,
+					...a.leading_tight,
+					...a.pb_lg,
+				}}
+			>
+				Liked by
+			</Text>
 			{isLoading ? (
 				<View style={{ minHeight: 300 }}>
 					<Loader size="xl" />
@@ -78,8 +86,15 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 			) : resolveError || likedByError || !data ? (
 				<ErrorMessage message={cleanError(resolveError || likedByError)} />
 			) : likes.length === 0 ? (
-				<View style={[t.atoms.bg_contrast_50, a.px_md, a.py_xl, a.rounded_md]}>
-					<Text style={[a.text_center]}>Nobody has liked this yet. Maybe you should be the first!</Text>
+				<View
+					style={{
+						...t.atoms.bg_contrast_50,
+						...a.px_md,
+						...a.py_xl,
+						...a.rounded_md,
+					}}
+				>
+					<Text style={a.text_center}>Nobody has liked this yet. Maybe you should be the first!</Text>
 				</View>
 			) : (
 				<FlatList
@@ -91,7 +106,6 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 					ListFooterComponent={<ListFooterComponent isFetching={isFetchingNextPage} />}
 				/>
 			)}
-
 			<Dialog.Close />
 		</Dialog.Inner>
 	);

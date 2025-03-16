@@ -77,7 +77,17 @@ export function SettingsScreen(props: Props) {
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<SettingsList.Container>
-					<View style={[a.px_xl, a.pt_md, a.pb_md, a.w_full, a.gap_2xs, a.align_center, { minHeight: 160 }]}>
+					<View
+						style={{
+							...a.px_xl,
+							...a.pt_md,
+							...a.pb_md,
+							...a.w_full,
+							...a.gap_2xs,
+							...a.align_center,
+							...{ minHeight: 160 },
+						}}
+					>
 						{profile && <ProfilePreview profile={profile} />}
 					</View>
 					{accounts.length > 1 ? (
@@ -196,7 +206,6 @@ export function SettingsScreen(props: Props) {
 					)}
 				</SettingsList.Container>
 			</Layout.Content>
-
 			<Prompt.Basic
 				control={signOutPromptControl}
 				title={"Sign out?"}
@@ -206,7 +215,6 @@ export function SettingsScreen(props: Props) {
 				cancelButtonCta={"Cancel"}
 				confirmButtonColor="negative"
 			/>
-
 			<SwitchAccountDialog control={switchAccountControl} />
 		</Layout.Screen>
 	);
@@ -321,7 +329,7 @@ function AccountRow({
 	};
 
 	return (
-		<View style={[a.relative]}>
+		<View style={a.relative}>
 			<SettingsList.PressableItem onPress={onSwitchAccount} label={"Switch account"}>
 				{moderationOpts && profile ? (
 					<UserAvatar
@@ -331,7 +339,7 @@ function AccountRow({
 						type={profile.associated?.labeler ? "labeler" : "user"}
 					/>
 				) : (
-					<View style={[{ width: 28 }]} />
+					<View style={{ width: 28 }} />
 				)}
 				<SettingsList.ItemText>{sanitizeHandle(account.handle, "@")}</SettingsList.ItemText>
 				{pendingDid === account.did && <SettingsList.ItemIcon icon={Loader} />}
@@ -342,13 +350,13 @@ function AccountRow({
 						{({ props, state }) => (
 							<Pressable
 								{...props}
-								style={[
-									a.absolute,
-									{ top: 10, right: tokens.space.lg },
-									a.p_xs,
-									a.rounded_full,
-									(state.hovered || state.pressed) && t.atoms.bg_contrast_25,
-								]}
+								style={{
+									...a.absolute,
+									...{ top: 10, right: tokens.space.lg },
+									...a.p_xs,
+									...a.rounded_full,
+									...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),
+								}}
 							>
 								<DotsHorizontal size="md" style={t.atoms.text} />
 							</Pressable>
@@ -362,7 +370,6 @@ function AccountRow({
 					</Menu.Outer>
 				</Menu.Root>
 			)}
-
 			<Prompt.Basic
 				control={removePromptControl}
 				title={"Remove from quick access?"}

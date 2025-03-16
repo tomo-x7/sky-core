@@ -21,11 +21,37 @@ export function StepDetails() {
 
 	return (
 		<ScreenTransition direction={state.transitionDirection}>
-			<View style={[a.px_xl, a.gap_xl, a.mt_4xl]}>
-				<View style={[a.gap_md, a.align_center, a.px_md, a.mb_md]}>
+			<View
+				style={{
+					...a.px_xl,
+					...a.gap_xl,
+					...a.mt_4xl,
+				}}
+			>
+				<View
+					style={{
+						...a.gap_md,
+						...a.align_center,
+						...a.px_md,
+						...a.mb_md,
+					}}
+				>
 					<StarterPack width={90} gradient="sky" />
-					<Text style={[a.font_bold, a.text_3xl]}>Invites, but personal</Text>
-					<Text style={[a.text_center, a.text_md, a.px_md]}>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_3xl,
+						}}
+					>
+						Invites, but personal
+					</Text>
+					<Text
+						style={{
+							...a.text_center,
+							...a.text_md,
+							...a.px_md,
+						}}
+					>
 						Invite your friends to follow your favorite feeds and people
 					</Text>
 				</View>
@@ -38,7 +64,7 @@ export function StepDetails() {
 							onChangeText={(text) => dispatch({ type: "SetName", name: text })}
 						/>
 						<TextField.SuffixText label={`${state.name?.length} out of 50`}>
-							<Text style={[t.atoms.text_contrast_medium]}>{state.name?.length ?? 0}/50</Text>
+							<Text style={t.atoms.text_contrast_medium}>{state.name?.length ?? 0}/50</Text>
 						</TextField.SuffixText>
 					</TextField.Root>
 				</View>

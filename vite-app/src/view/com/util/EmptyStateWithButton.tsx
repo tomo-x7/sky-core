@@ -23,9 +23,22 @@ export function EmptyStateWithButton(props: Props) {
 		<View testID={props.testID} style={styles.container}>
 			<View style={styles.iconContainer}>
 				{/* @ts-ignore */}
-				<FontAwesomeIcon icon={props.icon} style={[styles.icon, pal.text]} size={62} />
+				<FontAwesomeIcon
+					icon={props.icon}
+					style={{
+						...styles.icon,
+						...pal.text,
+					}}
+					size={62}
+				/>
 			</View>
-			<Text type="xl-medium" style={[s.textCenter, pal.text]}>
+			<Text
+				type="xl-medium"
+				style={{
+					...s.textCenter,
+					...pal.text,
+				}}
+			>
 				{props.message}
 			</Text>
 			<View style={styles.btns}>

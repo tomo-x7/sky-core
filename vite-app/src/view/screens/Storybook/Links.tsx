@@ -8,20 +8,36 @@ import { H1, Text } from "#/components/Typography";
 export function Links() {
 	const t = useTheme();
 	return (
-		<View style={[a.gap_md, a.align_start]}>
+		<View
+			style={{
+				...a.gap_md,
+				...a.align_start,
+			}}
+		>
 			<H1>Links</H1>
-
-			<View style={[a.gap_md, a.align_start]}>
-				<InlineLinkText label="foo" to="https://google.com" style={[a.text_lg]}>
+			<View
+				style={{
+					...a.gap_md,
+					...a.align_start,
+				}}
+			>
+				<InlineLinkText label="foo" to="https://google.com" style={a.text_lg}>
 					https://google.com
 				</InlineLinkText>
-				<InlineLinkText label="foo" to="https://google.com" style={[a.text_lg]}>
+				<InlineLinkText label="foo" to="https://google.com" style={a.text_lg}>
 					External with custom children (google.com)
 				</InlineLinkText>
-				<InlineLinkText label="foo" to="https://bsky.social" style={[a.text_md, t.atoms.text_contrast_low]}>
+				<InlineLinkText
+					label="foo"
+					to="https://bsky.social"
+					style={{
+						...a.text_md,
+						...t.atoms.text_contrast_low,
+					}}
+				>
 					Internal (bsky.social)
 				</InlineLinkText>
-				<InlineLinkText label="foo" to="https://bsky.app/profile/bsky.app" style={[a.text_md]}>
+				<InlineLinkText label="foo" to="https://bsky.app/profile/bsky.app" style={a.text_md}>
 					Internal (bsky.app)
 				</InlineLinkText>
 
@@ -36,8 +52,23 @@ export function Links() {
 				</Link>
 
 				<Link label="View @bsky.app's profile" to="https://bsky.app/profile/bsky.app">
-					<View style={[a.flex_row, a.align_center, a.gap_md, a.rounded_md, a.p_md, t.atoms.bg_contrast_25]}>
-						<View style={[{ width: 32, height: 32 }, a.rounded_full, t.atoms.bg_contrast_200]} />
+					<View
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.gap_md,
+							...a.rounded_md,
+							...a.p_md,
+							...t.atoms.bg_contrast_25,
+						}}
+					>
+						<View
+							style={{
+								...{ width: 32, height: 32 },
+								...a.rounded_full,
+								...t.atoms.bg_contrast_200,
+							}}
+						/>
 						<Text>View @bsky.app's profile</Text>
 					</View>
 				</Link>

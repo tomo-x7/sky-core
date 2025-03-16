@@ -93,32 +93,42 @@ export function MyLists({
 		({ item, index }: { item: any; index: number }) => {
 			if (item === EMPTY) {
 				return (
-					<View style={[a.flex_1, a.align_center, a.gap_sm, a.px_xl, a.pt_xl]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.align_center,
+							...a.gap_sm,
+							...a.px_xl,
+							...a.pt_xl,
+						}}
+					>
 						<View
-							style={[
-								a.align_center,
-								a.justify_center,
-								a.rounded_full,
-								t.atoms.bg_contrast_25,
-								{
+							style={{
+								...a.align_center,
+								...a.justify_center,
+								...a.rounded_full,
+								...t.atoms.bg_contrast_25,
+
+								...{
 									width: 32,
 									height: 32,
 								},
-							]}
+							}}
 						>
 							<ListIcon size="md" fill={t.atoms.text_contrast_low.color} />
 						</View>
 						<Text
-							style={[
-								a.text_center,
-								a.flex_1,
-								a.text_sm,
-								a.leading_snug,
-								t.atoms.text_contrast_medium,
-								{
+							style={{
+								...a.text_center,
+								...a.flex_1,
+								...a.text_sm,
+								...a.leading_snug,
+								...t.atoms.text_contrast_medium,
+
+								...{
 									maxWidth: 200,
 								},
-							]}
+							}}
 						>
 							{emptyText}
 						</Text>
@@ -136,7 +146,14 @@ export function MyLists({
 			return renderItem ? (
 				renderItem(item, index)
 			) : (
-				<View style={[index !== 0 && a.border_t, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
+				<View
+					style={{
+						...(index !== 0 && a.border_t),
+						...t.atoms.border_contrast_low,
+						...a.px_lg,
+						...a.py_lg,
+					}}
+				>
 					<ListCard.Default view={item} />
 				</View>
 			);

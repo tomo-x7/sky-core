@@ -71,7 +71,13 @@ export function ProfileCard({
 	return (
 		<Link
 			testID={testID}
-			style={[styles.outer, pal.border, noBorder && styles.outerNoBorder, !noBg && pal.view, style]}
+			style={{
+				...styles.outer,
+				...pal.border,
+				...(noBorder && styles.outerNoBorder),
+				...(!noBg && pal.view),
+				...style,
+			}}
 			href={makeProfileLink(profile)}
 			title={profile.handle}
 			asAnchor
@@ -88,13 +94,23 @@ export function ProfileCard({
 					/>
 				</View>
 				<View style={styles.layoutContent}>
-					<Text emoji type="lg" style={[s.bold, pal.text, a.self_start]} numberOfLines={1} lineHeight={1.2}>
+					<Text
+						emoji
+						type="lg"
+						style={{
+							...s.bold,
+							...pal.text,
+							...a.self_start,
+						}}
+						numberOfLines={1}
+						lineHeight={1.2}
+					>
 						{sanitizeDisplayName(
 							profile.displayName || sanitizeHandle(profile.handle),
 							moderation.ui("displayName"),
 						)}
 					</Text>
-					<Text emoji type="md" style={[pal.textLight]} numberOfLines={1}>
+					<Text emoji type="md" style={pal.textLight} numberOfLines={1}>
 						{sanitizeHandle(profile.handle, "@")}
 					</Text>
 					<ProfileCardPills followedBy={!!profile.viewer?.followedBy} moderation={moderation} />
@@ -112,7 +128,14 @@ export function ProfileCard({
 						</Text>
 					) : null}
 					{knownFollowersVisible ? (
-						<View style={[a.flex_row, a.align_center, a.gap_sm, !!hasDescription && a.mt_md]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_sm,
+								...(!!hasDescription && a.mt_md),
+							}}
+						>
 							<KnownFollowers minimal profile={profile} moderationOpts={moderationOpts} />
 						</View>
 					) : null}
@@ -135,7 +158,7 @@ export function ProfileCardPills({
 	}
 
 	return (
-		<Pills.Row style={[a.pt_xs]}>
+		<Pills.Row style={a.pt_xs}>
 			{followedBy && <Pills.FollowsYou />}
 			{modui.alerts.map((alert) => (
 				<Pills.Label key={getModerationCauseKey(alert)} cause={alert} />

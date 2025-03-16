@@ -84,7 +84,14 @@ export function SelectLangBtn() {
 			accessibilityHint=""
 		>
 			{postLanguagesPref.length > 0 ? (
-				<Text type="lg-bold" style={[pal.link, styles.label]} numberOfLines={1}>
+				<Text
+					type="lg-bold"
+					style={{
+						...pal.link,
+						...styles.label,
+					}}
+					numberOfLines={1}
+				>
 					{postLanguagesPref.map((lang) => codeToLanguageName(lang, langPrefs.appLanguage)).join(", ")}
 				</Text>
 			) : (

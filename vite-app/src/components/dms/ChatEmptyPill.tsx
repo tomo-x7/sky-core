@@ -44,23 +44,37 @@ export function ChatEmptyPill() {
 
 	return (
 		<View
-			style={[
-				a.absolute,
-				a.w_full,
-				a.z_10,
-				a.align_center,
-				{
+			style={{
+				...a.absolute,
+				...a.w_full,
+				...a.z_10,
+				...a.align_center,
+
+				...{
 					top: -50,
 				},
-			]}
+			}}
 		>
 			<AnimatedPressable
-				style={[a.px_xl, a.py_md, a.rounded_full, t.atoms.bg_contrast_25, a.align_center, animatedStyle]}
+				style={{
+					...a.px_xl,
+					...a.py_md,
+					...a.rounded_full,
+					...t.atoms.bg_contrast_25,
+					...a.align_center,
+					...animatedStyle,
+				}}
 				entering={ScaleAndFadeIn}
 				exiting={ShrinkAndPop}
 				onPress={onPress}
 			>
-				<Text style={[a.font_bold, a.pointer_events_none]} selectable={false}>
+				<Text
+					style={{
+						...a.font_bold,
+						...a.pointer_events_none,
+					}}
+					selectable={false}
+				>
 					{prompts[promptIndex]}
 				</Text>
 			</AnimatedPressable>

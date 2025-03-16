@@ -107,11 +107,23 @@ export function Component({
 
 	return (
 		<KeyboardAvoidingView style={s.flex1} behavior="height">
-			<ScrollView style={[pal.view]} testID="editProfileModal">
-				<Text style={[styles.title, pal.text]}>Edit my profile</Text>
+			<ScrollView style={pal.view} testID="editProfileModal">
+				<Text
+					style={{
+						...styles.title,
+						...pal.text,
+					}}
+				>
+					Edit my profile
+				</Text>
 				<View style={styles.photos}>
 					<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
-					<View style={[styles.avi, { borderColor: pal.colors.background }]}>
+					<View
+						style={{
+							...styles.avi,
+							...{ borderColor: pal.colors.background },
+						}}
+					>
 						<EditableUserAvatar size={80} avatar={userAvatar} onSelectNewAvatar={onSelectNewAvatar} />
 					</View>
 				</View>
@@ -127,10 +139,21 @@ export function Component({
 				)}
 				<View style={styles.form}>
 					<View>
-						<Text style={[styles.label, pal.text]}>Display Name</Text>
+						<Text
+							style={{
+								...styles.label,
+								...pal.text,
+							}}
+						>
+							Display Name
+						</Text>
 						<TextInput
 							testID="editProfileDisplayNameInput"
-							style={[styles.textInput, pal.border, pal.text]}
+							style={{
+								...styles.textInput,
+								...pal.border,
+								...pal.text,
+							}}
 							placeholder={"e.g. Alice Roberts"}
 							placeholderTextColor={colors.gray4}
 							value={displayName}
@@ -141,10 +164,21 @@ export function Component({
 						/>
 					</View>
 					<View style={s.pb10}>
-						<Text style={[styles.label, pal.text]}>Description</Text>
+						<Text
+							style={{
+								...styles.label,
+								...pal.text,
+							}}
+						>
+							Description
+						</Text>
 						<TextInput
 							testID="editProfileDescriptionInput"
-							style={[styles.textArea, pal.border, pal.text]}
+							style={{
+								...styles.textArea,
+								...pal.border,
+								...pal.text,
+							}}
 							placeholder={"e.g. Artist, dog-lover, and avid reader."}
 							placeholderTextColor={colors.gray4}
 							keyboardAppearance={theme.colorScheme}
@@ -157,7 +191,13 @@ export function Component({
 						/>
 					</View>
 					{updateMutation.isPending ? (
-						<View style={[styles.btn, s.mt10, { backgroundColor: colors.gray2 }]}>
+						<View
+							style={{
+								...styles.btn,
+								...s.mt10,
+								...{ backgroundColor: colors.gray2 },
+							}}
+						>
 							<ActivityIndicator />
 						</View>
 					) : (
@@ -173,9 +213,16 @@ export function Component({
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
 								start={{ x: 0, y: 0 }}
 								end={{ x: 1, y: 1 }}
-								style={[styles.btn]}
+								style={styles.btn}
 							>
-								<Text style={[s.white, s.bold]}>Save Changes</Text>
+								<Text
+									style={{
+										...s.white,
+										...s.bold,
+									}}
+								>
+									Save Changes
+								</Text>
 							</LinearGradient>
 						</TouchableOpacity>
 					)}
@@ -190,8 +237,16 @@ export function Component({
 							accessibilityHint=""
 							onAccessibilityEscape={onPressCancel}
 						>
-							<View style={[styles.btn]}>
-								<Text style={[s.black, s.bold, pal.text]}>Cancel</Text>
+							<View style={styles.btn}>
+								<Text
+									style={{
+										...s.black,
+										...s.bold,
+										...pal.text,
+									}}
+								>
+									Cancel
+								</Text>
 							</View>
 						</AnimatedTouchableOpacity>
 					)}

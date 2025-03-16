@@ -54,14 +54,44 @@ function WizardListCard({
 			value={included}
 			disabled={btnType === "remove" || disabled}
 			onChange={onPress}
-			style={[a.flex_row, a.align_center, a.px_lg, a.py_md, a.gap_md, a.border_b, t.atoms.border_contrast_low]}
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.px_lg,
+				...a.py_md,
+				...a.gap_md,
+				...a.border_b,
+				...t.atoms.border_contrast_low,
+			}}
 		>
 			<UserAvatar size={45} avatar={avatar} moderation={moderationUi} type={type} />
-			<View style={[a.flex_1, a.gap_2xs]}>
-				<Text emoji style={[a.flex_1, a.font_bold, a.text_md, a.leading_tight, a.self_start]} numberOfLines={1}>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_2xs,
+				}}
+			>
+				<Text
+					emoji
+					style={{
+						...a.flex_1,
+						...a.font_bold,
+						...a.text_md,
+						...a.leading_tight,
+						...a.self_start,
+					}}
+					numberOfLines={1}
+				>
 					{displayName}
 				</Text>
-				<Text style={[a.flex_1, a.leading_tight, t.atoms.text_contrast_medium]} numberOfLines={1}>
+				<Text
+					style={{
+						...a.flex_1,
+						...a.leading_tight,
+						...t.atoms.text_contrast_medium,
+					}}
+					numberOfLines={1}
+				>
 					{subtitle}
 				</Text>
 			</View>
@@ -73,7 +103,10 @@ function WizardListCard({
 					variant="solid"
 					color="secondary"
 					size="small"
-					style={[a.self_center, { marginLeft: "auto" }]}
+					style={{
+						...a.self_center,
+						...{ marginLeft: "auto" },
+					}}
 					onPress={onPress}
 				>
 					<ButtonText>Remove</ButtonText>

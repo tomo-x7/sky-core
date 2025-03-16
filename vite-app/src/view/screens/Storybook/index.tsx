@@ -46,10 +46,22 @@ function StorybookInner() {
 
 	return (
 		<>
-			<View style={[a.p_xl, a.gap_5xl, { paddingBottom: 100 }]}>
+			<View
+				style={{
+					...a.p_xl,
+					...a.gap_5xl,
+					...{ paddingBottom: 100 },
+				}}
+			>
 				{!showContainedList ? (
 					<>
-						<View style={[a.flex_row, a.align_start, a.gap_md]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.align_start,
+								...a.gap_md,
+							}}
+						>
 							<Button
 								variant="outline"
 								color="primary"

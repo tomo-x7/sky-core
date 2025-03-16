@@ -41,13 +41,19 @@ function PlaceholderOverlay({
 	if (isPlayerActive && !isLoading) return null;
 
 	return (
-		<View style={[a.absolute, a.inset_0, styles.overlayLayer]}>
+		<View
+			style={{
+				...a.absolute,
+				...a.inset_0,
+				...styles.overlayLayer,
+			}}
+		>
 			<Pressable
 				accessibilityRole="button"
 				accessibilityLabel={"Play Video"}
 				accessibilityHint={"Plays the video"}
 				onPress={onPress}
-				style={[styles.overlayContainer]}
+				style={styles.overlayContainer}
 			>
 				{!isPlayerActive ? <PlayButtonIcon /> : <ActivityIndicator size="large" color="white" />}
 			</Pressable>
@@ -78,7 +84,13 @@ function Player({
 	if (!isPlayerActive) return null;
 
 	return (
-		<EventStopper style={[a.absolute, a.inset_0, styles.playerLayer]}>
+		<EventStopper
+			style={{
+				...a.absolute,
+				...a.inset_0,
+				...styles.playerLayer,
+			}}
+		>
 			<WebView
 				javaScriptEnabled={true}
 				onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
@@ -188,28 +200,33 @@ export function ExternalPlayer({
 	return (
 		<>
 			<EmbedConsentDialog control={consentDialogControl} source={params.source} onAccept={onAcceptConsent} />
-
-			<Animated.View ref={viewRef} collapsable={false} style={[aspect, a.overflow_hidden]}>
+			<Animated.View
+				ref={viewRef}
+				collapsable={false}
+				style={{
+					...aspect,
+					...a.overflow_hidden,
+				}}
+			>
 				{link.thumb && (!isPlayerActive || isLoading) ? (
 					<>
-						<Image style={[a.flex_1]} source={{ uri: link.thumb }} accessibilityIgnoresInvertColors />
+						<Image style={a.flex_1} source={{ uri: link.thumb }} accessibilityIgnoresInvertColors />
 						<Fill
-							style={[
-								t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg,
-								{
+							style={{
+								...(t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg),
+
+								...{
 									opacity: 0.3,
 								},
-							]}
+							}}
 						/>
 					</>
 				) : (
 					<Fill
-						style={[
-							{
-								backgroundColor: t.name === "light" ? t.palette.contrast_975 : "black",
-								opacity: 0.3,
-							},
-						]}
+						style={{
+							backgroundColor: t.name === "light" ? t.palette.contrast_975 : "black",
+							opacity: 0.3,
+						}}
 					/>
 				)}
 				<PlaceholderOverlay isLoading={isLoading} isPlayerActive={isPlayerActive} onPress={onPlayPress} />

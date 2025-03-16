@@ -29,8 +29,13 @@ export function PostFeedVideoGridRow({
 	if (posts.length !== slices.length) return null;
 
 	return (
-		<View style={[gutters]}>
-			<View style={[a.flex_row, a.gap_sm]}>
+		<View style={gutters}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_sm,
+				}}
+			>
 				<Grid.Row gap={a.gap_sm.gap}>
 					{posts.map((post) => (
 						<Grid.Col key={post.post.uri} width={1 / 2}>
@@ -50,8 +55,13 @@ export function PostFeedVideoGridRow({
 export function PostFeedVideoGridRowPlaceholder() {
 	const gutters = useGutters(["base", "base", 0, "base"]);
 	return (
-		<View style={[gutters]}>
-			<View style={[a.flex_row, a.gap_sm]}>
+		<View style={gutters}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_sm,
+				}}
+			>
 				<VideoPostCardPlaceholder />
 				<VideoPostCardPlaceholder />
 			</View>

@@ -90,7 +90,13 @@ let ProfileHeaderShell = ({
 
 	return (
 		<View style={t.atoms.bg} pointerEvents={"box-none"}>
-			<View pointerEvents={"box-none"} style={[a.relative, { height: 150 }]}>
+			<View
+				pointerEvents={"box-none"}
+				style={{
+					...a.relative,
+					...{ height: 150 },
+				}}
+			>
 				<StatusBarShadow />
 				<GrowableBanner
 					backButton={
@@ -104,12 +110,13 @@ let ProfileHeaderShell = ({
 								accessibilityHint=""
 							>
 								<View
-									style={[
-										styles.backBtnWrapper,
-										{
+									style={{
+										...styles.backBtnWrapper,
+
+										...{
 											top: 10,
 										},
-									]}
+									}}
 								>
 									<ArrowLeftIcon size="lg" fill="white" />
 								</View>
@@ -128,11 +135,15 @@ let ProfileHeaderShell = ({
 					)}
 				</GrowableBanner>
 			</View>
-
 			{children}
-
 			{!isPlaceholderProfile && (
-				<View style={[a.px_lg, a.py_xs]} pointerEvents={"box-none"}>
+				<View
+					style={{
+						...a.px_lg,
+						...a.py_xs,
+					}}
+					pointerEvents={"box-none"}
+				>
 					{isMe ? (
 						<LabelsOnMe type="account" labels={profile.labels} />
 					) : (
@@ -140,7 +151,6 @@ let ProfileHeaderShell = ({
 					)}
 				</View>
 			)}
-
 			<GrowableAvatar style={styles.aviPosition}>
 				<TouchableWithoutFeedback
 					testID="profileHeaderAviButton"
@@ -150,12 +160,12 @@ let ProfileHeaderShell = ({
 					accessibilityHint=""
 				>
 					<View
-						style={[
-							t.atoms.bg,
-							{ borderColor: t.atoms.bg.backgroundColor },
-							styles.avi,
-							profile.associated?.labeler && styles.aviLabeler,
-						]}
+						style={{
+							...t.atoms.bg,
+							...{ borderColor: t.atoms.bg.backgroundColor },
+							...styles.avi,
+							...(profile.associated?.labeler && styles.aviLabeler),
+						}}
 					>
 						<View ref={aviRef} collapsable={false}>
 							<UserAvatar

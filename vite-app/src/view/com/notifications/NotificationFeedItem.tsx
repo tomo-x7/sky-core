@@ -158,10 +158,19 @@ let NotificationFeedItem = ({
 	const firstAuthorLink = (
 		<TextLink
 			key={firstAuthor.href}
-			style={[pal.text, s.bold]}
+			style={{
+				...pal.text,
+				...s.bold,
+			}}
 			href={firstAuthor.href}
 			text={
-				<Text emoji style={[pal.text, s.bold]}>
+				<Text
+					emoji
+					style={{
+						...pal.text,
+						...s.bold,
+					}}
+				>
 					{forceLTR(firstAuthorName)}
 				</Text>
 			}
@@ -177,10 +186,10 @@ let NotificationFeedItem = ({
 	let icon = (
 		<HeartIconFilled
 			size="xl"
-			style={[
-				s.likeColor,
+			style={
 				// {position: 'relative', top: -4}
-			]}
+				s.likeColor
+			}
 		/>
 	);
 
@@ -191,7 +200,12 @@ let NotificationFeedItem = ({
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
-				<Text style={[pal.text, s.bold]}>
+				<Text
+					style={{
+						...pal.text,
+						...s.bold,
+					}}
+				>
 					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				liked your post
@@ -206,7 +220,12 @@ let NotificationFeedItem = ({
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
-				<Text style={[pal.text, s.bold]}>
+				<Text
+					style={{
+						...pal.text,
+						...s.bold,
+					}}
+				>
 					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				reposted your post
@@ -250,7 +269,12 @@ let NotificationFeedItem = ({
 			notificationContent = hasMultipleAuthors ? (
 				<>
 					{firstAuthorLink} and{" "}
-					<Text style={[pal.text, s.bold]}>
+					<Text
+						style={{
+							...pal.text,
+							...s.bold,
+						}}
+					>
 						{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 					</Text>{" "}
 					followed you
@@ -267,7 +291,12 @@ let NotificationFeedItem = ({
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
-				<Text style={[pal.text, s.bold]}>
+				<Text
+					style={{
+						...pal.text,
+						...s.bold,
+					}}
+				>
 					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				liked your custom feed
@@ -282,7 +311,12 @@ let NotificationFeedItem = ({
 		notificationContent = hasMultipleAuthors ? (
 			<>
 				{firstAuthorLink} and{" "}
-				<Text style={[pal.text, s.bold]}>
+				<Text
+					style={{
+						...pal.text,
+						...s.bold,
+					}}
+				>
 					{formattedAuthorsCount} {additionalAuthorsCount === 1 ? "other" : "others"}
 				</Text>{" "}
 				signed up with your starter pack
@@ -303,18 +337,20 @@ let NotificationFeedItem = ({
 	return (
 		<Link
 			testID={`feedItem-by-${item.notification.author.handle}`}
-			style={[
-				styles.outer,
-				pal.border,
-				item.notification.isRead
+			style={{
+				...styles.outer,
+				...pal.border,
+
+				...(item.notification.isRead
 					? undefined
 					: {
 							backgroundColor: pal.colors.unreadNotifBg,
 							borderColor: pal.colors.unreadNotifBorder,
-						},
-				{ borderTopWidth: hideTopBorder ? 0 : StyleSheet.hairlineWidth },
-				a.overflow_hidden,
-			]}
+						}),
+
+				...{ borderTopWidth: hideTopBorder ? 0 : StyleSheet.hairlineWidth },
+				...a.overflow_hidden,
+			}}
 			href={itemHref}
 			noFeedback
 			accessibilityHint=""
@@ -352,7 +388,12 @@ let NotificationFeedItem = ({
 			}}
 		>
 			<SubtleWebHover hover={hover} />
-			<View style={[styles.layoutIcon, a.pr_sm]}>
+			<View
+				style={{
+					...styles.layoutIcon,
+					...a.pr_sm,
+				}}
+			>
 				{/* TODO: Prevent conditional rendering and move toward composable
 		  notifications for clearer accessibility labeling */}
 				{icon}
@@ -370,7 +411,11 @@ let NotificationFeedItem = ({
 					/>
 					<ExpandedAuthorsList visible={isAuthorsExpanded} authors={authors} />
 					<Text
-						style={[styles.meta, a.self_start, pal.text]}
+						style={{
+							...styles.meta,
+							...a.self_start,
+							...pal.text,
+						}}
 						accessibilityHint=""
 						accessibilityLabel={a11yLabel}
 					>
@@ -379,8 +424,8 @@ let NotificationFeedItem = ({
 							{({ timeElapsed }) => (
 								<>
 									{/* make sure there's whitespace around the middot -sfn */}
-									<Text style={[pal.textLight]}> &middot; </Text>
-									<Text style={[pal.textLight]} title={niceTimestamp}>
+									<Text style={pal.textLight}> &middot; </Text>
+									<Text style={pal.textLight} title={niceTimestamp}>
 										{timeElapsed}
 									</Text>
 								</>
@@ -394,13 +439,26 @@ let NotificationFeedItem = ({
 				{item.type === "feedgen-like" && item.subjectUri ? (
 					<FeedSourceCard
 						feedUri={item.subjectUri}
-						style={[t.atoms.bg, t.atoms.border_contrast_low, a.border, styles.feedcard]}
+						style={{
+							...t.atoms.bg,
+							...t.atoms.border_contrast_low,
+							...a.border,
+							...styles.feedcard,
+						}}
 						showLikes
 					/>
 				) : null}
 				{item.type === "starterpack-joined" ? (
 					<View>
-						<View style={[a.border, a.p_sm, a.rounded_sm, a.mt_sm, t.atoms.border_contrast_low]}>
+						<View
+							style={{
+								...a.border,
+								...a.p_sm,
+								...a.rounded_sm,
+								...a.mt_sm,
+								...t.atoms.border_contrast_low,
+							}}
+						>
 							<StarterPackCard starterPack={item.subject} />
 						</View>
 					</View>
@@ -423,7 +481,7 @@ function ExpandListPressable({
 }) {
 	if (hasMultipleAuthors) {
 		return (
-			<Pressable onPress={onToggleAuthorsExpanded} style={[styles.expandedAuthorsTrigger]} accessible={false}>
+			<Pressable onPress={onToggleAuthorsExpanded} style={styles.expandedAuthorsTrigger} accessible={false}>
 				{children}
 			</Pressable>
 		);
@@ -450,7 +508,10 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 			variant="ghost"
 			color="primary"
 			size="small"
-			style={[a.self_center, { marginLeft: "auto" }]}
+			style={{
+				...a.self_center,
+				...{ marginLeft: "auto" },
+			}}
 			disabled={isLoading}
 			onPress={async () => {
 				try {
@@ -498,7 +559,13 @@ function CondensedAuthorsList({
 					accessibilityLabel={"Hide user list"}
 					accessibilityHint={"Collapses list of users for a given notification"}
 				>
-					<ChevronUpIcon size="md" style={[styles.expandedAuthorsCloseBtnIcon, pal.text]} />
+					<ChevronUpIcon
+						size="md"
+						style={{
+							...styles.expandedAuthorsCloseBtnIcon,
+							...pal.text,
+						}}
+					/>
 					<Text type="sm-medium" style={pal.text}>
 						Hide
 					</Text>
@@ -508,7 +575,7 @@ function CondensedAuthorsList({
 	}
 	if (authors.length === 1) {
 		return (
-			<View style={[styles.avis]}>
+			<View style={styles.avis}>
 				<PreviewableUserAvatar
 					size={35}
 					profile={authors[0].profile}
@@ -533,9 +600,22 @@ function CondensedAuthorsList({
 					</View>
 				))}
 				{authors.length > MAX_AUTHORS ? (
-					<Text style={[styles.aviExtraCount, pal.textLight]}>+{authors.length - MAX_AUTHORS}</Text>
+					<Text
+						style={{
+							...styles.aviExtraCount,
+							...pal.textLight,
+						}}
+					>
+						+{authors.length - MAX_AUTHORS}
+					</Text>
 				) : undefined}
-				<ChevronDownIcon size="md" style={[styles.expandedAuthorsCloseBtnIcon, pal.textLight]} />
+				<ChevronDownIcon
+					size="md"
+					style={{
+						...styles.expandedAuthorsCloseBtnIcon,
+						...pal.textLight,
+					}}
+				/>
 			</View>
 		</TouchableOpacity>
 	);
@@ -563,7 +643,12 @@ function ExpandedAuthorsList({
 	}, [heightInterp, visible]);
 
 	return (
-		<Animated.View style={[a.overflow_hidden, heightStyle]}>
+		<Animated.View
+			style={{
+				...a.overflow_hidden,
+				...heightStyle,
+			}}
+		>
 			{visible &&
 				authors.map((author) => (
 					<NewLink
@@ -591,7 +676,7 @@ function ExpandedAuthorsList({
 								<Text emoji type="lg-bold" style={pal.text} lineHeight={1.2}>
 									{sanitizeDisplayName(author.profile.displayName || author.profile.handle)}
 								</Text>{" "}
-								<Text style={[pal.textLight]} lineHeight={1.2}>
+								<Text style={pal.textLight} lineHeight={1.2}>
 									{sanitizeHandle(author.profile.handle, "@")}
 								</Text>
 							</Text>

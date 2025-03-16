@@ -52,7 +52,10 @@ export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 
 	return (
 		<Pressable
-			style={[t.atoms.border_contrast_medium, styles.replyToLayout]}
+			style={{
+				...t.atoms.border_contrast_medium,
+				...styles.replyToLayout,
+			}}
 			onPress={onPress}
 			accessibilityRole="button"
 			accessibilityLabel={"Expand or collapse the full post you are replying to"}
@@ -92,50 +95,72 @@ function ComposerReplyToImages({
 	showFull: boolean;
 }) {
 	return (
-		<View style={[styles.imagesContainer, a.mx_xs]}>
+		<View
+			style={{
+				...styles.imagesContainer,
+				...a.mx_xs,
+			}}
+		>
 			{(images.length === 1 && (
 				<Image
 					source={{ uri: images[0].thumb }}
-					style={[a.flex_1]}
+					style={a.flex_1}
 					//@ts-ignore
 					cachePolicy="memory-disk"
 					accessibilityIgnoresInvertColors
 				/>
 			)) ||
 				(images.length === 2 && (
-					<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.flex_row,
+							...a.gap_2xs,
+						}}
+					>
 						<Image
 							source={{ uri: images[0].thumb }}
-							style={[a.flex_1]} //@ts-ignore
+							style={a.flex_1} //@ts-ignore
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
 						<Image
 							source={{ uri: images[1].thumb }}
-							style={[a.flex_1]} //@ts-ignore
+							style={a.flex_1} //@ts-ignore
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
 					</View>
 				)) ||
 				(images.length === 3 && (
-					<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.flex_row,
+							...a.gap_2xs,
+						}}
+					>
 						<Image
 							source={{ uri: images[0].thumb }}
-							style={[a.flex_1]} //@ts-ignore
+							style={a.flex_1} //@ts-ignore
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
-						<View style={[a.flex_1, a.gap_2xs]}>
+						<View
+							style={{
+								...a.flex_1,
+								...a.gap_2xs,
+							}}
+						>
 							<Image
 								source={{ uri: images[1].thumb }}
-								style={[a.flex_1]} //@ts-ignore
+								style={a.flex_1} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[2].thumb }}
-								style={[a.flex_1]} //@ts-ignore
+								style={a.flex_1} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
@@ -143,31 +168,48 @@ function ComposerReplyToImages({
 					</View>
 				)) ||
 				(images.length === 4 && (
-					<View style={[a.flex_1, a.gap_2xs]}>
-						<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.gap_2xs,
+						}}
+					>
+						<View
+							style={{
+								...a.flex_1,
+								...a.flex_row,
+								...a.gap_2xs,
+							}}
+						>
 							<Image
 								source={{ uri: images[0].thumb }}
-								style={[a.flex_1]} //@ts-ignore
+								style={a.flex_1} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[1].thumb }}
-								style={[a.flex_1]} //@ts-ignore
+								style={a.flex_1} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 						</View>
-						<View style={[a.flex_1, a.flex_row, a.gap_2xs]}>
+						<View
+							style={{
+								...a.flex_1,
+								...a.flex_row,
+								...a.gap_2xs,
+							}}
+						>
 							<Image
 								source={{ uri: images[2].thumb }}
-								style={[a.flex_1]} //@ts-ignore
+								style={a.flex_1} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[3].thumb }}
-								style={[a.flex_1]} //@ts-ignore
+								style={a.flex_1} //@ts-ignore
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>

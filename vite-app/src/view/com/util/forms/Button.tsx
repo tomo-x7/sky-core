@@ -171,11 +171,22 @@ export function Button({
 		}
 
 		return (
-			<View style={[styles.labelContainer, labelContainerStyle]}>
+			<View
+				style={{
+					...styles.labelContainer,
+					...labelContainerStyle,
+				}}
+			>
 				{label && withLoading && isLoading ? (
 					<ActivityIndicator size={12} color={typeLabelStyle.color} />
 				) : null}
-				<Text type="button" style={[typeLabelStyle, labelStyle]}>
+				<Text
+					type="button"
+					style={{
+						...typeLabelStyle,
+						...labelStyle,
+					}}
+				>
 					{label}
 				</Text>
 			</View>

@@ -111,9 +111,14 @@ function ContentHiderActive({
 	}, [modui?.blurs, blur, desc.name, labelDefs, globalLabelStrings]);
 
 	return (
-		<View testID={testID} style={[a.overflow_hidden, style]}>
+		<View
+			testID={testID}
+			style={{
+				...a.overflow_hidden,
+				...style,
+			}}
+		>
 			<ModerationDetailsDialog control={control} modcause={blur} />
-
 			<Button
 				onPress={(e) => {
 					e.preventDefault();
@@ -135,48 +140,50 @@ function ContentHiderActive({
 			>
 				{(state) => (
 					<View
-						style={[
-							a.flex_row,
-							a.w_full,
-							a.justify_start,
-							a.align_center,
-							a.py_md,
-							a.px_lg,
-							a.gap_xs,
-							a.rounded_sm,
-							t.atoms.bg_contrast_25,
-							gtMobile && [a.gap_sm, a.py_lg, a.mt_xs, a.px_xl],
-							(state.hovered || state.pressed) && t.atoms.bg_contrast_50,
-						]}
+						style={{
+							...a.flex_row,
+							...a.w_full,
+							...a.justify_start,
+							...a.align_center,
+							...a.py_md,
+							...a.px_lg,
+							...a.gap_xs,
+							...a.rounded_sm,
+							...t.atoms.bg_contrast_25,
+							...(gtMobile && [a.gap_sm, a.py_lg, a.mt_xs, a.px_xl]),
+							...((state.hovered || state.pressed) && t.atoms.bg_contrast_50),
+						}}
 					>
 						<desc.icon size="md" fill={t.atoms.text_contrast_medium.color} style={{ marginLeft: -2 }} />
 						<Text
-							style={[
-								a.flex_1,
-								a.text_left,
-								a.font_bold,
-								a.leading_snug,
-								gtMobile && [a.font_bold],
-								t.atoms.text_contrast_medium,
-								{
+							style={{
+								...a.flex_1,
+								...a.text_left,
+								...a.font_bold,
+								...a.leading_snug,
+								...(gtMobile && [a.font_bold]),
+								...t.atoms.text_contrast_medium,
+
+								...{
 									marginBottom: 1,
 								},
-							]}
+							}}
 							numberOfLines={2}
 						>
 							{labelName}
 						</Text>
 						{!modui.noOverride && (
 							<Text
-								style={[
-									a.font_bold,
-									a.leading_snug,
-									gtMobile && [a.font_bold],
-									t.atoms.text_contrast_high,
-									{
+								style={{
+									...a.font_bold,
+									...a.leading_snug,
+									...(gtMobile && [a.font_bold]),
+									...t.atoms.text_contrast_high,
+
+									...{
 										marginBottom: 1,
 									},
-								]}
+								}}
 							>
 								{override ? <>Hide</> : <>Show</>}
 							</Text>
@@ -184,7 +191,6 @@ function ContentHiderActive({
 					</View>
 				)}
 			</Button>
-
 			{desc.source && blur.type === "label" && !override && (
 				<Button
 					onPress={(e) => {
@@ -193,18 +199,18 @@ function ContentHiderActive({
 						control.open();
 					}}
 					label={"Learn more about the moderation applied to this content."}
-					style={[a.pt_sm]}
+					style={a.pt_sm}
 				>
 					{(state) => (
 						<Text
-							style={[
-								a.flex_1,
-								a.text_sm,
-								a.font_normal,
-								a.leading_snug,
-								t.atoms.text_contrast_medium,
-								a.text_left,
-							]}
+							style={{
+								...a.flex_1,
+								...a.text_sm,
+								...a.font_normal,
+								...a.leading_snug,
+								...t.atoms.text_contrast_medium,
+								...a.text_left,
+							}}
 						>
 							{desc.sourceType === "user" ? (
 								<>Labeled by the author.</>
@@ -213,12 +219,13 @@ function ContentHiderActive({
 								<>Labeled by {sanitizeDisplayName(desc.source!)}.</>
 							)}{" "}
 							<Text
-								style={[
-									{ color: t.palette.primary_500 },
-									a.text_sm,
-									//@ts-ignore
-									state.hovered && { textDecoration: "underline" },
-								]}
+								style={{
+									...{ color: t.palette.primary_500 },
+									...a.text_sm,
+
+									...//@ts-ignore
+									(state.hovered && { textDecoration: "underline" }),
+								}}
 							>
 								Learn more.
 							</Text>
@@ -226,7 +233,6 @@ function ContentHiderActive({
 					)}
 				</Button>
 			)}
-
 			{override && <View style={childContainerStyle}>{children}</View>}
 		</View>
 	);

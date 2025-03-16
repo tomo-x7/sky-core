@@ -34,14 +34,14 @@ export function VideoPreview({
 
 	return (
 		<View
-			style={[
-				a.w_full,
-				a.rounded_sm,
-				{ aspectRatio },
-				a.overflow_hidden,
-				{ backgroundColor: "black" },
-				a.relative,
-			]}
+			style={{
+				...a.w_full,
+				...a.rounded_sm,
+				...{ aspectRatio },
+				...a.overflow_hidden,
+				...{ backgroundColor: "black" },
+				...a.relative,
+			}}
 		>
 			<ExternalEmbedRemoveBtn onRemove={clear} />
 			{video.mimeType === "image/gif" ? (
@@ -62,7 +62,14 @@ export function VideoPreview({
 						}}
 					/>
 					{autoplayDisabled && (
-						<View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
+						<View
+							style={{
+								...a.absolute,
+								...a.inset_0,
+								...a.justify_center,
+								...a.align_center,
+							}}
+						>
 							<PlayButtonIcon />
 						</View>
 					)}

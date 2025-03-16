@@ -69,7 +69,13 @@ export function MaybeQuoteEmbed({
 		);
 	} else if (AppBskyEmbedRecord.isViewBlocked(embed.record)) {
 		return (
-			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
+			<View
+				style={{
+					...styles.errorContainer,
+					...a.border,
+					...t.atoms.border_contrast_low,
+				}}
+			>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
 					Blocked
@@ -78,7 +84,13 @@ export function MaybeQuoteEmbed({
 		);
 	} else if (AppBskyEmbedRecord.isViewNotFound(embed.record)) {
 		return (
-			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
+			<View
+				style={{
+					...styles.errorContainer,
+					...a.border,
+					...t.atoms.border_contrast_low,
+				}}
+			>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
 					Deleted
@@ -88,7 +100,13 @@ export function MaybeQuoteEmbed({
 	} else if (AppBskyEmbedRecord.isViewDetached(embed.record)) {
 		const isViewerOwner = currentAccount?.did ? embed.record.uri.includes(currentAccount.did) : false;
 		return (
-			<View style={[styles.errorContainer, a.border, t.atoms.border_contrast_low]}>
+			<View
+				style={{
+					...styles.errorContainer,
+					...a.border,
+					...t.atoms.border_contrast_low,
+				}}
+			>
 				<InfoCircleIcon size={18} style={pal.text} />
 				<Text type="lg" style={pal.text}>
 					{isViewerOwner ? <>Removed by you</> : <>Removed by author</>}
@@ -193,7 +211,14 @@ export function QuoteEmbed({
 		>
 			<ContentHider
 				modui={moderation?.ui("contentList")}
-				style={[a.rounded_md, a.p_md, a.mt_sm, a.border, t.atoms.border_contrast_low, style]}
+				style={{
+					...a.rounded_md,
+					...a.p_md,
+					...a.mt_sm,
+					...a.border,
+					...t.atoms.border_contrast_low,
+					...style,
+				}}
 				childContainerStyle={[a.pt_sm]}
 			>
 				<SubtleWebHover hover={hover} />
@@ -212,7 +237,7 @@ export function QuoteEmbed({
 							timestamp={quote.indexedAt}
 						/>
 					</View>
-					{moderation ? <PostAlerts modui={moderation.ui("contentView")} style={[a.py_xs]} /> : null}
+					{moderation ? <PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} /> : null}
 					{richText ? <RichText value={richText} style={a.text_md} numberOfLines={20} disableLinks /> : null}
 					{embed && <PostEmbeds embed={embed} moderation={moderation} />}
 				</Link>
@@ -224,18 +249,19 @@ export function QuoteEmbed({
 export function QuoteX({ onRemove }: { onRemove: () => void }) {
 	return (
 		<TouchableOpacity
-			style={[
-				a.absolute,
-				a.p_xs,
-				a.rounded_full,
-				a.align_center,
-				a.justify_center,
-				{
+			style={{
+				...a.absolute,
+				...a.p_xs,
+				...a.rounded_full,
+				...a.align_center,
+				...a.justify_center,
+
+				...{
 					top: 16,
 					right: 10,
 					backgroundColor: "rgba(0, 0, 0, 0.75)",
 				},
-			]}
+			}}
 			onPress={onRemove}
 			accessibilityRole="button"
 			accessibilityLabel={"Remove quote"}

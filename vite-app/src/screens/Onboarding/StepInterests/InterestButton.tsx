@@ -48,21 +48,28 @@ export function InterestButton({ interest }: { interest: string }) {
 
 	return (
 		<View
-			style={[
-				{
+			style={{
+				...{
 					backgroundColor: t.palette.contrast_100,
 					paddingVertical: 15,
 				},
-				a.rounded_full,
-				a.px_2xl,
-				ctx.hovered ? styles.hovered : {},
-				ctx.focused ? styles.hovered : {},
-				ctx.pressed ? styles.hovered : {},
-				ctx.selected ? styles.selected : {},
-				ctx.selected && (ctx.hovered || ctx.focused || ctx.pressed) ? styles.selectedHover : {},
-			]}
+
+				...a.rounded_full,
+				...a.px_2xl,
+				...(ctx.hovered ? styles.hovered : {}),
+				...(ctx.focused ? styles.hovered : {}),
+				...(ctx.pressed ? styles.hovered : {}),
+				...(ctx.selected ? styles.selected : {}),
+				...(ctx.selected && (ctx.hovered || ctx.focused || ctx.pressed) ? styles.selectedHover : {}),
+			}}
 		>
-			<Text style={[{ color: t.palette.contrast_900 }, a.font_bold, ctx.selected ? styles.textSelected : {}]}>
+			<Text
+				style={{
+					...{ color: t.palette.contrast_900 },
+					...a.font_bold,
+					...(ctx.selected ? styles.textSelected : {}),
+				}}
+			>
 				{interestsDisplayNames[interest] || capitalize(interest)}
 			</Text>
 		</View>

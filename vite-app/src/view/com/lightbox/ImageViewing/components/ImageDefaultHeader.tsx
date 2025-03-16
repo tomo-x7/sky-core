@@ -21,7 +21,10 @@ const ImageDefaultHeader = ({ onRequestClose }: Props) => {
 	return (
 		<SafeAreaView style={styles.root}>
 			<TouchableOpacity
-				style={[styles.closeButton, styles.blurredBackground]}
+				style={{
+					...styles.closeButton,
+					...styles.blurredBackground,
+				}}
 				onPress={onRequestClose}
 				hitSlop={HIT_SLOP}
 				accessibilityRole="button"

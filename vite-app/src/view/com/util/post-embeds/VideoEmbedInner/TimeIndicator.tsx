@@ -29,8 +29,8 @@ export function TimeIndicator({
 			pointerEvents="none"
 			accessibilityLabel={`Time remaining: ${Number(time) || 0} ${Number(time) === 1 ? "second" : "seconds"}`}
 			accessibilityHint=""
-			style={[
-				{
+			style={{
+				...{
 					backgroundColor: "rgba(0, 0, 0, 0.5)",
 					borderRadius: 6,
 					paddingHorizontal: 6,
@@ -39,17 +39,18 @@ export function TimeIndicator({
 					bottom: 6,
 					minHeight: 21,
 				},
-				a.absolute,
-				a.justify_center,
-				style,
-			]}
+
+				...a.absolute,
+				...a.justify_center,
+				...style,
+			}}
 		>
 			<Text
-				style={[
-					{ color: t.palette.white, fontSize: 12, fontVariant: ["tabular-nums"] },
-					a.font_bold,
-					{ lineHeight: 1.25 },
-				]}
+				style={{
+					...{ color: t.palette.white, fontSize: 12, fontVariant: ["tabular-nums"] },
+					...a.font_bold,
+					...{ lineHeight: 1.25 },
+				}}
 			>
 				{`${minutes}:${seconds}`}
 			</Text>

@@ -60,10 +60,15 @@ export function PrivacyAndSecuritySettingsScreen(props: Props) {
 						<PwiOptOut />
 					</SettingsList.Group>
 					<SettingsList.Item>
-						<Admonition.Outer type="tip" style={[a.flex_1]}>
+						<Admonition.Outer type="tip" style={a.flex_1}>
 							<Admonition.Row>
 								<Admonition.Icon />
-								<View style={[a.flex_1, a.gap_sm]}>
+								<View
+									style={{
+										...a.flex_1,
+										...a.gap_sm,
+									}}
+								>
 									<Admonition.Text>
 										Note: Bluesky is an open and public network. This setting only limits the
 										visibility of your content on the Bluesky app and website, and other apps may

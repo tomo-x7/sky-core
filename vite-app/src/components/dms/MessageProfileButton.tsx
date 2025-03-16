@@ -64,15 +64,21 @@ export function MessageProfileButton({
 				<View
 					testID="dmBtnLoading"
 					aria-hidden={true}
-					style={[
-						a.justify_center,
-						a.align_center,
-						t.atoms.bg_contrast_25,
-						a.rounded_full,
-						{ width: 34, height: 34 },
-					]}
+					style={{
+						...a.justify_center,
+						...a.align_center,
+						...t.atoms.bg_contrast_25,
+						...a.rounded_full,
+						...{ width: 34, height: 34 },
+					}}
 				>
-					<Message style={[t.atoms.text, { opacity: 0.3 }]} size="md" />
+					<Message
+						style={{
+							...t.atoms.text,
+							...{ opacity: 0.3 },
+						}}
+						size="md"
+					/>
 				</View>
 			);
 		} else {
@@ -91,7 +97,7 @@ export function MessageProfileButton({
 					variant="solid"
 					shape="round"
 					label={`Message ${profile.handle}`}
-					style={[a.justify_center]}
+					style={a.justify_center}
 					onPress={onPress}
 				>
 					<ButtonIcon icon={Message} size="md" />

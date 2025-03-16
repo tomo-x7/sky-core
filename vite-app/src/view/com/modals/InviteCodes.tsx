@@ -46,15 +46,37 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 
 	if (invites.all.length === 0) {
 		return (
-			<View style={[styles.container, pal.view]} testID="inviteCodesModal">
-				<View style={[styles.empty, pal.viewLight]}>
-					<Text type="lg" style={[pal.text, styles.emptyText]}>
+			<View
+				style={{
+					...styles.container,
+					...pal.view,
+				}}
+				testID="inviteCodesModal"
+			>
+				<View
+					style={{
+						...styles.empty,
+						...pal.viewLight,
+					}}
+				>
+					<Text
+						type="lg"
+						style={{
+							...pal.text,
+							...styles.emptyText,
+						}}
+					>
 						You don't have any invite codes yet! We'll send you some when you've been on Bluesky for a
 						little longer.
 					</Text>
 				</View>
 				<View style={styles.flex1} />
-				<View style={[styles.btnContainer, isTabletOrDesktop && styles.btnContainerDesktop]}>
+				<View
+					style={{
+						...styles.btnContainer,
+						...(isTabletOrDesktop && styles.btnContainerDesktop),
+					}}
+				>
 					<Button
 						type="primary"
 						label={"Done"}
@@ -68,14 +90,37 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 	}
 
 	return (
-		<View style={[styles.container, pal.view]} testID="inviteCodesModal">
-			<Text type="title-xl" style={[styles.title, pal.text]}>
+		<View
+			style={{
+				...styles.container,
+				...pal.view,
+			}}
+			testID="inviteCodesModal"
+		>
+			<Text
+				type="title-xl"
+				style={{
+					...styles.title,
+					...pal.text,
+				}}
+			>
 				Invite a Friend
 			</Text>
-			<Text type="lg" style={[styles.description, pal.text]}>
+			<Text
+				type="lg"
+				style={{
+					...styles.description,
+					...pal.text,
+				}}
+			>
 				Each code works once. You'll receive more invite codes periodically.
 			</Text>
-			<ScrollView style={[styles.scrollContainer, pal.border]}>
+			<ScrollView
+				style={{
+					...styles.scrollContainer,
+					...pal.border,
+				}}
+			>
 				{invites.available.map((invite, i) => (
 					<InviteCode testID={`inviteCode-${i}`} key={invite.code} invite={invite} invites={invites} />
 				))}
@@ -120,10 +165,15 @@ function InviteCode({
 	}, [setInviteCopied, invite]);
 
 	return (
-		<View style={[pal.border, { borderBottomWidth: 1, paddingHorizontal: 20, paddingVertical: 14 }]}>
+		<View
+			style={{
+				...pal.border,
+				...{ borderBottomWidth: 1, paddingHorizontal: 20, paddingVertical: 14 },
+			}}
+		>
 			<TouchableOpacity
 				testID={testID}
-				style={[styles.inviteCode]}
+				style={styles.inviteCode}
 				onPress={onPress}
 				accessibilityRole="button"
 				accessibilityLabel={
@@ -142,7 +192,14 @@ function InviteCode({
 				</Text>
 				<View style={styles.flex1} />
 				{!used && invitesState.copiedInvites.includes(invite.code) && (
-					<Text style={[pal.textLight, styles.codeCopied]}>Copied</Text>
+					<Text
+						style={{
+							...pal.textLight,
+							...styles.codeCopied,
+						}}
+					>
+						Copied
+					</Text>
 				)}
 				{/* @ts-ignore */}
 				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text} />}

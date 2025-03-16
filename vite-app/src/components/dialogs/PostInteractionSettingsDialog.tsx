@@ -58,14 +58,32 @@ export function PostInteractionSettingsControlledDialog({
 	return (
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />
-			<Dialog.ScrollableInner label="Edit post interaction settings" style={[{ maxWidth: 500 }, a.w_full]}>
-				<View style={[a.gap_md]}>
+			<Dialog.ScrollableInner
+				label="Edit post interaction settings"
+				style={{
+					...{ maxWidth: 500 },
+					...a.w_full,
+				}}
+			>
+				<View style={a.gap_md}>
 					<Header />
 					<PostInteractionSettingsForm {...rest} />
-					<Text style={[a.pt_sm, a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
+					<Text
+						style={{
+							...a.pt_sm,
+							...a.text_sm,
+							...a.leading_snug,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
 						<>
 							You can set default interaction settings in{" "}
-							<Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
+							<Text
+								style={{
+									...a.font_bold,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								Settings &rarr; Moderation &rarr; Interaction settings
 							</Text>
 							.
@@ -80,9 +98,28 @@ export function PostInteractionSettingsControlledDialog({
 
 export function Header() {
 	return (
-		<View style={[a.gap_md, a.pb_sm]}>
-			<Text style={[a.text_2xl, a.font_bold]}>Post interaction settings</Text>
-			<Text style={[a.text_md, a.pb_xs]}>Customize who can interact with this post.</Text>
+		<View
+			style={{
+				...a.gap_md,
+				...a.pb_sm,
+			}}
+		>
+			<Text
+				style={{
+					...a.text_2xl,
+					...a.font_bold,
+				}}
+			>
+				Post interaction settings
+			</Text>
+			<Text
+				style={{
+					...a.text_md,
+					...a.pb_xs,
+				}}
+			>
+				Customize who can interact with this post.
+			</Text>
 			<Divider />
 		</View>
 	);
@@ -199,12 +236,25 @@ export function PostInteractionSettingsDialogControlledInner(props: PostInteract
 	]);
 
 	return (
-		<Dialog.ScrollableInner label="Edit post interaction settings" style={[{ maxWidth: 500 }, a.w_full]}>
-			<View style={[a.gap_md]}>
+		<Dialog.ScrollableInner
+			label="Edit post interaction settings"
+			style={{
+				...{ maxWidth: 500 },
+				...a.w_full,
+			}}
+		>
+			<View style={a.gap_md}>
 				<Header />
 
 				{isLoading ? (
-					<View style={[a.flex_1, a.py_4xl, a.align_center, a.justify_center]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.py_4xl,
+							...a.align_center,
+							...a.justify_center,
+						}}
+					>
 						<Loader size="xl" />
 					</View>
 				) : (
@@ -275,10 +325,22 @@ export function PostInteractionSettingsForm({
 
 	return (
 		<View>
-			<View style={[a.flex_1, a.gap_md]}>
-				<View style={[a.gap_lg]}>
-					<View style={[a.gap_sm]}>
-						<Text style={[a.font_bold, a.text_lg]}>Quote settings</Text>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_md,
+				}}
+			>
+				<View style={a.gap_lg}>
+					<View style={a.gap_sm}>
+						<Text
+							style={{
+								...a.font_bold,
+								...a.text_lg,
+							}}
+						>
+							Quote settings
+						</Text>
 
 						<Toggle.Item
 							name="quoteposts"
@@ -290,9 +352,12 @@ export function PostInteractionSettingsForm({
 							}
 							value={quotesEnabled}
 							onChange={onChangeQuotesEnabled}
-							style={[a.justify_between, a.pt_xs]}
+							style={{
+								...a.justify_between,
+								...a.pt_xs,
+							}}
 						>
-							<Text style={[t.atoms.text_contrast_medium]}>Allow quote posts</Text>
+							<Text style={t.atoms.text_contrast_medium}>Allow quote posts</Text>
 							<Toggle.Switch />
 						</Toggle.Item>
 					</View>
@@ -301,36 +366,62 @@ export function PostInteractionSettingsForm({
 
 					{replySettingsDisabled && (
 						<View
-							style={[
-								a.px_md,
-								a.py_sm,
-								a.rounded_sm,
-								a.flex_row,
-								a.align_center,
-								a.gap_sm,
-								t.atoms.bg_contrast_25,
-							]}
+							style={{
+								...a.px_md,
+								...a.py_sm,
+								...a.rounded_sm,
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_sm,
+								...t.atoms.bg_contrast_25,
+							}}
 						>
 							<CircleInfo fill={t.atoms.text_contrast_low.color} />
-							<Text style={[a.flex_1, a.leading_snug, t.atoms.text_contrast_medium]}>
+							<Text
+								style={{
+									...a.flex_1,
+									...a.leading_snug,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								Reply settings are chosen by the author of the thread
 							</Text>
 						</View>
 					)}
 
 					<View
-						style={[
-							a.gap_sm,
-							{
+						style={{
+							...a.gap_sm,
+
+							...{
 								opacity: replySettingsDisabled ? 0.3 : 1,
 							},
-						]}
+						}}
 					>
-						<Text style={[a.font_bold, a.text_lg]}>Reply settings</Text>
+						<Text
+							style={{
+								...a.font_bold,
+								...a.text_lg,
+							}}
+						>
+							Reply settings
+						</Text>
 
-						<Text style={[a.pt_sm, t.atoms.text_contrast_medium]}>Allow replies from:</Text>
+						<Text
+							style={{
+								...a.pt_sm,
+								...t.atoms.text_contrast_medium,
+							}}
+						>
+							Allow replies from:
+						</Text>
 
-						<View style={[a.flex_row, a.gap_sm]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.gap_sm,
+							}}
+						>
 							<Selectable
 								label="Everybody"
 								isSelected={!!threadgateAllowUISettings.find((v) => v.type === "everybody")}
@@ -349,9 +440,16 @@ export function PostInteractionSettingsForm({
 
 						{!noOneCanReply && (
 							<>
-								<Text style={[a.pt_sm, t.atoms.text_contrast_medium]}>Or combine these options:</Text>
+								<Text
+									style={{
+										...a.pt_sm,
+										...t.atoms.text_contrast_medium,
+									}}
+								>
+									Or combine these options:
+								</Text>
 
-								<View style={[a.gap_sm]}>
+								<View style={a.gap_sm}>
 									<Selectable
 										label="Mentioned users"
 										isSelected={!!threadgateAllowUISettings.find((v) => v.type === "mention")}
@@ -392,7 +490,6 @@ export function PostInteractionSettingsForm({
 					</View>
 				</View>
 			</View>
-
 			<Button
 				disabled={!canSave || isSaving}
 				label="Save"
@@ -437,23 +534,35 @@ function Selectable({
 		>
 			{({ hovered, focused }) => (
 				<View
-					style={[
-						a.flex_1,
-						a.flex_row,
-						a.align_center,
-						a.justify_between,
-						a.rounded_sm,
-						a.p_md,
-						{ minHeight: 40 }, // for consistency with checkmark icon visible or not
-						t.atoms.bg_contrast_50,
-						(hovered || focused) && t.atoms.bg_contrast_100,
-						isSelected && {
+					style={{
+						...a.flex_1,
+						...a.flex_row,
+						...a.align_center,
+						...a.justify_between,
+						...a.rounded_sm,
+						...a.p_md,
+
+						...// for consistency with checkmark icon visible or not
+						{ minHeight: 40 },
+
+						...t.atoms.bg_contrast_50,
+						...((hovered || focused) && t.atoms.bg_contrast_100),
+
+						...(isSelected && {
 							backgroundColor: t.palette.primary_100,
-						},
-						style,
-					]}
+						}),
+
+						...style,
+					}}
 				>
-					<Text style={[a.text_sm, isSelected && a.font_bold]}>{label}</Text>
+					<Text
+						style={{
+							...a.text_sm,
+							...(isSelected && a.font_bold),
+						}}
+					>
+						{label}
+					</Text>
 					{isSelected ? <Check size="sm" fill={t.palette.primary_500} /> : <View />}
 				</View>
 			)}

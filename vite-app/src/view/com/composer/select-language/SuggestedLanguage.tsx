@@ -41,10 +41,20 @@ export function SuggestedLanguage({ text }: { text: string }) {
 		const suggestedLanguageName = codeToLanguageName(suggestedLanguage, langPrefs.appLanguage);
 
 		return (
-			<View style={[pal.border, styles.infoBar]}>
+			<View
+				style={{
+					...pal.border,
+					...styles.infoBar,
+				}}
+			>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="language" style={pal.text} size={24} />
-				<Text style={[pal.text, s.flex1]}>
+				<Text
+					style={{
+						...pal.text,
+						...s.flex1,
+					}}
+				>
 					<>
 						Are you writing in{" "}
 						<Text type="sm-bold" style={pal.text}>
@@ -53,14 +63,19 @@ export function SuggestedLanguage({ text }: { text: string }) {
 						?
 					</>
 				</Text>
-
 				<Button
 					type="default"
 					onPress={() => setLangPrefs.setPostLanguage(suggestedLanguage)}
 					accessibilityLabel={`Change post language to ${suggestedLanguageName}`}
 					accessibilityHint=""
 				>
-					<Text type="button" style={[pal.link, s.fw600]}>
+					<Text
+						type="button"
+						style={{
+							...pal.link,
+							...s.fw600,
+						}}
+					>
 						Yes
 					</Text>
 				</Button>

@@ -27,9 +27,23 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 	}
 
 	return (
-		<View style={[t.atoms.bg, a.p_lg, a.gap_md, a.align_center]}>
+		<View
+			style={{
+				...t.atoms.bg,
+				...a.p_lg,
+				...a.gap_md,
+				...a.align_center,
+			}}
+		>
 			{otherUser && <KnownFollowers profile={otherUser} moderationOpts={moderationOpts} showIfEmpty />}
-			<View style={[a.flex_row, a.gap_md, a.w_full, otherUser && a.pt_sm]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_md,
+					...a.w_full,
+					...(otherUser && a.pt_sm),
+				}}
+			>
 				{otherUser && (
 					<RejectMenu
 						label={"Block or report"}
@@ -55,7 +69,12 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 					hasMessages={false}
 				/>
 			</View>
-			<View style={[a.w_full, a.flex_row]}>
+			<View
+				style={{
+					...a.w_full,
+					...a.flex_row,
+				}}
+			>
 				<AcceptChatButton
 					onAcceptConvo={onAcceptChat}
 					convo={convoState.convo}

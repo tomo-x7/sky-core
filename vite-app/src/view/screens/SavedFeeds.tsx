@@ -95,15 +95,25 @@ function SavedFeedsInner({
 					<ButtonText>{isDesktop ? <>Save changes</> : <>Save</>}</ButtonText>
 				</Button>
 			</Layout.Header.Outer>
-
 			<Layout.Content>
 				{noSavedFeedsOfAnyType && (
-					<View style={[pal.border, a.border_b]}>
+					<View
+						style={{
+							...pal.border,
+							...a.border_b,
+						}}
+					>
 						<NoSavedFeedsOfAnyType />
 					</View>
 				)}
 
-				<View style={[pal.text, pal.border, styles.title]}>
+				<View
+					style={{
+						...pal.text,
+						...pal.border,
+						...styles.title,
+					}}
+				>
 					<Text type="title" style={pal.text}>
 						Pinned Feeds
 					</Text>
@@ -111,8 +121,15 @@ function SavedFeedsInner({
 
 				{preferences ? (
 					!pinnedFeeds.length ? (
-						<View style={[pal.border, isMobile && s.flex1, pal.viewLight, styles.empty]}>
-							<Text type="lg" style={[pal.text]}>
+						<View
+							style={{
+								...pal.border,
+								...(isMobile && s.flex1),
+								...pal.viewLight,
+								...styles.empty,
+							}}
+						>
+							<Text type="lg" style={pal.text}>
 								You don't have any pinned feeds.
 							</Text>
 						</View>
@@ -133,20 +150,38 @@ function SavedFeedsInner({
 				)}
 
 				{noFollowingFeed && (
-					<View style={[pal.border, a.border_b]}>
+					<View
+						style={{
+							...pal.border,
+							...a.border_b,
+						}}
+					>
 						<NoFollowingFeed />
 					</View>
 				)}
 
-				<View style={[pal.text, pal.border, styles.title]}>
+				<View
+					style={{
+						...pal.text,
+						...pal.border,
+						...styles.title,
+					}}
+				>
 					<Text type="title" style={pal.text}>
 						Saved Feeds
 					</Text>
 				</View>
 				{preferences ? (
 					!unpinnedFeeds.length ? (
-						<View style={[pal.border, isMobile && s.flex1, pal.viewLight, styles.empty]}>
-							<Text type="lg" style={[pal.text]}>
+						<View
+							style={{
+								...pal.border,
+								...(isMobile && s.flex1),
+								...pal.viewLight,
+								...styles.empty,
+							}}
+						>
+							<Text type="lg" style={pal.text}>
 								You don't have any saved feeds.
 							</Text>
 						</View>
@@ -237,14 +272,20 @@ function ListItem({
 	}, [feed, currentFeeds, setCurrentFeeds]);
 
 	return (
-		<Animated.View style={[styles.itemContainer, pal.border]} layout={LinearTransition.duration(100)}>
+		<Animated.View
+			style={{
+				...styles.itemContainer,
+				...pal.border,
+			}}
+			layout={LinearTransition.duration(100)}
+		>
 			{feed.type === "timeline" ? (
 				<FollowingFeedCard />
 			) : (
 				<FeedSourceCard
 					key={feedUri}
 					feedUri={feedUri}
-					style={[isPinned && { paddingRight: 8 }]}
+					style={isPinned && { paddingRight: 8 }}
 					showMinimalPlaceholder
 					hideTopBorder={true}
 				/>
@@ -266,7 +307,7 @@ function ListItem({
 						testID={`feed-${feed.type}-moveUp`}
 					>
 						{/* @ts-ignore */}
-						<FontAwesomeIcon icon="arrow-up" size={14} style={[pal.textLight]} />
+						<FontAwesomeIcon icon="arrow-up" size={14} style={pal.textLight} />
 					</Pressable>
 					<Pressable
 						accessibilityRole="button"
@@ -283,7 +324,7 @@ function ListItem({
 						testID={`feed-${feed.type}-moveDown`}
 					>
 						{/* @ts-ignore */}
-						<FontAwesomeIcon icon="arrow-down" size={14} style={[pal.textLight]} />
+						<FontAwesomeIcon icon="arrow-down" size={14} style={pal.textLight} />
 					</Pressable>
 				</>
 			) : (
@@ -332,41 +373,41 @@ function FollowingFeedCard() {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.flex_row,
-				a.align_center,
-				a.flex_1,
-				{
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.flex_1,
+
+				...{
 					paddingHorizontal: 18,
 					paddingVertical: 20,
 				},
-			]}
+			}}
 		>
 			<View
-				style={[
-					a.align_center,
-					a.justify_center,
-					a.rounded_sm,
-					{
+				style={{
+					...a.align_center,
+					...a.justify_center,
+					...a.rounded_sm,
+
+					...{
 						width: 36,
 						height: 36,
 						backgroundColor: t.palette.primary_500,
 						marginRight: 10,
 					},
-				]}
+				}}
 			>
 				<FilterTimeline
-					style={[
-						{
-							width: 22,
-							height: 22,
-						},
-					]}
+					style={{
+						width: 22,
+						height: 22,
+					}}
 					fill={t.palette.white}
 				/>
 			</View>
 			<View style={{ flex: 1, flexDirection: "row", gap: 8, alignItems: "center" }}>
-				<Text type="lg-medium" style={[t.atoms.text]} numberOfLines={1}>
+				<Text type="lg-medium" style={t.atoms.text} numberOfLines={1}>
 					Following
 				</Text>
 			</View>

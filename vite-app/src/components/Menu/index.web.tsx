@@ -68,7 +68,11 @@ export function Root({
 			{context.control.isOpen && (
 				<Portal>
 					<Pressable
-						style={[a.fixed, a.inset_0, a.z_50]}
+						style={{
+							...a.fixed,
+							...a.inset_0,
+							...a.z_50,
+						}}
 						onPress={() => context.control.close()}
 						accessibilityHint=""
 						accessibilityLabel={"Context menu backdrop, click to close the menu."}
@@ -169,19 +173,22 @@ export function Outer({
 				className="dropdown-menu-transform-origin dropdown-menu-constrain-size"
 			>
 				<View
-					style={[
-						a.rounded_sm,
-						a.p_xs,
-						a.border,
-						t.name === "light" ? t.atoms.bg : t.atoms.bg_contrast_25,
-						t.atoms.shadow_md,
-						t.atoms.border_contrast_low,
-						//@ts-ignore
+					style={{
+						...a.rounded_sm,
+						...a.p_xs,
+						...a.border,
+						...(t.name === "light" ? t.atoms.bg : t.atoms.bg_contrast_25),
+						...t.atoms.shadow_md,
+						...t.atoms.border_contrast_low,
+
+						...//@ts-ignore
 						a.overflow_auto,
-						//@ts-ignore
-						!reduceMotionEnabled && a.zoom_fade_in,
-						style,
-					]}
+
+						...//@ts-ignore
+						(!reduceMotionEnabled && a.zoom_fade_in),
+
+						...style,
+					}}
 				>
 					{children}
 				</View>
@@ -259,7 +266,15 @@ export function ItemText({ children, style }: ItemTextProps) {
 	const t = useTheme();
 	const { disabled } = useMenuItemContext();
 	return (
-		<Text style={[a.flex_1, a.font_bold, t.atoms.text_contrast_high, style, disabled && t.atoms.text_contrast_low]}>
+		<Text
+			style={{
+				...a.flex_1,
+				...a.font_bold,
+				...t.atoms.text_contrast_high,
+				...style,
+				...(disabled && t.atoms.text_contrast_low),
+			}}
+		>
 			{children}
 		</Text>
 	);
@@ -270,15 +285,16 @@ export function ItemIcon({ icon: Comp, position = "left" }: ItemIconProps) {
 	const { disabled } = useMenuItemContext();
 	return (
 		<View
-			style={[
-				position === "left" && {
+			style={{
+				...(position === "left" && {
 					marginLeft: -2,
-				},
-				position === "right" && {
+				}),
+
+				...(position === "right" && {
 					marginRight: -2,
 					marginLeft: 12,
-				},
-			]}
+				}),
+			}}
 		>
 			<Comp size="md" fill={disabled ? t.atoms.text_contrast_low.color : t.atoms.text_contrast_medium.color} />
 		</View>
@@ -289,30 +305,32 @@ export function ItemRadio({ selected }: { selected: boolean }) {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.justify_center,
-				a.align_center,
-				a.rounded_full,
-				t.atoms.border_contrast_high,
-				{
+			style={{
+				...a.justify_center,
+				...a.align_center,
+				...a.rounded_full,
+				...t.atoms.border_contrast_high,
+
+				...{
 					borderWidth: 1,
 					height: 20,
 					width: 20,
 				},
-			]}
+			}}
 		>
 			{selected ? (
 				<View
-					style={[
-						a.absolute,
-						a.rounded_full,
-						{ height: 14, width: 14 },
-						selected
+					style={{
+						...a.absolute,
+						...a.rounded_full,
+						...{ height: 14, width: 14 },
+
+						...(selected
 							? {
 									backgroundColor: t.palette.primary_500,
 								}
-							: {},
-					]}
+							: {}),
+					}}
 				/>
 			) : null}
 		</View>
@@ -323,15 +341,16 @@ export function LabelText({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
 	return (
 		<Text
-			style={[
-				a.font_bold,
-				a.pt_md,
-				a.pb_sm,
-				t.atoms.text_contrast_low,
-				{
+			style={{
+				...a.font_bold,
+				...a.pt_md,
+				...a.pb_sm,
+				...t.atoms.text_contrast_low,
+
+				...{
 					paddingHorizontal: 10,
 				},
-			]}
+			}}
 		>
 			{children}
 		</Text>

@@ -114,28 +114,35 @@ function KnownFollowersInner({
 			label={"Press to view followers of this account that you also follow"}
 			onPress={onLinkPress}
 			to={makeProfileLink(profile, "known-followers")}
-			style={[a.flex_row, minimal ? a.gap_sm : a.gap_md, a.align_center, { marginLeft: -AVI_BORDER }]}
+			style={{
+				...a.flex_row,
+				...(minimal ? a.gap_sm : a.gap_md),
+				...a.align_center,
+				...{ marginLeft: -AVI_BORDER },
+			}}
 		>
 			{({ hovered, pressed }) => (
 				<>
 					<View
-						style={[
-							{
+						style={{
+							...{
 								height: SIZE,
 								width: SIZE + (slice.length - 1) * a.gap_md.gap,
 							},
-							pressed && {
+
+							...(pressed && {
 								opacity: 0.5,
-							},
-						]}
+							}),
+						}}
 					>
 						{slice.map(({ profile: prof, moderation }, i) => (
 							<View
 								key={prof.did}
-								style={[
-									a.absolute,
-									a.rounded_full,
-									{
+								style={{
+									...a.absolute,
+									...a.rounded_full,
+
+									...{
 										borderWidth: AVI_BORDER,
 										borderColor: t.atoms.bg.backgroundColor,
 										width: SIZE + AVI_BORDER * 2,
@@ -143,7 +150,7 @@ function KnownFollowersInner({
 										left: i * a.gap_md.gap,
 										zIndex: AVI_BORDER - i,
 									},
-								]}
+								}}
 							>
 								<UserAvatar
 									size={SIZE}
@@ -156,16 +163,18 @@ function KnownFollowersInner({
 					</View>
 
 					<Text
-						style={[
-							textStyle,
-							hovered && {
+						style={{
+							...textStyle,
+
+							...(hovered && {
 								textDecorationLine: "underline",
 								textDecorationColor: t.atoms.text_contrast_medium.color,
-							},
-							pressed && {
+							}),
+
+							...(pressed && {
 								opacity: 0.5,
-							},
-						]}
+							}),
+						}}
 						numberOfLines={2}
 					>
 						{slice.length >= 2 ? (
@@ -226,7 +235,13 @@ function EmptyFallback({ show }: { show?: boolean }) {
 	if (!show) return null;
 
 	return (
-		<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
+		<Text
+			style={{
+				...a.text_sm,
+				...a.leading_snug,
+				...t.atoms.text_contrast_medium,
+			}}
+		>
 			Not followed by anyone you're following
 		</Text>
 	);

@@ -28,7 +28,13 @@ export function ImageLayoutGrid({ style, ...props }: ImageLayoutGridProps) {
 
 	return (
 		<View style={style}>
-			<View style={[gap, a.rounded_md, a.overflow_hidden]}>
+			<View
+				style={{
+					...gap,
+					...a.rounded_md,
+					...a.overflow_hidden,
+				}}
+			>
 				<ImageLayoutGridInner {...props} gap={gap} />
 			</View>
 		</View>
@@ -58,8 +64,19 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 		case 2: {
 			const containerRefs = [containerRef1, containerRef2];
 			return (
-				<View style={[a.flex_1, a.flex_row, gap]}>
-					<View style={[a.flex_1, { aspectRatio: 1 }]}>
+				<View
+					style={{
+						...a.flex_1,
+						...a.flex_row,
+						...gap,
+					}}
+				>
+					<View
+						style={{
+							...a.flex_1,
+							...{ aspectRatio: 1 },
+						}}
+					>
 						<GalleryItem
 							{...props}
 							index={0}
@@ -68,7 +85,12 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 							thumbDimsRef={thumbDimsRef}
 						/>
 					</View>
-					<View style={[a.flex_1, { aspectRatio: 1 }]}>
+					<View
+						style={{
+							...a.flex_1,
+							...{ aspectRatio: 1 },
+						}}
+					>
 						<GalleryItem
 							{...props}
 							index={1}
@@ -84,8 +106,19 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 		case 3: {
 			const containerRefs = [containerRef1, containerRef2, containerRef3];
 			return (
-				<View style={[a.flex_1, a.flex_row, gap]}>
-					<View style={[a.flex_1, { aspectRatio: 1 }]}>
+				<View
+					style={{
+						...a.flex_1,
+						...a.flex_row,
+						...gap,
+					}}
+				>
+					<View
+						style={{
+							...a.flex_1,
+							...{ aspectRatio: 1 },
+						}}
+					>
 						<GalleryItem
 							{...props}
 							index={0}
@@ -94,8 +127,14 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 							thumbDimsRef={thumbDimsRef}
 						/>
 					</View>
-					<View style={[a.flex_1, { aspectRatio: 1 }, gap]}>
-						<View style={[a.flex_1]}>
+					<View
+						style={{
+							...a.flex_1,
+							...{ aspectRatio: 1 },
+							...gap,
+						}}
+					>
+						<View style={a.flex_1}>
 							<GalleryItem
 								{...props}
 								index={1}
@@ -104,7 +143,7 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 								thumbDimsRef={thumbDimsRef}
 							/>
 						</View>
-						<View style={[a.flex_1]}>
+						<View style={a.flex_1}>
 							<GalleryItem
 								{...props}
 								index={2}
@@ -122,8 +161,18 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 			const containerRefs = [containerRef1, containerRef2, containerRef3, containerRef4];
 			return (
 				<>
-					<View style={[a.flex_row, gap]}>
-						<View style={[a.flex_1, { aspectRatio: 1.5 }]}>
+					<View
+						style={{
+							...a.flex_row,
+							...gap,
+						}}
+					>
+						<View
+							style={{
+								...a.flex_1,
+								...{ aspectRatio: 1.5 },
+							}}
+						>
 							<GalleryItem
 								{...props}
 								index={0}
@@ -132,7 +181,12 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 								thumbDimsRef={thumbDimsRef}
 							/>
 						</View>
-						<View style={[a.flex_1, { aspectRatio: 1.5 }]}>
+						<View
+							style={{
+								...a.flex_1,
+								...{ aspectRatio: 1.5 },
+							}}
+						>
 							<GalleryItem
 								{...props}
 								index={1}
@@ -142,8 +196,18 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 							/>
 						</View>
 					</View>
-					<View style={[a.flex_row, gap]}>
-						<View style={[a.flex_1, { aspectRatio: 1.5 }]}>
+					<View
+						style={{
+							...a.flex_row,
+							...gap,
+						}}
+					>
+						<View
+							style={{
+								...a.flex_1,
+								...{ aspectRatio: 1.5 },
+							}}
+						>
 							<GalleryItem
 								{...props}
 								index={2}
@@ -152,7 +216,12 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 								thumbDimsRef={thumbDimsRef}
 							/>
 						</View>
-						<View style={[a.flex_1, { aspectRatio: 1.5 }]}>
+						<View
+							style={{
+								...a.flex_1,
+								...{ aspectRatio: 1.5 },
+							}}
+						>
 							<GalleryItem
 								{...props}
 								index={3}

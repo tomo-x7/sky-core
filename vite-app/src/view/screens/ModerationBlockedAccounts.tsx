@@ -69,29 +69,46 @@ export function ModerationBlockedAccounts(props: Props) {
 	}) => <ProfileCard testID={`blockedAccount-${index}`} key={item.did} profile={item} noModFilter />;
 	return (
 		<Layout.Screen testID="blockedAccountsScreen">
-			<Layout.Center style={[a.flex_1, { paddingBottom: 100 }]}>
+			<Layout.Center
+				style={{
+					...a.flex_1,
+					...{ paddingBottom: 100 },
+				}}
+			>
 				<ViewHeader title={"Blocked Accounts"} showOnDesktop />
 				<Text
 					type="sm"
-					style={[
-						styles.description,
-						pal.text,
-						isTabletOrDesktop && styles.descriptionDesktop,
-						{
+					style={{
+						...styles.description,
+						...pal.text,
+						...(isTabletOrDesktop && styles.descriptionDesktop),
+
+						...{
 							marginTop: 20,
 						},
-					]}
+					}}
 				>
 					Blocked accounts cannot reply in your threads, mention you, or otherwise interact with you. You will
 					not see their content and they will be prevented from seeing yours.
 				</Text>
 				{isEmpty ? (
-					<View style={[pal.border]}>
+					<View style={pal.border}>
 						{isError ? (
 							<ErrorScreen title="Oops!" message={cleanError(error)} onPressTryAgain={refetch} />
 						) : (
-							<View style={[styles.empty, pal.viewLight]}>
-								<Text type="lg" style={[pal.text, styles.emptyText]}>
+							<View
+								style={{
+									...styles.empty,
+									...pal.viewLight,
+								}}
+							>
+								<Text
+									type="lg"
+									style={{
+										...pal.text,
+										...styles.emptyText,
+									}}
+								>
 									You have not blocked any accounts yet. To block an account, go to their profile and
 									select "Block account" from the menu on their account.
 								</Text>
@@ -100,7 +117,7 @@ export function ModerationBlockedAccounts(props: Props) {
 					</View>
 				) : (
 					<FlatList
-						style={[!isTabletOrDesktop && styles.flex1]}
+						style={!isTabletOrDesktop && styles.flex1}
 						data={profiles}
 						keyExtractor={(item: ActorDefs.ProfileView) => item.did}
 						refreshControl={

@@ -159,9 +159,10 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 					/>
 
 					<Animated.View
-						style={[
-							bottomLogoAnimation,
-							{
+						style={{
+							...bottomLogoAnimation,
+
+							...{
 								position: "absolute",
 								bottom: 40,
 								left: 0,
@@ -170,31 +171,38 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 								justifyContent: "center",
 								opacity: 0,
 							},
-						]}
+						}}
 					>
 						<Logotype fill="#fff" width={90} />
 					</Animated.View>
 				</div>
 			)}
-
 			{isReady && (
 				<>
-					<Animated.View style={[{ flex: 1 }, appAnimation]}>{props.children}</Animated.View>
+					<Animated.View
+						style={{
+							...{ flex: 1 },
+							...appAnimation,
+						}}
+					>
+						{props.children}
+					</Animated.View>
 
 					{!isAnimationComplete && (
 						<Animated.View
-							style={[
-								StyleSheet.absoluteFillObject,
-								logoWrapperAnimation,
-								{
+							style={{
+								...StyleSheet.absoluteFillObject,
+								...logoWrapperAnimation,
+
+								...{
 									flex: 1,
 									justifyContent: "center",
 									alignItems: "center",
 									transform: [{ translateY: 0 }, { scale: 0.1 }], // scale from 1000px to 100px
 								},
-							]}
+							}}
 						>
-							<Animated.View style={[logoAnimations]}>
+							<Animated.View style={logoAnimations}>
 								<Logo fill={logoBg} />
 							</Animated.View>
 						</Animated.View>

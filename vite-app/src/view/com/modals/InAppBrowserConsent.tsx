@@ -33,11 +33,22 @@ export function Component({ href }: { href: string }) {
 	return (
 		<ScrollView
 			testID="inAppBrowserConsentModal"
-			style={[s.flex1, pal.view, { paddingHorizontal: 20, paddingTop: 10 }]}
+			style={{
+				...s.flex1,
+				...pal.view,
+				...{ paddingHorizontal: 20, paddingTop: 10 },
+			}}
 		>
-			<Text style={[pal.text, styles.title]}>How should we open this link?</Text>
+			<Text
+				style={{
+					...pal.text,
+					...styles.title,
+				}}
+			>
+				How should we open this link?
+			</Text>
 			<Text style={pal.text}>Your choice will be saved, but can be changed later in settings.</Text>
-			<View style={[styles.btnContainer]}>
+			<View style={styles.btnContainer}>
 				<Button
 					testID="confirmBtn"
 					type="inverted"

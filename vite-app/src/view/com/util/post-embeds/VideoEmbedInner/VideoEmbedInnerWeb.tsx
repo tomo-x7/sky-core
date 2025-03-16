@@ -50,7 +50,11 @@ export function VideoEmbedInnerWeb({
 
 	return (
 		<View
-			style={[a.flex_1, a.rounded_md, a.overflow_hidden]}
+			style={{
+				...a.flex_1,
+				...a.rounded_md,
+				...a.overflow_hidden,
+			}}
 			accessibilityLabel={"Embedded video player"}
 			accessibilityHint=""
 		>

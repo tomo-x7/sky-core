@@ -33,8 +33,14 @@ let SearchLinkCard = ({
 	const pal = usePalette("default");
 
 	const inner = (
-		<View style={[pal.border, { paddingVertical: 16, paddingHorizontal: 12 }, style]}>
-			<Text type="md" style={[pal.text]}>
+		<View
+			style={{
+				...pal.border,
+				...{ paddingVertical: 16, paddingHorizontal: 12 },
+				...style,
+			}}
+		>
+			<Text type="md" style={pal.text}>
 				{label}
 			</Text>
 		</View>
@@ -50,8 +56,14 @@ let SearchLinkCard = ({
 
 	return (
 		<Link href={to} asAnchor anchorNoUnderline>
-			<View style={[pal.border, { paddingVertical: 16, paddingHorizontal: 12 }, style]}>
-				<Text type="md" style={[pal.text]}>
+			<View
+				style={{
+					...pal.border,
+					...{ paddingVertical: 16, paddingHorizontal: 12 },
+					...style,
+				}}
+			>
+				<Text type="md" style={pal.text}>
 					{label}
 				</Text>
 			</View>
@@ -88,16 +100,17 @@ let SearchProfileCard = ({
 			onBeforePress={onPress}
 		>
 			<View
-				style={[
-					pal.border,
-					{
+				style={{
+					...pal.border,
+
+					...{
 						flexDirection: "row",
 						alignItems: "center",
 						gap: 12,
 						paddingVertical: 8,
 						paddingHorizontal: 12,
 					},
-				]}
+				}}
 			>
 				<UserAvatar
 					size={40}
@@ -106,13 +119,23 @@ let SearchProfileCard = ({
 					type={profile.associated?.labeler ? "labeler" : "user"}
 				/>
 				<View style={{ flex: 1 }}>
-					<Text emoji type="lg" style={[s.bold, pal.text, a.self_start]} numberOfLines={1} lineHeight={1.2}>
+					<Text
+						emoji
+						type="lg"
+						style={{
+							...s.bold,
+							...pal.text,
+							...a.self_start,
+						}}
+						numberOfLines={1}
+						lineHeight={1.2}
+					>
 						{sanitizeDisplayName(
 							profile.displayName || sanitizeHandle(profile.handle),
 							moderation.ui("displayName"),
 						)}
 					</Text>
-					<Text type="md" style={[pal.textLight]} numberOfLines={1}>
+					<Text type="md" style={pal.textLight} numberOfLines={1}>
 						{sanitizeHandle(profile.handle, "@")}
 					</Text>
 				</View>
@@ -154,7 +177,12 @@ export function DesktopSearch() {
 	}, []);
 
 	return (
-		<View style={[styles.container, pal.view]}>
+		<View
+			style={{
+				...styles.container,
+				...pal.view,
+			}}
+		>
 			<SearchInput
 				value={query}
 				onChangeText={onChangeText}
@@ -162,7 +190,13 @@ export function DesktopSearch() {
 				onSubmitEditing={onSubmit}
 			/>
 			{query !== "" && isActive && moderationOpts && (
-				<View style={[pal.view, pal.borderDark, styles.resultsContainer]}>
+				<View
+					style={{
+						...pal.view,
+						...pal.borderDark,
+						...styles.resultsContainer,
+					}}
+				>
 					{isFetching && !autocompleteData?.length ? (
 						<View style={{ padding: 8 }}>
 							<ActivityIndicator />

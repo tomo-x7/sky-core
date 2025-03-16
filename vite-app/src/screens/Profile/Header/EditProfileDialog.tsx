@@ -187,10 +187,10 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={[a.rounded_full]}
+				style={a.rounded_full}
 				testID="editProfileCancelBtn"
 			>
-				<ButtonText style={[a.text_md]}>Cancel</ButtonText>
+				<ButtonText style={a.text_md}>Cancel</ButtonText>
 			</Button>
 		),
 		[onPressCancel],
@@ -205,10 +205,17 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={[a.rounded_full]}
+				style={a.rounded_full}
 				testID="editProfileSaveBtn"
 			>
-				<ButtonText style={[a.text_md, !dirty && t.atoms.text_contrast_low]}>Save</ButtonText>
+				<ButtonText
+					style={{
+						...a.text_md,
+						...(!dirty && t.atoms.text_contrast_low),
+					}}
+				>
+					Save
+				</ButtonText>
 			</Button>
 		),
 		[t, dirty, onPressSave, isUpdatingProfile, displayNameTooLong, descriptionTooLong],
@@ -217,7 +224,7 @@ function DialogInner({
 	return (
 		<Dialog.ScrollableInner
 			label={"Edit profile"}
-			style={[a.overflow_hidden]}
+			style={a.overflow_hidden}
 			contentContainerStyle={[a.px_0, a.pt_0]}
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
@@ -225,12 +232,13 @@ function DialogInner({
 				</Dialog.Header>
 			}
 		>
-			<View style={[a.relative]}>
+			<View style={a.relative}>
 				<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
 				<View
-					style={[
-						a.absolute,
-						{
+					style={{
+						...a.absolute,
+
+						...{
 							top: 80,
 							left: 20,
 							width: 84,
@@ -239,22 +247,28 @@ function DialogInner({
 							borderRadius: 42,
 							borderColor: t.atoms.bg.backgroundColor,
 						},
-					]}
+					}}
 				>
 					<EditableUserAvatar size={80} avatar={userAvatar} onSelectNewAvatar={onSelectNewAvatar} />
 				</View>
 			</View>
 			{isUpdateProfileError && (
-				<View style={[a.mt_xl]}>
+				<View style={a.mt_xl}>
 					<ErrorMessage message={cleanError(updateProfileError)} />
 				</View>
 			)}
 			{imageError !== "" && (
-				<View style={[a.mt_xl]}>
+				<View style={a.mt_xl}>
 					<ErrorMessage message={imageError} />
 				</View>
 			)}
-			<View style={[a.mt_4xl, a.px_xl, a.gap_xl]}>
+			<View
+				style={{
+					...a.mt_4xl,
+					...a.px_xl,
+					...a.gap_xl,
+				}}
+			>
 				<View>
 					<TextField.LabelText>Display name</TextField.LabelText>
 					<TextField.Root isInvalid={displayNameTooLong}>
@@ -268,7 +282,12 @@ function DialogInner({
 					</TextField.Root>
 					{displayNameTooLong && (
 						<TextField.SuffixText
-							style={[a.text_sm, a.mt_xs, a.font_bold, { color: t.palette.negative_400 }]}
+							style={{
+								...a.text_sm,
+								...a.mt_xs,
+								...a.font_bold,
+								...{ color: t.palette.negative_400 },
+							}}
 							label={"Display name is too long"}
 						>
 							<>
@@ -293,7 +312,12 @@ function DialogInner({
 					</TextField.Root>
 					{descriptionTooLong && (
 						<TextField.SuffixText
-							style={[a.text_sm, a.mt_xs, a.font_bold, { color: t.palette.negative_400 }]}
+							style={{
+								...a.text_sm,
+								...a.mt_xs,
+								...a.font_bold,
+								...{ color: t.palette.negative_400 },
+							}}
 							label={"Description is too long"}
 						>
 							<>

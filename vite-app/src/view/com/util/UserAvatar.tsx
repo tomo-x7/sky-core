@@ -169,7 +169,12 @@ let UserAvatar = ({
 			return null;
 		}
 		return (
-			<View style={[styles.alertIconContainer, pal.view]}>
+			<View
+				style={{
+					...styles.alertIconContainer,
+					...pal.view,
+				}}
+			>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="exclamation-circle" style={styles.alertIcon} size={Math.floor(size / 3)} />
 			</View>
@@ -213,7 +218,7 @@ let UserAvatar = ({
 					onLoad={onLoad}
 				/>
 			)}
-			<MediaInsetBorder style={[{ borderRadius: aviStyle.borderRadius }]} />
+			<MediaInsetBorder style={{ borderRadius: aviStyle.borderRadius }} />
 			{alert}
 		</View>
 	) : (
@@ -321,7 +326,12 @@ let EditableUserAvatar = ({
 						) : (
 							<DefaultAvatar type={type} size={size} />
 						)}
-						<View style={[styles.editButtonContainer, pal.btn]}>
+						<View
+							style={{
+								...styles.editButtonContainer,
+								...pal.btn,
+							}}
+						>
 							<CameraFilled height={14} width={14} style={t.atoms.text} />
 						</View>
 					</Pressable>

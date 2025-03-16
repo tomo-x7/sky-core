@@ -21,7 +21,13 @@ export function PostAlerts({
 	}
 
 	return (
-		<Pills.Row size={size} style={[size === "sm" && { marginLeft: -3 }, style]}>
+		<Pills.Row
+			size={size}
+			style={{
+				...(size === "sm" && { marginLeft: -3 }),
+				...style,
+			}}
+		>
 			{modui.alerts.filter(unique).map((cause) => (
 				<Pills.Label key={getModerationCauseKey(cause)} cause={cause} size={size} noBg={size === "sm"} />
 			))}

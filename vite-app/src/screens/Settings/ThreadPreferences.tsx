@@ -41,8 +41,18 @@ export function ThreadPreferencesScreen(props: Props) {
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={BubblesIcon} />
 						<SettingsList.ItemText>Sort replies</SettingsList.ItemText>
-						<View style={[a.w_full, a.gap_md]}>
-							<Text style={[a.flex_1, t.atoms.text_contrast_medium]}>
+						<View
+							style={{
+								...a.w_full,
+								...a.gap_md,
+							}}
+						>
+							<Text
+								style={{
+									...a.flex_1,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								Sort replies to the same post by:
 							</Text>
 							<Toggle.Group
@@ -51,7 +61,12 @@ export function ThreadPreferencesScreen(props: Props) {
 								values={sortReplies ? [sortReplies] : []}
 								onChange={(values) => setThreadViewPrefs({ sort: values[0] })}
 							>
-								<View style={[a.gap_sm, a.flex_1]}>
+								<View
+									style={{
+										...a.gap_sm,
+										...a.flex_1,
+									}}
+								>
 									<Toggle.Item name="hotness" label={"Hot replies first"}>
 										<Toggle.Radio />
 										<Toggle.LabelText>Hot replies first</Toggle.LabelText>
@@ -89,9 +104,12 @@ export function ThreadPreferencesScreen(props: Props) {
 									prioritizeFollowedUsers: value,
 								})
 							}
-							style={[a.w_full, a.gap_md]}
+							style={{
+								...a.w_full,
+								...a.gap_md,
+							}}
 						>
-							<Toggle.LabelText style={[a.flex_1]}>
+							<Toggle.LabelText style={a.flex_1}>
 								Show replies by people you follow before all other replies
 							</Toggle.LabelText>
 							<Toggle.Platform />
@@ -111,9 +129,12 @@ export function ThreadPreferencesScreen(props: Props) {
 									lab_treeViewEnabled: value,
 								})
 							}
-							style={[a.w_full, a.gap_md]}
+							style={{
+								...a.w_full,
+								...a.gap_md,
+							}}
 						>
-							<Toggle.LabelText style={[a.flex_1]}>Show replies as threaded</Toggle.LabelText>
+							<Toggle.LabelText style={a.flex_1}>Show replies as threaded</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>
 					</SettingsList.Group>

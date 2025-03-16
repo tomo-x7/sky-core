@@ -7,9 +7,8 @@ import { H1 } from "#/components/Typography";
 
 export function Admonitions() {
 	return (
-		<View style={[a.gap_md]}>
+		<View style={a.gap_md}>
 			<H1>Admonitions</H1>
-
 			<Admonition>The quick brown fox jumps over the lazy dog.</Admonition>
 			<Admonition type="info">
 				How happy the blameless vestal's lot, the world forgetting by the world forgot.{" "}

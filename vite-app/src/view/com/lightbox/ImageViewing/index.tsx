@@ -142,7 +142,10 @@ export default function ImageViewRoot({
 	return (
 		// Keep it always mounted to avoid flicker on the first frame.
 		<SafeAreaView
-			style={[styles.screen, !activeLightbox && styles.screenHidden]}
+			style={{
+				...styles.screen,
+				...(!activeLightbox && styles.screenHidden),
+			}}
 			aria-modal
 			// accessibilityViewIsModal
 			aria-hidden={!activeLightbox}
@@ -296,9 +299,20 @@ function ImageView({
 	}, [t]);
 
 	return (
-		<Animated.View style={[styles.container, containerStyle]}>
+		<Animated.View
+			style={{
+				...styles.container,
+				...containerStyle,
+			}}
+		>
 			<StatusBar animated style="light" hideTransitionAnimation="slide" backgroundColor="black" />
-			<Animated.View style={[styles.backdrop, backdropStyle]} renderToHardwareTextureAndroid />
+			<Animated.View
+				style={{
+					...styles.backdrop,
+					...backdropStyle,
+				}}
+				renderToHardwareTextureAndroid
+			/>
 			<PagerView
 				scrollEnabled={!isScaled}
 				initialPage={initialImageIndex}
@@ -515,7 +529,7 @@ function LightboxFooter({
 				{altText ? (
 					<View accessibilityRole="button" style={styles.footerText}>
 						<Text
-							style={[s.gray3]}
+							style={s.gray3}
 							numberOfLines={isAltExpanded ? undefined : 3}
 							selectable
 							onPress={() => {

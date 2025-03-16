@@ -37,7 +37,7 @@ export function FollowingFeedPreferencesScreen(props: Props) {
 			<Layout.Content>
 				<SettingsList.Container>
 					<SettingsList.Item>
-						<Admonition type="tip" style={[a.flex_1]}>
+						<Admonition type="tip" style={a.flex_1}>
 							These settings only apply to the Following feed.
 						</Admonition>
 					</SettingsList.Item>
@@ -106,9 +106,12 @@ export function FollowingFeedPreferencesScreen(props: Props) {
 									lab_mergeFeedEnabled: value,
 								})
 							}
-							style={[a.w_full, a.gap_md]}
+							style={{
+								...a.w_full,
+								...a.gap_md,
+							}}
 						>
-							<Toggle.LabelText style={[a.flex_1]}>
+							<Toggle.LabelText style={a.flex_1}>
 								Show samples of your saved feeds in your Following feed
 							</Toggle.LabelText>
 							<Toggle.Platform />

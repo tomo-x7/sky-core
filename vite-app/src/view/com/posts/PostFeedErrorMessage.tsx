@@ -141,16 +141,17 @@ function FeedgenErrorMessage({
 	return (
 		<>
 			<View
-				style={[
-					pal.border,
-					pal.viewLight,
-					{
+				style={{
+					...pal.border,
+					...pal.viewLight,
+
+					...{
 						borderTopWidth: 1,
 						paddingHorizontal: 20,
 						paddingVertical: 18,
 						gap: 12,
 					},
-				]}
+				}}
 			>
 				<Text style={pal.text}>{msg}</Text>
 
@@ -162,7 +163,6 @@ function FeedgenErrorMessage({
 
 				{cta}
 			</View>
-
 			<Prompt.Basic
 				control={removePromptControl}
 				title={"Remove feed?"}

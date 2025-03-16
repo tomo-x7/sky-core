@@ -33,23 +33,26 @@ export function Outer({
 	return (
 		<View
 			ref={headerRef}
-			style={[
-				a.w_full,
-				!noBottomBorder && a.border_b,
-				a.flex_row,
-				a.align_center,
-				a.gap_sm,
-				//@ts-ignore
-				sticky && [a.sticky, { top: 0 }, a.z_10, t.atoms.bg],
-				gutters,
-				a.py_xs,
-				{ minHeight: 52 },
-				t.atoms.border_contrast_low,
-				gtMobile && [a.mx_auto, { maxWidth: 600 }],
-				!isWithinOffsetView && {
+			style={{
+				...a.w_full,
+				...(!noBottomBorder && a.border_b),
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_sm,
+
+				...//@ts-ignore
+				(sticky && [a.sticky, { top: 0 }, a.z_10, t.atoms.bg]),
+
+				...gutters,
+				...a.py_xs,
+				...{ minHeight: 52 },
+				...t.atoms.border_contrast_low,
+				...(gtMobile && [a.mx_auto, { maxWidth: 600 }]),
+
+				...(!isWithinOffsetView && {
 					transform: [{ translateX: centerColumnOffset ? -150 : 0 }, { translateX: SCROLLBAR_OFFSET ?? 0 }],
-				},
-			]}
+				}),
+			}}
 		>
 			{children}
 		</View>
@@ -66,14 +69,29 @@ export function Content({
 	align?: "platform" | "left";
 }) {
 	return (
-		<View style={[a.flex_1, a.justify_center, { minHeight: HEADER_SLOT_SIZE }]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.justify_center,
+				...{ minHeight: HEADER_SLOT_SIZE },
+			}}
+		>
 			<AlignmentContext.Provider value={align}>{children}</AlignmentContext.Provider>
 		</View>
 	);
 }
 
 export function Slot({ children }: { children?: React.ReactNode }) {
-	return <View style={[a.z_50, { width: HEADER_SLOT_SIZE }]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.z_50,
+				...{ width: HEADER_SLOT_SIZE },
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
@@ -102,7 +120,11 @@ export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
 				shape="square"
 				onPress={onPressBack}
 				hitSlop={HITSLOP_30}
-				style={[{ marginLeft: -BUTTON_VISUAL_ALIGNMENT_OFFSET }, a.bg_transparent, style]}
+				style={{
+					...{ marginLeft: -BUTTON_VISUAL_ALIGNMENT_OFFSET },
+					...a.bg_transparent,
+					...style,
+				}}
 				{...props}
 			>
 				<ButtonIcon icon={ArrowLeft} size="lg" />
@@ -130,7 +152,7 @@ export function MenuButton() {
 				shape="square"
 				onPress={onPress}
 				hitSlop={HITSLOP_30}
-				style={[{ marginLeft: -BUTTON_VISUAL_ALIGNMENT_OFFSET }]}
+				style={{ marginLeft: -BUTTON_VISUAL_ALIGNMENT_OFFSET }}
 			>
 				<ButtonIcon icon={Menu} size="lg" />
 			</Button>
@@ -142,7 +164,17 @@ export function TitleText({ children, style }: { children: React.ReactNode } & T
 	const { gtMobile } = useBreakpoints();
 	const align = useContext(AlignmentContext);
 	return (
-		<Text style={[a.text_lg, a.font_heavy, a.leading_tight, gtMobile && a.text_xl, style]} numberOfLines={2} emoji>
+		<Text
+			style={{
+				...a.text_lg,
+				...a.font_heavy,
+				...a.leading_tight,
+				...(gtMobile && a.text_xl),
+				...style,
+			}}
+			numberOfLines={2}
+			emoji
+		>
 			{children}
 		</Text>
 	);
@@ -152,7 +184,14 @@ export function SubtitleText({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
 	const align = useContext(AlignmentContext);
 	return (
-		<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={2}>
+		<Text
+			style={{
+				...a.text_sm,
+				...a.leading_snug,
+				...t.atoms.text_contrast_medium,
+			}}
+			numberOfLines={2}
+		>
 			{children}
 		</Text>
 	);

@@ -37,9 +37,9 @@ export function AccessibilitySettingsScreen(props: Props) {
 							label={"Require alt text before posting"}
 							value={requireAltTextEnabled ?? false}
 							onChange={(value) => setRequireAltTextEnabled(value)}
-							style={[a.w_full]}
+							style={a.w_full}
 						>
-							<Toggle.LabelText style={[a.flex_1]}>Require alt text before posting</Toggle.LabelText>
+							<Toggle.LabelText style={a.flex_1}>Require alt text before posting</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>
 						<Toggle.Item
@@ -47,14 +47,14 @@ export function AccessibilitySettingsScreen(props: Props) {
 							label={"Display larger alt text badges"}
 							value={!!largeAltBadgeEnabled}
 							onChange={(value) => setLargeAltBadgeEnabled(value)}
-							style={[a.w_full]}
+							style={a.w_full}
 						>
-							<Toggle.LabelText style={[a.flex_1]}>Display larger alt text badges</Toggle.LabelText>
+							<Toggle.LabelText style={a.flex_1}>Display larger alt text badges</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>
 					</SettingsList.Group>
 					<SettingsList.Item>
-						<Admonition type="info" style={[a.flex_1]}>
+						<Admonition type="info" style={a.flex_1}>
 							<>
 								Autoplay options have moved to the{" "}
 								<InlineLinkText to="/settings/content-and-media" label={"Content and media"}>

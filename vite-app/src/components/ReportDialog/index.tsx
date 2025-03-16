@@ -40,14 +40,19 @@ function ReportDialogInner(props: ReportDialogProps) {
 	return (
 		<Dialog.ScrollableInner label={"Report dialog"} ref={ref}>
 			{isLoading ? (
-				<View style={[a.align_center, { height: 100 }]}>
+				<View
+					style={{
+						...a.align_center,
+						...{ height: 100 },
+					}}
+				>
 					<Loader size="xl" />
 					{/* Here to capture focus for a hot sec to prevent flash */}
 					<Pressable accessible={false} />
 				</View>
 			) : error || !labelers ? (
 				<View>
-					<Text style={[a.text_md]}>Something went wrong, please try again.</Text>
+					<Text style={a.text_md}>Something went wrong, please try again.</Text>
 				</View>
 			) : (
 				<ReportDialogLoaded labelers={labelers} {...props} />

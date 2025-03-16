@@ -9,17 +9,17 @@ export function Container({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.flex_1,
-				t.atoms.bg_contrast_25,
-				a.justify_center,
-				a.align_center,
-				a.px_lg,
-				a.border,
-				t.atoms.border_contrast_low,
-				a.rounded_sm,
-				a.gap_lg,
-			]}
+			style={{
+				...a.flex_1,
+				...t.atoms.bg_contrast_25,
+				...a.justify_center,
+				...a.align_center,
+				...a.px_lg,
+				...a.border,
+				...t.atoms.border_contrast_low,
+				...a.rounded_sm,
+				...a.gap_lg,
+			}}
 		>
 			{children}
 		</View>
@@ -29,7 +29,15 @@ export function Container({ children }: { children: React.ReactNode }) {
 export function Text({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
 	return (
-		<TypoText style={[a.text_center, t.atoms.text_contrast_high, a.text_md, a.leading_snug, { maxWidth: 300 }]}>
+		<TypoText
+			style={{
+				...a.text_center,
+				...t.atoms.text_contrast_high,
+				...a.text_md,
+				...a.leading_snug,
+				...{ maxWidth: 300 },
+			}}
+		>
 			{children}
 		</TypoText>
 	);

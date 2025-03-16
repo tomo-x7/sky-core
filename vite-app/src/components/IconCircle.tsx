@@ -18,26 +18,29 @@ export function IconCircle({
 
 	return (
 		<View
-			style={[
-				a.justify_center,
-				a.align_center,
-				a.rounded_full,
-				{
+			style={{
+				...a.justify_center,
+				...a.align_center,
+				...a.rounded_full,
+
+				...{
 					width: size === "lg" ? 52 : 64,
 					height: size === "lg" ? 52 : 64,
 					backgroundColor: t.palette.primary_50,
 				},
-				flatten(style),
-			]}
+
+				...flatten(style),
+			}}
 		>
 			<Icon
 				size={size}
-				style={[
-					{
+				style={{
+					...{
 						color: t.palette.primary_500,
 					},
-					flatten(iconStyle),
-				]}
+
+					...flatten(iconStyle),
+				}}
 			/>
 		</View>
 	);

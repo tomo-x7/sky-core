@@ -20,14 +20,14 @@ export function Group({ children, multiple, ...props }: GroupProps) {
 	return (
 		<Toggle.Group type={multiple ? "checkbox" : "radio"} {...props}>
 			<View
-				style={[
-					a.w_full,
-					a.flex_row,
-					a.rounded_sm,
-					a.overflow_hidden,
-					t.atoms.border_contrast_low,
-					{ borderWidth: 1 },
-				]}
+				style={{
+					...a.w_full,
+					...a.flex_row,
+					...a.rounded_sm,
+					...a.overflow_hidden,
+					...t.atoms.border_contrast_low,
+					...{ borderWidth: 1 },
+				}}
 			>
 				{children}
 			</View>
@@ -37,7 +37,13 @@ export function Group({ children, multiple, ...props }: GroupProps) {
 
 export function Button({ children, ...props }: ItemProps) {
 	return (
-		<Toggle.Item {...props} style={[a.flex_grow, a.flex_1]}>
+		<Toggle.Item
+			{...props}
+			style={{
+				...a.flex_grow,
+				...a.flex_1,
+			}}
+		>
 			<ButtonInner>{children}</ButtonInner>
 		</Toggle.Item>
 	);
@@ -84,20 +90,21 @@ function ButtonInner({ children }: React.PropsWithChildren) {
 
 	return (
 		<View
-			style={[
-				{
+			style={{
+				...{
 					borderLeftWidth: 1,
 					marginLeft: -1,
 				},
-				a.flex_grow,
-				a.py_md,
-				a.px_md,
-				t.atoms.bg,
-				t.atoms.border_contrast_low,
-				baseStyles,
-				activeStyles,
-				(state.hovered || state.pressed) && hoverStyles,
-			]}
+
+				...a.flex_grow,
+				...a.py_md,
+				...a.px_md,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_low,
+				...baseStyles,
+				...activeStyles,
+				...((state.hovered || state.pressed) && hoverStyles),
+			}}
 		>
 			{children}
 		</View>
@@ -121,5 +128,16 @@ export function ButtonText({ children }: { children: React.ReactNode }) {
 		return text;
 	}, [t, state]);
 
-	return <Text style={[a.text_center, a.font_bold, t.atoms.text_contrast_medium, textStyles]}>{children}</Text>;
+	return (
+		<Text
+			style={{
+				...a.text_center,
+				...a.font_bold,
+				...t.atoms.text_contrast_medium,
+				...textStyles,
+			}}
+		>
+			{children}
+		</Text>
+	);
 }

@@ -154,7 +154,10 @@ const GalleryItem = ({
 				accessibilityLabel={"Add alt text"}
 				accessibilityHint=""
 				onPress={onAltTextEdit}
-				style={[styles.altTextControl, altTextControlStyle]}
+				style={{
+					...styles.altTextControl,
+					...altTextControlStyle,
+				}}
 			>
 				{image.alt.length !== 0 ? (
 					//@ts-ignore
@@ -198,19 +201,19 @@ const GalleryItem = ({
 				onPress={onAltTextEdit}
 				style={styles.altTextHiddenRegion}
 			/>
-
 			<Image
 				testID="selectedPhotoImage"
-				style={[styles.image, imageStyle]}
+				style={{
+					...styles.image,
+					...imageStyle,
+				}}
 				source={{
 					uri: (image.transformed ?? image.source).path,
 				}}
 				accessible={true}
 				accessibilityIgnoresInvertColors
 			/>
-
 			<ImageAltTextDialog control={altTextControl} image={image} onChange={onChange} />
-
 			<EditImageDialog control={editControl} image={image} onChange={onChange} />
 		</View>
 	);
@@ -219,12 +222,23 @@ const GalleryItem = ({
 export function AltTextReminder() {
 	const t = useTheme();
 	return (
-		<View style={[styles.reminder]}>
-			<View style={[styles.infoIcon, t.atoms.bg_contrast_25]}>
+		<View style={styles.reminder}>
+			<View
+				style={{
+					...styles.infoIcon,
+					...t.atoms.bg_contrast_25,
+				}}
+			>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
 			</View>
-			<Text type="sm" style={[t.atoms.text_contrast_medium, s.flex1]}>
+			<Text
+				type="sm"
+				style={{
+					...t.atoms.text_contrast_medium,
+					...s.flex1,
+				}}
+			>
 				Alt text describes images for blind and low-vision users, and helps give context to everyone.
 			</Text>
 		</View>

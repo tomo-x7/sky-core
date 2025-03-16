@@ -183,15 +183,21 @@ export function Component({
 	return (
 		<KeyboardAvoidingView behavior="height">
 			<ScrollView
-				style={[
-					pal.view,
-					{
+				style={{
+					...pal.view,
+
+					...{
 						paddingHorizontal: isMobile ? 16 : 0,
 					},
-				]}
+				}}
 				testID="createOrEditListModal"
 			>
-				<Text style={[styles.title, pal.text]}>
+				<Text
+					style={{
+						...styles.title,
+						...pal.text,
+					}}
+				>
 					{isCurateList ? (
 						list ? (
 							<>Edit User List</>
@@ -209,20 +215,42 @@ export function Component({
 						<ErrorMessage message={error} />
 					</View>
 				)}
-				<Text style={[styles.label, pal.text]}>List Avatar</Text>
-				<View style={[styles.avi, { borderColor: pal.colors.background }]}>
+				<Text
+					style={{
+						...styles.label,
+						...pal.text,
+					}}
+				>
+					List Avatar
+				</Text>
+				<View
+					style={{
+						...styles.avi,
+						...{ borderColor: pal.colors.background },
+					}}
+				>
 					<EditableUserAvatar type="list" size={80} avatar={avatar} onSelectNewAvatar={onSelectNewAvatar} />
 				</View>
 				<View style={styles.form}>
 					<View>
 						<View style={styles.labelWrapper}>
-							<Text style={[styles.label, pal.text]} nativeID="list-name">
+							<Text
+								style={{
+									...styles.label,
+									...pal.text,
+								}}
+								nativeID="list-name"
+							>
 								List Name
 							</Text>
 						</View>
 						<TextInput
 							testID="editNameInput"
-							style={[styles.textInput, pal.border, pal.text]}
+							style={{
+								...styles.textInput,
+								...pal.border,
+								...pal.text,
+							}}
 							placeholder={isCurateList ? "e.g. Great Posters" : "e.g. Spammers"}
 							placeholderTextColor={colors.gray4}
 							value={name}
@@ -235,16 +263,31 @@ export function Component({
 					</View>
 					<View style={s.pb10}>
 						<View style={styles.labelWrapper}>
-							<Text style={[styles.label, pal.text]} nativeID="list-description">
+							<Text
+								style={{
+									...styles.label,
+									...pal.text,
+								}}
+								nativeID="list-description"
+							>
 								Description
 							</Text>
-							<Text style={[!isDescriptionOver ? pal.textLight : s.red3, s.f13]}>
+							<Text
+								style={{
+									...(!isDescriptionOver ? pal.textLight : s.red3),
+									...s.f13,
+								}}
+							>
 								{graphemeLength}/{MAX_DESCRIPTION}
 							</Text>
 						</View>
 						<TextInput
 							testID="editDescriptionInput"
-							style={[styles.textArea, pal.border, pal.text]}
+							style={{
+								...styles.textArea,
+								...pal.border,
+								...pal.text,
+							}}
 							placeholder={
 								isCurateList
 									? "e.g. The posters who never miss."
@@ -262,13 +305,22 @@ export function Component({
 						/>
 					</View>
 					{isProcessing ? (
-						<View style={[styles.btn, s.mt10, { backgroundColor: colors.gray2 }]}>
+						<View
+							style={{
+								...styles.btn,
+								...s.mt10,
+								...{ backgroundColor: colors.gray2 },
+							}}
+						>
 							<ActivityIndicator />
 						</View>
 					) : (
 						<TouchableOpacity
 							testID="saveBtn"
-							style={[s.mt10, isDescriptionOver && s.dimmed]}
+							style={{
+								...s.mt10,
+								...(isDescriptionOver && s.dimmed),
+							}}
 							disabled={isDescriptionOver}
 							onPress={onPressSave}
 							accessibilityRole="button"
@@ -281,7 +333,14 @@ export function Component({
 								end={{ x: 1, y: 1 }}
 								style={styles.btn}
 							>
-								<Text style={[s.white, s.bold]}>Save</Text>
+								<Text
+									style={{
+										...s.white,
+										...s.bold,
+									}}
+								>
+									Save
+								</Text>
 							</LinearGradient>
 						</TouchableOpacity>
 					)}
@@ -294,8 +353,16 @@ export function Component({
 						accessibilityHint=""
 						onAccessibilityEscape={onPressCancel}
 					>
-						<View style={[styles.btn]}>
-							<Text style={[s.black, s.bold, pal.text]}>Cancel</Text>
+						<View style={styles.btn}>
+							<Text
+								style={{
+									...s.black,
+									...s.bold,
+									...pal.text,
+								}}
+							>
+								Cancel
+							</Text>
 						</View>
 					</TouchableOpacity>
 				</View>

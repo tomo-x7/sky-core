@@ -89,7 +89,12 @@ let MessageItem = ({
 	return (
 		<>
 			{isNewDay && <DateDivider date={message.sentAt} />}
-			<View style={[isFromSelf ? a.mr_md : a.ml_md, nextIsMessage && !isNextFromSameSender && a.mb_md]}>
+			<View
+				style={{
+					...(isFromSelf ? a.mr_md : a.ml_md),
+					...(nextIsMessage && !isNextFromSameSender && a.mb_md),
+				}}
+			>
 				<ActionsWrapper isFromSelf={isFromSelf} message={message}>
 					{AppBskyEmbedRecord.isView(message.embed) && <MessageItemEmbed embed={message.embed} />}
 					{rt.text.length > 0 && (
@@ -118,7 +123,10 @@ let MessageItem = ({
 						>
 							<RichText
 								value={rt}
-								style={[a.text_md, isFromSelf && { color: t.palette.white }]}
+								style={{
+									...a.text_md,
+									...(isFromSelf && { color: t.palette.white }),
+								}}
 								interactiveStyle={a.underline}
 								enableTags
 								emojiMultiplier={3}
@@ -173,22 +181,39 @@ let MessageItemMetadata = ({
 	}, []);
 
 	return (
-		<Text style={[a.text_xs, a.mt_2xs, a.mb_lg, t.atoms.text_contrast_medium, style]}>
+		<Text
+			style={{
+				...a.text_xs,
+				...a.mt_2xs,
+				...a.mb_lg,
+				...t.atoms.text_contrast_medium,
+				...style,
+			}}
+		>
 			<TimeElapsed timestamp={message.sentAt} timeToString={relativeTimestamp}>
-				{({ timeElapsed }) => <Text style={[a.text_xs, t.atoms.text_contrast_medium]}>{timeElapsed}</Text>}
+				{({ timeElapsed }) => (
+					<Text
+						style={{
+							...a.text_xs,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
+						{timeElapsed}
+					</Text>
+				)}
 			</TimeElapsed>
-
 			{item.type === "pending-message" && item.failed && (
 				<>
 					{" "}
 					&middot;{" "}
 					<Text
-						style={[
-							a.text_xs,
-							{
+						style={{
+							...a.text_xs,
+
+							...{
 								color: t.palette.negative_400,
 							},
-						]}
+						}}
 					>
 						{"Failed to send"}
 					</Text>
@@ -200,7 +225,7 @@ let MessageItemMetadata = ({
 								label={"Click to retry failed message"}
 								to="#"
 								onPress={handleRetry}
-								style={[a.text_xs]}
+								style={a.text_xs}
 							>
 								{"Retry"}
 							</InlineLinkText>

@@ -60,9 +60,9 @@ function ChangeHandleDialogInner() {
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={[a.rounded_full]}
+				style={a.rounded_full}
 			>
-				<ButtonText style={[a.text_md]}>Cancel</ButtonText>
+				<ButtonText style={a.text_md}>Cancel</ButtonText>
 			</Button>
 		),
 		[control],
@@ -78,7 +78,13 @@ function ChangeHandleDialogInner() {
 			}
 			contentContainerStyle={[a.pt_0, a.px_0]}
 		>
-			<View style={[a.flex_1, a.pt_lg, a.px_xl]}>
+			<View
+				style={{
+					...a.flex_1,
+					...a.pt_lg,
+					...a.px_xl,
+				}}
+			>
 				{serviceInfoError ? (
 					<ErrorScreen
 						title={"Oops!"}
@@ -102,7 +108,14 @@ function ChangeHandleDialogInner() {
 						)}
 					</LayoutAnimationConfig>
 				) : (
-					<View style={[a.flex_1, a.justify_center, a.align_center, a.py_4xl]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.justify_center,
+							...a.align_center,
+							...a.py_4xl,
+						}}
+					>
 						<Loader size="xl" />
 					</View>
 				)}
@@ -148,7 +161,12 @@ function ProvidedHandlePage({
 
 	return (
 		<LayoutAnimationConfig skipEntering>
-			<View style={[a.flex_1, a.gap_md]}>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_md,
+				}}
+			>
 				{isSuccess && (
 					<Animated.View entering={FadeIn} exiting={FadeOut}>
 						<SuccessMessage text={"Handle changed!"} />
@@ -159,7 +177,12 @@ function ProvidedHandlePage({
 						<ChangeHandleError error={error} />
 					</Animated.View>
 				)}
-				<Animated.View style={[a.flex_1, a.gap_md]}>
+				<Animated.View
+					style={{
+						...a.flex_1,
+						...a.gap_md,
+					}}
+				>
 					<View>
 						<TextField.LabelText>New handle</TextField.LabelText>
 						<TextField.Root isInvalid={isInvalid}>
@@ -173,7 +196,7 @@ function ProvidedHandlePage({
 								autoCapitalize="none"
 								autoCorrect={false}
 							/>
-							<TextField.SuffixText label={host} style={[{ maxWidth: "40%" }]}>
+							<TextField.SuffixText label={host} style={{ maxWidth: "40%" }}>
 								{host}
 							</TextField.SuffixText>
 						</TextField.Root>
@@ -181,7 +204,7 @@ function ProvidedHandlePage({
 					<Text>
 						<>
 							Your full handle will be{" "}
-							<Text style={[a.font_bold]}>@{createFullHandle(subdomain, host)}</Text>
+							<Text style={a.font_bold}>@{createFullHandle(subdomain, host)}</Text>
 						</>
 					</Text>
 					<Button
@@ -198,14 +221,14 @@ function ProvidedHandlePage({
 					>
 						{isPending ? <ButtonIcon icon={Loader} /> : <ButtonText>Save</ButtonText>}
 					</Button>
-					<Text style={[a.leading_snug]}>
+					<Text style={a.leading_snug}>
 						<>
 							If you have your own domain, you can use that as your handle. This lets you self-verify your
 							identity.{" "}
 							<InlineLinkText
 								label={"learn more"}
 								to="https://bsky.social/about/blog/4-28-2023-domain-handle-tutorial"
-								style={[a.font_bold]}
+								style={a.font_bold}
 								disableMismatchWarning
 							>
 								Learn more here.
@@ -272,7 +295,12 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 	});
 
 	return (
-		<View style={[a.flex_1, a.gap_lg]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.gap_lg,
+			}}
+		>
 			{isSuccess && (
 				<Animated.View entering={FadeIn} exiting={FadeOut}>
 					<SuccessMessage text={"Handle changed!"} />
@@ -294,7 +322,13 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					</Admonition>
 				</Animated.View>
 			)}
-			<Animated.View style={[a.flex_1, a.gap_md, a.overflow_hidden]}>
+			<Animated.View
+				style={{
+					...a.flex_1,
+					...a.gap_md,
+					...a.overflow_hidden,
+				}}
+			>
 				<View>
 					<TextField.LabelText>Enter the domain you want to use</TextField.LabelText>
 					<TextField.Root>
@@ -329,16 +363,16 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					<>
 						<Text>Add the following DNS record to your domain:</Text>
 						<View
-							style={[
-								t.atoms.bg_contrast_25,
-								a.rounded_sm,
-								a.p_md,
-								a.border,
-								t.atoms.border_contrast_low,
-							]}
+							style={{
+								...t.atoms.bg_contrast_25,
+								...a.rounded_sm,
+								...a.p_md,
+								...a.border,
+								...t.atoms.border_contrast_low,
+							}}
 						>
-							<Text style={[t.atoms.text_contrast_medium]}>Host:</Text>
-							<View style={[a.py_xs]}>
+							<Text style={t.atoms.text_contrast_medium}>Host:</Text>
+							<View style={a.py_xs}>
 								<CopyButton
 									variant="solid"
 									color="secondary"
@@ -347,16 +381,37 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									hoverStyle={[a.bg_transparent]}
 									hitSlop={HITSLOP_10}
 								>
-									<Text style={[a.text_md, a.flex_1]}>_atproto</Text>
+									<Text
+										style={{
+											...a.text_md,
+											...a.flex_1,
+										}}
+									>
+										_atproto
+									</Text>
 									<ButtonIcon icon={CopyIcon} />
 								</CopyButton>
 							</View>
-							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>Type:</Text>
-							<View style={[a.py_xs]}>
-								<Text style={[a.text_md]}>TXT</Text>
+							<Text
+								style={{
+									...a.mt_xs,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
+								Type:
+							</Text>
+							<View style={a.py_xs}>
+								<Text style={a.text_md}>TXT</Text>
 							</View>
-							<Text style={[a.mt_xs, t.atoms.text_contrast_medium]}>Value:</Text>
-							<View style={[a.py_xs]}>
+							<Text
+								style={{
+									...a.mt_xs,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
+								Value:
+							</Text>
+							<View style={a.py_xs}>
 								<CopyButton
 									variant="solid"
 									color="secondary"
@@ -365,37 +420,44 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									hoverStyle={[a.bg_transparent]}
 									hitSlop={HITSLOP_10}
 								>
-									<Text style={[a.text_md, a.flex_1]}>did={currentAccount?.did}</Text>
+									<Text
+										style={{
+											...a.text_md,
+											...a.flex_1,
+										}}
+									>
+										did={currentAccount?.did}
+									</Text>
 									<ButtonIcon icon={CopyIcon} />
 								</CopyButton>
 							</View>
 						</View>
 						<Text>This should create a domain record at:</Text>
 						<View
-							style={[
-								t.atoms.bg_contrast_25,
-								a.rounded_sm,
-								a.p_md,
-								a.border,
-								t.atoms.border_contrast_low,
-							]}
+							style={{
+								...t.atoms.bg_contrast_25,
+								...a.rounded_sm,
+								...a.p_md,
+								...a.border,
+								...t.atoms.border_contrast_low,
+							}}
 						>
-							<Text style={[a.text_md]}>_atproto.{domain}</Text>
+							<Text style={a.text_md}>_atproto.{domain}</Text>
 						</View>
 					</>
 				) : (
 					<>
 						<Text>Upload a text file to:</Text>
 						<View
-							style={[
-								t.atoms.bg_contrast_25,
-								a.rounded_sm,
-								a.p_md,
-								a.border,
-								t.atoms.border_contrast_low,
-							]}
+							style={{
+								...t.atoms.bg_contrast_25,
+								...a.rounded_sm,
+								...a.p_md,
+								...a.border,
+								...t.atoms.border_contrast_low,
+							}}
 						>
-							<Text style={[a.text_md]}>https://{domain}/.well-known/atproto-did</Text>
+							<Text style={a.text_md}>https://{domain}/.well-known/atproto-did</Text>
 						</View>
 						<Text>That contains the following:</Text>
 						<CopyButton
@@ -404,9 +466,20 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							size="large"
 							variant="solid"
 							color="secondary"
-							style={[a.px_md, a.border, t.atoms.border_contrast_low]}
+							style={{
+								...a.px_md,
+								...a.border,
+								...t.atoms.border_contrast_low,
+							}}
 						>
-							<Text style={[a.text_md, a.flex_1]}>{currentAccount?.did}</Text>
+							<Text
+								style={{
+									...a.text_md,
+									...a.flex_1,
+								}}
+							>
+								{currentAccount?.did}
+							</Text>
 							<ButtonIcon icon={CopyIcon} />
 						</CopyButton>
 					</>
@@ -419,10 +492,10 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 			)}
 			<Animated.View>
 				{currentAccount?.handle?.endsWith(".bsky.social") && (
-					<Admonition type="info" style={[a.mb_md]}>
+					<Admonition type="info" style={a.mb_md}>
 						<>
 							Your current handle{" "}
-							<Text style={[a.font_bold]}>{sanitizeHandle(currentAccount?.handle || "", "@")}</Text> will
+							<Text style={a.font_bold}>{sanitizeHandle(currentAccount?.handle || "", "@")}</Text> will
 							automatically remain reserved for you. You can switch back to it at any time from this
 							account.
 						</>
@@ -464,7 +537,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					variant="outline"
 					color="secondary"
 					size="large"
-					style={[a.mt_sm]}
+					style={a.mt_sm}
 				>
 					<ButtonIcon icon={ArrowLeftIcon} position="left" />
 					<ButtonText>Nevermind, create a handle for me</ButtonText>
@@ -508,29 +581,29 @@ function SuccessMessage({ text }: { text: string }) {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.flex_1,
-				a.gap_md,
-				a.flex_row,
-				a.justify_center,
-				a.align_center,
-				gtMobile ? a.px_md : a.px_sm,
-				a.py_xs,
-				t.atoms.border_contrast_low,
-			]}
+			style={{
+				...a.flex_1,
+				...a.gap_md,
+				...a.flex_row,
+				...a.justify_center,
+				...a.align_center,
+				...(gtMobile ? a.px_md : a.px_sm),
+				...a.py_xs,
+				...t.atoms.border_contrast_low,
+			}}
 		>
 			<View
-				style={[
-					{ height: 20, width: 20 },
-					a.rounded_full,
-					a.align_center,
-					a.justify_center,
-					{ backgroundColor: t.palette.positive_600 },
-				]}
+				style={{
+					...{ height: 20, width: 20 },
+					...a.rounded_full,
+					...a.align_center,
+					...a.justify_center,
+					...{ backgroundColor: t.palette.positive_600 },
+				}}
 			>
 				<CheckIcon fill={t.palette.white} size="xs" />
 			</View>
-			<Text style={[a.text_md]}>{text}</Text>
+			<Text style={a.text_md}>{text}</Text>
 		</View>
 	);
 }

@@ -48,9 +48,24 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 	const timestampLabel = niceDate(opts.timestamp);
 
 	return (
-		<View style={[a.flex_1, a.flex_row, a.align_center, a.pb_2xs, a.gap_xs, a.z_10, opts.style]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.flex_row,
+				...a.align_center,
+				...a.pb_2xs,
+				...a.gap_xs,
+				...a.z_10,
+				...opts.style,
+			}}
+		>
 			{opts.showAvatar && (
-				<View style={[a.self_center, a.mr_2xs]}>
+				<View
+					style={{
+						...a.self_center,
+						...a.mr_2xs,
+					}}
+				>
 					<PreviewableUserAvatar
 						size={opts.avatarSize || 16}
 						profile={opts.author}
@@ -60,15 +75,22 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 				</View>
 			)}
 			<ProfileHoverCard inline did={opts.author.did}>
-				<Text numberOfLines={1} style={[a.flex_shrink]}>
+				<Text numberOfLines={1} style={a.flex_shrink}>
 					<WebOnlyInlineLinkText
 						to={profileLink}
 						label={"View profile"}
 						disableMismatchWarning
 						onPress={onBeforePressAuthor}
-						style={[t.atoms.text]}
+						style={t.atoms.text}
 					>
-						<Text emoji style={[a.text_md, a.font_bold, a.leading_snug]}>
+						<Text
+							emoji
+							style={{
+								...a.text_md,
+								...a.font_bold,
+								...a.leading_snug,
+							}}
+						>
 							{forceLTR(sanitizeDisplayName(displayName, opts.moderation?.ui("displayName")))}
 						</Text>
 					</WebOnlyInlineLinkText>
@@ -78,21 +100,36 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						disableMismatchWarning
 						disableUnderline
 						onPress={onBeforePressAuthor}
-						style={[a.text_md, t.atoms.text_contrast_medium, a.leading_snug]}
+						style={{
+							...a.text_md,
+							...t.atoms.text_contrast_medium,
+							...a.leading_snug,
+						}}
 					>
-						<Text emoji style={[a.text_md, t.atoms.text_contrast_medium, a.leading_snug]}>
+						<Text
+							emoji
+							style={{
+								...a.text_md,
+								...t.atoms.text_contrast_medium,
+								...a.leading_snug,
+							}}
+						>
 							{NON_BREAKING_SPACE + sanitizeHandle(handle, "@")}
 						</Text>
 					</WebOnlyInlineLinkText>
 				</Text>
 			</ProfileHoverCard>
-
 			{
-				<Text style={[a.text_md, t.atoms.text_contrast_medium]} accessible={false}>
+				<Text
+					style={{
+						...a.text_md,
+						...t.atoms.text_contrast_medium,
+					}}
+					accessible={false}
+				>
 					&middot;
 				</Text>
 			}
-
 			<TimeElapsed timestamp={opts.timestamp}>
 				{({ timeElapsed }) => (
 					<WebOnlyInlineLinkText
@@ -102,13 +139,14 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						disableMismatchWarning
 						disableUnderline
 						onPress={onBeforePressPost}
-						style={[
-							a.text_md,
-							t.atoms.text_contrast_medium,
-							a.leading_snug,
-							//@ts-ignore
+						style={{
+							...a.text_md,
+							...t.atoms.text_contrast_medium,
+							...a.leading_snug,
+
+							...//@ts-ignore
 							{ whiteSpace: "nowrap" },
-						]}
+						}}
 					>
 						{timeElapsed}
 					</WebOnlyInlineLinkText>

@@ -55,7 +55,12 @@ export function AvatarCircle({
 					<StreamingLive height={100} width={100} style={{ color: t.palette.contrast_200 }} />
 				</View>
 			)}
-			<View style={[a.absolute, { bottom: 2, right: 2 }]}>
+			<View
+				style={{
+					...a.absolute,
+					...{ bottom: 2, right: 2 },
+				}}
+			>
 				<Button
 					label={"Select an avatar"}
 					size="large"

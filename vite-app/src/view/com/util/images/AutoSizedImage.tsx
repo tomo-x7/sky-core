@@ -34,17 +34,28 @@ export function ConstrainedImage({
 	}, [aspectRatio, gtMobile]);
 
 	return (
-		<View style={[a.w_full]}>
-			<View style={[a.overflow_hidden, { paddingTop: outerAspectRatio }]}>
-				<View style={[a.absolute, a.inset_0, a.flex_row]}>
+		<View style={a.w_full}>
+			<View
+				style={{
+					...a.overflow_hidden,
+					...{ paddingTop: outerAspectRatio },
+				}}
+			>
+				<View
+					style={{
+						...a.absolute,
+						...a.inset_0,
+						...a.flex_row,
+					}}
+				>
 					<View
-						style={[
-							a.h_full,
-							a.rounded_md,
-							a.overflow_hidden,
-							t.atoms.bg_contrast_25,
-							fullBleed ? a.w_full : { aspectRatio },
-						]}
+						style={{
+							...a.h_full,
+							...a.rounded_md,
+							...a.overflow_hidden,
+							...t.atoms.bg_contrast_25,
+							...(fullBleed ? a.w_full : { aspectRatio }),
+						}}
 					>
 						{children}
 					</View>
@@ -102,7 +113,10 @@ export function AutoSizedImage({
 		<View ref={containerRef} collapsable={false} style={{ flex: 1 }}>
 			<Image
 				contentFit={isContain ? "contain" : "cover"}
-				style={[a.w_full, a.h_full]}
+				style={{
+					...a.w_full,
+					...a.h_full,
+				}}
 				//@ts-ignore
 				source={image.thumb}
 				accessible={true} // Must set for `accessibilityLabel` to work
@@ -125,58 +139,71 @@ export function AutoSizedImage({
 			{(hasAlt || isCropped) && !hideBadge ? (
 				<View
 					accessible={false}
-					style={[
-						a.absolute,
-						a.flex_row,
-						{
+					style={{
+						...a.absolute,
+						...a.flex_row,
+
+						...{
 							bottom: a.p_xs.padding,
 							right: a.p_xs.padding,
 							gap: 3,
 						},
-						largeAlt && [
+
+						...(largeAlt && [
 							{
 								gap: 4,
 							},
-						],
-					]}
+						]),
+					}}
 				>
 					{isCropped && (
 						<View
-							style={[
-								a.rounded_xs,
-								t.atoms.bg_contrast_25,
-								{
+							style={{
+								...a.rounded_xs,
+								...t.atoms.bg_contrast_25,
+
+								...{
 									padding: 3,
 									opacity: 0.8,
 								},
-								largeAlt && [
+
+								...(largeAlt && [
 									{
 										padding: 5,
 									},
-								],
-							]}
+								]),
+							}}
 						>
 							<Fullscreen fill={t.atoms.text_contrast_high.color} width={largeAlt ? 18 : 12} />
 						</View>
 					)}
 					{hasAlt && (
 						<View
-							style={[
-								a.justify_center,
-								a.rounded_xs,
-								t.atoms.bg_contrast_25,
-								{
+							style={{
+								...a.justify_center,
+								...a.rounded_xs,
+								...t.atoms.bg_contrast_25,
+
+								...{
 									padding: 3,
 									opacity: 0.8,
 								},
-								largeAlt && [
+
+								...(largeAlt && [
 									{
 										padding: 5,
 									},
-								],
-							]}
+								]),
+							}}
 						>
-							<Text style={[a.font_heavy, largeAlt ? a.text_xs : { fontSize: 8 }]}>ALT</Text>
+							<Text
+								style={{
+									...a.font_heavy,
+									...(largeAlt ? a.text_xs : { fontSize: 8 }),
+								}}
+							>
+								ALT
+							</Text>
 						</View>
 					)}
 				</View>
@@ -193,7 +220,13 @@ export function AutoSizedImage({
 				// alt here is what screen readers actually use
 				accessibilityLabel={image.alt}
 				accessibilityHint={"Views full image"}
-				style={[a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25, { aspectRatio: max ?? 1 }]}
+				style={{
+					...a.w_full,
+					...a.rounded_md,
+					...a.overflow_hidden,
+					...t.atoms.bg_contrast_25,
+					...{ aspectRatio: max ?? 1 },
+				}}
 			>
 				{contents}
 			</Pressable>
@@ -208,7 +241,7 @@ export function AutoSizedImage({
 					// alt here is what screen readers actually use
 					accessibilityLabel={image.alt}
 					accessibilityHint={"Views full image"}
-					style={[a.h_full]}
+					style={a.h_full}
 				>
 					{contents}
 				</Pressable>

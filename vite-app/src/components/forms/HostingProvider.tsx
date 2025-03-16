@@ -34,8 +34,19 @@ export function HostingProvider({
 		<>
 			<ServerInputDialog control={serverInputControl} onSelect={onSelectServiceUrl} />
 			{minimal ? (
-				<View style={[a.flex_row, a.align_center, a.flex_wrap]}>
-					<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.flex_wrap,
+					}}
+				>
+					<Text
+						style={{
+							...a.text_sm,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
 						You are creating an account on{" "}
 						<Button
 							label={toNiceDomain(serviceUrl)}
@@ -44,9 +55,12 @@ export function HostingProvider({
 							variant="ghost"
 							color="secondary"
 							size="tiny"
-							style={[a.px_xs, { marginHorizontal: tokens.space.xs * -1 }]}
+							style={{
+								...a.px_xs,
+								...{ marginHorizontal: tokens.space.xs * -1 },
+							}}
 						>
-							<ButtonText style={[a.text_sm]}>{toNiceDomain(serviceUrl)}</ButtonText>
+							<ButtonText style={a.text_sm}>{toNiceDomain(serviceUrl)}</ButtonText>
 							<ButtonIcon icon={PencilIcon} />
 						</Button>
 					</Text>
@@ -58,16 +72,16 @@ export function HostingProvider({
 					accessibilityHint={"Changes hosting provider"}
 					variant="solid"
 					color="secondary"
-					style={[
-						a.w_full,
-						a.flex_row,
-						a.align_center,
-						a.rounded_sm,
-						a.pl_md,
-						a.pr_sm,
-						a.gap_xs,
-						{ paddingVertical: 8 },
-					]}
+					style={{
+						...a.w_full,
+						...a.flex_row,
+						...a.align_center,
+						...a.rounded_sm,
+						...a.pl_md,
+						...a.pr_sm,
+						...a.gap_xs,
+						...{ paddingVertical: 8 },
+					}}
 					onPress={onPressSelectService}
 				>
 					{({ hovered, pressed }) => {
@@ -80,13 +94,13 @@ export function HostingProvider({
 										fill={interacted ? t.palette.contrast_800 : t.palette.contrast_500}
 									/>
 								</View>
-								<Text style={[a.text_md]}>{toNiceDomain(serviceUrl)}</Text>
+								<Text style={a.text_md}>{toNiceDomain(serviceUrl)}</Text>
 								<View
-									style={[
-										a.rounded_sm,
-										interacted ? t.atoms.bg_contrast_300 : t.atoms.bg_contrast_100,
-										{ marginLeft: "auto", padding: 6 },
-									]}
+									style={{
+										...a.rounded_sm,
+										...(interacted ? t.atoms.bg_contrast_300 : t.atoms.bg_contrast_100),
+										...{ marginLeft: "auto", padding: 6 },
+									}}
 								>
 									<PencilIcon
 										size="sm"

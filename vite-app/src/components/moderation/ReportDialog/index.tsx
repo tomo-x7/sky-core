@@ -57,8 +57,22 @@ export function ReportDialog(
 function Invalid() {
 	return (
 		<Dialog.ScrollableInner label={"Report dialog"}>
-			<Text style={[a.font_heavy, a.text_xl, a.leading_snug, a.pb_xs]}>Invalid report subject</Text>
-			<Text style={[a.text_md, a.leading_snug]}>
+			<Text
+				style={{
+					...a.font_heavy,
+					...a.text_xl,
+					...a.leading_snug,
+					...a.pb_xs,
+				}}
+			>
+				Invalid report subject
+			</Text>
+			<Text
+				style={{
+					...a.text_md,
+					...a.leading_snug,
+				}}
+			>
 				Something wasn't quite right with the data you're trying to report. Please contact support.
 			</Text>
 			<Dialog.Close />
@@ -150,12 +164,19 @@ function Inner(props: ReportDialogProps) {
 	}, [submitReport, state, props]);
 
 	return (
-		<Dialog.ScrollableInner label={"Report dialog"} ref={ref} style={[a.w_full, { maxWidth: 500 }]}>
-			<View style={[a.gap_2xl]}>
+		<Dialog.ScrollableInner
+			label={"Report dialog"}
+			ref={ref}
+			style={{
+				...a.w_full,
+				...{ maxWidth: 500 },
+			}}
+		>
+			<View style={a.gap_2xl}>
 				<StepOuter>
 					<StepTitle index={1} title={copy.subtitle} activeIndex1={state.activeStepIndex1} />
 					{isLoading ? (
-						<View style={[a.gap_sm]}>
+						<View style={a.gap_sm}>
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
@@ -181,8 +202,14 @@ function Inner(props: ReportDialogProps) {
 					) : (
 						<>
 							{state.selectedOption ? (
-								<View style={[a.flex_row, a.align_center, a.gap_md]}>
-									<View style={[a.flex_1]}>
+								<View
+									style={{
+										...a.flex_row,
+										...a.align_center,
+										...a.gap_md,
+									}}
+								>
+									<View style={a.flex_1}>
 										<OptionCard option={state.selectedOption} />
 									</View>
 									<Button
@@ -199,7 +226,7 @@ function Inner(props: ReportDialogProps) {
 									</Button>
 								</View>
 							) : (
-								<View style={[a.gap_sm]}>
+								<View style={a.gap_sm}>
 									{reportOptions[props.subject.type].map((o) => (
 										<OptionCard
 											key={o.reason}
@@ -214,20 +241,26 @@ function Inner(props: ReportDialogProps) {
 										<Link to={DMCA_LINK} label={"View details for reporting a copyright violation"}>
 											{({ hovered, pressed }) => (
 												<View
-													style={[
-														a.flex_row,
-														a.align_center,
-														a.w_full,
-														a.px_md,
-														a.py_sm,
-														a.rounded_sm,
-														a.border,
-														hovered || pressed
+													style={{
+														...a.flex_row,
+														...a.align_center,
+														...a.w_full,
+														...a.px_md,
+														...a.py_sm,
+														...a.rounded_sm,
+														...a.border,
+														...(hovered || pressed
 															? [t.atoms.border_contrast_high]
-															: [t.atoms.border_contrast_low],
-													]}
+															: [t.atoms.border_contrast_low]),
+													}}
 												>
-													<Text style={[a.flex_1, a.italic, a.leading_snug]}>
+													<Text
+														style={{
+															...a.flex_1,
+															...a.italic,
+															...a.leading_snug,
+														}}
+													>
 														Need to report a copyright violation?
 													</Text>
 													<SquareArrowTopRight size="sm" fill={t.atoms.text.color} />
@@ -249,8 +282,14 @@ function Inner(props: ReportDialogProps) {
 								{hasSingleSupportedLabeler ? (
 									<LabelerCard labeler={state.selectedLabeler} />
 								) : (
-									<View style={[a.flex_row, a.align_center, a.gap_md]}>
-										<View style={[a.flex_1]}>
+									<View
+										style={{
+											...a.flex_row,
+											...a.align_center,
+											...a.gap_md,
+										}}
+									>
+										<View style={a.flex_1}>
 											<LabelerCard labeler={state.selectedLabeler} />
 										</View>
 										<Button
@@ -271,7 +310,7 @@ function Inner(props: ReportDialogProps) {
 						) : (
 							<>
 								{hasSupportedLabelers ? (
-									<View style={[a.gap_sm]}>
+									<View style={a.gap_sm}>
 										{hasSingleSupportedLabeler ? (
 											<>
 												<LabelerCard labeler={supportedLabelers[0]} />
@@ -313,10 +352,25 @@ function Inner(props: ReportDialogProps) {
 					<StepTitle index={3} title={"Submit report"} activeIndex1={state.activeStepIndex1} />
 					{state.activeStepIndex1 === 3 && (
 						<>
-							<View style={[a.pb_xs, a.gap_xs]}>
-								<Text style={[a.leading_snug, a.pb_xs]}>
+							<View
+								style={{
+									...a.pb_xs,
+									...a.gap_xs,
+								}}
+							>
+								<Text
+									style={{
+										...a.leading_snug,
+										...a.pb_xs,
+									}}
+								>
 									Your report will be sent to{" "}
-									<Text style={[a.font_bold, a.leading_snug]}>
+									<Text
+										style={{
+											...a.font_bold,
+											...a.leading_snug,
+										}}
+									>
 										{state.selectedLabeler?.creator.displayName}
 									</Text>
 									.{" "}
@@ -345,17 +399,18 @@ function Inner(props: ReportDialogProps) {
 											numberOfLines={4}
 										/>
 										<View
-											style={[
-												a.absolute,
-												a.flex_row,
-												a.align_center,
-												a.pr_md,
-												a.pb_sm,
-												{
+											style={{
+												...a.absolute,
+												...a.flex_row,
+												...a.align_center,
+												...a.pr_md,
+												...a.pb_sm,
+
+												...{
 													bottom: 0,
 													right: 0,
 												},
-											]}
+											}}
 										>
 											<CharProgress count={state.details?.length || 0} />
 										</View>
@@ -379,7 +434,6 @@ function Inner(props: ReportDialogProps) {
 					)}
 				</StepOuter>
 			</View>
-
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);
@@ -401,7 +455,16 @@ function ActionOnce({
 }
 
 function StepOuter({ children }: { children: React.ReactNode }) {
-	return <View style={[a.gap_md, a.w_full]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.gap_md,
+				...a.w_full,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 function StepTitle({
@@ -417,14 +480,21 @@ function StepTitle({
 	const active = activeIndex1 === index;
 	const completed = activeIndex1 > index;
 	return (
-		<View style={[a.flex_row, a.gap_sm, a.pr_3xl]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.gap_sm,
+				...a.pr_3xl,
+			}}
+		>
 			<View
-				style={[
-					a.justify_center,
-					a.align_center,
-					a.rounded_full,
-					a.border,
-					{
+				style={{
+					...a.justify_center,
+					...a.align_center,
+					...a.rounded_full,
+					...a.border,
+
+					...{
 						width: 24,
 						height: 24,
 						backgroundColor: active
@@ -438,17 +508,18 @@ function StepTitle({
 								? t.palette.primary_400
 								: t.atoms.border_contrast_low.borderColor,
 					},
-				]}
+				}}
 			>
 				{completed ? (
 					<Check width={12} />
 				) : (
 					<Text
-						style={[
-							a.font_heavy,
-							a.text_center,
-							t.atoms.text,
-							{
+						style={{
+							...a.font_heavy,
+							...a.text_center,
+							...t.atoms.text,
+
+							...{
 								color: active
 									? "white"
 									: completed
@@ -459,24 +530,24 @@ function StepTitle({
 								height: 24,
 								lineHeight: 24,
 							},
-						]}
+						}}
 					>
 						{index}
 					</Text>
 				)}
 			</View>
-
 			<Text
-				style={[
-					a.flex_1,
-					a.font_heavy,
-					a.text_lg,
-					a.leading_snug,
-					active ? t.atoms.text : t.atoms.text_contrast_medium,
-					{
+				style={{
+					...a.flex_1,
+					...a.font_heavy,
+					...a.text_lg,
+					...a.leading_snug,
+					...(active ? t.atoms.text : t.atoms.text_contrast_medium),
+
+					...{
 						top: 1,
 					},
-				]}
+				}}
 			>
 				{title}
 			</Text>
@@ -500,18 +571,34 @@ function OptionCard({
 		<Button label={`Create report for ${option.title}`} onPress={onPress} disabled={!onSelect}>
 			{({ hovered, pressed }) => (
 				<View
-					style={[
-						a.w_full,
-						gutters,
-						a.py_sm,
-						a.rounded_sm,
-						a.border,
-						t.atoms.bg_contrast_25,
-						hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low],
-					]}
+					style={{
+						...a.w_full,
+						...gutters,
+						...a.py_sm,
+						...a.rounded_sm,
+						...a.border,
+						...t.atoms.bg_contrast_25,
+						...(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
+					}}
 				>
-					<Text style={[a.text_md, a.font_bold, a.leading_snug]}>{option.title}</Text>
-					<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>{option.description}</Text>
+					<Text
+						style={{
+							...a.text_md,
+							...a.font_bold,
+							...a.leading_snug,
+						}}
+					>
+						{option.title}
+					</Text>
+					<Text
+						style={{
+							...a.text_sm,
+							...a.leading_snug,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
+						{option.description}
+					</Text>
 				</View>
 			)}
 		</Button>
@@ -522,14 +609,16 @@ function OptionCardSkeleton() {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.w_full,
-				a.rounded_sm,
-				a.border,
-				t.atoms.bg_contrast_25,
-				t.atoms.border_contrast_low,
-				{ height: 55 }, // magic, based on web
-			]}
+			style={{
+				...a.w_full,
+				...a.rounded_sm,
+				...a.border,
+				...t.atoms.bg_contrast_25,
+				...t.atoms.border_contrast_low,
+
+				...// magic, based on web
+				{ height: 55 },
+			}}
 		/>
 	);
 }
@@ -553,22 +642,36 @@ function LabelerCard({
 		<Button label={`Send report to ${title}`} onPress={onPress} disabled={!onSelect}>
 			{({ hovered, pressed }) => (
 				<View
-					style={[
-						a.w_full,
-						a.p_sm,
-						a.flex_row,
-						a.align_center,
-						a.gap_sm,
-						a.rounded_md,
-						a.border,
-						t.atoms.bg_contrast_25,
-						hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low],
-					]}
+					style={{
+						...a.w_full,
+						...a.p_sm,
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_sm,
+						...a.rounded_md,
+						...a.border,
+						...t.atoms.bg_contrast_25,
+						...(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
+					}}
 				>
 					<UserAvatar type="labeler" size={36} avatar={labeler.creator.avatar} />
-					<View style={[a.flex_1]}>
-						<Text style={[a.text_md, a.font_bold, a.leading_snug]}>{title}</Text>
-						<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
+					<View style={a.flex_1}>
+						<Text
+							style={{
+								...a.text_md,
+								...a.font_bold,
+								...a.leading_snug,
+							}}
+						>
+							{title}
+						</Text>
+						<Text
+							style={{
+								...a.text_sm,
+								...a.leading_snug,
+								...t.atoms.text_contrast_medium,
+							}}
+						>
 							By {sanitizeHandle(labeler.creator.handle, "@")}
 						</Text>
 					</View>

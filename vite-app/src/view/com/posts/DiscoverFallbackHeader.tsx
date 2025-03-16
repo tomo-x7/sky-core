@@ -9,17 +9,18 @@ export function DiscoverFallbackHeader() {
 	const pal = usePalette("default");
 	return (
 		<View
-			style={[
-				{
+			style={{
+				...{
 					flexDirection: "row",
 					alignItems: "center",
 					paddingVertical: 12,
 					paddingHorizontal: 12,
 					borderTopWidth: 1,
 				},
-				pal.border,
-				pal.viewLight,
-			]}
+
+				...pal.border,
+				...pal.viewLight,
+			}}
 		>
 			<View style={{ width: 68, paddingLeft: 12 }}>
 				<InfoCircleIcon size={36} style={pal.textLight} strokeWidth={1.5} />

@@ -50,43 +50,76 @@ export function ScreenHider({
 	);
 	return (
 		<CenteredView
-			style={[
-				a.flex_1,
-				{
+			style={{
+				...a.flex_1,
+
+				...{
 					paddingTop: 100,
 					paddingBottom: 150,
 				},
-				t.atoms.bg,
-				containerStyle,
-			]}
+
+				...t.atoms.bg,
+				...containerStyle,
+			}}
 			sideBorders
 		>
-			<View style={[a.align_center, a.mb_md]}>
+			<View
+				style={{
+					...a.align_center,
+					...a.mb_md,
+				}}
+			>
 				<View
-					style={[
-						t.atoms.bg_contrast_975,
-						a.align_center,
-						a.justify_center,
-						{
+					style={{
+						...t.atoms.bg_contrast_975,
+						...a.align_center,
+						...a.justify_center,
+
+						...{
 							borderRadius: 25,
 							width: 50,
 							height: 50,
 						},
-					]}
+					}}
 				>
 					<desc.icon width={24} fill={t.atoms.bg.backgroundColor} />
 				</View>
 			</View>
-			<Text style={[a.text_4xl, a.font_bold, a.text_center, a.mb_md, t.atoms.text]}>
+			<Text
+				style={{
+					...a.text_4xl,
+					...a.font_bold,
+					...a.text_center,
+					...a.mb_md,
+					...t.atoms.text,
+				}}
+			>
 				{isNoPwi ? <>Sign-in Required</> : <>Content Warning</>}
 			</Text>
-			<Text style={[a.text_lg, a.mb_md, a.px_lg, a.text_center, a.leading_snug, t.atoms.text_contrast_medium]}>
+			<Text
+				style={{
+					...a.text_lg,
+					...a.mb_md,
+					...a.px_lg,
+					...a.text_center,
+					...a.leading_snug,
+					...t.atoms.text_contrast_medium,
+				}}
+			>
 				{isNoPwi ? (
 					<>This account has requested that users sign in to view their profile.</>
 				) : (
 					<>
 						<>This {screenDescription} has been flagged:</>{" "}
-						<Text style={[a.text_lg, a.font_bold, a.leading_snug, t.atoms.text, a.ml_xs]}>
+						<Text
+							style={{
+								...a.text_lg,
+								...a.font_bold,
+								...a.leading_snug,
+								...t.atoms.text,
+								...a.ml_xs,
+							}}
+						>
 							{desc.name}.{" "}
 						</Text>
 						<TouchableWithoutFeedback
@@ -98,12 +131,12 @@ export function ScreenHider({
 							accessibilityHint=""
 						>
 							<Text
-								style={[
-									a.text_lg,
-									a.leading_snug,
-									{ color: t.palette.primary_500 },
-									{ cursor: "pointer" },
-								]}
+								style={{
+									...a.text_lg,
+									...a.leading_snug,
+									...{ color: t.palette.primary_500 },
+									...{ cursor: "pointer" },
+								}}
 							>
 								Learn More
 							</Text>
@@ -113,12 +146,19 @@ export function ScreenHider({
 				)}{" "}
 			</Text>
 			{isMobile && <View style={a.flex_1} />}
-			<View style={[a.flex_row, a.justify_center, a.my_md, a.gap_md]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.justify_center,
+					...a.my_md,
+					...a.gap_md,
+				}}
+			>
 				<Button
 					variant="solid"
 					color="primary"
 					size="large"
-					style={[a.rounded_full]}
+					style={a.rounded_full}
 					label={"Go back"}
 					onPress={() => {
 						if (navigation.canGoBack()) {
@@ -135,7 +175,7 @@ export function ScreenHider({
 						variant="solid"
 						color="secondary"
 						size="large"
-						style={[a.rounded_full]}
+						style={a.rounded_full}
 						label={"Show anyway"}
 						onPress={() => setOverride((v) => !v)}
 					>

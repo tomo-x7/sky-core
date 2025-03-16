@@ -16,12 +16,20 @@ export function TextInput({ testID, icon, onChange, ...props }: Props) {
 	const theme = useTheme();
 	const pal = usePalette("default");
 	return (
-		<View style={[pal.border, styles.container]}>
+		<View
+			style={{
+				...pal.border,
+				...styles.container,
+			}}
+		>
 			{/* @ts-ignore */}
 			<FontAwesomeIcon icon={icon} style={{ ...pal.textLight, ...styles.icon }} />
 			<RNTextInput
 				testID={testID}
-				style={[pal.text, styles.textInput]}
+				style={{
+					...pal.text,
+					...styles.textInput,
+				}}
 				placeholderTextColor={pal.colors.textLight}
 				autoCapitalize="none"
 				autoCorrect={false}

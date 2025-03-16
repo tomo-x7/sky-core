@@ -85,11 +85,28 @@ export function Component({
 	};
 
 	return (
-		<SafeAreaView style={[pal.view, s.flex1]}>
-			<ScrollView testID="verifyEmailModal" style={[s.flex1, isMobile && { paddingHorizontal: 18 }]}>
+		<SafeAreaView
+			style={{
+				...pal.view,
+				...s.flex1,
+			}}
+		>
+			<ScrollView
+				testID="verifyEmailModal"
+				style={{
+					...s.flex1,
+					...(isMobile && { paddingHorizontal: 18 }),
+				}}
+			>
 				{stage === Stages.Reminder && <ReminderIllustration />}
 				<View style={styles.titleSection}>
-					<Text type="title-lg" style={[pal.text, styles.title]}>
+					<Text
+						type="title-lg"
+						style={{
+							...pal.text,
+							...styles.title,
+						}}
+					>
 						{stage === Stages.Reminder ? (
 							<>Please Verify Your Email</>
 						) : stage === Stages.Email ? (
@@ -102,7 +119,13 @@ export function Component({
 					</Text>
 				</View>
 
-				<Text type="lg" style={[pal.textLight, { marginBottom: 10 }]}>
+				<Text
+					type="lg"
+					style={{
+						...pal.textLight,
+						...{ marginBottom: 10 },
+					}}
+				>
 					{stage === Stages.Reminder ? (
 						<>
 							Your email has not yet been verified. This is an important security step which we recommend.
@@ -124,7 +147,14 @@ export function Component({
 						<View style={styles.emailContainer}>
 							{/* @ts-ignore */}
 							<FontAwesomeIcon icon="envelope" color={pal.colors.text} size={16} />
-							<Text type="xl-medium" style={[pal.text, s.flex1, { minWidth: 0 }]}>
+							<Text
+								type="xl-medium"
+								style={{
+									...pal.text,
+									...s.flex1,
+									...{ minWidth: 0 },
+								}}
+							>
 								{currentAccount?.email || "(no email)"}
 							</Text>
 						</View>
@@ -143,7 +173,11 @@ export function Component({
 				) : stage === Stages.ConfirmCode ? (
 					<TextInput
 						testID="confirmCodeInput"
-						style={[styles.textInput, pal.border, pal.text]}
+						style={{
+							...styles.textInput,
+							...pal.border,
+							...pal.text,
+						}}
 						placeholder="XXXXX-XXXXX"
 						placeholderTextColor={pal.colors.textLight}
 						value={confirmationCode}
@@ -159,7 +193,7 @@ export function Component({
 
 				{error ? <ErrorMessage message={error} style={styles.error} /> : undefined}
 
-				<View style={[styles.btnContainer]}>
+				<View style={styles.btnContainer}>
 					{isProcessing ? (
 						<View style={styles.btn}>
 							<ActivityIndicator color="#fff" />
@@ -244,7 +278,12 @@ function ReminderIllustration() {
 	const pal = usePalette("default");
 	const palInverted = usePalette("inverted");
 	return (
-		<View style={[pal.viewLight, { borderRadius: 8, marginBottom: 20 }]}>
+		<View
+			style={{
+				...pal.viewLight,
+				...{ borderRadius: 8, marginBottom: 20 },
+			}}
+		>
 			<Svg viewBox="0 0 112 84" fill="none" height={200}>
 				<Path
 					fillRule="evenodd"

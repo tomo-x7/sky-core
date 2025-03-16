@@ -114,39 +114,57 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 			isOpen && (
 				<Portal>
 					<Animated.View
-						style={[
-							// @ts-ignore position: fixed is web only
+						style={{
+							...// @ts-ignore position: fixed is web only
 							containerStyle,
-							animatedStyle,
-						]}
+
+							...animatedStyle,
+						}}
 					>
 						<Pressable
-							style={[
-								t.atoms.bg,
-								a.flex_row,
-								a.align_center,
-								a.gap_md,
-								a.border,
-								t.atoms.border_contrast_high,
-								a.rounded_md,
-								a.px_lg,
-								a.py_md,
-								a.shadow_sm,
-								{
+							style={{
+								...t.atoms.bg,
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_md,
+								...a.border,
+								...t.atoms.border_contrast_high,
+								...a.rounded_md,
+								...a.px_lg,
+								...a.py_md,
+								...a.shadow_sm,
+
+								...{
 									shadowRadius: 8,
 									shadowOpacity: 0.1,
 									shadowOffset: { width: 0, height: 2 },
 									elevation: 8,
 								},
-							]}
+							}}
 							onPress={close}
 							accessibilityLabel={"Tap to dismiss"}
 							accessibilityHint=""
 						>
 							<AnimatedCheck fill={t.palette.primary_500} ref={animatedCheckRef} />
 							<View>
-								<Text style={[a.text_md, a.font_bold]}>{title}</Text>
-								{subtitle && <Text style={[a.text_sm, t.atoms.text_contrast_medium]}>{subtitle}</Text>}
+								<Text
+									style={{
+										...a.text_md,
+										...a.font_bold,
+									}}
+								>
+									{title}
+								</Text>
+								{subtitle && (
+									<Text
+										style={{
+											...a.text_sm,
+											...t.atoms.text_contrast_medium,
+										}}
+									>
+										{subtitle}
+									</Text>
+								)}
 							</View>
 						</Pressable>
 					</Animated.View>

@@ -48,7 +48,7 @@ export function AppPasswordsScreen(props: Props) {
 				) : (
 					<SettingsList.Container>
 						<SettingsList.Item>
-							<Admonition type="tip" style={[a.flex_1]}>
+							<Admonition type="tip" style={a.flex_1}>
 								Use app passwords to sign in to other Bluesky clients without giving full access to your
 								account or password.
 							</Admonition>
@@ -60,7 +60,7 @@ export function AppPasswordsScreen(props: Props) {
 								color="primary"
 								variant="solid"
 								onPress={() => createAppPasswordControl.open()}
-								style={[a.flex_1]}
+								style={a.flex_1}
 							>
 								<ButtonIcon icon={PlusIcon} />
 								<ButtonText>Add App Password</ButtonText>
@@ -70,7 +70,7 @@ export function AppPasswordsScreen(props: Props) {
 						<LayoutAnimationConfig skipEntering skipExiting>
 							{appPasswords ? (
 								appPasswords.length > 0 ? (
-									<View style={[a.overflow_hidden]}>
+									<View style={a.overflow_hidden}>
 										{appPasswords.map((appPassword) => (
 											<Animated.View
 												key={appPassword.name}
@@ -89,7 +89,14 @@ export function AppPasswordsScreen(props: Props) {
 									<EmptyState icon="growth" message={"No app passwords yet"} />
 								)
 							) : (
-								<View style={[a.flex_1, a.justify_center, a.align_center, a.py_4xl]}>
+								<View
+									style={{
+										...a.flex_1,
+										...a.justify_center,
+										...a.align_center,
+										...a.py_4xl,
+									}}
+								>
 									<Loader size="xl" />
 								</View>
 							)}
@@ -97,7 +104,6 @@ export function AppPasswordsScreen(props: Props) {
 					</SettingsList.Container>
 				)}
 			</Layout.Content>
-
 			<AddAppPasswordDialog
 				control={createAppPasswordControl}
 				passwords={appPasswords?.map((p) => p.name) || []}
@@ -122,20 +128,36 @@ function AppPasswordCard({
 
 	return (
 		<View
-			style={[
-				a.w_full,
-				a.border,
-				a.rounded_sm,
-				a.px_md,
-				a.py_sm,
-				t.atoms.bg_contrast_25,
-				t.atoms.border_contrast_low,
-			]}
+			style={{
+				...a.w_full,
+				...a.border,
+				...a.rounded_sm,
+				...a.px_md,
+				...a.py_sm,
+				...t.atoms.bg_contrast_25,
+				...t.atoms.border_contrast_low,
+			}}
 		>
-			<View style={[a.flex_row, a.justify_between, a.align_start, a.w_full, a.gap_sm]}>
-				<View style={[a.gap_xs]}>
-					<Text style={[t.atoms.text, a.text_md, a.font_bold]}>{appPassword.name}</Text>
-					<Text style={[t.atoms.text_contrast_medium]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.justify_between,
+					...a.align_start,
+					...a.w_full,
+					...a.gap_sm,
+				}}
+			>
+				<View style={a.gap_xs}>
+					<Text
+						style={{
+							...t.atoms.text,
+							...a.text_md,
+							...a.font_bold,
+						}}
+					>
+						{appPassword.name}
+					</Text>
+					<Text style={t.atoms.text_contrast_medium}>
 						<>
 							Created{" "}
 							{new Date(appPassword.createdAt).toLocaleDateString(undefined, {
@@ -153,19 +175,25 @@ function AppPasswordCard({
 					variant="ghost"
 					color="negative"
 					size="small"
-					style={[a.bg_transparent]}
+					style={a.bg_transparent}
 					onPress={() => deleteControl.open()}
 				>
 					<ButtonIcon icon={TrashIcon} />
 				</Button>
 			</View>
 			{appPassword.privileged && (
-				<View style={[a.flex_row, a.gap_sm, a.align_center, a.mt_md]}>
-					<WarningIcon style={[{ color: colors.warning[t.scheme] }]} />
+				<View
+					style={{
+						...a.flex_row,
+						...a.gap_sm,
+						...a.align_center,
+						...a.mt_md,
+					}}
+				>
+					<WarningIcon style={{ color: colors.warning[t.scheme] }} />
 					<Text style={t.atoms.text_contrast_high}>Allows access to direct messages</Text>
 				</View>
 			)}
-
 			<Prompt.Basic
 				control={deleteControl}
 				title={"Delete app password?"}

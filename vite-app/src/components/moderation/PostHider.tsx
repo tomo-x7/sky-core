@@ -66,18 +66,20 @@ export function PostHider({
 			accessibilityRole="button"
 			accessibilityHint={override ? "Hides the content" : "Shows the content"}
 			accessibilityLabel=""
-			style={[
-				a.flex_row,
-				a.align_center,
-				a.gap_sm,
-				a.py_md,
-				{
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_sm,
+				...a.py_md,
+
+				...{
 					paddingLeft: 6,
 					paddingRight: 18,
 				},
-				override ? { paddingBottom: 0 } : undefined,
-				t.atoms.bg,
-			]}
+
+				...(override ? { paddingBottom: 0 } : undefined),
+				...t.atoms.bg,
+			}}
 		>
 			<ModerationDetailsDialog control={control} modcause={blur} />
 			<Pressable
@@ -89,26 +91,34 @@ export function PostHider({
 				accessibilityHint=""
 			>
 				<View
-					style={[
-						t.atoms.bg_contrast_25,
-						a.align_center,
-						a.justify_center,
-						{
+					style={{
+						...t.atoms.bg_contrast_25,
+						...a.align_center,
+						...a.justify_center,
+
+						...{
 							width: iconSize,
 							height: iconSize,
 							borderRadius: iconSize,
 						},
-						iconStyles,
-					]}
+
+						...iconStyles,
+					}}
 				>
 					<desc.icon size="sm" fill={t.atoms.text_contrast_medium.color} />
 				</View>
 			</Pressable>
-			<Text style={[t.atoms.text_contrast_medium, a.flex_1]} numberOfLines={1}>
+			<Text
+				style={{
+					...t.atoms.text_contrast_medium,
+					...a.flex_1,
+				}}
+				numberOfLines={1}
+			>
 				{desc.name}
 			</Text>
 			{!modui.noOverride && (
-				<Text style={[{ color: t.palette.primary_500 }]}>{override ? <>Hide</> : <>Show</>}</Text>
+				<Text style={{ color: t.palette.primary_500 }}>{override ? <>Hide</> : <>Show</>}</Text>
 			)}
 		</Pressable>
 	) : (

@@ -46,14 +46,34 @@ export function Component({
 	const onPressCancelSearch = useCallback(() => setQuery(""), []);
 
 	return (
-		<SafeAreaView testID="listAddUserModal" style={[pal.view, styles.fixedHeight]}>
-			<View style={[s.flex1, isMobile && { paddingHorizontal: 18 }]}>
-				<View style={[styles.searchContainer, pal.border]}>
+		<SafeAreaView
+			testID="listAddUserModal"
+			style={{
+				...pal.view,
+				...styles.fixedHeight,
+			}}
+		>
+			<View
+				style={{
+					...s.flex1,
+					...(isMobile && { paddingHorizontal: 18 }),
+				}}
+			>
+				<View
+					style={{
+						...styles.searchContainer,
+						...pal.border,
+					}}
+				>
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="search" size={16} />
 					<TextInput
 						testID="searchInput"
-						style={[styles.searchInput, pal.border, pal.text]}
+						style={{
+							...styles.searchInput,
+							...pal.border,
+							...pal.text,
+						}}
 						placeholder={"Search for users"}
 						placeholderTextColor={pal.colors.textLight}
 						value={query}
@@ -81,7 +101,7 @@ export function Component({
 						</Pressable>
 					) : undefined}
 				</View>
-				<ScrollView style={[s.flex1]} keyboardDismissMode="none" keyboardShouldPersistTaps="always">
+				<ScrollView style={s.flex1} keyboardDismissMode="none" keyboardShouldPersistTaps="always">
 					{autocomplete.isLoading ? (
 						<View style={{ marginVertical: 20 }}>
 							<ActivityIndicator />
@@ -100,12 +120,23 @@ export function Component({
 							))}
 						</>
 					) : (
-						<Text type="xl" style={[pal.textLight, { paddingHorizontal: 12, paddingVertical: 16 }]}>
+						<Text
+							type="xl"
+							style={{
+								...pal.textLight,
+								...{ paddingHorizontal: 12, paddingVertical: 16 },
+							}}
+						>
 							<>No results found for {query}</>
 						</Text>
 					)}
 				</ScrollView>
-				<View style={[styles.btnContainer, { paddingBottom: isKeyboardVisible ? 10 : 20 }]}>
+				<View
+					style={{
+						...styles.btnContainer,
+						...{ paddingBottom: isKeyboardVisible ? 10 : 20 },
+					}}
+				>
 					<Button
 						testID="doneBtn"
 						type="default"
@@ -177,15 +208,16 @@ function UserResult({
 
 	return (
 		<View
-			style={[
-				pal.border,
-				{
+			style={{
+				...pal.border,
+
+				...{
 					flexDirection: "row",
 					alignItems: "center",
 					borderTopWidth: noBorder ? 0 : 1,
 					paddingHorizontal: 8,
 				},
-			]}
+			}}
 		>
 			<View
 				style={{
@@ -203,10 +235,18 @@ function UserResult({
 					paddingBottom: 10,
 				}}
 			>
-				<Text type="lg" style={[s.bold, pal.text]} numberOfLines={1} lineHeight={1.2}>
+				<Text
+					type="lg"
+					style={{
+						...s.bold,
+						...pal.text,
+					}}
+					numberOfLines={1}
+					lineHeight={1.2}
+				>
 					{sanitizeDisplayName(profile.displayName || sanitizeHandle(profile.handle))}
 				</Text>
-				<Text type="md" style={[pal.textLight]} numberOfLines={1}>
+				<Text type="md" style={pal.textLight} numberOfLines={1}>
 					{sanitizeHandle(profile.handle, "@")}
 				</Text>
 				{!!profile.viewer?.followedBy && <View style={s.flexRow} />}

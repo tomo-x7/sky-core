@@ -68,7 +68,12 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 		//@ts-ignore
 		<Layout.Center style={{ flex: 1, minHeight: "100dvh" }}>
 			{isLabelerLoading ? (
-				<View style={[a.w_full, a.align_center]}>
+				<View
+					style={{
+						...a.w_full,
+						...a.align_center,
+					}}
+				>
 					<Loader size="xl" />
 				</View>
 			) : labelerError || !labelerInfo ? (
@@ -142,32 +147,80 @@ export function ProfileLabelsSectionInner({
 			contentOffset={{ x: 0, y: headerHeight * -1 }}
 			onScroll={scrollHandler}
 		>
-			<View style={[a.pt_xl, a.px_lg, a.border_t, t.atoms.border_contrast_low]}>
+			<View
+				style={{
+					...a.pt_xl,
+					...a.px_lg,
+					...a.border_t,
+					...t.atoms.border_contrast_low,
+				}}
+			>
 				<View>
-					<Text style={[t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
+					<Text
+						style={{
+							...t.atoms.text_contrast_high,
+							...a.leading_snug,
+							...a.text_sm,
+						}}
+					>
 						Labels are annotations on users and content. They can be used to hide, warn, and categorize the
 						network.
 					</Text>
 					{labelerInfo.creator.viewer?.blocking ? (
-						<View style={[a.flex_row, a.gap_sm, a.align_center, a.mt_md]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.gap_sm,
+								...a.align_center,
+								...a.mt_md,
+							}}
+						>
 							<CircleInfo size="sm" fill={t.atoms.text_contrast_medium.color} />
-							<Text style={[t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
+							<Text
+								style={{
+									...t.atoms.text_contrast_high,
+									...a.leading_snug,
+									...a.text_sm,
+								}}
+							>
 								Blocking does not prevent this labeler from placing labels on your account.
 							</Text>
 						</View>
 					) : null}
 					{labelValues.length === 0 ? (
-						<Text style={[a.pt_xl, t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
+						<Text
+							style={{
+								...a.pt_xl,
+								...t.atoms.text_contrast_high,
+								...a.leading_snug,
+								...a.text_sm,
+							}}
+						>
 							This labeler hasn't declared what labels it publishes, and may not be active.
 						</Text>
 					) : !isSubscribed ? (
-						<Text style={[a.pt_xl, t.atoms.text_contrast_high, a.leading_snug, a.text_sm]}>
+						<Text
+							style={{
+								...a.pt_xl,
+								...t.atoms.text_contrast_high,
+								...a.leading_snug,
+								...a.text_sm,
+							}}
+						>
 							<>Subscribe to @{labelerInfo.creator.handle} to use these labels:</>
 						</Text>
 					) : null}
 				</View>
 				{labelDefs.length > 0 && (
-					<View style={[a.mt_xl, a.w_full, a.rounded_md, a.overflow_hidden, t.atoms.bg_contrast_25]}>
+					<View
+						style={{
+							...a.mt_xl,
+							...a.w_full,
+							...a.rounded_md,
+							...a.overflow_hidden,
+							...t.atoms.bg_contrast_25,
+						}}
+					>
 						{labelDefs.map((labelDef, i) => {
 							return (
 								<React.Fragment key={labelDef.identifier}>

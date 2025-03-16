@@ -26,7 +26,14 @@ export function BackNextButtons({
 	overrideNextText,
 }: BackNextButtonsProps) {
 	return (
-		<View style={[a.flex_row, a.justify_between, a.pb_lg, a.pt_3xl]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.justify_between,
+				...a.pb_lg,
+				...a.pt_3xl,
+			}}
+		>
 			<Button
 				label={"Go back to previous step"}
 				variant="solid"

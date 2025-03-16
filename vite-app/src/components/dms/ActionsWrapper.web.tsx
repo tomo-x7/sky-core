@@ -47,13 +47,14 @@ export function ActionsWrapper({
 		>
 			{isFromSelf && (
 				<View
-					style={[
-						a.mr_xl,
-						a.justify_center,
-						{
+					style={{
+						...a.mr_xl,
+						...a.justify_center,
+
+						...{
 							marginLeft: "auto",
 						},
-					]}
+					}}
 				>
 					<MessageMenu
 						message={message}
@@ -70,7 +71,13 @@ export function ActionsWrapper({
 				{children}
 			</View>
 			{!isFromSelf && (
-				<View style={[a.flex_row, a.align_center, a.ml_xl]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.ml_xl,
+					}}
+				>
 					<MessageMenu
 						message={message}
 						control={menuControl}

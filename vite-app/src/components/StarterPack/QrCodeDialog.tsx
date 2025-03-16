@@ -97,7 +97,13 @@ export function QrCodeDialog({
 	return (
 		<Dialog.Outer control={control}>
 			<Dialog.ScrollableInner label={"Create a QR code for a starter pack"}>
-				<View style={[a.flex_1, a.align_center, a.gap_5xl]}>
+				<View
+					style={{
+						...a.flex_1,
+						...a.align_center,
+						...a.gap_5xl,
+					}}
+				>
 					<React.Suspense fallback={<Loading />}>
 						{!link ? (
 							<Loading />
@@ -109,7 +115,13 @@ export function QrCodeDialog({
 										<Loader size="xl" />
 									</View>
 								) : (
-									<View style={[a.w_full, a.gap_md, [a.flex_row_reverse]]}>
+									<View
+										style={{
+											...a.w_full,
+											...a.gap_md,
+											...[a.flex_row_reverse],
+										}}
+									>
 										<Button
 											label={"Copy QR code"}
 											variant="solid"
@@ -141,7 +153,12 @@ export function QrCodeDialog({
 
 function Loading() {
 	return (
-		<View style={[a.align_center, a.p_xl]}>
+		<View
+			style={{
+				...a.align_center,
+				...a.p_xl,
+			}}
+		>
 			<Loader size="xl" />
 		</View>
 	);

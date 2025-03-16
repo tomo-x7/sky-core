@@ -40,10 +40,18 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 	return (
 		<Dialog.ScrollableInner
 			label="Sign in to Bluesky or create a new account"
-			style={[gtMobile ? { width: "auto", maxWidth: 420 } : a.w_full]}
+			style={gtMobile ? { width: "auto", maxWidth: 420 } : a.w_full}
 		>
-			<View style={[a.p_2xl]}>
-				<View style={[a.flex_row, a.align_center, a.justify_center, a.gap_sm, a.pb_lg]}>
+			<View style={a.p_2xl}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.justify_center,
+						...a.gap_sm,
+						...a.pb_lg,
+					}}
+				>
 					<Logo width={36} />
 					<View style={{ paddingTop: 6 }}>
 						<Logotype width={120} fill={t.atoms.text.color} />
@@ -51,22 +59,28 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 				</View>
 
 				<Text
-					style={[
-						a.text_lg,
-						a.text_center,
-						t.atoms.text,
-						a.pb_2xl,
-						a.leading_snug,
-						a.mx_auto,
-						{
+					style={{
+						...a.text_lg,
+						...a.text_center,
+						...t.atoms.text,
+						...a.pb_2xl,
+						...a.leading_snug,
+						...a.mx_auto,
+
+						...{
 							maxWidth: 300,
 						},
-					]}
+					}}
 				>
 					Sign in or create your account to join the conversation!
 				</Text>
 
-				<View style={[a.flex_col, a.gap_md]}>
+				<View
+					style={{
+						...a.flex_col,
+						...a.gap_md,
+					}}
+				>
 					<Button
 						variant="solid"
 						color="primary"
@@ -82,7 +96,6 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 					</Button>
 				</View>
 			</View>
-
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

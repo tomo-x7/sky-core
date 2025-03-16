@@ -83,10 +83,22 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 				hitSlop={HITSLOP_10}
 			>
 				{({ hovered }) => (
-					<View style={[a.flex_row, a.align_center, a.gap_xs, style]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.gap_xs,
+							...style,
+						}}
+					>
 						<Icon color={t.palette.contrast_400} width={16} settings={settings} />
 						<Text
-							style={[a.text_sm, a.leading_tight, t.atoms.text_contrast_medium, hovered && a.underline]}
+							style={{
+								...a.text_sm,
+								...a.leading_tight,
+								...t.atoms.text_contrast_medium,
+								...(hovered && a.underline),
+							}}
 						>
 							{description}
 						</Text>
@@ -95,7 +107,6 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 					</View>
 				)}
 			</Button>
-
 			{isThreadAuthor ? (
 				<PostInteractionSettingsDialog
 					postUri={post.uri}
@@ -146,10 +157,18 @@ function WhoCanReplyDialog({
 			<Dialog.Handle />
 			<Dialog.ScrollableInner
 				label={"Dialog: adjust who can interact with this post"}
-				style={[{ width: "auto", maxWidth: 400, minWidth: 200 }]}
+				style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 			>
-				<View style={[a.gap_sm]}>
-					<Text style={[a.font_bold, a.text_xl, a.pb_sm]}>Who can interact with this post?</Text>
+				<View style={a.gap_sm}>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_xl,
+							...a.pb_sm,
+						}}
+					>
+						Who can interact with this post?
+					</Text>
 					<Rules post={post} settings={settings} embeddingDisabled={embeddingDisabled} />
 				</View>
 			</Dialog.ScrollableInner>
@@ -170,7 +189,14 @@ function Rules({
 
 	return (
 		<>
-			<Text style={[a.text_sm, a.leading_snug, a.flex_wrap, t.atoms.text_contrast_medium]}>
+			<Text
+				style={{
+					...a.text_sm,
+					...a.leading_snug,
+					...a.flex_wrap,
+					...t.atoms.text_contrast_medium,
+				}}
+			>
 				{settings.length === 0 ? (
 					<>This post has an unknown type of threadgate on it. Your app may be out of date.</>
 				) : settings[0].type === "everybody" ? (
@@ -191,7 +217,14 @@ function Rules({
 				)}{" "}
 			</Text>
 			{embeddingDisabled && (
-				<Text style={[a.text_sm, a.leading_snug, a.flex_wrap, t.atoms.text_contrast_medium]}>
+				<Text
+					style={{
+						...a.text_sm,
+						...a.leading_snug,
+						...a.flex_wrap,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					No one but the author can quote this post.
 				</Text>
 			)}
@@ -218,7 +251,10 @@ function Rule({
 				<InlineLinkText
 					label={`@${post.author.handle}`}
 					to={makeProfileLink(post.author)}
-					style={[a.text_sm, a.leading_snug]}
+					style={{
+						...a.text_sm,
+						...a.leading_snug,
+					}}
 				>
 					@{post.author.handle}
 				</InlineLinkText>
@@ -232,7 +268,10 @@ function Rule({
 				<InlineLinkText
 					label={`@${post.author.handle}`}
 					to={makeProfileLink(post.author)}
-					style={[a.text_sm, a.leading_snug]}
+					style={{
+						...a.text_sm,
+						...a.leading_snug,
+					}}
 				>
 					@{post.author.handle}
 				</InlineLinkText>
@@ -248,7 +287,10 @@ function Rule({
 					<InlineLinkText
 						label={list.name}
 						to={makeListLink(listUrip.hostname, listUrip.rkey)}
-						style={[a.text_sm, a.leading_snug]}
+						style={{
+							...a.text_sm,
+							...a.leading_snug,
+						}}
 					>
 						{list.name}
 					</InlineLinkText>{" "}

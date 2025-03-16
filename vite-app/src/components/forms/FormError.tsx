@@ -10,10 +10,26 @@ export function FormError({ error }: { error?: string }) {
 	if (!error) return null;
 
 	return (
-		<View style={[{ backgroundColor: t.palette.negative_400 }, a.flex_row, a.rounded_sm, a.p_md, a.gap_sm]}>
+		<View
+			style={{
+				...{ backgroundColor: t.palette.negative_400 },
+				...a.flex_row,
+				...a.rounded_sm,
+				...a.p_md,
+				...a.gap_sm,
+			}}
+		>
 			<Warning fill={t.palette.white} size="md" />
-			<View style={[a.flex_1]}>
-				<Text style={[{ color: t.palette.white }, a.font_bold, a.leading_snug]}>{error}</Text>
+			<View style={a.flex_1}>
+				<Text
+					style={{
+						...{ color: t.palette.white },
+						...a.font_bold,
+						...a.leading_snug,
+					}}
+				>
+					{error}
+				</Text>
 			</View>
 		</View>
 	);

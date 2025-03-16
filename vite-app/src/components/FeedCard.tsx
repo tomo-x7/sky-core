@@ -54,7 +54,7 @@ export function Link({ view, children, ...props }: Props & Omit<LinkProps, "to" 
 	}, [view, queryClient]);
 
 	return (
-		<InternalLink label={view.displayName} to={href} style={[a.flex_col]} {...props}>
+		<InternalLink label={view.displayName} to={href} style={a.flex_col} {...props}>
 			{children}
 		</InternalLink>
 	);
@@ -78,14 +78,15 @@ export function AvatarPlaceholder({ size = 40 }: Omit<AvatarProps, "src">) {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				t.atoms.bg_contrast_25,
-				{
+			style={{
+				...t.atoms.bg_contrast_25,
+
+				...{
 					width: size,
 					height: size,
 					borderRadius: 8,
 				},
-			]}
+			}}
 		/>
 	);
 }
@@ -101,11 +102,25 @@ export function TitleAndByline({
 
 	return (
 		<div style={a.flex_1}>
-			<Text emoji style={[a.text_md, a.font_bold, a.leading_snug]} numberOfLines={1}>
+			<Text
+				emoji
+				style={{
+					...a.text_md,
+					...a.font_bold,
+					...a.leading_snug,
+				}}
+				numberOfLines={1}
+			>
 				{title}
 			</Text>
 			{creator && (
-				<Text style={[a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
+				<Text
+					style={{
+						...a.leading_snug,
+						...t.atoms.text_contrast_medium,
+					}}
+					numberOfLines={1}
+				>
 					<>Feed by {sanitizeHandle(creator.handle, "@")}</>
 				</Text>
 			)}
@@ -119,26 +134,27 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 	return (
 		<div style={{ ...a.flex_1, ...a.gap_xs }}>
 			<View
-				style={[
-					a.rounded_xs,
-					t.atoms.bg_contrast_50,
-					{
+				style={{
+					...a.rounded_xs,
+					...t.atoms.bg_contrast_50,
+
+					...{
 						width: "60%",
 						height: 14,
 					},
-				]}
+				}}
 			/>
-
 			{creator && (
 				<View
-					style={[
-						a.rounded_xs,
-						t.atoms.bg_contrast_25,
-						{
+					style={{
+						...a.rounded_xs,
+						...t.atoms.bg_contrast_25,
+
+						...{
 							width: "40%",
 							height: 10,
 						},
-					]}
+					}}
 				/>
 			)}
 		</div>
@@ -153,7 +169,7 @@ export function Description({ description, ...rest }: { description?: string } &
 		return rt;
 	}, [description]);
 	if (!rt) return null;
-	return <RichText value={rt} style={[a.leading_snug]} disableLinks {...rest} />;
+	return <RichText value={rt} style={a.leading_snug} disableLinks {...rest} />;
 }
 
 export function DescriptionPlaceholder() {
@@ -170,7 +186,12 @@ export function DescriptionPlaceholder() {
 export function Likes({ count }: { count: number }) {
 	const t = useTheme();
 	return (
-		<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
+		<Text
+			style={{
+				...a.text_sm,
+				...t.atoms.text_contrast_medium,
+			}}
+		>
 			<>
 				Liked by {count || 0} {count === 1 ? "user" : "users"}
 			</>

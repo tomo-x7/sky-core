@@ -108,7 +108,7 @@ export function NotificationsScreen(props: Props) {
 						variant="ghost"
 						color="secondary"
 						shape="round"
-						style={[a.justify_center]}
+						style={a.justify_center}
 					>
 						<ButtonIcon icon={isLoading ? Loader : SettingsIcon} size="lg" />
 					</Link>
@@ -118,7 +118,13 @@ export function NotificationsScreen(props: Props) {
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
 					// @ts-ignore
-					<Layout.Center style={[a.z_10, a.sticky, { top: 0 }]}>
+					<Layout.Center
+						style={{
+							...a.z_10,
+							...a.sticky,
+							...{ top: 0 },
+						}}
+					>
 						<TabBar
 							{...props}
 							items={sections.map((section) => section.title)}

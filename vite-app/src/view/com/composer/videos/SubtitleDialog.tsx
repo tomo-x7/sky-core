@@ -32,7 +32,12 @@ export function SubtitleDialogBtn(props: Props) {
 	const control = Dialog.useDialogControl();
 
 	return (
-		<View style={[a.flex_row, a.my_xs]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.my_xs,
+			}}
+		>
 			<Button
 				label={"Captions & alt text"}
 				accessibilityHint={"Opens captions and alt text dialog"}
@@ -81,7 +86,15 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 	return (
 		<Dialog.ScrollableInner label={"Video settings"}>
 			<View style={a.gap_md}>
-				<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>Alt text</Text>
+				<Text
+					style={{
+						...a.text_xl,
+						...a.font_bold,
+						...a.leading_tight,
+					}}
+				>
+					Alt text
+				</Text>
 				<TextField.Root>
 					<Dialog.Input
 						label={"Alt text"}
@@ -100,8 +113,23 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 					/>
 				</TextField.Root>
 
-				<View style={[a.border_t, a.w_full, t.atoms.border_contrast_medium, a.my_md]} />
-				<Text style={[a.text_xl, a.font_bold, a.leading_tight]}>Captions (.vtt)</Text>
+				<View
+					style={{
+						...a.border_t,
+						...a.w_full,
+						...t.atoms.border_contrast_medium,
+						...a.my_md,
+					}}
+				/>
+				<Text
+					style={{
+						...a.text_xl,
+						...a.font_bold,
+						...a.leading_tight,
+					}}
+				>
+					Captions (.vtt)
+				</Text>
 				<SubtitleFilePicker
 					onSelectFile={handleSelectFile}
 					disabled={subtitleMissingLanguage || captions.length >= MAX_NUM_CAPTIONS}
@@ -118,17 +146,27 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 									langCode(lang) === subtitle.lang ||
 									!captions.some((s) => s.lang === langCode(lang)),
 							)}
-							style={[i % 2 === 0 && t.atoms.bg_contrast_25]}
+							style={i % 2 === 0 && t.atoms.bg_contrast_25}
 						/>
 					))}
 				</View>
 				{subtitleMissingLanguage && (
-					<Text style={[a.text_sm, t.atoms.text_contrast_medium]}>
+					<Text
+						style={{
+							...a.text_sm,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
 						Ensure you have selected a language for each subtitle file.
 					</Text>
 				)}
 
-				<View style={[a.flex_row, a.justify_end]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.justify_end,
+					}}
+				>
 					<Button
 						label={"Done"}
 						size={"small"}
@@ -174,15 +212,51 @@ function SubtitleFileRow({
 	);
 
 	return (
-		<View style={[a.flex_row, a.justify_between, a.py_md, a.px_lg, a.rounded_md, a.gap_md, style]}>
-			<View style={[a.flex_1, a.gap_xs, a.justify_center]}>
-				<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.justify_between,
+				...a.py_md,
+				...a.px_lg,
+				...a.rounded_md,
+				...a.gap_md,
+				...style,
+			}}
+		>
+			<View
+				style={{
+					...a.flex_1,
+					...a.gap_xs,
+					...a.justify_center,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_sm,
+					}}
+				>
 					{language === "" ? (
 						<WarningIcon style={a.flex_shrink_0} fill={t.palette.negative_500} size="sm" />
 					) : (
-						<PageTextIcon style={[t.atoms.text, a.flex_shrink_0]} size="sm" />
+						<PageTextIcon
+							style={{
+								...t.atoms.text,
+								...a.flex_shrink_0,
+							}}
+							size="sm"
+						/>
 					)}
-					<Text style={[a.flex_1, a.leading_snug, a.font_bold, a.mb_2xs]} numberOfLines={1}>
+					<Text
+						style={{
+							...a.flex_1,
+							...a.leading_snug,
+							...a.font_bold,
+							...a.mb_2xs,
+						}}
+						numberOfLines={1}
+					>
 						{file.name}
 					</Text>
 					<RNPickerSelect
@@ -200,7 +274,6 @@ function SubtitleFileRow({
 					/>
 				</View>
 			</View>
-
 			<Button
 				label={"Remove subtitle file"}
 				size="tiny"
@@ -208,7 +281,7 @@ function SubtitleFileRow({
 				variant="outline"
 				color="secondary"
 				onPress={() => setCaptions((subs) => subs.filter((s) => s.lang !== language))}
-				style={[a.ml_sm]}
+				style={a.ml_sm}
 			>
 				<ButtonIcon icon={X} />
 			</Button>

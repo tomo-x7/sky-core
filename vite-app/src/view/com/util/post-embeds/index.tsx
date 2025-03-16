@@ -157,7 +157,12 @@ export function PostEmbeds({
 				const image = images[0];
 				return (
 					<ContentHider modui={moderation?.ui("contentMedia")}>
-						<View style={[a.mt_sm, style]}>
+						<View
+							style={{
+								...a.mt_sm,
+								...style,
+							}}
+						>
 							<AutoSizedImage
 								crop={
 									viewContext === PostEmbedViewContext.ThreadHighlighted
@@ -178,7 +183,12 @@ export function PostEmbeds({
 
 			return (
 				<ContentHider modui={moderation?.ui("contentMedia")}>
-					<View style={[a.mt_sm, style]}>
+					<View
+						style={{
+							...a.mt_sm,
+							...style,
+						}}
+					>
 						<ImageLayoutGrid
 							images={embed.images}
 							onPress={onPress}
@@ -197,7 +207,14 @@ export function PostEmbeds({
 		const link = embed.external;
 		return (
 			<ContentHider modui={moderation?.ui("contentMedia")}>
-				<ExternalLinkEmbed link={link} onOpen={onOpen} style={[a.mt_sm, style]} />
+				<ExternalLinkEmbed
+					link={link}
+					onOpen={onOpen}
+					style={{
+						...a.mt_sm,
+						...style,
+					}}
+				/>
 			</ContentHider>
 		);
 	}
@@ -233,7 +250,15 @@ export function MaybeFeedCard({ view }: { view: AppBskyFeedDefs.GeneratorView })
 
 	return (
 		<ContentHider modui={moderation?.ui("contentList")}>
-			<FeedSourceCard feedUri={view.uri} style={[pal.view, pal.border, styles.customFeedOuter]} showLikes />
+			<FeedSourceCard
+				feedUri={view.uri}
+				style={{
+					...pal.view,
+					...pal.border,
+					...styles.customFeedOuter,
+				}}
+				showLikes
+			/>
 		</ContentHider>
 	);
 }
@@ -247,7 +272,14 @@ export function MaybeListCard({ view }: { view: AppBskyGraphDefs.ListView }) {
 
 	return (
 		<ContentHider modui={moderation?.ui("contentList")}>
-			<View style={[a.border, t.atoms.border_contrast_medium, a.p_md, a.rounded_sm]}>
+			<View
+				style={{
+					...a.border,
+					...t.atoms.border_contrast_medium,
+					...a.p_md,
+					...a.rounded_sm,
+				}}
+			>
 				<ListCard.Default view={view} />
 			</View>
 		</ContentHider>

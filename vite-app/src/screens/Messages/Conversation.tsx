@@ -53,7 +53,13 @@ export function MessagesConversationScreen({ route }: Props) {
 	);
 
 	return (
-		<Layout.Screen testID="convoScreen" style={[{ minHeight: 0 }, a.flex_1]}>
+		<Layout.Screen
+			testID="convoScreen"
+			style={{
+				...{ minHeight: 0 },
+				...a.flex_1,
+			}}
+		>
 			<ConvoProvider key={convoId} convoId={convoId}>
 				<Inner />
 			</ConvoProvider>
@@ -93,7 +99,7 @@ function Inner() {
 
 	if (convoState.status === ConvoStatus.Error) {
 		return (
-			<Layout.Center style={[a.flex_1]}>
+			<Layout.Center style={a.flex_1}>
 				<MessagesListHeader />
 				<Error
 					title={"Something went wrong"}
@@ -106,14 +112,14 @@ function Inner() {
 	}
 
 	return (
-		<Layout.Center style={[a.flex_1]}>
+		<Layout.Center style={a.flex_1}>
 			{!readyToShow &&
 				(moderation ? (
 					<MessagesListHeader moderation={moderation} profile={recipient} />
 				) : (
 					<MessagesListHeader />
 				))}
-			<View style={[a.flex_1]}>
+			<View style={a.flex_1}>
 				{moderation && recipient ? (
 					<InnerReady
 						moderation={moderation}
@@ -122,13 +128,27 @@ function Inner() {
 						setHasScrolled={setHasScrolled}
 					/>
 				) : (
-					<View style={[a.align_center, a.gap_sm, a.flex_1]} />
+					<View
+						style={{
+							...a.align_center,
+							...a.gap_sm,
+							...a.flex_1,
+						}}
+					/>
 				)}
 				{!readyToShow && (
 					<View
-						style={[a.absolute, a.z_10, a.w_full, a.h_full, a.justify_center, a.align_center, t.atoms.bg]}
+						style={{
+							...a.absolute,
+							...a.z_10,
+							...a.w_full,
+							...a.h_full,
+							...a.justify_center,
+							...a.align_center,
+							...t.atoms.bg,
+						}}
 					>
-						<View style={[{ marginBottom: 75 }]}>
+						<View style={{ marginBottom: 75 }}>
 							<Loader size="xl" />
 						</View>
 					</View>

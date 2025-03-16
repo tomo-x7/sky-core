@@ -83,11 +83,11 @@ export function CountWheel({
 			>
 				<Text
 					testID="likeCount"
-					style={[
-						big ? a.text_md : { fontSize: 15 },
-						a.user_select_none,
-						isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 },
-					]}
+					style={{
+						...(big ? a.text_md : { fontSize: 15 }),
+						...a.user_select_none,
+						...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+					}}
 				>
 					{formattedCount}
 				</Text>
@@ -100,11 +100,11 @@ export function CountWheel({
 					ref={prevCountView}
 				>
 					<Text
-						style={[
-							big ? a.text_md : { fontSize: 15 },
-							a.user_select_none,
-							isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 },
-						]}
+						style={{
+							...(big ? a.text_md : { fontSize: 15 }),
+							...a.user_select_none,
+							...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+						}}
 					>
 						{formattedPrevCount}
 					</Text>

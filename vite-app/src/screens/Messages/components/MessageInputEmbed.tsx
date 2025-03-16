@@ -115,14 +115,28 @@ export function MessageInputEmbed({
 	switch (status) {
 		case "pending":
 			content = (
-				<View style={[a.flex_1, { minHeight: 64 }, a.justify_center, a.align_center]}>
+				<View
+					style={{
+						...a.flex_1,
+						...{ minHeight: 64 },
+						...a.justify_center,
+						...a.align_center,
+					}}
+				>
 					<Loader />
 				</View>
 			);
 			break;
 		case "error":
 			content = (
-				<View style={[a.flex_1, { minHeight: 64 }, a.justify_center, a.align_center]}>
+				<View
+					style={{
+						...a.flex_1,
+						...{ minHeight: 64 },
+						...a.justify_center,
+						...a.align_center,
+					}}
+				>
 					<Text style={a.text_center}>Could not fetch post</Text>
 				</View>
 			);
@@ -137,7 +151,15 @@ export function MessageInputEmbed({
 
 			content = (
 				<View
-					style={[a.flex_1, t.atoms.bg, t.atoms.border_contrast_low, a.rounded_md, a.border, a.p_sm, a.mb_sm]}
+					style={{
+						...a.flex_1,
+						...t.atoms.bg,
+						...t.atoms.border_contrast_low,
+						...a.rounded_md,
+						...a.border,
+						...a.p_sm,
+						...a.mb_sm,
+					}}
 					pointerEvents="none"
 				>
 					<PostMeta
@@ -156,7 +178,10 @@ export function MessageInputEmbed({
 									enableTags
 									testID="postText"
 									value={rt}
-									style={[a.text_sm, t.atoms.text_contrast_high]}
+									style={{
+										...a.text_sm,
+										...t.atoms.text_contrast_high,
+									}}
 									authorHandle={post.author.handle}
 									numberOfLines={3}
 								/>
@@ -171,7 +196,12 @@ export function MessageInputEmbed({
 	}
 
 	return (
-		<View style={[a.flex_row, a.gap_sm]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.gap_sm,
+			}}
+		>
 			{content}
 			<Button
 				label={"Remove embed"}

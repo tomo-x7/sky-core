@@ -54,13 +54,29 @@ export function ExportCarDialog({
 				accessibilityDescribedBy="dialog-description"
 				accessibilityLabelledBy="dialog-title"
 			>
-				<View style={[a.relative, a.gap_lg, a.w_full]}>
-					<Text nativeID="dialog-title" style={[a.text_2xl, a.font_heavy]}>
+				<View
+					style={{
+						...a.relative,
+						...a.gap_lg,
+						...a.w_full,
+					}}
+				>
+					<Text
+						nativeID="dialog-title"
+						style={{
+							...a.text_2xl,
+							...a.font_heavy,
+						}}
+					>
 						Export My Data
 					</Text>
 					<Text
 						nativeID="dialog-description"
-						style={[a.text_sm, a.leading_normal, t.atoms.text_contrast_high]}
+						style={{
+							...a.text_sm,
+							...a.leading_normal,
+							...t.atoms.text_contrast_high,
+						}}
 					>
 						Your account repository, containing all public data records, can be downloaded as a "CAR" file.
 						This file does not include media embeds, such as images, or your private data, which must be
@@ -80,13 +96,20 @@ export function ExportCarDialog({
 						{loading && <ButtonIcon icon={Loader} />}
 					</Button>
 
-					<Text style={[t.atoms.text_contrast_medium, a.text_sm, a.leading_snug, a.flex_1]}>
+					<Text
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.text_sm,
+							...a.leading_snug,
+							...a.flex_1,
+						}}
+					>
 						<>
 							This feature is in beta. You can read more about repository exports in{" "}
 							<InlineLinkText
 								label={"View blogpost for more details"}
 								to="https://docs.bsky.app/blog/repo-export"
-								style={[a.text_sm]}
+								style={a.text_sm}
 							>
 								this blogpost
 							</InlineLinkText>

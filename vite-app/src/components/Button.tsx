@@ -474,13 +474,13 @@ export const Button = React.forwardRef<View, ButtonProps>(
 				accessibilityState={{
 					disabled: disabled || false,
 				}}
-				style={[
-					a.flex_row,
-					a.align_center,
-					a.justify_center,
-					flattenedBaseStyles,
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_center,
+					...flattenedBaseStyles,
 					...(state.hovered || state.pressed ? [hoverStyles, flatten(hoverStyleProp)] : []),
-				]}
+				}}
 				onPressIn={onPressIn}
 				onPressOut={onPressOut}
 				onHoverIn={onHoverIn}
@@ -490,19 +490,22 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			>
 				{variant === "gradient" && gradientValues && (
 					<View
-						style={[
-							a.absolute,
-							a.inset_0,
-							a.overflow_hidden,
-							{ borderRadius: flattenedBaseStyles.borderRadius },
-						]}
+						style={{
+							...a.absolute,
+							...a.inset_0,
+							...a.overflow_hidden,
+							...{ borderRadius: flattenedBaseStyles.borderRadius },
+						}}
 					>
 						<LinearGradient
 							colors={state.hovered || state.pressed ? gradientValues.hoverColors : gradientValues.colors}
 							locations={gradientValues.locations}
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
-							style={[a.absolute, a.inset_0]}
+							style={{
+								...a.absolute,
+								...a.inset_0,
+							}}
 						/>
 					</View>
 				)}
@@ -651,7 +654,15 @@ export function ButtonText({ children, style, ...rest }: ButtonTextProps) {
 	const textStyles = useSharedButtonTextStyles();
 
 	return (
-		<Text {...rest} style={[a.font_bold, a.text_center, textStyles, style]}>
+		<Text
+			{...rest}
+			style={{
+				...a.font_bold,
+				...a.text_center,
+				...textStyles,
+				...style,
+			}}
+		>
 			{children}
 		</Text>
 	);
@@ -711,21 +722,23 @@ export function ButtonIcon({
 
 	return (
 		<View
-			style={[
-				a.z_20,
-				{
+			style={{
+				...a.z_20,
+
+				...{
 					width: iconContainerSize,
 					height: iconContainerSize,
 					opacity: disabled ? 0.7 : 1,
 					marginLeft: position === "left" ? -2 : 0,
 					marginRight: position === "right" ? -2 : 0,
 				},
-			]}
+			}}
 		>
 			<View
-				style={[
-					a.absolute,
-					{
+				style={{
+					...a.absolute,
+
+					...{
 						width: iconSize,
 						height: iconSize,
 						top: "50%",
@@ -739,16 +752,14 @@ export function ButtonIcon({
 							},
 						],
 					},
-				]}
+				}}
 			>
 				<Comp
 					width={iconSize}
-					style={[
-						{
-							color: textStyles.color,
-							pointerEvents: "none",
-						},
-					]}
+					style={{
+						color: textStyles.color,
+						pointerEvents: "none",
+					}}
 				/>
 			</View>
 		</View>

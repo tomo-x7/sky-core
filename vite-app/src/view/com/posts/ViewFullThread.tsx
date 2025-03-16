@@ -20,7 +20,7 @@ export function ViewFullThread({ uri }: { uri: string }) {
 
 	return (
 		<Link
-			style={[styles.viewFullThread]}
+			style={styles.viewFullThread}
 			href={itemHref}
 			asAnchor
 			noFeedback
@@ -40,8 +40,13 @@ export function ViewFullThread({ uri }: { uri: string }) {
 					<Circle cx="2" cy="34" r="1.5" fill={pal.colors.replyLineDot} />
 				</Svg>
 			</View>
-
-			<Text type="md" style={[pal.link, { paddingTop: 18, paddingBottom: 4 }]}>
+			<Text
+				type="md"
+				style={{
+					...pal.link,
+					...{ paddingTop: 18, paddingBottom: 4 },
+				}}
+			>
 				View full thread
 			</Text>
 		</Link>

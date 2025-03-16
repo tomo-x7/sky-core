@@ -36,12 +36,13 @@ export function AppLanguageDropdown({ style }: ViewStyleProp) {
 
 	return (
 		<View
-			style={[
-				// We don't have hitSlop here to increase the tap region,
+			style={{
+				...// We don't have hitSlop here to increase the tap region,
 				// alternative is negative margins.
 				{ height: 32, marginVertical: -((32 - 14) / 2) },
-				style,
-			]}
+
+				...style,
+			}}
 		>
 			<div
 				style={{ ...a.flex_row, ...a.gap_sm, ...a.align_center, ...a.flex_shrink, ...a.h_full, ...t.atoms.bg }}
@@ -52,7 +53,6 @@ export function AppLanguageDropdown({ style }: ViewStyleProp) {
 				{/*@ts-ignore*/}
 				<ChevronDown fill={t.atoms.text.color} size="xs" style={a.flex_0} />
 			</div>
-
 			<select
 				value={sanitizedLang}
 				onChange={onChangeAppLanguage}

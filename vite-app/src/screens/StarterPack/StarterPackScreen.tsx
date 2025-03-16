@@ -363,7 +363,13 @@ function Header({
 				avatarType="starter-pack"
 			>
 				{hasSession ? (
-					<View style={[a.flex_row, a.gap_sm, a.align_center]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.gap_sm,
+							...a.align_center,
+						}}
+					>
 						{isOwn ? (
 							<Button
 								label={"Share this starter pack"}
@@ -383,7 +389,11 @@ function Header({
 								size="small"
 								disabled={isProcessing}
 								onPress={onFollowAll}
-								style={[a.flex_row, a.gap_xs, a.align_center]}
+								style={{
+									...a.flex_row,
+									...a.gap_xs,
+									...a.align_center,
+								}}
 							>
 								<ButtonText>Follow all</ButtonText>
 								{isProcessing && <Loader size="xs" />}
@@ -398,8 +408,23 @@ function Header({
 				) : null}
 			</ProfileSubpageHeader>
 			{!hasSession || richText || joinedAllTimeCount >= 25 ? (
-				<View style={[a.px_lg, a.pt_md, a.pb_sm, a.gap_md]}>
-					{richText ? <RichText value={richText} style={[a.text_md, a.leading_snug]} /> : null}
+				<View
+					style={{
+						...a.px_lg,
+						...a.pt_md,
+						...a.pb_sm,
+						...a.gap_md,
+					}}
+				>
+					{richText ? (
+						<RichText
+							value={richText}
+							style={{
+								...a.text_md,
+								...a.leading_snug,
+							}}
+						/>
+					) : null}
 					{!hasSession ? (
 						<Button
 							label={"Join Bluesky"}
@@ -413,18 +438,30 @@ function Header({
 							color="primary"
 							size="large"
 						>
-							<ButtonText style={[a.text_lg]}>Join Bluesky</ButtonText>
+							<ButtonText style={a.text_lg}>Join Bluesky</ButtonText>
 						</Button>
 					) : null}
 					{joinedAllTimeCount >= 25 ? (
-						<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_sm,
+							}}
+						>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
 								//@ts-ignore
 								size={12}
 								color={t.atoms.text_contrast_medium.color}
 							/>
-							<Text style={[a.font_bold, a.text_sm, t.atoms.text_contrast_medium]}>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_sm,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								<>{starterPack.joinedAllTimeCount || 0} people have used this starter pack!</>
 							</Text>
 						</View>
@@ -546,7 +583,6 @@ function OverflowMenu({
 					)}
 				</Menu.Outer>
 			</Menu.Root>
-
 			{starterPack.list && (
 				<ReportDialog
 					control={reportDialogControl}
@@ -556,26 +592,30 @@ function OverflowMenu({
 					}}
 				/>
 			)}
-
 			<Prompt.Outer control={deleteDialogControl}>
 				<Prompt.TitleText>Delete starter pack?</Prompt.TitleText>
 				<Prompt.DescriptionText>Are you sure you want to delete this starter pack?</Prompt.DescriptionText>
 				{deleteError && (
 					<View
-						style={[
-							a.flex_row,
-							a.gap_sm,
-							a.rounded_sm,
-							a.p_md,
-							a.mb_lg,
-							a.border,
-							t.atoms.border_contrast_medium,
-							t.atoms.bg_contrast_25,
-						]}
+						style={{
+							...a.flex_row,
+							...a.gap_sm,
+							...a.rounded_sm,
+							...a.p_md,
+							...a.mb_lg,
+							...a.border,
+							...t.atoms.border_contrast_medium,
+							...t.atoms.bg_contrast_25,
+						}}
 					>
-						<View style={[a.flex_1, a.gap_2xs]}>
-							<Text style={[a.font_bold]}>Unable to delete</Text>
-							<Text style={[a.leading_snug]}>{cleanError(deleteError)}</Text>
+						<View
+							style={{
+								...a.flex_1,
+								...a.gap_2xs,
+							}}
+						>
+							<Text style={a.font_bold}>Unable to delete</Text>
+							<Text style={a.leading_snug}>{cleanError(deleteError)}</Text>
 						</View>
 						<CircleInfo size="sm" fill={t.palette.negative_400} />
 					</View>
@@ -626,29 +666,58 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 
 	return (
 		<Layout.Content centerContent>
-			<View style={[a.py_4xl, a.px_xl, a.align_center, a.gap_5xl]}>
-				<View style={[a.w_full, a.align_center, a.gap_lg]}>
-					<Text style={[a.font_bold, a.text_3xl]}>Starter pack is invalid</Text>
+			<View
+				style={{
+					...a.py_4xl,
+					...a.px_xl,
+					...a.align_center,
+					...a.gap_5xl,
+				}}
+			>
+				<View
+					style={{
+						...a.w_full,
+						...a.align_center,
+						...a.gap_lg,
+					}}
+				>
 					<Text
-						style={[
-							a.text_md,
-							a.text_center,
-							t.atoms.text_contrast_high,
-							{ lineHeight: 1.4 },
-							gtMobile ? { width: 450 } : [a.w_full, a.px_lg],
-						]}
+						style={{
+							...a.font_bold,
+							...a.text_3xl,
+						}}
+					>
+						Starter pack is invalid
+					</Text>
+					<Text
+						style={{
+							...a.text_md,
+							...a.text_center,
+							...t.atoms.text_contrast_high,
+							...{ lineHeight: 1.4 },
+							...(gtMobile ? { width: 450 } : [a.w_full, a.px_lg]),
+						}}
 					>
 						The starter pack that you are trying to view is invalid. You may delete this starter pack
 						instead.
 					</Text>
 				</View>
-				<View style={[a.gap_md, gtMobile ? { width: 350 } : [a.w_full, a.px_lg]]}>
+				<View
+					style={{
+						...a.gap_md,
+						...(gtMobile ? { width: 350 } : [a.w_full, a.px_lg]),
+					}}
+				>
 					<Button
 						variant="solid"
 						color="primary"
 						label={"Delete starter pack"}
 						size="large"
-						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
+						style={{
+							...a.rounded_sm,
+							...a.overflow_hidden,
+							...{ paddingVertical: 10 },
+						}}
 						disabled={isProcessing}
 						onPress={() => {
 							setIsProcessing(true);
@@ -663,7 +732,11 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						color="secondary"
 						label={"Return to previous page"}
 						size="large"
-						style={[a.rounded_sm, a.overflow_hidden, { paddingVertical: 10 }]}
+						style={{
+							...a.rounded_sm,
+							...a.overflow_hidden,
+							...{ paddingVertical: 10 },
+						}}
 						disabled={isProcessing}
 						onPress={goBack}
 					>

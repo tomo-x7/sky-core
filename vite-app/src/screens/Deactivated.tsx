@@ -89,7 +89,12 @@ export function Deactivated() {
 	}, [agent, queryClient]);
 
 	return (
-		<View style={[a.util_screen_outer, a.flex_1]}>
+		<View
+			style={{
+				...a.util_screen_outer,
+				...a.flex_1,
+			}}
+		>
 			<Layout.Content
 				ignoreTabletLayoutOffset
 				contentContainerStyle={[
@@ -100,22 +105,58 @@ export function Deactivated() {
 					},
 				]}
 			>
-				<View style={[a.w_full, { marginHorizontal: "auto", maxWidth: COL_WIDTH }]}>
-					<View style={[a.w_full, a.justify_center, a.align_center, a.pb_5xl]}>
+				<View
+					style={{
+						...a.w_full,
+						...{ marginHorizontal: "auto", maxWidth: COL_WIDTH },
+					}}
+				>
+					<View
+						style={{
+							...a.w_full,
+							...a.justify_center,
+							...a.align_center,
+							...a.pb_5xl,
+						}}
+					>
 						<Logo width={40} />
 					</View>
 
-					<View style={[a.gap_xs, a.pb_3xl]}>
-						<Text style={[a.text_xl, a.font_bold, a.leading_snug]}>Welcome back!</Text>
-						<Text style={[a.text_sm, a.leading_snug]}>
+					<View
+						style={{
+							...a.gap_xs,
+							...a.pb_3xl,
+						}}
+					>
+						<Text
+							style={{
+								...a.text_xl,
+								...a.font_bold,
+								...a.leading_snug,
+							}}
+						>
+							Welcome back!
+						</Text>
+						<Text
+							style={{
+								...a.text_sm,
+								...a.leading_snug,
+							}}
+						>
 							<>You previously deactivated @{currentAccount?.handle}.</>
 						</Text>
-						<Text style={[a.text_sm, a.leading_snug, a.pb_md]}>
+						<Text
+							style={{
+								...a.text_sm,
+								...a.leading_snug,
+								...a.pb_md,
+							}}
+						>
 							You can reactivate your account to continue logging in. Your profile and posts will be
 							visible to other users.
 						</Text>
 
-						<View style={[a.gap_sm]}>
+						<View style={a.gap_sm}>
 							<Button
 								label={"Reactivate your account"}
 								size="large"
@@ -138,20 +179,42 @@ export function Deactivated() {
 						</View>
 
 						{error && (
-							<View style={[a.flex_row, a.gap_sm, a.mt_md, a.p_md, a.rounded_sm, t.atoms.bg_contrast_25]}>
+							<View
+								style={{
+									...a.flex_row,
+									...a.gap_sm,
+									...a.mt_md,
+									...a.p_md,
+									...a.rounded_sm,
+									...t.atoms.bg_contrast_25,
+								}}
+							>
 								<CircleInfo size="md" fill={t.palette.negative_400} />
-								<Text style={[a.flex_1, a.leading_snug]}>{error}</Text>
+								<Text
+									style={{
+										...a.flex_1,
+										...a.leading_snug,
+									}}
+								>
+									{error}
+								</Text>
 							</View>
 						)}
 					</View>
 
-					<View style={[a.pb_3xl]}>
+					<View style={a.pb_3xl}>
 						<Divider />
 					</View>
 
 					{hasOtherAccounts ? (
 						<>
-							<Text style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
+							<Text
+								style={{
+									...t.atoms.text_contrast_medium,
+									...a.pb_md,
+									...a.leading_snug,
+								}}
+							>
 								Or, sign in to one of your other accounts.
 							</Text>
 							<AccountList
@@ -163,7 +226,13 @@ export function Deactivated() {
 						</>
 					) : (
 						<>
-							<Text style={[t.atoms.text_contrast_medium, a.pb_md, a.leading_snug]}>
+							<Text
+								style={{
+									...t.atoms.text_contrast_medium,
+									...a.pb_md,
+									...a.leading_snug,
+								}}
+							>
 								Or, continue with another account.
 							</Text>
 							<Button

@@ -81,18 +81,50 @@ export function VideoPostCard({
 	const black = getBlackColor(t);
 
 	const textAndAuthor = (
-		<View style={[a.pr_xs, { paddingTop: 6, gap: 4 }]}>
+		<View
+			style={{
+				...a.pr_xs,
+				...{ paddingTop: 6, gap: 4 },
+			}}
+		>
 			{text && (
-				<Text style={[a.text_md, a.leading_snug]} numberOfLines={2} emoji>
+				<Text
+					style={{
+						...a.text_md,
+						...a.leading_snug,
+					}}
+					numberOfLines={2}
+					emoji
+				>
 					{text}
 				</Text>
 			)}
-			<View style={[a.flex_row, a.gap_xs, a.align_center]}>
-				<View style={[a.relative, a.rounded_full, { width: 20, height: 20 }]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_xs,
+					...a.align_center,
+				}}
+			>
+				<View
+					style={{
+						...a.relative,
+						...a.rounded_full,
+						...{ width: 20, height: 20 },
+					}}
+				>
 					<UserAvatar type="user" size={20} avatar={post.author.avatar} />
 					<MediaInsetBorder />
 				</View>
-				<Text style={[a.flex_1, a.text_sm, a.leading_tight, t.atoms.text_contrast_medium]} numberOfLines={1}>
+				<Text
+					style={{
+						...a.flex_1,
+						...a.text_sm,
+						...a.leading_tight,
+						...t.atoms.text_contrast_medium,
+					}}
+					numberOfLines={1}
+				>
 					{sanitizeHandle(post.author.handle, "@")}
 				</Text>
 			</View>
@@ -115,50 +147,76 @@ export function VideoPostCard({
 			}}
 			onPressIn={onPressIn}
 			onPressOut={onPressOut}
-			style={[
-				a.flex_col,
-				{
+			style={{
+				...a.flex_col,
+
+				...{
 					alignItems: undefined,
 					justifyContent: undefined,
 				},
-			]}
+			}}
 		>
 			<Hider.Outer modui={mergedModui}>
 				<Hider.Mask>
 					<View
-						style={[
-							a.justify_center,
-							a.rounded_md,
-							a.overflow_hidden,
-							{
+						style={{
+							...a.justify_center,
+							...a.rounded_md,
+							...a.overflow_hidden,
+
+							...{
 								backgroundColor: black,
 								aspectRatio: 9 / 16,
 							},
-						]}
+						}}
 					>
 						<Image
 							source={{ uri: thumbnail }}
-							style={[a.w_full, a.h_full, { opacity: pressed ? 0.8 : 1 }]}
+							style={{
+								...a.w_full,
+								...a.h_full,
+								...{ opacity: pressed ? 0.8 : 1 },
+							}}
 							accessibilityIgnoresInvertColors
 							blurRadius={100}
 						/>
 						<MediaInsetBorder />
-						<View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
+						<View
+							style={{
+								...a.absolute,
+								...a.inset_0,
+								...a.justify_center,
+								...a.align_center,
+							}}
+						>
 							<View
-								style={[
-									a.absolute,
-									a.inset_0,
-									a.justify_center,
-									a.align_center,
-									{
+								style={{
+									...a.absolute,
+									...a.inset_0,
+									...a.justify_center,
+									...a.align_center,
+
+									...{
 										backgroundColor: "black",
 										opacity: 0.2,
 									},
-								]}
+								}}
 							/>
-							<View style={[a.align_center, a.gap_xs]}>
+							<View
+								style={{
+									...a.align_center,
+									...a.gap_xs,
+								}}
+							>
 								<Eye size="lg" fill="white" />
-								<Text style={[a.text_sm, { color: "white" }]}>{"Hidden"}</Text>
+								<Text
+									style={{
+										...a.text_sm,
+										...{ color: "white" },
+									}}
+								>
+									{"Hidden"}
+								</Text>
 							</View>
 						</View>
 					</View>
@@ -166,55 +224,102 @@ export function VideoPostCard({
 				</Hider.Mask>
 				<Hider.Content>
 					<View
-						style={[
-							a.justify_center,
-							a.rounded_md,
-							a.overflow_hidden,
-							{
+						style={{
+							...a.justify_center,
+							...a.rounded_md,
+							...a.overflow_hidden,
+
+							...{
 								backgroundColor: black,
 								aspectRatio: 9 / 16,
 							},
-						]}
+						}}
 					>
 						<Image
 							source={{ uri: thumbnail }}
-							style={[a.w_full, a.h_full, { opacity: pressed ? 0.8 : 1 }]}
+							style={{
+								...a.w_full,
+								...a.h_full,
+								...{ opacity: pressed ? 0.8 : 1 },
+							}}
 							accessibilityIgnoresInvertColors
 						/>
 						<MediaInsetBorder />
 
-						<View style={[a.absolute, a.inset_0]}>
+						<View
+							style={{
+								...a.absolute,
+								...a.inset_0,
+							}}
+						>
 							<View
-								style={[
-									a.absolute,
-									a.inset_0,
-									a.pt_2xl,
-									{
+								style={{
+									...a.absolute,
+									...a.inset_0,
+									...a.pt_2xl,
+
+									...{
 										top: "auto",
 									},
-								]}
+								}}
 							>
 								<LinearGradient
 									colors={[black, "rgba(0, 0, 0, 0)"]}
 									locations={[0.02, 1]}
 									start={{ x: 0, y: 1 }}
 									end={{ x: 0, y: 0 }}
-									style={[a.absolute, a.inset_0, { opacity: 0.9 }]}
+									style={{
+										...a.absolute,
+										...a.inset_0,
+										...{ opacity: 0.9 },
+									}}
 								/>
 
-								<View style={[a.relative, a.z_10, a.p_md, a.flex_row, a.gap_md]}>
+								<View
+									style={{
+										...a.relative,
+										...a.z_10,
+										...a.p_md,
+										...a.flex_row,
+										...a.gap_md,
+									}}
+								>
 									{likeCount > 0 && (
-										<View style={[a.flex_row, a.align_center, a.gap_xs]}>
+										<View
+											style={{
+												...a.flex_row,
+												...a.align_center,
+												...a.gap_xs,
+											}}
+										>
 											<Heart size="sm" fill="white" />
-											<Text style={[a.text_sm, a.font_bold, { color: "white" }]}>
+											<Text
+												style={{
+													...a.text_sm,
+													...a.font_bold,
+													...{ color: "white" },
+												}}
+											>
 												{formatCount(likeCount)}
 											</Text>
 										</View>
 									)}
 									{repostCount > 0 && (
-										<View style={[a.flex_row, a.align_center, a.gap_xs]}>
+										<View
+											style={{
+												...a.flex_row,
+												...a.align_center,
+												...a.gap_xs,
+											}}
+										>
 											<Repost size="sm" fill="white" />
-											<Text style={[a.text_sm, a.font_bold, { color: "white" }]}>
+											<Text
+												style={{
+													...a.text_sm,
+													...a.font_bold,
+													...{ color: "white" },
+												}}
+											>
 												{formatCount(repostCount)}
 											</Text>
 										</View>
@@ -235,16 +340,17 @@ export function VideoPostCardPlaceholder() {
 	const black = getBlackColor(t);
 
 	return (
-		<View style={[a.flex_1]}>
+		<View style={a.flex_1}>
 			<View
-				style={[
-					a.rounded_md,
-					a.overflow_hidden,
-					{
+				style={{
+					...a.rounded_md,
+					...a.overflow_hidden,
+
+					...{
 						backgroundColor: black,
 						aspectRatio: 9 / 16,
 					},
-				]}
+				}}
 			>
 				<MediaInsetBorder />
 			</View>
@@ -261,63 +367,95 @@ export function VideoPostCardTextPlaceholder({
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_1]}>
-			<View style={[a.pr_xs, { paddingTop: 8, gap: 6 }]}>
+		<View style={a.flex_1}>
+			<View
+				style={{
+					...a.pr_xs,
+					...{ paddingTop: 8, gap: 6 },
+				}}
+			>
 				<View
-					style={[
-						a.w_full,
-						a.rounded_xs,
-						t.atoms.bg_contrast_50,
-						{
+					style={{
+						...a.w_full,
+						...a.rounded_xs,
+						...t.atoms.bg_contrast_50,
+
+						...{
 							height: 14,
 						},
-					]}
+					}}
 				/>
 				<View
-					style={[
-						a.w_full,
-						a.rounded_xs,
-						t.atoms.bg_contrast_50,
-						{
+					style={{
+						...a.w_full,
+						...a.rounded_xs,
+						...t.atoms.bg_contrast_50,
+
+						...{
 							height: 14,
 							width: "70%",
 						},
-					]}
+					}}
 				/>
 				{author ? (
-					<View style={[a.flex_row, a.gap_xs, a.align_center]}>
-						<View style={[a.relative, a.rounded_full, { width: 20, height: 20 }]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.gap_xs,
+							...a.align_center,
+						}}
+					>
+						<View
+							style={{
+								...a.relative,
+								...a.rounded_full,
+								...{ width: 20, height: 20 },
+							}}
+						>
 							<UserAvatar type="user" size={20} avatar={author.avatar} />
 							<MediaInsetBorder />
 						</View>
 						<Text
-							style={[a.flex_1, a.text_sm, a.leading_tight, t.atoms.text_contrast_medium]}
+							style={{
+								...a.flex_1,
+								...a.text_sm,
+								...a.leading_tight,
+								...t.atoms.text_contrast_medium,
+							}}
 							numberOfLines={1}
 						>
 							{sanitizeHandle(author.handle, "@")}
 						</Text>
 					</View>
 				) : (
-					<View style={[a.flex_row, a.gap_xs, a.align_center]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.gap_xs,
+							...a.align_center,
+						}}
+					>
 						<View
-							style={[
-								a.rounded_full,
-								t.atoms.bg_contrast_50,
-								{
+							style={{
+								...a.rounded_full,
+								...t.atoms.bg_contrast_50,
+
+								...{
 									width: 20,
 									height: 20,
 								},
-							]}
+							}}
 						/>
 						<View
-							style={[
-								a.rounded_xs,
-								t.atoms.bg_contrast_25,
-								{
+							style={{
+								...a.rounded_xs,
+								...t.atoms.bg_contrast_25,
+
+								...{
 									height: 12,
 									width: "75%",
 								},
-							]}
+							}}
 						/>
 					</View>
 				)}
@@ -379,103 +517,177 @@ export function CompactVideoPostCard({
 			}}
 			onPressIn={onPressIn}
 			onPressOut={onPressOut}
-			style={[
-				a.flex_col,
-				{
+			style={{
+				...a.flex_col,
+
+				...{
 					alignItems: undefined,
 					justifyContent: undefined,
 				},
-			]}
+			}}
 		>
 			<Hider.Outer modui={mergedModui}>
 				<Hider.Mask>
 					<View
-						style={[
-							a.justify_center,
-							a.rounded_md,
-							a.overflow_hidden,
-							{
+						style={{
+							...a.justify_center,
+							...a.rounded_md,
+							...a.overflow_hidden,
+
+							...{
 								backgroundColor: black,
 								aspectRatio: 9 / 16,
 							},
-						]}
+						}}
 					>
 						<Image
 							source={{ uri: thumbnail }}
-							style={[a.w_full, a.h_full, { opacity: pressed ? 0.8 : 1 }]}
+							style={{
+								...a.w_full,
+								...a.h_full,
+								...{ opacity: pressed ? 0.8 : 1 },
+							}}
 							accessibilityIgnoresInvertColors
 							blurRadius={100}
 						/>
 						<MediaInsetBorder />
-						<View style={[a.absolute, a.inset_0, a.justify_center, a.align_center]}>
+						<View
+							style={{
+								...a.absolute,
+								...a.inset_0,
+								...a.justify_center,
+								...a.align_center,
+							}}
+						>
 							<View
-								style={[
-									a.absolute,
-									a.inset_0,
-									a.justify_center,
-									a.align_center,
-									{
+								style={{
+									...a.absolute,
+									...a.inset_0,
+									...a.justify_center,
+									...a.align_center,
+
+									...{
 										backgroundColor: "black",
 										opacity: 0.2,
 									},
-								]}
+								}}
 							/>
-							<View style={[a.align_center, a.gap_xs]}>
+							<View
+								style={{
+									...a.align_center,
+									...a.gap_xs,
+								}}
+							>
 								<Eye size="lg" fill="white" />
-								<Text style={[a.text_sm, { color: "white" }]}>{"Hidden"}</Text>
+								<Text
+									style={{
+										...a.text_sm,
+										...{ color: "white" },
+									}}
+								>
+									{"Hidden"}
+								</Text>
 							</View>
 						</View>
 					</View>
 				</Hider.Mask>
 				<Hider.Content>
 					<View
-						style={[
-							a.justify_center,
-							a.rounded_md,
-							a.overflow_hidden,
-							{
+						style={{
+							...a.justify_center,
+							...a.rounded_md,
+							...a.overflow_hidden,
+
+							...{
 								backgroundColor: black,
 								aspectRatio: 9 / 16,
 							},
-						]}
+						}}
 					>
 						<Image
 							source={{ uri: thumbnail }}
-							style={[a.w_full, a.h_full, { opacity: pressed ? 0.8 : 1 }]}
+							style={{
+								...a.w_full,
+								...a.h_full,
+								...{ opacity: pressed ? 0.8 : 1 },
+							}}
 							accessibilityIgnoresInvertColors
 						/>
 						<MediaInsetBorder />
 
-						<View style={[a.absolute, a.inset_0]}>
-							<View style={[a.absolute, a.inset_0, a.p_sm, { bottom: "auto" }]}>
-								<View style={[a.relative, a.rounded_full, { width: 20, height: 20 }]}>
+						<View
+							style={{
+								...a.absolute,
+								...a.inset_0,
+							}}
+						>
+							<View
+								style={{
+									...a.absolute,
+									...a.inset_0,
+									...a.p_sm,
+									...{ bottom: "auto" },
+								}}
+							>
+								<View
+									style={{
+										...a.relative,
+										...a.rounded_full,
+										...{ width: 20, height: 20 },
+									}}
+								>
 									<UserAvatar type="user" size={20} avatar={post.author.avatar} />
 									<MediaInsetBorder />
 								</View>
 							</View>
 							<View
-								style={[
-									a.absolute,
-									a.inset_0,
-									a.pt_2xl,
-									{
+								style={{
+									...a.absolute,
+									...a.inset_0,
+									...a.pt_2xl,
+
+									...{
 										top: "auto",
 									},
-								]}
+								}}
 							>
 								<LinearGradient
 									colors={[black, "rgba(0, 0, 0, 0)"]}
 									locations={[0.02, 1]}
 									start={{ x: 0, y: 1 }}
 									end={{ x: 0, y: 0 }}
-									style={[a.absolute, a.inset_0, { opacity: 0.9 }]}
+									style={{
+										...a.absolute,
+										...a.inset_0,
+										...{ opacity: 0.9 },
+									}}
 								/>
 
-								<View style={[a.relative, a.z_10, a.p_sm, a.flex_row, a.gap_md]}>
+								<View
+									style={{
+										...a.relative,
+										...a.z_10,
+										...a.p_sm,
+										...a.flex_row,
+										...a.gap_md,
+									}}
+								>
 									{likeCount > 0 && (
-										<View style={[a.flex_row, a.align_center, a.gap_xs]}>
+										<View
+											style={{
+												...a.flex_row,
+												...a.align_center,
+												...a.gap_xs,
+											}}
+										>
 											<Heart size="sm" fill="white" />
-											<Text style={[a.text_sm, a.font_bold, { color: "white" }]}>
+											<Text
+												style={{
+													...a.text_sm,
+													...a.font_bold,
+													...{ color: "white" },
+												}}
+											>
 												{formatCount(likeCount)}
 											</Text>
 										</View>
@@ -495,16 +707,17 @@ export function CompactVideoPostCardPlaceholder() {
 	const black = getBlackColor(t);
 
 	return (
-		<View style={[a.flex_1]}>
+		<View style={a.flex_1}>
 			<View
-				style={[
-					a.rounded_md,
-					a.overflow_hidden,
-					{
+				style={{
+					...a.rounded_md,
+					...a.overflow_hidden,
+
+					...{
 						backgroundColor: black,
 						aspectRatio: 9 / 16,
 					},
-				]}
+				}}
 			>
 				<MediaInsetBorder />
 			</View>

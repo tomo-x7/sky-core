@@ -81,23 +81,50 @@ export function Component(props: {}) {
 		closeModal();
 	};
 	return (
-		<SafeAreaView style={[s.flex1]}>
-			<ScrollView style={[pal.view]} keyboardShouldPersistTaps="handled">
-				<View style={[styles.titleContainer, pal.view]}>
-					<Text type="title-xl" style={[s.textCenter, pal.text]}>
+		<SafeAreaView style={s.flex1}>
+			<ScrollView style={pal.view} keyboardShouldPersistTaps="handled">
+				<View
+					style={{
+						...styles.titleContainer,
+						...pal.view,
+					}}
+				>
+					<Text
+						type="title-xl"
+						style={{
+							...s.textCenter,
+							...pal.text,
+						}}
+					>
 						<>
 							Delete Account{" "}
-							<Text type="title-xl" style={[pal.text, s.bold]}>
+							<Text
+								type="title-xl"
+								style={{
+									...pal.text,
+									...s.bold,
+								}}
+							>
 								"
 							</Text>
 							<Text
 								type="title-xl"
 								numberOfLines={1}
-								style={[isMobile ? styles.titleMobile : styles.titleDesktop, pal.text, s.bold]}
+								style={{
+									...(isMobile ? styles.titleMobile : styles.titleDesktop),
+									...pal.text,
+									...s.bold,
+								}}
 							>
 								{currentAccount?.handle}
 							</Text>
-							<Text type="title-xl" style={[pal.text, s.bold]}>
+							<Text
+								type="title-xl"
+								style={{
+									...pal.text,
+									...s.bold,
+								}}
+							>
 								"
 							</Text>
 						</>
@@ -105,7 +132,13 @@ export function Component(props: {}) {
 				</View>
 				{!isEmailSent ? (
 					<>
-						<Text type="lg" style={[styles.description, pal.text]}>
+						<Text
+							type="lg"
+							style={{
+								...styles.description,
+								...pal.text,
+							}}
+						>
 							For security reasons, we'll need to send a confirmation code to your email address.
 						</Text>
 						{error ? (
@@ -114,7 +147,12 @@ export function Component(props: {}) {
 							</View>
 						) : undefined}
 						{isProcessing ? (
-							<View style={[styles.btn, s.mt10]}>
+							<View
+								style={{
+									...styles.btn,
+									...s.mt10,
+								}}
+							>
 								<ActivityIndicator />
 							</View>
 						) : (
@@ -130,15 +168,24 @@ export function Component(props: {}) {
 										colors={[gradients.blueLight.start, gradients.blueLight.end]}
 										start={{ x: 0, y: 0 }}
 										end={{ x: 1, y: 1 }}
-										style={[styles.btn]}
+										style={styles.btn}
 									>
-										<Text type="button-lg" style={[s.white, s.bold]}>
+										<Text
+											type="button-lg"
+											style={{
+												...s.white,
+												...s.bold,
+											}}
+										>
 											Send Email
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
 								<TouchableOpacity
-									style={[styles.btn, s.mt10]}
+									style={{
+										...styles.btn,
+										...s.mt10,
+									}}
 									onPress={onCancel}
 									accessibilityRole="button"
 									accessibilityLabel={"Cancel account deletion"}
@@ -154,27 +201,33 @@ export function Component(props: {}) {
 
 						<View>
 							<View
-								style={[
-									a.w_full,
-									a.flex_row,
-									a.gap_sm,
-									a.mt_lg,
-									a.p_lg,
-									a.rounded_sm,
-									t.atoms.bg_contrast_25,
-								]}
+								style={{
+									...a.w_full,
+									...a.flex_row,
+									...a.gap_sm,
+									...a.mt_lg,
+									...a.p_lg,
+									...a.rounded_sm,
+									...t.atoms.bg_contrast_25,
+								}}
 							>
 								<CircleInfo
 									size="md"
-									style={[
-										a.relative,
-										{
+									style={{
+										...a.relative,
+
+										...{
 											top: -1,
 										},
-									]}
+									}}
 								/>
 
-								<NewText style={[a.leading_snug, a.flex_1]}>
+								<NewText
+									style={{
+										...a.leading_snug,
+										...a.flex_1,
+									}}
+								>
 									You can also temporarily deactivate your account instead, and reactivate it at any
 									time.
 								</NewText>
@@ -184,11 +237,23 @@ export function Component(props: {}) {
 				) : (
 					<>
 						{/* TODO: Update this label to be more concise */}
-						<Text type="lg" style={[pal.text, styles.description]} nativeID="confirmationCode">
+						<Text
+							type="lg"
+							style={{
+								...pal.text,
+								...styles.description,
+							}}
+							nativeID="confirmationCode"
+						>
 							Check your inbox for an email with the confirmation code to enter below:
 						</Text>
 						<TextInput
-							style={[styles.textInput, pal.borderDark, pal.text, styles.mb20]}
+							style={{
+								...styles.textInput,
+								...pal.borderDark,
+								...pal.text,
+								...styles.mb20,
+							}}
 							placeholder={"Confirmation code"}
 							placeholderTextColor={pal.textLight.color}
 							keyboardAppearance={theme.colorScheme}
@@ -198,11 +263,22 @@ export function Component(props: {}) {
 							accessibilityLabel={"Confirmation code"}
 							accessibilityHint={"Input confirmation code for account deletion"}
 						/>
-						<Text type="lg" style={[pal.text, styles.description]} nativeID="password">
+						<Text
+							type="lg"
+							style={{
+								...pal.text,
+								...styles.description,
+							}}
+							nativeID="password"
+						>
 							Please enter your password as well:
 						</Text>
 						<TextInput
-							style={[styles.textInput, pal.borderDark, pal.text]}
+							style={{
+								...styles.textInput,
+								...pal.borderDark,
+								...pal.text,
+							}}
 							placeholder={"Password"}
 							placeholderTextColor={pal.textLight.color}
 							keyboardAppearance={theme.colorScheme}
@@ -219,24 +295,42 @@ export function Component(props: {}) {
 							</View>
 						) : undefined}
 						{isProcessing ? (
-							<View style={[styles.btn, s.mt10]}>
+							<View
+								style={{
+									...styles.btn,
+									...s.mt10,
+								}}
+							>
 								<ActivityIndicator />
 							</View>
 						) : (
 							<>
 								<TouchableOpacity
-									style={[styles.btn, styles.evilBtn, styles.mt20]}
+									style={{
+										...styles.btn,
+										...styles.evilBtn,
+										...styles.mt20,
+									}}
 									onPress={onPressConfirmDelete}
 									accessibilityRole="button"
 									accessibilityLabel={"Confirm delete account"}
 									accessibilityHint=""
 								>
-									<Text type="button-lg" style={[s.white, s.bold]}>
+									<Text
+										type="button-lg"
+										style={{
+											...s.white,
+											...s.bold,
+										}}
+									>
 										Delete my account
 									</Text>
 								</TouchableOpacity>
 								<TouchableOpacity
-									style={[styles.btn, s.mt10]}
+									style={{
+										...styles.btn,
+										...s.mt10,
+									}}
 									onPress={onCancel}
 									accessibilityRole="button"
 									accessibilityLabel={"Cancel account deletion"}

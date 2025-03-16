@@ -44,7 +44,16 @@ export function Icon() {
 
 export function Text({ children, style, ...rest }: Pick<TextProps, "children" | "style">) {
 	return (
-		<BaseText {...rest} style={[a.flex_1, a.text_sm, a.leading_snug, a.pr_md, style]}>
+		<BaseText
+			{...rest}
+			style={{
+				...a.flex_1,
+				...a.text_sm,
+				...a.leading_snug,
+				...a.pr_md,
+				...style,
+			}}
+		>
 			{children}
 		</BaseText>
 	);
@@ -82,14 +91,14 @@ export function Outer({
 	return (
 		<Context.Provider value={{ type }}>
 			<View
-				style={[
-					gtMobile ? a.p_md : a.p_sm,
-					a.rounded_sm,
-					a.border,
-					t.atoms.bg_contrast_25,
-					{ borderColor },
-					style,
-				]}
+				style={{
+					...(gtMobile ? a.p_md : a.p_sm),
+					...a.rounded_sm,
+					...a.border,
+					...t.atoms.bg_contrast_25,
+					...{ borderColor },
+					...style,
+				}}
 			>
 				{children}
 			</View>

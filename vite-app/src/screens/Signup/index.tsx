@@ -85,11 +85,24 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 						AppBskyGraphStarterpack.isRecord,
 					) ? (
 						<Animated.View entering={!isFetchedAtMount ? FadeIn : undefined}>
-							<LinearGradientBackground style={[a.mx_lg, a.p_lg, a.gap_sm, a.rounded_sm]}>
-								<Text style={[a.font_bold, a.text_xl, { color: "white" }]}>
+							<LinearGradientBackground
+								style={{
+									...a.mx_lg,
+									...a.p_lg,
+									...a.gap_sm,
+									...a.rounded_sm,
+								}}
+							>
+								<Text
+									style={{
+										...a.font_bold,
+										...a.text_xl,
+										...{ color: "white" },
+									}}
+								>
 									{starterPack.record.name}
 								</Text>
-								<Text style={[{ color: "white" }]}>
+								<Text style={{ color: "white" }}>
 									{starterPack.feeds?.length ? (
 										<>
 											You'll follow the suggested users and feeds once you finish creating your
@@ -102,9 +115,26 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 							</LinearGradientBackground>
 						</Animated.View>
 					) : null}
-					<View style={[a.flex_1, a.px_xl, a.pt_2xl, !gtMobile && { paddingBottom: 100 }]}>
-						<View style={[a.gap_sm, a.pb_3xl]}>
-							<Text style={[a.font_bold, t.atoms.text_contrast_medium]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.px_xl,
+							...a.pt_2xl,
+							...(!gtMobile && { paddingBottom: 100 }),
+						}}
+					>
+						<View
+							style={{
+								...a.gap_sm,
+								...a.pb_3xl,
+							}}
+						>
+							<Text
+								style={{
+									...a.font_bold,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								<>
 									Step {state.activeStep + 1} of{" "}
 									{state.serviceDescription && !state.serviceDescription.phoneVerificationRequired
@@ -112,7 +142,12 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 										: "3"}
 								</>
 							</Text>
-							<Text style={[a.text_3xl, a.font_bold]}>
+							<Text
+								style={{
+									...a.text_3xl,
+									...a.font_bold,
+								}}
+							>
 								{state.activeStep === SignupStep.INFO ? (
 									<>Your account</>
 								) : state.activeStep === SignupStep.HANDLE ? (
@@ -140,14 +175,27 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 
 						<Divider />
 
-						<View style={[a.w_full, a.py_lg, a.flex_row, a.gap_lg, a.align_center]}>
+						<View
+							style={{
+								...a.w_full,
+								...a.py_lg,
+								...a.flex_row,
+								...a.gap_lg,
+								...a.align_center,
+							}}
+						>
 							<AppLanguageDropdown />
-							<Text style={[t.atoms.text_contrast_medium, !gtMobile && a.text_md]}>
+							<Text
+								style={{
+									...t.atoms.text_contrast_medium,
+									...(!gtMobile && a.text_md),
+								}}
+							>
 								Having trouble?{" "}
 								<InlineLinkText
 									label={"Contact support"}
 									to={FEEDBACK_FORM_URL({ email: state.email })}
-									style={[!gtMobile && a.text_md]}
+									style={!gtMobile && a.text_md}
 								>
 									Contact support
 								</InlineLinkText>

@@ -144,23 +144,23 @@ export function FeedSourceCardLoaded({
 	if (!feed || !preferences)
 		return (
 			<View
-				style={[
-					pal.border,
-					{
+				style={{
+					...pal.border,
+
+					...{
 						borderTopWidth: showMinimalPlaceholder || hideTopBorder ? 0 : StyleSheet.hairlineWidth,
 						flexDirection: "row",
 						alignItems: "center",
 						flex: 1,
 						paddingRight: 18,
 					},
-				]}
+				}}
 			>
 				{showMinimalPlaceholder ? (
 					<FeedLoadingPlaceholder style={{ flex: 1 }} showTopBorder={false} showLowerPlaceholder={false} />
 				) : (
 					<FeedLoadingPlaceholder style={{ flex: 1 }} showTopBorder={false} />
 				)}
-
 				{showSaveBtn && (
 					<Pressable
 						testID={`feed-${feedUri}-toggleSave`}
@@ -184,12 +184,12 @@ export function FeedSourceCardLoaded({
 			<Pressable
 				testID={`feed-${feed.displayName}`}
 				accessibilityRole="button"
-				style={[
-					styles.container,
-					pal.border,
-					style,
-					{ borderTopWidth: hideTopBorder ? 0 : StyleSheet.hairlineWidth },
-				]}
+				style={{
+					...styles.container,
+					...pal.border,
+					...style,
+					...{ borderTopWidth: hideTopBorder ? 0 : StyleSheet.hairlineWidth },
+				}}
 				onPress={(e) => {
 					const shouldOpenInNewTab = shouldClickOpenNewTab(e);
 					if (feed.type === "feed") {
@@ -214,15 +214,27 @@ export function FeedSourceCardLoaded({
 				}}
 				key={feed.uri}
 			>
-				<View style={[styles.headerContainer, a.align_center]}>
-					<View style={[s.mr10]}>
+				<View
+					style={{
+						...styles.headerContainer,
+						...a.align_center,
+					}}
+				>
+					<View style={s.mr10}>
 						<UserAvatar type="algo" size={36} avatar={feed.avatar} />
 					</View>
-					<View style={[styles.headerTextContainer]}>
-						<Text emoji style={[pal.text, s.bold]} numberOfLines={1}>
+					<View style={styles.headerTextContainer}>
+						<Text
+							emoji
+							style={{
+								...pal.text,
+								...s.bold,
+							}}
+							numberOfLines={1}
+						>
 							{feed.displayName}
 						</Text>
-						<Text style={[pal.textLight]} numberOfLines={1}>
+						<Text style={pal.textLight} numberOfLines={1}>
 							{feed.type === "feed" ? (
 								<>Feed by {sanitizeHandle(feed.creatorHandle, "@")}</>
 							) : (
@@ -257,21 +269,29 @@ export function FeedSourceCardLoaded({
 
 				{showDescription && feed.description ? (
 					<RichText
-						style={[t.atoms.text_contrast_high, styles.description]}
+						style={{
+							...t.atoms.text_contrast_high,
+							...styles.description,
+						}}
 						value={feed.description}
 						numberOfLines={3}
 					/>
 				) : null}
 
 				{showLikes && feed.type === "feed" ? (
-					<Text type="sm-medium" style={[pal.text, pal.textLight]}>
+					<Text
+						type="sm-medium"
+						style={{
+							...pal.text,
+							...pal.textLight,
+						}}
+					>
 						<>
 							Liked by {feed.likeCount || 0} {feed.likeCount === 1 ? "user" : "users"}
 						</>
 					</Text>
 				) : null}
 			</Pressable>
-
 			<Prompt.Basic
 				control={removePromptControl}
 				title={"Remove from your feeds?"}

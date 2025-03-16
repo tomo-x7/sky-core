@@ -20,7 +20,16 @@ export function SubtleWebHover({ style, hover }: ViewStyleProp & { hover: boolea
 			opacity = 0.5;
 			break;
 	}
-	return <View style={[t.atoms.bg_contrast_25, styles.container, { opacity: hover ? opacity : 0 }, style]} />;
+	return (
+		<View
+			style={{
+				...t.atoms.bg_contrast_25,
+				...styles.container,
+				...{ opacity: hover ? opacity : 0 },
+				...style,
+			}}
+		/>
+	);
 }
 
 const styles = StyleSheet.create({

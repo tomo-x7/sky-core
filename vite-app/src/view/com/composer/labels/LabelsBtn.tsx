@@ -81,22 +81,66 @@ function DialogInner({
 	const t = useTheme();
 
 	return (
-		<Dialog.ScrollableInner label={"Add a content warning"} style={[{ maxWidth: 500 }, a.w_full]}>
-			<View style={[a.flex_1]}>
-				<View style={[a.gap_sm]}>
-					<Text style={[a.text_2xl, a.font_bold]}>Add a content warning</Text>
-					<Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
+		<Dialog.ScrollableInner
+			label={"Add a content warning"}
+			style={{
+				...{ maxWidth: 500 },
+				...a.w_full,
+			}}
+		>
+			<View style={a.flex_1}>
+				<View style={a.gap_sm}>
+					<Text
+						style={{
+							...a.text_2xl,
+							...a.font_bold,
+						}}
+					>
+						Add a content warning
+					</Text>
+					<Text
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.leading_snug,
+						}}
+					>
 						Choose self-labels that are applicable for the media you are posting. If none are selected, this
 						post is suitable for all audiences.
 					</Text>
 				</View>
 
-				<View style={[a.my_md, a.gap_lg]}>
+				<View
+					style={{
+						...a.my_md,
+						...a.gap_lg,
+					}}
+				>
 					<View>
-						<View style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
-							<Text style={[a.font_bold, a.text_lg]}>Adult Content</Text>
+						<View
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.justify_between,
+								...a.pb_sm,
+							}}
+						>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_lg,
+								}}
+							>
+								Adult Content
+							</Text>
 						</View>
-						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
+						<View
+							style={{
+								...a.p_md,
+								...a.rounded_sm,
+								...a.border,
+								...t.atoms.border_contrast_medium,
+							}}
+						>
 							<Toggle.Group
 								label={"Adult Content labels"}
 								values={labels}
@@ -104,7 +148,7 @@ function DialogInner({
 									updateAdultLabels(values as AdultSelfLabel[]);
 								}}
 							>
-								<View style={[a.gap_sm]}>
+								<View style={a.gap_sm}>
 									<Toggle.Item name="sexual" label={"Suggestive"}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Suggestive</Toggle.LabelText>
@@ -120,7 +164,12 @@ function DialogInner({
 								</View>
 							</Toggle.Group>
 							{labels.includes("sexual") || labels.includes("nudity") || labels.includes("porn") ? (
-								<Text style={[a.mt_sm, t.atoms.text_contrast_medium]}>
+								<Text
+									style={{
+										...a.mt_sm,
+										...t.atoms.text_contrast_medium,
+									}}
+								>
 									{labels.includes("sexual") ? (
 										<>Pictures meant for adults.</>
 									) : labels.includes("nudity") ? (
@@ -135,10 +184,31 @@ function DialogInner({
 						</View>
 					</View>
 					<View>
-						<View style={[a.flex_row, a.align_center, a.justify_between, a.pb_sm]}>
-							<Text style={[a.font_bold, a.text_lg]}>Other</Text>
+						<View
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.justify_between,
+								...a.pb_sm,
+							}}
+						>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_lg,
+								}}
+							>
+								Other
+							</Text>
 						</View>
-						<View style={[a.p_md, a.rounded_sm, a.border, t.atoms.border_contrast_medium]}>
+						<View
+							style={{
+								...a.p_md,
+								...a.rounded_sm,
+								...a.border,
+								...t.atoms.border_contrast_medium,
+							}}
+						>
 							<Toggle.Group
 								label={"Adult Content labels"}
 								values={labels}
@@ -152,7 +222,12 @@ function DialogInner({
 								</Toggle.Item>
 							</Toggle.Group>
 							{labels.includes("graphic-media") ? (
-								<Text style={[a.mt_sm, t.atoms.text_contrast_medium]}>
+								<Text
+									style={{
+										...a.mt_sm,
+										...t.atoms.text_contrast_medium,
+									}}
+								>
 									Media that may be disturbing or inappropriate for some audiences.
 								</Text>
 							) : null}
@@ -160,8 +235,13 @@ function DialogInner({
 					</View>
 				</View>
 			</View>
-
-			<View style={[a.mt_sm, a.flex_row, a.ml_auto]}>
+			<View
+				style={{
+					...a.mt_sm,
+					...a.flex_row,
+					...a.ml_auto,
+				}}
+			>
 				<Button
 					label={"Done"}
 					onPress={() => control.close()}

@@ -52,24 +52,44 @@ export function Component(props: {}) {
 	return (
 		<View
 			testID="contentLanguagesModal"
-			style={[
-				pal.view,
-				styles.container,
-				// @ts-ignore vh is web only
-				isMobile
+			style={{
+				...pal.view,
+				...styles.container,
+
+				...// @ts-ignore vh is web only
+				(isMobile
 					? {
 							paddingTop: 20,
 						}
 					: {
 							maxHeight: "90vh",
-						},
-			]}
+						}),
+			}}
 		>
-			<Text style={[pal.text, styles.title]}>Content Languages</Text>
-			<Text style={[pal.text, styles.description]}>
+			<Text
+				style={{
+					...pal.text,
+					...styles.title,
+				}}
+			>
+				Content Languages
+			</Text>
+			<Text
+				style={{
+					...pal.text,
+					...styles.description,
+				}}
+			>
 				Which languages would you like to see in your algorithmic feeds?
 			</Text>
-			<Text style={[pal.textLight, styles.description]}>Leave them all unchecked to see any language.</Text>
+			<Text
+				style={{
+					...pal.textLight,
+					...styles.description,
+				}}
+			>
+				Leave them all unchecked to see any language.
+			</Text>
 			<ScrollView style={styles.scrollContainer}>
 				{languages.map((lang) => (
 					<LanguageToggle

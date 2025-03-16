@@ -37,47 +37,78 @@ export function ErrorScreen({
 					<Layout.Header.Slot />
 				</Layout.Header.Outer>
 			)}
-			<View style={[a.px_xl, a.py_2xl]}>
-				<View style={[a.mb_md, a.align_center]}>
+			<View
+				style={{
+					...a.px_xl,
+					...a.py_2xl,
+				}}
+			>
+				<View
+					style={{
+						...a.mb_md,
+						...a.align_center,
+					}}
+				>
 					<View
-						style={[
-							a.rounded_full,
-							{ width: 50, height: 50 },
-							a.align_center,
-							a.justify_center,
-							{ backgroundColor: t.palette.contrast_950 },
-						]}
+						style={{
+							...a.rounded_full,
+							...{ width: 50, height: 50 },
+							...a.align_center,
+							...a.justify_center,
+							...{ backgroundColor: t.palette.contrast_950 },
+						}}
 					>
 						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="exclamation" style={pal.textInverted} size={24} />
 					</View>
 				</View>
-				<Text style={[a.text_center, a.font_heavy, a.text_2xl, a.mb_md]}>{title}</Text>
-				<Text style={[a.text_center, a.text_md, a.mb_xl]}>{message}</Text>
+				<Text
+					style={{
+						...a.text_center,
+						...a.font_heavy,
+						...a.text_2xl,
+						...a.mb_md,
+					}}
+				>
+					{title}
+				</Text>
+				<Text
+					style={{
+						...a.text_center,
+						...a.text_md,
+						...a.mb_xl,
+					}}
+				>
+					{message}
+				</Text>
 				{details && (
 					<View
-						style={[
-							a.w_full,
-							a.border,
-							t.atoms.border_contrast_medium,
-							t.atoms.bg_contrast_25,
-							a.mb_xl,
-							a.py_sm,
-							a.px_lg,
-							a.rounded_xs,
-							a.overflow_hidden,
-						]}
+						style={{
+							...a.w_full,
+							...a.border,
+							...t.atoms.border_contrast_medium,
+							...t.atoms.bg_contrast_25,
+							...a.mb_xl,
+							...a.py_sm,
+							...a.px_lg,
+							...a.rounded_xs,
+							...a.overflow_hidden,
+						}}
 					>
 						<Text
 							testID={`${testID}-details`}
-							style={[a.text_center, a.text_md, t.atoms.text_contrast_high]}
+							style={{
+								...a.text_center,
+								...a.text_md,
+								...t.atoms.text_contrast_high,
+							}}
 						>
 							{details}
 						</Text>
 					</View>
 				)}
 				{onPressTryAgain && (
-					<View style={[a.align_center]}>
+					<View style={a.align_center}>
 						<Button
 							testID="errorScreenTryAgainButton"
 							onPress={onPressTryAgain}

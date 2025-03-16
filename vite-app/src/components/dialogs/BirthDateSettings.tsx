@@ -28,9 +28,26 @@ export function BirthDateSettingsDialog({
 		<Dialog.Outer control={control} nativeOptions={{ preventExpansion: true }}>
 			<Dialog.Handle />
 			<Dialog.ScrollableInner label={"My Birthday"}>
-				<View style={[a.gap_sm, a.pb_lg]}>
-					<Text style={[a.text_2xl, a.font_bold]}>My Birthday</Text>
-					<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
+				<View
+					style={{
+						...a.gap_sm,
+						...a.pb_lg,
+					}}
+				>
+					<Text
+						style={{
+							...a.text_2xl,
+							...a.font_bold,
+						}}
+					>
+						My Birthday
+					</Text>
+					<Text
+						style={{
+							...a.text_md,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
 						This information is not shared with other users.
 					</Text>
 				</View>
@@ -42,7 +59,7 @@ export function BirthDateSettingsDialog({
 						message={
 							error?.toString() || "We were unable to load your birth date preferences. Please try again."
 						}
-						style={[a.rounded_sm]}
+						style={a.rounded_sm}
 					/>
 				) : (
 					<BirthdayInner control={control} preferences={preferences} />
@@ -89,10 +106,13 @@ function BirthdayInner({
 					maximumDate={getDateAgo(13)}
 				/>
 			</View>
-
-			{isError ? <ErrorMessage message={cleanError(error)} style={[a.rounded_sm]} /> : undefined}
-
-			<View style={[a.flex_row, a.justify_end]}>
+			{isError ? <ErrorMessage message={cleanError(error)} style={a.rounded_sm} /> : undefined}
+			<View
+				style={{
+					...a.flex_row,
+					...a.justify_end,
+				}}
+			>
 				<Button
 					label={hasChanged ? "Save birthday" : "Done"}
 					size="large"

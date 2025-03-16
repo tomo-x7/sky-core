@@ -36,7 +36,12 @@ export class ErrorBoundary extends Component<Props, State> {
 			}
 
 			return (
-				<CenteredView style={[{ height: "100%", flex: 1 }, this.props.style]}>
+				<CenteredView
+					style={{
+						...{ height: "100%", flex: 1 },
+						...this.props.style,
+					}}
+				>
 					<TranslatedErrorScreen details={this.state.error.toString()} />
 				</CenteredView>
 			);

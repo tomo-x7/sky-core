@@ -224,7 +224,10 @@ export function Link({
 	return (
 		<Button
 			{...rest}
-			style={[a.justify_start, flatten(rest.style)]}
+			style={{
+				...a.justify_start,
+				...flatten(rest.style),
+			}}
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="link"
 			accessibilityRole="link"
@@ -299,18 +302,20 @@ export function InlineLinkText({
 			accessibilityHint=""
 			accessibilityLabel={label}
 			{...rest}
-			style={[
-				{ color: t.palette.primary_500 },
-				hovered &&
+			style={{
+				...{ color: t.palette.primary_500 },
+
+				...(hovered &&
 					!disableUnderline && {
 						...{
 							outline: 0,
 							textDecorationLine: "underline",
 							textDecorationColor: flattenedStyle.color ?? t.palette.primary_500,
 						},
-					},
-				flattenedStyle,
-			]}
+					}),
+
+				...flattenedStyle,
+			}}
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="link"
 			onPress={download ? undefined : onPress}

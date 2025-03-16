@@ -230,9 +230,18 @@ function ChatListItemReady({
 				onMouseLeave={onMouseLeave}
 				onFocus={onFocus}
 				onBlur={onMouseLeave}
-				style={[a.relative, t.atoms.bg]}
+				style={{
+					...a.relative,
+					...t.atoms.bg,
+				}}
 			>
-				<View style={[a.z_10, a.absolute, { top: tokens.space.md, left: tokens.space.lg }]}>
+				<View
+					style={{
+						...a.z_10,
+						...a.absolute,
+						...{ top: tokens.space.md, left: tokens.space.lg },
+					}}
+				>
 					<PreviewableUserAvatar profile={profile} size={52} moderation={moderation.ui("avatar")} />
 				</View>
 
@@ -251,31 +260,50 @@ function ChatListItemReady({
 				>
 					{({ hovered, pressed, focused }) => (
 						<View
-							style={[
-								a.flex_row,
-								isDeletedAccount ? a.align_center : a.align_start,
-								a.flex_1,
-								a.px_lg,
-								a.py_md,
-								a.gap_md,
-								(hovered || pressed || focused) && t.atoms.bg_contrast_25,
-							]}
+							style={{
+								...a.flex_row,
+								...(isDeletedAccount ? a.align_center : a.align_start),
+								...a.flex_1,
+								...a.px_lg,
+								...a.py_md,
+								...a.gap_md,
+								...((hovered || pressed || focused) && t.atoms.bg_contrast_25),
+							}}
 						>
 							{/* Avatar goes here */}
 							<View style={{ width: 52, height: 52 }} />
 
-							<View style={[a.flex_1, a.justify_center, { paddingRight: 45 }]}>
-								<View style={[a.w_full, a.flex_row, a.align_end, a.pb_2xs]}>
-									<Text numberOfLines={1} style={[{ maxWidth: "85%" }, [a.leading_normal]]}>
+							<View
+								style={{
+									...a.flex_1,
+									...a.justify_center,
+									...{ paddingRight: 45 },
+								}}
+							>
+								<View
+									style={{
+										...a.w_full,
+										...a.flex_row,
+										...a.align_end,
+										...a.pb_2xs,
+									}}
+								>
+									<Text
+										numberOfLines={1}
+										style={{
+											...{ maxWidth: "85%" },
+											...[a.leading_normal],
+										}}
+									>
 										<Text
 											emoji
-											style={[
-												a.text_md,
-												t.atoms.text,
-												a.font_bold,
-												{ lineHeight: 21 },
-												isDimStyle && t.atoms.text_contrast_medium,
-											]}
+											style={{
+												...a.text_md,
+												...t.atoms.text,
+												...a.font_bold,
+												...{ lineHeight: 21 },
+												...(isDimStyle && t.atoms.text_contrast_medium),
+											}}
 										>
 											{displayName}
 										</Text>
@@ -284,12 +312,15 @@ function ChatListItemReady({
 										<TimeElapsed timestamp={lastMessageSentAt}>
 											{({ timeElapsed }) => (
 												<Text
-													style={[
-														a.text_sm,
-														{ lineHeight: 21 },
-														t.atoms.text_contrast_medium, //@ts-ignore
-														{ whiteSpace: "preserve nowrap" },
-													]}
+													style={{
+														...a.text_sm,
+														...{ lineHeight: 21 },
+
+														...//@ts-ignore
+														t.atoms.text_contrast_medium,
+
+														...{ whiteSpace: "preserve nowrap" },
+													}}
 												>
 													{" "}
 													&middot; {timeElapsed}
@@ -299,21 +330,31 @@ function ChatListItemReady({
 									)}
 									{(convo.muted || moderation.blocked) && (
 										<Text
-											style={[
-												a.text_sm,
-												{ lineHeight: 21 },
-												t.atoms.text_contrast_medium, //@ts-ignore
-												{ whiteSpace: "preserve nowrap" },
-											]}
+											style={{
+												...a.text_sm,
+												...{ lineHeight: 21 },
+
+												...//@ts-ignore
+												t.atoms.text_contrast_medium,
+
+												...{ whiteSpace: "preserve nowrap" },
+											}}
 										>
 											{" "}
-											&middot; <BellStroke size="xs" style={[t.atoms.text_contrast_medium]} />
+											&middot; <BellStroke size="xs" style={t.atoms.text_contrast_medium} />
 										</Text>
 									)}
 								</View>
 
 								{!isDeletedAccount && (
-									<Text numberOfLines={1} style={[a.text_sm, t.atoms.text_contrast_medium, a.pb_xs]}>
+									<Text
+										numberOfLines={1}
+										style={{
+											...a.text_sm,
+											...t.atoms.text_contrast_medium,
+											...a.pb_xs,
+										}}
+									>
 										@{profile.handle}
 									</Text>
 								)}
@@ -321,27 +362,28 @@ function ChatListItemReady({
 								<Text
 									emoji
 									numberOfLines={2}
-									style={[
-										a.text_sm,
-										a.leading_snug,
-										hasUnread ? a.font_bold : t.atoms.text_contrast_high,
-										isDimStyle && t.atoms.text_contrast_medium,
-									]}
+									style={{
+										...a.text_sm,
+										...a.leading_snug,
+										...(hasUnread ? a.font_bold : t.atoms.text_contrast_high),
+										...(isDimStyle && t.atoms.text_contrast_medium),
+									}}
 								>
 									{lastMessage}
 								</Text>
 
-								<PostAlerts modui={moderation.ui("contentList")} size="lg" style={[a.pt_xs]} />
+								<PostAlerts modui={moderation.ui("contentList")} size="lg" style={a.pt_xs} />
 
 								{children}
 							</View>
 
 							{hasUnread && (
 								<View
-									style={[
-										a.absolute,
-										a.rounded_full,
-										{
+									style={{
+										...a.absolute,
+										...a.rounded_full,
+
+										...{
 											backgroundColor: isDimStyle
 												? t.palette.contrast_200
 												: t.palette.primary_500,
@@ -350,7 +392,7 @@ function ChatListItemReady({
 											top: 15,
 											right: 12,
 										},
-									]}
+									}}
 								/>
 							)}
 						</View>
@@ -366,16 +408,17 @@ function ChatListItemReady({
 						showMarkAsRead={convo.unreadCount > 0}
 						hideTrigger={false}
 						blockInfo={blockInfo}
-						style={[
-							a.absolute,
-							a.h_full,
-							a.self_end,
-							a.justify_center,
-							{
+						style={{
+							...a.absolute,
+							...a.h_full,
+							...a.self_end,
+							...a.justify_center,
+
+							...{
 								right: tokens.space.lg,
 								opacity: !gtMobile || showActions || menuControl.isOpen ? 1 : 0,
 							},
-						]}
+						}}
 						latestReportableMessage={latestReportableMessage}
 					/>
 				)}

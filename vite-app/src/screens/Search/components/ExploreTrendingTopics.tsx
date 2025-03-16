@@ -33,17 +33,65 @@ function Inner() {
 
 	return error || noTopics ? null : (
 		<>
-			<View style={[a.flex_row, [a.px_lg, a.py_lg, a.pt_2xl, a.gap_md], a.border_b, t.atoms.border_contrast_low]}>
-				<View style={[a.flex_1, a.gap_sm]}>
-					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+			<View
+				style={{
+					...a.flex_row,
+					...[a.px_lg, a.py_lg, a.pt_2xl, a.gap_md],
+					...a.border_b,
+					...t.atoms.border_contrast_low,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_1,
+						...a.gap_sm,
+					}}
+				>
+					<View
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.gap_sm,
+						}}
+					>
 						<Trending size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
-						<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>Trending</Text>
-						<View style={[a.py_xs, a.px_sm, a.rounded_sm, a.overflow_hidden]}>
+						<Text
+							style={{
+								...a.text_2xl,
+								...a.font_heavy,
+								...t.atoms.text,
+							}}
+						>
+							Trending
+						</Text>
+						<View
+							style={{
+								...a.py_xs,
+								...a.px_sm,
+								...a.rounded_sm,
+								...a.overflow_hidden,
+							}}
+						>
 							<GradientFill gradient={tokens.gradients.primary} />
-							<Text style={[a.text_sm, a.font_heavy, { color: "white" }]}>BETA</Text>
+							<Text
+								style={{
+									...a.text_sm,
+									...a.font_heavy,
+									...{ color: "white" },
+								}}
+							>
+								BETA
+							</Text>
 						</View>
 					</View>
-					<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>What people are posting about.</Text>
+					<Text
+						style={{
+							...t.atoms.text_contrast_high,
+							...a.leading_snug,
+						}}
+					>
+						What people are posting about.
+					</Text>
 				</View>
 				<Button
 					label={"Hide trending topics"}
@@ -57,8 +105,21 @@ function Inner() {
 				</Button>
 			</View>
 
-			<View style={[a.pt_md, a.pb_lg]}>
-				<View style={[a.flex_row, a.justify_start, a.flex_wrap, { rowGap: 8, columnGap: 6 }, gutters]}>
+			<View
+				style={{
+					...a.pt_md,
+					...a.pb_lg,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.justify_start,
+						...a.flex_wrap,
+						...{ rowGap: 8, columnGap: 6 },
+						...gutters,
+					}}
+				>
 					{isLoading ? (
 						Array(TRENDING_TOPICS_COUNT)
 							.fill(0)
@@ -70,7 +131,7 @@ function Inner() {
 									{({ hovered }) => (
 										<TrendingTopic
 											topic={topic}
-											style={[hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25]]}
+											style={hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25]}
 										/>
 									)}
 								</TrendingTopicLink>

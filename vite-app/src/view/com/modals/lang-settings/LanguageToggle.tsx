@@ -33,7 +33,11 @@ export function LanguageToggle({
 			label={name}
 			isSelected={isSelected}
 			onPress={isDisabled ? undefined : onPress}
-			style={[pal.border, styles.languageToggle, isDisabled && styles.dimmed]}
+			style={{
+				...pal.border,
+				...styles.languageToggle,
+				...(isDisabled && styles.dimmed),
+			}}
 		/>
 	);
 }

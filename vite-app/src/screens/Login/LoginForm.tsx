@@ -151,7 +151,7 @@ export const LoginForm = ({
 			</View>
 			<View>
 				<TextField.LabelText>Account</TextField.LabelText>
-				<View style={[a.gap_sm]}>
+				<View style={a.gap_sm}>
 					<TextField.Root>
 						<TextField.Icon icon={At} />
 						<TextField.Input
@@ -205,12 +205,14 @@ export const LoginForm = ({
 							accessibilityHint={"Opens password reset form"}
 							variant="solid"
 							color="secondary"
-							style={[
-								a.rounded_sm,
-								// t.atoms.bg_contrast_100,
+							style={{
+								...a.rounded_sm,
+
+								...// t.atoms.bg_contrast_100,
 								{ marginLeft: "auto", left: 6, padding: 6 },
-								a.z_10,
-							]}
+
+								...a.z_10,
+							}}
 						>
 							<ButtonText>Forgot?</ButtonText>
 						</Button>
@@ -239,20 +241,30 @@ export const LoginForm = ({
 							onSubmitEditing={onPressNext}
 							editable={!isProcessing}
 							accessibilityHint={"Input the code which has been emailed to you"}
-							style={[
-								{
-									textTransform: isAuthFactorTokenValueEmpty ? "none" : "uppercase",
-								},
-							]}
+							style={{
+								textTransform: isAuthFactorTokenValueEmpty ? "none" : "uppercase",
+							}}
 						/>
 					</TextField.Root>
-					<Text style={[a.text_sm, t.atoms.text_contrast_medium, a.mt_sm]}>
+					<Text
+						style={{
+							...a.text_sm,
+							...t.atoms.text_contrast_medium,
+							...a.mt_sm,
+						}}
+					>
 						Check your email for a sign in code and enter it here.
 					</Text>
 				</View>
 			)}
 			<FormError error={error} />
-			<View style={[a.flex_row, a.align_center, a.pt_md]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.pt_md,
+				}}
+			>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
@@ -272,7 +284,14 @@ export const LoginForm = ({
 				) : !serviceDescription ? (
 					<>
 						<ActivityIndicator />
-						<Text style={[t.atoms.text_contrast_high, a.pl_md]}>Connecting...</Text>
+						<Text
+							style={{
+								...t.atoms.text_contrast_high,
+								...a.pl_md,
+							}}
+						>
+							Connecting...
+						</Text>
 					</>
 				) : (
 					<Button

@@ -56,12 +56,24 @@ export function AvatarCreatorItems({
 	);
 
 	return (
-		<View style={[a.w_full]}>
-			<Text style={[a.pb_md, t.atoms.text_contrast_medium]}>
+		<View style={a.w_full}>
+			<Text
+				style={{
+					...a.pb_md,
+					...t.atoms.text_contrast_medium,
+				}}
+			>
 				{isEmojis ? <>Select an emoji</> : <>Select a color</>}
 			</Text>
-
-			<View style={[a.flex_row, a.align_start, a.justify_start, a.flex_wrap, a.gap_md]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_start,
+					...a.justify_start,
+					...a.flex_wrap,
+					...a.gap_md,
+				}}
+			>
 				{isEmojis
 					? emojiNames.map((emojiName) => (
 							<Button
@@ -76,14 +88,15 @@ export function AvatarCreatorItems({
 								<ButtonIcon icon={emojiItems[emojiName].component} />
 								{avatar.placeholder.name === emojiName && (
 									<View
-										style={[
-											a.absolute,
-											a.rounded_full,
-											ACTIVE_BORDER_STYLES,
-											{
+										style={{
+											...a.absolute,
+											...a.rounded_full,
+											...ACTIVE_BORDER_STYLES,
+
+											...{
 												borderColor: avatar.backgroundColor,
 											},
-										]}
+										}}
 									/>
 								)}
 							</Button>
@@ -100,27 +113,29 @@ export function AvatarCreatorItems({
 								{(ctx) => (
 									<>
 										<View
-											style={[
-												a.absolute,
-												a.inset_0,
-												a.rounded_full,
-												{
+											style={{
+												...a.absolute,
+												...a.inset_0,
+												...a.rounded_full,
+
+												...{
 													opacity: ctx.hovered || ctx.pressed ? 0.8 : 1,
 													backgroundColor: color,
 												},
-											]}
+											}}
 										/>
 
 										{avatar.backgroundColor === color && (
 											<View
-												style={[
-													a.absolute,
-													a.rounded_full,
-													ACTIVE_BORDER_STYLES,
-													{
+												style={{
+													...a.absolute,
+													...a.rounded_full,
+													...ACTIVE_BORDER_STYLES,
+
+													...{
 														borderColor: color,
 													},
-												]}
+												}}
 											/>
 										)}
 									</>

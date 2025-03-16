@@ -499,7 +499,14 @@ export const ComposePost = ({
 				keyboardVerticalOffset={keyboardVerticalOffset}
 				style={a.flex_1}
 			>
-				<View style={[a.flex_1, viewStyles]} aria-modal accessibilityViewIsModal>
+				<View
+					style={{
+						...a.flex_1,
+						...viewStyles,
+					}}
+					aria-modal
+					accessibilityViewIsModal
+				>
 					<ComposerTopBar
 						canPost={canPost}
 						isReply={!!replyTo}
@@ -657,18 +664,23 @@ const ComposerPost = React.memo(function ComposerPost({
 	);
 
 	return (
-		<View style={[a.mx_lg, !isActive && styles.inactivePost]}>
-			<View style={[a.flex_row]}>
+		<View
+			style={{
+				...a.mx_lg,
+				...(!isActive && styles.inactivePost),
+			}}
+		>
+			<View style={a.flex_row}>
 				<UserAvatar
 					avatar={currentProfile?.avatar}
 					size={50}
 					type={currentProfile?.associated?.labeler ? "labeler" : "user"}
-					style={[a.mt_xs]}
+					style={a.mt_xs}
 				/>
 				<TextInput
 					ref={textInput}
 					//@ts-ignore
-					style={[a.pt_xs]}
+					style={a.pt_xs}
 					richtext={richtext}
 					placeholder={selectTextInputPlaceholder}
 					autoFocus
@@ -695,7 +707,6 @@ const ComposerPost = React.memo(function ComposerPost({
 					accessibilityHint={`Compose posts up to ${MAX_GRAPHEME_LENGTH} characters in length`}
 				/>
 			</View>
-
 			{canRemovePost && isActive && (
 				<>
 					<Button
@@ -704,7 +715,10 @@ const ComposerPost = React.memo(function ComposerPost({
 						color="secondary"
 						variant="ghost"
 						shape="round"
-						style={[a.absolute, { top: 0, right: 0 }]}
+						style={{
+							...a.absolute,
+							...{ top: 0, right: 0 },
+						}}
 						onPress={() => {
 							if (
 								post.shortenedGraphemeLength > 0 ||
@@ -738,7 +752,6 @@ const ComposerPost = React.memo(function ComposerPost({
 					/>
 				</>
 			)}
-
 			<ComposerEmbeds
 				canRemoveQuote={canRemoveQuote}
 				embed={post.embed}
@@ -783,11 +796,15 @@ function ComposerTopBar({
 					color="primary"
 					shape="default"
 					size="small"
-					style={[a.rounded_full, a.py_sm, { paddingLeft: 7, paddingRight: 7 }]}
+					style={{
+						...a.rounded_full,
+						...a.py_sm,
+						...{ paddingLeft: 7, paddingRight: 7 },
+					}}
 					onPress={onCancel}
 					accessibilityHint="Closes post composer and discards post draft"
 				>
-					<ButtonText style={[a.text_md]}>Cancel</ButtonText>
+					<ButtonText style={a.text_md}>Cancel</ButtonText>
 				</Button>
 				<View style={a.flex_1} />
 				{isPublishing ? (
@@ -805,11 +822,14 @@ function ComposerTopBar({
 						color="primary"
 						shape="default"
 						size="small"
-						style={[a.rounded_full, a.py_sm]}
+						style={{
+							...a.rounded_full,
+							...a.py_sm,
+						}}
 						onPress={onPublish}
 						disabled={!canPost || isPublishQueued}
 					>
-						<ButtonText style={[a.text_md]}>
+						<ButtonText style={a.text_md}>
 							{isReply ? <>Reply</> : isThread ? <>Post All</> : <>Post</>}
 						</ButtonText>
 					</Button>
@@ -823,12 +843,24 @@ function ComposerTopBar({
 function AltTextReminder({ error }: { error: string }) {
 	const pal = usePalette("default");
 	return (
-		<View style={[styles.reminderLine, pal.viewLight]}>
+		<View
+			style={{
+				...styles.reminderLine,
+				...pal.viewLight,
+			}}
+		>
 			<View style={styles.errorIcon}>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="exclamation" style={{ color: colors.red4 }} size={10} />
 			</View>
-			<Text style={[pal.text, a.flex_1]}>{error}</Text>
+			<Text
+				style={{
+					...pal.text,
+					...a.flex_1,
+				}}
+			>
+				{error}
+			</Text>
 		</View>
 	);
 }
@@ -850,9 +882,14 @@ function ComposerEmbeds({
 	return (
 		<>
 			{embed.media?.type === "images" && <Gallery images={embed.media.images} dispatch={dispatch} />}
-
 			{embed.media?.type === "gif" && (
-				<View style={[a.relative, a.mt_lg]} key={embed.media.gif.url}>
+				<View
+					style={{
+						...a.relative,
+						...a.mt_lg,
+					}}
+					key={embed.media.gif.url}
+				>
 					<ExternalEmbedGif gif={embed.media.gif} onRemove={() => dispatch({ type: "embed_remove_gif" })} />
 					<GifAltTextDialog
 						gif={embed.media.gif}
@@ -863,9 +900,14 @@ function ComposerEmbeds({
 					/>
 				</View>
 			)}
-
 			{!embed.media && embed.link && (
-				<View style={[a.relative, a.mt_lg]} key={embed.link.uri}>
+				<View
+					style={{
+						...a.relative,
+						...a.mt_lg,
+					}}
+					key={embed.link.uri}
+				>
 					<ExternalEmbedLink
 						uri={embed.link.uri}
 						hasQuote={!!embed.quote}
@@ -873,10 +915,14 @@ function ComposerEmbeds({
 					/>
 				</View>
 			)}
-
 			<LayoutAnimationConfig skipExiting>
 				{video && (
-					<Animated.View style={[a.w_full, a.mt_lg]}>
+					<Animated.View
+						style={{
+							...a.w_full,
+							...a.mt_lg,
+						}}
+					>
 						{video.asset && video.status !== "compressing" && video.video && (
 							<VideoPreview
 								asset={video.asset}
@@ -915,7 +961,13 @@ function ComposerEmbeds({
 			</LayoutAnimationConfig>
 			{embed.quote?.uri ? (
 				<View style={!video ? [a.mt_md] : []}>
-					<View style={[s.mt5, s.mb2, s.mb10]}>
+					<View
+						style={{
+							...s.mt5,
+							...s.mb2,
+							...s.mb10,
+						}}
+					>
 						<View style={{ pointerEvents: "none" }}>
 							<LazyQuoteEmbed uri={embed.quote.uri} />
 						</View>
@@ -951,7 +1003,14 @@ function ComposerPills({
 	}
 
 	return (
-		<Animated.View style={[a.flex_row, a.p_sm, t.atoms.bg, bottomBarAnimatedStyle]}>
+		<Animated.View
+			style={{
+				...a.flex_row,
+				...a.p_sm,
+				...t.atoms.bg,
+				...bottomBarAnimatedStyle,
+			}}
+		>
 			<ScrollView
 				contentContainerStyle={[a.gap_sm]}
 				horizontal={true}
@@ -1039,22 +1098,33 @@ function ComposerFooter({
 
 	return (
 		<View
-			style={[
-				a.flex_row,
-				a.py_xs,
-				{ paddingLeft: 7, paddingRight: 16 },
-				a.align_center,
-				a.border_t,
-				t.atoms.bg,
-				t.atoms.border_contrast_medium,
-				a.justify_between,
-			]}
+			style={{
+				...a.flex_row,
+				...a.py_xs,
+				...{ paddingLeft: 7, paddingRight: 16 },
+				...a.align_center,
+				...a.border_t,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_medium,
+				...a.justify_between,
+			}}
 		>
-			<View style={[a.flex_row, a.align_center]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+				}}
+			>
 				{video && video.status !== "done" ? (
 					<VideoUploadToolbar state={video} />
 				) : (
-					<ToolbarWrapper style={[a.flex_row, a.align_center, a.gap_xs]}>
+					<ToolbarWrapper
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.gap_xs,
+						}}
+					>
 						<SelectPhotoBtn
 							size={images.length}
 							disabled={media?.type === "images" ? isMaxImages : !!media}
@@ -1080,12 +1150,21 @@ function ComposerFooter({
 					</ToolbarWrapper>
 				)}
 			</View>
-			<View style={[a.flex_row, a.align_center, a.justify_between]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_between,
+				}}
+			>
 				{showAddButton && (
 					<Button
 						label={"Add new post"}
 						onPress={onAddPost}
-						style={[a.p_sm, a.m_2xs]}
+						style={{
+							...a.p_sm,
+							...a.m_2xs,
+						}}
 						variant="ghost"
 						shape="round"
 						color="primary"
@@ -1333,18 +1412,51 @@ function ErrorBanner({
 	if (!error) return null;
 
 	return (
-		<Animated.View style={[a.px_lg, a.pb_sm]} entering={FadeIn} exiting={FadeOut}>
-			<View style={[a.px_md, a.py_sm, a.gap_xs, a.rounded_sm, t.atoms.bg_contrast_25]}>
-				<View style={[a.relative, a.flex_row, a.gap_sm, { paddingRight: 48 }]}>
+		<Animated.View
+			style={{
+				...a.px_lg,
+				...a.pb_sm,
+			}}
+			entering={FadeIn}
+			exiting={FadeOut}
+		>
+			<View
+				style={{
+					...a.px_md,
+					...a.py_sm,
+					...a.gap_xs,
+					...a.rounded_sm,
+					...t.atoms.bg_contrast_25,
+				}}
+			>
+				<View
+					style={{
+						...a.relative,
+						...a.flex_row,
+						...a.gap_sm,
+						...{ paddingRight: 48 },
+					}}
+				>
 					<CircleInfo fill={t.palette.negative_400} />
-					<NewText style={[a.flex_1, a.leading_snug, { paddingTop: 1 }]}>{error}</NewText>
+					<NewText
+						style={{
+							...a.flex_1,
+							...a.leading_snug,
+							...{ paddingTop: 1 },
+						}}
+					>
+						{error}
+					</NewText>
 					<Button
 						label={"Dismiss error"}
 						size="tiny"
 						color="secondary"
 						variant="ghost"
 						shape="round"
-						style={[a.absolute, { top: 0, right: 0 }]}
+						style={{
+							...a.absolute,
+							...{ top: 0, right: 0 },
+						}}
 						onPress={onClearError}
 					>
 						<ButtonIcon icon={X} />
@@ -1352,7 +1464,13 @@ function ErrorBanner({
 				</View>
 				{videoError && videoState.jobId && (
 					<NewText
-						style={[{ paddingLeft: 28 }, a.text_xs, a.font_bold, a.leading_snug, t.atoms.text_contrast_low]}
+						style={{
+							...{ paddingLeft: 28 },
+							...a.text_xs,
+							...a.font_bold,
+							...a.leading_snug,
+							...t.atoms.text_contrast_low,
+						}}
 					>
 						<>Job ID: {videoState.jobId}</>
 					</NewText>
@@ -1419,8 +1537,14 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 	}
 
 	return (
-		<ToolbarWrapper style={[a.flex_row, a.align_center, { paddingVertical: 5 }]}>
-			<Animated.View style={[animatedStyle]}>
+		<ToolbarWrapper
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...{ paddingVertical: 5 },
+			}}
+		>
+			<Animated.View style={animatedStyle}>
 				<ProgressCircle
 					size={30}
 					borderWidth={1}
@@ -1429,7 +1553,14 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 					progress={wheelProgress}
 				/>
 			</Animated.View>
-			<NewText style={[a.font_bold, a.ml_sm]}>{text}</NewText>
+			<NewText
+				style={{
+					...a.font_bold,
+					...a.ml_sm,
+				}}
+			>
+				{text}
+			</NewText>
 		</ToolbarWrapper>
 	);
 }

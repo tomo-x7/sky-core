@@ -87,27 +87,51 @@ export function ListHiddenScreen({
 
 	return (
 		<CenteredView
-			style={[
-				a.flex_1,
-				a.align_center,
-				a.gap_5xl,
-				!gtMobile && a.justify_between,
-				t.atoms.border_contrast_low,
-				{ paddingTop: 175, paddingBottom: 110 },
-			]}
+			style={{
+				...a.flex_1,
+				...a.align_center,
+				...a.gap_5xl,
+				...(!gtMobile && a.justify_between),
+				...t.atoms.border_contrast_low,
+				...{ paddingTop: 175, paddingBottom: 110 },
+			}}
 			sideBorders={true}
 		>
-			<View style={[a.w_full, a.align_center, a.gap_lg]}>
+			<View
+				style={{
+					...a.w_full,
+					...a.align_center,
+					...a.gap_lg,
+				}}
+			>
 				<EyeSlash style={{ color: t.atoms.text_contrast_medium.color }} height={42} width={42} />
-				<View style={[a.gap_sm, a.align_center]}>
-					<Text style={[a.font_bold, a.text_3xl]}>
+				<View
+					style={{
+						...a.gap_sm,
+						...a.align_center,
+					}}
+				>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_3xl,
+						}}
+					>
 						{list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
 							<>Creator has been blocked</>
 						) : (
 							<>List has been hidden</>
 						)}
 					</Text>
-					<Text style={[a.text_md, a.text_center, a.px_md, t.atoms.text_contrast_high, { lineHeight: 1.4 }]}>
+					<Text
+						style={{
+							...a.text_md,
+							...a.text_center,
+							...a.px_md,
+							...t.atoms.text_contrast_high,
+							...{ lineHeight: 1.4 },
+						}}
+					>
 						{list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
 							<>Either the creator of this list has blocked you or you have blocked the creator.</>
 						) : isOwner ? (
@@ -118,15 +142,20 @@ export function ListHiddenScreen({
 						) : (
 							<>
 								This list – created by{" "}
-								<Text style={[a.font_bold]}>{sanitizeHandle(list.creator.handle, "@")}</Text> – contains
+								<Text style={a.font_bold}>{sanitizeHandle(list.creator.handle, "@")}</Text> – contains
 								possible violations of Bluesky's community guidelines in its name or description.
 							</>
 						)}
 					</Text>
 				</View>
 			</View>
-			<View style={[a.gap_md, gtMobile ? { width: 350 } : [a.w_full, a.px_lg]]}>
-				<View style={[a.gap_md]}>
+			<View
+				style={{
+					...a.gap_md,
+					...(gtMobile ? { width: 350 } : [a.w_full, a.px_lg]),
+				}}
+			>
+				<View style={a.gap_md}>
 					{savedFeedConfig ? (
 						<Button
 							variant="solid"

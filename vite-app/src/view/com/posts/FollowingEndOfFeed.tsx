@@ -23,9 +23,21 @@ export function FollowingEndOfFeed() {
 	}, [navigation]);
 
 	return (
-		<View style={[styles.container, pal.border, { minHeight: Dimensions.get("window").height * 0.75 }]}>
+		<View
+			style={{
+				...styles.container,
+				...pal.border,
+				...{ minHeight: Dimensions.get("window").height * 0.75 },
+			}}
+		>
 			<View style={styles.inner}>
-				<Text type="xl-medium" style={[s.textCenter, pal.text]}>
+				<Text
+					type="xl-medium"
+					style={{
+						...s.textCenter,
+						...pal.text,
+					}}
+				>
 					You've reached the end of your feed! Find some more accounts to follow.
 				</Text>
 				<Button type="inverted" style={styles.emptyBtn} onPress={onPressFindAccounts}>
@@ -36,10 +48,24 @@ export function FollowingEndOfFeed() {
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 				</Button>
 
-				<Text type="xl-medium" style={[s.textCenter, pal.text, s.mt20]}>
+				<Text
+					type="xl-medium"
+					style={{
+						...s.textCenter,
+						...pal.text,
+						...s.mt20,
+					}}
+				>
 					You can also discover new Custom Feeds to follow.
 				</Text>
-				<Button type="inverted" style={[styles.emptyBtn, s.mt10]} onPress={onPressDiscoverFeeds}>
+				<Button
+					type="inverted"
+					style={{
+						...styles.emptyBtn,
+						...s.mt10,
+					}}
+					onPress={onPressDiscoverFeeds}
+				>
 					<Text type="lg-medium" style={palInverted.text}>
 						Discover new custom feeds
 					</Text>

@@ -17,10 +17,27 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 
 	if (guide) {
 		return (
-			<View style={[a.flex_col, a.gap_md, style]}>
-				<View style={[a.flex_row, a.align_center, a.justify_between]}>
+			<View
+				style={{
+					...a.flex_col,
+					...a.gap_md,
+					...style,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.justify_between,
+					}}
+				>
 					<Text
-						style={[t.atoms.text_contrast_medium, a.font_bold, a.text_sm, { textTransform: "uppercase" }]}
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.font_bold,
+							...a.text_sm,
+							...{ textTransform: "uppercase" },
+						}}
 					>
 						Getting started
 					</Text>

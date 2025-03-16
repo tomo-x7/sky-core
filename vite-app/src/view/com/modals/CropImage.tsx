@@ -75,7 +75,12 @@ export function Component({
 
 	return (
 		<View>
-			<View style={[styles.cropper, pal.borderDark]}>
+			<View
+				style={{
+					...styles.cropper,
+					...pal.borderDark,
+				}}
+			>
 				<ReactCrop
 					aspect={aspect}
 					crop={crop}
@@ -85,7 +90,12 @@ export function Component({
 					<img ref={imageRef} src={uri} style={{ maxHeight: "75vh" }} alt="" />
 				</ReactCrop>
 			</View>
-			<View style={[styles.btns, isMobile && { paddingHorizontal: 16 }]}>
+			<View
+				style={{
+					...styles.btns,
+					...(isMobile && { paddingHorizontal: 16 }),
+				}}
+			>
 				<TouchableOpacity
 					onPress={onPressCancel}
 					accessibilityRole="button"
@@ -107,7 +117,7 @@ export function Component({
 						colors={[gradients.blueLight.start, gradients.blueLight.end]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 1 }}
-						style={[styles.btn]}
+						style={styles.btn}
 					>
 						<Text type="xl-medium" style={s.white}>
 							Done

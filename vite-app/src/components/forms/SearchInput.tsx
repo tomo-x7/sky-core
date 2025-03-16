@@ -24,7 +24,12 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 	const showClear = value && value.length > 0;
 
 	return (
-		<View style={[a.w_full, a.relative]}>
+		<View
+			style={{
+				...a.w_full,
+				...a.relative,
+			}}
+		>
 			<TextField.Root>
 				<TextField.Icon icon={MagnifyingGlassIcon} />
 				<TextField.Input
@@ -40,19 +45,28 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 					autoCorrect={false}
 					autoComplete="off"
 					autoCapitalize="none"
-					style={[
+					style={
 						showClear
 							? {
 									paddingRight: 24,
 								}
-							: {},
-					]}
+							: {}
+					}
 					{...rest}
 				/>
 			</TextField.Root>
-
 			{showClear && (
-				<View style={[a.absolute, a.z_20, a.my_auto, a.inset_0, a.justify_center, a.pr_sm, { left: "auto" }]}>
+				<View
+					style={{
+						...a.absolute,
+						...a.z_20,
+						...a.my_auto,
+						...a.inset_0,
+						...a.justify_center,
+						...a.pr_sm,
+						...{ left: "auto" },
+					}}
+				>
 					<Button
 						testID="searchTextInputClearBtn"
 						onPress={onClearText}

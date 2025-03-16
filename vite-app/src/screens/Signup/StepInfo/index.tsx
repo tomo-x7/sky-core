@@ -128,7 +128,7 @@ export function StepInfo({
 
 	return (
 		<ScreenTransition>
-			<View style={[a.gap_md]}>
+			<View style={a.gap_md}>
 				<FormError error={state.error} />
 				<HostingProvider
 					minimal
@@ -136,7 +136,7 @@ export function StepInfo({
 					onSelectServiceUrl={(v) => dispatch({ type: "setServiceUrl", value: v })}
 				/>
 				{state.isLoading || isLoadingStarterPack ? (
-					<View style={[a.align_center]}>
+					<View style={a.align_center}>
 						<Loader size="xl" />
 					</View>
 				) : state.serviceDescription ? (

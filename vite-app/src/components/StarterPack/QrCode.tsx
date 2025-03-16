@@ -27,42 +27,74 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 
 		return (
 			// <ViewShot ref={ref}>
+			//  </ViewShot>
 			<LinearGradientBackground
-				style={[
-					{ width: 300, minHeight: 390 },
-					a.align_center,
-					a.px_sm,
-					a.py_xl,
-					a.rounded_sm,
-					a.justify_between,
-					a.gap_md,
-				]}
+				style={{
+					...{ width: 300, minHeight: 390 },
+					...a.align_center,
+					...a.px_sm,
+					...a.py_xl,
+					...a.rounded_sm,
+					...a.justify_between,
+					...a.gap_md,
+				}}
 			>
-				<View style={[a.gap_sm]}>
-					<Text style={[a.font_bold, a.text_3xl, a.text_center, { color: "white" }]}>{record.name}</Text>
+				<View style={a.gap_sm}>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_3xl,
+							...a.text_center,
+							...{ color: "white" },
+						}}
+					>
+						{record.name}
+					</Text>
 				</View>
-				<View style={[a.gap_xl, a.align_center]}>
-					<Text style={[a.font_bold, a.text_center, { color: "white", fontSize: 18 }]}>
+				<View
+					style={{
+						...a.gap_xl,
+						...a.align_center,
+					}}
+				>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_center,
+							...{ color: "white", fontSize: 18 },
+						}}
+					>
 						Join the conversation
 					</Text>
-					<View style={[a.rounded_sm, a.overflow_hidden]}>
+					<View
+						style={{
+							...a.rounded_sm,
+							...a.overflow_hidden,
+						}}
+					>
 						<QrCodeInner link={link} />
 					</View>
 
 					<Text
-						style={[
-							a.flex,
-							a.flex_row,
-							a.align_center,
-							a.font_bold,
-							{ color: "white", fontSize: 18, gap: 6 },
-						]}
+						style={{
+							...a.flex,
+							...a.flex_row,
+							...a.align_center,
+							...a.font_bold,
+							...{ color: "white", fontSize: 18, gap: 6 },
+						}}
 					>
 						<>
 							on
-							<View style={[a.flex_row, a.align_center, { gap: 6 }]}>
+							<View
+								style={{
+									...a.flex_row,
+									...a.align_center,
+									...{ gap: 6 },
+								}}
+							>
 								<Logo width={25} fill="white" />
-								<View style={[{ marginTop: 3.5 }]}>
+								<View style={{ marginTop: 3.5 }}>
 									<Logotype width={72} fill="white" />
 								</View>
 							</View>
@@ -70,7 +102,6 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					</Text>
 				</View>
 			</LinearGradientBackground>
-			//  </ViewShot>
 		);
 	};
 
@@ -80,7 +111,10 @@ export function QrCodeInner({ link }: { link: string }) {
 	return (
 		<QRCode
 			data={link}
-			style={[a.rounded_sm, { height: 225, width: 225, backgroundColor: "#f3f3f3" }]}
+			style={{
+				...a.rounded_sm,
+				...{ height: 225, width: 225, backgroundColor: "#f3f3f3" },
+			}}
 			pieceSize={8}
 			padding={20}
 			// pieceLiquidRadius={2}

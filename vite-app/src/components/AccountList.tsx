@@ -37,7 +37,12 @@ export function AccountList({
 	return (
 		<View
 			pointerEvents={pendingDid ? "none" : "auto"}
-			style={[a.rounded_md, a.overflow_hidden, { borderWidth: 1 }, t.atoms.border_contrast_low]}
+			style={{
+				...a.rounded_md,
+				...a.overflow_hidden,
+				...{ borderWidth: 1 },
+				...t.atoms.border_contrast_low,
+			}}
 		>
 			{accounts.map((account) => (
 				<React.Fragment key={account.did}>
@@ -53,24 +58,38 @@ export function AccountList({
 			))}
 			<Button
 				testID="chooseAddAccountBtn"
-				style={[a.flex_1]}
+				style={a.flex_1}
 				onPress={pendingDid ? undefined : onPressAddAccount}
 				label={"Sign in to account that is not listed"}
 			>
 				{({ hovered, pressed }) => (
 					<View
-						style={[
-							a.flex_1,
-							a.flex_row,
-							a.align_center,
-							{ height: 48 },
-							(hovered || pressed) && t.atoms.bg_contrast_25,
-						]}
+						style={{
+							...a.flex_1,
+							...a.flex_row,
+							...a.align_center,
+							...{ height: 48 },
+							...((hovered || pressed) && t.atoms.bg_contrast_25),
+						}}
 					>
-						<Text style={[a.align_baseline, a.flex_1, a.flex_row, a.py_sm, { paddingLeft: 48 }]}>
+						<Text
+							style={{
+								...a.align_baseline,
+								...a.flex_1,
+								...a.flex_row,
+								...a.py_sm,
+								...{ paddingLeft: 48 },
+							}}
+						>
 							{otherLabel ?? "Other account"}
 						</Text>
-						<Chevron size="sm" style={[t.atoms.text, a.mr_md]} />
+						<Chevron
+							size="sm"
+							style={{
+								...t.atoms.text,
+								...a.mr_md,
+							}}
+						/>
 					</View>
 				)}
 			</Button>
@@ -101,7 +120,7 @@ function AccountItem({
 		<Button
 			testID={`chooseAccountBtn-${account.handle}`}
 			key={account.did}
-			style={[a.flex_1]}
+			style={a.flex_1}
 			onPress={onPress}
 			label={
 				isCurrentAccount
@@ -111,13 +130,13 @@ function AccountItem({
 		>
 			{({ hovered, pressed }) => (
 				<View
-					style={[
-						a.flex_1,
-						a.flex_row,
-						a.align_center,
-						{ height: 48 },
-						(hovered || pressed || isPendingAccount) && t.atoms.bg_contrast_25,
-					]}
+					style={{
+						...a.flex_1,
+						...a.flex_row,
+						...a.align_center,
+						...{ height: 48 },
+						...((hovered || pressed || isPendingAccount) && t.atoms.bg_contrast_25),
+					}}
 				>
 					<div style={a.p_md}>
 						<UserAvatar
@@ -126,18 +145,37 @@ function AccountItem({
 							type={profile?.associated?.labeler ? "labeler" : "user"}
 						/>
 					</div>
-					<Text style={[a.align_baseline, a.flex_1, a.flex_row, a.py_sm]}>
-						<Text emoji style={[a.font_bold]}>
+					<Text
+						style={{
+							...a.align_baseline,
+							...a.flex_1,
+							...a.flex_row,
+							...a.py_sm,
+						}}
+					>
+						<Text emoji style={a.font_bold}>
 							{sanitizeDisplayName(profile?.displayName || profile?.handle || account.handle)}
 						</Text>{" "}
-						<Text emoji style={[t.atoms.text_contrast_medium]}>
+						<Text emoji style={t.atoms.text_contrast_medium}>
 							{sanitizeHandle(account.handle)}
 						</Text>
 					</Text>
 					{isCurrentAccount ? (
-						<Check size="sm" style={[{ color: t.palette.positive_600 }, a.mr_md]} />
+						<Check
+							size="sm"
+							style={{
+								...{ color: t.palette.positive_600 },
+								...a.mr_md,
+							}}
+						/>
 					) : (
-						<Chevron size="sm" style={[t.atoms.text, a.mr_md]} />
+						<Chevron
+							size="sm"
+							style={{
+								...t.atoms.text,
+								...a.mr_md,
+							}}
+						/>
 					)}
 				</View>
 			)}

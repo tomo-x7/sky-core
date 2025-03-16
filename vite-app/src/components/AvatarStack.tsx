@@ -41,10 +41,11 @@ export function AvatarStack({
 			{items.map((item, i) => (
 				<View
 					key={item.key}
-					style={[
-						t.atoms.bg_contrast_25,
-						a.relative,
-						{
+					style={{
+						...t.atoms.bg_contrast_25,
+						...a.relative,
+
+						...{
 							width: size,
 							height: size,
 							left: i * -halfSize,
@@ -53,7 +54,7 @@ export function AvatarStack({
 							borderRadius: 999,
 							zIndex: 3 - i,
 						},
-					]}
+					}}
 				>
 					{item.profile && (
 						<UserAvatar

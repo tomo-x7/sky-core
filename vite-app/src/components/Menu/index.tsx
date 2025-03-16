@@ -80,7 +80,7 @@ export function Outer({
 			{/* Re-wrap with context since Dialogs are portal-ed to root */}
 			<Context.Provider value={context}>
 				<Dialog.ScrollableInner label={"Menu"}>
-					<View style={[a.gap_lg]}>{children}</View>
+					<View style={a.gap_lg}>{children}</View>
 				</Dialog.ScrollableInner>
 			</Context.Provider>
 		</Dialog.Outer>
@@ -108,19 +108,19 @@ export function Item({ children, label, style, onPress, ...rest }: ItemProps) {
 				onPressOut();
 				rest.onPressOut?.(e);
 			}}
-			style={[
-				a.flex_row,
-				a.align_center,
-				a.gap_sm,
-				a.px_md,
-				a.rounded_md,
-				a.border,
-				t.atoms.bg_contrast_25,
-				t.atoms.border_contrast_low,
-				{ minHeight: 44, paddingVertical: 10 },
-				style,
-				(focused || pressed) && !rest.disabled && [t.atoms.bg_contrast_50],
-			]}
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_sm,
+				...a.px_md,
+				...a.rounded_md,
+				...a.border,
+				...t.atoms.bg_contrast_25,
+				...t.atoms.border_contrast_low,
+				...{ minHeight: 44, paddingVertical: 10 },
+				...style,
+				...((focused || pressed) && !rest.disabled && [t.atoms.bg_contrast_50]),
+			}}
 		>
 			<ItemContext.Provider value={{ disabled: Boolean(rest.disabled) }}>{children}</ItemContext.Provider>
 		</Pressable>
@@ -134,15 +134,15 @@ export function ItemText({ children, style }: ItemTextProps) {
 		<Text
 			numberOfLines={1}
 			ellipsizeMode="middle"
-			style={[
-				a.flex_1,
-				a.text_md,
-				a.font_bold,
-				t.atoms.text_contrast_high,
-				{ paddingTop: 3 },
-				style,
-				disabled && t.atoms.text_contrast_low,
-			]}
+			style={{
+				...a.flex_1,
+				...a.text_md,
+				...a.font_bold,
+				...t.atoms.text_contrast_high,
+				...{ paddingTop: 3 },
+				...style,
+				...(disabled && t.atoms.text_contrast_low),
+			}}
 		>
 			{children}
 		</Text>
@@ -159,30 +159,32 @@ export function ItemRadio({ selected }: { selected: boolean }) {
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.justify_center,
-				a.align_center,
-				a.rounded_full,
-				t.atoms.border_contrast_high,
-				{
+			style={{
+				...a.justify_center,
+				...a.align_center,
+				...a.rounded_full,
+				...t.atoms.border_contrast_high,
+
+				...{
 					borderWidth: 1,
 					height: 20,
 					width: 20,
 				},
-			]}
+			}}
 		>
 			{selected ? (
 				<View
-					style={[
-						a.absolute,
-						a.rounded_full,
-						{ height: 14, width: 14 },
-						selected
+					style={{
+						...a.absolute,
+						...a.rounded_full,
+						...{ height: 14, width: 14 },
+
+						...(selected
 							? {
 									backgroundColor: t.palette.primary_500,
 								}
-							: {},
-					]}
+							: {}),
+					}}
 				/>
 			) : null}
 		</View>
@@ -193,13 +195,14 @@ export function LabelText({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
 	return (
 		<Text
-			style={[
-				a.font_bold,
-				t.atoms.text_contrast_medium,
-				{
+			style={{
+				...a.font_bold,
+				...t.atoms.text_contrast_medium,
+
+				...{
 					marginBottom: -8,
 				},
-			]}
+			}}
 		>
 			{children}
 		</Text>
@@ -209,11 +212,26 @@ export function LabelText({ children }: { children: React.ReactNode }) {
 export function Group({ children, style }: GroupProps) {
 	const t = useTheme();
 	return (
-		<View style={[a.rounded_md, a.overflow_hidden, a.border, t.atoms.border_contrast_low, style]}>
+		<View
+			style={{
+				...a.rounded_md,
+				...a.overflow_hidden,
+				...a.border,
+				...t.atoms.border_contrast_low,
+				...style,
+			}}
+		>
 			{flattenReactChildren(children).map((child, i) => {
 				return React.isValidElement(child) && child.type === Item ? (
 					<React.Fragment key={i.toString()}>
-						{i > 0 ? <View style={[a.border_b, t.atoms.border_contrast_low]} /> : null}
+						{i > 0 ? (
+							<View
+								style={{
+									...a.border_b,
+									...t.atoms.border_contrast_low,
+								}}
+							/>
+						) : null}
 						{React.cloneElement(child, {
 							// @ts-ignore
 							style: {

@@ -6,7 +6,13 @@ import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Time
 
 export function ExternalEmbedRemoveBtn({ onRemove }: { onRemove: () => void }) {
 	return (
-		<View style={[a.absolute, { top: 8, right: 8 }, a.z_50]}>
+		<View
+			style={{
+				...a.absolute,
+				...{ top: 8, right: 8 },
+				...a.z_50,
+			}}
+		>
 			<Button
 				label={"Remove attachment"}
 				onPress={onRemove}

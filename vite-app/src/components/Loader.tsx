@@ -20,15 +20,23 @@ export function Loader(props: Props) {
 
 	return (
 		<Animated.View
-			style={[
-				a.relative,
-				a.justify_center,
-				a.align_center,
-				{ width: common.size, height: common.size },
-				animatedStyles,
-			]}
+			style={{
+				...a.relative,
+				...a.justify_center,
+				...a.align_center,
+				...{ width: common.size, height: common.size },
+				...animatedStyles,
+			}}
 		>
-			<Icon {...props} style={[a.absolute, a.inset_0, t.atoms.text_contrast_high, flatten(props.style)]} />
+			<Icon
+				{...props}
+				style={{
+					...a.absolute,
+					...a.inset_0,
+					...t.atoms.text_contrast_high,
+					...flatten(props.style),
+				}}
+			/>
 		</Animated.View>
 	);
 }

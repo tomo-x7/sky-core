@@ -15,7 +15,12 @@ let MessageItemEmbed = ({
 
 	return (
 		<MessageContextProvider>
-			<View style={[a.my_xs, t.atoms.bg]}>
+			<View
+				style={{
+					...a.my_xs,
+					...t.atoms.bg,
+				}}
+			>
 				<PostEmbeds embed={embed} allowNestedQuotes viewContext={PostEmbedViewContext.Feed} />
 			</View>
 		</MessageContextProvider>

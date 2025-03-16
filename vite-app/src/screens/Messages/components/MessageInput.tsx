@@ -119,10 +119,11 @@ export function MessageInput({
 		<View style={a.p_sm}>
 			{children}
 			<View
-				style={[
-					a.flex_row,
-					t.atoms.bg_contrast_25,
-					{
+				style={{
+					...a.flex_row,
+					...t.atoms.bg_contrast_25,
+
+					...{
 						paddingRight: a.p_sm.padding - 2,
 						paddingLeft: a.p_sm.padding - 2,
 						borderWidth: 1,
@@ -130,9 +131,10 @@ export function MessageInput({
 						borderColor: "transparent",
 						height: textAreaHeight + 23,
 					},
-					isHovered && inputStyles.chromeHover,
-					isFocused && inputStyles.chromeFocus,
-				]}
+
+					...(isHovered && inputStyles.chromeHover),
+					...(isFocused && inputStyles.chromeFocus),
+				}}
 				// @ts-expect-error web only
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
@@ -149,33 +151,35 @@ export function MessageInput({
 							});
 						});
 					}}
-					style={[
-						a.rounded_full,
-						a.overflow_hidden,
-						a.align_center,
-						a.justify_center,
-						{
+					style={{
+						...a.rounded_full,
+						...a.overflow_hidden,
+						...a.align_center,
+						...a.justify_center,
+
+						...{
 							marginTop: 5,
 							height: 30,
 							width: 30,
 						},
-					]}
+					}}
 					label={"Open emoji picker"}
 				>
 					{(state) => (
 						<View
-							style={[
-								a.absolute,
-								a.inset_0,
-								a.align_center,
-								a.justify_center,
-								{
+							style={{
+								...a.absolute,
+								...a.inset_0,
+								...a.align_center,
+								...a.justify_center,
+
+								...{
 									backgroundColor:
 										state.hovered || state.focused || state.pressed
 											? t.atoms.bg.backgroundColor
 											: undefined,
 								},
-							]}
+							}}
 						>
 							<EmojiSmile size="lg" />
 						</View>
@@ -218,20 +222,27 @@ export function MessageInput({
 					accessibilityRole="button"
 					accessibilityLabel={"Send message"}
 					accessibilityHint=""
-					style={[
-						a.rounded_full,
-						a.align_center,
-						a.justify_center,
-						{
+					style={{
+						...a.rounded_full,
+						...a.align_center,
+						...a.justify_center,
+
+						...{
 							height: 30,
 							width: 30,
 							marginTop: 5,
 							backgroundColor: t.palette.primary_500,
 						},
-					]}
+					}}
 					onPress={onSubmit}
 				>
-					<PaperPlane fill={t.palette.white} style={[a.relative, { left: 1 }]} />
+					<PaperPlane
+						fill={t.palette.white}
+						style={{
+							...a.relative,
+							...{ left: 1 },
+						}}
+					/>
 				</Pressable>
 			</View>
 		</View>

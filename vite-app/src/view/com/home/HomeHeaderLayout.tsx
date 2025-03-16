@@ -42,9 +42,23 @@ function HomeHeaderLayoutDesktopAndTablet({
 		<>
 			{hasSession && (
 				<Layout.Center>
-					<View style={[a.flex_row, a.align_center, gutters, a.pt_md, t.atoms.bg]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...gutters,
+							...a.pt_md,
+							...t.atoms.bg,
+						}}
+					>
 						<View style={{ width: 34 }} />
-						<View style={[a.flex_1, a.align_center, a.justify_center]}>
+						<View
+							style={{
+								...a.flex_1,
+								...a.align_center,
+								...a.justify_center,
+							}}
+						>
 							<Logo width={kawaii ? 60 : 28} />
 						</View>
 						<Link
@@ -55,7 +69,7 @@ function HomeHeaderLayoutDesktopAndTablet({
 							variant="ghost"
 							color="secondary"
 							shape="square"
-							style={[a.justify_center]}
+							style={a.justify_center}
 						>
 							<ButtonIcon icon={FeedsIcon} size="lg" />
 						</Link>
@@ -65,7 +79,13 @@ function HomeHeaderLayoutDesktopAndTablet({
 			{tabBarAnchor}
 			<Layout.Center
 				//@ts-ignore
-				style={[a.sticky, a.z_10, a.align_center, t.atoms.bg, { top: 0 }]}
+				style={{
+					...a.sticky,
+					...a.z_10,
+					...a.align_center,
+					...t.atoms.bg,
+					...{ top: 0 },
+				}}
 				onLayout={(e) => {
 					headerHeight.set(e.nativeEvent.layout.height);
 				}}

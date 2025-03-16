@@ -22,9 +22,21 @@ export function CustomFeedEmptyState() {
 	return (
 		<View style={styles.emptyContainer}>
 			<View style={styles.emptyIconContainer}>
-				<MagnifyingGlassIcon style={[styles.emptyIcon, pal.text]} size={62} />
+				<MagnifyingGlassIcon
+					style={{
+						...styles.emptyIcon,
+						...pal.text,
+					}}
+					size={62}
+				/>
 			</View>
-			<Text type="xl-medium" style={[s.textCenter, pal.text]}>
+			<Text
+				type="xl-medium"
+				style={{
+					...s.textCenter,
+					...pal.text,
+				}}
+			>
 				This feed is empty! You may need to follow more users or tune your language settings.
 			</Text>
 			<Button type="inverted" style={styles.emptyBtn} onPress={onPressFindAccounts}>

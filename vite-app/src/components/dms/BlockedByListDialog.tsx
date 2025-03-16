@@ -22,15 +22,32 @@ export function BlockedByListDialog({
 	return (
 		<Prompt.Outer control={control} testID="blockedByListDialog">
 			<Prompt.TitleText>{"User blocked by list"}</Prompt.TitleText>
-
-			<View style={[a.gap_sm, a.pb_lg]}>
-				<Text selectable style={[a.text_md, a.leading_snug, t.atoms.text_contrast_high]}>
+			<View
+				style={{
+					...a.gap_sm,
+					...a.pb_lg,
+				}}
+			>
+				<Text
+					selectable
+					style={{
+						...a.text_md,
+						...a.leading_snug,
+						...t.atoms.text_contrast_high,
+					}}
+				>
 					{
 						"This account is blocked by one or more of your moderation lists. To unblock, please visit the lists directly and remove this user."
 					}{" "}
 				</Text>
 
-				<Text style={[a.text_md, a.leading_snug, t.atoms.text_contrast_high]}>
+				<Text
+					style={{
+						...a.text_md,
+						...a.leading_snug,
+						...t.atoms.text_contrast_high,
+					}}
+				>
 					{"Lists blocking this user:"}{" "}
 					{listBlocks.map((block, i) =>
 						block.source.type === "list" ? (
@@ -39,7 +56,10 @@ export function BlockedByListDialog({
 								<InlineLinkText
 									label={block.source.list.name}
 									to={listUriToHref(block.source.list.uri)}
-									style={[a.text_md, a.leading_snug]}
+									style={{
+										...a.text_md,
+										...a.leading_snug,
+									}}
 								>
 									{block.source.list.name}
 								</InlineLinkText>
@@ -48,11 +68,9 @@ export function BlockedByListDialog({
 					)}
 				</Text>
 			</View>
-
 			<Prompt.Actions>
 				<Prompt.Action cta={"I understand"} onPress={() => {}} />
 			</Prompt.Actions>
-
 			<Dialog.Close />
 		</Prompt.Outer>
 	);

@@ -87,9 +87,17 @@ export function VideoEmbed({
 	);
 
 	return (
-		<View style={[a.pt_xs]}>
+		<View style={a.pt_xs}>
 			{cropDisabled ? (
-				<View style={[a.w_full, a.overflow_hidden, { aspectRatio: max ?? 1 }]}>{contents}</View>
+				<View
+					style={{
+						...a.w_full,
+						...a.overflow_hidden,
+						...{ aspectRatio: max ?? 1 },
+					}}
+				>
+					{contents}
+				</View>
 			) : (
 				<ConstrainedImage fullBleed={crop === "square"} aspectRatio={constrained || 1}>
 					{contents}
@@ -146,7 +154,12 @@ function ViewportObserver({
 	}, [isAnyViewActive, sendPosition]);
 
 	return (
-		<View style={[a.flex_1, a.flex_row]}>
+		<View
+			style={{
+				...a.flex_1,
+				...a.flex_row,
+			}}
+		>
 			{nearScreen && children}
 			<div
 				ref={ref}

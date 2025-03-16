@@ -49,7 +49,10 @@ export function PressableScale({
 				cancelAnimation(scale);
 				scale.set(() => withTiming(1, { duration: 100 }));
 			}}
-			style={[!reducedMotion && animatedStyle, style]}
+			style={{
+				...(!reducedMotion && animatedStyle),
+				...style,
+			}}
 			{...rest}
 		>
 			{children}

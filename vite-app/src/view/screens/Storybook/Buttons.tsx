@@ -9,12 +9,24 @@ import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe
 
 export function Buttons() {
 	return (
-		<View style={[a.gap_md]}>
+		<View style={a.gap_md}>
 			<H1>Buttons</H1>
-
-			<View style={[a.flex_row, a.flex_wrap, a.gap_md, a.align_start]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.flex_wrap,
+					...a.gap_md,
+					...a.align_start,
+				}}
+			>
 				{["primary", "secondary", "secondary_inverted", "negative"].map((color) => (
-					<View key={color} style={[a.gap_md, a.align_start]}>
+					<View
+						key={color}
+						style={{
+							...a.gap_md,
+							...a.align_start,
+						}}
+					>
 						{["solid", "outline", "ghost"].map((variant) => (
 							<React.Fragment key={variant}>
 								<Button
@@ -39,8 +51,19 @@ export function Buttons() {
 					</View>
 				))}
 
-				<View style={[a.flex_row, a.gap_md, a.align_start]}>
-					<View style={[a.gap_md, a.align_start]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.gap_md,
+						...a.align_start,
+					}}
+				>
+					<View
+						style={{
+							...a.gap_md,
+							...a.align_start,
+						}}
+					>
 						{["gradient_sky", "gradient_midnight", "gradient_sunrise"].map((name) => (
 							<React.Fragment key={name}>
 								<Button variant="gradient" color={name as ButtonColor} size="large" label="Click here">
@@ -60,8 +83,13 @@ export function Buttons() {
 					</View>
 				</View>
 			</View>
-
-			<View style={[a.flex_wrap, a.gap_md, a.align_start]}>
+			<View
+				style={{
+					...a.flex_wrap,
+					...a.gap_md,
+					...a.align_start,
+				}}
+			>
 				<Button variant="solid" color="primary" size="large" label="Link out">
 					<ButtonText>Button</ButtonText>
 				</Button>
@@ -83,8 +111,13 @@ export function Buttons() {
 					<ButtonText>Button</ButtonText>
 				</Button>
 			</View>
-
-			<View style={[a.flex_row, a.gap_md, a.align_center]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_md,
+					...a.align_center,
+				}}
+			>
 				<Button variant="solid" color="primary" size="large" label="Link out">
 					<ButtonText>Button</ButtonText>
 				</Button>
@@ -103,8 +136,13 @@ export function Buttons() {
 					<ButtonIcon icon={ChevronLeft} size="lg" />
 				</Button>
 			</View>
-
-			<View style={[a.flex_row, a.gap_md, a.align_center]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_md,
+					...a.align_center,
+				}}
+			>
 				<Button variant="solid" color="primary" size="small" label="Link out">
 					<ButtonText>Button</ButtonText>
 				</Button>
@@ -119,8 +157,13 @@ export function Buttons() {
 					<ButtonIcon icon={ChevronLeft} size="lg" />
 				</Button>
 			</View>
-
-			<View style={[a.flex_row, a.gap_md, a.align_center]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_md,
+					...a.align_center,
+				}}
+			>
 				<Button variant="solid" color="primary" size="tiny" label="Link out">
 					<ButtonText>Button</ButtonText>
 				</Button>
@@ -135,8 +178,13 @@ export function Buttons() {
 					<ButtonIcon icon={ChevronLeft} size="md" />
 				</Button>
 			</View>
-
-			<View style={[a.flex_row, a.gap_md, a.align_center]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_md,
+					...a.align_center,
+				}}
+			>
 				<Button variant="solid" color="primary" size="large" shape="round" label="Link out">
 					<ButtonIcon icon={ChevronLeft} />
 				</Button>
@@ -156,8 +204,13 @@ export function Buttons() {
 					<ButtonIcon icon={ChevronLeft} />
 				</Button>
 			</View>
-
-			<View style={[a.flex_row, a.gap_md, a.align_start]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_md,
+					...a.align_start,
+				}}
+			>
 				<Button variant="solid" color="primary" size="large" shape="square" label="Link out">
 					<ButtonIcon icon={ChevronLeft} />
 				</Button>

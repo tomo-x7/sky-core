@@ -105,19 +105,36 @@ export function Component() {
 	};
 
 	return (
-		<SafeAreaView style={[pal.view, s.flex1]}>
+		<SafeAreaView
+			style={{
+				...pal.view,
+				...s.flex1,
+			}}
+		>
 			<ScrollView
 				contentContainerStyle={[styles.container, isMobile && styles.containerMobile]}
 				keyboardShouldPersistTaps="handled"
 			>
 				<View>
 					<View style={styles.titleSection}>
-						<Text type="title-lg" style={[pal.text, styles.title]}>
+						<Text
+							type="title-lg"
+							style={{
+								...pal.text,
+								...styles.title,
+							}}
+						>
 							{stage !== Stages.Done ? "Change Password" : "Password Changed"}
 						</Text>
 					</View>
 
-					<Text type="lg" style={[pal.textLight, { marginBottom: 10 }]}>
+					<Text
+						type="lg"
+						style={{
+							...pal.textLight,
+							...{ marginBottom: 10 },
+						}}
+					>
 						{stage === Stages.RequestCode ? (
 							<>
 								If you want to change your password, we will send you a code to verify that this is your
@@ -131,7 +148,13 @@ export function Component() {
 					</Text>
 
 					{stage === Stages.RequestCode && (
-						<View style={[s.flexRow, s.justifyCenter, s.mt10]}>
+						<View
+							style={{
+								...s.flexRow,
+								...s.justifyCenter,
+								...s.mt10,
+							}}
+						>
 							<TouchableOpacity
 								testID="skipSendEmailButton"
 								onPress={() => setStage(Stages.ChangePassword)}
@@ -139,20 +162,40 @@ export function Component() {
 								accessibilityLabel={"Go to next"}
 								accessibilityHint={"Navigates to the next screen"}
 							>
-								<Text type="xl" style={[pal.link, s.pr5]}>
+								<Text
+									type="xl"
+									style={{
+										...pal.link,
+										...s.pr5,
+									}}
+								>
 									Already have a code?
 								</Text>
 							</TouchableOpacity>
 						</View>
 					)}
 					{stage === Stages.ChangePassword && (
-						<View style={[pal.border, styles.group]}>
-							<View style={[styles.groupContent]}>
+						<View
+							style={{
+								...pal.border,
+								...styles.group,
+							}}
+						>
+							<View style={styles.groupContent}>
 								{/* @ts-ignore */}
-								<FontAwesomeIcon icon="ticket" style={[pal.textLight, styles.groupContentIcon]} />
+								<FontAwesomeIcon
+									icon="ticket"
+									style={{
+										...pal.textLight,
+										...styles.groupContentIcon,
+									}}
+								/>
 								<TextInput
 									testID="codeInput"
-									style={[pal.text, styles.textInput]}
+									style={{
+										...pal.text,
+										...styles.textInput,
+									}}
 									placeholder={"Reset code"}
 									placeholderTextColor={pal.colors.textLight}
 									value={resetCode}
@@ -167,12 +210,27 @@ export function Component() {
 									autoComplete="off"
 								/>
 							</View>
-							<View style={[pal.borderDark, styles.groupContent, styles.groupBottom]}>
+							<View
+								style={{
+									...pal.borderDark,
+									...styles.groupContent,
+									...styles.groupBottom,
+								}}
+							>
 								{/* @ts-ignore */}
-								<FontAwesomeIcon icon="lock" style={[pal.textLight, styles.groupContentIcon]} />
+								<FontAwesomeIcon
+									icon="lock"
+									style={{
+										...pal.textLight,
+										...styles.groupContentIcon,
+									}}
+								/>
 								<TextInput
 									testID="codeInput"
-									style={[pal.text, styles.textInput]}
+									style={{
+										...pal.text,
+										...styles.textInput,
+									}}
 									placeholder={"New password"}
 									placeholderTextColor={pal.colors.textLight}
 									onChangeText={setNewPassword}
@@ -188,7 +246,7 @@ export function Component() {
 					)}
 					{error ? <ErrorMessage message={error} style={styles.error} /> : undefined}
 				</View>
-				<View style={[styles.btnContainer]}>
+				<View style={styles.btnContainer}>
 					{isProcessing ? (
 						<View style={styles.btn}>
 							<ActivityIndicator color="#fff" />

@@ -49,10 +49,11 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 
 	return (
 		<View
-			style={[
-				gutters,
-				a.gap_lg,
-				//@ts-ignore
+			style={{
+				...gutters,
+				...a.gap_lg,
+
+				...//@ts-ignore
 				{
 					position: "fixed",
 					left: "50%",
@@ -61,10 +62,9 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 					maxHeight: "100%",
 					overflowY: "auto",
 				},
-			]}
+			}}
 		>
 			{!isSearchScreen && <DesktopSearch />}
-
 			{hasSession && (
 				<>
 					<ProgressGuideList />
@@ -72,10 +72,13 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 					<Divider />
 				</>
 			)}
-
 			{showTrending && <SidebarTrendingTopics />}
-
-			<Text style={[a.leading_snug, t.atoms.text_contrast_low]}>
+			<Text
+				style={{
+					...a.leading_snug,
+					...t.atoms.text_contrast_low,
+				}}
+			>
 				{hasSession && (
 					<>
 						<InlineLinkText
@@ -102,9 +105,13 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 					{"Help"}
 				</InlineLinkText>
 			</Text>
-
 			{kawaii && (
-				<Text style={[t.atoms.text_contrast_medium, { marginTop: 12 }]}>
+				<Text
+					style={{
+						...t.atoms.text_contrast_medium,
+						...{ marginTop: 12 },
+					}}
+				>
 					<>
 						Logo by{" "}
 						<InlineLinkText
@@ -116,9 +123,13 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 					</>
 				</Text>
 			)}
-
 			{!hasSession && leftNavMinimal && (
-				<View style={[a.w_full, { height: 32 }]}>
+				<View
+					style={{
+						...a.w_full,
+						...{ height: 32 },
+					}}
+				>
 					<AppLanguageDropdown style={{ marginTop: 0 }} />
 				</View>
 			)}

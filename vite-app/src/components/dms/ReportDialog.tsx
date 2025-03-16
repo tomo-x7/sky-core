@@ -78,7 +78,13 @@ function DialogInner({
 		profile ? (
 			<DoneStep convoId={params.convoId} currentScreen={currentScreen} profile={profile} />
 		) : (
-			<View style={[a.w_full, a.py_5xl, a.align_center]}>
+			<View
+				style={{
+					...a.w_full,
+					...a.py_5xl,
+					...a.align_center,
+				}}
+			>
 				<Loader />
 			</View>
 		)
@@ -183,27 +189,64 @@ function SubmitStep({
 			>
 				<ButtonIcon icon={Chevron} />
 			</Button>
-
-			<View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
-				<Text style={[a.text_2xl, a.font_bold]}>{copy.title}</Text>
-				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
+			<View
+				style={{
+					...a.justify_center,
+					...(gtMobile ? a.gap_sm : a.gap_xs),
+				}}
+			>
+				<Text
+					style={{
+						...a.text_2xl,
+						...a.font_bold,
+					}}
+				>
+					{copy.title}
+				</Text>
+				<Text
+					style={{
+						...a.text_md,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					Your report will be sent to the Bluesky Moderation Service
 				</Text>
 			</View>
-
 			{params.type === "convoMessage" && <PreviewMessage message={params.message} />}
-
-			<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
-				<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>Reason:</Text>{" "}
-				<Text style={[a.font_bold, a.text_md]}>{reportOption.title}</Text>
+			<Text
+				style={{
+					...a.text_md,
+					...t.atoms.text_contrast_medium,
+				}}
+			>
+				<Text
+					style={{
+						...a.font_bold,
+						...a.text_md,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
+					Reason:
+				</Text>{" "}
+				<Text
+					style={{
+						...a.font_bold,
+						...a.text_md,
+					}}
+				>
+					{reportOption.title}
+				</Text>
 			</Text>
-
 			<Divider />
+			<View style={a.gap_md}>
+				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
-			<View style={[a.gap_md]}>
-				<Text style={[t.atoms.text_contrast_medium]}>Optionally provide additional information below:</Text>
-
-				<View style={[a.relative, a.w_full]}>
+				<View
+					style={{
+						...a.relative,
+						...a.w_full,
+					}}
+				>
 					<Dialog.Input
 						multiline
 						defaultValue={details}
@@ -213,26 +256,40 @@ function SubmitStep({
 						numberOfLines={5}
 					/>
 					<View
-						style={[
-							a.absolute,
-							a.flex_row,
-							a.align_center,
-							a.pr_md,
-							a.pb_sm,
-							{
+						style={{
+							...a.absolute,
+							...a.flex_row,
+							...a.align_center,
+							...a.pr_md,
+							...a.pb_sm,
+
+							...{
 								bottom: 0,
 								right: 0,
 							},
-						]}
+						}}
 					>
 						<CharProgress count={details?.length || 0} />
 					</View>
 				</View>
 			</View>
-
-			<View style={[a.flex_row, a.align_center, a.justify_end, a.gap_lg]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_end,
+					...a.gap_lg,
+				}}
+			>
 				{error && (
-					<Text style={[a.flex_1, a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
+					<Text
+						style={{
+							...a.flex_1,
+							...a.italic,
+							...a.leading_snug,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
 						There was an issue sending your report. Please check your internet connection.
 					</Text>
 				)}
@@ -310,26 +367,47 @@ function DoneStep({
 
 	return (
 		<View style={a.gap_2xl}>
-			<View style={[a.justify_center, gtMobile ? a.gap_sm : a.gap_xs]}>
-				<Text style={[a.text_2xl, a.font_bold]}>Report submitted</Text>
-				<Text style={[a.text_md, t.atoms.text_contrast_medium]}>
+			<View
+				style={{
+					...a.justify_center,
+					...(gtMobile ? a.gap_sm : a.gap_xs),
+				}}
+			>
+				<Text
+					style={{
+						...a.text_2xl,
+						...a.font_bold,
+					}}
+				>
+					Report submitted
+				</Text>
+				<Text
+					style={{
+						...a.text_md,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					Our moderation team has received your report.
 				</Text>
 			</View>
 			<Toggle.Group label={"Block and/or delete this conversation"} values={actions} onChange={setActions}>
-				<View style={[a.gap_md]}>
+				<View style={a.gap_md}>
 					<Toggle.Item name="block" label={"Block user"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={[a.text_md]}>Block user</Toggle.LabelText>
+						<Toggle.LabelText style={a.text_md}>Block user</Toggle.LabelText>
 					</Toggle.Item>
 					<Toggle.Item name="leave" label={"Delete conversation"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={[a.text_md]}>Delete conversation</Toggle.LabelText>
+						<Toggle.LabelText style={a.text_md}>Delete conversation</Toggle.LabelText>
 					</Toggle.Item>
 				</View>
 			</Toggle.Group>
-
-			<View style={[a.gap_md, [a.flex_row_reverse]]}>
+			<View
+				style={{
+					...a.gap_md,
+					...[a.flex_row_reverse],
+				}}
+			>
 				<Button
 					label={btnText}
 					onPress={onPressPrimaryAction}
@@ -356,20 +434,30 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 	return (
 		<View style={a.align_start}>
 			<View
-				style={[
-					a.py_sm,
-					a.my_2xs,
-					a.rounded_md,
-					{
+				style={{
+					...a.py_sm,
+					...a.my_2xs,
+					...a.rounded_md,
+
+					...{
 						paddingLeft: 14,
 						paddingRight: 14,
 						backgroundColor: t.palette.contrast_50,
 						borderRadius: 17,
 					},
-					{ borderBottomLeftRadius: 2 },
-				]}
+
+					...{ borderBottomLeftRadius: 2 },
+				}}
 			>
-				<RichText value={rt} style={[a.text_md, a.leading_snug]} interactiveStyle={a.underline} enableTags />
+				<RichText
+					value={rt}
+					style={{
+						...a.text_md,
+						...a.leading_snug,
+					}}
+					interactiveStyle={a.underline}
+					enableTags
+				/>
 			</View>
 			<MessageItemMetadata
 				item={{
@@ -379,7 +467,10 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 					nextMessage: null,
 					prevMessage: null,
 				}}
-				style={[a.text_left, a.mb_0]}
+				style={{
+					...a.text_left,
+					...a.mb_0,
+				}}
 			/>
 		</View>
 	);

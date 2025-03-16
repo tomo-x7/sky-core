@@ -104,15 +104,14 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 	return (
 		<>
 			<SwitchAccountDialog control={accountSwitchControl} />
-
 			<Animated.View
-				style={[
-					styles.bottomBar,
-					pal.view,
-					pal.border,
-					{ paddingBottom: clamp(0, 15, 60) },
-					footerMinimalShellTransform,
-				]}
+				style={{
+					...styles.bottomBar,
+					...pal.view,
+					...pal.border,
+					...{ paddingBottom: clamp(0, 15, 60) },
+					...footerMinimalShellTransform,
+				}}
 				onLayout={(e) => {
 					footerHeight.set(e.nativeEvent.layout.height);
 				}}
@@ -125,10 +124,21 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 								isAtHome ? (
 									<HomeFilled
 										width={iconWidth + 1}
-										style={[styles.ctrlIcon, pal.text, styles.homeIcon]}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.homeIcon,
+										}}
 									/>
 								) : (
-									<Home width={iconWidth + 1} style={[styles.ctrlIcon, pal.text, styles.homeIcon]} />
+									<Home
+										width={iconWidth + 1}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.homeIcon,
+										}}
+									/>
 								)
 							}
 							// hasNew={hasHomeBadge && gate("remove_show_latest_button")}
@@ -142,13 +152,21 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 								isAtSearch ? (
 									<MagnifyingGlassFilled
 										width={iconWidth + 2}
-										style={[styles.ctrlIcon, pal.text, styles.searchIcon]}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.searchIcon,
+										}}
 									/>
 								) : (
 									<MagnifyingGlass
 										testID="bottomBarSearchBtn"
 										width={iconWidth + 2}
-										style={[styles.ctrlIcon, pal.text, styles.searchIcon]}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.searchIcon,
+										}}
 									/>
 								)
 							}
@@ -163,12 +181,20 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 								isAtMessages ? (
 									<MessageFilled
 										width={iconWidth - 1}
-										style={[styles.ctrlIcon, pal.text, styles.feedsIcon]}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.feedsIcon,
+										}}
 									/>
 								) : (
 									<Message
 										width={iconWidth - 1}
-										style={[styles.ctrlIcon, pal.text, styles.feedsIcon]}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.feedsIcon,
+										}}
 									/>
 								)
 							}
@@ -190,10 +216,21 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 								isAtNotifications ? (
 									<BellFilled
 										width={iconWidth}
-										style={[styles.ctrlIcon, pal.text, styles.bellIcon]}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.bellIcon,
+										}}
 									/>
 								) : (
-									<Bell width={iconWidth} style={[styles.ctrlIcon, pal.text, styles.bellIcon]} />
+									<Bell
+										width={iconWidth}
+										style={{
+											...styles.ctrlIcon,
+											...pal.text,
+											...styles.bellIcon,
+										}}
+									/>
 								)
 							}
 							onPress={onPressNotifications}
@@ -213,13 +250,13 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 								<View style={styles.ctrlIconSizingWrapper}>
 									{isAtMyProfile ? (
 										<View
-											style={[
-												styles.ctrlIcon,
-												pal.text,
-												styles.profileIcon,
-												styles.onProfile,
-												{ borderColor: pal.text.color },
-											]}
+											style={{
+												...styles.ctrlIcon,
+												...pal.text,
+												...styles.profileIcon,
+												...styles.onProfile,
+												...{ borderColor: pal.text.color },
+											}}
 										>
 											<UserAvatar
 												avatar={profile?.avatar}
@@ -230,7 +267,13 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 											/>
 										</View>
 									) : (
-										<View style={[styles.ctrlIcon, pal.text, styles.profileIcon]}>
+										<View
+											style={{
+												...styles.ctrlIcon,
+												...pal.text,
+												...styles.profileIcon,
+											}}
+										>
 											<UserAvatar
 												avatar={profile?.avatar}
 												size={iconWidth - 3}
@@ -271,7 +314,13 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 								</View>
 							</View>
 
-							<View style={[a.flex_row, a.flex_wrap, a.gap_sm]}>
+							<View
+								style={{
+									...a.flex_row,
+									...a.flex_wrap,
+									...a.gap_sm,
+								}}
+							>
 								<Button
 									onPress={showCreateAccount}
 									label={"Create account"}
@@ -326,7 +375,10 @@ function Btn({
 	return (
 		<PressableScale
 			testID={testID}
-			style={[styles.ctrl, a.flex_1]}
+			style={{
+				...styles.ctrl,
+				...a.flex_1,
+			}}
 			onPress={onPress}
 			onLongPress={onLongPress}
 			accessible={accessible}
@@ -336,11 +388,21 @@ function Btn({
 		>
 			{icon}
 			{notificationCount ? (
-				<View style={[styles.notificationCount, a.rounded_full]}>
+				<View
+					style={{
+						...styles.notificationCount,
+						...a.rounded_full,
+					}}
+				>
 					<Text style={styles.notificationCountLabel}>{notificationCount}</Text>
 				</View>
 			) : hasNew ? (
-				<View style={[styles.hasNewBadge, a.rounded_full]} />
+				<View
+					style={{
+						...styles.hasNewBadge,
+						...a.rounded_full,
+					}}
+				/>
 			) : null}
 		</PressableScale>
 	);

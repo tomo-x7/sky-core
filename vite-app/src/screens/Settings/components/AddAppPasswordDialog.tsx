@@ -80,9 +80,21 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 			<View>
 				<LayoutAnimationConfig skipEntering skipExiting>
 					{!data ? (
-						<Animated.View style={[a.gap_lg]} key={0}>
-							<Text style={[a.text_2xl, a.font_bold]}>Add App Password</Text>
-							<Text style={[a.text_md, a.leading_snug]}>
+						<Animated.View style={a.gap_lg} key={0}>
+							<Text
+								style={{
+									...a.text_2xl,
+									...a.font_bold,
+								}}
+							>
+								Add App Password
+							</Text>
+							<Text
+								style={{
+									...a.text_md,
+									...a.leading_snug,
+								}}
+							>
 								Please enter a unique name for this app password or use our randomly generated one.
 							</Text>
 							<View>
@@ -106,17 +118,23 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									<Admonition type="error">{error.message}</Admonition>
 								</Animated.View>
 							)}
-							<Animated.View style={[a.gap_lg]}>
+							<Animated.View style={a.gap_lg}>
 								<Toggle.Item
 									name="privileged"
 									type="checkbox"
 									label={"Allow access to your direct messages"}
 									value={privileged}
 									onChange={setPrivileged}
-									style={[a.flex_1]}
+									style={a.flex_1}
 								>
 									<Toggle.Checkbox />
-									<Toggle.LabelText style={[a.font_normal, a.text_md, a.leading_snug]}>
+									<Toggle.LabelText
+										style={{
+											...a.font_normal,
+											...a.text_md,
+											...a.leading_snug,
+										}}
+									>
 										Allow access to your direct messages
 									</Toggle.LabelText>
 								</Toggle.Item>
@@ -125,7 +143,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									size="large"
 									variant="solid"
 									color="primary"
-									style={[a.flex_1]}
+									style={a.flex_1}
 									onPress={() => createAppPassword()}
 									disabled={isPending}
 								>
@@ -143,9 +161,21 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 							</Animated.View>
 						</Animated.View>
 					) : (
-						<Animated.View style={[a.gap_lg]} entering={FadeIn.delay(200)} key={1}>
-							<Text style={[a.text_2xl, a.font_bold]}>Here is your app password!</Text>
-							<Text style={[a.text_md, a.leading_snug]}>
+						<Animated.View style={a.gap_lg} entering={FadeIn.delay(200)} key={1}>
+							<Text
+								style={{
+									...a.text_2xl,
+									...a.font_bold,
+								}}
+							>
+								Here is your app password!
+							</Text>
+							<Text
+								style={{
+									...a.text_md,
+									...a.leading_snug,
+								}}
+							>
 								Use this to sign in to the other app along with your handle.
 							</Text>
 							<CopyButton
@@ -158,7 +188,13 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								<ButtonText>{data.password}</ButtonText>
 								<ButtonIcon icon={CopyIcon} />
 							</CopyButton>
-							<Text style={[a.text_md, a.leading_snug, t.atoms.text_contrast_medium]}>
+							<Text
+								style={{
+									...a.text_md,
+									...a.leading_snug,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								For security reasons, you won't be able to view this again. If you lose this app
 								password, you'll need to generate a new one.
 							</Text>
@@ -167,7 +203,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								size="large"
 								variant="outline"
 								color="primary"
-								style={[a.flex_1]}
+								style={a.flex_1}
 								onPress={() => control.close()}
 							>
 								<ButtonText>Done</ButtonText>

@@ -93,15 +93,23 @@ export const ForgotPasswordForm = ({
 					/>
 				</TextField.Root>
 			</View>
-
-			<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>
+			<Text
+				style={{
+					...t.atoms.text_contrast_high,
+					...a.leading_snug,
+				}}
+			>
 				Enter the email you used to create your account. We'll send you a "reset code" so you can set a new
 				password.
 			</Text>
-
 			<FormError error={error} />
-
-			<View style={[a.flex_row, a.align_center, a.pt_md]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.pt_md,
+				}}
+			>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
@@ -114,10 +122,26 @@ export const ForgotPasswordForm = ({
 					</Button>
 				)}
 				{!serviceDescription || isProcessing ? (
-					<Text style={[t.atoms.text_contrast_high, a.pl_md]}>Processing...</Text>
+					<Text
+						style={{
+							...t.atoms.text_contrast_high,
+							...a.pl_md,
+						}}
+					>
+						Processing...
+					</Text>
 				) : undefined}
 			</View>
-			<View style={[t.atoms.border_contrast_medium, a.border_t, a.pt_2xl, a.mt_md, a.flex_row, a.justify_center]}>
+			<View
+				style={{
+					...t.atoms.border_contrast_medium,
+					...a.border_t,
+					...a.pt_2xl,
+					...a.mt_md,
+					...a.flex_row,
+					...a.justify_center,
+				}}
+			>
 				<Button
 					testID="skipSendEmailButton"
 					onPress={onEmailSent}

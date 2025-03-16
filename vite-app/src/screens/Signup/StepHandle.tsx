@@ -76,7 +76,7 @@ export function StepHandle() {
 	const validCheck = validateServiceHandle(draftValue, state.userDomain);
 	return (
 		<ScreenTransition>
-			<View style={[a.gap_lg]}>
+			<View style={a.gap_lg}>
 				<View>
 					<TextField.Root>
 						<TextField.Icon icon={At} />
@@ -101,10 +101,15 @@ export function StepHandle() {
 					</TextField.Root>
 				</View>
 				{draftValue !== "" && (
-					<Text style={[a.text_md]}>
+					<Text style={a.text_md}>
 						<>
 							Your full username will be{" "}
-							<Text style={[a.text_md, a.font_bold]}>
+							<Text
+								style={{
+									...a.text_md,
+									...a.font_bold,
+								}}
+							>
 								@{createFullHandle(draftValue, state.userDomain)}
 							</Text>
 						</>
@@ -112,32 +117,102 @@ export function StepHandle() {
 				)}
 
 				{draftValue !== "" && (
-					<View style={[a.w_full, a.rounded_sm, a.border, a.p_md, a.gap_sm, t.atoms.border_contrast_low]}>
+					<View
+						style={{
+							...a.w_full,
+							...a.rounded_sm,
+							...a.border,
+							...a.p_md,
+							...a.gap_sm,
+							...t.atoms.border_contrast_low,
+						}}
+					>
 						{state.error ? (
-							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
+							<View
+								style={{
+									...a.w_full,
+									...a.flex_row,
+									...a.align_center,
+									...a.gap_sm,
+								}}
+							>
 								<IsValidIcon valid={false} />
-								<Text style={[a.text_md, a.flex_1]}>{state.error}</Text>
+								<Text
+									style={{
+										...a.text_md,
+										...a.flex_1,
+									}}
+								>
+									{state.error}
+								</Text>
 							</View>
 						) : undefined}
 						{validCheck.hyphenStartOrEnd ? (
-							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
+							<View
+								style={{
+									...a.w_full,
+									...a.flex_row,
+									...a.align_center,
+									...a.gap_sm,
+								}}
+							>
 								<IsValidIcon valid={validCheck.handleChars} />
-								<Text style={[a.text_md, a.flex_1]}>Only contains letters, numbers, and hyphens</Text>
+								<Text
+									style={{
+										...a.text_md,
+										...a.flex_1,
+									}}
+								>
+									Only contains letters, numbers, and hyphens
+								</Text>
 							</View>
 						) : (
-							<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
+							<View
+								style={{
+									...a.w_full,
+									...a.flex_row,
+									...a.align_center,
+									...a.gap_sm,
+								}}
+							>
 								<IsValidIcon valid={validCheck.hyphenStartOrEnd} />
-								<Text style={[a.text_md, a.flex_1]}>Doesn't begin or end with a hyphen</Text>
+								<Text
+									style={{
+										...a.text_md,
+										...a.flex_1,
+									}}
+								>
+									Doesn't begin or end with a hyphen
+								</Text>
 							</View>
 						)}
-						<View style={[a.w_full, a.flex_row, a.align_center, a.gap_sm]}>
+						<View
+							style={{
+								...a.w_full,
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_sm,
+							}}
+						>
 							<IsValidIcon valid={validCheck.frontLength && validCheck.totalLength} />
 							{!validCheck.totalLength || draftValue.length > MAX_SERVICE_HANDLE_LENGTH ? (
-								<Text style={[a.text_md, a.flex_1]}>
+								<Text
+									style={{
+										...a.text_md,
+										...a.flex_1,
+									}}
+								>
 									<>No longer than {MAX_SERVICE_HANDLE_LENGTH} characters</>
 								</Text>
 							) : (
-								<Text style={[a.text_md, a.flex_1]}>At least 3 characters</Text>
+								<Text
+									style={{
+										...a.text_md,
+										...a.flex_1,
+									}}
+								>
+									At least 3 characters
+								</Text>
 							)}
 						</View>
 					</View>

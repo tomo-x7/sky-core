@@ -176,12 +176,19 @@ let PostCtrls = ({
 	);
 
 	return (
-		<View style={[a.flex_row, a.justify_between, a.align_center, style]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.justify_between,
+				...a.align_center,
+				...style,
+			}}
+		>
 			<View
-				style={[
-					big ? a.align_center : [a.flex_1, a.align_start, { marginLeft: -6 }],
-					replyDisabled ? { opacity: 0.5 } : undefined,
-				]}
+				style={{
+					...(big ? a.align_center : [a.flex_1, a.align_start, { marginLeft: -6 }]),
+					...(replyDisabled ? { opacity: 0.5 } : undefined),
+				}}
 			>
 				<Pressable
 					testID="replyBtn"
@@ -196,9 +203,21 @@ let PostCtrls = ({
 					accessibilityHint=""
 					hitSlop={POST_CTRL_HITSLOP}
 				>
-					<Bubble style={[defaultCtrlColor, { pointerEvents: "none" }]} width={big ? 22 : 18} />
+					<Bubble
+						style={{
+							...defaultCtrlColor,
+							...{ pointerEvents: "none" },
+						}}
+						width={big ? 22 : 18}
+					/>
 					{typeof post.replyCount !== "undefined" && post.replyCount > 0 ? (
-						<Text style={[defaultCtrlColor, big ? a.text_md : { fontSize: 15 }, a.user_select_none]}>
+						<Text
+							style={{
+								...defaultCtrlColor,
+								...(big ? a.text_md : { fontSize: 15 }),
+								...a.user_select_none,
+							}}
+						>
 							{formatCount(post.replyCount)}
 						</Text>
 					) : undefined}
@@ -259,7 +278,13 @@ let PostCtrls = ({
 							accessibilityHint=""
 							hitSlop={POST_CTRL_HITSLOP}
 						>
-							<ArrowOutOfBox style={[defaultCtrlColor, { pointerEvents: "none" }]} width={22} />
+							<ArrowOutOfBox
+								style={{
+									...defaultCtrlColor,
+									...{ pointerEvents: "none" },
+								}}
+								width={22}
+							/>
 						</Pressable>
 					</View>
 					<Prompt.Basic

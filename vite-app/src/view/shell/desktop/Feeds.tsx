@@ -25,25 +25,24 @@ export function DesktopFeeds() {
 	if (isLoading) {
 		return (
 			<View
-				style={[
-					{
-						gap: 12,
-					},
-				]}
+				style={{
+					gap: 12,
+				}}
 			>
 				{Array(5)
 					.fill(0)
 					.map((_, i) => (
 						<View
 							key={i}
-							style={[
-								a.rounded_sm,
-								t.atoms.bg_contrast_25,
-								{
+							style={{
+								...a.rounded_sm,
+								...t.atoms.bg_contrast_25,
+
+								...{
 									height: 16,
 									width: i % 2 === 0 ? "60%" : "80%",
 								},
-							]}
+							}}
 						/>
 					))}
 			</View>
@@ -56,18 +55,16 @@ export function DesktopFeeds() {
 
 	return (
 		<View
-			style={[
-				{
-					gap: 10,
-					/*
-					 * Small padding prevents overflow prior to actually overflowing the
-					 * height of the screen with lots of feeds.
-					 */
-					paddingVertical: 2,
-					// @ts-ignore
-					overflowY: "auto",
-				},
-			]}
+			style={{
+				gap: 10,
+				/*
+				 * Small padding prevents overflow prior to actually overflowing the
+				 * height of the screen with lots of feeds.
+				 */
+				paddingVertical: 2,
+				// @ts-ignore
+				overflowY: "auto",
+			}}
 		>
 			{pinnedFeedInfos.map((feedInfo) => {
 				const feed = feedInfo.feedDescriptor;
@@ -84,19 +81,26 @@ export function DesktopFeeds() {
 								emitSoftReset();
 							}
 						})}
-						style={[
-							a.text_md,
-							a.leading_snug,
-							current ? [a.font_bold, t.atoms.text] : [t.atoms.text_contrast_medium],
-						]}
+						style={{
+							...a.text_md,
+							...a.leading_snug,
+							...(current ? [a.font_bold, t.atoms.text] : [t.atoms.text_contrast_medium]),
+						}}
 						numberOfLines={1}
 					>
 						{feedInfo.displayName}
 					</InlineLinkText>
 				);
 			})}
-
-			<InlineLinkText to="/feeds" label={"More feeds"} style={[a.text_md, a.leading_snug]} numberOfLines={1}>
+			<InlineLinkText
+				to="/feeds"
+				label={"More feeds"}
+				style={{
+					...a.text_md,
+					...a.leading_snug,
+				}}
+				numberOfLines={1}
+			>
 				{"More feeds"}
 			</InlineLinkText>
 		</View>

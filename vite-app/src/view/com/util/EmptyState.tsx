@@ -24,17 +24,29 @@ export function EmptyState({
 	const iconSize = isTabletOrDesktop ? 64 : 48;
 	return (
 		<View testID={testID} style={style}>
-			<View style={[styles.iconContainer, isTabletOrDesktop && styles.iconContainerBig, pal.viewLight]}>
+			<View
+				style={{
+					...styles.iconContainer,
+					...(isTabletOrDesktop && styles.iconContainerBig),
+					...pal.viewLight,
+				}}
+			>
 				{icon === "user-group" ? (
 					<UserGroupIcon size={iconSize} />
 				) : icon === "growth" ? (
 					<Growth width={iconSize} fill={pal.colors.emptyStateIcon} />
 				) : (
 					// @ts-ignore
-					<FontAwesomeIcon icon={icon} size={iconSize} style={[{ color: pal.colors.emptyStateIcon }]} />
+					<FontAwesomeIcon icon={icon} size={iconSize} style={{ color: pal.colors.emptyStateIcon }} />
 				)}
 			</View>
-			<Text type="xl" style={[{ color: pal.colors.textLight }, styles.text]}>
+			<Text
+				type="xl"
+				style={{
+					...{ color: pal.colors.textLight },
+					...styles.text,
+				}}
+			>
 				{message}
 			</Text>
 		</View>

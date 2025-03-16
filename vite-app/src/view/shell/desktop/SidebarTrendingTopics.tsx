@@ -34,10 +34,30 @@ function Inner() {
 
 	return error || noTopics ? null : (
 		<>
-			<View style={[a.gap_sm, { paddingBottom: 2 }]}>
-				<View style={[a.flex_row, a.align_center, a.gap_xs]}>
+			<View
+				style={{
+					...a.gap_sm,
+					...{ paddingBottom: 2 },
+				}}
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_xs,
+					}}
+				>
 					<Graph size="sm" />
-					<Text style={[a.flex_1, a.text_sm, a.font_bold, t.atoms.text_contrast_medium]}>Trending</Text>
+					<Text
+						style={{
+							...a.flex_1,
+							...a.text_sm,
+							...a.font_bold,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
+						Trending
+					</Text>
 					<Button
 						label={"Hide trending topics"}
 						size="tiny"
@@ -50,7 +70,13 @@ function Inner() {
 					</Button>
 				</View>
 
-				<View style={[a.flex_row, a.flex_wrap, { gap: "6px 4px" }]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.flex_wrap,
+						...{ gap: "6px 4px" },
+					}}
+				>
 					{isLoading ? (
 						Array(TRENDING_LIMIT)
 							.fill(0)
@@ -63,7 +89,7 @@ function Inner() {
 										<TrendingTopic
 											size="small"
 											topic={topic}
-											style={[hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25]]}
+											style={hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25]}
 										/>
 									)}
 								</TrendingTopicLink>

@@ -13,11 +13,17 @@ const ProfileHeaderLoading = (): React.ReactNode => {
 	return (
 		<View style={t.atoms.bg}>
 			<LoadingPlaceholder width="100%" height={150} style={{ borderRadius: 0 }} />
-			<View style={[t.atoms.bg, { borderColor: t.atoms.bg.backgroundColor }, styles.avi]}>
+			<View
+				style={{
+					...t.atoms.bg,
+					...{ borderColor: t.atoms.bg.backgroundColor },
+					...styles.avi,
+				}}
+			>
 				<LoadingPlaceholder width={90} height={90} style={styles.br45} />
 			</View>
 			<View style={styles.content}>
-				<View style={[styles.buttonsLine]}>
+				<View style={styles.buttonsLine}>
 					<LoadingPlaceholder width={140} height={34} style={styles.br50} />
 				</View>
 			</View>

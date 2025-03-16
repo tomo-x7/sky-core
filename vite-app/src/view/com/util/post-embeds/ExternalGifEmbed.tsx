@@ -70,17 +70,17 @@ export function ExternalGifEmbed({
 	return (
 		<>
 			<EmbedConsentDialog control={consentDialogControl} source={params.source} onAccept={load} />
-
 			<Pressable
-				style={[
-					{ height: 300 },
-					a.w_full,
-					a.overflow_hidden,
-					{
+				style={{
+					...{ height: 300 },
+					...a.w_full,
+					...a.overflow_hidden,
+
+					...{
 						borderBottomLeftRadius: 0,
 						borderBottomRightRadius: 0,
 					},
-				]}
+				}}
 				onPress={onPlayPress}
 				accessibilityRole="button"
 				accessibilityHint={"Plays the GIF"}
@@ -102,14 +102,20 @@ export function ExternalGifEmbed({
 				/>
 
 				{(!isPrefetched || !isAnimating) && (
-					<Fill style={[a.align_center, a.justify_center]}>
+					<Fill
+						style={{
+							...a.align_center,
+							...a.justify_center,
+						}}
+					>
 						<Fill
-							style={[
-								t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg,
-								{
+							style={{
+								...(t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg),
+
+								...{
 									opacity: 0.3,
 								},
-							]}
+							}}
 						/>
 
 						{!isAnimating || !isPlayerActive ? ( // Play button when not animating or not active

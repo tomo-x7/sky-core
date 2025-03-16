@@ -12,21 +12,28 @@ export function Menus() {
 	// const {closeAllDialogs} = useDialogStateControlContext()
 
 	return (
-		<View style={[a.gap_md]}>
-			<View style={[a.flex_row, a.align_start]}>
+		<View style={a.gap_md}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_start,
+				}}
+			>
 				<Menu.Root control={menuControl}>
 					<Menu.Trigger label="Open basic menu">
 						{({ state, props }) => {
 							return (
 								<Text
 									{...props}
-									style={[
-										a.py_sm,
-										a.px_md,
-										a.rounded_sm,
-										t.atoms.bg_contrast_50,
-										(state.hovered || state.focused || state.pressed) && [t.atoms.bg_contrast_200],
-									]}
+									style={{
+										...a.py_sm,
+										...a.px_md,
+										...a.rounded_sm,
+										...t.atoms.bg_contrast_50,
+										...((state.hovered || state.focused || state.pressed) && [
+											t.atoms.bg_contrast_200,
+										]),
+									}}
 								>
 									Open
 								</Text>

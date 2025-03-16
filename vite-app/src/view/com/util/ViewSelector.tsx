@@ -143,7 +143,12 @@ export function Selector({
 			}}
 		>
 			<ScrollView testID="selector" horizontal showsHorizontalScrollIndicator={false}>
-				<View style={[pal.view, styles.outer]}>
+				<View
+					style={{
+						...pal.view,
+						...styles.outer,
+					}}
+				>
 					{items.map((item, i) => {
 						const selected = i === selectedIndex;
 						return (
@@ -156,7 +161,13 @@ export function Selector({
 								// TODO: Modify the component API such that lint fails
 								// at the invocation site as well
 							>
-								<View style={[styles.item, selected && styles.itemSelected, borderColor]}>
+								<View
+									style={{
+										...styles.item,
+										...(selected && styles.itemSelected),
+										...borderColor,
+									}}
+								>
 									<Text
 										style={
 											selected ? [styles.labelSelected, pal.text] : [styles.label, pal.textLight]

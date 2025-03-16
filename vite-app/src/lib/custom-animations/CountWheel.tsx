@@ -123,15 +123,15 @@ export function CountWheel({
 	return (
 		<LayoutAnimationConfig skipEntering skipExiting>
 			{likeCount > 0 ? (
-				<View style={[a.justify_center]}>
+				<View style={a.justify_center}>
 					<Animated.View entering={enteringAnimation} key={key}>
 						<Text
 							testID="likeCount"
-							style={[
-								big ? a.text_md : { fontSize: 15 },
-								a.user_select_none,
-								isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 },
-							]}
+							style={{
+								...(big ? a.text_md : { fontSize: 15 }),
+								...a.user_select_none,
+								...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+							}}
 						>
 							{formattedCount}
 						</Text>
@@ -141,15 +141,18 @@ export function CountWheel({
 							entering={exitingAnimation}
 							// Add 2 to the key so there are never duplicates
 							key={key + 2}
-							style={[a.absolute, { width: 50, opacity: 0 }]}
+							style={{
+								...a.absolute,
+								...{ width: 50, opacity: 0 },
+							}}
 							aria-disabled={true}
 						>
 							<Text
-								style={[
-									big ? a.text_md : { fontSize: 15 },
-									a.user_select_none,
-									isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 },
-								]}
+								style={{
+									...(big ? a.text_md : { fontSize: 15 }),
+									...a.user_select_none,
+									...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+								}}
 							>
 								{formattedPrevCount}
 							</Text>

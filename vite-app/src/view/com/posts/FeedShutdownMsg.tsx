@@ -65,23 +65,49 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 
 	const isProcessing = isReplacePending || isRemovePending;
 	return (
-		<View style={[a.py_3xl, a.px_2xl, a.gap_xl, t.atoms.border_contrast_low, a.border_t]}>
-			<Text style={[a.text_5xl, a.font_bold, t.atoms.text, a.text_center]}>:(</Text>
-			<Text style={[a.text_md, a.leading_snug, t.atoms.text, a.text_center]}>
+		<View
+			style={{
+				...a.py_3xl,
+				...a.px_2xl,
+				...a.gap_xl,
+				...t.atoms.border_contrast_low,
+				...a.border_t,
+			}}
+		>
+			<Text
+				style={{
+					...a.text_5xl,
+					...a.font_bold,
+					...t.atoms.text,
+					...a.text_center,
+				}}
+			>
+				:(
+			</Text>
+			<Text
+				style={{
+					...a.text_md,
+					...a.leading_snug,
+					...t.atoms.text,
+					...a.text_center,
+				}}
+			>
 				<>
 					This feed is no longer online. We are showing{" "}
-					<InlineLinkText
-						label={"The Discover feed"}
-						to="/profile/bsky.app/feed/whats-hot"
-						style={[a.text_md]}
-					>
+					<InlineLinkText label={"The Discover feed"} to="/profile/bsky.app/feed/whats-hot" style={a.text_md}>
 						Discover
 					</InlineLinkText>{" "}
 					instead.
 				</>
 			</Text>
 			{hasFeedPinned ? (
-				<View style={[a.flex_row, a.justify_center, a.gap_sm]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.justify_center,
+						...a.gap_sm,
+					}}
+				>
 					<Button
 						variant="outline"
 						color="primary"

@@ -59,34 +59,84 @@ function Inner({ control }: { control: DialogControlProps }) {
 	return (
 		<Dialog.ScrollableInner
 			label={"Verify email dialog"}
-			style={[gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full]}
+			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
-			<View style={[a.gap_xl]}>
+			<View style={a.gap_xl}>
 				{status === "loading" ? (
-					<View style={[a.py_2xl, a.align_center, a.justify_center]}>
+					<View
+						style={{
+							...a.py_2xl,
+							...a.align_center,
+							...a.justify_center,
+						}}
+					>
 						<Loader size="xl" fill={t.atoms.text_contrast_low.color} />
 					</View>
 				) : status === "success" ? (
-					<View style={[a.gap_sm]}>
-						<Text style={[a.font_heavy, a.text_2xl]}>Email Verified</Text>
-						<Text style={[a.text_md, a.leading_snug]}>
+					<View style={a.gap_sm}>
+						<Text
+							style={{
+								...a.font_heavy,
+								...a.text_2xl,
+							}}
+						>
+							Email Verified
+						</Text>
+						<Text
+							style={{
+								...a.text_md,
+								...a.leading_snug,
+							}}
+						>
 							Thanks, you have successfully verified your email address. You can close this dialog.
 						</Text>
 					</View>
 				) : status === "failure" ? (
-					<View style={[a.gap_sm]}>
-						<Text style={[a.font_heavy, a.text_2xl]}>Invalid Verification Code</Text>
-						<Text style={[a.text_md, a.leading_snug]}>
+					<View style={a.gap_sm}>
+						<Text
+							style={{
+								...a.font_heavy,
+								...a.text_2xl,
+							}}
+						>
+							Invalid Verification Code
+						</Text>
+						<Text
+							style={{
+								...a.text_md,
+								...a.leading_snug,
+							}}
+						>
 							The verification code you have provided is invalid. Please make sure that you have used the
 							correct verification link or request a new one.
 						</Text>
 					</View>
 				) : (
-					<View style={[a.gap_sm]}>
-						<Text style={[a.font_heavy, a.text_2xl]}>Email Resent</Text>
-						<Text style={[a.text_md, a.leading_snug]}>
+					<View style={a.gap_sm}>
+						<Text
+							style={{
+								...a.font_heavy,
+								...a.text_2xl,
+							}}
+						>
+							Email Resent
+						</Text>
+						<Text
+							style={{
+								...a.text_md,
+								...a.leading_snug,
+							}}
+						>
 							We have sent another verification email to{" "}
-							<Text style={[a.text_md, a.font_bold]}>{currentAccount?.email}</Text>.
+							<Text
+								style={{
+									...a.text_md,
+									...a.font_bold,
+								}}
+							>
+								{currentAccount?.email}
+							</Text>
+							.
 						</Text>
 					</View>
 				)}
@@ -108,7 +158,6 @@ function Inner({ control }: { control: DialogControlProps }) {
 					</>
 				)}
 			</View>
-
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

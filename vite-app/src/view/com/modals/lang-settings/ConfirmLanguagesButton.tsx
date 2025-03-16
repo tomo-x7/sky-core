@@ -16,14 +16,15 @@ export const ConfirmLanguagesButton = ({
 	const { isMobile } = useWebMediaQueries();
 	return (
 		<View
-			style={[
-				styles.btnContainer,
-				pal.borderDark,
-				isMobile && {
+			style={{
+				...styles.btnContainer,
+				...pal.borderDark,
+
+				...(isMobile && {
 					paddingBottom: 40,
 					borderTopWidth: 1,
-				},
-			]}
+				}),
+			}}
 		>
 			<Pressable
 				testID="confirmContentLanguagesBtn"
@@ -36,9 +37,15 @@ export const ConfirmLanguagesButton = ({
 					colors={[gradients.blueLight.start, gradients.blueLight.end]}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
-					style={[styles.btn]}
+					style={styles.btn}
 				>
-					<Text style={[s.white, s.bold, s.f18]}>
+					<Text
+						style={{
+							...s.white,
+							...s.bold,
+							...s.f18,
+						}}
+					>
 						<>Done{extraText}</>
 					</Text>
 				</LinearGradient>

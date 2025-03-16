@@ -142,7 +142,11 @@ export function Scrubber({
 	return (
 		<View
 			testID="scrubber"
-			style={[{ height: isTouchDevice ? 32 : 18, width: "100%" }, a.flex_shrink_0, a.px_xs]}
+			style={{
+				...{ height: isTouchDevice ? 32 : 18, width: "100%" },
+				...a.flex_shrink_0,
+				...a.px_xs,
+			}}
 			onPointerEnter={onStartHover}
 			onPointerLeave={onEndHover}
 		>
@@ -162,19 +166,24 @@ export function Scrubber({
 				onPointerCancel={onPointerUp}
 			>
 				<View
-					style={[
-						a.w_full,
-						a.rounded_full,
-						a.overflow_hidden,
-						{ backgroundColor: "rgba(255, 255, 255, 0.4)" },
-						{ height: hovered || scrubberActive ? 6 : 3 },
-						//@ts-ignore
+					style={{
+						...a.w_full,
+						...a.rounded_full,
+						...a.overflow_hidden,
+						...{ backgroundColor: "rgba(255, 255, 255, 0.4)" },
+						...{ height: hovered || scrubberActive ? 6 : 3 },
+
+						...//@ts-ignore
 						{ transition: "height 0.1s ease" },
-					]}
+					}}
 				>
 					{duration > 0 && (
 						<View
-							style={[a.h_full, { backgroundColor: t.palette.white }, { width: `${progressPercent}%` }]}
+							style={{
+								...a.h_full,
+								...{ backgroundColor: t.palette.white },
+								...{ width: `${progressPercent}%` },
+							}}
 						/>
 					)}
 				</View>
@@ -201,19 +210,20 @@ export function Scrubber({
 					}}
 				>
 					<View
-						style={[
-							a.w_full,
-							a.h_full,
-							a.rounded_full,
-							{ backgroundColor: t.palette.white },
-							{
+						style={{
+							...a.w_full,
+							...a.h_full,
+							...a.rounded_full,
+							...{ backgroundColor: t.palette.white },
+
+							...{
 								transform: [
 									{
 										scale: hovered || scrubberActive || focused ? (scrubberActive ? 1 : 0.6) : 0,
 									},
 								],
 							},
-						]}
+						}}
 					/>
 				</div>
 			</div>

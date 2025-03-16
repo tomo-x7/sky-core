@@ -4,12 +4,15 @@ import { styles } from "./styles";
 import type { BottomSheetBackgroundProps } from "./types";
 
 const BottomSheetBackgroundComponent = ({ pointerEvents, style }: BottomSheetBackgroundProps) => (
-	<View
+	<div
 		pointerEvents={pointerEvents}
 		accessible={true}
 		accessibilityRole="adjustable"
 		accessibilityLabel="Bottom Sheet"
-		style={[styles.container, style]}
+		style={{
+			...styles.container,
+			...style,
+		}}
 	/>
 );
 

@@ -70,28 +70,45 @@ export function ModerationMutedAccounts(props: Props) {
 	return (
 		<Layout.Screen testID="mutedAccountsScreen">
 			<ViewHeader title={"Muted Accounts"} showOnDesktop />
-			<Layout.Center style={[a.flex_1, { paddingBottom: 100 }]}>
+			<Layout.Center
+				style={{
+					...a.flex_1,
+					...{ paddingBottom: 100 },
+				}}
+			>
 				<Text
 					type="sm"
-					style={[
-						styles.description,
-						pal.text,
-						isTabletOrDesktop && styles.descriptionDesktop,
-						{
+					style={{
+						...styles.description,
+						...pal.text,
+						...(isTabletOrDesktop && styles.descriptionDesktop),
+
+						...{
 							marginTop: 20,
 						},
-					]}
+					}}
 				>
 					Muted accounts have their posts removed from your feed and from your notifications. Mutes are
 					completely private.
 				</Text>
 				{isEmpty ? (
-					<View style={[pal.border]}>
+					<View style={pal.border}>
 						{isError ? (
 							<ErrorScreen title="Oops!" message={cleanError(error)} onPressTryAgain={refetch} />
 						) : (
-							<View style={[styles.empty, pal.viewLight]}>
-								<Text type="lg" style={[pal.text, styles.emptyText]}>
+							<View
+								style={{
+									...styles.empty,
+									...pal.viewLight,
+								}}
+							>
+								<Text
+									type="lg"
+									style={{
+										...pal.text,
+										...styles.emptyText,
+									}}
+								>
 									You have not muted any accounts yet. To mute an account, go to their profile and
 									select "Mute account" from the menu on their account.
 								</Text>
@@ -100,7 +117,7 @@ export function ModerationMutedAccounts(props: Props) {
 					</View>
 				) : (
 					<FlatList
-						style={[!isTabletOrDesktop && styles.flex1]}
+						style={!isTabletOrDesktop && styles.flex1}
 						data={profiles}
 						keyExtractor={(item) => item.did}
 						refreshControl={

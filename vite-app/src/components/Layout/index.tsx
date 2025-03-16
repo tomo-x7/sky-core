@@ -25,7 +25,14 @@ export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }
 	return (
 		<>
 			<WebCenterBorders />
-			<View style={[a.util_screen_outer, { paddingTop: 0 }, style]} {...props} />
+			<View
+				style={{
+					...a.util_screen_outer,
+					...{ paddingTop: 0 },
+					...style,
+				}}
+				{...props}
+			/>
 		</>
 	);
 });
@@ -65,7 +72,10 @@ export const Content = React.memo(function Content({
 			indicatorStyle={t.scheme === "dark" ? "white" : "black"}
 			// sets the scroll inset to the height of the footer
 			animatedProps={animatedProps}
-			style={[scrollViewStyles.common, style]}
+			style={{
+				...scrollViewStyles.common,
+				...style,
+			}}
 			contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
 			{...props}
 		>
@@ -104,7 +114,10 @@ export const KeyboardAwareContent = React.memo(function LayoutScrollView({
 }: KeyboardAwareContentProps) {
 	return (
 		<KeyboardAwareScrollView
-			style={[scrollViewStyles.common, style]}
+			style={{
+				...scrollViewStyles.common,
+				...style,
+			}}
 			contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
 			keyboardShouldPersistTaps="handled"
 			{...props}
@@ -130,22 +143,25 @@ export const Center = React.memo(function LayoutContent({
 	const ctx = useMemo(() => ({ isWithinOffsetView: true }), []);
 	return (
 		<View
-			style={[
-				a.w_full,
-				a.mx_auto,
-				gtMobile && {
+			style={{
+				...a.w_full,
+				...a.mx_auto,
+
+				...(gtMobile && {
 					maxWidth: 600,
-				},
-				!isWithinOffsetView && {
+				}),
+
+				...(!isWithinOffsetView && {
 					transform: [
 						{
 							translateX: centerColumnOffset && !ignoreTabletLayoutOffset && !isWithinDialog ? -150 : 0,
 						},
 						{ translateX: SCROLLBAR_OFFSET ?? 0 },
 					],
-				},
-				style,
-			]}
+				}),
+
+				...style,
+			}}
 			{...props}
 		>
 			<ScrollbarOffsetContext.Provider value={ctx}>{children}</ScrollbarOffsetContext.Provider>
@@ -162,13 +178,14 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 	const { centerColumnOffset } = useLayoutBreakpoints();
 	return gtMobile ? (
 		<View
-			style={[
-				a.fixed,
-				a.inset_0,
-				a.border_l,
-				a.border_r,
-				t.atoms.border_contrast_low,
-				{
+			style={{
+				...a.fixed,
+				...a.inset_0,
+				...a.border_l,
+				...a.border_r,
+				...t.atoms.border_contrast_low,
+
+				...{
 					width: 602,
 					left: "50%",
 					transform: [
@@ -177,7 +194,7 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 						...a.scrollbar_offset.transform,
 					],
 				},
-			]}
+			}}
 		/>
 	) : null;
 });

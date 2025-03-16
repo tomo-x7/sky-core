@@ -79,7 +79,7 @@ export function SubmitView({
 	}, [params, details, selectedReportOption, selectedServices, onSubmitComplete, agent]);
 
 	return (
-		<View style={[a.gap_2xl]}>
+		<View style={a.gap_2xl}>
 			<Button
 				size="small"
 				variant="solid"
@@ -90,33 +90,62 @@ export function SubmitView({
 			>
 				<ButtonIcon icon={ChevronLeft} />
 			</Button>
-
 			<View
-				style={[
-					a.w_full,
-					a.flex_row,
-					a.align_center,
-					a.justify_between,
-					a.gap_lg,
-					a.p_md,
-					a.rounded_md,
-					a.border,
-					t.atoms.border_contrast_low,
-				]}
+				style={{
+					...a.w_full,
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_between,
+					...a.gap_lg,
+					...a.p_md,
+					...a.rounded_md,
+					...a.border,
+					...t.atoms.border_contrast_low,
+				}}
 			>
-				<View style={[a.flex_1, a.gap_xs]}>
-					<Text style={[a.text_md, a.font_bold]}>{selectedReportOption.title}</Text>
-					<Text style={[a.leading_tight, { maxWidth: 400 }]}>{selectedReportOption.description}</Text>
+				<View
+					style={{
+						...a.flex_1,
+						...a.gap_xs,
+					}}
+				>
+					<Text
+						style={{
+							...a.text_md,
+							...a.font_bold,
+						}}
+					>
+						{selectedReportOption.title}
+					</Text>
+					<Text
+						style={{
+							...a.leading_tight,
+							...{ maxWidth: 400 },
+						}}
+					>
+						{selectedReportOption.description}
+					</Text>
 				</View>
 
-				<Check size="md" style={[a.pr_sm, t.atoms.text_contrast_low]} />
+				<Check
+					size="md"
+					style={{
+						...a.pr_sm,
+						...t.atoms.text_contrast_low,
+					}}
+				/>
 			</View>
-
-			<View style={[a.gap_md]}>
-				<Text style={[t.atoms.text_contrast_medium]}>Select the moderation service(s) to report to</Text>
+			<View style={a.gap_md}>
+				<Text style={t.atoms.text_contrast_medium}>Select the moderation service(s) to report to</Text>
 
 				<Toggle.Group label="Select mod services" values={selectedServices} onChange={setSelectedServices}>
-					<View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.gap_md,
+							...a.flex_wrap,
+						}}
+					>
 						{labelers.map((labeler) => {
 							const title = getLabelingServiceTitle({
 								displayName: labeler.creator.displayName,
@@ -131,10 +160,15 @@ export function SubmitView({
 					</View>
 				</Toggle.Group>
 			</View>
-			<View style={[a.gap_md]}>
-				<Text style={[t.atoms.text_contrast_medium]}>Optionally provide additional information below:</Text>
+			<View style={a.gap_md}>
+				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
-				<View style={[a.relative, a.w_full]}>
+				<View
+					style={{
+						...a.relative,
+						...a.w_full,
+					}}
+				>
 					<Dialog.Input
 						multiline
 						value={details}
@@ -145,27 +179,41 @@ export function SubmitView({
 					/>
 
 					<View
-						style={[
-							a.absolute,
-							a.flex_row,
-							a.align_center,
-							a.pr_md,
-							a.pb_sm,
-							{
+						style={{
+							...a.absolute,
+							...a.flex_row,
+							...a.align_center,
+							...a.pr_md,
+							...a.pb_sm,
+
+							...{
 								bottom: 0,
 								right: 0,
 							},
-						]}
+						}}
 					>
 						<CharProgress count={details?.length || 0} />
 					</View>
 				</View>
 			</View>
-
-			<View style={[a.flex_row, a.align_center, a.justify_end, a.gap_lg]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_end,
+					...a.gap_lg,
+				}}
+			>
 				{!selectedServices.length ||
 					(error && (
-						<Text style={[a.flex_1, a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
+						<Text
+							style={{
+								...a.flex_1,
+								...a.italic,
+								...a.leading_snug,
+								...t.atoms.text_contrast_medium,
+							}}
+						>
 							{error ? error : <>You must select at least one labeler for a report</>}
 						</Text>
 					))}
@@ -193,21 +241,35 @@ function LabelerToggle({ title }: { title: string }) {
 
 	return (
 		<View
-			style={[
-				a.flex_row,
-				a.align_center,
-				a.gap_md,
-				a.p_md,
-				a.pr_lg,
-				a.rounded_sm,
-				a.overflow_hidden,
-				t.atoms.bg_contrast_25,
-				ctx.selected && [t.atoms.bg_contrast_50],
-			]}
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_md,
+				...a.p_md,
+				...a.pr_lg,
+				...a.rounded_sm,
+				...a.overflow_hidden,
+				...t.atoms.bg_contrast_25,
+				...(ctx.selected && [t.atoms.bg_contrast_50]),
+			}}
 		>
 			<Toggle.Checkbox />
-			<View style={[a.flex_row, a.align_center, a.justify_between, a.gap_lg, a.z_10]}>
-				<Text emoji style={[t.atoms.text_contrast_medium, ctx.selected && t.atoms.text]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_between,
+					...a.gap_lg,
+					...a.z_10,
+				}}
+			>
+				<Text
+					emoji
+					style={{
+						...t.atoms.text_contrast_medium,
+						...(ctx.selected && t.atoms.text),
+					}}
+				>
 					{title}
 				</Text>
 			</View>

@@ -27,9 +27,21 @@ export function FollowingEmptyState() {
 		<View style={styles.container}>
 			<View style={styles.inner}>
 				<View style={styles.iconContainer}>
-					<MagnifyingGlassIcon style={[styles.icon, pal.text]} size={62} />
+					<MagnifyingGlassIcon
+						style={{
+							...styles.icon,
+							...pal.text,
+						}}
+						size={62}
+					/>
 				</View>
-				<Text type="xl-medium" style={[s.textCenter, pal.text]}>
+				<Text
+					type="xl-medium"
+					style={{
+						...s.textCenter,
+						...pal.text,
+					}}
+				>
 					Your following feed is empty! Follow more users to see what's happening.
 				</Text>
 				<Button type="inverted" style={styles.emptyBtn} onPress={onPressFindAccounts}>
@@ -40,10 +52,24 @@ export function FollowingEmptyState() {
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 				</Button>
 
-				<Text type="xl-medium" style={[s.textCenter, pal.text, s.mt20]}>
+				<Text
+					type="xl-medium"
+					style={{
+						...s.textCenter,
+						...pal.text,
+						...s.mt20,
+					}}
+				>
 					You can also discover new Custom Feeds to follow.
 				</Text>
-				<Button type="inverted" style={[styles.emptyBtn, s.mt10]} onPress={onPressDiscoverFeeds}>
+				<Button
+					type="inverted"
+					style={{
+						...styles.emptyBtn,
+						...s.mt10,
+					}}
+					onPress={onPressDiscoverFeeds}
+				>
 					<Text type="lg-medium" style={palInverted.text}>
 						Discover new custom feeds
 					</Text>

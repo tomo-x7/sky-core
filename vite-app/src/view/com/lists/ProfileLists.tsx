@@ -132,7 +132,14 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 				return <FeedLoadingPlaceholder />;
 			}
 			return (
-				<View style={[a.border_t, t.atoms.border_contrast_low, a.px_lg, a.py_lg]}>
+				<View
+					style={{
+						...a.border_t,
+						...t.atoms.border_contrast_low,
+						...a.px_lg,
+						...a.py_lg,
+					}}
+				>
 					<ListCard.Default view={item} />
 				</View>
 			);
@@ -148,7 +155,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 	}, [enabled, scrollElRef, setScrollViewTag]);
 
 	const ProfileListsFooter = React.useCallback(() => {
-		return isFetchingNextPage ? <ActivityIndicator style={[styles.footer]} /> : null;
+		return isFetchingNextPage ? <ActivityIndicator style={styles.footer} /> : null;
 	}, [isFetchingNextPage]);
 
 	return (

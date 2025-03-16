@@ -74,21 +74,68 @@ export function ExploreTrendingVideos() {
 	}
 
 	return (
-		<View style={[a.pb_xl]}>
-			<View style={[a.flex_row, [a.px_lg, a.py_lg, a.pt_2xl, a.gap_md], a.border_b, t.atoms.border_contrast_low]}>
-				<View style={[a.flex_1, a.gap_sm]}>
-					<View style={[a.flex_row, a.align_center, a.gap_sm]}>
+		<View style={a.pb_xl}>
+			<View
+				style={{
+					...a.flex_row,
+					...[a.px_lg, a.py_lg, a.pt_2xl, a.gap_md],
+					...a.border_b,
+					...t.atoms.border_contrast_low,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_1,
+						...a.gap_sm,
+					}}
+				>
+					<View
+						style={{
+							...a.flex_row,
+							...a.align_center,
+							...a.gap_sm,
+						}}
+					>
 						<Graph size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
-						<Text style={[a.text_2xl, a.font_heavy, t.atoms.text]}>Trending Videos</Text>
-						<View style={[a.py_xs, a.px_sm, a.rounded_sm, a.overflow_hidden]}>
+						<Text
+							style={{
+								...a.text_2xl,
+								...a.font_heavy,
+								...t.atoms.text,
+							}}
+						>
+							Trending Videos
+						</Text>
+						<View
+							style={{
+								...a.py_xs,
+								...a.px_sm,
+								...a.rounded_sm,
+								...a.overflow_hidden,
+							}}
+						>
 							<GradientFill gradient={tokens.gradients.primary} />
-							<Text style={[a.text_sm, a.font_heavy, { color: "white" }]}>BETA</Text>
+							<Text
+								style={{
+									...a.text_sm,
+									...a.font_heavy,
+									...{ color: "white" },
+								}}
+							>
+								BETA
+							</Text>
 						</View>
 					</View>
-					<Text style={[t.atoms.text_contrast_high, a.leading_snug]}>Popular videos in your network.</Text>
+					<Text
+						style={{
+							...t.atoms.text_contrast_high,
+							...a.leading_snug,
+						}}
+					>
+						Popular videos in your network.
+					</Text>
 				</View>
 			</View>
-
 			<BlockDrawerGesture>
 				<ScrollView
 					horizontal
@@ -97,21 +144,22 @@ export function ExploreTrendingVideos() {
 					snapToInterval={CARD_WIDTH + tokens.space.sm}
 				>
 					<View
-						style={[
-							a.pt_lg,
-							a.flex_row,
-							a.gap_sm,
-							{
+						style={{
+							...a.pt_lg,
+							...a.flex_row,
+							...a.gap_sm,
+
+							...{
 								paddingLeft: gutters.paddingLeft,
 								paddingRight: gutters.paddingRight,
 							},
-						]}
+						}}
 					>
 						{isLoading ? (
 							Array(10)
 								.fill(0)
 								.map((_, i) => (
-									<View key={i.toString()} style={[{ width: CARD_WIDTH }]}>
+									<View key={i.toString()} style={{ width: CARD_WIDTH }}>
 										<CompactVideoPostCardPlaceholder />
 									</View>
 								))
@@ -123,10 +171,24 @@ export function ExploreTrendingVideos() {
 					</View>
 				</ScrollView>
 			</BlockDrawerGesture>
-
 			{!isSavedAlready && (
-				<View style={[gutters, a.pt_lg, a.flex_row, a.align_center, a.justify_between, a.gap_xl]}>
-					<Text style={[a.flex_1, a.text_sm, a.leading_snug]}>
+				<View
+					style={{
+						...gutters,
+						...a.pt_lg,
+						...a.flex_row,
+						...a.align_center,
+						...a.justify_between,
+						...a.gap_xl,
+					}}
+				>
+					<Text
+						style={{
+							...a.flex_1,
+							...a.text_sm,
+							...a.leading_snug,
+						}}
+					>
 						Pin the trending videos feed to your home screen for easy access
 					</Text>
 					<Button
@@ -168,7 +230,7 @@ function VideoCards({
 	return (
 		<>
 			{items.map((item) => (
-				<View key={item.post.uri} style={[{ width: CARD_WIDTH }]}>
+				<View key={item.post.uri} style={{ width: CARD_WIDTH }}>
 					<CompactVideoPostCard
 						post={item.post}
 						moderation={item.moderation}
@@ -180,36 +242,43 @@ function VideoCards({
 					/>
 				</View>
 			))}
-
-			<View style={[{ width: CARD_WIDTH * 2 }]}>
+			<View style={{ width: CARD_WIDTH * 2 }}>
 				<Link
 					to={href}
 					label={"View more"}
-					style={[a.justify_center, a.align_center, a.flex_1, a.rounded_md, t.atoms.bg_contrast_25]}
+					style={{
+						...a.justify_center,
+						...a.align_center,
+						...a.flex_1,
+						...a.rounded_md,
+						...t.atoms.bg_contrast_25,
+					}}
 				>
 					{({ pressed }) => (
 						<View
-							style={[
-								a.flex_row,
-								a.align_center,
-								a.gap_md,
-								{
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_md,
+
+								...{
 									opacity: pressed ? 0.6 : 1,
 								},
-							]}
+							}}
 						>
-							<Text style={[a.text_md]}>View more</Text>
+							<Text style={a.text_md}>View more</Text>
 							<View
-								style={[
-									a.align_center,
-									a.justify_center,
-									a.rounded_full,
-									{
+								style={{
+									...a.align_center,
+									...a.justify_center,
+									...a.rounded_full,
+
+									...{
 										width: 34,
 										height: 34,
 										backgroundColor: t.palette.primary_500,
 									},
-								]}
+								}}
 							>
 								<ButtonIcon icon={ChevronRight} />
 							</View>

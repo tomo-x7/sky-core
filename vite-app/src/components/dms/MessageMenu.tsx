@@ -74,11 +74,11 @@ export let MessageMenu = ({
 						{({ props, state }) => (
 							<Pressable
 								{...props}
-								style={[
-									a.p_sm,
-									a.rounded_full,
-									(state.hovered || state.pressed) && t.atoms.bg_contrast_25,
-								]}
+								style={{
+									...a.p_sm,
+									...a.rounded_full,
+									...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),
+								}}
 							>
 								<DotsHorizontal size="md" style={t.atoms.text} />
 							</Pressable>
@@ -132,13 +132,11 @@ export let MessageMenu = ({
 					</Menu.Group>
 				</Menu.Outer>
 			</Menu.Root>
-
 			<ReportDialog
 				currentScreen="conversation"
 				params={{ type: "convoMessage", convoId: convo.convo.id, message }}
 				control={reportControl}
 			/>
-
 			<Prompt.Basic
 				control={deleteControl}
 				title={"Delete message"}

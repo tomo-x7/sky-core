@@ -27,29 +27,30 @@ export function TrendingTopic({
 
 	return (
 		<View
-			style={[
-				a.flex_row,
-				a.align_center,
-				a.rounded_full,
-				a.border,
-				t.atoms.border_contrast_medium,
-				t.atoms.bg,
-				isSmall
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.rounded_full,
+				...a.border,
+				...t.atoms.border_contrast_medium,
+				...t.atoms.bg,
+
+				...(isSmall
 					? [
 							{
 								paddingVertical: 5,
 								paddingHorizontal: 10,
 							},
 						]
-					: [a.py_sm, a.px_md],
-				hasIcon && { gap: 6 },
-				style,
-			]}
+					: [a.py_sm, a.px_md]),
+
+				...(hasIcon && { gap: 6 }),
+				...style,
+			}}
 		>
 			{hasIcon && topic.type === "starter-pack" && (
 				<StarterPackIcon gradient="sky" width={iconSize} style={{ marginLeft: -3, marginVertical: -1 }} />
 			)}
-
 			{/*
         <View
           style={[
@@ -81,9 +82,12 @@ export function TrendingTopic({
           )}
         </View>
         */}
-
 			<Text
-				style={[a.font_bold, a.leading_tight, isSmall ? [a.text_sm] : [a.text_md, { paddingBottom: 1 }]]}
+				style={{
+					...a.font_bold,
+					...a.leading_tight,
+					...(isSmall ? [a.text_sm] : [a.text_md, { paddingBottom: 1 }]),
+				}}
 				numberOfLines={1}
 			>
 				{topic.displayName}
@@ -103,12 +107,13 @@ export function TrendingTopicSkeleton({
 	const isSmall = size === "small";
 	return (
 		<View
-			style={[
-				a.rounded_full,
-				a.border,
-				t.atoms.border_contrast_medium,
-				t.atoms.bg_contrast_25,
-				isSmall
+			style={{
+				...a.rounded_full,
+				...a.border,
+				...t.atoms.border_contrast_medium,
+				...t.atoms.bg_contrast_25,
+
+				...(isSmall
 					? {
 							width: index % 2 === 0 ? 75 : 90,
 							height: 27,
@@ -116,8 +121,8 @@ export function TrendingTopicSkeleton({
 					: {
 							width: index % 2 === 0 ? 90 : 110,
 							height: 36,
-						},
-			]}
+						}),
+			}}
 		/>
 	);
 }

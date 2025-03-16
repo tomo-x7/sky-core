@@ -29,7 +29,12 @@ export function Screen() {
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
 			<Layout.Content>
-				<View style={[gutters, a.gap_xl]}>
+				<View
+					style={{
+						...gutters,
+						...a.gap_xl,
+					}}
+				>
 					<Admonition type="tip">
 						The following settings will be used as your defaults when creating new posts. You can edit these
 						for a specific post from the composer.
@@ -37,7 +42,13 @@ export function Screen() {
 					{preferences ? (
 						<Inner preferences={preferences} />
 					) : (
-						<View style={[gutters, a.justify_center, a.align_center]}>
+						<View
+							style={{
+								...gutters,
+								...a.justify_center,
+								...a.align_center,
+							}}
+						>
 							<Loader size="xl" />
 						</View>
 					)}

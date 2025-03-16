@@ -108,22 +108,56 @@ export function Takendown() {
 	useEnableKeyboardController(true);
 
 	return (
-		<Modal visible presentationStyle="formSheet" style={[a.util_screen_outer]}>
-			<KeyboardAwareScrollView style={[a.flex_1, t.atoms.bg]} centerContent>
-				<View style={[a.flex_row, a.justify_center, gtMobile ? a.pt_4xl : [a.px_xl, a.pt_4xl]]}>
-					<View style={[a.flex_1, { maxWidth: COL_WIDTH, minHeight: COL_WIDTH }]}>
-						<View style={[a.pb_xl]}>
+		<Modal visible presentationStyle="formSheet" style={a.util_screen_outer}>
+			<KeyboardAwareScrollView
+				style={{
+					...a.flex_1,
+					...t.atoms.bg,
+				}}
+				centerContent
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.justify_center,
+						...(gtMobile ? a.pt_4xl : [a.px_xl, a.pt_4xl]),
+					}}
+				>
+					<View
+						style={{
+							...a.flex_1,
+							...{ maxWidth: COL_WIDTH, minHeight: COL_WIDTH },
+						}}
+					>
+						<View style={a.pb_xl}>
 							<Logo width={64} />
 						</View>
 
-						<Text style={[a.text_4xl, a.font_heavy, a.pb_md]}>
+						<Text
+							style={{
+								...a.text_4xl,
+								...a.font_heavy,
+								...a.pb_md,
+							}}
+						>
 							{isAppealling ? <>Appeal suspension</> : <>Your account has been suspended</>}
 						</Text>
 
 						{isAppealling ? (
-							<View style={[a.relative, a.w_full, a.mt_xl]}>
+							<View
+								style={{
+									...a.relative,
+									...a.w_full,
+									...a.mt_xl,
+								}}
+							>
 								{isSuccess ? (
-									<P style={[t.atoms.text_contrast_medium, a.text_center]}>
+									<P
+										style={{
+											...t.atoms.text_contrast_medium,
+											...a.text_center,
+										}}
+									>
 										Your appeal has been submitted. If your appeal succeeds, you will receive an
 										email.
 									</P>
@@ -148,17 +182,18 @@ export function Takendown() {
 											/>
 										</TextField.Root>
 										<View
-											style={[
-												a.absolute,
-												a.flex_row,
-												a.align_center,
-												a.pr_md,
-												a.pb_sm,
-												{
+											style={{
+												...a.absolute,
+												...a.flex_row,
+												...a.align_center,
+												...a.pr_md,
+												...a.pb_sm,
+
+												...{
 													bottom: 0,
 													right: 0,
 												},
-											]}
+											}}
 										>
 											<CharProgress
 												count={reasonGraphemeLength}
@@ -169,25 +204,28 @@ export function Takendown() {
 								)}
 								{error && (
 									<Text
-										style={[
-											a.text_md,
-											a.leading_normal,
-											{ color: t.palette.negative_500 },
-											a.mt_lg,
-										]}
+										style={{
+											...a.text_md,
+											...a.leading_normal,
+											...{ color: t.palette.negative_500 },
+											...a.mt_lg,
+										}}
 									>
 										{cleanError(error)}
 									</Text>
 								)}
 							</View>
 						) : (
-							<P style={[t.atoms.text_contrast_medium]}>
+							<P style={t.atoms.text_contrast_medium}>
 								<>
 									Your account was found to be in violation of the{" "}
 									<InlineLinkText
 										label={"Bluesky Social Terms of Service"}
 										to="https://bsky.social/about/support/tos"
-										style={[a.text_md, a.leading_normal]}
+										style={{
+											...a.text_md,
+											...a.leading_normal,
+										}}
 										overridePresentation
 									>
 										Bluesky Social Terms of Service
@@ -200,7 +238,15 @@ export function Takendown() {
 						)}
 
 						{webLayout && (
-							<View style={[a.w_full, a.flex_row, a.justify_between, a.pt_5xl, { paddingBottom: 200 }]}>
+							<View
+								style={{
+									...a.w_full,
+									...a.flex_row,
+									...a.justify_between,
+									...a.pt_5xl,
+									...{ paddingBottom: 200 },
+								}}
+							>
 								{secondaryBtn}
 								{primaryBtn}
 							</View>
@@ -208,17 +254,22 @@ export function Takendown() {
 					</View>
 				</View>
 			</KeyboardAwareScrollView>
-
 			{!webLayout && (
 				<View
-					style={[
-						a.align_center,
-						t.atoms.bg,
-						gtMobile ? a.px_5xl : a.px_xl,
-						{ paddingBottom: a.pb_5xl.paddingBottom },
-					]}
+					style={{
+						...a.align_center,
+						...t.atoms.bg,
+						...(gtMobile ? a.px_5xl : a.px_xl),
+						...{ paddingBottom: a.pb_5xl.paddingBottom },
+					}}
 				>
-					<View style={[a.w_full, a.gap_sm, { maxWidth: COL_WIDTH }]}>
+					<View
+						style={{
+							...a.w_full,
+							...a.gap_sm,
+							...{ maxWidth: COL_WIDTH },
+						}}
+					>
 						{primaryBtn}
 						{secondaryBtn}
 					</View>

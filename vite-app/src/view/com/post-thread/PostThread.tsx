@@ -388,14 +388,44 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 			);
 		} else if (isThreadNotFound(item)) {
 			return (
-				<View style={[a.p_lg, index !== 0 && a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
-					<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>Deleted post.</Text>
+				<View
+					style={{
+						...a.p_lg,
+						...(index !== 0 && a.border_t),
+						...t.atoms.border_contrast_low,
+						...t.atoms.bg_contrast_25,
+					}}
+				>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_md,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
+						Deleted post.
+					</Text>
 				</View>
 			);
 		} else if (isThreadBlocked(item)) {
 			return (
-				<View style={[a.p_lg, index !== 0 && a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
-					<Text style={[a.font_bold, a.text_md, t.atoms.text_contrast_medium]}>Blocked post.</Text>
+				<View
+					style={{
+						...a.p_lg,
+						...(index !== 0 && a.border_t),
+						...t.atoms.border_contrast_low,
+						...t.atoms.bg_contrast_25,
+					}}
+				>
+					<Text
+						style={{
+							...a.font_bold,
+							...a.text_md,
+							...t.atoms.text_contrast_medium,
+						}}
+					>
+						Blocked post.
+					</Text>
 				</View>
 			);
 		} else if (isThreadPost(item)) {
@@ -616,13 +646,14 @@ function MobileComposePrompt({ onPressReply }: { onPressReply: () => unknown }) 
 	const fabMinimalShellTransform = useMinimalShellFabTransform();
 	return (
 		<Animated.View
-			style={[
-				styles.prompt,
-				fabMinimalShellTransform,
-				{
+			style={{
+				...styles.prompt,
+				...fabMinimalShellTransform,
+
+				...{
 					bottom: clamp(0, 13, 60),
 				},
-			]}
+			}}
 		>
 			<PostThreadComposePrompt onPressCompose={onPressReply} />
 		</Animated.View>

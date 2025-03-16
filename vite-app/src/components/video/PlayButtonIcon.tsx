@@ -11,9 +11,10 @@ export function PlayButtonIcon({ size = 32 }: { size?: number }) {
 	return (
 		<>
 			<View
-				style={[
-					a.rounded_full,
-					{
+				style={{
+					...a.rounded_full,
+
+					...{
 						backgroundColor: bg,
 						shadowColor: "black",
 						shadowRadius: 32,
@@ -23,7 +24,7 @@ export function PlayButtonIcon({ size = 32 }: { size?: number }) {
 						height: size + size / 1.5,
 						opacity: 0.7,
 					},
-				]}
+				}}
 			/>
 			<PlayIcon width={size} fill={fg} style={a.absolute} />
 		</>

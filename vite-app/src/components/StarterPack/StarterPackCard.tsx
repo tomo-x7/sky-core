@@ -60,14 +60,40 @@ export function Card({
 	}
 
 	return (
-		<View style={[a.w_full, a.gap_md]}>
-			<View style={[a.flex_row, a.gap_sm, a.w_full]}>
+		<View
+			style={{
+				...a.w_full,
+				...a.gap_md,
+			}}
+		>
+			<View
+				style={{
+					...a.flex_row,
+					...a.gap_sm,
+					...a.w_full,
+				}}
+			>
 				{!noIcon ? <StarterPackIcon width={40} gradient="sky" /> : null}
-				<View style={[a.flex_1]}>
-					<Text emoji style={[a.text_md, a.font_bold, a.leading_snug]} numberOfLines={2}>
+				<View style={a.flex_1}>
+					<Text
+						emoji
+						style={{
+							...a.text_md,
+							...a.font_bold,
+							...a.leading_snug,
+						}}
+						numberOfLines={2}
+					>
 						{record.name}
 					</Text>
-					<Text emoji style={[a.leading_snug, t.atoms.text_contrast_medium]} numberOfLines={1}>
+					<Text
+						emoji
+						style={{
+							...a.leading_snug,
+							...t.atoms.text_contrast_medium,
+						}}
+						numberOfLines={1}
+					>
 						{creator?.did === currentAccount?.did
 							? "Starter pack by you"
 							: `Starter pack by ${sanitizeHandle(creator.handle, "@")}`}
@@ -75,12 +101,19 @@ export function Card({
 				</View>
 			</View>
 			{!noDescription && record.description ? (
-				<Text emoji numberOfLines={3} style={[a.leading_snug]}>
+				<Text emoji numberOfLines={3} style={a.leading_snug}>
 					{record.description}
 				</Text>
 			) : null}
 			{!!joinedAllTimeCount && joinedAllTimeCount >= 50 && (
-				<Text style={[a.font_bold, t.atoms.text_contrast_medium]}>{joinedAllTimeCount} users have joined!</Text>
+				<Text
+					style={{
+						...a.font_bold,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
+					{joinedAllTimeCount} users have joined!
+				</Text>
 			)}
 		</View>
 	);
@@ -115,7 +148,10 @@ export function Link({
 				precacheResolvedUri(queryClient, starterPack.creator.handle, starterPack.creator.did);
 				precacheStarterPack(queryClient, starterPack);
 			}}
-			style={[a.flex_col, a.align_start]}
+			style={{
+				...a.flex_col,
+				...a.align_start,
+			}}
 		>
 			{children}
 		</BaseLink>
@@ -131,15 +167,30 @@ export function Embed({
 	const imageUri = getStarterPackOgCard(starterPack);
 
 	return (
-		<View style={[a.border, a.rounded_sm, a.overflow_hidden, t.atoms.border_contrast_low]}>
+		<View
+			style={{
+				...a.border,
+				...a.rounded_sm,
+				...a.overflow_hidden,
+				...t.atoms.border_contrast_low,
+			}}
+		>
 			<Link starterPack={starterPack}>
 				<Image
 					//@ts-ignore
 					source={imageUri}
-					style={[a.w_full, { aspectRatio: 1.91 }]}
+					style={{
+						...a.w_full,
+						...{ aspectRatio: 1.91 },
+					}}
 					accessibilityIgnoresInvertColors={true}
 				/>
-				<View style={[a.px_sm, a.py_md]}>
+				<View
+					style={{
+						...a.px_sm,
+						...a.py_md,
+					}}
+				>
 					<Card starterPack={starterPack} />
 				</View>
 			</Link>

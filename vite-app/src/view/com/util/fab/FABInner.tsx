@@ -22,7 +22,14 @@ export function FABInner({ testID, icon, onPress, ...props }: FABProps) {
 	const tabletSpacing = isTablet ? { right: 50, bottom: 50 } : { right: 24, bottom: clamp(0, 15, 60) + 15 };
 
 	return (
-		<Animated.View style={[styles.outer, size, tabletSpacing, isMobile && fabMinimalShellTransform]}>
+		<Animated.View
+			style={{
+				...styles.outer,
+				...size,
+				...tabletSpacing,
+				...(isMobile && fabMinimalShellTransform),
+			}}
+		>
 			<PressableScale
 				testID={testID}
 				onPress={(evt) => {
@@ -35,7 +42,10 @@ export function FABInner({ testID, icon, onPress, ...props }: FABProps) {
 					colors={[gradients.blueLight.start, gradients.blueLight.end]}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
-					style={[styles.inner, size]}
+					style={{
+						...styles.inner,
+						...size,
+					}}
 				>
 					{icon}
 				</LinearGradient>

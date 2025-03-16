@@ -74,11 +74,25 @@ const ImageAltTextInner = ({
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>
 			<Dialog.Close />
-
 			<View>
-				<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>Add alt text</Text>
+				<Text
+					style={{
+						...a.text_2xl,
+						...a.font_bold,
+						...a.leading_tight,
+						...a.pb_sm,
+					}}
+				>
+					Add alt text
+				</Text>
 
-				<View style={[t.atoms.bg_contrast_50, a.rounded_sm, a.overflow_hidden]}>
+				<View
+					style={{
+						...t.atoms.bg_contrast_50,
+						...a.rounded_sm,
+						...a.overflow_hidden,
+					}}
+				>
 					<Image
 						style={imageStyle}
 						source={{
@@ -92,10 +106,19 @@ const ImageAltTextInner = ({
 					/>
 				</View>
 			</View>
-
-			<View style={[a.mt_md, a.gap_md]}>
-				<View style={[a.gap_sm]}>
-					<View style={[a.relative, { width: "100%" }]}>
+			<View
+				style={{
+					...a.mt_md,
+					...a.gap_md,
+				}}
+			>
+				<View style={a.gap_sm}>
+					<View
+						style={{
+							...a.relative,
+							...{ width: "100%" },
+						}}
+					>
 						<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 						<TextField.Root>
 							<Dialog.Input
@@ -112,9 +135,21 @@ const ImageAltTextInner = ({
 					</View>
 
 					{altText.length > MAX_ALT_TEXT && (
-						<View style={[a.pb_sm, a.flex_row, a.gap_xs]}>
+						<View
+							style={{
+								...a.pb_sm,
+								...a.flex_row,
+								...a.gap_xs,
+							}}
+						>
 							<CircleInfo fill={t.palette.negative_500} />
-							<Text style={[a.italic, a.leading_snug, t.atoms.text_contrast_medium]}>
+							<Text
+								style={{
+									...a.italic,
+									...a.leading_snug,
+									...t.atoms.text_contrast_medium,
+								}}
+							>
 								<>Alt text will be truncated. Limit: {MAX_ALT_TEXT.toLocaleString()} characters.</>
 							</Text>
 						</View>
@@ -131,7 +166,7 @@ const ImageAltTextInner = ({
 						onPress={() => {
 							control.close();
 						}}
-						style={[a.flex_grow]}
+						style={a.flex_grow}
 					>
 						<ButtonText>Save</ButtonText>
 					</Button>

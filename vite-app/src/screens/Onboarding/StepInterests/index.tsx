@@ -109,17 +109,18 @@ export function StepInterests() {
 	);
 
 	return (
-		<View style={[a.align_start]} testID="onboardingInterests">
+		<View style={a.align_start} testID="onboardingInterests">
 			<IconCircle
 				icon={isError ? EmojiSad : Hashtag}
-				style={[
-					a.mb_2xl,
-					isError
+				style={{
+					...a.mb_2xl,
+
+					...(isError
 						? {
 								backgroundColor: t.palette.negative_50,
 							}
-						: {},
-				]}
+						: {}),
+				}}
 				iconStyle={[
 					isError
 						? {
@@ -128,33 +129,38 @@ export function StepInterests() {
 						: {},
 				]}
 			/>
-
 			<TitleText>{title}</TitleText>
 			<DescriptionText>{description}</DescriptionText>
-
-			<View style={[a.w_full, a.pt_2xl]}>
+			<View
+				style={{
+					...a.w_full,
+					...a.pt_2xl,
+				}}
+			>
 				{isLoading ? (
 					<Loader size="xl" />
 				) : isError || !data ? (
 					<View
-						style={[
-							a.w_full,
-							a.p_lg,
-							a.rounded_md,
-							{
+						style={{
+							...a.w_full,
+							...a.p_lg,
+							...a.rounded_md,
+
+							...{
 								backgroundColor: t.palette.negative_50,
 							},
-						]}
+						}}
 					>
-						<Text style={[a.text_md]}>
+						<Text style={a.text_md}>
 							<Text
-								style={[
-									a.text_md,
-									a.font_bold,
-									{
+								style={{
+									...a.text_md,
+									...a.font_bold,
+
+									...{
 										color: t.palette.negative_900,
 									},
-								]}
+								}}
 							>
 								Error:{" "}
 							</Text>
@@ -167,7 +173,13 @@ export function StepInterests() {
 						onChange={setInterests}
 						label={"Select your interests from the options below"}
 					>
-						<View style={[a.flex_row, a.gap_md, a.flex_wrap]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.gap_md,
+								...a.flex_wrap,
+							}}
+						>
 							{data.interests.map((interest) => (
 								<Toggle.Item
 									key={interest}
@@ -181,10 +193,14 @@ export function StepInterests() {
 					</Toggle.Group>
 				)}
 			</View>
-
 			<OnboardingControls.Portal>
 				{isError ? (
-					<View style={[a.gap_md, gtMobile ? a.flex_row : a.flex_col]}>
+					<View
+						style={{
+							...a.gap_md,
+							...(gtMobile ? a.flex_row : a.flex_col),
+						}}
+					>
 						<Button
 							disabled={isFetching}
 							variant="solid"

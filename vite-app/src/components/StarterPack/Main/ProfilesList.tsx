@@ -68,7 +68,13 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<AppBskyActorDefs.ProfileViewBasic>) => {
 		return (
-			<View style={[a.p_lg, t.atoms.border_contrast_low, a.border_t]}>
+			<View
+				style={{
+					...a.p_lg,
+					...t.atoms.border_contrast_low,
+					...a.border_t,
+				}}
+			>
 				<ProfileCard profile={item} moderationOpts={moderationOpts} logContext="StarterPackProfilesList" />
 			</View>
 		);
@@ -77,7 +83,12 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 	if (!data) {
 		return (
 			//@ts-ignore
-			<View style={[a.h_full_vh, { marginTop: headerHeight, marginBottom: bottomBarOffset }]}>
+			<View
+				style={{
+					...a.h_full_vh,
+					...{ marginTop: headerHeight, marginBottom: bottomBarOffset },
+				}}
+			>
 				<ListMaybePlaceholder isLoading={true} isError={isError} onRetry={refetch} />
 			</View>
 		);

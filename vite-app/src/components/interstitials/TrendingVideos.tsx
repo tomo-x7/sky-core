@@ -56,11 +56,42 @@ export function TrendingVideos() {
 	}
 
 	return (
-		<View style={[a.pt_lg, a.pb_lg, a.border_t, t.atoms.border_contrast_low, t.atoms.bg_contrast_25]}>
-			<View style={[gutters, a.pb_sm, a.flex_row, a.align_center, a.justify_between]}>
-				<View style={[a.flex_1, a.flex_row, a.align_center, a.gap_xs]}>
+		<View
+			style={{
+				...a.pt_lg,
+				...a.pb_lg,
+				...a.border_t,
+				...t.atoms.border_contrast_low,
+				...t.atoms.bg_contrast_25,
+			}}
+		>
+			<View
+				style={{
+					...gutters,
+					...a.pb_sm,
+					...a.flex_row,
+					...a.align_center,
+					...a.justify_between,
+				}}
+			>
+				<View
+					style={{
+						...a.flex_1,
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_xs,
+					}}
+				>
 					<Graph />
-					<Text style={[a.text_md, a.font_bold, a.leading_snug]}>Trending Videos</Text>
+					<Text
+						style={{
+							...a.text_md,
+							...a.font_bold,
+							...a.leading_snug,
+						}}
+					>
+						Trending Videos
+					</Text>
 				</View>
 				<Button
 					label={"Dismiss this section"}
@@ -73,7 +104,6 @@ export function TrendingVideos() {
 					<ButtonIcon icon={X} />
 				</Button>
 			</View>
-
 			<BlockDrawerGesture>
 				<ScrollView
 					horizontal
@@ -82,20 +112,21 @@ export function TrendingVideos() {
 					snapToInterval={CARD_WIDTH + a.gap_sm.gap}
 				>
 					<View
-						style={[
-							a.flex_row,
-							a.gap_sm,
-							{
+						style={{
+							...a.flex_row,
+							...a.gap_sm,
+
+							...{
 								paddingLeft: gutters.paddingLeft,
 								paddingRight: gutters.paddingRight,
 							},
-						]}
+						}}
 					>
 						{isLoading ? (
 							Array(10)
 								.fill(0)
 								.map((_, i) => (
-									<View key={i.toString()} style={[{ width: CARD_WIDTH }]}>
+									<View key={i.toString()} style={{ width: CARD_WIDTH }}>
 										<CompactVideoPostCardPlaceholder />
 									</View>
 								))
@@ -107,7 +138,6 @@ export function TrendingVideos() {
 					</View>
 				</ScrollView>
 			</BlockDrawerGesture>
-
 			<Prompt.Basic
 				control={trendingPrompt}
 				title={"Hide trending videos?"}
@@ -141,7 +171,7 @@ function VideoCards({
 	return (
 		<>
 			{items.map((item) => (
-				<View key={item.post.uri} style={[{ width: CARD_WIDTH }]}>
+				<View key={item.post.uri} style={{ width: CARD_WIDTH }}>
 					<CompactVideoPostCard
 						post={item.post}
 						moderation={item.moderation}
@@ -153,36 +183,43 @@ function VideoCards({
 					/>
 				</View>
 			))}
-
-			<View style={[{ width: CARD_WIDTH * 2 }]}>
+			<View style={{ width: CARD_WIDTH * 2 }}>
 				<Link
 					to={href}
 					label={"View more"}
-					style={[a.justify_center, a.align_center, a.flex_1, a.rounded_md, t.atoms.bg]}
+					style={{
+						...a.justify_center,
+						...a.align_center,
+						...a.flex_1,
+						...a.rounded_md,
+						...t.atoms.bg,
+					}}
 				>
 					{({ pressed }) => (
 						<View
-							style={[
-								a.flex_row,
-								a.align_center,
-								a.gap_md,
-								{
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_md,
+
+								...{
 									opacity: pressed ? 0.6 : 1,
 								},
-							]}
+							}}
 						>
-							<Text style={[a.text_md]}>View more</Text>
+							<Text style={a.text_md}>View more</Text>
 							<View
-								style={[
-									a.align_center,
-									a.justify_center,
-									a.rounded_full,
-									{
+								style={{
+									...a.align_center,
+									...a.justify_center,
+									...a.rounded_full,
+
+									...{
 										width: 34,
 										height: 34,
 										backgroundColor: t.palette.primary_500,
 									},
-								]}
+								}}
 							>
 								<ButtonIcon icon={ChevronRight} />
 							</View>

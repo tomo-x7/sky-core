@@ -26,8 +26,13 @@ export const CopyrightPolicyScreen = (_props: Props) => {
 	return (
 		<Layout.Screen>
 			<ViewHeader title={"Copyright Policy"} />
-			<ScrollView style={[s.hContentRegion, pal.view]}>
-				<View style={[s.p20]}>
+			<ScrollView
+				style={{
+					...s.hContentRegion,
+					...pal.view,
+				}}
+			>
+				<View style={s.p20}>
 					<Text style={pal.text}>
 						<>
 							The Copyright Policy has been moved to{" "}

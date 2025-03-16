@@ -86,16 +86,36 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 	}, [postUri, postCid, record, timestamp, postAuthor, colorMode]);
 
 	return (
-		<Dialog.Inner label="Embed post" style={[{ maxWidth: 500 }]}>
-			<View style={[a.gap_lg]}>
-				<View style={[a.gap_sm]}>
-					<Text style={[a.text_2xl, a.font_heavy]}>Embed post</Text>
-					<Text style={[a.text_md, t.atoms.text_contrast_medium, a.leading_normal]}>
+		<Dialog.Inner label="Embed post" style={{ maxWidth: 500 }}>
+			<View style={a.gap_lg}>
+				<View style={a.gap_sm}>
+					<Text
+						style={{
+							...a.text_2xl,
+							...a.font_heavy,
+						}}
+					>
+						Embed post
+					</Text>
+					<Text
+						style={{
+							...a.text_md,
+							...t.atoms.text_contrast_medium,
+							...a.leading_normal,
+						}}
+					>
 						Embed this post in your website. Simply copy the following snippet and paste it into the HTML
 						code of your website.
 					</Text>
 				</View>
-				<View style={[a.border, t.atoms.border_contrast_low, a.rounded_sm, a.overflow_hidden]}>
+				<View
+					style={{
+						...a.border,
+						...t.atoms.border_contrast_low,
+						...a.rounded_sm,
+						...a.overflow_hidden,
+					}}
+				>
 					<Button
 						label={showCustomisation ? "Hide customization options" : "Show customization options"}
 						color="secondary"
@@ -103,15 +123,30 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 						size="small"
 						shape="default"
 						onPress={() => setShowCustomisation((c) => !c)}
-						style={[a.justify_start, showCustomisation && t.atoms.bg_contrast_25]}
+						style={{
+							...a.justify_start,
+							...(showCustomisation && t.atoms.bg_contrast_25),
+						}}
 					>
 						<ButtonIcon icon={showCustomisation ? ChevronBottomIcon : ChevronRightIcon} />
 						<ButtonText>Customization options</ButtonText>
 					</Button>
 
 					{showCustomisation && (
-						<View style={[a.gap_sm, a.p_md]}>
-							<Text style={[t.atoms.text_contrast_medium, a.font_bold]}>Color theme</Text>
+						<View
+							style={{
+								...a.gap_sm,
+								...a.p_md,
+							}}
+						>
+							<Text
+								style={{
+									...t.atoms.text_contrast_medium,
+									...a.font_bold,
+								}}
+							>
+								Color theme
+							</Text>
 							<ToggleButton.Group
 								label={"Color mode"}
 								values={[colorMode]}
@@ -130,8 +165,13 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 						</View>
 					)}
 				</View>
-				<View style={[a.flex_row, a.gap_sm]}>
-					<View style={[a.flex_1]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.gap_sm,
+					}}
+				>
+					<View style={a.flex_1}>
 						<TextField.Root>
 							<TextField.Icon icon={CodeBracketsIcon} />
 							<TextField.Input

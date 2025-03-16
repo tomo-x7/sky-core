@@ -75,35 +75,77 @@ export function SignupQueued() {
 	const webLayout = gtMobile;
 
 	return (
-		<Modal visible presentationStyle="formSheet" style={[a.util_screen_outer]}>
-			<ScrollView style={[a.flex_1, t.atoms.bg]} contentContainerStyle={{ borderWidth: 0 }} bounces={false}>
-				<View style={[a.flex_row, a.justify_center, gtMobile ? a.pt_4xl : [a.px_xl, a.pt_xl]]}>
-					<View style={[a.flex_1, { maxWidth: COL_WIDTH }]}>
-						<View style={[a.w_full, a.justify_center, a.align_center, a.my_4xl]}>
+		<Modal visible presentationStyle="formSheet" style={a.util_screen_outer}>
+			<ScrollView
+				style={{
+					...a.flex_1,
+					...t.atoms.bg,
+				}}
+				contentContainerStyle={{ borderWidth: 0 }}
+				bounces={false}
+			>
+				<View
+					style={{
+						...a.flex_row,
+						...a.justify_center,
+						...(gtMobile ? a.pt_4xl : [a.px_xl, a.pt_xl]),
+					}}
+				>
+					<View
+						style={{
+							...a.flex_1,
+							...{ maxWidth: COL_WIDTH },
+						}}
+					>
+						<View
+							style={{
+								...a.w_full,
+								...a.justify_center,
+								...a.align_center,
+								...a.my_4xl,
+							}}
+						>
 							<Logo width={120} />
 						</View>
 
-						<Text style={[a.text_4xl, a.font_heavy, a.pb_sm]}>You're in line</Text>
-						<P style={[t.atoms.text_contrast_medium]}>
+						<Text
+							style={{
+								...a.text_4xl,
+								...a.font_heavy,
+								...a.pb_sm,
+							}}
+						>
+							You're in line
+						</Text>
+						<P style={t.atoms.text_contrast_medium}>
 							There's been a rush of new users to Bluesky! We'll activate your account as soon as we can.
 						</P>
 
 						<View
-							style={[
-								a.rounded_sm,
-								a.px_2xl,
-								a.py_4xl,
-								a.mt_2xl,
-								a.mb_md,
-								a.border,
-								t.atoms.bg_contrast_25,
-								t.atoms.border_contrast_medium,
-							]}
+							style={{
+								...a.rounded_sm,
+								...a.px_2xl,
+								...a.py_4xl,
+								...a.mt_2xl,
+								...a.mb_md,
+								...a.border,
+								...t.atoms.bg_contrast_25,
+								...t.atoms.border_contrast_medium,
+							}}
 						>
 							{typeof placeInQueue === "number" && (
-								<Text style={[a.text_5xl, a.text_center, a.font_heavy, a.mb_2xl]}>{placeInQueue}</Text>
+								<Text
+									style={{
+										...a.text_5xl,
+										...a.text_center,
+										...a.font_heavy,
+										...a.mb_2xl,
+									}}
+								>
+									{placeInQueue}
+								</Text>
 							)}
-							<P style={[a.text_center]}>
+							<P style={a.text_center}>
 								{typeof placeInQueue === "number" ? <>left to go.</> : <>You are in line.</>}{" "}
 								{estimatedTime ? (
 									<>We estimate {estimatedTime} until your account is ready.</>
@@ -114,7 +156,15 @@ export function SignupQueued() {
 						</View>
 
 						{webLayout && (
-							<View style={[a.w_full, a.flex_row, a.justify_between, a.pt_5xl, { paddingBottom: 200 }]}>
+							<View
+								style={{
+									...a.w_full,
+									...a.flex_row,
+									...a.justify_between,
+									...a.pt_5xl,
+									...{ paddingBottom: 200 },
+								}}
+							>
 								{logoutBtn}
 								{checkBtn}
 							</View>
@@ -122,17 +172,22 @@ export function SignupQueued() {
 					</View>
 				</View>
 			</ScrollView>
-
 			{!webLayout && (
 				<View
-					style={[
-						a.align_center,
-						t.atoms.bg,
-						gtMobile ? a.px_5xl : a.px_xl,
-						{ paddingBottom: a.pb_5xl.paddingBottom },
-					]}
+					style={{
+						...a.align_center,
+						...t.atoms.bg,
+						...(gtMobile ? a.px_5xl : a.px_xl),
+						...{ paddingBottom: a.pb_5xl.paddingBottom },
+					}}
 				>
-					<View style={[a.w_full, a.gap_sm, { maxWidth: COL_WIDTH }]}>
+					<View
+						style={{
+							...a.w_full,
+							...a.gap_sm,
+							...{ maxWidth: COL_WIDTH },
+						}}
+					>
 						{checkBtn}
 						{logoutBtn}
 					</View>

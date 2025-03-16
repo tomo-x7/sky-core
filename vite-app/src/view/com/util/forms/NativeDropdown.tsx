@@ -180,7 +180,13 @@ function DropdownContent({
 					return (
 						<DropdownMenu.Group key={getKey(item.label, index, item.testID)}>
 							<DropdownMenuItem key={getKey(item.label, index, item.testID)} onSelect={item.onPress}>
-								<Text selectable={false} style={[pal.text, styles.itemTitle]}>
+								<Text
+									selectable={false}
+									style={{
+										...pal.text,
+										...styles.itemTitle,
+									}}
+								>
 									{item.label}
 								</Text>
 								{item.icon && (
@@ -193,7 +199,13 @@ function DropdownContent({
 				}
 				return (
 					<DropdownMenuItem key={getKey(item.label, index, item.testID)} onSelect={item.onPress}>
-						<Text selectable={false} style={[pal.text, styles.itemTitle]}>
+						<Text
+							selectable={false}
+							style={{
+								...pal.text,
+								...styles.itemTitle,
+							}}
+						>
 							{item.label}
 						</Text>
 						{/* @ts-ignore */}

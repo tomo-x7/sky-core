@@ -29,17 +29,19 @@ export function HomeHeaderLayoutMobile({
 
 	return (
 		<Animated.View
-			style={[
-				a.fixed,
-				a.z_10,
-				t.atoms.bg,
-				{
+			style={{
+				...a.fixed,
+				...a.z_10,
+				...t.atoms.bg,
+
+				...{
 					top: 0,
 					left: 0,
 					right: 0,
 				},
-				headerMinimalShellTransform,
-			]}
+
+				...headerMinimalShellTransform,
+			}}
 			onLayout={(e) => {
 				headerHeight.set(e.nativeEvent.layout.height);
 			}}
@@ -49,7 +51,12 @@ export function HomeHeaderLayoutMobile({
 					<Layout.Header.MenuButton />
 				</Layout.Header.Slot>
 
-				<View style={[a.flex_1, a.align_center]}>
+				<View
+					style={{
+						...a.flex_1,
+						...a.align_center,
+					}}
+				>
 					<PressableScale
 						targetScale={0.9}
 						onPress={() => {
@@ -71,12 +78,13 @@ export function HomeHeaderLayoutMobile({
 							variant="ghost"
 							color="secondary"
 							shape="square"
-							style={[
-								a.justify_center,
-								{
+							style={{
+								...a.justify_center,
+
+								...{
 									marginRight: -Layout.BUTTON_VISUAL_ALIGNMENT_OFFSET,
 								},
-							]}
+							}}
 						>
 							<ButtonIcon icon={FeedsIcon} size="lg" />
 						</Link>

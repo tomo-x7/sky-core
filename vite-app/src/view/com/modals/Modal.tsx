@@ -95,7 +95,14 @@ function Modal({ modal }: { modal: ModalIface }) {
 			<Animated.View style={styles.mask} entering={FadeIn.duration(150)} exiting={FadeOut}>
 				{/* eslint-disable-next-line react-native-a11y/has-valid-accessibility-descriptors */}
 				<TouchableWithoutFeedback onPress={onInnerPress}>
-					<View style={[styles.container, isMobile && styles.containerMobile, pal.view, pal.border]}>
+					<View
+						style={{
+							...styles.container,
+							...(isMobile && styles.containerMobile),
+							...pal.view,
+							...pal.border,
+						}}
+					>
 						{element}
 					</View>
 				</TouchableWithoutFeedback>

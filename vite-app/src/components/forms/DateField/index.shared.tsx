@@ -33,7 +33,10 @@ export function DateFieldButton({
 
 	return (
 		<View
-			style={[a.relative, a.w_full]}
+			style={{
+				...a.relative,
+				...a.w_full,
+			}}
 			{...{
 				onMouseOver: onHoverIn,
 				onMouseOut: onHoverOut,
@@ -48,28 +51,36 @@ export function DateFieldButton({
 				onPressOut={onPressOut}
 				onFocus={onFocus}
 				onBlur={onBlur}
-				style={[
-					{
+				style={{
+					...{
 						paddingLeft: 14,
 						paddingRight: 14,
 						borderColor: "transparent",
 						borderWidth: 2,
 					},
-					a.py_md,
-					a.flex_row,
-					a.flex_1,
-					a.w_full,
-					a.rounded_sm,
-					t.atoms.bg_contrast_25,
-					a.align_center,
-					hovered ? chromeHover : {},
-					focused || pressed ? chromeFocus : {},
-					isInvalid || isInvalid ? chromeError : {},
-					(isInvalid || isInvalid) && (hovered || focused) ? chromeErrorHover : {},
-				]}
+
+					...a.py_md,
+					...a.flex_row,
+					...a.flex_1,
+					...a.w_full,
+					...a.rounded_sm,
+					...t.atoms.bg_contrast_25,
+					...a.align_center,
+					...(hovered ? chromeHover : {}),
+					...(focused || pressed ? chromeFocus : {}),
+					...(isInvalid || isInvalid ? chromeError : {}),
+					...((isInvalid || isInvalid) && (hovered || focused) ? chromeErrorHover : {}),
+				}}
 			>
 				<TextField.Icon icon={CalendarDays} />
-				<Text style={[a.text_md, a.pl_xs, t.atoms.text, { lineHeight: a.text_md.fontSize * 1.1875 }]}>
+				<Text
+					style={{
+						...a.text_md,
+						...a.pl_xs,
+						...t.atoms.text,
+						...{ lineHeight: a.text_md.fontSize * 1.1875 },
+					}}
+				>
 					{i18n.date(value, { timeZone: "UTC" })}
 				</Text>
 			</Pressable>

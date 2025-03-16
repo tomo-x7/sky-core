@@ -52,10 +52,10 @@ export function AccountSettingsScreen(props: Props) {
                 it wouldn't push the BadgeText/Chevron/whatever to the right.
                 TODO: find a general solution for this. workaround in this case is to set the ItemText to flex: 1 and BadgeText to flex: 0 -sfn */}
 						{/*@ts-ignore */}
-						<SettingsList.ItemText style={[a.flex_0]}>Email</SettingsList.ItemText>
+						<SettingsList.ItemText style={a.flex_0}>Email</SettingsList.ItemText>
 						{currentAccount && (
 							<>
-								<SettingsList.BadgeText style={[a.flex_1]}>
+								<SettingsList.BadgeText style={a.flex_1}>
 									{currentAccount.email || "(no email)"}
 								</SettingsList.BadgeText>
 								{currentAccount.emailConfirmed && (
@@ -68,12 +68,22 @@ export function AccountSettingsScreen(props: Props) {
 						<SettingsList.PressableItem
 							label={"Verify your email"}
 							onPress={() => verifyEmailControl.open()}
-							style={[a.my_xs, a.mx_lg, a.rounded_md, { backgroundColor: t.palette.primary_50 }]}
+							style={{
+								...a.my_xs,
+								...a.mx_lg,
+								...a.rounded_md,
+								...{ backgroundColor: t.palette.primary_50 },
+							}}
 							hoverStyle={[{ backgroundColor: t.palette.primary_100 }]}
 							contentContainerStyle={[a.rounded_md, a.px_lg]}
 						>
 							<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
-							<SettingsList.ItemText style={[{ color: t.palette.primary_500 }, a.font_bold]}>
+							<SettingsList.ItemText
+								style={{
+									...{ color: t.palette.primary_500 },
+									...a.font_bold,
+								}}
+							>
 								Verify your email
 							</SettingsList.ItemText>
 							<SettingsList.Chevron color={t.palette.primary_500} />
@@ -136,7 +146,6 @@ export function AccountSettingsScreen(props: Props) {
 					</SettingsList.PressableItem>
 				</SettingsList.Container>
 			</Layout.Content>
-
 			<VerifyEmailDialog control={verifyEmailControl} />
 			<BirthDateSettingsDialog control={birthdayControl} />
 			<ChangeHandleDialog control={changeHandleControl} />

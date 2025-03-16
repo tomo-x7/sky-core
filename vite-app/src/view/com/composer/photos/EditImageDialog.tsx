@@ -54,10 +54,17 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 	return (
 		<Dialog.Inner label={"Edit image"}>
 			<Dialog.Close />
-
-			<Text style={[a.text_2xl, a.font_bold, a.leading_tight, a.pb_sm]}>Edit image</Text>
-
-			<View style={[a.align_center]}>
+			<Text
+				style={{
+					...a.text_2xl,
+					...a.font_bold,
+					...a.leading_tight,
+					...a.pb_sm,
+				}}
+			>
+				Edit image
+			</Text>
+			<View style={a.align_center}>
 				<ReactCrop
 					crop={crop}
 					onChange={(_pixelCrop, percentCrop) => setCrop(percentCrop)}
@@ -66,8 +73,12 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 					<img src={source.path} style={{ maxHeight: "50vh" }} alt="" />
 				</ReactCrop>
 			</View>
-
-			<View style={[a.mt_md, a.gap_md]}>
+			<View
+				style={{
+					...a.mt_md,
+					...a.gap_md,
+				}}
+			>
 				<Button
 					disabled={!isNew}
 					label={"Save"}

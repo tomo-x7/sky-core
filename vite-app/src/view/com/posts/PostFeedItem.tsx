@@ -249,14 +249,15 @@ let FeedItemInner = ({
 				<View style={{ width: 42 }}>
 					{isThreadChild && (
 						<View
-							style={[
-								styles.replyLine,
-								{
+							style={{
+								...styles.replyLine,
+
+								...{
 									flexGrow: 1,
 									backgroundColor: pal.colors.replyLine,
 									marginBottom: 4,
 								},
-							]}
+							}}
 						/>
 					)}
 				</View>
@@ -330,7 +331,6 @@ let FeedItemInner = ({
 					) : null}
 				</View>
 			</View>
-
 			<View style={styles.layout}>
 				<View style={styles.layoutAvi}>
 					<PreviewableUserAvatar
@@ -342,14 +342,15 @@ let FeedItemInner = ({
 					/>
 					{isThreadParent && (
 						<View
-							style={[
-								styles.replyLine,
-								{
+							style={{
+								...styles.replyLine,
+
+								...{
 									flexGrow: 1,
 									backgroundColor: pal.colors.replyLine,
 									marginTop: 4,
 								},
-							]}
+							}}
 						/>
 					)}
 				</View>
@@ -441,11 +442,7 @@ let PostContent = ({
 			ignoreMute
 			childContainerStyle={styles.contentHiderChild}
 		>
-			<PostAlerts
-				modui={moderation.ui("contentList")}
-				style={[a.py_2xs]}
-				additionalCauses={additionalPostAlerts}
-			/>
+			<PostAlerts modui={moderation.ui("contentList")} style={a.py_2xs} additionalCauses={additionalPostAlerts} />
 			{richText.text ? (
 				<View style={styles.postTextContainer}>
 					<RichText
@@ -453,7 +450,10 @@ let PostContent = ({
 						testID="postText"
 						value={richText}
 						numberOfLines={limitLines ? MAX_POST_LINES : undefined}
-						style={[a.flex_1, a.text_md]}
+						style={{
+							...a.flex_1,
+							...a.text_md,
+						}}
 						authorHandle={postAuthor.handle}
 						shouldProxyLinks={true}
 					/>
@@ -463,7 +463,7 @@ let PostContent = ({
 				<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 			) : undefined}
 			{postEmbed ? (
-				<View style={[a.pb_xs]}>
+				<View style={a.pb_xs}>
 					<PostEmbeds
 						embed={postEmbed}
 						moderation={moderation}
@@ -529,10 +529,31 @@ function ReplyToLabel({
 	}
 
 	return (
-		<View style={[s.flexRow, s.mb2, s.alignCenter]}>
+		<View
+			style={{
+				...s.flexRow,
+				...s.mb2,
+				...s.alignCenter,
+			}}
+		>
 			{/* @ts-ignore */}
-			<FontAwesomeIcon icon="reply" size={9} style={[{ color: pal.colors.textLight }, s.mr5]} />
-			<Text type="md" style={[pal.textLight, s.mr2]} lineHeight={1.2} numberOfLines={1}>
+			<FontAwesomeIcon
+				icon="reply"
+				size={9}
+				style={{
+					...{ color: pal.colors.textLight },
+					...s.mr5,
+				}}
+			/>
+			<Text
+				type="md"
+				style={{
+					...pal.textLight,
+					...s.mr2,
+				}}
+				lineHeight={1.2}
+				numberOfLines={1}
+			>
 				{label}
 			</Text>
 		</View>

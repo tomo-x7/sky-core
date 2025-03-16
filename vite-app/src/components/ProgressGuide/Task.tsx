@@ -21,7 +21,13 @@ export function ProgressGuideTask({
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_row, a.gap_sm, !subtitle && a.align_center]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.gap_sm,
+				...(!subtitle && a.align_center),
+			}}
+		>
 			{current === total ? (
 				<AnimatedCheck playOnMount fill={t.palette.primary_500} width={20} />
 			) : (
@@ -34,19 +40,34 @@ export function ProgressGuideTask({
 					unfilledColor={t.palette.contrast_50}
 				/>
 			)}
-
-			<View style={[a.flex_col, a.gap_2xs, subtitle && { marginTop: -2 }]}>
+			<View
+				style={{
+					...a.flex_col,
+					...a.gap_2xs,
+					...(subtitle && { marginTop: -2 }),
+				}}
+			>
 				<Text
-					style={[
-						a.text_sm,
-						a.font_bold,
-						a.leading_tight,
-						tabularNumsTitle && { fontVariant: ["tabular-nums"] },
-					]}
+					style={{
+						...a.text_sm,
+						...a.font_bold,
+						...a.leading_tight,
+						...(tabularNumsTitle && { fontVariant: ["tabular-nums"] }),
+					}}
 				>
 					{title}
 				</Text>
-				{subtitle && <Text style={[a.text_sm, t.atoms.text_contrast_medium, a.leading_tight]}>{subtitle}</Text>}
+				{subtitle && (
+					<Text
+						style={{
+							...a.text_sm,
+							...t.atoms.text_contrast_medium,
+							...a.leading_tight,
+						}}
+					>
+						{subtitle}
+					</Text>
+				)}
 			</View>
 		</View>
 	);

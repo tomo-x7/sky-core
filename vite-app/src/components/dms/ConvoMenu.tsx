@@ -65,7 +65,7 @@ let ConvoMenu = ({
 		<>
 			<Menu.Root control={control}>
 				{!hideTrigger && (
-					<View style={[style]}>
+					<View style={style}>
 						<Menu.Trigger label={"Chat settings"}>
 							{({ props, state }) => (
 								<Pressable
@@ -74,13 +74,14 @@ let ConvoMenu = ({
 										Keyboard.dismiss();
 										props.onPress();
 									}}
-									style={[
-										a.p_sm,
-										a.rounded_full,
-										(state.hovered || state.pressed) && t.atoms.bg_contrast_25,
-										// make sure pfp is in the middle
+									style={{
+										...a.p_sm,
+										...a.rounded_full,
+										...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),
+
+										...// make sure pfp is in the middle
 										{ marginLeft: -10 },
-									]}
+									}}
 								>
 									<DotsHorizontal size="md" style={t.atoms.text} />
 								</Pressable>
@@ -101,7 +102,6 @@ let ConvoMenu = ({
 					/>
 				</Menu.Outer>
 			</Menu.Root>
-
 			<LeaveConvoPrompt control={leaveConvoControl} convoId={convo.id} currentScreen={currentScreen} />
 			{latestReportableMessage ? (
 				<ReportDialog
@@ -116,7 +116,6 @@ let ConvoMenu = ({
 			) : (
 				<ReportConversationPrompt control={reportControl} />
 			)}
-
 			<BlockedByListDialog control={blockedByListControl} listBlocks={listBlocks} />
 		</>
 	);

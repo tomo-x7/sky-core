@@ -94,7 +94,6 @@ export function ProfileSubpageHeader({
 				<Layout.Header.Content />
 				{children}
 			</Layout.Header.Outer>
-
 			<View
 				style={{
 					flexDirection: "row",
@@ -129,7 +128,10 @@ export function ProfileSubpageHeader({
 							testID="headerTitle"
 							type="title-xl"
 							href={href}
-							style={[pal.text, { fontWeight: "600" }]}
+							style={{
+								...pal.text,
+								...{ fontWeight: "600" },
+							}}
 							text={title || ""}
 							onPress={emitSoftReset}
 							numberOfLines={4}
@@ -139,7 +141,7 @@ export function ProfileSubpageHeader({
 					{isLoading || !creator ? (
 						<LoadingPlaceholder width={50} height={8} />
 					) : (
-						<Text type="lg" style={[pal.textLight]} numberOfLines={1}>
+						<Text type="lg" style={pal.textLight} numberOfLines={1}>
 							{purpose === "app.bsky.graph.defs#curatelist" ? (
 								isOwner ? (
 									<>List by you</>

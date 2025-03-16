@@ -18,15 +18,17 @@ export function Row({
 	return (
 		<Context.Provider value={useMemo(() => ({ gap }), [gap])}>
 			<View
-				style={[
-					a.flex_row,
-					a.flex_1,
-					{
+				style={{
+					...a.flex_row,
+					...a.flex_1,
+
+					...{
 						marginLeft: -gap / 2,
 						marginRight: -gap / 2,
 					},
-					style,
-				]}
+
+					...style,
+				}}
 			>
 				{children}
 			</View>
@@ -45,15 +47,17 @@ export function Col({
 	const { gap } = useContext(Context);
 	return (
 		<View
-			style={[
-				a.flex_col,
-				{
+			style={{
+				...a.flex_col,
+
+				...{
 					paddingLeft: gap / 2,
 					paddingRight: gap / 2,
 					width: `${width * 100}%`,
 				},
-				style,
-			]}
+
+				...style,
+			}}
 		>
 			{children}
 		</View>

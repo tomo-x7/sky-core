@@ -26,8 +26,13 @@ export const CommunityGuidelinesScreen = (_props: Props) => {
 	return (
 		<Layout.Screen>
 			<ViewHeader title={"Community Guidelines"} />
-			<ScrollView style={[s.hContentRegion, pal.view]}>
-				<View style={[s.p20]}>
+			<ScrollView
+				style={{
+					...s.hContentRegion,
+					...pal.view,
+				}}
+			>
+				<View style={s.p20}>
 					<Text style={pal.text}>
 						<>
 							The Community Guidelines have been moved to{" "}

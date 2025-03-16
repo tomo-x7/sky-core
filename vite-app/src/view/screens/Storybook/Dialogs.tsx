@@ -56,7 +56,7 @@ export function Dialogs() {
 	};
 
 	return (
-		<View style={[a.gap_md]}>
+		<View style={a.gap_md}>
 			<Button
 				variant="outline"
 				color="secondary"
@@ -71,7 +71,6 @@ export function Dialogs() {
 			>
 				<ButtonText>Open all dialogs</ButtonText>
 			</Button>
-
 			<Button
 				variant="outline"
 				color="secondary"
@@ -83,7 +82,6 @@ export function Dialogs() {
 			>
 				<ButtonText>Open scrollable dialog</ButtonText>
 			</Button>
-
 			<Button
 				variant="outline"
 				color="secondary"
@@ -95,7 +93,6 @@ export function Dialogs() {
 			>
 				<ButtonText>Open basic dialog</ButtonText>
 			</Button>
-
 			<Button
 				variant="outline"
 				color="primary"
@@ -105,19 +102,15 @@ export function Dialogs() {
 			>
 				<ButtonText>Open dialog with menu in it</ButtonText>
 			</Button>
-
 			<Button variant="solid" color="primary" size="small" onPress={() => prompt.open()} label="Open prompt">
 				<ButtonText>Open prompt</ButtonText>
 			</Button>
-
 			<Button variant="solid" color="primary" size="small" onPress={testDialog.open} label="one">
 				<ButtonText>Open Tester</ButtonText>
 			</Button>
-
 			<Button variant="solid" color="primary" size="small" onPress={onUnmountTestStartPressWithClose} label="two">
 				<ButtonText>Start Unmount Test With `.close()` call</ButtonText>
 			</Button>
-
 			<Button
 				variant="solid"
 				color="primary"
@@ -127,11 +120,9 @@ export function Dialogs() {
 			>
 				<ButtonText>Start Unmount Test Without `.close()` call</ButtonText>
 			</Button>
-
 			<Button variant="solid" color="primary" size="small" onPress={onUnmountTestEndPress} label="two">
 				<ButtonText>End Unmount Test</ButtonText>
 			</Button>
-
 			<Button
 				variant="solid"
 				color="primary"
@@ -144,7 +135,6 @@ export function Dialogs() {
 			>
 				<ButtonText>Is reduced motion enabled?: ({reducedMotionEnabled?.toString() || "undefined"})</ButtonText>
 			</Button>
-
 			<Prompt.Outer control={prompt}>
 				<Prompt.TitleText>This is a prompt</Prompt.TitleText>
 				<Prompt.DescriptionText>
@@ -155,14 +145,12 @@ export function Dialogs() {
 					<Prompt.Action cta="Confirm" onPress={() => {}} />
 				</Prompt.Actions>
 			</Prompt.Outer>
-
 			<Dialog.Outer control={basic}>
 				<Dialog.Inner label="test">
 					<H3 nativeID="dialog-title">Dialog</H3>
 					<P nativeID="dialog-description">A basic dialog</P>
 				</Dialog.Inner>
 			</Dialog.Outer>
-
 			<Dialog.Outer control={withMenu}>
 				<Dialog.Inner label="test">
 					<H3 nativeID="dialog-title">Dialog with Menu</H3>
@@ -194,13 +182,18 @@ export function Dialogs() {
 					</Menu.Root>
 				</Dialog.Inner>
 			</Dialog.Outer>
-
 			<Dialog.Outer control={scrollable}>
 				<Dialog.ScrollableInner
 					accessibilityDescribedBy="dialog-description"
 					accessibilityLabelledBy="dialog-title"
 				>
-					<View style={[a.relative, a.gap_md, a.w_full]}>
+					<View
+						style={{
+							...a.relative,
+							...a.gap_md,
+							...a.w_full,
+						}}
+					>
 						<H3 nativeID="dialog-title">Dialog</H3>
 						<P nativeID="dialog-description">A scrollable dialog with an input within it.</P>
 						<Dialog.Input value="" onChangeText={() => {}} label="Type here" />
@@ -215,7 +208,12 @@ export function Dialogs() {
 							<ButtonText>Close all dialogs</ButtonText>
 						</Button>
 						<View style={{ height: 1000 }} />
-						<View style={[a.flex_row, a.justify_end]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.justify_end,
+							}}
+						>
 							<Button
 								variant="outline"
 								color="primary"
@@ -233,13 +231,18 @@ export function Dialogs() {
 					</View>
 				</Dialog.ScrollableInner>
 			</Dialog.Outer>
-
 			<Dialog.Outer control={testDialog}>
 				<Dialog.ScrollableInner
 					accessibilityDescribedBy="dialog-description"
 					accessibilityLabelledBy="dialog-title"
 				>
-					<View style={[a.relative, a.gap_md, a.w_full]}>
+					<View
+						style={{
+							...a.relative,
+							...a.gap_md,
+							...a.w_full,
+						}}
+					>
 						<Text>
 							Watch the console logs to test each of these dialog edge cases. Functionality should be
 							consistent across both native and web. If not then *sad face* something is wrong.
@@ -356,7 +359,6 @@ export function Dialogs() {
 					</View>
 				</Dialog.ScrollableInner>
 			</Dialog.Outer>
-
 			{shouldRenderUnmountTest && (
 				<Dialog.Outer control={unmountTestDialog}>
 					<Dialog.Inner label="test">

@@ -13,7 +13,20 @@ import { usePreferencesQuery, usePreferencesSetContentLabelMutation } from "#/st
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "../icons/CircleInfo";
 
 export function Outer({ children }: React.PropsWithChildren) {
-	return <View style={[a.flex_row, a.gap_sm, a.px_lg, a.py_lg, a.justify_between, a.flex_wrap]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.flex_row,
+				...a.gap_sm,
+				...a.px_lg,
+				...a.py_lg,
+				...a.justify_between,
+				...a.flex_wrap,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 export function Content({
@@ -28,14 +41,30 @@ export function Content({
 	const { gtPhone } = useBreakpoints();
 
 	return (
-		<View style={[a.gap_xs, a.flex_1]}>
-			<Text emoji style={[a.font_bold, gtPhone ? a.text_sm : a.text_md]}>
+		<View
+			style={{
+				...a.gap_xs,
+				...a.flex_1,
+			}}
+		>
+			<Text
+				emoji
+				style={{
+					...a.font_bold,
+					...(gtPhone ? a.text_sm : a.text_md),
+				}}
+			>
 				{name}
 			</Text>
-			<Text emoji style={[t.atoms.text_contrast_medium, a.leading_snug]}>
+			<Text
+				emoji
+				style={{
+					...t.atoms.text_contrast_medium,
+					...a.leading_snug,
+				}}
+			>
 				{description}
 			</Text>
-
 			{children}
 		</View>
 	);
@@ -57,7 +86,12 @@ export function Buttons({
 	hideLabel?: string;
 }) {
 	return (
-		<View style={[{ minHeight: 35 }, a.w_full]}>
+		<View
+			style={{
+				...{ minHeight: 35 },
+				...a.w_full,
+			}}
+		>
 			<ToggleButton.Group
 				label={`Configure content filtering setting for category: ${name}`}
 				values={values}
@@ -193,10 +227,23 @@ export function LabelerLabelPreference({
 		<Outer>
 			<Content name={labelStrings.name} description={labelStrings.description}>
 				{cantConfigure && (
-					<View style={[a.flex_row, a.gap_xs, a.align_center, a.mt_xs]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.gap_xs,
+							...a.align_center,
+							...a.mt_xs,
+						}}
+					>
 						<CircleInfo size="sm" fill={t.atoms.text_contrast_high.color} />
 
-						<Text style={[t.atoms.text_contrast_medium, a.font_bold, a.italic]}>
+						<Text
+							style={{
+								...t.atoms.text_contrast_medium,
+								...a.font_bold,
+								...a.italic,
+							}}
+						>
 							{adultDisabled ? (
 								<>Adult content is disabled.</>
 							) : isGlobalLabel ? (
@@ -212,21 +259,26 @@ export function LabelerLabelPreference({
 					</View>
 				)}
 			</Content>
-
 			{showConfig &&
 				(cantConfigure ? (
 					<View
-						style={[
-							{ minHeight: 35 },
-							a.px_md,
-							a.py_md,
-							a.rounded_sm,
-							a.border,
-							t.atoms.border_contrast_low,
-							a.self_start,
-						]}
+						style={{
+							...{ minHeight: 35 },
+							...a.px_md,
+							...a.py_md,
+							...a.rounded_sm,
+							...a.border,
+							...t.atoms.border_contrast_low,
+							...a.self_start,
+						}}
 					>
-						<Text emoji style={[a.font_bold, t.atoms.text_contrast_low]}>
+						<Text
+							emoji
+							style={{
+								...a.font_bold,
+								...t.atoms.text_contrast_low,
+							}}
+						>
 							{currentPrefLabel}
 						</Text>
 					</View>

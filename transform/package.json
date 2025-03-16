@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"transform": "jscodeshift -t main.ts ../vite-app/src/**/*.tsx"
+		"transform": "jscodeshift -t main.ts ../vite-app/src/**"
 	},
 	"keywords": [],
 	"author": "",

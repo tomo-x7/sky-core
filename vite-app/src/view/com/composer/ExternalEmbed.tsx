@@ -38,17 +38,28 @@ export const ExternalEmbedGif = ({
 	};
 
 	return (
-		<View style={[a.overflow_hidden, t.atoms.border_contrast_medium]}>
+		<View
+			style={{
+				...a.overflow_hidden,
+				...t.atoms.border_contrast_medium,
+			}}
+		>
 			{linkInfo ? (
 				<View style={{ pointerEvents: "auto" }}>
 					<ExternalLinkEmbed link={linkInfo} hideAlt />
 				</View>
 			) : error ? (
-				<Container style={[a.align_start, a.p_md, a.gap_xs]}>
+				<Container
+					style={{
+						...a.align_start,
+						...a.p_md,
+						...a.gap_xs,
+					}}
+				>
 					<Text numberOfLines={1} style={t.atoms.text_contrast_high}>
 						{gif.url}
 					</Text>
-					<Text numberOfLines={2} style={[{ color: t.palette.negative_400 }]}>
+					<Text numberOfLines={2} style={{ color: t.palette.negative_400 }}>
 						{cleanError(error)}
 					</Text>
 				</Container>
@@ -103,15 +114,27 @@ export const ExternalEmbedLink = ({
 	}
 
 	return (
-		<View style={[a.mb_xl, a.overflow_hidden, t.atoms.border_contrast_medium]}>
+		<View
+			style={{
+				...a.mb_xl,
+				...a.overflow_hidden,
+				...t.atoms.border_contrast_medium,
+			}}
+		>
 			{linkComponent ? (
 				<View style={{ pointerEvents: "none" }}>{linkComponent}</View>
 			) : error ? (
-				<Container style={[a.align_start, a.p_md, a.gap_xs]}>
+				<Container
+					style={{
+						...a.align_start,
+						...a.p_md,
+						...a.gap_xs,
+					}}
+				>
 					<Text numberOfLines={1} style={t.atoms.text_contrast_high}>
 						{uri}
 					</Text>
-					<Text numberOfLines={2} style={[{ color: t.palette.negative_400 }]}>
+					<Text numberOfLines={2} style={{ color: t.palette.negative_400 }}>
 						{cleanError(error)}
 					</Text>
 				</Container>
@@ -135,16 +158,16 @@ function Container({
 	const t = useTheme();
 	return (
 		<View
-			style={[
-				a.rounded_sm,
-				a.border,
-				a.align_center,
-				a.justify_center,
-				a.py_5xl,
-				t.atoms.bg_contrast_25,
-				t.atoms.border_contrast_medium,
-				style,
-			]}
+			style={{
+				...a.rounded_sm,
+				...a.border,
+				...a.align_center,
+				...a.justify_center,
+				...a.py_5xl,
+				...t.atoms.bg_contrast_25,
+				...t.atoms.border_contrast_medium,
+				...style,
+			}}
 		>
 			{children}
 		</View>

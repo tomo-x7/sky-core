@@ -17,7 +17,16 @@ const ItemContext = React.createContext({
 const Portal = createPortalGroup();
 
 export function Container({ children }: { children: React.ReactNode }) {
-	return <View style={[a.flex_1, a.py_md]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.flex_1,
+				...a.py_md,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 /**
@@ -39,14 +48,30 @@ export function Group({
 }) {
 	const context = useMemo(() => ({ destructive, withinGroup: true }), [destructive]);
 	return (
-		<View style={[a.w_full, style]}>
+		<View
+			style={{
+				...a.w_full,
+				...style,
+			}}
+		>
 			<Portal.Provider>
 				<ItemContext.Provider value={context}>
-					<Item style={[a.pb_2xs, { minHeight: 42 }]}>
+					<Item
+						style={{
+							...a.pb_2xs,
+							...{ minHeight: 42 },
+						}}
+					>
 						<Portal.Outlet />
 					</Item>
 					<Item
-						style={[a.flex_col, a.pt_2xs, a.align_start, a.gap_0, contentContainerStyle]}
+						style={{
+							...a.flex_col,
+							...a.pt_2xs,
+							...a.align_start,
+							...a.gap_0,
+							...contentContainerStyle,
+						}}
 						iconInset={iconInset}
 					>
 						{children}
@@ -79,15 +104,16 @@ export function Item({
 	}, [context, destructive]);
 	return (
 		<View
-			style={[
-				a.px_xl,
-				a.py_sm,
-				a.align_center,
-				a.gap_md,
-				a.w_full,
-				a.flex_row,
-				{ minHeight: 48 },
-				iconInset && {
+			style={{
+				...a.px_xl,
+				...a.py_sm,
+				...a.align_center,
+				...a.gap_md,
+				...a.w_full,
+				...a.flex_row,
+				...{ minHeight: 48 },
+
+				...(iconInset && {
 					paddingLeft:
 						// existing padding
 						a.pl_xl.paddingLeft +
@@ -95,9 +121,10 @@ export function Item({
 						28 +
 						// gap
 						a.gap_md.gap,
-				},
-				style,
-			]}
+				}),
+
+				...style,
+			}}
 		>
 			<ItemContext.Provider value={childContext}>{children}</ItemContext.Provider>
 		</View>
@@ -122,7 +149,10 @@ export function LinkItem({
 			{(args) => (
 				<Item
 					destructive={destructive}
-					style={[(args.hovered || args.pressed) && [t.atoms.bg_contrast_25], contentContainerStyle]}
+					style={{
+						...((args.hovered || args.pressed) && [t.atoms.bg_contrast_25]),
+						...contentContainerStyle,
+					}}
 				>
 					{typeof children === "function" ? children(args) : children}
 					<Chevron color={chevronColor} />
@@ -148,10 +178,10 @@ export function PressableItem({
 			{(args) => (
 				<Item
 					destructive={destructive}
-					style={[
-						(args.hovered || args.pressed) && [t.atoms.bg_contrast_25, hoverStyle],
-						contentContainerStyle,
-					]}
+					style={{
+						...((args.hovered || args.pressed) && [t.atoms.bg_contrast_25, hoverStyle]),
+						...contentContainerStyle,
+					}}
 				>
 					{typeof children === "function" ? children(args) : children}
 				</Item>
@@ -186,8 +216,13 @@ export function ItemIcon({
 	const color = colorProp ?? (destructive ? t.palette.negative_500 : t.atoms.text.color);
 
 	const content = (
-		<View style={[a.z_20, { width: iconSize, height: iconSize }]}>
-			<Comp width={iconSize} style={[{ color }]} />
+		<View
+			style={{
+				...a.z_20,
+				...{ width: iconSize, height: iconSize },
+			}}
+		>
+			<Comp width={iconSize} style={{ color }} />
 		</View>
 	);
 
@@ -204,14 +239,14 @@ export function ItemText({ style, ...props }: React.ComponentProps<typeof Button
 
 	const content = (
 		<Button.ButtonText
-			style={[
-				a.text_md,
-				a.font_normal,
-				a.text_left,
-				a.flex_1,
-				destructive ? { color: t.palette.negative_500 } : t.atoms.text,
-				style,
-			]}
+			style={{
+				...a.text_md,
+				...a.font_normal,
+				...a.text_left,
+				...a.flex_1,
+				...(destructive ? { color: t.palette.negative_500 } : t.atoms.text),
+				...style,
+			}}
 			{...props}
 		/>
 	);
@@ -225,7 +260,17 @@ export function ItemText({ style, ...props }: React.ComponentProps<typeof Button
 
 export function Divider({ style }: ViewStyleProp) {
 	const t = useTheme();
-	return <View style={[a.border_t, t.atoms.border_contrast_medium, a.w_full, a.my_sm, style]} />;
+	return (
+		<View
+			style={{
+				...a.border_t,
+				...t.atoms.border_contrast_medium,
+				...a.w_full,
+				...a.my_sm,
+				...style,
+			}}
+		/>
+	);
 }
 
 export function Chevron({ color: colorProp }: { color?: string }) {
@@ -244,7 +289,16 @@ export function BadgeText({
 }) {
 	const t = useTheme();
 	return (
-		<Text style={[t.atoms.text_contrast_low, a.text_md, a.text_right, a.leading_snug, style]} numberOfLines={1}>
+		<Text
+			style={{
+				...t.atoms.text_contrast_low,
+				...a.text_md,
+				...a.text_right,
+				...a.leading_snug,
+				...style,
+			}}
+			numberOfLines={1}
+		>
 			{children}
 		</Text>
 	);
@@ -262,12 +316,12 @@ export function BadgeButton({
 		<Button.Button label={label} onPress={onPress} hitSlop={HITSLOP_10}>
 			{({ pressed }) => (
 				<Button.ButtonText
-					style={[
-						a.text_md,
-						a.font_normal,
-						a.text_right,
-						{ color: pressed ? t.palette.contrast_300 : t.palette.primary_500 },
-					]}
+					style={{
+						...a.text_md,
+						...a.font_normal,
+						...a.text_right,
+						...{ color: pressed ? t.palette.contrast_300 : t.palette.primary_500 },
+					}}
 				>
 					{label}
 				</Button.ButtonText>

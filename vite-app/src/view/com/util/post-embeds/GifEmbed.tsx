@@ -31,25 +31,31 @@ function PlaybackControls({
 			accessibilityRole="button"
 			accessibilityHint={"Plays or pauses the GIF"}
 			accessibilityLabel={isPlaying ? "Pause" : "Play"}
-			style={[
-				a.absolute,
-				a.align_center,
-				a.justify_center,
-				!isLoaded && a.border,
-				t.atoms.border_contrast_medium,
-				a.inset_0,
-				a.w_full,
-				a.h_full,
-				{
+			style={{
+				...a.absolute,
+				...a.align_center,
+				...a.justify_center,
+				...(!isLoaded && a.border),
+				...t.atoms.border_contrast_medium,
+				...a.inset_0,
+				...a.w_full,
+				...a.h_full,
+
+				...{
 					zIndex: 2,
 					backgroundColor: !isLoaded ? t.atoms.bg_contrast_25.backgroundColor : undefined,
 				},
-			]}
+			}}
 			onPress={onPress}
 		>
 			{!isLoaded ? (
 				<View>
-					<View style={[a.align_center, a.justify_center]}>
+					<View
+						style={{
+							...a.align_center,
+							...a.justify_center,
+						}}
+					>
 						<Loader size="xl" />
 					</View>
 				</View>
@@ -98,19 +104,20 @@ export function GifEmbed({
 
 	return (
 		<View
-			style={[
-				a.rounded_md,
-				a.overflow_hidden,
-				a.border,
-				t.atoms.border_contrast_low,
-				{ aspectRatio: params.dimensions!.width / params.dimensions!.height },
-				style,
-			]}
+			style={{
+				...a.rounded_md,
+				...a.overflow_hidden,
+				...a.border,
+				...t.atoms.border_contrast_low,
+				...{ aspectRatio: params.dimensions!.width / params.dimensions!.height },
+				...style,
+			}}
 		>
 			<View
-				style={[
-					a.absolute,
-					/*
+				style={{
+					...a.absolute,
+
+					.../*
 					 * Aspect ratio was being clipped weirdly on web -esb
 					 */
 					{
@@ -119,7 +126,7 @@ export function GifEmbed({
 						left: -2,
 						right: -2,
 					},
-				]}
+				}}
 			>
 				<PlaybackControls onPress={onPress} isPlaying={playerState.isPlaying} isLoaded={playerState.isLoaded} />
 				<GifView
@@ -134,12 +141,13 @@ export function GifEmbed({
 				/>
 				{!playerState.isPlaying && (
 					<Fill
-						style={[
-							t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg,
-							{
+						style={{
+							...(t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg),
+
+							...{
 								opacity: 0.3,
 							},
-						]}
+						}}
 					/>
 				)}
 				{!hideAlt && isPreferredAltText && <AltText text={altText} />}
@@ -163,7 +171,13 @@ function AltText({ text }: { text: string }) {
 				onPress={control.open}
 				style={styles.altContainer}
 			>
-				<Text style={[styles.alt, largeAltBadge && a.text_xs]} accessible={false}>
+				<Text
+					style={{
+						...styles.alt,
+						...(largeAltBadge && a.text_xs),
+					}}
+					accessible={false}
+				>
 					ALT
 				</Text>
 			</TouchableOpacity>

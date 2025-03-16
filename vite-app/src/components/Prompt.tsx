@@ -48,7 +48,7 @@ export function Outer({
 				<Dialog.ScrollableInner
 					accessibilityLabelledBy={titleId}
 					accessibilityDescribedBy={descriptionId}
-					style={[gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full]}
+					style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 				>
 					{children}
 				</Dialog.ScrollableInner>
@@ -60,7 +60,15 @@ export function Outer({
 export function TitleText({ children }: React.PropsWithChildren) {
 	const { titleId } = React.useContext(Context);
 	return (
-		<Text nativeID={titleId} style={[a.text_2xl, a.font_bold, a.pb_sm, a.leading_snug]}>
+		<Text
+			nativeID={titleId}
+			style={{
+				...a.text_2xl,
+				...a.font_bold,
+				...a.pb_sm,
+				...a.leading_snug,
+			}}
+		>
 			{children}
 		</Text>
 	);
@@ -73,7 +81,12 @@ export function DescriptionText({ children, selectable }: React.PropsWithChildre
 		<Text
 			nativeID={descriptionId}
 			selectable={selectable}
-			style={[a.text_md, a.leading_snug, t.atoms.text_contrast_high, a.pb_lg]}
+			style={{
+				...a.text_md,
+				...a.leading_snug,
+				...t.atoms.text_contrast_high,
+				...a.pb_lg,
+			}}
 		>
 			{children}
 		</Text>
@@ -85,12 +98,12 @@ export function Actions({ children }: React.PropsWithChildren) {
 
 	return (
 		<View
-			style={[
-				a.w_full,
-				a.gap_md,
-				a.justify_end,
-				gtMobile ? [a.flex_row, a.flex_row_reverse, a.justify_start] : [a.flex_col],
-			]}
+			style={{
+				...a.w_full,
+				...a.gap_md,
+				...a.justify_end,
+				...(gtMobile ? [a.flex_row, a.flex_row_reverse, a.justify_start] : [a.flex_col]),
+			}}
 		>
 			{children}
 		</View>

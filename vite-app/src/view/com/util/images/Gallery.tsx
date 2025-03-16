@@ -49,14 +49,19 @@ export function GalleryItem({
 				onPress={onPress ? () => onPress(index, containerRefs, thumbDimsRef.current.slice()) : undefined}
 				onPressIn={onPressIn ? () => onPressIn(index) : undefined}
 				onLongPress={onLongPress ? () => onLongPress(index) : undefined}
-				style={[a.flex_1, a.overflow_hidden, t.atoms.bg_contrast_25, imageStyle]}
+				style={{
+					...a.flex_1,
+					...a.overflow_hidden,
+					...t.atoms.bg_contrast_25,
+					...imageStyle,
+				}}
 				accessibilityRole="button"
 				accessibilityLabel={image.alt || "Image"}
 				accessibilityHint=""
 			>
 				<Image
 					source={{ uri: image.thumb }}
-					style={[a.flex_1]}
+					style={a.flex_1}
 					accessible={true}
 					accessibilityLabel={image.alt}
 					accessibilityHint=""
@@ -75,28 +80,37 @@ export function GalleryItem({
 			{hasAlt && !hideBadges ? (
 				<View
 					accessible={false}
-					style={[
-						a.absolute,
-						a.flex_row,
-						a.align_center,
-						a.rounded_xs,
-						t.atoms.bg_contrast_25,
-						{
+					style={{
+						...a.absolute,
+						...a.flex_row,
+						...a.align_center,
+						...a.rounded_xs,
+						...t.atoms.bg_contrast_25,
+
+						...{
 							gap: 3,
 							padding: 3,
 							bottom: a.p_xs.padding,
 							right: a.p_xs.padding,
 							opacity: 0.8,
 						},
-						largeAltBadge && [
+
+						...(largeAltBadge && [
 							{
 								gap: 4,
 								padding: 5,
 							},
-						],
-					]}
+						]),
+					}}
 				>
-					<Text style={[a.font_heavy, largeAltBadge ? a.text_xs : { fontSize: 8 }]}>ALT</Text>
+					<Text
+						style={{
+							...a.font_heavy,
+							...(largeAltBadge ? a.text_xs : { fontSize: 8 }),
+						}}
+					>
+						ALT
+					</Text>
 				</View>
 			) : null}
 		</View>

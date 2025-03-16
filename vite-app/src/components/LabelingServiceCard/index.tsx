@@ -18,7 +18,21 @@ type LabelingServiceProps = {
 };
 
 export function Outer({ children, style }: React.PropsWithChildren<ViewStyleProp>) {
-	return <View style={[a.flex_row, a.gap_md, a.w_full, a.p_lg, a.pr_md, a.overflow_hidden, style]}>{children}</View>;
+	return (
+		<View
+			style={{
+				...a.flex_row,
+				...a.gap_md,
+				...a.w_full,
+				...a.p_lg,
+				...a.pr_md,
+				...a.overflow_hidden,
+				...style,
+			}}
+		>
+			{children}
+		</View>
+	);
 }
 
 export function Avatar({ avatar }: { avatar?: string }) {
@@ -27,7 +41,14 @@ export function Avatar({ avatar }: { avatar?: string }) {
 
 export function Title({ value }: { value: string }) {
 	return (
-		<Text emoji style={[a.text_md, a.font_bold, a.leading_tight]}>
+		<Text
+			emoji
+			style={{
+				...a.text_md,
+				...a.font_bold,
+				...a.leading_tight,
+			}}
+		>
 			{value}
 		</Text>
 	);
@@ -36,10 +57,10 @@ export function Title({ value }: { value: string }) {
 export function Description({ value, handle }: { value?: string; handle: string }) {
 	return value ? (
 		<Text numberOfLines={2}>
-			<RichText value={value} style={[a.leading_snug]} />
+			<RichText value={value} style={a.leading_snug} />
 		</Text>
 	) : (
-		<Text emoji style={[a.leading_snug]}>
+		<Text emoji style={a.leading_snug}>
 			{`By ${sanitizeHandle(handle, "@")}`}
 		</Text>
 	);
@@ -48,9 +69,24 @@ export function Description({ value, handle }: { value?: string; handle: string 
 export function RegionalNotice() {
 	const t = useTheme();
 	return (
-		<View style={[a.flex_row, a.align_center, a.gap_xs, a.pt_2xs, { marginLeft: -2 }]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_xs,
+				...a.pt_2xs,
+				...{ marginLeft: -2 },
+			}}
+		>
 			<Flag fill={t.atoms.text_contrast_low.color} size="sm" />
-			<Text style={[a.italic, a.leading_snug]}>Required in your region</Text>
+			<Text
+				style={{
+					...a.italic,
+					...a.leading_snug,
+				}}
+			>
+				Required in your region
+			</Text>
 		</View>
 	);
 }
@@ -58,7 +94,14 @@ export function RegionalNotice() {
 export function LikeCount({ likeCount }: { likeCount: number }) {
 	const t = useTheme();
 	return (
-		<Text style={[a.mt_sm, a.text_sm, t.atoms.text_contrast_medium, { fontWeight: "600" }]}>
+		<Text
+			style={{
+				...a.mt_sm,
+				...a.text_sm,
+				...t.atoms.text_contrast_medium,
+				...{ fontWeight: "600" },
+			}}
+		>
 			Liked by {likeCount} {likeCount === 1 ? "user" : "users"}
 		</Text>
 	);
@@ -68,10 +111,30 @@ export function Content({ children }: React.PropsWithChildren) {
 	const t = useTheme();
 
 	return (
-		<View style={[a.flex_1, a.flex_row, a.gap_md, a.align_center, a.justify_between]}>
-			<View style={[a.gap_2xs, a.flex_1]}>{children}</View>
-
-			<ChevronRight size="md" style={[a.z_10, t.atoms.text_contrast_low]} />
+		<View
+			style={{
+				...a.flex_1,
+				...a.flex_row,
+				...a.gap_md,
+				...a.align_center,
+				...a.justify_between,
+			}}
+		>
+			<View
+				style={{
+					...a.gap_2xs,
+					...a.flex_1,
+				}}
+			>
+				{children}
+			</View>
+			<ChevronRight
+				size="md"
+				style={{
+					...a.z_10,
+					...t.atoms.text_contrast_low,
+				}}
+			/>
 		</View>
 	);
 }

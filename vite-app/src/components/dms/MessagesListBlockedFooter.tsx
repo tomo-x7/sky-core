@@ -56,19 +56,37 @@ export function MessagesListBlockedFooter({
 	}, [blockedByListControl, listBlocks, queueUnblock]);
 
 	return (
-		<View style={[hasMessages && a.pt_md, a.pb_xl, a.gap_lg]}>
+		<View
+			style={{
+				...(hasMessages && a.pt_md),
+				...a.pb_xl,
+				...a.gap_lg,
+			}}
+		>
 			<Divider />
-			<Text style={[a.text_md, a.font_bold, a.text_center]}>
+			<Text
+				style={{
+					...a.text_md,
+					...a.font_bold,
+					...a.text_center,
+				}}
+			>
 				{isBlocking ? <>You have blocked this user</> : <>This user has blocked you</>}
 			</Text>
-
-			<View style={[a.flex_row, a.justify_between, a.gap_lg, a.px_md]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.justify_between,
+					...a.gap_lg,
+					...a.px_md,
+				}}
+			>
 				<Button
 					label={"Leave chat"}
 					color="secondary"
 					variant="solid"
 					size="small"
-					style={[a.flex_1]}
+					style={a.flex_1}
 					onPress={leaveConvoControl.open}
 				>
 					<ButtonText style={{ color: t.palette.negative_500 }}>Leave chat</ButtonText>
@@ -78,7 +96,7 @@ export function MessagesListBlockedFooter({
 					color="secondary"
 					variant="solid"
 					size="small"
-					style={[a.flex_1]}
+					style={a.flex_1}
 					onPress={reportControl.open}
 				>
 					<ButtonText style={{ color: t.palette.negative_500 }}>Report</ButtonText>
@@ -89,7 +107,7 @@ export function MessagesListBlockedFooter({
 						color="secondary"
 						variant="solid"
 						size="small"
-						style={[a.flex_1]}
+						style={a.flex_1}
 						onPress={onUnblockPress}
 					>
 						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>
@@ -97,24 +115,27 @@ export function MessagesListBlockedFooter({
 				)}
 			</View>
 			{isBlocking && !gtMobile && (
-				<View style={[a.flex_row, a.justify_center, a.px_md]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.justify_center,
+						...a.px_md,
+					}}
+				>
 					<Button
 						label={"Unblock"}
 						color="secondary"
 						variant="solid"
 						size="small"
-						style={[a.flex_1]}
+						style={a.flex_1}
 						onPress={onUnblockPress}
 					>
 						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>
 					</Button>
 				</View>
 			)}
-
 			<LeaveConvoPrompt control={leaveConvoControl} currentScreen="conversation" convoId={convoId} />
-
 			<ReportConversationPrompt control={reportControl} />
-
 			<BlockedByListDialog control={blockedByListControl} listBlocks={listBlocks} />
 		</View>
 	);

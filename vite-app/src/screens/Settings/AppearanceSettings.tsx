@@ -184,7 +184,14 @@ export function AppearanceToggleButtonGroup({
 				<SettingsList.ItemIcon icon={Icon} />
 				<SettingsList.ItemText>{title}</SettingsList.ItemText>
 				{description && (
-					<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium, a.w_full]}>
+					<Text
+						style={{
+							...a.text_sm,
+							...a.leading_snug,
+							...t.atoms.text_contrast_medium,
+							...a.w_full,
+						}}
+					>
 						{description}
 					</Text>
 				)}

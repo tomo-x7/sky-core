@@ -69,9 +69,20 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 	};
 
 	return (
-		<ScreenTransition style={[a.flex_1]} direction={state.transitionDirection}>
-			<View style={[a.border_b, t.atoms.border_contrast_medium]}>
-				<View style={[a.py_sm, a.px_md, { height: 60 }]}>
+		<ScreenTransition style={a.flex_1} direction={state.transitionDirection}>
+			<View
+				style={{
+					...a.border_b,
+					...t.atoms.border_contrast_medium,
+				}}
+			>
+				<View
+					style={{
+						...a.py_sm,
+						...a.px_md,
+						...{ height: 60 },
+					}}
+				>
 					<SearchInput value={query} onChangeText={(t) => setQuery(t)} onClearText={() => setQuery("")} />
 				</View>
 			</View>
@@ -88,11 +99,26 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 				sideBorders={false}
 				style={{ flex: 1 }}
 				ListEmptyComponent={
-					<View style={[a.flex_1, a.align_center, a.mt_lg, a.px_lg]}>
+					<View
+						style={{
+							...a.flex_1,
+							...a.align_center,
+							...a.mt_lg,
+							...a.px_lg,
+						}}
+					>
 						{isLoading ? (
 							<Loader size="lg" />
 						) : (
-							<Text style={[a.font_bold, a.text_lg, a.text_center, a.mt_lg, a.leading_snug]}>
+							<Text
+								style={{
+									...a.font_bold,
+									...a.text_lg,
+									...a.text_center,
+									...a.mt_lg,
+									...a.leading_snug,
+								}}
+							>
 								No feeds found. Try searching for something else.
 							</Text>
 						)}

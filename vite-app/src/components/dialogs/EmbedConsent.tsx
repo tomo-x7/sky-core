@@ -45,12 +45,25 @@ export function EmbedConsentDialog({
 			<Dialog.Handle />
 			<Dialog.ScrollableInner
 				label="External Media"
-				style={[gtMobile ? { width: "auto", maxWidth: 400 } : a.w_full]}
+				style={gtMobile ? { width: "auto", maxWidth: 400 } : a.w_full}
 			>
 				<View style={a.gap_sm}>
-					<Text style={[a.text_2xl, a.font_bold]}>External Media</Text>
+					<Text
+						style={{
+							...a.text_2xl,
+							...a.font_bold,
+						}}
+					>
+						External Media
+					</Text>
 
-					<View style={[a.mt_sm, a.mb_2xl, a.gap_lg]}>
+					<View
+						style={{
+							...a.mt_sm,
+							...a.mb_2xl,
+							...a.gap_lg,
+						}}
+					>
 						<Text>
 							This content is hosted by {externalEmbedLabels[source]}. Do you want to enable external
 							media?

@@ -55,7 +55,10 @@ export function NotificationSettingsScreen(props: Props) {
 								<Toggle.Item
 									name="enabled"
 									label={"Enable priority notifications"}
-									style={[a.flex_1, a.justify_between]}
+									style={{
+										...a.flex_1,
+										...a.justify_between,
+									}}
 								>
 									<Toggle.LabelText>Enable priority notifications</Toggle.LabelText>
 									{!data ? <Loader size="md" /> : <Toggle.Platform />}
@@ -63,9 +66,9 @@ export function NotificationSettingsScreen(props: Props) {
 							</Toggle.Group>
 						</SettingsList.Group>
 						<SettingsList.Item>
-							<Admonition type="warning" style={[a.flex_1]}>
+							<Admonition type="warning" style={a.flex_1}>
 								<>
-									<Text style={[a.font_bold]}>Experimental:</Text> When this preference is enabled,
+									<Text style={a.font_bold}>Experimental:</Text> When this preference is enabled,
 									you'll only receive reply and quote notifications from users you follow. We'll
 									continue to add more controls here over time.
 								</>

@@ -94,7 +94,12 @@ export function Component({
 				)}
 				style={listStyle}
 			/>
-			<View style={[styles.btns, pal.border]}>
+			<View
+				style={{
+					...styles.btns,
+					...pal.border,
+				}}
+			>
 				<Button
 					testID="doneBtn"
 					type="default"
@@ -169,16 +174,28 @@ function ListItem({
 	return (
 		<View
 			testID={`toggleBtn-${list.name}`}
-			style={[styles.listItem, pal.border, index !== 0 && { borderTopWidth: StyleSheet.hairlineWidth }]}
+			style={{
+				...styles.listItem,
+				...pal.border,
+				...(index !== 0 && { borderTopWidth: StyleSheet.hairlineWidth }),
+			}}
 		>
 			<View style={styles.listItemAvi}>
 				<UserAvatar size={40} avatar={list.avatar} type="list" />
 			</View>
 			<View style={styles.listItemContent}>
-				<Text type="lg" style={[s.bold, pal.text]} numberOfLines={1} lineHeight={1.2}>
+				<Text
+					type="lg"
+					style={{
+						...s.bold,
+						...pal.text,
+					}}
+					numberOfLines={1}
+					lineHeight={1.2}
+				>
 					{sanitizeDisplayName(list.name)}
 				</Text>
-				<Text type="md" style={[pal.textLight]} numberOfLines={1}>
+				<Text type="md" style={pal.textLight} numberOfLines={1}>
 					{list.purpose === "app.bsky.graph.defs#curatelist" &&
 						(list.creator.did === currentAccount?.did ? (
 							<>User list by you</>

@@ -40,7 +40,13 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<GeneratorView>) => {
 		return (
-			<View style={[a.p_lg, a.border_t, t.atoms.border_contrast_low]}>
+			<View
+				style={{
+					...a.p_lg,
+					...a.border_t,
+					...t.atoms.border_contrast_low,
+				}}
+			>
 				<FeedCard.Default view={item} />
 			</View>
 		);
@@ -53,7 +59,7 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 			keyExtractor={keyExtractor}
 			ref={scrollElRef}
 			headerOffset={headerHeight}
-			ListFooterComponent={<View style={[{ height: initialHeaderHeight + bottomBarOffset }]} />}
+			ListFooterComponent={<View style={{ height: initialHeaderHeight + bottomBarOffset }} />}
 			showsVerticalScrollIndicator={false}
 			desktopFixedHeight={true}
 		/>

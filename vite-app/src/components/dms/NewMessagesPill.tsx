@@ -27,27 +27,29 @@ export function NewMessagesPill({
 
 	return (
 		<View
-			style={[
-				a.absolute,
-				a.w_full,
-				a.z_10,
-				a.align_center,
-				{
+			style={{
+				...a.absolute,
+				...a.w_full,
+				...a.z_10,
+				...a.align_center,
+
+				...{
 					bottom: 70,
 					// Don't prevent scrolling in this area _except_ for in the pill itself
 					pointerEvents: "box-none",
 				},
-			]}
+			}}
 		>
 			<AnimatedPressable
-				style={[
-					a.py_sm,
-					a.rounded_full,
-					a.shadow_sm,
-					a.border,
-					t.atoms.bg_contrast_50,
-					t.atoms.border_contrast_medium,
-					{
+				style={{
+					...a.py_sm,
+					...a.rounded_full,
+					...a.shadow_sm,
+					...a.border,
+					...t.atoms.bg_contrast_50,
+					...t.atoms.border_contrast_medium,
+
+					...{
 						width: 160,
 						alignItems: "center",
 						shadowOpacity: 0.125,
@@ -55,13 +57,14 @@ export function NewMessagesPill({
 						shadowOffset: { width: 0, height: 5 },
 						pointerEvents: "box-only",
 					},
-					animatedStyle,
-				]}
+
+					...animatedStyle,
+				}}
 				entering={ScaleAndFadeIn}
 				exiting={ScaleAndFadeOut}
 				onPress={onPress}
 			>
-				<Text style={[a.font_bold]}>New messages</Text>
+				<Text style={a.font_bold}>New messages</Text>
 			</AnimatedPressable>
 		</View>
 	);

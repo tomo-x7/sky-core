@@ -21,12 +21,31 @@ export function ErrorMessage({
 	const pal = usePalette("error");
 	return (
 		<Layout.Center>
-			<View testID="errorMessageView" style={[styles.outer, pal.view, style]}>
-				<View style={[styles.errorIcon, { backgroundColor: theme.palette.error.icon }]}>
+			<View
+				testID="errorMessageView"
+				style={{
+					...styles.outer,
+					...pal.view,
+					...style,
+				}}
+			>
+				<View
+					style={{
+						...styles.errorIcon,
+						...{ backgroundColor: theme.palette.error.icon },
+					}}
+				>
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="exclamation" style={pal.text} size={16} />
 				</View>
-				<Text type="sm-medium" style={[styles.message, pal.text]} numberOfLines={numberOfLines}>
+				<Text
+					type="sm-medium"
+					style={{
+						...styles.message,
+						...pal.text,
+					}}
+					numberOfLines={numberOfLines}
+				>
 					{message}
 				</Text>
 				{onPressTryAgain && (

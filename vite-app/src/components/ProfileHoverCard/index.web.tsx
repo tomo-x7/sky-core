@@ -59,7 +59,7 @@ export function ProfileHoverCard(props: ProfileHoverCardProps) {
 		return props.children;
 	} else {
 		return (
-			<View onPointerMove={onPointerMove} style={[a.flex_shrink]}>
+			<View onPointerMove={onPointerMove} style={a.flex_shrink}>
 				<ProfileHoverCardInner {...props} />
 			</View>
 		);
@@ -327,23 +327,24 @@ let Card = ({ did, hide }: { did: string; hide: () => void }): React.ReactNode =
 
 	return (
 		<View
-			style={[
-				a.p_lg,
-				a.border,
-				a.rounded_md,
-				a.overflow_hidden,
-				t.atoms.bg,
-				t.atoms.border_contrast_low,
-				t.atoms.shadow_lg,
-				{
+			style={{
+				...a.p_lg,
+				...a.border,
+				...a.rounded_md,
+				...a.overflow_hidden,
+				...t.atoms.bg,
+				...t.atoms.border_contrast_low,
+				...t.atoms.shadow_lg,
+
+				...{
 					width: 300,
 				},
-			]}
+			}}
 		>
 			{data && moderationOpts ? (
 				<Inner profile={data} moderationOpts={moderationOpts} hide={hide} />
 			) : (
-				<View style={[a.justify_center]}>
+				<View style={a.justify_center}>
 					<Loader size="xl" />
 				</View>
 			)}
@@ -383,7 +384,13 @@ function Inner({
 
 	return (
 		<View>
-			<View style={[a.flex_row, a.justify_between, a.align_start]}>
+			<View
+				style={{
+					...a.flex_row,
+					...a.justify_between,
+					...a.align_start,
+				}}
+			>
 				<Link to={profileURL} label={"View profile"} onPress={hide}>
 					<UserAvatar
 						size={64}
@@ -403,7 +410,7 @@ function Inner({
 							size="small"
 							color="secondary"
 							variant="solid"
-							style={[a.rounded_full]}
+							style={a.rounded_full}
 						>
 							<ButtonText>{"View profile"}</ButtonText>
 						</Link>
@@ -413,7 +420,7 @@ function Inner({
 							color={profileShadow.viewer?.following ? "secondary" : "primary"}
 							variant="solid"
 							label={profileShadow.viewer?.following ? "Following" : "Follow"}
-							style={[a.rounded_full]}
+							style={a.rounded_full}
 							onPress={profileShadow.viewer?.following ? unfollow : follow}
 						>
 							<ButtonIcon position="left" icon={profileShadow.viewer?.following ? Check : Plus} />
@@ -421,10 +428,22 @@ function Inner({
 						</Button>
 					))}
 			</View>
-
 			<Link to={profileURL} label={"View profile"} onPress={hide}>
-				<View style={[a.pb_sm, a.flex_1]}>
-					<Text style={[a.pt_md, a.pb_xs, a.text_lg, a.font_bold, a.self_start]}>
+				<View
+					style={{
+						...a.pb_sm,
+						...a.flex_1,
+					}}
+				>
+					<Text
+						style={{
+							...a.pt_md,
+							...a.pb_xs,
+							...a.text_lg,
+							...a.font_bold,
+							...a.self_start,
+						}}
+					>
 						{sanitizeDisplayName(
 							profile.displayName || sanitizeHandle(profile.handle),
 							moderation.ui("displayName"),
@@ -434,46 +453,78 @@ function Inner({
 					<ProfileHeaderHandle profile={profileShadow} disableTaps />
 				</View>
 			</Link>
-
 			{isBlockedUser && (
-				<View style={[a.flex_row, a.flex_wrap, a.gap_xs]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.flex_wrap,
+						...a.gap_xs,
+					}}
+				>
 					{moderation.ui("profileView").alerts.map((cause) => (
 						<Pills.Label key={getModerationCauseKey(cause)} size="lg" cause={cause} disableDetailsDialog />
 					))}
 				</View>
 			)}
-
 			{!isBlockedUser && (
 				<>
-					<View style={[a.flex_row, a.flex_wrap, a.gap_md, a.pt_xs]}>
+					<View
+						style={{
+							...a.flex_row,
+							...a.flex_wrap,
+							...a.gap_md,
+							...a.pt_xs,
+						}}
+					>
 						<InlineLinkText
 							to={makeProfileLink(profile, "followers")}
 							label={`${followers} ${pluralizedFollowers}`}
-							style={[t.atoms.text]}
+							style={t.atoms.text}
 							onPress={hide}
 						>
-							<Text style={[a.text_md, a.font_bold]}>{followers} </Text>
-							<Text style={[t.atoms.text_contrast_medium]}>{pluralizedFollowers}</Text>
+							<Text
+								style={{
+									...a.text_md,
+									...a.font_bold,
+								}}
+							>
+								{followers}{" "}
+							</Text>
+							<Text style={t.atoms.text_contrast_medium}>{pluralizedFollowers}</Text>
 						</InlineLinkText>
 						<InlineLinkText
 							to={makeProfileLink(profile, "follows")}
 							label={`${following} following`}
-							style={[t.atoms.text]}
+							style={t.atoms.text}
 							onPress={hide}
 						>
-							<Text style={[a.text_md, a.font_bold]}>{following} </Text>
-							<Text style={[t.atoms.text_contrast_medium]}>{pluralizedFollowings}</Text>
+							<Text
+								style={{
+									...a.text_md,
+									...a.font_bold,
+								}}
+							>
+								{following}{" "}
+							</Text>
+							<Text style={t.atoms.text_contrast_medium}>{pluralizedFollowings}</Text>
 						</InlineLinkText>
 					</View>
 
 					{profile.description?.trim() && !moderation.ui("profileView").blur ? (
-						<View style={[a.pt_md]}>
+						<View style={a.pt_md}>
 							<RichText numberOfLines={8} value={descriptionRT} onLinkPress={hide} />
 						</View>
 					) : undefined}
 
 					{!isMe && shouldShowKnownFollowers(profile.viewer?.knownFollowers) && (
-						<View style={[a.flex_row, a.align_center, a.gap_sm, a.pt_md]}>
+						<View
+							style={{
+								...a.flex_row,
+								...a.align_center,
+								...a.gap_sm,
+								...a.pt_md,
+							}}
+						>
 							<KnownFollowers profile={profile} moderationOpts={moderationOpts} onLinkPress={hide} />
 						</View>
 					)}

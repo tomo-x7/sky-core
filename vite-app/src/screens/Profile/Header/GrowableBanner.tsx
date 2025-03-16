@@ -23,7 +23,12 @@ export function GrowableBanner({
 	// plain non-growable mode for Android/Web
 
 	return (
-		<View style={[a.w_full, a.h_full]}>
+		<View
+			style={{
+				...a.w_full,
+				...a.h_full,
+			}}
+		>
 			{children}
 			{backButton}
 		</View>

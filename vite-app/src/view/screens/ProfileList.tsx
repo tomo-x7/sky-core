@@ -612,7 +612,12 @@ function Header({
 							accessibilityLabel={"Subscribe to this list"}
 							accessibilityHint=""
 						>
-							<View style={[palInverted.view, styles.btn]}>
+							<View
+								style={{
+									...palInverted.view,
+									...styles.btn,
+								}}
+							>
 								<Text style={palInverted.text}>Subscribe</Text>
 							</View>
 						</NativeDropdown>
@@ -624,7 +629,12 @@ function Header({
 					accessibilityLabel={"More options"}
 					accessibilityHint=""
 				>
-					<View style={[pal.viewLight, styles.btn]}>
+					<View
+						style={{
+							...pal.viewLight,
+							...styles.btn,
+						}}
+					>
 						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="ellipsis" size={20} color={pal.colors.text} />
 					</View>
@@ -661,8 +671,21 @@ function Header({
 				/>
 			</ProfileSubpageHeader>
 			{descriptionRT ? (
-				<View style={[a.px_lg, a.pt_sm, a.pb_sm, a.gap_md]}>
-					<RichText value={descriptionRT} style={[a.text_md, a.leading_snug]} />
+				<View
+					style={{
+						...a.px_lg,
+						...a.pt_sm,
+						...a.pb_sm,
+						...a.gap_md,
+					}}
+				>
+					<RichText
+						value={descriptionRT}
+						style={{
+							...a.text_md,
+							...a.leading_snug,
+						}}
+					/>
 				</View>
 			) : null}
 		</>
@@ -707,7 +730,12 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 
 	const renderPostsEmpty = useCallback(() => {
 		return (
-			<View style={[a.gap_xl, a.align_center]}>
+			<View
+				style={{
+					...a.gap_xl,
+					...a.align_center,
+				}}
+			>
 				<EmptyState icon="hashtag" message={"This feed is empty."} />
 				{isOwner && (
 					<NewButton
@@ -778,7 +806,12 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 		}
 		if (isMobile) {
 			return (
-				<View style={[a.px_sm, a.py_sm]}>
+				<View
+					style={{
+						...a.px_sm,
+						...a.py_sm,
+					}}
+				>
 					<NewButton
 						testID="addUserBtn"
 						label={"Add a user to this list"}
@@ -786,7 +819,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 						color="primary"
 						size="small"
 						variant="outline"
-						style={[a.py_md]}
+						style={a.py_md}
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
 						<ButtonText>Add people</ButtonText>
@@ -795,7 +828,13 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 			);
 		}
 		return (
-			<View style={[a.px_lg, a.py_md, a.flex_row_reverse]}>
+			<View
+				style={{
+					...a.px_lg,
+					...a.py_md,
+					...a.flex_row_reverse,
+				}}
+			>
 				<NewButton
 					testID="addUserBtn"
 					label={"Add a user to this list"}
@@ -803,7 +842,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					color="primary"
 					size="small"
 					variant="ghost"
-					style={[a.py_sm]}
+					style={a.py_sm}
 				>
 					<ButtonIcon icon={PersonPlusIcon} />
 					<ButtonText>Add people</ButtonText>
@@ -814,7 +853,12 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 
 	const renderEmptyState = useCallback(() => {
 		return (
-			<View style={[a.gap_xl, a.align_center]}>
+			<View
+				style={{
+					...a.gap_xl,
+					...a.align_center,
+				}}
+			>
 				<EmptyState icon="users-slash" message={"This list is empty."} />
 				{isOwner && (
 					<NewButton
@@ -862,23 +906,35 @@ function ErrorScreen({ error }: { error: string }) {
 
 	return (
 		<View
-			style={[
-				pal.view,
-				pal.border,
-				{
+			style={{
+				...pal.view,
+				...pal.border,
+
+				...{
 					paddingHorizontal: 18,
 					paddingVertical: 14,
 					borderTopWidth: StyleSheet.hairlineWidth,
 				},
-			]}
+			}}
 		>
-			<Text type="title-lg" style={[pal.text, s.mb10]}>
+			<Text
+				type="title-lg"
+				style={{
+					...pal.text,
+					...s.mb10,
+				}}
+			>
 				Could not load list
 			</Text>
-			<Text type="md" style={[pal.text, s.mb20]}>
+			<Text
+				type="md"
+				style={{
+					...pal.text,
+					...s.mb20,
+				}}
+			>
 				{error}
 			</Text>
-
 			<View style={{ flexDirection: "row" }}>
 				<Button
 					type="default"

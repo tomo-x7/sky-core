@@ -79,8 +79,21 @@ export function DisableEmail2FADialog({
 				accessibilityDescribedBy="dialog-description"
 				accessibilityLabelledBy="dialog-title"
 			>
-				<View style={[a.relative, a.gap_md, a.w_full]}>
-					<Text nativeID="dialog-title" style={[a.text_2xl, a.font_bold, t.atoms.text]}>
+				<View
+					style={{
+						...a.relative,
+						...a.gap_md,
+						...a.w_full,
+					}}
+				>
+					<Text
+						nativeID="dialog-title"
+						style={{
+							...a.text_2xl,
+							...a.font_bold,
+							...t.atoms.text,
+						}}
+					>
 						Disable Email 2FA
 					</Text>
 					<P nativeID="dialog-description">
@@ -97,7 +110,12 @@ export function DisableEmail2FADialog({
 					{error ? <ErrorMessage message={error} /> : undefined}
 
 					{stage === Stages.Email ? (
-						<View style={[a.gap_sm, gtMobile && [a.flex_row, a.justify_end, a.gap_md]]}>
+						<View
+							style={{
+								...a.gap_sm,
+								...(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
+							}}
+						>
 							<Button
 								testID="sendEmailButton"
 								variant="solid"
@@ -124,7 +142,7 @@ export function DisableEmail2FADialog({
 						</View>
 					) : stage === Stages.ConfirmCode ? (
 						<View>
-							<View style={[a.mb_md]}>
+							<View style={a.mb_md}>
 								<TextField.LabelText>Confirmation code</TextField.LabelText>
 								<TextField.Root>
 									<TextField.Icon icon={Lock} />
@@ -142,7 +160,12 @@ export function DisableEmail2FADialog({
 									/>
 								</TextField.Root>
 							</View>
-							<View style={[a.gap_sm, gtMobile && [a.flex_row, a.justify_end, a.gap_md]]}>
+							<View
+								style={{
+									...a.gap_sm,
+									...(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
+								}}
+							>
 								<Button
 									testID="resendCodeBtn"
 									variant="ghost"

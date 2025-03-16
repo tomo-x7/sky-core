@@ -69,14 +69,29 @@ function DeactivateAccountDialogInner({
 				Your profile, posts, feeds, and lists will no longer be visible to other Bluesky users. You can
 				reactivate your account at any time by logging in.
 			</Prompt.DescriptionText>
-
-			<View style={[a.pb_xl]}>
+			<View style={a.pb_xl}>
 				<Divider />
-				<View style={[a.gap_sm, a.pt_lg, a.pb_xl]}>
-					<Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
+				<View
+					style={{
+						...a.gap_sm,
+						...a.pt_lg,
+						...a.pb_xl,
+					}}
+				>
+					<Text
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.leading_snug,
+						}}
+					>
 						There is no time limit for account deactivation, come back any time.
 					</Text>
-					<Text style={[t.atoms.text_contrast_medium, a.leading_snug]}>
+					<Text
+						style={{
+							...t.atoms.text_contrast_medium,
+							...a.leading_snug,
+						}}
+					>
 						If you're trying to change your handle or email, do so before you deactivate.
 					</Text>
 				</View>
@@ -96,11 +111,26 @@ function DeactivateAccountDialogInner({
 				</Button>
 				<Prompt.Cancel />
 			</Prompt.Actions>
-
 			{error && (
-				<View style={[a.flex_row, a.gap_sm, a.mt_md, a.p_md, a.rounded_sm, t.atoms.bg_contrast_25]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.gap_sm,
+						...a.mt_md,
+						...a.p_md,
+						...a.rounded_sm,
+						...t.atoms.bg_contrast_25,
+					}}
+				>
 					<CircleInfo size="md" fill={t.palette.negative_400} />
-					<Text style={[a.flex_1, a.leading_snug]}>{error}</Text>
+					<Text
+						style={{
+							...a.flex_1,
+							...a.leading_snug,
+						}}
+					>
+						{error}
+					</Text>
 				</View>
 			)}
 		</>

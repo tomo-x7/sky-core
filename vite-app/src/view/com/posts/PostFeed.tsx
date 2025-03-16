@@ -637,7 +637,7 @@ let PostFeed = ({
 		const offset = Math.max(headerOffset, 32);
 
 		return isFetchingNextPage ? (
-			<View style={[styles.feedFooter]}>
+			<View style={styles.feedFooter}>
 				<ActivityIndicator />
 				<View style={{ height: offset }} />
 			</View>

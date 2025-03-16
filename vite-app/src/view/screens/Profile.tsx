@@ -44,7 +44,7 @@ interface SectionRef {
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Profile">;
 export function ProfileScreen(props: Props) {
 	return (
-		<Layout.Screen testID="profileScreen" style={[a.pt_0]}>
+		<Layout.Screen testID="profileScreen" style={a.pt_0}>
 			<ProfileScreenInner {...props} />
 		</Layout.Screen>
 	);
@@ -106,7 +106,7 @@ function ProfileScreenInner({ route }: Props) {
 	}
 	if (resolveError || profileError) {
 		return (
-			<SafeAreaView style={[a.flex_1]}>
+			<SafeAreaView style={a.flex_1}>
 				<ErrorScreen
 					testID="profileErrorScreen"
 					title={profileError ? "Not Found" : "Oops!"}
@@ -129,7 +129,7 @@ function ProfileScreenInner({ route }: Props) {
 	}
 	// should never happen
 	return (
-		<SafeAreaView style={[a.flex_1]}>
+		<SafeAreaView style={a.flex_1}>
 			<ErrorScreen
 				testID="profileErrorScreen"
 				title="Oops!"

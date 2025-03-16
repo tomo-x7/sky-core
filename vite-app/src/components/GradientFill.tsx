@@ -26,7 +26,11 @@ export function GradientFill({
 			locations={gradient.values.map((c) => c[0]) as [number, number, ...number[]]}
 			start={{ x: 0, y: 0 }}
 			end={{ x: 1, y: 1 }}
-			style={[a.absolute, a.inset_0, style]}
+			style={{
+				...a.absolute,
+				...a.inset_0,
+				...style,
+			}}
 		/>
 	);
 }

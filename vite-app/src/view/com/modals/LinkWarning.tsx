@@ -40,19 +40,42 @@ export function Component({
 	};
 
 	return (
-		<SafeAreaView style={[s.flex1, pal.view]}>
-			<ScrollView testID="linkWarningModal" style={[s.flex1, isMobile && { paddingHorizontal: 18 }]}>
+		<SafeAreaView
+			style={{
+				...s.flex1,
+				...pal.view,
+			}}
+		>
+			<ScrollView
+				testID="linkWarningModal"
+				style={{
+					...s.flex1,
+					...(isMobile && { paddingHorizontal: 18 }),
+				}}
+			>
 				<View style={styles.titleSection}>
 					{potentiallyMisleading ? (
 						<>
 							{/* @ts-ignore */}
 							<FontAwesomeIcon icon="circle-exclamation" color={pal.colors.text} size={18} />
-							<Text type="title-lg" style={[pal.text, styles.title]}>
+							<Text
+								type="title-lg"
+								style={{
+									...pal.text,
+									...styles.title,
+								}}
+							>
 								Potentially Misleading Link
 							</Text>
 						</>
 					) : (
-						<Text type="title-lg" style={[pal.text, styles.title]}>
+						<Text
+							type="title-lg"
+							style={{
+								...pal.text,
+								...styles.title,
+							}}
+						>
 							Leaving Bluesky
 						</Text>
 					)}
@@ -72,7 +95,12 @@ export function Component({
 					)}
 				</View>
 
-				<View style={[styles.btnContainer, isMobile && { paddingBottom: 40 }]}>
+				<View
+					style={{
+						...styles.btnContainer,
+						...(isMobile && { paddingBottom: 40 }),
+					}}
+				>
 					<Button
 						testID="confirmBtn"
 						type="primary"
@@ -113,7 +141,13 @@ function LinkBox({ href }: { href: string }) {
 		}
 	}, [href]);
 	return (
-		<View style={[pal.view, pal.border, styles.linkBox]}>
+		<View
+			style={{
+				...pal.view,
+				...pal.border,
+				...styles.linkBox,
+			}}
+		>
 			<Text type="lg" style={pal.textLight}>
 				{scheme}
 				<Text type="lg-bold" style={pal.text}>

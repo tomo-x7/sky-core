@@ -239,7 +239,12 @@ export function GestureActionView({
 	return (
 		<GestureDetector gesture={composedGesture}>
 			<View>
-				<Animated.View style={[StyleSheet.absoluteFill, animatedBackgroundStyle]}>
+				<Animated.View
+					style={{
+						...StyleSheet.absoluteFill,
+						...animatedBackgroundStyle,
+					}}
+				>
 					<View
 						style={{
 							flex: 1,
@@ -251,7 +256,7 @@ export function GestureActionView({
 									: "flex-start",
 						}}
 					>
-						<Animated.View style={[animatedIconStyle]}>
+						<Animated.View style={animatedIconStyle}>
 							{activeAction === "leftFirst" && actions.leftFirst?.icon ? (
 								<actions.leftFirst.icon
 									height={ICON_SIZE}

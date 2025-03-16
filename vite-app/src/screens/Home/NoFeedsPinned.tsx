@@ -57,27 +57,57 @@ export function NoFeedsPinned({
 
 	return (
 		//@ts-ignore
-		<CenteredView sideBorders style={[a.h_full_vh]}>
+		<CenteredView sideBorders style={a.h_full_vh}>
 			<View
-				style={[
-					a.align_center,
-					//@ts-ignore
+				style={{
+					...a.align_center,
+
+					...//@ts-ignore
 					a.h_full_vh,
-					a.py_3xl,
-					a.px_xl,
-					{
+
+					...a.py_3xl,
+					...a.px_xl,
+
+					...{
 						paddingTop: headerOffset + a.py_3xl.paddingTop,
 					},
-				]}
+				}}
 			>
-				<View style={[a.align_center, a.gap_sm, a.pb_xl]}>
-					<Text style={[a.text_xl, a.font_bold]}>Whoops!</Text>
-					<Text style={[a.text_md, a.text_center, a.leading_snug, { maxWidth: 340 }]}>
+				<View
+					style={{
+						...a.align_center,
+						...a.gap_sm,
+						...a.pb_xl,
+					}}
+				>
+					<Text
+						style={{
+							...a.text_xl,
+							...a.font_bold,
+						}}
+					>
+						Whoops!
+					</Text>
+					<Text
+						style={{
+							...a.text_md,
+							...a.text_center,
+							...a.leading_snug,
+							...{ maxWidth: 340 },
+						}}
+					>
 						Looks like you unpinned all your feeds. But don't worry, you can add some below 😄
 					</Text>
 				</View>
 
-				<View style={[a.flex_row, a.gap_md, a.justify_center, a.flex_wrap]}>
+				<View
+					style={{
+						...a.flex_row,
+						...a.gap_md,
+						...a.justify_center,
+						...a.flex_wrap,
+					}}
+				>
 					<Button
 						disabled={isPending}
 						label={"Apply default recommended feeds"}

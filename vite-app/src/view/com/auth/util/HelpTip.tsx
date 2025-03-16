@@ -9,11 +9,23 @@ export function HelpTip({ text }: { text: string }) {
 	const bg = useColorSchemeStyle({ backgroundColor: colors.gray1 }, { backgroundColor: colors.gray8 });
 	const fg = useColorSchemeStyle({ color: colors.gray5 }, { color: colors.gray4 });
 	return (
-		<View style={[styles.helptip, bg]}>
+		<View
+			style={{
+				...styles.helptip,
+				...bg,
+			}}
+		>
 			<View style={styles.icon}>
 				<InfoCircleIcon size={18} style={fg} strokeWidth={1.5} />
 			</View>
-			<Text type="xs-medium" style={[fg, s.ml5, s.flex1]}>
+			<Text
+				type="xs-medium"
+				style={{
+					...fg,
+					...s.ml5,
+					...s.flex1,
+				}}
+			>
 				{text}
 			</Text>
 		</View>

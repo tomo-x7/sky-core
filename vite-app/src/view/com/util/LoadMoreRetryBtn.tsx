@@ -17,7 +17,14 @@ export function LoadMoreRetryBtn({
 		<Button type="default-light" onPress={onPress} style={styles.loadMoreRetry}>
 			{/* @ts-ignore */}
 			<FontAwesomeIcon icon="arrow-rotate-left" style={pal.textLight} size={18} />
-			<Text style={[pal.textLight, styles.label]}>{label}</Text>
+			<Text
+				style={{
+					...pal.textLight,
+					...styles.label,
+				}}
+			>
+				{label}
+			</Text>
 		</Button>
 	);
 }

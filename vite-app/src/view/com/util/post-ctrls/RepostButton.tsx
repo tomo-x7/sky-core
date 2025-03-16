@@ -41,12 +41,13 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 						return (
 							<Pressable
 								{...props}
-								style={[
-									a.rounded_full,
-									(state.hovered || state.pressed) && {
+								style={{
+									...a.rounded_full,
+
+									...((state.hovered || state.pressed) && {
 										backgroundColor: t.palette.contrast_25,
-									},
-								]}
+									}),
+								}}
 							>
 								<RepostInner
 									isReposted={isReposted}
@@ -106,12 +107,24 @@ const RepostInner = ({
 	big?: boolean;
 }) => {
 	return (
-		<View style={[a.flex_row, a.align_center, a.gap_xs, { padding: 5 }]}>
+		<View
+			style={{
+				...a.flex_row,
+				...a.align_center,
+				...a.gap_xs,
+				...{ padding: 5 },
+			}}
+		>
 			<Repost style={color} width={big ? 22 : 18} />
 			{typeof repostCount !== "undefined" && repostCount > 0 ? (
 				<Text
 					testID="repostCount"
-					style={[color, big ? a.text_md : { fontSize: 15 }, isReposted && [a.font_bold], a.user_select_none]}
+					style={{
+						...color,
+						...(big ? a.text_md : { fontSize: 15 }),
+						...(isReposted && [a.font_bold]),
+						...a.user_select_none,
+					}}
 				>
 					{formatCount(repostCount)}
 				</Text>

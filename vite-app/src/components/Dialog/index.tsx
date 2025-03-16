@@ -99,19 +99,20 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 							onPress={handleBackgroundPress}
 						>
 							<View
-								style={[
-									a.fixed,
-									a.inset_0,
-									a.z_10,
-									a.px_xl,
-									webOptions?.alignCenter ? a.justify_center : undefined,
-									a.align_center,
-									{
+								style={{
+									...a.fixed,
+									...a.inset_0,
+									...a.z_10,
+									...a.px_xl,
+									...(webOptions?.alignCenter ? a.justify_center : undefined),
+									...a.align_center,
+
+									...{
 										//@ts-ignore
 										overflowY: "auto",
 										paddingVertical: gtMobile ? "10vh" : a.pt_xl.paddingTop,
 									},
-								]}
+								}}
 							>
 								<Backdrop />
 								{/**
@@ -120,13 +121,14 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 								 * stacked dialogs appear relatively aligned.
 								 */}
 								<View
-									style={[
-										a.w_full,
-										a.z_20,
-										a.align_center,
-										//@ts-ignore
+									style={{
+										...a.w_full,
+										...a.z_20,
+										...a.align_center,
+
+										...//@ts-ignore
 										{ minHeight: "60vh", position: "static" },
-									]}
+									}}
 								>
 									{children}
 								</View>
@@ -215,7 +217,14 @@ export const InnerFlatList = React.forwardRef<
 			}}
 			contentContainerStyle={{ ...a.px_0, ...webInnerContentContainerStyle }}
 		>
-			<FlatList ref={ref} style={[gtMobile ? a.px_2xl : a.px_xl, flatten(style)]} {...props} />
+			<FlatList
+				ref={ref}
+				style={{
+					...(gtMobile ? a.px_2xl : a.px_xl),
+					...flatten(style),
+				}}
+				{...props}
+			/>
 		</Inner>
 	);
 });
@@ -224,14 +233,15 @@ export function Close() {
 	const { close } = React.useContext(Context);
 	return (
 		<View
-			style={[
-				a.absolute,
-				a.z_10,
-				{
+			style={{
+				...a.absolute,
+				...a.z_10,
+
+				...{
 					top: a.pt_md.paddingTop,
 					right: a.pr_md.paddingRight,
 				},
-			]}
+			}}
 		>
 			<Button
 				size="small"
@@ -258,7 +268,12 @@ function Backdrop() {
 		<View style={{ opacity: 0.8 }}>
 			<View
 				//@ts-ignore
-				style={[a.fixed, a.inset_0, { backgroundColor: t.palette.black }, !reduceMotionEnabled && a.fade_in]}
+				style={{
+					...a.fixed,
+					...a.inset_0,
+					...{ backgroundColor: t.palette.black },
+					...(!reduceMotionEnabled && a.fade_in),
+				}}
 			/>
 		</View>
 	);

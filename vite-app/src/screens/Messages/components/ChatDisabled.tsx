@@ -14,12 +14,32 @@ import * as Toast from "#/view/com/util/Toast";
 export function ChatDisabled() {
 	const t = useTheme();
 	return (
-		<View style={[a.p_md]}>
-			<View style={[a.align_start, a.p_xl, a.rounded_md, t.atoms.bg_contrast_25]}>
-				<Text style={[a.text_md, a.font_bold, a.pb_sm, t.atoms.text_contrast_high]}>
+		<View style={a.p_md}>
+			<View
+				style={{
+					...a.align_start,
+					...a.p_xl,
+					...a.rounded_md,
+					...t.atoms.bg_contrast_25,
+				}}
+			>
+				<Text
+					style={{
+						...a.text_md,
+						...a.font_bold,
+						...a.pb_sm,
+						...t.atoms.text_contrast_high,
+					}}
+				>
 					Your chats have been disabled
 				</Text>
-				<Text style={[a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]}>
+				<Text
+					style={{
+						...a.text_sm,
+						...a.leading_snug,
+						...t.atoms.text_contrast_medium,
+					}}
+				>
 					Our moderators have reviewed reports and decided to disable your access to chats on Bluesky.
 				</Text>
 				<AppealDialog />
@@ -87,9 +107,25 @@ function DialogInner() {
 
 	return (
 		<Dialog.ScrollableInner label={"Appeal this decision"}>
-			<Text style={[a.text_2xl, a.font_bold, a.pb_xs, a.leading_tight]}>Appeal this decision</Text>
-			<Text style={[a.text_md, a.leading_snug]}>This appeal will be sent to Bluesky's moderation service.</Text>
-			<View style={[a.my_md]}>
+			<Text
+				style={{
+					...a.text_2xl,
+					...a.font_bold,
+					...a.pb_xs,
+					...a.leading_tight,
+				}}
+			>
+				Appeal this decision
+			</Text>
+			<Text
+				style={{
+					...a.text_md,
+					...a.leading_snug,
+				}}
+			>
+				This appeal will be sent to Bluesky's moderation service.
+			</Text>
+			<View style={a.my_md}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={"Please explain why you think your chats were incorrectly disabled"}
@@ -101,7 +137,6 @@ function DialogInner() {
 					maxLength={300}
 				/>
 			</View>
-
 			<View style={gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm]}>
 				<Button testID="backBtn" variant="solid" color="secondary" size="large" onPress={onBack} label={"Back"}>
 					<ButtonText>{"Back"}</ButtonText>
