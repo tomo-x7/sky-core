@@ -2,16 +2,10 @@ import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React, { useImperativeHandle } from "react";
-import {
-	FlatList,
-	type FlatListProps,
-	type StyleProp,
-	TouchableWithoutFeedback,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { FlatList, type FlatListProps, TouchableWithoutFeedback, View } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
+import hexRgb from "hex-rgb";
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Context } from "#/components/Dialog/context";
@@ -20,7 +14,6 @@ import { Portal } from "#/components/Portal";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useA11y } from "#/state/a11y";
 import { useDialogStateControlContext } from "#/state/dialogs";
-import hexRgb from "hex-rgb"
 
 export { useDialogContext, useDialogControl } from "#/components/Dialog/context";
 export * from "#/components/Dialog/shared";
@@ -180,7 +173,7 @@ export function Inner({
 					maxWidth: 600,
 					borderColor: t.palette.contrast_200,
 					// TODO:2pxは適当に決めたので要チェック
-					boxShadow:`2px 2px 30px ${hexRgb(t.palette.black,{alpha:t.name === "light" ? 0.1 : 0.4,format:"css"})}`,
+					boxShadow: `2px 2px 30px ${hexRgb(t.palette.black, { alpha: t.name === "light" ? 0.1 : 0.4, format: "css" })}`,
 
 					...(!reduceMotionEnabled ? a.zoom_fade_in : {}),
 					...style,

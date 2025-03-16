@@ -12,8 +12,8 @@ import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
 import { useAutoplayDisabled } from "#/state/preferences";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 import { GifView } from "../../../../../modules/expo-bluesky-gif-view";
+import type { GifViewHandle } from "../../../../../modules/expo-bluesky-gif-view/src/GifView";
 import type { GifViewStateChangeEvent } from "../../../../../modules/expo-bluesky-gif-view/src/GifView.types";
-import { GifViewHandle } from "../../../../../modules/expo-bluesky-gif-view/src/GifView";
 
 function PlaybackControls({
 	onPress,
@@ -78,7 +78,7 @@ export function GifEmbed({
 	const t = useTheme();
 	const autoplayDisabled = useAutoplayDisabled();
 
-	const playerRef:React.Ref<GifViewHandle|null>  = React.useRef(null);
+	const playerRef: React.Ref<GifViewHandle | null> = React.useRef(null);
 
 	const [playerState, setPlayerState] = React.useState<{
 		isPlaying: boolean;
@@ -125,7 +125,7 @@ export function GifEmbed({
 				<GifView
 					source={params.playerUri}
 					placeholderSource={thumb}
-					style={{flex:1}}
+					style={{ flex: 1 }}
 					autoplay={!autoplayDisabled}
 					onPlayerStateChange={onPlayerStateChange}
 					ref={playerRef}

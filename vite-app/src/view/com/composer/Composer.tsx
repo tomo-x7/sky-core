@@ -88,7 +88,6 @@ import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { LazyQuoteEmbed, QuoteX } from "#/view/com/util/post-embeds/QuoteEmbed";
 import { Text } from "#/view/com/util/text/Text";
-import { BottomSheetPortalProvider } from "../../../../modules/bottom-sheet";
 import {
 	type ComposerAction,
 	type EmbedDraft,

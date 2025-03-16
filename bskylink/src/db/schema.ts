@@ -1,17 +1,17 @@
-import {Selectable} from 'kysely'
+import type { Selectable } from "kysely";
 
 export type DbSchema = {
-  link: Link
-}
+	link: Link;
+};
 
 export interface Link {
-  id: string
-  type: LinkType
-  path: string
+	id: string;
+	type: LinkType;
+	path: string;
 }
 
 export enum LinkType {
-  StarterPack = 1,
+	StarterPack = 1,
 }
 
-export type LinkEntry = Selectable<Link>
+export type LinkEntry = Selectable<Link>;

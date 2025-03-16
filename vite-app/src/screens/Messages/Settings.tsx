@@ -12,7 +12,6 @@ import { useUpdateActorDeclaration } from "#/state/queries/messages/actor-declar
 import { useProfileQuery } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
 import * as Toast from "#/view/com/util/Toast";
-import { useBackgroundNotificationPreferences } from "../../../modules/expo-background-notification-handler/src/BackgroundNotificationHandlerProvider";
 
 type AllowIncoming = "all" | "none" | "following";
 

@@ -43,7 +43,9 @@ export function AppLanguageDropdown({ style }: ViewStyleProp) {
 				style,
 			]}
 		>
-			<div style={{...a.flex_row, ...a.gap_sm, ...a.align_center, ...a.flex_shrink, ...a.h_full, ...t.atoms.bg}}>
+			<div
+				style={{ ...a.flex_row, ...a.gap_sm, ...a.align_center, ...a.flex_shrink, ...a.h_full, ...t.atoms.bg }}
+			>
 				<Text aria-hidden={true} style={t.atoms.text_contrast_medium}>
 					{APP_LANGUAGES.find((l) => l.code2 === sanitizedLang)?.name}
 				</Text>

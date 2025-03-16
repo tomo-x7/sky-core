@@ -1,4 +1,4 @@
-import {subsystemLogger} from '@atproto/common'
+import { subsystemLogger } from "@atproto/common";
 
-export const httpLogger = subsystemLogger('bskyogcard')
-export const renderLogger = subsystemLogger('bskyogcard:render')
+export const httpLogger = subsystemLogger("bskyogcard");
+export const renderLogger = subsystemLogger("bskyogcard:render");

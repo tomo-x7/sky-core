@@ -36,7 +36,6 @@ import { PagerWithHeader } from "#/view/com/pager/PagerWithHeader";
 import type { ListRef } from "#/view/com/util/List";
 import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 import { FAB } from "#/view/com/util/fab/FAB";
-import { ExpoScrollForwarderView } from "../../../modules/expo-scroll-forwarder";
 
 interface SectionRef {
 	scrollToTop: () => void;
@@ -320,15 +319,15 @@ function ProfileScreenLoaded({
 		setMinimumHeight: (height: number) => void;
 	}) => {
 		return (
-				<ProfileHeader
-					profile={profile}
-					labeler={labelerInfo}
-					descriptionRT={hasDescription ? descriptionRT : null}
-					moderationOpts={moderationOpts}
-					hideBackButton={hideBackButton}
-					isPlaceholderProfile={showPlaceholder}
-					setMinimumHeight={setMinimumHeight}
-				/>
+			<ProfileHeader
+				profile={profile}
+				labeler={labelerInfo}
+				descriptionRT={hasDescription ? descriptionRT : null}
+				moderationOpts={moderationOpts}
+				hideBackButton={hideBackButton}
+				isPlaceholderProfile={showPlaceholder}
+				setMinimumHeight={setMinimumHeight}
+			/>
 		);
 	};
 

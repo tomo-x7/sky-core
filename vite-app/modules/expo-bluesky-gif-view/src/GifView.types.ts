@@ -1,5 +1,3 @@
-import type { ViewProps } from "react-native";
-
 export interface GifViewStateChangeEvent {
 	nativeEvent: {
 		isPlaying: boolean;
@@ -14,5 +12,5 @@ export interface GifViewProps {
 	onPlayerStateChange?: (event: GifViewStateChangeEvent) => void;
 	style: React.CSSProperties;
 	accessibilityLabel: string;
-	accessibilityHint:string
+	accessibilityHint: string;
 }

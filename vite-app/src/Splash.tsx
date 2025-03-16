@@ -2,7 +2,7 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect } from "react";
 // import Svg, {Path, SvgProps} from 'react-native-svg'
 import { Image } from "react-native";
-import { AccessibilityInfo, Image as RNImage, StyleSheet, View, useColorScheme } from "react-native";
+import { AccessibilityInfo, Image as RNImage, StyleSheet, useColorScheme } from "react-native";
 import Animated, {
 	Easing,
 	interpolate,
@@ -14,8 +14,8 @@ import Animated, {
 
 import darkSplashImagePointer from "./assets/splash-dark.png";
 import splashImagePointer from "./assets/splash.png";
-import { Logotype } from "./view/icons/Logotype";
 import { useOnLayout } from "./lib/onLayout";
+import { Logotype } from "./view/icons/Logotype";
 const splashImageUri = RNImage.resolveAssetSource(splashImagePointer).uri;
 const darkSplashImageUri = RNImage.resolveAssetSource(darkSplashImagePointer).uri;
 

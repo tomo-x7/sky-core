@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";

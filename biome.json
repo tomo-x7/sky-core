@@ -25,9 +25,10 @@
 				"noExplicitAny": "info",
 				"noImplicitAnyLet": "info",
 				"noArrayIndexKey": "info",
-				"noConfusingVoidType": "off","noAssignInExpressions":"off"
+				"noConfusingVoidType": "off",
+				"noAssignInExpressions": "off"
 			},
-			"complexity": { "noUselessSwitchCase": "info", "noForEach": "off","noBannedTypes":"info" }
+			"complexity": { "noUselessSwitchCase": "info", "noForEach": "off", "noBannedTypes": "info" }
 		}
 	},
 	"overrides": [{ "include": ["tsconfig.*"], "json": { "parser": { "allowComments": true } } }]

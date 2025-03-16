@@ -2,8 +2,6 @@ import "./view/icons";
 
 import React, { useEffect, useState } from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
-
-import { BackgroundNotificationPreferencesProvider } from "../modules/expo-background-notification-handler/src/BackgroundNotificationHandlerProvider";
 import { ThemeProvider as Alf } from "./alf";
 import { useColorModeTheme } from "./alf/util/useColorModeTheme";
 import { Provider as PortalProvider } from "./components/Portal";

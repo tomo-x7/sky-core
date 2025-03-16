@@ -1,8 +1,8 @@
-import '#/platform/markBundleStartTime'
-import '#/platform/polyfills'
+import "#/platform/markBundleStartTime";
+import "#/platform/polyfills";
 
-import {registerRootComponent} from 'expo'
+import { registerRootComponent } from "expo";
 
-import App from '#/App'
+import App from "#/App";
 
-registerRootComponent(App)
+registerRootComponent(App);
