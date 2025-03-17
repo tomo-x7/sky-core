@@ -1,5 +1,4 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
-import type { StyleProp, ViewStyle } from "react-native";
 
 import { CenteredView } from "./Views";
 import { ErrorScreen } from "./error/ErrorScreen";
@@ -7,7 +6,7 @@ import { ErrorScreen } from "./error/ErrorScreen";
 interface Props {
 	children?: ReactNode;
 	renderError?: (error: any) => ReactNode;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }
 
 interface State {

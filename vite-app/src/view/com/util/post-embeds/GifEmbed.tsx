@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Fill } from "#/components/Fill";
@@ -7,7 +7,6 @@ import { Loader } from "#/components/Loader";
 import * as Prompt from "#/components/Prompt";
 import { Text } from "#/components/Typography";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
-import { HITSLOP_20 } from "#/lib/constants";
 import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
 import { useAutoplayDisabled } from "#/state/preferences";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
@@ -27,10 +26,8 @@ function PlaybackControls({
 	const t = useTheme();
 
 	return (
-		<Pressable
-			accessibilityRole="button"
-			accessibilityHint={"Plays or pauses the GIF"}
-			accessibilityLabel={isPlaying ? "Pause" : "Play"}
+		<button
+			type="button"
 			style={{
 				...a.absolute,
 				...a.align_center,
@@ -46,23 +43,23 @@ function PlaybackControls({
 					backgroundColor: !isLoaded ? t.atoms.bg_contrast_25.backgroundColor : undefined,
 				},
 			}}
-			onPress={onPress}
+			onClick={onPress}
 		>
 			{!isLoaded ? (
-				<View>
-					<View
+				<div>
+					<div
 						style={{
 							...a.align_center,
 							...a.justify_center,
 						}}
 					>
 						<Loader size="xl" />
-					</View>
-				</View>
+					</div>
+				</div>
 			) : !isPlaying ? (
 				<PlayButtonIcon />
 			) : undefined}
-		</Pressable>
+		</button>
 	);
 }
 
@@ -79,12 +76,12 @@ export function GifEmbed({
 	altText: string;
 	isPreferredAltText: boolean;
 	hideAlt?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const t = useTheme();
 	const autoplayDisabled = useAutoplayDisabled();
 
-	const playerRef: React.Ref<GifViewHandle | null> = React.useRef(null);
+	const playerRef: React.Ref<GifViewHandle> = React.useRef(null);
 
 	const [playerState, setPlayerState] = React.useState<{
 		isPlaying: boolean;
@@ -103,7 +100,7 @@ export function GifEmbed({
 	}, []);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.rounded_md,
 				...a.overflow_hidden,
@@ -113,7 +110,7 @@ export function GifEmbed({
 				...style,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.absolute,
 
@@ -151,8 +148,8 @@ export function GifEmbed({
 					/>
 				)}
 				{!hideAlt && isPreferredAltText && <AltText text={altText} />}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -162,12 +159,11 @@ function AltText({ text }: { text: string }) {
 
 	return (
 		<>
-			<TouchableOpacity
-				accessibilityRole="button"
-				accessibilityLabel={"Show alt text"}
-				accessibilityHint=""
-				hitSlop={HITSLOP_20}
-				onPress={control.open}
+			<button
+				type="button"
+				// TODO
+				// hitSlop={HITSLOP_20}
+				onClick={control.open}
 				style={styles.altContainer}
 			>
 				<Text
@@ -175,11 +171,10 @@ function AltText({ text }: { text: string }) {
 						...styles.alt,
 						...(largeAltBadge && a.text_xs),
 					}}
-					accessible={false}
 				>
 					ALT
 				</Text>
-			</TouchableOpacity>
+			</button>
 			<Prompt.Outer control={control}>
 				<Prompt.TitleText>Alt Text</Prompt.TitleText>
 				<Prompt.DescriptionText selectable>{text}</Prompt.DescriptionText>

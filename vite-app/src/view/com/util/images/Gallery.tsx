@@ -1,7 +1,5 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
 import type React from "react";
-import { Image, type ImageStyle } from "react-native";
-import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
@@ -19,9 +17,9 @@ interface Props {
 	onPress?: (index: number, containerRefs: HandleRef[], fetchedDims: (Dimensions | null)[]) => void;
 	onLongPress?: EventFunction;
 	onPressIn?: EventFunction;
-	imageStyle?: StyleProp<ImageStyle>;
+	imageStyle?: React.CSSProperties;
 	viewContext?: PostEmbedViewContext;
-	insetBorderStyle?: StyleProp<ViewStyle>;
+	insetBorderStyle?: React.CSSProperties;
 	containerRefs: HandleRef[];
 	thumbDimsRef: React.MutableRefObject<(Dimensions | null)[]>;
 }
@@ -44,42 +42,33 @@ export function GalleryItem({
 	const hasAlt = !!image.alt;
 	const hideBadges = viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia;
 	return (
-		<View style={a.flex_1} ref={containerRefs[index]} collapsable={false}>
-			<Pressable
-				onPress={onPress ? () => onPress(index, containerRefs, thumbDimsRef.current.slice()) : undefined}
-				onPressIn={onPressIn ? () => onPressIn(index) : undefined}
-				onLongPress={onLongPress ? () => onLongPress(index) : undefined}
+		<div style={a.flex_1} ref={containerRefs[index]}>
+			<button
+				type="button"
+				onClick={onPress ? () => onPress(index, containerRefs, thumbDimsRef.current.slice()) : undefined}
+				onMouseDown={onPressIn ? () => onPressIn(index) : undefined}
+				// onLongPress={onLongPress ? () => onLongPress(index) : undefined}
 				style={{
 					...a.flex_1,
 					...a.overflow_hidden,
 					...t.atoms.bg_contrast_25,
 					...imageStyle,
 				}}
-				accessibilityRole="button"
-				accessibilityLabel={image.alt || "Image"}
-				accessibilityHint=""
 			>
-				<Image
-					source={{ uri: image.thumb }}
+				<img
+					src={image.thumb}
 					style={a.flex_1}
-					accessible={true}
-					accessibilityLabel={image.alt}
-					accessibilityHint=""
-					accessibilityIgnoresInvertColors
 					onLoad={(e) => {
 						thumbDimsRef.current[index] = {
-							//@ts-ignore
-							width: e.source.width,
-							//@ts-ignore
-							height: e.source.height,
+							width: e.currentTarget.width,
+							height: e.currentTarget.height,
 						};
 					}}
 				/>
 				<MediaInsetBorder style={insetBorderStyle} />
-			</Pressable>
+			</button>
 			{hasAlt && !hideBadges ? (
-				<View
-					accessible={false}
+				<div
 					style={{
 						...a.absolute,
 						...a.flex_row,
@@ -95,12 +84,7 @@ export function GalleryItem({
 							opacity: 0.8,
 						},
 
-						...(largeAltBadge && [
-							{
-								gap: 4,
-								padding: 5,
-							},
-						]),
+						...(largeAltBadge && { gap: 4, padding: 5 }),
 					}}
 				>
 					<Text
@@ -111,8 +95,8 @@ export function GalleryItem({
 					>
 						ALT
 					</Text>
-				</View>
+				</div>
 			) : null}
-		</View>
+		</div>
 	);
 }

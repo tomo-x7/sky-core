@@ -7,7 +7,7 @@ import {
 } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { memo, useCallback } from "react";
-import { Platform, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
+import { Platform, type PressableProps } from "react-native";
 
 import { useBreakpoints } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
@@ -79,7 +79,7 @@ let PostDropdownMenuItems = ({
 	postFeedContext: string | undefined;
 	record: AppBskyFeedPost.Record;
 	richText: RichTextAPI;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	hitSlop?: PressableProps["hitSlop"];
 	size?: "lg" | "md" | "sm";
 	timestamp: string;

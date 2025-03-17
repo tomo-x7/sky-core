@@ -20,7 +20,7 @@ export interface TabBarProps {
 // to give the user a hint there's more to scroll.
 const OFFSCREEN_ITEM_WIDTH = 20;
 
-export function TabBar({  selectedPage, items, onSelect, onPressSelected }: TabBarProps) {
+export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBarProps) {
 	const t = useTheme();
 	const scrollElRef = useRef<ScrollView>(null);
 	const itemRefs = useRef<Array<Element>>([]);

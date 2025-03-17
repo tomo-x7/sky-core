@@ -1,13 +1,12 @@
-import { type StyleProp, type TextStyle, View, type ViewStyle } from "react-native";
 // @ts-ignore no type definition -prf
 import ProgressCircle from "react-native-progress/Circle";
 // @ts-ignore no type definition -prf
 import ProgressPie from "react-native-progress/Pie";
 
 import { atoms as a } from "#/alf";
+import { Text } from "#/components/Typography";
 import { MAX_GRAPHEME_LENGTH } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
-import { Text } from "../../util/text/Text";
 
 export function CharProgress({
 	count,
@@ -18,8 +17,8 @@ export function CharProgress({
 }: {
 	count: number;
 	max?: number;
-	style?: StyleProp<ViewStyle>;
-	textStyle?: StyleProp<TextStyle>;
+	style?: React.CSSProperties;
+	textStyle?: React.CSSProperties;
 	size?: number;
 }) {
 	const maxLength = max || MAX_GRAPHEME_LENGTH;
@@ -27,7 +26,7 @@ export function CharProgress({
 	const textColor = count > maxLength ? "#e60000" : pal.colors.text;
 	const circleColor = count > maxLength ? "#e60000" : pal.colors.link;
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -38,7 +37,7 @@ export function CharProgress({
 		>
 			<Text
 				style={{
-					...{ color: textColor, fontVariant: ["tabular-nums"] },
+					...{ color: textColor, fontVariant: "tabular-nums" },
 					...a.flex_grow,
 					...a.text_right,
 					...textStyle,
@@ -63,6 +62,6 @@ export function CharProgress({
 					progress={count / maxLength}
 				/>
 			)}
-		</View>
+		</div>
 	);
 }

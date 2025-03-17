@@ -1,6 +1,4 @@
 import type { AppBskyFeedPostgate } from "@atproto/api";
-import type { StyleProp, ViewStyle } from "react-native";
-import type { AnimatedStyle } from "react-native-reanimated";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { PostInteractionSettingsControlledDialog } from "#/components/dialogs/PostInteractionSettingsDialog";
@@ -20,8 +18,9 @@ export function ThreadgateBtn({
 	threadgateAllowUISettings: ThreadgateAllowUISetting[];
 	onChangeThreadgateAllowUISettings: (v: ThreadgateAllowUISetting[]) => void;
 
-	style?: StyleProp<AnimatedStyle<ViewStyle>>;
-}) {
+	style?: React.CSSProperties>;
+})
+{
 	const control = Dialog.useDialogControl();
 
 	const onPress = () => {

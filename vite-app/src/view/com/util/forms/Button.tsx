@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-	ActivityIndicator,
-	type GestureResponderEvent,
-	type NativeSyntheticEvent,
-	type NativeTouchEvent,
-	Pressable,
-	type PressableStateCallbackType,
-	type StyleProp,
-	StyleSheet,
-	type TextStyle,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { ActivityIndicator, type PressableStateCallbackType } from "react-native";
 
+import { flatten } from "#/alf";
+import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { choose } from "#/lib/functions";
-import { Text } from "#/components/Typography";
-import { flatten } from "#/alf";
 
 export type ButtonType =
 	| "primary"
@@ -59,7 +47,7 @@ export function Button({
 	style?: React.CSSProperties;
 	labelContainerStyle?: React.CSSProperties;
 	labelStyle?: React.CSSProperties;
-	onPress?: (e: React.MouseEvent<HTMLButtonElement,MouseEvent>) => void | Promise<void>;
+	onPress?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | Promise<void>;
 	accessibilityLabel?: string;
 	accessibilityHint?: string;
 	accessibilityLabelledBy?: string;
@@ -140,11 +128,11 @@ export function Button({
 	});
 
 	const [isLoading, setIsLoading] = React.useState(false);
-	const [pressed,setPressed]=useState(false)
-	const [hovered,setHovered]=useState(false)
-	const [focused,setFocused]=useState(false)
+	const [pressed, setPressed] = useState(false);
+	const [hovered, setHovered] = useState(false);
+	const [focused, setFocused] = useState(false);
 	const onPressWrapped = React.useCallback(
-		async (event: React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
+		async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			event.stopPropagation();
 			event.preventDefault();
 			withLoading && setIsLoading(true);
@@ -195,24 +183,24 @@ export function Button({
 		);
 	}, [children, label, withLoading, isLoading, labelContainerStyle, typeLabelStyle, labelStyle]);
 	useEffect(() => {
-		const handler=(ev:KeyboardEvent) => {
+		const handler = (ev: KeyboardEvent) => {
 			if (ev.key === "Escape") onAccessibilityEscape?.();
-		}
+		};
 		document.addEventListener("keydown", handler);
-		return ()=>document.removeEventListener("keydown",handler)
+		return () => document.removeEventListener("keydown", handler);
 	}, [onAccessibilityEscape]);
 	return (
 		<button
 			type="button"
-			style={getStyle({pressed,focused,hovered})}
+			style={getStyle({ pressed, focused, hovered })}
 			onClick={onPressWrapped}
 			disabled={disabled || isLoading}
-			onMouseDown={()=>setPressed(true)}
-			onMouseUp={()=>setPressed(false)}
-			onMouseEnter={()=>setHovered(true)}
-			onMouseLeave={()=>setHovered(false)}
-			onFocus={()=>setFocused(true)}
-			onBlur={()=>setFocused(false)}
+			onMouseDown={() => setPressed(true)}
+			onMouseUp={() => setPressed(false)}
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+			onFocus={() => setFocused(true)}
+			onBlur={() => setFocused(false)}
 		>
 			{renderChildern()}
 		</button>

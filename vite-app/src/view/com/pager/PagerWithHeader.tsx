@@ -58,7 +58,7 @@ export const PagerWithHeader = React.forwardRef<PagerRef, PagerWithHeaderProps>(
 				/>
 			);
 		},
-		[items, isHeaderReady, renderHeader, currentPage, onCurrentPageSelected, ],
+		[items, isHeaderReady, renderHeader, currentPage, onCurrentPageSelected],
 	);
 
 	const onPageSelectedInner = React.useCallback(

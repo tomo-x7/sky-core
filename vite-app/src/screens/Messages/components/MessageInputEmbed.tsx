@@ -1,7 +1,7 @@
 import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, RichText as RichTextAPI, moderatePost } from "@atproto/api";
 import { type RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { LayoutAnimation, View } from "react-native";
+import { LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -115,7 +115,7 @@ export function MessageInputEmbed({
 	switch (status) {
 		case "pending":
 			content = (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...{ minHeight: 64 },
@@ -124,12 +124,12 @@ export function MessageInputEmbed({
 					}}
 				>
 					<Loader />
-				</View>
+				</div>
 			);
 			break;
 		case "error":
 			content = (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...{ minHeight: 64 },
@@ -138,7 +138,7 @@ export function MessageInputEmbed({
 					}}
 				>
 					<Text style={a.text_center}>Could not fetch post</Text>
-				</View>
+				</div>
 			);
 			break;
 		case "success": {
@@ -150,7 +150,7 @@ export function MessageInputEmbed({
 			}
 
 			content = (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...t.atoms.bg,
@@ -159,8 +159,8 @@ export function MessageInputEmbed({
 						...a.border,
 						...a.p_sm,
 						...a.mb_sm,
+						pointerEvents: "none",
 					}}
-					pointerEvents="none"
 				>
 					<PostMeta
 						showAvatar
@@ -173,7 +173,7 @@ export function MessageInputEmbed({
 					<ContentHider modui={moderation.ui("contentView")}>
 						<PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} />
 						{rt.text && (
-							<View style={a.mt_xs}>
+							<div style={a.mt_xs}>
 								<RichText
 									enableTags
 									value={rt}
@@ -184,18 +184,18 @@ export function MessageInputEmbed({
 									authorHandle={post.author.handle}
 									numberOfLines={3}
 								/>
-							</View>
+							</div>
 						)}
 						<MediaPreview.Embed embed={post.embed} style={a.mt_sm} />
 					</ContentHider>
-				</View>
+				</div>
 			);
 			break;
 		}
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_sm,
@@ -215,6 +215,6 @@ export function MessageInputEmbed({
 			>
 				<ButtonIcon icon={X} />
 			</Button>
-		</View>
+		</div>
 	);
 }

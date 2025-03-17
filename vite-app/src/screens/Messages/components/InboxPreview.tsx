@@ -1,5 +1,4 @@
 import type { ChatBskyActorDefs } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { AvatarStack } from "#/components/AvatarStack";
@@ -37,10 +36,10 @@ export function InboxPreview({
 			color="secondary"
 			variant="solid"
 		>
-			<View style={a.relative}>
+			<div style={a.relative}>
 				<ButtonIcon icon={EnvelopeIcon} size="lg" />
 				{profiles.length > 0 && (
-					<View
+					<div
 						style={{
 							...a.absolute,
 							...a.rounded_full,
@@ -56,14 +55,15 @@ export function InboxPreview({
 						}}
 					/>
 				)}
-			</View>
+			</div>
 			<ButtonText
 				style={{
 					...a.flex_1,
 					...a.font_bold,
 					...a.text_left,
 				}}
-				numberOfLines={1}
+				// TODO
+				// numberOfLines={1}
 			>
 				Chat requests
 			</ButtonText>

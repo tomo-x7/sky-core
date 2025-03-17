@@ -1,23 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Image } from "react-native";
-import {
-	type ImageStyle,
-	Keyboard,
-	type LayoutChangeEvent,
-	StyleSheet,
-	TouchableOpacity,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { Keyboard } from "react-native";
 
 import { useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
+import { Text } from "#/components/Typography";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { Dimensions } from "#/lib/media/types";
+import { useOnLayout } from "#/lib/onLayout";
 import { colors, s } from "#/lib/styles";
 import type { ComposerImage } from "#/state/gallery";
-import { Text } from "#/view/com/util/text/Text";
 import type { PostAction } from "../state/composer";
 import { EditImageDialog } from "./EditImageDialog";
 import { ImageAltTextDialog } from "./ImageAltTextDialog";
@@ -32,19 +24,15 @@ interface GalleryProps {
 export let Gallery = (props: GalleryProps): React.ReactNode => {
 	const [containerInfo, setContainerInfo] = React.useState<Dimensions>();
 
-	const onLayout = (evt: LayoutChangeEvent) => {
-		const { width, height } = evt.nativeEvent.layout;
+	const onLayout = (evt: DOMRect) => {
+		const { width, height } = evt;
 		setContainerInfo({
 			width,
 			height,
 		});
 	};
-
-	return (
-		<View onLayout={onLayout}>
-			{containerInfo ? <GalleryInner {...props} containerInfo={containerInfo} /> : undefined}
-		</View>
-	);
+	const ref = useOnLayout(onLayout);
+	return <div ref={ref}>{containerInfo ? <GalleryInner {...props} containerInfo={containerInfo} /> : undefined}</div>;
 };
 Gallery = React.memo(Gallery);
 
@@ -87,7 +75,7 @@ const GalleryInner = ({ images, containerInfo, dispatch }: GalleryInnerProps) =>
 
 	return images.length !== 0 ? (
 		<>
-			<View style={styles.gallery}>
+			<div style={styles.gallery}>
 				{images.map((image) => {
 					return (
 						<GalleryItem
@@ -105,7 +93,7 @@ const GalleryInner = ({ images, containerInfo, dispatch }: GalleryInnerProps) =>
 						/>
 					);
 				})}
-			</View>
+			</div>
 			<AltTextReminder />
 		</>
 	) : null;
@@ -113,9 +101,9 @@ const GalleryInner = ({ images, containerInfo, dispatch }: GalleryInnerProps) =>
 
 type GalleryItemProps = {
 	image: ComposerImage;
-	altTextControlStyle?: ViewStyle;
-	imageControlsStyle?: ViewStyle;
-	imageStyle?: ImageStyle;
+	altTextControlStyle?: React.CSSProperties;
+	imageControlsStyle?: React.CSSProperties;
+	imageStyle?: React.CSSProperties;
 	onChange: (next: ComposerImage) => void;
 	onRemove: () => void;
 };
@@ -143,16 +131,10 @@ const GalleryItem = ({
 	};
 
 	return (
-		<View
-			style={imageStyle as ViewStyle}
-			// Fixes ALT and icons appearing with half opacity when the post is inactive
-			renderToHardwareTextureAndroid
-		>
-			<TouchableOpacity
-				accessibilityRole="button"
-				accessibilityLabel={"Add alt text"}
-				accessibilityHint=""
-				onPress={onAltTextEdit}
+		<div style={imageStyle}>
+			<button
+				type="button"
+				onClick={onAltTextEdit}
 				style={{
 					...styles.altTextControl,
 					...altTextControlStyle,
@@ -165,61 +147,37 @@ const GalleryItem = ({
 					//@ts-ignore
 					<FontAwesomeIcon icon="plus" size={10} style={{ color: t.palette.white }} />
 				)}
-				<Text style={styles.altTextControlLabel} accessible={false}>
-					ALT
-				</Text>
-			</TouchableOpacity>
-			<View style={imageControlsStyle}>
-				<TouchableOpacity
-					accessibilityRole="button"
-					accessibilityLabel={"Edit image"}
-					accessibilityHint=""
-					onPress={onImageEdit}
-					style={styles.imageControl}
-				>
+				<Text style={styles.altTextControlLabel}>ALT</Text>
+			</button>
+			<div style={imageControlsStyle}>
+				<button type="button" onClick={onImageEdit} style={styles.imageControl}>
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="pen" size={12} style={{ color: colors.white }} />
-				</TouchableOpacity>
-				<TouchableOpacity
-					accessibilityRole="button"
-					accessibilityLabel={"Remove image"}
-					accessibilityHint=""
-					onPress={onRemove}
-					style={styles.imageControl}
-				>
+				</button>
+				<button type="button" onClick={onRemove} style={styles.imageControl}>
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="xmark" size={16} style={{ color: colors.white }} />
-				</TouchableOpacity>
-			</View>
-			<TouchableOpacity
-				accessibilityRole="button"
-				accessibilityLabel={"Add alt text"}
-				accessibilityHint=""
-				onPress={onAltTextEdit}
-				style={styles.altTextHiddenRegion}
-			/>
-			<Image
+				</button>
+			</div>
+			<button type="button" onClick={onAltTextEdit} style={styles.altTextHiddenRegion} />
+			<img
 				style={{
 					...styles.image,
 					...imageStyle,
 				}}
-				source={{
-					uri: (image.transformed ?? image.source).path,
-				}}
-				accessible={true}
-				accessibilityIgnoresInvertColors
+				src={(image.transformed ?? image.source).path}
 			/>
 			<ImageAltTextDialog control={altTextControl} image={image} onChange={onChange} />
 			<EditImageDialog control={editControl} image={image} onChange={onChange} />
-		</View>
+		</div>
 	);
 };
 
 export function AltTextReminder() {
 	const t = useTheme();
 	return (
-		<View style={styles.reminder}>
-			<View
+		<div style={styles.reminder}>
+			<div
 				style={{
 					...styles.infoIcon,
 					...t.atoms.bg_contrast_25,
@@ -227,7 +185,7 @@ export function AltTextReminder() {
 			>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
-			</View>
+			</div>
 			<Text
 				type="sm"
 				style={{
@@ -237,11 +195,11 @@ export function AltTextReminder() {
 			>
 				Alt text describes images for blind and low-vision users, and helps give context to everyone.
 			</Text>
-		</View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles: Record<string, React.CSSProperties> = {
 	gallery: {
 		flex: 1,
 		flexDirection: "row",
@@ -249,7 +207,7 @@ const styles = StyleSheet.create({
 		marginTop: 16,
 	},
 	image: {
-		resizeMode: "cover",
+		objectFit: "cover",
 		borderRadius: 8,
 	},
 	imageControl: {
@@ -265,8 +223,7 @@ const styles = StyleSheet.create({
 		zIndex: 1,
 		borderRadius: 6,
 		backgroundColor: "rgba(0, 0, 0, 0.75)",
-		paddingHorizontal: 8,
-		paddingVertical: 3,
+		padding: "3px 8px",
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 4,
@@ -291,7 +248,8 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		gap: 8,
 		borderRadius: 8,
-		paddingVertical: 14,
+		paddingTop: 14,
+		paddingBottom: 14,
 	},
 	infoIcon: {
 		width: 22,
@@ -300,4 +258,4 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-});
+};

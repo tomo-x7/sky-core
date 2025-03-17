@@ -1,6 +1,6 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import React, { type JSX, useCallback } from "react";
-import { Dimensions, type StyleProp, View, type ViewStyle } from "react-native";
+import { Dimensions } from "react-native";
 
 import { ListFooter } from "#/components/Lists";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -33,7 +33,7 @@ export function ListMembers({
 	desktopFixedHeightOffset,
 }: {
 	list: string;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	scrollElRef?: ListRef;
 	onScrolledDownChange: (isScrolledDown: boolean) => void;
 	onPressTryAgain?: () => void;
@@ -145,7 +145,7 @@ export function ListMembers({
 				<ProfileCard
 					profile={(item as AppBskyGraphDefs.ListItemView).subject}
 					renderButton={renderMemberButton}
-					style={{ paddingHorizontal: isMobile ? 8 : 14, paddingVertical: 4 }}
+					style={{ padding: `4px ${isMobile ? 8 : 14}px` }}
 					noModFilter
 				/>
 			);
@@ -166,7 +166,7 @@ export function ListMembers({
 	}, [hasNextPage, error, isFetchingNextPage, fetchNextPage, isEmpty]);
 
 	return (
-		<View style={style}>
+		<div style={style}>
 			<List
 				ref={scrollElRef}
 				data={items}
@@ -187,6 +187,6 @@ export function ListMembers({
 				// @ts-ignore our .web version only -prf
 				desktopFixedHeight={desktopFixedHeightOffset || true}
 			/>
-		</View>
+		</div>
 	);
 }

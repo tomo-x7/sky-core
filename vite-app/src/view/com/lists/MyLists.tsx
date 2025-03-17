@@ -1,13 +1,6 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { type JSX } from "react";
-import {
-	ActivityIndicator,
-	FlatList as RNFlatList,
-	RefreshControl,
-	type StyleProp,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { ActivityIndicator, FlatList as RNFlatList, RefreshControl, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
@@ -33,7 +26,7 @@ export function MyLists({
 }: {
 	filter: MyListsFilter;
 	inline?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	renderItem?: (list: GraphDefs.ListView, index: number) => JSX.Element;
 }) {
 	const pal = usePalette("default");

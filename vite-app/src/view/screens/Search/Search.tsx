@@ -2,15 +2,7 @@ import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@a
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
-import {
-	ActivityIndicator,
-	Pressable,
-	type StyleProp,
-	StyleSheet,
-	type TextInput,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet } from "react-native";
 import { ScrollView as RNGHScrollView } from "react-native-gesture-handler";
 
 import { atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
@@ -24,10 +16,11 @@ import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon } from "#/comp
 import { Earth_Stroke2_Corner0_Rounded as EarthIcon } from "#/components/icons/Globe";
 import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
 import { APP_LANGUAGES, LANGUAGES } from "#/lib/../locale/languages";
-import { HITSLOP_20, createHitslop } from "#/lib/constants";
+import { createHitslop } from "#/lib/constants";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { MagnifyingGlassIcon } from "#/lib/icons";
+import { useOnLayout } from "#/lib/onLayout";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { NavigationProp } from "#/lib/routes/types";
 import type { NativeStackScreenProps, SearchTabNavigatorParams } from "#/lib/routes/types";
@@ -60,9 +53,9 @@ import { SearchLinkCard, SearchProfileCard } from "#/view/shell/desktop/Search";
 function Loader() {
 	return (
 		<Layout.Content>
-			<View style={a.py_xl}>
+			<div style={a.py_xl}>
 				<ActivityIndicator />
-			</View>
+			</div>
 		</Layout.Content>
 	);
 }
@@ -72,8 +65,8 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 
 	return (
 		<Layout.Content>
-			<View style={a.p_xl}>
-				<View
+			<div style={a.p_xl}>
+				<div
 					style={{
 						...t.atoms.bg_contrast_25,
 						...a.rounded_sm,
@@ -84,9 +77,10 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 
 					{error && (
 						<>
-							<View
+							<div
 								style={{
-									marginVertical: 12,
+									marginTop: 12,
+									marginBottom: 12,
 									height: 1,
 									width: "100%",
 									backgroundColor: t.atoms.text.color,
@@ -97,8 +91,8 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 							<Text style={t.atoms.text_contrast_medium}>Error: {error}</Text>
 						</>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 		</Layout.Content>
 	);
 }
@@ -270,7 +264,7 @@ let SearchScreenFeedsResults = ({
 				<List
 					data={results}
 					renderItem={({ item }) => (
-						<View
+						<div
 							style={{
 								...a.border_b,
 								...t.atoms.border_contrast_low,
@@ -279,7 +273,7 @@ let SearchScreenFeedsResults = ({
 							}}
 						>
 							<FeedCard.Default view={item} />
-						</View>
+						</div>
 					)}
 					keyExtractor={(item) => item.uri}
 					desktopFixedHeight
@@ -488,16 +482,16 @@ let SearchScreenInner = ({
 			initialPage={0}
 		>
 			{sections.map((section, i) => (
-				<View key={i}>{section.component}</View>
+				<div key={i}>{section.component}</div>
 			))}
 		</Pager>
 	) : hasSession ? (
 		<Explore />
 	) : (
 		<Layout.Center>
-			<View style={a.flex_1}>
+			<div style={a.flex_1}>
 				{gtTablet && (
-					<View
+					<div
 						style={{
 							...a.border_b,
 							...t.atoms.border_contrast_low,
@@ -514,10 +508,10 @@ let SearchScreenInner = ({
 						>
 							Search
 						</Text>
-					</View>
+					</div>
 				)}
 
-				<View
+				<div
 					style={{
 						...a.align_center,
 						...a.justify_center,
@@ -525,11 +519,7 @@ let SearchScreenInner = ({
 						...a.gap_lg,
 					}}
 				>
-					<MagnifyingGlassIcon
-						strokeWidth={3}
-						size={60}
-						style={t.atoms.text_contrast_medium as StyleProp<ViewStyle>}
-					/>
+					<MagnifyingGlassIcon strokeWidth={3} size={60} style={t.atoms.text_contrast_medium} />
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
@@ -538,8 +528,8 @@ let SearchScreenInner = ({
 					>
 						Find posts, users, and feeds on Bluesky
 					</Text>
-				</View>
-			</View>
+				</div>
+			</div>
 		</Layout.Center>
 	);
 };
@@ -566,7 +556,7 @@ export function SearchScreenShell({
 	const { gtMobile } = useBreakpoints();
 	const navigation = useNavigation<NavigationProp>();
 	const route = useRoute();
-	const textInput = React.useRef<TextInput>(null);
+	const textInput = React.useRef<HTMLInputElement>(null);
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { currentAccount } = useSession();
 	const queryClient = useQueryClient();
@@ -724,26 +714,26 @@ export function SearchScreenShell({
 		});
 	}, []);
 
+	useOnLayout((evt) => {
+		setHeaderHeight(evt.height);
+	}, headerRef);
+
 	const showHeader = !gtMobile || navButton !== "menu";
 
 	return (
 		<Layout.Screen>
-			<View
+			<div
 				ref={headerRef}
-				onLayout={(evt) => {
-					setHeaderHeight(evt.nativeEvent.layout.height);
-				}}
 				style={{
 					...a.relative,
 					...a.z_10,
 
-					...//@ts-ignore
-					{ position: "sticky", top: 0 },
+					...{ position: "sticky", top: 0 },
 				}}
 			>
 				<Layout.Center style={t.atoms.bg}>
 					{showHeader && (
-						<View
+						<div
 							// HACK: shift up search input. we can't remove the top padding
 							// on the search input because it messes up the layout animation
 							// if we add it only when the header is hidden
@@ -760,9 +750,9 @@ export function SearchScreenShell({
 									<Layout.Header.Slot />
 								)}
 							</Layout.Header.Outer>
-						</View>
+						</div>
 					)}
-					<View
+					<div
 						style={{
 							...a.px_md,
 							...a.pt_sm,
@@ -770,8 +760,8 @@ export function SearchScreenShell({
 							...a.overflow_hidden,
 						}}
 					>
-						<View style={a.gap_sm}>
-							<View
+						<div style={a.gap_sm}>
+							<div
 								style={{
 									...a.w_full,
 									...a.flex_row,
@@ -779,7 +769,7 @@ export function SearchScreenShell({
 									...a.gap_xs,
 								}}
 							>
-								<View style={a.flex_1}>
+								<div style={a.flex_1}>
 									<SearchInput
 										ref={textInput}
 										value={searchText}
@@ -788,9 +778,10 @@ export function SearchScreenShell({
 										onClearText={onPressClearQuery}
 										onSubmitEditing={onSubmit}
 										placeholder={inputPlaceholder ?? "Search for posts, users, or feeds"}
-										hitSlop={{ ...HITSLOP_20, top: 0 }}
+										// TODO
+										// hitSlop={{ ...HITSLOP_20, top: 0 }}
 									/>
-								</View>
+								</div>
 								{showAutocomplete && (
 									<Button
 										label={"Cancel search"}
@@ -804,10 +795,10 @@ export function SearchScreenShell({
 										<ButtonText>Cancel</ButtonText>
 									</Button>
 								)}
-							</View>
+							</div>
 
 							{showFilters && !showHeader && (
-								<View
+								<div
 									style={{
 										...a.flex_row,
 										...a.align_center,
@@ -816,13 +807,13 @@ export function SearchScreenShell({
 									}}
 								>
 									<SearchLanguageDropdown value={params.lang} onChange={params.setLang} />
-								</View>
+								</div>
 							)}
-						</View>
-					</View>
+						</div>
+					</div>
 				</Layout.Center>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					display: showAutocomplete && !fixedParams ? "flex" : "none",
 					flex: 1,
@@ -847,15 +838,15 @@ export function SearchScreenShell({
 						onRemoveProfileClick={deleteProfileHistoryItem}
 					/>
 				)}
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					display: showAutocomplete ? "none" : "flex",
 					flex: 1,
 				}}
 			>
 				<SearchScreenInner query={query} queryWithParams={queryWithParams} headerHeight={headerHeight} />
-			</View>
+			</div>
 		</Layout.Screen>
 	);
 }
@@ -899,7 +890,7 @@ let AutocompleteResults = ({
 							}}
 						/>
 					))}
-					<View style={{ height: 200 }} />
+					<div style={{ height: 200 }} />
 				</Layout.Content>
 			)}
 		</>
@@ -927,7 +918,7 @@ function SearchHistory({
 
 	return (
 		<Layout.Content keyboardDismissMode="interactive" keyboardShouldPersistTaps="handled">
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.px_md,
@@ -945,7 +936,7 @@ function SearchHistory({
 					</Text>
 				)}
 				{selectedProfiles.length > 0 && (
-					<View
+					<div
 						style={{
 							...styles.selectedProfilesContainer,
 							...(!gtMobile && styles.selectedProfilesContainerMobile),
@@ -962,7 +953,7 @@ function SearchHistory({
 							contentContainerStyle={[a.px_2xl, a.border_0]}
 						>
 							{selectedProfiles.slice(0, 5).map((profile, index) => (
-								<View
+								<div
 									key={index}
 									style={{
 										...styles.profileItem,
@@ -1007,13 +998,13 @@ function SearchHistory({
 									>
 										<XIcon size="xs" style={t.atoms.text_contrast_low} />
 									</Pressable>
-								</View>
+								</div>
 							))}
 						</RNGHScrollView>
-					</View>
+					</div>
 				)}
 				{searchHistory.length > 0 && (
-					<View
+					<div
 						style={{
 							...a.pl_md,
 							...a.pr_xs,
@@ -1021,7 +1012,7 @@ function SearchHistory({
 						}}
 					>
 						{searchHistory.slice(0, 5).map((historyItem, index) => (
-							<View
+							<div
 								key={index}
 								style={{
 									...a.flex_row,
@@ -1050,11 +1041,11 @@ function SearchHistory({
 								>
 									<ButtonIcon icon={XIcon} />
 								</Button>
-							</View>
+							</div>
 						))}
-					</View>
+					</div>
 				)}
-			</View>
+			</div>
 		</Layout.Content>
 	);
 }

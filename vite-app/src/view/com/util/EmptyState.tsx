@@ -1,6 +1,6 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -15,14 +15,14 @@ export function EmptyState({
 }: {
 	icon: IconProp | "user-group" | "growth";
 	message: string;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const pal = usePalette("default");
 	const { isTabletOrDesktop } = useWebMediaQueries();
 	const iconSize = isTabletOrDesktop ? 64 : 48;
 	return (
-		<View style={style}>
-			<View
+		<div style={style}>
+			<div
 				style={{
 					...styles.iconContainer,
 					...(isTabletOrDesktop && styles.iconContainerBig),
@@ -37,7 +37,7 @@ export function EmptyState({
 					// @ts-ignore
 					<FontAwesomeIcon icon={icon} size={iconSize} style={{ color: pal.colors.emptyStateIcon }} />
 				)}
-			</View>
+			</div>
 			<Text
 				type="xl"
 				style={{
@@ -47,7 +47,7 @@ export function EmptyState({
 			>
 				{message}
 			</Text>
-		</View>
+		</div>
 	);
 }
 

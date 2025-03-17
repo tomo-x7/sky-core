@@ -1,5 +1,5 @@
 import React, { useImperativeHandle } from "react";
-import { Pressable, View, useWindowDimensions } from "react-native";
+import { Pressable, useWindowDimensions } from "react-native";
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -25,7 +25,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 		const translateY = useSharedValue(0);
 		const opacity = useSharedValue(0);
 		const animatedCheckRef = React.useRef<AnimatedCheckRef | null>(null);
-		const timeoutRef = React.useRef<number | undefined>(undefined);
+		const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 		const winDim = useWindowDimensions();
 
 		/**
@@ -146,7 +146,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 							accessibilityHint=""
 						>
 							<AnimatedCheck fill={t.palette.primary_500} ref={animatedCheckRef} />
-							<View>
+							<div>
 								<Text
 									style={{
 										...a.text_md,
@@ -165,7 +165,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 										{subtitle}
 									</Text>
 								)}
-							</View>
+							</div>
 						</Pressable>
 					</Animated.View>
 				</Portal>

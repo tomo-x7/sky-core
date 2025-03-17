@@ -1,5 +1,4 @@
 import type React from "react";
-import { View, type ViewStyle } from "react-native";
 
 /**
  * This utility function captures events and stops
@@ -10,25 +9,25 @@ export function EventStopper({
 	style,
 	onKeyDown = true,
 }: React.PropsWithChildren<{
-	style?: ViewStyle | ViewStyle[];
+	style?: React.CSSProperties;
 	/**
 	 * Default `true`. Set to `false` to allow onKeyDown to propagate
 	 */
 	onKeyDown?: boolean;
 }>) {
-	const stop = (e: any) => {
+	const stop = <T extends { stopPropagation: () => void }>(e: T) => {
 		e.stopPropagation();
 	};
 	return (
-		<View
-			onStartShouldSetResponder={(_) => true}
+		<div
+			onTouchStart={stop}
 			onTouchEnd={stop}
-			// @ts-ignore web only -prf
+			onMouseDown={stop}
 			onClick={stop}
 			onKeyDown={onKeyDown ? stop : undefined}
 			style={style}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }

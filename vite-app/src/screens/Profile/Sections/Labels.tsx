@@ -5,7 +5,7 @@ import {
 	interpretLabelValueDefinitions,
 } from "@atproto/api";
 import React from "react";
-import { View, findNodeHandle } from "react-native";
+import { findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
@@ -68,14 +68,14 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 		//@ts-ignore
 		<Layout.Center style={{ flex: 1, minHeight: "100dvh" }}>
 			{isLabelerLoading ? (
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.align_center,
 					}}
 				>
 					<Loader size="xl" />
-				</View>
+				</div>
 			) : labelerError || !labelerInfo ? (
 				<ErrorState error={labelerError?.toString() || "Something went wrong, please try again."} />
 			) : (
@@ -147,7 +147,7 @@ export function ProfileLabelsSectionInner({
 			contentOffset={{ x: 0, y: headerHeight * -1 }}
 			onScroll={scrollHandler}
 		>
-			<View
+			<div
 				style={{
 					...a.pt_xl,
 					...a.px_lg,
@@ -155,7 +155,7 @@ export function ProfileLabelsSectionInner({
 					...t.atoms.border_contrast_low,
 				}}
 			>
-				<View>
+				<div>
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
@@ -167,7 +167,7 @@ export function ProfileLabelsSectionInner({
 						network.
 					</Text>
 					{labelerInfo.creator.viewer?.blocking ? (
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.gap_sm,
@@ -185,7 +185,7 @@ export function ProfileLabelsSectionInner({
 							>
 								Blocking does not prevent this labeler from placing labels on your account.
 							</Text>
-						</View>
+						</div>
 					) : null}
 					{labelValues.length === 0 ? (
 						<Text
@@ -210,9 +210,9 @@ export function ProfileLabelsSectionInner({
 							<>Subscribe to @{labelerInfo.creator.handle} to use these labels:</>
 						</Text>
 					) : null}
-				</View>
+				</div>
 				{labelDefs.length > 0 && (
-					<View
+					<div
 						style={{
 							...a.mt_xl,
 							...a.w_full,
@@ -233,10 +233,10 @@ export function ProfileLabelsSectionInner({
 								</React.Fragment>
 							);
 						})}
-					</View>
+					</div>
 				)}
-				<View style={{ height: 100 }} />
-			</View>
+				<div style={{ height: 100 }} />
+			</div>
 		</Layout.Content>
 	);
 }

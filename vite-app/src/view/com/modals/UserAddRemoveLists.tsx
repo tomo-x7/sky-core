@@ -1,7 +1,8 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { useCallback } from "react";
-import { ActivityIndicator, StyleSheet, View, useWindowDimensions } from "react-native";
+import { ActivityIndicator, StyleSheet, useWindowDimensions } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
@@ -21,7 +22,6 @@ import { MyLists } from "../lists/MyLists";
 import * as Toast from "../util/Toast";
 import { UserAvatar } from "../util/UserAvatar";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
 
 export const snapPoints = ["fullscreen"];
 
@@ -49,25 +49,24 @@ export function Component({
 
 	const listStyle = React.useMemo(() => {
 		if (isMobileWeb) {
-			return [pal.border, { height: screenHeight / 2 }];
+			return { ...pal.border, height: screenHeight / 2 };
 		} else {
-			return [pal.border, { height: screenHeight / 1.5 }];
+			return { ...pal.border, height: screenHeight / 1.5 };
 		}
 	}, [pal.border, screenHeight]);
 
-	const headerStyles = [
-		{
-			textAlign: "center",
-			fontWeight: "600",
-			fontSize: 20,
-			marginBottom: 12,
-			paddingHorizontal: 12,
-		} as const,
-		pal.text,
-	];
+	const headerStyles: React.CSSProperties = {
+		textAlign: "center",
+		fontWeight: "600",
+		fontSize: 20,
+		marginBottom: 12,
+		paddingLeft: 12,
+		paddingRight: 12,
+		...pal.text,
+	};
 
 	return (
-		<View style={s.hContentRegion}>
+		<div style={s.hContentRegion}>
 			<Text style={headerStyles} numberOfLines={1}>
 				<>
 					Update{" "}
@@ -94,7 +93,7 @@ export function Component({
 				)}
 				style={listStyle}
 			/>
-			<View
+			<div
 				style={{
 					...styles.btns,
 					...pal.border,
@@ -109,8 +108,8 @@ export function Component({
 					onAccessibilityEscape={onPressDone}
 					label={"Done"}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -171,17 +170,17 @@ function ListItem({
 	}, [list, subject, membership, onAdd, onRemove, listMembershipAddMutation, listMembershipRemoveMutation]);
 
 	return (
-		<View
+		<div
 			style={{
 				...styles.listItem,
 				...pal.border,
 				...(index !== 0 && { borderTopWidth: StyleSheet.hairlineWidth }),
 			}}
 		>
-			<View style={styles.listItemAvi}>
+			<div style={styles.listItemAvi}>
 				<UserAvatar size={40} avatar={list.avatar} type="list" />
-			</View>
-			<View style={styles.listItemContent}>
+			</div>
+			<div style={styles.listItemContent}>
 				<Text
 					type="lg"
 					style={{
@@ -207,8 +206,8 @@ function ListItem({
 							<>Moderation list by {sanitizeHandle(list.creator.handle, "@")}</>
 						))}
 				</Text>
-			</View>
-			<View>
+			</div>
+			<div>
 				{isProcessing || typeof membership === "undefined" ? (
 					<ActivityIndicator />
 				) : (
@@ -218,14 +217,15 @@ function ListItem({
 						onPress={onToggleMembership}
 					/>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles: Record<string, React.CSSProperties> = {
 	container: {
-		paddingHorizontal: 0,
+		paddingLeft: 0,
+		paddingRight: 0,
 	},
 	btns: {
 		position: "relative",
@@ -238,15 +238,13 @@ const styles = StyleSheet.create({
 		borderTopWidth: StyleSheet.hairlineWidth,
 	},
 	footerBtn: {
-		paddingHorizontal: 24,
-		paddingVertical: 12,
+		padding: "12px 24px",
 	},
 
 	listItem: {
 		flexDirection: "row",
 		alignItems: "center",
-		paddingHorizontal: 14,
-		paddingVertical: 10,
+		padding: "10px 14px",
 	},
 	listItemAvi: {
 		width: 54,
@@ -277,4 +275,4 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		justifyContent: "center",
 	},
-});
+};

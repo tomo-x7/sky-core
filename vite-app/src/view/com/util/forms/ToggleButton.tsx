@@ -1,4 +1,4 @@
-import { type StyleProp, StyleSheet, type TextStyle, View, type ViewStyle } from "react-native";
+import { StyleSheet, type TextStyle } from "react-native";
 
 import { useTheme } from "#/lib/ThemeContext";
 import type { TypographyVariant } from "#/lib/ThemeContext";
@@ -18,12 +18,12 @@ export function ToggleButton({
 	type?: ButtonType;
 	label: string;
 	isSelected: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	labelType?: TypographyVariant;
 	onPress?: () => void;
 }) {
 	const theme = useTheme();
-	const circleStyle = choose<TextStyle, Record<ButtonType, TextStyle>>(type, {
+	const circleStyle = choose<React.CSSProperties, Record<ButtonType, React.CSSProperties>>(type, {
 		primary: {
 			borderColor: theme.palette.primary.text,
 		},
@@ -52,7 +52,7 @@ export function ToggleButton({
 			borderColor: theme.palette.default.border,
 		},
 	});
-	const circleFillStyle = choose<TextStyle, Record<ButtonType, TextStyle>>(type, {
+	const circleFillStyle = choose<React.CSSProperties, Record<ButtonType, React.CSSProperties>>(type, {
 		primary: {
 			backgroundColor: theme.palette.primary.text,
 			opacity: isSelected ? 1 : 0.33,
@@ -128,21 +128,21 @@ export function ToggleButton({
 	});
 	return (
 		<Button type={type} onPress={onPress} style={style}>
-			<View style={styles.outer}>
-				<View
+			<div style={styles.outer}>
+				<div
 					style={{
 						...circleStyle,
 						...styles.circle,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...circleFillStyle,
 							...styles.circleFill,
 							...(isSelected ? styles.circleFillSelected : undefined),
 						}}
 					/>
-				</View>
+				</div>
 				{label === "" ? null : (
 					<Text
 						type={labelType || "button"}
@@ -154,7 +154,7 @@ export function ToggleButton({
 						{label}
 					</Text>
 				)}
-			</View>
+			</div>
 		</Button>
 	);
 }

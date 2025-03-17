@@ -1,4 +1,4 @@
-import { type StyleProp, type TextStyle, View } from "react-native";
+import { View } from "react-native";
 
 import type { Shadow } from "#/state/cache/types";
 import { useProfileFollowMutationQueue } from "#/state/queries/profile";
@@ -16,7 +16,7 @@ export function FollowButton({
 	unfollowedType?: ButtonType;
 	followedType?: ButtonType;
 	profile: Shadow<bsky.profile.AnyProfileView>;
-	labelStyle?: StyleProp<TextStyle>;
+	labelStyle?: React.CSSProperties;
 	onFollow?: () => void;
 }) {
 	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);

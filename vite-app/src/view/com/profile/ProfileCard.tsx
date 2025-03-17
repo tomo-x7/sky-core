@@ -1,11 +1,12 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { KnownFollowers, shouldShowKnownFollowers } from "#/components/KnownFollowers";
 import * as Pills from "#/components/Pills";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { getModerationCauseKey, isJustAMute } from "#/lib/moderation";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -20,7 +21,6 @@ import { useSession } from "#/state/session";
 import type * as bsky from "#/types/bsky";
 import { Link } from "../util/Link";
 import { PreviewableUserAvatar } from "../util/UserAvatar";
-import { Text } from "../util/text/Text";
 import { FollowButton } from "./FollowButton";
 
 export function ProfileCard({
@@ -39,7 +39,7 @@ export function ProfileCard({
 	noBorder?: boolean;
 	renderButton?: (profile: Shadow<bsky.profile.AnyProfileView>) => React.ReactNode;
 	onPress?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	showKnownFollowers?: boolean;
 }) {
 	const queryClient = useQueryClient();
@@ -81,16 +81,16 @@ export function ProfileCard({
 			onBeforePress={onBeforePress}
 			anchorNoUnderline
 		>
-			<View style={styles.layout}>
-				<View style={styles.layoutAvi}>
+			<div style={styles.layout}>
+				<div style={styles.layoutAvi}>
 					<PreviewableUserAvatar
 						size={40}
 						profile={profile}
 						moderation={moderation.ui("avatar")}
 						type={isLabeler ? "labeler" : "user"}
 					/>
-				</View>
-				<View style={styles.layoutContent}>
+				</div>
+				<div style={styles.layoutContent}>
 					<Text
 						emoji
 						type="lg"
@@ -111,21 +111,21 @@ export function ProfileCard({
 						{sanitizeHandle(profile.handle, "@")}
 					</Text>
 					<ProfileCardPills followedBy={!!profile.viewer?.followedBy} moderation={moderation} />
-					{!!profile.viewer?.followedBy && <View style={s.flexRow} />}
-				</View>
+					{!!profile.viewer?.followedBy && <div style={s.flexRow} />}
+				</div>
 				{renderButton && !isLabeler ? (
-					<View style={styles.layoutButton}>{renderButton(profile)}</View>
+					<div style={styles.layoutButton}>{renderButton(profile)}</div>
 				) : undefined}
-			</View>
+			</div>
 			{hasDescription || knownFollowersVisible ? (
-				<View style={styles.details}>
+				<div style={styles.details}>
 					{hasDescription && profile.description ? (
 						<Text emoji style={pal.text} numberOfLines={4}>
 							{profile.description as string}
 						</Text>
 					) : null}
 					{knownFollowersVisible ? (
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -134,9 +134,9 @@ export function ProfileCard({
 							}}
 						>
 							<KnownFollowers minimal profile={profile} moderationOpts={moderationOpts} />
-						</View>
+						</div>
 					) : null}
-				</View>
+				</div>
 			) : null}
 		</Link>
 	);

@@ -6,11 +6,12 @@ import {
 	type RichText as RichTextAPI,
 } from "@atproto/api";
 import React, { memo, useCallback } from "react";
-import { Pressable, type PressableStateCallbackType, type StyleProp, View, type ViewStyle } from "react-native";
+import { Pressable, type PressableStateCallbackType } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
+import { Text } from "#/components/Typography";
 import { ArrowOutOfBox_Stroke2_Corner0_Rounded as ArrowOutOfBox } from "#/components/icons/ArrowOutOfBox";
 import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
 import { POST_CTRL_HITSLOP } from "#/lib/constants";
@@ -28,7 +29,6 @@ import { ProgressGuideAction, useProgressGuideControls } from "#/state/shell/pro
 import * as Toast from "../Toast";
 import { PostDropdownBtn } from "../forms/PostDropdownBtn";
 import { formatCount } from "../numeric/format";
-import { Text } from "../text/Text";
 import { RepostButton } from "./RepostButton";
 
 let PostCtrls = ({
@@ -47,7 +47,7 @@ let PostCtrls = ({
 	record: AppBskyFeedPost.Record;
 	richText: RichTextAPI;
 	feedContext?: string | undefined;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	onPressReply: () => void;
 	onPostReply?: (postUri: string | undefined) => void;
 	threadgateRecord?: AppBskyFeedThreadgate.Record;
@@ -73,12 +73,12 @@ let PostCtrls = ({
 		);
 	}, [currentAccount, post]);
 
-	const defaultCtrlColor = React.useMemo(
+	const defaultCtrlColor: React.CSSProperties = React.useMemo(
 		() => ({
 			color: t.palette.contrast_500,
 		}),
 		[t],
-	) as StyleProp<ViewStyle>;
+	);
 
 	const [hasLikeIconBeenToggled, setHasLikeIconBeenToggled] = React.useState(false);
 
@@ -176,7 +176,7 @@ let PostCtrls = ({
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.justify_between,
@@ -184,9 +184,9 @@ let PostCtrls = ({
 				...style,
 			}}
 		>
-			<View
+			<div
 				style={{
-					...(big ? a.align_center : [a.flex_1, a.align_start, { marginLeft: -6 }]),
+					...(big ? a.align_center : flatten([a.flex_1, a.align_start, { marginLeft: -6 }])),
 					...(replyDisabled ? { opacity: 0.5 } : undefined),
 				}}
 			>
@@ -221,8 +221,8 @@ let PostCtrls = ({
 						</Text>
 					) : undefined}
 				</Pressable>
-			</View>
-			<View style={big ? a.align_center : [a.flex_1, a.align_start]}>
+			</div>
+			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
 				<RepostButton
 					isReposted={!!post.viewer?.repost}
 					repostCount={(post.repostCount ?? 0) + (post.quoteCount ?? 0)}
@@ -231,8 +231,8 @@ let PostCtrls = ({
 					big={big}
 					embeddingDisabled={Boolean(post.viewer?.embeddingDisabled)}
 				/>
-			</View>
-			<View style={big ? a.align_center : [a.flex_1, a.align_start]}>
+			</div>
+			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
 				<Pressable
 					style={btnStyle}
 					onPress={() => requireAuth(() => onPressToggleLike())}
@@ -257,10 +257,10 @@ let PostCtrls = ({
 						hasBeenToggled={hasLikeIconBeenToggled}
 					/>
 				</Pressable>
-			</View>
+			</div>
 			{big && (
 				<>
-					<View style={a.align_center}>
+					<div style={a.align_center}>
 						<Pressable
 							style={btnStyle}
 							onPress={() => {
@@ -283,7 +283,7 @@ let PostCtrls = ({
 								width={22}
 							/>
 						</Pressable>
-					</View>
+					</div>
 					<Prompt.Basic
 						control={loggedOutWarningPromptControl}
 						title={"Note about sharing"}
@@ -293,7 +293,7 @@ let PostCtrls = ({
 					/>
 				</>
 			)}
-			<View style={big ? a.align_center : [a.flex_1, a.align_start]}>
+			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
 				<PostDropdownBtn
 					post={post}
 					postFeedContext={feedContext}
@@ -304,8 +304,8 @@ let PostCtrls = ({
 					timestamp={post.indexedAt}
 					threadgateRecord={threadgateRecord}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 };
 PostCtrls = memo(PostCtrls);

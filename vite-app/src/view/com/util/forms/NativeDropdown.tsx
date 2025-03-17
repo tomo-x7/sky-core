@@ -2,10 +2,9 @@ import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
-import { Pressable, StyleSheet, Text, type View, type ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { useTheme } from "#/lib/ThemeContext";
-import { HITSLOP_10 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 
 // Custom Dropdown Menu Components
@@ -13,7 +12,7 @@ import { usePalette } from "#/lib/hooks/usePalette";
 export const DropdownMenuRoot = DropdownMenu.Root;
 
 type ItemProps = React.ComponentProps<(typeof DropdownMenu)["Item"]>;
-export const DropdownMenuItem = (props: ItemProps ) => {
+export const DropdownMenuItem = (props: ItemProps) => {
 	const theme = useTheme();
 	const [focused, setFocused] = React.useState(false);
 	const backgroundColor = theme.colorScheme === "dark" ? "#fff1" : "#0001";
@@ -47,7 +46,7 @@ type Props = {
 	items: DropdownItem[];
 	accessibilityLabel?: string;
 	accessibilityHint?: string;
-	triggerStyle?: ViewStyle;
+	triggerStyle?: React.CSSProperties;
 };
 
 export function NativeDropdown({
@@ -106,18 +105,16 @@ export function NativeDropdown({
 	return (
 		<DropdownMenuRoot open={open} onOpenChange={(o) => setOpen(o)}>
 			<DropdownMenu.Trigger asChild>
-				<Pressable
-					ref={buttonRef as unknown as React.Ref<View>}
-					accessibilityRole="button"
-					accessibilityLabel={accessibilityLabel}
-					accessibilityHint={accessibilityHint}
+				<button
+					type="button"
+					ref={buttonRef}
 					onPointerDown={(e) => {
 						// Prevent false positive that interpret mobile scroll as a tap.
 						// This requires the custom onPress handler below to compensate.
 						// https://github.com/radix-ui/primitives/issues/1912
 						e.preventDefault();
 					}}
-					onPress={() => {
+					onClick={() => {
 						if (window.event instanceof KeyboardEvent) {
 							// The onPointerDown hack above is not relevant to this press, so don't do anything.
 							return;
@@ -125,11 +122,12 @@ export function NativeDropdown({
 						// Compensate for the disabled onPointerDown above by triggering it manually.
 						setOpen((o) => !o);
 					}}
-					hitSlop={HITSLOP_10}
+					// TODO
+					// hitSlop={HITSLOP_10}
 					style={triggerStyle}
 				>
 					{children}
-				</Pressable>
+				</button>
 			</DropdownMenu.Trigger>
 
 			<DropdownMenu.Portal>
@@ -153,6 +151,7 @@ function DropdownContent({
 
 	return (
 		<DropdownMenu.Content
+			//@ts-expect-error
 			ref={menuRef}
 			style={StyleSheet.flatten([styles.content, dropDownBackgroundColor]) as React.CSSProperties}
 			loop
@@ -161,7 +160,7 @@ function DropdownContent({
 				if (item.label === "separator") {
 					return (
 						<DropdownMenu.Separator
-							key={getKey(item.label, index, )}
+							key={getKey(item.label, index)}
 							style={
 								StyleSheet.flatten([
 									styles.separator,
@@ -173,8 +172,8 @@ function DropdownContent({
 				}
 				if (index > 1 && items[index - 1].label === "separator") {
 					return (
-						<DropdownMenu.Group key={getKey(item.label, index, )}>
-							<DropdownMenuItem key={getKey(item.label, index, )} onSelect={item.onPress}>
+						<DropdownMenu.Group key={getKey(item.label, index)}>
+							<DropdownMenuItem key={getKey(item.label, index)} onSelect={item.onPress}>
 								<span
 									unselectable={"on"}
 									style={{
@@ -193,7 +192,7 @@ function DropdownContent({
 					);
 				}
 				return (
-					<DropdownMenuItem key={getKey(item.label, index, )} onSelect={item.onPress}>
+					<DropdownMenuItem key={getKey(item.label, index)} onSelect={item.onPress}>
 						<span
 							unselectable={"on"}
 							style={{

@@ -30,7 +30,7 @@ export function Text({
 			flags,
 		},
 	);
-	const ref = onLayout ? useOnLayout(onLayout) : undefined;
+	const ref = useOnLayout(onLayout);
 
 	const shared = {
 		uiTextView: true,

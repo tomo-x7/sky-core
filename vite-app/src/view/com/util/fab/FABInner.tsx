@@ -12,7 +12,7 @@ export interface FABProps extends ComponentProps<typeof TouchableWithoutFeedback
 	icon: JSX.Element;
 }
 
-export function FABInner({  icon, onPress, ...props }: FABProps) {
+export function FABInner({ icon, onPress, ...props }: FABProps) {
 	const { isMobile, isTablet } = useWebMediaQueries();
 	const fabMinimalShellTransform = useMinimalShellFabTransform();
 

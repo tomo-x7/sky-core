@@ -1,4 +1,4 @@
-import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
+import { Pressable, type PressableProps } from "react-native";
 import Animated, {
 	cancelAnimation,
 	useAnimatedStyle,
@@ -22,7 +22,7 @@ export function PressableScale({
 	...rest
 }: {
 	targetScale?: number;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 } & Exclude<PressableProps, "onPressIn" | "onPressOut" | "style">) {
 	const reducedMotion = useReducedMotion();
 

@@ -1,6 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View, findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";

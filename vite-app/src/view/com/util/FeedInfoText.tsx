@@ -1,4 +1,4 @@
-import { type StyleProp, StyleSheet, type TextStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
@@ -19,7 +19,7 @@ export function FeedNameText({
 	href: string;
 	lineHeight?: number;
 	numberOfLines?: number;
-	style?: StyleProp<TextStyle>;
+	style?: React.CSSProperties;
 }) {
 	const { data, isError } = useFeedSourceInfoQuery({ uri });
 

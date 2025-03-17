@@ -9,10 +9,8 @@ import {
 	KeyboardAvoidingView,
 	type LayoutChangeEvent,
 	ScrollView,
-	type StyleProp,
 	StyleSheet,
 	View,
-	type ViewStyle,
 } from "react-native";
 // @ts-expect-error no type definition
 import ProgressCircle from "react-native-progress/Circle";
@@ -778,7 +776,7 @@ function ComposerTopBar({
 	isThread: boolean;
 	onCancel: () => void;
 	onPublish: () => void;
-	topBarAnimatedStyle: StyleProp<ViewStyle>;
+	topBarAnimatedStyle: React.CSSProperties;
 	children?: React.ReactNode;
 }) {
 	const pal = usePalette("default");
@@ -984,7 +982,7 @@ function ComposerPills({
 	thread: ThreadDraft;
 	post: PostDraft;
 	dispatch: (action: ComposerAction) => void;
-	bottomBarAnimatedStyle: StyleProp<ViewStyle>;
+	bottomBarAnimatedStyle: React.CSSProperties;
 }) {
 	const t = useTheme();
 	const media = post.embed.media;
@@ -1478,7 +1476,7 @@ function ToolbarWrapper({
 	style,
 	children,
 }: {
-	style: StyleProp<ViewStyle>;
+	style: React.CSSProperties;
 	children: React.ReactNode;
 }) {
 	return children;

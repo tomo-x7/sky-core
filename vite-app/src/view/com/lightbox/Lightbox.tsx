@@ -1,15 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useState } from "react";
-import {
-	Image,
-	type ImageStyle,
-	Pressable,
-	StyleSheet,
-	TouchableOpacity,
-	TouchableWithoutFeedback,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { Image, type ImageStyle, Pressable, TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -92,7 +83,7 @@ function LightboxInner({
 	const img = imgs[index];
 	const isAvi = img.type === "circle-avi" || img.type === "rect-avi";
 	return (
-		<View style={styles.mask}>
+		<div style={styles.mask}>
 			<TouchableWithoutFeedback
 				onPress={onClose}
 				accessibilityRole="button"
@@ -101,7 +92,7 @@ function LightboxInner({
 				onAccessibilityEscape={onClose}
 			>
 				{isAvi ? (
-					<View style={styles.aviCenterer}>
+					<div style={styles.aviCenterer}>
 						<img
 							src={img.uri}
 							// @ts-ignore web-only
@@ -114,9 +105,9 @@ function LightboxInner({
 							}
 							alt={img.alt}
 						/>
-					</View>
+					</div>
 				) : (
-					<View style={styles.imageCenterer}>
+					<div style={styles.imageCenterer}>
 						<Image
 							accessibilityIgnoresInvertColors
 							source={img}
@@ -125,44 +116,40 @@ function LightboxInner({
 							accessibilityHint=""
 						/>
 						{canGoLeft && (
-							<TouchableOpacity
-								onPress={onPressLeft}
+							<button
+								type="button"
+								onClick={onPressLeft}
 								style={{
 									...styles.btn,
 									...btnStyle,
 									...styles.leftBtn,
 									...styles.blurredBackground,
 								}}
-								accessibilityRole="button"
-								accessibilityLabel={"Previous image"}
-								accessibilityHint=""
 							>
 								{/* @ts-ignore */}
 								<FontAwesomeIcon icon="angle-left" style={styles.icon} size={iconSize} />
-							</TouchableOpacity>
+							</button>
 						)}
 						{canGoRight && (
-							<TouchableOpacity
-								onPress={onPressRight}
+							<button
+								type="button"
+								onClick={onPressRight}
 								style={{
 									...styles.btn,
 									...btnStyle,
 									...styles.rightBtn,
 									...styles.blurredBackground,
 								}}
-								accessibilityRole="button"
-								accessibilityLabel={"Next image"}
-								accessibilityHint=""
 							>
 								{/* @ts-ignore */}
 								<FontAwesomeIcon icon="angle-right" style={styles.icon} size={iconSize} />
-							</TouchableOpacity>
+							</button>
 						)}
-					</View>
+					</div>
 				)}
 			</TouchableWithoutFeedback>
 			{img.alt ? (
-				<View style={styles.footer}>
+				<div style={styles.footer}>
 					<Pressable
 						accessibilityLabel={"Expand alt text"}
 						accessibilityHint={"If alt text is long, toggles alt text expanded state"}
@@ -174,18 +161,17 @@ function LightboxInner({
 							{img.alt}
 						</Text>
 					</Pressable>
-				</View>
+				</div>
 			) : null}
-			<View style={styles.closeBtn}>
+			<div style={styles.closeBtn}>
 				<ImageDefaultHeader onRequestClose={onClose} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles: Record<string, React.CSSProperties> = {
 	mask: {
-		// @ts-ignore
 		position: "fixed",
 		top: 0,
 		left: 0,
@@ -201,7 +187,7 @@ const styles = StyleSheet.create({
 	image: {
 		width: "100%",
 		height: "100%",
-		resizeMode: "contain",
+		objectFit: "contain",
 	},
 	aviCenterer: {
 		flex: 1,
@@ -253,12 +239,11 @@ const styles = StyleSheet.create({
 		top: "50%",
 	},
 	footer: {
-		paddingHorizontal: 32,
-		paddingVertical: 24,
+		padding: "24px 32px",
 		backgroundColor: colors.black,
 	},
 	blurredBackground: {
 		backdropFilter: "blur(10px)",
 		WebkitBackdropFilter: "blur(10px)",
-	} as ViewStyle,
-});
+	},
+};

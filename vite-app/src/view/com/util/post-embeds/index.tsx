@@ -12,7 +12,7 @@ import {
 } from "@atproto/api";
 import React from "react";
 import { Image } from "react-native";
-import { InteractionManager, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { InteractionManager, StyleSheet } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -53,7 +53,7 @@ export function PostEmbeds({
 	embed?: Embed;
 	moderation?: ModerationDecision;
 	onOpen?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	allowNestedQuotes?: boolean;
 	viewContext?: PostEmbedViewContext;
 }) {
@@ -63,7 +63,7 @@ export function PostEmbeds({
 	// =
 	if (AppBskyEmbedRecordWithMedia.isView(embed)) {
 		return (
-			<View style={style}>
+			<div style={style}>
 				<PostEmbeds embed={embed.media} moderation={moderation} onOpen={onOpen} viewContext={viewContext} />
 				<MaybeQuoteEmbed
 					embed={embed.record}
@@ -74,7 +74,7 @@ export function PostEmbeds({
 							: undefined
 					}
 				/>
-			</View>
+			</div>
 		);
 	}
 
@@ -82,27 +82,27 @@ export function PostEmbeds({
 		// custom feed embed (i.e. generator view)
 		if (AppBskyFeedDefs.isGeneratorView(embed.record)) {
 			return (
-				<View style={a.mt_sm}>
+				<div style={a.mt_sm}>
 					<MaybeFeedCard view={embed.record} />
-				</View>
+				</div>
 			);
 		}
 
 		// list embed
 		if (AppBskyGraphDefs.isListView(embed.record)) {
 			return (
-				<View style={a.mt_sm}>
+				<div style={a.mt_sm}>
 					<MaybeListCard view={embed.record} />
-				</View>
+				</div>
 			);
 		}
 
 		// starter pack embed
 		if (AppBskyGraphDefs.isStarterPackViewBasic(embed.record)) {
 			return (
-				<View style={a.mt_sm}>
+				<div style={a.mt_sm}>
 					<StarterPackCard starterPack={embed.record} />
-				</View>
+				</div>
 			);
 		}
 
@@ -157,7 +157,7 @@ export function PostEmbeds({
 				const image = images[0];
 				return (
 					<ContentHider modui={moderation?.ui("contentMedia")}>
-						<View
+						<div
 							style={{
 								...a.mt_sm,
 								...style,
@@ -176,14 +176,14 @@ export function PostEmbeds({
 								onPressIn={() => onPressIn(0)}
 								hideBadge={viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia}
 							/>
-						</View>
+						</div>
 					</ContentHider>
 				);
 			}
 
 			return (
 				<ContentHider modui={moderation?.ui("contentMedia")}>
-					<View
+					<div
 						style={{
 							...a.mt_sm,
 							...style,
@@ -195,7 +195,7 @@ export function PostEmbeds({
 							onPressIn={onPressIn}
 							viewContext={viewContext}
 						/>
-					</View>
+					</div>
 				</ContentHider>
 			);
 		}
@@ -238,7 +238,7 @@ export function PostEmbeds({
 		);
 	}
 
-	return <View />;
+	return <div />;
 }
 
 export function MaybeFeedCard({ view }: { view: AppBskyFeedDefs.GeneratorView }) {
@@ -272,7 +272,7 @@ export function MaybeListCard({ view }: { view: AppBskyGraphDefs.ListView }) {
 
 	return (
 		<ContentHider modui={moderation?.ui("contentList")}>
-			<View
+			<div
 				style={{
 					...a.border,
 					...t.atoms.border_contrast_medium,
@@ -281,7 +281,7 @@ export function MaybeListCard({ view }: { view: AppBskyGraphDefs.ListView }) {
 				}}
 			>
 				<ListCard.Default view={view} />
-			</View>
+			</div>
 		</ContentHider>
 	);
 }

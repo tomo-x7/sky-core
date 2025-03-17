@@ -1,4 +1,3 @@
-import type { StyleProp, ViewStyle } from "react-native";
 import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -13,7 +12,7 @@ export function TimeIndicator({
 	style,
 }: {
 	time: number;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const t = useTheme();
 

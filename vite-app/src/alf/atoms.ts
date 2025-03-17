@@ -331,10 +331,11 @@ export const atoms = {
 	},
 	border: {
 		border: "1px solid black",
-		borderWidth: "1px",
+		borderWidth: 1,
 	},
 	border_t: {
 		borderTop: "1px solid black",
+		borderTopWidth: 1,
 	},
 	border_b: {
 		borderBottom: "1px solid black",

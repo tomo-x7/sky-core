@@ -1,7 +1,6 @@
 import React, { useContext, useMemo } from "react";
-import { type GestureResponderEvent, type StyleProp, View, type ViewStyle } from "react-native";
 
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import * as Button from "#/components/Button";
 import { Link, type LinkProps } from "#/components/Link";
 import { createPortalGroup } from "#/components/Portal";
@@ -18,14 +17,14 @@ const Portal = createPortalGroup();
 
 export function Container({ children }: { children: React.ReactNode }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.py_md,
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -43,12 +42,12 @@ export function Group({
 	children: React.ReactNode;
 	destructive?: boolean;
 	iconInset?: boolean;
-	style?: StyleProp<ViewStyle>;
-	contentContainerStyle?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
+	contentContainerStyle?: React.CSSProperties;
 }) {
 	const context = useMemo(() => ({ destructive, withinGroup: true }), [destructive]);
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...style,
@@ -78,7 +77,7 @@ export function Group({
 					</Item>
 				</ItemContext.Provider>
 			</Portal.Provider>
-		</View>
+		</div>
 	);
 }
 
@@ -95,7 +94,7 @@ export function Item({
 	 * @default false
 	 */
 	iconInset?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const context = useContext(ItemContext);
 	const childContext = useMemo(() => {
@@ -103,7 +102,7 @@ export function Item({
 		return { ...context, destructive };
 	}, [context, destructive]);
 	return (
-		<View
+		<div
 			style={{
 				...a.px_xl,
 				...a.py_sm,
@@ -127,7 +126,7 @@ export function Item({
 			}}
 		>
 			<ItemContext.Provider value={childContext}>{children}</ItemContext.Provider>
-		</View>
+		</div>
 	);
 }
 
@@ -138,7 +137,7 @@ export function LinkItem({
 	chevronColor,
 	...props
 }: LinkProps & {
-	contentContainerStyle?: StyleProp<ViewStyle>;
+	contentContainerStyle?: React.CSSProperties;
 	destructive?: boolean;
 	chevronColor?: string;
 }) {
@@ -150,7 +149,7 @@ export function LinkItem({
 				<Item
 					destructive={destructive}
 					style={{
-						...((args.hovered || args.pressed) && [t.atoms.bg_contrast_25]),
+						...((args.hovered || args.pressed) && t.atoms.bg_contrast_25),
 						...contentContainerStyle,
 					}}
 				>
@@ -169,7 +168,7 @@ export function PressableItem({
 	hoverStyle,
 	...props
 }: Button.ButtonProps & {
-	contentContainerStyle?: StyleProp<ViewStyle>;
+	contentContainerStyle?: React.CSSProperties;
 	destructive?: boolean;
 }) {
 	const t = useTheme();
@@ -179,7 +178,7 @@ export function PressableItem({
 				<Item
 					destructive={destructive}
 					style={{
-						...((args.hovered || args.pressed) && [t.atoms.bg_contrast_25, hoverStyle]),
+						...flatten((args.hovered || args.pressed) && [t.atoms.bg_contrast_25, hoverStyle]),
 						...contentContainerStyle,
 					}}
 				>
@@ -216,14 +215,14 @@ export function ItemIcon({
 	const color = colorProp ?? (destructive ? t.palette.negative_500 : t.atoms.text.color);
 
 	const content = (
-		<View
+		<div
 			style={{
 				...a.z_20,
 				...{ width: iconSize, height: iconSize },
 			}}
 		>
 			<Comp width={iconSize} style={{ color }} />
-		</View>
+		</div>
 	);
 
 	if (withinGroup) {
@@ -261,7 +260,7 @@ export function ItemText({ style, ...props }: React.ComponentProps<typeof Button
 export function Divider({ style }: ViewStyleProp) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.border_t,
 				...t.atoms.border_contrast_medium,
@@ -285,7 +284,7 @@ export function BadgeText({
 	style,
 }: {
 	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const t = useTheme();
 	return (
@@ -309,7 +308,7 @@ export function BadgeButton({
 	onPress,
 }: {
 	label: string;
-	onPress: (evt: GestureResponderEvent) => void;
+	onPress: (evt: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
 	const t = useTheme();
 	return (

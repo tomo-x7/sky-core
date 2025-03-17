@@ -1,5 +1,4 @@
 import type { ModerationCause, ModerationUI } from "@atproto/api";
-import type { StyleProp, ViewStyle } from "react-native";
 
 import * as Pills from "#/components/Pills";
 import { getModerationCauseKey, unique } from "#/lib/moderation";
@@ -13,7 +12,7 @@ export function PostAlerts({
 	modui: ModerationUI;
 	size?: Pills.CommonProps["size"];
 	includeMute?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	additionalCauses?: ModerationCause[] | Pills.AppModerationCause[];
 }) {
 	if (!modui.alert && !modui.inform && !additionalCauses?.length) {

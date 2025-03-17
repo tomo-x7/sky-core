@@ -1,7 +1,6 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import React from "react";
 import { Image } from "react-native";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
@@ -24,7 +23,7 @@ export const ExternalLinkEmbed = ({
 }: {
 	link: AppBskyEmbedExternal.ViewExternal;
 	onOpen?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	hideAlt?: boolean;
 }) => {
 	const t = useTheme();
@@ -43,7 +42,7 @@ export const ExternalLinkEmbed = ({
 	if (embedPlayerParams?.source === "tenor") {
 		const parsedAlt = parseAltFromGIFDescription(link.description);
 		return (
-			<View style={style}>
+			<div style={style}>
 				<GifEmbed
 					params={embedPlayerParams}
 					thumb={link.thumb}
@@ -51,14 +50,14 @@ export const ExternalLinkEmbed = ({
 					isPreferredAltText={parsedAlt.isPreferred}
 					hideAlt={hideAlt}
 				/>
-			</View>
+			</div>
 		);
 	}
 
 	return (
 		<Link label={link.title || `Open link to ${niceUrl}`} to={link.uri} shouldProxy={true} onPress={onOpen}>
 			{({ hovered }) => (
-				<View
+				<div
 					style={{
 						...//@ts-ignore
 						a.transition_color,
@@ -88,7 +87,7 @@ export const ExternalLinkEmbed = ({
 						<ExternalPlayer link={link} params={embedPlayerParams} />
 					) : undefined}
 
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.pt_sm,
@@ -97,7 +96,7 @@ export const ExternalLinkEmbed = ({
 							...(hovered ? t.atoms.border_contrast_high : t.atoms.border_contrast_low),
 						}}
 					>
-						<View
+						<div
 							style={{
 								...{ gap: 3 },
 								...a.pb_xs,
@@ -129,10 +128,10 @@ export const ExternalLinkEmbed = ({
 									{link.description}
 								</Text>
 							) : undefined}
-						</View>
-						<View style={a.px_md}>
+						</div>
+						<div style={a.px_md}>
 							<Divider />
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.align_center,
@@ -166,10 +165,10 @@ export const ExternalLinkEmbed = ({
 								>
 									{toNiceDomain(link.uri)}
 								</Text>
-							</View>
-						</View>
-					</View>
-				</View>
+							</div>
+						</div>
+					</div>
+				</div>
 			)}
 		</Link>
 	);

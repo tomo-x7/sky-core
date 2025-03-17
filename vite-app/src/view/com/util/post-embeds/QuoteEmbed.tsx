@@ -14,11 +14,12 @@ import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { RichText } from "#/components/RichText";
 import { SubtleWebHover } from "#/components/SubtleWebHover";
+import { Text } from "#/components/Typography";
 import { HITSLOP_20 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { InfoCircleIcon } from "#/lib/icons";
@@ -34,7 +35,6 @@ import { ContentHider } from "../../../../components/moderation/ContentHider";
 import { PostAlerts } from "../../../../components/moderation/PostAlerts";
 import { Link } from "../Link";
 import { PostMeta } from "../PostMeta";
-import { Text } from "../text/Text";
 import type { QuoteEmbedViewContext } from "./types";
 
 export function MaybeQuoteEmbed({
@@ -46,7 +46,7 @@ export function MaybeQuoteEmbed({
 }: {
 	embed: AppBskyEmbedRecord.View;
 	onOpen?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	allowNestedQuotes?: boolean;
 	viewContext?: QuoteEmbedViewContext;
 }) {
@@ -69,7 +69,7 @@ export function MaybeQuoteEmbed({
 		);
 	} else if (AppBskyEmbedRecord.isViewBlocked(embed.record)) {
 		return (
-			<View
+			<div
 				style={{
 					...styles.errorContainer,
 					...a.border,
@@ -80,11 +80,11 @@ export function MaybeQuoteEmbed({
 				<Text type="lg" style={pal.text}>
 					Blocked
 				</Text>
-			</View>
+			</div>
 		);
 	} else if (AppBskyEmbedRecord.isViewNotFound(embed.record)) {
 		return (
-			<View
+			<div
 				style={{
 					...styles.errorContainer,
 					...a.border,
@@ -95,12 +95,12 @@ export function MaybeQuoteEmbed({
 				<Text type="lg" style={pal.text}>
 					Deleted
 				</Text>
-			</View>
+			</div>
 		);
 	} else if (AppBskyEmbedRecord.isViewDetached(embed.record)) {
 		const isViewerOwner = currentAccount?.did ? embed.record.uri.includes(currentAccount.did) : false;
 		return (
-			<View
+			<div
 				style={{
 					...styles.errorContainer,
 					...a.border,
@@ -111,7 +111,7 @@ export function MaybeQuoteEmbed({
 				<Text type="lg" style={pal.text}>
 					{isViewerOwner ? <>Removed by you</> : <>Removed by author</>}
 				</Text>
-			</View>
+			</div>
 		);
 	}
 	return null;
@@ -126,7 +126,7 @@ function QuoteEmbedModerated({
 }: {
 	viewRecord: AppBskyEmbedRecord.ViewRecord;
 	onOpen?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	allowNestedQuotes?: boolean;
 	viewContext?: QuoteEmbedViewContext;
 }) {
@@ -158,7 +158,7 @@ export function QuoteEmbed({
 	quote: AppBskyFeedDefs.PostView;
 	moderation?: ModerationDecision;
 	onOpen?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	allowNestedQuotes?: boolean;
 	viewContext?: QuoteEmbedViewContext;
 }) {
@@ -201,7 +201,7 @@ export function QuoteEmbed({
 
 	const [hover, setHover] = React.useState(false);
 	return (
-		<View
+		<div
 			onPointerEnter={() => {
 				setHover(true);
 			}}
@@ -219,7 +219,7 @@ export function QuoteEmbed({
 					...t.atoms.border_contrast_low,
 					...style,
 				}}
-				childContainerStyle={[a.pt_sm]}
+				childContainerStyle={a.pt_sm}
 			>
 				<SubtleWebHover hover={hover} />
 				<Link
@@ -228,7 +228,7 @@ export function QuoteEmbed({
 					title={itemTitle}
 					onBeforePress={onBeforePress}
 				>
-					<View pointerEvents="none">
+					<div style={{ pointerEvents: "none" }}>
 						<PostMeta
 							author={quote.author}
 							moderation={moderation}
@@ -236,13 +236,13 @@ export function QuoteEmbed({
 							postHref={itemHref}
 							timestamp={quote.indexedAt}
 						/>
-					</View>
+					</div>
 					{moderation ? <PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} /> : null}
 					{richText ? <RichText value={richText} style={a.text_md} numberOfLines={20} disableLinks /> : null}
 					{embed && <PostEmbeds embed={embed} moderation={moderation} />}
 				</Link>
 			</ContentHider>
-		</View>
+		</div>
 	);
 }
 

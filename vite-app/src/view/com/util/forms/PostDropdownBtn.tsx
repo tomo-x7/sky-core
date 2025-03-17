@@ -1,7 +1,7 @@
 import type { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, RichText as RichTextAPI } from "@atproto/api";
 import type React from "react";
 import { memo, useMemo, useState } from "react";
-import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
+import type { PressableProps } from "react-native";
 
 import { atoms as a, flatten, useTheme as useAlf } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
@@ -54,7 +54,7 @@ let PostDropdownBtn = ({
 		<EventStopper onKeyDown={false}>
 			<Menu.Root control={lazyMenuControl}>
 				<Menu.Trigger label={"Open post options menu"}>
-					{({ props, state, }) => {
+					{({ props, state }) => {
 						return (
 							<button
 								{...props}

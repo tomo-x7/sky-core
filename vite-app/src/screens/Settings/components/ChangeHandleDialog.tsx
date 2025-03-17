@@ -1,10 +1,10 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
-import { View, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -39,7 +39,7 @@ export function ChangeHandleDialog({
 	const { height } = useWindowDimensions();
 
 	return (
-		<Dialog.Outer control={control} nativeOptions={{ minHeight: height }}>
+		<Dialog.Outer control={control}>
 			<ChangeHandleDialogInner />
 		</Dialog.Outer>
 	);
@@ -76,9 +76,9 @@ function ChangeHandleDialogInner() {
 					<Dialog.HeaderText>Change Handle</Dialog.HeaderText>
 				</Dialog.Header>
 			}
-			contentContainerStyle={[a.pt_0, a.px_0]}
+			contentContainerStyle={flatten([a.pt_0, a.px_0])}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.pt_lg,
@@ -108,7 +108,7 @@ function ChangeHandleDialogInner() {
 						)}
 					</LayoutAnimationConfig>
 				) : (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.justify_center,
@@ -117,9 +117,9 @@ function ChangeHandleDialogInner() {
 						}}
 					>
 						<Loader size="xl" />
-					</View>
+					</div>
 				)}
-			</View>
+			</div>
 		</Dialog.ScrollableInner>
 	);
 }
@@ -161,7 +161,7 @@ function ProvidedHandlePage({
 
 	return (
 		<LayoutAnimationConfig skipEntering>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_md,
@@ -183,12 +183,12 @@ function ProvidedHandlePage({
 						...a.gap_md,
 					}}
 				>
-					<View>
+					<div>
 						<TextField.LabelText>New handle</TextField.LabelText>
 						<TextField.Root isInvalid={isInvalid}>
 							<TextField.Icon icon={AtIcon} />
 							<Dialog.Input
-								editable={!isPending}
+								contentEditable={!isPending}
 								defaultValue={subdomain}
 								onChangeText={(text) => setSubdomain(text)}
 								label={"New handle"}
@@ -196,11 +196,9 @@ function ProvidedHandlePage({
 								autoCapitalize="none"
 								autoCorrect={"off"}
 							/>
-							<TextField.SuffixText label={host} style={{ maxWidth: "40%" }}>
-								{host}
-							</TextField.SuffixText>
+							<TextField.SuffixText style={{ maxWidth: "40%" }}>{host}</TextField.SuffixText>
 						</TextField.Root>
-					</View>
+					</div>
 					<Text>
 						<>
 							Your full handle will be{" "}
@@ -246,7 +244,7 @@ function ProvidedHandlePage({
 						<ButtonIcon icon={ArrowRightIcon} position="right" />
 					</Button>
 				</Animated.View>
-			</View>
+			</div>
 		</LayoutAnimationConfig>
 	);
 }
@@ -295,7 +293,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 	});
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.gap_lg,
@@ -329,14 +327,14 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					...a.overflow_hidden,
 				}}
 			>
-				<View>
+				<div>
 					<TextField.LabelText>Enter the domain you want to use</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={AtIcon} />
 						<Dialog.Input
 							label={"New handle"}
 							placeholder={"e.g. alice.com"}
-							editable={!isPending}
+							contentEditable={!isPending}
 							defaultValue={domain}
 							onChangeText={(text) => {
 								setDomain(text);
@@ -346,7 +344,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							autoCorrect={"off"}
 						/>
 					</TextField.Root>
-				</View>
+				</div>
 				<ToggleButton.Group
 					label={"Choose domain verification method"}
 					values={[dnsPanel ? "dns" : "file"]}
@@ -362,7 +360,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 				{dnsPanel ? (
 					<>
 						<Text>Add the following DNS record to your domain:</Text>
-						<View
+						<div
 							style={{
 								...t.atoms.bg_contrast_25,
 								...a.rounded_sm,
@@ -372,13 +370,13 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							}}
 						>
 							<Text style={t.atoms.text_contrast_medium}>Host:</Text>
-							<View style={a.py_xs}>
+							<div style={a.py_xs}>
 								<CopyButton
 									variant="solid"
 									color="secondary"
 									value="_atproto"
 									label={"Copy host"}
-									hoverStyle={[a.bg_transparent]}
+									hoverStyle={a.bg_transparent}
 									hitSlop={HITSLOP_10}
 								>
 									<Text
@@ -391,7 +389,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									</Text>
 									<ButtonIcon icon={CopyIcon} />
 								</CopyButton>
-							</View>
+							</div>
 							<Text
 								style={{
 									...a.mt_xs,
@@ -400,9 +398,9 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							>
 								Type:
 							</Text>
-							<View style={a.py_xs}>
+							<div style={a.py_xs}>
 								<Text style={a.text_md}>TXT</Text>
-							</View>
+							</div>
 							<Text
 								style={{
 									...a.mt_xs,
@@ -411,13 +409,13 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							>
 								Value:
 							</Text>
-							<View style={a.py_xs}>
+							<div style={a.py_xs}>
 								<CopyButton
 									variant="solid"
 									color="secondary"
 									value={`did=${currentAccount?.did}`}
 									label={"Copy TXT record value"}
-									hoverStyle={[a.bg_transparent]}
+									hoverStyle={a.bg_transparent}
 									hitSlop={HITSLOP_10}
 								>
 									<Text
@@ -430,10 +428,10 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									</Text>
 									<ButtonIcon icon={CopyIcon} />
 								</CopyButton>
-							</View>
-						</View>
+							</div>
+						</div>
 						<Text>This should create a domain record at:</Text>
-						<View
+						<div
 							style={{
 								...t.atoms.bg_contrast_25,
 								...a.rounded_sm,
@@ -443,12 +441,12 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							}}
 						>
 							<Text style={a.text_md}>_atproto.{domain}</Text>
-						</View>
+						</div>
 					</>
 				) : (
 					<>
 						<Text>Upload a text file to:</Text>
-						<View
+						<div
 							style={{
 								...t.atoms.bg_contrast_25,
 								...a.rounded_sm,
@@ -458,7 +456,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							}}
 						>
 							<Text style={a.text_md}>https://{domain}/.well-known/atproto-did</Text>
-						</View>
+						</div>
 						<Text>That contains the following:</Text>
 						<CopyButton
 							value={currentAccount?.did ?? ""}
@@ -543,7 +541,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					<ButtonText>Nevermind, create a handle for me</ButtonText>
 				</Button>
 			</Animated.View>
-		</View>
+		</div>
 	);
 }
 
@@ -580,7 +578,7 @@ function SuccessMessage({ text }: { text: string }) {
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.gap_md,
@@ -592,7 +590,7 @@ function SuccessMessage({ text }: { text: string }) {
 				...t.atoms.border_contrast_low,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...{ height: 20, width: 20 },
 					...a.rounded_full,
@@ -602,8 +600,8 @@ function SuccessMessage({ text }: { text: string }) {
 				}}
 			>
 				<CheckIcon fill={t.palette.white} size="xs" />
-			</View>
+			</div>
 			<Text style={a.text_md}>{text}</Text>
-		</View>
+		</div>
 	);
 }

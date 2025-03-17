@@ -1,9 +1,8 @@
 import { ComAtprotoModerationDefs } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
-import { View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -14,8 +13,8 @@ import * as Toast from "#/view/com/util/Toast";
 export function ChatDisabled() {
 	const t = useTheme();
 	return (
-		<View style={a.p_md}>
-			<View
+		<div style={a.p_md}>
+			<div
 				style={{
 					...a.align_start,
 					...a.p_xl,
@@ -43,8 +42,8 @@ export function ChatDisabled() {
 					Our moderators have reviewed reports and decided to disable your access to chats on Bluesky.
 				</Text>
 				<AppealDialog />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -124,19 +123,24 @@ function DialogInner() {
 			>
 				This appeal will be sent to Bluesky's moderation service.
 			</Text>
-			<View style={a.my_md}>
+			<div style={a.my_md}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={"Please explain why you think your chats were incorrectly disabled"}
 					value={details}
 					onChangeText={setDetails}
 					autoFocus={true}
-					numberOfLines={3}
+					// TODO
+					// numberOfLines={3}
 					multiline
 					maxLength={300}
 				/>
-			</View>
-			<View style={gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm]}>
+			</div>
+			<div
+				style={flatten(
+					gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm],
+				)}
+			>
 				<Button variant="solid" color="secondary" size="large" onPress={onBack} label={"Back"}>
 					<ButtonText>{"Back"}</ButtonText>
 				</Button>
@@ -144,7 +148,7 @@ function DialogInner() {
 					<ButtonText>{"Submit"}</ButtonText>
 					{isPending && <ButtonIcon icon={Loader} />}
 				</Button>
-			</View>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

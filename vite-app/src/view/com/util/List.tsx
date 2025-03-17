@@ -1,12 +1,11 @@
 import React, { isValidElement, type JSX, memo, startTransition, useRef } from "react";
-import { type FlatListProps, StyleSheet, View, type ViewProps } from "react-native";
+import type { FlatListProps } from "react-native";
 import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
 import * as Layout from "#/components/Layout";
 import { useScrollHandlers } from "#/lib/ScrollContext";
 import { batchedUpdates } from "#/lib/batchedUpdates";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { addStyle } from "#/lib/styles";
 
 export type ListMethods = any; // TODO: Better types.
 export type ListProps<ItemT> = Omit<
@@ -14,6 +13,8 @@ export type ListProps<ItemT> = Omit<
 	| "onScroll" // Use ScrollContext instead.
 	| "refreshControl" // Pass refreshing and/or onRefresh instead.
 	| "contentOffset" // Pass headerOffset instead.
+	| "style"
+	| "contentContainerStyle"
 > & {
 	onScrolledDownChange?: (isScrolledDown: boolean) => void;
 	headerOffset?: number;
@@ -27,6 +28,8 @@ export type ListProps<ItemT> = Omit<
 	 * @deprecated Should be using Layout components
 	 */
 	sideBorders?: boolean;
+	style?: React.CSSProperties;
+	contentContainerStyle: React.CSSProperties;
 };
 export type ListRef = React.MutableRefObject<any | null>; // TODO: Better types.
 
@@ -97,9 +100,7 @@ function ListImpl<ItemT>(
 	}
 
 	if (headerOffset != null) {
-		style = addStyle(style, {
-			paddingTop: headerOffset,
-		});
+		style = { ...style, paddingTop: headerOffset };
 	}
 
 	const getScrollableNode = React.useCallback(() => {
@@ -288,14 +289,13 @@ function ListImpl<ItemT>(
 	});
 
 	return (
-		<View
+		<div
 			{...props}
 			style={{
 				...style,
 
 				...(disableFullWindowScroll && {
 					flex: 1,
-					// @ts-expect-error web only
 					"overflow-y": "scroll",
 				}),
 			}}
@@ -310,7 +310,7 @@ function ListImpl<ItemT>(
 				}
 			/>
 			<Layout.Center>
-				<View
+				<div
 					ref={containerRef}
 					style={{
 						...contentContainerStyle,
@@ -358,9 +358,9 @@ function ListImpl<ItemT>(
 						/>
 					)}
 					{footerComponent}
-				</View>
+				</div>
 			</Layout.Center>
-		</View>
+		</div>
 	);
 }
 
@@ -473,7 +473,7 @@ let Row = function RowImpl<ItemT>({
 		return null;
 	}
 
-	return <View ref={rowRef}>{renderItem({ item, index, separators: null as any })}</View>;
+	return <div ref={rowRef}>{renderItem({ item, index, separators: null as any })}</div>;
 };
 Row = React.memo(Row);
 
@@ -488,7 +488,7 @@ let Visibility = ({
 	topMargin?: string;
 	bottomMargin?: string;
 	onVisibleChange: (isVisible: boolean) => void;
-	style?: ViewProps["style"];
+	style?: React.CSSProperties;
 }): React.ReactNode => {
 	const tailRef = React.useRef(null);
 	const isIntersecting = React.useRef(false);
@@ -516,7 +516,7 @@ let Visibility = ({
 		};
 	}, [bottomMargin, handleIntersection, topMargin, root]);
 
-	return <View ref={tailRef} style={addStyle(styles.visibilityDetector, style)} />;
+	return <div ref={tailRef} style={{ ...styles.visibilityDetector, ...style }} />;
 };
 Visibility = React.memo(Visibility);
 
@@ -526,13 +526,11 @@ export const List = memo(React.forwardRef(ListImpl)) as <ItemT>(
 
 // https://stackoverflow.com/questions/7944460/detect-safari-browser
 
-const styles = StyleSheet.create({
+const styles: Record<string, React.CSSProperties> = {
 	minHeightViewport: {
-		// @ts-ignore web only
 		minHeight: "100vh",
 	},
 	parentTreeVisibilityDetector: {
-		// @ts-ignore web only
 		position: "fixed",
 		top: 0,
 		left: 0,
@@ -550,4 +548,4 @@ const styles = StyleSheet.create({
 		pointerEvents: "none",
 		zIndex: -1,
 	},
-});
+};

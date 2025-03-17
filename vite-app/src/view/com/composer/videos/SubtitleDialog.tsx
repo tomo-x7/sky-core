@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Keyboard, type StyleProp, View, type ViewStyle } from "react-native";
+import { Keyboard } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -32,7 +32,7 @@ export function SubtitleDialogBtn(props: Props) {
 	const control = Dialog.useDialogControl();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.my_xs,
@@ -56,7 +56,7 @@ export function SubtitleDialogBtn(props: Props) {
 				<Dialog.Handle />
 				<SubtitleDialogInner {...props} />
 			</Dialog.Outer>
-		</View>
+		</div>
 	);
 }
 
@@ -85,7 +85,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 
 	return (
 		<Dialog.ScrollableInner label={"Video settings"}>
-			<View style={a.gap_md}>
+			<div style={a.gap_md}>
 				<Text
 					style={{
 						...a.text_xl,
@@ -104,7 +104,8 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 						maxLength={MAX_ALT_TEXT * 10}
 						multiline
 						style={{ maxHeight: 300 }}
-						numberOfLines={3}
+						// TODO
+						// numberOfLines={3}
 						onKeyPress={({ nativeEvent }) => {
 							if (nativeEvent.key === "Escape") {
 								control.close();
@@ -113,7 +114,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 					/>
 				</TextField.Root>
 
-				<View
+				<div
 					style={{
 						...a.border_t,
 						...a.w_full,
@@ -134,7 +135,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 					onSelectFile={handleSelectFile}
 					disabled={subtitleMissingLanguage || captions.length >= MAX_NUM_CAPTIONS}
 				/>
-				<View>
+				<div>
 					{captions.map((subtitle, i) => (
 						<SubtitleFileRow
 							key={subtitle.lang}
@@ -146,10 +147,10 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 									langCode(lang) === subtitle.lang ||
 									!captions.some((s) => s.lang === langCode(lang)),
 							)}
-							style={i % 2 === 0 && t.atoms.bg_contrast_25}
+							style={i % 2 === 0 ? t.atoms.bg_contrast_25 : {}}
 						/>
 					))}
-				</View>
+				</div>
 				{subtitleMissingLanguage && (
 					<Text
 						style={{
@@ -161,7 +162,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 					</Text>
 				)}
 
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_end,
@@ -180,8 +181,8 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 					>
 						<ButtonText>Done</ButtonText>
 					</Button>
-				</View>
-			</View>
+				</div>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);
@@ -198,7 +199,7 @@ function SubtitleFileRow({
 	file: File;
 	otherLanguages: { code2: string; code3: string; name: string }[];
 	setCaptions: (updater: (prev: CaptionsTrack[]) => CaptionsTrack[]) => void;
-	style: StyleProp<ViewStyle>;
+	style: React.CSSProperties;
 }) {
 	const t = useTheme();
 
@@ -212,7 +213,7 @@ function SubtitleFileRow({
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.justify_between,
@@ -223,14 +224,14 @@ function SubtitleFileRow({
 				...style,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_xs,
 					...a.justify_center,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -272,8 +273,8 @@ function SubtitleFileRow({
 						}))}
 						style={{ viewContainer: { maxWidth: 200, flex: 1 } }}
 					/>
-				</View>
-			</View>
+				</div>
+			</div>
 			<Button
 				label={"Remove subtitle file"}
 				size="tiny"
@@ -285,7 +286,7 @@ function SubtitleFileRow({
 			>
 				<ButtonIcon icon={X} />
 			</Button>
-		</View>
+		</div>
 	);
 }
 

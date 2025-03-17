@@ -1,5 +1,4 @@
 import type { ModerationDecision } from "@atproto/api";
-import type { StyleProp, ViewStyle } from "react-native";
 
 import * as Pills from "#/components/Pills";
 import { getModerationCauseKey, unique } from "#/lib/moderation";
@@ -8,7 +7,7 @@ export function ProfileHeaderAlerts({
 	moderation,
 }: {
 	moderation: ModerationDecision;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const modui = moderation.ui("profileView");
 	if (!modui.alert && !modui.inform) {

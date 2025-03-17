@@ -1,14 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import {
-	ActivityIndicator,
-	type ListRenderItemInfo,
-	type StyleProp,
-	StyleSheet,
-	View,
-	type ViewStyle,
-	findNodeHandle,
-} from "react-native";
+import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View, findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
@@ -36,12 +28,12 @@ interface ProfileFeedgensProps {
 	scrollElRef: ListRef;
 	headerOffset: number;
 	enabled?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	setScrollViewTag: (tag: number | null) => void;
 }
 
 export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps>(function ProfileFeedgensImpl(
-	{ did, scrollElRef, headerOffset, enabled, style,  setScrollViewTag },
+	{ did, scrollElRef, headerOffset, enabled, style, setScrollViewTag },
 	ref,
 ) {
 	const t = useTheme();
@@ -119,7 +111,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	const renderItem = React.useCallback(
 		({ item, index }: ListRenderItemInfo<any>) => {
 			if (item === EMPTY) {
-				return <EmptyState icon="hashtag" message={"You have no feeds."}  />;
+				return <EmptyState icon="hashtag" message={"You have no feeds."} />;
 			} else if (item === ERROR_ITEM) {
 				return <ErrorMessage message={cleanError(error)} onPressTryAgain={refetch} />;
 			} else if (item === LOAD_MORE_ERROR_ITEM) {
@@ -165,7 +157,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	return (
 		<View style={style}>
 			<List
-								ref={scrollElRef}
+				ref={scrollElRef}
 				data={items}
 				keyExtractor={(item: any) => item._reactKey || item.uri}
 				renderItem={renderItem}

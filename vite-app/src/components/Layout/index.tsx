@@ -1,6 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { StyleSheet, type ViewStyle } from "react-native";
-import type { StyleProp } from "react-native";
+import { StyleSheet } from "react-native";
 import { KeyboardAwareScrollView, type KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
 import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
 
@@ -38,7 +37,7 @@ export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }
 
 export type ContentProps = Omit<AnimatedScrollViewProps, "style"> & {
 	style?: React.CSSProperties;
-	contentContainerStyle?: StyleProp<ViewStyle>;
+	contentContainerStyle?: React.CSSProperties;
 	ignoreTabletLayoutOffset?: boolean;
 };
 
@@ -99,7 +98,7 @@ const scrollViewStyles = StyleSheet.create({
 export type KeyboardAwareContentProps = Omit<KeyboardAwareScrollViewProps, "style"> & {
 	children: React.ReactNode;
 	style: React.CSSProperties;
-	contentContainerStyle?: StyleProp<ViewStyle>;
+	contentContainerStyle?: React.CSSProperties;
 };
 
 /**

@@ -1,12 +1,11 @@
 import type React from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
 export function GrowableAvatar({
 	children,
 	style,
 }: {
 	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
-	return <View style={style}>{children}</View>;
+	return <div style={style}>{children}</div>;
 }

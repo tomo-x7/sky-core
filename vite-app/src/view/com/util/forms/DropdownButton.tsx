@@ -4,24 +4,20 @@ import type React from "react";
 import { type PropsWithChildren, useMemo, useRef } from "react";
 import {
 	Dimensions,
-	type GestureResponderEvent,
 	type Insets,
-	type StyleProp,
 	StyleSheet,
 	TouchableOpacity,
 	TouchableWithoutFeedback,
-	View,
-	type ViewStyle,
 	useWindowDimensions,
 } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import RootSiblings from "react-native-root-siblings";
 import { FullWindowOverlay } from "#/components/FullWindowOverlay";
+import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { HITSLOP_10 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { colors } from "#/lib/styles";
-import { Text } from "#/components/Typography";
 import { Button, type ButtonType } from "./Button";
 
 const ESTIMATED_BTN_HEIGHT = 50;
@@ -137,7 +133,7 @@ export function DropdownButton({
 	}
 	return (
 		<div ref={ref2}>
-			<Button  type={type} onPress={onPress} style={style} label={label}>
+			<Button type={type} onPress={onPress} style={style} label={label}>
 				{children}
 			</Button>
 		</div>

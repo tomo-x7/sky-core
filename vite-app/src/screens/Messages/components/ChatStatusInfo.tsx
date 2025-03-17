@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { KnownFollowers } from "#/components/KnownFollowers";
@@ -27,7 +26,7 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.bg,
 				...a.p_lg,
@@ -36,7 +35,7 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 			}}
 		>
 			{otherUser && <KnownFollowers profile={otherUser} moderationOpts={moderationOpts} showIfEmpty />}
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -68,8 +67,8 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 					currentScreen="conversation"
 					hasMessages={false}
 				/>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.w_full,
 					...a.flex_row,
@@ -83,7 +82,7 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 					size="small"
 					currentScreen="conversation"
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

@@ -1,16 +1,7 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type JSX, memo } from "react";
-import {
-	ActivityIndicator,
-	AppState,
-	Dimensions,
-	type ListRenderItemInfo,
-	type StyleProp,
-	StyleSheet,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { ActivityIndicator, AppState, Dimensions, type ListRenderItemInfo, StyleSheet, View } from "react-native";
 
 import { useBreakpoints, useLayoutBreakpoints } from "#/alf";
 import { ProgressGuide, SuggestedFollows } from "#/components/FeedInterstitials";
@@ -158,7 +149,7 @@ let PostFeed = ({
 	feed: FeedDescriptor;
 	feedParams?: FeedParams;
 	ignoreFilterFor?: string;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	enabled?: boolean;
 	pollInterval?: number;
 	disablePoll?: boolean;

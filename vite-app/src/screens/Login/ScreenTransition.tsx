@@ -1,12 +1,11 @@
 import type React from "react";
-import type { StyleProp, ViewStyle } from "react-native";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
 
 export function ScreenTransition({
 	style,
 	children,
 }: {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	children: React.ReactNode;
 }) {
 	return (

@@ -1,7 +1,7 @@
 import type { ComAtprotoServerCreateAppPassword } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { View, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -25,7 +25,7 @@ export function AddAppPasswordDialog({
 }) {
 	const { height } = useWindowDimensions();
 	return (
-		<Dialog.Outer control={control} nativeOptions={{ minHeight: height }}>
+		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<CreateDialogInner passwords={passwords} />
 		</Dialog.Outer>
@@ -77,7 +77,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 
 	return (
 		<Dialog.ScrollableInner label={"Add app password"}>
-			<View>
+			<div>
 				<LayoutAnimationConfig skipEntering skipExiting>
 					{!data ? (
 						<Animated.View style={a.gap_lg} key={0}>
@@ -97,7 +97,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 							>
 								Please enter a unique name for this app password or use our randomly generated one.
 							</Text>
-							<View>
+							<div>
 								<TextInput.Root isInvalid={!!error}>
 									<Dialog.Input
 										label={"App Password"}
@@ -112,7 +112,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 										autoFocus
 									/>
 								</TextInput.Root>
-							</View>
+							</div>
 							{error instanceof DisplayableError && (
 								<Animated.View entering={FadeIn} exiting={FadeOut}>
 									<Admonition type="error">{error.message}</Admonition>
@@ -124,7 +124,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									type="checkbox"
 									label={"Allow access to your direct messages"}
 									value={privileged}
-									onChange={setPrivileged}
+									onChange={(v) => typeof v === "boolean" && setPrivileged(v)}
 									style={a.flex_1}
 								>
 									<Toggle.Checkbox />
@@ -211,7 +211,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 						</Animated.View>
 					)}
 				</LayoutAnimationConfig>
-			</View>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

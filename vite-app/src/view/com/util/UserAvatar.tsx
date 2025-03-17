@@ -2,7 +2,7 @@ import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
-import { Image, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { Image, Pressable, StyleSheet } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 import Svg, { Circle, Path, Rect } from "react-native-svg";
 
@@ -38,7 +38,7 @@ interface UserAvatarProps extends BaseUserAvatarProps {
 	moderation?: ModerationUI;
 	usePlainRNImage?: boolean;
 	onLoad?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }
 
 interface EditableUserAvatarProps extends BaseUserAvatarProps {
@@ -169,7 +169,7 @@ let UserAvatar = ({
 			return null;
 		}
 		return (
-			<View
+			<div
 				style={{
 					...styles.alertIconContainer,
 					...pal.view,
@@ -177,22 +177,20 @@ let UserAvatar = ({
 			>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon icon="exclamation-circle" style={styles.alertIcon} size={Math.floor(size / 3)} />
-			</View>
+			</div>
 		);
 	}, [moderation?.alert, size, pal]);
 
 	const containerStyle = useMemo(() => {
-		return [
-			{
-				width: size,
-				height: size,
-			},
-			style,
-		];
+		return {
+			width: size,
+			height: size,
+			...style,
+		};
 	}, [size, style]);
 
 	return avatar ? (
-		<View style={containerStyle}>
+		<div style={containerStyle}>
 			{usePlainRNImage ? (
 				<Image
 					accessibilityIgnoresInvertColors
@@ -218,12 +216,12 @@ let UserAvatar = ({
 			)}
 			<MediaInsetBorder style={{ borderRadius: aviStyle.borderRadius }} />
 			{alert}
-		</View>
+		</div>
 	) : (
-		<View style={containerStyle}>
+		<div style={containerStyle}>
 			<DefaultAvatar type={type} shape={finalShape} size={size} />
 			{alert}
-		</View>
+		</div>
 	);
 };
 UserAvatar = memo(UserAvatar);
@@ -319,14 +317,14 @@ let EditableUserAvatar = ({
 						) : (
 							<DefaultAvatar type={type} size={size} />
 						)}
-						<View
+						<div
 							style={{
 								...styles.editButtonContainer,
 								...pal.btn,
 							}}
 						>
 							<CameraFilled height={14} width={14} style={t.atoms.text} />
-						</View>
+						</div>
 					</Pressable>
 				)}
 			</Menu.Trigger>

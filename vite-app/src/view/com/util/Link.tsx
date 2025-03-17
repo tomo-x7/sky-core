@@ -1,17 +1,7 @@
 import { sanitizeUrl } from "@braintree/sanitize-url";
 import { StackActions, useLinkProps } from "@react-navigation/native";
-import React, { type ComponentProps, type JSX, memo, useMemo } from "react";
-import {
-	type GestureResponderEvent,
-	Platform,
-	Pressable,
-	type StyleProp,
-	type TouchableOpacity,
-	View,
-	type ViewStyle,
-} from "react-native";
-
-import { useTheme } from "#/alf";
+import React, { type JSX, memo, useMemo } from "react";
+import { Platform, Pressable } from "react-native";
 import { Text } from "#/components/Typography";
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { type DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
@@ -24,14 +14,14 @@ import { WebAuxClickWrapper } from "#/view/com/util/WebAuxClickWrapper";
 import { router } from "../../../routes";
 import { PressableWithHover } from "./PressableWithHover";
 
-type Event = React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent;
+type Event = React.MouseEvent<HTMLAnchorElement, MouseEvent>;
 
-interface Props extends ComponentProps<typeof TouchableOpacity> {
-	style?: StyleProp<ViewStyle>;
+interface Props {
+	style?: React.CSSProperties;
 	href?: string;
 	title?: string;
 	children?: React.ReactNode;
-	hoverStyle?: StyleProp<ViewStyle>;
+	hoverStyle?: React.CSSProperties;
 	noFeedback?: boolean;
 	asAnchor?: boolean;
 	dataSet?: Object | undefined;
@@ -49,22 +39,18 @@ export const Link = memo(function Link({
 	children,
 	noFeedback,
 	asAnchor,
-	accessible,
 	anchorNoUnderline,
 	navigationAction,
 	onBeforePress,
-	accessibilityActions,
-	onAccessibilityAction,
 	...props
 }: Props) {
-	const t = useTheme();
 	const { closeModal } = useModalControls();
 	const navigation = useNavigationDeduped();
 	const anchorHref = asAnchor ? sanitizeUrl(href) : undefined;
 	const openLink = useOpenLink();
 
 	const onPress = React.useCallback(
-		(e?: Event) => {
+		(e?: React.MouseEvent<HTMLAnchorElement>) => {
 			onBeforePress?.();
 			if (typeof href === "string") {
 				return onPressInner(closeModal, navigation, sanitizeUrl(href), navigationAction, openLink, e);
@@ -73,34 +59,18 @@ export const Link = memo(function Link({
 		[closeModal, navigation, navigationAction, href, openLink, onBeforePress],
 	);
 
-	const accessibilityActionsWithActivate = [...(accessibilityActions || []), { name: "activate", label: title }];
-
 	if (noFeedback) {
 		return (
 			<WebAuxClickWrapper>
-				<Pressable
-					onPress={onPress}
-					accessible={accessible}
-					accessibilityRole="link"
-					accessibilityActions={accessibilityActionsWithActivate}
-					onAccessibilityAction={(e) => {
-						if (e.nativeEvent.actionName === "activate") {
-							onPress();
-						} else {
-							onAccessibilityAction?.(e);
-						}
-					}}
+				<a
+					// biome-ignore lint/a11y/useValidAnchor: <explanation>
+					onClick={onPress}
 					{...props}
-					android_ripple={{
-						color: t.atoms.bg_contrast_25.backgroundColor,
-					}}
-					unstable_pressDelay={undefined}
 				>
-					{/* @ts-ignore web only -prf */}
-					<View style={style} href={anchorHref}>
+					<a style={style} href={anchorHref}>
 						{children ? children : <Text>{title || "link"}</Text>}
-					</View>
-				</Pressable>
+					</a>
+				</a>
 			</WebAuxClickWrapper>
 		);
 	}
@@ -110,10 +80,6 @@ export const Link = memo(function Link({
 		props.dataSet = props.dataSet || {};
 		// @ts-ignore web only -prf
 		props.dataSet.noUnderline = 1;
-	}
-
-	if (title && !props.accessibilityLabel) {
-		props.accessibilityLabel = title;
 	}
 
 	const Com = props.hoverStyle ? PressableWithHover : Pressable;

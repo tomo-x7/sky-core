@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useMemo, useState } from "react";
-import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
@@ -46,7 +46,7 @@ export function Post({
 	post: AppBskyFeedDefs.PostView;
 	showReplyLine?: boolean;
 	hideTopBorder?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const moderationOpts = useModerationOpts();
 	const record = useMemo<AppBskyFeedPost.Record | undefined>(
@@ -102,7 +102,7 @@ function PostInner({
 	moderation: ModerationDecision;
 	showReplyLine?: boolean;
 	hideTopBorder?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const queryClient = useQueryClient();
 	const pal = usePalette("default");
@@ -159,17 +159,17 @@ function PostInner({
 			}}
 		>
 			<SubtleWebHover hover={hover} />
-			{showReplyLine && <View style={styles.replyLine} />}
-			<View style={styles.layout}>
-				<View style={styles.layoutAvi}>
+			{showReplyLine && <div style={styles.replyLine} />}
+			<div style={styles.layout}>
+				<div style={styles.layoutAvi}>
 					<PreviewableUserAvatar
 						size={42}
 						profile={post.author}
 						moderation={moderation.ui("avatar")}
 						type={post.author.associated?.labeler ? "labeler" : "user"}
 					/>
-				</View>
-				<View style={styles.layoutContent}>
+				</div>
+				<div style={styles.layoutContent}>
 					<PostMeta
 						author={post.author}
 						moderation={moderation}
@@ -177,7 +177,7 @@ function PostInner({
 						postHref={itemHref}
 					/>
 					{replyAuthorDid !== "" && (
-						<View
+						<div
 							style={{
 								...s.flexRow,
 								...s.mb2,
@@ -218,7 +218,7 @@ function PostInner({
 									</>
 								)}
 							</Text>
-						</View>
+						</div>
 					)}
 					<LabelsOnMyPost post={post} />
 					<ContentHider
@@ -228,7 +228,7 @@ function PostInner({
 					>
 						<PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} />
 						{richText.text ? (
-							<View style={styles.postTextContainer}>
+							<div style={styles.postTextContainer}>
 								<RichText
 									enableTags
 									value={richText}
@@ -240,7 +240,7 @@ function PostInner({
 									authorHandle={post.author.handle}
 									shouldProxyLinks={true}
 								/>
-							</View>
+							</div>
 						) : undefined}
 						{limitLines ? (
 							<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
@@ -260,8 +260,8 @@ function PostInner({
 						onPressReply={onPressReply}
 						logContext="Post"
 					/>
-				</View>
-			</View>
+				</div>
+			</div>
 		</Link>
 	);
 }

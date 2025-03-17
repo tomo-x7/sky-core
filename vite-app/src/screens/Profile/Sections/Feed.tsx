@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { View, findNodeHandle } from "react-native";
+import { findNodeHandle } from "react-native";
+import { Text } from "#/components/Typography";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
@@ -10,7 +11,6 @@ import { PostFeed } from "#/view/com/posts/PostFeed";
 import { EmptyState } from "#/view/com/util/EmptyState";
 import type { ListRef } from "#/view/com/util/List";
 import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
-import { Text } from "#/view/com/util/text/Text";
 import type { SectionRef } from "./types";
 
 interface FeedSectionProps {
@@ -58,7 +58,7 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 	}, [isFocused, scrollElRef, setScrollViewTag]);
 
 	return (
-		<View>
+		<div>
 			<PostFeed
 				enabled={isFocused}
 				feed={feed}
@@ -75,7 +75,7 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 			{(isScrolledDown || hasNew) && (
 				<LoadLatestBtn onPress={onScrollToTop} label={"Load new posts"} showIndicator={hasNew} />
 			)}
-		</View>
+		</div>
 	);
 });
 
@@ -83,7 +83,7 @@ function ProfileEndOfFeed() {
 	const pal = usePalette("default");
 
 	return (
-		<View
+		<div
 			style={{
 				...pal.border,
 				...{ paddingTop: 32, paddingBottom: 32, borderTopWidth: 1 },
@@ -98,6 +98,6 @@ function ProfileEndOfFeed() {
 			>
 				End of feed
 			</Text>
-		</View>
+		</div>
 	);
 }

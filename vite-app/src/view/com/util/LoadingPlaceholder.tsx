@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { type DimensionValue, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { atoms as a, useTheme as useTheme_NEW } from "#/alf";
 import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
@@ -17,21 +17,19 @@ export function LoadingPlaceholder({
 	height,
 	style,
 }: {
-	width: DimensionValue;
-	height: DimensionValue | undefined;
-	style?: StyleProp<ViewStyle>;
+	width: React.CSSProperties["width"];
+	height: React.CSSProperties["height"];
+	style?: React.CSSProperties;
 }) {
 	const theme = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...styles.loadingPlaceholder,
 
-				...{
-					width,
-					height,
-					backgroundColor: theme.palette.default.backgroundLight,
-				},
+				width,
+				height,
+				backgroundColor: theme.palette.default.backgroundLight,
 
 				...style,
 			}}
@@ -42,12 +40,12 @@ export function LoadingPlaceholder({
 export function PostLoadingPlaceholder({
 	style,
 }: {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const t = useTheme_NEW();
 	const pal = usePalette("default");
 	return (
-		<View
+		<div
 			style={{
 				...styles.post,
 				...pal.view,
@@ -66,19 +64,19 @@ export function PostLoadingPlaceholder({
 					},
 				}}
 			/>
-			<View style={s.flex1}>
+			<div style={s.flex1}>
 				<LoadingPlaceholder width={100} height={6} style={{ marginBottom: 10 }} />
 				<LoadingPlaceholder width="95%" height={6} style={{ marginBottom: 8 }} />
 				<LoadingPlaceholder width="95%" height={6} style={{ marginBottom: 8 }} />
 				<LoadingPlaceholder width="80%" height={6} style={{ marginBottom: 11 }} />
-				<View style={styles.postCtrls}>
-					<View
+				<div style={styles.postCtrls}>
+					<div
 						style={{
 							...styles.postCtrl,
 							...{ marginLeft: -6 },
 						}}
 					>
-						<View style={styles.postBtn}>
+						<div style={styles.postBtn}>
 							<Bubble
 								style={{
 									...{
@@ -89,10 +87,10 @@ export function PostLoadingPlaceholder({
 								}}
 								width={18}
 							/>
-						</View>
-					</View>
-					<View style={styles.postCtrl}>
-						<View style={styles.postBtn}>
+						</div>
+					</div>
+					<div style={styles.postCtrl}>
+						<div style={styles.postBtn}>
 							<Repost
 								style={{
 									...{
@@ -103,10 +101,10 @@ export function PostLoadingPlaceholder({
 								}}
 								width={18}
 							/>
-						</View>
-					</View>
-					<View style={styles.postCtrl}>
-						<View style={styles.postBtn}>
+						</div>
+					</div>
+					<div style={styles.postCtrl}>
+						<div style={styles.postBtn}>
 							<HeartIconOutline
 								style={{
 									...{
@@ -117,25 +115,25 @@ export function PostLoadingPlaceholder({
 								}}
 								width={18}
 							/>
-						</View>
-					</View>
-					<View style={styles.postCtrl}>
-						<View
+						</div>
+					</div>
+					<div style={styles.postCtrl}>
+						<div
 							style={{
 								...styles.postBtn,
 								...{ minHeight: 30 },
 							}}
 						/>
-					</View>
-				</View>
-			</View>
-		</View>
+					</div>
+				</div>
+			</div>
+		</div>
 	);
 }
 
 export function PostFeedLoadingPlaceholder() {
 	return (
-		<View>
+		<div>
 			<PostLoadingPlaceholder />
 			<PostLoadingPlaceholder />
 			<PostLoadingPlaceholder />
@@ -144,25 +142,25 @@ export function PostFeedLoadingPlaceholder() {
 			<PostLoadingPlaceholder />
 			<PostLoadingPlaceholder />
 			<PostLoadingPlaceholder />
-		</View>
+		</div>
 	);
 }
 
 export function NotificationLoadingPlaceholder({
 	style,
 }: {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const pal = usePalette("default");
 	return (
-		<View
+		<div
 			style={{
 				...styles.notification,
 				...pal.view,
 				...style,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...{ width: 60 },
 					...a.align_end,
@@ -171,20 +169,20 @@ export function NotificationLoadingPlaceholder({
 				}}
 			>
 				<HeartIconFilled size="xl" style={{ color: pal.colors.backgroundLight }} />
-			</View>
-			<View style={{ flex: 1 }}>
-				<View
+			</div>
+			<div style={{ flex: 1 }}>
+				<div
 					style={{
 						...a.flex_row,
 						...s.mb10,
 					}}
 				>
 					<LoadingPlaceholder width={35} height={35} style={styles.smallAvatar} />
-				</View>
+				</div>
 				<LoadingPlaceholder width="90%" height={6} style={s.mb5} />
 				<LoadingPlaceholder width="70%" height={6} style={s.mb5} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -209,11 +207,11 @@ export function NotificationFeedLoadingPlaceholder() {
 export function ProfileCardLoadingPlaceholder({
 	style,
 }: {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const pal = usePalette("default");
 	return (
-		<View
+		<div
 			style={{
 				...styles.profileCard,
 				...pal.view,
@@ -221,12 +219,12 @@ export function ProfileCardLoadingPlaceholder({
 			}}
 		>
 			<LoadingPlaceholder width={40} height={40} style={styles.profileCardAvi} />
-			<View>
+			<div>
 				<LoadingPlaceholder width={140} height={8} style={s.mb5} />
 				<LoadingPlaceholder width={120} height={8} style={s.mb10} />
 				<LoadingPlaceholder width={220} height={8} style={s.mb5} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -253,13 +251,13 @@ export function FeedLoadingPlaceholder({
 	showLowerPlaceholder = true,
 	showTopBorder = true,
 }: {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	showTopBorder?: boolean;
 	showLowerPlaceholder?: boolean;
 }) {
 	const pal = usePalette("default");
 	return (
-		<View
+		<div
 			style={{
 				...{
 					paddingHorizontal: 12,
@@ -271,7 +269,7 @@ export function FeedLoadingPlaceholder({
 				...style,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...pal.view,
 					...{ flexDirection: "row" },
@@ -285,7 +283,7 @@ export function FeedLoadingPlaceholder({
 						...{ borderRadius: 6 },
 					}}
 				/>
-				<View style={s.flex1}>
+				<div style={s.flex1}>
 					<LoadingPlaceholder
 						width={100}
 						height={8}
@@ -295,15 +293,15 @@ export function FeedLoadingPlaceholder({
 						}}
 					/>
 					<LoadingPlaceholder width={120} height={8} />
-				</View>
-			</View>
+				</div>
+			</div>
 			{showLowerPlaceholder && (
-				<View style={{ paddingHorizontal: 5, marginTop: 10 }}>
-					<LoadingPlaceholder width={260} height={8} style={{ marginVertical: 12 }} />
+				<div style={{ padding: "10px 5px" }}>
+					<LoadingPlaceholder width={260} height={8} style={{ marginTop: 12, marginBottom: 12 }} />
 					<LoadingPlaceholder width={120} height={8} />
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -328,12 +326,12 @@ export function FeedFeedLoadingPlaceholder() {
 export function ChatListItemLoadingPlaceholder({
 	style,
 }: {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const t = useTheme_NEW();
 	const random = useMemo(() => Math.random(), []);
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_md,
@@ -344,12 +342,12 @@ export function ChatListItemLoadingPlaceholder({
 			}}
 		>
 			<LoadingPlaceholder width={52} height={52} style={a.rounded_full} />
-			<View>
+			<div>
 				<LoadingPlaceholder width={140} height={12} style={a.mt_xs} />
 				<LoadingPlaceholder width={120} height={8} style={a.mt_sm} />
 				<LoadingPlaceholder width={80 + random * 100} height={8} style={a.mt_sm} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 

@@ -2,9 +2,10 @@ import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from 
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 
 import { atoms as a } from "#/alf";
+import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -17,7 +18,6 @@ import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { precacheProfile } from "#/state/queries/profile";
 import { Link } from "#/view/com/util/Link";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { Text } from "#/view/com/util/text/Text";
 
 let SearchLinkCard = ({
 	label,
@@ -28,22 +28,22 @@ let SearchLinkCard = ({
 	label: string;
 	to?: string;
 	onPress?: () => void;
-	style?: ViewStyle;
+	style?: React.CSSProperties;
 }): React.ReactNode => {
 	const pal = usePalette("default");
 
 	const inner = (
-		<View
+		<div
 			style={{
 				...pal.border,
-				...{ paddingVertical: 16, paddingHorizontal: 12 },
+				...{ padding: "16px 12px" },
 				...style,
 			}}
 		>
 			<Text type="md" style={pal.text}>
 				{label}
 			</Text>
-		</View>
+		</div>
 	);
 
 	if (onPress) {
@@ -56,7 +56,7 @@ let SearchLinkCard = ({
 
 	return (
 		<Link href={to} asAnchor anchorNoUnderline>
-			<View
+			<div
 				style={{
 					...pal.border,
 					...{ paddingVertical: 16, paddingHorizontal: 12 },
@@ -66,7 +66,7 @@ let SearchLinkCard = ({
 				<Text type="md" style={pal.text}>
 					{label}
 				</Text>
-			</View>
+			</div>
 		</Link>
 	);
 };
@@ -92,7 +92,7 @@ let SearchProfileCard = ({
 
 	return (
 		<Link href={makeProfileLink(profile)} title={profile.handle} asAnchor anchorNoUnderline onBeforePress={onPress}>
-			<View
+			<div
 				style={{
 					...pal.border,
 
@@ -111,7 +111,7 @@ let SearchProfileCard = ({
 					moderation={moderation.ui("avatar")}
 					type={profile.associated?.labeler ? "labeler" : "user"}
 				/>
-				<View style={{ flex: 1 }}>
+				<div style={{ flex: 1 }}>
 					<Text
 						emoji
 						type="lg"
@@ -131,8 +131,8 @@ let SearchProfileCard = ({
 					<Text type="md" style={pal.textLight} numberOfLines={1}>
 						{sanitizeHandle(profile.handle, "@")}
 					</Text>
-				</View>
-			</View>
+				</div>
+			</div>
 		</Link>
 	);
 };
@@ -170,7 +170,7 @@ export function DesktopSearch() {
 	}, []);
 
 	return (
-		<View
+		<div
 			style={{
 				...styles.container,
 				...pal.view,
@@ -183,7 +183,7 @@ export function DesktopSearch() {
 				onSubmitEditing={onSubmit}
 			/>
 			{query !== "" && isActive && moderationOpts && (
-				<View
+				<div
 					style={{
 						...pal.view,
 						...pal.borderDark,
@@ -191,9 +191,9 @@ export function DesktopSearch() {
 					}}
 				>
 					{isFetching && !autocompleteData?.length ? (
-						<View style={{ padding: 8 }}>
+						<div style={{ padding: 8 }}>
 							<ActivityIndicator />
-						</View>
+						</div>
 					) : (
 						<>
 							<SearchLinkCard
@@ -211,9 +211,9 @@ export function DesktopSearch() {
 							))}
 						</>
 					)}
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 }
 

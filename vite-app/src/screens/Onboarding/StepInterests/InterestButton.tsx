@@ -1,5 +1,4 @@
 import React from "react";
-import { type TextStyle, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -13,29 +12,20 @@ export function InterestButton({ interest }: { interest: string }) {
 	const ctx = Toggle.useItemContext();
 
 	const styles = React.useMemo(() => {
-		const hovered: ViewStyle[] = [
-			{
-				backgroundColor: t.name === "light" ? t.palette.contrast_200 : t.palette.contrast_50,
-			},
-		];
-		const focused: ViewStyle[] = [];
-		const pressed: ViewStyle[] = [];
-		const selected: ViewStyle[] = [
-			{
-				backgroundColor: t.palette.contrast_900,
-			},
-		];
-		const selectedHover: ViewStyle[] = [
-			{
-				backgroundColor: t.palette.contrast_800,
-			},
-		];
-		const textSelected: TextStyle[] = [
-			{
-				color: t.palette.contrast_100,
-			},
-		];
-
+		const hovered: React.CSSProperties = {
+			backgroundColor: t.name === "light" ? t.palette.contrast_200 : t.palette.contrast_50,
+		};
+		const focused: React.CSSProperties = {};
+		const pressed: React.CSSProperties = {};
+		const selected: React.CSSProperties = {
+			backgroundColor: t.palette.contrast_900,
+		};
+		const selectedHover: React.CSSProperties = {
+			backgroundColor: t.palette.contrast_800,
+		};
+		const textSelected: React.CSSProperties = {
+			color: t.palette.contrast_100,
+		};
 		return {
 			hovered,
 			focused,
@@ -47,7 +37,7 @@ export function InterestButton({ interest }: { interest: string }) {
 	}, [t]);
 
 	return (
-		<View
+		<div
 			style={{
 				...{
 					backgroundColor: t.palette.contrast_100,
@@ -72,6 +62,6 @@ export function InterestButton({ interest }: { interest: string }) {
 			>
 				{interestsDisplayNames[interest] || capitalize(interest)}
 			</Text>
-		</View>
+		</div>
 	);
 }

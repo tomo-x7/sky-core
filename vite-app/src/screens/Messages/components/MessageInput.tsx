@@ -1,7 +1,7 @@
 import Graphemer from "graphemer";
 import React from "react";
 import { flushSync } from "react-dom";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import TextareaAutosize from "react-textarea-autosize";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -116,9 +116,9 @@ export function MessageInput({
 	useExtractEmbedFromFacets(message, setEmbed);
 
 	return (
-		<View style={a.p_sm}>
+		<div style={a.p_sm}>
 			{children}
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...t.atoms.bg_contrast_25,
@@ -135,20 +135,20 @@ export function MessageInput({
 					...(isHovered && inputStyles.chromeHover),
 					...(isFocused && inputStyles.chromeFocus),
 				}}
-				// @ts-expect-error web only
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
 			>
 				<Button
 					onPress={(e) => {
-						e.currentTarget.measure((_fx, _fy, _width, _height, px, py) => {
-							openEmojiPicker?.({
-								top: py,
-								left: px,
-								right: px,
-								bottom: py,
-								nextFocusRef: textAreaRef as unknown as React.MutableRefObject<HTMLElement>,
-							});
+						const rect = e.currentTarget.getBoundingClientRect();
+						const px = rect.left + window.scrollX;
+						const py = rect.top + window.scrollY;
+						openEmojiPicker?.({
+							top: py,
+							left: px,
+							right: px,
+							bottom: py,
+							nextFocusRef: textAreaRef,
 						});
 					}}
 					style={{
@@ -166,7 +166,7 @@ export function MessageInput({
 					label={"Open emoji picker"}
 				>
 					{(state) => (
-						<View
+						<div
 							style={{
 								...a.absolute,
 								...a.inset_0,
@@ -182,7 +182,7 @@ export function MessageInput({
 							}}
 						>
 							<EmojiSmile size="lg" />
-						</View>
+						</div>
 					)}
 				</Button>
 				<TextareaAutosize
@@ -244,7 +244,7 @@ export function MessageInput({
 						}}
 					/>
 				</Pressable>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

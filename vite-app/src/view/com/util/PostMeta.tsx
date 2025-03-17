@@ -2,7 +2,6 @@ import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import type React from "react";
 import { memo, useCallback } from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { WebOnlyInlineLinkText } from "#/components/Link";
@@ -26,7 +25,7 @@ interface PostMetaOpts {
 	showAvatar?: boolean;
 	avatarSize?: number;
 	onOpenAuthor?: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }
 
 let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
@@ -48,7 +47,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 	const timestampLabel = niceDate(opts.timestamp);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.flex_row,
@@ -60,7 +59,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 			}}
 		>
 			{opts.showAvatar && (
-				<View
+				<div
 					style={{
 						...a.self_center,
 						...a.mr_2xs,
@@ -72,7 +71,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						moderation={opts.moderation?.ui("avatar")}
 						type={opts.author.associated?.labeler ? "labeler" : "user"}
 					/>
-				</View>
+				</div>
 			)}
 			<ProfileHoverCard inline did={opts.author.did}>
 				<Text numberOfLines={1} style={a.flex_shrink}>
@@ -125,7 +124,6 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						...a.text_md,
 						...t.atoms.text_contrast_medium,
 					}}
-					accessible={false}
 				>
 					&middot;
 				</Text>
@@ -152,7 +150,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 					</WebOnlyInlineLinkText>
 				)}
 			</TimeElapsed>
-		</View>
+		</div>
 	);
 };
 PostMeta = memo(PostMeta);

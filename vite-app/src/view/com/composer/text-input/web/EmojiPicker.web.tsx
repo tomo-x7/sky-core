@@ -2,7 +2,7 @@ import Picker from "@emoji-mart/react";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React from "react";
-import { Pressable, View, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 
 import { atoms as a, flatten } from "#/alf";
 import { Portal } from "#/components/Portal";
@@ -29,7 +29,7 @@ export interface EmojiPickerPosition {
 	left: number;
 	right: number;
 	bottom: number;
-	nextFocusRef: React.MutableRefObject<HTMLElement> | null;
+	nextFocusRef: React.RefObject<HTMLElement | null> | null;
 }
 
 export interface EmojiPickerState {
@@ -128,18 +128,16 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 					}
 				}}
 			>
-				<Pressable
-					accessible
-					accessibilityLabel={"Close emoji picker"}
-					accessibilityHint={"Closes the emoji picker"}
-					onPress={close}
+				<button
+					type="button"
+					onClick={close}
 					style={{
 						...a.fixed,
 						...a.inset_0,
 					}}
 				/>
 
-				<View
+				<div
 					style={flatten([
 						a.fixed,
 						a.w_full,
@@ -153,7 +151,7 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 						},
 					])}
 				>
-					<View
+					<div
 						style={{
 							...{ position: "absolute" },
 							...position,
@@ -168,14 +166,12 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 								autoFocus={true}
 							/>
 						</DismissableLayer>
-					</View>
-				</View>
+					</div>
+				</div>
 
-				<Pressable
-					accessible
-					accessibilityLabel={"Close emoji picker"}
-					accessibilityHint={"Closes the emoji picker"}
-					onPress={close}
+				<button
+					type="button"
+					onClick={close}
 					style={{
 						...a.fixed,
 						...a.inset_0,

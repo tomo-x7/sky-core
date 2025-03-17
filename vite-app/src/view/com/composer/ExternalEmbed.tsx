@@ -1,5 +1,4 @@
 import React from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
@@ -32,22 +31,22 @@ export const ExternalEmbedGif = ({
 		[data],
 	);
 
-	const loadingStyle: ViewStyle = {
+	const loadingStyle: React.CSSProperties = {
 		aspectRatio: gif.media_formats.gif.dims[0] / gif.media_formats.gif.dims[1],
 		width: "100%",
 	};
 
 	return (
-		<View
+		<div
 			style={{
 				...a.overflow_hidden,
 				...t.atoms.border_contrast_medium,
 			}}
 		>
 			{linkInfo ? (
-				<View style={{ pointerEvents: "auto" }}>
+				<div style={{ pointerEvents: "auto" }}>
 					<ExternalLinkEmbed link={linkInfo} hideAlt />
-				</View>
+				</div>
 			) : error ? (
 				<Container
 					style={{
@@ -69,7 +68,7 @@ export const ExternalEmbedGif = ({
 				</Container>
 			)}
 			<ExternalEmbedRemoveBtn onRemove={onRemove} />
-		</View>
+		</div>
 	);
 };
 
@@ -114,7 +113,7 @@ export const ExternalEmbedLink = ({
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...a.mb_xl,
 				...a.overflow_hidden,
@@ -122,7 +121,7 @@ export const ExternalEmbedLink = ({
 			}}
 		>
 			{linkComponent ? (
-				<View style={{ pointerEvents: "none" }}>{linkComponent}</View>
+				<div style={{ pointerEvents: "none" }}>{linkComponent}</div>
 			) : error ? (
 				<Container
 					style={{
@@ -144,7 +143,7 @@ export const ExternalEmbedLink = ({
 				</Container>
 			)}
 			<ExternalEmbedRemoveBtn onRemove={onRemove} />
-		</View>
+		</div>
 	);
 };
 
@@ -152,12 +151,12 @@ function Container({
 	style,
 	children,
 }: {
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	children: React.ReactNode;
 }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.rounded_sm,
 				...a.border,
@@ -170,6 +169,6 @@ function Container({
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }

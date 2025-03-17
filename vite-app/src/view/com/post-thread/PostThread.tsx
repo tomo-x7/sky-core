@@ -1,6 +1,6 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
 import React, { memo, useRef, useState } from "react";
-import { StyleSheet, View, useWindowDimensions } from "react-native";
+import { StyleSheet, useWindowDimensions } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -17,6 +17,7 @@ import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransfor
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
+import { useOnLayout } from "#/lib/onLayout";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -86,7 +87,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 	const initialNumToRender = useInitialNumToRender();
 	const { height: windowHeight } = useWindowDimensions();
 	const [hiddenRepliesState, setHiddenRepliesState] = React.useState(HiddenRepliesState.Hide);
-	const headerRef = React.useRef<View | null>(null);
+	const headerRef = React.useRef<HTMLDivElement | null>(null);
 
 	const { data: preferences } = usePreferencesQuery();
 	const {
@@ -152,10 +153,9 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 
 	// Values used for proper rendering of parents
 	const ref = useRef<ListMethods>(null);
-	const highlightedPostRef = useRef<View | null>(null);
+	const highlightedPostRef = useRef<HTMLDivElement | null>(null);
 	const [maxParents, setMaxParents] = React.useState(Number.POSITIVE_INFINITY);
 	const [maxReplies, setMaxReplies] = React.useState(50);
-
 	useSetTitle(
 		rootPost && !isNoPwi
 			? `${sanitizeDisplayName(
@@ -169,6 +169,8 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 	// We need to delay showing them so that we can use maintainVisibleContentPosition to keep the main post on screen.
 	// On the web this is not necessary because we can synchronously adjust the scroll in onContentSizeChange instead.
 	const [deferParents, setDeferParents] = React.useState(false);
+
+	useOnLayout(deferParents ? () => setDeferParents(false) : undefined, highlightedPostRef);
 
 	const currentDid = currentAccount?.did;
 	const threadModerationCache = React.useMemo(() => {
@@ -371,7 +373,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 
 	const renderItem = ({ item, index }: { item: RowItem; index: number }) => {
 		if (item === REPLY_PROMPT && hasSession) {
-			return <View>{!isMobile && <PostThreadComposePrompt onPressCompose={onPressReply} />}</View>;
+			return <div>{!isMobile && <PostThreadComposePrompt onPressCompose={onPressReply} />}</div>;
 		} else if (item === SHOW_HIDDEN_REPLIES || item === SHOW_MUTED_REPLIES) {
 			return (
 				<PostThreadShowHiddenReplies
@@ -388,7 +390,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 			);
 		} else if (isThreadNotFound(item)) {
 			return (
-				<View
+				<div
 					style={{
 						...a.p_lg,
 						...(index !== 0 && a.border_t),
@@ -405,11 +407,11 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 					>
 						Deleted post.
 					</Text>
-				</View>
+				</div>
 			);
 		} else if (isThreadBlocked(item)) {
 			return (
-				<View
+				<div
 					style={{
 						...a.p_lg,
 						...(index !== 0 && a.border_t),
@@ -426,7 +428,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 					>
 						Blocked post.
 					</Text>
-				</View>
+				</div>
 			);
 		} else if (isThreadPost(item)) {
 			const prev = isThreadPost(posts[index - 1]) ? (posts[index - 1] as ThreadPost) : undefined;
@@ -440,10 +442,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 			}
 
 			return (
-				<View
-					ref={item.ctx.isHighlightedPost ? highlightedPostRef : undefined}
-					onLayout={deferParents ? () => setDeferParents(false) : undefined}
-				>
+				<div ref={item.ctx.isHighlightedPost ? highlightedPostRef : undefined}>
 					<PostThreadItem
 						post={item.post}
 						record={item.record}
@@ -464,7 +463,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 						onPostReply={onPostReply}
 						hideTopBorder={index === 0 && !item.ctx.isParentLoading}
 					/>
-				</View>
+				</div>
 			);
 		}
 		return null;

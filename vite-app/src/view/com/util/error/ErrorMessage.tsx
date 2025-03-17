@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type StyleProp, StyleSheet, TouchableOpacity, View, type ViewStyle } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
-import { Text } from "../text/Text";
 
 export function ErrorMessage({
 	message,
@@ -14,21 +14,21 @@ export function ErrorMessage({
 }: {
 	message: string;
 	numberOfLines?: number;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	onPressTryAgain?: () => void;
 }) {
 	const theme = useTheme();
 	const pal = usePalette("error");
 	return (
 		<Layout.Center>
-			<View
+			<div
 				style={{
 					...styles.outer,
 					...pal.view,
 					...style,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...styles.errorIcon,
 						...{ backgroundColor: theme.palette.error.icon },
@@ -36,7 +36,7 @@ export function ErrorMessage({
 				>
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="exclamation" style={pal.text} size={16} />
-				</View>
+				</div>
 				<Text
 					type="sm-medium"
 					style={{
@@ -59,7 +59,7 @@ export function ErrorMessage({
 						<FontAwesomeIcon icon="arrows-rotate" style={{ color: theme.palette.error.icon }} size={18} />
 					</TouchableOpacity>
 				)}
-			</View>
+			</div>
 		</Layout.Center>
 	);
 }

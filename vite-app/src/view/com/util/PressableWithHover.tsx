@@ -1,12 +1,12 @@
 import { type PropsWithChildren, forwardRef } from "react";
-import { Pressable, type PressableProps, type StyleProp, type ViewStyle } from "react-native";
+import { Pressable, type PressableProps } from "react-native";
 import type { View } from "react-native";
 
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { addStyle } from "#/lib/styles";
 
 interface PressableWithHover extends PressableProps {
-	hoverStyle: StyleProp<ViewStyle>;
+	hoverStyle: React.CSSProperties;
 }
 
 export const PressableWithHover = forwardRef<View, PropsWithChildren<PressableWithHover>>(

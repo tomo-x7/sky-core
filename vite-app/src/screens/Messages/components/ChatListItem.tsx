@@ -1,7 +1,6 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
-import { type GestureResponderEvent, View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import * as tokens from "#/alf/tokens";
@@ -174,7 +173,7 @@ function ChatListItemReady({
 	}, []);
 
 	const onPress = useCallback(
-		(e: GestureResponderEvent) => {
+		(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
 			precacheProfile(queryClient, profile);
 			precacheConvoQuery(queryClient, convo);
 			if (isDeletedAccount) {
@@ -224,8 +223,7 @@ function ChatListItemReady({
 
 	return (
 		<GestureActionView actions={actions}>
-			<View
-				// @ts-expect-error web only
+			<div
 				onMouseEnter={onMouseEnter}
 				onMouseLeave={onMouseLeave}
 				onFocus={onFocus}
@@ -235,7 +233,7 @@ function ChatListItemReady({
 					...t.atoms.bg,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.z_10,
 						...a.absolute,
@@ -243,7 +241,7 @@ function ChatListItemReady({
 					}}
 				>
 					<PreviewableUserAvatar profile={profile} size={52} moderation={moderation.ui("avatar")} />
-				</View>
+				</div>
 
 				<Link
 					to={`/messages/${convo.id}`}
@@ -259,7 +257,7 @@ function ChatListItemReady({
 					onAccessibilityAction={onLongPress}
 				>
 					{({ hovered, pressed, focused }) => (
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...(isDeletedAccount ? a.align_center : a.align_start),
@@ -271,16 +269,16 @@ function ChatListItemReady({
 							}}
 						>
 							{/* Avatar goes here */}
-							<View style={{ width: 52, height: 52 }} />
+							<div style={{ width: 52, height: 52 }} />
 
-							<View
+							<div
 								style={{
 									...a.flex_1,
 									...a.justify_center,
 									...{ paddingRight: 45 },
 								}}
 							>
-								<View
+								<div
 									style={{
 										...a.w_full,
 										...a.flex_row,
@@ -292,7 +290,7 @@ function ChatListItemReady({
 										numberOfLines={1}
 										style={{
 											...{ maxWidth: "85%" },
-											...[a.leading_normal],
+											...a.leading_normal,
 										}}
 									>
 										<Text
@@ -344,7 +342,7 @@ function ChatListItemReady({
 											&middot; <BellStroke size="xs" style={t.atoms.text_contrast_medium} />
 										</Text>
 									)}
-								</View>
+								</div>
 
 								{!isDeletedAccount && (
 									<Text
@@ -375,10 +373,10 @@ function ChatListItemReady({
 								<PostAlerts modui={moderation.ui("contentList")} size="lg" style={a.pt_xs} />
 
 								{children}
-							</View>
+							</div>
 
 							{hasUnread && (
-								<View
+								<div
 									style={{
 										...a.absolute,
 										...a.rounded_full,
@@ -395,7 +393,7 @@ function ChatListItemReady({
 									}}
 								/>
 							)}
-						</View>
+						</div>
 					)}
 				</Link>
 
@@ -423,7 +421,7 @@ function ChatListItemReady({
 					/>
 				)}
 				<LeaveConvoPrompt control={leaveConvoControl} convoId={convo.id} currentScreen="list" />
-			</View>
+			</div>
 		</GestureActionView>
 	);
 }
