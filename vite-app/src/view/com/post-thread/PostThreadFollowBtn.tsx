@@ -96,7 +96,6 @@ function PostThreadFollowBtnLoaded({
 
 	return (
 		<Button
-			testID="followBtn"
 			label={`Follow ${profile.handle}`}
 			onPress={onPress}
 			size="small"

@@ -51,20 +51,13 @@ export function ModerationModlistsScreen(props: Props) {
 	}, [needsEmailVerification, control, openModal, navigation]);
 
 	return (
-		<Layout.Screen testID="moderationModlistsScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align="left">
 					<Layout.Header.TitleText>Moderation Lists</Layout.Header.TitleText>
 				</Layout.Header.Content>
-				<Button
-					label={"New list"}
-					testID="newModListBtn"
-					color="secondary"
-					variant="solid"
-					size="small"
-					onPress={onPressNewList}
-				>
+				<Button label={"New list"} color="secondary" variant="solid" size="small" onPress={onPressNewList}>
 					<ButtonIcon icon={PlusIcon} />
 					<ButtonText>New</ButtonText>
 				</Button>

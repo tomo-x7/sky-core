@@ -1,5 +1,4 @@
 import { moderateProfile } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -39,7 +38,7 @@ export function AvatarStack({
 	return (
 		<div style={{ ...a.flex_row, ...a.align_center, ...a.relative, width: size + (items.length - 1) * halfSize }}>
 			{items.map((item, i) => (
-				<View
+				<div
 					key={item.key}
 					style={{
 						...t.atoms.bg_contrast_25,
@@ -64,7 +63,7 @@ export function AvatarStack({
 							moderation={item.moderation.ui("avatar")}
 						/>
 					)}
-				</View>
+				</div>
 			))}
 		</div>
 	);

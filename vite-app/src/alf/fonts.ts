@@ -1,4 +1,3 @@
-import type { TextStyle } from "react-native";
 import { type Device, device } from "../storage";
 
 const WEB_FONT_FAMILIES = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"`;
@@ -35,7 +34,7 @@ export function setFontFamily(fontFamily: Device["fontFamily"]) {
 /*
  * Unused fonts are commented out, but the files are there if we need them.
  */
-export function applyFonts(style: TextStyle, fontFamily: "system" | "theme") {
+export function applyFonts(style: React.CSSProperties, fontFamily: "system" | "theme") {
 	if (fontFamily === "theme") {
 		style.fontFamily = "InterVariable";
 
@@ -50,7 +49,7 @@ export function applyFonts(style: TextStyle, fontFamily: "system" | "theme") {
 		 * Disable contextual alternates in Inter
 		 * {@link https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant}
 		 */
-		style.fontVariant = (style.fontVariant || []).concat("no-contextual");
+		style.fontVariant = (style.fontVariant?.split(" ") || []).concat("no-contextual").join(" ");
 	} else {
 		// fallback families only supported on web
 		style.fontFamily = style.fontFamily || WEB_FONT_FAMILIES;

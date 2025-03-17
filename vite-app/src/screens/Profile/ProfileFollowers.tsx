@@ -26,7 +26,7 @@ export const ProfileFollowersScreen = ({ route }: Props) => {
 	);
 
 	return (
-		<Layout.Screen testID="profileFollowersScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>

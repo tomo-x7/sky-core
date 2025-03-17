@@ -7,7 +7,7 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { Keyboard, View } from "react-native";
+import { Keyboard } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -65,7 +65,7 @@ function WizardListCard({
 			}}
 		>
 			<UserAvatar size={45} avatar={avatar} moderation={moderationUi} type={type} />
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_2xs,
@@ -94,7 +94,7 @@ function WizardListCard({
 				>
 					{subtitle}
 				</Text>
-			</View>
+			</div>
 			{btnType === "checkbox" ? (
 				<Checkbox />
 			) : !disabled ? (

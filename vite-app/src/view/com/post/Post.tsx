@@ -231,7 +231,6 @@ function PostInner({
 							<View style={styles.postTextContainer}>
 								<RichText
 									enableTags
-									testID="postText"
 									value={richText}
 									numberOfLines={limitLines ? MAX_POST_LINES : undefined}
 									style={{

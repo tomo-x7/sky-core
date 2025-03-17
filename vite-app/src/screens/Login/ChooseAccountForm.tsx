@@ -56,7 +56,7 @@ export const ChooseAccountForm = ({
 	);
 
 	return (
-		<FormContainer testID="chooseAccountForm" titleText={<>Select account</>}>
+		<FormContainer titleText={<>Select account</>}>
 			<View>
 				<TextField.LabelText>Sign in as...</TextField.LabelText>
 				<AccountList
@@ -65,12 +65,12 @@ export const ChooseAccountForm = ({
 					pendingDid={pendingDid}
 				/>
 			</View>
-			<View style={a.flex_row}>
+			<div style={a.flex_row}>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>{"Back"}</ButtonText>
 				</Button>
-				<View style={a.flex_1} />
-			</View>
+				<div style={a.flex_1} />
+			</div>
 		</FormContainer>
 	);
 };

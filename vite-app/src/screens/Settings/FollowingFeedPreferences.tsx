@@ -26,7 +26,7 @@ export function FollowingFeedPreferencesScreen(props: Props) {
 	);
 
 	return (
-		<Layout.Screen testID="followingFeedPreferencesScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>

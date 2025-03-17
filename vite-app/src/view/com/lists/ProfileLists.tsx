@@ -1,14 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import {
-	ActivityIndicator,
-	type ListRenderItemInfo,
-	type StyleProp,
-	StyleSheet,
-	View,
-	type ViewStyle,
-	findNodeHandle,
-} from "react-native";
+import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View, findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
@@ -35,13 +27,12 @@ interface ProfileListsProps {
 	scrollElRef: ListRef;
 	headerOffset: number;
 	enabled?: boolean;
-	style?: StyleProp<ViewStyle>;
-	testID?: string;
+	style?: React.CSSProperties;
 	setScrollViewTag: (tag: number | null) => void;
 }
 
 export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(function ProfileListsImpl(
-	{ did, scrollElRef, headerOffset, enabled, style, testID, setScrollViewTag },
+	{ did, scrollElRef, headerOffset, enabled, style, setScrollViewTag },
 	ref,
 ) {
 	const t = useTheme();
@@ -118,7 +109,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 	const renderItemInner = React.useCallback(
 		({ item, index }: ListRenderItemInfo<any>) => {
 			if (item === EMPTY) {
-				return <EmptyState icon="list-ul" message={"You have no lists."} testID="listsEmpty" />;
+				return <EmptyState icon="list-ul" message={"You have no lists."} />;
 			} else if (item === ERROR_ITEM) {
 				return <ErrorMessage message={cleanError(error)} onPressTryAgain={refetch} />;
 			} else if (item === LOAD_MORE_ERROR_ITEM) {
@@ -159,9 +150,8 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 	}, [isFetchingNextPage]);
 
 	return (
-		<View testID={testID} style={style}>
+		<div style={style}>
 			<List
-				testID={testID ? `${testID}-flatlist` : undefined}
 				ref={scrollElRef}
 				data={items}
 				keyExtractor={(item: any) => item._reactKey || item.uri}
@@ -175,7 +165,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 				desktopFixedHeight
 				onEndReached={onEndReached}
 			/>
-		</View>
+		</div>
 	);
 });
 

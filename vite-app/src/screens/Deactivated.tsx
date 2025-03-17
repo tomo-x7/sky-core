@@ -1,7 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { AccountList } from "#/components/AccountList";
@@ -89,7 +88,7 @@ export function Deactivated() {
 	}, [agent, queryClient]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.util_screen_outer,
 				...a.flex_1,
@@ -105,13 +104,13 @@ export function Deactivated() {
 					},
 				]}
 			>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...{ marginHorizontal: "auto", maxWidth: COL_WIDTH },
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.justify_center,
@@ -120,9 +119,9 @@ export function Deactivated() {
 						}}
 					>
 						<Logo width={40} />
-					</View>
+					</div>
 
-					<View
+					<div
 						style={{
 							...a.gap_xs,
 							...a.pb_3xl,
@@ -156,7 +155,7 @@ export function Deactivated() {
 							visible to other users.
 						</Text>
 
-						<View style={a.gap_sm}>
+						<div style={a.gap_sm}>
 							<Button
 								label={"Reactivate your account"}
 								size="large"
@@ -176,10 +175,10 @@ export function Deactivated() {
 							>
 								<ButtonText>Cancel</ButtonText>
 							</Button>
-						</View>
+						</div>
 
 						{error && (
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.gap_sm,
@@ -198,13 +197,13 @@ export function Deactivated() {
 								>
 									{error}
 								</Text>
-							</View>
+							</div>
 						)}
-					</View>
+					</div>
 
-					<View style={a.pb_3xl}>
+					<div style={a.pb_3xl}>
 						<Divider />
-					</View>
+					</div>
 
 					{hasOtherAccounts ? (
 						<>
@@ -246,8 +245,8 @@ export function Deactivated() {
 							</Button>
 						</>
 					)}
-				</View>
+				</div>
 			</Layout.Content>
-		</View>
+		</div>
 	);
 }

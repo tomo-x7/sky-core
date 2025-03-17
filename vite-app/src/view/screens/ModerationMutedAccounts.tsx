@@ -66,9 +66,9 @@ export function ModerationMutedAccounts(props: Props) {
 	}: {
 		item: ActorDefs.ProfileView;
 		index: number;
-	}) => <ProfileCard testID={`mutedAccount-${index}`} key={item.did} profile={item} noModFilter />;
+	}) => <ProfileCard key={item.did} profile={item} noModFilter />;
 	return (
-		<Layout.Screen testID="mutedAccountsScreen">
+		<Layout.Screen>
 			<ViewHeader title={"Muted Accounts"} showOnDesktop />
 			<Layout.Center
 				style={{

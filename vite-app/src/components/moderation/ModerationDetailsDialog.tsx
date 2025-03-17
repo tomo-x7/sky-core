@@ -1,5 +1,4 @@
 import type { ModerationCause } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -126,7 +125,7 @@ function ModerationDetailsDialogInner({
 				paddingBottom: 0,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...xGutters,
 					...a.pb_lg,
@@ -152,9 +151,9 @@ function ModerationDetailsDialogInner({
 				>
 					{description}
 				</Text>
-			</View>
+			</div>
 			{modcause?.type === "label" && (
-				<View
+				<div
 					style={{
 						...xGutters,
 						...a.py_md,
@@ -180,7 +179,7 @@ function ModerationDetailsDialogInner({
 						</Text>
 					) : (
 						<>
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.justify_between,
@@ -211,7 +210,7 @@ function ModerationDetailsDialogInner({
 									</>
 								</Text>
 								{modcause.label.exp && (
-									<View>
+									<div>
 										<Text
 											style={{
 												...a.leading_snug,
@@ -222,12 +221,12 @@ function ModerationDetailsDialogInner({
 										>
 											<>Expires in {timeDiff(Date.now(), modcause.label.exp)}</>
 										</Text>
-									</View>
+									</div>
 								)}
-							</View>
+							</div>
 						</>
 					)}
-				</View>
+				</div>
 			)}
 			<Dialog.Close />
 		</Dialog.ScrollableInner>

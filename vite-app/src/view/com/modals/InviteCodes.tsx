@@ -2,8 +2,10 @@ import type { ComAtprotoServerDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 
+import { flatten } from "#/alf";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -16,7 +18,6 @@ import * as Toast from "../util/Toast";
 import { UserInfoText } from "../util/UserInfoText";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
 import { ScrollView } from "./util";
 
 export const snapPoints = ["70%"];
@@ -27,9 +28,9 @@ export function Component() {
 	return error ? (
 		<ErrorMessage message={cleanError(error)} />
 	) : isLoading || !invites ? (
-		<View style={{ padding: 18 }}>
+		<div style={{ padding: 18 }}>
 			<ActivityIndicator />
-		</View>
+		</div>
 	) : (
 		<Inner invites={invites} />
 	);
@@ -46,14 +47,13 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 
 	if (invites.all.length === 0) {
 		return (
-			<View
+			<div
 				style={{
 					...styles.container,
 					...pal.view,
 				}}
-				testID="inviteCodesModal"
 			>
-				<View
+				<div
 					style={{
 						...styles.empty,
 						...pal.viewLight,
@@ -69,9 +69,9 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 						You don't have any invite codes yet! We'll send you some when you've been on Bluesky for a
 						little longer.
 					</Text>
-				</View>
-				<View style={styles.flex1} />
-				<View
+				</div>
+				<div style={styles.flex1} />
+				<div
 					style={{
 						...styles.btnContainer,
 						...(isTabletOrDesktop && styles.btnContainerDesktop),
@@ -84,18 +84,17 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 						labelStyle={styles.btnLabel}
 						onPress={onClose}
 					/>
-				</View>
-			</View>
+				</div>
+			</div>
 		);
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...styles.container,
 				...pal.view,
 			}}
-			testID="inviteCodesModal"
 		>
 			<Text
 				type="title-xl"
@@ -122,33 +121,30 @@ export function Inner({ invites }: { invites: InviteCodesQueryResponse }) {
 				}}
 			>
 				{invites.available.map((invite, i) => (
-					<InviteCode testID={`inviteCode-${i}`} key={invite.code} invite={invite} invites={invites} />
+					<InviteCode key={invite.code} invite={invite} invites={invites} />
 				))}
 				{invites.used.map((invite, i) => (
-					<InviteCode used testID={`inviteCode-${i}`} key={invite.code} invite={invite} invites={invites} />
+					<InviteCode used key={invite.code} invite={invite} invites={invites} />
 				))}
 			</ScrollView>
-			<View style={styles.btnContainer}>
+			<div style={styles.btnContainer}>
 				<Button
-					testID="closeBtn"
 					type="primary"
 					label={"Done"}
 					style={styles.btn}
 					labelStyle={styles.btnLabel}
 					onPress={onClose}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
 function InviteCode({
-	testID,
 	invite,
 	used,
 	invites,
 }: {
-	testID: string;
 	invite: ComAtprotoServerDefs.InviteCode;
 	used?: boolean;
 	invites: InviteCodesQueryResponse;
@@ -165,14 +161,13 @@ function InviteCode({
 	}, [setInviteCopied, invite]);
 
 	return (
-		<View
+		<div
 			style={{
 				...pal.border,
 				...{ borderBottomWidth: 1, paddingHorizontal: 20, paddingVertical: 14 },
 			}}
 		>
 			<TouchableOpacity
-				testID={testID}
 				style={styles.inviteCode}
 				onPress={onPress}
 				accessibilityRole="button"
@@ -184,13 +179,12 @@ function InviteCode({
 				accessibilityHint={"Opens list of invite codes"}
 			>
 				<Text
-					testID={`${testID}-code`}
 					type={used ? "md" : "md-bold"}
-					style={used ? [pal.textLight, styles.strikeThrough] : pal.text}
+					style={used ? flatten([pal.textLight, styles.strikeThrough]) : pal.text}
 				>
 					{invite.code}
 				</Text>
-				<View style={styles.flex1} />
+				<div style={styles.flex1} />
 				{!used && invitesState.copiedInvites.includes(invite.code) && (
 					<Text
 						style={{
@@ -205,7 +199,7 @@ function InviteCode({
 				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text} />}
 			</TouchableOpacity>
 			{uses.length > 0 ? (
-				<View
+				<div
 					style={{
 						flexDirection: "column",
 						gap: 8,
@@ -227,9 +221,9 @@ function InviteCode({
 							</Link>
 						))}
 					</Text>
-				</View>
+				</div>
 			) : null}
-		</View>
+		</div>
 	);
 }
 

@@ -47,7 +47,6 @@ export function Component({
 
 	return (
 		<SafeAreaView
-			testID="listAddUserModal"
 			style={{
 				...pal.view,
 				...styles.fixedHeight,
@@ -68,7 +67,6 @@ export function Component({
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="search" size={16} />
 					<TextInput
-						testID="searchInput"
 						style={{
 							...styles.searchInput,
 							...pal.border,
@@ -84,7 +82,7 @@ export function Component({
 						autoFocus
 						autoCapitalize="none"
 						autoComplete="off"
-						autoCorrect={false}
+						autoCorrect={"off"}
 						selectTextOnFocus
 					/>
 					{query ? (
@@ -138,7 +136,6 @@ export function Component({
 					}}
 				>
 					<Button
-						testID="doneBtn"
 						type="default"
 						onPress={() => {
 							closeModal();
@@ -256,7 +253,6 @@ function UserResult({
 					<ActivityIndicator />
 				) : (
 					<Button
-						testID={`user-${profile.handle}-addBtn`}
 						type="default"
 						label={membership === false ? "Add" : "Remove"}
 						onPress={onToggleMembership}

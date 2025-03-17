@@ -50,7 +50,6 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 
 	return (
 		<View
-			testID="noSessionView"
 			style={{
 				...a.util_screen_outer,
 				...t.atoms.bg,

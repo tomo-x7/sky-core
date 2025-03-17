@@ -2,7 +2,6 @@ import type { ChatBskyConvoDefs, ChatBskyConvoListConvos } from "@atproto/api";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -56,7 +55,7 @@ export function MessagesInboxScreen(props: Props) {
 	}, [conversations]);
 
 	return (
-		<Layout.Screen testID="messagesInboxScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content align={gtTablet ? "left" : "platform"}>
@@ -134,7 +133,7 @@ function RequestList({
 					<>
 						{isError ? (
 							<>
-								<View
+								<div
 									style={{
 										...a.pt_3xl,
 										...a.align_center,
@@ -174,11 +173,11 @@ function RequestList({
 										<ButtonText>Retry</ButtonText>
 										<ButtonIcon icon={RetryIcon} position="right" />
 									</Button>
-								</View>
+								</div>
 							</>
 						) : (
 							<>
-								<View
+								<div
 									style={{
 										...a.pt_3xl,
 										...a.align_center,
@@ -222,7 +221,7 @@ function RequestList({
 										<ButtonIcon icon={ArrowLeftIcon} />
 										<ButtonText>Back to Chats</ButtonText>
 									</Button>
-								</View>
+								</div>
 							</>
 						)}
 					</>
@@ -281,7 +280,6 @@ function MarkAllReadFAB() {
 
 	return (
 		<FAB
-			testID="markAllAsReadFAB"
 			onPress={() => markAllRead()}
 			icon={<CheckIcon size="lg" fill={t.palette.white} />}
 			accessibilityRole="button"

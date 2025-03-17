@@ -29,7 +29,6 @@ export function ListMembers({
 	onPressTryAgain,
 	renderHeader,
 	renderEmptyState,
-	testID,
 	headerOffset = 0,
 	desktopFixedHeightOffset,
 }: {
@@ -40,7 +39,6 @@ export function ListMembers({
 	onPressTryAgain?: () => void;
 	renderHeader: () => JSX.Element;
 	renderEmptyState: () => JSX.Element;
-	testID?: string;
 	headerOffset?: number;
 	desktopFixedHeightOffset?: number;
 }) {
@@ -122,14 +120,7 @@ export function ListMembers({
 			if (!isOwner) {
 				return null;
 			}
-			return (
-				<Button
-					testID={`user-${profile.handle}-editBtn`}
-					type="default"
-					label={"Edit"}
-					onPress={() => onPressEditMembership(profile)}
-				/>
-			);
+			return <Button type="default" label={"Edit"} onPress={() => onPressEditMembership(profile)} />;
 		},
 		[isOwner, onPressEditMembership],
 	);
@@ -152,7 +143,6 @@ export function ListMembers({
 			}
 			return (
 				<ProfileCard
-					testID={`user-${(item as AppBskyGraphDefs.ListItemView).subject.handle}`}
 					profile={(item as AppBskyGraphDefs.ListItemView).subject}
 					renderButton={renderMemberButton}
 					style={{ paddingHorizontal: isMobile ? 8 : 14, paddingVertical: 4 }}
@@ -176,9 +166,8 @@ export function ListMembers({
 	}, [hasNextPage, error, isFetchingNextPage, fetchNextPage, isEmpty]);
 
 	return (
-		<View testID={testID} style={style}>
+		<View style={style}>
 			<List
-				testID={testID ? `${testID}-flatlist` : undefined}
 				ref={scrollElRef}
 				data={items}
 				keyExtractor={(item: any) => item.subject?.did || item._reactKey}

@@ -1,7 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -28,7 +27,6 @@ export function MessageProfileButton({
 	const { data: convoAvailability } = useGetConvoAvailabilityQuery(profile.did);
 	const { mutate: initiateConvo } = useGetConvoForMembers({
 		onSuccess: ({ convo }) => {
-			logEvent("chat:open", { logContext: "ProfileHeader" });
 			navigation.navigate("MessagesConversation", { conversation: convo.id });
 		},
 		onError: () => {
@@ -47,12 +45,10 @@ export function MessageProfileButton({
 		}
 
 		if (convoAvailability.convo) {
-			logEvent("chat:open", { logContext: "ProfileHeader" });
 			navigation.navigate("MessagesConversation", {
 				conversation: convoAvailability.convo.id,
 			});
 		} else {
-			logEvent("chat:create", { logContext: "ProfileHeader" });
 			initiateConvo([profile.did]);
 		}
 	}, [needsEmailVerification, verifyEmailControl, navigation, profile.did, initiateConvo, convoAvailability]);
@@ -61,8 +57,7 @@ export function MessageProfileButton({
 		// show pending state based on declaration
 		if (canBeMessaged(profile)) {
 			return (
-				<View
-					testID="dmBtnLoading"
+				<div
 					aria-hidden={true}
 					style={{
 						...a.justify_center,
@@ -79,7 +74,7 @@ export function MessageProfileButton({
 						}}
 						size="md"
 					/>
-				</View>
+				</div>
 			);
 		} else {
 			return null;
@@ -91,7 +86,6 @@ export function MessageProfileButton({
 			<>
 				<Button
 					accessibilityRole="button"
-					testID="dmBtn"
 					size="small"
 					color="secondary"
 					variant="solid"

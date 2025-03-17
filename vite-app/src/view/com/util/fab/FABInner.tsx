@@ -9,11 +9,10 @@ import { clamp } from "#/lib/numbers";
 import { gradients } from "#/lib/styles";
 
 export interface FABProps extends ComponentProps<typeof TouchableWithoutFeedback> {
-	testID?: string;
 	icon: JSX.Element;
 }
 
-export function FABInner({ testID, icon, onPress, ...props }: FABProps) {
+export function FABInner({  icon, onPress, ...props }: FABProps) {
 	const { isMobile, isTablet } = useWebMediaQueries();
 	const fabMinimalShellTransform = useMinimalShellFabTransform();
 
@@ -31,7 +30,6 @@ export function FABInner({ testID, icon, onPress, ...props }: FABProps) {
 			}}
 		>
 			<PressableScale
-				testID={testID}
 				onPress={(evt) => {
 					onPress?.(evt);
 				}}

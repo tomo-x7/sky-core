@@ -1,5 +1,4 @@
 import { AppBskyEmbedVideo } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useGutters } from "#/alf";
 import * as Grid from "#/components/Grid";
@@ -29,8 +28,8 @@ export function PostFeedVideoGridRow({
 	if (posts.length !== slices.length) return null;
 
 	return (
-		<View style={gutters}>
-			<View
+		<div style={gutters}>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_sm,
@@ -47,16 +46,16 @@ export function PostFeedVideoGridRow({
 						</Grid.Col>
 					))}
 				</Grid.Row>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
 export function PostFeedVideoGridRowPlaceholder() {
 	const gutters = useGutters(["base", "base", 0, "base"]);
 	return (
-		<View style={gutters}>
-			<View
+		<div style={gutters}>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_sm,
@@ -64,7 +63,7 @@ export function PostFeedVideoGridRowPlaceholder() {
 			>
 				<VideoPostCardPlaceholder />
 				<VideoPostCardPlaceholder />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

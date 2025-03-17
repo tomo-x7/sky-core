@@ -1,6 +1,5 @@
 import { subDays } from "date-fns";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "../Typography";
@@ -54,7 +53,7 @@ let DateDivider = ({ date: dateStr }: { date: string }): React.ReactNode => {
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.my_lg,
@@ -80,7 +79,7 @@ let DateDivider = ({ date: dateStr }: { date: string }): React.ReactNode => {
 				</Text>{" "}
 				at {time}
 			</Text>
-		</View>
+		</div>
 	);
 };
 DateDivider = React.memo(DateDivider);

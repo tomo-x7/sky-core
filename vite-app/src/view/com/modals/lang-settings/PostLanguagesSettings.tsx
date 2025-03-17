@@ -51,7 +51,6 @@ export function Component() {
 
 	return (
 		<View
-			testID="postLanguagesModal"
 			style={{
 				...pal.view,
 				...styles.container,

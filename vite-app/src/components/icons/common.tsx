@@ -1,16 +1,15 @@
 import { nanoid } from "nanoid/non-secure";
-import { StyleSheet, type TextProps } from "react-native";
-import type { PathProps, SvgProps } from "react-native-svg";
+import { StyleSheet } from "react-native";
 import { Defs, LinearGradient, Stop } from "react-native-svg";
 
 import { tokens, useTheme } from "#/alf";
 
 export type Props = {
-	fill?: PathProps["fill"];
-	style?: TextProps["style"];
+	fill?: string | undefined;
+	style?: React.CSSProperties;
 	size?: keyof typeof sizes;
 	gradient?: keyof typeof tokens.gradients;
-} & Omit<SvgProps, "style" | "size">;
+} & Omit<JSX.IntrinsicElements["svg"], "style" | "size">;
 
 export const sizes = {
 	xs: 12,

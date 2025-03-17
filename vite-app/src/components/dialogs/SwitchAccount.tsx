@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -22,7 +21,7 @@ export function SwitchAccountDialog({
 		(account: SessionAccount) => {
 			if (account.did !== currentAccount?.did) {
 				control.close(() => {
-					onPressSwitchAccount(account, "SwitchAccount");
+					onPressSwitchAccount(account);
 				});
 			} else {
 				control.close();
@@ -41,7 +40,7 @@ export function SwitchAccountDialog({
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<Dialog.ScrollableInner label="Switch Account">
-				<View style={a.gap_lg}>
+				<div style={a.gap_lg}>
 					<Text
 						style={{
 							...a.text_2xl,
@@ -57,7 +56,7 @@ export function SwitchAccountDialog({
 						otherLabel="Add account"
 						pendingDid={pendingDid}
 					/>
-				</View>
+				</div>
 
 				<Dialog.Close />
 			</Dialog.ScrollableInner>

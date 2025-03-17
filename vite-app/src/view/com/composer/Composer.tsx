@@ -493,12 +493,7 @@ export const ComposePost = ({
 				}}
 				reasonText={"Before creating a post, you must first verify your email."}
 			/>
-			<KeyboardAvoidingView
-				testID="composePostView"
-				behavior={"height"}
-				keyboardVerticalOffset={keyboardVerticalOffset}
-				style={a.flex_1}
-			>
+			<KeyboardAvoidingView behavior={"height"} keyboardVerticalOffset={keyboardVerticalOffset} style={a.flex_1}>
 				<View
 					style={{
 						...a.flex_1,
@@ -816,7 +811,6 @@ function ComposerTopBar({
 					</>
 				) : (
 					<Button
-						testID="composerPublishBtn"
 						label={isReply ? "Publish reply" : "Publish post"}
 						variant="solid"
 						color="primary"

@@ -1,9 +1,8 @@
 import { type ComAtprotoLabelDefs, ComAtprotoModerationDefs } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
@@ -84,7 +83,7 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 						)}
 					</Text>
 
-					<View
+					<div
 						style={{
 							...a.py_lg,
 							...a.gap_md,
@@ -99,7 +98,7 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 								onPressAppeal={setAppealingLabel}
 							/>
 						))}
-					</View>
+					</div>
 				</>
 			)}
 			<Dialog.Close />
@@ -123,7 +122,7 @@ function Label({
 	const sourceName = labeler ? sanitizeHandle(labeler.creator.handle, "@") : label.src;
 	const timeDiff = useGetTimeAgo({ future: true });
 	return (
-		<View
+		<div
 			style={{
 				...a.border,
 				...t.atoms.border_contrast_low,
@@ -131,14 +130,14 @@ function Label({
 				...a.overflow_hidden,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.p_md,
 					...a.gap_sm,
 					...a.flex_row,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.gap_xs,
@@ -162,9 +161,9 @@ function Label({
 					>
 						{strings.description}
 					</Text>
-				</View>
+				</div>
 				{!isSelfLabel && (
-					<View>
+					<div>
 						<Button
 							variant="solid"
 							color="secondary"
@@ -174,11 +173,11 @@ function Label({
 						>
 							<ButtonText>Appeal</ButtonText>
 						</Button>
-					</View>
+					</div>
 				)}
-			</View>
+			</div>
 			<Divider />
-			<View
+			<div
 				style={{
 					...a.px_md,
 					...a.py_sm,
@@ -188,7 +187,7 @@ function Label({
 				{isSelfLabel ? (
 					<Text style={t.atoms.text_contrast_medium}>This label was applied by you.</Text>
 				) : (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.justify_between,
@@ -216,7 +215,7 @@ function Label({
 							</>
 						</Text>
 						{label.exp && (
-							<View>
+							<div>
 								<Text
 									style={{
 										...a.leading_snug,
@@ -227,12 +226,12 @@ function Label({
 								>
 									<>Expires in {timeDiff(Date.now(), label.exp)}</>
 								</Text>
-							</View>
+							</div>
 						)}
-					</View>
+					</div>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -287,7 +286,7 @@ function AppealForm({
 
 	return (
 		<>
-			<View>
+			<div>
 				<Text
 					style={{
 						...a.text_2xl,
@@ -320,8 +319,8 @@ function AppealForm({
 						.
 					</>
 				</Text>
-			</View>
-			<View style={a.my_md}>
+			</div>
+			<div style={a.my_md}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={`Please explain why you think this label was incorrectly applied by ${
@@ -330,34 +329,25 @@ function AppealForm({
 					value={details}
 					onChangeText={setDetails}
 					autoFocus={true}
+					// @ts-expect-error
 					numberOfLines={3}
 					multiline
 					maxLength={300}
 				/>
-			</View>
-			<View style={gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm]}>
-				<Button
-					testID="backBtn"
-					variant="solid"
-					color="secondary"
-					size="large"
-					onPress={onPressBack}
-					label={"Back"}
-				>
+			</div>
+			<div
+				style={flatten(
+					gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm],
+				)}
+			>
+				<Button variant="solid" color="secondary" size="large" onPress={onPressBack} label={"Back"}>
 					<ButtonText>{"Back"}</ButtonText>
 				</Button>
-				<Button
-					testID="submitBtn"
-					variant="solid"
-					color="primary"
-					size="large"
-					onPress={onSubmit}
-					label={"Submit"}
-				>
+				<Button variant="solid" color="primary" size="large" onPress={onSubmit} label={"Submit"}>
 					<ButtonText>{"Submit"}</ButtonText>
 					{isPending && <ButtonIcon icon={Loader} />}
 				</Button>
-			</View>
+			</div>
 		</>
 	);
 }

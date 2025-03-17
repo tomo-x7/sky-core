@@ -1,5 +1,4 @@
 import { createContext, useContext, useMemo } from "react";
-import { View } from "react-native";
 
 import { type ViewStyleProp, atoms as a } from "#/alf";
 
@@ -17,7 +16,7 @@ export function Row({
 }) {
 	return (
 		<Context.Provider value={useMemo(() => ({ gap }), [gap])}>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.flex_1,
@@ -31,7 +30,7 @@ export function Row({
 				}}
 			>
 				{children}
-			</View>
+			</div>
 		</Context.Provider>
 	);
 }
@@ -46,7 +45,7 @@ export function Col({
 }) {
 	const { gap } = useContext(Context);
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_col,
 
@@ -60,6 +59,6 @@ export function Col({
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }

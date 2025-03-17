@@ -97,7 +97,6 @@ export function Component() {
 			}}
 		>
 			<ScrollView
-				testID="changeEmailModal"
 				style={{
 					...s.flex1,
 					...(isMobile && { paddingHorizontal: 18 }),
@@ -138,7 +137,6 @@ export function Component() {
 
 				{stage === Stages.InputEmail && (
 					<TextInput
-						testID="emailInput"
 						style={{
 							...styles.textInput,
 							...pal.border,
@@ -153,12 +151,11 @@ export function Component() {
 						accessibilityHint=""
 						autoCapitalize="none"
 						autoComplete="email"
-						autoCorrect={false}
+						autoCorrect={"off"}
 					/>
 				)}
 				{stage === Stages.ConfirmCode && (
 					<TextInput
-						testID="confirmCodeInput"
 						style={{
 							...styles.textInput,
 							...pal.border,
@@ -173,7 +170,7 @@ export function Component() {
 						accessibilityHint=""
 						autoCapitalize="none"
 						autoComplete="off"
-						autoCorrect={false}
+						autoCorrect={"off"}
 					/>
 				)}
 
@@ -188,7 +185,6 @@ export function Component() {
 						<View style={{ gap: 6 }}>
 							{stage === Stages.InputEmail && (
 								<Button
-									testID="requestChangeBtn"
 									type="primary"
 									onPress={onRequestChange}
 									accessibilityLabel={"Request Change"}
@@ -200,7 +196,6 @@ export function Component() {
 							)}
 							{stage === Stages.ConfirmCode && (
 								<Button
-									testID="confirmBtn"
 									type="primary"
 									onPress={onConfirm}
 									accessibilityLabel={"Confirm Change"}
@@ -212,7 +207,6 @@ export function Component() {
 							)}
 							{stage === Stages.Done && (
 								<Button
-									testID="verifyBtn"
 									type="primary"
 									onPress={onVerify}
 									accessibilityLabel={"Verify New Email"}
@@ -223,7 +217,6 @@ export function Component() {
 								/>
 							)}
 							<Button
-								testID="cancelBtn"
 								type="default"
 								onPress={() => {
 									closeModal();

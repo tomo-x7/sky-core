@@ -80,7 +80,7 @@ export const SetNewPasswordForm = ({
 	};
 
 	return (
-		<FormContainer testID="setNewPasswordForm" titleText={<>Set new password</>}>
+		<FormContainer titleText={<>Set new password</>}>
 			<Text
 				style={{
 					...a.leading_snug,
@@ -94,18 +94,16 @@ export const SetNewPasswordForm = ({
 				<TextField.Root>
 					<TextField.Icon icon={Ticket} />
 					<TextField.Input
-						testID="resetCodeInput"
 						label={"Looks like XXXXX-XXXXX"}
 						autoCapitalize="none"
 						autoFocus={true}
-						autoCorrect={false}
+						autoCorrect={"off"}
 						autoComplete="off"
 						value={resetCode}
 						onChangeText={setResetCode}
 						onFocus={() => setError("")}
 						onBlur={onBlur}
-						editable={!isProcessing}
-						accessibilityHint={"Input code sent to your email for password reset"}
+						disabled={isProcessing}
 					/>
 				</TextField.Root>
 			</View>
@@ -114,25 +112,23 @@ export const SetNewPasswordForm = ({
 				<TextField.Root>
 					<TextField.Icon icon={Lock} />
 					<TextField.Input
-						testID="newPasswordInput"
 						label={"Enter a password"}
 						autoCapitalize="none"
-						autoCorrect={false}
+						autoCorrect={"off"}
 						autoComplete="password"
 						returnKeyType="done"
-						secureTextEntry={true}
-						textContentType="password"
-						clearButtonMode="while-editing"
+						type="password"
+						// TODO
+						// clearButtonMode="while-editing"
 						value={password}
 						onChangeText={setPassword}
 						onSubmitEditing={onPressNext}
-						editable={!isProcessing}
-						accessibilityHint={"Input new password"}
+						disabled={isProcessing}
 					/>
 				</TextField.Root>
 			</View>
 			<FormError error={error} />
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -142,7 +138,7 @@ export const SetNewPasswordForm = ({
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
-				<View style={a.flex_1} />
+				<div style={a.flex_1} />
 				{isProcessing ? (
 					<ActivityIndicator />
 				) : (
@@ -160,7 +156,7 @@ export const SetNewPasswordForm = ({
 						Updating...
 					</Text>
 				) : undefined}
-			</View>
+			</div>
 		</FormContainer>
 	);
 };

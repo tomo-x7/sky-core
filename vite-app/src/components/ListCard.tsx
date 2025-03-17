@@ -1,7 +1,6 @@
 import { type AppBskyGraphDefs, AtUri, type ModerationUI, moderateUserList } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Avatar, Description, Header, Outer, SaveButton } from "#/components/FeedCard";
@@ -94,7 +93,7 @@ export function TitleAndByline({
 	const { currentAccount } = useSession();
 
 	return (
-		<View style={a.flex_1}>
+		<div style={a.flex_1}>
 			<Hider.Outer
 				modui={modUi}
 				isContentVisibleInitialState={creator && currentAccount?.did === creator.did}
@@ -141,7 +140,7 @@ export function TitleAndByline({
 						: `List by ${sanitizeHandle(creator.handle, "@")}`}
 				</Text>
 			)}
-		</View>
+		</div>
 	);
 }
 

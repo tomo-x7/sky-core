@@ -1,29 +1,25 @@
 import type React from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 
 export function FormContainer({
-	testID,
 	titleText,
 	children,
 	style,
 }: {
-	testID?: string;
 	titleText?: React.ReactNode;
 	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
 	return (
-		<View
-			testID={testID}
+		<div
 			style={{
 				...a.gap_md,
 				...a.flex_1,
-				...(!gtMobile && [a.px_lg, a.py_md]),
+				...flatten(!gtMobile && [a.px_lg, a.py_md]),
 				...style,
 			}}
 		>
@@ -39,6 +35,6 @@ export function FormContainer({
 				</Text>
 			)}
 			{children}
-		</View>
+		</div>
 	);
 }

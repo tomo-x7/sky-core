@@ -191,7 +191,6 @@ let PostCtrls = ({
 				}}
 			>
 				<Pressable
-					testID="replyBtn"
 					style={btnStyle}
 					onPress={() => {
 						if (!replyDisabled) {
@@ -235,7 +234,6 @@ let PostCtrls = ({
 			</View>
 			<View style={big ? a.align_center : [a.flex_1, a.align_start]}>
 				<Pressable
-					testID="likeBtn"
 					style={btnStyle}
 					onPress={() => requireAuth(() => onPressToggleLike())}
 					accessibilityRole="button"
@@ -264,7 +262,6 @@ let PostCtrls = ({
 				<>
 					<View style={a.align_center}>
 						<Pressable
-							testID="shareBtn"
 							style={btnStyle}
 							onPress={() => {
 								if (shouldShowLoggedOutWarning) {
@@ -298,7 +295,6 @@ let PostCtrls = ({
 			)}
 			<View style={big ? a.align_center : [a.flex_1, a.align_start]}>
 				<PostDropdownBtn
-					testID="postDropdownBtn"
 					post={post}
 					postFeedContext={feedContext}
 					record={record}

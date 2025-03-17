@@ -67,7 +67,7 @@ export function Component({
 	];
 
 	return (
-		<View testID="userAddRemoveListsModal" style={s.hContentRegion}>
+		<View style={s.hContentRegion}>
 			<Text style={headerStyles} numberOfLines={1}>
 				<>
 					Update{" "}
@@ -101,7 +101,6 @@ export function Component({
 				}}
 			>
 				<Button
-					testID="doneBtn"
 					type="default"
 					onPress={onPressDone}
 					style={styles.footerBtn}
@@ -173,7 +172,6 @@ function ListItem({
 
 	return (
 		<View
-			testID={`toggleBtn-${list.name}`}
 			style={{
 				...styles.listItem,
 				...pal.border,
@@ -215,7 +213,6 @@ function ListItem({
 					<ActivityIndicator />
 				) : (
 					<Button
-						testID={`user-${handle}-addBtn`}
 						type="default"
 						label={membership === false ? "Add" : "Remove"}
 						onPress={onToggleMembership}

@@ -1,9 +1,8 @@
 import createEmojiRegex from "emoji-regex";
 import type React from "react";
 import { Children } from "react";
-import type { TextProps as RNTextProps } from "react-native";
-import type { StyleProp, TextStyle } from "react-native";
-import { type Alf, applyFonts, atoms, flatten } from ".";
+import type { TypographyVariant } from "#/lib/ThemeContext";
+import { type Alf, applyFonts, atoms } from ".";
 
 /**
  * Util to calculate lineHeight from a text size atom and a leading atom
@@ -28,7 +27,7 @@ export function leading<Size extends { fontSize?: number }, Leading extends { li
  * returns it as-is.
  */
 export function normalizeTextStyles(
-	styles: StyleProp<TextStyle>,
+	styles: React.CSSProperties,
 	{
 		fontScale,
 		fontFamily,
@@ -37,13 +36,14 @@ export function normalizeTextStyles(
 		fontFamily: Alf["fonts"]["family"];
 	} & Pick<Alf, "flags">,
 ) {
-	const s = flatten(styles);
+	const s = styles;
 	// should always be defined on these components
-	s.fontSize = (s.fontSize || atoms.text_md.fontSize) * fontScale;
+	s.fontSize = (Number.parseFloat(String(s.fontSize)) || atoms.text_md.fontSize) * fontScale;
 
 	if (s?.lineHeight) {
-		if (s.lineHeight !== 0 && s.lineHeight <= 2) {
-			s.lineHeight = Math.round(s.fontSize * s.lineHeight);
+		const lh = Number.parseFloat(String(s.lineHeight));
+		if (!Number.isNaN(lh) && lh !== 0 && lh <= 2) {
+			s.lineHeight = Math.round(s.fontSize * lh);
 		}
 	} else {
 		s.lineHeight = s.fontSize;
@@ -55,7 +55,14 @@ export function normalizeTextStyles(
 }
 
 export type StringChild = string | (string | null)[];
-export type TextProps = RNTextProps & {
+export type TextProps = {
+	style?: React.CSSProperties;
+	type?: TypographyVariant;
+	children?: React.ReactNode;
+	numberOfLines?: number;
+	onLayout?: (rect: DOMRect) => void;
+	lineHeight?: number;
+} & {
 	/**
 	 * Lets the user select text, to use the native copy and paste functionality.
 	 */

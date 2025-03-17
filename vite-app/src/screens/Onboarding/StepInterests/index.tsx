@@ -109,7 +109,7 @@ export function StepInterests() {
 	);
 
 	return (
-		<View style={a.align_start} testID="onboardingInterests">
+		<View style={a.align_start}>
 			<IconCircle
 				icon={isError ? EmojiSad : Hashtag}
 				style={{

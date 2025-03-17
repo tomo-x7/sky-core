@@ -1,7 +1,7 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
 import type React from "react";
 import { Image } from "react-native";
-import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
@@ -18,7 +18,7 @@ export function Embed({
 	style,
 }: {
 	embed: AppBskyFeedDefs.PostView["embed"];
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const e = bsky.post.parseEmbed(embed);
 
@@ -56,10 +56,10 @@ export function Outer({
 	style,
 }: {
 	children?: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_xs,
@@ -67,7 +67,7 @@ export function Outer({
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -82,7 +82,7 @@ export function ImageItem({
 }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.relative,
 				...a.flex_1,
@@ -106,14 +106,14 @@ export function ImageItem({
 			/>
 			<MediaInsetBorder style={a.rounded_xs} />
 			{children}
-		</View>
+		</div>
 	);
 }
 
 export function GifItem({ thumbnail, alt }: { thumbnail: string; alt?: string }) {
 	return (
 		<ImageItem thumbnail={thumbnail} alt={alt}>
-			<View
+			<div
 				style={{
 					...a.absolute,
 					...a.inset_0,
@@ -122,10 +122,10 @@ export function GifItem({ thumbnail, alt }: { thumbnail: string; alt?: string })
 				}}
 			>
 				<PlayButtonIcon size={24} />
-			</View>
-			<View style={styles.altContainer}>
+			</div>
+			<div style={styles.altContainer}>
 				<Text style={styles.alt}>GIF</Text>
-			</View>
+			</div>
 		</ImageItem>
 	);
 }
@@ -139,7 +139,7 @@ export function VideoItem({
 }) {
 	if (!thumbnail) {
 		return (
-			<View
+			<div
 				style={{
 					...{ backgroundColor: "black" },
 					...a.flex_1,
@@ -149,12 +149,12 @@ export function VideoItem({
 				}}
 			>
 				<PlayButtonIcon size={24} />
-			</View>
+			</div>
 		);
 	}
 	return (
 		<ImageItem thumbnail={thumbnail} alt={alt}>
-			<View
+			<div
 				style={{
 					...a.absolute,
 					...a.inset_0,
@@ -163,7 +163,7 @@ export function VideoItem({
 				}}
 			>
 				<PlayButtonIcon size={24} />
-			</View>
+			</div>
 		</ImageItem>
 	);
 }

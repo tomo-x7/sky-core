@@ -13,22 +13,23 @@
 	},
 	"linter": {
 		"rules": {
-			"a11y": { "useKeyWithClickEvents": "off" },
+			"a11y": { "useKeyWithClickEvents": "off", "useAltText": "off", "noSvgWithoutTitle": "off" },
 			"style": {
 				"noUselessElse": "off",
 				"useImportType": "info",
-				"noNonNullAssertion": "info",
+				"useExportType": "info",
+				"noNonNullAssertion": "off",
 				"noParameterAssign": "off"
 			},
 			"correctness": { "noUnusedImports": "info" },
 			"suspicious": {
-				"noExplicitAny": "info",
-				"noImplicitAnyLet": "info",
-				"noArrayIndexKey": "info",
+				"noExplicitAny": "off",
+				"noImplicitAnyLet": "off",
+				"noArrayIndexKey": "off",
 				"noConfusingVoidType": "off",
 				"noAssignInExpressions": "off"
 			},
-			"complexity": { "noUselessSwitchCase": "info", "noForEach": "off", "noBannedTypes": "info" }
+			"complexity": { "noUselessSwitchCase": "info", "noForEach": "off", "noBannedTypes": "off" }
 		}
 	},
 	"overrides": [{ "include": ["tsconfig.*"], "json": { "parser": { "allowComments": true } } }]

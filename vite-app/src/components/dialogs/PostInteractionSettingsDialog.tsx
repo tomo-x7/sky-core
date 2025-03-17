@@ -2,7 +2,6 @@ import { type AppBskyFeedDefs, type AppBskyFeedPostgate, AtUri } from "@atproto/
 import { useQueryClient } from "@tanstack/react-query";
 import isEqual from "lodash.isequal";
 import React from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -65,7 +64,7 @@ export function PostInteractionSettingsControlledDialog({
 					...a.w_full,
 				}}
 			>
-				<View style={a.gap_md}>
+				<div style={a.gap_md}>
 					<Header />
 					<PostInteractionSettingsForm {...rest} />
 					<Text
@@ -89,7 +88,7 @@ export function PostInteractionSettingsControlledDialog({
 							.
 						</>
 					</Text>
-				</View>
+				</div>
 				<Dialog.Close />
 			</Dialog.ScrollableInner>
 		</Dialog.Outer>
@@ -98,7 +97,7 @@ export function PostInteractionSettingsControlledDialog({
 
 export function Header() {
 	return (
-		<View
+		<div
 			style={{
 				...a.gap_md,
 				...a.pb_sm,
@@ -121,7 +120,7 @@ export function Header() {
 				Customize who can interact with this post.
 			</Text>
 			<Divider />
-		</View>
+		</div>
 	);
 }
 
@@ -243,11 +242,11 @@ export function PostInteractionSettingsDialogControlledInner(props: PostInteract
 				...a.w_full,
 			}}
 		>
-			<View style={a.gap_md}>
+			<div style={a.gap_md}>
 				<Header />
 
 				{isLoading ? (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.py_4xl,
@@ -256,7 +255,7 @@ export function PostInteractionSettingsDialogControlledInner(props: PostInteract
 						}}
 					>
 						<Loader size="xl" />
-					</View>
+					</div>
 				) : (
 					<PostInteractionSettingsForm
 						replySettingsDisabled={!isThreadgateOwnedByViewer}
@@ -268,7 +267,7 @@ export function PostInteractionSettingsDialogControlledInner(props: PostInteract
 						onChangeThreadgateAllowUISettings={setEditedAllowUISettings}
 					/>
 				)}
-			</View>
+			</div>
 		</Dialog.ScrollableInner>
 	);
 }
@@ -324,15 +323,15 @@ export function PostInteractionSettingsForm({
 	const noOneCanReply = !!threadgateAllowUISettings.find((v) => v.type === "nobody");
 
 	return (
-		<View>
-			<View
+		<div>
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_md,
 				}}
 			>
-				<View style={a.gap_lg}>
-					<View style={a.gap_sm}>
+				<div style={a.gap_lg}>
+					<div style={a.gap_sm}>
 						<Text
 							style={{
 								...a.font_bold,
@@ -360,12 +359,12 @@ export function PostInteractionSettingsForm({
 							<Text style={t.atoms.text_contrast_medium}>Allow quote posts</Text>
 							<Toggle.Switch />
 						</Toggle.Item>
-					</View>
+					</div>
 
 					<Divider />
 
 					{replySettingsDisabled && (
-						<View
+						<div
 							style={{
 								...a.px_md,
 								...a.py_sm,
@@ -386,10 +385,10 @@ export function PostInteractionSettingsForm({
 							>
 								Reply settings are chosen by the author of the thread
 							</Text>
-						</View>
+						</div>
 					)}
 
-					<View
+					<div
 						style={{
 							...a.gap_sm,
 
@@ -416,7 +415,7 @@ export function PostInteractionSettingsForm({
 							Allow replies from:
 						</Text>
 
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.gap_sm,
@@ -436,7 +435,7 @@ export function PostInteractionSettingsForm({
 								style={{ flex: 1 }}
 								disabled={replySettingsDisabled}
 							/>
-						</View>
+						</div>
 
 						{!noOneCanReply && (
 							<>
@@ -449,7 +448,7 @@ export function PostInteractionSettingsForm({
 									Or combine these options:
 								</Text>
 
-								<View style={a.gap_sm}>
+								<div style={a.gap_sm}>
 									<Selectable
 										label="Mentioned users"
 										isSelected={!!threadgateAllowUISettings.find((v) => v.type === "mention")}
@@ -484,12 +483,12 @@ export function PostInteractionSettingsForm({
 											))
 										: // No loading states to avoid jumps for the common case (no lists)
 											null}
-								</View>
+								</div>
 							</>
 						)}
-					</View>
-				</View>
-			</View>
+					</div>
+				</div>
+			</div>
 			<Button
 				disabled={!canSave || isSaving}
 				label="Save"
@@ -502,7 +501,7 @@ export function PostInteractionSettingsForm({
 				<ButtonText>"Save"</ButtonText>
 				{isSaving && <ButtonIcon icon={Loader} position="right" />}
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -516,7 +515,7 @@ function Selectable({
 	label: string;
 	isSelected: boolean;
 	onPress: () => void;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	disabled?: boolean;
 }) {
 	const t = useTheme();
@@ -533,7 +532,7 @@ function Selectable({
 			style={a.flex_1}
 		>
 			{({ hovered, focused }) => (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.flex_row,
@@ -563,8 +562,8 @@ function Selectable({
 					>
 						{label}
 					</Text>
-					{isSelected ? <Check size="sm" fill={t.palette.primary_500} /> : <View />}
-				</View>
+					{isSelected ? <Check size="sm" fill={t.palette.primary_500} /> : <div />}
+				</div>
 			)}
 		</Button>
 	);

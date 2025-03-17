@@ -29,7 +29,6 @@ export function ProfileHeaderMetrics({
 			pointerEvents="box-none"
 		>
 			<InlineLinkText
-				testID="profileHeaderFollowersButton"
 				style={{
 					...a.flex_row,
 					...t.atoms.text,
@@ -55,7 +54,6 @@ export function ProfileHeaderMetrics({
 				</Text>
 			</InlineLinkText>
 			<InlineLinkText
-				testID="profileHeaderFollowsButton"
 				style={{
 					...a.flex_row,
 					...t.atoms.text,

@@ -1,6 +1,5 @@
 import { TID } from "@atproto/common-web";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -56,9 +55,8 @@ export function NoFeedsPinned({
 	}, [overwriteSavedFeeds, preferences.savedFeeds]);
 
 	return (
-		//@ts-ignore
 		<CenteredView sideBorders style={a.h_full_vh}>
-			<View
+			<div
 				style={{
 					...a.align_center,
 
@@ -73,7 +71,7 @@ export function NoFeedsPinned({
 					},
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.align_center,
 						...a.gap_sm,
@@ -98,9 +96,9 @@ export function NoFeedsPinned({
 					>
 						Looks like you unpinned all your feeds. But don't worry, you can add some below 😄
 					</Text>
-				</View>
+				</div>
 
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.gap_md,
@@ -124,8 +122,8 @@ export function NoFeedsPinned({
 						<ButtonIcon icon={ListSparkle} position="left" />
 						<ButtonText>{"Browse other feeds"}</ButtonText>
 					</Link>
-				</View>
-			</View>
+				</div>
+			</div>
 		</CenteredView>
 	);
 }

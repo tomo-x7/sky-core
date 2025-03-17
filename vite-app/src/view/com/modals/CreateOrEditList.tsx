@@ -190,7 +190,6 @@ export function Component({
 						paddingHorizontal: isMobile ? 16 : 0,
 					},
 				}}
-				testID="createOrEditListModal"
 			>
 				<Text
 					style={{
@@ -245,7 +244,6 @@ export function Component({
 							</Text>
 						</View>
 						<TextInput
-							testID="editNameInput"
 							style={{
 								...styles.textInput,
 								...pal.border,
@@ -282,7 +280,6 @@ export function Component({
 							</Text>
 						</View>
 						<TextInput
-							testID="editDescriptionInput"
 							style={{
 								...styles.textArea,
 								...pal.border,
@@ -316,7 +313,6 @@ export function Component({
 						</View>
 					) : (
 						<TouchableOpacity
-							testID="saveBtn"
 							style={{
 								...s.mt10,
 								...(isDescriptionOver && s.dimmed),
@@ -345,7 +341,6 @@ export function Component({
 						</TouchableOpacity>
 					)}
 					<TouchableOpacity
-						testID="cancelBtn"
 						style={s.mt5}
 						onPress={onPressCancel}
 						accessibilityRole="button"

@@ -73,7 +73,6 @@ export const SplashScreen = ({
 				ignoreTabletLayoutOffset
 			>
 				<View
-					testID="noSessionView"
 					style={{
 						...a.h_full,
 						...a.justify_center,
@@ -120,7 +119,6 @@ export const SplashScreen = ({
 						</View>
 
 						<View
-							testID="signinOrCreateAccount"
 							style={{
 								...a.w_full,
 								...a.px_xl,
@@ -130,7 +128,6 @@ export const SplashScreen = ({
 							}}
 						>
 							<Button
-								testID="createAccountButton"
 								onPress={onPressCreateAccount}
 								label={"Create new account"}
 								accessibilityHint={"Opens flow to create a new Bluesky account"}
@@ -141,7 +138,6 @@ export const SplashScreen = ({
 								<ButtonText>Create account</ButtonText>
 							</Button>
 							<Button
-								testID="signInButton"
 								onPress={onPressSignin}
 								label={"Sign in"}
 								accessibilityHint={"Opens flow to sign in to your existing Bluesky account"}

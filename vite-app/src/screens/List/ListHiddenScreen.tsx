@@ -1,9 +1,8 @@
 import { AppBskyGraphDefs } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -97,7 +96,7 @@ export function ListHiddenScreen({
 			}}
 			sideBorders={true}
 		>
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.align_center,
@@ -105,7 +104,7 @@ export function ListHiddenScreen({
 				}}
 			>
 				<EyeSlash style={{ color: t.atoms.text_contrast_medium.color }} height={42} width={42} />
-				<View
+				<div
 					style={{
 						...a.gap_sm,
 						...a.align_center,
@@ -147,15 +146,15 @@ export function ListHiddenScreen({
 							</>
 						)}
 					</Text>
-				</View>
-			</View>
-			<View
+				</div>
+			</div>
+			<div
 				style={{
 					...a.gap_md,
-					...(gtMobile ? { width: 350 } : [a.w_full, a.px_lg]),
+					...(gtMobile ? { width: 350 } : flatten([a.w_full, a.px_lg])),
 				}}
 			>
-				<View style={a.gap_md}>
+				<div style={a.gap_md}>
 					{savedFeedConfig ? (
 						<Button
 							variant="solid"
@@ -199,7 +198,7 @@ export function ListHiddenScreen({
 							{isProcessing ? <ButtonIcon icon={Loader} position="right" /> : null}
 						</Button>
 					) : null}
-				</View>
+				</div>
 				<Button
 					variant="solid"
 					color="primary"
@@ -210,7 +209,7 @@ export function ListHiddenScreen({
 				>
 					<ButtonText>Go Back</ButtonText>
 				</Button>
-			</View>
+			</div>
 		</CenteredView>
 	);
 }

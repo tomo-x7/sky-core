@@ -1,5 +1,4 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, useButtonContext } from "#/components/Button";
@@ -19,8 +18,8 @@ export function SelectLabelerView({
 	const { gtMobile } = useBreakpoints();
 
 	return (
-		<View style={a.gap_lg}>
-			<View
+		<div style={a.gap_lg}>
+			<div
 				style={{
 					...a.justify_center,
 					...(gtMobile ? a.gap_sm : a.gap_xs),
@@ -42,9 +41,9 @@ export function SelectLabelerView({
 				>
 					To whom would you like to send this report?
 				</Text>
-			</View>
+			</div>
 			<Divider />
-			<View style={a.gap_sm}>
+			<div style={a.gap_sm}>
 				{props.labelers.map((labeler) => {
 					return (
 						<Button
@@ -56,8 +55,8 @@ export function SelectLabelerView({
 						</Button>
 					);
 				})}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 

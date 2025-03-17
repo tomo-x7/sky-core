@@ -47,7 +47,6 @@ export function Component({
 			}}
 		>
 			<ScrollView
-				testID="linkWarningModal"
 				style={{
 					...s.flex1,
 					...(isMobile && { paddingHorizontal: 18 }),
@@ -102,7 +101,6 @@ export function Component({
 					}}
 				>
 					<Button
-						testID="confirmBtn"
 						type="primary"
 						onPress={onPressVisit}
 						accessibilityLabel={share ? "Share Link" : "Visit Site"}
@@ -112,7 +110,6 @@ export function Component({
 						labelStyle={[s.f18]}
 					/>
 					<Button
-						testID="cancelBtn"
 						type="default"
 						onPress={() => {
 							closeModal();

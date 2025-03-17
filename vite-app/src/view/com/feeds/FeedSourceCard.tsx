@@ -1,13 +1,14 @@
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Linking, Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { Linking, Pressable, StyleSheet, View } from "react-native";
 
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
 import { shouldClickOpenNewTab } from "#/components/Link";
 import * as Prompt from "#/components/Prompt";
 import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
 import { useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -22,7 +23,6 @@ import {
 import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "../util/UserAvatar";
-import { Text } from "../util/text/Text";
 
 export function FeedSourceCard({
 	feedUri,
@@ -35,7 +35,7 @@ export function FeedSourceCard({
 	hideTopBorder,
 }: {
 	feedUri: string;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	showSaveBtn?: boolean;
 	showDescription?: boolean;
 	showLikes?: boolean;
@@ -77,7 +77,7 @@ export function FeedSourceCardLoaded({
 	feedUri: string;
 	feed?: FeedSourceInfo;
 	preferences?: UsePreferencesQueryResponse;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	showSaveBtn?: boolean;
 	showDescription?: boolean;
 	showLikes?: boolean;
@@ -143,7 +143,7 @@ export function FeedSourceCardLoaded({
 	 */
 	if (!feed || !preferences)
 		return (
-			<View
+			<div
 				style={{
 					...pal.border,
 
@@ -163,7 +163,6 @@ export function FeedSourceCardLoaded({
 				)}
 				{showSaveBtn && (
 					<Pressable
-						testID={`feed-${feedUri}-toggleSave`}
 						disabled={isRemovePending}
 						accessibilityRole="button"
 						accessibilityLabel={"Remove from my feeds"}
@@ -176,21 +175,20 @@ export function FeedSourceCardLoaded({
 						<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
 					</Pressable>
 				)}
-			</View>
+			</div>
 		);
 
 	return (
 		<>
-			<Pressable
-				testID={`feed-${feed.displayName}`}
-				accessibilityRole="button"
+			<button
+				type="button"
 				style={{
 					...styles.container,
 					...pal.border,
 					...style,
-					...{ borderTopWidth: hideTopBorder ? 0 : StyleSheet.hairlineWidth },
+					...{ borderTopWidth: hideTopBorder ? 0 : 1 },
 				}}
-				onPress={(e) => {
+				onClick={(e) => {
 					const shouldOpenInNewTab = shouldClickOpenNewTab(e);
 					if (feed.type === "feed") {
 						if (shouldOpenInNewTab) {
@@ -223,7 +221,7 @@ export function FeedSourceCardLoaded({
 					<View style={s.mr10}>
 						<UserAvatar type="algo" size={36} avatar={feed.avatar} />
 					</View>
-					<View style={styles.headerTextContainer}>
+					<div style={styles.headerTextContainer}>
 						<Text
 							emoji
 							style={{
@@ -241,12 +239,11 @@ export function FeedSourceCardLoaded({
 								<>List by {sanitizeHandle(feed.creatorHandle, "@")}</>
 							)}
 						</Text>
-					</View>
+					</div>
 
 					{showSaveBtn && (
 						<View style={{ alignSelf: "center" }}>
 							<Pressable
-								testID={`feed-${feed.displayName}-toggleSave`}
 								disabled={isAddSavedFeedPending || isRemovePending}
 								accessibilityRole="button"
 								accessibilityLabel={isSaved ? "Remove from my feeds" : "Add to my feeds"}
@@ -291,7 +288,7 @@ export function FeedSourceCardLoaded({
 						</>
 					</Text>
 				) : null}
-			</Pressable>
+			</button>
 			<Prompt.Basic
 				control={removePromptControl}
 				title={"Remove from your feeds?"}
@@ -304,10 +301,9 @@ export function FeedSourceCardLoaded({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
-		paddingHorizontal: 18,
-		paddingVertical: 20,
+		padding: "20px 18px",
 		flexDirection: "column",
 		flex: 1,
 		gap: 14,
@@ -328,6 +324,7 @@ const styles = StyleSheet.create({
 		flexWrap: "wrap",
 	},
 	btn: {
-		paddingVertical: 6,
+		paddingTop: 6,
+		paddingBottom: 6,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

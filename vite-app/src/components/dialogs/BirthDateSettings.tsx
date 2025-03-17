@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -25,10 +24,10 @@ export function BirthDateSettingsDialog({
 	const { isLoading, error, data: preferences } = usePreferencesQuery();
 
 	return (
-		<Dialog.Outer control={control} nativeOptions={{ preventExpansion: true }}>
+		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<Dialog.ScrollableInner label={"My Birthday"}>
-				<View
+				<div
 					style={{
 						...a.gap_sm,
 						...a.pb_lg,
@@ -50,7 +49,7 @@ export function BirthDateSettingsDialog({
 					>
 						This information is not shared with other users.
 					</Text>
-				</View>
+				</div>
 
 				{isLoading ? (
 					<Loader size="xl" />
@@ -95,19 +94,18 @@ function BirthdayInner({
 	}, [date, setBirthDate, control, hasChanged]);
 
 	return (
-		<View style={a.gap_lg} testID="birthDateSettingsDialog">
-			<View>
+		<div style={a.gap_lg}>
+			<div>
 				<DateField
-					testID="birthdayInput"
 					value={date}
 					onChangeDate={(newDate) => setDate(new Date(newDate))}
 					label={"Birthday"}
 					accessibilityHint={"Enter your birth date"}
 					maximumDate={getDateAgo(13)}
 				/>
-			</View>
+			</div>
 			{isError ? <ErrorMessage message={cleanError(error)} style={a.rounded_sm} /> : undefined}
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.justify_end,
@@ -123,7 +121,7 @@ function BirthdayInner({
 					<ButtonText>{hasChanged ? <>Save</> : <>Done</>}</ButtonText>
 					{isPending && <ButtonIcon icon={Loader} />}
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

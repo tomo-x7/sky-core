@@ -1,7 +1,7 @@
 import type { ModerationUI } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { type StyleProp, TouchableWithoutFeedback, View, type ViewStyle } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -16,18 +16,16 @@ import type { NavigationProp } from "#/lib/routes/types";
 import { CenteredView } from "#/view/com/util/Views";
 
 export function ScreenHider({
-	testID,
 	screenDescription,
 	modui,
 	style,
 	containerStyle,
 	children,
 }: React.PropsWithChildren<{
-	testID?: string;
 	screenDescription: string;
 	modui: ModerationUI;
-	style?: StyleProp<ViewStyle>;
-	containerStyle?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
+	containerStyle?: React.CSSProperties;
 }>) {
 	const t = useTheme();
 	const [override, setOverride] = React.useState(false);
@@ -38,11 +36,7 @@ export function ScreenHider({
 	const desc = useModerationCauseDescription(blur);
 
 	if (!blur || override) {
-		return (
-			<View testID={testID} style={style}>
-				{children}
-			</View>
-		);
+		return <div style={style}>{children}</div>;
 	}
 
 	const isNoPwi = !!modui.blurs.find(
@@ -63,13 +57,13 @@ export function ScreenHider({
 			}}
 			sideBorders
 		>
-			<View
+			<div
 				style={{
 					...a.align_center,
 					...a.mb_md,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...t.atoms.bg_contrast_975,
 						...a.align_center,
@@ -83,8 +77,8 @@ export function ScreenHider({
 					}}
 				>
 					<desc.icon width={24} fill={t.atoms.bg.backgroundColor} />
-				</View>
-			</View>
+				</div>
+			</div>
 			<Text
 				style={{
 					...a.text_4xl,
@@ -145,8 +139,8 @@ export function ScreenHider({
 					</>
 				)}{" "}
 			</Text>
-			{isMobile && <View style={a.flex_1} />}
-			<View
+			{isMobile && <div style={a.flex_1} />}
+			<div
 				style={{
 					...a.flex_row,
 					...a.justify_center,
@@ -182,7 +176,7 @@ export function ScreenHider({
 						<ButtonText>Show anyway</ButtonText>
 					</Button>
 				)}
-			</View>
+			</div>
 		</CenteredView>
 	);
 }

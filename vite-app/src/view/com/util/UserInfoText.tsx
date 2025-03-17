@@ -1,6 +1,7 @@
 import type { AppBskyActorGetProfile as GetProfile } from "@atproto/api";
-import { type StyleProp, StyleSheet, type TextStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
+import { Text } from "#/components/Typography";
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { makeProfileLink } from "#/lib/routes/links";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
@@ -9,7 +10,6 @@ import { STALE } from "#/state/queries";
 import { useProfileQuery } from "#/state/queries/profile";
 import { TextLinkOnWebOnly } from "./Link";
 import { LoadingPlaceholder } from "./LoadingPlaceholder";
-import { Text } from "./text/Text";
 
 export function UserInfoText({
 	type = "md",
@@ -25,7 +25,7 @@ export function UserInfoText({
 	loading?: string;
 	failed?: string;
 	prefix?: string;
-	style?: StyleProp<TextStyle>;
+	style?: React.CSSProperties;
 }) {
 	attr = attr || "handle";
 	failed = failed || "user";
@@ -51,7 +51,7 @@ export function UserInfoText({
 				numberOfLines={1}
 				href={makeProfileLink(profile)}
 				text={
-					<Text emoji type={type} style={style} lineHeight={1.2}>
+					<Text emoji type={type} style={{ ...style, lineHeight: 1.2 }} /*lineHeight={1.2}*/>
 						{`${prefix || ""}${sanitizeDisplayName(
 							typeof profile[attr] === "string" && profile[attr]
 								? (profile[attr] as string)

@@ -16,7 +16,6 @@ export interface PagerWithHeaderChildParams {
 }
 
 export interface PagerWithHeaderProps {
-	testID?: string;
 	children:
 		| (((props: PagerWithHeaderChildParams) => JSX.Element) | null)[]
 		| ((props: PagerWithHeaderChildParams) => JSX.Element);
@@ -34,7 +33,6 @@ export interface PagerWithHeaderProps {
 export const PagerWithHeader = React.forwardRef<PagerRef, PagerWithHeaderProps>(function PageWithHeaderImpl(
 	{
 		children,
-		testID,
 		items,
 		isHeaderReady,
 		renderHeader,
@@ -57,11 +55,10 @@ export const PagerWithHeader = React.forwardRef<PagerRef, PagerWithHeaderProps>(
 					onCurrentPageSelected={onCurrentPageSelected}
 					onSelect={props.onSelect}
 					tabBarAnchor={props.tabBarAnchor}
-					testID={testID}
 				/>
 			);
 		},
-		[items, isHeaderReady, renderHeader, currentPage, onCurrentPageSelected, testID],
+		[items, isHeaderReady, renderHeader, currentPage, onCurrentPageSelected, ],
 	);
 
 	const onPageSelectedInner = React.useCallback(
@@ -98,7 +95,6 @@ let PagerTabBar = ({
 	currentPage,
 	items,
 	isHeaderReady,
-	testID,
 	renderHeader,
 	onCurrentPageSelected,
 	onSelect,
@@ -106,7 +102,6 @@ let PagerTabBar = ({
 }: {
 	currentPage: number;
 	items: string[];
-	testID?: string;
 	renderHeader?: ({
 		setMinimumHeight,
 	}: {
@@ -132,7 +127,6 @@ let PagerTabBar = ({
 				}}
 			>
 				<TabBar
-					testID={testID}
 					items={items}
 					selectedPage={currentPage}
 					onSelect={onSelect}

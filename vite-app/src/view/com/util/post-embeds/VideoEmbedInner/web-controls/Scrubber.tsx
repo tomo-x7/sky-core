@@ -141,7 +141,6 @@ export function Scrubber({
 
 	return (
 		<View
-			testID="scrubber"
 			style={{
 				...{ height: isTouchDevice ? 32 : 18, width: "100%" },
 				...a.flex_shrink_0,

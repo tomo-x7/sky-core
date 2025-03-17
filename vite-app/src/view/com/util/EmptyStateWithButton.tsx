@@ -8,7 +8,6 @@ import { Button } from "./forms/Button";
 import { Text } from "./text/Text";
 
 interface Props {
-	testID?: string;
 	icon: IconProp;
 	message: string;
 	buttonLabel: string;
@@ -20,7 +19,7 @@ export function EmptyStateWithButton(props: Props) {
 	const palInverted = usePalette("inverted");
 
 	return (
-		<View testID={props.testID} style={styles.container}>
+		<View style={styles.container}>
 			<View style={styles.iconContainer}>
 				{/* @ts-ignore */}
 				<FontAwesomeIcon
@@ -42,12 +41,7 @@ export function EmptyStateWithButton(props: Props) {
 				{props.message}
 			</Text>
 			<View style={styles.btns}>
-				<Button
-					testID={props.testID ? `${props.testID}-button` : undefined}
-					type="inverted"
-					style={styles.btn}
-					onPress={props.onPress}
-				>
+				<Button type="inverted" style={styles.btn} onPress={props.onPress}>
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="plus" style={palInverted.text} size={14} />
 					<Text type="lg-medium" style={palInverted.text}>

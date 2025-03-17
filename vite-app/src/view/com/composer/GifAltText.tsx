@@ -64,7 +64,6 @@ export function GifAltTextDialogLoaded({
 	return (
 		<>
 			<TouchableOpacity
-				testID="altTextButton"
 				accessibilityRole="button"
 				accessibilityLabel={"Add alt text"}
 				accessibilityHint=""

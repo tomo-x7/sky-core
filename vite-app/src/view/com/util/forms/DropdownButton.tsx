@@ -21,7 +21,7 @@ import { useTheme } from "#/lib/ThemeContext";
 import { HITSLOP_10 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { colors } from "#/lib/styles";
-import { Text } from "../text/Text";
+import { Text } from "#/components/Typography";
 import { Button, type ButtonType } from "./Button";
 
 const ESTIMATED_BTN_HEIGHT = 50;
@@ -29,7 +29,6 @@ const ESTIMATED_SEP_HEIGHT = 16;
 const ESTIMATED_HEADING_HEIGHT = 60;
 
 export interface DropdownItemButton {
-	testID?: string;
 	icon?: IconProp;
 	label: string;
 	onPress: () => void;
@@ -47,9 +46,8 @@ type MaybeDropdownItem = DropdownItem | false | undefined;
 export type DropdownButtonType = ButtonType | "bare";
 
 interface DropdownButtonProps {
-	testID?: string;
 	type?: DropdownButtonType;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	items: MaybeDropdownItem[];
 	label?: string;
 	menuWidth?: number;
@@ -64,7 +62,6 @@ interface DropdownButtonProps {
 }
 
 export function DropdownButton({
-	testID,
 	type = "bare",
 	style,
 	items,
@@ -78,36 +75,39 @@ export function DropdownButton({
 	hitSlop = HITSLOP_10,
 	accessibilityLabel,
 }: PropsWithChildren<DropdownButtonProps>) {
-	const ref1 = useRef<View>(null);
-	const ref2 = useRef<View>(null);
+	const ref1 = useRef<HTMLButtonElement>(null);
+	const ref2 = useRef<HTMLDivElement>(null);
 
-	const onPress = (e: GestureResponderEvent) => {
+	const onPress = (e: React.MouseEvent<HTMLButtonElement>) => {
 		const ref = ref1.current || ref2.current;
 		const { height: winHeight } = Dimensions.get("window");
 		const pressY = e.nativeEvent.pageY;
-		ref?.measure((_x: number, _y: number, width: number, _height: number, pageX: number, pageY: number) => {
-			if (!menuWidth) {
-				menuWidth = 200;
+		const rect = ref?.getBoundingClientRect();
+		if (rect == null) return;
+		const { width } = rect;
+		const pageX = rect.left + window.scrollX; // スクロール位置を考慮
+		const pageY = rect.top + window.scrollY;
+		if (!menuWidth) {
+			menuWidth = 200;
+		}
+		let estimatedMenuHeight = 0;
+		for (const item of items) {
+			if (item && isSep(item)) {
+				estimatedMenuHeight += ESTIMATED_SEP_HEIGHT;
+			} else if (item && isBtn(item)) {
+				estimatedMenuHeight += ESTIMATED_BTN_HEIGHT;
+			} else if (item && isHeading(item)) {
+				estimatedMenuHeight += ESTIMATED_HEADING_HEIGHT;
 			}
-			let estimatedMenuHeight = 0;
-			for (const item of items) {
-				if (item && isSep(item)) {
-					estimatedMenuHeight += ESTIMATED_SEP_HEIGHT;
-				} else if (item && isBtn(item)) {
-					estimatedMenuHeight += ESTIMATED_BTN_HEIGHT;
-				} else if (item && isHeading(item)) {
-					estimatedMenuHeight += ESTIMATED_HEADING_HEIGHT;
-				}
-			}
-			const newX = openToRight ? pageX + width + rightOffset : pageX + width - menuWidth;
+		}
+		const newX = openToRight ? pageX + width + rightOffset : pageX + width - menuWidth;
 
-			// Add a bit of additional room
-			let newY = pressY + bottomOffset + 20;
-			if (openUpwards || newY + estimatedMenuHeight > winHeight) {
-				newY -= estimatedMenuHeight;
-			}
-			createDropdownMenu(newX, newY, pageY, menuWidth, items.filter((v) => !!v) as DropdownItem[], openUpwards);
-		});
+		// Add a bit of additional room
+		let newY = pressY + bottomOffset + 20;
+		if (openUpwards || newY + estimatedMenuHeight > winHeight) {
+			newY -= estimatedMenuHeight;
+		}
+		createDropdownMenu(newX, newY, pageY, menuWidth, items.filter((v) => !!v) as DropdownItem[], openUpwards);
 	};
 
 	const numItems = useMemo(
@@ -124,26 +124,23 @@ export function DropdownButton({
 
 	if (type === "bare") {
 		return (
-			<TouchableOpacity
-				testID={testID}
+			<button
+				type="button"
 				style={style}
-				onPress={onPress}
-				hitSlop={hitSlop}
+				onClick={onPress}
+				// hitSlop={hitSlop}
 				ref={ref1}
-				accessibilityRole="button"
-				accessibilityLabel={accessibilityLabel || `Opens ${numItems} options`}
-				accessibilityHint=""
 			>
 				{children}
-			</TouchableOpacity>
+			</button>
 		);
 	}
 	return (
-		<View ref={ref2}>
-			<Button type={type} testID={testID} onPress={onPress} style={style} label={label}>
+		<div ref={ref2}>
+			<Button  type={type} onPress={onPress} style={style} label={label}>
 				{children}
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -232,7 +229,6 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 					if (isBtn(item)) {
 						return (
 							<TouchableOpacity
-								testID={item.testID}
 								key={index}
 								style={styles.menuItem}
 								onPress={() => onPressItem(index)}
@@ -259,7 +255,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 						);
 					} else if (isSep(item)) {
 						return (
-							<View
+							<div
 								key={index}
 								style={{
 									...styles.separator,
@@ -269,7 +265,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 						);
 					} else if (isHeading(item)) {
 						return (
-							<View
+							<div
 								style={{
 									...styles.heading,
 									...pal.border,
@@ -284,7 +280,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 								>
 									{item.label}
 								</Text>
-							</View>
+							</div>
 						);
 					}
 					return null;

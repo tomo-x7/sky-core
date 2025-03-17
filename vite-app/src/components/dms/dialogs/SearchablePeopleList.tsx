@@ -1,9 +1,9 @@
 import { type ModerationOpts, moderateProfile } from "@atproto/api";
 import type React from "react";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { TextInput, View } from "react-native";
+import { TextInput } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -11,6 +11,7 @@ import { canBeMessaged } from "#/components/dms/util";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { useOnLayout } from "#/lib/onLayout";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -186,7 +187,6 @@ export function SearchablePeopleList({
 							key={item.key}
 							enabled={item.enabled}
 							profile={item.profile}
-							// biome-ignore lint/style/noNonNullAssertion: <explanation>
 							moderationOpts={moderationOpts!}
 							onPress={onSelectChat}
 						/>
@@ -212,9 +212,10 @@ export function SearchablePeopleList({
 	}, []);
 
 	const listHeader = useMemo(() => {
+		const ref = useOnLayout((evt) => setHeaderHeight(evt.height));
 		return (
-			<View
-				onLayout={(evt) => setHeaderHeight(evt.nativeEvent.layout.height)}
+			<div
+				ref={ref}
 				style={{
 					...a.relative,
 					...a.pt_lg,
@@ -225,7 +226,7 @@ export function SearchablePeopleList({
 					...t.atoms.bg,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.justify_center,
@@ -257,8 +258,8 @@ export function SearchablePeopleList({
 					>
 						<ButtonIcon icon={X} size="md" />
 					</Button>
-				</View>
-				<View style={a.pt_xs}>
+				</div>
+				<div style={a.pt_xs}>
 					<SearchInput
 						inputRef={inputRef as React.RefObject<TextInput>}
 						value={searchText}
@@ -268,8 +269,8 @@ export function SearchablePeopleList({
 						}}
 						onEscape={control.close}
 					/>
-				</View>
-			</View>
+				</div>
+			</div>
 		);
 	}, [t.atoms.border_contrast_low, t.atoms.bg, t.atoms.text_contrast_high, title, searchText, control]);
 
@@ -284,7 +285,7 @@ export function SearchablePeopleList({
 			//@ts-ignore
 			style={[a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]}
 			webInnerContentContainerStyle={a.py_0}
-			webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
+			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
 			scrollIndicatorInsets={{ top: headerHeight }}
 			keyboardDismissMode="on-drag"
 		/>
@@ -317,7 +318,7 @@ function ProfileCard({
 	return (
 		<Button disabled={!enabled} label={`Start chat with ${displayName}`} onPress={handleOnPress}>
 			{({ hovered, pressed, focused }) => (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.py_md,
@@ -341,7 +342,7 @@ function ProfileCard({
 						moderation={moderation.ui("avatar")}
 						type={profile.associated?.labeler ? "labeler" : "user"}
 					/>
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.gap_2xs,
@@ -368,8 +369,8 @@ function ProfileCard({
 						>
 							{!enabled ? <>{handle} can't be messaged</> : handle}
 						</Text>
-					</View>
-				</View>
+					</div>
+				</div>
 			)}
 		</Button>
 	);
@@ -379,7 +380,7 @@ function ProfileCardSkeleton() {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.py_md,
@@ -389,42 +390,42 @@ function ProfileCardSkeleton() {
 				...a.flex_row,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.rounded_full,
 					...{ width: 42, height: 42 },
 					...t.atoms.bg_contrast_25,
 				}}
 			/>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_sm,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.rounded_xs,
 						...{ width: 80, height: 14 },
 						...t.atoms.bg_contrast_25,
 					}}
 				/>
-				<View
+				<div
 					style={{
 						...a.rounded_xs,
 						...{ width: 120, height: 10 },
 						...t.atoms.bg_contrast_25,
 					}}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
 function Empty({ message }: { message: string }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.p_lg,
 				...a.py_xl,
@@ -449,7 +450,7 @@ function Empty({ message }: { message: string }) {
 			>
 				(╯°□°)╯︵ ┻━┻
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -470,7 +471,7 @@ function SearchInput({
 	const interacted = hovered || focused;
 
 	return (
-		<View
+		<div
 			{...{
 				onMouseEnter,
 				onMouseLeave,
@@ -506,13 +507,13 @@ function SearchInput({
 						onEscape();
 					}
 				}}
-				autoCorrect={false}
+				autoCorrect={"off"}
 				autoComplete="off"
 				autoCapitalize="none"
 				autoFocus
 				accessibilityLabel={"Search profiles"}
 				accessibilityHint={"Searches for profiles"}
 			/>
-		</View>
+		</div>
 	);
 }

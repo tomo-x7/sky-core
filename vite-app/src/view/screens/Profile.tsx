@@ -44,7 +44,7 @@ interface SectionRef {
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Profile">;
 export function ProfileScreen(props: Props) {
 	return (
-		<Layout.Screen testID="profileScreen" style={a.pt_0}>
+		<Layout.Screen style={a.pt_0}>
 			<ProfileScreenInner {...props} />
 		</Layout.Screen>
 	);
@@ -108,7 +108,6 @@ function ProfileScreenInner({ route }: Props) {
 		return (
 			<SafeAreaView style={a.flex_1}>
 				<ErrorScreen
-					testID="profileErrorScreen"
 					title={profileError ? "Not Found" : "Oops!"}
 					message={cleanError(resolveError || profileError)}
 					onPressTryAgain={onPressTryAgain}
@@ -131,7 +130,6 @@ function ProfileScreenInner({ route }: Props) {
 	return (
 		<SafeAreaView style={a.flex_1}>
 			<ErrorScreen
-				testID="profileErrorScreen"
 				title="Oops!"
 				message="Something went wrong and we're not sure what."
 				onPressTryAgain={onPressTryAgain}
@@ -332,14 +330,8 @@ function ProfileScreenLoaded({
 	};
 
 	return (
-		<ScreenHider
-			testID="profileView"
-			style={styles.container}
-			screenDescription={"profile"}
-			modui={moderation.ui("profileView")}
-		>
+		<ScreenHider style={styles.container} screenDescription={"profile"} modui={moderation.ui("profileView")}>
 			<PagerWithHeader
-				testID="profilePager"
 				isHeaderReady={!showPlaceholder}
 				items={sectionTitles}
 				onPageSelected={onPageSelected}
@@ -480,7 +472,6 @@ function ProfileScreenLoaded({
 			</PagerWithHeader>
 			{hasSession && (
 				<FAB
-					testID="composeFAB"
 					onPress={onPressCompose}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 					accessibilityRole="button"

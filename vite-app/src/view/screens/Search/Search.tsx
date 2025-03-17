@@ -548,18 +548,16 @@ SearchScreenInner = React.memo(SearchScreenInner);
 export function SearchScreen(props: NativeStackScreenProps<SearchTabNavigatorParams, "Search">) {
 	const queryParam = props.route?.params?.q ?? "";
 
-	return <SearchScreenShell queryParam={queryParam} testID="searchScreen" />;
+	return <SearchScreenShell queryParam={queryParam} />;
 }
 
 export function SearchScreenShell({
 	queryParam,
-	testID,
 	fixedParams,
 	navButton = "menu",
 	inputPlaceholder,
 }: {
 	queryParam: string;
-	testID: string;
 	fixedParams?: Params;
 	navButton?: "back" | "menu";
 	inputPlaceholder?: string;
@@ -729,7 +727,7 @@ export function SearchScreenShell({
 	const showHeader = !gtMobile || navButton !== "menu";
 
 	return (
-		<Layout.Screen testID={testID}>
+		<Layout.Screen>
 			<View
 				ref={headerRef}
 				onLayout={(evt) => {

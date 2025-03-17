@@ -112,7 +112,6 @@ function StorybookInner() {
 							size="small"
 							onPress={() => navigation.navigate("SharedPreferencesTester")}
 							label="two"
-							testID="sharedPrefsTestOpenBtn"
 						>
 							<ButtonText>Open Shared Prefs Tester</ButtonText>
 						</Button>

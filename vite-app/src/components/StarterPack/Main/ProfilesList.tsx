@@ -1,7 +1,7 @@
 import { type AppBskyActorDefs, type AppBskyGraphGetList, AtUri, type ModerationOpts } from "@atproto/api";
 import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import React, { useCallback } from "react";
-import { type ListRenderItemInfo, View } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
@@ -68,7 +68,7 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<AppBskyActorDefs.ProfileViewBasic>) => {
 		return (
-			<View
+			<div
 				style={{
 					...a.p_lg,
 					...t.atoms.border_contrast_low,
@@ -76,21 +76,20 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 				}}
 			>
 				<ProfileCard profile={item} moderationOpts={moderationOpts} logContext="StarterPackProfilesList" />
-			</View>
+			</div>
 		);
 	};
 
 	if (!data) {
 		return (
-			//@ts-ignore
-			<View
+			<div
 				style={{
 					...a.h_full_vh,
 					...{ marginTop: headerHeight, marginBottom: bottomBarOffset },
 				}}
 			>
 				<ListMaybePlaceholder isLoading={true} isError={isError} onRetry={refetch} />
-			</View>
+			</div>
 		);
 	}
 

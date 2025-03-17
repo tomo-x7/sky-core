@@ -22,7 +22,6 @@ export function ErrorMessage({
 	return (
 		<Layout.Center>
 			<View
-				testID="errorMessageView"
 				style={{
 					...styles.outer,
 					...pal.view,
@@ -50,7 +49,6 @@ export function ErrorMessage({
 				</Text>
 				{onPressTryAgain && (
 					<TouchableOpacity
-						testID="errorMessageTryAgainButton"
 						style={styles.btn}
 						onPress={onPressTryAgain}
 						accessibilityRole="button"

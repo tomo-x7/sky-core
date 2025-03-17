@@ -9,12 +9,10 @@ import { UserGroupIcon } from "#/lib/icons";
 import { Text } from "./text/Text";
 
 export function EmptyState({
-	testID,
 	icon,
 	message,
 	style,
 }: {
-	testID?: string;
 	icon: IconProp | "user-group" | "growth";
 	message: string;
 	style?: StyleProp<ViewStyle>;
@@ -23,7 +21,7 @@ export function EmptyState({
 	const { isTabletOrDesktop } = useWebMediaQueries();
 	const iconSize = isTabletOrDesktop ? 64 : 48;
 	return (
-		<View testID={testID} style={style}>
+		<View style={style}>
 			<View
 				style={{
 					...styles.iconContainer,

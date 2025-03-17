@@ -1,13 +1,11 @@
 import React from "react";
 
-import { BottomSheetSnapPoint } from "../../../modules/bottom-sheet/src/BottomSheet.types";
 import { useDialogStateContext } from "../../state/dialogs";
 import type { DialogContextProps, DialogControlRefProps, DialogOuterProps } from "../Dialog/types";
 
 export const Context = React.createContext<DialogContextProps>({
 	close: () => {},
 	isNativeDialog: false,
-	nativeSnapPoint: BottomSheetSnapPoint.Hidden,
 	disableDrag: false,
 	setDisableDrag: () => {},
 	isWithinDialog: false,

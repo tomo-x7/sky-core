@@ -194,7 +194,7 @@ function ProvidedHandlePage({
 								label={"New handle"}
 								placeholder={"e.g. alice"}
 								autoCapitalize="none"
-								autoCorrect={false}
+								autoCorrect={"off"}
 							/>
 							<TextField.SuffixText label={host} style={{ maxWidth: "40%" }}>
 								{host}
@@ -343,7 +343,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								resetVerification();
 							}}
 							autoCapitalize="none"
-							autoCorrect={false}
+							autoCorrect={"off"}
 						/>
 					</TextField.Root>
 				</View>

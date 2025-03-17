@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Text as RNText, type StyleProp, type TextStyle } from "react-native";
+import { Text as RNText } from "react-native";
 
 import { InlineLinkText, createStaticClick, createStaticClickIfUnmodified } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -25,7 +25,7 @@ export function RichTextTag({
 	tag: string;
 	display: string;
 	authorHandle?: string;
-	textStyle: StyleProp<TextStyle>;
+	textStyle: React.CSSProperties;
 }) {
 	const { isLoading: isPreferencesLoading, data: preferences } = usePreferencesQuery();
 	const {

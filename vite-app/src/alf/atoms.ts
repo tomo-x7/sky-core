@@ -1,5 +1,3 @@
-import { Platform, type StyleProp, StyleSheet, type ViewStyle } from "react-native";
-
 import * as Layout from "../components/Layout";
 import * as tokens from "./tokens";
 
@@ -13,7 +11,7 @@ export const atoms = {
 	 * Positioning
 	 */
 	fixed: {
-		position: Platform.select({ web: "fixed", native: "absolute" }) as "absolute",
+		position: "fixed",
 	},
 	absolute: {
 		position: "absolute",
@@ -85,11 +83,9 @@ export const atoms = {
 	 * Used for the outermost components on screens, to ensure that they can fill
 	 * the screen and extend beyond.
 	 */
-	util_screen_outer: [
-		{
-			minHeight: "100vh",
-		},
-	] as unknown as StyleProp<ViewStyle>,
+	util_screen_outer: {
+		minHeight: "100vh",
+	},
 
 	/*
 	 * Theme-independent bg colors
@@ -334,38 +330,33 @@ export const atoms = {
 		borderRightWidth: 0,
 	},
 	border: {
-		borderWidth: StyleSheet.hairlineWidth,
+		border: "1px solid black",
+		borderWidth: "1px",
 	},
 	border_t: {
-		borderTopWidth: StyleSheet.hairlineWidth,
+		borderTop: "1px solid black",
 	},
 	border_b: {
-		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottom: "1px solid black",
 	},
 	border_l: {
-		borderLeftWidth: StyleSheet.hairlineWidth,
+		borderLeft: "1px solid black",
 	},
 	border_r: {
-		borderRightWidth: StyleSheet.hairlineWidth,
+		borderRight: "1px solid black",
 	},
 
 	/*
 	 * Shadow
 	 */
 	shadow_sm: {
-		shadowRadius: 8,
-		shadowOpacity: 0.1,
-		elevation: 8,
+		boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
 	},
 	shadow_md: {
-		shadowRadius: 16,
-		shadowOpacity: 0.1,
-		elevation: 16,
+		boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
 	},
 	shadow_lg: {
-		shadowRadius: 32,
-		shadowOpacity: 0.1,
-		elevation: 24,
+		boxShadow: "0 16px 32px rgba(0, 0, 0, 0.1)",
 	},
 
 	/*
@@ -925,7 +916,7 @@ export const atoms = {
 	},
 	outline_inset_1: {
 		outlineOffset: "-1px",
-	} as unknown as StyleProp<ViewStyle>,
+	},
 
 	/*
 	 * Text decoration
@@ -1006,10 +997,6 @@ export const atoms = {
 	 * {@link Layout.SCROLLBAR_OFFSET}
 	 */
 	scrollbar_offset: {
-		transform: [
-			{
-				translateX: Layout.SCROLLBAR_OFFSET,
-			},
-		],
+		transform: `translateX(${Layout.SCROLLBAR_OFFSET})`,
 	},
-} as const;
+} satisfies Record<string, React.CSSProperties>;

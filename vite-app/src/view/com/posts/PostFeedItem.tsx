@@ -230,7 +230,6 @@ let FeedItemInner = ({
 	const [hover, setHover] = useState(false);
 	return (
 		<Link
-			testID={`feedItem-by-${post.author.handle}`}
 			style={outerStyles}
 			href={href}
 			noFeedback
@@ -436,18 +435,12 @@ let PostContent = ({
 	}, []);
 
 	return (
-		<ContentHider
-			testID="contentHider-post"
-			modui={moderation.ui("contentList")}
-			ignoreMute
-			childContainerStyle={styles.contentHiderChild}
-		>
+		<ContentHider modui={moderation.ui("contentList")} ignoreMute childContainerStyle={styles.contentHiderChild}>
 			<PostAlerts modui={moderation.ui("contentList")} style={a.py_2xs} additionalCauses={additionalPostAlerts} />
 			{richText.text ? (
 				<View style={styles.postTextContainer}>
 					<RichText
 						enableTags
-						testID="postText"
 						value={richText}
 						numberOfLines={limitLines ? MAX_POST_LINES : undefined}
 						style={{

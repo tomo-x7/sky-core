@@ -151,7 +151,6 @@ let ProfileHeaderLabeler = ({
 					{isMe ? (
 						<>
 							<Button
-								testID="profileHeaderEditProfileButton"
 								size="small"
 								color="secondary"
 								variant="solid"
@@ -166,7 +165,6 @@ let ProfileHeaderLabeler = ({
 					) : !isAppLabeler(profile.did) ? (
 						<>
 							<Button
-								testID="toggleSubscribeBtn"
 								label={isSubscribed ? "Unsubscribe from this labeler" : "Subscribe to this labeler"}
 								onPress={onPressSubscribe}
 							>
@@ -223,7 +221,6 @@ let ProfileHeaderLabeler = ({
 						{descriptionRT && !moderation.ui("profileView").blur ? (
 							<View pointerEvents="auto">
 								<RichText
-									testID="profileHeaderDescription"
 									style={a.text_md}
 									numberOfLines={15}
 									value={descriptionRT}
@@ -242,7 +239,6 @@ let ProfileHeaderLabeler = ({
 								}}
 							>
 								<Button
-									testID="toggleLikeBtn"
 									size="small"
 									color="secondary"
 									variant="solid"

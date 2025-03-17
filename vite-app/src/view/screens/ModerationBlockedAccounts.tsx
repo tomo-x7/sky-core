@@ -66,9 +66,9 @@ export function ModerationBlockedAccounts(props: Props) {
 	}: {
 		item: ActorDefs.ProfileView;
 		index: number;
-	}) => <ProfileCard testID={`blockedAccount-${index}`} key={item.did} profile={item} noModFilter />;
+	}) => <ProfileCard key={item.did} profile={item} noModFilter />;
 	return (
-		<Layout.Screen testID="blockedAccountsScreen">
+		<Layout.Screen>
 			<Layout.Center
 				style={{
 					...a.flex_1,

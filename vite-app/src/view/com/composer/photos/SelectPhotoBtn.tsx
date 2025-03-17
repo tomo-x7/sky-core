@@ -35,7 +35,6 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 
 	return (
 		<Button
-			testID="openGalleryBtn"
 			onPress={onPressSelectPhotos}
 			label={"Gallery"}
 			accessibilityHint={"Opens device photo gallery"}

@@ -119,7 +119,6 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 				{hasSession ? (
 					<>
 						<Btn
-							testID="bottomBarHomeBtn"
 							icon={
 								isAtHome ? (
 									<HomeFilled
@@ -160,7 +159,6 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 									/>
 								) : (
 									<MagnifyingGlass
-										testID="bottomBarSearchBtn"
 										width={iconWidth + 2}
 										style={{
 											...styles.ctrlIcon,
@@ -176,7 +174,6 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							accessibilityHint=""
 						/>
 						<Btn
-							testID="bottomBarMessagesBtn"
 							icon={
 								isAtMessages ? (
 									<MessageFilled
@@ -211,7 +208,6 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							}
 						/>
 						<Btn
-							testID="bottomBarNotificationsBtn"
 							icon={
 								isAtNotifications ? (
 									<BellFilled
@@ -245,7 +241,6 @@ export function BottomBar({ navigation }: BottomTabBarProps) {
 							}
 						/>
 						<Btn
-							testID="bottomBarProfileBtn"
 							icon={
 								<View style={styles.ctrlIconSizingWrapper}>
 									{isAtMyProfile ? (
@@ -353,7 +348,6 @@ interface BtnProps
 		ComponentProps<typeof PressableScale>,
 		"accessible" | "accessibilityRole" | "accessibilityHint" | "accessibilityLabel"
 	> {
-	testID?: string;
 	icon: JSX.Element;
 	notificationCount?: string;
 	hasNew?: boolean;
@@ -362,7 +356,6 @@ interface BtnProps
 }
 
 function Btn({
-	testID,
 	icon,
 	hasNew,
 	notificationCount,
@@ -374,7 +367,6 @@ function Btn({
 }: BtnProps) {
 	return (
 		<PressableScale
-			testID={testID}
 			style={{
 				...styles.ctrl,
 				...a.flex_1,

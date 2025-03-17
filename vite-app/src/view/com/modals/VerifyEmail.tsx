@@ -92,7 +92,6 @@ export function Component({
 			}}
 		>
 			<ScrollView
-				testID="verifyEmailModal"
 				style={{
 					...s.flex1,
 					...(isMobile && { paddingHorizontal: 18 }),
@@ -172,7 +171,6 @@ export function Component({
 					</>
 				) : stage === Stages.ConfirmCode ? (
 					<TextInput
-						testID="confirmCodeInput"
 						style={{
 							...styles.textInput,
 							...pal.border,
@@ -187,7 +185,7 @@ export function Component({
 						accessibilityHint=""
 						autoCapitalize="none"
 						autoComplete="one-time-code"
-						autoCorrect={false}
+						autoCorrect={"off"}
 					/>
 				) : undefined}
 
@@ -202,7 +200,6 @@ export function Component({
 						<View style={{ gap: 6 }}>
 							{stage === Stages.Reminder && (
 								<Button
-									testID="getStartedBtn"
 									type="primary"
 									onPress={() => setStage(Stages.Email)}
 									accessibilityLabel={"Get Started"}
@@ -215,7 +212,6 @@ export function Component({
 							{stage === Stages.Email && (
 								<>
 									<Button
-										testID="sendEmailBtn"
 										type="primary"
 										onPress={onSendEmail}
 										accessibilityLabel={"Send Confirmation Email"}
@@ -228,7 +224,6 @@ export function Component({
 										labelStyle={[s.f18]}
 									/>
 									<Button
-										testID="haveCodeBtn"
 										type="default"
 										accessibilityLabel={"I have a code"}
 										accessibilityHint=""
@@ -244,7 +239,6 @@ export function Component({
 							)}
 							{stage === Stages.ConfirmCode && (
 								<Button
-									testID="confirmBtn"
 									type="primary"
 									onPress={onConfirm}
 									accessibilityLabel={"Confirm"}
@@ -255,7 +249,6 @@ export function Component({
 								/>
 							)}
 							<Button
-								testID="cancelBtn"
 								type="default"
 								onPress={() => {
 									closeModal();

@@ -60,18 +60,13 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 					}}
 				</Menu.Trigger>
 				<Menu.Outer style={{ minWidth: 170 }}>
-					<Menu.Item
-						label={isReposted ? "Undo repost" : "Repost"}
-						testID="repostDropdownRepostBtn"
-						onPress={onRepost}
-					>
+					<Menu.Item label={isReposted ? "Undo repost" : "Repost"} onPress={onRepost}>
 						<Menu.ItemText>{isReposted ? "Undo repost" : "Repost"}</Menu.ItemText>
 						<Menu.ItemIcon icon={Repost} position="right" />
 					</Menu.Item>
 					<Menu.Item
 						disabled={embeddingDisabled}
 						label={embeddingDisabled ? "Quote posts disabled" : "Quote post"}
-						testID="repostDropdownQuoteBtn"
 						onPress={onQuote}
 					>
 						<Menu.ItemText>{embeddingDisabled ? "Quote posts disabled" : "Quote post"}</Menu.ItemText>
@@ -118,7 +113,6 @@ const RepostInner = ({
 			<Repost style={color} width={big ? 22 : 18} />
 			{typeof repostCount !== "undefined" && repostCount > 0 ? (
 				<Text
-					testID="repostCount"
 					style={{
 						...color,
 						...(big ? a.text_md : { fontSize: 15 }),

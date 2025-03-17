@@ -132,7 +132,6 @@ export function NotificationFeed({
 		<View style={s.hContentRegion}>
 			{error && <ErrorMessage message={cleanError(error)} onPressTryAgain={onPressTryAgain} />}
 			<List
-				testID="notifsFeed"
 				ref={scrollElRef}
 				data={items}
 				keyExtractor={(item) => item._reactKey}

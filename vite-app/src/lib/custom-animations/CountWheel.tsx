@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import Animated, { Easing, LayoutAnimationConfig, useReducedMotion, withTiming } from "react-native-reanimated";
+import { useReducedMotion } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { decideShouldRoll } from "#/lib/custom-animations/util";
@@ -10,76 +10,29 @@ import { Text } from "#/view/com/util/text/Text";
 
 const animationConfig = {
 	duration: 400,
-	easing: Easing.out(Easing.cubic),
+	easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+	fill: "forwards" as FillMode,
 };
 
-function EnteringUp() {
-	"worklet";
-	const animations = {
-		opacity: withTiming(1, animationConfig),
-		transform: [{ translateY: withTiming(0, animationConfig) }],
-	};
-	const initialValues = {
-		opacity: 0,
-		transform: [{ translateY: 18 }],
-	};
-	return {
-		animations,
-		initialValues,
-	};
-}
+const enteringUpKeyframe = [
+	{ opacity: 0, transform: "translateY(18px)" },
+	{ opacity: 1, transform: "translateY(0)" },
+];
 
-function EnteringDown() {
-	"worklet";
-	const animations = {
-		opacity: withTiming(1, animationConfig),
-		transform: [{ translateY: withTiming(0, animationConfig) }],
-	};
-	const initialValues = {
-		opacity: 0,
-		transform: [{ translateY: -18 }],
-	};
-	return {
-		animations,
-		initialValues,
-	};
-}
+const enteringDownKeyframe = [
+	{ opacity: 0, transform: "translateY(-18px)" },
+	{ opacity: 1, transform: "translateY(0)" },
+];
 
-function ExitingUp() {
-	"worklet";
-	const animations = {
-		opacity: withTiming(0, animationConfig),
-		transform: [
-			{
-				translateY: withTiming(-18, animationConfig),
-			},
-		],
-	};
-	const initialValues = {
-		opacity: 1,
-		transform: [{ translateY: 0 }],
-	};
-	return {
-		animations,
-		initialValues,
-	};
-}
+const exitingUpKeyframe = [
+	{ opacity: 1, transform: "translateY(0)" },
+	{ opacity: 0, transform: "translateY(-18px)" },
+];
 
-function ExitingDown() {
-	"worklet";
-	const animations = {
-		opacity: withTiming(0, animationConfig),
-		transform: [{ translateY: withTiming(18, animationConfig) }],
-	};
-	const initialValues = {
-		opacity: 1,
-		transform: [{ translateY: 0 }],
-	};
-	return {
-		animations,
-		initialValues,
-	};
-}
+const exitingDownKeyframe = [
+	{ opacity: 1, transform: "translateY(0)" },
+	{ opacity: 0, transform: "translateY(18px)" },
+];
 
 export function CountWheel({
 	likeCount,
@@ -96,11 +49,9 @@ export function CountWheel({
 	const shouldAnimate = !useReducedMotion() && hasBeenToggled;
 	const shouldRoll = decideShouldRoll(isLiked, likeCount);
 
-	// Incrementing the key will cause the `Animated.View` to re-render, with the newly selected entering/exiting
-	// animation
-	// The initial entering/exiting animations will get skipped, since these will happen on screen mounts and would
-	// be unnecessary
-	const [key, setKey] = React.useState(0);
+	const countView = React.useRef<HTMLDivElement>(null);
+	const prevCountView = React.useRef<HTMLDivElement>(null);
+
 	const [prevCount, setPrevCount] = React.useState(likeCount);
 	const prevIsLiked = React.useRef(isLiked);
 	const formattedCount = formatCount(likeCount);
@@ -112,54 +63,44 @@ export function CountWheel({
 		}
 
 		const newPrevCount = isLiked ? likeCount - 1 : likeCount + 1;
-		setKey((prev) => prev + 1);
-		setPrevCount(newPrevCount);
+		if (shouldAnimate && shouldRoll) {
+			countView.current?.animate?.(isLiked ? enteringUpKeyframe : enteringDownKeyframe, animationConfig);
+			prevCountView.current?.animate?.(isLiked ? exitingUpKeyframe : exitingDownKeyframe, animationConfig);
+			setPrevCount(newPrevCount);
+		}
 		prevIsLiked.current = isLiked;
-	}, [isLiked, likeCount]);
+	}, [isLiked, likeCount, shouldAnimate, shouldRoll]);
 
-	const enteringAnimation = shouldAnimate && shouldRoll ? (isLiked ? EnteringUp : EnteringDown) : undefined;
-	const exitingAnimation = shouldAnimate && shouldRoll ? (isLiked ? ExitingUp : ExitingDown) : undefined;
+	if (likeCount < 1) {
+		return null;
+	}
 
 	return (
-		<LayoutAnimationConfig skipEntering skipExiting>
-			{likeCount > 0 ? (
-				<View style={a.justify_center}>
-					<Animated.View entering={enteringAnimation} key={key}>
-						<Text
-							testID="likeCount"
-							style={{
-								...(big ? a.text_md : { fontSize: 15 }),
-								...a.user_select_none,
-								...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
-							}}
-						>
-							{formattedCount}
-						</Text>
-					</Animated.View>
-					{shouldAnimate && (likeCount > 1 || !isLiked) ? (
-						<Animated.View
-							entering={exitingAnimation}
-							// Add 2 to the key so there are never duplicates
-							key={key + 2}
-							style={{
-								...a.absolute,
-								...{ width: 50, opacity: 0 },
-							}}
-							aria-disabled={true}
-						>
-							<Text
-								style={{
-									...(big ? a.text_md : { fontSize: 15 }),
-									...a.user_select_none,
-									...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
-								}}
-							>
-								{formattedPrevCount}
-							</Text>
-						</Animated.View>
-					) : null}
-				</View>
+		<View>
+			<div ref={countView}>
+				<Text
+					style={{
+						...(big ? a.text_md : { fontSize: 15 }),
+						...a.user_select_none,
+						...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+					}}
+				>
+					{formattedCount}
+				</Text>
+			</div>
+			{shouldAnimate && (likeCount > 1 || !isLiked) ? (
+				<div style={{ position: "absolute", opacity: 0 }} aria-disabled={true} ref={prevCountView}>
+					<Text
+						style={{
+							...(big ? a.text_md : { fontSize: 15 }),
+							...a.user_select_none,
+							...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+						}}
+					>
+						{formattedPrevCount}
+					</Text>
+				</div>
 			) : null}
-		</LayoutAnimationConfig>
+		</View>
 	);
 }

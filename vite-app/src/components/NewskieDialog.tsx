@@ -1,7 +1,6 @@
 import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
 import { differenceInSeconds } from "date-fns";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -54,7 +53,7 @@ export function NewskieDialog({
 	if (!createdAt || daysOld > 7) return null;
 
 	return (
-		<View style={a.pr_2xs}>
+		<div style={a.pr_2xs}>
 			<Button
 				disabled={disabled}
 				label={"This user is new here. Press for more info about when they joined."}
@@ -77,9 +76,9 @@ export function NewskieDialog({
 					label={"New user info dialog"}
 					style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 				>
-					<View style={a.gap_md}>
-						<View style={a.align_center}>
-							<View
+					<div style={a.gap_md}>
+						<div style={a.align_center}>
+							<div
 								style={{
 									height: 60,
 									width: 64,
@@ -94,7 +93,7 @@ export function NewskieDialog({
 										...a.inset_0,
 									}}
 								/>
-							</View>
+							</div>
 							<Text
 								style={{
 									...a.font_bold,
@@ -103,7 +102,7 @@ export function NewskieDialog({
 							>
 								{isMe ? <>Welcome, friend!</> : <>Say hello!</>}
 							</Text>
-						</View>
+						</div>
 						<Text
 							style={{
 								...a.text_md,
@@ -129,7 +128,7 @@ export function NewskieDialog({
 									control.close();
 								}}
 							>
-								<View
+								<div
 									style={{
 										...a.w_full,
 										...a.mt_sm,
@@ -140,14 +139,14 @@ export function NewskieDialog({
 									}}
 								>
 									<StarterPackCard.Card starterPack={profile.joinedViaStarterPack} />
-								</View>
+								</div>
 							</StarterPackCard.Link>
 						) : null}
-					</View>
+					</div>
 
 					<Dialog.Close />
 				</Dialog.ScrollableInner>
 			</Dialog.Outer>
-		</View>
+		</div>
 	);
 }

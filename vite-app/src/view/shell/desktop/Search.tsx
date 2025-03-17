@@ -91,14 +91,7 @@ let SearchProfileCard = ({
 	}, [queryClient, profile, onPressInner]);
 
 	return (
-		<Link
-			testID={`searchAutoCompleteResult-${profile.handle}`}
-			href={makeProfileLink(profile)}
-			title={profile.handle}
-			asAnchor
-			anchorNoUnderline
-			onBeforePress={onPress}
-		>
+		<Link href={makeProfileLink(profile)} title={profile.handle} asAnchor anchorNoUnderline onBeforePress={onPress}>
 			<View
 				style={{
 					...pal.border,

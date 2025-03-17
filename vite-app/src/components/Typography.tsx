@@ -1,20 +1,36 @@
-import { UITextView } from "react-native-uitextview";
-
-import { atoms, flatten, useAlf, useTheme } from "#/alf";
+import { atoms, useAlf, useTheme } from "#/alf";
 import { type TextProps, normalizeTextStyles, renderChildrenWithEmoji } from "#/alf/typography";
+import { useOnLayout } from "#/lib/onLayout";
 export type { TextProps };
+import { useTheme as useTheme2 } from "#/lib/ThemeContext";
 
 /**
  * Our main text component. Use this most of the time.
  */
-export function Text({ children, emoji, style, selectable, title, dataSet, ...rest }: TextProps) {
+export function Text({
+	children,
+	emoji,
+	style,
+	selectable,
+	title,
+	dataSet,
+	onLayout,
+	type = "md",
+	...rest
+}: TextProps) {
+	//TODO numberOfLinesの実装、lineHeightの実装
 	const { fonts, flags } = useAlf();
 	const t = useTheme();
-	const s = normalizeTextStyles([atoms.text_sm, t.atoms.text, flatten(style)], {
-		fontScale: fonts.scaleMultiplier,
-		fontFamily: fonts.family,
-		flags,
-	});
+	const t2 = useTheme2();
+	const s = normalizeTextStyles(
+		{ ...atoms.text_sm, ...t.atoms.text, ...t2.typography[type], ...style },
+		{
+			fontScale: fonts.scaleMultiplier,
+			fontFamily: fonts.family,
+			flags,
+		},
+	);
+	const ref = onLayout ? useOnLayout(onLayout) : undefined;
 
 	const shared = {
 		uiTextView: true,
@@ -24,7 +40,11 @@ export function Text({ children, emoji, style, selectable, title, dataSet, ...re
 		...rest,
 	};
 
-	return <UITextView {...shared}>{renderChildrenWithEmoji(children, shared, emoji ?? false)}</UITextView>;
+	return (
+		<div contentEditable ref={ref} {...shared}>
+			{renderChildrenWithEmoji(children, shared, emoji ?? false)}
+		</div>
+	);
 }
 
 function createHeadingElement({ level }: { level: number }) {
@@ -51,7 +71,6 @@ export function P({ style, ...rest }: TextProps) {
 	const attr = {
 		role: "paragraph",
 	};
-	// @ts-ignore
 	return (
 		<Text
 			{...attr}
@@ -59,7 +78,7 @@ export function P({ style, ...rest }: TextProps) {
 			style={{
 				...atoms.text_md,
 				...atoms.leading_normal,
-				...flatten(style),
+				...style,
 			}}
 		/>
 	);

@@ -1,8 +1,5 @@
 import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect } from "react";
-// import Svg, {Path, SvgProps} from 'react-native-svg'
-import { Image } from "react-native";
-import { AccessibilityInfo, Image as RNImage, StyleSheet, useColorScheme } from "react-native";
 import Animated, {
 	Easing,
 	interpolate,
@@ -11,13 +8,13 @@ import Animated, {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
+import { useColorScheme } from "#/lib/useColorScheme";
 
-import darkSplashImagePointer from "./assets/splash-dark.png";
-import splashImagePointer from "./assets/splash.png";
+import darkSplashImage from "./assets/splash-dark.png";
+import splashImage from "./assets/splash.png";
 import { useOnLayout } from "./lib/onLayout";
+import { useReduceMotion } from "./lib/useReduceMotion";
 import { Logotype } from "./view/icons/Logotype";
-const splashImageUri = RNImage.resolveAssetSource(splashImagePointer).uri;
-const darkSplashImageUri = RNImage.resolveAssetSource(darkSplashImagePointer).uri;
 
 export const Logo = React.forwardRef(function LogoImpl(props: React.SVGProps<SVGSVGElement>, ref) {
 	const width = 1000;
@@ -52,7 +49,7 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 	const [isAnimationComplete, setIsAnimationComplete] = React.useState(false);
 	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
 	const [isLayoutReady, setIsLayoutReady] = React.useState(false);
-	const [reduceMotion, setReduceMotion] = React.useState<boolean | undefined>(false);
+	const reduceMotion = useReduceMotion();
 	const isReady = props.isReady && isImageLoaded && isLayoutReady && reduceMotion !== undefined;
 
 	const colorScheme = useColorScheme();
@@ -139,10 +136,6 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 		}
 	}, [onFinish, intro, outroLogo, outroApp, outroAppOpacity, isReady]);
 
-	useEffect(() => {
-		AccessibilityInfo.isReduceMotionEnabled().then(setReduceMotion);
-	}, []);
-
 	const logoAnimations = reduceMotion === true ? reducedLogoAnimation : logoAnimation;
 	// special off-spec color for dark mode
 	const logoBg = isDarkMode ? "#0F1824" : "#fff";
@@ -150,12 +143,11 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 	return (
 		<div style={{ flex: 1 }} ref={useOnLayout(onLayout)}>
 			{!isAnimationComplete && (
-				<div style={StyleSheet.absoluteFillObject}>
-					<Image
-						accessibilityIgnoresInvertColors
-						onLoadEnd={onLoadEnd}
-						source={{ uri: isDarkMode ? darkSplashImageUri : splashImageUri }}
-						style={StyleSheet.absoluteFillObject}
+				<div style={absoluteFillObject}>
+					<img
+						onLoad={onLoadEnd}
+						src={isDarkMode ? darkSplashImage : splashImage}
+						style={absoluteFillObject}
 					/>
 
 					<Animated.View
@@ -191,7 +183,7 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 					{!isAnimationComplete && (
 						<Animated.View
 							style={{
-								...StyleSheet.absoluteFillObject,
+								...absoluteFillObject,
 								...logoWrapperAnimation,
 
 								...{
@@ -212,3 +204,13 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 		</div>
 	);
 }
+
+const absoluteFillObject = {
+	position: "absolute",
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: 0,
+	width: "100%",
+	height: "100%",
+} as const;

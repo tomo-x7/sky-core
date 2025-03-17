@@ -30,7 +30,7 @@ export function AppPasswordsScreen(props: Props) {
 	const createAppPasswordControl = useDialogControl();
 
 	return (
-		<Layout.Screen testID="AppPasswordsScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>

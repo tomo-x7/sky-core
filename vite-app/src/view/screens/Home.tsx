@@ -51,7 +51,7 @@ export function HomeScreen(props: Props) {
 
 	if (preferences && pinnedFeedInfos && !isPinnedFeedsLoading) {
 		return (
-			<Layout.Screen testID="HomeScreen">
+			<Layout.Screen>
 				<HomeScreenReady {...props} preferences={preferences} pinnedFeedInfos={pinnedFeedInfos} />
 			</Layout.Screen>
 		);
@@ -123,13 +123,7 @@ function HomeScreenReady({
 	const renderTabBar = React.useCallback(
 		(props: RenderTabBarFnProps) => {
 			return (
-				<HomeHeader
-					key="FEEDS_TAB_BAR"
-					{...props}
-					testID="homeScreenFeedTabs"
-					onPressSelected={onPressSelected}
-					feeds={pinnedFeedInfos}
-				/>
+				<HomeHeader key="FEEDS_TAB_BAR" {...props} onPressSelected={onPressSelected} feeds={pinnedFeedInfos} />
 			);
 		},
 		[onPressSelected, pinnedFeedInfos],
@@ -172,7 +166,6 @@ function HomeScreenReady({
 						return (
 							<FeedPage
 								key={feed}
-								testID="followingFeedPage"
 								isPageFocused={maybeSelectedFeed === feed}
 								isPageAdjacent={Math.abs(selectedIndex - index) === 1}
 								feed={feed}
@@ -187,7 +180,6 @@ function HomeScreenReady({
 					return (
 						<FeedPage
 							key={feed}
-							testID="customFeedPage"
 							isPageFocused={maybeSelectedFeed === feed}
 							isPageAdjacent={Math.abs(selectedIndex - index) === 1}
 							feed={feed}
@@ -204,7 +196,6 @@ function HomeScreenReady({
 	) : (
 		<Pager onPageSelected={onPageSelected} renderTabBar={renderTabBar}>
 			<FeedPage
-				testID="customFeedPage"
 				isPageFocused
 				isPageAdjacent={false}
 				feed={`feedgen|${PROD_DEFAULT_FEED("whats-hot")}`}

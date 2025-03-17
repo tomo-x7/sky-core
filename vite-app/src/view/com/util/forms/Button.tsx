@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	ActivityIndicator,
 	type GestureResponderEvent,
@@ -15,7 +15,8 @@ import {
 
 import { useTheme } from "#/lib/ThemeContext";
 import { choose } from "#/lib/functions";
-import { Text } from "../text/Text";
+import { Text } from "#/components/Typography";
+import { flatten } from "#/alf";
 
 export type ButtonType =
 	| "primary"
@@ -46,7 +47,6 @@ export function Button({
 	labelStyle,
 	onPress,
 	children,
-	testID,
 	accessibilityLabel,
 	accessibilityHint,
 	accessibilityLabelledBy,
@@ -56,11 +56,10 @@ export function Button({
 }: React.PropsWithChildren<{
 	type?: ButtonType;
 	label?: string;
-	style?: StyleProp<ViewStyle>;
-	labelContainerStyle?: StyleProp<ViewStyle>;
-	labelStyle?: StyleProp<TextStyle>;
-	onPress?: (e: NativeSyntheticEvent<NativeTouchEvent>) => void | Promise<void>;
-	testID?: string;
+	style?: React.CSSProperties;
+	labelContainerStyle?: React.CSSProperties;
+	labelStyle?: React.CSSProperties;
+	onPress?: (e: React.MouseEvent<HTMLButtonElement,MouseEvent>) => void | Promise<void>;
 	accessibilityLabel?: string;
 	accessibilityHint?: string;
 	accessibilityLabelledBy?: string;
@@ -69,7 +68,7 @@ export function Button({
 	disabled?: boolean;
 }>) {
 	const theme = useTheme();
-	const typeOuterStyle = choose<ViewStyle, Record<ButtonType, ViewStyle>>(type, {
+	const typeOuterStyle = choose<React.CSSProperties, Record<ButtonType, React.CSSProperties>>(type, {
 		primary: {
 			backgroundColor: theme.palette.primary.background,
 		},
@@ -102,7 +101,7 @@ export function Button({
 			backgroundColor: theme.palette.default.background,
 		},
 	});
-	const typeLabelStyle = choose<TextStyle, Record<ButtonType, TextStyle>>(type, {
+	const typeLabelStyle = choose<React.CSSProperties, Record<ButtonType, React.CSSProperties>>(type, {
 		primary: {
 			color: theme.palette.primary.text,
 			fontWeight: "600",
@@ -141,8 +140,11 @@ export function Button({
 	});
 
 	const [isLoading, setIsLoading] = React.useState(false);
+	const [pressed,setPressed]=useState(false)
+	const [hovered,setHovered]=useState(false)
+	const [focused,setFocused]=useState(false)
 	const onPressWrapped = React.useCallback(
-		async (event: GestureResponderEvent) => {
+		async (event: React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
 			event.stopPropagation();
 			event.preventDefault();
 			withLoading && setIsLoading(true);
@@ -160,7 +162,7 @@ export function Button({
 			} else if (state.hovered) {
 				arr.push({ opacity: 0.8 });
 			}
-			return arr;
+			return flatten(arr);
 		},
 		[typeOuterStyle, style],
 	);
@@ -171,7 +173,7 @@ export function Button({
 		}
 
 		return (
-			<View
+			<div
 				style={{
 					...styles.labelContainer,
 					...labelContainerStyle,
@@ -189,35 +191,41 @@ export function Button({
 				>
 					{label}
 				</Text>
-			</View>
+			</div>
 		);
 	}, [children, label, withLoading, isLoading, labelContainerStyle, typeLabelStyle, labelStyle]);
-
+	useEffect(() => {
+		const handler=(ev:KeyboardEvent) => {
+			if (ev.key === "Escape") onAccessibilityEscape?.();
+		}
+		document.addEventListener("keydown", handler);
+		return ()=>document.removeEventListener("keydown",handler)
+	}, [onAccessibilityEscape]);
 	return (
-		<Pressable
-			style={getStyle}
-			onPress={onPressWrapped}
+		<button
+			type="button"
+			style={getStyle({pressed,focused,hovered})}
+			onClick={onPressWrapped}
 			disabled={disabled || isLoading}
-			testID={testID}
-			accessibilityRole="button"
-			accessibilityLabel={accessibilityLabel}
-			accessibilityHint={accessibilityHint}
-			accessibilityLabelledBy={accessibilityLabelledBy}
-			onAccessibilityEscape={onAccessibilityEscape}
+			onMouseDown={()=>setPressed(true)}
+			onMouseUp={()=>setPressed(false)}
+			onMouseEnter={()=>setHovered(true)}
+			onMouseLeave={()=>setHovered(false)}
+			onFocus={()=>setFocused(true)}
+			onBlur={()=>setFocused(false)}
 		>
-			{renderChildern}
-		</Pressable>
+			{renderChildern()}
+		</button>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles: Record<string, React.CSSProperties> = {
 	outer: {
-		paddingHorizontal: 14,
-		paddingVertical: 8,
+		padding: "8px 14px",
 		borderRadius: 24,
 	},
 	labelContainer: {
 		flexDirection: "row",
 		gap: 8,
 	},
-});
+};

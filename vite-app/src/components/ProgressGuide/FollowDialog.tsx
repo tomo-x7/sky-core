@@ -1,9 +1,9 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ScrollView, TextInput, View, useWindowDimensions } from "react-native";
+import { ScrollView, TextInput, useWindowDimensions } from "react-native";
 import Animated, { LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
-import { type ViewStyleProp, atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, flatten, tokens, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import * as ProfileCard from "#/components/ProfileCard";
@@ -13,6 +13,7 @@ import { MagnifyingGlass2_Stroke2_Corner0_Rounded as SearchIcon } from "#/compon
 import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/components/icons/Person";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
+import { useOnLayout } from "#/lib/onLayout";
 import { cleanError } from "#/lib/strings/errors";
 import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -65,7 +66,7 @@ export function FollowDialog({ guide }: { guide: Follow10ProgressGuide }) {
 				<ButtonIcon icon={PersonGroupIcon} />
 				<ButtonText>Find people to follow</ButtonText>
 			</Button>
-			<Dialog.Outer control={control} nativeOptions={{ minHeight }}>
+			<Dialog.Outer control={control}>
 				<Dialog.Handle />
 				<DialogInner guide={guide} />
 			</Dialog.Outer>
@@ -273,14 +274,13 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
-			//@ts-ignore
 			style={{
 				...a.px_0,
 				...a.py_0,
 				...{ height: "100vh", maxHeight: 600 },
 			}}
 			webInnerContentContainerStyle={a.py_0}
-			webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
+			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
 			keyboardDismissMode="on-drag"
 			scrollIndicatorInsets={{ top: headerHeight }}
 			initialNumToRender={8}
@@ -319,9 +319,10 @@ let Header = ({
 }): React.ReactNode => {
 	const t = useTheme();
 	const control = Dialog.useDialogContext();
+	const ref = useOnLayout((evt) => setHeaderHeight(evt.height));
 	return (
-		<View
-			onLayout={(evt) => setHeaderHeight(evt.nativeEvent.layout.height)}
+		<div
+			ref={ref}
 			style={{
 				...a.relative,
 				...a.pt_lg,
@@ -332,7 +333,7 @@ let Header = ({
 			}}
 		>
 			<HeaderTop guide={guide} />
-			<View
+			<div
 				style={{
 					...a.pt_xs,
 					...a.pb_xs,
@@ -354,8 +355,8 @@ let Header = ({
 					hasSearchText={!!searchText}
 					interestsDisplayNames={interestsDisplayNames}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 };
 Header = memo(Header);
@@ -364,7 +365,7 @@ function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
 	const t = useTheme();
 	const control = Dialog.useDialogContext();
 	return (
-		<View
+		<div
 			style={{
 				...a.px_lg,
 				...a.relative,
@@ -384,14 +385,14 @@ function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
 			>
 				Find people to follow
 			</Text>
-			<View style={{ paddingRight: 36 }}>
+			<div style={{ paddingRight: 36 }}>
 				<ProgressGuideTask
 					current={guide.numFollows + 1}
 					total={10 + 1}
 					title={`${guide.numFollows} / 10`}
 					tabularNumsTitle
 				/>
-			</View>
+			</div>
 			<Button
 				label={"Close"}
 				size="small"
@@ -407,7 +408,7 @@ function HeaderTop({ guide }: { guide: Follow10ProgressGuide }) {
 			>
 				<ButtonIcon icon={X} size="md" />
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -527,8 +528,9 @@ let Tab = ({
 	onLayout: (index: number, x: number, width: number) => void;
 }): React.ReactNode => {
 	const activeText = active ? " (active)" : "";
+	const ref = useOnLayout((e) => onLayout(index, e.x, e.width));
 	return (
-		<View key={interest} onLayout={(e) => onLayout(index, e.nativeEvent.layout.x, e.nativeEvent.layout.width)}>
+		<div key={interest} ref={ref}>
 			<Button
 				label={`Search for "${interestsDisplayName}"${activeText}`}
 				variant={active ? "solid" : "outline"}
@@ -539,7 +541,7 @@ let Tab = ({
 				<ButtonIcon icon={SearchIcon} />
 				<ButtonText>{interestsDisplayName}</ButtonText>
 			</Button>
-		</View>
+		</div>
 	);
 };
 Tab = memo(Tab);
@@ -638,7 +640,7 @@ function FollowProfileCardInner({
 function CardOuter({ children, style }: { children: React.ReactNode | React.ReactNode[] } & ViewStyleProp) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.py_md,
@@ -649,7 +651,7 @@ function CardOuter({ children, style }: { children: React.ReactNode | React.Reac
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -670,7 +672,7 @@ function SearchInput({
 	const interacted = hovered || focused;
 
 	return (
-		<View
+		<div
 			{...{
 				onMouseEnter,
 				onMouseLeave,
@@ -707,13 +709,13 @@ function SearchInput({
 						onEscape();
 					}
 				}}
-				autoCorrect={false}
+				autoCorrect={"off"}
 				autoComplete="off"
 				autoCapitalize="none"
 				accessibilityLabel={"Search profiles"}
 				accessibilityHint={"Searches for profiles"}
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -721,7 +723,7 @@ function ProfileCardSkeleton() {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.py_md,
@@ -731,42 +733,42 @@ function ProfileCardSkeleton() {
 				...a.flex_row,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.rounded_full,
 					...{ width: 42, height: 42 },
 					...t.atoms.bg_contrast_25,
 				}}
 			/>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_sm,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.rounded_xs,
 						...{ width: 80, height: 14 },
 						...t.atoms.bg_contrast_25,
 					}}
 				/>
-				<View
+				<div
 					style={{
 						...a.rounded_xs,
 						...{ width: 120, height: 10 },
 						...t.atoms.bg_contrast_25,
 					}}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
 function Empty({ message }: { message: string }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.p_lg,
 				...a.py_xl,
@@ -791,7 +793,7 @@ function Empty({ message }: { message: string }) {
 			>
 				(╯°□°)╯︵ ┻━┻
 			</Text>
-		</View>
+		</div>
 	);
 }
 

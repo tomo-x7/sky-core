@@ -37,12 +37,11 @@ interface ProfileFeedgensProps {
 	headerOffset: number;
 	enabled?: boolean;
 	style?: StyleProp<ViewStyle>;
-	testID?: string;
 	setScrollViewTag: (tag: number | null) => void;
 }
 
 export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps>(function ProfileFeedgensImpl(
-	{ did, scrollElRef, headerOffset, enabled, style, testID, setScrollViewTag },
+	{ did, scrollElRef, headerOffset, enabled, style,  setScrollViewTag },
 	ref,
 ) {
 	const t = useTheme();
@@ -120,7 +119,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	const renderItem = React.useCallback(
 		({ item, index }: ListRenderItemInfo<any>) => {
 			if (item === EMPTY) {
-				return <EmptyState icon="hashtag" message={"You have no feeds."} testID="listsEmpty" />;
+				return <EmptyState icon="hashtag" message={"You have no feeds."}  />;
 			} else if (item === ERROR_ITEM) {
 				return <ErrorMessage message={cleanError(error)} onPressTryAgain={refetch} />;
 			} else if (item === LOAD_MORE_ERROR_ITEM) {
@@ -164,10 +163,9 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	}, [isFetchingNextPage]);
 
 	return (
-		<View testID={testID} style={style}>
+		<View style={style}>
 			<List
-				testID={testID ? `${testID}-flatlist` : undefined}
-				ref={scrollElRef}
+								ref={scrollElRef}
 				data={items}
 				keyExtractor={(item: any) => item._reactKey || item.uri}
 				renderItem={renderItem}

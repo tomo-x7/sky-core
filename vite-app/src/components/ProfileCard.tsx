@@ -1,6 +1,5 @@
 import { type ModerationOpts, RichText as RichTextApi, moderateProfile } from "@atproto/api";
 import React from "react";
-import { type GestureResponderEvent, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, type ButtonProps, ButtonText } from "#/components/Button";
@@ -67,7 +66,7 @@ export function Outer({
 	children: React.ReactElement | React.ReactElement[];
 }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.flex_1,
@@ -75,7 +74,7 @@ export function Outer({
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -85,7 +84,7 @@ export function Header({
 	children: React.ReactElement | React.ReactElement[];
 }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -93,7 +92,7 @@ export function Header({
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -145,7 +144,7 @@ export function Avatar({
 export function AvatarPlaceholder() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.rounded_full,
 				...t.atoms.bg_contrast_50,
@@ -175,7 +174,7 @@ export function NameAndHandle({
 	const handle = sanitizeHandle(profile.handle, "@");
 
 	return (
-		<View style={a.flex_1}>
+		<div style={a.flex_1}>
 			<Text
 				emoji
 				style={{
@@ -198,7 +197,7 @@ export function NameAndHandle({
 			>
 				{handle}
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -206,13 +205,13 @@ export function NameAndHandlePlaceholder() {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.gap_xs,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.rounded_xs,
 					...t.atoms.bg_contrast_50,
@@ -223,7 +222,7 @@ export function NameAndHandlePlaceholder() {
 					},
 				}}
 			/>
-			<View
+			<div
 				style={{
 					...a.rounded_xs,
 					...t.atoms.bg_contrast_50,
@@ -234,7 +233,7 @@ export function NameAndHandlePlaceholder() {
 					},
 				}}
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -256,9 +255,9 @@ export function Description({
 	if (profile.viewer && (profile.viewer.blockedBy || profile.viewer.blocking || profile.viewer.blockingByList))
 		return null;
 	return (
-		<View style={a.pt_xs}>
+		<div style={a.pt_xs}>
 			<RichText value={rt} style={a.leading_snug} numberOfLines={numberOfLines} disableLinks />
-		</View>
+		</div>
 	);
 }
 
@@ -269,11 +268,11 @@ export function DescriptionPlaceholder({
 }) {
 	const t = useTheme();
 	return (
-		<View style={{ gap: 8 }}>
+		<div style={{ gap: 8 }}>
 			{Array(numberOfLines)
 				.fill(0)
 				.map((_, i) => (
-					<View
+					<div
 						key={i.toString()}
 						style={{
 							...a.rounded_xs,
@@ -283,7 +282,7 @@ export function DescriptionPlaceholder({
 						}}
 					/>
 				))}
-		</View>
+		</div>
 	);
 }
 
@@ -313,7 +312,7 @@ export function FollowButtonInner({
 	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 	const isRound = Boolean(rest.shape && rest.shape === "round");
 
-	const onPressFollow = async (e: GestureResponderEvent) => {
+	const onPressFollow = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
 		e.stopPropagation();
 		try {
@@ -330,7 +329,7 @@ export function FollowButtonInner({
 		}
 	};
 
-	const onPressUnfollow = async (e: GestureResponderEvent) => {
+	const onPressUnfollow = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
 		e.stopPropagation();
 		try {
@@ -356,7 +355,7 @@ export function FollowButtonInner({
 	if (profile.viewer.blockedBy || profile.viewer.blocking || profile.viewer.blockingByList) return null;
 
 	return (
-		<View>
+		<div>
 			{profile.viewer.following ? (
 				<Button
 					label={unfollowLabel}
@@ -382,6 +381,6 @@ export function FollowButtonInner({
 					{isRound ? null : <ButtonText>{followLabel}</ButtonText>}
 				</Button>
 			)}
-		</View>
+		</div>
 	);
 }

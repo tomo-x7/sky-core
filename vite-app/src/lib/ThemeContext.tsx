@@ -1,6 +1,5 @@
 import type React from "react";
 import { type ReactNode, createContext, useContext } from "react";
-import type { TextStyle, ViewStyle } from "react-native";
 
 import type { ThemeName } from "#/alf/types";
 import { darkTheme, defaultTheme, dimTheme } from "./themes";
@@ -23,7 +22,7 @@ export type PaletteColor = {
 export type Palette = Record<PaletteColorName, PaletteColor>;
 
 export type ShapeName = "button" | "bigButton" | "smallButton";
-export type Shapes = Record<ShapeName, ViewStyle>;
+export type Shapes = Record<ShapeName, React.CSSProperties>;
 
 export type TypographyVariant =
 	| "2xl-thin"
@@ -66,7 +65,7 @@ export type TypographyVariant =
 	| "button"
 	| "button-lg"
 	| "mono";
-export type Typography = Record<TypographyVariant, TextStyle>;
+export type Typography = Record<TypographyVariant, React.CSSProperties>;
 
 export interface Theme {
 	colorScheme: ColorScheme;

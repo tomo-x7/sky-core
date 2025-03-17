@@ -1,8 +1,8 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, RichText as RichTextAPI } from "@atproto/api";
 import React, { useCallback, useMemo, useRef } from "react";
-import { type GestureResponderEvent, LayoutAnimation, type StyleProp, type TextStyle, View } from "react-native";
+import { type GestureResponderEvent, LayoutAnimation } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
@@ -89,7 +89,7 @@ let MessageItem = ({
 	return (
 		<>
 			{isNewDay && <DateDivider date={message.sentAt} />}
-			<View
+			<div
 				style={{
 					...(isFromSelf ? a.mr_md : a.ml_md),
 					...(nextIsMessage && !isNextFromSameSender && a.mb_md),
@@ -98,27 +98,29 @@ let MessageItem = ({
 				<ActionsWrapper isFromSelf={isFromSelf} message={message}>
 					{AppBskyEmbedRecord.isView(message.embed) && <MessageItemEmbed embed={message.embed} />}
 					{rt.text.length > 0 && (
-						<View
+						<div
 							style={
-								!isOnlyEmoji(message.text) && [
-									a.py_sm,
-									a.my_2xs,
-									a.rounded_md,
-									{
-										paddingLeft: 14,
-										paddingRight: 14,
-										backgroundColor: isFromSelf
-											? isPending
-												? pendingColor
-												: t.palette.primary_500
-											: t.palette.contrast_50,
-										borderRadius: 17,
-									},
-									isFromSelf ? a.self_end : a.self_start,
-									isFromSelf
-										? { borderBottomRightRadius: needsTail ? 2 : 17 }
-										: { borderBottomLeftRadius: needsTail ? 2 : 17 },
-								]
+								isOnlyEmoji(message.text)
+									? undefined
+									: flatten([
+											a.py_sm,
+											a.my_2xs,
+											a.rounded_md,
+											{
+												paddingLeft: 14,
+												paddingRight: 14,
+												backgroundColor: isFromSelf
+													? isPending
+														? pendingColor
+														: t.palette.primary_500
+													: t.palette.contrast_50,
+												borderRadius: 17,
+											},
+											isFromSelf ? a.self_end : a.self_start,
+											isFromSelf
+												? { borderBottomRightRadius: needsTail ? 2 : 17 }
+												: { borderBottomLeftRadius: needsTail ? 2 : 17 },
+										])
 							}
 						>
 							<RichText
@@ -131,12 +133,12 @@ let MessageItem = ({
 								enableTags
 								emojiMultiplier={3}
 							/>
-						</View>
+						</div>
 					)}
 				</ActionsWrapper>
 
 				{isLastInGroup && <MessageItemMetadata item={item} style={isFromSelf ? a.text_right : a.text_left} />}
-			</View>
+			</div>
 		</>
 	);
 };
@@ -148,7 +150,7 @@ let MessageItemMetadata = ({
 	style,
 }: {
 	item: ConvoItem & { type: "message" | "pending-message" };
-	style: StyleProp<TextStyle>;
+	style: React.CSSProperties;
 }): React.ReactNode => {
 	const t = useTheme();
 	const { message } = item;

@@ -1,20 +1,19 @@
 import { useMemo } from "react";
-import type { TextStyle, ViewStyle } from "react-native";
 
 import { type PaletteColor, type PaletteColorName, useTheme } from "../ThemeContext";
 
 export interface UsePaletteValue {
 	colors: PaletteColor;
-	view: ViewStyle;
-	viewLight: ViewStyle;
-	btn: ViewStyle;
-	border: ViewStyle;
-	borderDark: ViewStyle;
-	text: TextStyle;
-	textLight: TextStyle;
-	textInverted: TextStyle;
-	link: TextStyle;
-	icon: TextStyle;
+	view: React.CSSProperties;
+	viewLight: React.CSSProperties;
+	btn: React.CSSProperties;
+	border: React.CSSProperties;
+	borderDark: React.CSSProperties;
+	text: React.CSSProperties;
+	textLight: React.CSSProperties;
+	textInverted: React.CSSProperties;
+	link: React.CSSProperties;
+	icon: React.CSSProperties;
 }
 export function usePalette(color: PaletteColorName): UsePaletteValue {
 	const theme = useTheme();

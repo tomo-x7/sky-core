@@ -1,8 +1,6 @@
 import { AppBskyGraphStarterpack, AtUri } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { Image } from "react-native";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Link as BaseLink, type LinkProps as BaseLinkProps } from "#/components/Link";
@@ -60,13 +58,13 @@ export function Card({
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.gap_md,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_sm,
@@ -74,7 +72,7 @@ export function Card({
 				}}
 			>
 				{!noIcon ? <StarterPackIcon width={40} gradient="sky" /> : null}
-				<View style={a.flex_1}>
+				<div style={a.flex_1}>
 					<Text
 						emoji
 						style={{
@@ -98,8 +96,8 @@ export function Card({
 							? "Starter pack by you"
 							: `Starter pack by ${sanitizeHandle(creator.handle, "@")}`}
 					</Text>
-				</View>
-			</View>
+				</div>
+			</div>
 			{!noDescription && record.description ? (
 				<Text emoji numberOfLines={3} style={a.leading_snug}>
 					{record.description}
@@ -115,7 +113,7 @@ export function Card({
 					{joinedAllTimeCount} users have joined!
 				</Text>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -167,7 +165,7 @@ export function Embed({
 	const imageUri = getStarterPackOgCard(starterPack);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.border,
 				...a.rounded_sm,
@@ -176,24 +174,22 @@ export function Embed({
 			}}
 		>
 			<Link starterPack={starterPack}>
-				<Image
-					//@ts-ignore
-					source={imageUri}
+				<img
+					src={imageUri}
 					style={{
 						...a.w_full,
-						...{ aspectRatio: 1.91 },
+						aspectRatio: 1.91,
 					}}
-					accessibilityIgnoresInvertColors={true}
 				/>
-				<View
+				<div
 					style={{
 						...a.px_sm,
 						...a.py_md,
 					}}
 				>
 					<Card starterPack={starterPack} />
-				</View>
+				</div>
 			</Link>
-		</View>
+		</div>
 	);
 }

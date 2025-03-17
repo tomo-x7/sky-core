@@ -1,8 +1,7 @@
 import type { ModerationUI } from "@atproto/api";
 import React from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import {
@@ -17,45 +16,37 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { useLabelDefinitions } from "#/state/preferences";
 
 export function ContentHider({
-	testID,
 	modui,
 	ignoreMute,
 	style,
 	childContainerStyle,
 	children,
 }: React.PropsWithChildren<{
-	testID?: string;
 	modui: ModerationUI | undefined;
 	ignoreMute?: boolean;
-	style?: StyleProp<ViewStyle>;
-	childContainerStyle?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
+	childContainerStyle?: React.CSSProperties;
 }>) {
 	const blur = modui?.blurs[0];
 	if (!blur || (ignoreMute && isJustAMute(modui))) {
-		return (
-			<View testID={testID} style={style}>
-				{children}
-			</View>
-		);
+		return <div style={style}>{children}</div>;
 	}
 	return (
-		<ContentHiderActive testID={testID} modui={modui} style={style} childContainerStyle={childContainerStyle}>
+		<ContentHiderActive modui={modui} style={style} childContainerStyle={childContainerStyle}>
 			{children}
 		</ContentHiderActive>
 	);
 }
 
 function ContentHiderActive({
-	testID,
 	modui,
 	style,
 	childContainerStyle,
 	children,
 }: React.PropsWithChildren<{
-	testID?: string;
 	modui: ModerationUI;
-	style?: StyleProp<ViewStyle>;
-	childContainerStyle?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
+	childContainerStyle?: React.CSSProperties;
 }>) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
@@ -101,7 +92,7 @@ function ContentHiderActive({
 				if (def.identifier === "porn" || def.identifier === "sexual") {
 					return "Adult Content";
 				}
-				return getLabelStrings("ja", globalLabelStrings, def).name;
+				return getLabelStrings(globalLabelStrings, def).name;
 			});
 
 		if (selfBlurNames.length === 0) {
@@ -111,8 +102,7 @@ function ContentHiderActive({
 	}, [modui?.blurs, blur, desc.name, labelDefs, globalLabelStrings]);
 
 	return (
-		<View
-			testID={testID}
+		<div
 			style={{
 				...a.overflow_hidden,
 				...style,
@@ -139,7 +129,7 @@ function ContentHiderActive({
 				}
 			>
 				{(state) => (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.w_full,
@@ -150,7 +140,7 @@ function ContentHiderActive({
 							...a.gap_xs,
 							...a.rounded_sm,
 							...t.atoms.bg_contrast_25,
-							...(gtMobile && [a.gap_sm, a.py_lg, a.mt_xs, a.px_xl]),
+							...flatten(gtMobile ? [a.gap_sm, a.py_lg, a.mt_xs, a.px_xl] : []),
 							...((state.hovered || state.pressed) && t.atoms.bg_contrast_50),
 						}}
 					>
@@ -161,7 +151,7 @@ function ContentHiderActive({
 								...a.text_left,
 								...a.font_bold,
 								...a.leading_snug,
-								...(gtMobile && [a.font_bold]),
+								...(gtMobile && a.font_bold),
 								...t.atoms.text_contrast_medium,
 
 								...{
@@ -177,18 +167,16 @@ function ContentHiderActive({
 								style={{
 									...a.font_bold,
 									...a.leading_snug,
-									...(gtMobile && [a.font_bold]),
+									...(gtMobile && a.font_bold),
 									...t.atoms.text_contrast_high,
 
-									...{
-										marginBottom: 1,
-									},
+									marginBottom: 1,
 								}}
 							>
 								{override ? <>Hide</> : <>Show</>}
 							</Text>
 						)}
-					</View>
+					</div>
 				)}
 			</Button>
 			{desc.source && blur.type === "label" && !override && (
@@ -215,7 +203,6 @@ function ContentHiderActive({
 							{desc.sourceType === "user" ? (
 								<>Labeled by the author.</>
 							) : (
-								// biome-ignore lint/style/noNonNullAssertion: <explanation>
 								<>Labeled by {sanitizeDisplayName(desc.source!)}.</>
 							)}{" "}
 							<Text
@@ -233,7 +220,7 @@ function ContentHiderActive({
 					)}
 				</Button>
 			)}
-			{override && <View style={childContainerStyle}>{children}</View>}
-		</View>
+			{override && <div style={childContainerStyle}>{children}</div>}
+		</div>
 	);
 }

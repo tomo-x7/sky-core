@@ -10,7 +10,6 @@ import { HomeHeaderLayout } from "./HomeHeaderLayout";
 
 export function HomeHeader(
 	props: RenderTabBarFnProps & {
-		testID?: string;
 		onPressSelected: () => void;
 		feeds: FeedSourceInfo[];
 	},
@@ -57,10 +56,9 @@ export function HomeHeader(
 				onPressSelected={props.onPressSelected}
 				selectedPage={props.selectedPage}
 				onSelect={onSelect}
-				testID={props.testID}
 				items={items}
-				dragProgress={props.dragProgress}
-				dragState={props.dragState}
+				// dragProgress={props.dragProgress}
+				// dragState={props.dragState}
 			/>
 		</HomeHeaderLayout>
 	);

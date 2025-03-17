@@ -58,7 +58,7 @@ export function ProfileFeedScreen(props: Props) {
 
 	if (error) {
 		return (
-			<Layout.Screen testID="profileFeedScreenError">
+			<Layout.Screen>
 				<Layout.Content>
 					<View
 						style={{
@@ -106,11 +106,11 @@ export function ProfileFeedScreen(props: Props) {
 	}
 
 	return resolvedUri ? (
-		<Layout.Screen testID="profileFeedScreen">
+		<Layout.Screen>
 			<ProfileFeedScreenIntermediate feedUri={resolvedUri.uri} feedParams={feedParams} />
 		</Layout.Screen>
 	) : (
-		<Layout.Screen testID="profileFeedScreen">
+		<Layout.Screen>
 			<ProfileFeedHeaderSkeleton />
 			<Layout.Content>
 				<PostFeedLoadingPlaceholder />
@@ -215,7 +215,6 @@ export function ProfileFeedScreenInner({
 
 			{hasSession && (
 				<FAB
-					testID="composeFAB"
 					onPress={() => openComposer({})}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
 					accessibilityRole="button"

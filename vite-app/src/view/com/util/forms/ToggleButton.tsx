@@ -8,7 +8,6 @@ import { Text } from "../text/Text";
 import { Button, type ButtonType } from "./Button";
 
 export function ToggleButton({
-	testID,
 	type = "default-light",
 	label,
 	isSelected,
@@ -16,7 +15,6 @@ export function ToggleButton({
 	labelType,
 	onPress,
 }: {
-	testID?: string;
 	type?: ButtonType;
 	label: string;
 	isSelected: boolean;
@@ -129,7 +127,7 @@ export function ToggleButton({
 		},
 	});
 	return (
-		<Button testID={testID} type={type} onPress={onPress} style={style}>
+		<Button type={type} onPress={onPress} style={style}>
 			<View style={styles.outer}>
 				<View
 					style={{

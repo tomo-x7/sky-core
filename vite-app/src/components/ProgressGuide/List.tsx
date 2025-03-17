@@ -1,5 +1,3 @@
-import { type StyleProp, View, type ViewStyle } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -8,7 +6,7 @@ import { useProgressGuide, useProgressGuideControls } from "#/state/shell/progre
 import { FollowDialog } from "./FollowDialog";
 import { ProgressGuideTask } from "./Task";
 
-export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
+export function ProgressGuideList({ style }: { style?: React.CSSProperties }) {
 	const t = useTheme();
 	const followProgressGuide = useProgressGuide("follow-10");
 	const followAndLikeProgressGuide = useProgressGuide("like-10-and-follow-7");
@@ -17,14 +15,14 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 
 	if (guide) {
 		return (
-			<View
+			<div
 				style={{
 					...a.flex_col,
 					...a.gap_md,
 					...style,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -51,7 +49,7 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 					>
 						<ButtonIcon icon={Times} size="sm" />
 					</Button>
-				</View>
+				</div>
 				{guide.guide === "follow-10" && (
 					<>
 						<ProgressGuideTask
@@ -79,7 +77,7 @@ export function ProgressGuideList({ style }: { style?: StyleProp<ViewStyle> }) {
 						/>
 					</>
 				)}
-			</View>
+			</div>
 		);
 	}
 	return null;

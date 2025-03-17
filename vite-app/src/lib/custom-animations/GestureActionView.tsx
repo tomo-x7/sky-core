@@ -1,5 +1,5 @@
 import React from "react";
-import { type ColorValue, Dimensions, StyleSheet, View } from "react-native";
+import { type ColorValue, Dimensions, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
 	clamp,
@@ -241,14 +241,16 @@ export function GestureActionView({
 			<View>
 				<Animated.View
 					style={{
-						...StyleSheet.absoluteFill,
 						...animatedBackgroundStyle,
+						position: "absolute",
+						inset: 0,
 					}}
 				>
-					<View
+					<div
 						style={{
 							flex: 1,
-							marginHorizontal: 12,
+							marginTop: 12,
+							marginBottom: 12,
 							justifyContent: "center",
 							alignItems:
 								activeAction === "leftFirst" || activeAction === "leftSecond"
@@ -285,7 +287,7 @@ export function GestureActionView({
 								/>
 							) : null}
 						</Animated.View>
-					</View>
+					</div>
 				</Animated.View>
 				<Animated.View style={animatedSliderStyle}>{children}</Animated.View>
 			</View>

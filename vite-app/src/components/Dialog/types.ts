@@ -1,9 +1,7 @@
 import type React from "react";
-import type { AccessibilityProps, GestureResponderEvent, ScrollViewProps } from "react-native";
+import type { AccessibilityProps, ScrollViewProps } from "react-native";
 
 import type { ViewStyleProp } from "#/alf";
-import type { BottomSheetViewProps } from "../../../modules/bottom-sheet";
-import type { BottomSheetSnapPoint } from "../../../modules/bottom-sheet/src/BottomSheet.types";
 
 type A11yProps = Required<AccessibilityProps>;
 
@@ -17,7 +15,7 @@ type A11yProps = Required<AccessibilityProps>;
  * would need to create a function to wrap `.open()` with.
  */
 export type DialogControlRefProps = {
-	open: (options?: DialogControlOpenOptions & Partial<GestureResponderEvent>) => void;
+	open: (options?: DialogControlOpenOptions & React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	close: (callback?: () => void) => void;
 };
 
@@ -33,7 +31,6 @@ export type DialogControlProps = DialogControlRefProps & {
 export type DialogContextProps = {
 	close: DialogControlProps["close"];
 	isNativeDialog: boolean;
-	nativeSnapPoint: BottomSheetSnapPoint;
 	disableDrag: boolean;
 	setDisableDrag: React.Dispatch<React.SetStateAction<boolean>>;
 	// in the event that the hook is used outside of a dialog
@@ -53,7 +50,6 @@ export type DialogControlOpenOptions = {
 export type DialogOuterProps = {
 	control: DialogControlProps;
 	onClose?: () => void;
-	nativeOptions?: Omit<BottomSheetViewProps, "children">;
 	webOptions?: {
 		alignCenter?: boolean;
 	};
@@ -67,14 +63,14 @@ export type DialogInnerProps =
 			accessibilityLabelledBy: A11yProps["aria-labelledby"];
 			accessibilityDescribedBy: string;
 			keyboardDismissMode?: ScrollViewProps["keyboardDismissMode"];
-			contentContainerStyle?: { style?: React.CSSProperties };
+			contentContainerStyle?: React.CSSProperties;
 			header?: React.ReactNode;
 	  }>
 	| DialogInnerPropsBase<{
-			label: string;
+			label?: string;
 			accessibilityLabelledBy?: undefined;
 			accessibilityDescribedBy?: undefined;
 			keyboardDismissMode?: ScrollViewProps["keyboardDismissMode"];
-			contentContainerStyle?: { style?: React.CSSProperties };
+			contentContainerStyle?: React.CSSProperties;
 			header?: React.ReactNode;
 	  }>;

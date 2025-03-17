@@ -1,8 +1,7 @@
 import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { Link, type LinkProps } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -85,7 +84,7 @@ function KnownFollowersInner({
 }) {
 	const t = useTheme();
 
-	const textStyle = [a.text_sm, a.leading_snug, t.atoms.text_contrast_medium];
+	const textStyle = flatten([a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]);
 
 	const slice = cachedKnownFollowers.followers.slice(0, 3).map((f) => {
 		const moderation = moderateProfile(f, moderationOpts);
@@ -123,7 +122,7 @@ function KnownFollowersInner({
 		>
 			{({ hovered, pressed }) => (
 				<>
-					<View
+					<div
 						style={{
 							...{
 								height: SIZE,
@@ -136,7 +135,7 @@ function KnownFollowersInner({
 						}}
 					>
 						{slice.map(({ profile: prof, moderation }, i) => (
-							<View
+							<div
 								key={prof.did}
 								style={{
 									...a.absolute,
@@ -158,22 +157,26 @@ function KnownFollowersInner({
 									moderation={moderation.ui("avatar")}
 									type={prof.associated?.labeler ? "labeler" : "user"}
 								/>
-							</View>
+							</div>
 						))}
-					</View>
+					</div>
 
 					<Text
 						style={{
 							...textStyle,
 
-							...(hovered && {
-								textDecorationLine: "underline",
-								textDecorationColor: t.atoms.text_contrast_medium.color,
-							}),
+							...(hovered
+								? {
+										textDecorationLine: "underline",
+										textDecorationColor: t.atoms.text_contrast_medium.color,
+									}
+								: {}),
 
-							...(pressed && {
-								opacity: 0.5,
-							}),
+							...(pressed
+								? {
+										opacity: 0.5,
+									}
+								: {}),
 						}}
 						numberOfLines={2}
 					>

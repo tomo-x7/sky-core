@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
@@ -10,7 +8,7 @@ export function FormError({ error }: { error?: string }) {
 	if (!error) return null;
 
 	return (
-		<View
+		<div
 			style={{
 				...{ backgroundColor: t.palette.negative_400 },
 				...a.flex_row,
@@ -20,7 +18,7 @@ export function FormError({ error }: { error?: string }) {
 			}}
 		>
 			<Warning fill={t.palette.white} size="md" />
-			<View style={a.flex_1}>
+			<div style={a.flex_1}>
 				<Text
 					style={{
 						...{ color: t.palette.white },
@@ -30,7 +28,7 @@ export function FormError({ error }: { error?: string }) {
 				>
 					{error}
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

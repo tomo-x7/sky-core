@@ -1,7 +1,6 @@
 import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -281,8 +280,8 @@ export function ProfileGrid({
 				<Person fill={t.atoms.text_contrast_low.color} size="sm" />
 			</div>
 			{gtMobile ? (
-				<View style={{ ...a.flex_1, ...a.px_lg, ...a.pt_sm, ...a.pb_lg, ...a.gap_md }}>
-					<View
+				<div style={{ ...a.flex_1, ...a.px_lg, ...a.pt_sm, ...a.pb_lg, ...a.gap_md }}>
+					<div
 						style={{
 							...a.flex_1,
 							...a.flex_row,
@@ -291,9 +290,9 @@ export function ProfileGrid({
 						}}
 					>
 						{content}
-					</View>
+					</div>
 
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.justify_end,
@@ -309,8 +308,8 @@ export function ProfileGrid({
 							Browse more suggestions
 						</InlineLinkText>
 						<Arrow size="sm" fill={t.atoms.text_contrast_medium.color} />
-					</View>
-				</View>
+					</div>
+				</div>
 			) : (
 				<BlockDrawerGesture>
 					<ScrollView
@@ -319,7 +318,7 @@ export function ProfileGrid({
 						snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
 						decelerationRate="fast"
 					>
-						<View
+						<div
 							style={{
 								...a.px_lg,
 								...a.pt_sm,
@@ -337,13 +336,13 @@ export function ProfileGrid({
 								}}
 							>
 								<CardOuter style={{ ...a.flex_1, borderWidth: 0 }}>
-									<View
+									<div
 										style={{
 											...a.flex_1,
 											...a.justify_center,
 										}}
 									>
-										<View
+										<div
 											style={{
 												...a.flex_row,
 												...a.px_lg,
@@ -360,11 +359,11 @@ export function ProfileGrid({
 											</Text>
 
 											<Arrow size="xl" />
-										</View>
-									</View>
+										</div>
+									</div>
 								</CardOuter>
 							</Button>
-						</View>
+						</div>
 					</ScrollView>
 				</BlockDrawerGesture>
 			)}
@@ -420,14 +419,14 @@ export function SuggestedFeeds() {
 	);
 
 	return error ? null : (
-		<View
+		<div
 			style={{
 				...a.border_t,
 				...t.atoms.border_contrast_low,
 				...t.atoms.bg_contrast_25,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.pt_2xl,
 					...a.px_lg,
@@ -446,10 +445,10 @@ export function SuggestedFeeds() {
 					Some other feeds you might like
 				</Text>
 				<Hashtag fill={t.atoms.text_contrast_low.color} />
-			</View>
+			</div>
 
 			{gtMobile ? (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.px_lg,
@@ -460,7 +459,7 @@ export function SuggestedFeeds() {
 				>
 					{content}
 
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.justify_end,
@@ -477,8 +476,8 @@ export function SuggestedFeeds() {
 							Browse more suggestions
 						</InlineLinkText>
 						<Arrow size="sm" fill={t.atoms.text_contrast_medium.color} />
-					</View>
-				</View>
+					</div>
+				</div>
 			) : (
 				<BlockDrawerGesture>
 					<ScrollView
@@ -487,7 +486,7 @@ export function SuggestedFeeds() {
 						snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
 						decelerationRate="fast"
 					>
-						<View
+						<div
 							style={{
 								...a.px_lg,
 								...a.pt_md,
@@ -506,13 +505,13 @@ export function SuggestedFeeds() {
 								style={a.flex_col}
 							>
 								<CardOuter style={a.flex_1}>
-									<View
+									<div
 										style={{
 											...a.flex_1,
 											...a.justify_center,
 										}}
 									>
-										<View
+										<div
 											style={{
 												...a.flex_row,
 												...a.px_lg,
@@ -529,22 +528,22 @@ export function SuggestedFeeds() {
 											</Text>
 
 											<Arrow size="xl" />
-										</View>
-									</View>
+										</div>
+									</div>
 								</CardOuter>
 							</Button>
-						</View>
+						</div>
 					</ScrollView>
 				</BlockDrawerGesture>
 			)}
-		</View>
+		</div>
 	);
 }
 
 export function ProgressGuide() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.border_contrast_low,
 				...a.px_lg,
@@ -553,6 +552,6 @@ export function ProgressGuide() {
 			}}
 		>
 			<ProgressGuideList />
-		</View>
+		</div>
 	);
 }

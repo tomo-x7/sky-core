@@ -163,7 +163,6 @@ function AltText({ text }: { text: string }) {
 	return (
 		<>
 			<TouchableOpacity
-				testID="altTextButton"
 				accessibilityRole="button"
 				accessibilityLabel={"Show alt text"}
 				accessibilityHint=""

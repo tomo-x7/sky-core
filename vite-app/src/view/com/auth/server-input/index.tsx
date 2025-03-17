@@ -135,7 +135,7 @@ function DialogInner({
 					<ToggleButton.Button name={BSKY_SERVICE} label={"Bluesky"}>
 						<ToggleButton.ButtonText>{"Bluesky"}</ToggleButton.ButtonText>
 					</ToggleButton.Button>
-					<ToggleButton.Button testID="customSelectBtn" name="custom" label={"Custom"}>
+					<ToggleButton.Button name="custom" label={"Custom"}>
 						<ToggleButton.ButtonText>{"Custom"}</ToggleButton.ButtonText>
 					</ToggleButton.Button>
 				</ToggleButton.Group>
@@ -161,7 +161,6 @@ function DialogInner({
 						<TextField.Root>
 							<TextField.Icon icon={Globe} />
 							<Dialog.Input
-								testID="customServerTextInput"
 								value={customAddress}
 								onChangeText={setCustomAddress}
 								label="my-server.com"
@@ -228,7 +227,6 @@ function DialogInner({
 
 				<View style={gtMobile && [a.flex_row, a.justify_end]}>
 					<Button
-						testID="doneBtn"
 						variant="outline"
 						color="primary"
 						size="small"

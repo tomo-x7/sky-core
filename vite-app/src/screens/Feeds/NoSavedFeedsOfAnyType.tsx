@@ -1,6 +1,5 @@
 import { TID } from "@atproto/common-web";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -28,7 +27,7 @@ export function NoSavedFeedsOfAnyType() {
 	}, [overwriteSavedFeeds]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.flex_wrap,
@@ -57,6 +56,6 @@ export function NoSavedFeedsOfAnyType() {
 				<ButtonIcon icon={Plus} position="left" />
 				<ButtonText>{"Use recommended"}</ButtonText>
 			</Button>
-		</View>
+		</div>
 	);
 }

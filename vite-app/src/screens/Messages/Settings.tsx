@@ -38,7 +38,7 @@ export function MessagesSettingsScreen(props: Props) {
 	);
 
 	return (
-		<Layout.Screen testID="messagesSettingsScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>
@@ -47,7 +47,7 @@ export function MessagesSettingsScreen(props: Props) {
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
 			<Layout.Content>
-				<View
+				<div
 					style={{
 						...a.p_lg,
 						...a.gap_md,
@@ -106,7 +106,7 @@ export function MessagesSettingsScreen(props: Props) {
 					<Admonition type="tip">
 						You can continue ongoing conversations regardless of which setting you choose.
 					</Admonition>
-				</View>
+				</div>
 			</Layout.Content>
 		</Layout.Screen>
 	);

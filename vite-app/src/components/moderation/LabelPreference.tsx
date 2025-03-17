@@ -1,6 +1,5 @@
 import type { InterpretedLabelValueDefinition, LabelPreference } from "@atproto/api";
 import type React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
@@ -14,7 +13,7 @@ import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "../icons/Circl
 
 export function Outer({ children }: React.PropsWithChildren) {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_sm,
@@ -25,7 +24,7 @@ export function Outer({ children }: React.PropsWithChildren) {
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -41,7 +40,7 @@ export function Content({
 	const { gtPhone } = useBreakpoints();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.gap_xs,
 				...a.flex_1,
@@ -66,7 +65,7 @@ export function Content({
 				{description}
 			</Text>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -86,7 +85,7 @@ export function Buttons({
 	hideLabel?: string;
 }) {
 	return (
-		<View
+		<div
 			style={{
 				...{ minHeight: 35 },
 				...a.w_full,
@@ -113,7 +112,7 @@ export function Buttons({
 					</ToggleButton.Button>
 				)}
 			</ToggleButton.Group>
-		</View>
+		</div>
 	);
 }
 
@@ -221,13 +220,13 @@ export function LabelerLabelPreference({
 	const warnLabel = useLabelBehaviorDescription(labelDefinition, "warn");
 	const ignoreLabel = useLabelBehaviorDescription(labelDefinition, "ignore");
 	const globalLabelStrings = useGlobalLabelStrings();
-	const labelStrings = getLabelStrings("ja", globalLabelStrings, labelDefinition);
+	const labelStrings = getLabelStrings(globalLabelStrings, labelDefinition);
 
 	return (
 		<Outer>
 			<Content name={labelStrings.name} description={labelStrings.description}>
 				{cantConfigure && (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_xs,
@@ -256,12 +255,12 @@ export function LabelerLabelPreference({
 								</>
 							) : null}
 						</Text>
-					</View>
+					</div>
 				)}
 			</Content>
 			{showConfig &&
 				(cantConfigure ? (
-					<View
+					<div
 						style={{
 							...{ minHeight: 35 },
 							...a.px_md,
@@ -281,7 +280,7 @@ export function LabelerLabelPreference({
 						>
 							{currentPrefLabel}
 						</Text>
-					</View>
+					</div>
 				) : (
 					<Buttons
 						name={labelStrings.name.toLowerCase()}

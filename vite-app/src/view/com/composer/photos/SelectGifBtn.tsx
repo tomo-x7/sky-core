@@ -25,7 +25,6 @@ export function SelectGifBtn({ onClose, onSelectGif, disabled }: Props) {
 	return (
 		<>
 			<Button
-				testID="openGifBtn"
 				onPress={onPressSelectGif}
 				label={"Select GIF"}
 				accessibilityHint={"Opens GIF select dialog"}

@@ -142,7 +142,7 @@ export function Selector({
 				backgroundColor: pal.colors.background,
 			}}
 		>
-			<ScrollView testID="selector" horizontal showsHorizontalScrollIndicator={false}>
+			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 				<View
 					style={{
 						...pal.view,
@@ -153,7 +153,6 @@ export function Selector({
 						const selected = i === selectedIndex;
 						return (
 							<Pressable
-								testID={`selector-${i}`}
 								key={item}
 								onPress={() => onPressItem(i)}
 								accessibilityLabel={item}

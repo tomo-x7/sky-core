@@ -147,7 +147,6 @@ let ProfileHeaderStandard = ({
 					{isMe ? (
 						<>
 							<Button
-								testID="profileHeaderEditProfileButton"
 								size="small"
 								color="secondary"
 								variant="solid"
@@ -162,7 +161,6 @@ let ProfileHeaderStandard = ({
 					) : profile.viewer?.blocking ? (
 						profile.viewer?.blockingByList ? null : (
 							<Button
-								testID="unblockBtn"
 								size="small"
 								color="secondary"
 								variant="solid"
@@ -179,7 +177,6 @@ let ProfileHeaderStandard = ({
 							{hasSession && <MessageProfileButton profile={profile} />}
 
 							<Button
-								testID={profile.viewer?.following ? "unfollowBtn" : "followBtn"}
 								size="small"
 								color={profile.viewer?.following ? "secondary" : "primary"}
 								variant="solid"
@@ -223,7 +220,6 @@ let ProfileHeaderStandard = ({
 						{descriptionRT && !moderation.ui("profileView").blur ? (
 							<View pointerEvents="auto">
 								<RichText
-									testID="profileHeaderDescription"
 									style={a.text_md}
 									numberOfLines={15}
 									value={descriptionRT}

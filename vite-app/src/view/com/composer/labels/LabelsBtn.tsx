@@ -44,7 +44,6 @@ export function LabelsBtn({
 				variant="solid"
 				color="secondary"
 				size="small"
-				testID="labelsBtn"
 				onPress={() => {
 					Keyboard.dismiss();
 					control.open();
@@ -242,14 +241,7 @@ function DialogInner({
 					...a.ml_auto,
 				}}
 			>
-				<Button
-					label={"Done"}
-					onPress={() => control.close()}
-					color="primary"
-					size={"small"}
-					variant="solid"
-					testID="confirmBtn"
-				>
+				<Button label={"Done"} onPress={() => control.close()} color="primary" size={"small"} variant="solid">
 					<ButtonText>Done</ButtonText>
 				</Button>
 			</View>

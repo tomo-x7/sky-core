@@ -471,7 +471,7 @@ export function FeedsScreen(_props: Props) {
 	);
 
 	return (
-		<Layout.Screen testID="FeedsScreen">
+		<Layout.Screen>
 			<Layout.Center>
 				<Layout.Header.Outer>
 					<Layout.Header.BackButton />
@@ -480,7 +480,6 @@ export function FeedsScreen(_props: Props) {
 					</Layout.Header.Content>
 					<Layout.Header.Slot>
 						<Link
-							testID="editFeedsBtn"
 							to="/settings/saved-feeds"
 							label={"Edit My Feeds"}
 							size="small"
@@ -515,7 +514,6 @@ export function FeedsScreen(_props: Props) {
 			</Layout.Center>
 			{hasSession && (
 				<FAB
-					testID="composeFAB"
 					onPress={onPressCompose}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 					accessibilityRole="button"
@@ -581,7 +579,7 @@ function SavedFeed({
 	const commonStyle = [a.w_full, a.flex_1, a.px_lg, a.py_md, a.border_b, t.atoms.border_contrast_low];
 
 	return savedFeed.type === "feed" ? (
-		<FeedCard.Link testID={`saved-feed-${savedFeed.view.displayName}`} {...savedFeed}>
+		<FeedCard.Link {...savedFeed}>
 			{({ hovered, pressed }) => (
 				<View
 					style={{
@@ -599,7 +597,7 @@ function SavedFeed({
 			)}
 		</FeedCard.Link>
 	) : (
-		<ListCard.Link testID={`saved-feed-${savedFeed.view.name}`} {...savedFeed}>
+		<ListCard.Link {...savedFeed}>
 			{({ hovered, pressed }) => (
 				<View
 					style={{

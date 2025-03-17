@@ -1,6 +1,5 @@
 import { type AppBskyActorDefs, type AppBskyFeedPost, AtUri } from "@atproto/api";
 import { memo, useEffect, useMemo, useState } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -87,8 +86,8 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 
 	return (
 		<Dialog.Inner label="Embed post" style={{ maxWidth: 500 }}>
-			<View style={a.gap_lg}>
-				<View style={a.gap_sm}>
+			<div style={a.gap_lg}>
+				<div style={a.gap_sm}>
 					<Text
 						style={{
 							...a.text_2xl,
@@ -107,8 +106,8 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 						Embed this post in your website. Simply copy the following snippet and paste it into the HTML
 						code of your website.
 					</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...a.border,
 						...t.atoms.border_contrast_low,
@@ -133,7 +132,7 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 					</Button>
 
 					{showCustomisation && (
-						<View
+						<div
 							style={{
 								...a.gap_sm,
 								...a.p_md,
@@ -162,16 +161,16 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 									<ToggleButton.ButtonText>Dark</ToggleButton.ButtonText>
 								</ToggleButton.Button>
 							</ToggleButton.Group>
-						</View>
+						</div>
 					)}
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...a.flex_row,
 						...a.gap_sm,
 					}}
 				>
-					<View style={a.flex_1}>
+					<div style={a.flex_1}>
 						<TextField.Root>
 							<TextField.Icon icon={CodeBracketsIcon} />
 							<TextField.Input
@@ -181,7 +180,7 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 								value={snippet}
 							/>
 						</TextField.Root>
-					</View>
+					</div>
 					<Button
 						label="Copy code"
 						color="primary"
@@ -201,8 +200,8 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 							<ButtonText>Copy code</ButtonText>
 						)}
 					</Button>
-				</View>
-			</View>
+				</div>
+			</div>
 			<Dialog.Close />
 		</Dialog.Inner>
 	);

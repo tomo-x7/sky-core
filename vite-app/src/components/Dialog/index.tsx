@@ -2,11 +2,12 @@ import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React, { useImperativeHandle } from "react";
-import { FlatList, type FlatListProps, TouchableWithoutFeedback, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
+import { FlatList, type FlatListProps } from "#/lib/flatlist";
 
 import hexRgb from "hex-rgb";
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Context } from "#/components/Dialog/context";
 import type { DialogControlProps, DialogInnerProps, DialogOuterProps } from "#/components/Dialog/types";
@@ -79,7 +80,6 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 		() => ({
 			close,
 			isNativeDialog: false,
-			nativeSnapPoint: 0,
 			disableDrag: false,
 			setDisableDrag: () => {},
 			isWithinDialog: true,
@@ -98,7 +98,7 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 							accessibilityLabel={"Close active dialog"}
 							onPress={handleBackgroundPress}
 						>
-							<View
+							<div
 								style={{
 									...a.fixed,
 									...a.inset_0,
@@ -107,11 +107,9 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 									...(webOptions?.alignCenter ? a.justify_center : undefined),
 									...a.align_center,
 
-									...{
-										//@ts-ignore
-										overflowY: "auto",
-										paddingVertical: gtMobile ? "10vh" : a.pt_xl.paddingTop,
-									},
+									overflowY: "auto",
+									paddingTop: gtMobile ? "10vh" : a.pt_xl.paddingTop,
+									paddingBottom: gtMobile ? "10vh" : a.pt_xl.paddingTop,
 								}}
 							>
 								<Backdrop />
@@ -120,19 +118,18 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 								 * above the screen, and provides a "natural" centering so that
 								 * stacked dialogs appear relatively aligned.
 								 */}
-								<View
+								<div
 									style={{
 										...a.w_full,
 										...a.z_20,
 										...a.align_center,
 
-										...//@ts-ignore
-										{ minHeight: "60vh", position: "static" },
+										...{ minHeight: "60vh", position: "static" },
 									}}
 								>
 									{children}
-								</View>
-							</View>
+								</div>
+							</div>
 						</TouchableWithoutFeedback>
 					</Context.Provider>
 				</Portal>
@@ -198,10 +195,10 @@ export function Inner({
 export const ScrollableInner = Inner;
 
 export const InnerFlatList = React.forwardRef<
-	FlatList,
-	FlatListProps<any> & { label: string } & {
-		webInnerStyle?: { style: React.CSSProperties };
-		webInnerContentContainerStyle?: { style: React.CSSProperties };
+	HTMLDivElement,
+	FlatListProps<any> & { label?: string } & {
+		webInnerStyle?: React.CSSProperties;
+		webInnerContentContainerStyle?: React.CSSProperties;
 	}
 >(function InnerFlatList({ label, style, webInnerStyle, webInnerContentContainerStyle, ...props }, ref) {
 	const { gtMobile } = useBreakpoints();
@@ -221,7 +218,7 @@ export const InnerFlatList = React.forwardRef<
 				ref={ref}
 				style={{
 					...(gtMobile ? a.px_2xl : a.px_xl),
-					...flatten(style),
+					...style,
 				}}
 				{...props}
 			/>
@@ -232,7 +229,7 @@ export const InnerFlatList = React.forwardRef<
 export function Close() {
 	const { close } = React.useContext(Context);
 	return (
-		<View
+		<div
 			style={{
 				...a.absolute,
 				...a.z_10,
@@ -253,7 +250,7 @@ export function Close() {
 			>
 				<ButtonIcon icon={X} size="md" />
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -265,8 +262,8 @@ function Backdrop() {
 	const t = useTheme();
 	const { reduceMotionEnabled } = useA11y();
 	return (
-		<View style={{ opacity: 0.8 }}>
-			<View
+		<div style={{ opacity: 0.8 }}>
+			<div
 				//@ts-ignore
 				style={{
 					...a.fixed,
@@ -275,6 +272,6 @@ function Backdrop() {
 					...(!reduceMotionEnabled && a.fade_in),
 				}}
 			/>
-		</View>
+		</div>
 	);
 }

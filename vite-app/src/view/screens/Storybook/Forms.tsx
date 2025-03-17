@@ -104,7 +104,6 @@ export function Forms() {
 				<View style={a.w_full}>
 					<LabelText>Date</LabelText>
 					<DateField
-						testID="date"
 						value={date}
 						onChangeDate={(date) => {
 							console.log(date);

@@ -75,7 +75,6 @@ let PostDropdownMenuItems = ({
 	timestamp,
 	threadgateRecord,
 }: {
-	testID: string;
 	post: Shadow<AppBskyFeedDefs.PostView>;
 	postFeedContext: string | undefined;
 	record: AppBskyFeedPost.Record;
@@ -350,7 +349,6 @@ let PostDropdownMenuItems = ({
 					<>
 						<Menu.Group>
 							<Menu.Item
-								testID="pinPostBtn"
 								label={isPinned ? "Unpin from profile" : "Pin to your profile"}
 								disabled={isPinPending}
 								onPress={onPressPin}
@@ -366,16 +364,12 @@ let PostDropdownMenuItems = ({
 				<Menu.Group>
 					{(!hideInPWI || hasSession) && (
 						<>
-							<Menu.Item testID="postDropdownTranslateBtn" label={"Translate"} onPress={onPressTranslate}>
+							<Menu.Item label={"Translate"} onPress={onPressTranslate}>
 								<Menu.ItemText>{"Translate"}</Menu.ItemText>
 								<Menu.ItemIcon icon={Translate} position="right" />
 							</Menu.Item>
 
-							<Menu.Item
-								testID="postDropdownCopyTextBtn"
-								label={"Copy post text"}
-								onPress={onCopyPostText}
-							>
+							<Menu.Item label={"Copy post text"} onPress={onCopyPostText}>
 								<Menu.ItemText>{"Copy post text"}</Menu.ItemText>
 								<Menu.ItemIcon icon={ClipboardIcon} position="right" />
 							</Menu.Item>
@@ -383,18 +377,13 @@ let PostDropdownMenuItems = ({
 					)}
 
 					{hasSession && (
-						<Menu.Item
-							testID="postDropdownSendViaDMBtn"
-							label={"Send via direct message"}
-							onPress={() => sendViaChatControl.open()}
-						>
+						<Menu.Item label={"Send via direct message"} onPress={() => sendViaChatControl.open()}>
 							<Menu.ItemText>Send via direct message</Menu.ItemText>
 							<Menu.ItemIcon icon={Send} position="right" />
 						</Menu.Item>
 					)}
 
 					<Menu.Item
-						testID="postDropdownShareBtn"
 						label={"Copy link to post"}
 						onPress={() => {
 							if (showLoggedOutWarning) {
@@ -409,11 +398,7 @@ let PostDropdownMenuItems = ({
 					</Menu.Item>
 
 					{canEmbed && (
-						<Menu.Item
-							testID="postDropdownEmbedBtn"
-							label={"Embed post"}
-							onPress={() => embedPostControl.open()}
-						>
+						<Menu.Item label={"Embed post"} onPress={() => embedPostControl.open()}>
 							<Menu.ItemText>{"Embed post"}</Menu.ItemText>
 							<Menu.ItemIcon icon={CodeBrackets} position="right" />
 						</Menu.Item>
@@ -424,20 +409,12 @@ let PostDropdownMenuItems = ({
 					<>
 						<Menu.Divider />
 						<Menu.Group>
-							<Menu.Item
-								testID="postDropdownShowMoreBtn"
-								label={"Show more like this"}
-								onPress={onPressShowMore}
-							>
+							<Menu.Item label={"Show more like this"} onPress={onPressShowMore}>
 								<Menu.ItemText>{"Show more like this"}</Menu.ItemText>
 								<Menu.ItemIcon icon={EmojiSmile} position="right" />
 							</Menu.Item>
 
-							<Menu.Item
-								testID="postDropdownShowLessBtn"
-								label={"Show less like this"}
-								onPress={onPressShowLess}
-							>
+							<Menu.Item label={"Show less like this"} onPress={onPressShowLess}>
 								<Menu.ItemText>{"Show less like this"}</Menu.ItemText>
 								<Menu.ItemIcon icon={EmojiSad} position="right" />
 							</Menu.Item>
@@ -450,7 +427,6 @@ let PostDropdownMenuItems = ({
 						<Menu.Divider />
 						<Menu.Group>
 							<Menu.Item
-								testID="postDropdownMuteThreadBtn"
 								label={isThreadMuted ? "Unmute thread" : "Mute thread"}
 								onPress={onToggleThreadMute}
 							>
@@ -458,11 +434,7 @@ let PostDropdownMenuItems = ({
 								<Menu.ItemIcon icon={isThreadMuted ? Unmute : Mute} position="right" />
 							</Menu.Item>
 
-							<Menu.Item
-								testID="postDropdownMuteWordsBtn"
-								label={"Mute words & tags"}
-								onPress={() => mutedWordsDialogControl.open()}
-							>
+							<Menu.Item label={"Mute words & tags"} onPress={() => mutedWordsDialogControl.open()}>
 								<Menu.ItemText>{"Mute words & tags"}</Menu.ItemText>
 								<Menu.ItemIcon icon={Filter} position="right" />
 							</Menu.Item>
@@ -476,7 +448,6 @@ let PostDropdownMenuItems = ({
 						<Menu.Group>
 							{canHidePostForMe && (
 								<Menu.Item
-									testID="postDropdownHideBtn"
 									label={isReply ? "Hide reply for me" : "Hide post for me"}
 									onPress={() => hidePromptControl.open()}
 								>
@@ -486,7 +457,6 @@ let PostDropdownMenuItems = ({
 							)}
 							{canHideReplyForEveryone && (
 								<Menu.Item
-									testID="postDropdownHideBtn"
 									label={
 										isReplyHiddenByThreadgate
 											? "Show reply for everyone"
@@ -510,7 +480,6 @@ let PostDropdownMenuItems = ({
 							{canDetachQuote && (
 								<Menu.Item
 									disabled={isDetachPending}
-									testID="postDropdownHideBtn"
 									label={quoteEmbed.isDetached ? "Re-attach quote" : "Detach quote"}
 									onPress={
 										quoteEmbed.isDetached
@@ -538,7 +507,6 @@ let PostDropdownMenuItems = ({
 							{!isAuthor && (
 								<>
 									<Menu.Item
-										testID="postDropdownMuteBtn"
 										label={postAuthor.viewer?.muted ? "Unmute account" : "Mute account"}
 										onPress={onMuteAuthor}
 									>
@@ -552,21 +520,13 @@ let PostDropdownMenuItems = ({
 									</Menu.Item>
 
 									{!postAuthor.viewer?.blocking && (
-										<Menu.Item
-											testID="postDropdownBlockBtn"
-											label={"Block account"}
-											onPress={() => blockPromptControl.open()}
-										>
+										<Menu.Item label={"Block account"} onPress={() => blockPromptControl.open()}>
 											<Menu.ItemText>{"Block account"}</Menu.ItemText>
 											<Menu.ItemIcon icon={PersonX} position="right" />
 										</Menu.Item>
 									)}
 
-									<Menu.Item
-										testID="postDropdownReportBtn"
-										label={"Report post"}
-										onPress={() => reportDialogControl.open()}
-									>
+									<Menu.Item label={"Report post"} onPress={() => reportDialogControl.open()}>
 										<Menu.ItemText>{"Report post"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Warning} position="right" />
 									</Menu.Item>
@@ -576,7 +536,6 @@ let PostDropdownMenuItems = ({
 							{isAuthor && (
 								<>
 									<Menu.Item
-										testID="postDropdownEditPostInteractions"
 										label={"Edit interaction settings"}
 										onPress={() => postInteractionSettingsDialogControl.open()}
 										{...(isAuthor
@@ -593,11 +552,7 @@ let PostDropdownMenuItems = ({
 										<Menu.ItemText>{"Edit interaction settings"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Gear} position="right" />
 									</Menu.Item>
-									<Menu.Item
-										testID="postDropdownDeleteBtn"
-										label={"Delete post"}
-										onPress={() => deletePromptControl.open()}
-									>
+									<Menu.Item label={"Delete post"} onPress={() => deletePromptControl.open()}>
 										<Menu.ItemText>{"Delete post"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Trash} position="right" />
 									</Menu.Item>
@@ -609,19 +564,11 @@ let PostDropdownMenuItems = ({
 							<>
 								<Menu.Divider />
 								<Menu.Group>
-									<Menu.Item
-										testID="postAtUriShareBtn"
-										label={"Copy post at:// URI"}
-										onPress={onShareATURI}
-									>
+									<Menu.Item label={"Copy post at:// URI"} onPress={onShareATURI}>
 										<Menu.ItemText>{"Copy post at:// URI"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Share} position="right" />
 									</Menu.Item>
-									<Menu.Item
-										testID="postAuthorDIDShareBtn"
-										label={"Copy author DID"}
-										onPress={onShareAuthorDID}
-									>
+									<Menu.Item label={"Copy author DID"} onPress={onShareAuthorDID}>
 										<Menu.ItemText>{"Copy author DID"}</Menu.ItemText>
 										<Menu.ItemIcon icon={Share} position="right" />
 									</Menu.Item>

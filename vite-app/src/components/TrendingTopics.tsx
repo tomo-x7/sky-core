@@ -1,8 +1,7 @@
 import type { AtUri } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
@@ -26,7 +25,7 @@ export function TrendingTopic({
 	const iconSize = 20;
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -35,24 +34,29 @@ export function TrendingTopic({
 				...t.atoms.border_contrast_medium,
 				...t.atoms.bg,
 
-				...(isSmall
-					? [
-							{
-								paddingVertical: 5,
-								paddingHorizontal: 10,
-							},
-						]
-					: [a.py_sm, a.px_md]),
+				...flatten(
+					isSmall
+						? [
+								{
+									padding: "5px 10px",
+								},
+							]
+						: [a.py_sm, a.px_md],
+				),
 
 				...(hasIcon && { gap: 6 }),
 				...style,
 			}}
 		>
 			{hasIcon && topic.type === "starter-pack" && (
-				<StarterPackIcon gradient="sky" width={iconSize} style={{ marginLeft: -3, marginVertical: -1 }} />
+				<StarterPackIcon
+					gradient="sky"
+					width={iconSize}
+					style={{ marginLeft: -3, marginTop: -1, marginBottom: -1 }}
+				/>
 			)}
 			{/*
-        <View
+        <div
           style={[
             a.align_center,
             a.justify_center,
@@ -80,19 +84,19 @@ export function TrendingTopic({
               avatar=""
             />
           )}
-        </View>
+        </div>
         */}
 			<Text
 				style={{
 					...a.font_bold,
 					...a.leading_tight,
-					...(isSmall ? [a.text_sm] : [a.text_md, { paddingBottom: 1 }]),
+					...flatten(isSmall ? [a.text_sm] : [a.text_md, { paddingBottom: 1 }]),
 				}}
 				numberOfLines={1}
 			>
 				{topic.displayName}
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -106,7 +110,7 @@ export function TrendingTopicSkeleton({
 	const t = useTheme();
 	const isSmall = size === "small";
 	return (
-		<View
+		<div
 			style={{
 				...a.rounded_full,
 				...a.border,

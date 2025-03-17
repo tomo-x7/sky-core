@@ -1,5 +1,4 @@
 import React from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button as BaseButton, type ButtonProps } from "#/components/Button";
@@ -42,7 +41,7 @@ export function Icon() {
 	return <Icon fill={fill} size="md" />;
 }
 
-export function Text({ children, style, ...rest }: Pick<TextProps, "children" | "style">) {
+export function Text({ children, style, ...rest }: { children?: React.ReactNode; style?: React.CSSProperties }) {
 	return (
 		<BaseText
 			{...rest}
@@ -78,7 +77,7 @@ export function Outer({
 }: {
 	children: React.ReactNode;
 	type?: Context["type"];
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
@@ -90,7 +89,7 @@ export function Outer({
 	}[type];
 	return (
 		<Context.Provider value={{ type }}>
-			<View
+			<div
 				style={{
 					...(gtMobile ? a.p_md : a.p_sm),
 					...a.rounded_sm,
@@ -101,7 +100,7 @@ export function Outer({
 				}}
 			>
 				{children}
-			</View>
+			</div>
 		</Context.Provider>
 	);
 }
@@ -113,7 +112,7 @@ export function Admonition({
 }: {
 	children: TextProps["children"];
 	type?: Context["type"];
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	return (
 		<Outer type={type} style={style}>

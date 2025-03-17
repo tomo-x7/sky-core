@@ -1,11 +1,9 @@
 import React from "react";
-import { type GestureResponderEvent, View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, type ButtonColor, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
-import type { BottomSheetViewProps } from "../../modules/bottom-sheet";
 
 export {
 	type DialogControlProps as PromptControlProps,
@@ -23,12 +21,8 @@ const Context = React.createContext<{
 export function Outer({
 	children,
 	control,
-	testID,
-	nativeOptions,
 }: React.PropsWithChildren<{
 	control: Dialog.DialogControlProps;
-	testID?: string;
-	nativeOptions?: Omit<BottomSheetViewProps, "children">;
 }>) {
 	const { gtMobile } = useBreakpoints();
 	const titleId = React.useId();
@@ -37,12 +31,7 @@ export function Outer({
 	const context = React.useMemo(() => ({ titleId, descriptionId }), [titleId, descriptionId]);
 
 	return (
-		<Dialog.Outer
-			control={control}
-			testID={testID}
-			webOptions={{ alignCenter: true }}
-			nativeOptions={{ preventExpansion: true, ...nativeOptions }}
-		>
+		<Dialog.Outer control={control} webOptions={{ alignCenter: true }}>
 			<Dialog.Handle />
 			<Context.Provider value={context}>
 				<Dialog.ScrollableInner
@@ -58,10 +47,8 @@ export function Outer({
 }
 
 export function TitleText({ children }: React.PropsWithChildren) {
-	const { titleId } = React.useContext(Context);
 	return (
 		<Text
-			nativeID={titleId}
 			style={{
 				...a.text_2xl,
 				...a.font_bold,
@@ -76,10 +63,8 @@ export function TitleText({ children }: React.PropsWithChildren) {
 
 export function DescriptionText({ children, selectable }: React.PropsWithChildren<{ selectable?: boolean }>) {
 	const t = useTheme();
-	const { descriptionId } = React.useContext(Context);
 	return (
 		<Text
-			nativeID={descriptionId}
 			selectable={selectable}
 			style={{
 				...a.text_md,
@@ -97,16 +82,16 @@ export function Actions({ children }: React.PropsWithChildren) {
 	const { gtMobile } = useBreakpoints();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.gap_md,
 				...a.justify_end,
-				...(gtMobile ? [a.flex_row, a.flex_row_reverse, a.justify_start] : [a.flex_col]),
+				...flatten(gtMobile ? [a.flex_row, a.flex_row_reverse, a.justify_start] : [a.flex_col]),
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -141,7 +126,6 @@ export function Action({
 	onPress,
 	color = "primary",
 	cta,
-	testID,
 }: {
 	/**
 	 * Callback to run when the action is pressed. The method is called _after_
@@ -150,18 +134,17 @@ export function Action({
 	 * Note: The dialog will close automatically when the action is pressed, you
 	 * should NOT close the dialog as a side effect of this method.
 	 */
-	onPress: (e: GestureResponderEvent) => void;
+	onPress: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	color?: ButtonColor;
 	/**
 	 * Optional i18n string. If undefined, it will default to "Confirm".
 	 */
 	cta?: string;
-	testID?: string;
 }) {
 	const { gtMobile } = useBreakpoints();
 	const { close } = Dialog.useDialogContext();
 	const handleOnPress = React.useCallback(
-		(e: GestureResponderEvent) => {
+		(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			close(() => onPress?.(e));
 		},
 		[close, onPress],
@@ -174,7 +157,6 @@ export function Action({
 			size={gtMobile ? "small" : "large"}
 			label={cta || "Confirm"}
 			onPress={handleOnPress}
-			testID={testID}
 		>
 			<ButtonText>{cta || "Confirm"}</ButtonText>
 		</Button>
@@ -203,16 +185,16 @@ export function Basic({
 	 * Note: The dialog will close automatically when the action is pressed, you
 	 * should NOT close the dialog as a side effect of this method.
 	 */
-	onConfirm: (e: GestureResponderEvent) => void;
+	onConfirm: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	confirmButtonColor?: ButtonColor;
 	showCancel?: boolean;
 }>) {
 	return (
-		<Outer control={control} testID="confirmModal">
+		<Outer control={control}>
 			<TitleText>{title}</TitleText>
 			<DescriptionText>{description}</DescriptionText>
 			<Actions>
-				<Action cta={confirmButtonCta} onPress={onConfirm} color={confirmButtonColor} testID="confirmBtn" />
+				<Action cta={confirmButtonCta} onPress={onConfirm} color={confirmButtonColor} />
 				{showCancel && <Cancel cta={cancelButtonCta} />}
 			</Actions>
 		</Outer>

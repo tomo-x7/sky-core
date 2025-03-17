@@ -1,10 +1,9 @@
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
-import flattenReactChildren from "react-keyed-flatten-children";
-import { Pressable, type StyleProp, View, type ViewStyle } from "react-native";
+import { Pressable } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
+import { atoms as a, flatten, useTheme } from "#/alf";
+import type * as Dialog from "#/components/Dialog";
 import { Context, ItemContext, useMenuContext, useMenuItemContext } from "#/components/Menu/context";
 import type {
 	ContextType,
@@ -12,15 +11,35 @@ import type {
 	ItemIconProps,
 	ItemProps,
 	ItemTextProps,
+	RadixPassThroughTriggerProps,
 	TriggerProps,
 } from "#/components/Menu/types";
+import { Portal } from "#/components/Portal";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
+import { useA11y } from "#/state/a11y";
 
-export {
-	type DialogControlProps as MenuControlProps,
-	useDialogControl as useMenuControl,
-} from "#/components/Dialog";
+export type { DialogControlProps as MenuControlProps } from "#/components/Dialog";
+
+export function useMenuControl(): Dialog.DialogControlProps {
+	const id = React.useId();
+	const [isOpen, setIsOpen] = React.useState(false);
+	//@ts-ignore
+	return React.useMemo(
+		() => ({
+			id,
+			ref: { current: null },
+			isOpen,
+			open() {
+				setIsOpen(true);
+			},
+			close() {
+				setIsOpen(false);
+			},
+		}),
+		[id, isOpen],
+	);
+}
 
 export function Root({
 	children,
@@ -28,102 +47,218 @@ export function Root({
 }: React.PropsWithChildren<{
 	control?: Dialog.DialogOuterProps["control"];
 }>) {
-	const defaultControl = Dialog.useDialogControl();
+	const defaultControl = useMenuControl();
 	const context = React.useMemo<ContextType>(
 		() => ({
 			control: control || defaultControl,
 		}),
 		[control, defaultControl],
 	);
+	const onOpenChange = React.useCallback(
+		(open: boolean) => {
+			if (context.control.isOpen && !open) {
+				context.control.close();
+			} else if (!context.control.isOpen && open) {
+				context.control.open();
+			}
+		},
+		[context.control],
+	);
 
-	return <Context.Provider value={context}>{children}</Context.Provider>;
+	return (
+		<Context.Provider value={context}>
+			{context.control.isOpen && (
+				<Portal>
+					<button
+						type="button"
+						style={{
+							...a.fixed,
+							...a.inset_0,
+							...a.z_50,
+						}}
+						onClick={() => context.control.close()}
+						aria-label="Context menu backdrop, click to close the menu."
+					/>
+				</Portal>
+			)}
+			<DropdownMenu.Root open={context.control.isOpen} onOpenChange={onOpenChange}>
+				{children}
+			</DropdownMenu.Root>
+		</Context.Provider>
+	);
 }
 
-export function Trigger({ children, label, role = "button", hint }: TriggerProps) {
-	const context = useMenuContext();
-	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
-	const { state: pressed, onIn: onPressIn, onOut: onPressOut } = useInteractionState();
-
-	return children({
-		isNative: true,
-		control: context.control,
-		state: {
-			hovered: false,
-			focused,
-			pressed,
-		},
+const RadixTriggerPassThrough = React.forwardRef(
+	(
 		props: {
-			ref: null,
-			onPress: context.control.open,
-			onFocus,
-			onBlur,
-			onPressIn,
-			onPressOut,
-			accessibilityHint: hint,
-			accessibilityLabel: label,
-			accessibilityRole: role,
+			children: (
+				props: RadixPassThroughTriggerProps & {
+					ref: React.Ref<any>;
+				},
+			) => React.ReactNode;
 		},
-	});
+		ref,
+	) => {
+		// @ts-expect-error Radix provides no types of this stuff
+		return props.children({ ...props, ref });
+	},
+);
+RadixTriggerPassThrough.displayName = "RadixTriggerPassThrough";
+
+export function Trigger({ children, label, role = "button", hint }: TriggerProps) {
+	const { control } = useMenuContext();
+	const { state: hovered, onIn: onMouseEnter, onOut: onMouseLeave } = useInteractionState();
+	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
+
+	return (
+		<DropdownMenu.Trigger asChild>
+			<RadixTriggerPassThrough>
+				{(props) =>
+					children({
+						isNative: false,
+						control,
+						state: {
+							hovered,
+							focused,
+							pressed: false,
+						},
+						props: {
+							...props,
+							// No-op override to prevent false positive that interprets mobile scroll as a tap.
+							// This requires the custom onPress handler below to compensate.
+							// https://github.com/radix-ui/primitives/issues/1912
+							onPointerDown: undefined,
+							onPress: () => {
+								if (window.event instanceof KeyboardEvent) {
+									// The onPointerDown hack above is not relevant to this press, so don't do anything.
+									return;
+								}
+								// Compensate for the disabled onPointerDown above by triggering it manually.
+								if (control.isOpen) {
+									control.close();
+								} else {
+									control.open();
+								}
+							},
+							onFocus: onFocus,
+							onBlur: onBlur,
+							onMouseEnter,
+							onMouseLeave,
+							accessibilityHint: hint,
+							accessibilityLabel: label,
+							accessibilityRole: role,
+						},
+					})
+				}
+			</RadixTriggerPassThrough>
+		</DropdownMenu.Trigger>
+	);
 }
 
 export function Outer({
 	children,
-	showCancel,
+	style,
 }: React.PropsWithChildren<{
 	showCancel?: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }>) {
-	const context = useMenuContext();
+	const t = useTheme();
+	const { reduceMotionEnabled } = useA11y();
+
 	return (
-		<Dialog.Outer control={context.control} nativeOptions={{ preventExpansion: true }}>
-			<Dialog.Handle />
-			{/* Re-wrap with context since Dialogs are portal-ed to root */}
-			<Context.Provider value={context}>
-				<Dialog.ScrollableInner label={"Menu"}>
-					<View style={a.gap_lg}>{children}</View>
-				</Dialog.ScrollableInner>
-			</Context.Provider>
-		</Dialog.Outer>
+		<DropdownMenu.Portal>
+			<DropdownMenu.Content
+				sideOffset={5}
+				collisionPadding={{ left: 5, right: 5, bottom: 5 }}
+				loop
+				aria-label="Test"
+				className="dropdown-menu-transform-origin dropdown-menu-constrain-size"
+			>
+				<div
+					style={{
+						...a.rounded_sm,
+						...a.p_xs,
+						...a.border,
+						...(t.name === "light" ? t.atoms.bg : t.atoms.bg_contrast_25),
+						...t.atoms.shadow_md,
+						...t.atoms.border_contrast_low,
+
+						...a.overflow_auto,
+
+						...(!reduceMotionEnabled && a.zoom_fade_in),
+
+						...style,
+					}}
+				>
+					{children}
+				</div>
+
+				{/* Disabled until we can fix positioning
+        <DropdownMenu.Arrow
+          className="DropdownMenuArrow"
+          fill={
+            (t.name === 'light' ? t.atoms.bg : t.atoms.bg_contrast_25)
+              .backgroundColor
+          }
+        />
+          */}
+			</DropdownMenu.Content>
+		</DropdownMenu.Portal>
 	);
 }
 
-export function Item({ children, label, style, onPress, ...rest }: ItemProps) {
+export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 	const t = useTheme();
-	const context = useMenuContext();
+	const { control } = useMenuContext();
+	const { state: hovered, onIn: onMouseEnter, onOut: onMouseLeave } = useInteractionState();
 	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
-	const { state: pressed, onIn: onPressIn, onOut: onPressOut } = useInteractionState();
 
 	return (
-		<Pressable
-			{...rest}
-			accessibilityHint=""
-			accessibilityLabel={label}
-			onFocus={onFocus}
-			onBlur={onBlur}
-			onPressIn={(e) => {
-				onPressIn();
-				rest.onPressIn?.(e);
-			}}
-			onPressOut={(e) => {
-				onPressOut();
-				rest.onPressOut?.(e);
-			}}
-			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_sm,
-				...a.px_md,
-				...a.rounded_md,
-				...a.border,
-				...t.atoms.bg_contrast_25,
-				...t.atoms.border_contrast_low,
-				...{ minHeight: 44, paddingVertical: 10 },
-				...style,
-				...((focused || pressed) && !rest.disabled && [t.atoms.bg_contrast_50]),
-			}}
-		>
-			<ItemContext.Provider value={{ disabled: Boolean(rest.disabled) }}>{children}</ItemContext.Provider>
-		</Pressable>
+		<DropdownMenu.Item asChild>
+			<Pressable
+				{...rest}
+				className="radix-dropdown-item"
+				accessibilityHint=""
+				accessibilityLabel={label}
+				onPress={(e) => {
+					onPress(e);
+
+					/**
+					 * Ported forward from Radix
+					 * @see https://www.radix-ui.com/primitives/docs/components/dropdown-menu#item
+					 */
+					if (!e.defaultPrevented) {
+						control.close();
+					}
+				}}
+				onFocus={onFocus}
+				onBlur={onBlur}
+				// need `flatten` here for Radix compat
+				//@ts-ignore
+				style={flatten([
+					a.flex_row,
+					a.align_center,
+					a.gap_lg,
+					a.py_sm,
+					a.rounded_xs,
+					{ minHeight: 32, paddingLeft: 10, paddingRight: 10 },
+					{ outline: 0 },
+					//@ts-ignore
+					(hovered || focused) &&
+						!rest.disabled && [
+							{ outline: "0 !important" },
+							t.name === "light" ? t.atoms.bg_contrast_25 : t.atoms.bg_contrast_50,
+						],
+					style,
+				])}
+				{...{
+					onMouseEnter,
+					onMouseLeave,
+				}}
+			>
+				<ItemContext.Provider value={{ disabled: Boolean(rest.disabled) }}>{children}</ItemContext.Provider>
+			</Pressable>
+		</DropdownMenu.Item>
 	);
 }
 
@@ -132,14 +267,10 @@ export function ItemText({ children, style }: ItemTextProps) {
 	const { disabled } = useMenuItemContext();
 	return (
 		<Text
-			numberOfLines={1}
-			ellipsizeMode="middle"
 			style={{
 				...a.flex_1,
-				...a.text_md,
 				...a.font_bold,
 				...t.atoms.text_contrast_high,
-				...{ paddingTop: 3 },
 				...style,
 				...(disabled && t.atoms.text_contrast_low),
 			}}
@@ -149,16 +280,31 @@ export function ItemText({ children, style }: ItemTextProps) {
 	);
 }
 
-export function ItemIcon({ icon: Comp }: ItemIconProps) {
+export function ItemIcon({ icon: Comp, position = "left" }: ItemIconProps) {
 	const t = useTheme();
 	const { disabled } = useMenuItemContext();
-	return <Comp size="lg" fill={disabled ? t.atoms.text_contrast_low.color : t.atoms.text_contrast_medium.color} />;
+	return (
+		<div
+			style={{
+				...(position === "left" && {
+					marginLeft: -2,
+				}),
+
+				...(position === "right" && {
+					marginRight: -2,
+					marginLeft: 12,
+				}),
+			}}
+		>
+			<Comp size="md" fill={disabled ? t.atoms.text_contrast_low.color : t.atoms.text_contrast_medium.color} />
+		</div>
+	);
 }
 
 export function ItemRadio({ selected }: { selected: boolean }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.justify_center,
 				...a.align_center,
@@ -173,7 +319,7 @@ export function ItemRadio({ selected }: { selected: boolean }) {
 			}}
 		>
 			{selected ? (
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...a.rounded_full,
@@ -187,7 +333,7 @@ export function ItemRadio({ selected }: { selected: boolean }) {
 					}}
 				/>
 			) : null}
-		</View>
+		</div>
 	);
 }
 
@@ -197,10 +343,12 @@ export function LabelText({ children }: { children: React.ReactNode }) {
 		<Text
 			style={{
 				...a.font_bold,
-				...t.atoms.text_contrast_medium,
+				...a.pt_md,
+				...a.pb_sm,
+				...t.atoms.text_contrast_low,
 
 				...{
-					marginBottom: -8,
+					paddingHorizontal: 10,
 				},
 			}}
 		>
@@ -209,59 +357,13 @@ export function LabelText({ children }: { children: React.ReactNode }) {
 	);
 }
 
-export function Group({ children, style }: GroupProps) {
-	const t = useTheme();
-	return (
-		<View
-			style={{
-				...a.rounded_md,
-				...a.overflow_hidden,
-				...a.border,
-				...t.atoms.border_contrast_low,
-				...style,
-			}}
-		>
-			{flattenReactChildren(children).map((child, i) => {
-				return React.isValidElement(child) && child.type === Item ? (
-					<React.Fragment key={i.toString()}>
-						{i > 0 ? (
-							<View
-								style={{
-									...a.border_b,
-									...t.atoms.border_contrast_low,
-								}}
-							/>
-						) : null}
-						{React.cloneElement(child, {
-							// @ts-ignore
-							style: {
-								borderRadius: 0,
-								borderWidth: 0,
-							},
-						})}
-					</React.Fragment>
-				) : null;
-			})}
-		</View>
-	);
-}
-
-function Cancel() {
-	const context = useMenuContext();
-
-	return (
-		<Button
-			label={"Close this dialog"}
-			size="small"
-			variant="ghost"
-			color="secondary"
-			onPress={() => context.control.close()}
-		>
-			<ButtonText>Cancel</ButtonText>
-		</Button>
-	);
+export function Group({ children }: GroupProps) {
+	return children;
 }
 
 export function Divider() {
-	return null;
+	const t = useTheme();
+	return (
+		<DropdownMenu.Separator style={flatten([a.my_xs, t.atoms.bg_contrast_100, a.flex_shrink_0, { height: 1 }])} />
+	);
 }

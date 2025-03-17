@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -42,8 +41,8 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 			label="Sign in to Bluesky or create a new account"
 			style={gtMobile ? { width: "auto", maxWidth: 420 } : a.w_full}
 		>
-			<View style={a.p_2xl}>
-				<View
+			<div style={a.p_2xl}>
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -53,10 +52,10 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 					}}
 				>
 					<Logo width={36} />
-					<View style={{ paddingTop: 6 }}>
+					<div style={{ paddingTop: 6 }}>
 						<Logotype width={120} fill={t.atoms.text.color} />
-					</View>
-				</View>
+					</div>
+				</div>
 
 				<Text
 					style={{
@@ -75,7 +74,7 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 					Sign in or create your account to join the conversation!
 				</Text>
 
-				<View
+				<div
 					style={{
 						...a.flex_col,
 						...a.gap_md,
@@ -94,8 +93,8 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 					<Button variant="solid" color="secondary" size="large" onPress={showSignIn} label="Sign in">
 						<ButtonText>Sign in</ButtonText>
 					</Button>
-				</View>
-			</View>
+				</div>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

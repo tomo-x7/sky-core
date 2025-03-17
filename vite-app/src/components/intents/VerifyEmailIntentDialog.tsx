@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -61,9 +60,9 @@ function Inner({ control }: { control: DialogControlProps }) {
 			label={"Verify email dialog"}
 			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
-			<View style={a.gap_xl}>
+			<div style={a.gap_xl}>
 				{status === "loading" ? (
-					<View
+					<div
 						style={{
 							...a.py_2xl,
 							...a.align_center,
@@ -71,9 +70,9 @@ function Inner({ control }: { control: DialogControlProps }) {
 						}}
 					>
 						<Loader size="xl" fill={t.atoms.text_contrast_low.color} />
-					</View>
+					</div>
 				) : status === "success" ? (
-					<View style={a.gap_sm}>
+					<div style={a.gap_sm}>
 						<Text
 							style={{
 								...a.font_heavy,
@@ -90,9 +89,9 @@ function Inner({ control }: { control: DialogControlProps }) {
 						>
 							Thanks, you have successfully verified your email address. You can close this dialog.
 						</Text>
-					</View>
+					</div>
 				) : status === "failure" ? (
-					<View style={a.gap_sm}>
+					<div style={a.gap_sm}>
 						<Text
 							style={{
 								...a.font_heavy,
@@ -110,9 +109,9 @@ function Inner({ control }: { control: DialogControlProps }) {
 							The verification code you have provided is invalid. Please make sure that you have used the
 							correct verification link or request a new one.
 						</Text>
-					</View>
+					</div>
 				) : (
-					<View style={a.gap_sm}>
+					<div style={a.gap_sm}>
 						<Text
 							style={{
 								...a.font_heavy,
@@ -138,7 +137,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 							</Text>
 							.
 						</Text>
-					</View>
+					</div>
 				)}
 
 				{status === "failure" && (
@@ -157,7 +156,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 						</Button>
 					</>
 				)}
-			</View>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

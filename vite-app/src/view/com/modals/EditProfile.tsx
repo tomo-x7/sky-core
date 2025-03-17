@@ -107,7 +107,7 @@ export function Component({
 
 	return (
 		<KeyboardAvoidingView style={s.flex1} behavior="height">
-			<ScrollView style={pal.view} testID="editProfileModal">
+			<ScrollView style={pal.view}>
 				<Text
 					style={{
 						...styles.title,
@@ -148,7 +148,6 @@ export function Component({
 							Display Name
 						</Text>
 						<TextInput
-							testID="editProfileDisplayNameInput"
 							style={{
 								...styles.textInput,
 								...pal.border,
@@ -173,7 +172,6 @@ export function Component({
 							Description
 						</Text>
 						<TextInput
-							testID="editProfileDescriptionInput"
 							style={{
 								...styles.textArea,
 								...pal.border,
@@ -202,7 +200,6 @@ export function Component({
 						</View>
 					) : (
 						<TouchableOpacity
-							testID="editProfileSaveBtn"
 							style={s.mt10}
 							onPress={onPressSave}
 							accessibilityRole="button"
@@ -229,7 +226,6 @@ export function Component({
 					{!updateMutation.isPending && (
 						<AnimatedTouchableOpacity
 							exiting={undefined}
-							testID="editProfileCancelBtn"
 							style={s.mt5}
 							onPress={onPressCancel}
 							accessibilityRole="button"

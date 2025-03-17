@@ -1,6 +1,4 @@
-import { View } from "react-native";
-
-import { type TextStyleProp, type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
+import { type TextStyleProp, type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import type { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
 import type { Props } from "#/components/icons/common";
 
@@ -17,7 +15,7 @@ export function IconCircle({
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.justify_center,
 				...a.align_center,
@@ -29,7 +27,7 @@ export function IconCircle({
 					backgroundColor: t.palette.primary_50,
 				},
 
-				...flatten(style),
+				...style,
 			}}
 		>
 			<Icon
@@ -39,9 +37,9 @@ export function IconCircle({
 						color: t.palette.primary_500,
 					},
 
-					...flatten(iconStyle),
+					...iconStyle,
 				}}
 			/>
-		</View>
+		</div>
 	);
 }

@@ -117,7 +117,6 @@ export function DisableEmail2FADialog({
 							}}
 						>
 							<Button
-								testID="sendEmailButton"
 								variant="solid"
 								color="primary"
 								size={gtMobile ? "small" : "large"}
@@ -129,7 +128,6 @@ export function DisableEmail2FADialog({
 								{isProcessing && <ButtonIcon icon={Loader} />}
 							</Button>
 							<Button
-								testID="haveCodeButton"
 								variant="ghost"
 								color="primary"
 								size={gtMobile ? "small" : "large"}
@@ -147,11 +145,10 @@ export function DisableEmail2FADialog({
 								<TextField.Root>
 									<TextField.Icon icon={Lock} />
 									<Dialog.Input
-										testID="confirmationCode"
 										label={"Confirmation code"}
 										autoCapitalize="none"
 										autoFocus
-										autoCorrect={false}
+										autoCorrect={"off"}
 										autoComplete="off"
 										value={confirmationCode}
 										onChangeText={setConfirmationCode}
@@ -167,7 +164,6 @@ export function DisableEmail2FADialog({
 								}}
 							>
 								<Button
-									testID="resendCodeBtn"
 									variant="ghost"
 									color="primary"
 									size={gtMobile ? "small" : "large"}
@@ -178,7 +174,6 @@ export function DisableEmail2FADialog({
 									<ButtonText>Resend email</ButtonText>
 								</Button>
 								<Button
-									testID="confirmBtn"
 									variant="solid"
 									color="primary"
 									size={gtMobile ? "small" : "large"}

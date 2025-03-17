@@ -1,5 +1,4 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
 import type { GifViewProps } from "./GifView.types";
 
 export type GifViewHandle = {
@@ -79,7 +78,7 @@ const GifView = React.memo(
 				playsInline
 				loop
 				muted
-				style={StyleSheet.flatten(props.style)}
+				style={props.style}
 				onCanPlay={onLoad}
 				onPlay={firePlayerStateChangeEvent}
 				onPause={firePlayerStateChangeEvent}

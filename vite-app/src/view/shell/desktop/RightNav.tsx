@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
@@ -48,20 +47,17 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...gutters,
 				...a.gap_lg,
 
-				...//@ts-ignore
-				{
-					position: "fixed",
-					left: "50%",
-					transform: [{ translateX: centerColumnOffset ? 150 : 300 }, ...a.scrollbar_offset.transform],
-					width: 300 + gutters.paddingLeft,
-					maxHeight: "100%",
-					overflowY: "auto",
-				},
+				position: "fixed",
+				left: "50%",
+				transform: `translateX(${centerColumnOffset ? 150 : 300}px) ${a.scrollbar_offset.transform}`,
+				width: 300 + gutters.paddingLeft,
+				maxHeight: "100%",
+				overflowY: "auto",
 			}}
 		>
 			{!isSearchScreen && <DesktopSearch />}
@@ -124,15 +120,15 @@ export function DesktopRightNav({ routeName }: { routeName: string }) {
 				</Text>
 			)}
 			{!hasSession && leftNavMinimal && (
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...{ height: 32 },
 					}}
 				>
 					<AppLanguageDropdown style={{ marginTop: 0 }} />
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 }

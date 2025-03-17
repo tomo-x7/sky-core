@@ -54,7 +54,6 @@ function AppealDialog() {
 	return (
 		<>
 			<Button
-				testID="appealDisabledChatBtn"
 				variant="ghost"
 				color="secondary"
 				size="small"
@@ -138,17 +137,10 @@ function DialogInner() {
 				/>
 			</View>
 			<View style={gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm]}>
-				<Button testID="backBtn" variant="solid" color="secondary" size="large" onPress={onBack} label={"Back"}>
+				<Button variant="solid" color="secondary" size="large" onPress={onBack} label={"Back"}>
 					<ButtonText>{"Back"}</ButtonText>
 				</Button>
-				<Button
-					testID="submitBtn"
-					variant="solid"
-					color="primary"
-					size="large"
-					onPress={onSubmit}
-					label={"Submit"}
-				>
+				<Button variant="solid" color="primary" size="large" onPress={onSubmit} label={"Submit"}>
 					<ButtonText>{"Submit"}</ButtonText>
 					{isPending && <ButtonIcon icon={Loader} />}
 				</Button>

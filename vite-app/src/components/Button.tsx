@@ -1,23 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import {
-	type AccessibilityProps,
-	type GestureResponderEvent,
-	type MouseEvent,
-	type NativeSyntheticEvent,
-	Pressable,
-	type PressableProps,
-	type StyleProp,
-	StyleSheet,
-	type TargetedEvent,
-	type TextProps,
-	type TextStyle,
-	View,
-	type ViewStyle,
-} from "react-native";
+import { type AccessibilityProps, Pressable, type PressableProps, StyleSheet } from "react-native";
 
 import { atoms as a, flatten, select, tokens, useTheme } from "#/alf";
-import { Text } from "#/components/Typography";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 
 export type ButtonVariant = "solid" | "outline" | "ghost" | "gradient";
@@ -65,34 +50,39 @@ export type ButtonContext = VariantProps & ButtonState;
 
 type NonTextElements = React.ReactElement | Iterable<React.ReactElement | null | undefined | boolean>;
 
-export type ButtonProps = Pick<
-	PressableProps,
-	| "disabled"
-	| "onPress"
-	| "testID"
-	| "onLongPress"
-	| "hitSlop"
-	| "onHoverIn"
-	| "onHoverOut"
-	| "onPressIn"
-	| "onPressOut"
-	| "onFocus"
-	| "onBlur"
-> &
-	AccessibilityProps &
+export type ButtonProps = {
+	disabled?: boolean;
+	onPress?: React.MouseEventHandler<HTMLButtonElement>;
+	hitSlop?:
+		| number
+		| {
+				top?: number;
+				bottom?: number;
+				left?: number;
+				right?: number;
+		  };
+	onHoverIn?: React.MouseEventHandler<HTMLButtonElement>;
+	onHoverOut?: React.MouseEventHandler<HTMLButtonElement>;
+	onPressIn?: React.MouseEventHandler<HTMLButtonElement>;
+	onPressOut?: React.MouseEventHandler<HTMLButtonElement>;
+	onFocus?: (ev: React.FocusEvent<HTMLButtonElement, Element>) => void;
+	onBlur?: (ev: React.FocusEvent<HTMLButtonElement, Element>) => void;
+	className?: string;
+} & AccessibilityProps &
 	VariantProps & {
-		testID?: string;
 		/**
 		 * For a11y, try to make this descriptive and clear
 		 */
 		label: string;
-		style?: StyleProp<ViewStyle>;
-		hoverStyle?: StyleProp<ViewStyle>;
+		style?: React.CSSProperties;
+		hoverStyle?: React.CSSProperties;
 		children: NonTextElements | ((context: ButtonContext) => NonTextElements);
 		PressableComponent?: React.ComponentType<PressableProps>;
 	};
 
-export type ButtonTextProps = TextProps & VariantProps & { disabled?: boolean };
+export type ButtonTextProps = { style?: React.CSSProperties; children?: React.ReactNode } & VariantProps & {
+		disabled?: boolean;
+	};
 
 const Context = React.createContext<VariantProps & ButtonState>({
 	hovered: false,
@@ -105,7 +95,7 @@ export function useButtonContext() {
 	return React.useContext(Context);
 }
 
-export const Button = React.forwardRef<View, ButtonProps>(
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	(
 		{
 			children,
@@ -136,7 +126,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 		});
 
 		const onPressIn = React.useCallback(
-			(e: GestureResponderEvent) => {
+			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					pressed: true,
@@ -146,7 +136,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			[onPressInOuter],
 		);
 		const onPressOut = React.useCallback(
-			(e: GestureResponderEvent) => {
+			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					pressed: false,
@@ -156,7 +146,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			[onPressOutOuter],
 		);
 		const onHoverIn = React.useCallback(
-			(e: MouseEvent) => {
+			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					hovered: true,
@@ -166,7 +156,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			[onHoverInOuter],
 		);
 		const onHoverOut = React.useCallback(
-			(e: MouseEvent) => {
+			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					hovered: false,
@@ -176,7 +166,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			[onHoverOutOuter],
 		);
 		const onFocus = React.useCallback(
-			(e: NativeSyntheticEvent<TargetedEvent>) => {
+			(e: React.FocusEvent<HTMLButtonElement, Element>) => {
 				setState((s) => ({
 					...s,
 					focused: true,
@@ -186,7 +176,7 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			[onFocusOuter],
 		);
 		const onBlur = React.useCallback(
-			(e: NativeSyntheticEvent<TargetedEvent>) => {
+			(e: React.FocusEvent<HTMLButtonElement, Element>) => {
 				setState((s) => ({
 					...s,
 					focused: false,
@@ -197,8 +187,8 @@ export const Button = React.forwardRef<View, ButtonProps>(
 		);
 
 		const { baseStyles, hoverStyles } = React.useMemo(() => {
-			const baseStyles: ViewStyle[] = [];
-			const hoverStyles: ViewStyle[] = [];
+			const baseStyles: React.CSSProperties[] = [];
+			const hoverStyles: React.CSSProperties[] = [];
 
 			if (color === "primary") {
 				if (variant === "solid") {
@@ -359,22 +349,19 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			if (shape === "default") {
 				if (size === "large") {
 					baseStyles.push({
-						paddingVertical: 13,
-						paddingHorizontal: 20,
+						padding: "13px 20px",
 						borderRadius: 8,
 						gap: 8,
 					});
 				} else if (size === "small") {
 					baseStyles.push({
-						paddingVertical: 9,
-						paddingHorizontal: 12,
+						padding: "9px 12px",
 						borderRadius: 6,
 						gap: 6,
 					});
 				} else if (size === "tiny") {
 					baseStyles.push({
-						paddingVertical: 4,
-						paddingHorizontal: 8,
+						padding: "4px 8px",
 						borderRadius: 4,
 						gap: 4,
 					});
@@ -412,8 +399,8 @@ export const Button = React.forwardRef<View, ButtonProps>(
 			}
 
 			return {
-				baseStyles,
-				hoverStyles,
+				baseStyles: flatten(baseStyles),
+				hoverStyles: flatten(hoverStyles),
 			};
 		}, [t, variant, color, size, shape, disabled]);
 
@@ -458,43 +445,35 @@ export const Button = React.forwardRef<View, ButtonProps>(
 		);
 
 		const flattenedBaseStyles = flatten([baseStyles, style]);
-
 		return (
-			<PressableComponent
-				// biome-ignore lint/a11y/useSemanticElements: <explanation>
-				role="button"
+			<button
 				accessibilityHint={undefined} // optional
 				{...rest}
-				// @ts-ignore - this will always be a pressable
 				ref={ref}
 				aria-label={label}
 				aria-pressed={state.pressed}
-				accessibilityLabel={label}
 				disabled={disabled || false}
-				accessibilityState={{
-					disabled: disabled || false,
-				}}
 				style={{
 					...a.flex_row,
 					...a.align_center,
 					...a.justify_center,
 					...flattenedBaseStyles,
-					...(state.hovered || state.pressed ? [hoverStyles, flatten(hoverStyleProp)] : []),
+					...(state.hovered || state.pressed ? { ...hoverStyles, ...hoverStyleProp } : {}),
 				}}
-				onPressIn={onPressIn}
-				onPressOut={onPressOut}
-				onHoverIn={onHoverIn}
-				onHoverOut={onHoverOut}
 				onFocus={onFocus}
 				onBlur={onBlur}
+				onMouseDown={onPressIn}
+				onMouseUp={onPressOut}
+				onMouseEnter={onHoverIn}
+				onMouseLeave={onHoverOut}
 			>
 				{variant === "gradient" && gradientValues && (
-					<View
+					<div
 						style={{
 							...a.absolute,
 							...a.inset_0,
 							...a.overflow_hidden,
-							...{ borderRadius: flattenedBaseStyles.borderRadius },
+							...{ borderRadius: flattenedBaseStyles?.borderRadius },
 						}}
 					>
 						<LinearGradient
@@ -507,12 +486,12 @@ export const Button = React.forwardRef<View, ButtonProps>(
 								...a.inset_0,
 							}}
 						/>
-					</View>
+					</div>
 				)}
 				<Context.Provider value={context}>
 					{typeof children === "function" ? children(context) : children}
 				</Context.Provider>
-			</PressableComponent>
+			</button>
 		);
 	},
 );
@@ -522,7 +501,7 @@ export function useSharedButtonTextStyles() {
 	const t = useTheme();
 	const { color, variant, disabled, size } = useButtonContext();
 	return React.useMemo(() => {
-		const baseStyles: TextStyle[] = [];
+		const baseStyles: React.CSSProperties[] = [];
 
 		if (color === "primary") {
 			if (variant === "solid") {
@@ -654,7 +633,7 @@ export function ButtonText({ children, style, ...rest }: ButtonTextProps) {
 	const textStyles = useSharedButtonTextStyles();
 
 	return (
-		<Text
+		<div
 			{...rest}
 			style={{
 				...a.font_bold,
@@ -664,7 +643,7 @@ export function ButtonText({ children, style, ...rest }: ButtonTextProps) {
 			}}
 		>
 			{children}
-		</Text>
+		</div>
 	);
 }
 
@@ -721,7 +700,7 @@ export function ButtonIcon({
 	}, [buttonSize, size]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.z_20,
 
@@ -734,24 +713,14 @@ export function ButtonIcon({
 				},
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.absolute,
-
-					...{
-						width: iconSize,
-						height: iconSize,
-						top: "50%",
-						left: "50%",
-						transform: [
-							{
-								translateX: (iconSize / 2) * -1,
-							},
-							{
-								translateY: (iconSize / 2) * -1,
-							},
-						],
-					},
+					width: iconSize,
+					height: iconSize,
+					top: "50%",
+					left: "50%",
+					transform: `translateX(${(iconSize / 2) * -1}px) translateY(${(iconSize / 2) * -1}px)`,
 				}}
 			>
 				<Comp
@@ -761,7 +730,7 @@ export function ButtonIcon({
 						pointerEvents: "none",
 					}}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

@@ -1,11 +1,10 @@
 import { sanitizeUrl } from "@braintree/sanitize-url";
 import { StackActions, useLinkProps } from "@react-navigation/native";
 import React from "react";
-import type { GestureResponderEvent } from "react-native";
 
-import { type TextStyleProp, atoms as a, flatten, useTheme } from "#/alf";
+import { type TextStyleProp, atoms as a, useTheme } from "#/alf";
 import { Button, type ButtonProps } from "#/components/Button";
-import { Text, type TextProps } from "#/components/Typography";
+import type { TextProps } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { BSKY_DOWNLOAD_URL } from "#/lib/constants";
 import { useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
@@ -28,8 +27,6 @@ import { useModalControls } from "#/state/modals";
 export { useButtonContext as useLinkContext } from "#/components/Button";
 
 type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0], "to"> & {
-	testID?: string;
-
 	/**
 	 * The React Navigation `StackAction` to perform when the link is pressed.
 	 */
@@ -49,14 +46,14 @@ type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0]
 	 * DO NOT use this for navigation, that's what the `to` prop is for.
 	 */
 
-	onPress?: (e: GestureResponderEvent) => void | false;
+	onPress?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => void | false;
 
 	/**
 	 * Callback for when the link is long pressed (on native). Prevent default
 	 * and return `false` to exit early and prevent default long press hander.
 	 */
 
-	onLongPress?: (e: GestureResponderEvent) => void | false;
+	onLongPress?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => void | false;
 
 	/**
 	 * Web-only attribute. Sets `download` attr on web.
@@ -98,7 +95,7 @@ export function useLink({
 	const openLink = useOpenLink();
 
 	const onPress = React.useCallback(
-		(e: GestureResponderEvent) => {
+		(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
 			const exitEarlyIfFalse = outerOnPress?.(e);
 
 			if (exitEarlyIfFalse === false) return;
@@ -158,25 +155,8 @@ export function useLink({
 		],
 	);
 
-	const handleLongPress = React.useCallback(() => {
-		const requiresWarning = Boolean(
-			!disableMismatchWarning && displayText && isExternal && linkRequiresWarning(href, displayText),
-		);
-
-		if (requiresWarning) {
-			openModal({
-				name: "link-warning",
-				text: displayText,
-				href: href,
-				share: true,
-			});
-		} else {
-			shareUrl(href);
-		}
-	}, [disableMismatchWarning, displayText, href, isExternal, openModal]);
-
 	const onLongPress = React.useCallback(
-		(e: GestureResponderEvent) => {
+		(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
 			const exitEarlyIfFalse = outerOnLongPress?.(e);
 			if (exitEarlyIfFalse === false) return;
 			return undefined;
@@ -212,12 +192,11 @@ export function Link({
 	shouldProxy,
 	...rest
 }: LinkProps) {
-	const { href, isExternal, onPress, onLongPress } = useLink({
+	const { href, isExternal, onPress } = useLink({
 		to,
 		displayText: typeof children === "string" ? children : "",
 		action,
 		onPress: outerOnPress,
-		onLongPress: outerOnLongPress,
 		shouldProxy: shouldProxy,
 	});
 
@@ -226,7 +205,7 @@ export function Link({
 			{...rest}
 			style={{
 				...a.justify_start,
-				...flatten(rest.style),
+				...rest.style,
 			}}
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="link"
@@ -234,7 +213,6 @@ export function Link({
 			//@ts-ignore
 			href={href}
 			onPress={download ? undefined : onPress}
-			onLongPress={onLongPress}
 			{...{
 				hrefAttrs: {
 					target: download ? undefined : isExternal ? "blank" : undefined,
@@ -255,7 +233,7 @@ export function Link({
 export type InlineLinkProps = React.PropsWithChildren<
 	BaseLinkProps &
 		TextStyleProp &
-		Pick<TextProps, "selectable" | "numberOfLines"> &
+		Pick<TextProps, "selectable"> &
 		Pick<ButtonProps, "label" | "accessibilityHint"> & {
 			disableUnderline?: boolean;
 			title?: TextProps["title"];
@@ -282,7 +260,7 @@ export function InlineLinkText({
 }: InlineLinkProps) {
 	const t = useTheme();
 	const stringChildren = typeof children === "string";
-	const { href, isExternal, onPress, onLongPress } = useLink({
+	const { href, isExternal, onPress } = useLink({
 		to,
 		displayText: stringChildren ? children : "",
 		action,
@@ -294,13 +272,12 @@ export function InlineLinkText({
 		shouldProxy: shouldProxy,
 	});
 	const { state: hovered, onIn: onHoverIn, onOut: onHoverOut } = useInteractionState();
-	const flattenedStyle = flatten(style) || {};
+	const flattenedStyle = style || {};
 
 	return (
-		<Text
-			selectable={selectable}
+		<a
+			unselectable={selectable ? "off" : "on"}
 			accessibilityHint=""
-			accessibilityLabel={label}
 			{...rest}
 			style={{
 				...{ color: t.palette.primary_500 },
@@ -316,14 +293,9 @@ export function InlineLinkText({
 
 				...flattenedStyle,
 			}}
-			// biome-ignore lint/a11y/useSemanticElements: <explanation>
-			role="link"
-			onPress={download ? undefined : onPress}
-			onLongPress={onLongPress}
-			//@ts-ignore
+			onClick={download ? undefined : onPress}
 			onMouseEnter={onHoverIn}
 			onMouseLeave={onHoverOut}
-			accessibilityRole="link"
 			href={href}
 			{...{
 				hrefAttrs: {
@@ -338,7 +310,7 @@ export function InlineLinkText({
 			}}
 		>
 			{children}
-		</Text>
+		</a>
 	);
 }
 
@@ -362,7 +334,7 @@ export function createStaticClick(onPressHandler: Exclude<BaseLinkProps["onPress
 } {
 	return {
 		to: "#",
-		onPress(e: GestureResponderEvent) {
+		onPress(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) {
 			e.preventDefault();
 			onPressHandler(e);
 			return false;
@@ -384,7 +356,7 @@ export function createStaticClickIfUnmodified(onPressHandler: Exclude<BaseLinkPr
 	onPress: Exclude<BaseLinkProps["onPress"], undefined>;
 } {
 	return {
-		onPress(e: GestureResponderEvent) {
+		onPress(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) {
 			if (!isModifiedClickEvent(e)) {
 				e.preventDefault();
 				onPressHandler(e);
@@ -398,16 +370,16 @@ export function createStaticClickIfUnmodified(onPressHandler: Exclude<BaseLinkPr
  * Determines if the click event has a meta key pressed, indicating the user
  * intends to deviate from default behavior.
  */
-export function isClickEventWithMetaKey(e: GestureResponderEvent) {
-	const event = e as unknown as MouseEvent;
+export function isClickEventWithMetaKey(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) {
+	const event = e;
 	return event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
 }
 
 /**
  * Determines if the web click target is anything other than `_self`
  */
-export function isClickTargetExternal(e: GestureResponderEvent) {
-	const event = e as unknown as MouseEvent;
+export function isClickTargetExternal(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) {
+	const event = e;
 	const el = event.currentTarget as HTMLAnchorElement;
 	return el?.target && el.target !== "_self";
 }
@@ -417,8 +389,8 @@ export function isClickTargetExternal(e: GestureResponderEvent) {
  * behavior, e.g. `Cmd` or a middle click.
  * {@link https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button}
  */
-export function isModifiedClickEvent(e: GestureResponderEvent): boolean {
-	const event = e as unknown as MouseEvent;
+export function isModifiedClickEvent(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): boolean {
+	const event = e;
 	const isPrimaryButton = event.button === 0;
 	return isClickEventWithMetaKey(e) || isClickTargetExternal(e) || !isPrimaryButton;
 }
@@ -428,8 +400,8 @@ export function isModifiedClickEvent(e: GestureResponderEvent): boolean {
  * that the user intends to open a new tab.
  * {@link https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button}
  */
-export function shouldClickOpenNewTab(e: GestureResponderEvent) {
-	const event = e as unknown as MouseEvent;
+export function shouldClickOpenNewTab(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) {
+	const event = e;
 	const isMiddleClick = event.button === 1;
 	return isClickEventWithMetaKey(e) || isClickTargetExternal(e) || isMiddleClick;
 }

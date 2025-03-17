@@ -186,7 +186,6 @@ let ProfileMenu = ({
 						return (
 							<Button
 								{...props}
-								testID="profileHeaderDropdownBtn"
 								label={"More options"}
 								hitSlop={HITSLOP_20}
 								variant="solid"
@@ -203,7 +202,6 @@ let ProfileMenu = ({
 				<Menu.Outer style={{ minWidth: 170 }}>
 					<Menu.Group>
 						<Menu.Item
-							testID="profileHeaderDropdownShareBtn"
 							label={"Share"}
 							onPress={() => {
 								if (showLoggedOutWarning) {
@@ -216,11 +214,7 @@ let ProfileMenu = ({
 							<Menu.ItemText>Share</Menu.ItemText>
 							<Menu.ItemIcon icon={Share} />
 						</Menu.Item>
-						<Menu.Item
-							testID="profileHeaderDropdownSearchBtn"
-							label={"Search posts"}
-							onPress={onPressSearch}
-						>
+						<Menu.Item label={"Search posts"} onPress={onPressSearch}>
 							<Menu.ItemText>Search posts</Menu.ItemText>
 							<Menu.ItemIcon icon={SearchIcon} />
 						</Menu.Item>
@@ -232,7 +226,6 @@ let ProfileMenu = ({
 							<Menu.Group>
 								{!isSelf && (isLabelerAndNotBlocked || isFollowingBlockedAccount) && (
 									<Menu.Item
-										testID="profileHeaderDropdownFollowBtn"
 										label={isFollowing ? "Unfollow account" : "Follow account"}
 										onPress={isFollowing ? onPressUnfollowAccount : onPressFollowAccount}
 									>
@@ -242,11 +235,7 @@ let ProfileMenu = ({
 										<Menu.ItemIcon icon={isFollowing ? UserMinus : Plus} />
 									</Menu.Item>
 								)}
-								<Menu.Item
-									testID="profileHeaderDropdownListAddRemoveBtn"
-									label={"Add to Lists"}
-									onPress={onPressAddRemoveLists}
-								>
+								<Menu.Item label={"Add to Lists"} onPress={onPressAddRemoveLists}>
 									<Menu.ItemText>Add to lists</Menu.ItemText>
 									<Menu.ItemIcon icon={List} />
 								</Menu.Item>
@@ -254,7 +243,6 @@ let ProfileMenu = ({
 									<>
 										{!profile.viewer?.blocking && !profile.viewer?.mutedByList && (
 											<Menu.Item
-												testID="profileHeaderDropdownMuteBtn"
 												label={profile.viewer?.muted ? "Unmute account" : "Mute account"}
 												onPress={onPressMuteAccount}
 											>
@@ -266,7 +254,6 @@ let ProfileMenu = ({
 										)}
 										{!profile.viewer?.blockingByList && (
 											<Menu.Item
-												testID="profileHeaderDropdownBlockBtn"
 												label={profile.viewer ? "Unblock account" : "Block account"}
 												onPress={() => blockPromptControl.open()}
 											>
@@ -282,11 +269,7 @@ let ProfileMenu = ({
 												/>
 											</Menu.Item>
 										)}
-										<Menu.Item
-											testID="profileHeaderDropdownReportBtn"
-											label={"Report account"}
-											onPress={onPressReportAccount}
-										>
+										<Menu.Item label={"Report account"} onPress={onPressReportAccount}>
 											<Menu.ItemText>Report account</Menu.ItemText>
 											<Menu.ItemIcon icon={Flag} />
 										</Menu.Item>
@@ -299,19 +282,11 @@ let ProfileMenu = ({
 						<>
 							<Menu.Divider />
 							<Menu.Group>
-								<Menu.Item
-									testID="profileHeaderDropdownShareATURIBtn"
-									label={"Copy at:// URI"}
-									onPress={onPressShareATUri}
-								>
+								<Menu.Item label={"Copy at:// URI"} onPress={onPressShareATUri}>
 									<Menu.ItemText>Copy at:// URI</Menu.ItemText>
 									<Menu.ItemIcon icon={Share} />
 								</Menu.Item>
-								<Menu.Item
-									testID="profileHeaderDropdownShareDIDBtn"
-									label={"Copy DID"}
-									onPress={onPressShareDID}
-								>
+								<Menu.Item label={"Copy DID"} onPress={onPressShareDID}>
 									<Menu.ItemText>Copy DID</Menu.ItemText>
 									<Menu.ItemIcon icon={Share} />
 								</Menu.Item>

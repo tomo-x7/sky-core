@@ -2,7 +2,7 @@ import type { AppBskyActorDefs, ModerationCause, ModerationDecision } from "@atp
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Link } from "#/components/Link";
@@ -53,7 +53,7 @@ export let MessagesListHeader = ({
 	}, [navigation]);
 
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
@@ -67,7 +67,6 @@ export let MessagesListHeader = ({
 			}}
 		>
 			<TouchableOpacity
-				testID="conversationHeaderBackBtn"
 				onPress={onPressBack}
 				hitSlop={BACK_HITSLOP}
 				style={{ width: 30, height: 30, marginTop: 6 }}
@@ -88,7 +87,7 @@ export let MessagesListHeader = ({
 				<HeaderReady profile={profile} moderation={moderation} blockInfo={blockInfo} />
 			) : (
 				<>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -96,15 +95,15 @@ export let MessagesListHeader = ({
 							...a.flex_1,
 						}}
 					>
-						<View
+						<div
 							style={{
 								...{ width: PFP_SIZE, height: PFP_SIZE },
 								...a.rounded_full,
 								...t.atoms.bg_contrast_25,
 							}}
 						/>
-						<View style={a.gap_xs}>
-							<View
+						<div style={a.gap_xs}>
+							<div
 								style={{
 									...{ width: 120, height: 16 },
 									...a.rounded_xs,
@@ -112,20 +111,20 @@ export let MessagesListHeader = ({
 									...a.mt_xs,
 								}}
 							/>
-							<View
+							<div
 								style={{
 									...{ width: 175, height: 12 },
 									...a.rounded_xs,
 									...t.atoms.bg_contrast_25,
 								}}
 							/>
-						</View>
-					</View>
+						</div>
+					</div>
 
-					<View style={{ width: 30 }} />
+					<div style={{ width: 30 }} />
 				</>
 			)}
-		</View>
+		</div>
 	);
 };
 MessagesListHeader = React.memo(MessagesListHeader);
@@ -159,8 +158,8 @@ function HeaderReady({
 		latestMessageFromOther?.type === "message" ? latestMessageFromOther.message : undefined;
 
 	return (
-		<View style={a.flex_1}>
-			<View
+		<div style={a.flex_1}>
+			<div
 				style={{
 					...a.w_full,
 					...a.flex_row,
@@ -179,15 +178,15 @@ function HeaderReady({
 					}}
 					to={makeProfileLink(profile)}
 				>
-					<View style={a.pt_2xs}>
+					<div style={a.pt_2xs}>
 						<PreviewableUserAvatar
 							size={PFP_SIZE}
 							profile={profile}
 							moderation={moderation.ui("avatar")}
 							disableHoverCard={moderation.blocked}
 						/>
-					</View>
-					<View style={a.flex_1}>
+					</div>
+					<div style={a.flex_1}>
 						<Text
 							emoji
 							style={{
@@ -205,7 +204,8 @@ function HeaderReady({
 								style={{
 									...t.atoms.text_contrast_medium,
 									...a.text_sm,
-									...[a.leading_normal, { marginTop: -2 }],
+									...a.leading_normal,
+									marginTop: -2,
 								}}
 								numberOfLines={1}
 							>
@@ -218,7 +218,7 @@ function HeaderReady({
 								)}
 							</Text>
 						)}
-					</View>
+					</div>
 				</Link>
 
 				{isConvoActive(convoState) && (
@@ -230,14 +230,14 @@ function HeaderReady({
 						latestReportableMessage={latestReportableMessage}
 					/>
 				)}
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					paddingLeft: PFP_SIZE + a.gap_md.gap,
 				}}
 			>
 				<PostAlerts modui={moderation.ui("contentList")} size="lg" style={a.pt_xs} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

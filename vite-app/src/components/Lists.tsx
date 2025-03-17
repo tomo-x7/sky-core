@@ -1,8 +1,7 @@
 import type React from "react";
 import { memo } from "react";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { Error } from "#/components/Error";
@@ -27,7 +26,7 @@ export function ListFooter({
 	error?: string;
 	onRetry?: () => Promise<unknown>;
 	height?: number;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 	showEndMessage?: boolean;
 	endMessageText?: string;
 	renderEndMessage?: () => React.ReactNode;
@@ -35,7 +34,7 @@ export function ListFooter({
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.align_center,
@@ -43,7 +42,7 @@ export function ListFooter({
 				...a.pb_lg,
 				...t.atoms.border_contrast_low,
 				...{ height: height ?? 180, paddingTop: 30 },
-				...flatten(style),
+				...style,
 			}}
 		>
 			{isFetchingNextPage ? (
@@ -64,7 +63,7 @@ export function ListFooter({
 					</Text>
 				)
 			) : null}
-		</View>
+		</div>
 	);
 }
 
@@ -80,13 +79,13 @@ function ListFooterMaybeError({
 	if (!error) return null;
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.px_lg,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -121,8 +120,8 @@ function ListFooterMaybeError({
 				>
 					<ButtonText>Retry</ButtonText>
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -162,18 +161,17 @@ let ListMaybePlaceholder = ({
 		return (
 			<CenteredView
 				style={{
-					...//@ts-ignore
-					a.h_full_vh,
-
+					...a.h_full_vh,
 					...a.align_center,
 					...(!gtMobile ? a.justify_between : a.gap_5xl),
 					...t.atoms.border_contrast_low,
-					...{ paddingTop: 175, paddingBottom: 110 },
+					paddingTop: 175,
+					paddingBottom: 110,
 				}}
 				sideBorders={sideBorders ?? gtMobile}
 				topBorder={topBorder && !gtTablet}
 			>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.align_center,
@@ -181,7 +179,7 @@ let ListMaybePlaceholder = ({
 					}}
 				>
 					<Loader size="xl" />
-				</View>
+				</div>
 			</CenteredView>
 		);
 	}

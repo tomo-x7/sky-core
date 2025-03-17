@@ -106,7 +106,6 @@ export function ProfileSubpageHeader({
 			>
 				<View ref={aviRef} collapsable={false}>
 					<Pressable
-						testID="headerAviButton"
 						onPress={onPressAvi}
 						accessibilityRole="image"
 						accessibilityLabel={"View the avatar"}
@@ -125,7 +124,6 @@ export function ProfileSubpageHeader({
 						<LoadingPlaceholder width={200} height={32} style={{ marginVertical: 6 }} />
 					) : (
 						<TextLink
-							testID="headerTitle"
 							type="title-xl"
 							href={href}
 							style={{

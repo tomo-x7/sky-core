@@ -1,6 +1,5 @@
 import { AppBskyRichtextFacet, RichText as RichTextAPI } from "@atproto/api";
 import React from "react";
-import type { TextStyle } from "react-native";
 
 import { type TextStyleProp, atoms as a, flatten } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
@@ -13,21 +12,20 @@ import { toShortUrl } from "#/lib/strings/url-helpers";
 const WORD_WRAP = { wordWrap: 1 };
 
 export type RichTextProps = TextStyleProp &
-	Pick<TextProps, "selectable" | "onLayout" | "onTextLayout"> & {
+	Pick<TextProps, "selectable"> & {
 		value: RichTextAPI | string;
-		testID?: string;
 		numberOfLines?: number;
 		disableLinks?: boolean;
 		enableTags?: boolean;
 		authorHandle?: string;
 		onLinkPress?: LinkProps["onPress"];
-		interactiveStyle?: TextStyle;
+		interactiveStyle?: React.CSSProperties;
 		emojiMultiplier?: number;
 		shouldProxyLinks?: boolean;
+		onLayout?: (rect: DOMRect) => void;
 	};
 
 export function RichText({
-	testID,
 	value,
 	style,
 	numberOfLines,
@@ -39,7 +37,7 @@ export function RichText({
 	interactiveStyle,
 	emojiMultiplier = 1.85,
 	onLayout,
-	onTextLayout,
+	// onTextLayout,
 	shouldProxyLinks,
 }: RichTextProps) {
 	const richText = React.useMemo(
@@ -47,26 +45,26 @@ export function RichText({
 		[value],
 	);
 
-	const flattenedStyle = flatten(style);
+	const flattenedStyle = style;
 	const plainStyles = [a.leading_snug, flattenedStyle];
-	const interactiveStyles = [a.leading_snug, flatten(interactiveStyle), flattenedStyle];
+	const interactiveStyles = [a.leading_snug, interactiveStyle, flattenedStyle];
 
 	const { text, facets } = richText;
 
 	if (!facets?.length) {
 		if (isOnlyEmoji(text)) {
-			const fontSize = (flattenedStyle.fontSize ?? a.text_sm.fontSize) * emojiMultiplier;
+			const fontSize =
+				Number.parseFloat(String(flattenedStyle?.fontSize ?? a.text_sm.fontSize)) * emojiMultiplier;
 			return (
 				<Text
 					emoji
 					selectable={selectable}
-					testID={testID}
 					style={{
-						...plainStyles,
+						...flatten(plainStyles),
 						...{ fontSize },
 					}}
 					onLayout={onLayout}
-					onTextLayout={onTextLayout}
+					// onTextLayout={onTextLayout}
 					// @ts-ignore web only -prf
 					dataSet={WORD_WRAP}
 				>
@@ -78,11 +76,10 @@ export function RichText({
 			<Text
 				emoji
 				selectable={selectable}
-				testID={testID}
-				style={plainStyles}
+				style={flatten(plainStyles)}
 				numberOfLines={numberOfLines}
 				onLayout={onLayout}
-				onTextLayout={onTextLayout}
+				// onTextLayout={onTextLayout}
 				// @ts-ignore web only -prf
 				dataSet={WORD_WRAP}
 			>
@@ -104,7 +101,7 @@ export function RichText({
 					<InlineLinkText
 						selectable={selectable}
 						to={`/profile/${mention.did}`}
-						style={interactiveStyles}
+						style={flatten(interactiveStyles)}
 						// @ts-ignore TODO
 						dataSet={WORD_WRAP}
 						shouldProxy={shouldProxyLinks}
@@ -123,7 +120,7 @@ export function RichText({
 						selectable={selectable}
 						key={key}
 						to={link.uri}
-						style={interactiveStyles}
+						style={flatten(interactiveStyles)}
 						// @ts-ignore TODO
 						dataSet={WORD_WRAP}
 						shareOnLongPress
@@ -141,7 +138,7 @@ export function RichText({
 					key={key}
 					display={segment.text}
 					tag={tag.tag}
-					textStyle={interactiveStyles}
+					textStyle={flatten(interactiveStyles)}
 					authorHandle={authorHandle}
 				/>,
 			);
@@ -155,11 +152,10 @@ export function RichText({
 		<Text
 			emoji
 			selectable={selectable}
-			testID={testID}
-			style={plainStyles}
+			style={flatten(plainStyles)}
 			numberOfLines={numberOfLines}
 			onLayout={onLayout}
-			onTextLayout={onTextLayout}
+			// onTextLayout={onTextLayout}
 			// @ts-ignore web only -prf
 			dataSet={WORD_WRAP}
 		>

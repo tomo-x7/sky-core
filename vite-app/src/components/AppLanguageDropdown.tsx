@@ -1,25 +1,27 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
-import RNPickerSelect, { type PickerSelectProps } from "react-native-picker-select";
 
 import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDown } from "#/components/icons/Chevron";
 import { sanitizeAppLanguageSetting } from "#/locale/helpers";
 import { APP_LANGUAGES } from "#/locale/languages";
 import { useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences";
 import { resetPostsFeedQueries } from "#/state/queries/post-feed";
 
-export function AppLanguageDropdown(_props: ViewStyleProp) {
+export function AppLanguageDropdown({ style }: ViewStyleProp) {
 	const t = useTheme();
 
 	const queryClient = useQueryClient();
 	const langPrefs = useLanguagePrefs();
 	const setLangPrefs = useLanguagePrefsApi();
+
 	const sanitizedLang = sanitizeAppLanguageSetting(langPrefs.appLanguage);
 
 	const onChangeAppLanguage = React.useCallback(
-		(value: Parameters<PickerSelectProps["onValueChange"]>[0]) => {
+		(ev: React.ChangeEvent<HTMLSelectElement>) => {
+			const value = ev.target.value;
+
 			if (!value) return;
 			if (sanitizedLang !== value) {
 				setLangPrefs.setAppLanguage(sanitizeAppLanguageSetting(value));
@@ -32,43 +34,46 @@ export function AppLanguageDropdown(_props: ViewStyleProp) {
 	);
 
 	return (
-		<div style={a.relative}>
-			<RNPickerSelect
-				darkTheme={t.scheme === "dark"}
-				placeholder={{}}
+		<div
+			style={{
+				...// We don't have hitSlop here to increase the tap region,
+				// alternative is negative margins.
+				{ height: 32, marginVertical: -((32 - 14) / 2) },
+
+				...style,
+			}}
+		>
+			<div
+				style={{ ...a.flex_row, ...a.gap_sm, ...a.align_center, ...a.flex_shrink, ...a.h_full, ...t.atoms.bg }}
+			>
+				<Text aria-hidden={true} style={t.atoms.text_contrast_medium}>
+					{APP_LANGUAGES.find((l) => l.code2 === sanitizedLang)?.name}
+				</Text>
+				{/*@ts-ignore*/}
+				<ChevronDown fill={t.atoms.text.color} size="xs" style={a.flex_0} />
+			</div>
+			<select
 				value={sanitizedLang}
-				onValueChange={onChangeAppLanguage}
-				items={APP_LANGUAGES.filter((l) => Boolean(l.code2)).map((l) => ({
-					label: l.name,
-					value: l.code2,
-					key: l.code2,
-				}))}
-				useNativeAndroidPickerStyle={false}
+				onChange={onChangeAppLanguage}
 				style={{
-					inputAndroid: {
-						color: t.atoms.text_contrast_medium.color,
-						fontSize: 16,
-						paddingRight: 12 + 4,
-					},
-					inputIOS: {
-						color: t.atoms.text.color,
-						fontSize: 16,
-						paddingRight: 12 + 4,
-					},
-				}}
-			/>
-			<View
-				style={{
-					...a.absolute,
-					...a.inset_0,
-					...{ left: "auto" },
-					...{ pointerEvents: "none" },
-					...a.align_center,
-					...a.justify_center,
+					fontSize: a.text_sm.fontSize,
+					letterSpacing: a.text_sm.letterSpacing,
+					cursor: "pointer",
+					position: "absolute",
+					inset: 0,
+					opacity: 0,
+					color: t.atoms.text.color,
+					background: t.atoms.bg.backgroundColor,
+					padding: 4,
+					maxWidth: "100%",
 				}}
 			>
-				<ChevronDown fill={t.atoms.text.color} size="xs" />
-			</View>
+				{APP_LANGUAGES.filter((l) => Boolean(l.code2)).map((l) => (
+					<option key={l.code2} value={l.code2}>
+						{l.name}
+					</option>
+				))}
+			</select>
 		</div>
 	);
 }

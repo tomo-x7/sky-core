@@ -13,21 +13,19 @@ export function ErrorScreen({
 	message,
 	details,
 	onPressTryAgain,
-	testID,
 	showHeader,
 }: {
 	title: string;
 	message: string;
 	details?: string;
 	onPressTryAgain?: () => void;
-	testID?: string;
 	showHeader?: boolean;
 }) {
 	const t = useTheme();
 	const pal = usePalette("default");
 
 	return (
-		<Layout.Center testID={testID}>
+		<Layout.Center>
 			{showHeader && (
 				<Layout.Header.Outer>
 					<Layout.Header.BackButton />
@@ -96,7 +94,6 @@ export function ErrorScreen({
 						}}
 					>
 						<Text
-							testID={`${testID}-details`}
 							style={{
 								...a.text_center,
 								...a.text_md,
@@ -110,7 +107,6 @@ export function ErrorScreen({
 				{onPressTryAgain && (
 					<View style={a.align_center}>
 						<Button
-							testID="errorScreenTryAgainButton"
 							onPress={onPressTryAgain}
 							variant="solid"
 							color="secondary_inverted"

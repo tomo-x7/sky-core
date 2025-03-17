@@ -6,14 +6,13 @@ import {
 	Platform,
 	Pressable,
 	type StyleProp,
-	type TextProps,
-	type TextStyle,
 	type TouchableOpacity,
 	View,
 	type ViewStyle,
 } from "react-native";
 
 import { useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { type DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
@@ -24,12 +23,10 @@ import { useModalControls } from "#/state/modals";
 import { WebAuxClickWrapper } from "#/view/com/util/WebAuxClickWrapper";
 import { router } from "../../../routes";
 import { PressableWithHover } from "./PressableWithHover";
-import { Text } from "./text/Text";
 
 type Event = React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent;
 
 interface Props extends ComponentProps<typeof TouchableOpacity> {
-	testID?: string;
 	style?: StyleProp<ViewStyle>;
 	href?: string;
 	title?: string;
@@ -46,7 +43,6 @@ interface Props extends ComponentProps<typeof TouchableOpacity> {
 }
 
 export const Link = memo(function Link({
-	testID,
 	style,
 	href,
 	title,
@@ -83,7 +79,6 @@ export const Link = memo(function Link({
 		return (
 			<WebAuxClickWrapper>
 				<Pressable
-					testID={testID}
 					onPress={onPress}
 					accessible={accessible}
 					accessibilityRole="link"
@@ -124,7 +119,6 @@ export const Link = memo(function Link({
 	const Com = props.hoverStyle ? PressableWithHover : Pressable;
 	return (
 		<Com
-			testID={testID}
 			style={style}
 			onPress={onPress}
 			accessible={accessible}
@@ -139,7 +133,6 @@ export const Link = memo(function Link({
 });
 
 export const TextLink = memo(function TextLink({
-	testID,
 	type = "md",
 	style,
 	href,
@@ -155,9 +148,8 @@ export const TextLink = memo(function TextLink({
 	anchorNoUnderline,
 	...orgProps
 }: {
-	testID?: string;
 	type?: TypographyVariant;
-	style?: StyleProp<TextStyle>;
+	style?: React.CSSProperties;
 	href: string;
 	text: string | JSX.Element | React.ReactNode;
 	numberOfLines?: number;
@@ -168,7 +160,8 @@ export const TextLink = memo(function TextLink({
 	navigationAction?: "push" | "replace" | "navigate";
 	anchorNoUnderline?: boolean;
 	onBeforePress?: () => void;
-} & TextProps) {
+	onPress?: (event: React.MouseEvent) => void;
+}) {
 	const { ...props } = useLinkProps({ to: sanitizeUrl(href) });
 	const navigation = useNavigationDeduped();
 	const { openModal, closeModal } = useModalControls();
@@ -233,7 +226,6 @@ export const TextLink = memo(function TextLink({
 
 	return (
 		<Text
-			testID={testID}
 			type={type}
 			style={style}
 			numberOfLines={numberOfLines}
@@ -253,10 +245,9 @@ export const TextLink = memo(function TextLink({
 /**
  * Only acts as a link on desktop web
  */
-interface TextLinkOnWebOnlyProps extends TextProps {
-	testID?: string;
+interface TextLinkOnWebOnlyProps {
 	type?: TypographyVariant;
-	style?: StyleProp<TextStyle>;
+	style?: React.CSSProperties;
 	href: string;
 	text: string | JSX.Element;
 	numberOfLines?: number;
@@ -272,7 +263,6 @@ interface TextLinkOnWebOnlyProps extends TextProps {
 	anchorNoUnderline?: boolean;
 }
 export const TextLinkOnWebOnly = memo(function DesktopWebTextLink({
-	testID,
 	type = "md",
 	style,
 	href,
@@ -286,7 +276,6 @@ export const TextLinkOnWebOnly = memo(function DesktopWebTextLink({
 }: TextLinkOnWebOnlyProps) {
 	return (
 		<TextLink
-			testID={testID}
 			type={type}
 			style={style}
 			href={href}

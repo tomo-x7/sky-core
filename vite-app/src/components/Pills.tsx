@@ -1,8 +1,7 @@
 import { BSKY_LABELER_DID, type ModerationCause } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import {
@@ -39,17 +38,17 @@ export function Row({
 		}
 	}, [size]);
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.flex_wrap,
 				...a.gap_xs,
-				...styles,
+				...flatten(styles),
 				...style,
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -85,7 +84,7 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 			default: {
 				return {
 					outer: [
-						!noBg && t.atoms.bg_contrast_25,
+						!noBg ? t.atoms.bg_contrast_25 : {},
 						{
 							gap: 3,
 							paddingHorizontal: 3,
@@ -111,12 +110,12 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 				}}
 			>
 				{({ hovered, pressed }) => (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
 							...a.rounded_full,
-							...outer,
+							...flatten(outer),
 							...((hovered || pressed) && t.atoms.bg_contrast_50),
 						}}
 					>
@@ -129,16 +128,16 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 						<Text
 							emoji
 							style={{
-								...text,
+								...flatten(text),
 								...a.font_bold,
 								...a.leading_tight,
 								...t.atoms.text_contrast_medium,
-								...{ paddingRight: 3 },
+								paddingRight: 3,
 							}}
 						>
 							{desc.name}
 						</Text>
-					</View>
+					</div>
 				)}
 			</Button>
 			{!disableDetailsDialog && <ModerationDetailsDialog control={control} modcause={cause} />}
@@ -163,9 +162,9 @@ export function FollowsYou({ size = "sm" }: CommonProps) {
 	}, [size]);
 
 	return (
-		<View
+		<div
 			style={{
-				...variantStyles,
+				...flatten(variantStyles),
 				...a.justify_center,
 				...t.atoms.bg_contrast_25,
 			}}
@@ -178,6 +177,6 @@ export function FollowsYou({ size = "sm" }: CommonProps) {
 			>
 				Follows You
 			</Text>
-		</View>
+		</div>
 	);
 }

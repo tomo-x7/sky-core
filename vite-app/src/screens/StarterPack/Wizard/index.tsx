@@ -91,7 +91,6 @@ export function Wizard({
 
 	return (
 		<Layout.Screen
-			testID="starterPackWizardScreen"
 			style={{
 				...{ minHeight: 0 },
 				...a.flex_1,

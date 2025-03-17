@@ -1,7 +1,7 @@
 import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -56,7 +56,7 @@ export function TrendingVideos() {
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...a.pt_lg,
 				...a.pb_lg,
@@ -65,7 +65,7 @@ export function TrendingVideos() {
 				...t.atoms.bg_contrast_25,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...gutters,
 					...a.pb_sm,
@@ -74,7 +74,7 @@ export function TrendingVideos() {
 					...a.justify_between,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.flex_row,
@@ -92,7 +92,7 @@ export function TrendingVideos() {
 					>
 						Trending Videos
 					</Text>
-				</View>
+				</div>
 				<Button
 					label={"Dismiss this section"}
 					size="tiny"
@@ -103,7 +103,7 @@ export function TrendingVideos() {
 				>
 					<ButtonIcon icon={X} />
 				</Button>
-			</View>
+			</div>
 			<BlockDrawerGesture>
 				<ScrollView
 					horizontal
@@ -111,7 +111,7 @@ export function TrendingVideos() {
 					decelerationRate="fast"
 					snapToInterval={CARD_WIDTH + a.gap_sm.gap}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_sm,
@@ -126,16 +126,16 @@ export function TrendingVideos() {
 							Array(10)
 								.fill(0)
 								.map((_, i) => (
-									<View key={i.toString()} style={{ width: CARD_WIDTH }}>
+									<div key={i.toString()} style={{ width: CARD_WIDTH }}>
 										<CompactVideoPostCardPlaceholder />
-									</View>
+									</div>
 								))
 						) : error || !data ? (
 							<Text>Whoops! Trending videos failed to load.</Text>
 						) : (
 							<VideoCards data={data} />
 						)}
-					</View>
+					</div>
 				</ScrollView>
 			</BlockDrawerGesture>
 			<Prompt.Basic
@@ -145,7 +145,7 @@ export function TrendingVideos() {
 				confirmButtonCta={"Hide"}
 				onConfirm={onConfirmHide}
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -171,7 +171,7 @@ function VideoCards({
 	return (
 		<>
 			{items.map((item) => (
-				<View key={item.post.uri} style={{ width: CARD_WIDTH }}>
+				<div key={item.post.uri} style={{ width: CARD_WIDTH }}>
 					<CompactVideoPostCard
 						post={item.post}
 						moderation={item.moderation}
@@ -181,9 +181,9 @@ function VideoCards({
 							sourceInterstitial: "discover",
 						}}
 					/>
-				</View>
+				</div>
 			))}
-			<View style={{ width: CARD_WIDTH * 2 }}>
+			<div style={{ width: CARD_WIDTH * 2 }}>
 				<Link
 					to={href}
 					label={"View more"}
@@ -196,7 +196,7 @@ function VideoCards({
 					}}
 				>
 					{({ pressed }) => (
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -208,7 +208,7 @@ function VideoCards({
 							}}
 						>
 							<Text style={a.text_md}>View more</Text>
-							<View
+							<div
 								style={{
 									...a.align_center,
 									...a.justify_center,
@@ -222,11 +222,11 @@ function VideoCards({
 								}}
 							>
 								<ButtonIcon icon={ChevronRight} />
-							</View>
-						</View>
+							</div>
+						</div>
 					)}
 				</Link>
-			</View>
+			</div>
 		</>
 	);
 }

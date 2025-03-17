@@ -1,5 +1,6 @@
 import React from "react";
-import { type ColorSchemeName, useColorScheme } from "react-native";
+
+import { useColorScheme } from "#/lib/useColorScheme";
 import { useThemePrefs } from "../../state/shell";
 import { dark, dim, light } from "../themes";
 import type { ThemeName } from "../types";
@@ -21,7 +22,11 @@ export function useThemeName(): ThemeName {
 	return getThemeName(colorScheme, colorMode, darkTheme);
 }
 
-function getThemeName(colorScheme: ColorSchemeName, colorMode: "system" | "light" | "dark", darkTheme?: ThemeName) {
+function getThemeName(
+	colorScheme: "light" | "dark" | null | undefined,
+	colorMode: "system" | "light" | "dark",
+	darkTheme?: ThemeName,
+) {
 	if ((colorMode === "system" && colorScheme === "light") || colorMode === "light") {
 		return "light";
 	} else {

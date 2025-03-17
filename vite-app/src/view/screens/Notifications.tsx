@@ -94,7 +94,7 @@ export function NotificationsScreen(props: Props) {
 	}, [hasNew, checkUnreadAll, checkUnreadMentions, activeTab, isLoadingAll, isLoadingMentions]);
 
 	return (
-		<Layout.Screen testID="notificationsScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer noBottomBorder sticky={false}>
 				<Layout.Header.MenuButton />
 				<Layout.Header.Content>
@@ -139,7 +139,6 @@ export function NotificationsScreen(props: Props) {
 				))}
 			</Pager>
 			<FAB
-				testID="composeFAB"
 				onPress={() => openComposer({})}
 				icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 				accessibilityRole="button"

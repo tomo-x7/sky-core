@@ -1,7 +1,7 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
-import { type ListRenderItemInfo, type StyleProp, View, type ViewStyle, findNodeHandle } from "react-native";
+import { type ListRenderItemInfo, findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -32,8 +32,7 @@ interface ProfileFeedgensProps {
 	did: string;
 	headerOffset: number;
 	enabled?: boolean;
-	style?: StyleProp<ViewStyle>;
-	testID?: string;
+	style?: React.CSSProperties;
 	setScrollViewTag: (tag: number | null) => void;
 	isMe: boolean;
 }
@@ -43,7 +42,7 @@ function keyExtractor(item: AppBskyGraphDefs.StarterPackView) {
 }
 
 export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensProps>(function ProfileFeedgensImpl(
-	{ scrollElRef, did, headerOffset, enabled, style, testID, setScrollViewTag, isMe },
+	{ scrollElRef, did, headerOffset, enabled, style, setScrollViewTag, isMe },
 	ref,
 ) {
 	const t = useTheme();
@@ -87,7 +86,7 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<AppBskyGraphDefs.StarterPackView>) => {
 		return (
-			<View
+			<div
 				style={{
 					...a.p_lg,
 					...((isTabletOrDesktop || index !== 0) && a.border_t),
@@ -95,14 +94,13 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 				}}
 			>
 				<StarterPackCard starterPack={item} />
-			</View>
+			</div>
 		);
 	};
 
 	return (
-		<View testID={testID} style={style}>
+		<div style={style}>
 			<List
-				testID={testID ? `${testID}-flatlist` : undefined}
 				ref={scrollElRef}
 				// @ts-ignore
 				data={items}
@@ -118,7 +116,7 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 				ListEmptyComponent={data ? (isMe ? Empty : undefined) : FeedLoadingPlaceholder}
 				ListFooterComponent={!!data && items?.length !== 0 && isMe ? CreateAnother : undefined}
 			/>
-		</View>
+		</div>
 	);
 });
 
@@ -127,7 +125,7 @@ function CreateAnother() {
 	const navigation = useNavigation<NavigationProp>();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.pr_md,
 				...a.pt_lg,
@@ -147,10 +145,10 @@ function CreateAnother() {
 				<ButtonText>Create another</ButtonText>
 				<ButtonIcon icon={Plus} position="right" />
 			</Button>
-		</View>
+		</div>
 	);
 }
-
+const className = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(6))));
 function Empty() {
 	const navigation = useNavigation<NavigationProp>();
 	const confirmDialogControl = useDialogControl();
@@ -200,7 +198,7 @@ function Empty() {
 				...{ marginTop: a.border.borderWidth },
 			}}
 		>
-			<View style={a.gap_xs}>
+			<div style={a.gap_xs}>
 				<Text
 					style={{
 						...a.font_bold,
@@ -218,8 +216,8 @@ function Empty() {
 				>
 					Starter packs let you easily share your favorite feeds and people with your friends.
 				</Text>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -262,11 +260,12 @@ function Empty() {
 						borderColor: "white",
 						width: 100,
 					}}
-					hoverStyle={[{ backgroundColor: "#dfdfdf" }]}
+					className={className}
 				>
+					<style>{`.${className}::hover{background-color:#dfdfdf}`}</style>
 					<ButtonText>Create</ButtonText>
 				</Button>
-			</View>
+			</div>
 			<Prompt.Outer control={confirmDialogControl}>
 				<Prompt.TitleText>Generate a starter pack</Prompt.TitleText>
 				<Prompt.DescriptionText>

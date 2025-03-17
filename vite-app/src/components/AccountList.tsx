@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import React, { useCallback } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
@@ -35,13 +34,13 @@ export function AccountList({
 	}, [onSelectOther]);
 
 	return (
-		<View
-			pointerEvents={pendingDid ? "none" : "auto"}
+		<div
 			style={{
 				...a.rounded_md,
 				...a.overflow_hidden,
 				...{ borderWidth: 1 },
 				...t.atoms.border_contrast_low,
+				pointerEvents: pendingDid ? "none" : "auto",
 			}}
 		>
 			{accounts.map((account) => (
@@ -57,13 +56,12 @@ export function AccountList({
 				</React.Fragment>
 			))}
 			<Button
-				testID="chooseAddAccountBtn"
 				style={a.flex_1}
 				onPress={pendingDid ? undefined : onPressAddAccount}
 				label={"Sign in to account that is not listed"}
 			>
 				{({ hovered, pressed }) => (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.flex_row,
@@ -90,10 +88,10 @@ export function AccountList({
 								...a.mr_md,
 							}}
 						/>
-					</View>
+					</div>
 				)}
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -118,7 +116,6 @@ function AccountItem({
 
 	return (
 		<Button
-			testID={`chooseAccountBtn-${account.handle}`}
 			key={account.did}
 			style={a.flex_1}
 			onPress={onPress}
@@ -129,7 +126,7 @@ function AccountItem({
 			}
 		>
 			{({ hovered, pressed }) => (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.flex_row,
@@ -177,7 +174,7 @@ function AccountItem({
 							}}
 						/>
 					)}
-				</View>
+				</div>
 			)}
 		</Button>
 	);

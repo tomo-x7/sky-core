@@ -11,10 +11,9 @@ import { usePalette } from "#/lib/hooks/usePalette";
 // Custom Dropdown Menu Components
 // ==
 export const DropdownMenuRoot = DropdownMenu.Root;
-export const DropdownMenuContent = DropdownMenu.Content;
 
 type ItemProps = React.ComponentProps<(typeof DropdownMenu)["Item"]>;
-export const DropdownMenuItem = (props: ItemProps & { testID?: string }) => {
+export const DropdownMenuItem = (props: ItemProps ) => {
 	const theme = useTheme();
 	const [focused, setFocused] = React.useState(false);
 	const backgroundColor = theme.colorScheme === "dark" ? "#fff1" : "#0001";
@@ -38,7 +37,6 @@ export const DropdownMenuItem = (props: ItemProps & { testID?: string }) => {
 export type DropdownItem = {
 	label: string | "separator";
 	onPress?: () => void;
-	testID?: string;
 	icon?: {
 		ios: unknown;
 		android: string;
@@ -47,7 +45,6 @@ export type DropdownItem = {
 };
 type Props = {
 	items: DropdownItem[];
-	testID?: string;
 	accessibilityLabel?: string;
 	accessibilityHint?: string;
 	triggerStyle?: ViewStyle;
@@ -56,7 +53,6 @@ type Props = {
 export function NativeDropdown({
 	items,
 	children,
-	testID,
 	accessibilityLabel,
 	accessibilityHint,
 	triggerStyle,
@@ -112,7 +108,6 @@ export function NativeDropdown({
 			<DropdownMenu.Trigger asChild>
 				<Pressable
 					ref={buttonRef as unknown as React.Ref<View>}
-					testID={testID}
 					accessibilityRole="button"
 					accessibilityLabel={accessibilityLabel}
 					accessibilityHint={accessibilityHint}
@@ -166,7 +161,7 @@ function DropdownContent({
 				if (item.label === "separator") {
 					return (
 						<DropdownMenu.Separator
-							key={getKey(item.label, index, item.testID)}
+							key={getKey(item.label, index, )}
 							style={
 								StyleSheet.flatten([
 									styles.separator,
@@ -178,17 +173,17 @@ function DropdownContent({
 				}
 				if (index > 1 && items[index - 1].label === "separator") {
 					return (
-						<DropdownMenu.Group key={getKey(item.label, index, item.testID)}>
-							<DropdownMenuItem key={getKey(item.label, index, item.testID)} onSelect={item.onPress}>
-								<Text
-									selectable={false}
+						<DropdownMenu.Group key={getKey(item.label, index, )}>
+							<DropdownMenuItem key={getKey(item.label, index, )} onSelect={item.onPress}>
+								<span
+									unselectable={"on"}
 									style={{
 										...pal.text,
 										...styles.itemTitle,
 									}}
 								>
 									{item.label}
-								</Text>
+								</span>
 								{item.icon && (
 									// @ts-ignore
 									<FontAwesomeIcon icon={item.icon.web} size={20} color={pal.colors.textLight} />
@@ -198,16 +193,16 @@ function DropdownContent({
 					);
 				}
 				return (
-					<DropdownMenuItem key={getKey(item.label, index, item.testID)} onSelect={item.onPress}>
-						<Text
-							selectable={false}
+					<DropdownMenuItem key={getKey(item.label, index, )} onSelect={item.onPress}>
+						<span
+							unselectable={"on"}
 							style={{
 								...pal.text,
 								...styles.itemTitle,
 							}}
 						>
 							{item.label}
-						</Text>
+						</span>
 						{/* @ts-ignore */}
 						{item.icon && <FontAwesomeIcon icon={item.icon.web} size={20} color={pal.colors.textLight} />}
 					</DropdownMenuItem>

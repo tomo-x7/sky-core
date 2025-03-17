@@ -2,7 +2,7 @@ import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { BskyAgent } from "@atproto/api";
 import * as EmailValidator from "email-validator";
 import React, { useState } from "react";
-import { ActivityIndicator, Keyboard, View } from "react-native";
+import { ActivityIndicator, Keyboard } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -66,33 +66,31 @@ export const ForgotPasswordForm = ({
 	};
 
 	return (
-		<FormContainer testID="forgotPasswordForm" titleText={<>Reset password</>}>
-			<View>
+		<FormContainer titleText={<>Reset password</>}>
+			<div>
 				<TextField.LabelText>Hosting provider</TextField.LabelText>
 				<HostingProvider
 					serviceUrl={serviceUrl}
 					onSelectServiceUrl={setServiceUrl}
 					onOpenDialog={onPressSelectService}
 				/>
-			</View>
-			<View>
+			</div>
+			<div>
 				<TextField.LabelText>Email address</TextField.LabelText>
 				<TextField.Root>
 					<TextField.Icon icon={At} />
 					<TextField.Input
-						testID="forgotPasswordEmail"
 						label={"Enter your email address"}
 						autoCapitalize="none"
 						autoFocus
-						autoCorrect={false}
+						autoCorrect={""}
 						autoComplete="email"
 						value={email}
 						onChangeText={setEmail}
-						editable={!isProcessing}
-						accessibilityHint={"Sets email for password reset"}
+						disabled={isProcessing}
 					/>
 				</TextField.Root>
-			</View>
+			</div>
 			<Text
 				style={{
 					...t.atoms.text_contrast_high,
@@ -103,7 +101,7 @@ export const ForgotPasswordForm = ({
 				password.
 			</Text>
 			<FormError error={error} />
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -113,7 +111,7 @@ export const ForgotPasswordForm = ({
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
-				<View style={a.flex_1} />
+				<div style={a.flex_1} />
 				{!serviceDescription || isProcessing ? (
 					<ActivityIndicator />
 				) : (
@@ -131,8 +129,8 @@ export const ForgotPasswordForm = ({
 						Processing...
 					</Text>
 				) : undefined}
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...t.atoms.border_contrast_medium,
 					...a.border_t,
@@ -143,7 +141,6 @@ export const ForgotPasswordForm = ({
 				}}
 			>
 				<Button
-					testID="skipSendEmailButton"
 					onPress={onEmailSent}
 					label={"Go to next"}
 					accessibilityHint={"Navigates to the next screen"}
@@ -153,7 +150,7 @@ export const ForgotPasswordForm = ({
 				>
 					<ButtonText>Already have a code?</ButtonText>
 				</Button>
-			</View>
+			</div>
 		</FormContainer>
 	);
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Keyboard, View } from "react-native";
+import { Keyboard } from "react-native";
 
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -34,7 +34,7 @@ export function HostingProvider({
 		<>
 			<ServerInputDialog control={serverInputControl} onSelect={onSelectServiceUrl} />
 			{minimal ? (
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -64,10 +64,9 @@ export function HostingProvider({
 							<ButtonIcon icon={PencilIcon} />
 						</Button>
 					</Text>
-				</View>
+				</div>
 			) : (
 				<Button
-					testID="selectServiceButton"
 					label={toNiceDomain(serviceUrl)}
 					accessibilityHint={"Changes hosting provider"}
 					variant="solid"
@@ -88,14 +87,14 @@ export function HostingProvider({
 						const interacted = hovered || pressed;
 						return (
 							<>
-								<View style={a.pr_xs}>
+								<div style={a.pr_xs}>
 									<GlobeIcon
 										size="md"
 										fill={interacted ? t.palette.contrast_800 : t.palette.contrast_500}
 									/>
-								</View>
+								</div>
 								<Text style={a.text_md}>{toNiceDomain(serviceUrl)}</Text>
-								<View
+								<div
 									style={{
 										...a.rounded_sm,
 										...(interacted ? t.atoms.bg_contrast_300 : t.atoms.bg_contrast_100),
@@ -108,7 +107,7 @@ export function HostingProvider({
 											color: interacted ? t.palette.contrast_800 : t.palette.contrast_500,
 										}}
 									/>
-								</View>
+								</div>
 							</>
 						);
 					}}

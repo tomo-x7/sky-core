@@ -51,7 +51,6 @@ export function Component(props: {}) {
 
 	return (
 		<View
-			testID="contentLanguagesModal"
 			style={{
 				...pal.view,
 				...styles.container,

@@ -1,8 +1,6 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 import { useRef } from "react";
-import type { ListRenderItemInfo } from "react-native";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -43,7 +41,7 @@ export function WizardEditListDialog({
 		return [profile, ...state.profiles.filter((p) => p.did !== currentAccount?.did)];
 	};
 
-	const renderItem = ({ item }: ListRenderItemInfo<any>) =>
+	const renderItem = ({ item }: { item: any; index: number }) =>
 		state.currentStep === "Profiles" ? (
 			<WizardProfileCard
 				profile={item}
@@ -63,7 +61,7 @@ export function WizardEditListDialog({
 		);
 
 	return (
-		<Dialog.Outer control={control} testID="newChatDialog">
+		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<Dialog.InnerFlatList
 				ref={listRef}
@@ -71,7 +69,7 @@ export function WizardEditListDialog({
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}
 				ListHeaderComponent={
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.justify_between,
@@ -84,7 +82,7 @@ export function WizardEditListDialog({
 							...{ height: 48 },
 						}}
 					>
-						<View style={{ width: 60 }} />
+						<div style={{ width: 60 }} />
 						<Text
 							style={{
 								...a.font_bold,
@@ -93,7 +91,7 @@ export function WizardEditListDialog({
 						>
 							{state.currentStep === "Profiles" ? <>Edit People</> : <>Edit Feeds</>}
 						</Text>
-						<View style={{ width: 60 }}>
+						<div style={{ width: 60 }}>
 							<Button
 								label={"Close"}
 								variant="ghost"
@@ -103,19 +101,17 @@ export function WizardEditListDialog({
 							>
 								<ButtonText>Close</ButtonText>
 							</Button>
-						</View>
-					</View>
+						</div>
+					</div>
 				}
 				stickyHeaderIndices={[0]}
-				// @ts-ignore
 				style={{
 					...a.py_0,
 					...{ height: "100vh", maxHeight: 600 },
 					...a.px_0,
 				}}
-				webInnerStyle={[a.py_0, { maxWidth: 500, minWidth: 200 }]}
+				webInnerStyle={{ ...a.py_0, maxWidth: 500, minWidth: 200 }}
 				keyboardDismissMode="on-drag"
-				removeClippedSubviews={true}
 				initialNumToRender={initialNumToRender}
 			/>
 		</Dialog.Outer>

@@ -1,14 +1,13 @@
 import React from "react";
-import { type AccessibilityProps, type TextStyle, View, type ViewStyle } from "react-native";
+import type { AccessibilityProps } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 
 type ItemProps = Omit<Toggle.ItemProps, "style" | "role" | "children"> &
 	AccessibilityProps & {
 		children: React.ReactElement;
-		testID?: string;
 	};
 
 export type GroupProps = Omit<Toggle.GroupProps, "style" | "type"> & {
@@ -19,7 +18,7 @@ export function Group({ children, multiple, ...props }: GroupProps) {
 	const t = useTheme();
 	return (
 		<Toggle.Group type={multiple ? "checkbox" : "radio"} {...props}>
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.flex_row,
@@ -30,7 +29,7 @@ export function Group({ children, multiple, ...props }: GroupProps) {
 				}}
 			>
 				{children}
-			</View>
+			</div>
 		</Toggle.Group>
 	);
 }
@@ -54,9 +53,9 @@ function ButtonInner({ children }: React.PropsWithChildren) {
 	const state = Toggle.useItemContext();
 
 	const { baseStyles, hoverStyles, activeStyles } = React.useMemo(() => {
-		const base: ViewStyle[] = [];
-		const hover: ViewStyle[] = [];
-		const active: ViewStyle[] = [];
+		const base: React.CSSProperties[] = [];
+		const hover: React.CSSProperties[] = [];
+		const active: React.CSSProperties[] = [];
 
 		hover.push(t.name === "light" ? t.atoms.bg_contrast_100 : t.atoms.bg_contrast_25);
 
@@ -82,14 +81,14 @@ function ButtonInner({ children }: React.PropsWithChildren) {
 		}
 
 		return {
-			baseStyles: base,
-			hoverStyles: hover,
-			activeStyles: active,
+			baseStyles: flatten(base),
+			hoverStyles: flatten(hover),
+			activeStyles: flatten(active),
 		};
 	}, [t, state]);
 
 	return (
-		<View
+		<div
 			style={{
 				...{
 					borderLeftWidth: 1,
@@ -107,7 +106,7 @@ function ButtonInner({ children }: React.PropsWithChildren) {
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -116,7 +115,7 @@ export function ButtonText({ children }: { children: React.ReactNode }) {
 	const state = Toggle.useItemContext();
 
 	const textStyles = React.useMemo(() => {
-		const text: TextStyle[] = [];
+		const text: React.CSSProperties[] = [];
 		if (state.selected) {
 			text.push(t.atoms.text_inverted);
 		}
@@ -125,7 +124,7 @@ export function ButtonText({ children }: { children: React.ReactNode }) {
 				opacity: 0.5,
 			});
 		}
-		return text;
+		return flatten(text);
 	}, [t, state]);
 
 	return (

@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationUI } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type ComponentProps } from "react";
-import { Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -18,14 +18,13 @@ import { Link } from "#/view/com/util/Link";
 interface Props extends ComponentProps<typeof Link> {
 	disabled: boolean;
 	iconSize: number;
-	iconStyles: StyleProp<ViewStyle>;
+	iconStyles: React.CSSProperties;
 	modui: ModerationUI;
 	profile: AppBskyActorDefs.ProfileViewBasic;
 	interpretFilterAsBlur?: boolean;
 }
 
 export function PostHider({
-	testID,
 	href,
 	disabled,
 	modui,
@@ -50,7 +49,7 @@ export function PostHider({
 
 	if (!blur || (disabled && !modui.noOverride)) {
 		return (
-			<Link testID={testID} style={style} href={href} accessible={false} onBeforePress={onBeforePress} {...props}>
+			<Link style={style} href={href} accessible={false} onBeforePress={onBeforePress} {...props}>
 				{children}
 			</Link>
 		);
@@ -90,7 +89,7 @@ export function PostHider({
 				accessibilityLabel={"Learn more about this warning"}
 				accessibilityHint=""
 			>
-				<View
+				<div
 					style={{
 						...t.atoms.bg_contrast_25,
 						...a.align_center,
@@ -106,7 +105,7 @@ export function PostHider({
 					}}
 				>
 					<desc.icon size="sm" fill={t.atoms.text_contrast_medium.color} />
-				</View>
+				</div>
 			</Pressable>
 			<Text
 				style={{
@@ -122,7 +121,7 @@ export function PostHider({
 			)}
 		</Pressable>
 	) : (
-		<Link testID={testID} style={addStyle(style, styles.child)} href={href} accessible={false} {...props}>
+		<Link style={addStyle(style, styles.child)} href={href} accessible={false} {...props}>
 			{children}
 		</Link>
 	);

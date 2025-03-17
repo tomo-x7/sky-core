@@ -1,6 +1,5 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 // import type ViewShot from "react-native-view-shot";
 
 import { atoms as a } from "#/alf";
@@ -97,7 +96,7 @@ export function QrCodeDialog({
 	return (
 		<Dialog.Outer control={control}>
 			<Dialog.ScrollableInner label={"Create a QR code for a starter pack"}>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.align_center,
@@ -111,15 +110,15 @@ export function QrCodeDialog({
 							<>
 								<QrCode starterPack={starterPack} link={link} /*ref={ref}*/ />
 								{isProcessing ? (
-									<View>
+									<div>
 										<Loader size="xl" />
-									</View>
+									</div>
 								) : (
-									<View
+									<div
 										style={{
 											...a.w_full,
 											...a.gap_md,
-											...[a.flex_row_reverse],
+											...a.flex_row_reverse,
 										}}
 									>
 										<Button
@@ -140,12 +139,12 @@ export function QrCodeDialog({
 										>
 											<ButtonText>Save</ButtonText>
 										</Button>
-									</View>
+									</div>
 								)}
 							</>
 						)}
 					</React.Suspense>
-				</View>
+				</div>
 			</Dialog.ScrollableInner>
 		</Dialog.Outer>
 	);
@@ -153,13 +152,13 @@ export function QrCodeDialog({
 
 function Loading() {
 	return (
-		<View
+		<div
 			style={{
 				...a.align_center,
 				...a.p_xl,
 			}}
 		>
 			<Loader size="xl" />
-		</View>
+		</div>
 	);
 }

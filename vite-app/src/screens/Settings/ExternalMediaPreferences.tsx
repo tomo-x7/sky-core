@@ -13,7 +13,7 @@ import * as SettingsList from "./components/SettingsList";
 type Props = NativeStackScreenProps<CommonNavigatorParams, "PreferencesExternalEmbeds">;
 export function ExternalMediaPreferencesScreen(props: Props) {
 	return (
-		<Layout.Screen testID="externalMediaPreferencesScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>

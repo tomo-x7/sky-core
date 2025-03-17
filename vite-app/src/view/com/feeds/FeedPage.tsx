@@ -2,7 +2,6 @@ import type { AppBskyActorDefs } from "@atproto/api";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type JSX } from "react";
-import { View } from "react-native";
 
 import { useHeaderOffset } from "#/components/hooks/useHeaderOffset";
 import { ComposeIcon2 } from "#/lib/icons";
@@ -28,7 +27,6 @@ import { LoadLatestBtn } from "../util/load-latest/LoadLatestBtn";
 const POLL_FREQ = 60e3; // 60sec
 
 export function FeedPage({
-	testID,
 	isPageFocused,
 	isPageAdjacent,
 	feed,
@@ -38,7 +36,6 @@ export function FeedPage({
 	savedFeedConfig,
 	feedInfo,
 }: {
-	testID?: string;
 	feed: FeedDescriptor;
 	feedParams?: FeedParams;
 	isPageFocused: boolean;
@@ -104,11 +101,10 @@ export function FeedPage({
 
 	const shouldPrefetch = false;
 	return (
-		<View testID={testID}>
+		<div>
 			<MainScrollProvider>
 				<FeedFeedbackProvider value={feedFeedback}>
 					<PostFeed
-						testID={testID ? `${testID}-feed` : undefined}
 						enabled={isPageFocused || shouldPrefetch}
 						feed={feed}
 						feedParams={feedParams}
@@ -131,7 +127,6 @@ export function FeedPage({
 
 			{hasSession && (
 				<FAB
-					testID="composeFAB"
 					onPress={onPressCompose}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
 					accessibilityRole="button"
@@ -139,6 +134,6 @@ export function FeedPage({
 					accessibilityHint=""
 				/>
 			)}
-		</View>
+		</div>
 	);
 }

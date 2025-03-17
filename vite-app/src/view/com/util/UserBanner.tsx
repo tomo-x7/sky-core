@@ -83,10 +83,9 @@ export function UserBanner({
 			<Menu.Root>
 				<Menu.Trigger label={"Edit avatar"}>
 					{({ props }) => (
-						<Pressable {...props} testID="changeBannerBtn">
+						<Pressable {...props}>
 							{banner ? (
 								<Image
-									testID="userBannerImage"
 									style={styles.bannerImage}
 									source={{ uri: banner }}
 									accessible={true}
@@ -94,7 +93,6 @@ export function UserBanner({
 								/>
 							) : (
 								<View
-									testID="userBannerFallback"
 									style={{
 										...styles.bannerImage,
 										...t.atoms.bg_contrast_25,
@@ -114,11 +112,7 @@ export function UserBanner({
 				</Menu.Trigger>
 				<Menu.Outer showCancel>
 					<Menu.Group>
-						<Menu.Item
-							testID="changeBannerLibraryBtn"
-							label={"Upload from Library"}
-							onPress={onOpenLibrary}
-						>
+						<Menu.Item label={"Upload from Library"} onPress={onOpenLibrary}>
 							<Menu.ItemText>{"Upload from Files"}</Menu.ItemText>
 							<Menu.ItemIcon icon={Library} />
 						</Menu.Item>
@@ -127,11 +121,7 @@ export function UserBanner({
 						<>
 							<Menu.Divider />
 							<Menu.Group>
-								<Menu.Item
-									testID="changeBannerRemoveBtn"
-									label={"Remove Banner"}
-									onPress={onRemoveBanner}
-								>
+								<Menu.Item label={"Remove Banner"} onPress={onRemoveBanner}>
 									<Menu.ItemText>Remove Banner</Menu.ItemText>
 									<Menu.ItemIcon icon={Trash} />
 								</Menu.Item>
@@ -143,7 +133,6 @@ export function UserBanner({
 		</EventStopper>
 	) : banner ? (
 		<Image
-			testID="userBannerImage"
 			style={{
 				...styles.bannerImage,
 				...{ backgroundColor: theme.palette.default.backgroundLight },
@@ -157,7 +146,6 @@ export function UserBanner({
 		/>
 	) : (
 		<View
-			testID="userBannerFallback"
 			style={{
 				...styles.bannerImage,
 				...(type === "labeler" ? styles.labelerBanner : t.atoms.bg_contrast_25),

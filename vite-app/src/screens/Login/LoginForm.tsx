@@ -1,6 +1,6 @@
 import { ComAtprotoServerCreateSession, type ComAtprotoServerDescribeServer } from "@atproto/api";
 import React, { useRef, useState } from "react";
-import { ActivityIndicator, Keyboard, LayoutAnimation, type TextInput, View } from "react-native";
+import { ActivityIndicator, Keyboard, LayoutAnimation, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -54,7 +54,7 @@ export const LoginForm = ({
 	const identifierValueRef = useRef<string>(initialHandle || "");
 	const passwordValueRef = useRef<string>("");
 	const authFactorTokenValueRef = useRef<string>("");
-	const passwordRef = useRef<TextInput>(null);
+	const passwordRef = useRef<HTMLInputElement>(null);
 	const { login } = useSessionApi();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
 	const setHasCheckedForStarterPack = useSetHasCheckedForStarterPack();
@@ -140,7 +140,7 @@ export const LoginForm = ({
 	};
 
 	return (
-		<FormContainer testID="loginForm" titleText={<>Sign in</>}>
+		<FormContainer titleText={<>Sign in</>}>
 			<View>
 				<TextField.LabelText>Hosting provider</TextField.LabelText>
 				<HostingProvider
@@ -151,18 +151,17 @@ export const LoginForm = ({
 			</View>
 			<View>
 				<TextField.LabelText>Account</TextField.LabelText>
-				<View style={a.gap_sm}>
+				<div style={a.gap_sm}>
 					<TextField.Root>
 						<TextField.Icon icon={At} />
 						<TextField.Input
-							testID="loginUsernameInput"
 							label={"Username or email address"}
 							autoCapitalize="none"
 							autoFocus
-							autoCorrect={false}
+							autoCorrect={"off"}
 							autoComplete="username"
 							returnKeyType="next"
-							textContentType="username"
+							// textContentType="username"
 							defaultValue={initialHandle || ""}
 							onChangeText={(v) => {
 								identifierValueRef.current = v;
@@ -171,35 +170,31 @@ export const LoginForm = ({
 								passwordRef.current?.focus();
 							}}
 							blurOnSubmit={false} // prevents flickering due to onSubmitEditing going to next field
-							editable={!isProcessing}
-							accessibilityHint={"Input the username or email address you used at signup"}
+							disabled={isProcessing}
 						/>
 					</TextField.Root>
 
 					<TextField.Root>
 						<TextField.Icon icon={Lock} />
 						<TextField.Input
-							testID="loginPasswordInput"
 							inputRef={passwordRef}
 							label={"Password"}
 							autoCapitalize="none"
-							autoCorrect={false}
+							autoCorrect={"off"}
 							autoComplete="password"
 							returnKeyType="done"
 							enablesReturnKeyAutomatically={true}
-							secureTextEntry={true}
-							textContentType="password"
-							clearButtonMode="while-editing"
+							type="password"
+							// TODO
+							// clearButtonMode="while-editing"
 							onChangeText={(v) => {
 								passwordValueRef.current = v;
 							}}
 							onSubmitEditing={onPressNext}
 							blurOnSubmit={false} // HACK: https://github.com/facebook/react-native/issues/21911#issuecomment-558343069 Keyboard blur behavior is now handled in onSubmitEditing
-							editable={!isProcessing}
-							accessibilityHint={"Enter your password"}
+							disabled={isProcessing}
 						/>
 						<Button
-							testID="forgotPasswordButton"
 							onPress={onPressForgotPassword}
 							label={"Forgot password?"}
 							accessibilityHint={"Opens password reset form"}
@@ -217,7 +212,7 @@ export const LoginForm = ({
 							<ButtonText>Forgot?</ButtonText>
 						</Button>
 					</TextField.Root>
-				</View>
+				</div>
 			</View>
 			{isAuthFactorTokenNeeded && (
 				<View>
@@ -225,22 +220,19 @@ export const LoginForm = ({
 					<TextField.Root>
 						<TextField.Icon icon={Ticket} />
 						<TextField.Input
-							testID="loginAuthFactorTokenInput"
 							label={"Confirmation code"}
 							autoCapitalize="none"
 							autoFocus
-							autoCorrect={false}
+							autoCorrect={"off"}
 							autoComplete="one-time-code"
 							returnKeyType="done"
-							textContentType="username"
 							blurOnSubmit={false} // prevents flickering due to onSubmitEditing going to next field
 							onChangeText={(v) => {
 								setIsAuthFactorTokenValueEmpty(v === "");
 								authFactorTokenValueRef.current = v;
 							}}
 							onSubmitEditing={onPressNext}
-							editable={!isProcessing}
-							accessibilityHint={"Input the code which has been emailed to you"}
+							disabled={isProcessing}
 							style={{
 								textTransform: isAuthFactorTokenValueEmpty ? "none" : "uppercase",
 							}}
@@ -258,7 +250,7 @@ export const LoginForm = ({
 				</View>
 			)}
 			<FormError error={error} />
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -268,10 +260,9 @@ export const LoginForm = ({
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
-				<View style={a.flex_1} />
+				<div style={a.flex_1} />
 				{!serviceDescription && error ? (
 					<Button
-						testID="loginRetryButton"
 						label={"Retry"}
 						accessibilityHint={"Retries signing in"}
 						variant="solid"
@@ -295,7 +286,6 @@ export const LoginForm = ({
 					</>
 				) : (
 					<Button
-						testID="loginNextButton"
 						label={"Next"}
 						accessibilityHint={"Navigates to the next screen"}
 						variant="solid"
@@ -307,7 +297,7 @@ export const LoginForm = ({
 						{isProcessing && <ButtonIcon icon={Loader} />}
 					</Button>
 				)}
-			</View>
+			</div>
 		</FormContainer>
 	);
 };

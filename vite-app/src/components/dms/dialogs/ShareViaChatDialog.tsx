@@ -13,7 +13,7 @@ export function SendViaChatDialog({
 	onSelectChat: (chatId: string) => void;
 }) {
 	return (
-		<Dialog.Outer control={control} testID="sendViaChatChatDialog">
+		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<SendViaChatDialogInner control={control} onSelectChat={onSelectChat} />
 		</Dialog.Outer>

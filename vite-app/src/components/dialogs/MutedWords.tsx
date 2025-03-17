@@ -1,8 +1,7 @@
 import { type AppBskyActorDefs, sanitizeMutedWordValue } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
-import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -90,7 +89,7 @@ function MutedWordsInner() {
 
 	return (
 		<Dialog.ScrollableInner label="Manage your muted words and tags">
-			<View>
+			<div>
 				<Text
 					style={{
 						...a.text_md,
@@ -112,9 +111,9 @@ function MutedWordsInner() {
 					appear in many posts, since it can result in no posts being shown.
 				</Text>
 
-				<View style={a.pb_sm}>
+				<div style={a.pb_sm}>
 					<Dialog.Input
-						autoCorrect={false}
+						autoCorrect={"off"}
 						autoCapitalize="none"
 						autoComplete="off"
 						label="Enter a word or tag"
@@ -128,9 +127,9 @@ function MutedWordsInner() {
 						}}
 						onSubmitEditing={submit}
 					/>
-				</View>
+				</div>
 
-				<View
+				<div
 					style={{
 						...a.pb_xl,
 						...a.gap_sm,
@@ -153,13 +152,13 @@ function MutedWordsInner() {
 							Duration:
 						</Text>
 
-						<View
+						<div
 							style={{
-								...(gtMobile && [a.flex_row, a.align_center, a.justify_start]),
+								...flatten(gtMobile ? [a.flex_row, a.align_center, a.justify_start] : undefined),
 								...a.gap_sm,
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.flex_1,
 									...a.flex_row,
@@ -170,7 +169,7 @@ function MutedWordsInner() {
 							>
 								<Toggle.Item label="Mute this word until you unmute it" name="forever" style={a.flex_1}>
 									<TargetToggle>
-										<View
+										<div
 											style={{
 												...a.flex_1,
 												...a.flex_row,
@@ -187,13 +186,13 @@ function MutedWordsInner() {
 											>
 												Forever
 											</Toggle.LabelText>
-										</View>
+										</div>
 									</TargetToggle>
 								</Toggle.Item>
 
 								<Toggle.Item label="Mute this word for 24 hours" name="24_hours" style={a.flex_1}>
 									<TargetToggle>
-										<View
+										<div
 											style={{
 												...a.flex_1,
 												...a.flex_row,
@@ -210,12 +209,12 @@ function MutedWordsInner() {
 											>
 												24 hours
 											</Toggle.LabelText>
-										</View>
+										</div>
 									</TargetToggle>
 								</Toggle.Item>
-							</View>
+							</div>
 
-							<View
+							<div
 								style={{
 									...a.flex_1,
 									...a.flex_row,
@@ -226,7 +225,7 @@ function MutedWordsInner() {
 							>
 								<Toggle.Item label="Mute this word for 7 days" name="7_days" style={a.flex_1}>
 									<TargetToggle>
-										<View
+										<div
 											style={{
 												...a.flex_1,
 												...a.flex_row,
@@ -243,13 +242,13 @@ function MutedWordsInner() {
 											>
 												7 days
 											</Toggle.LabelText>
-										</View>
+										</div>
 									</TargetToggle>
 								</Toggle.Item>
 
 								<Toggle.Item label="Mute this word for 30 days" name="30_days" style={a.flex_1}>
 									<TargetToggle>
-										<View
+										<div
 											style={{
 												...a.flex_1,
 												...a.flex_row,
@@ -266,11 +265,11 @@ function MutedWordsInner() {
 											>
 												30 days
 											</Toggle.LabelText>
-										</View>
+										</div>
 									</TargetToggle>
 								</Toggle.Item>
-							</View>
-						</View>
+							</div>
+						</div>
 					</Toggle.Group>
 
 					<Toggle.Group
@@ -290,7 +289,7 @@ function MutedWordsInner() {
 							Mute in:
 						</Text>
 
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -300,7 +299,7 @@ function MutedWordsInner() {
 						>
 							<Toggle.Item label="Mute this word in post text and tags" name="content" style={a.flex_1}>
 								<TargetToggle>
-									<View
+									<div
 										style={{
 											...a.flex_1,
 											...a.flex_row,
@@ -317,14 +316,14 @@ function MutedWordsInner() {
 										>
 											Text & tags
 										</Toggle.LabelText>
-									</View>
+									</div>
 									<PageText size="sm" />
 								</TargetToggle>
 							</Toggle.Item>
 
 							<Toggle.Item label="Mute this word in tags only" name="tag" style={a.flex_1}>
 								<TargetToggle>
-									<View
+									<div
 										style={{
 											...a.flex_1,
 											...a.flex_row,
@@ -341,14 +340,14 @@ function MutedWordsInner() {
 										>
 											Tags only
 										</Toggle.LabelText>
-									</View>
+									</div>
 									<Hashtag size="sm" />
 								</TargetToggle>
 							</Toggle.Item>
-						</View>
+						</div>
 					</Toggle.Group>
 
-					<View>
+					<div>
 						<Text
 							style={{
 								...a.pb_xs,
@@ -370,7 +369,7 @@ function MutedWordsInner() {
 							onChange={setExcludeFollowing}
 						>
 							<TargetToggle>
-								<View
+								<div
 									style={{
 										...a.flex_1,
 										...a.flex_row,
@@ -387,28 +386,27 @@ function MutedWordsInner() {
 									>
 										Exclude users you follow
 									</Toggle.LabelText>
-								</View>
+								</div>
 							</TargetToggle>
 						</Toggle.Item>
-					</View>
+					</div>
 
-					<View style={a.pt_xs}>
+					<div style={a.pt_xs}>
 						<Button
 							disabled={isPending || !field}
 							label="Add mute word with chosen settings"
 							size="large"
 							color="primary"
 							variant="solid"
-							style={[]}
 							onPress={submit}
 						>
 							<ButtonText>Add</ButtonText>
 							<ButtonIcon icon={isPending ? Loader : Plus} position="right" />
 						</Button>
-					</View>
+					</div>
 
 					{error && (
-						<View
+						<div
 							style={{
 								...a.mb_lg,
 								...a.flex_row,
@@ -430,13 +428,13 @@ function MutedWordsInner() {
 							>
 								{error}
 							</Text>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 
 				<Divider />
 
-				<View style={a.pt_2xl}>
+				<div style={a.pt_2xl}>
 					<Text
 						style={{
 							...a.text_md,
@@ -451,7 +449,7 @@ function MutedWordsInner() {
 					{isPreferencesLoading ? (
 						<Loader />
 					) : preferencesError || !preferences ? (
-						<View
+						<div
 							style={{
 								...a.py_md,
 								...a.px_lg,
@@ -468,7 +466,7 @@ function MutedWordsInner() {
 								We're sorry, but we weren't able to load your muted words at this time. Please try
 								again.
 							</Text>
-						</View>
+						</div>
 					) : preferences.moderationPrefs.mutedWords.length ? (
 						[...preferences.moderationPrefs.mutedWords]
 							.reverse()
@@ -476,11 +474,11 @@ function MutedWordsInner() {
 								<MutedWordRow
 									key={word.value + i.toString()}
 									word={word}
-									style={i % 2 === 0 && t.atoms.bg_contrast_25}
+									style={i % 2 === 0 ? t.atoms.bg_contrast_25 : undefined}
 								/>
 							))
 					) : (
-						<View
+						<div
 							style={{
 								...a.py_md,
 								...a.px_lg,
@@ -496,10 +494,10 @@ function MutedWordsInner() {
 							>
 								You haven't muted any words or tags yet
 							</Text>
-						</View>
+						</div>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);
@@ -528,7 +526,7 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 				confirmButtonCta="Remove"
 				confirmButtonColor="negative"
 			/>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.justify_between,
@@ -539,13 +537,13 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 					...style,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.gap_xs,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -604,10 +602,10 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 								</>
 							)}
 						</Text>
-					</View>
+					</div>
 
 					{(expiryDate || word.actorTarget === "exclude-following") && (
-						<View
+						<div
 							style={{
 								...a.flex_1,
 								...a.flex_row,
@@ -641,9 +639,9 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 									</>
 								)}
 							</Text>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 
 				<Button
 					label="Remove mute word from your list"
@@ -656,7 +654,7 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 				>
 					<ButtonIcon icon={isPending ? Loader : X} />
 				</Button>
-			</View>
+			</div>
 		</>
 	);
 }
@@ -666,7 +664,7 @@ function TargetToggle({ children }: React.PropsWithChildren) {
 	const ctx = Toggle.useItemContext();
 	const { gtMobile } = useBreakpoints();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -680,11 +678,9 @@ function TargetToggle({ children }: React.PropsWithChildren) {
 				...t.atoms.bg_contrast_25,
 				...((ctx.hovered || ctx.focused) && t.atoms.bg_contrast_50),
 
-				...(ctx.selected && [
-					{
-						backgroundColor: t.palette.primary_50,
-					},
-				]),
+				...(ctx.selected && {
+					backgroundColor: t.palette.primary_50,
+				}),
 
 				...(ctx.disabled && {
 					opacity: 0.8,
@@ -692,6 +688,6 @@ function TargetToggle({ children }: React.PropsWithChildren) {
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }

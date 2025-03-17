@@ -1,5 +1,4 @@
 import React from "react";
-import { type TextInput, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -16,7 +15,7 @@ type SearchInputProps = Omit<TextField.InputProps, "label"> & {
 	onClearText?: () => void;
 };
 
-export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(function SearchInput(
+export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(function SearchInput(
 	{ value, label, onClearText, ...rest },
 	ref,
 ) {
@@ -24,7 +23,7 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 	const showClear = value && value.length > 0;
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.relative,
@@ -38,11 +37,7 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 					value={value}
 					placeholder={"Search"}
 					returnKeyType="search"
-					keyboardAppearance={t.scheme}
-					selectTextOnFocus={false}
 					autoFocus={false}
-					accessibilityRole="search"
-					autoCorrect={false}
 					autoComplete="off"
 					autoCapitalize="none"
 					style={
@@ -56,7 +51,7 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 				/>
 			</TextField.Root>
 			{showClear && (
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...a.z_20,
@@ -68,7 +63,6 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 					}}
 				>
 					<Button
-						testID="searchTextInputClearBtn"
 						onPress={onClearText}
 						label={"Clear search query"}
 						hitSlop={HITSLOP_10}
@@ -79,8 +73,8 @@ export const SearchInput = React.forwardRef<TextInput, SearchInputProps>(functio
 					>
 						<ButtonIcon icon={X} size="xs" />
 					</Button>
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 });

@@ -47,7 +47,6 @@ export function NewChat({
 	return (
 		<>
 			<FAB
-				testID="newChatFAB"
 				onPress={() => {
 					if (needsEmailVerification) {
 						verifyEmailControl.open();
@@ -61,7 +60,7 @@ export function NewChat({
 				accessibilityHint=""
 			/>
 
-			<Dialog.Outer control={control} testID="newChatDialog">
+			<Dialog.Outer control={control}>
 				<Dialog.Handle />
 				<SearchablePeopleList title={"Start a new chat"} onSelectChat={onCreateChat} />
 			</Dialog.Outer>

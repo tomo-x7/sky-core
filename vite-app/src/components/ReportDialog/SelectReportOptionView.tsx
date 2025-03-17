@@ -1,6 +1,5 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
 import { Link } from "#/components/Link";
 import { DMCA_LINK } from "#/components/ReportDialog/const";
@@ -60,7 +59,7 @@ export function SelectReportOptionView(props: {
 	}, [props.params.type]);
 
 	return (
-		<View style={a.gap_lg}>
+		<div style={a.gap_lg}>
 			{props.labelers?.length > 1 ? (
 				<Button
 					size="small"
@@ -73,7 +72,7 @@ export function SelectReportOptionView(props: {
 					<ButtonIcon icon={ChevronLeft} />
 				</Button>
 			) : null}
-			<View
+			<div
 				style={{
 					...a.justify_center,
 					...(gtMobile ? a.gap_sm : a.gap_xs),
@@ -95,14 +94,13 @@ export function SelectReportOptionView(props: {
 				>
 					{i18n.description}
 				</Text>
-			</View>
+			</div>
 			<Divider />
-			<View style={a.gap_sm}>
+			<div style={a.gap_sm}>
 				{reportOptions.map((reportOption) => {
 					return (
 						<Button
 							key={reportOption.reason}
-							testID={reportOption.reason}
 							label={`Create report for ${reportOption.title}`}
 							onPress={() => props.onSelectReportOption(reportOption)}
 						>
@@ -112,7 +110,7 @@ export function SelectReportOptionView(props: {
 				})}
 
 				{(props.params.type === "post" || props.params.type === "account") && (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -144,10 +142,10 @@ export function SelectReportOptionView(props: {
 							<ButtonText>View details</ButtonText>
 							<ButtonIcon position="right" icon={SquareArrowTopRight} />
 						</Link>
-					</View>
+					</div>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -163,7 +161,7 @@ function ReportOptionButton({
 	const interacted = hovered || pressed;
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.flex_row,
@@ -176,7 +174,7 @@ function ReportOptionButton({
 				...(interacted && t.atoms.bg_contrast_50),
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_xs,
@@ -199,8 +197,8 @@ function ReportOptionButton({
 				>
 					{description}
 				</Text>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.absolute,
 					...a.inset_0,
@@ -210,7 +208,7 @@ function ReportOptionButton({
 				}}
 			>
 				<ChevronRight size="md" fill={t.atoms.text_contrast_low.color} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

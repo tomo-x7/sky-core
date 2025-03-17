@@ -1,6 +1,5 @@
 import React from "react";
 import { Pressable, View } from "react-native";
-import type { ScrollView } from "react-native-gesture-handler";
 
 import type { ReportOption } from "#/lib/moderation/useReportOptions";
 import { useMyLabelersQuery } from "#/state/queries/preferences";
@@ -35,12 +34,10 @@ function ReportDialogInner(props: ReportDialogProps) {
 	} = useMyLabelersQuery({ excludeNonConfigurableLabelers: true });
 	const isLoading = useDelayedLoading(500, isLabelerLoading);
 
-	const ref = React.useRef<ScrollView>(null);
-
 	return (
-		<Dialog.ScrollableInner label={"Report dialog"} ref={ref}>
+		<Dialog.ScrollableInner label={"Report dialog"}>
 			{isLoading ? (
-				<View
+				<div
 					style={{
 						...a.align_center,
 						...{ height: 100 },
@@ -49,7 +46,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 					<Loader size="xl" />
 					{/* Here to capture focus for a hot sec to prevent flash */}
 					<Pressable accessible={false} />
-				</View>
+				</div>
 			) : error || !labelers ? (
 				<View>
 					<Text style={a.text_md}>Something went wrong, please try again.</Text>

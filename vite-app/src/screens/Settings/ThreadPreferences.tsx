@@ -28,7 +28,7 @@ export function ThreadPreferencesScreen(props: Props) {
 	);
 
 	return (
-		<Layout.Screen testID="threadPreferencesScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>

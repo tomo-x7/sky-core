@@ -2,13 +2,13 @@ import { type ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api
 import { useMutation } from "@tanstack/react-query";
 import Graphemer from "graphemer";
 import { useMemo, useState } from "react";
-import { Modal, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { InlineLinkText } from "#/components/Link";
 import { Loader } from "#/components/Loader";
+import { Modal } from "#/components/Motal";
 import { P, Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { MAX_REPORT_REASON_GRAPHEME_LENGTH } from "#/lib/constants";
@@ -116,22 +116,22 @@ export function Takendown() {
 				}}
 				centerContent
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_center,
-						...(gtMobile ? a.pt_4xl : [a.px_xl, a.pt_4xl]),
+						...(gtMobile ? a.pt_4xl : flatten([a.px_xl, a.pt_4xl])),
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...{ maxWidth: COL_WIDTH, minHeight: COL_WIDTH },
 						}}
 					>
-						<View style={a.pb_xl}>
+						<div style={a.pb_xl}>
 							<Logo width={64} />
-						</View>
+						</div>
 
 						<Text
 							style={{
@@ -144,7 +144,7 @@ export function Takendown() {
 						</Text>
 
 						{isAppealling ? (
-							<View
+							<div
 								style={{
 									...a.relative,
 									...a.w_full,
@@ -175,13 +175,14 @@ export function Takendown() {
 												onChangeText={setReason}
 												placeholder={"Why are you appealing?"}
 												multiline
+												// @ts-expect-error
 												numberOfLines={5}
 												autoFocus
 												style={{ paddingBottom: 40, minHeight: 150 }}
 												maxLength={MAX_REPORT_REASON_GRAPHEME_LENGTH * 10}
 											/>
 										</TextField.Root>
-										<View
+										<div
 											style={{
 												...a.absolute,
 												...a.flex_row,
@@ -199,7 +200,7 @@ export function Takendown() {
 												count={reasonGraphemeLength}
 												max={MAX_REPORT_REASON_GRAPHEME_LENGTH}
 											/>
-										</View>
+										</div>
 									</>
 								)}
 								{error && (
@@ -214,7 +215,7 @@ export function Takendown() {
 										{cleanError(error)}
 									</Text>
 								)}
-							</View>
+							</div>
 						) : (
 							<P style={t.atoms.text_contrast_medium}>
 								<>
@@ -238,7 +239,7 @@ export function Takendown() {
 						)}
 
 						{webLayout && (
-							<View
+							<div
 								style={{
 									...a.w_full,
 									...a.flex_row,
@@ -249,13 +250,13 @@ export function Takendown() {
 							>
 								{secondaryBtn}
 								{primaryBtn}
-							</View>
+							</div>
 						)}
-					</View>
-				</View>
+					</div>
+				</div>
 			</KeyboardAwareScrollView>
 			{!webLayout && (
-				<View
+				<div
 					style={{
 						...a.align_center,
 						...t.atoms.bg,
@@ -263,7 +264,7 @@ export function Takendown() {
 						...{ paddingBottom: a.pb_5xl.paddingBottom },
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.gap_sm,
@@ -272,8 +273,8 @@ export function Takendown() {
 					>
 						{primaryBtn}
 						{secondaryBtn}
-					</View>
-				</View>
+					</div>
+				</div>
 			)}
 		</Modal>
 	);

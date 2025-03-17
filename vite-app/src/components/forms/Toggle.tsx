@@ -1,12 +1,10 @@
 import React from "react";
-import { Pressable, View, type ViewStyle } from "react-native";
 import Animated, { LinearTransition } from "react-native-reanimated";
 
-import { type TextStyleProp, type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
+import { type TextStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { CheckThick_Stroke2_Corner0_Rounded as Checkmark } from "#/components/icons/Check";
-import { HITSLOP_10 } from "#/lib/constants";
 
 export type ItemState = {
 	name: string;
@@ -51,7 +49,7 @@ export type GroupProps = React.PropsWithChildren<{
 	label: string;
 }>;
 
-export type ItemProps = ViewStyleProp & {
+export type ItemProps = Omit<JSX.IntrinsicElements["input"], "value"> & {
 	type?: "radio" | "checkbox";
 	name: string;
 	label: string;
@@ -115,7 +113,7 @@ export function Group({
 
 	return (
 		<GroupContext.Provider value={context}>
-			<View
+			<div
 				style={a.w_full}
 				role={groupRole}
 				{...(groupRole === "radiogroup"
@@ -127,7 +125,7 @@ export function Group({
 					: {})}
 			>
 				{children}
-			</View>
+			</div>
 		</GroupContext.Provider>
 	);
 }
@@ -135,7 +133,7 @@ export function Group({
 export function Item({
 	children,
 	name,
-	value = false,
+	value,
 	disabled: itemDisabled = false,
 	onChange,
 	isInvalid,
@@ -156,7 +154,7 @@ export function Item({
 	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
 
 	const role = groupType === "radio" ? "radio" : type;
-	const selected = selectedValues.includes(name) || !!value;
+	const selected = selectedValues.includes(name) || !!(value ?? false);
 	const disabled = groupDisabled || itemDisabled || (!selected && maxSelectionsReached);
 
 	const onPress = React.useCallback(() => {
@@ -180,38 +178,32 @@ export function Item({
 
 	return (
 		<ItemContext.Provider value={state}>
-			<Pressable
-				accessibilityHint={undefined} // optional
-				hitSlop={HITSLOP_10}
-				{...rest}
-				disabled={disabled}
-				aria-disabled={disabled ?? false}
-				aria-checked={selected}
-				aria-invalid={isInvalid}
-				aria-label={label}
-				role={role}
-				accessibilityRole={role}
-				accessibilityState={{
-					disabled: disabled ?? false,
-					selected: selected,
-				}}
-				accessibilityLabel={label}
-				onPress={onPress}
-				onHoverIn={onHoverIn}
-				onHoverOut={onHoverOut}
-				onPressIn={onPressIn}
-				onPressOut={onPressOut}
-				onFocus={onFocus}
-				onBlur={onBlur}
-				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.gap_sm,
-					...flatten(style),
-				}}
-			>
+			<label>
+				<input
+					// hitSlop={HITSLOP_10}
+					{...rest}
+					disabled={disabled}
+					aria-disabled={disabled ?? false}
+					aria-checked={selected}
+					aria-invalid={isInvalid}
+					aria-label={label}
+					role={role}
+					onClick={onPress}
+					onMouseEnter={onHoverIn}
+					onMouseLeave={onHoverOut}
+					onMouseDown={onPressIn}
+					onMouseUp={onPressOut}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_sm,
+						...style,
+					}}
+				/>
 				{typeof children === "function" ? children(state) : children}
-			</Pressable>
+			</label>
 		</ItemContext.Provider>
 	);
 }
@@ -230,7 +222,7 @@ export function LabelText({ children, style }: React.PropsWithChildren<TextStyle
 					color: disabled ? t.atoms.text_contrast_low.color : t.atoms.text_contrast_high.color,
 				},
 
-				...flatten(style),
+				...style,
 			}}
 		>
 			{children}
@@ -253,9 +245,9 @@ export function createSharedToggleStyles({
 	disabled: boolean;
 	isInvalid: boolean;
 }) {
-	const base: ViewStyle[] = [];
-	const baseHover: ViewStyle[] = [];
-	const indicator: ViewStyle[] = [];
+	const base: React.CSSProperties[] = [];
+	const baseHover: React.CSSProperties[] = [];
+	const indicator: React.CSSProperties[] = [];
 
 	if (selected) {
 		base.push({
@@ -300,9 +292,9 @@ export function createSharedToggleStyles({
 	}
 
 	return {
-		baseStyles: base,
-		baseHoverStyles: disabled ? [] : baseHover,
-		indicatorStyles: indicator,
+		baseStyles: flatten(base),
+		baseHoverStyles: disabled ? {} : flatten(baseHover),
+		indicatorStyles: flatten(indicator),
 	};
 }
 
@@ -318,25 +310,23 @@ export function Checkbox() {
 		isInvalid,
 	});
 	return (
-		<View
+		<div
 			style={{
 				...a.justify_center,
 				...a.align_center,
 				...a.rounded_xs,
 				...t.atoms.border_contrast_high,
 
-				...{
-					borderWidth: 1,
-					height: 24,
-					width: 24,
-				},
+				borderWidth: 1,
+				height: 24,
+				width: 24,
 
 				...baseStyles,
 				...(hovered ? baseHoverStyles : {}),
 			}}
 		>
 			{selected ? <Checkmark size="xs" fill={t.palette.primary_500} /> : null}
-		</View>
+		</div>
 	);
 }
 
@@ -352,7 +342,7 @@ export function Switch() {
 		isInvalid,
 	});
 	return (
-		<View
+		<div
 			style={{
 				...a.relative,
 				...a.rounded_full,
@@ -374,11 +364,10 @@ export function Switch() {
 				layout={LinearTransition.duration(100)}
 				style={{
 					...a.rounded_full,
-
-					...{
-						height: 16,
-						width: 16,
-					},
+					// @ts-ignore
+					height: 16,
+					// @ts-ignore
+					width: 16,
 
 					...(selected
 						? {
@@ -393,7 +382,7 @@ export function Switch() {
 					...indicatorStyles,
 				}}
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -409,7 +398,7 @@ export function Radio() {
 		isInvalid,
 	});
 	return (
-		<View
+		<div
 			style={{
 				...a.justify_center,
 				...a.align_center,
@@ -427,7 +416,7 @@ export function Radio() {
 			}}
 		>
 			{selected ? (
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...a.rounded_full,
@@ -443,7 +432,7 @@ export function Radio() {
 					}}
 				/>
 			) : null}
-		</View>
+		</div>
 	);
 }
 

@@ -39,7 +39,6 @@ export function ThreadgateBtn({
 				variant="solid"
 				color="secondary"
 				size="small"
-				testID="openReplyGateButton"
 				onPress={onPress}
 				label={label}
 				accessibilityHint={"Opens a dialog to choose who can reply to this thread"}

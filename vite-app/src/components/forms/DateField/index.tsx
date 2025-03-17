@@ -1,41 +1,22 @@
-import { useCallback, useImperativeHandle } from "react";
-import { Keyboard, View } from "react-native";
-import DatePicker from "react-native-date-picker";
+import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
-import { Button, ButtonText } from "#/components/Button";
-import * as Dialog from "#/components/Dialog";
 import type { DateFieldProps } from "#/components/forms/DateField/types";
 import { toSimpleDateString } from "#/components/forms/DateField/utils";
 import * as TextField from "#/components/forms/TextField";
-import { DateFieldButton } from "./index.shared";
+import { CalendarDays_Stroke2_Corner0_Rounded as CalendarDays } from "#/components/icons/CalendarDays";
 
 export * as utils from "#/components/forms/DateField/utils";
 export const LabelText = TextField.LabelText;
 
-/**
- * Date-only input. Accepts a string in the format YYYY-MM-DD, or a Date object.
- * Date objects are converted to strings in the format YYYY-MM-DD.
- * Returns a string in the format YYYY-MM-DD.
- *
- * To generate a string in the format YYYY-MM-DD from a Date object, use the
- * `utils.toSimpleDateString(Date)` export of this file.
- */
-export function DateField({
-	value,
-	inputRef,
-	onChangeDate,
-	testID,
-	label,
-	isInvalid,
-	accessibilityHint,
-	maximumDate,
-}: DateFieldProps) {
-	const t = useTheme();
-	const control = Dialog.useDialogControl();
+const InputBase = React.forwardRef<HTMLInputElement, JSX.IntrinsicElements["input"]>(({ style, ...props }, ref) => {
+	return <input type="date" ref={ref} style={{ ...style, background: "transparent", border: 0 }} {...props} />;
+});
 
-	const onChangeInternal = useCallback(
-		(date: Date | undefined) => {
+export function DateField({ value, inputRef, onChangeDate, label, isInvalid, maximumDate }: DateFieldProps) {
+	const handleOnChange = React.useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			const date = e.target.valueAsDate || e.target.value;
+
 			if (date) {
 				const formatted = toSimpleDateString(date);
 				onChangeDate(formatted);
@@ -44,68 +25,18 @@ export function DateField({
 		[onChangeDate],
 	);
 
-	useImperativeHandle(
-		inputRef,
-		() => ({
-			focus: () => {
-				Keyboard.dismiss();
-				control.open();
-			},
-			blur: () => {
-				control.close();
-			},
-		}),
-		[control],
-	);
-
 	return (
-		<>
-			<DateFieldButton
+		<TextField.Root isInvalid={isInvalid}>
+			<TextField.Icon icon={CalendarDays} />
+			<TextField.Input
+				value={toSimpleDateString(value)}
+				inputRef={inputRef}
 				label={label}
-				value={value}
-				onPress={() => {
-					Keyboard.dismiss();
-					control.open();
-				}}
-				isInvalid={isInvalid}
-				accessibilityHint={accessibilityHint}
+				onChange={handleOnChange}
+				max={maximumDate ? toSimpleDateString(maximumDate) : undefined}
+				style={{ background: "transparent", border: 0 }}
+				type="date"
 			/>
-			<Dialog.Outer control={control} testID={testID} nativeOptions={{ preventExpansion: true }}>
-				<Dialog.Handle />
-				<Dialog.ScrollableInner label={label}>
-					<View style={a.gap_lg}>
-						<View
-							style={{
-								...a.relative,
-								...a.w_full,
-								...a.align_center,
-							}}
-						>
-							<DatePicker
-								timeZoneOffsetInMinutes={0}
-								theme={t.name === "light" ? "light" : "dark"}
-								date={new Date(toSimpleDateString(value))}
-								onDateChange={onChangeInternal}
-								mode="date"
-								testID={`${testID}-datepicker`}
-								aria-label={label}
-								accessibilityLabel={label}
-								accessibilityHint={accessibilityHint}
-								maximumDate={maximumDate ? new Date(toSimpleDateString(maximumDate)) : undefined}
-							/>
-						</View>
-						<Button
-							label={"Done"}
-							onPress={() => control.close()}
-							size="large"
-							color="primary"
-							variant="solid"
-						>
-							<ButtonText>Done</ButtonText>
-						</Button>
-					</View>
-				</Dialog.ScrollableInner>
-			</Dialog.Outer>
-		</>
+		</TextField.Root>
 	);
 }

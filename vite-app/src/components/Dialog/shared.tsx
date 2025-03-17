@@ -1,5 +1,4 @@
 import type React from "react";
-import { type StyleProp, type TextStyle, View, type ViewStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -13,11 +12,11 @@ export function Header({
 	renderLeft?: () => React.ReactNode;
 	renderRight?: () => React.ReactNode;
 	children?: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.relative,
 				...a.w_full,
@@ -35,27 +34,27 @@ export function Header({
 			}}
 		>
 			{renderLeft && (
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...{ left: 6 },
 					}}
 				>
 					{renderLeft()}
-				</View>
+				</div>
 			)}
 			{children}
 			{renderRight && (
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...{ right: 6 },
 					}}
 				>
 					{renderRight()}
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -64,7 +63,7 @@ export function HeaderText({
 	style,
 }: {
 	children?: React.ReactNode;
-	style?: StyleProp<TextStyle>;
+	style?: React.CSSProperties;
 }) {
 	return (
 		<Text

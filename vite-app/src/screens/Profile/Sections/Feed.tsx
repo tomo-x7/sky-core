@@ -60,7 +60,6 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 	return (
 		<View>
 			<PostFeed
-				testID="postsFeed"
 				enabled={isFocused}
 				feed={feed}
 				scrollElRef={scrollElRef}

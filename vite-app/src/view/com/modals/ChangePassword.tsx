@@ -156,7 +156,6 @@ export function Component() {
 							}}
 						>
 							<TouchableOpacity
-								testID="skipSendEmailButton"
 								onPress={() => setStage(Stages.ChangePassword)}
 								accessibilityRole="button"
 								accessibilityLabel={"Go to next"}
@@ -191,7 +190,6 @@ export function Component() {
 									}}
 								/>
 								<TextInput
-									testID="codeInput"
 									style={{
 										...pal.text,
 										...styles.textInput,
@@ -206,7 +204,7 @@ export function Component() {
 									accessibilityLabel={"Reset Code"}
 									accessibilityHint=""
 									autoCapitalize="none"
-									autoCorrect={false}
+									autoCorrect={"off"}
 									autoComplete="off"
 								/>
 							</View>
@@ -226,7 +224,6 @@ export function Component() {
 									}}
 								/>
 								<TextInput
-									testID="codeInput"
 									style={{
 										...pal.text,
 										...styles.textInput,
@@ -255,7 +252,6 @@ export function Component() {
 						<View style={{ gap: 6 }}>
 							{stage === Stages.RequestCode && (
 								<Button
-									testID="requestChangeBtn"
 									type="primary"
 									onPress={onRequestCode}
 									accessibilityLabel={"Request Code"}
@@ -267,7 +263,6 @@ export function Component() {
 							)}
 							{stage === Stages.ChangePassword && (
 								<Button
-									testID="confirmBtn"
 									type="primary"
 									onPress={onChangePassword}
 									accessibilityLabel={"Next"}
@@ -278,7 +273,6 @@ export function Component() {
 								/>
 							)}
 							<Button
-								testID="cancelBtn"
 								type={stage !== Stages.Done ? "default" : "primary"}
 								onPress={() => {
 									closeModal();

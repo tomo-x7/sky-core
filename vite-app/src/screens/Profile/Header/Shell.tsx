@@ -102,7 +102,6 @@ let ProfileHeaderShell = ({
 					backButton={
 						!hideBackButton && (
 							<TouchableWithoutFeedback
-								testID="profileHeaderBackBtn"
 								onPress={onPressBack}
 								hitSlop={BACK_HITSLOP}
 								accessibilityRole="button"
@@ -153,7 +152,6 @@ let ProfileHeaderShell = ({
 			)}
 			<GrowableAvatar style={styles.aviPosition}>
 				<TouchableWithoutFeedback
-					testID="profileHeaderAviButton"
 					onPress={onPressAvi}
 					accessibilityRole="image"
 					accessibilityLabel={`View ${profile.handle}'s avatar`}

@@ -81,7 +81,7 @@ export function ModerationScreen(_props: NativeStackScreenProps<CommonNavigatorP
 	const error = preferencesError;
 
 	return (
-		<Layout.Screen testID="moderationScreen">
+		<Layout.Screen>
 			<ViewHeader title={"Moderation"} showOnDesktop />
 			<Layout.Content>
 				{isLoading ? (
@@ -216,11 +216,7 @@ export function ModerationScreenInner({
 					...t.atoms.bg_contrast_25,
 				}}
 			>
-				<Link
-					label={"View your default post interaction settings"}
-					testID="interactionSettingsBtn"
-					to="/moderation/interaction-settings"
-				>
+				<Link label={"View your default post interaction settings"} to="/moderation/interaction-settings">
 					{(state) => (
 						<SubItem
 							title={"Interaction settings"}
@@ -230,11 +226,7 @@ export function ModerationScreenInner({
 					)}
 				</Link>
 				<Divider />
-				<Button
-					testID="mutedWordsBtn"
-					label={"Open muted words and tags settings"}
-					onPress={() => mutedWordsDialogControl.open()}
-				>
+				<Button label={"Open muted words and tags settings"} onPress={() => mutedWordsDialogControl.open()}>
 					{(state) => (
 						<SubItem
 							title={"Muted words & tags"}
@@ -244,7 +236,7 @@ export function ModerationScreenInner({
 					)}
 				</Button>
 				<Divider />
-				<Link label={"View your moderation lists"} testID="moderationlistsBtn" to="/moderation/modlists">
+				<Link label={"View your moderation lists"} to="/moderation/modlists">
 					{(state) => (
 						<SubItem
 							title={"Moderation lists"}
@@ -254,7 +246,7 @@ export function ModerationScreenInner({
 					)}
 				</Link>
 				<Divider />
-				<Link label={"View your muted accounts"} testID="mutedAccountsBtn" to="/moderation/muted-accounts">
+				<Link label={"View your muted accounts"} to="/moderation/muted-accounts">
 					{(state) => (
 						<SubItem
 							title={"Muted accounts"}
@@ -264,11 +256,7 @@ export function ModerationScreenInner({
 					)}
 				</Link>
 				<Divider />
-				<Link
-					label={"View your blocked accounts"}
-					testID="blockedAccountsBtn"
-					to="/moderation/blocked-accounts"
-				>
+				<Link label={"View your blocked accounts"} to="/moderation/blocked-accounts">
 					{(state) => (
 						<SubItem
 							title={"Blocked accounts"}

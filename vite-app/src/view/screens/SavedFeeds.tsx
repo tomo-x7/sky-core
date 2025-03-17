@@ -83,7 +83,6 @@ function SavedFeedsInner({
 					<Layout.Header.TitleText>Feeds</Layout.Header.TitleText>
 				</Layout.Header.Content>
 				<Button
-					testID="saveChangesBtn"
 					size="small"
 					variant={hasUnsavedChanges ? "solid" : "solid"}
 					color={hasUnsavedChanges ? "primary" : "secondary"}
@@ -304,7 +303,6 @@ function ListItem({
 							marginRight: 8,
 							opacity: state.hovered || state.pressed ? 0.5 : 1,
 						})}
-						testID={`feed-${feed.type}-moveUp`}
 					>
 						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="arrow-up" size={14} style={pal.textLight} />
@@ -321,7 +319,6 @@ function ListItem({
 							marginRight: 8,
 							opacity: state.hovered || state.pressed ? 0.5 : 1,
 						})}
-						testID={`feed-${feed.type}-moveDown`}
 					>
 						{/* @ts-ignore */}
 						<FontAwesomeIcon icon="arrow-down" size={14} style={pal.textLight} />
@@ -329,7 +326,6 @@ function ListItem({
 				</>
 			) : (
 				<Pressable
-					testID={`feed-${feedUri}-toggleSave`}
 					accessibilityRole="button"
 					accessibilityLabel={"Remove from my feeds"}
 					accessibilityHint=""
@@ -359,7 +355,6 @@ function ListItem({
 						borderRadius: 4,
 						opacity: state.hovered || state.focused ? 0.5 : 1,
 					})}
-					testID={`feed-${feed.type}-togglePin`}
 				>
 					{/* @ts-ignore */}
 					<FontAwesomeIcon icon="thumb-tack" size={14} color={isPinned ? colors.blue3 : pal.colors.icon} />

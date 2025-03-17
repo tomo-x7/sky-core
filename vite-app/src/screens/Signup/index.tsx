@@ -78,7 +78,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 				description={`We're so excited to have you join us!`}
 				scrollable
 			>
-				<View testID="createAccount" style={a.flex_1}>
+				<View style={a.flex_1}>
 					{showStarterPackCard &&
 					bsky.dangerousIsType<AppBskyGraphStarterpack.Record>(
 						starterPack.record,

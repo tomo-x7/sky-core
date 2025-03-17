@@ -132,12 +132,7 @@ let NotificationFeedItem = ({
 		}
 		const isHighlighted = highlightUnread && !item.notification.isRead;
 		return (
-			<Link
-				testID={`feedItem-by-${item.notification.author.handle}`}
-				href={itemHref}
-				noFeedback
-				accessible={false}
-			>
+			<Link href={itemHref} noFeedback accessible={false}>
 				<Post
 					post={item.subject}
 					style={
@@ -336,7 +331,6 @@ let NotificationFeedItem = ({
 
 	return (
 		<Link
-			testID={`feedItem-by-${item.notification.author.handle}`}
 			style={{
 				...styles.outer,
 				...pal.border,

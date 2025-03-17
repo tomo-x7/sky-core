@@ -1,11 +1,10 @@
 import type React from "react";
-import { View } from "react-native";
 
 import { type ViewStyleProp, atoms as a } from "#/alf";
 
 export function Fill({ children, style }: { children?: React.ReactNode } & ViewStyleProp) {
 	return (
-		<View
+		<div
 			style={{
 				...a.absolute,
 				...a.inset_0,
@@ -13,6 +12,6 @@ export function Fill({ children, style }: { children?: React.ReactNode } & ViewS
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }

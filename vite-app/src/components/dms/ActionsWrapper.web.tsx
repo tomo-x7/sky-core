@@ -1,8 +1,7 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
 import React from "react";
-import { StyleSheet, View } from "react-native";
 
-import { atoms as a } from "#/alf";
+import { atoms as a, flatten } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
 import { MessageMenu } from "#/components/dms/MessageMenu";
 
@@ -36,17 +35,16 @@ export function ActionsWrapper({
 	}, []);
 
 	return (
-		<View
-			// @ts-expect-error web only
+		<div
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			onFocus={onFocus}
 			onBlur={onMouseLeave}
-			style={StyleSheet.flatten([a.flex_1, a.flex_row])}
+			style={flatten([a.flex_1, a.flex_row])}
 			ref={viewRef}
 		>
 			{isFromSelf && (
-				<View
+				<div
 					style={{
 						...a.mr_xl,
 						...a.justify_center,
@@ -61,17 +59,17 @@ export function ActionsWrapper({
 						control={menuControl}
 						triggerOpacity={showActions || menuControl.isOpen ? 1 : 0}
 					/>
-				</View>
+				</div>
 			)}
-			<View
+			<div
 				style={{
 					maxWidth: "80%",
 				}}
 			>
 				{children}
-			</View>
+			</div>
 			{!isFromSelf && (
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -83,8 +81,8 @@ export function ActionsWrapper({
 						control={menuControl}
 						triggerOpacity={showActions || menuControl.isOpen ? 1 : 0}
 					/>
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 }

@@ -77,12 +77,8 @@ export function CountWheel({
 
 	return (
 		<View>
-			<View
-				// @ts-expect-error is div
-				ref={countView}
-			>
+			<div ref={countView}>
 				<Text
-					testID="likeCount"
 					style={{
 						...(big ? a.text_md : { fontSize: 15 }),
 						...a.user_select_none,
@@ -91,14 +87,9 @@ export function CountWheel({
 				>
 					{formattedCount}
 				</Text>
-			</View>
+			</div>
 			{shouldAnimate && (likeCount > 1 || !isLiked) ? (
-				<View
-					style={{ position: "absolute", opacity: 0 }}
-					aria-disabled={true}
-					// @ts-expect-error is div
-					ref={prevCountView}
-				>
+				<div style={{ position: "absolute", opacity: 0 }} aria-disabled={true} ref={prevCountView}>
 					<Text
 						style={{
 							...(big ? a.text_md : { fontSize: 15 }),
@@ -108,7 +99,7 @@ export function CountWheel({
 					>
 						{formattedPrevCount}
 					</Text>
-				</View>
+				</div>
 			) : null}
 		</View>
 	);

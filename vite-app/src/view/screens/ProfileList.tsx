@@ -69,7 +69,7 @@ interface SectionRef {
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileList">;
 export function ProfileListScreen(props: Props) {
 	return (
-		<Layout.Screen testID="profileListScreen">
+		<Layout.Screen>
 			<ProfileListScreenInner {...props} />
 		</Layout.Screen>
 	);
@@ -212,7 +212,6 @@ function ProfileListScreenLoaded({
 							)}
 						</PagerWithHeader>
 						<FAB
-							testID="composeFAB"
 							onPress={() => openComposer({})}
 							icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
 							accessibilityRole="button"
@@ -239,7 +238,6 @@ function ProfileListScreenLoaded({
 						headerHeight={0}
 					/>
 					<FAB
-						testID="composeFAB"
 						onPress={() => openComposer({})}
 						icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
 						accessibilityRole="button"
@@ -397,7 +395,6 @@ function Header({
 	const dropdownItems: DropdownItem[] = useMemo(() => {
 		const items: DropdownItem[] = [
 			{
-				testID: "listHeaderDropdownShareBtn",
 				label: "Copy link to list",
 				onPress: onPressShare,
 				icon: {
@@ -412,7 +409,6 @@ function Header({
 
 		if (savedFeedConfig) {
 			items.push({
-				testID: "listHeaderDropdownRemoveFromFeedsBtn",
 				label: "Remove from my feeds",
 				onPress: onRemoveFromSavedFeeds,
 				icon: {
@@ -428,7 +424,6 @@ function Header({
 		if (isOwner) {
 			items.push({ label: "separator" });
 			items.push({
-				testID: "listHeaderDropdownEditBtn",
 				label: "Edit list details",
 				onPress: onPressEdit,
 				icon: {
@@ -440,7 +435,6 @@ function Header({
 				},
 			});
 			items.push({
-				testID: "listHeaderDropdownDeleteBtn",
 				label: "Delete List",
 				onPress: deleteListPromptControl.open,
 				icon: {
@@ -454,7 +448,6 @@ function Header({
 		} else {
 			items.push({ label: "separator" });
 			items.push({
-				testID: "listHeaderDropdownReportBtn",
 				label: "Report List",
 				onPress: onPressReport,
 				icon: {
@@ -469,7 +462,6 @@ function Header({
 		if (isModList && isPinned) {
 			items.push({ label: "separator" });
 			items.push({
-				testID: "listHeaderDropdownUnpinBtn",
 				label: "Unpin moderation list",
 				onPress: isPending || !savedFeedConfig ? undefined : () => removeSavedFeed(savedFeedConfig),
 				icon: {
@@ -486,7 +478,6 @@ function Header({
 
 			if (isMuting) {
 				items.push({
-					testID: "listHeaderDropdownMuteBtn",
 					label: "Un-mute list",
 					onPress: onUnsubscribeMute,
 					icon: {
@@ -501,7 +492,6 @@ function Header({
 
 			if (isBlocking) {
 				items.push({
-					testID: "listHeaderDropdownBlockBtn",
 					label: "Un-block list",
 					onPress: onUnsubscribeBlock,
 					icon: {
@@ -537,7 +527,6 @@ function Header({
 	const subscribeDropdownItems: DropdownItem[] = useMemo(() => {
 		return [
 			{
-				testID: "subscribeDropdownMuteBtn",
 				label: "Mute accounts",
 				onPress: subscribeMutePromptControl.open,
 				icon: {
@@ -549,7 +538,6 @@ function Header({
 				},
 			},
 			{
-				testID: "subscribeDropdownBlockBtn",
 				label: "Block accounts",
 				onPress: subscribeBlockPromptControl.open,
 				icon: {
@@ -594,7 +582,6 @@ function Header({
 				/>
 				{isCurateList ? (
 					<Button
-						testID={isPinned ? "unpinBtn" : "pinBtn"}
 						type={isPinned ? "default" : "inverted"}
 						label={isPinned ? "Unpin" : "Pin to home"}
 						onPress={onTogglePinned}
@@ -602,12 +589,11 @@ function Header({
 					/>
 				) : isModList ? (
 					isBlocking ? (
-						<Button testID="unblockBtn" type="default" label={"Unblock"} onPress={onUnsubscribeBlock} />
+						<Button type="default" label={"Unblock"} onPress={onUnsubscribeBlock} />
 					) : isMuting ? (
-						<Button testID="unmuteBtn" type="default" label={"Unmute"} onPress={onUnsubscribeMute} />
+						<Button type="default" label={"Unmute"} onPress={onUnsubscribeMute} />
 					) : (
 						<NativeDropdown
-							testID="subscribeBtn"
 							items={subscribeDropdownItems}
 							accessibilityLabel={"Subscribe to this list"}
 							accessibilityHint=""
@@ -623,12 +609,7 @@ function Header({
 						</NativeDropdown>
 					)
 				) : null}
-				<NativeDropdown
-					testID="headerDropdownBtn"
-					items={dropdownItems}
-					accessibilityLabel={"More options"}
-					accessibilityHint=""
-				>
+				<NativeDropdown items={dropdownItems} accessibilityLabel={"More options"} accessibilityHint="">
 					<View
 						style={{
 							...pal.viewLight,
@@ -756,7 +737,6 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 	return (
 		<View>
 			<PostFeed
-				testID="listFeed"
 				enabled={isFocused}
 				feed={feed}
 				pollInterval={60e3}
@@ -813,7 +793,6 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					}}
 				>
 					<NewButton
-						testID="addUserBtn"
 						label={"Add a user to this list"}
 						onPress={onPressAddUser}
 						color="primary"
@@ -836,7 +815,6 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				}}
 			>
 				<NewButton
-					testID="addUserBtn"
 					label={"Add a user to this list"}
 					onPress={onPressAddUser}
 					color="primary"
@@ -862,7 +840,6 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				<EmptyState icon="users-slash" message={"This list is empty."} />
 				{isOwner && (
 					<NewButton
-						testID="emptyStateAddUserBtn"
 						label={"Start adding people"}
 						onPress={onPressAddUser}
 						color="primary"
@@ -880,7 +857,6 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 	return (
 		<View>
 			<ListMembers
-				testID="listItems"
 				list={list.uri}
 				scrollElRef={scrollElRef}
 				renderHeader={renderHeader}

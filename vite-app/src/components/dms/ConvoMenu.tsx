@@ -1,7 +1,7 @@
 import type { ChatBskyConvoDefs, ModerationCause } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
-import { Keyboard, Pressable, View } from "react-native";
+import { Keyboard, Pressable } from "react-native";
 
 import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
@@ -65,7 +65,7 @@ let ConvoMenu = ({
 		<>
 			<Menu.Root control={control}>
 				{!hideTrigger && (
-					<View style={style}>
+					<div style={style}>
 						<Menu.Trigger label={"Chat settings"}>
 							{({ props, state }) => (
 								<Pressable
@@ -87,7 +87,7 @@ let ConvoMenu = ({
 								</Pressable>
 							)}
 						</Menu.Trigger>
-					</View>
+					</div>
 				)}
 
 				<Menu.Outer>

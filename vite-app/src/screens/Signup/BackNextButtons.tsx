@@ -57,7 +57,6 @@ export function BackNextButtons({
 					</Button>
 				) : (
 					<Button
-						testID="nextBtn"
 						label={"Continue to next step"}
 						variant="solid"
 						color="primary"

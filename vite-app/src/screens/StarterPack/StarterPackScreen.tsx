@@ -13,7 +13,7 @@ import React from "react";
 import { Image } from "react-native";
 import { View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -202,7 +202,6 @@ function StarterPackScreenLoaded({
 								// Validated above
 								listUri={starterPack!.list!.uri}
 								headerHeight={headerHeight}
-								// @ts-expect-error
 								scrollElRef={scrollElRef}
 								moderationOpts={moderationOpts}
 							/>
@@ -214,7 +213,6 @@ function StarterPackScreenLoaded({
 								// @ts-expect-error ?
 								feeds={starterPack?.feeds}
 								headerHeight={headerHeight}
-								// @ts-expect-error
 								scrollElRef={scrollElRef}
 							/>
 						)
@@ -225,7 +223,6 @@ function StarterPackScreenLoaded({
 								// Validated above
 								listUri={starterPack!.list!.uri}
 								headerHeight={headerHeight}
-								// @ts-expect-error
 								scrollElRef={scrollElRef}
 								moderationOpts={moderationOpts}
 							/>
@@ -442,7 +439,7 @@ function Header({
 						</Button>
 					) : null}
 					{joinedAllTimeCount >= 25 ? (
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -464,7 +461,7 @@ function Header({
 							>
 								<>{starterPack.joinedAllTimeCount || 0} people have used this starter pack!</>
 							</Text>
-						</View>
+						</div>
 					) : null}
 				</View>
 			) : null}
@@ -528,7 +525,6 @@ function OverflowMenu({
 					{({ props }) => (
 						<Button
 							{...props}
-							testID="headerDropdownBtn"
 							label={"Open starter pack menu"}
 							hitSlop={HITSLOP_20}
 							variant="solid"
@@ -545,7 +541,6 @@ function OverflowMenu({
 						<>
 							<Menu.Item
 								label={"Edit starter pack"}
-								testID="editStarterPackLinkBtn"
 								onPress={() => {
 									navigation.navigate("StarterPackEdit", {
 										rkey: routeParams.rkey,
@@ -557,7 +552,6 @@ function OverflowMenu({
 							</Menu.Item>
 							<Menu.Item
 								label={"Delete starter pack"}
-								testID="deleteStarterPackBtn"
 								onPress={() => {
 									deleteDialogControl.open();
 								}}
@@ -569,7 +563,7 @@ function OverflowMenu({
 					) : (
 						<>
 							<Menu.Group>
-								<Menu.Item label={"Share"} testID="shareStarterPackLinkBtn" onPress={onOpenShareDialog}>
+								<Menu.Item label={"Share"} onPress={onOpenShareDialog}>
 									<Menu.ItemText>Share link</Menu.ItemText>
 									<Menu.ItemIcon icon={ArrowOutOfBox} position="right" />
 								</Menu.Item>
@@ -666,7 +660,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 
 	return (
 		<Layout.Content centerContent>
-			<View
+			<div
 				style={{
 					...a.py_4xl,
 					...a.px_xl,
@@ -674,7 +668,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 					...a.gap_5xl,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.align_center,
@@ -694,18 +688,18 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 							...a.text_md,
 							...a.text_center,
 							...t.atoms.text_contrast_high,
-							...{ lineHeight: 1.4 },
-							...(gtMobile ? { width: 450 } : [a.w_full, a.px_lg]),
+							lineHeight: 1.4,
+							...(gtMobile ? { width: 450 } : flatten([a.w_full, a.px_lg])),
 						}}
 					>
 						The starter pack that you are trying to view is invalid. You may delete this starter pack
 						instead.
 					</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...a.gap_md,
-						...(gtMobile ? { width: 350 } : [a.w_full, a.px_lg]),
+						...(gtMobile ? { width: 350 } : flatten([a.w_full, a.px_lg])),
 					}}
 				>
 					<Button
@@ -742,8 +736,8 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 					>
 						<ButtonText>Go Back</ButtonText>
 					</Button>
-				</View>
-			</View>
+				</div>
+			</div>
 		</Layout.Content>
 	);
 }

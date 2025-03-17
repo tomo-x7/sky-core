@@ -81,7 +81,6 @@ export function StepHandle() {
 					<TextField.Root>
 						<TextField.Icon icon={At} />
 						<TextField.Input
-							testID="handleInput"
 							onChangeText={(val) => {
 								if (state.error) {
 									dispatch({ type: "setError", value: "" });
@@ -94,7 +93,7 @@ export function StepHandle() {
 							label={"Type your desired username"}
 							defaultValue={draftValue}
 							autoCapitalize="none"
-							autoCorrect={false}
+							autoCorrect={"off"}
 							autoFocus
 							autoComplete="off"
 						/>

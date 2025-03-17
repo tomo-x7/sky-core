@@ -1,8 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
 import { createContext, useCallback, useContext } from "react";
-import { type GestureResponderEvent, Keyboard, View } from "react-native";
+import { Keyboard } from "react-native";
 
-import { type TextStyleProp, atoms as a, useBreakpoints, useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
+import {
+	type TextStyleProp,
+	atoms as a,
+	flatten,
+	useBreakpoints,
+	useGutters,
+	useLayoutBreakpoints,
+	useTheme,
+} from "#/alf";
 import { Button, ButtonIcon, type ButtonProps } from "#/components/Button";
 import { BUTTON_VISUAL_ALIGNMENT_OFFSET, HEADER_SLOT_SIZE, SCROLLBAR_OFFSET } from "#/components/Layout/const";
 import { ScrollbarOffsetContext } from "#/components/Layout/context";
@@ -21,7 +29,7 @@ export function Outer({
 }: {
 	children: React.ReactNode;
 	noBottomBorder?: boolean;
-	headerRef?: React.RefObject<View | null>;
+	headerRef?: React.RefObject<HTMLDivElement>;
 	sticky?: boolean;
 }) {
 	const t = useTheme();
@@ -31,7 +39,7 @@ export function Outer({
 	const { centerColumnOffset } = useLayoutBreakpoints();
 
 	return (
-		<View
+		<div
 			ref={headerRef}
 			style={{
 				...a.w_full,
@@ -40,22 +48,21 @@ export function Outer({
 				...a.align_center,
 				...a.gap_sm,
 
-				...//@ts-ignore
-				(sticky && [a.sticky, { top: 0 }, a.z_10, t.atoms.bg]),
+				...flatten(sticky ? [a.sticky, { top: 0 }, a.z_10, t.atoms.bg] : []),
 
 				...gutters,
 				...a.py_xs,
 				...{ minHeight: 52 },
 				...t.atoms.border_contrast_low,
-				...(gtMobile && [a.mx_auto, { maxWidth: 600 }]),
+				...flatten(gtMobile ? [a.mx_auto, { maxWidth: 600 }] : []),
 
 				...(!isWithinOffsetView && {
-					transform: [{ translateX: centerColumnOffset ? -150 : 0 }, { translateX: SCROLLBAR_OFFSET ?? 0 }],
+					transform: `translateX(${centerColumnOffset ? -150 : 0}px) translateX(${SCROLLBAR_OFFSET ?? 0}px)`,
 				}),
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -69,7 +76,7 @@ export function Content({
 	align?: "platform" | "left";
 }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.justify_center,
@@ -77,20 +84,20 @@ export function Content({
 			}}
 		>
 			<AlignmentContext.Provider value={align}>{children}</AlignmentContext.Provider>
-		</View>
+		</div>
 	);
 }
 
 export function Slot({ children }: { children?: React.ReactNode }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.z_50,
 				...{ width: HEADER_SLOT_SIZE },
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -98,7 +105,7 @@ export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
 	const navigation = useNavigation<NavigationProp>();
 
 	const onPressBack = useCallback(
-		(evt: GestureResponderEvent) => {
+		(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			onPress?.(evt);
 			if (evt.defaultPrevented) return;
 			if (navigation.canGoBack()) {

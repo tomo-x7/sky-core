@@ -106,7 +106,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 										returnKeyType="done"
 										onSubmitEditing={() => createAppPassword()}
 										blurOnSubmit
-										autoCorrect={false}
+										autoCorrect={"off"}
 										autoComplete="off"
 										autoCapitalize="none"
 										autoFocus

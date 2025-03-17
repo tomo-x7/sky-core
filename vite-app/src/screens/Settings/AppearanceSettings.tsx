@@ -58,7 +58,7 @@ export function AppearanceSettingsScreen(props: Props) {
 
 	return (
 		<LayoutAnimationConfig skipExiting skipEntering>
-			<Layout.Screen testID="preferencesThreadsScreen">
+			<Layout.Screen>
 				<Layout.Header.Outer>
 					<Layout.Header.BackButton />
 					<Layout.Header.Content>

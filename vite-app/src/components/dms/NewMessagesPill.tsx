@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -26,18 +26,16 @@ export function NewMessagesPill({
 	}));
 
 	return (
-		<View
+		<div
 			style={{
 				...a.absolute,
 				...a.w_full,
 				...a.z_10,
 				...a.align_center,
 
-				...{
-					bottom: 70,
-					// Don't prevent scrolling in this area _except_ for in the pill itself
-					pointerEvents: "box-none",
-				},
+				bottom: 70,
+				// Don't prevent scrolling in this area _except_ for in the pill itself
+				pointerEvents: "none",
 			}}
 		>
 			<AnimatedPressable
@@ -66,6 +64,6 @@ export function NewMessagesPill({
 			>
 				<Text style={a.font_bold}>New messages</Text>
 			</AnimatedPressable>
-		</View>
+		</div>
 	);
 }

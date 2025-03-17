@@ -21,7 +21,7 @@ export function PostThreadScreen({ route }: Props) {
 	);
 
 	return (
-		<Layout.Screen testID="postThreadScreen">
+		<Layout.Screen>
 			<PostThreadComponent uri={uri} />
 		</Layout.Screen>
 	);

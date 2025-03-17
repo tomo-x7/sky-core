@@ -1,7 +1,6 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 import { Image } from "react-native";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -67,17 +66,17 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 		<>
 			<Dialog.ScrollableInner label={"Share link dialog"}>
 				{!imageLoaded || !link ? (
-					<View
+					<div
 						style={{
 							...a.p_xl,
 							...a.align_center,
 						}}
 					>
 						<Loader size="xl" />
-					</View>
+					</div>
 				) : (
-					<View style={!isTabletOrDesktop && a.gap_lg}>
-						<View
+					<div style={!isTabletOrDesktop ? a.gap_lg : undefined}>
+						<div
 							style={{
 								...a.gap_sm,
 								...(isTabletOrDesktop && a.pb_lg),
@@ -99,7 +98,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 							>
 								Share this starter pack and help people join your community on Bluesky.
 							</Text>
-						</View>
+						</div>
 						<Image
 							source={{ uri: imageUrl }}
 							style={{
@@ -113,10 +112,12 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 							}}
 							accessibilityIgnoresInvertColors={true}
 						/>
-						<View
+						<div
 							style={{
 								...a.gap_md,
-								...[a.gap_sm, a.flex_row_reverse, { marginLeft: "auto" }],
+								...a.gap_sm,
+								...a.flex_row_reverse,
+								marginLeft: "auto",
 							}}
 						>
 							<Button
@@ -143,8 +144,8 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 							>
 								<ButtonText>Share QR code</ButtonText>
 							</Button>
-						</View>
-					</View>
+						</div>
+					</div>
 				)}
 			</Dialog.ScrollableInner>
 		</>

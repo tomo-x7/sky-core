@@ -1,6 +1,6 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
 import React from "react";
-import { Platform, type StyleProp, View, type ViewStyle } from "react-native";
+import { Platform } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -24,7 +24,7 @@ import { PencilLine_Stroke2_Corner0_Rounded as PencilLine } from "./icons/Pencil
 interface WhoCanReplyProps {
 	post: AppBskyFeedDefs.PostView;
 	isThreadAuthor: boolean;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }
 
 export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
@@ -83,7 +83,7 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 				hitSlop={HITSLOP_10}
 			>
 				{({ hovered }) => (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -104,7 +104,7 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 						</Text>
 
 						{isThreadAuthor && <PencilLine width={12} fill={t.palette.primary_500} />}
-					</View>
+					</div>
 				)}
 			</Button>
 			{isThreadAuthor ? (
@@ -159,7 +159,7 @@ function WhoCanReplyDialog({
 				label={"Dialog: adjust who can interact with this post"}
 				style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 			>
-				<View style={a.gap_sm}>
+				<div style={a.gap_sm}>
 					<Text
 						style={{
 							...a.font_bold,
@@ -170,7 +170,7 @@ function WhoCanReplyDialog({
 						Who can interact with this post?
 					</Text>
 					<Rules post={post} settings={settings} embeddingDisabled={embeddingDisabled} />
-				</View>
+				</div>
 			</Dialog.ScrollableInner>
 		</Dialog.Outer>
 	);

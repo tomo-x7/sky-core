@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
@@ -29,7 +28,7 @@ export function NoFollowingFeed() {
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.flex_wrap,
@@ -56,6 +55,6 @@ export function NoFollowingFeed() {
 					</InlineLinkText>
 				</>
 			</Text>
-		</View>
+		</div>
 	);
 }

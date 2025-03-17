@@ -1,6 +1,6 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
 import { useCallback, useMemo } from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -80,13 +80,13 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 				Liked by
 			</Text>
 			{isLoading ? (
-				<View style={{ minHeight: 300 }}>
+				<div style={{ minHeight: 300 }}>
 					<Loader size="xl" />
-				</View>
+				</div>
 			) : resolveError || likedByError || !data ? (
 				<ErrorMessage message={cleanError(resolveError || likedByError)} />
 			) : likes.length === 0 ? (
-				<View
+				<div
 					style={{
 						...t.atoms.bg_contrast_50,
 						...a.px_md,
@@ -95,7 +95,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 					}}
 				>
 					<Text style={a.text_center}>Nobody has liked this yet. Maybe you should be the first!</Text>
-				</View>
+				</div>
 			) : (
 				<FlatList
 					data={likes}
@@ -114,9 +114,9 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 function ListFooterComponent({ isFetching }: { isFetching: boolean }) {
 	if (isFetching) {
 		return (
-			<View style={a.pt_lg}>
+			<div style={a.pt_lg}>
 				<ActivityIndicator />
-			</View>
+			</div>
 		);
 	}
 	return null;

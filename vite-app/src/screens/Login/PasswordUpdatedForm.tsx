@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useBreakpoints } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -14,7 +12,6 @@ export const PasswordUpdatedForm = ({
 
 	return (
 		<FormContainer
-			testID="passwordUpdatedForm"
 			style={{
 				...a.gap_2xl,
 				...(!gtMobile && a.mt_5xl),
@@ -38,7 +35,7 @@ export const PasswordUpdatedForm = ({
 			>
 				You can now sign in with your new password.
 			</Text>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.justify_center,
@@ -54,7 +51,7 @@ export const PasswordUpdatedForm = ({
 				>
 					<ButtonText>Okay</ButtonText>
 				</Button>
-			</View>
+			</div>
 		</FormContainer>
 	);
 };

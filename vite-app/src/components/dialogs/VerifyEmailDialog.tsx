@@ -1,7 +1,6 @@
 import React from "react";
-import { View } from "react-native";
 
-import { atoms as a, useBreakpoints } from "#/alf";
+import { atoms as a, flatten, useBreakpoints } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
@@ -38,7 +37,6 @@ export function VerifyEmailDialog({
 				}
 
 				try {
-					// biome-ignore lint/style/noNonNullAssertion: <explanation>
 					await agent.resumeSession(agent.session!);
 					onCloseAfterVerifying?.();
 				} catch (e: unknown) {
@@ -125,8 +123,8 @@ export function Inner({
 			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
 			<Dialog.Close />
-			<View style={a.gap_xl}>
-				<View style={a.gap_sm}>
+			<div style={a.gap_xl}>
+				<div style={a.gap_sm}>
 					<Text
 						style={{
 							...a.font_heavy,
@@ -136,19 +134,19 @@ export function Inner({
 						{uiStrings[currentStep].title}
 					</Text>
 					{error ? (
-						<View
+						<div
 							style={{
 								...a.rounded_sm,
 								...a.overflow_hidden,
 							}}
 						>
 							<ErrorMessage message={error} />
-						</View>
+						</div>
 					) : null}
 					{currentStep === "StepOne" ? (
-						<View>
+						<div>
 							{reasonText ? (
-								<View style={a.gap_sm}>
+								<div style={a.gap_sm}>
 									<Text
 										style={{
 											...a.text_md,
@@ -193,7 +191,7 @@ export function Inner({
 										</InlineLinkText>
 										.
 									</Text>
-								</View>
+								</div>
 							) : (
 								<Text
 									style={{
@@ -233,7 +231,7 @@ export function Inner({
 									</InlineLinkText>
 								</Text>
 							)}
-						</View>
+						</div>
 					) : (
 						<Text
 							style={{
@@ -244,9 +242,9 @@ export function Inner({
 							{uiStrings[currentStep].message}
 						</Text>
 					)}
-				</View>
+				</div>
 				{currentStep === "StepTwo" ? (
-					<View>
+					<div>
 						<TextField.LabelText>Confirmation Code</TextField.LabelText>
 						<TextField.Root>
 							<TextField.Input
@@ -255,12 +253,12 @@ export function Inner({
 								onChangeText={setConfirmationCode}
 							/>
 						</TextField.Root>
-					</View>
+					</div>
 				) : null}
-				<View
+				<div
 					style={{
 						...a.gap_sm,
-						...(gtMobile && [a.flex_row_reverse, a.ml_auto]),
+						...flatten(gtMobile ? [a.flex_row_reverse, a.ml_auto] : undefined),
 					}}
 				>
 					{currentStep === "StepOne" ? (
@@ -325,8 +323,8 @@ export function Inner({
 							<ButtonText>Close</ButtonText>
 						</Button>
 					) : null}
-				</View>
-			</View>
+				</div>
+			</div>
 		</Dialog.ScrollableInner>
 	);
 }

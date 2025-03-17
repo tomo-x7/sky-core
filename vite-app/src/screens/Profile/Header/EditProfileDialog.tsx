@@ -63,7 +63,6 @@ export function EditProfileDialog({
 				preventDismiss: dirty,
 				minHeight: SCREEN_HEIGHT,
 			}}
-			testID="editProfileModal"
 		>
 			<DialogInner profile={profile} onUpdate={onUpdate} setDirty={setDirty} onPressCancel={onPressCancel} />
 
@@ -188,7 +187,6 @@ function DialogInner({
 				color="primary"
 				variant="ghost"
 				style={a.rounded_full}
-				testID="editProfileCancelBtn"
 			>
 				<ButtonText style={a.text_md}>Cancel</ButtonText>
 			</Button>
@@ -206,7 +204,6 @@ function DialogInner({
 				color="primary"
 				variant="ghost"
 				style={a.rounded_full}
-				testID="editProfileSaveBtn"
 			>
 				<ButtonText
 					style={{
@@ -277,7 +274,6 @@ function DialogInner({
 							onChangeText={setDisplayName}
 							label={"Display name"}
 							placeholder={"e.g. Alice Lastname"}
-							testID="editProfileDisplayNameInput"
 						/>
 					</TextField.Root>
 					{displayNameTooLong && (
@@ -307,7 +303,6 @@ function DialogInner({
 							multiline
 							label={"Display name"}
 							placeholder={"Tell us a bit about yourself"}
-							testID="editProfileDescriptionInput"
 						/>
 					</TextField.Root>
 					{descriptionTooLong && (

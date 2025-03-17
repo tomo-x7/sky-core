@@ -21,7 +21,6 @@ export function ProfileHeaderDisplayName({
 		<View pointerEvents="none">
 			<Text
 				emoji
-				testID="profileHeaderDisplayName"
 				style={{
 					...t.atoms.text,
 					...(gtMobile ? a.text_4xl : a.text_3xl),

@@ -1,5 +1,4 @@
 import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-import { View } from "react-native";
 // @ts-expect-error missing types
 import QRCode from "react-native-qrcode-styled";
 // import ViewShot from "react-native-view-shot";
@@ -39,7 +38,7 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					...a.gap_md,
 				}}
 			>
-				<View style={a.gap_sm}>
+				<div style={a.gap_sm}>
 					<Text
 						style={{
 							...a.font_bold,
@@ -50,8 +49,8 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					>
 						{record.name}
 					</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...a.gap_xl,
 						...a.align_center,
@@ -66,14 +65,14 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					>
 						Join the conversation
 					</Text>
-					<View
+					<div
 						style={{
 							...a.rounded_sm,
 							...a.overflow_hidden,
 						}}
 					>
 						<QrCodeInner link={link} />
-					</View>
+					</div>
 
 					<Text
 						style={{
@@ -86,7 +85,7 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					>
 						<>
 							on
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.align_center,
@@ -94,13 +93,13 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 								}}
 							>
 								<Logo width={25} fill="white" />
-								<View style={{ marginTop: 3.5 }}>
+								<div style={{ marginTop: 3.5 }}>
 									<Logotype width={72} fill="white" />
-								</View>
-							</View>
+								</div>
+							</div>
 						</>
 					</Text>
-				</View>
+				</div>
 			</LinearGradientBackground>
 		);
 	};

@@ -1,8 +1,7 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -79,7 +78,7 @@ export function SubmitView({
 	}, [params, details, selectedReportOption, selectedServices, onSubmitComplete, agent]);
 
 	return (
-		<View style={a.gap_2xl}>
+		<div style={a.gap_2xl}>
 			<Button
 				size="small"
 				variant="solid"
@@ -90,7 +89,7 @@ export function SubmitView({
 			>
 				<ButtonIcon icon={ChevronLeft} />
 			</Button>
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.flex_row,
@@ -103,7 +102,7 @@ export function SubmitView({
 					...t.atoms.border_contrast_low,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.gap_xs,
@@ -125,7 +124,7 @@ export function SubmitView({
 					>
 						{selectedReportOption.description}
 					</Text>
-				</View>
+				</div>
 
 				<Check
 					size="md"
@@ -134,12 +133,12 @@ export function SubmitView({
 						...t.atoms.text_contrast_low,
 					}}
 				/>
-			</View>
-			<View style={a.gap_md}>
+			</div>
+			<div style={a.gap_md}>
 				<Text style={t.atoms.text_contrast_medium}>Select the moderation service(s) to report to</Text>
 
 				<Toggle.Group label="Select mod services" values={selectedServices} onChange={setSelectedServices}>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_md,
@@ -157,13 +156,13 @@ export function SubmitView({
 								</Toggle.Item>
 							);
 						})}
-					</View>
+					</div>
 				</Toggle.Group>
-			</View>
-			<View style={a.gap_md}>
+			</div>
+			<div style={a.gap_md}>
 				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.w_full,
@@ -175,10 +174,11 @@ export function SubmitView({
 						onChangeText={setDetails}
 						label="Text field"
 						style={{ paddingRight: 60 }}
+						// @ts-expect-error
 						numberOfLines={6}
 					/>
 
-					<View
+					<div
 						style={{
 							...a.absolute,
 							...a.flex_row,
@@ -193,10 +193,10 @@ export function SubmitView({
 						}}
 					>
 						<CharProgress count={details?.length || 0} />
-					</View>
-				</View>
-			</View>
-			<View
+					</div>
+				</div>
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -219,7 +219,6 @@ export function SubmitView({
 					))}
 
 				<Button
-					testID="sendReportBtn"
 					size="large"
 					variant="solid"
 					color="negative"
@@ -230,8 +229,8 @@ export function SubmitView({
 					<ButtonText>Send report</ButtonText>
 					<ButtonIcon icon={submitting ? Loader : SendIcon} />
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -240,7 +239,7 @@ function LabelerToggle({ title }: { title: string }) {
 	const ctx = Toggle.useItemContext();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -250,11 +249,11 @@ function LabelerToggle({ title }: { title: string }) {
 				...a.rounded_sm,
 				...a.overflow_hidden,
 				...t.atoms.bg_contrast_25,
-				...(ctx.selected && [t.atoms.bg_contrast_50]),
+				...flatten(ctx.selected ? [t.atoms.bg_contrast_50] : []),
 			}}
 		>
 			<Toggle.Checkbox />
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -272,7 +271,7 @@ function LabelerToggle({ title }: { title: string }) {
 				>
 					{title}
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

@@ -22,7 +22,7 @@ export const ProfileFeedLikedByScreen = ({ route }: Props) => {
 	);
 
 	return (
-		<Layout.Screen testID="postLikedByScreen">
+		<Layout.Screen>
 			<CenteredView sideBorders={true}>
 				<ViewHeader title={"Liked By"} />
 				<PostLikedByComponent uri={uri} />

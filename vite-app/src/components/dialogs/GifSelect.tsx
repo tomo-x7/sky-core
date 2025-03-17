@@ -1,6 +1,6 @@
 import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { Image } from "react-native";
-import { type TextInput, View } from "react-native";
+import type { TextInput } from "react-native";
 import { useWindowDimensions } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -42,14 +42,7 @@ export function GifSelectDialog({
 	const renderErrorBoundary = useCallback((error: unknown) => <DialogError details={String(error)} />, []);
 
 	return (
-		<Dialog.Outer
-			control={control}
-			onClose={onClose}
-			nativeOptions={{
-				//@ts-ignore
-				bottomInset: 0,
-			}}
-		>
+		<Dialog.Outer control={control} onClose={onClose}>
 			<Dialog.Handle />
 			<ErrorBoundary renderError={renderErrorBoundary}>
 				<GifList control={control} onSelectGif={onSelectGif} />
@@ -112,7 +105,7 @@ function GifList({
 
 	const listHeader = useMemo(() => {
 		return (
-			<View
+			<div
 				style={{
 					...a.relative,
 					...a.mb_lg,
@@ -122,7 +115,7 @@ function GifList({
 				}}
 			>
 				{/* cover top corners */}
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...a.inset_0,
@@ -167,7 +160,7 @@ function GifList({
 						}}
 					/>
 				</TextField.Root>
-			</View>
+			</div>
 		);
 	}, [gtMobile, t.atoms.bg, control]);
 

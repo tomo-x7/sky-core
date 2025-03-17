@@ -1,6 +1,5 @@
 import type { ModerationDecision } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -56,7 +55,7 @@ export function MessagesListBlockedFooter({
 	}, [blockedByListControl, listBlocks, queueUnblock]);
 
 	return (
-		<View
+		<div
 			style={{
 				...(hasMessages && a.pt_md),
 				...a.pb_xl,
@@ -73,7 +72,7 @@ export function MessagesListBlockedFooter({
 			>
 				{isBlocking ? <>You have blocked this user</> : <>This user has blocked you</>}
 			</Text>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.justify_between,
@@ -113,9 +112,9 @@ export function MessagesListBlockedFooter({
 						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>
 					</Button>
 				)}
-			</View>
+			</div>
 			{isBlocking && !gtMobile && (
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_center,
@@ -132,11 +131,11 @@ export function MessagesListBlockedFooter({
 					>
 						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>
 					</Button>
-				</View>
+				</div>
 			)}
 			<LeaveConvoPrompt control={leaveConvoControl} currentScreen="conversation" convoId={convoId} />
 			<ReportConversationPrompt control={reportControl} />
 			<BlockedByListDialog control={blockedByListControl} listBlocks={listBlocks} />
-		</View>
+		</div>
 	);
 }

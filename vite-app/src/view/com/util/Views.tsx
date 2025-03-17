@@ -13,14 +13,7 @@
  */
 
 import React from "react";
-import {
-	type FlatList,
-	type FlatListProps,
-	type ScrollViewProps,
-	StyleSheet,
-	View,
-	type ViewProps,
-} from "react-native";
+import type { FlatList, FlatListProps, ScrollViewProps, ViewProps } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { useLayoutBreakpoints } from "#/alf";
@@ -37,26 +30,30 @@ interface AddedProps {
  * @deprecated use `Layout` components
  */
 export const CenteredView = React.forwardRef(function CenteredView(
-	{ style, topBorder, ...props }: React.PropsWithChildren<ViewProps & { sideBorders?: boolean; topBorder?: boolean }>,
-	ref: React.Ref<View>,
+	{
+		style,
+		topBorder,
+		...props
+	}: React.PropsWithChildren<
+		Omit<ViewProps, "style"> & { sideBorders?: boolean; topBorder?: boolean; style: React.CSSProperties }
+	>,
+	ref: React.Ref<HTMLDivElement>,
 ) {
 	const pal = usePalette("default");
 	const { isMobile } = useWebMediaQueries();
 	const { centerColumnOffset } = useLayoutBreakpoints();
 	const { isWithinDialog } = useDialogContext();
 	if (!isMobile) {
-		style = addStyle(style, styles.container);
+		style = { ...style, ...styles.container };
 	}
 	if (centerColumnOffset && !isWithinDialog) {
-		style = addStyle(style, styles.containerOffset);
+		style = { ...style, ...styles.containerOffset };
 	}
 	if (topBorder) {
-		style = addStyle(style, {
-			borderTopWidth: 1,
-		});
-		style = addStyle(style, pal.border);
+		style = { ...style, borderTopWidth: 1 };
+		style = { ...style, ...pal.border };
 	}
-	return <View ref={ref} style={style} {...props} />;
+	return <div ref={ref} style={style} {...props} />;
 });
 
 export const FlatList_INTERNAL = React.forwardRef(function FlatListImpl<ItemT>(
@@ -150,9 +147,8 @@ export const ScrollView = React.forwardRef(function ScrollViewImpl(
 	);
 });
 
-const styles = StyleSheet.create({
+const styles = {
 	contentContainer: {
-		// @ts-expect-error web only
 		minHeight: "100vh",
 	},
 	container: {
@@ -162,7 +158,7 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 	},
 	containerOffset: {
-		transform: [{ translateX: -150 }],
+		transform: "translateX(-150px)",
 	},
 	containerScroll: {
 		width: "100%",
@@ -171,7 +167,6 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 	},
 	fixedHeight: {
-		// @ts-expect-error web only
 		height: "100vh",
 	},
-});
+} as const;

@@ -2,7 +2,6 @@ import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from 
 import { type RouteProp, useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useCallback } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
@@ -54,7 +53,6 @@ export function MessagesConversationScreen({ route }: Props) {
 
 	return (
 		<Layout.Screen
-			testID="convoScreen"
 			style={{
 				...{ minHeight: 0 },
 				...a.flex_1,
@@ -119,7 +117,7 @@ function Inner() {
 				) : (
 					<MessagesListHeader />
 				))}
-			<View style={a.flex_1}>
+			<div style={a.flex_1}>
 				{moderation && recipient ? (
 					<InnerReady
 						moderation={moderation}
@@ -128,7 +126,7 @@ function Inner() {
 						setHasScrolled={setHasScrolled}
 					/>
 				) : (
-					<View
+					<div
 						style={{
 							...a.align_center,
 							...a.gap_sm,
@@ -137,7 +135,7 @@ function Inner() {
 					/>
 				)}
 				{!readyToShow && (
-					<View
+					<div
 						style={{
 							...a.absolute,
 							...a.z_10,
@@ -148,12 +146,12 @@ function Inner() {
 							...t.atoms.bg,
 						}}
 					>
-						<View style={{ marginBottom: 75 }}>
+						<div style={{ marginBottom: 75 }}>
 							<Loader size="xl" />
-						</View>
-					</View>
+						</div>
+					</div>
 				)}
-			</View>
+			</div>
 		</Layout.Center>
 	);
 }

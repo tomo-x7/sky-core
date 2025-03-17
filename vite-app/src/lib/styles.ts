@@ -1,4 +1,4 @@
-import { Dimensions, type StyleProp, StyleSheet, type TextStyle } from "react-native";
+import type { StyleProp } from "react-native";
 import type { Theme, TypographyVariant } from "./ThemeContext";
 
 // 1 is lightest, 2 is light, 3 is mid, 4 is dark, 5 is darkest
@@ -61,7 +61,7 @@ export const gradients = {
 	blueDark: { start: "#5F45E0", end: colors.blue3 }, // avis, banner
 };
 
-export const s = StyleSheet.create({
+export const s = {
 	// helpers
 	footerSpacer: { height: 100 },
 	contentContainer: { paddingBottom: 200 },
@@ -175,8 +175,8 @@ export const s = StyleSheet.create({
 	h100pct: { height: "100%" },
 	hContentRegion: { minHeight: "100%" },
 	window: {
-		width: Dimensions.get("window").width,
-		height: Dimensions.get("window").height,
+		width: window.innerWidth,
+		height: window.innerHeight,
 	},
 
 	// text align
@@ -226,14 +226,14 @@ export const s = StyleSheet.create({
 
 	brandBlue: { color: colors.brandBlue },
 	likeColor: { color: colors.like },
-});
+} as const;
 
-export function lh(theme: Theme, type: TypographyVariant, height: number): TextStyle {
+export function lh(theme: Theme, type: TypographyVariant, height: number): React.CSSProperties {
 	return {
-		lineHeight: Math.round((theme.typography[type].fontSize || 16) * height),
+		lineHeight: Math.round((Number.parseFloat(String(theme.typography[type].fontSize)) || 16) * height),
 	};
 }
-
+/**@deprecated */
 export function addStyle<T>(base: StyleProp<T>, addedStyle: StyleProp<T>): StyleProp<T> {
 	if (Array.isArray(base)) {
 		return base.concat([addedStyle]);

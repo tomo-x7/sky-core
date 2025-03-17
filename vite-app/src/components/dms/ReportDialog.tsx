@@ -9,7 +9,6 @@ import { StackActions, useNavigation } from "@react-navigation/native";
 import { useMutation } from "@tanstack/react-query";
 import type React from "react";
 import { memo, useMemo, useState } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -78,7 +77,7 @@ function DialogInner({
 		profile ? (
 			<DoneStep convoId={params.convoId} currentScreen={currentScreen} profile={profile} />
 		) : (
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.py_5xl,
@@ -86,7 +85,7 @@ function DialogInner({
 				}}
 			>
 				<Loader />
-			</View>
+			</div>
 		)
 	) : reportOption ? (
 		<SubmitStep
@@ -178,7 +177,7 @@ function SubmitStep({
 	}, [params]);
 
 	return (
-		<View style={a.gap_lg}>
+		<div style={a.gap_lg}>
 			<Button
 				size="small"
 				variant="solid"
@@ -189,7 +188,7 @@ function SubmitStep({
 			>
 				<ButtonIcon icon={Chevron} />
 			</Button>
-			<View
+			<div
 				style={{
 					...a.justify_center,
 					...(gtMobile ? a.gap_sm : a.gap_xs),
@@ -211,7 +210,7 @@ function SubmitStep({
 				>
 					Your report will be sent to the Bluesky Moderation Service
 				</Text>
-			</View>
+			</div>
 			{params.type === "convoMessage" && <PreviewMessage message={params.message} />}
 			<Text
 				style={{
@@ -238,10 +237,10 @@ function SubmitStep({
 				</Text>
 			</Text>
 			<Divider />
-			<View style={a.gap_md}>
+			<div style={a.gap_md}>
 				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.w_full,
@@ -253,9 +252,10 @@ function SubmitStep({
 						onChangeText={setDetails}
 						label="Text field"
 						style={{ paddingRight: 60 }}
+						// @ts-expect-error
 						numberOfLines={5}
 					/>
-					<View
+					<div
 						style={{
 							...a.absolute,
 							...a.flex_row,
@@ -270,10 +270,10 @@ function SubmitStep({
 						}}
 					>
 						<CharProgress count={details?.length || 0} />
-					</View>
-				</View>
-			</View>
-			<View
+					</div>
+				</div>
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -294,19 +294,12 @@ function SubmitStep({
 					</Text>
 				)}
 
-				<Button
-					testID="sendReportBtn"
-					size="large"
-					variant="solid"
-					color="negative"
-					label="Send report"
-					onPress={() => submit()}
-				>
+				<Button size="large" variant="solid" color="negative" label="Send report" onPress={() => submit()}>
 					<ButtonText>Send report</ButtonText>
 					<ButtonIcon icon={submitting ? Loader : SendIcon} />
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -366,8 +359,8 @@ function DoneStep({
 	};
 
 	return (
-		<View style={a.gap_2xl}>
-			<View
+		<div style={a.gap_2xl}>
+			<div
 				style={{
 					...a.justify_center,
 					...(gtMobile ? a.gap_sm : a.gap_xs),
@@ -389,9 +382,9 @@ function DoneStep({
 				>
 					Our moderation team has received your report.
 				</Text>
-			</View>
+			</div>
 			<Toggle.Group label={"Block and/or delete this conversation"} values={actions} onChange={setActions}>
-				<View style={a.gap_md}>
+				<div style={a.gap_md}>
 					<Toggle.Item name="block" label={"Block user"}>
 						<Toggle.Checkbox />
 						<Toggle.LabelText style={a.text_md}>Block user</Toggle.LabelText>
@@ -400,12 +393,12 @@ function DoneStep({
 						<Toggle.Checkbox />
 						<Toggle.LabelText style={a.text_md}>Delete conversation</Toggle.LabelText>
 					</Toggle.Item>
-				</View>
+				</div>
 			</Toggle.Group>
-			<View
+			<div
 				style={{
 					...a.gap_md,
-					...[a.flex_row_reverse],
+					...a.flex_row_reverse,
 				}}
 			>
 				<Button
@@ -420,8 +413,8 @@ function DoneStep({
 				<Button label={"Close"} onPress={() => control.close()} size="large" variant="solid" color="secondary">
 					<ButtonText>Close</ButtonText>
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -432,8 +425,8 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 	}, [message.text, message.facets]);
 
 	return (
-		<View style={a.align_start}>
-			<View
+		<div style={a.align_start}>
+			<div
 				style={{
 					...a.py_sm,
 					...a.my_2xs,
@@ -458,7 +451,7 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 					interactiveStyle={a.underline}
 					enableTags
 				/>
-			</View>
+			</div>
 			<MessageItemMetadata
 				item={{
 					type: "message",
@@ -472,6 +465,6 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 					...a.mb_0,
 				}}
 			/>
-		</View>
+		</div>
 	);
 }

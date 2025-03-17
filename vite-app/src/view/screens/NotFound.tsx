@@ -33,7 +33,7 @@ export const NotFoundScreen = () => {
 	}, [navigation, canGoBack]);
 
 	return (
-		<Layout.Screen testID="notFoundView">
+		<Layout.Screen>
 			<ViewHeader title={"Page Not Found"} />
 			<View style={styles.container}>
 				<Text

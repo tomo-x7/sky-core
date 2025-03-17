@@ -1,7 +1,6 @@
 import { type AppBskyFeedDefs, type AppBskyGraphDefs, AtUri, RichText as RichTextApi } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { type GestureResponderEvent, View } from "react-native";
 
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
@@ -77,7 +76,7 @@ export function Avatar({ src, size = 40 }: AvatarProps) {
 export function AvatarPlaceholder({ size = 40 }: Omit<AvatarProps, "src">) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.bg_contrast_25,
 
@@ -133,7 +132,7 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 
 	return (
 		<div style={{ ...a.flex_1, ...a.gap_xs }}>
-			<View
+			<div
 				style={{
 					...a.rounded_xs,
 					...t.atoms.bg_contrast_50,
@@ -145,7 +144,7 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 				}}
 			/>
 			{creator && (
-				<View
+				<div
 					style={{
 						...a.rounded_xs,
 						...t.atoms.bg_contrast_25,
@@ -232,7 +231,7 @@ function SaveButtonInner({
 	const isPending = isAddSavedFeedPending || isRemovePending;
 
 	const toggleSave = React.useCallback(
-		async (e: GestureResponderEvent) => {
+		async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			e.preventDefault();
 			e.stopPropagation();
 
@@ -258,7 +257,7 @@ function SaveButtonInner({
 	);
 
 	const onPrompRemoveFeed = React.useCallback(
-		async (e: GestureResponderEvent) => {
+		async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			e.preventDefault();
 			e.stopPropagation();
 

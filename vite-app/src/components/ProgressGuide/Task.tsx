@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "../Typography";
@@ -21,7 +20,7 @@ export function ProgressGuideTask({
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_sm,
@@ -40,7 +39,7 @@ export function ProgressGuideTask({
 					unfilledColor={t.palette.contrast_50}
 				/>
 			)}
-			<View
+			<div
 				style={{
 					...a.flex_col,
 					...a.gap_2xs,
@@ -52,7 +51,7 @@ export function ProgressGuideTask({
 						...a.text_sm,
 						...a.font_bold,
 						...a.leading_tight,
-						...(tabularNumsTitle && { fontVariant: ["tabular-nums"] }),
+						...(tabularNumsTitle && { fontVariant: "tabular-nums" }),
 					}}
 				>
 					{title}
@@ -68,8 +67,8 @@ export function ProgressGuideTask({
 						{subtitle}
 					</Text>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 

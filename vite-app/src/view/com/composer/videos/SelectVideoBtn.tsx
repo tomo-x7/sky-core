@@ -66,7 +66,6 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 	return (
 		<>
 			<Button
-				testID="openGifBtn"
 				onPress={onPressSelectVideo}
 				label={"Select video"}
 				accessibilityHint={"Opens video picker"}

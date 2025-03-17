@@ -7,8 +7,6 @@ import {
 } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useMemo } from "react";
-import { Image } from "react-native";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { BLUE_HUE } from "#/alf/util/colorGeneration";
@@ -81,7 +79,7 @@ export function VideoPostCard({
 	const black = getBlackColor(t);
 
 	const textAndAuthor = (
-		<View
+		<div
 			style={{
 				...a.pr_xs,
 				...{ paddingTop: 6, gap: 4 },
@@ -99,14 +97,14 @@ export function VideoPostCard({
 					{text}
 				</Text>
 			)}
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_xs,
 					...a.align_center,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.rounded_full,
@@ -115,7 +113,7 @@ export function VideoPostCard({
 				>
 					<UserAvatar type="user" size={20} avatar={post.author.avatar} />
 					<MediaInsetBorder />
-				</View>
+				</div>
 				<Text
 					style={{
 						...a.flex_1,
@@ -127,8 +125,8 @@ export function VideoPostCard({
 				>
 					{sanitizeHandle(post.author.handle, "@")}
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 
 	return (
@@ -158,7 +156,7 @@ export function VideoPostCard({
 		>
 			<Hider.Outer modui={mergedModui}>
 				<Hider.Mask>
-					<View
+					<div
 						style={{
 							...a.justify_center,
 							...a.rounded_md,
@@ -170,18 +168,17 @@ export function VideoPostCard({
 							},
 						}}
 					>
-						<Image
-							source={{ uri: thumbnail }}
+						<img
+							src={thumbnail}
 							style={{
 								...a.w_full,
 								...a.h_full,
-								...{ opacity: pressed ? 0.8 : 1 },
+								opacity: pressed ? 0.8 : 1,
+								filter: "blur(100px)",
 							}}
-							accessibilityIgnoresInvertColors
-							blurRadius={100}
 						/>
 						<MediaInsetBorder />
-						<View
+						<div
 							style={{
 								...a.absolute,
 								...a.inset_0,
@@ -189,7 +186,7 @@ export function VideoPostCard({
 								...a.align_center,
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.absolute,
 									...a.inset_0,
@@ -202,7 +199,7 @@ export function VideoPostCard({
 									},
 								}}
 							/>
-							<View
+							<div
 								style={{
 									...a.align_center,
 									...a.gap_xs,
@@ -217,13 +214,13 @@ export function VideoPostCard({
 								>
 									{"Hidden"}
 								</Text>
-							</View>
-						</View>
-					</View>
+							</div>
+						</div>
+					</div>
 					{listModUi.blur ? <VideoPostCardTextPlaceholder author={post.author} /> : textAndAuthor}
 				</Hider.Mask>
 				<Hider.Content>
-					<View
+					<div
 						style={{
 							...a.justify_center,
 							...a.rounded_md,
@@ -235,24 +232,23 @@ export function VideoPostCard({
 							},
 						}}
 					>
-						<Image
-							source={{ uri: thumbnail }}
+						<img
+							src={thumbnail}
 							style={{
 								...a.w_full,
 								...a.h_full,
-								...{ opacity: pressed ? 0.8 : 1 },
+								opacity: pressed ? 0.8 : 1,
 							}}
-							accessibilityIgnoresInvertColors
 						/>
 						<MediaInsetBorder />
 
-						<View
+						<div
 							style={{
 								...a.absolute,
 								...a.inset_0,
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.absolute,
 									...a.inset_0,
@@ -275,7 +271,7 @@ export function VideoPostCard({
 									}}
 								/>
 
-								<View
+								<div
 									style={{
 										...a.relative,
 										...a.z_10,
@@ -285,7 +281,7 @@ export function VideoPostCard({
 									}}
 								>
 									{likeCount > 0 && (
-										<View
+										<div
 											style={{
 												...a.flex_row,
 												...a.align_center,
@@ -302,10 +298,10 @@ export function VideoPostCard({
 											>
 												{formatCount(likeCount)}
 											</Text>
-										</View>
+										</div>
 									)}
 									{repostCount > 0 && (
-										<View
+										<div
 											style={{
 												...a.flex_row,
 												...a.align_center,
@@ -322,12 +318,12 @@ export function VideoPostCard({
 											>
 												{formatCount(repostCount)}
 											</Text>
-										</View>
+										</div>
 									)}
-								</View>
-							</View>
-						</View>
-					</View>
+								</div>
+							</div>
+						</div>
+					</div>
 					{textAndAuthor}
 				</Hider.Content>
 			</Hider.Outer>
@@ -340,8 +336,8 @@ export function VideoPostCardPlaceholder() {
 	const black = getBlackColor(t);
 
 	return (
-		<View style={a.flex_1}>
-			<View
+		<div style={a.flex_1}>
+			<div
 				style={{
 					...a.rounded_md,
 					...a.overflow_hidden,
@@ -353,9 +349,9 @@ export function VideoPostCardPlaceholder() {
 				}}
 			>
 				<MediaInsetBorder />
-			</View>
+			</div>
 			<VideoPostCardTextPlaceholder />
-		</View>
+		</div>
 	);
 }
 
@@ -367,14 +363,14 @@ export function VideoPostCardTextPlaceholder({
 	const t = useTheme();
 
 	return (
-		<View style={a.flex_1}>
-			<View
+		<div style={a.flex_1}>
+			<div
 				style={{
 					...a.pr_xs,
 					...{ paddingTop: 8, gap: 6 },
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.rounded_xs,
@@ -385,7 +381,7 @@ export function VideoPostCardTextPlaceholder({
 						},
 					}}
 				/>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.rounded_xs,
@@ -398,14 +394,14 @@ export function VideoPostCardTextPlaceholder({
 					}}
 				/>
 				{author ? (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_xs,
 							...a.align_center,
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.relative,
 								...a.rounded_full,
@@ -414,7 +410,7 @@ export function VideoPostCardTextPlaceholder({
 						>
 							<UserAvatar type="user" size={20} avatar={author.avatar} />
 							<MediaInsetBorder />
-						</View>
+						</div>
 						<Text
 							style={{
 								...a.flex_1,
@@ -426,16 +422,16 @@ export function VideoPostCardTextPlaceholder({
 						>
 							{sanitizeHandle(author.handle, "@")}
 						</Text>
-					</View>
+					</div>
 				) : (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_xs,
 							...a.align_center,
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.rounded_full,
 								...t.atoms.bg_contrast_50,
@@ -446,7 +442,7 @@ export function VideoPostCardTextPlaceholder({
 								},
 							}}
 						/>
-						<View
+						<div
 							style={{
 								...a.rounded_xs,
 								...t.atoms.bg_contrast_25,
@@ -457,10 +453,10 @@ export function VideoPostCardTextPlaceholder({
 								},
 							}}
 						/>
-					</View>
+					</div>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -528,7 +524,7 @@ export function CompactVideoPostCard({
 		>
 			<Hider.Outer modui={mergedModui}>
 				<Hider.Mask>
-					<View
+					<div
 						style={{
 							...a.justify_center,
 							...a.rounded_md,
@@ -540,18 +536,17 @@ export function CompactVideoPostCard({
 							},
 						}}
 					>
-						<Image
-							source={{ uri: thumbnail }}
+						<img
+							src={thumbnail}
 							style={{
 								...a.w_full,
 								...a.h_full,
-								...{ opacity: pressed ? 0.8 : 1 },
+								opacity: pressed ? 0.8 : 1,
+								filter: "blur(100px)",
 							}}
-							accessibilityIgnoresInvertColors
-							blurRadius={100}
 						/>
 						<MediaInsetBorder />
-						<View
+						<div
 							style={{
 								...a.absolute,
 								...a.inset_0,
@@ -559,7 +554,7 @@ export function CompactVideoPostCard({
 								...a.align_center,
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.absolute,
 									...a.inset_0,
@@ -572,7 +567,7 @@ export function CompactVideoPostCard({
 									},
 								}}
 							/>
-							<View
+							<div
 								style={{
 									...a.align_center,
 									...a.gap_xs,
@@ -587,12 +582,12 @@ export function CompactVideoPostCard({
 								>
 									{"Hidden"}
 								</Text>
-							</View>
-						</View>
-					</View>
+							</div>
+						</div>
+					</div>
 				</Hider.Mask>
 				<Hider.Content>
-					<View
+					<div
 						style={{
 							...a.justify_center,
 							...a.rounded_md,
@@ -604,24 +599,23 @@ export function CompactVideoPostCard({
 							},
 						}}
 					>
-						<Image
-							source={{ uri: thumbnail }}
+						<img
+							src={thumbnail}
 							style={{
 								...a.w_full,
 								...a.h_full,
 								...{ opacity: pressed ? 0.8 : 1 },
 							}}
-							accessibilityIgnoresInvertColors
 						/>
 						<MediaInsetBorder />
 
-						<View
+						<div
 							style={{
 								...a.absolute,
 								...a.inset_0,
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.absolute,
 									...a.inset_0,
@@ -629,7 +623,7 @@ export function CompactVideoPostCard({
 									...{ bottom: "auto" },
 								}}
 							>
-								<View
+								<div
 									style={{
 										...a.relative,
 										...a.rounded_full,
@@ -638,9 +632,9 @@ export function CompactVideoPostCard({
 								>
 									<UserAvatar type="user" size={20} avatar={post.author.avatar} />
 									<MediaInsetBorder />
-								</View>
-							</View>
-							<View
+								</div>
+							</div>
+							<div
 								style={{
 									...a.absolute,
 									...a.inset_0,
@@ -663,7 +657,7 @@ export function CompactVideoPostCard({
 									}}
 								/>
 
-								<View
+								<div
 									style={{
 										...a.relative,
 										...a.z_10,
@@ -673,7 +667,7 @@ export function CompactVideoPostCard({
 									}}
 								>
 									{likeCount > 0 && (
-										<View
+										<div
 											style={{
 												...a.flex_row,
 												...a.align_center,
@@ -690,12 +684,12 @@ export function CompactVideoPostCard({
 											>
 												{formatCount(likeCount)}
 											</Text>
-										</View>
+										</div>
 									)}
-								</View>
-							</View>
-						</View>
-					</View>
+								</div>
+							</div>
+						</div>
+					</div>
 				</Hider.Content>
 			</Hider.Outer>
 		</Link>
@@ -707,8 +701,8 @@ export function CompactVideoPostCardPlaceholder() {
 	const black = getBlackColor(t);
 
 	return (
-		<View style={a.flex_1}>
-			<View
+		<div style={a.flex_1}>
+			<div
 				style={{
 					...a.rounded_md,
 					...a.overflow_hidden,
@@ -720,7 +714,7 @@ export function CompactVideoPostCardPlaceholder() {
 				}}
 			>
 				<MediaInsetBorder />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

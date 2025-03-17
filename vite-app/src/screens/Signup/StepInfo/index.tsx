@@ -168,7 +168,6 @@ export function StepInfo({
 							<TextField.Root isInvalid={state.errorField === "email"}>
 								<TextField.Icon icon={Envelope} />
 								<TextField.Input
-									testID="emailInput"
 									inputRef={emailInputRef}
 									onChangeText={(value) => {
 										emailValueRef.current = value.trim();
@@ -197,7 +196,6 @@ export function StepInfo({
 							<TextField.Root isInvalid={state.errorField === "password"}>
 								<TextField.Icon icon={Lock} />
 								<TextField.Input
-									testID="passwordInput"
 									inputRef={passwordInputRef}
 									onChangeText={(value) => {
 										passwordValueRef.current = value;
@@ -218,7 +216,6 @@ export function StepInfo({
 						<View>
 							<DateField.LabelText>Your birth date</DateField.LabelText>
 							<DateField.DateField
-								testID="date"
 								inputRef={birthdateInputRef}
 								value={state.dateOfBirth}
 								onChangeDate={(date) => {

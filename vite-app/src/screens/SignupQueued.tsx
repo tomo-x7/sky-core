@@ -1,9 +1,10 @@
 import React from "react";
-import { Modal, ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
+import { Modal } from "#/components/Motal";
 import { P, Text } from "#/components/Typography";
 import { isSignupQueued, useAgent, useSessionApi } from "#/state/session";
 import { useOnboardingDispatch } from "#/state/shell";
@@ -84,20 +85,20 @@ export function SignupQueued() {
 				contentContainerStyle={{ borderWidth: 0 }}
 				bounces={false}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_center,
-						...(gtMobile ? a.pt_4xl : [a.px_xl, a.pt_xl]),
+						...(gtMobile ? a.pt_4xl : flatten([a.px_xl, a.pt_xl])),
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...{ maxWidth: COL_WIDTH },
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.w_full,
 								...a.justify_center,
@@ -106,7 +107,7 @@ export function SignupQueued() {
 							}}
 						>
 							<Logo width={120} />
-						</View>
+						</div>
 
 						<Text
 							style={{
@@ -121,7 +122,7 @@ export function SignupQueued() {
 							There's been a rush of new users to Bluesky! We'll activate your account as soon as we can.
 						</P>
 
-						<View
+						<div
 							style={{
 								...a.rounded_sm,
 								...a.px_2xl,
@@ -153,10 +154,10 @@ export function SignupQueued() {
 									<>We will let you know when your account is ready.</>
 								)}
 							</P>
-						</View>
+						</div>
 
 						{webLayout && (
-							<View
+							<div
 								style={{
 									...a.w_full,
 									...a.flex_row,
@@ -167,13 +168,13 @@ export function SignupQueued() {
 							>
 								{logoutBtn}
 								{checkBtn}
-							</View>
+							</div>
 						)}
-					</View>
-				</View>
+					</div>
+				</div>
 			</ScrollView>
 			{!webLayout && (
-				<View
+				<div
 					style={{
 						...a.align_center,
 						...t.atoms.bg,
@@ -181,7 +182,7 @@ export function SignupQueued() {
 						...{ paddingBottom: a.pb_5xl.paddingBottom },
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.gap_sm,
@@ -190,8 +191,8 @@ export function SignupQueued() {
 					>
 						{checkBtn}
 						{logoutBtn}
-					</View>
-				</View>
+					</div>
+				</div>
 			)}
 		</Modal>
 	);

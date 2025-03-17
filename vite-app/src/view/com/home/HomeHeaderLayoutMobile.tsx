@@ -70,7 +70,6 @@ export function HomeHeaderLayoutMobile({
 				<Layout.Header.Slot>
 					{hasSession && (
 						<Link
-							testID="viewHeaderHomeFeedPrefsBtn"
 							to="/feeds"
 							hitSlop={HITSLOP_10}
 							label={"View your feeds and explore more"}

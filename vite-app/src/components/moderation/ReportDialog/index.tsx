@@ -1,9 +1,8 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import React from "react";
-import { Pressable, View } from "react-native";
-import type { ScrollView } from "react-native-gesture-handler";
+import { Pressable } from "react-native";
 
-import { atoms as a, useGutters, useTheme } from "#/alf";
+import { atoms as a, flatten, useGutters, useTheme } from "#/alf";
 import * as Admonition from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -82,7 +81,6 @@ function Invalid() {
 
 function Inner(props: ReportDialogProps) {
 	const t = useTheme();
-	const ref = React.useRef<ScrollView>(null);
 	const {
 		data: allLabelers,
 		isLoading: isLabelerLoading,
@@ -166,17 +164,16 @@ function Inner(props: ReportDialogProps) {
 	return (
 		<Dialog.ScrollableInner
 			label={"Report dialog"}
-			ref={ref}
 			style={{
 				...a.w_full,
 				...{ maxWidth: 500 },
 			}}
 		>
-			<View style={a.gap_2xl}>
+			<div style={a.gap_2xl}>
 				<StepOuter>
 					<StepTitle index={1} title={copy.subtitle} activeIndex1={state.activeStepIndex1} />
 					{isLoading ? (
-						<View style={a.gap_sm}>
+						<div style={a.gap_sm}>
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
@@ -184,7 +181,7 @@ function Inner(props: ReportDialogProps) {
 							<OptionCardSkeleton />
 							{/* Here to capture focus for a hot sec to prevent flash */}
 							<Pressable accessible={false} />
-						</View>
+						</div>
 					) : labelersLoadError || !allLabelers ? (
 						<Admonition.Outer type="error">
 							<Admonition.Row>
@@ -202,16 +199,16 @@ function Inner(props: ReportDialogProps) {
 					) : (
 						<>
 							{state.selectedOption ? (
-								<View
+								<div
 									style={{
 										...a.flex_row,
 										...a.align_center,
 										...a.gap_md,
 									}}
 								>
-									<View style={a.flex_1}>
+									<div style={a.flex_1}>
 										<OptionCard option={state.selectedOption} />
-									</View>
+									</div>
 									<Button
 										label={"Change report reason"}
 										size="tiny"
@@ -224,9 +221,9 @@ function Inner(props: ReportDialogProps) {
 									>
 										<ButtonIcon icon={X} />
 									</Button>
-								</View>
+								</div>
 							) : (
-								<View style={a.gap_sm}>
+								<div style={a.gap_sm}>
 									{reportOptions[props.subject.type].map((o) => (
 										<OptionCard
 											key={o.reason}
@@ -240,7 +237,7 @@ function Inner(props: ReportDialogProps) {
 									{["post", "account"].includes(props.subject.type) && (
 										<Link to={DMCA_LINK} label={"View details for reporting a copyright violation"}>
 											{({ hovered, pressed }) => (
-												<View
+												<div
 													style={{
 														...a.flex_row,
 														...a.align_center,
@@ -249,9 +246,11 @@ function Inner(props: ReportDialogProps) {
 														...a.py_sm,
 														...a.rounded_sm,
 														...a.border,
-														...(hovered || pressed
-															? [t.atoms.border_contrast_high]
-															: [t.atoms.border_contrast_low]),
+														...flatten(
+															hovered || pressed
+																? [t.atoms.border_contrast_high]
+																: [t.atoms.border_contrast_low],
+														),
 													}}
 												>
 													<Text
@@ -264,11 +263,11 @@ function Inner(props: ReportDialogProps) {
 														Need to report a copyright violation?
 													</Text>
 													<SquareArrowTopRight size="sm" fill={t.atoms.text.color} />
-												</View>
+												</div>
 											)}
 										</Link>
 									)}
-								</View>
+								</div>
 							)}
 						</>
 					)}
@@ -282,16 +281,16 @@ function Inner(props: ReportDialogProps) {
 								{hasSingleSupportedLabeler ? (
 									<LabelerCard labeler={state.selectedLabeler} />
 								) : (
-									<View
+									<div
 										style={{
 											...a.flex_row,
 											...a.align_center,
 											...a.gap_md,
 										}}
 									>
-										<View style={a.flex_1}>
+										<div style={a.flex_1}>
 											<LabelerCard labeler={state.selectedLabeler} />
-										</View>
+										</div>
 										<Button
 											label={"Change moderation service"}
 											size="tiny"
@@ -304,13 +303,13 @@ function Inner(props: ReportDialogProps) {
 										>
 											<ButtonIcon icon={X} />
 										</Button>
-									</View>
+									</div>
 								)}
 							</>
 						) : (
 							<>
 								{hasSupportedLabelers ? (
-									<View style={a.gap_sm}>
+									<div style={a.gap_sm}>
 										{hasSingleSupportedLabeler ? (
 											<>
 												<LabelerCard labeler={supportedLabelers[0]} />
@@ -337,7 +336,7 @@ function Inner(props: ReportDialogProps) {
 												))}
 											</>
 										)}
-									</View>
+									</div>
 								) : (
 									// should never happen in our app
 									<Admonition.Admonition type="warning">
@@ -352,7 +351,7 @@ function Inner(props: ReportDialogProps) {
 					<StepTitle index={3} title={"Submit report"} activeIndex1={state.activeStepIndex1} />
 					{state.activeStepIndex1 === 3 && (
 						<>
-							<View
+							<div
 								style={{
 									...a.pb_xs,
 									...a.gap_xs,
@@ -387,7 +386,7 @@ function Inner(props: ReportDialogProps) {
 								</Text>
 
 								{state.detailsOpen && (
-									<View>
+									<div>
 										<Dialog.Input
 											multiline
 											value={state.details}
@@ -396,9 +395,10 @@ function Inner(props: ReportDialogProps) {
 											}}
 											label={"Additional details (limit 300 characters)"}
 											style={{ paddingRight: 60 }}
+											// @ts-expect-error
 											numberOfLines={4}
 										/>
-										<View
+										<div
 											style={{
 												...a.absolute,
 												...a.flex_row,
@@ -413,10 +413,10 @@ function Inner(props: ReportDialogProps) {
 											}}
 										>
 											<CharProgress count={state.details?.length || 0} />
-										</View>
-									</View>
+										</div>
+									</div>
 								)}
-							</View>
+							</div>
 							<Button
 								label={"Submit report"}
 								size="large"
@@ -433,7 +433,7 @@ function Inner(props: ReportDialogProps) {
 						</>
 					)}
 				</StepOuter>
-			</View>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);
@@ -456,14 +456,14 @@ function ActionOnce({
 
 function StepOuter({ children }: { children: React.ReactNode }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.gap_md,
 				...a.w_full,
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -480,14 +480,14 @@ function StepTitle({
 	const active = activeIndex1 === index;
 	const completed = activeIndex1 > index;
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_sm,
 				...a.pr_3xl,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.justify_center,
 					...a.align_center,
@@ -525,7 +525,7 @@ function StepTitle({
 									: completed
 										? t.palette.primary_700
 										: t.atoms.text_contrast_medium.color,
-								fontVariant: ["tabular-nums"],
+								fontVariant: "tabular-nums",
 								width: 24,
 								height: 24,
 								lineHeight: 24,
@@ -535,7 +535,7 @@ function StepTitle({
 						{index}
 					</Text>
 				)}
-			</View>
+			</div>
 			<Text
 				style={{
 					...a.flex_1,
@@ -551,7 +551,7 @@ function StepTitle({
 			>
 				{title}
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -570,7 +570,7 @@ function OptionCard({
 	return (
 		<Button label={`Create report for ${option.title}`} onPress={onPress} disabled={!onSelect}>
 			{({ hovered, pressed }) => (
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...gutters,
@@ -578,7 +578,7 @@ function OptionCard({
 						...a.rounded_sm,
 						...a.border,
 						...t.atoms.bg_contrast_25,
-						...(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
+						...flatten(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
 					}}
 				>
 					<Text
@@ -599,7 +599,7 @@ function OptionCard({
 					>
 						{option.description}
 					</Text>
-				</View>
+				</div>
 			)}
 		</Button>
 	);
@@ -608,7 +608,7 @@ function OptionCard({
 function OptionCardSkeleton() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.rounded_sm,
@@ -641,7 +641,7 @@ function LabelerCard({
 	return (
 		<Button label={`Send report to ${title}`} onPress={onPress} disabled={!onSelect}>
 			{({ hovered, pressed }) => (
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.p_sm,
@@ -651,11 +651,11 @@ function LabelerCard({
 						...a.rounded_md,
 						...a.border,
 						...t.atoms.bg_contrast_25,
-						...(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
+						...flatten(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
 					}}
 				>
 					<UserAvatar type="labeler" size={36} avatar={labeler.creator.avatar} />
-					<View style={a.flex_1}>
+					<div style={a.flex_1}>
 						<Text
 							style={{
 								...a.text_md,
@@ -674,8 +674,8 @@ function LabelerCard({
 						>
 							By {sanitizeHandle(labeler.creator.handle, "@")}
 						</Text>
-					</View>
-				</View>
+					</div>
+				</div>
 			)}
 		</Button>
 	);

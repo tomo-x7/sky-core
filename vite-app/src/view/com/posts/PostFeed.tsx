@@ -146,7 +146,6 @@ let PostFeed = ({
 	onHasNew,
 	renderEmptyState,
 	renderEndOfFeed,
-	testID,
 	headerOffset = 0,
 	progressViewOffset,
 	desktopFixedHeightOffset,
@@ -168,7 +167,6 @@ let PostFeed = ({
 	onScrolledDownChange?: (isScrolledDown: boolean) => void;
 	renderEmptyState: () => JSX.Element;
 	renderEndOfFeed?: () => JSX.Element;
-	testID?: string;
 	headerOffset?: number;
 	progressViewOffset?: number;
 	desktopFixedHeightOffset?: number;
@@ -649,9 +647,8 @@ let PostFeed = ({
 	}, [isFetchingNextPage, shouldRenderEndOfFeed, renderEndOfFeed, headerOffset]);
 
 	return (
-		<View testID={testID} style={style}>
+		<View style={style}>
 			<List
-				testID={testID ? `${testID}-flatlist` : undefined}
 				ref={scrollElRef}
 				data={feedItems}
 				keyExtractor={(item) => item.key}

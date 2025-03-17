@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -47,7 +46,7 @@ export function EmbedConsentDialog({
 				label="External Media"
 				style={gtMobile ? { width: "auto", maxWidth: 400 } : a.w_full}
 			>
-				<View style={a.gap_sm}>
+				<div style={a.gap_sm}>
 					<Text
 						style={{
 							...a.text_2xl,
@@ -57,7 +56,7 @@ export function EmbedConsentDialog({
 						External Media
 					</Text>
 
-					<View
+					<div
 						style={{
 							...a.mt_sm,
 							...a.mb_2xl,
@@ -73,11 +72,11 @@ export function EmbedConsentDialog({
 							External media may allow websites to collect information about you and your device. No
 							information is sent or requested until you press the "play" button.
 						</Text>
-					</View>
-				</View>
-				<View style={a.gap_md}>
+					</div>
+				</div>
+				<div style={a.gap_md}>
 					<Button
-						style={gtMobile && a.flex_1}
+						style={gtMobile ? a.flex_1 : undefined}
 						label="Enable external media"
 						onPress={onShowAllPress}
 						onAccessibilityEscape={control.close}
@@ -88,7 +87,7 @@ export function EmbedConsentDialog({
 						<ButtonText>Enable external media</ButtonText>
 					</Button>
 					<Button
-						style={gtMobile && a.flex_1}
+						style={gtMobile ? a.flex_1 : undefined}
 						label="Enable this source only"
 						onPress={onShowPress}
 						onAccessibilityEscape={control.close}
@@ -108,7 +107,7 @@ export function EmbedConsentDialog({
 					>
 						<ButtonText>No thanks</ButtonText>
 					</Button>
-				</View>
+				</div>
 				<Dialog.Close />
 			</Dialog.ScrollableInner>
 		</Dialog.Outer>

@@ -1,6 +1,5 @@
 import type { ModerationCause } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -20,9 +19,9 @@ export function BlockedByListDialog({
 	const t = useTheme();
 
 	return (
-		<Prompt.Outer control={control} testID="blockedByListDialog">
+		<Prompt.Outer control={control}>
 			<Prompt.TitleText>{"User blocked by list"}</Prompt.TitleText>
-			<View
+			<div
 				style={{
 					...a.gap_sm,
 					...a.pb_lg,
@@ -67,7 +66,7 @@ export function BlockedByListDialog({
 						) : null,
 					)}
 				</Text>
-			</View>
+			</div>
 			<Prompt.Actions>
 				<Prompt.Action cta={"I understand"} onPress={() => {}} />
 			</Prompt.Actions>

@@ -1,5 +1,3 @@
-import { Pressable, View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
@@ -32,7 +30,7 @@ export function DateFieldButton({
 	const { chromeHover, chromeFocus, chromeError, chromeErrorHover } = TextField.useSharedInputStyles();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.relative,
 				...a.w_full,
@@ -42,22 +40,19 @@ export function DateFieldButton({
 				onMouseOut: onHoverOut,
 			}}
 		>
-			<Pressable
+			<button
+				type="button"
 				aria-label={label}
-				accessibilityLabel={label}
-				accessibilityHint={accessibilityHint}
-				onPress={onPress}
-				onPressIn={onPressIn}
-				onPressOut={onPressOut}
+				onClick={onPress}
+				onMouseEnter={onPressIn}
+				onMouseLeave={onPressOut}
 				onFocus={onFocus}
 				onBlur={onBlur}
 				style={{
-					...{
-						paddingLeft: 14,
-						paddingRight: 14,
-						borderColor: "transparent",
-						borderWidth: 2,
-					},
+					paddingLeft: 14,
+					paddingRight: 14,
+					borderColor: "transparent",
+					borderWidth: 2,
 
 					...a.py_md,
 					...a.flex_row,
@@ -81,9 +76,9 @@ export function DateFieldButton({
 						...{ lineHeight: a.text_md.fontSize * 1.1875 },
 					}}
 				>
-					{i18n.date(value, { timeZone: "UTC" })}
+					{new Date(value).toUTCString()}
 				</Text>
-			</Pressable>
-		</View>
+			</button>
+		</div>
 	);
 }

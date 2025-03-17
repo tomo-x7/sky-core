@@ -2,7 +2,6 @@ import type { ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { View } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -199,7 +198,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 						<>
 							{isError ? (
 								<>
-									<View
+									<div
 										style={{
 											...a.pt_3xl,
 											...a.align_center,
@@ -239,11 +238,11 @@ export function MessagesScreen({ navigation, route }: Props) {
 											<ButtonText>Retry</ButtonText>
 											<ButtonIcon icon={Retry} position="right" />
 										</Button>
-									</View>
+									</div>
 								</>
 							) : (
 								<>
-									<View
+									<div
 										style={{
 											...a.pt_3xl,
 											...a.align_center,
@@ -271,7 +270,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 										>
 											You have no conversations yet. Start one!
 										</Text>
-									</View>
+									</div>
 								</>
 							)}
 						</>
@@ -283,7 +282,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 	}
 
 	return (
-		<Layout.Screen testID="messagesScreen">
+		<Layout.Screen>
 			<Header newChatControl={newChatControl} />
 			<NewChat onNewChat={onNewChat} control={newChatControl} />
 			<List
@@ -338,7 +337,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 						<Layout.Header.TitleText>Chats</Layout.Header.TitleText>
 					</Layout.Header.Content>
 
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -356,7 +355,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 							<ButtonIcon icon={Plus} position="left" />
 							<ButtonText>New chat</ButtonText>
 						</Button>
-					</View>
+					</div>
 				</>
 			) : (
 				<>

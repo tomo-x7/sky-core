@@ -30,13 +30,11 @@ export function MyLists({
 	inline,
 	style,
 	renderItem,
-	testID,
 }: {
 	filter: MyListsFilter;
 	inline?: boolean;
 	style?: StyleProp<ViewStyle>;
 	renderItem?: (list: GraphDefs.ListView, index: number) => JSX.Element;
-	testID?: string;
 }) {
 	const pal = usePalette("default");
 	const t = useTheme();
@@ -163,10 +161,9 @@ export function MyLists({
 
 	if (inline) {
 		return (
-			<View testID={testID} style={style}>
+			<View style={style}>
 				{items.length > 0 && (
 					<RNFlatList
-						testID={testID ? `${testID}-flatlist` : undefined}
 						data={items}
 						keyExtractor={(item) => (item.uri ? item.uri : item._reactKey)}
 						renderItem={renderItemInner}
@@ -186,10 +183,9 @@ export function MyLists({
 		);
 	} else {
 		return (
-			<View testID={testID} style={style}>
+			<View style={style}>
 				{items.length > 0 && (
 					<List
-						testID={testID ? `${testID}-flatlist` : undefined}
 						data={items}
 						keyExtractor={(item) => (item.uri ? item.uri : item._reactKey)}
 						renderItem={renderItemInner}

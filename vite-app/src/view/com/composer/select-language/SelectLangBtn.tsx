@@ -75,7 +75,6 @@ export function SelectLangBtn() {
 	return (
 		<DropdownButton
 			type="bare"
-			testID="selectLangBtn"
 			items={items}
 			openUpwards
 			style={styles.button}

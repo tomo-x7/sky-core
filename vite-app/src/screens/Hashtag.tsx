@@ -2,7 +2,7 @@ import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { type ListRenderItemInfo, View } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -132,7 +132,7 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 				initialPage={0}
 			>
 				{sections.map((section, i) => (
-					<View key={i}>{section.component}</View>
+					<div key={i}>{section.component}</div>
 				))}
 			</Pager>
 		</Layout.Screen>

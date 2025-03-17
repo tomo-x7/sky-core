@@ -37,7 +37,6 @@ export type Alf = {
 	 * Feature flags or other gated options
 	 */
 
-	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	flags: {};
 };
 

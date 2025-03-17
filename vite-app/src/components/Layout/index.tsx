@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { StyleSheet, View, type ViewProps, type ViewStyle } from "react-native";
+import { StyleSheet, type ViewStyle } from "react-native";
 import type { StyleProp } from "react-native";
 import { KeyboardAwareScrollView, type KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
 import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
@@ -13,8 +13,7 @@ import { useShellLayout } from "#/state/shell/shell-layout";
 export * from "#/components/Layout/const";
 export * as Header from "#/components/Layout/Header";
 
-export type ScreenProps = React.ComponentProps<typeof View> & {
-	style?: StyleProp<ViewStyle>;
+export type ScreenProps = JSX.IntrinsicElements["div"] & {
 	noInsetTop?: boolean;
 };
 
@@ -25,7 +24,7 @@ export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }
 	return (
 		<>
 			<WebCenterBorders />
-			<View
+			<div
 				style={{
 					...a.util_screen_outer,
 					...{ paddingTop: 0 },
@@ -37,8 +36,8 @@ export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }
 	);
 });
 
-export type ContentProps = AnimatedScrollViewProps & {
-	style?: StyleProp<ViewStyle>;
+export type ContentProps = Omit<AnimatedScrollViewProps, "style"> & {
+	style?: React.CSSProperties;
 	contentContainerStyle?: StyleProp<ViewStyle>;
 	ignoreTabletLayoutOffset?: boolean;
 };
@@ -72,6 +71,7 @@ export const Content = React.memo(function Content({
 			indicatorStyle={t.scheme === "dark" ? "white" : "black"}
 			// sets the scroll inset to the height of the footer
 			animatedProps={animatedProps}
+			// @ts-expect-error
 			style={{
 				...scrollViewStyles.common,
 				...style,
@@ -96,8 +96,9 @@ const scrollViewStyles = StyleSheet.create({
 	},
 });
 
-export type KeyboardAwareContentProps = KeyboardAwareScrollViewProps & {
+export type KeyboardAwareContentProps = Omit<KeyboardAwareScrollViewProps, "style"> & {
 	children: React.ReactNode;
+	style: React.CSSProperties;
 	contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
@@ -114,6 +115,7 @@ export const KeyboardAwareContent = React.memo(function LayoutScrollView({
 }: KeyboardAwareContentProps) {
 	return (
 		<KeyboardAwareScrollView
+			// @ts-expect-error
 			style={{
 				...scrollViewStyles.common,
 				...style,
@@ -135,14 +137,14 @@ export const Center = React.memo(function LayoutContent({
 	style,
 	ignoreTabletLayoutOffset,
 	...props
-}: ViewProps & { ignoreTabletLayoutOffset?: boolean }) {
+}: JSX.IntrinsicElements["div"] & { ignoreTabletLayoutOffset?: boolean }) {
 	const { isWithinOffsetView } = useContext(ScrollbarOffsetContext);
 	const { gtMobile } = useBreakpoints();
 	const { centerColumnOffset } = useLayoutBreakpoints();
 	const { isWithinDialog } = useDialogContext();
 	const ctx = useMemo(() => ({ isWithinOffsetView: true }), []);
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.mx_auto,
@@ -152,12 +154,7 @@ export const Center = React.memo(function LayoutContent({
 				}),
 
 				...(!isWithinOffsetView && {
-					transform: [
-						{
-							translateX: centerColumnOffset && !ignoreTabletLayoutOffset && !isWithinDialog ? -150 : 0,
-						},
-						{ translateX: SCROLLBAR_OFFSET ?? 0 },
-					],
+					transform: `translateX(${centerColumnOffset && !ignoreTabletLayoutOffset && !isWithinDialog ? -150 : 0}px) translateX(${SCROLLBAR_OFFSET ?? 0}px)`,
 				}),
 
 				...style,
@@ -165,7 +162,7 @@ export const Center = React.memo(function LayoutContent({
 			{...props}
 		>
 			<ScrollbarOffsetContext.Provider value={ctx}>{children}</ScrollbarOffsetContext.Provider>
-		</View>
+		</div>
 	);
 });
 
@@ -177,7 +174,7 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 	const { gtMobile } = useBreakpoints();
 	const { centerColumnOffset } = useLayoutBreakpoints();
 	return gtMobile ? (
-		<View
+		<div
 			style={{
 				...a.fixed,
 				...a.inset_0,
@@ -188,11 +185,7 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 				...{
 					width: 602,
 					left: "50%",
-					transform: [
-						{ translateX: "-50%" },
-						{ translateX: centerColumnOffset ? -150 : 0 },
-						...a.scrollbar_offset.transform,
-					],
+					transform: `translateX(-50%) translateX(${centerColumnOffset ? -150 : 0}px) ${a.scrollbar_offset.transform}`,
 				},
 			}}
 		/>

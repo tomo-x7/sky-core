@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -33,7 +33,7 @@ export function Inner() {
 	}, [setTrendingDisabled]);
 
 	return error || noTopics ? null : (
-		<View
+		<div
 			style={{
 				...t.atoms.border_contrast_low,
 				...a.border_t,
@@ -41,7 +41,7 @@ export function Inner() {
 		>
 			<BlockDrawerGesture>
 				<ScrollView horizontal showsHorizontalScrollIndicator={false} decelerationRate="fast">
-					<View
+					<div
 						style={{
 							...gutters,
 							...a.flex_row,
@@ -49,11 +49,11 @@ export function Inner() {
 							...a.gap_lg,
 						}}
 					>
-						<View style={{ paddingLeft: 4, paddingRight: 2 }}>
+						<div style={{ paddingLeft: 4, paddingRight: 2 }}>
 							<Graph size="sm" />
-						</View>
+						</div>
 						{isLoading ? (
-							<View
+							<div
 								style={{
 									...a.py_lg,
 									...a.flex_row,
@@ -75,12 +75,12 @@ export function Inner() {
 								>
 									{" "}
 								</Text>
-							</View>
+							</div>
 						) : !trending?.topics ? null : (
 							<>
 								{trending.topics.map((topic) => (
 									<TrendingTopicLink key={topic.link} topic={topic}>
-										<View style={a.py_lg}>
+										<div style={a.py_lg}>
 											<Text
 												style={{
 													...t.atoms.text,
@@ -93,7 +93,7 @@ export function Inner() {
 											>
 												{topic.topic}
 											</Text>
-										</View>
+										</div>
 									</TrendingTopicLink>
 								))}
 								<Button
@@ -108,7 +108,7 @@ export function Inner() {
 								</Button>
 							</>
 						)}
-					</View>
+					</div>
 				</ScrollView>
 			</BlockDrawerGesture>
 
@@ -119,6 +119,6 @@ export function Inner() {
 				confirmButtonCta={"Hide"}
 				onConfirm={onConfirmHide}
 			/>
-		</View>
+		</div>
 	);
 }

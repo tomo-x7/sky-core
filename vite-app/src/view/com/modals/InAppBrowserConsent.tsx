@@ -32,7 +32,6 @@ export function Component({ href }: { href: string }) {
 
 	return (
 		<ScrollView
-			testID="inAppBrowserConsentModal"
 			style={{
 				...s.flex1,
 				...pal.view,
@@ -50,7 +49,6 @@ export function Component({ href }: { href: string }) {
 			<Text style={pal.text}>Your choice will be saved, but can be changed later in settings.</Text>
 			<View style={styles.btnContainer}>
 				<Button
-					testID="confirmBtn"
 					type="inverted"
 					onPress={onUseIAB}
 					accessibilityLabel={"Use in-app browser"}
@@ -60,7 +58,6 @@ export function Component({ href }: { href: string }) {
 					labelStyle={[s.f18]}
 				/>
 				<Button
-					testID="confirmBtn"
 					type="inverted"
 					onPress={onUseLinking}
 					accessibilityLabel={"Use my default browser"}
@@ -70,7 +67,6 @@ export function Component({ href }: { href: string }) {
 					labelStyle={[s.f18]}
 				/>
 				<Button
-					testID="cancelBtn"
 					type="default"
 					onPress={() => {
 						closeModal();

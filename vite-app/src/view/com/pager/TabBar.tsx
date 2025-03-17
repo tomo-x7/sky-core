@@ -7,7 +7,6 @@ import { PressableWithHover } from "../util/PressableWithHover";
 import { DraggableScrollView } from "./DraggableScrollView";
 
 export interface TabBarProps {
-	testID?: string;
 	selectedPage: number;
 	items: string[];
 	indicatorColor?: string;
@@ -21,7 +20,7 @@ export interface TabBarProps {
 // to give the user a hint there's more to scroll.
 const OFFSCREEN_ITEM_WIDTH = 20;
 
-export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected }: TabBarProps) {
+export function TabBar({  selectedPage, items, onSelect, onPressSelected }: TabBarProps) {
 	const t = useTheme();
 	const scrollElRef = useRef<ScrollView>(null);
 	const itemRefs = useRef<Array<Element>>([]);
@@ -81,7 +80,6 @@ export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected 
 
 	return (
 		<View
-			testID={testID}
 			style={{
 				...t.atoms.bg,
 				...styles.outer,
@@ -89,7 +87,6 @@ export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected 
 			accessibilityRole="tablist"
 		>
 			<DraggableScrollView
-				testID={`${testID}-selector`}
 				horizontal={true}
 				showsHorizontalScrollIndicator={false}
 				ref={scrollElRef}
@@ -99,7 +96,6 @@ export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected 
 					const selected = i === selectedPage;
 					return (
 						<PressableWithHover
-							testID={`${testID}-selector-${i}`}
 							key={`${item}-${i}`}
 							ref={(node) => (itemRefs.current[i] = node as any)}
 							style={styles.item}
@@ -110,7 +106,6 @@ export function TabBar({ testID, selectedPage, items, onSelect, onPressSelected 
 							<View style={styles.itemInner}>
 								<Text
 									emoji
-									testID={testID ? `${testID}-${item}` : undefined}
 									style={{
 										...styles.itemText,
 										...(selected ? t.atoms.text : t.atoms.text_contrast_medium),

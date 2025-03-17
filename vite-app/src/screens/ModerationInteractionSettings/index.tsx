@@ -20,7 +20,7 @@ export function Screen() {
 	const gutters = useGutters(["base"]);
 	const { data: preferences } = usePreferencesQuery();
 	return (
-		<Layout.Screen testID="ModerationInteractionSettingsScreen">
+		<Layout.Screen>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton />
 				<Layout.Header.Content>

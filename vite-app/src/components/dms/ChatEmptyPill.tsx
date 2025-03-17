@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -43,7 +43,7 @@ export function ChatEmptyPill() {
 	}));
 
 	return (
-		<View
+		<div
 			style={{
 				...a.absolute,
 				...a.w_full,
@@ -78,6 +78,6 @@ export function ChatEmptyPill() {
 					{prompts[promptIndex]}
 				</Text>
 			</AnimatedPressable>
-		</View>
+		</div>
 	);
 }

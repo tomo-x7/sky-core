@@ -1,7 +1,7 @@
 import { type ChatBskyConvoDefs, RichText } from "@atproto/api";
 // import * as Clipboard from "expo-clipboard";
 import React from "react";
-import { LayoutAnimation, Pressable, View } from "react-native";
+import { LayoutAnimation, Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
@@ -69,7 +69,7 @@ export let MessageMenu = ({
 	return (
 		<>
 			<Menu.Root control={control}>
-				<View style={{ opacity: triggerOpacity }}>
+				<div style={{ opacity: triggerOpacity }}>
 					<Menu.Trigger label={"Chat settings"}>
 						{({ props, state }) => (
 							<Pressable
@@ -84,25 +84,17 @@ export let MessageMenu = ({
 							</Pressable>
 						)}
 					</Menu.Trigger>
-				</View>
+				</div>
 
 				<Menu.Outer>
 					{message.text.length > 0 && (
 						<>
 							<Menu.Group>
-								<Menu.Item
-									testID="messageDropdownTranslateBtn"
-									label={"Translate"}
-									onPress={onPressTranslateMessage}
-								>
+								<Menu.Item label={"Translate"} onPress={onPressTranslateMessage}>
 									<Menu.ItemText>{"Translate"}</Menu.ItemText>
 									<Menu.ItemIcon icon={Translate} position="right" />
 								</Menu.Item>
-								<Menu.Item
-									testID="messageDropdownCopyBtn"
-									label={"Copy message text"}
-									onPress={onCopyMessage}
-								>
+								<Menu.Item label={"Copy message text"} onPress={onCopyMessage}>
 									<Menu.ItemText>{"Copy message text"}</Menu.ItemText>
 									<Menu.ItemIcon icon={ClipboardIcon} position="right" />
 								</Menu.Item>
@@ -111,20 +103,12 @@ export let MessageMenu = ({
 						</>
 					)}
 					<Menu.Group>
-						<Menu.Item
-							testID="messageDropdownDeleteBtn"
-							label={"Delete message for me"}
-							onPress={() => deleteControl.open()}
-						>
+						<Menu.Item label={"Delete message for me"} onPress={() => deleteControl.open()}>
 							<Menu.ItemText>{"Delete for me"}</Menu.ItemText>
 							<Menu.ItemIcon icon={Trash} position="right" />
 						</Menu.Item>
 						{!isFromSelf && (
-							<Menu.Item
-								testID="messageDropdownReportBtn"
-								label={"Report message"}
-								onPress={() => reportControl.open()}
-							>
+							<Menu.Item label={"Report message"} onPress={() => reportControl.open()}>
 								<Menu.ItemText>{"Report"}</Menu.ItemText>
 								<Menu.ItemIcon icon={Warning} position="right" />
 							</Menu.Item>

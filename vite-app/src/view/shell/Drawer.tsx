@@ -60,7 +60,6 @@ let DrawerProfileCard = ({
 
 	return (
 		<TouchableOpacity
-			testID="profileCardButton"
 			accessibilityLabel={"Profile"}
 			accessibilityHint={"Navigates to your profile"}
 			onPress={onPressProfile}
@@ -204,7 +203,6 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 
 	return (
 		<View
-			testID="drawer"
 			style={{
 				...a.flex_1,
 				...a.border_r,
@@ -494,7 +492,7 @@ SettingsMenuItem = React.memo(SettingsMenuItem);
 function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 	const t = useTheme();
 	return (
-		<Button testID={`menuItemButton-${label}`} onPress={onPress} accessibilityRole="tab" label={label}>
+		<Button onPress={onPress} accessibilityRole="tab" label={label}>
 			{({ hovered, pressed }) => (
 				<View
 					style={{

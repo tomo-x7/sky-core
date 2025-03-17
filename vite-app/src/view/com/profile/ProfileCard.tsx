@@ -24,7 +24,6 @@ import { Text } from "../util/text/Text";
 import { FollowButton } from "./FollowButton";
 
 export function ProfileCard({
-	testID,
 	profile: profileUnshadowed,
 	noModFilter,
 	noBg,
@@ -34,7 +33,6 @@ export function ProfileCard({
 	style,
 	showKnownFollowers,
 }: {
-	testID?: string;
 	profile: bsky.profile.AnyProfileView;
 	noModFilter?: boolean;
 	noBg?: boolean;
@@ -70,7 +68,6 @@ export function ProfileCard({
 
 	return (
 		<Link
-			testID={testID}
 			style={{
 				...styles.outer,
 				...pal.border,

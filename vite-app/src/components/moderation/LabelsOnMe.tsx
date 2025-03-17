@@ -1,5 +1,4 @@
 import type { AppBskyFeedDefs, ComAtprotoLabelDefs } from "@atproto/api";
-import { type StyleProp, View, type ViewStyle } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, type ButtonSize, ButtonText } from "#/components/Button";
@@ -16,7 +15,7 @@ export function LabelsOnMe({
 	type: "account" | "content";
 	labels: ComAtprotoLabelDefs.Label[] | undefined;
 	size?: ButtonSize;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const { currentAccount } = useSession();
 	const control = useLabelsOnMeDialogControl();
@@ -30,7 +29,7 @@ export function LabelsOnMe({
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...style,
@@ -61,7 +60,7 @@ export function LabelsOnMe({
 					)}
 				</ButtonText>
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -70,7 +69,7 @@ export function LabelsOnMyPost({
 	style,
 }: {
 	post: AppBskyFeedDefs.PostView;
-	style?: StyleProp<ViewStyle>;
+	style?: React.CSSProperties;
 }) {
 	const { currentAccount } = useSession();
 	if (post.author.did !== currentAccount?.did) {

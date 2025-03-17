@@ -176,7 +176,6 @@ export function MessageInputEmbed({
 							<View style={a.mt_xs}>
 								<RichText
 									enableTags
-									testID="postText"
 									value={rt}
 									style={{
 										...a.text_sm,

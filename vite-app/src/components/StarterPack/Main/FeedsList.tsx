@@ -1,7 +1,7 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 import React, { useCallback } from "react";
-import { type ListRenderItemInfo, View } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
@@ -40,7 +40,7 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<GeneratorView>) => {
 		return (
-			<View
+			<div
 				style={{
 					...a.p_lg,
 					...a.border_t,
@@ -48,7 +48,7 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 				}}
 			>
 				<FeedCard.Default view={item} />
-			</View>
+			</div>
 		);
 	};
 
@@ -59,7 +59,7 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 			keyExtractor={keyExtractor}
 			ref={scrollElRef}
 			headerOffset={headerHeight}
-			ListFooterComponent={<View style={{ height: initialHeaderHeight + bottomBarOffset }} />}
+			ListFooterComponent={<div style={{ height: initialHeaderHeight + bottomBarOffset }} />}
 			showsVerticalScrollIndicator={false}
 			desktopFixedHeight={true}
 		/>

@@ -298,7 +298,6 @@ let PostThreadItemLoaded = ({
 					</View>
 				)}
 				<View
-					testID={`postThreadItem-by-${post.author.handle}`}
 					style={{
 						...a.px_lg,
 						...t.atoms.border_contrast_low,
@@ -414,7 +413,6 @@ let PostThreadItemLoaded = ({
 								{post.repostCount != null && post.repostCount !== 0 ? (
 									<Link href={repostsHref} title={repostsTitle}>
 										<Text
-											testID="repostCount-expanded"
 											style={{
 												...a.text_md,
 												...t.atoms.text_contrast_medium,
@@ -436,7 +434,6 @@ let PostThreadItemLoaded = ({
 								{post.quoteCount != null && post.quoteCount !== 0 && !post.viewer?.embeddingDisabled ? (
 									<Link href={quotesHref} title={quotesTitle}>
 										<Text
-											testID="quoteCount-expanded"
 											style={{
 												...a.text_md,
 												...t.atoms.text_contrast_medium,
@@ -458,7 +455,6 @@ let PostThreadItemLoaded = ({
 								{post.likeCount != null && post.likeCount !== 0 ? (
 									<Link href={likesHref} title={likesTitle}>
 										<Text
-											testID="likeCount-expanded"
 											style={{
 												...a.text_md,
 												...t.atoms.text_contrast_medium,
@@ -518,7 +514,6 @@ let PostThreadItemLoaded = ({
 				hideTopBorder={hideTopBorder}
 			>
 				<PostHider
-					testID={`postThreadItem-by-${post.author.handle}`}
 					href={postHref}
 					disabled={overrideBlur}
 					modui={moderation.ui("contentList")}

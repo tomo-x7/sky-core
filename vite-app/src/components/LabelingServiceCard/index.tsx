@@ -1,6 +1,5 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import type React from "react";
-import { View } from "react-native";
 
 import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
@@ -19,7 +18,7 @@ type LabelingServiceProps = {
 
 export function Outer({ children, style }: React.PropsWithChildren<ViewStyleProp>) {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_md,
@@ -31,7 +30,7 @@ export function Outer({ children, style }: React.PropsWithChildren<ViewStyleProp
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -69,7 +68,7 @@ export function Description({ value, handle }: { value?: string; handle: string 
 export function RegionalNotice() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -87,7 +86,7 @@ export function RegionalNotice() {
 			>
 				Required in your region
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -111,7 +110,7 @@ export function Content({ children }: React.PropsWithChildren) {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.flex_row,
@@ -120,14 +119,14 @@ export function Content({ children }: React.PropsWithChildren) {
 				...a.justify_between,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.gap_2xs,
 					...a.flex_1,
 				}}
 			>
 				{children}
-			</View>
+			</div>
 			<ChevronRight
 				size="md"
 				style={{
@@ -135,7 +134,7 @@ export function Content({ children }: React.PropsWithChildren) {
 					...t.atoms.text_contrast_low,
 				}}
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -179,9 +178,9 @@ export function Link({ children, labeler }: LabelingServiceProps & Pick<LinkProp
 // TODO not finished yet
 export function DefaultSkeleton() {
 	return (
-		<View>
+		<div>
 			<Text>Loading</Text>
-		</View>
+		</div>
 	);
 }
 

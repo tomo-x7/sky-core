@@ -87,7 +87,7 @@ const GalleryInner = ({ images, containerInfo, dispatch }: GalleryInnerProps) =>
 
 	return images.length !== 0 ? (
 		<>
-			<View testID="selectedPhotosView" style={styles.gallery}>
+			<View style={styles.gallery}>
 				{images.map((image) => {
 					return (
 						<GalleryItem
@@ -149,7 +149,6 @@ const GalleryItem = ({
 			renderToHardwareTextureAndroid
 		>
 			<TouchableOpacity
-				testID="altTextButton"
 				accessibilityRole="button"
 				accessibilityLabel={"Add alt text"}
 				accessibilityHint=""
@@ -172,7 +171,6 @@ const GalleryItem = ({
 			</TouchableOpacity>
 			<View style={imageControlsStyle}>
 				<TouchableOpacity
-					testID="editPhotoButton"
 					accessibilityRole="button"
 					accessibilityLabel={"Edit image"}
 					accessibilityHint=""
@@ -183,7 +181,6 @@ const GalleryItem = ({
 					<FontAwesomeIcon icon="pen" size={12} style={{ color: colors.white }} />
 				</TouchableOpacity>
 				<TouchableOpacity
-					testID="removePhotoButton"
 					accessibilityRole="button"
 					accessibilityLabel={"Remove image"}
 					accessibilityHint=""
@@ -202,7 +199,6 @@ const GalleryItem = ({
 				style={styles.altTextHiddenRegion}
 			/>
 			<Image
-				testID="selectedPhotoImage"
 				style={{
 					...styles.image,
 					...imageStyle,
