@@ -1,10 +1,8 @@
-import { StyleSheet, type TextStyle } from "react-native";
-
 import { useTheme } from "#/lib/ThemeContext";
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { choose } from "#/lib/functions";
 import { colors } from "#/lib/styles";
-import { Text } from "../text/Text";
+import { Text } from "#/components/Typography";
 import { Button, type ButtonType } from "./Button";
 
 export function ToggleButton({
@@ -88,7 +86,7 @@ export function ToggleButton({
 			backgroundColor: isSelected ? theme.palette.primary.background : colors.gray3,
 		},
 	});
-	const labelStyle = choose<TextStyle, Record<ButtonType, TextStyle>>(type, {
+	const labelStyle = choose<React.CSSProperties, Record<ButtonType, React.CSSProperties>>(type, {
 		primary: {
 			color: theme.palette.primary.text,
 			fontWeight: theme.palette.primary.isLowContrast ? "600" : undefined,
@@ -159,7 +157,7 @@ export function ToggleButton({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles: Record<string, React.CSSProperties> = {
 	outer: {
 		flexDirection: "row",
 		alignItems: "center",
@@ -183,4 +181,4 @@ const styles = StyleSheet.create({
 	label: {
 		flex: 1,
 	},
-});
+};

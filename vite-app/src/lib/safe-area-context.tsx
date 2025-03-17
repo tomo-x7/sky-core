@@ -26,7 +26,7 @@ export const SafeAreaView = ({
 	children,
 	style = {},
 	edges,
-}: PropsWithChildren<{ style?: unknown; edges?: "all" | SafeAreaEdges[] }>) => {
+}: PropsWithChildren<{ style?: React.CSSProperties; edges?: "all" | SafeAreaEdges[] }>) => {
 	const [safeArea, setSafeArea] = useState({
 		top: 0,
 		bottom: 0,
