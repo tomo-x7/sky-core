@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 		borderRadius: 35,
 	},
 	outer: {
-		// @ts-ignore web-only
+		// @ts-expect-error web-only
 		position: "fixed",
 		zIndex: 1,
 		cursor: "pointer",

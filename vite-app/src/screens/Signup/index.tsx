@@ -1,6 +1,5 @@
 import { AppBskyGraphStarterpack } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 import Animated, { FadeIn, LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -78,7 +77,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 				description={`We're so excited to have you join us!`}
 				scrollable
 			>
-				<View style={a.flex_1}>
+				<div style={a.flex_1}>
 					{showStarterPackCard &&
 					bsky.dangerousIsType<AppBskyGraphStarterpack.Record>(
 						starterPack.record,
@@ -115,7 +114,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 							</LinearGradientBackground>
 						</Animated.View>
 					) : null}
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.px_xl,
@@ -123,7 +122,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 							...(!gtMobile && { paddingBottom: 100 }),
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.gap_sm,
 								...a.pb_3xl,
@@ -156,7 +155,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 									<>Complete the challenge</>
 								)}
 							</Text>
-						</View>
+						</div>
 
 						<LayoutAnimationConfig skipEntering skipExiting>
 							{state.activeStep === SignupStep.INFO ? (
@@ -175,7 +174,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 
 						<Divider />
 
-						<View
+						<div
 							style={{
 								...a.w_full,
 								...a.py_lg,
@@ -195,14 +194,14 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 								<InlineLinkText
 									label={"Contact support"}
 									to={FEEDBACK_FORM_URL({ email: state.email })}
-									style={!gtMobile && a.text_md}
+									style={!gtMobile ? a.text_md : undefined}
 								>
 									Contact support
 								</InlineLinkText>
 							</Text>
-						</View>
-					</View>
-				</View>
+						</div>
+					</div>
+				</div>
 			</LoggedOutLayout>
 		</SignupContext.Provider>
 	);

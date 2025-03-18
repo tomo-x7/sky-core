@@ -1,14 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import lande from "lande";
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { s } from "#/lib/styles";
 import { code3ToCode2Strict, codeToLanguageName } from "#/locale/helpers";
 import { toPostLanguages, useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences/languages";
 import { Button } from "../../util/forms/Button";
-import { Text } from "../../util/text/Text";
 
 // fallbacks for safari
 const onIdle = globalThis.requestIdleCallback || ((cb) => setTimeout(cb, 1));
@@ -41,13 +40,13 @@ export function SuggestedLanguage({ text }: { text: string }) {
 		const suggestedLanguageName = codeToLanguageName(suggestedLanguage, langPrefs.appLanguage);
 
 		return (
-			<View
+			<div
 				style={{
 					...pal.border,
 					...styles.infoBar,
 				}}
 			>
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="language" style={pal.text} size={24} />
 				<Text
 					style={{
@@ -79,26 +78,26 @@ export function SuggestedLanguage({ text }: { text: string }) {
 						Yes
 					</Text>
 				</Button>
-			</View>
+			</div>
 		);
 	} else {
 		return null;
 	}
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	infoBar: {
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 10,
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 16,
-		paddingVertical: 12,
-		marginHorizontal: 10,
+		marginLeft: 10,
+		marginRight: 10,
 		marginBottom: 10,
+		padding: "12px 16px",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;
 
 /**
  * This function is using the lande language model to attempt to detect the language

@@ -5,7 +5,6 @@
 import { FontAwesomeIcon, type Props as FontAwesomeProps } from "@fortawesome/react-fontawesome";
 import type React from "react";
 import { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const DURATION = 3500;
 
@@ -18,7 +17,7 @@ type GlobalSetActiveToast = (_activeToast: ActiveToast | undefined) => void;
 // globals
 // =
 let globalSetActiveToast: GlobalSetActiveToast | undefined;
-let toastTimeout: number | undefined;
+let toastTimeout: ReturnType<typeof setTimeout> | undefined;
 
 // components
 // =
@@ -33,19 +32,18 @@ export const ToastContainer: React.FC<ToastContainerProps> = () => {
 	return (
 		<>
 			{activeToast && (
-				<View style={styles.container}>
-					{/* @ts-ignore */}
+				<div style={styles.container}>
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon={activeToast.icon} size={20} style={styles.icon} />
-					<Text style={styles.text}>{activeToast.text}</Text>
-					<Pressable
+					<span style={styles.text}>{activeToast.text}</span>
+					<button
+						type="button"
 						style={styles.dismissBackdrop}
-						accessibilityLabel="Dismiss"
-						accessibilityHint=""
-						onPress={() => {
+						onClick={() => {
 							setActiveToast(undefined);
 						}}
 					/>
-				</View>
+				</div>
 			)}
 		</>
 	);
@@ -64,13 +62,11 @@ export function show(text: string, icon: FontAwesomeProps["icon"] = "check") {
 	}, DURATION);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
-		// @ts-ignore web only
 		position: "fixed",
 		left: 20,
 		bottom: 20,
-		// @ts-ignore web only
 		width: "calc(100% - 40px)",
 		maxWidth: 350,
 		padding: 20,
@@ -95,4 +91,4 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		marginLeft: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

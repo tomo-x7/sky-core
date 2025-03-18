@@ -2,10 +2,11 @@ import { useIsFocused, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { ComposeIcon2 } from "#/lib/icons";
@@ -31,7 +32,6 @@ import { PostFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { FAB } from "#/view/com/util/fab/FAB";
 import { Button } from "#/view/com/util/forms/Button";
 import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
-import { Text } from "#/view/com/util/text/Text";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileFeed">;
 export function ProfileFeedScreen(props: Props) {
@@ -60,7 +60,7 @@ export function ProfileFeedScreen(props: Props) {
 		return (
 			<Layout.Screen>
 				<Layout.Content>
-					<View
+					<div
 						style={{
 							...pal.view,
 							...pal.border,
@@ -86,7 +86,7 @@ export function ProfileFeedScreen(props: Props) {
 							{error.toString()}
 						</Text>
 
-						<View style={{ flexDirection: "row" }}>
+						<div style={{ flexDirection: "row" }}>
 							<Button
 								type="default"
 								accessibilityLabel={"Go back"}
@@ -98,8 +98,8 @@ export function ProfileFeedScreen(props: Props) {
 									Go Back
 								</Text>
 							</Button>
-						</View>
-					</View>
+						</div>
+					</div>
 				</Layout.Content>
 			</Layout.Screen>
 		);

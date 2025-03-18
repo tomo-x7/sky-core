@@ -89,7 +89,7 @@ export function SearchablePeopleList({
 				}
 
 				_items = _items.sort((item) => {
-					// @ts-ignore
+					// @ts-expect-error
 					return item.enabled ? -1 : 1;
 				});
 			}
@@ -141,7 +141,7 @@ export function SearchablePeopleList({
 
 					// only sort follows
 					followsItems = followsItems.sort((item) => {
-						// @ts-ignore
+						// @ts-expect-error
 						return item.enabled ? -1 : 1;
 					});
 
@@ -163,7 +163,7 @@ export function SearchablePeopleList({
 				}
 
 				_items = _items.sort((item) => {
-					// @ts-ignore
+					// @ts-expect-error
 					return item.enabled ? -1 : 1;
 				});
 			} else {
@@ -282,7 +282,7 @@ export function SearchablePeopleList({
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
-			//@ts-ignore
+			//@ts-expect-error
 			style={[a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]}
 			webInnerContentContainerStyle={a.py_0}
 			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
@@ -484,7 +484,7 @@ function SearchInput({
 		>
 			<Search size="md" fill={interacted ? t.palette.primary_500 : t.palette.contrast_300} />
 			<TextInput
-				// @ts-ignore bottom sheet input types issue — esb
+				// @ts-expect-error bottom sheet input types issue — esb
 				ref={inputRef}
 				placeholder={"Search"}
 				value={value}

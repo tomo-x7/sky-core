@@ -4,13 +4,14 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { ActivityIndicator, Pressable, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Pressable } from "react-native";
 import Animated, { LinearTransition } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
+import { Text } from "#/components/Typography";
 import { FilterTimeline_Stroke2_Corner0_Rounded as FilterTimeline } from "#/components/icons/FilterTimeline";
 import { FloppyDisk_Stroke2_Corner0_Rounded as SaveIcon } from "#/components/icons/FloppyDisk";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -25,13 +26,12 @@ import { useSetMinimalShellMode } from "#/state/shell";
 import { FeedSourceCard } from "#/view/com/feeds/FeedSourceCard";
 import { TextLink } from "#/view/com/util/Link";
 import * as Toast from "#/view/com/util/Toast";
-import { Text } from "#/view/com/util/text/Text";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "SavedFeeds">;
 export function SavedFeeds(props: Props) {
 	const { data: preferences } = usePreferencesQuery();
 	if (!preferences) {
-		return <View />;
+		return <div />;
 	}
 	return <SavedFeedsInner preferences={preferences} />;
 }
@@ -96,17 +96,17 @@ function SavedFeedsInner({
 			</Layout.Header.Outer>
 			<Layout.Content>
 				{noSavedFeedsOfAnyType && (
-					<View
+					<div
 						style={{
 							...pal.border,
 							...a.border_b,
 						}}
 					>
 						<NoSavedFeedsOfAnyType />
-					</View>
+					</div>
 				)}
 
-				<View
+				<div
 					style={{
 						...pal.text,
 						...pal.border,
@@ -116,11 +116,11 @@ function SavedFeedsInner({
 					<Text type="title" style={pal.text}>
 						Pinned Feeds
 					</Text>
-				</View>
+				</div>
 
 				{preferences ? (
 					!pinnedFeeds.length ? (
-						<View
+						<div
 							style={{
 								...pal.border,
 								...(isMobile && s.flex1),
@@ -131,7 +131,7 @@ function SavedFeedsInner({
 							<Text type="lg" style={pal.text}>
 								You don't have any pinned feeds.
 							</Text>
-						</View>
+						</div>
 					) : (
 						pinnedFeeds.map((f) => (
 							<ListItem
@@ -149,17 +149,17 @@ function SavedFeedsInner({
 				)}
 
 				{noFollowingFeed && (
-					<View
+					<div
 						style={{
 							...pal.border,
 							...a.border_b,
 						}}
 					>
 						<NoFollowingFeed />
-					</View>
+					</div>
 				)}
 
-				<View
+				<div
 					style={{
 						...pal.text,
 						...pal.border,
@@ -169,10 +169,10 @@ function SavedFeedsInner({
 					<Text type="title" style={pal.text}>
 						Saved Feeds
 					</Text>
-				</View>
+				</div>
 				{preferences ? (
 					!unpinnedFeeds.length ? (
-						<View
+						<div
 							style={{
 								...pal.border,
 								...(isMobile && s.flex1),
@@ -183,7 +183,7 @@ function SavedFeedsInner({
 							<Text type="lg" style={pal.text}>
 								You don't have any saved feeds.
 							</Text>
-						</View>
+						</div>
 					) : (
 						unpinnedFeeds.map((f) => (
 							<ListItem
@@ -200,7 +200,7 @@ function SavedFeedsInner({
 					<ActivityIndicator style={{ marginTop: 20 }} />
 				)}
 
-				<View style={styles.footerText}>
+				<div style={styles.footerText}>
 					<Text type="sm" style={pal.textLight}>
 						<>
 							Feeds are custom algorithms that users build with a little coding expertise.{" "}
@@ -213,7 +213,7 @@ function SavedFeedsInner({
 							for more information.
 						</>
 					</Text>
-				</View>
+				</div>
 			</Layout.Content>
 		</Layout.Screen>
 	);
@@ -272,6 +272,7 @@ function ListItem({
 
 	return (
 		<Animated.View
+			// @ts-expect-error
 			style={{
 				...styles.itemContainer,
 				...pal.border,
@@ -284,7 +285,7 @@ function ListItem({
 				<FeedSourceCard
 					key={feedUri}
 					feedUri={feedUri}
-					style={isPinned && { paddingRight: 8 }}
+					style={isPinned ? { paddingRight: 8 } : undefined}
 					showMinimalPlaceholder
 					hideTopBorder={true}
 				/>
@@ -304,7 +305,7 @@ function ListItem({
 							opacity: state.hovered || state.pressed ? 0.5 : 1,
 						})}
 					>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="arrow-up" size={14} style={pal.textLight} />
 					</Pressable>
 					<Pressable
@@ -320,7 +321,7 @@ function ListItem({
 							opacity: state.hovered || state.pressed ? 0.5 : 1,
 						})}
 					>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="arrow-down" size={14} style={pal.textLight} />
 					</Pressable>
 				</>
@@ -339,11 +340,11 @@ function ListItem({
 						opacity: state.hovered || state.focused ? 0.5 : 1,
 					})}
 				>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
 				</Pressable>
 			)}
-			<View style={{ paddingRight: 16 }}>
+			<div style={{ paddingRight: 16 }}>
 				<Pressable
 					accessibilityRole="button"
 					hitSlop={5}
@@ -356,10 +357,10 @@ function ListItem({
 						opacity: state.hovered || state.focused ? 0.5 : 1,
 					})}
 				>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="thumb-tack" size={14} color={isPinned ? colors.blue3 : pal.colors.icon} />
 				</Pressable>
-			</View>
+			</div>
 		</Animated.View>
 	);
 }
@@ -367,7 +368,7 @@ function ListItem({
 function FollowingFeedCard() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -379,7 +380,7 @@ function FollowingFeedCard() {
 				},
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.align_center,
 					...a.justify_center,
@@ -400,37 +401,33 @@ function FollowingFeedCard() {
 					}}
 					fill={t.palette.white}
 				/>
-			</View>
-			<View style={{ flex: 1, flexDirection: "row", gap: 8, alignItems: "center" }}>
+			</div>
+			<div style={{ flex: 1, flexDirection: "row", gap: 8, alignItems: "center" }}>
 				<Text type="lg-medium" style={t.atoms.text} numberOfLines={1}>
 					Following
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	empty: {
-		paddingHorizontal: 20,
-		paddingVertical: 20,
+		padding: 20,
 		borderRadius: 8,
-		marginHorizontal: 10,
-		marginTop: 10,
+		margin: 10,
+		marginBottom: "unset",
 	},
 	title: {
-		paddingHorizontal: 14,
+		padding: 14,
 		paddingTop: 20,
 		paddingBottom: 10,
-		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottomWidth: 1,
 	},
 	itemContainer: {
 		flexDirection: "row",
 		alignItems: "center",
-		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottomWidth: 1,
 	},
-	footerText: {
-		paddingHorizontal: 26,
-		paddingVertical: 22,
-	},
-});
+	footerText: { padding: "22px 26px" },
+} satisfies Record<string, React.CSSProperties>;

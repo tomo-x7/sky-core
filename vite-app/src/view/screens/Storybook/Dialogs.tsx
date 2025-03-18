@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -56,7 +55,7 @@ export function Dialogs() {
 	};
 
 	return (
-		<View style={a.gap_md}>
+		<div style={a.gap_md}>
 			<Button
 				variant="outline"
 				color="secondary"
@@ -147,13 +146,13 @@ export function Dialogs() {
 			</Prompt.Outer>
 			<Dialog.Outer control={basic}>
 				<Dialog.Inner label="test">
-					<H3 nativeID="dialog-title">Dialog</H3>
-					<P nativeID="dialog-description">A basic dialog</P>
+					<H3>Dialog</H3>
+					<P>A basic dialog</P>
 				</Dialog.Inner>
 			</Dialog.Outer>
 			<Dialog.Outer control={withMenu}>
 				<Dialog.Inner label="test">
-					<H3 nativeID="dialog-title">Dialog with Menu</H3>
+					<H3>Dialog with Menu</H3>
 					<Menu.Root>
 						<Menu.Trigger label="Open menu">
 							{({ props }) => (
@@ -187,15 +186,15 @@ export function Dialogs() {
 					accessibilityDescribedBy="dialog-description"
 					accessibilityLabelledBy="dialog-title"
 				>
-					<View
+					<div
 						style={{
 							...a.relative,
 							...a.gap_md,
 							...a.w_full,
 						}}
 					>
-						<H3 nativeID="dialog-title">Dialog</H3>
-						<P nativeID="dialog-description">A scrollable dialog with an input within it.</P>
+						<H3>Dialog</H3>
+						<P>A scrollable dialog with an input within it.</P>
 						<Dialog.Input value="" onChangeText={() => {}} label="Type here" />
 
 						<Button
@@ -207,8 +206,8 @@ export function Dialogs() {
 						>
 							<ButtonText>Close all dialogs</ButtonText>
 						</Button>
-						<View style={{ height: 1000 }} />
-						<View
+						<div style={{ height: 1000 }} />
+						<div
 							style={{
 								...a.flex_row,
 								...a.justify_end,
@@ -227,8 +226,8 @@ export function Dialogs() {
 							>
 								<ButtonText>Close dialog</ButtonText>
 							</Button>
-						</View>
-					</View>
+						</div>
+					</div>
 				</Dialog.ScrollableInner>
 			</Dialog.Outer>
 			<Dialog.Outer control={testDialog}>
@@ -236,7 +235,7 @@ export function Dialogs() {
 					accessibilityDescribedBy="dialog-description"
 					accessibilityLabelledBy="dialog-title"
 				>
-					<View
+					<div
 						style={{
 							...a.relative,
 							...a.gap_md,
@@ -356,17 +355,17 @@ export function Dialogs() {
 								of 1 2 3
 							</ButtonText>
 						</Button>
-					</View>
+					</div>
 				</Dialog.ScrollableInner>
 			</Dialog.Outer>
 			{shouldRenderUnmountTest && (
 				<Dialog.Outer control={unmountTestDialog}>
 					<Dialog.Inner label="test">
-						<H3 nativeID="dialog-title">Unmount Test Dialog</H3>
-						<P nativeID="dialog-description">Will unmount in about 5 seconds</P>
+						<H3>Unmount Test Dialog</H3>
+						<P>Will unmount in about 5 seconds</P>
 					</Dialog.Inner>
 				</Dialog.Outer>
 			)}
-		</View>
+		</div>
 	);
 }

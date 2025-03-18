@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useCallback, useEffect, useState } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -57,13 +57,7 @@ export function EditProfileDialog({
 	}, [dirty, control, cancelControl]);
 
 	return (
-		<Dialog.Outer
-			control={control}
-			nativeOptions={{
-				preventDismiss: dirty,
-				minHeight: SCREEN_HEIGHT,
-			}}
-		>
+		<Dialog.Outer control={control}>
 			<DialogInner profile={profile} onUpdate={onUpdate} setDirty={setDirty} onPressCancel={onPressCancel} />
 
 			<Prompt.Basic
@@ -222,16 +216,16 @@ function DialogInner({
 		<Dialog.ScrollableInner
 			label={"Edit profile"}
 			style={a.overflow_hidden}
-			contentContainerStyle={[a.px_0, a.pt_0]}
+			contentContainerStyle={{ ...a.px_0, ...a.pt_0 }}
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
 					<Dialog.HeaderText>Edit profile</Dialog.HeaderText>
 				</Dialog.Header>
 			}
 		>
-			<View style={a.relative}>
+			<div style={a.relative}>
 				<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
-				<View
+				<div
 					style={{
 						...a.absolute,
 
@@ -247,26 +241,26 @@ function DialogInner({
 					}}
 				>
 					<EditableUserAvatar size={80} avatar={userAvatar} onSelectNewAvatar={onSelectNewAvatar} />
-				</View>
-			</View>
+				</div>
+			</div>
 			{isUpdateProfileError && (
-				<View style={a.mt_xl}>
+				<div style={a.mt_xl}>
 					<ErrorMessage message={cleanError(updateProfileError)} />
-				</View>
+				</div>
 			)}
 			{imageError !== "" && (
-				<View style={a.mt_xl}>
+				<div style={a.mt_xl}>
 					<ErrorMessage message={imageError} />
-				</View>
+				</div>
 			)}
-			<View
+			<div
 				style={{
 					...a.mt_4xl,
 					...a.px_xl,
 					...a.gap_xl,
 				}}
 			>
-				<View>
+				<div>
 					<TextField.LabelText>Display name</TextField.LabelText>
 					<TextField.Root isInvalid={displayNameTooLong}>
 						<Dialog.Input
@@ -284,7 +278,6 @@ function DialogInner({
 								...a.font_bold,
 								...{ color: t.palette.negative_400 },
 							}}
-							label={"Display name is too long"}
 						>
 							<>
 								Display name is too long. The maximum number of characters is{" "}
@@ -292,9 +285,9 @@ function DialogInner({
 							</>
 						</TextField.SuffixText>
 					)}
-				</View>
+				</div>
 
-				<View>
+				<div>
 					<TextField.LabelText>Description</TextField.LabelText>
 					<TextField.Root isInvalid={descriptionTooLong}>
 						<Dialog.Input
@@ -313,7 +306,6 @@ function DialogInner({
 								...a.font_bold,
 								...{ color: t.palette.negative_400 },
 							}}
-							label={"Description is too long"}
 						>
 							<>
 								Description is too long. The maximum number of characters is {DESCRIPTION_MAX_GRAPHEMES}
@@ -321,8 +313,8 @@ function DialogInner({
 							</>
 						</TextField.SuffixText>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 		</Dialog.ScrollableInner>
 	);
 }

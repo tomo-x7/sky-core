@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { LayoutAnimation, Pressable, View } from "react-native";
+import { LayoutAnimation, Pressable } from "react-native";
 import { Linking } from "react-native";
 import { useReducedMotion } from "react-native-reanimated";
 
@@ -77,7 +77,7 @@ export function SettingsScreen(props: Props) {
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<SettingsList.Container>
-					<View
+					<div
 						style={{
 							...a.px_xl,
 							...a.pt_md,
@@ -89,7 +89,7 @@ export function SettingsScreen(props: Props) {
 						}}
 					>
 						{profile && <ProfilePreview profile={profile} />}
-					</View>
+					</div>
 					{accounts.length > 1 ? (
 						<>
 							<SettingsList.PressableItem
@@ -210,7 +210,7 @@ export function SettingsScreen(props: Props) {
 				control={signOutPromptControl}
 				title={"Sign out?"}
 				description={"You will be signed out of all your accounts."}
-				onConfirm={() => logoutEveryAccount("Settings")}
+				onConfirm={() => logoutEveryAccount()}
 				confirmButtonCta={"Sign out"}
 				cancelButtonCta={"Cancel"}
 				confirmButtonColor="negative"
@@ -329,7 +329,7 @@ function AccountRow({
 	};
 
 	return (
-		<View style={a.relative}>
+		<div style={a.relative}>
 			<SettingsList.PressableItem onPress={onSwitchAccount} label={"Switch account"}>
 				{moderationOpts && profile ? (
 					<UserAvatar
@@ -339,7 +339,7 @@ function AccountRow({
 						type={profile.associated?.labeler ? "labeler" : "user"}
 					/>
 				) : (
-					<View style={{ width: 28 }} />
+					<div style={{ width: 28 }} />
 				)}
 				<SettingsList.ItemText>{sanitizeHandle(account.handle, "@")}</SettingsList.ItemText>
 				{pendingDid === account.did && <SettingsList.ItemIcon icon={Loader} />}
@@ -381,6 +381,6 @@ function AccountRow({
 				confirmButtonCta={"Remove"}
 				confirmButtonColor="negative"
 			/>
-		</View>
+		</div>
 	);
 }

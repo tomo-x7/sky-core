@@ -1,15 +1,14 @@
 import { StackActions, useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
 
 import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { NavigationProp } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { Button } from "#/view/com/util/forms/Button";
-import { Text } from "#/view/com/util/text/Text";
 
 export const NotFoundScreen = () => {
 	const pal = usePalette("default");
@@ -35,7 +34,7 @@ export const NotFoundScreen = () => {
 	return (
 		<Layout.Screen>
 			<ViewHeader title={"Page Not Found"} />
-			<View style={styles.container}>
+			<div style={styles.container}>
 				<Text
 					type="title-2xl"
 					style={{
@@ -61,16 +60,17 @@ export const NotFoundScreen = () => {
 					accessibilityHint={canGoBack ? "Returns to previous page" : "Returns to home page"}
 					onPress={onPressHome}
 				/>
-			</View>
+			</div>
 		</Layout.Screen>
 	);
 };
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		paddingTop: 100,
-		paddingHorizontal: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
 		alignItems: "center",
 		height: "100%",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

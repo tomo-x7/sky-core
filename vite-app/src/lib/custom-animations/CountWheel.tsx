@@ -1,12 +1,11 @@
 import React from "react";
-import { View } from "react-native";
 import { useReducedMotion } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import { decideShouldRoll } from "#/lib/custom-animations/util";
 import { s } from "#/lib/styles";
 import { formatCount } from "#/view/com/util/numeric/format";
-import { Text } from "#/view/com/util/text/Text";
 
 const animationConfig = {
 	duration: 400,
@@ -76,13 +75,13 @@ export function CountWheel({
 	}
 
 	return (
-		<View>
+		<div>
 			<div ref={countView}>
 				<Text
 					style={{
 						...(big ? a.text_md : { fontSize: 15 }),
 						...a.user_select_none,
-						...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+						...(isLiked ? { ...a.font_bold, ...s.likeColor } : { color: t.palette.contrast_500 }),
 					}}
 				>
 					{formattedCount}
@@ -94,13 +93,13 @@ export function CountWheel({
 						style={{
 							...(big ? a.text_md : { fontSize: 15 }),
 							...a.user_select_none,
-							...(isLiked ? [a.font_bold, s.likeColor] : { color: t.palette.contrast_500 }),
+							...(isLiked ? { ...a.font_bold, ...s.likeColor } : { color: t.palette.contrast_500 }),
 						}}
 					>
 						{formattedPrevCount}
 					</Text>
 				</div>
 			) : null}
-		</View>
+		</div>
 	);
 }

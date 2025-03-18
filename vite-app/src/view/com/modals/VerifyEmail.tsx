@@ -1,19 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet } from "react-native";
 import { Circle, Path, Svg } from "react-native-svg";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
-import { ScrollView, TextInput } from "./util";
+import { ScrollView } from "./util";
 
 export const snapPoints = ["90%"];
 
@@ -39,6 +41,7 @@ export function Component({
 	const [error, setError] = useState<string>("");
 	const { isMobile } = useWebMediaQueries();
 	const { openModal, closeModal } = useModalControls();
+	const phStyleCName = usePlaceholderStyle(pal.colors.textLight);
 
 	React.useEffect(() => {
 		if (!currentAccount) {
@@ -98,7 +101,7 @@ export function Component({
 				}}
 			>
 				{stage === Stages.Reminder && <ReminderIllustration />}
-				<View style={styles.titleSection}>
+				<div style={styles.titleSection}>
 					<Text
 						type="title-lg"
 						style={{
@@ -116,7 +119,7 @@ export function Component({
 							""
 						)}
 					</Text>
-				</View>
+				</div>
 
 				<Text
 					type="lg"
@@ -143,8 +146,8 @@ export function Component({
 
 				{stage === Stages.Email ? (
 					<>
-						<View style={styles.emailContainer}>
-							{/* @ts-ignore */}
+						<div style={styles.emailContainer}>
+							{/* @ts-expect-error */}
 							<FontAwesomeIcon icon="envelope" color={pal.colors.text} size={16} />
 							<Text
 								type="xl-medium"
@@ -156,7 +159,7 @@ export function Component({
 							>
 								{currentAccount?.email || "(no email)"}
 							</Text>
-						</View>
+						</div>
 						<Pressable
 							accessibilityRole="link"
 							accessibilityLabel={"Change my email"}
@@ -170,19 +173,17 @@ export function Component({
 						</Pressable>
 					</>
 				) : stage === Stages.ConfirmCode ? (
-					<TextInput
+					<input
+						type="text"
 						style={{
 							...styles.textInput,
 							...pal.border,
 							...pal.text,
 						}}
 						placeholder="XXXXX-XXXXX"
-						placeholderTextColor={pal.colors.textLight}
+						className={phStyleCName}
 						value={confirmationCode}
-						onChangeText={setConfirmationCode}
-						accessible={true}
-						accessibilityLabel={"Confirmation code"}
-						accessibilityHint=""
+						onChange={(ev) => setConfirmationCode(ev.target.value)}
 						autoCapitalize="none"
 						autoComplete="one-time-code"
 						autoCorrect={"off"}
@@ -191,13 +192,13 @@ export function Component({
 
 				{error ? <ErrorMessage message={error} style={styles.error} /> : undefined}
 
-				<View style={styles.btnContainer}>
+				<div style={styles.btnContainer}>
 					{isProcessing ? (
-						<View style={styles.btn}>
+						<div style={styles.btn}>
 							<ActivityIndicator color="#fff" />
-						</View>
+						</div>
 					) : (
-						<View style={{ gap: 6 }}>
+						<div style={{ gap: 6 }}>
 							{stage === Stages.Reminder && (
 								<Button
 									type="primary"
@@ -206,7 +207,7 @@ export function Component({
 									accessibilityHint=""
 									label={"Get Started"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-									labelStyle={[s.f18]}
+									labelStyle={s.f18}
 								/>
 							)}
 							{stage === Stages.Email && (
@@ -221,7 +222,7 @@ export function Component({
 											justifyContent: "center",
 											padding: 4,
 										}}
-										labelStyle={[s.f18]}
+										labelStyle={s.f18}
 									/>
 									<Button
 										type="default"
@@ -232,7 +233,7 @@ export function Component({
 											justifyContent: "center",
 											padding: 4,
 										}}
-										labelStyle={[s.f18]}
+										labelStyle={s.f18}
 										onPress={() => setStage(Stages.ConfirmCode)}
 									/>
 								</>
@@ -245,7 +246,7 @@ export function Component({
 									accessibilityHint=""
 									label={"Confirm"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-									labelStyle={[s.f18]}
+									labelStyle={s.f18}
 								/>
 							)}
 							<Button
@@ -257,11 +258,11 @@ export function Component({
 								accessibilityHint=""
 								label={stage === Stages.Reminder ? "Not right now" : "Cancel"}
 								labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-								labelStyle={[s.f18]}
+								labelStyle={s.f18}
 							/>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 			</ScrollView>
 		</SafeAreaView>
 	);
@@ -271,7 +272,7 @@ function ReminderIllustration() {
 	const pal = usePalette("default");
 	const palInverted = usePalette("inverted");
 	return (
-		<View
+		<div
 			style={{
 				...pal.viewLight,
 				...{ borderRadius: 8, marginBottom: 20 },
@@ -293,7 +294,7 @@ function ReminderIllustration() {
 				<Circle cx="82" cy="61" r="13" fill="#20BC07" />
 				<Path d="M75 61L80 66L89 57" stroke="white" strokeWidth="2" />
 			</Svg>
-		</View>
+		</div>
 	);
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -49,7 +48,7 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 	}, [clearRequestedAccount, onDismiss]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.util_screen_outer,
 				...t.atoms.bg,
@@ -103,6 +102,6 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 					<Signup onPressBack={() => setScreenState(ScreenState.S_LoginOrCreateAccount)} />
 				) : undefined}
 			</ErrorBoundary>
-		</View>
+		</div>
 	);
 }

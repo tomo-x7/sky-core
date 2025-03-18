@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { useState } from "react";
-import { type ListRenderItemInfo, View } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -58,13 +58,13 @@ export function StepProfiles({
 
 	return (
 		<ScreenTransition style={a.flex_1} direction={state.transitionDirection}>
-			<View
+			<div
 				style={{
 					...a.border_b,
 					...t.atoms.border_contrast_medium,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.py_sm,
 						...a.px_md,
@@ -72,9 +72,10 @@ export function StepProfiles({
 					}}
 				>
 					<SearchInput value={query} onChangeText={setQuery} onClearText={() => setQuery("")} />
-				</View>
-			</View>
+				</div>
+			</div>
 			<List
+				// @ts-expect-error
 				data={query ? results : topFollowers}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}
@@ -87,7 +88,7 @@ export function StepProfiles({
 				onEndReachedThreshold={0.25}
 				keyboardDismissMode="on-drag"
 				ListEmptyComponent={
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.align_center,
@@ -110,7 +111,7 @@ export function StepProfiles({
 								Nobody was found. Try searching for someone else.
 							</Text>
 						)}
-					</View>
+					</div>
 				}
 			/>
 		</ScreenTransition>

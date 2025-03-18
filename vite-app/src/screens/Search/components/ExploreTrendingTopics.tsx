@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, tokens, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -33,21 +32,24 @@ function Inner() {
 
 	return error || noTopics ? null : (
 		<>
-			<View
+			<div
 				style={{
 					...a.flex_row,
-					...[a.px_lg, a.py_lg, a.pt_2xl, a.gap_md],
+					...a.px_lg,
+					...a.py_lg,
+					...a.pt_2xl,
+					...a.gap_md,
 					...a.border_b,
 					...t.atoms.border_contrast_low,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.gap_sm,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -64,7 +66,7 @@ function Inner() {
 						>
 							Trending
 						</Text>
-						<View
+						<div
 							style={{
 								...a.py_xs,
 								...a.px_sm,
@@ -82,8 +84,8 @@ function Inner() {
 							>
 								BETA
 							</Text>
-						</View>
-					</View>
+						</div>
+					</div>
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
@@ -92,7 +94,7 @@ function Inner() {
 					>
 						What people are posting about.
 					</Text>
-				</View>
+				</div>
 				<Button
 					label={"Hide trending topics"}
 					size="small"
@@ -103,15 +105,15 @@ function Inner() {
 				>
 					<ButtonIcon icon={X} />
 				</Button>
-			</View>
+			</div>
 
-			<View
+			<div
 				style={{
 					...a.pt_md,
 					...a.pb_lg,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_start,
@@ -131,15 +133,19 @@ function Inner() {
 									{({ hovered }) => (
 										<TrendingTopic
 											topic={topic}
-											style={hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25]}
+											style={
+												hovered
+													? { ...t.atoms.border_contrast_high, ...t.atoms.bg_contrast_25 }
+													: {}
+											}
 										/>
 									)}
 								</TrendingTopicLink>
 							))}
 						</>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 
 			<Prompt.Basic
 				control={trendingPrompt}

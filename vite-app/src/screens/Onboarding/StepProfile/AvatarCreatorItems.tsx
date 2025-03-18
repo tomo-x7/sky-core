@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -56,7 +55,7 @@ export function AvatarCreatorItems({
 	);
 
 	return (
-		<View style={a.w_full}>
+		<div style={a.w_full}>
 			<Text
 				style={{
 					...a.pb_md,
@@ -65,7 +64,7 @@ export function AvatarCreatorItems({
 			>
 				{isEmojis ? <>Select an emoji</> : <>Select a color</>}
 			</Text>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_start,
@@ -87,7 +86,7 @@ export function AvatarCreatorItems({
 							>
 								<ButtonIcon icon={emojiItems[emojiName].component} />
 								{avatar.placeholder.name === emojiName && (
-									<View
+									<div
 										style={{
 											...a.absolute,
 											...a.rounded_full,
@@ -112,7 +111,7 @@ export function AvatarCreatorItems({
 							>
 								{(ctx) => (
 									<>
-										<View
+										<div
 											style={{
 												...a.absolute,
 												...a.inset_0,
@@ -126,7 +125,7 @@ export function AvatarCreatorItems({
 										/>
 
 										{avatar.backgroundColor === color && (
-											<View
+											<div
 												style={{
 													...a.absolute,
 													...a.rounded_full,
@@ -142,7 +141,7 @@ export function AvatarCreatorItems({
 								)}
 							</Button>
 						))}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

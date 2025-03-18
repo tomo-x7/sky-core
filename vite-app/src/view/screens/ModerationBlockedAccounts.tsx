@@ -2,10 +2,11 @@ import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
 
 import { atoms as a } from "#/alf";
 import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { CommonNavigatorParams } from "#/lib/routes/types";
@@ -15,7 +16,6 @@ import { useSetMinimalShellMode } from "#/state/shell";
 import { ProfileCard } from "#/view/com/profile/ProfileCard";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
-import { Text } from "#/view/com/util/text/Text";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "ModerationBlockedAccounts">;
 export function ModerationBlockedAccounts(props: Props) {
@@ -92,11 +92,11 @@ export function ModerationBlockedAccounts(props: Props) {
 					not see their content and they will be prevented from seeing yours.
 				</Text>
 				{isEmpty ? (
-					<View style={pal.border}>
+					<div style={pal.border}>
 						{isError ? (
 							<ErrorScreen title="Oops!" message={cleanError(error)} onPressTryAgain={refetch} />
 						) : (
-							<View
+							<div
 								style={{
 									...styles.empty,
 									...pal.viewLight,
@@ -112,9 +112,9 @@ export function ModerationBlockedAccounts(props: Props) {
 									You have not blocked any accounts yet. To block an account, go to their profile and
 									select "Block account" from the menu on their account.
 								</Text>
-							</View>
+							</div>
 						)}
-					</View>
+					</div>
 				) : (
 					<FlatList
 						style={!isTabletOrDesktop && styles.flex1}
@@ -134,11 +134,11 @@ export function ModerationBlockedAccounts(props: Props) {
 						// FIXME(dan)
 
 						ListFooterComponent={() => (
-							<View style={styles.footer}>
+							<div style={styles.footer}>
 								{(isFetching || isFetchingNextPage) && <ActivityIndicator />}
-							</View>
+							</div>
 						)}
-						// @ts-ignore our .web version only -prf
+						// @ts-expect-error our .web version only -prf
 						desktopFixedHeight
 					/>
 				)}
@@ -147,7 +147,7 @@ export function ModerationBlockedAccounts(props: Props) {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	title: {
 		textAlign: "center",
 		marginTop: 12,
@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
 	},
 	description: {
 		textAlign: "center",
-		paddingHorizontal: 30,
+		paddingLeft: 30,
+		paddingRight: 30,
 		marginBottom: 14,
 	},
 	descriptionDesktop: {
@@ -166,10 +167,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	empty: {
-		paddingHorizontal: 20,
-		paddingVertical: 20,
+		padding: 20,
 		borderRadius: 16,
-		marginHorizontal: 24,
+		marginRight: 24,
+		marginLeft: 24,
 		marginTop: 10,
 	},
 	emptyText: {
@@ -180,4 +181,4 @@ const styles = StyleSheet.create({
 		height: 200,
 		paddingTop: 20,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

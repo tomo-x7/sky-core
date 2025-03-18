@@ -159,7 +159,7 @@ export function Inner({
 				aria-labelledby={accessibilityLabelledBy}
 				aria-describedby={accessibilityDescribedBy}
 				onClick={stopPropagation}
-				//@ts-ignore
+				//@ts-expect-error
 				onStartShouldSetResponder={() => true}
 				onTouchEnd={stopPropagation}
 				style={{
@@ -264,7 +264,7 @@ function Backdrop() {
 	return (
 		<div style={{ opacity: 0.8 }}>
 			<div
-				//@ts-ignore
+				//@ts-expect-error
 				style={{
 					...a.fixed,
 					...a.inset_0,

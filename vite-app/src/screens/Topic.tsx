@@ -78,7 +78,7 @@ export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavi
 			<Pager
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
-					// @ts-ignore
+					// @ts-expect-error
 					<Layout.Center
 						style={{
 							...a.z_10,
@@ -172,7 +172,7 @@ function TopicScreenTab({
 					onRefresh={onRefresh}
 					onEndReached={onEndReached}
 					onEndReachedThreshold={4}
-					// @ts-ignore web only -prf
+					// @ts-expect-error web only -prf
 					desktopFixedHeight
 					ListFooterComponent={
 						<ListFooter

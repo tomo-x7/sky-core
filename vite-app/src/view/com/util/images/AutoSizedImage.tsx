@@ -1,9 +1,7 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
 import React, { useRef } from "react";
-import { Image } from "react-native";
-import { type DimensionValue, Pressable, View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
 import { ArrowsDiagonalOut_Stroke2_Corner0_Rounded as Fullscreen } from "#/components/icons/ArrowsDiagonal";
@@ -26,7 +24,7 @@ export function ConstrainedImage({
 	 * Computed as a % value to apply as `paddingTop`, this basically controls
 	 * the height of the image.
 	 */
-	const outerAspectRatio = React.useMemo<DimensionValue>(() => {
+	const outerAspectRatio = React.useMemo(() => {
 		const ratio = !gtMobile
 			? Math.min(1 / aspectRatio, 16 / 9) // 9:16 bounding box
 			: Math.min(1 / aspectRatio, 1); // 1:1 bounding box
@@ -34,21 +32,21 @@ export function ConstrainedImage({
 	}, [aspectRatio, gtMobile]);
 
 	return (
-		<View style={a.w_full}>
-			<View
+		<div style={a.w_full}>
+			<div
 				style={{
 					...a.overflow_hidden,
 					...{ paddingTop: outerAspectRatio },
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...a.inset_0,
 						...a.flex_row,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.h_full,
 							...a.rounded_md,
@@ -58,10 +56,10 @@ export function ConstrainedImage({
 						}}
 					>
 						{children}
-					</View>
-				</View>
-			</View>
-		</View>
+					</div>
+				</div>
+			</div>
+		</div>
 	);
 }
 
@@ -110,26 +108,19 @@ export function AutoSizedImage({
 	const hasAlt = !!image.alt;
 
 	const contents = (
-		<View ref={containerRef} collapsable={false} style={{ flex: 1 }}>
-			<Image
-				contentFit={isContain ? "contain" : "cover"}
+		<div ref={containerRef} style={{ flex: 1 }}>
+			<img
 				style={{
 					...a.w_full,
 					...a.h_full,
+					objectFit: isContain ? "contain" : "cover",
 				}}
-				//@ts-ignore
-				source={image.thumb}
-				accessible={true} // Must set for `accessibilityLabel` to work
-				accessibilityIgnoresInvertColors
-				accessibilityLabel={image.alt}
-				accessibilityHint=""
+				src={image.thumb}
 				onLoad={(e) => {
 					if (!isContain) {
 						fetchedDimsRef.current = {
-							//@ts-ignore
-							width: e.source.width,
-							//@ts-ignore
-							height: e.source.height,
+							width: e.currentTarget.width,
+							height: e.currentTarget.height,
 						};
 					}
 				}}
@@ -137,63 +128,39 @@ export function AutoSizedImage({
 			<MediaInsetBorder />
 
 			{(hasAlt || isCropped) && !hideBadge ? (
-				<View
-					accessible={false}
+				<div
 					style={{
 						...a.absolute,
 						...a.flex_row,
-
-						...{
-							bottom: a.p_xs.padding,
-							right: a.p_xs.padding,
-							gap: 3,
-						},
-
-						...(largeAlt && [
-							{
-								gap: 4,
-							},
-						]),
+						bottom: a.p_xs.padding,
+						right: a.p_xs.padding,
+						gap: 3,
+						...flatten(largeAlt && [{ gap: 4 }]),
 					}}
 				>
 					{isCropped && (
-						<View
+						<div
 							style={{
 								...a.rounded_xs,
 								...t.atoms.bg_contrast_25,
-
-								...{
-									padding: 3,
-									opacity: 0.8,
-								},
-
-								...(largeAlt && [
-									{
-										padding: 5,
-									},
-								]),
+								padding: 3,
+								opacity: 0.8,
+								...flatten(largeAlt && [{ padding: 5 }]),
 							}}
 						>
 							<Fullscreen fill={t.atoms.text_contrast_high.color} width={largeAlt ? 18 : 12} />
-						</View>
+						</div>
 					)}
 					{hasAlt && (
-						<View
+						<div
 							style={{
 								...a.justify_center,
 								...a.rounded_xs,
 								...t.atoms.bg_contrast_25,
+								padding: 3,
+								opacity: 0.8,
 
-								...{
-									padding: 3,
-									opacity: 0.8,
-								},
-
-								...(largeAlt && [
-									{
-										padding: 5,
-									},
-								]),
+								...flatten(largeAlt && [{ padding: 5 }]),
 							}}
 						>
 							<Text
@@ -204,22 +171,20 @@ export function AutoSizedImage({
 							>
 								ALT
 							</Text>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 			) : null}
-		</View>
+		</div>
 	);
 
 	if (cropDisabled) {
 		return (
-			<Pressable
-				onPress={() => onPress?.(containerRef, fetchedDimsRef.current)}
-				onLongPress={onLongPress}
-				onPressIn={onPressIn}
-				// alt here is what screen readers actually use
-				accessibilityLabel={image.alt}
-				accessibilityHint={"Views full image"}
+			<button
+				type="button"
+				onClick={() => onPress?.(containerRef, fetchedDimsRef.current)}
+				// onLongPress={onLongPress}
+				onMouseDown={onPressIn}
 				style={{
 					...a.w_full,
 					...a.rounded_md,
@@ -229,22 +194,20 @@ export function AutoSizedImage({
 				}}
 			>
 				{contents}
-			</Pressable>
+			</button>
 		);
 	} else {
 		return (
 			<ConstrainedImage fullBleed={crop === "square"} aspectRatio={constrained ?? 1}>
-				<Pressable
-					onPress={() => onPress?.(containerRef, fetchedDimsRef.current)}
-					onLongPress={onLongPress}
-					onPressIn={onPressIn}
-					// alt here is what screen readers actually use
-					accessibilityLabel={image.alt}
-					accessibilityHint={"Views full image"}
+				<button
+					type="button"
+					onClick={() => onPress?.(containerRef, fetchedDimsRef.current)}
+					// onLongPress={onLongPress}
+					onMouseDown={onPressIn}
 					style={a.h_full}
 				>
 					{contents}
-				</Pressable>
+				</button>
 			</ConstrainedImage>
 		);
 	}

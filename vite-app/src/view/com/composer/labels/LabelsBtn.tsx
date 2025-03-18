@@ -1,4 +1,4 @@
-import { Keyboard, View } from "react-native";
+import { Keyboard } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -52,10 +52,12 @@ export function LabelsBtn({
 				accessibilityHint={"Opens a dialog to add a content warning to your post"}
 			>
 				<ButtonIcon icon={hasLabel ? Check : Shield_Stroke2_Corner0_Rounded} />
-				<ButtonText numberOfLines={1}>{labels.length > 0 ? <>Labels added</> : <>Labels</>}</ButtonText>
+				<ButtonText /*numberOfLines={1}  //TODO*/>
+					{labels.length > 0 ? <>Labels added</> : <>Labels</>}
+				</ButtonText>
 			</Button>
 
-			<Dialog.Outer control={control} nativeOptions={{ preventExpansion: true }}>
+			<Dialog.Outer control={control}>
 				<Dialog.Handle />
 				<DialogInner
 					labels={labels}
@@ -87,8 +89,8 @@ function DialogInner({
 				...a.w_full,
 			}}
 		>
-			<View style={a.flex_1}>
-				<View style={a.gap_sm}>
+			<div style={a.flex_1}>
+				<div style={a.gap_sm}>
 					<Text
 						style={{
 							...a.text_2xl,
@@ -106,16 +108,16 @@ function DialogInner({
 						Choose self-labels that are applicable for the media you are posting. If none are selected, this
 						post is suitable for all audiences.
 					</Text>
-				</View>
+				</div>
 
-				<View
+				<div
 					style={{
 						...a.my_md,
 						...a.gap_lg,
 					}}
 				>
-					<View>
-						<View
+					<div>
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -131,8 +133,8 @@ function DialogInner({
 							>
 								Adult Content
 							</Text>
-						</View>
-						<View
+						</div>
+						<div
 							style={{
 								...a.p_md,
 								...a.rounded_sm,
@@ -147,7 +149,7 @@ function DialogInner({
 									updateAdultLabels(values as AdultSelfLabel[]);
 								}}
 							>
-								<View style={a.gap_sm}>
+								<div style={a.gap_sm}>
 									<Toggle.Item name="sexual" label={"Suggestive"}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Suggestive</Toggle.LabelText>
@@ -160,7 +162,7 @@ function DialogInner({
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Adult</Toggle.LabelText>
 									</Toggle.Item>
-								</View>
+								</div>
 							</Toggle.Group>
 							{labels.includes("sexual") || labels.includes("nudity") || labels.includes("porn") ? (
 								<Text
@@ -180,10 +182,10 @@ function DialogInner({
 									)}
 								</Text>
 							) : null}
-						</View>
-					</View>
-					<View>
-						<View
+						</div>
+					</div>
+					<div>
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -199,8 +201,8 @@ function DialogInner({
 							>
 								Other
 							</Text>
-						</View>
-						<View
+						</div>
+						<div
 							style={{
 								...a.p_md,
 								...a.rounded_sm,
@@ -230,11 +232,11 @@ function DialogInner({
 									Media that may be disturbing or inappropriate for some audiences.
 								</Text>
 							) : null}
-						</View>
-					</View>
-				</View>
-			</View>
-			<View
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
 				style={{
 					...a.mt_sm,
 					...a.flex_row,
@@ -244,7 +246,7 @@ function DialogInner({
 				<Button label={"Done"} onPress={() => control.close()} color="primary" size={"small"} variant="solid">
 					<ButtonText>Done</ButtonText>
 				</Button>
-			</View>
+			</div>
 		</Dialog.ScrollableInner>
 	);
 }

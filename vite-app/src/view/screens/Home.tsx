@@ -73,7 +73,7 @@ function HomeScreenReady({
 	preferences: UsePreferencesQueryResponse;
 	pinnedFeedInfos: SavedFeedSourceInfo[];
 }) {
-	//@ts-ignore
+	//@ts-expect-error
 	const allFeeds = React.useMemo(() => pinnedFeedInfos.map((f) => f.feedDescriptor), [pinnedFeedInfos]);
 	const maybeRawSelectedFeed: FeedDescriptor | undefined = useSelectedFeed() ?? allFeeds[0];
 	const setSelectedFeed = useSetSelectedFeed();
@@ -142,9 +142,9 @@ function HomeScreenReady({
 			mergeFeedEnabled: Boolean(preferences.feedViewPrefs.lab_mergeFeedEnabled),
 			mergeFeedSources: preferences.feedViewPrefs.lab_mergeFeedEnabled
 				? preferences.savedFeeds
-						//@ts-ignore
+						//@ts-expect-error
 						.filter((f) => f.type === "feed" || f.type === "list")
-						//@ts-ignore
+						//@ts-expect-error
 						.map((f) => f.value)
 				: [],
 		};
@@ -159,7 +159,7 @@ function HomeScreenReady({
 			renderTabBar={renderTabBar}
 		>
 			{pinnedFeedInfos.length ? (
-				//@ts-ignore
+				//@ts-expect-error
 				pinnedFeedInfos.map((feedInfo, index) => {
 					const feed = feedInfo.feedDescriptor;
 					if (feed === "following") {

@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -20,7 +18,7 @@ export function PostThreadShowHiddenReplies({
 	return (
 		<Button onPress={onPress} label={label}>
 			{({ hovered, pressed }) => (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.flex_row,
@@ -33,7 +31,7 @@ export function PostThreadShowHiddenReplies({
 						...(hovered || pressed ? t.atoms.bg_contrast_25 : t.atoms.bg),
 					}}
 				>
-					<View
+					<div
 						style={{
 							...t.atoms.bg_contrast_25,
 							...a.align_center,
@@ -48,7 +46,7 @@ export function PostThreadShowHiddenReplies({
 						}}
 					>
 						<EyeSlash size="sm" fill={t.atoms.text_contrast_medium.color} />
-					</View>
+					</div>
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
@@ -58,7 +56,7 @@ export function PostThreadShowHiddenReplies({
 					>
 						{label}
 					</Text>
-				</View>
+				</div>
 			)}
 		</Button>
 	);

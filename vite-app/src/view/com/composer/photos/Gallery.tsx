@@ -141,21 +141,21 @@ const GalleryItem = ({
 				}}
 			>
 				{image.alt.length !== 0 ? (
-					//@ts-ignore
+					//@ts-expect-error
 					<FontAwesomeIcon icon="check" size={10} style={{ color: t.palette.white }} />
 				) : (
-					//@ts-ignore
+					//@ts-expect-error
 					<FontAwesomeIcon icon="plus" size={10} style={{ color: t.palette.white }} />
 				)}
 				<Text style={styles.altTextControlLabel}>ALT</Text>
 			</button>
 			<div style={imageControlsStyle}>
 				<button type="button" onClick={onImageEdit} style={styles.imageControl}>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="pen" size={12} style={{ color: colors.white }} />
 				</button>
 				<button type="button" onClick={onRemove} style={styles.imageControl}>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="xmark" size={16} style={{ color: colors.white }} />
 				</button>
 			</div>
@@ -183,7 +183,7 @@ export function AltTextReminder() {
 					...t.atoms.bg_contrast_25,
 				}}
 			>
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
 			</div>
 			<Text

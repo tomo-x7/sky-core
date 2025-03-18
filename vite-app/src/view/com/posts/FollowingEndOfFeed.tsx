@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { Dimensions } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { NavigationProp } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
 
 export function FollowingEndOfFeed() {
 	const pal = usePalette("default");
@@ -23,14 +23,14 @@ export function FollowingEndOfFeed() {
 	}, [navigation]);
 
 	return (
-		<View
+		<div
 			style={{
 				...styles.container,
 				...pal.border,
 				...{ minHeight: Dimensions.get("window").height * 0.75 },
 			}}
 		>
-			<View style={styles.inner}>
+			<div style={styles.inner}>
 				<Text
 					type="xl-medium"
 					style={{
@@ -44,7 +44,7 @@ export function FollowingEndOfFeed() {
 					<Text type="lg-medium" style={palInverted.text}>
 						Find accounts to follow
 					</Text>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text as FontAwesomeIconStyle} size={14} />
 				</Button>
 
@@ -69,20 +69,21 @@ export function FollowingEndOfFeed() {
 					<Text type="lg-medium" style={palInverted.text}>
 						Discover new custom feeds
 					</Text>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="angle-right" style={palInverted.text} size={14} />
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		flexDirection: "row",
 		justifyContent: "center",
 		paddingTop: 40,
 		paddingBottom: 80,
-		paddingHorizontal: 30,
+		paddingLeft: 30,
+		paddingRight: 30,
 		borderTopWidth: 1,
 	},
 	inner: {
@@ -90,12 +91,12 @@ const styles = StyleSheet.create({
 		maxWidth: 460,
 	},
 	emptyBtn: {
-		marginVertical: 20,
+		marginTop: 20,
+		marginBottom: 20,
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		paddingVertical: 18,
-		paddingHorizontal: 24,
+		padding: "18px 24px",
 		borderRadius: 30,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

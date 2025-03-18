@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -40,7 +39,7 @@ function DeactivateAccountDialogInner({
 			setPending(true);
 			await agent.com.atproto.server.deactivateAccount({});
 			control.close(() => {
-				logoutCurrentAccount("Deactivated");
+				logoutCurrentAccount();
 			});
 		} catch (e: any) {
 			switch (e.message) {
@@ -69,9 +68,9 @@ function DeactivateAccountDialogInner({
 				Your profile, posts, feeds, and lists will no longer be visible to other Bluesky users. You can
 				reactivate your account at any time by logging in.
 			</Prompt.DescriptionText>
-			<View style={a.pb_xl}>
+			<div style={a.pb_xl}>
 				<Divider />
-				<View
+				<div
 					style={{
 						...a.gap_sm,
 						...a.pt_lg,
@@ -94,10 +93,10 @@ function DeactivateAccountDialogInner({
 					>
 						If you're trying to change your handle or email, do so before you deactivate.
 					</Text>
-				</View>
+				</div>
 
 				<Divider />
-			</View>
+			</div>
 			<Prompt.Actions>
 				<Button
 					variant="solid"
@@ -112,7 +111,7 @@ function DeactivateAccountDialogInner({
 				<Prompt.Cancel />
 			</Prompt.Actions>
 			{error && (
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.gap_sm,
@@ -131,7 +130,7 @@ function DeactivateAccountDialogInner({
 					>
 						{error}
 					</Text>
-				</View>
+				</div>
 			)}
 		</>
 	);

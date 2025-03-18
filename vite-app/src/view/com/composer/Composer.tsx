@@ -672,7 +672,7 @@ const ComposerPost = React.memo(function ComposerPost({
 				/>
 				<TextInput
 					ref={textInput}
-					//@ts-ignore
+					//@ts-expect-error
 					style={a.pt_xs}
 					richtext={richtext}
 					placeholder={selectTextInputPlaceholder}
@@ -682,7 +682,7 @@ const ComposerPost = React.memo(function ComposerPost({
 					hasRightPadding={isPartOfThread}
 					isActive={isActive}
 					setRichText={(rt) => {
-						//@ts-ignore
+						//@ts-expect-error
 						dispatchPost({ type: "update_richtext", richtext: rt });
 					}}
 					onFocus={() => {
@@ -842,7 +842,7 @@ function AltTextReminder({ error }: { error: string }) {
 			}}
 		>
 			<View style={styles.errorIcon}>
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="exclamation" style={{ color: colors.red4 }} size={10} />
 			</View>
 			<Text
@@ -919,7 +919,7 @@ function ComposerEmbeds({
 							<VideoPreview
 								asset={video.asset}
 								video={video.video}
-								//@ts-ignore
+								//@ts-expect-error
 								isActivePost={isActivePost}
 								clear={clearVideo}
 							/>
@@ -1161,7 +1161,7 @@ function ComposerFooter({
 						shape="round"
 						color="primary"
 					>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="add" size={20} color={t.palette.primary_500} />
 					</Button>
 				)}
@@ -1330,7 +1330,7 @@ const styles = StyleSheet.create({
 		marginLeft: 12,
 	},
 	stickyFooterWeb: {
-		//@ts-ignore
+		//@ts-expect-error
 		position: "sticky",
 		bottom: 0,
 	},

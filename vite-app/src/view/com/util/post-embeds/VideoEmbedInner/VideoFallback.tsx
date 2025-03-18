@@ -1,5 +1,4 @@
 import type React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -8,7 +7,7 @@ import { Text as TypoText } from "#/components/Typography";
 export function Container({ children }: { children: React.ReactNode }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...t.atoms.bg_contrast_25,
@@ -22,7 +21,7 @@ export function Container({ children }: { children: React.ReactNode }) {
 			}}
 		>
 			{children}
-		</View>
+		</div>
 	);
 }
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { type ScrollView, StyleSheet, View } from "react-native";
+import type { ScrollView } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -79,12 +79,12 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.bg,
 				...styles.outer,
 			}}
-			accessibilityRole="tablist"
+			// accessibilityRole="tablist"
 		>
 			<DraggableScrollView
 				horizontal={true}
@@ -103,7 +103,7 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 							onPress={() => onPressItem(i)}
 							accessibilityRole="tab"
 						>
-							<View style={styles.itemInner}>
+							<div style={styles.itemInner}>
 								<Text
 									emoji
 									style={{
@@ -115,7 +115,7 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 									}}
 								>
 									{item}
-									<View
+									<div
 										style={{
 											...styles.itemIndicator,
 
@@ -125,41 +125,42 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 										}}
 									/>
 								</Text>
-							</View>
+							</div>
 						</PressableWithHover>
 					);
 				})}
 			</DraggableScrollView>
-			<View
+			<div
 				style={{
 					...t.atoms.border_contrast_low,
 					...styles.outerBottomBorder,
 				}}
 			/>
-		</View>
+		</div>
 	);
 }
 
-const desktopStyles = StyleSheet.create({
+const desktopStyles = {
 	outer: {
 		flexDirection: "row",
 		width: 600,
 	},
 	contentContainer: {
 		flexGrow: 1,
-		paddingHorizontal: 0,
+		paddingLeft: 0,
+		paddingRight: 0,
 		backgroundColor: "transparent",
 	},
 	item: {
 		flexGrow: 1,
 		alignItems: "stretch",
 		paddingTop: 14,
-		paddingHorizontal: 14,
+		paddingLeft: 14,
+		paddingRight: 14,
 		justifyContent: "center",
 	},
 	itemInner: {
 		alignItems: "center",
-		//@ts-ignore
 		overflowX: "hidden",
 	},
 	itemText: {
@@ -180,30 +181,31 @@ const desktopStyles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: "100%",
-		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottomWidth: 1,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;
 
-const mobileStyles = StyleSheet.create({
+const mobileStyles = {
 	outer: {
 		flexDirection: "row",
 	},
 	contentContainer: {
 		flexGrow: 1,
 		backgroundColor: "transparent",
-		paddingHorizontal: 6,
+		paddingLeft: 6,
+		paddingRight: 6,
 	},
 	item: {
 		flexGrow: 1,
 		alignItems: "stretch",
 		paddingTop: 10,
-		paddingHorizontal: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
 		justifyContent: "center",
 	},
 	itemInner: {
 		flexGrow: 1,
 		alignItems: "center",
-		//@ts-ignore
 		overflowX: "hidden",
 	},
 	itemText: {
@@ -224,6 +226,6 @@ const mobileStyles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: "100%",
-		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottomWidth: 1,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

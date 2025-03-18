@@ -106,7 +106,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 		}, [winDim.width]);
 
 		const animatedStyle = useAnimatedStyle(() => ({
-			transform: [{ translateY: translateY.get() }],
+			transform: `translateY(${translateY.get()}px)`,
 			opacity: opacity.get(),
 		}));
 
@@ -114,10 +114,9 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 			isOpen && (
 				<Portal>
 					<Animated.View
+					// @ts-expect-error
 						style={{
-							...// @ts-ignore position: fixed is web only
-							containerStyle,
-
+							...containerStyle,
 							...animatedStyle,
 						}}
 					>

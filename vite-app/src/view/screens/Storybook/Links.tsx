@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { ButtonText } from "#/components/Button";
 import { InlineLinkText, Link } from "#/components/Link";
@@ -8,14 +6,14 @@ import { H1, Text } from "#/components/Typography";
 export function Links() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.gap_md,
 				...a.align_start,
 			}}
 		>
 			<H1>Links</H1>
-			<View
+			<div
 				style={{
 					...a.gap_md,
 					...a.align_start,
@@ -52,7 +50,7 @@ export function Links() {
 				</Link>
 
 				<Link label="View @bsky.app's profile" to="https://bsky.app/profile/bsky.app">
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -62,7 +60,7 @@ export function Links() {
 							...t.atoms.bg_contrast_25,
 						}}
 					>
-						<View
+						<div
 							style={{
 								...{ width: 32, height: 32 },
 								...a.rounded_full,
@@ -70,9 +68,9 @@ export function Links() {
 							}}
 						/>
 						<Text>View @bsky.app's profile</Text>
-					</View>
+					</div>
 				</Link>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

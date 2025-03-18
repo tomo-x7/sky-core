@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { View } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -79,7 +78,7 @@ export function DisableEmail2FADialog({
 				accessibilityDescribedBy="dialog-description"
 				accessibilityLabelledBy="dialog-title"
 			>
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.gap_md,
@@ -87,7 +86,6 @@ export function DisableEmail2FADialog({
 					}}
 				>
 					<Text
-						nativeID="dialog-title"
 						style={{
 							...a.text_2xl,
 							...a.font_bold,
@@ -96,7 +94,7 @@ export function DisableEmail2FADialog({
 					>
 						Disable Email 2FA
 					</Text>
-					<P nativeID="dialog-description">
+					<P>
 						{stage === Stages.ConfirmCode ? (
 							<>
 								An email has been sent to {currentAccount?.email || "(no email)"}. It includes a
@@ -110,10 +108,10 @@ export function DisableEmail2FADialog({
 					{error ? <ErrorMessage message={error} /> : undefined}
 
 					{stage === Stages.Email ? (
-						<View
+						<div
 							style={{
 								...a.gap_sm,
-								...(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
+								...flatten(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
 							}}
 						>
 							<Button
@@ -137,10 +135,10 @@ export function DisableEmail2FADialog({
 							>
 								<ButtonText>I have a code</ButtonText>
 							</Button>
-						</View>
+						</div>
 					) : stage === Stages.ConfirmCode ? (
-						<View>
-							<View style={a.mb_md}>
+						<div>
+							<div style={a.mb_md}>
 								<TextField.LabelText>Confirmation code</TextField.LabelText>
 								<TextField.Root>
 									<TextField.Icon icon={Lock} />
@@ -153,14 +151,14 @@ export function DisableEmail2FADialog({
 										value={confirmationCode}
 										onChangeText={setConfirmationCode}
 										onSubmitEditing={onConfirmDisable}
-										editable={!isProcessing}
+										contentEditable={!isProcessing}
 									/>
 								</TextField.Root>
-							</View>
-							<View
+							</div>
+							<div
 								style={{
 									...a.gap_sm,
-									...(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
+									...flatten(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
 								}}
 							>
 								<Button
@@ -184,10 +182,10 @@ export function DisableEmail2FADialog({
 									<ButtonText>Confirm</ButtonText>
 									{isProcessing && <ButtonIcon icon={Loader} />}
 								</Button>
-							</View>
-						</View>
+							</div>
+						</div>
 					) : undefined}
-				</View>
+				</div>
 			</Dialog.ScrollableInner>
 		</Dialog.Outer>
 	);

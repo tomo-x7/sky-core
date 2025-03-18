@@ -11,7 +11,6 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Image } from "react-native";
-import { View } from "react-native";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -204,6 +203,8 @@ function StarterPackScreenLoaded({
 								headerHeight={headerHeight}
 								scrollElRef={scrollElRef}
 								moderationOpts={moderationOpts}
+								// @ts-expect-error
+								listMembersQuery={undefined}
 							/>
 						)
 					: null}
@@ -224,7 +225,7 @@ function StarterPackScreenLoaded({
 								listUri={starterPack!.list!.uri}
 								headerHeight={headerHeight}
 								scrollElRef={scrollElRef}
-								moderationOpts={moderationOpts}
+								// moderationOpts={moderationOpts}
 							/>
 						)
 					: null}
@@ -360,7 +361,7 @@ function Header({
 				avatarType="starter-pack"
 			>
 				{hasSession ? (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_sm,
@@ -401,11 +402,11 @@ function Header({
 							starterPack={starterPack}
 							onOpenShareDialog={onOpenShareDialog}
 						/>
-					</View>
+					</div>
 				) : null}
 			</ProfileSubpageHeader>
 			{!hasSession || richText || joinedAllTimeCount >= 25 ? (
-				<View
+				<div
 					style={{
 						...a.px_lg,
 						...a.pt_md,
@@ -448,7 +449,7 @@ function Header({
 						>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
-								//@ts-ignore
+								//@ts-expect-error
 								size={12}
 								color={t.atoms.text_contrast_medium.color}
 							/>
@@ -463,7 +464,7 @@ function Header({
 							</Text>
 						</div>
 					) : null}
-				</View>
+				</div>
 			) : null}
 		</>
 	);
@@ -590,7 +591,7 @@ function OverflowMenu({
 				<Prompt.TitleText>Delete starter pack?</Prompt.TitleText>
 				<Prompt.DescriptionText>Are you sure you want to delete this starter pack?</Prompt.DescriptionText>
 				{deleteError && (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_sm,
@@ -602,7 +603,7 @@ function OverflowMenu({
 							...t.atoms.bg_contrast_25,
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.flex_1,
 								...a.gap_2xs,
@@ -610,9 +611,9 @@ function OverflowMenu({
 						>
 							<Text style={a.font_bold}>Unable to delete</Text>
 							<Text style={a.leading_snug}>{cleanError(deleteError)}</Text>
-						</View>
+						</div>
 						<CircleInfo size="sm" fill={t.palette.negative_400} />
-					</View>
+					</div>
 				)}
 				<Prompt.Actions>
 					<Button

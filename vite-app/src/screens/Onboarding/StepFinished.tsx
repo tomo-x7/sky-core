@@ -3,7 +3,6 @@ import type { SavedFeed } from "@atproto/api/dist/client/types/app/bsky/actor/de
 import { TID } from "@atproto/common-web";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -172,17 +171,17 @@ export function StepFinished() {
 	]);
 
 	return (
-		<View style={a.align_start}>
+		<div style={a.align_start}>
 			<IconCircle icon={Check} style={a.mb_2xl} />
 			<TitleText>You're ready to go!</TitleText>
 			<DescriptionText>We hope you have a wonderful time. Remember, Bluesky is:</DescriptionText>
-			<View
+			<div
 				style={{
 					...a.pt_5xl,
 					...a.gap_3xl,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -191,7 +190,7 @@ export function StepFinished() {
 					}}
 				>
 					<IconCircle icon={Growth} size="lg" style={{ width: 48, height: 48 }} />
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.gap_xs,
@@ -214,9 +213,9 @@ export function StepFinished() {
 						>
 							Your posts, likes, and blocks are public. Mutes are private.
 						</Text>
-					</View>
-				</View>
-				<View
+					</div>
+				</div>
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -225,7 +224,7 @@ export function StepFinished() {
 					}}
 				>
 					<IconCircle icon={News} size="lg" style={{ width: 48, height: 48 }} />
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.gap_xs,
@@ -248,9 +247,9 @@ export function StepFinished() {
 						>
 							Never lose access to your followers or data.
 						</Text>
-					</View>
-				</View>
-				<View
+					</div>
+				</div>
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -259,7 +258,7 @@ export function StepFinished() {
 					}}
 				>
 					<IconCircle icon={Trending} size="lg" style={{ width: 48, height: 48 }} />
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.gap_xs,
@@ -282,9 +281,9 @@ export function StepFinished() {
 						>
 							Choose the algorithms that power your custom feeds.
 						</Text>
-					</View>
-				</View>
-			</View>
+					</div>
+				</div>
+			</div>
 			<OnboardingControls.Portal>
 				<Button
 					disabled={saving}
@@ -299,6 +298,6 @@ export function StepFinished() {
 					{saving && <ButtonIcon icon={Loader} position="right" />}
 				</Button>
 			</OnboardingControls.Portal>
-		</View>
+		</div>
 	);
 }

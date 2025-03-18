@@ -184,7 +184,6 @@ export function ListMembers({
 				onEndReached={onEndReached}
 				onEndReachedThreshold={0.6}
 				removeClippedSubviews={true}
-				// @ts-ignore our .web version only -prf
 				desktopFixedHeight={desktopFixedHeightOffset || true}
 			/>
 		</div>

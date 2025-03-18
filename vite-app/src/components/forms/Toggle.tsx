@@ -49,7 +49,7 @@ export type GroupProps = React.PropsWithChildren<{
 	label: string;
 }>;
 
-export type ItemProps = Omit<JSX.IntrinsicElements["input"], "value"> & {
+export type ItemProps = Omit<JSX.IntrinsicElements["input"], "value" | "onChange"> & {
 	type?: "radio" | "checkbox";
 	name: string;
 	label: string;
@@ -364,9 +364,9 @@ export function Switch() {
 				layout={LinearTransition.duration(100)}
 				style={{
 					...a.rounded_full,
-					// @ts-ignore
+					// @ts-expect-error
 					height: 16,
-					// @ts-ignore
+					// @ts-expect-error
 					width: 16,
 
 					...(selected

@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -35,19 +34,19 @@ export function ErrorScreen({
 					<Layout.Header.Slot />
 				</Layout.Header.Outer>
 			)}
-			<View
+			<div
 				style={{
 					...a.px_xl,
 					...a.py_2xl,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.mb_md,
 						...a.align_center,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.rounded_full,
 							...{ width: 50, height: 50 },
@@ -56,10 +55,10 @@ export function ErrorScreen({
 							...{ backgroundColor: t.palette.contrast_950 },
 						}}
 					>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="exclamation" style={pal.textInverted} size={24} />
-					</View>
-				</View>
+					</div>
+				</div>
 				<Text
 					style={{
 						...a.text_center,
@@ -80,7 +79,7 @@ export function ErrorScreen({
 					{message}
 				</Text>
 				{details && (
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.border,
@@ -102,10 +101,10 @@ export function ErrorScreen({
 						>
 							{details}
 						</Text>
-					</View>
+					</div>
 				)}
 				{onPressTryAgain && (
-					<View style={a.align_center}>
+					<div style={a.align_center}>
 						<Button
 							onPress={onPressTryAgain}
 							variant="solid"
@@ -117,9 +116,9 @@ export function ErrorScreen({
 							<ButtonIcon icon={ArrowRotateCounterClockwiseIcon} />
 							<ButtonText>Try again</ButtonText>
 						</Button>
-					</View>
+					</div>
 				)}
-			</View>
+			</div>
 		</Layout.Center>
 	);
 }

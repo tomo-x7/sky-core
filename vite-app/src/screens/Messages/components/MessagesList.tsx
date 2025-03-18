@@ -1,6 +1,6 @@
 import { type $Typed, type AppBskyEmbedRecord, AppBskyRichtextFacet, RichText } from "@atproto/api";
 import React, { useCallback, useRef } from "react";
-import { type LayoutChangeEvent, View } from "react-native";
+import type { LayoutChangeEvent } from "react-native";
 import { useKeyboardHandler } from "react-native-keyboard-controller";
 import Animated, { runOnJS, scrollTo, useAnimatedRef, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
@@ -28,7 +28,7 @@ import { MessageInputEmbed, useMessageEmbed } from "./MessageInputEmbed";
 
 function MaybeLoader({ isLoading }: { isLoading: boolean }) {
 	return (
-		<View
+		<div
 			style={{
 				height: 50,
 				width: "100%",
@@ -37,7 +37,7 @@ function MaybeLoader({ isLoading }: { isLoading: boolean }) {
 			}}
 		>
 			{isLoading && <Loader size="xl" />}
-		</View>
+		</div>
 	);
 }
 
@@ -234,7 +234,6 @@ export function MessagesList({
 
 	useKeyboardHandler(
 		{
-			//@ts-ignore
 			onStart: (e) => {
 				"worklet";
 				// Immediate updates - like opening the emoji picker - will have a duration of zero. In those cases, we should
@@ -245,14 +244,14 @@ export function MessagesList({
 				} else {
 					keyboardIsOpening.set(true);
 				}
-			}, //@ts-ignore
+			}, 
 			onMove: (e) => {
 				"worklet";
 				keyboardHeight.set(e.height);
 				if (e.height > footerHeight.get()) {
 					scrollTo(flatListRef, 0, 1e7, false);
 				}
-			}, //@ts-ignore
+			}, 
 			onEnd: (e) => {
 				"worklet";
 				keyboardHeight.set(e.height);

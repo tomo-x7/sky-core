@@ -210,7 +210,7 @@ function ContentHiderActive({
 									...{ color: t.palette.primary_500 },
 									...a.text_sm,
 
-									...//@ts-ignore
+									...//@ts-expect-error
 									(state.hovered && { textDecoration: "underline" }),
 								}}
 							>

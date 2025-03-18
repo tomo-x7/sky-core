@@ -2,7 +2,6 @@ import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React from "react";
-import { StyleSheet, View } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
@@ -89,19 +88,20 @@ function Inner({ state }: { state: ComposerOpts }) {
 					}
 				}}
 			>
-				<View
+				<div
 					style={{
 						...styles.container,
 						...(!gtMobile && styles.containerMobile),
 						...t.atoms.bg,
 						...t.atoms.border_contrast_medium,
 
-						...//@ts-ignore
-						(!reduceMotionEnabled && [
-							a.zoom_fade_in,
-							{ animationDelay: 0.1 },
-							{ animationFillMode: "backwards" },
-						]),
+						...flatten(
+							!reduceMotionEnabled && [
+								a.zoom_fade_in,
+								{ animationDelay: "0.1s" },
+								{ animationFillMode: "backwards" },
+							],
+						),
 					}}
 				>
 					<ComposePost
@@ -114,30 +114,29 @@ function Inner({ state }: { state: ComposerOpts }) {
 						text={state.text}
 						imageUris={state.imageUris}
 					/>
-				</View>
+				</div>
 				<EmojiPicker state={pickerState} close={onClosePicker} />
 			</DismissableLayer>
 		</FocusScope>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		marginTop: 50,
 		maxWidth: 600,
 		width: "100%",
-		paddingVertical: 0,
+		paddingTop: 0,
+		paddingBottom: 0,
 		borderRadius: 8,
 		marginBottom: 0,
 		borderWidth: 1,
-		// @ts-expect-error web only
 		maxHeight: "calc(100% - (40px * 2))",
 		overflow: "hidden",
 	},
 	containerMobile: {
 		borderRadius: 0,
 		marginBottom: BOTTOM_BAR_HEIGHT,
-		// @ts-expect-error web only
 		maxHeight: `calc(100% - ${BOTTOM_BAR_HEIGHT}px)`,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

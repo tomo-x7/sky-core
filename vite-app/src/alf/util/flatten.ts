@@ -1,4 +1,6 @@
-export function flatten(stylesArr: (React.CSSProperties | undefined)[] | undefined | false): React.CSSProperties {
+export function flatten(
+	stylesArr: (React.CSSProperties | undefined | false)[] | undefined | false,
+): React.CSSProperties {
 	if (stylesArr == null || typeof stylesArr !== "object") return {};
 	const result: React.CSSProperties = {};
 	for (const style of stylesArr) {

@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { ScreenTransition } from "#/components/StarterPack/Wizard/ScreenTransition";
 import { Text } from "#/components/Typography";
@@ -21,14 +19,14 @@ export function StepDetails() {
 
 	return (
 		<ScreenTransition direction={state.transitionDirection}>
-			<View
+			<div
 				style={{
 					...a.px_xl,
 					...a.gap_xl,
 					...a.mt_4xl,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.gap_md,
 						...a.align_center,
@@ -54,8 +52,8 @@ export function StepDetails() {
 					>
 						Invite your friends to follow your favorite feeds and people
 					</Text>
-				</View>
-				<View>
+				</div>
+				<div>
 					<TextField.LabelText>What do you want to call your starter pack?</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Input
@@ -63,12 +61,12 @@ export function StepDetails() {
 							value={state.name}
 							onChangeText={(text) => dispatch({ type: "SetName", name: text })}
 						/>
-						<TextField.SuffixText label={`${state.name?.length} out of 50`}>
+						<TextField.SuffixText>
 							<Text style={t.atoms.text_contrast_medium}>{state.name?.length ?? 0}/50</Text>
 						</TextField.SuffixText>
 					</TextField.Root>
-				</View>
-				<View>
+				</div>
+				<div>
 					<TextField.LabelText>Tell us a little more</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Input
@@ -81,8 +79,8 @@ export function StepDetails() {
 							style={{ minHeight: 150 }}
 						/>
 					</TextField.Root>
-				</View>
-			</View>
+				</div>
+			</div>
 		</ScreenTransition>
 	);
 }

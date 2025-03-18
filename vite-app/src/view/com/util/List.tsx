@@ -29,7 +29,7 @@ export type ListProps<ItemT> = Omit<
 	 */
 	sideBorders?: boolean;
 	style?: React.CSSProperties;
-	contentContainerStyle: React.CSSProperties;
+	contentContainerStyle?: React.CSSProperties;
 };
 export type ListRef = React.MutableRefObject<any | null>; // TODO: Better types.
 
@@ -74,7 +74,7 @@ function ListImpl<ItemT>(
 		if (isValidElement(ListHeaderComponent)) {
 			headerComponent = ListHeaderComponent;
 		} else {
-			// @ts-ignore Nah it's fine.
+			// @ts-expect-error Nah it's fine.
 			headerComponent = <ListHeaderComponent />;
 		}
 	}
@@ -84,7 +84,7 @@ function ListImpl<ItemT>(
 		if (isValidElement(ListFooterComponent)) {
 			footerComponent = ListFooterComponent;
 		} else {
-			// @ts-ignore Nah it's fine.
+			// @ts-expect-error Nah it's fine.
 			footerComponent = <ListFooterComponent />;
 		}
 	}
@@ -94,7 +94,7 @@ function ListImpl<ItemT>(
 		if (isValidElement(ListEmptyComponent)) {
 			emptyComponent = ListEmptyComponent;
 		} else {
-			// @ts-ignore Nah it's fine.
+			// @ts-expect-error Nah it's fine.
 			emptyComponent = <ListEmptyComponent />;
 		}
 	}
@@ -299,7 +299,7 @@ function ListImpl<ItemT>(
 					"overflow-y": "scroll",
 				}),
 			}}
-			ref={nativeRef as any}
+			ref={nativeRef}
 		>
 			<Visibility
 				onVisibleChange={setIsInsideVisibleTree}

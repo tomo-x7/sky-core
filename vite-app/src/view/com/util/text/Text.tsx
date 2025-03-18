@@ -50,11 +50,11 @@ function Text_DEPRECATED({
 	applyFonts(flattened, fonts.family);
 
 	// should always be defined on `typography`
-	// @ts-ignore
+	// @ts-expect-error
 	if (flattened.fontSize) {
-		// @ts-ignore
+		// @ts-expect-error
 		flattened.fontSize = Math.round(
-			// @ts-ignore
+			// @ts-expect-error
 			flattened.fontSize * fonts.scaleMultiplier,
 		);
 	}

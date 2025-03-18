@@ -1,18 +1,11 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useState } from "react";
-import {
-	ActivityIndicator,
-	KeyboardAvoidingView,
-	ScrollView,
-	StyleSheet,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, StyleSheet, TouchableOpacity, View } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 import Animated from "react-native-reanimated";
 
+import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { MAX_DESCRIPTION, MAX_DISPLAY_NAME } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -20,12 +13,12 @@ import { compressIfNeeded } from "#/lib/media/manip";
 import { cleanError } from "#/lib/strings/errors";
 import { enforceLen } from "#/lib/strings/helpers";
 import { colors, gradients, s } from "#/lib/styles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useProfileUpdateMutation } from "#/state/queries/profile";
 import * as Toast from "#/view/com/util/Toast";
 import { EditableUserAvatar } from "#/view/com/util/UserAvatar";
 import { UserBanner } from "#/view/com/util/UserBanner";
-import { Text } from "#/view/com/util/text/Text";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
@@ -50,6 +43,7 @@ export function Component({
 	const [userAvatar, setUserAvatar] = useState<string | undefined | null>(profile.avatar);
 	const [newUserBanner, setNewUserBanner] = useState<RNImage | undefined | null>();
 	const [newUserAvatar, setNewUserAvatar] = useState<RNImage | undefined | null>();
+	const phStyleCName = usePlaceholderStyle(colors.gray4);
 	const onPressCancel = () => {
 		closeModal();
 	};
@@ -107,7 +101,8 @@ export function Component({
 
 	return (
 		<KeyboardAvoidingView style={s.flex1} behavior="height">
-			<ScrollView style={pal.view}>
+			{/* TODO 元ScrollView */}
+			<div style={pal.view}>
 				<Text
 					style={{
 						...styles.title,
@@ -147,19 +142,17 @@ export function Component({
 						>
 							Display Name
 						</Text>
-						<TextInput
+						<input
+							type="text"
 							style={{
 								...styles.textInput,
 								...pal.border,
 								...pal.text,
 							}}
 							placeholder={"e.g. Alice Roberts"}
-							placeholderTextColor={colors.gray4}
+							className={phStyleCName}
 							value={displayName}
-							onChangeText={(v) => setDisplayName(enforceLen(v, MAX_DISPLAY_NAME))}
-							accessible={true}
-							accessibilityLabel={"Display name"}
-							accessibilityHint={"Edit your display name"}
+							onChange={(v) => setDisplayName(enforceLen(v.target.value, MAX_DISPLAY_NAME))}
 						/>
 					</View>
 					<View style={s.pb10}>
@@ -171,21 +164,16 @@ export function Component({
 						>
 							Description
 						</Text>
-						<TextInput
+						<textarea
 							style={{
 								...styles.textArea,
 								...pal.border,
 								...pal.text,
 							}}
 							placeholder={"e.g. Artist, dog-lover, and avid reader."}
-							placeholderTextColor={colors.gray4}
-							keyboardAppearance={theme.colorScheme}
-							multiline
+							className={phStyleCName}
 							value={description}
-							onChangeText={(v) => setDescription(enforceLen(v, MAX_DESCRIPTION))}
-							accessible={true}
-							accessibilityLabel={"Description"}
-							accessibilityHint={"Edit your profile description"}
+							onChange={(v) => setDescription(enforceLen(v.target.value, MAX_DESCRIPTION))}
 						/>
 					</View>
 					{updateMutation.isPending ? (
@@ -247,7 +235,7 @@ export function Component({
 						</AnimatedTouchableOpacity>
 					)}
 				</View>
-			</ScrollView>
+			</div>
 		</KeyboardAvoidingView>
 	);
 }

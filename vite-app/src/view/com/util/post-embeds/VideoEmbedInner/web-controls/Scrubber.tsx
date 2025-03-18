@@ -1,6 +1,5 @@
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
@@ -140,7 +139,7 @@ export function Scrubber({
 	const progressPercent = (progress / duration) * 100;
 
 	return (
-		<View
+		<div
 			style={{
 				...{ height: isTouchDevice ? 32 : 18, width: "100%" },
 				...a.flex_shrink_0,
@@ -164,28 +163,27 @@ export function Scrubber({
 				onPointerUp={onPointerUp}
 				onPointerCancel={onPointerUp}
 			>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.rounded_full,
 						...a.overflow_hidden,
-						...{ backgroundColor: "rgba(255, 255, 255, 0.4)" },
-						...{ height: hovered || scrubberActive ? 6 : 3 },
+						backgroundColor: "rgba(255, 255, 255, 0.4)",
+						height: hovered || scrubberActive ? 6 : 3,
 
-						...//@ts-ignore
-						{ transition: "height 0.1s ease" },
+						transition: "height 0.1s ease",
 					}}
 				>
 					{duration > 0 && (
-						<View
+						<div
 							style={{
 								...a.h_full,
-								...{ backgroundColor: t.palette.white },
-								...{ width: `${progressPercent}%` },
+								backgroundColor: t.palette.white,
+								width: `${progressPercent}%`,
 							}}
 						/>
 					)}
-				</View>
+				</div>
 				<div
 					ref={circleRef}
 					aria-label={
@@ -208,24 +206,17 @@ export function Scrubber({
 						pointerEvents: "none",
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.h_full,
 							...a.rounded_full,
-							...{ backgroundColor: t.palette.white },
-
-							...{
-								transform: [
-									{
-										scale: hovered || scrubberActive || focused ? (scrubberActive ? 1 : 0.6) : 0,
-									},
-								],
-							},
+							backgroundColor: t.palette.white,
+							scale: hovered || scrubberActive || focused ? (scrubberActive ? 1 : 0.6) : 0,
 						}}
 					/>
 				</div>
 			</div>
-		</View>
+		</div>
 	);
 }

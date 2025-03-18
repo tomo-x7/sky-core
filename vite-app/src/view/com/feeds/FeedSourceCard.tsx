@@ -1,7 +1,7 @@
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Linking, Pressable, StyleSheet, View } from "react-native";
+import { Linking } from "react-native";
 
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
@@ -148,7 +148,7 @@ export function FeedSourceCardLoaded({
 					...pal.border,
 
 					...{
-						borderTopWidth: showMinimalPlaceholder || hideTopBorder ? 0 : StyleSheet.hairlineWidth,
+						borderTopWidth: showMinimalPlaceholder || hideTopBorder ? 0 : 1,
 						flexDirection: "row",
 						alignItems: "center",
 						flex: 1,
@@ -162,18 +162,17 @@ export function FeedSourceCardLoaded({
 					<FeedLoadingPlaceholder style={{ flex: 1 }} showTopBorder={false} />
 				)}
 				{showSaveBtn && (
-					<Pressable
+					<button
+						type="button"
 						disabled={isRemovePending}
-						accessibilityRole="button"
-						accessibilityLabel={"Remove from my feeds"}
-						accessibilityHint=""
-						onPress={onUnsave}
-						hitSlop={15}
+						onClick={onUnsave}
+						// TODO
+						// hitSlop={15}
 						style={styles.btn}
 					>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
-					</Pressable>
+					</button>
 				)}
 			</div>
 		);
@@ -212,15 +211,15 @@ export function FeedSourceCardLoaded({
 				}}
 				key={feed.uri}
 			>
-				<View
+				<div
 					style={{
 						...styles.headerContainer,
 						...a.align_center,
 					}}
 				>
-					<View style={s.mr10}>
+					<div style={s.mr10}>
 						<UserAvatar type="algo" size={36} avatar={feed.avatar} />
-					</View>
+					</div>
 					<div style={styles.headerTextContainer}>
 						<Text
 							emoji
@@ -242,27 +241,26 @@ export function FeedSourceCardLoaded({
 					</div>
 
 					{showSaveBtn && (
-						<View style={{ alignSelf: "center" }}>
-							<Pressable
+						<div style={{ alignSelf: "center" }}>
+							<button
+								type="button"
 								disabled={isAddSavedFeedPending || isRemovePending}
-								accessibilityRole="button"
-								accessibilityLabel={isSaved ? "Remove from my feeds" : "Add to my feeds"}
-								accessibilityHint=""
-								onPress={onToggleSaved}
-								hitSlop={15}
+								onClick={onToggleSaved}
+								// TODO
+								// hitSlop={15}
 								style={styles.btn}
 							>
 								{isSaved ? (
-									//@ts-ignore
+									//@ts-expect-error
 									<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
 								) : (
-									//@ts-ignore
+									//@ts-expect-error
 									<FontAwesomeIcon icon="plus" size={18} color={pal.colors.link} />
 								)}
-							</Pressable>
-						</View>
+							</button>
+						</div>
 					)}
-				</View>
+				</div>
 
 				{showDescription && feed.description ? (
 					<RichText
@@ -309,7 +307,7 @@ const styles = {
 		gap: 14,
 	},
 	border: {
-		borderTopWidth: StyleSheet.hairlineWidth,
+		borderTopWidth: 1,
 	},
 	headerContainer: {
 		flexDirection: "row",

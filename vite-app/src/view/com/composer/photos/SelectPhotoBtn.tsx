@@ -27,7 +27,7 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 				allowsMultipleSelection: true,
 			}),
 		);
-		//@ts-ignore
+		//@ts-expect-error
 		const results = await Promise.all(images.map((img) => createComposerImage(img)));
 
 		onAdd(results);

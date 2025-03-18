@@ -34,12 +34,8 @@ export function useMinimalShellFooterTransform() {
 		return {
 			pointerEvents: footerModeValue === 0 ? "auto" : "none",
 			opacity: (1 - footerModeValue) ** 2,
-			transform: [
-				{
-					translateY: interpolate(footerModeValue, [0, 1], [0, footerHeight.get()]),
-				},
-			],
-		};
+			transform: `translateY(${interpolate(footerModeValue, [0, 1], [0, footerHeight.get()])}px)`,
+		} satisfies React.CSSProperties;
 	});
 
 	return footerTransform;
@@ -50,11 +46,7 @@ export function useMinimalShellFabTransform() {
 
 	const fabTransform = useAnimatedStyle(() => {
 		return {
-			transform: [
-				{
-					translateY: interpolate(footerMode.get(), [0, 1], [-44, 0]),
-				},
-			],
+			transform: `translateY(${interpolate(footerMode.get(), [0, 1], [-44, 0])}px)`,
 		};
 	});
 	return fabTransform;

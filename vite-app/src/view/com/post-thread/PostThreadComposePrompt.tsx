@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
@@ -37,7 +35,7 @@ export function PostThreadComposePrompt({
 			onHoverIn={onHoverIn}
 			onHoverOut={onHoverOut}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -46,8 +44,7 @@ export function PostThreadComposePrompt({
 					...a.rounded_full,
 					...((!gtMobile || hovered) && t.atoms.bg_contrast_25),
 
-					...//@ts-ignore
-					a.transition_color,
+					...a.transition_color,
 				}}
 			>
 				<UserAvatar
@@ -63,7 +60,7 @@ export function PostThreadComposePrompt({
 				>
 					Write your reply
 				</Text>
-			</View>
+			</div>
 		</PressableScale>
 	);
 }

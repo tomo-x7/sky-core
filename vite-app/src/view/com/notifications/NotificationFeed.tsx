@@ -1,5 +1,5 @@
 import React, { type JSX } from "react";
-import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View } from "react-native";
+import { ActivityIndicator, type ListRenderItemInfo } from "react-native";
 
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
@@ -119,17 +119,17 @@ export function NotificationFeed({
 	const FeedFooter = React.useCallback(
 		() =>
 			isFetchingNextPage ? (
-				<View style={styles.feedFooter}>
+				<div style={styles.feedFooter}>
 					<ActivityIndicator />
-				</View>
+				</div>
 			) : (
-				<View />
+				<div />
 			),
 		[isFetchingNextPage],
 	);
 
 	return (
-		<View style={s.hContentRegion}>
+		<div style={s.hContentRegion}>
 			{error && <ErrorMessage message={cleanError(error)} onPressTryAgain={onPressTryAgain} />}
 			<List
 				ref={scrollElRef}
@@ -150,11 +150,11 @@ export function NotificationFeed({
 				sideBorders={false}
 				removeClippedSubviews={true}
 			/>
-		</View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	feedFooter: { paddingTop: 20 },
-	emptyState: { paddingVertical: 40 },
-});
+	emptyState: { paddingTop: 40, paddingBottom: 40 },
+} satisfies Record<string, React.CSSProperties>;

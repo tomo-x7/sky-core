@@ -9,12 +9,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useMemo, useState } from "react";
-import { StyleSheet } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
 import { RichText } from "#/components/RichText";
 import { SubtleWebHover } from "#/components/SubtleWebHover";
+import { Text } from "#/components/Typography";
 import { MAX_POST_LINES } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -35,7 +35,6 @@ import { PreviewableUserAvatar } from "../util/UserAvatar";
 import { UserInfoText } from "../util/UserInfoText";
 import { PostCtrls } from "../util/post-ctrls/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "../util/post-embeds";
-import { Text } from "../util/text/Text";
 
 export function Post({
 	post,
@@ -147,7 +146,7 @@ function PostInner({
 			style={{
 				...styles.outer,
 				...pal.border,
-				...(!hideTopBorder && { borderTopWidth: StyleSheet.hairlineWidth }),
+				...(!hideTopBorder && { borderTopWidth: 1 }),
 				...style,
 			}}
 			onBeforePress={onBeforePress}
@@ -184,9 +183,9 @@ function PostInner({
 								...s.alignCenter,
 							}}
 						>
-							{/* @ts-ignore */}
 							<FontAwesomeIcon
 								icon="reply"
+								// @ts-expect-error
 								size={9}
 								style={{
 									...pal.textLight,
@@ -253,26 +252,19 @@ function PostInner({
 							/>
 						) : null}
 					</ContentHider>
-					<PostCtrls
-						post={post}
-						record={record}
-						richText={richText}
-						onPressReply={onPressReply}
-						logContext="Post"
-					/>
+					<PostCtrls post={post} record={record} richText={richText} onPressReply={onPressReply} />
 				</div>
 			</div>
 		</Link>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	outer: {
 		paddingTop: 10,
 		paddingRight: 15,
 		paddingBottom: 5,
 		paddingLeft: 10,
-		// @ts-ignore web only -prf
 		cursor: "pointer",
 	},
 	layout: {
@@ -308,4 +300,4 @@ const styles = StyleSheet.create({
 	contentHiderChild: {
 		marginTop: 6,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

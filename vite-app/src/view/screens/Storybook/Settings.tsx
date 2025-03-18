@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { Alien_Stroke2_Corner0_Rounded as AlienIcon } from "#/components/icons/Alien";
@@ -21,7 +19,7 @@ import * as Toast from "#/view/com/util/Toast";
 export function Settings() {
 	const t = useTheme();
 	return (
-		<View style={{ marginLeft: -20, marginRight: -20 }}>
+		<div style={{ marginLeft: -20, marginRight: -20 }}>
 			<Text style={{ marginLeft: 20, paddingBottom: 12 }}>Settings</Text>
 			<SettingsList.LinkItem to="/settings" label="Account">
 				<SettingsList.ItemIcon icon={PersonIcon} />
@@ -85,8 +83,8 @@ export function Settings() {
 					...a.rounded_md,
 					...{ backgroundColor: t.palette.primary_50 },
 				}}
-				hoverStyle={[{ backgroundColor: t.palette.primary_100 }]}
-				contentContainerStyle={[a.rounded_md, a.px_lg]}
+				hoverStyle={{ backgroundColor: t.palette.primary_100 }}
+				contentContainerStyle={{ ...a.rounded_md, ...a.px_lg }}
 			>
 				<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
 				<SettingsList.ItemText
@@ -112,6 +110,6 @@ export function Settings() {
 					long long long long long long long long long long long long long long long long long
 				</SettingsList.ItemText>
 			</SettingsList.LinkItem>
-		</View>
+		</div>
 	);
 }

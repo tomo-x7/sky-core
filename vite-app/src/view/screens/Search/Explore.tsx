@@ -6,7 +6,6 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
 import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -44,7 +43,7 @@ function SuggestedItemsHeader({
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.px_lg,
@@ -56,13 +55,13 @@ function SuggestedItemsHeader({
 				...style,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_sm,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -79,7 +78,7 @@ function SuggestedItemsHeader({
 					>
 						{title}
 					</Text>
-				</View>
+				</div>
 				<Text
 					style={{
 						...t.atoms.text_contrast_high,
@@ -88,8 +87,8 @@ function SuggestedItemsHeader({
 				>
 					{description}
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -144,7 +143,7 @@ function LoadMore({
 	const type = items[0].type;
 
 	return (
-		<View style={[]}>
+		<div>
 			<Button
 				label={"Load more"}
 				onPress={item.onLoadMore}
@@ -154,7 +153,7 @@ function LoadMore({
 				}}
 			>
 				{({ hovered, pressed }) => (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.flex_row,
@@ -164,7 +163,7 @@ function LoadMore({
 							...((hovered || pressed) && t.atoms.bg_contrast_25),
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.relative,
 
@@ -174,7 +173,7 @@ function LoadMore({
 								},
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.align_center,
 									...a.justify_center,
@@ -194,10 +193,10 @@ function LoadMore({
 								}}
 							>
 								<ArrowBottom fill={t.palette.white} />
-							</View>
+							</div>
 							{items.map((_item, i) => {
 								return (
-									<View
+									<div
 										key={_item.key}
 										style={{
 											...t.atoms.bg_contrast_25,
@@ -225,10 +224,10 @@ function LoadMore({
 											) : _item.type === "feed" ? (
 												<UserAvatar size={28} avatar={_item.avatar} type="algo" />
 											) : null)}
-									</View>
+									</div>
 								);
 							})}
-						</View>
+						</div>
 
 						<Text
 							style={{
@@ -240,18 +239,18 @@ function LoadMore({
 							{type === "profile" ? <>Load more suggested follows</> : <>Load more suggested feeds</>}
 						</Text>
 
-						<View
+						<div
 							style={{
 								...a.flex_1,
 								...a.align_end,
 							}}
 						>
 							{item.isLoadingMore && <Loader size="lg" />}
-						</View>
-					</View>
+						</div>
+					</div>
 				)}
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -423,7 +422,7 @@ export function Explore() {
 			key: "suggested-feeds-header",
 			title: "Discover new feeds",
 			description: "Choose your own timeline! Feeds built by the community help you find content you love.",
-			style: [a.pt_5xl],
+			style: a.pt_5xl,
 			icon: ListSparkle,
 		});
 
@@ -533,19 +532,19 @@ export function Explore() {
 				}
 				case "profile": {
 					return (
-						<View
+						<div
 							style={{
 								...a.border_b,
 								...t.atoms.border_contrast_low,
 							}}
 						>
 							<ProfileCardWithFollowBtn profile={item.profile} noBg noBorder showKnownFollowers />
-						</View>
+						</div>
 					);
 				}
 				case "feed": {
 					return (
-						<View
+						<div
 							style={{
 								...a.border_b,
 								...t.atoms.border_contrast_low,
@@ -554,7 +553,7 @@ export function Explore() {
 							}}
 						>
 							<FeedCard.Default view={item.feed} />
-						</View>
+						</div>
 					);
 				}
 				case "loadMore": {
@@ -568,7 +567,7 @@ export function Explore() {
 				}
 				case "error": {
 					return (
-						<View
+						<div
 							style={{
 								...a.border_t,
 								...a.pt_md,
@@ -576,7 +575,7 @@ export function Explore() {
 								...t.atoms.border_contrast_low,
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.gap_md,
@@ -586,7 +585,7 @@ export function Explore() {
 								}}
 							>
 								<CircleInfo size="md" fill={t.palette.negative_400} />
-								<View
+								<div
 									style={{
 										...a.flex_1,
 										...a.gap_sm,
@@ -609,9 +608,9 @@ export function Explore() {
 									>
 										{item.error}
 									</Text>
-								</View>
-							</View>
-						</View>
+								</div>
+							</div>
+						</div>
 					);
 				}
 			}
@@ -626,7 +625,6 @@ export function Explore() {
 			data={items}
 			renderItem={renderItem}
 			keyExtractor={(item) => item.key}
-			// @ts-ignore web only -prf
 			desktopFixedHeight
 			contentContainerStyle={{ paddingBottom: 100 }}
 			keyboardShouldPersistTaps="handled"

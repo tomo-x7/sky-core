@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -15,7 +15,7 @@ export const ConfirmLanguagesButton = ({
 	const pal = usePalette("default");
 	const { isMobile } = useWebMediaQueries();
 	return (
-		<View
+		<div
 			style={{
 				...styles.btnContainer,
 				...pal.borderDark,
@@ -26,16 +26,12 @@ export const ConfirmLanguagesButton = ({
 				}),
 			}}
 		>
-			<Pressable
-				onPress={onPress}
-				accessibilityRole="button"
-				accessibilityLabel={"Confirm content language settings"}
-				accessibilityHint=""
-			>
+			<button type="button" onClick={onPress}>
 				<LinearGradient
 					colors={[gradients.blueLight.start, gradients.blueLight.end]}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
+					// @ts-expect-error
 					style={styles.btn}
 				>
 					<Text
@@ -48,15 +44,16 @@ export const ConfirmLanguagesButton = ({
 						<>Done{extraText}</>
 					</Text>
 				</LinearGradient>
-			</Pressable>
-		</View>
+			</button>
+		</div>
 	);
 };
 
-const styles = StyleSheet.create({
+const styles = {
 	btnContainer: {
 		paddingTop: 10,
-		paddingHorizontal: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
 	},
 	btn: {
 		flexDirection: "row",
@@ -67,4 +64,4 @@ const styles = StyleSheet.create({
 		padding: 14,
 		backgroundColor: colors.gray1,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

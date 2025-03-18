@@ -269,7 +269,7 @@ export function QuoteX({ onRemove }: { onRemove: () => void }) {
 			onAccessibilityEscape={onRemove}
 			hitSlop={HITSLOP_20}
 		>
-			{/* @ts-ignore */}
+			{/* @ts-expect-error */}
 			<FontAwesomeIcon size={12} icon="xmark" style={s.white} />
 		</TouchableOpacity>
 	);

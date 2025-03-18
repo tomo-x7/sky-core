@@ -124,7 +124,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									type="checkbox"
 									label={"Allow access to your direct messages"}
 									value={privileged}
-									onChange={(v) => typeof v === "boolean" && setPrivileged(v)}
+									onChange={setPrivileged}
 									style={a.flex_1}
 								>
 									<Toggle.Checkbox />

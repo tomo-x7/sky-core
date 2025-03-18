@@ -94,7 +94,7 @@ export function SelectLangBtn() {
 					{postLanguagesPref.map((lang) => codeToLanguageName(lang, langPrefs.appLanguage)).join(", ")}
 				</Text>
 			) : (
-				// @ts-ignore
+				// @ts-expect-error
 				<FontAwesomeIcon icon="language" style={pal.link} size={26} />
 			)}
 		</DropdownButton>

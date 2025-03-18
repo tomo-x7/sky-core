@@ -1,12 +1,10 @@
-import { View } from "react-native";
-
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 
 export function ExternalEmbedRemoveBtn({ onRemove }: { onRemove: () => void }) {
 	return (
-		<View
+		<div
 			style={{
 				...a.absolute,
 				...{ top: 8, right: 8 },
@@ -23,6 +21,6 @@ export function ExternalEmbedRemoveBtn({ onRemove }: { onRemove: () => void }) {
 			>
 				<ButtonIcon icon={X} size="sm" />
 			</Button>
-		</View>
+		</div>
 	);
 }

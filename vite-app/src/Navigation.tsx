@@ -478,7 +478,7 @@ function navigate<K extends keyof AllNavigatorParams>(name: K, params?: AllNavig
 				};
 				navigationRef.addListener("state", handler);
 
-				// @ts-ignore I dont know what would make typescript happy but I have a life -prf
+				// @ts-expect-error I dont know what would make typescript happy but I have a life -prf
 				navigationRef.navigate(name, params);
 			}),
 			timeout(1e3),

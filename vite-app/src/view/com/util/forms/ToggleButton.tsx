@@ -1,8 +1,8 @@
+import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { choose } from "#/lib/functions";
 import { colors } from "#/lib/styles";
-import { Text } from "#/components/Typography";
 import { Button, type ButtonType } from "./Button";
 
 export function ToggleButton({

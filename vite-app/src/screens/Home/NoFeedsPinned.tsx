@@ -60,7 +60,7 @@ export function NoFeedsPinned({
 				style={{
 					...a.align_center,
 
-					...//@ts-ignore
+					...//@ts-expect-error
 					a.h_full_vh,
 
 					...a.py_3xl,

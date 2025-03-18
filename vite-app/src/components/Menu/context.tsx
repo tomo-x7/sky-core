@@ -3,7 +3,7 @@ import React from "react";
 import type { ContextType, ItemContextType } from "#/components/Menu/types";
 
 export const Context = React.createContext<ContextType>({
-	// @ts-ignore
+	// @ts-expect-error
 	control: null,
 });
 

@@ -184,7 +184,7 @@ function DropdownContent({
 									{item.label}
 								</span>
 								{item.icon && (
-									// @ts-ignore
+									// @ts-expect-error
 									<FontAwesomeIcon icon={item.icon.web} size={20} color={pal.colors.textLight} />
 								)}
 							</DropdownMenuItem>
@@ -202,7 +202,7 @@ function DropdownContent({
 						>
 							{item.label}
 						</span>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						{item.icon && <FontAwesomeIcon icon={item.icon.web} size={20} color={pal.colors.textLight} />}
 					</DropdownMenuItem>
 				);
@@ -232,8 +232,6 @@ const styles = StyleSheet.create({
 		paddingLeft: 4,
 		paddingRight: 4,
 		marginTop: 6,
-
-		// @ts-ignore web only -prf
 		boxShadow: "rgba(0, 0, 0, 0.3) 0px 5px 20px",
 	},
 	item: {
@@ -242,7 +240,6 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		alignItems: "center",
 		columnGap: 20,
-		// @ts-ignore -web
 		cursor: "pointer",
 		paddingTop: 8,
 		paddingBottom: 8,
@@ -251,7 +248,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		fontFamily:
 			'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Liberation Sans", Helvetica, Arial, sans-serif',
-		//@ts-ignore
+		//@ts-expect-error
 		outline: 0,
 		border: 0,
 	},

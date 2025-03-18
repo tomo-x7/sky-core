@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { type GestureResponderEvent, View } from "react-native";
 import Animated, { FadeOutUp, useReducedMotion, ZoomIn } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -19,7 +18,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 	}, [hasBeenCopied, isReducedMotionEnabled]);
 
 	const onPress = useCallback(
-		(evt: GestureResponderEvent) => {
+		(evt: React.MouseEvent<HTMLButtonElement>) => {
 			new Clipboard().writeText(value);
 			setHasBeenCopied(true);
 			onPressProp?.(evt);
@@ -28,7 +27,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 	);
 
 	return (
-		<View style={a.relative}>
+		<div style={a.relative}>
 			{hasBeenCopied && (
 				<Animated.View
 					entering={ZoomIn.duration(100)}
@@ -64,6 +63,6 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 				onPress={onPress}
 				{...props}
 			/>
-		</View>
+		</div>
 	);
 }

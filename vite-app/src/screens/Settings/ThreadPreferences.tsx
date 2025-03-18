@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -41,7 +39,7 @@ export function ThreadPreferencesScreen(props: Props) {
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={BubblesIcon} />
 						<SettingsList.ItemText>Sort replies</SettingsList.ItemText>
-						<View
+						<div
 							style={{
 								...a.w_full,
 								...a.gap_md,
@@ -61,7 +59,7 @@ export function ThreadPreferencesScreen(props: Props) {
 								values={sortReplies ? [sortReplies] : []}
 								onChange={(values) => setThreadViewPrefs({ sort: values[0] })}
 							>
-								<View
+								<div
 									style={{
 										...a.gap_sm,
 										...a.flex_1,
@@ -87,9 +85,9 @@ export function ThreadPreferencesScreen(props: Props) {
 										<Toggle.Radio />
 										<Toggle.LabelText>Random (aka "Poster's Roulette")</Toggle.LabelText>
 									</Toggle.Item>
-								</View>
+								</div>
 							</Toggle.Group>
-						</View>
+						</div>
 					</SettingsList.Group>
 					<SettingsList.Group>
 						<SettingsList.ItemIcon icon={PersonGroupIcon} />

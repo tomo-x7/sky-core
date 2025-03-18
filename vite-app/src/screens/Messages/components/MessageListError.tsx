@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
@@ -25,7 +24,7 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 	}, [item.code]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.py_md,
 				...a.w_full,
@@ -33,7 +32,7 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 				...a.justify_center,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.flex_row,
@@ -66,7 +65,7 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 						</InlineLinkText>
 					)}
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

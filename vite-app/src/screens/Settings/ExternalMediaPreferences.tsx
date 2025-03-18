@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
@@ -31,7 +30,7 @@ export function ExternalMediaPreferencesScreen(props: Props) {
 					</SettingsList.Item>
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Enable media players for</SettingsList.ItemText>
-						<View
+						<div
 							style={{
 								...a.mt_sm,
 								...a.w_full,
@@ -45,7 +44,7 @@ export function ExternalMediaPreferencesScreen(props: Props) {
 										<PrefSelector source={key as EmbedPlayerSource} label={label} key={key} />
 									</Fragment>
 								))}
-						</View>
+						</div>
 					</SettingsList.Group>
 				</SettingsList.Container>
 			</Layout.Content>

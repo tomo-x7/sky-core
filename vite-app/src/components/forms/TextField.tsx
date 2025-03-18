@@ -5,6 +5,7 @@ import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 import { mergeRefs } from "#/lib/merge-refs";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 
 const Context = React.createContext<{
 	inputRef: React.RefObject<HTMLInputElement> | null;
@@ -124,7 +125,6 @@ export type InputProps = Omit<JSX.IntrinsicElements["input"], "value" | "onChang
 	enablesReturnKeyAutomatically?: boolean;
 };
 
-const id = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(6))));
 export function Input({
 	label,
 	placeholder,
@@ -147,6 +147,7 @@ export function Input({
 	const ctx = React.useContext(Context);
 	const withinRoot = Boolean(ctx.inputRef);
 	const [val, setVal] = useState<string>("");
+	const phStyleCName = usePlaceholderStyle(t.palette.contrast_500);
 
 	const { chromeHover, chromeFocus, chromeError, chromeErrorHover } = useSharedInputStyles();
 
@@ -222,7 +223,7 @@ export function Input({
 				style={flattened}
 				type={type}
 				enterKeyHint={returnKeyType}
-				className={id}
+				className={phStyleCName}
 				onKeyDown={(ev) => {
 					if (ev.key === "Enter") {
 						if (blurOnSubmit) ev.currentTarget.blur();
@@ -231,9 +232,6 @@ export function Input({
 				}}
 				disabled={rest.disabled || (enablesReturnKeyAutomatically && val === "")}
 			/>
-			<style>{`.${id}::placeholder {
-				color: ${t.palette.contrast_500};
-			}`}</style>
 			<div
 				style={{
 					...a.z_10,

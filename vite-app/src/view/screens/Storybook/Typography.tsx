@@ -1,12 +1,10 @@
-import { View } from "react-native";
-
 import { atoms as a } from "#/alf";
 import { RichText } from "#/components/RichText";
 import { Text } from "#/components/Typography";
 
 export function Typography() {
 	return (
-		<View style={a.gap_md}>
+		<div style={a.gap_md}>
 			<Text selectable style={a.text_5xl}>
 				atoms.text_5xl
 			</Text>
@@ -31,6 +29,6 @@ export function Typography() {
 				value={"This is rich text. It can have mentions like @bsky.app or links like https://bsky.social"}
 				style={a.text_xl}
 			/>
-		</View>
+		</div>
 	);
 }

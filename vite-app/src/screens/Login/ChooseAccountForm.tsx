@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { AccountList } from "#/components/AccountList";
@@ -57,14 +56,14 @@ export const ChooseAccountForm = ({
 
 	return (
 		<FormContainer titleText={<>Select account</>}>
-			<View>
+			<div>
 				<TextField.LabelText>Sign in as...</TextField.LabelText>
 				<AccountList
 					onSelectAccount={onSelect}
 					onSelectOther={() => onSelectAccount()}
 					pendingDid={pendingDid}
 				/>
-			</View>
+			</div>
 			<div style={a.flex_row}>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>{"Back"}</ButtonText>

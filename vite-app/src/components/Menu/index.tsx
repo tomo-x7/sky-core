@@ -1,6 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
-import { Pressable } from "react-native";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import type * as Dialog from "#/components/Dialog";
@@ -24,7 +23,6 @@ export type { DialogControlProps as MenuControlProps } from "#/components/Dialog
 export function useMenuControl(): Dialog.DialogControlProps {
 	const id = React.useId();
 	const [isOpen, setIsOpen] = React.useState(false);
-	//@ts-ignore
 	return React.useMemo(
 		() => ({
 			id,
@@ -215,12 +213,11 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 
 	return (
 		<DropdownMenu.Item asChild>
-			<Pressable
+			<button
+				type="button"
 				{...rest}
 				className="radix-dropdown-item"
-				accessibilityHint=""
-				accessibilityLabel={label}
-				onPress={(e) => {
+				onClick={(e) => {
 					onPress(e);
 
 					/**
@@ -234,7 +231,6 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 				onFocus={onFocus}
 				onBlur={onBlur}
 				// need `flatten` here for Radix compat
-				//@ts-ignore
 				style={flatten([
 					a.flex_row,
 					a.align_center,
@@ -243,12 +239,12 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 					a.rounded_xs,
 					{ minHeight: 32, paddingLeft: 10, paddingRight: 10 },
 					{ outline: 0 },
-					//@ts-ignore
 					(hovered || focused) &&
-						!rest.disabled && [
-							{ outline: "0 !important" },
-							t.name === "light" ? t.atoms.bg_contrast_25 : t.atoms.bg_contrast_50,
-						],
+						!rest.disabled && {
+							outline: "0 !important",
+							...(t.name === "light" ? t.atoms.bg_contrast_25 : t.atoms.bg_contrast_50),
+						},
+
 					style,
 				])}
 				{...{
@@ -257,7 +253,7 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 				}}
 			>
 				<ItemContext.Provider value={{ disabled: Boolean(rest.disabled) }}>{children}</ItemContext.Provider>
-			</Pressable>
+			</button>
 		</DropdownMenu.Item>
 	);
 }

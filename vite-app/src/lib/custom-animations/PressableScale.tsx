@@ -23,7 +23,7 @@ export function PressableScale({
 }: {
 	targetScale?: number;
 	style?: React.CSSProperties;
-} & Exclude<PressableProps, "onPressIn" | "onPressOut" | "style">) {
+} & Omit<PressableProps, "style">) {
 	const reducedMotion = useReducedMotion();
 
 	const scale = useSharedValue(1);

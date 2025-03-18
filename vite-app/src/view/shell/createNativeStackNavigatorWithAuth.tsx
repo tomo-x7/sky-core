@@ -16,7 +16,6 @@ import type { NativeStackNavigationEventMap, NativeStackNavigationOptions } from
 import { NativeStackView } from "@react-navigation/native-stack";
 import type { NativeStackNavigatorProps } from "@react-navigation/native-stack/src/types";
 import * as React from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { PWI_ENABLED } from "#/lib/build-flags";
@@ -116,7 +115,7 @@ function NativeStackNavigator({
 			...descriptor,
 			render() {
 				if (requireAuth && !hasSession) {
-					return <View />;
+					return <div />;
 				} else {
 					return descriptor.render();
 				}
@@ -131,9 +130,9 @@ function NativeStackNavigator({
 	return (
 		<NavigationContent>
 			{/* biome-ignore lint/a11y/useSemanticElements: <explanation> */}
-			<View role="main" style={a.flex_1}>
+			<div role="main" style={a.flex_1}>
 				<NativeStackView {...rest} state={state} navigation={navigation} descriptors={newDescriptors} />
-			</View>
+			</div>
 
 			{showBottomBar ? <BottomBarWeb /> : <DesktopLeftNav />}
 			{!isMobile && <DesktopRightNav routeName={activeRoute.name} />}

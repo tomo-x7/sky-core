@@ -1,5 +1,5 @@
 import * as React from "react";
-import { type ScrollView, View } from "react-native";
+import type { ScrollView } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import type { JSX } from "react";
@@ -76,15 +76,14 @@ export const PagerWithHeader = React.forwardRef<PagerRef, PagerWithHeaderProps>(
 				.map((child, i) => {
 					const isReady = isHeaderReady;
 					return (
-						<View
+						<div
 							key={i}
-							collapsable={false}
 							style={{
 								display: isReady ? undefined : "none",
 							}}
 						>
 							<PagerItem isFocused={i === currentPage} renderTab={child} />
-						</View>
+						</div>
 					);
 				})}
 		</Pager>
@@ -119,10 +118,7 @@ let PagerTabBar = ({
 			<Layout.Center
 				style={{
 					...a.z_10,
-
-					...//@ts-ignore
-					a.sticky,
-
+					...a.sticky,
 					...{ top: 0, display: isHeaderReady ? undefined : "none" },
 				}}
 			>

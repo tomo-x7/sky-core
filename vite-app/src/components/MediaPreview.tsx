@@ -97,7 +97,7 @@ export function ImageItem({
 					...a.rounded_xs,
 					...t.atoms.bg_contrast_25,
 				}}
-				//@ts-ignore
+				//@ts-expect-error
 				contentFit="cover"
 				accessible={true}
 				accessibilityIgnoresInvertColors

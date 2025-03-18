@@ -102,7 +102,7 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 		<div style={style}>
 			<List
 				ref={scrollElRef}
-				// @ts-ignore
+				// @ts-expect-error
 				data={items}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}

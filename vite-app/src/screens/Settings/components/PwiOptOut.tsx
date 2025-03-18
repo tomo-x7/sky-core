@@ -1,6 +1,5 @@
 import { type $Typed, ComAtprotoLabelDefs } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -65,7 +64,7 @@ export function PwiOptOut() {
 	}, [updateProfile, profile]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.gap_sm,
@@ -93,6 +92,6 @@ export function PwiOptOut() {
 				Bluesky will not show your profile and posts to logged-out users. Other apps may not honor this request.
 				This does not make your account private.
 			</Text>
-		</View>
+		</div>
 	);
 }

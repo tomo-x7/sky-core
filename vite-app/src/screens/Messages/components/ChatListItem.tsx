@@ -314,8 +314,7 @@ function ChatListItemReady({
 														...a.text_sm,
 														...{ lineHeight: 21 },
 
-														...//@ts-ignore
-														t.atoms.text_contrast_medium,
+														...t.atoms.text_contrast_medium,
 
 														...{ whiteSpace: "preserve nowrap" },
 													}}
@@ -331,11 +330,8 @@ function ChatListItemReady({
 											style={{
 												...a.text_sm,
 												...{ lineHeight: 21 },
-
-												...//@ts-ignore
-												t.atoms.text_contrast_medium,
-
-												...{ whiteSpace: "preserve nowrap" },
+												...t.atoms.text_contrast_medium,
+												whiteSpace: "preserve nowrap",
 											}}
 										>
 											{" "}

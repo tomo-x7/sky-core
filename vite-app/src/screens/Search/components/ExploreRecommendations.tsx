@@ -1,5 +1,4 @@
 import type { AppBskyUnspeccedDefs } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";
 import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
@@ -22,21 +21,24 @@ function Inner() {
 
 	return error || noRecs ? null : (
 		<>
-			<View
+			<div
 				style={{
 					...a.flex_row,
-					...[a.px_lg, a.py_lg, a.pt_2xl, a.gap_md],
+					...a.px_lg,
+					...a.py_lg,
+					...a.pt_2xl,
+					...a.gap_md,
 					...a.border_b,
 					...t.atoms.border_contrast_low,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.gap_sm,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -57,7 +59,7 @@ function Inner() {
 						>
 							Recommended
 						</Text>
-					</View>
+					</div>
 					{!allFeeds ? (
 						<Text
 							style={{
@@ -77,16 +79,16 @@ function Inner() {
 							Feeds we think you might like.
 						</Text>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 
-			<View
+			<div
 				style={{
 					...a.pt_md,
 					...a.pb_lg,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_start,
@@ -106,15 +108,19 @@ function Inner() {
 									{({ hovered }) => (
 										<TrendingTopic
 											topic={topic}
-											style={hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25]}
+											style={
+												hovered
+													? { ...t.atoms.border_contrast_high, ...t.atoms.bg_contrast_25 }
+													: {}
+											}
 										/>
 									)}
 								</TrendingTopicLink>
 							))}
 						</>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 		</>
 	);
 }

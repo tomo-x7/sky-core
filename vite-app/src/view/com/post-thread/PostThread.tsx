@@ -511,7 +511,6 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 					onEndReachedThreshold={2}
 					onScrollToTop={onScrollToTop}
 					maintainVisibleContentPosition={undefined}
-					// @ts-ignore our .web version only -prf
 					desktopFixedHeight
 					removeClippedSubviews={undefined}
 					ListFooterComponent={
@@ -816,7 +815,7 @@ function hasBranchingReplies(node?: ThreadNode) {
 
 const styles = StyleSheet.create({
 	prompt: {
-		// @ts-ignore web-only
+		// @ts-expect-error web-only
 		position: "fixed",
 		left: 0,
 		right: 0,

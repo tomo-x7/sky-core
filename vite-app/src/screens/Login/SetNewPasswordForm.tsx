@@ -1,6 +1,6 @@
 import { BskyAgent } from "@atproto/api";
 import { useState } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -89,7 +89,7 @@ export const SetNewPasswordForm = ({
 			>
 				You will receive an email with a "reset code." Enter that code here, then enter your new password.
 			</Text>
-			<View>
+			<div>
 				<TextField.LabelText>Reset code</TextField.LabelText>
 				<TextField.Root>
 					<TextField.Icon icon={Ticket} />
@@ -106,8 +106,8 @@ export const SetNewPasswordForm = ({
 						disabled={isProcessing}
 					/>
 				</TextField.Root>
-			</View>
-			<View>
+			</div>
+			<div>
 				<TextField.LabelText>New password</TextField.LabelText>
 				<TextField.Root>
 					<TextField.Icon icon={Lock} />
@@ -126,7 +126,7 @@ export const SetNewPasswordForm = ({
 						disabled={isProcessing}
 					/>
 				</TextField.Root>
-			</View>
+			</div>
 			<FormError error={error} />
 			<div
 				style={{

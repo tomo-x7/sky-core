@@ -1,14 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { MagnifyingGlassIcon } from "#/lib/icons";
 import type { NavigationProp } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
 
 export function CustomFeedEmptyState() {
 	const pal = usePalette("default");
@@ -20,8 +19,8 @@ export function CustomFeedEmptyState() {
 	}, [navigation]);
 
 	return (
-		<View style={styles.emptyContainer}>
-			<View style={styles.emptyIconContainer}>
+		<div style={styles.emptyContainer}>
+			<div style={styles.emptyIconContainer}>
 				<MagnifyingGlassIcon
 					style={{
 						...styles.emptyIcon,
@@ -29,7 +28,7 @@ export function CustomFeedEmptyState() {
 					}}
 					size={62}
 				/>
-			</View>
+			</div>
 			<Text
 				type="xl-medium"
 				style={{
@@ -43,17 +42,16 @@ export function CustomFeedEmptyState() {
 				<Text type="lg-medium" style={palInverted.text}>
 					Find accounts to follow
 				</Text>
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="angle-right" style={palInverted.text} size={14} />
 			</Button>
-		</View>
+		</div>
 	);
 }
-const styles = StyleSheet.create({
+const styles = {
 	emptyContainer: {
 		height: "100%",
-		paddingVertical: 40,
-		paddingHorizontal: 30,
+		padding: "40px 30px",
 	},
 	emptyIconContainer: {
 		marginBottom: 16,
@@ -63,12 +61,12 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 	},
 	emptyBtn: {
-		marginVertical: 20,
+		marginTop: 20,
+		marginBottom: 20,
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		paddingVertical: 18,
-		paddingHorizontal: 24,
+		padding: "18px 24px",
 		borderRadius: 30,
 	},
 
@@ -80,4 +78,4 @@ const styles = StyleSheet.create({
 		marginLeft: 32,
 		marginTop: 8,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

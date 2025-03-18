@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 import { FlatNavigator, RoutesContainer } from "#/Navigation";
@@ -79,7 +79,7 @@ function ShellInner() {
 						accessibilityLabel={"Close drawer menu"}
 						accessibilityHint=""
 					>
-						<View
+						<div
 							style={{
 								...styles.drawerMask,
 
@@ -93,20 +93,18 @@ function ShellInner() {
 										: "transparent",
 								},
 
-								...//@ts-ignore
-								a.transition_color,
+								...a.transition_color,
 							}}
 						>
-							{/* @ts-ignore */}
-							<View
+							<div
 								style={{
 									...styles.drawerContainer,
 									...(showDrawer ? a.slide_in_left : a.slide_out_left),
 								}}
 							>
 								<DrawerContent />
-							</View>
-						</View>
+							</div>
+						</div>
 					</TouchableWithoutFeedback>
 				</>
 			)}
@@ -117,7 +115,7 @@ function ShellInner() {
 export const Shell: React.FC = function ShellImpl() {
 	const pageBg = useColorSchemeStyle(styles.bgLight, styles.bgDark);
 	return (
-		<View
+		<div
 			style={{
 				...a.util_screen_outer,
 				...pageBg,
@@ -126,11 +124,11 @@ export const Shell: React.FC = function ShellImpl() {
 			<RoutesContainer>
 				<ShellInner />
 			</RoutesContainer>
-		</View>
+		</div>
 	);
 };
 
-const styles = StyleSheet.create({
+const styles = {
 	bgLight: {
 		backgroundColor: colors.white,
 	},
@@ -138,7 +136,6 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.black, // TODO
 	},
 	drawerMask: {
-		// @ts-ignore
 		position: "fixed",
 		width: "100%",
 		height: "100%",
@@ -147,7 +144,6 @@ const styles = StyleSheet.create({
 	},
 	drawerContainer: {
 		display: "flex",
-		// @ts-ignore
 		position: "fixed",
 		top: 0,
 		left: 0,
@@ -155,4 +151,4 @@ const styles = StyleSheet.create({
 		width: 330,
 		maxWidth: "80%",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,5 +1,4 @@
-import { ActivityIndicator, View } from "react-native";
-
+import ActivityIndicator from "#/components/ActivityIndicator";
 import * as Layout from "#/components/Layout";
 import { s } from "#/lib/styles";
 
@@ -9,9 +8,9 @@ import { s } from "#/lib/styles";
 export function LoadingScreen() {
 	return (
 		<Layout.Content>
-			<View style={s.p20}>
-				<ActivityIndicator size="large" />
-			</View>
+			<div style={s.p20}>
+				<ActivityIndicator size={24} /*"large"*/ />
+			</div>
 		</Layout.Content>
 	);
 }

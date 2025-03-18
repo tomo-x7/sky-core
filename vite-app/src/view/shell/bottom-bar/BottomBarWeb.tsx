@@ -1,6 +1,5 @@
 import { useNavigationState } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -66,6 +65,7 @@ export function BottomBarWeb() {
 		<Animated.View
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="navigation"
+			// @ts-expect-error
 			style={{
 				...styles.bottomBar,
 				...styles.bottomBarWeb,
@@ -183,7 +183,7 @@ export function BottomBarWeb() {
 				</>
 			) : (
 				<>
-					<View
+					<div
 						style={{
 							width: "100%",
 							flexDirection: "row",
@@ -196,14 +196,14 @@ export function BottomBarWeb() {
 							gap: 8,
 						}}
 					>
-						<View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+						<div style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
 							<Logo width={32} />
-							<View style={{ paddingTop: 4 }}>
+							<div style={{ paddingTop: 4 }}>
 								<Logotype width={80} fill={t.atoms.text.color} />
-							</View>
-						</View>
+							</div>
+						</div>
 
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.flex_wrap,
@@ -228,8 +228,8 @@ export function BottomBarWeb() {
 							>
 								<ButtonText>Sign in</ButtonText>
 							</Button>
-						</View>
-					</View>
+						</div>
+					</div>
 				</>
 			)}
 		</Animated.View>
@@ -276,18 +276,17 @@ const NavItem: React.FC<{
 			navigationAction={isOnDifferentProfile ? "push" : "navigate"}
 			aria-role="link"
 			aria-label={routeName}
-			accessible={true}
 		>
 			{children({ isActive })}
 			{notificationCount ? (
-				<View
+				<div
 					style={styles.notificationCount}
 					aria-label={`${notificationCount ?? 0} unread ${notificationCount === "1" ? "item" : "items"}`}
 				>
 					<Text style={styles.notificationCountLabel}>{notificationCount}</Text>
-				</View>
+				</div>
 			) : hasNew ? (
-				<View style={styles.hasNewBadge} />
+				<div style={styles.hasNewBadge} />
 			) : null}
 		</Link>
 	);

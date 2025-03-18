@@ -1,7 +1,6 @@
 import type { ModerationUI } from "@atproto/api";
 import React from "react";
-import { Image } from "react-native";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { tokens, useTheme as useAlfTheme } from "#/alf";
@@ -85,28 +84,23 @@ export function UserBanner({
 					{({ props }) => (
 						<Pressable {...props}>
 							{banner ? (
-								<Image
-									style={styles.bannerImage}
-									source={{ uri: banner }}
-									accessible={true}
-									accessibilityIgnoresInvertColors
-								/>
+								<img style={styles.bannerImage} src={banner} />
 							) : (
-								<View
+								<div
 									style={{
 										...styles.bannerImage,
 										...t.atoms.bg_contrast_25,
 									}}
 								/>
 							)}
-							<View
+							<div
 								style={{
 									...styles.editButtonContainer,
 									...pal.btn,
 								}}
 							>
 								<CameraFilled height={14} width={14} style={t.atoms.text} />
-							</View>
+							</div>
 						</Pressable>
 					)}
 				</Menu.Trigger>
@@ -132,20 +126,17 @@ export function UserBanner({
 			</Menu.Root>
 		</EventStopper>
 	) : banner ? (
-		<Image
+		<img
 			style={{
 				...styles.bannerImage,
 				...{ backgroundColor: theme.palette.default.backgroundLight },
+				objectFit: "cover",
+				filter: moderation?.blur ? "blur(100)" : undefined,
 			}}
-			// @ts-ignore
-			contentFit="cover"
-			source={{ uri: banner }}
-			blurRadius={moderation?.blur ? 100 : 0}
-			accessible={true}
-			accessibilityIgnoresInvertColors
+			src={banner}
 		/>
 	) : (
-		<View
+		<div
 			style={{
 				...styles.bannerImage,
 				...(type === "labeler" ? styles.labelerBanner : t.atoms.bg_contrast_25),
@@ -154,7 +145,7 @@ export function UserBanner({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	editButtonContainer: {
 		position: "absolute",
 		width: 24,
@@ -173,4 +164,4 @@ const styles = StyleSheet.create({
 	labelerBanner: {
 		backgroundColor: tokens.color.temp_purple,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -102,7 +102,7 @@ const RepostInner = ({
 	big?: boolean;
 }) => {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -116,13 +116,13 @@ const RepostInner = ({
 					style={{
 						...color,
 						...(big ? a.text_md : { fontSize: 15 }),
-						...(isReposted && [a.font_bold]),
+						...(isReposted ? a.font_bold : undefined),
 						...a.user_select_none,
 					}}
 				>
 					{formatCount(repostCount)}
 				</Text>
 			) : undefined}
-		</View>
+		</div>
 	);
 };

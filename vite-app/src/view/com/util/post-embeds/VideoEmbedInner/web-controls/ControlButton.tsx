@@ -1,9 +1,9 @@
 import type React from "react";
-import type { SvgProps } from "react-native-svg";
 
 import { atoms as a, useTheme } from "#/alf";
 import { PressableWithHover } from "../../../PressableWithHover";
 
+type SvgProps = JSX.IntrinsicElements["svg"];
 export function ControlButton({
 	active,
 	activeLabel,
@@ -26,7 +26,6 @@ export function ControlButton({
 			accessibilityLabel={active ? activeLabel : inactiveLabel}
 			accessibilityHint=""
 			onPress={onPress}
-			//@ts-ignore
 			style={{
 				...a.p_xs,
 				...a.rounded_full,

@@ -1,6 +1,6 @@
 import type { AppBskyFeedDefs, ModerationOpts } from "@atproto/api";
 import { useState } from "react";
-import { type ListRenderItemInfo, View } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -70,13 +70,13 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 
 	return (
 		<ScreenTransition style={a.flex_1} direction={state.transitionDirection}>
-			<View
+			<div
 				style={{
 					...a.border_b,
 					...t.atoms.border_contrast_medium,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.py_sm,
 						...a.px_md,
@@ -84,8 +84,8 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 					}}
 				>
 					<SearchInput value={query} onChangeText={(t) => setQuery(t)} onClearText={() => setQuery("")} />
-				</View>
-			</View>
+				</div>
+			</div>
 			<List
 				data={query ? searchedFeeds : suggestedFeeds}
 				renderItem={renderItem}
@@ -99,7 +99,7 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 				sideBorders={false}
 				style={{ flex: 1 }}
 				ListEmptyComponent={
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.align_center,
@@ -122,7 +122,7 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 								No feeds found. Try searching for something else.
 							</Text>
 						)}
-					</View>
+					</div>
 				}
 			/>
 		</ScreenTransition>

@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
 import { H1 } from "#/components/Typography";
@@ -10,9 +8,9 @@ import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe
 export function Icons() {
 	const t = useTheme();
 	return (
-		<View style={a.gap_md}>
+		<div style={a.gap_md}>
 			<H1>Icons</H1>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_xl,
@@ -23,8 +21,8 @@ export function Icons() {
 				<Globe size="md" fill={t.atoms.text.color} />
 				<Globe size="lg" fill={t.atoms.text.color} />
 				<Globe size="xl" fill={t.atoms.text.color} />
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_xl,
@@ -35,8 +33,8 @@ export function Icons() {
 				<ArrowTopRight size="md" fill={t.atoms.text.color} />
 				<ArrowTopRight size="lg" fill={t.atoms.text.color} />
 				<ArrowTopRight size="xl" fill={t.atoms.text.color} />
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_xl,
@@ -47,8 +45,8 @@ export function Icons() {
 				<CalendarDays size="md" fill={t.atoms.text.color} />
 				<CalendarDays size="lg" fill={t.atoms.text.color} />
 				<CalendarDays size="xl" fill={t.atoms.text.color} />
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_xl,
@@ -59,8 +57,8 @@ export function Icons() {
 				<Loader size="md" fill={t.atoms.text.color} />
 				<Loader size="lg" fill={t.atoms.text.color} />
 				<Loader size="xl" fill={t.atoms.text.color} />
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_xl,
@@ -71,7 +69,7 @@ export function Icons() {
 				<Globe size="md" gradient="sky" />
 				<Globe size="lg" gradient="sky" />
 				<Globe size="xl" gradient="sky" />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

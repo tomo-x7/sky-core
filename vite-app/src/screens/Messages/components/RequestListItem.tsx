@@ -1,5 +1,4 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, tokens } from "#/alf";
 import { KnownFollowers } from "#/components/KnownFollowers";
@@ -22,23 +21,23 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 	const isDeletedAccount = otherUser.handle === "missing.invalid";
 
 	return (
-		<View
+		<div
 			style={{
 				...a.relative,
 				...a.flex_1,
 			}}
 		>
 			<ChatListItem convo={convo} showMenu={false}>
-				<View
+				<div
 					style={{
 						...a.pt_xs,
 						...a.pb_2xs,
 					}}
 				>
 					<KnownFollowers profile={otherUser} moderationOpts={moderationOpts} minimal showIfEmpty />
-				</View>
+				</div>
 				{/* spacer, since you can't nest pressables */}
-				<View
+				<div
 					style={{
 						...a.pt_md,
 						...a.pb_xs,
@@ -57,9 +56,9 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 					>
 						Accept Request
 					</Text>
-				</View>
+				</div>
 			</ChatListItem>
-			<View
+			<div
 				style={{
 					...a.absolute,
 					...a.pr_md,
@@ -82,10 +81,10 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 				) : (
 					<>
 						<DeleteChatButton convo={convo} currentScreen="list" />
-						<View style={a.flex_1} />
+						<div style={a.flex_1} />
 					</>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

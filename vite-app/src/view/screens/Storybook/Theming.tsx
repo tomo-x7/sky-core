@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { Palette } from "./Palette";
@@ -8,7 +6,7 @@ export function Theming() {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.bg,
 				...a.gap_lg,
@@ -25,7 +23,7 @@ export function Theming() {
 			>
 				theme.atoms.text
 			</Text>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...t.atoms.border_contrast_high,
@@ -41,7 +39,7 @@ export function Theming() {
 			>
 				theme.atoms.text_contrast_high
 			</Text>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...t.atoms.border_contrast_medium,
@@ -57,7 +55,7 @@ export function Theming() {
 			>
 				theme.atoms.text_contrast_medium
 			</Text>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...t.atoms.border_contrast_low,
@@ -73,20 +71,20 @@ export function Theming() {
 			>
 				theme.atoms.text_contrast_low
 			</Text>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...t.atoms.border_contrast_low,
 					...a.border_t,
 				}}
 			/>
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.gap_md,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...t.atoms.bg,
 						...a.justify_center,
@@ -94,8 +92,8 @@ export function Theming() {
 					}}
 				>
 					<Text>theme.atoms.bg</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...t.atoms.bg_contrast_25,
 						...a.justify_center,
@@ -103,8 +101,8 @@ export function Theming() {
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_25</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...t.atoms.bg_contrast_50,
 						...a.justify_center,
@@ -112,8 +110,8 @@ export function Theming() {
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_50</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...t.atoms.bg_contrast_100,
 						...a.justify_center,
@@ -121,8 +119,8 @@ export function Theming() {
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_100</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...t.atoms.bg_contrast_200,
 						...a.justify_center,
@@ -130,8 +128,8 @@ export function Theming() {
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_200</Text>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...t.atoms.bg_contrast_300,
 						...a.justify_center,
@@ -139,8 +137,8 @@ export function Theming() {
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_300</Text>
-				</View>
-			</View>
-		</View>
+				</div>
+			</div>
+		</div>
 	);
 }

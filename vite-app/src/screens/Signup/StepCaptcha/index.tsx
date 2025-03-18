@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid/non-secure";
 import React from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { FormError } from "#/components/forms/FormError";
@@ -65,13 +65,13 @@ export function StepCaptcha() {
 
 	return (
 		<ScreenTransition>
-			<View style={a.gap_lg}>
-				<View
+			<div style={a.gap_lg}>
+				<div
 					style={{
 						...a.w_full,
 						...a.overflow_hidden,
 						...{ minHeight: 510 },
-						...(completed && [a.align_center, a.justify_center]),
+						...(completed && { ...a.align_center, ...a.justify_center }),
 					}}
 				>
 					{!completed ? (
@@ -85,9 +85,9 @@ export function StepCaptcha() {
 					) : (
 						<ActivityIndicator size="large" />
 					)}
-				</View>
+				</div>
 				<FormError error={state.error} />
-			</View>
+			</div>
 			<BackNextButtons hideNext isLoading={state.isLoading} onBackPress={onBackPress} />
 		</ScreenTransition>
 	);

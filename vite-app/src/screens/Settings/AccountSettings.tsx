@@ -51,7 +51,7 @@ export function AccountSettingsScreen(props: Props) {
                 ItemText is also flex: 1. So we need to set flex: 0 on the ItemText to prevent it from growing, but if we did that everywhere
                 it wouldn't push the BadgeText/Chevron/whatever to the right.
                 TODO: find a general solution for this. workaround in this case is to set the ItemText to flex: 1 and BadgeText to flex: 0 -sfn */}
-						{/*@ts-ignore */}
+						{/*@ts-expect-error */}
 						<SettingsList.ItemText style={a.flex_0}>Email</SettingsList.ItemText>
 						{currentAccount && (
 							<>

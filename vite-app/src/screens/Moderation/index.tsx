@@ -1,7 +1,7 @@
 import { LABELS } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import { Fragment, useCallback } from "react";
-import { Linking, View } from "react-native";
+import { Linking } from "react-native";
 
 import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -39,7 +39,7 @@ import { ViewHeader } from "#/view/com/util/ViewHeader";
 function ErrorState({ error }: { error: string }) {
 	const t = useTheme();
 	return (
-		<View style={a.p_xl}>
+		<div style={a.p_xl}>
 			<Text
 				style={{
 					...a.text_md,
@@ -51,7 +51,7 @@ function ErrorState({ error }: { error: string }) {
 				Hmmmm, it seems we're having trouble loading this data. See below for more details. If this issue
 				persists, please contact us.
 			</Text>
-			<View
+			<div
 				style={{
 					...a.relative,
 					...a.py_md,
@@ -69,8 +69,8 @@ function ErrorState({ error }: { error: string }) {
 				>
 					{error}
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -106,7 +106,7 @@ function SubItem({
 }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.flex_row,
@@ -117,7 +117,7 @@ function SubItem({
 				...style,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -133,7 +133,7 @@ function SubItem({
 				>
 					{title}
 				</Text>
-			</View>
+			</div>
 			<ChevronRight
 				size="sm"
 				style={{
@@ -142,7 +142,7 @@ function SubItem({
 					...{ paddingBottom: 2 },
 				}}
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -191,7 +191,7 @@ export function ModerationScreenInner({
 	const disabledOnIOS = false;
 
 	return (
-		<View
+		<div
 			style={{
 				...a.pt_2xl,
 				...a.px_lg,
@@ -208,7 +208,7 @@ export function ModerationScreenInner({
 			>
 				Moderation tools
 			</Text>
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.rounded_md,
@@ -221,7 +221,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Interaction settings"}
 							icon={EditBig}
-							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
+							style={state.hovered || state.pressed ? t.atoms.bg_contrast_50 : undefined}
 						/>
 					)}
 				</Link>
@@ -231,7 +231,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Muted words & tags"}
 							icon={Filter}
-							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
+							style={state.hovered || state.pressed ? t.atoms.bg_contrast_50 : undefined}
 						/>
 					)}
 				</Button>
@@ -241,7 +241,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Moderation lists"}
 							icon={Group}
-							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
+							style={state.hovered || state.pressed ? t.atoms.bg_contrast_50 : undefined}
 						/>
 					)}
 				</Link>
@@ -251,7 +251,7 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Muted accounts"}
 							icon={Person}
-							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
+							style={state.hovered || state.pressed ? t.atoms.bg_contrast_50 : undefined}
 						/>
 					)}
 				</Link>
@@ -261,11 +261,11 @@ export function ModerationScreenInner({
 						<SubItem
 							title={"Blocked accounts"}
 							icon={CircleBanSign}
-							style={(state.hovered || state.pressed) && [t.atoms.bg_contrast_50]}
+							style={state.hovered || state.pressed ? t.atoms.bg_contrast_50 : undefined}
 						/>
 					)}
 				</Link>
-			</View>
+			</div>
 			<Text
 				style={{
 					...a.pt_2xl,
@@ -277,7 +277,7 @@ export function ModerationScreenInner({
 			>
 				Content filters
 			</Text>
-			<View style={a.gap_md}>
+			<div style={a.gap_md}>
 				{ageNotSet && (
 					<>
 						<Button
@@ -302,7 +302,7 @@ export function ModerationScreenInner({
 						<BirthDateSettingsDialog control={birthdateDialogControl} />
 					</>
 				)}
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.rounded_md,
@@ -312,14 +312,14 @@ export function ModerationScreenInner({
 				>
 					{!ageNotSet && !isUnderage && (
 						<>
-							<View
+							<div
 								style={{
 									...a.py_lg,
 									...a.px_lg,
 									...a.flex_row,
 									...a.align_center,
 									...a.justify_between,
-									...(disabledOnIOS && { opacity: 0.5 }),
+									...(disabledOnIOS ? { opacity: 0.5 } : undefined),
 								}}
 							>
 								<Text
@@ -337,7 +337,7 @@ export function ModerationScreenInner({
 									value={adultContentEnabled}
 									onChange={onToggleAdultContentEnabled}
 								>
-									<View
+									<div
 										style={{
 											...a.flex_row,
 											...a.align_center,
@@ -348,11 +348,11 @@ export function ModerationScreenInner({
 											{adultContentEnabled ? <>Enabled</> : <>Disabled</>}
 										</Text>
 										<Toggle.Switch />
-									</View>
+									</div>
 								</Toggle.Item>
-							</View>
+							</div>
 							{disabledOnIOS && (
-								<View
+								<div
 									style={{
 										...a.pb_lg,
 										...a.px_lg,
@@ -375,7 +375,7 @@ export function ModerationScreenInner({
 											.
 										</>
 									</Text>
-								</View>
+								</div>
 							)}
 							<Divider />
 						</>
@@ -391,8 +391,8 @@ export function ModerationScreenInner({
 						</>
 					)}
 					<GlobalLabelPreference labelDefinition={LABELS.nudity} />
-				</View>
-			</View>
+				</div>
+			</div>
 			<Text
 				style={{
 					...a.text_md,
@@ -405,7 +405,7 @@ export function ModerationScreenInner({
 				Advanced
 			</Text>
 			{isLabelersLoading ? (
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.align_center,
@@ -413,9 +413,9 @@ export function ModerationScreenInner({
 					}}
 				>
 					<Loader size="xl" />
-				</View>
+				</div>
 			) : labelersError || !labelers ? (
-				<View
+				<div
 					style={{
 						...a.p_lg,
 						...a.rounded_sm,
@@ -423,9 +423,9 @@ export function ModerationScreenInner({
 					}}
 				>
 					<Text>We were unable to load your configured labelers at this time.</Text>
-				</View>
+				</div>
 			) : (
-				<View
+				<div
 					style={{
 						...a.rounded_sm,
 						...t.atoms.bg_contrast_25,
@@ -449,7 +449,9 @@ export function ModerationScreenInner({
 													borderBottomRightRadius: a.rounded_sm.borderRadius,
 												}),
 
-												...((state.hovered || state.pressed) && [t.atoms.bg_contrast_50]),
+												...(state.hovered || state.pressed
+													? t.atoms.bg_contrast_50
+													: undefined),
 											}}
 										>
 											<LabelingService.Avatar avatar={labeler.creator.avatar} />
@@ -474,9 +476,9 @@ export function ModerationScreenInner({
 							</Fragment>
 						);
 					})}
-				</View>
+				</div>
 			)}
-			<View style={{ height: 150 }} />
-		</View>
+			<div style={{ height: 150 }} />
+		</div>
 	);
 }

@@ -425,7 +425,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				}
 
 				return {
-					//@ts-ignore
+					//@ts-expect-error
 					colors: gradient.values.map(([color]) => color) as [string, string, ...string[]],
 					hoverColors: gradient.values.map((_) => gradient.hover_value) as [string, string, ...string[]],
 					locations: gradient.values.map(([location]) => location) as [number, number, ...number[]],

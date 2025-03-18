@@ -1,6 +1,6 @@
-// @ts-ignore no type definition -prf
+// @ts-expect-error no type definition -prf
 import ProgressCircle from "react-native-progress/Circle";
-// @ts-ignore no type definition -prf
+// @ts-expect-error no type definition -prf
 import ProgressPie from "react-native-progress/Pie";
 
 import { atoms as a } from "#/alf";

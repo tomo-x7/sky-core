@@ -1,50 +1,49 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { type JSX, type ComponentProps } from "react";
-import { Linking, ScrollView, TouchableOpacity, View } from "react-native";
+import React, { type JSX } from "react";
+import { Linking, ScrollView, TouchableOpacity } from "react-native";
 
-import { atoms as a, tokens, useTheme } from "../../alf";
-import { Button, ButtonIcon, ButtonText } from "../../components/Button";
-import { Divider } from "../../components/Divider";
-import { InlineLinkText } from "../../components/Link";
-import { Text } from "../../components/Typography";
+import { atoms as a, tokens, useTheme } from "#/alf";
+import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { Divider } from "#/components/Divider";
+import { InlineLinkText } from "#/components/Link";
+import { Text } from "#/components/Typography";
 import {
 	Bell_Stroke2_Corner0_Rounded as Bell,
 	Bell_Filled_Corner0_Rounded as BellFilled,
-} from "../../components/icons/Bell";
-import { BulletList_Stroke2_Corner0_Rounded as List } from "../../components/icons/BulletList";
+} from "#/components/icons/Bell";
+import { BulletList_Stroke2_Corner0_Rounded as List } from "#/components/icons/BulletList";
 import {
 	Hashtag_Stroke2_Corner0_Rounded as Hashtag,
 	Hashtag_Filled_Corner0_Rounded as HashtagFilled,
-} from "../../components/icons/Hashtag";
+} from "#/components/icons/Hashtag";
 import {
 	HomeOpen_Stoke2_Corner0_Rounded as Home,
 	HomeOpen_Filled_Corner0_Rounded as HomeFilled,
-} from "../../components/icons/HomeOpen";
-import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "../../components/icons/MagnifyingGlass";
-import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "../../components/icons/MagnifyingGlass2";
+} from "#/components/icons/HomeOpen";
+import { MagnifyingGlass_Filled_Stroke2_Corner0_Rounded as MagnifyingGlassFilled } from "#/components/icons/MagnifyingGlass";
+import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlass } from "#/components/icons/MagnifyingGlass2";
 import {
 	Message_Stroke2_Corner0_Rounded as Message,
 	Message_Stroke2_Corner0_Rounded_Filled as MessageFilled,
-} from "../../components/icons/Message";
-import { SettingsGear2_Stroke2_Corner0_Rounded as Settings } from "../../components/icons/SettingsGear2";
+} from "#/components/icons/Message";
+import { SettingsGear2_Stroke2_Corner0_Rounded as Settings } from "#/components/icons/SettingsGear2";
 import {
 	UserCircle_Stroke2_Corner0_Rounded as UserCircle,
 	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
-} from "../../components/icons/UserCircle";
-import { FEEDBACK_FORM_URL, HELP_DESK_URL } from "../../lib/constants";
-import type { PressableScale } from "../../lib/custom-animations/PressableScale";
-import { useNavigationTabState } from "../../lib/hooks/useNavigationTabState";
-import type { NavigationProp } from "../../lib/routes/types";
-import { sanitizeHandle } from "../../lib/strings/handles";
-import { colors } from "../../lib/styles";
-import { useKawaiiMode } from "../../state/preferences/kawaii";
-import { useUnreadNotifications } from "../../state/queries/notifications/unread";
-import { useProfileQuery } from "../../state/queries/profile";
-import { type SessionAccount, useSession } from "../../state/session";
-import { useSetDrawerOpen } from "../../state/shell";
-import { UserAvatar } from "../../view/com/util/UserAvatar";
-import { formatCount } from "../../view/com/util/numeric/format";
-import { NavSignupCard } from "../../view/shell/NavSignupCard";
+} from "#/components/icons/UserCircle";
+import { FEEDBACK_FORM_URL, HELP_DESK_URL } from "#/lib/constants";
+import { useNavigationTabState } from "#/lib/hooks/useNavigationTabState";
+import type { NavigationProp } from "#/lib/routes/types";
+import { sanitizeHandle } from "#/lib/strings/handles";
+import { colors } from "#/lib/styles";
+import { useKawaiiMode } from "#/state/preferences/kawaii";
+import { useUnreadNotifications } from "#/state/queries/notifications/unread";
+import { useProfileQuery } from "#/state/queries/profile";
+import { type SessionAccount, useSession } from "#/state/session";
+import { useSetDrawerOpen } from "#/state/shell";
+import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { formatCount } from "#/view/com/util/numeric/format";
+import { NavSignupCard } from "#/view/shell/NavSignupCard";
 
 const iconWidth = 26;
 
@@ -72,7 +71,7 @@ let DrawerProfileCard = ({
 				usePlainRNImage={true}
 				type={profile?.associated?.labeler ? "labeler" : "user"}
 			/>
-			<View style={a.gap_2xs}>
+			<div style={a.gap_2xs}>
 				<Text
 					emoji
 					style={{
@@ -96,7 +95,7 @@ let DrawerProfileCard = ({
 				>
 					{sanitizeHandle(account.handle, "@")}
 				</Text>
-			</View>
+			</div>
 			<Text
 				style={{
 					...a.text_md,
@@ -151,7 +150,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 			if (tab === "MyProfile") {
 				navigation.navigate("Profile", { name: currentAccount!.handle });
 			} else {
-				// @ts-ignore must be Home, Search, Notifications, or MyProfile
+				// @ts-expect-error must be Home, Search, Notifications, or MyProfile
 				navigation.navigate(tab);
 			}
 		},
@@ -202,7 +201,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	// =
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.border_r,
@@ -218,13 +217,13 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 					},
 				]}
 			>
-				<View style={a.px_xl}>
+				<div style={a.px_xl}>
 					{hasSession && currentAccount ? (
 						<DrawerProfileCard account={currentAccount} onPressProfile={onPressProfile} />
 					) : (
-						<View style={a.pr_xl}>
+						<div style={a.pr_xl}>
 							<NavSignupCard />
-						</View>
+						</div>
 					)}
 
 					<Divider
@@ -233,7 +232,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 							...a.mb_sm,
 						}}
 					/>
-				</View>
+				</div>
 
 				{hasSession ? (
 					<>
@@ -254,7 +253,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 					</>
 				)}
 
-				<View style={a.px_xl}>
+				<div style={a.px_xl}>
 					<Divider
 						style={{
 							...a.mb_xl,
@@ -262,10 +261,10 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 						}}
 					/>
 					<ExtraLinks />
-				</View>
+				</div>
 			</ScrollView>
 			<DrawerFooter onPressFeedback={onPressFeedback} onPressHelp={onPressHelp} />
-		</View>
+		</div>
 	);
 };
 DrawerContent = React.memo(DrawerContent);
@@ -279,7 +278,7 @@ let DrawerFooter = ({
 	onPressHelp: () => void;
 }): React.ReactNode => {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_sm,
@@ -308,16 +307,17 @@ let DrawerFooter = ({
 			>
 				<ButtonText>Help</ButtonText>
 			</Button>
-		</View>
+		</div>
 	);
 };
 DrawerFooter = React.memo(DrawerFooter);
 
-interface MenuItemProps extends ComponentProps<typeof PressableScale> {
+interface MenuItemProps {
 	icon: JSX.Element;
 	label: string;
 	count?: string;
 	bold?: boolean;
+	onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 let SearchMenuItem = ({
@@ -339,7 +339,7 @@ let SearchMenuItem = ({
 			}
 			label={"Search"}
 			bold={isActive}
-			onPress={onPress}
+			onClick={onPress}
 		/>
 	);
 };
@@ -364,7 +364,7 @@ let HomeMenuItem = ({
 			}
 			label={"Home"}
 			bold={isActive}
-			onPress={onPress}
+			onClick={onPress}
 		/>
 	);
 };
@@ -389,7 +389,7 @@ let ChatMenuItem = ({
 			}
 			label={"Chat"}
 			bold={isActive}
-			onPress={onPress}
+			onClick={onPress}
 		/>
 	);
 };
@@ -414,14 +414,9 @@ let NotificationsMenuItem = ({
 				)
 			}
 			label={"Notifications"}
-			accessibilityHint={
-				numUnreadNotifications === ""
-					? ""
-					: `${numUnreadNotifications === "1" ? "../.. unread item" : "../.. unread items"}`
-			}
 			count={numUnreadNotifications}
 			bold={isActive}
-			onPress={onPress}
+			onClick={onPress}
 		/>
 	);
 };
@@ -446,7 +441,7 @@ let FeedsMenuItem = ({
 			}
 			label={"Feeds"}
 			bold={isActive}
-			onPress={onPress}
+			onClick={onPress}
 		/>
 	);
 };
@@ -455,7 +450,7 @@ FeedsMenuItem = React.memo(FeedsMenuItem);
 let ListsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode => {
 	const t = useTheme();
 
-	return <MenuItem icon={<List style={t.atoms.text} width={iconWidth} />} label={"Lists"} onPress={onPress} />;
+	return <MenuItem icon={<List style={t.atoms.text} width={iconWidth} />} label={"Lists"} onClick={onPress} />;
 };
 ListsMenuItem = React.memo(ListsMenuItem);
 
@@ -477,7 +472,7 @@ let ProfileMenuItem = ({
 				)
 			}
 			label={"Profile"}
-			onPress={onPress}
+			onClick={onPress}
 		/>
 	);
 };
@@ -485,16 +480,16 @@ ProfileMenuItem = React.memo(ProfileMenuItem);
 
 let SettingsMenuItem = ({ onPress }: { onPress: () => void }): React.ReactNode => {
 	const t = useTheme();
-	return <MenuItem icon={<Settings style={t.atoms.text} width={iconWidth} />} label={"Settings"} onPress={onPress} />;
+	return <MenuItem icon={<Settings style={t.atoms.text} width={iconWidth} />} label={"Settings"} onClick={onPress} />;
 };
 SettingsMenuItem = React.memo(SettingsMenuItem);
 
-function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
+function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 	const t = useTheme();
 	return (
-		<Button onPress={onPress} accessibilityRole="tab" label={label}>
+		<Button onPress={onClick ?? undefined} accessibilityRole="tab" label={label}>
 			{({ hovered, pressed }) => (
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.flex_row,
@@ -505,10 +500,10 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 						...((hovered || pressed) && t.atoms.bg_contrast_25),
 					}}
 				>
-					<View style={a.relative}>
+					<div style={a.relative}>
 						{icon}
 						{count ? (
-							<View
+							<div
 								style={{
 									...a.absolute,
 									...a.inset_0,
@@ -516,7 +511,7 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 									...{ top: -4, right: a.gap_sm.gap * -1 },
 								}}
 							>
-								<View
+								<div
 									style={{
 										...a.rounded_full,
 
@@ -533,20 +528,17 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 											...a.text_xs,
 											...a.leading_tight,
 											...a.font_bold,
-
-											...{
-												fontVariant: ["tabular-nums"],
-												color: colors.white,
-											},
+											fontVariant: "tabular-nums",
+											color: colors.white,
 										}}
 										numberOfLines={1}
 									>
 										{count}
 									</Text>
-								</View>
-							</View>
+								</div>
+							</div>
 						) : undefined}
-					</View>
+					</div>
 					<Text
 						style={{
 							...a.flex_1,
@@ -558,7 +550,7 @@ function MenuItem({ icon, label, count, bold, onPress }: MenuItemProps) {
 					>
 						{label}
 					</Text>
-				</View>
+				</div>
 			)}
 		</Button>
 	);
@@ -569,7 +561,7 @@ function ExtraLinks() {
 	const kawaii = useKawaiiMode();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_col,
 				...a.gap_md,
@@ -600,6 +592,6 @@ function ExtraLinks() {
 					</>
 				</Text>
 			)}
-		</View>
+		</div>
 	);
 }

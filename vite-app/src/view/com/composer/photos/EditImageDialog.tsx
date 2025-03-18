@@ -1,7 +1,6 @@
 import "react-image-crop/dist/ReactCrop.css";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -64,7 +63,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 			>
 				Edit image
 			</Text>
-			<View style={a.align_center}>
+			<div style={a.align_center}>
 				<ReactCrop
 					crop={crop}
 					onChange={(_pixelCrop, percentCrop) => setCrop(percentCrop)}
@@ -72,8 +71,8 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 				>
 					<img src={source.path} style={{ maxHeight: "50vh" }} alt="" />
 				</ReactCrop>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.mt_md,
 					...a.gap_md,
@@ -89,7 +88,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 				>
 					<ButtonText>Save</ButtonText>
 				</Button>
-			</View>
+			</div>
 		</Dialog.Inner>
 	);
 };

@@ -1,5 +1,5 @@
 import type React from "react";
-import type { AccessibilityProps, AccessibilityRole, GestureResponderEvent, PressableProps } from "react-native";
+import type { AccessibilityProps, AccessibilityRole, PressableProps } from "react-native";
 
 import type { TextStyleProp, ViewStyleProp } from "#/alf";
 import type * as Dialog from "#/components/Dialog";
@@ -60,10 +60,10 @@ export type TriggerChildProps = {
 };
 
 export type ItemProps = React.PropsWithChildren<
-	Omit<PressableProps, "style"> &
+	Omit<JSX.IntrinsicElements["button"], "style" | "onClick"> &
 		ViewStyleProp & {
 			label: string;
-			onPress: (e: GestureResponderEvent) => void;
+			onPress: (e: React.MouseEvent<HTMLButtonElement>) => void;
 		}
 >;
 

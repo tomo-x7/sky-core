@@ -1,20 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as EmailValidator from "email-validator";
 import { useState } from "react";
-import { ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 
+import ActivityIndicator from "#/components/ActivityIndicator";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError, isNetworkError } from "#/lib/strings/errors";
 import { checkAndFormatResetCode } from "#/lib/strings/password";
 import { colors, s } from "#/lib/styles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
 import { ScrollView } from "./util";
-import { TextInput } from "./util";
 
 enum Stages {
 	RequestCode = 0,
@@ -35,6 +37,7 @@ export function Component() {
 	const [error, setError] = useState<string>("");
 	const { isMobile } = useWebMediaQueries();
 	const { closeModal } = useModalControls();
+	const phStyleCName = usePlaceholderStyle(pal.colors.textLight);
 
 	const onRequestCode = async () => {
 		if (!currentAccount?.email || !EmailValidator.validate(currentAccount.email)) {
@@ -115,8 +118,8 @@ export function Component() {
 				contentContainerStyle={[styles.container, isMobile && styles.containerMobile]}
 				keyboardShouldPersistTaps="handled"
 			>
-				<View>
-					<View style={styles.titleSection}>
+				<div>
+					<div style={styles.titleSection}>
 						<Text
 							type="title-lg"
 							style={{
@@ -126,7 +129,7 @@ export function Component() {
 						>
 							{stage !== Stages.Done ? "Change Password" : "Password Changed"}
 						</Text>
-					</View>
+					</div>
 
 					<Text
 						type="lg"
@@ -148,7 +151,7 @@ export function Component() {
 					</Text>
 
 					{stage === Stages.RequestCode && (
-						<View
+						<div
 							style={{
 								...s.flexRow,
 								...s.justifyCenter,
@@ -171,17 +174,16 @@ export function Component() {
 									Already have a code?
 								</Text>
 							</TouchableOpacity>
-						</View>
+						</div>
 					)}
 					{stage === Stages.ChangePassword && (
-						<View
+						<div
 							style={{
 								...pal.border,
 								...styles.group,
 							}}
 						>
-							<View style={styles.groupContent}>
-								{/* @ts-ignore */}
+							<div style={styles.groupContent}>
 								<FontAwesomeIcon
 									icon="ticket"
 									style={{
@@ -189,33 +191,30 @@ export function Component() {
 										...styles.groupContentIcon,
 									}}
 								/>
-								<TextInput
+								<input
+									type="text"
 									style={{
 										...pal.text,
 										...styles.textInput,
 									}}
 									placeholder={"Reset code"}
-									placeholderTextColor={pal.colors.textLight}
+									className={phStyleCName}
 									value={resetCode}
-									onChangeText={setResetCode}
+									onChange={(ev) => setResetCode(ev.target.value)}
 									onFocus={() => setError("")}
 									onBlur={onBlur}
-									accessible={true}
-									accessibilityLabel={"Reset Code"}
-									accessibilityHint=""
 									autoCapitalize="none"
 									autoCorrect={"off"}
 									autoComplete="off"
 								/>
-							</View>
-							<View
+							</div>
+							<div
 								style={{
 									...pal.borderDark,
 									...styles.groupContent,
 									...styles.groupBottom,
 								}}
 							>
-								{/* @ts-ignore */}
 								<FontAwesomeIcon
 									icon="lock"
 									style={{
@@ -223,33 +222,30 @@ export function Component() {
 										...styles.groupContentIcon,
 									}}
 								/>
-								<TextInput
+								<input
+									type="password"
 									style={{
 										...pal.text,
 										...styles.textInput,
 									}}
 									placeholder={"New password"}
-									placeholderTextColor={pal.colors.textLight}
-									onChangeText={setNewPassword}
-									secureTextEntry
-									accessible={true}
-									accessibilityLabel={"New Password"}
-									accessibilityHint=""
+									className={phStyleCName}
+									onChange={(ev) => setNewPassword(ev.target.value)}
 									autoCapitalize="none"
 									autoComplete="new-password"
 								/>
-							</View>
-						</View>
+							</div>
+						</div>
 					)}
 					{error ? <ErrorMessage message={error} style={styles.error} /> : undefined}
-				</View>
-				<View style={styles.btnContainer}>
+				</div>
+				<div style={styles.btnContainer}>
 					{isProcessing ? (
-						<View style={styles.btn}>
+						<div style={styles.btn}>
 							<ActivityIndicator color="#fff" />
-						</View>
+						</div>
 					) : (
-						<View style={{ gap: 6 }}>
+						<div style={{ gap: 6 }}>
 							{stage === Stages.RequestCode && (
 								<Button
 									type="primary"
@@ -258,7 +254,7 @@ export function Component() {
 									accessibilityHint=""
 									label={"Request Code"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-									labelStyle={[s.f18]}
+									labelStyle={s.f18}
 								/>
 							)}
 							{stage === Stages.ChangePassword && (
@@ -269,7 +265,7 @@ export function Component() {
 									accessibilityHint=""
 									label={"Next"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-									labelStyle={[s.f18]}
+									labelStyle={s.f18}
 								/>
 							)}
 							<Button
@@ -281,22 +277,23 @@ export function Component() {
 								accessibilityHint=""
 								label={stage !== Stages.Done ? "Cancel" : "Close"}
 								labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-								labelStyle={[s.f18]}
+								labelStyle={s.f18}
 							/>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 			</ScrollView>
 		</SafeAreaView>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		justifyContent: "space-between",
 	},
 	containerMobile: {
-		paddingHorizontal: 18,
+		paddingLeft: 18,
+		paddingRight: 18,
 		paddingBottom: 35,
 	},
 	titleSection: {
@@ -313,8 +310,7 @@ const styles = StyleSheet.create({
 	},
 	textInput: {
 		width: "100%",
-		paddingHorizontal: 14,
-		paddingVertical: 10,
+		padding: "10px 14px",
 		fontSize: 16,
 	},
 	btn: {
@@ -331,10 +327,12 @@ const styles = StyleSheet.create({
 	group: {
 		borderWidth: 1,
 		borderRadius: 10,
-		marginVertical: 20,
+		marginTop: 20,
+		marginBottom: 20,
 	},
 	groupLabel: {
-		paddingHorizontal: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
 		paddingBottom: 5,
 	},
 	groupContent: {
@@ -347,4 +345,4 @@ const styles = StyleSheet.create({
 	groupContentIcon: {
 		marginLeft: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,7 +1,7 @@
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
 import React from "react";
 import { Image } from "react-native";
-import { LayoutAnimation, Pressable, StyleSheet, View } from "react-native";
+import { LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
@@ -51,15 +51,13 @@ export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 	}, [embed]);
 
 	return (
-		<Pressable
+		<button
+			type="button"
 			style={{
 				...t.atoms.border_contrast_medium,
 				...styles.replyToLayout,
 			}}
-			onPress={onPress}
-			accessibilityRole="button"
-			accessibilityLabel={"Expand or collapse the full post you are replying to"}
-			accessibilityHint={"Expands or collapses the full post you are replying to"}
+			onClick={onPress}
 		>
 			<PreviewableUserAvatar
 				size={50}
@@ -68,23 +66,23 @@ export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 				type={replyTo.author.associated?.labeler ? "labeler" : "user"}
 				disableNavigation={true}
 			/>
-			<View style={styles.replyToPost}>
+			<div style={styles.replyToPost}>
 				<Text type="xl-medium" style={t.atoms.text} numberOfLines={1} emoji>
 					{sanitizeDisplayName(replyTo.author.displayName || sanitizeHandle(replyTo.author.handle))}
 				</Text>
-				<View style={styles.replyToBody}>
-					<View style={styles.replyToText}>
+				<div style={styles.replyToBody}>
+					<div style={styles.replyToText}>
 						<Text type="post-text" style={t.atoms.text} numberOfLines={!showFull ? 6 : undefined} emoji>
 							{replyTo.text}
 						</Text>
-					</View>
+					</div>
 					{images && !replyTo.moderation?.ui("contentMedia").blur && (
 						<ComposerReplyToImages images={images} showFull={showFull} />
 					)}
-				</View>
+				</div>
 				{showFull && quoteEmbed && <MaybeQuoteEmbed embed={quoteEmbed} />}
-			</View>
-		</Pressable>
+			</div>
+		</button>
 	);
 }
 
@@ -95,7 +93,7 @@ function ComposerReplyToImages({
 	showFull: boolean;
 }) {
 	return (
-		<View
+		<div
 			style={{
 				...styles.imagesContainer,
 				...a.mx_xs,
@@ -105,13 +103,13 @@ function ComposerReplyToImages({
 				<Image
 					source={{ uri: images[0].thumb }}
 					style={a.flex_1}
-					//@ts-ignore
+					//@ts-expect-error
 					cachePolicy="memory-disk"
 					accessibilityIgnoresInvertColors
 				/>
 			)) ||
 				(images.length === 2 && (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.flex_row,
@@ -120,20 +118,20 @@ function ComposerReplyToImages({
 					>
 						<Image
 							source={{ uri: images[0].thumb }}
-							style={a.flex_1} //@ts-ignore
+							style={a.flex_1} //@ts-expect-error
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
 						<Image
 							source={{ uri: images[1].thumb }}
-							style={a.flex_1} //@ts-ignore
+							style={a.flex_1} //@ts-expect-error
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
-					</View>
+					</div>
 				)) ||
 				(images.length === 3 && (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.flex_row,
@@ -142,11 +140,11 @@ function ComposerReplyToImages({
 					>
 						<Image
 							source={{ uri: images[0].thumb }}
-							style={a.flex_1} //@ts-ignore
+							style={a.flex_1} //@ts-expect-error
 							cachePolicy="memory-disk"
 							accessibilityIgnoresInvertColors
 						/>
-						<View
+						<div
 							style={{
 								...a.flex_1,
 								...a.gap_2xs,
@@ -154,27 +152,27 @@ function ComposerReplyToImages({
 						>
 							<Image
 								source={{ uri: images[1].thumb }}
-								style={a.flex_1} //@ts-ignore
+								style={a.flex_1} //@ts-expect-error
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[2].thumb }}
-								style={a.flex_1} //@ts-ignore
+								style={a.flex_1} //@ts-expect-error
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
-						</View>
-					</View>
+						</div>
+					</div>
 				)) ||
 				(images.length === 4 && (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.gap_2xs,
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.flex_1,
 								...a.flex_row,
@@ -183,18 +181,18 @@ function ComposerReplyToImages({
 						>
 							<Image
 								source={{ uri: images[0].thumb }}
-								style={a.flex_1} //@ts-ignore
+								style={a.flex_1} //@ts-expect-error
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[1].thumb }}
-								style={a.flex_1} //@ts-ignore
+								style={a.flex_1} //@ts-expect-error
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
-						</View>
-						<View
+						</div>
+						<div
 							style={{
 								...a.flex_1,
 								...a.flex_row,
@@ -203,32 +201,33 @@ function ComposerReplyToImages({
 						>
 							<Image
 								source={{ uri: images[2].thumb }}
-								style={a.flex_1} //@ts-ignore
+								style={a.flex_1} //@ts-expect-error
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
 							<Image
 								source={{ uri: images[3].thumb }}
-								style={a.flex_1} //@ts-ignore
+								style={a.flex_1} //@ts-expect-error
 								cachePolicy="memory-disk"
 								accessibilityIgnoresInvertColors
 							/>
-						</View>
-					</View>
+						</div>
+					</div>
 				))}
-		</View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	replyToLayout: {
 		flexDirection: "row",
 		alignItems: "flex-start",
-		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottomWidth: 1,
 		paddingTop: 4,
 		paddingBottom: 16,
 		marginBottom: 12,
-		marginHorizontal: 16,
+		marginLeft: 16,
+		marginRight: 16,
 	},
 	replyToPost: {
 		flex: 1,
@@ -250,4 +249,4 @@ const styles = StyleSheet.create({
 		height: 64,
 		width: 64,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 
@@ -24,20 +22,15 @@ export function TimeIndicator({
 	const seconds = String(time % 60).padStart(2, "0");
 
 	return (
-		<View
-			pointerEvents="none"
-			accessibilityLabel={`Time remaining: ${Number(time) || 0} ${Number(time) === 1 ? "second" : "seconds"}`}
-			accessibilityHint=""
+		<div
 			style={{
-				...{
-					backgroundColor: "rgba(0, 0, 0, 0.5)",
-					borderRadius: 6,
-					paddingHorizontal: 6,
-					paddingVertical: 3,
-					left: 6,
-					bottom: 6,
-					minHeight: 21,
-				},
+				backgroundColor: "rgba(0, 0, 0, 0.5)",
+				borderRadius: 6,
+				padding: "3px 6px",
+				left: 6,
+				bottom: 6,
+				minHeight: 21,
+				pointerEvents: "none",
 
 				...a.absolute,
 				...a.justify_center,
@@ -46,13 +39,15 @@ export function TimeIndicator({
 		>
 			<Text
 				style={{
-					...{ color: t.palette.white, fontSize: 12, fontVariant: ["tabular-nums"] },
+					color: t.palette.white,
+					fontSize: 12,
+					fontVariant: "tabular-nums",
 					...a.font_bold,
-					...{ lineHeight: 1.25 },
+					lineHeight: 1.25,
 				}}
 			>
 				{`${minutes}:${seconds}`}
 			</Text>
-		</View>
+		</div>
 	);
 }

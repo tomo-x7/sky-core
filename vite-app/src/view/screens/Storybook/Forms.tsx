@@ -1,5 +1,4 @@
 import React from "react";
-import { type TextInput, View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -19,17 +18,17 @@ export function Forms() {
 	const [value, setValue] = React.useState("");
 	const [date, setDate] = React.useState("2001-01-01");
 
-	const inputRef = React.useRef<TextInput>(null);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.gap_4xl,
 				...a.align_start,
 			}}
 		>
 			<H1>Forms</H1>
-			<View
+			<div
 				style={{
 					...a.gap_md,
 					...a.align_start,
@@ -40,14 +39,14 @@ export function Forms() {
 
 				<TextField.Input value={value} onChangeText={setValue} label="Text field" />
 
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_start,
 						...a.gap_sm,
 					}}
 				>
-					<View style={a.flex_1}>
+					<div style={a.flex_1}>
 						<TextField.Root>
 							<TextField.Icon icon={Globe} />
 							<TextField.Input
@@ -57,17 +56,17 @@ export function Forms() {
 								label="Text field"
 							/>
 						</TextField.Root>
-					</View>
+					</div>
 					<Button
 						label="Submit"
 						size="large"
 						variant="solid"
 						color="primary"
-						onPress={() => inputRef.current?.clear()}
+						onPress={() => (inputRef.current ? (inputRef.current.value = "") : undefined)}
 					>
 						<ButtonText>Submit</ButtonText>
 					</Button>
-				</View>
+				</div>
 
 				<TextField.Root>
 					<TextField.Icon icon={Globe} />
@@ -79,29 +78,30 @@ export function Forms() {
 					<TextField.Input value={value} onChangeText={setValue} label="Text field" isInvalid />
 				</TextField.Root>
 
-				<View style={a.w_full}>
+				<div style={a.w_full}>
 					<TextField.LabelText>Text field</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={Globe} />
 						<TextField.Input value={value} onChangeText={setValue} label="Text field" />
-						<TextField.SuffixText label="@gmail.com">@gmail.com</TextField.SuffixText>
+						<TextField.SuffixText>@gmail.com</TextField.SuffixText>
 					</TextField.Root>
-				</View>
+				</div>
 
-				<View style={a.w_full}>
+				<div style={a.w_full}>
 					<TextField.LabelText>Textarea</TextField.LabelText>
 					<TextField.Input
 						multiline
-						numberOfLines={4}
-						value={value}
+						// TODO
+						// numberOfLines={4}
+						defaultValue={value}
 						onChangeText={setValue}
 						label="Text field"
 					/>
-				</View>
+				</div>
 
 				<H3>DateField</H3>
 
-				<View style={a.w_full}>
+				<div style={a.w_full}>
 					<LabelText>Date</LabelText>
 					<DateField
 						value={date}
@@ -111,9 +111,9 @@ export function Forms() {
 						}}
 						label="Input"
 					/>
-				</View>
-			</View>
-			<View
+				</div>
+			</div>
+			<div
 				style={{
 					...a.gap_md,
 					...a.align_start,
@@ -134,7 +134,7 @@ export function Forms() {
 					values={toggleGroupAValues}
 					onChange={setToggleGroupAValues}
 				>
-					<View style={a.gap_md}>
+					<div style={a.gap_md}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Switch />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -155,7 +155,7 @@ export function Forms() {
 							<Toggle.Switch />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
 						</Toggle.Item>
-					</View>
+					</div>
 				</Toggle.Group>
 
 				<Toggle.Group
@@ -165,7 +165,7 @@ export function Forms() {
 					values={toggleGroupBValues}
 					onChange={setToggleGroupBValues}
 				>
-					<View style={a.gap_md}>
+					<div style={a.gap_md}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Checkbox />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -186,11 +186,11 @@ export function Forms() {
 							<Toggle.Checkbox />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
 						</Toggle.Item>
-					</View>
+					</div>
 				</Toggle.Group>
 
 				<Toggle.Group label="Toggle" type="radio" values={toggleGroupCValues} onChange={setToggleGroupCValues}>
-					<View style={a.gap_md}>
+					<div style={a.gap_md}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Radio />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -211,9 +211,9 @@ export function Forms() {
 							<Toggle.Radio />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
 						</Toggle.Item>
-					</View>
+					</div>
 				</Toggle.Group>
-			</View>
+			</div>
 			<Button
 				variant="gradient"
 				color="gradient_nordic"
@@ -227,7 +227,7 @@ export function Forms() {
 			>
 				<ButtonText>Reset all toggles</ButtonText>
 			</Button>
-			<View
+			<div
 				style={{
 					...a.gap_md,
 					...a.align_start,
@@ -248,7 +248,7 @@ export function Forms() {
 					</ToggleButton.Button>
 				</ToggleButton.Group>
 
-				<View>
+				<div>
 					<ToggleButton.Group
 						label="Preferences"
 						values={toggleGroupDValues}
@@ -264,8 +264,8 @@ export function Forms() {
 							<ToggleButton.ButtonText>Show</ToggleButton.ButtonText>
 						</ToggleButton.Button>
 					</ToggleButton.Group>
-				</View>
-			</View>
-		</View>
+				</div>
+			</div>
+		</div>
 	);
 }

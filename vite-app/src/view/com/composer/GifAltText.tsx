@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { TouchableOpacity, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -10,7 +9,7 @@ import * as TextField from "#/components/forms/TextField";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { PlusSmall_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
-import { HITSLOP_10, MAX_ALT_TEXT } from "#/lib/constants";
+import { MAX_ALT_TEXT } from "#/lib/constants";
 import { parseAltFromGIFDescription } from "#/lib/gif-alt-text";
 import { type EmbedPlayerParams, parseEmbedPlayerFromUrl } from "#/lib/strings/embed-player";
 import { useResolveGifQuery } from "#/state/queries/resolve-link";
@@ -63,12 +62,11 @@ export function GifAltTextDialogLoaded({
 	const [altTextDraft, setAltTextDraft] = useState(altText || vendorAltText);
 	return (
 		<>
-			<TouchableOpacity
-				accessibilityRole="button"
-				accessibilityLabel={"Add alt text"}
-				accessibilityHint=""
-				hitSlop={HITSLOP_10}
-				onPress={control.open}
+			<button
+				type="button"
+				// TODO
+				// hitSlop={HITSLOP_10}
+				onClick={control.open}
 				style={{
 					...a.absolute,
 					...{ top: 8, left: 8 },
@@ -92,11 +90,10 @@ export function GifAltTextDialogLoaded({
 						...a.font_bold,
 						...{ color: t.palette.white },
 					}}
-					accessible={false}
 				>
 					ALT
 				</Text>
-			</TouchableOpacity>
+			</button>
 			<AltTextReminder />
 			<Dialog.Outer
 				control={control}
@@ -137,15 +134,15 @@ function AltTextInner({
 
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>
-			<View style={a.flex_col_reverse}>
-				<View
+			<div style={a.flex_col_reverse}>
+				<div
 					style={{
 						...a.mt_md,
 						...a.gap_md,
 					}}
 				>
-					<View style={a.gap_sm}>
-						<View style={a.relative}>
+					<div style={a.gap_sm}>
+						<div style={a.relative}>
 							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
@@ -154,19 +151,20 @@ function AltTextInner({
 									onChangeText={onChange}
 									defaultValue={altText}
 									multiline
-									numberOfLines={3}
+									// TODO
+									// numberOfLines={3}
 									autoFocus
-									onKeyPress={({ nativeEvent }) => {
+									onKeyDown={({ nativeEvent }) => {
 										if (nativeEvent.key === "Escape") {
 											control.close();
 										}
 									}}
 								/>
 							</TextField.Root>
-						</View>
+						</div>
 
 						{altText.length > MAX_ALT_TEXT && (
-							<View
+							<div
 								style={{
 									...a.pb_sm,
 									...a.flex_row,
@@ -183,9 +181,9 @@ function AltTextInner({
 								>
 									<>Alt text will be truncated. Limit: {MAX_ALT_TEXT.toLocaleString()} characters.</>
 								</Text>
-							</View>
+							</div>
 						)}
-					</View>
+					</div>
 
 					<AltTextCounterWrapper altText={altText}>
 						<Button
@@ -201,9 +199,9 @@ function AltTextInner({
 							<ButtonText>Save</ButtonText>
 						</Button>
 					</AltTextCounterWrapper>
-				</View>
+				</div>
 				{/* below the text input to force tab order */}
-				<View>
+				<div>
 					<Text
 						style={{
 							...a.text_2xl,
@@ -214,7 +212,7 @@ function AltTextInner({
 					>
 						Add alt text
 					</Text>
-					<View style={a.align_center}>
+					<div style={a.align_center}>
 						<GifEmbed
 							thumb={thumb}
 							altText={altText}
@@ -223,9 +221,9 @@ function AltTextInner({
 							hideAlt
 							style={{ height: 225 }}
 						/>
-					</View>
-				</View>
-			</View>
+					</div>
+				</div>
+			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>
 	);

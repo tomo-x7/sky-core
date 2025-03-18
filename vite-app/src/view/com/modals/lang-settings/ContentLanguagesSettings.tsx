@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { deviceLanguageCodes } from "#/locale/deviceLocales";
@@ -8,7 +8,6 @@ import { languageName } from "#/locale/helpers";
 import { useModalControls } from "#/state/modals";
 import { useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences/languages";
 import { LANGUAGES, LANGUAGES_MAP_CODE2 } from "../../../../locale/languages";
-import { Text } from "../../util/text/Text";
 import { ScrollView } from "../util";
 import { ConfirmLanguagesButton } from "./ConfirmLanguagesButton";
 import { LanguageToggle } from "./LanguageToggle";
@@ -31,9 +30,9 @@ export function Component(props: {}) {
 		);
 		// sort so that device & selected languages are on top, then alphabetically
 		langs.sort((a, b) => {
-			//@ts-ignore
+			//@ts-expect-error
 			const hasA = langPrefs.contentLanguages.includes(a.code2) || deviceLanguageCodes.includes(a.code2);
-			//@ts-ignore
+			//@ts-expect-error
 			const hasB = langPrefs.contentLanguages.includes(b.code2) || deviceLanguageCodes.includes(b.code2);
 			if (hasA === hasB) return a.name.localeCompare(b.name);
 			if (hasA) return -1;
@@ -50,13 +49,12 @@ export function Component(props: {}) {
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...pal.view,
 				...styles.container,
 
-				...// @ts-ignore vh is web only
-				(isMobile
+				...(isMobile
 					? {
 							paddingTop: 20,
 						}
@@ -101,18 +99,18 @@ export function Component(props: {}) {
 						}}
 					/>
 				))}
-				<View
+				<div
 					style={{
 						height: isMobile ? 60 : 0,
 					}}
 				/>
 			</ScrollView>
 			<ConfirmLanguagesButton onPress={onPressDone} />
-		</View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		flex: 1,
 	},
@@ -124,11 +122,13 @@ const styles = StyleSheet.create({
 	},
 	description: {
 		textAlign: "center",
-		paddingHorizontal: 16,
+		paddingLeft: 16,
+		paddingRight: 16,
 		marginBottom: 10,
 	},
 	scrollContainer: {
 		flex: 1,
-		paddingHorizontal: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

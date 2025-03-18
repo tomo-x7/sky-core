@@ -149,7 +149,7 @@ function HeaderReady({
 		? "Deleted Account"
 		: sanitizeDisplayName(profile.displayName || profile.handle, moderation.ui("displayName"));
 
-	// @ts-ignore findLast is polyfilled - esb
+	// @ts-expect-error findLast is polyfilled - esb
 	const latestMessageFromOther = convoState.items.findLast(
 		(item: ConvoItem) => item.type === "message" && item.message.sender.did === profile.did,
 	);

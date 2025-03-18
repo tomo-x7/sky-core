@@ -1,9 +1,9 @@
 import { type AppBskyActorDefs, AppBskyFeedGetAuthorFeed, AtUri } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
 
 import * as Prompt from "#/components/Prompt";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
@@ -13,7 +13,6 @@ import { EmptyState } from "../util/EmptyState";
 import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
 
 export enum KnownError {
 	Block = "Block",
@@ -51,7 +50,7 @@ export function PostFeedErrorMessage({
 	}
 
 	if (knownError === KnownError.Block) {
-		return <EmptyState icon="ban" message={"Posts hidden"} style={{ paddingVertical: 40 }} />;
+		return <EmptyState icon="ban" message={"Posts hidden"} style={{ paddingTop: 40, paddingBottom: 40 }} />;
 	}
 
 	return <ErrorMessage message={cleanError(error)} onPressTryAgain={onPressTryAgain} />;
@@ -127,12 +126,12 @@ function FeedgenErrorMessage({
 			case KnownError.FeedgenOffline:
 			case KnownError.FeedgenUnknown: {
 				return (
-					<View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+					<div style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
 						{knownError === KnownError.FeedgenDoesNotExist && savedFeedConfig && (
 							<Button type="inverted" label={"Remove feed"} onPress={onRemoveFeed} />
 						)}
 						<Button type="default-light" label={"View profile"} onPress={onViewProfile} />
-					</View>
+					</div>
 				);
 			}
 		}
@@ -140,7 +139,7 @@ function FeedgenErrorMessage({
 
 	return (
 		<>
-			<View
+			<div
 				style={{
 					...pal.border,
 					...pal.viewLight,
@@ -162,7 +161,7 @@ function FeedgenErrorMessage({
 				)}
 
 				{cta}
-			</View>
+			</div>
 			<Prompt.Basic
 				control={removePromptControl}
 				title={"Remove feed?"}

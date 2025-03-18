@@ -1,7 +1,7 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type JSX, memo } from "react";
-import { ActivityIndicator, AppState, Dimensions, type ListRenderItemInfo, StyleSheet, View } from "react-native";
+import { ActivityIndicator, AppState, Dimensions, type ListRenderItemInfo } from "react-native";
 
 import { useBreakpoints, useLayoutBreakpoints } from "#/alf";
 import { ProgressGuide, SuggestedFollows } from "#/components/FeedInterstitials";
@@ -575,11 +575,11 @@ let PostFeed = ({
 				return <ViewFullThread uri={row.uri} />;
 			} else if (row.type === "videoGridRowPlaceholder") {
 				return (
-					<View>
+					<div>
 						<PostFeedVideoGridRowPlaceholder />
 						<PostFeedVideoGridRowPlaceholder />
 						<PostFeedVideoGridRowPlaceholder />
-					</View>
+					</div>
 				);
 			} else if (row.type === "videoGridRow") {
 				let sourceContext: VideoFeedSourceContext;
@@ -626,19 +626,19 @@ let PostFeed = ({
 		const offset = Math.max(headerOffset, 32);
 
 		return isFetchingNextPage ? (
-			<View style={styles.feedFooter}>
+			<div style={styles.feedFooter}>
 				<ActivityIndicator />
-				<View style={{ height: offset }} />
-			</View>
+				<div style={{ height: offset }} />
+			</div>
 		) : shouldRenderEndOfFeed ? (
-			<View style={{ minHeight: offset }}>{renderEndOfFeed()}</View>
+			<div style={{ minHeight: offset }}>{renderEndOfFeed()}</div>
 		) : (
-			<View style={{ height: offset }} />
+			<div style={{ height: offset }} />
 		);
 	}, [isFetchingNextPage, shouldRenderEndOfFeed, renderEndOfFeed, headerOffset]);
 
 	return (
-		<View style={style}>
+		<div style={style}>
 			<List
 				ref={scrollElRef}
 				data={feedItems}
@@ -658,7 +658,6 @@ let PostFeed = ({
 				onEndReachedThreshold={2} // number of posts left to trigger load more
 				removeClippedSubviews={true}
 				extraData={extraData}
-				// @ts-ignore our .web version only -prf
 				desktopFixedHeight={desktopFixedHeightOffset ? desktopFixedHeightOffset : true}
 				initialNumToRender={initialNumToRenderOverride ?? initialNumToRender}
 				windowSize={9}
@@ -666,15 +665,15 @@ let PostFeed = ({
 				updateCellsBatchingPeriod={40}
 				onItemSeen={feedFeedback.onItemSeen}
 			/>
-		</View>
+		</div>
 	);
 };
 PostFeed = memo(PostFeed);
 export { PostFeed };
 
-const styles = StyleSheet.create({
+const styles = {
 	feedFooter: { paddingTop: 20 },
-});
+} satisfies Record<string, React.CSSProperties>;
 
 function isThreadParentAt<T>(arr: Array<T>, i: number) {
 	if (arr.length === 1) {

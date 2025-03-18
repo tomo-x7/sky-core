@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
 
 import { ThemeProvider, atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -46,7 +45,7 @@ function StorybookInner() {
 
 	return (
 		<>
-			<View
+			<div
 				style={{
 					...a.p_xl,
 					...a.gap_5xl,
@@ -55,7 +54,7 @@ function StorybookInner() {
 			>
 				{!showContainedList ? (
 					<>
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_start,
@@ -104,7 +103,7 @@ function StorybookInner() {
 							>
 								<ButtonText>Dark</ButtonText>
 							</Button>
-						</View>
+						</div>
 
 						<Button
 							variant="solid"
@@ -165,7 +164,7 @@ function StorybookInner() {
 						<ListContained />
 					</>
 				)}
-			</View>
+			</div>
 		</>
 	);
 }

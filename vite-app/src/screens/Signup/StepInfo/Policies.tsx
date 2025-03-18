@@ -1,6 +1,5 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import type { ReactElement } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
@@ -19,7 +18,7 @@ export const Policies = ({
 	const t = useTheme();
 
 	if (!serviceDescription) {
-		return <View />;
+		return <div />;
 	}
 
 	const tos = validWebLink(serviceDescription.links?.termsOfService);
@@ -27,7 +26,7 @@ export const Policies = ({
 
 	if (!tos && !pp) {
 		return (
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -38,7 +37,7 @@ export const Policies = ({
 				<Text style={t.atoms.text_contrast_medium}>
 					This service has not provided terms of service or a privacy policy.
 				</Text>
-			</View>
+			</div>
 		);
 	}
 
@@ -82,7 +81,7 @@ export const Policies = ({
 	}
 
 	return (
-		<View style={a.gap_sm}>
+		<div style={a.gap_sm}>
 			{els ? (
 				<Text
 					style={{
@@ -115,7 +114,7 @@ export const Policies = ({
 					must read these Terms on your behalf.
 				</Text>
 			) : undefined}
-		</View>
+		</div>
 	);
 };
 

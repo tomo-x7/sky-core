@@ -142,8 +142,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 							...t.atoms.text_contrast_medium,
 							...a.leading_snug,
 
-							...//@ts-ignore
-							{ whiteSpace: "nowrap" },
+							 whiteSpace: "nowrap" ,
 						}}
 					>
 						{timeElapsed}

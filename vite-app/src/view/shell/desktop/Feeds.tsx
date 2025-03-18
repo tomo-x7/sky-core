@@ -1,7 +1,6 @@
 import { useNavigation, useNavigationState } from "@react-navigation/native";
-import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { InlineLinkText, createStaticClick } from "#/components/Link";
 import { getCurrentRoute } from "#/lib/routes/helpers";
 import type { NavigationProp } from "#/lib/routes/types";
@@ -24,7 +23,7 @@ export function DesktopFeeds() {
 
 	if (isLoading) {
 		return (
-			<View
+			<div
 				style={{
 					gap: 12,
 				}}
@@ -32,7 +31,7 @@ export function DesktopFeeds() {
 				{Array(5)
 					.fill(0)
 					.map((_, i) => (
-						<View
+						<div
 							key={i}
 							style={{
 								...a.rounded_sm,
@@ -45,7 +44,7 @@ export function DesktopFeeds() {
 							}}
 						/>
 					))}
-			</View>
+			</div>
 		);
 	}
 
@@ -54,15 +53,15 @@ export function DesktopFeeds() {
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				gap: 10,
 				/*
 				 * Small padding prevents overflow prior to actually overflowing the
 				 * height of the screen with lots of feeds.
 				 */
-				paddingVertical: 2,
-				// @ts-ignore
+				paddingTop: 2,
+				paddingBottom: 2,
 				overflowY: "auto",
 			}}
 		>
@@ -84,9 +83,10 @@ export function DesktopFeeds() {
 						style={{
 							...a.text_md,
 							...a.leading_snug,
-							...(current ? [a.font_bold, t.atoms.text] : [t.atoms.text_contrast_medium]),
+							...flatten(current ? [a.font_bold, t.atoms.text] : [t.atoms.text_contrast_medium]),
 						}}
-						numberOfLines={1}
+						// TODO
+						// numberOfLines={1}
 					>
 						{feedInfo.displayName}
 					</InlineLinkText>
@@ -99,10 +99,11 @@ export function DesktopFeeds() {
 					...a.text_md,
 					...a.leading_snug,
 				}}
-				numberOfLines={1}
+				// TODO
+				// numberOfLines={1}
 			>
 				{"More feeds"}
 			</InlineLinkText>
-		</View>
+		</div>
 	);
 }

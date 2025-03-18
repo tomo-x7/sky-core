@@ -9,12 +9,12 @@ type Props = {
 
 const ImageDefaultHeader = ({ onRequestClose }: Props) => {
 	return (
-		<SafeAreaView style={{...styles.root,pointerEvents:"none"}}>
+		<SafeAreaView style={{ ...styles.root, pointerEvents: "none" }}>
 			<button
 				style={{
 					...styles.closeButton,
 					...styles.blurredBackground,
-					pointerEvents:"auto"
+					pointerEvents: "auto",
 				}}
 				onClick={onRequestClose}
 				// TODO
@@ -23,14 +23,14 @@ const ImageDefaultHeader = ({ onRequestClose }: Props) => {
 				// TODO
 				// onAccessibilityEscape={onRequestClose}
 			>
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="close" color={"#fff"} size={22} />
 			</button>
 		</SafeAreaView>
 	);
 };
 
-const styles:Record<string,React.CSSProperties> = ({
+const styles = {
 	root: {
 		alignItems: "flex-end",
 	},
@@ -47,7 +47,7 @@ const styles:Record<string,React.CSSProperties> = ({
 	blurredBackground: {
 		backdropFilter: "blur(10px)",
 		WebkitBackdropFilter: "blur(10px)",
-	} ,
-});
+	},
+} satisfies Record<string, React.CSSProperties>;
 
 export default ImageDefaultHeader;

@@ -1,15 +1,14 @@
 import { ReactRenderer } from "@tiptap/react";
 import type { SuggestionKeyDownProps, SuggestionOptions, SuggestionProps } from "@tiptap/suggestion";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
 import tippy, { type Instance as TippyInstance } from "tippy.js";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import type { ActorAutocompleteFn } from "#/state/queries/actor-autocomplete";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
-import { Text } from "#/view/com/util/text/Text";
 import { useGrapheme } from "../hooks/useGrapheme";
 
 interface MentionListRef {
@@ -42,7 +41,7 @@ export function createSuggestion({
 						return;
 					}
 
-					// @ts-ignore getReferenceClientRect doesnt like that clientRect can return null -prf
+					// @ts-expect-error getReferenceClientRect doesnt like that clientRect can return null -prf
 					popup = tippy("body", {
 						getReferenceClientRect: props.clientRect,
 						appendTo: () => document.body,
@@ -62,7 +61,7 @@ export function createSuggestion({
 					}
 
 					popup?.[0]?.setProps({
-						// @ts-ignore getReferenceClientRect doesnt like that clientRect can return null -prf
+						// @ts-expect-error getReferenceClientRect doesnt like that clientRect can return null -prf
 						getReferenceClientRect: props.clientRect,
 					});
 				},
@@ -139,7 +138,7 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 
 	return (
 		<div className="items">
-			<View
+			<div
 				style={{
 					...pal.borderDark,
 					...pal.view,
@@ -155,7 +154,8 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 						const isSelected = selectedIndex === index;
 
 						return (
-							<Pressable
+							<button
+								type="button"
 								key={item.handle}
 								style={{
 									...(isSelected ? pal.viewLight : undefined),
@@ -168,12 +168,11 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 											? styles.lastMention
 											: undefined),
 								}}
-								onPress={() => {
+								onClick={() => {
 									selectItem(index);
 								}}
-								accessibilityRole="button"
 							>
-								<View style={styles.avatarAndDisplayName}>
+								<div style={styles.avatarAndDisplayName}>
 									<UserAvatar
 										avatar={item.avatar ?? null}
 										size={26}
@@ -182,11 +181,11 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 									<Text emoji style={pal.text} numberOfLines={1}>
 										{displayName}
 									</Text>
-								</View>
+								</div>
 								<Text type="xs" style={pal.textLight} numberOfLines={1}>
 									{sanitizeHandle(item.handle, "@")}
 								</Text>
-							</Pressable>
+							</button>
 						);
 					})
 				) : (
@@ -200,12 +199,12 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 						No result
 					</Text>
 				)}
-			</View>
+			</div>
 		</div>
 	);
 });
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		width: 500,
 		borderRadius: 6,
@@ -218,8 +217,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 		flexDirection: "row",
-		paddingHorizontal: 12,
-		paddingVertical: 8,
+		padding: "8px 12px",
 		gap: 4,
 	},
 	firstMention: {
@@ -237,7 +235,6 @@ const styles = StyleSheet.create({
 		gap: 6,
 	},
 	noResult: {
-		paddingHorizontal: 12,
-		paddingVertical: 8,
+		padding: "8px 12px",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

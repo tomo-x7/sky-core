@@ -1,10 +1,10 @@
 import { AppBskyGraphDefs, AppBskyGraphStarterpack, AtUri, type ModerationOpts } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as FeedCard from "#/components/FeedCard";
@@ -142,7 +142,7 @@ function LandingScreenLoaded({
 	};
 
 	return (
-		<View style={a.flex_1}>
+		<div style={a.flex_1}>
 			<Layout.Content ignoreTabletLayoutOffset>
 				<LinearGradientBackground
 					style={{
@@ -150,14 +150,14 @@ function LandingScreenLoaded({
 						...a.gap_sm,
 						...a.px_lg,
 						...a.py_2xl,
-						...(isTabletOrDesktop && [a.mt_2xl, a.rounded_md]),
+						...(isTabletOrDesktop && { ...a.mt_2xl, ...a.rounded_md }),
 
 						...(activeStarterPack?.isClip && {
 							paddingTop: 100,
 						}),
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_md,
@@ -165,7 +165,7 @@ function LandingScreenLoaded({
 						}}
 					>
 						<Logo width={76} fill="white" />
-					</View>
+					</div>
 					<Text
 						style={{
 							...a.font_bold,
@@ -188,7 +188,7 @@ function LandingScreenLoaded({
 						Starter pack by {`@${creator.handle}`}
 					</Text>
 				</LinearGradientBackground>
-				<View
+				<div
 					style={{
 						...a.gap_2xl,
 						...a.mx_lg,
@@ -196,7 +196,7 @@ function LandingScreenLoaded({
 					}}
 				>
 					{record.description ? <RichText value={descriptionRt} style={a.text_md} /> : null}
-					<View style={a.gap_sm}>
+					<div style={a.gap_sm}>
 						<Button
 							label={"Join Bluesky"}
 							onPress={onJoinPress}
@@ -206,7 +206,7 @@ function LandingScreenLoaded({
 						>
 							<ButtonText style={a.text_lg}>Join Bluesky</ButtonText>
 						</Button>
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -215,7 +215,7 @@ function LandingScreenLoaded({
 						>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
-								//@ts-ignore
+								//@ts-expect-error
 								size={12}
 								color={t.atoms.text_contrast_medium.color}
 							/>
@@ -229,11 +229,11 @@ function LandingScreenLoaded({
 							>
 								<>{formatCount(JOINED_THIS_WEEK)} joined this week</>
 							</Text>
-						</View>
-					</View>
-					<View style={a.gap_3xl}>
+						</div>
+					</div>
+					<div style={a.gap_3xl}>
 						{Boolean(listItemsSample?.length) && (
-							<View style={a.gap_md}>
+							<div style={a.gap_md}>
 								<Text
 									style={{
 										...a.font_heavy,
@@ -246,14 +246,16 @@ function LandingScreenLoaded({
 										<>You'll follow these people and {listItemsCount - 8} others</>
 									)}
 								</Text>
-								<View
-									style={isTabletOrDesktop && [a.border, a.rounded_md, t.atoms.border_contrast_low]}
+								<div
+									style={flatten(
+										isTabletOrDesktop && [a.border, a.rounded_md, t.atoms.border_contrast_low],
+									)}
 								>
 									{starterPack.listItemsSample
 										?.filter((p) => !p.subject.associated?.labeler)
 										.slice(0, 8)
 										.map((item, i) => (
-											<View
+											<div
 												key={item.subject.did}
 												style={{
 													...a.py_lg,
@@ -264,13 +266,13 @@ function LandingScreenLoaded({
 												}}
 											>
 												<ProfileCard profile={item.subject} moderationOpts={moderationOpts} />
-											</View>
+											</div>
 										))}
-								</View>
-							</View>
+								</div>
+							</div>
 						)}
 						{feeds?.length ? (
-							<View style={a.gap_md}>
+							<div style={a.gap_md}>
 								<Text
 									style={{
 										...a.font_heavy,
@@ -280,14 +282,16 @@ function LandingScreenLoaded({
 									You'll stay updated with these feeds
 								</Text>
 
-								<View
+								<div
 									style={{
-										...{ pointerEvents: "none" },
-										...(isTabletOrDesktop && [a.border, a.rounded_md, t.atoms.border_contrast_low]),
+										pointerEvents: "none",
+										...flatten(
+											isTabletOrDesktop && [a.border, a.rounded_md, t.atoms.border_contrast_low],
+										),
 									}}
 								>
 									{feeds?.map((feed, i) => (
-										<View
+										<div
 											style={{
 												...a.py_lg,
 												...a.px_md,
@@ -297,12 +301,12 @@ function LandingScreenLoaded({
 											key={feed.uri}
 										>
 											<FeedCard.Default view={feed} />
-										</View>
+										</div>
 									))}
-								</View>
-							</View>
+								</div>
+							</div>
 						) : null}
-					</View>
+					</div>
 					<Button
 						label={"Signup without a starter pack"}
 						variant="solid"
@@ -313,7 +317,7 @@ function LandingScreenLoaded({
 					>
 						<ButtonText>Signup without a starter pack</ButtonText>
 					</Button>
-				</View>
+				</div>
 			</Layout.Content>
 			<AppClipOverlay visible={appClipOverlayVisible} setIsVisible={setAppClipOverlayVisible} />
 			<Prompt.Outer control={androidDialogControl}>
@@ -342,7 +346,7 @@ function LandingScreenLoaded({
 				name="apple-itunes-app"
 				content="app-id=xyz.blueskyweb.app, app-clip-bundle-id=xyz.blueskyweb.app.AppClip, app-clip-display=card"
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -371,7 +375,7 @@ export function AppClipOverlay({
 			exiting={FadeOut}
 			onPress={() => setIsVisible(false)}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.px_lg,
@@ -379,7 +383,7 @@ export function AppClipOverlay({
 				}}
 			>
 				{/* Webkit needs this to have a zindex of 2? */}
-				<View
+				<div
 					style={{
 						...a.gap_md,
 						...{ zIndex: 2 },
@@ -402,8 +406,8 @@ export function AppClipOverlay({
 					>
 						We'll remember the starter pack you chose and use it when you create an account in the app.
 					</Text>
-				</View>
-			</View>
+				</div>
+			</div>
 		</AnimatedPressable>
 	);
 }

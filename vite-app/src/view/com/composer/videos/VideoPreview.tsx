@@ -1,5 +1,4 @@
 import type { ImagePickerAsset } from "expo-image-picker";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
@@ -33,7 +32,7 @@ export function VideoPreview({
 	aspectRatio = clamp(aspectRatio, 1 / 1, 3 / 1);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.rounded_sm,
@@ -62,7 +61,7 @@ export function VideoPreview({
 						}}
 					/>
 					{autoplayDisabled && (
-						<View
+						<div
 							style={{
 								...a.absolute,
 								...a.inset_0,
@@ -71,10 +70,10 @@ export function VideoPreview({
 							}}
 						>
 							<PlayButtonIcon />
-						</View>
+						</div>
 					)}
 				</>
 			)}
-		</View>
+		</div>
 	);
 }

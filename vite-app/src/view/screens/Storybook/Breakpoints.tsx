@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { H3, Text } from "#/components/Typography";
 
@@ -8,7 +6,7 @@ export function Breakpoints() {
 	const breakpoints = useBreakpoints();
 
 	return (
-		<View>
+		<div>
 			<H3 style={a.pb_md}>Breakpoint Debugger</H3>
 			<Text style={a.pb_md}>
 				Current breakpoint: {!breakpoints.gtMobile && <Text>mobile</Text>}
@@ -24,6 +22,6 @@ export function Breakpoints() {
 			>
 				{JSON.stringify(breakpoints, null, 2)}
 			</Text>
-		</View>
+		</div>
 	);
 }

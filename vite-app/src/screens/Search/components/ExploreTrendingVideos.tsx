@@ -2,7 +2,7 @@ import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
 import { atoms as a, tokens, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -74,22 +74,25 @@ export function ExploreTrendingVideos() {
 	}
 
 	return (
-		<View style={a.pb_xl}>
-			<View
+		<div style={a.pb_xl}>
+			<div
 				style={{
 					...a.flex_row,
-					...[a.px_lg, a.py_lg, a.pt_2xl, a.gap_md],
+					...a.px_lg,
+					...a.py_lg,
+					...a.pt_2xl,
+					...a.gap_md,
 					...a.border_b,
 					...t.atoms.border_contrast_low,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.gap_sm,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -106,7 +109,7 @@ export function ExploreTrendingVideos() {
 						>
 							Trending Videos
 						</Text>
-						<View
+						<div
 							style={{
 								...a.py_xs,
 								...a.px_sm,
@@ -124,8 +127,8 @@ export function ExploreTrendingVideos() {
 							>
 								BETA
 							</Text>
-						</View>
-					</View>
+						</div>
+					</div>
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
@@ -134,8 +137,8 @@ export function ExploreTrendingVideos() {
 					>
 						Popular videos in your network.
 					</Text>
-				</View>
-			</View>
+				</div>
+			</div>
 			<BlockDrawerGesture>
 				<ScrollView
 					horizontal
@@ -143,7 +146,7 @@ export function ExploreTrendingVideos() {
 					decelerationRate="fast"
 					snapToInterval={CARD_WIDTH + tokens.space.sm}
 				>
-					<View
+					<div
 						style={{
 							...a.pt_lg,
 							...a.flex_row,
@@ -159,20 +162,20 @@ export function ExploreTrendingVideos() {
 							Array(10)
 								.fill(0)
 								.map((_, i) => (
-									<View key={i.toString()} style={{ width: CARD_WIDTH }}>
+									<div key={i.toString()} style={{ width: CARD_WIDTH }}>
 										<CompactVideoPostCardPlaceholder />
-									</View>
+									</div>
 								))
 						) : error || !data ? (
 							<Text>Whoops! Trending videos failed to load.</Text>
 						) : (
 							<VideoCards data={data} />
 						)}
-					</View>
+					</div>
 				</ScrollView>
 			</BlockDrawerGesture>
 			{!isSavedAlready && (
-				<View
+				<div
 					style={{
 						...gutters,
 						...a.pt_lg,
@@ -202,9 +205,9 @@ export function ExploreTrendingVideos() {
 						<ButtonText>{"Pin"}</ButtonText>
 						<ButtonIcon icon={Pin} position="right" />
 					</Button>
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -230,7 +233,7 @@ function VideoCards({
 	return (
 		<>
 			{items.map((item) => (
-				<View key={item.post.uri} style={{ width: CARD_WIDTH }}>
+				<div key={item.post.uri} style={{ width: CARD_WIDTH }}>
 					<CompactVideoPostCard
 						post={item.post}
 						moderation={item.moderation}
@@ -240,9 +243,9 @@ function VideoCards({
 							sourceInterstitial: "explore",
 						}}
 					/>
-				</View>
+				</div>
 			))}
-			<View style={{ width: CARD_WIDTH * 2 }}>
+			<div style={{ width: CARD_WIDTH * 2 }}>
 				<Link
 					to={href}
 					label={"View more"}
@@ -255,7 +258,7 @@ function VideoCards({
 					}}
 				>
 					{({ pressed }) => (
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -267,7 +270,7 @@ function VideoCards({
 							}}
 						>
 							<Text style={a.text_md}>View more</Text>
-							<View
+							<div
 								style={{
 									...a.align_center,
 									...a.justify_center,
@@ -281,11 +284,11 @@ function VideoCards({
 								}}
 							>
 								<ButtonIcon icon={ChevronRight} />
-							</View>
-						</View>
+							</div>
+						</div>
 					)}
 				</Link>
-			</View>
+			</div>
 		</>
 	);
 }

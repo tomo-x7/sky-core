@@ -1,12 +1,12 @@
 import type React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView } from "react-native";
 
 import { atoms as a } from "#/alf";
+import { Text } from "#/components/Typography";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { Text } from "../text/Text";
 
 export const LoggedOutLayout = ({
 	leadin,
@@ -40,16 +40,16 @@ export const LoggedOutLayout = ({
 					keyboardDismissMode="none"
 					contentContainerStyle={[{ paddingBottom: isKeyboardVisible ? 300 : 0 }]}
 				>
-					<View style={a.pt_md}>{children}</View>
+					<div style={a.pt_md}>{children}</div>
 				</ScrollView>
 			);
 		} else {
-			return <View style={a.pt_md}>{children}</View>;
+			return <div style={a.pt_md}>{children}</div>;
 		}
 	}
 	return (
-		<View style={styles.container}>
-			<View
+		<div style={styles.container}>
+			<div
 				style={{
 					...styles.side,
 					...sideBg,
@@ -82,9 +82,9 @@ export const LoggedOutLayout = ({
 				>
 					{description}
 				</Text>
-			</View>
+			</div>
 			{scrollable ? (
-				<View
+				<div
 					style={{
 						...styles.scrollableContent,
 						...contentBg,
@@ -96,45 +96,46 @@ export const LoggedOutLayout = ({
 						keyboardShouldPersistTaps="handled"
 						keyboardDismissMode="on-drag"
 					>
-						<View
+						<div
 							style={{
 								...styles.contentWrapper,
 								...a.my_auto,
 							}}
 						>
 							{children}
-						</View>
+						</div>
 					</ScrollView>
-				</View>
+				</div>
 			) : (
-				<View
+				<div
 					style={{
 						...styles.content,
 						...contentBg,
 					}}
 				>
-					<View style={styles.contentWrapper}>{children}</View>
-				</View>
+					<div style={styles.contentWrapper}>{children}</div>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 };
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		flexDirection: "row",
-		// @ts-ignore web only
 		height: "100vh",
 	},
 	side: {
 		flex: 1,
-		paddingHorizontal: 40,
+		paddingLeft: 40,
+		paddingRight: 40,
 		paddingBottom: 80,
 		justifyContent: "center",
 	},
 	content: {
 		flex: 2,
-		paddingHorizontal: 40,
+		paddingLeft: 40,
+		paddingRight: 40,
 		justifyContent: "center",
 	},
 	scrollableContent: {
@@ -142,7 +143,8 @@ const styles = StyleSheet.create({
 	},
 	scrollViewContentContainer: {
 		flex: 1,
-		paddingHorizontal: 40,
+		paddingLeft: 40,
+		paddingRight: 40,
 	},
 	leadinText: {
 		fontSize: 36,
@@ -169,4 +171,4 @@ const styles = StyleSheet.create({
 	contentWrapper: {
 		maxWidth: 600,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

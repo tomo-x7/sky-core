@@ -1,5 +1,5 @@
 import React from "react";
-import { type ColorValue, Dimensions, View } from "react-native";
+import { type ColorValue, Dimensions } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
 	clamp,
@@ -104,7 +104,6 @@ export function GestureActionView({
 			"worklet";
 			isActive.set(true);
 		})
-		//@ts-ignore
 		.onChange((e) => {
 			"worklet";
 			transX.set(e.translationX);
@@ -151,7 +150,6 @@ export function GestureActionView({
 				}
 			}
 		})
-		//@ts-ignore
 		.onEnd((e) => {
 			"worklet";
 			if (e.translationX < 0) {
@@ -238,7 +236,7 @@ export function GestureActionView({
 
 	return (
 		<GestureDetector gesture={composedGesture}>
-			<View>
+			<div>
 				<Animated.View
 					style={{
 						...animatedBackgroundStyle,
@@ -290,7 +288,7 @@ export function GestureActionView({
 					</div>
 				</Animated.View>
 				<Animated.View style={animatedSliderStyle}>{children}</Animated.View>
-			</View>
+			</div>
 		</GestureDetector>
 	);
 }

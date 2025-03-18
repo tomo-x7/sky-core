@@ -1,5 +1,4 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Admonition from "#/components/Admonition";
@@ -63,7 +62,7 @@ export function PrivacyAndSecuritySettingsScreen(props: Props) {
 						<Admonition.Outer type="tip" style={a.flex_1}>
 							<Admonition.Row>
 								<Admonition.Icon />
-								<View
+								<div
 									style={{
 										...a.flex_1,
 										...a.gap_sm,
@@ -83,7 +82,7 @@ export function PrivacyAndSecuritySettingsScreen(props: Props) {
 											Learn more about what is public on Bluesky.
 										</InlineLinkText>
 									</Admonition.Text>
-								</View>
+								</div>
 							</Admonition.Row>
 						</Admonition.Outer>
 					</SettingsList.Item>

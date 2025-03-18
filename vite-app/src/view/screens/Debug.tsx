@@ -1,7 +1,8 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
 import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { type PaletteColorName, ThemeProvider } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
@@ -16,7 +17,6 @@ import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 import { Button } from "#/view/com/util/forms/Button";
 import { DropdownButton, type DropdownItem } from "#/view/com/util/forms/DropdownButton";
 import { ToggleButton } from "#/view/com/util/forms/ToggleButton";
-import { Text } from "#/view/com/util/text/Text";
 
 const MAIN_VIEWS = ["Base", "Controls", "Error", "Notifs"];
 
@@ -46,8 +46,8 @@ function DebugInner({
 
 	const renderItem = (item: any) => {
 		return (
-			<View key={`view-${item.currentView}`}>
-				<View
+			<div key={`view-${item.currentView}`}>
+				<div
 					style={{
 						...s.pt10,
 						...s.pl10,
@@ -60,7 +60,7 @@ function DebugInner({
 						isSelected={colorScheme === "dark"}
 						label={"Dark mode"}
 					/>
-				</View>
+				</div>
 				{item.currentView === 3 ? (
 					<NotifsView />
 				) : item.currentView === 2 ? (
@@ -70,14 +70,14 @@ function DebugInner({
 				) : (
 					<BaseView />
 				)}
-			</View>
+			</div>
 		);
 	};
 
 	const items = [{ currentView }];
 
 	return (
-		<View
+		<div
 			style={{
 				...s.hContentRegion,
 				...pal.view,
@@ -91,14 +91,14 @@ function DebugInner({
 				renderItem={renderItem}
 				onSelectView={setCurrentView}
 			/>
-		</View>
+		</div>
 	);
 }
 
 function Heading({ label }: { label: string }) {
 	const pal = usePalette("default");
 	return (
-		<View
+		<div
 			style={{
 				...s.pt10,
 				...s.pb5,
@@ -107,13 +107,13 @@ function Heading({ label }: { label: string }) {
 			<Text type="title-lg" style={pal.text}>
 				{label}
 			</Text>
-		</View>
+		</div>
 	);
 }
 
 function BaseView() {
 	return (
-		<View
+		<div
 			style={{
 				...s.pl10,
 				...s.pr10,
@@ -131,8 +131,8 @@ function BaseView() {
 			<EmptyStateView />
 			<Heading label="Loading placeholders" />
 			<LoadingPlaceholderView />
-			<View style={s.footerSpacer} />
-		</View>
+			<div style={s.footerSpacer} />
+		</div>
 	);
 }
 
@@ -150,42 +150,42 @@ function ControlsView() {
 			<DropdownButtonsView />
 			<Heading label="Toggle Buttons" />
 			<ToggleButtonsView />
-			<View style={s.footerSpacer} />
+			<div style={s.footerSpacer} />
 		</ScrollView>
 	);
 }
 
 function ErrorView() {
 	return (
-		<View style={s.p10}>
-			<View style={s.mb5}>
+		<div style={s.p10}>
+			<div style={s.mb5}>
 				<ErrorScreen
 					title="Error screen"
 					message="A major error occurred that led the entire screen to fail"
 					details="Here are some details"
 					onPressTryAgain={() => {}}
 				/>
-			</View>
-			<View style={s.mb5}>
+			</div>
+			<div style={s.mb5}>
 				<ErrorMessage message="This is an error that occurred while things were being done" />
-			</View>
-			<View style={s.mb5}>
+			</div>
+			<div style={s.mb5}>
 				<ErrorMessage message="This is an error that occurred while things were being done" numberOfLines={1} />
-			</View>
-			<View style={s.mb5}>
+			</div>
+			<div style={s.mb5}>
 				<ErrorMessage
 					message="This is an error that occurred while things were being done"
 					onPressTryAgain={() => {}}
 				/>
-			</View>
-			<View style={s.mb5}>
+			</div>
+			<div style={s.mb5}>
 				<ErrorMessage
 					message="This is an error that occurred while things were being done"
 					onPressTryAgain={() => {}}
 					numberOfLines={1}
 				/>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -200,13 +200,13 @@ function NotifsView() {
 		Toast.show("The task has been completed successfully and with no problems");
 	};
 	return (
-		<View style={s.p10}>
-			<View style={s.flexRow}>
+		<div style={s.p10}>
+			<div style={s.flexRow}>
 				<Button onPress={triggerPush} label="Trigger Push" />
 				<Button onPress={triggerToast} label="Trigger Toast" />
 				<Button onPress={triggerToast2} label="Trigger Toast 2" />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -214,7 +214,7 @@ function PaletteView({ palette }: { palette: PaletteColorName }) {
 	const defaultPal = usePalette("default");
 	const pal = usePalette(palette);
 	return (
-		<View
+		<div
 			style={{
 				...pal.view,
 				...pal.border,
@@ -227,18 +227,18 @@ function PaletteView({ palette }: { palette: PaletteColorName }) {
 			<Text style={pal.textLight}>Light text</Text>
 			<Text style={pal.link}>Link text</Text>
 			{palette !== "default" && (
-				<View style={defaultPal.view}>
+				<div style={defaultPal.view}>
 					<Text style={pal.textInverted}>Inverted text</Text>
-				</View>
+				</div>
 			)}
-		</View>
+		</div>
 	);
 }
 
 function TypographyView() {
 	const pal = usePalette("default");
 	return (
-		<View style={pal.view}>
+		<div style={pal.view}>
 			<Text type="2xl-thin" style={pal.text}>
 				'2xl-thin' lorem ipsum dolor
 			</Text>
@@ -347,7 +347,7 @@ function TypographyView() {
 			<Text type="button-lg" style={pal.text}>
 				Button-lg
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -368,8 +368,8 @@ function ButtonsView() {
 	const defaultPal = usePalette("default");
 	const buttonStyles = { marginRight: 5 };
 	return (
-		<View style={defaultPal.view}>
-			<View
+		<div style={defaultPal.view}>
+			<div
 				style={{
 					...s.flexRow,
 					...s.mb5,
@@ -377,8 +377,8 @@ function ButtonsView() {
 			>
 				<Button type="primary" label="Primary solid" style={buttonStyles} />
 				<Button type="secondary" label="Secondary solid" style={buttonStyles} />
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...s.flexRow,
 					...s.mb5,
@@ -386,19 +386,19 @@ function ButtonsView() {
 			>
 				<Button type="default" label="Default solid" style={buttonStyles} />
 				<Button type="inverted" label="Inverted solid" style={buttonStyles} />
-			</View>
-			<View style={s.flexRow}>
+			</div>
+			<div style={s.flexRow}>
 				<Button type="primary-outline" label="Primary outline" style={buttonStyles} />
 				<Button type="secondary-outline" label="Secondary outline" style={buttonStyles} />
-			</View>
-			<View style={s.flexRow}>
+			</div>
+			<div style={s.flexRow}>
 				<Button type="primary-light" label="Primary light" style={buttonStyles} />
 				<Button type="secondary-light" label="Secondary light" style={buttonStyles} />
-			</View>
-			<View style={s.flexRow}>
+			</div>
+			<div style={s.flexRow}>
 				<Button type="default-light" label="Default light" style={buttonStyles} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -422,16 +422,16 @@ const DROPDOWN_ITEMS: DropdownItem[] = [
 function DropdownButtonsView() {
 	const defaultPal = usePalette("default");
 	return (
-		<View style={defaultPal.view}>
-			<View style={s.mb5}>
+		<div style={defaultPal.view}>
+			<div style={s.mb5}>
 				<DropdownButton type="primary" items={DROPDOWN_ITEMS} menuWidth={200} label="Primary button" />
-			</View>
-			<View style={s.mb5}>
+			</div>
+			<div style={s.mb5}>
 				<DropdownButton type="bare" items={DROPDOWN_ITEMS} menuWidth={200}>
 					<Text>Bare</Text>
 				</DropdownButton>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -441,7 +441,7 @@ function ToggleButtonsView() {
 	const [isSelected, setIsSelected] = React.useState(false);
 	const onToggle = () => setIsSelected(!isSelected);
 	return (
-		<View style={defaultPal.view}>
+		<div style={defaultPal.view}>
 			<ToggleButton
 				type="primary"
 				label="Primary solid"
@@ -498,6 +498,6 @@ function ToggleButtonsView() {
 				isSelected={isSelected}
 				onPress={onToggle}
 			/>
-		</View>
+		</div>
 	);
 }

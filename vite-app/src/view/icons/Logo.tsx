@@ -18,7 +18,7 @@ export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
 	const gradient = fill === "sky";
 	const styles = StyleSheet.flatten(props.style);
 	const _fill = gradient ? "url(#sky)" : fill || styles?.color || colors.blue3;
-	// @ts-ignore it's fiiiiine
+	// @ts-expect-error it's fiiiiine
 	const size = Number.parseInt(rest.width || 32);
 
 	const isKawaii = useKawaiiMode();
@@ -38,7 +38,7 @@ export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
 	return (
 		<Svg
 			fill="none"
-			// @ts-ignore it's fiiiiine
+			// @ts-expect-error it's fiiiiine
 			ref={ref}
 			viewBox="0 0 64 57"
 			{...rest}

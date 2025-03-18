@@ -1,5 +1,4 @@
 import type React from "react";
-import { View } from "react-native";
 
 import type { JSX } from "react";
 import { atoms as a, useBreakpoints, useGutters, useTheme } from "#/alf";
@@ -7,6 +6,7 @@ import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
 import { Hashtag_Stroke2_Corner0_Rounded as FeedsIcon } from "#/components/icons/Hashtag";
+import { useOnLayout } from "#/lib/onLayout";
 import { useKawaiiMode } from "#/state/preferences/kawaii";
 import { useSession } from "#/state/session";
 import { useShellLayout } from "#/state/shell/shell-layout";
@@ -42,7 +42,7 @@ function HomeHeaderLayoutDesktopAndTablet({
 		<>
 			{hasSession && (
 				<Layout.Center>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -51,8 +51,8 @@ function HomeHeaderLayoutDesktopAndTablet({
 							...t.atoms.bg,
 						}}
 					>
-						<View style={{ width: 34 }} />
-						<View
+						<div style={{ width: 34 }} />
+						<div
 							style={{
 								...a.flex_1,
 								...a.align_center,
@@ -60,7 +60,7 @@ function HomeHeaderLayoutDesktopAndTablet({
 							}}
 						>
 							<Logo width={kawaii ? 60 : 28} />
-						</View>
+						</div>
 						<Link
 							to="/feeds"
 							hitSlop={10}
@@ -73,12 +73,11 @@ function HomeHeaderLayoutDesktopAndTablet({
 						>
 							<ButtonIcon icon={FeedsIcon} size="lg" />
 						</Link>
-					</View>
+					</div>
 				</Layout.Center>
 			)}
 			{tabBarAnchor}
 			<Layout.Center
-				//@ts-ignore
 				style={{
 					...a.sticky,
 					...a.z_10,
@@ -86,9 +85,9 @@ function HomeHeaderLayoutDesktopAndTablet({
 					...t.atoms.bg,
 					...{ top: 0 },
 				}}
-				onLayout={(e) => {
-					headerHeight.set(e.nativeEvent.layout.height);
-				}}
+				ref={useOnLayout((e) => {
+					headerHeight.set(e.height);
+				})}
 			>
 				{children}
 			</Layout.Center>

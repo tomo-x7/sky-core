@@ -195,7 +195,7 @@ function InviteCode({
 						Copied
 					</Text>
 				)}
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text} />}
 			</TouchableOpacity>
 			{uses.length > 0 ? (

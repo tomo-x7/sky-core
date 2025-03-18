@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Pressable, View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
@@ -44,8 +43,8 @@ export const SplashScreen = ({
 	return (
 		<>
 			{onDismiss && (
-				<Pressable
-					accessibilityRole="button"
+				<button
+					type="button"
 					style={{
 						position: "absolute",
 						top: 20,
@@ -53,17 +52,17 @@ export const SplashScreen = ({
 						padding: 20,
 						zIndex: 100,
 					}}
-					onPress={onDismiss}
+					onClick={onDismiss}
 				>
 					<FontAwesomeIcon
 						icon="x"
-						//@ts-ignore
+						//@ts-expect-error
 						size={24}
 						style={{
 							color: String(t.atoms.text.color),
 						}}
 					/>
-				</Pressable>
+				</button>
 			)}
 			<Layout.Center
 				style={{
@@ -72,13 +71,12 @@ export const SplashScreen = ({
 				}}
 				ignoreTabletLayoutOffset
 			>
-				<View
+				<div
 					style={{
 						...a.h_full,
 						...a.justify_center,
 
-						...// @ts-expect-error web only
-						{ paddingBottom: "20vh" },
+						paddingBottom: "20vh",
 
 						...(isMobileWeb && a.pb_5xl),
 						...t.atoms.border_contrast_medium,
@@ -88,7 +86,7 @@ export const SplashScreen = ({
 					}}
 				>
 					<ErrorBoundary>
-						<View
+						<div
 							style={{
 								...a.justify_center,
 								...a.align_center,
@@ -97,14 +95,14 @@ export const SplashScreen = ({
 							<Logo width={kawaii ? 300 : 92} fill="sky" />
 
 							{!kawaii && (
-								<View
+								<div
 									style={{
 										...a.pb_sm,
 										...a.pt_5xl,
 									}}
 								>
 									<Logotype width={161} fill={t.atoms.text.color} />
-								</View>
+								</div>
 							)}
 
 							<Text
@@ -116,9 +114,9 @@ export const SplashScreen = ({
 							>
 								What's up?
 							</Text>
-						</View>
+						</div>
 
-						<View
+						<div
 							style={{
 								...a.w_full,
 								...a.px_xl,
@@ -147,9 +145,9 @@ export const SplashScreen = ({
 							>
 								<ButtonText>Sign in</ButtonText>
 							</Button>
-						</View>
+						</div>
 					</ErrorBoundary>
-				</View>
+				</div>
 				<Footer />
 			</Layout.Center>
 			<AppClipOverlay visible={showClipOverlay} setIsVisible={setShowClipOverlay} />
@@ -161,7 +159,7 @@ function Footer() {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.absolute,
 				...a.inset_0,
@@ -184,8 +182,8 @@ function Footer() {
 			<InlineLinkText label={"See jobs at Bluesky"} to="https://bsky.social/about/join">
 				Jobs
 			</InlineLinkText>
-			<View style={a.flex_1} />
+			<div style={a.flex_1} />
 			<AppLanguageDropdown />
-		</View>
+		</div>
 	);
 }

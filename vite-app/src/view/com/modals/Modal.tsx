@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
@@ -90,12 +90,11 @@ function Modal({ modal }: { modal: ModalIface }) {
 	}
 
 	return (
-		// eslint-disable-next-line react-native-a11y/has-valid-accessibility-descriptors
 		<TouchableWithoutFeedback onPress={onPressMask}>
+			{/* @ts-expect-error */}
 			<Animated.View style={styles.mask} entering={FadeIn.duration(150)} exiting={FadeOut}>
-				{/* eslint-disable-next-line react-native-a11y/has-valid-accessibility-descriptors */}
 				<TouchableWithoutFeedback onPress={onInnerPress}>
-					<View
+					<div
 						style={{
 							...styles.container,
 							...(isMobile && styles.containerMobile),
@@ -104,16 +103,15 @@ function Modal({ modal }: { modal: ModalIface }) {
 						}}
 					>
 						{element}
-					</View>
+					</div>
 				</TouchableWithoutFeedback>
 			</Animated.View>
 		</TouchableWithoutFeedback>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	mask: {
-		// @ts-ignore
 		position: "fixed",
 		top: 0,
 		left: 0,
@@ -125,17 +123,15 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		width: 600,
-		// @ts-ignore web only
 		maxWidth: "100vw",
-		// @ts-ignore web only
 		maxHeight: "90vh",
-		paddingVertical: 20,
-		paddingHorizontal: 24,
+		padding: "20px 24px",
 		borderRadius: 8,
 		borderWidth: 1,
 	},
 	containerMobile: {
 		borderRadius: 0,
-		paddingHorizontal: 0,
+		paddingLeft: 0,
+		paddingRight: 0,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

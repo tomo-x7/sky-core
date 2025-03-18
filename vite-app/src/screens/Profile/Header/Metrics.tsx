@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
@@ -20,18 +19,19 @@ export function ProfileHeaderMetrics({
 	const pluralizedFollowings = profile.followsCount === 1 ? "following" : "following";
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_sm,
 				...a.align_center,
+				pointerEvents: "none",
 			}}
-			pointerEvents="box-none"
 		>
 			<InlineLinkText
 				style={{
 					...a.flex_row,
 					...t.atoms.text,
+					pointerEvents: "auto",
 				}}
 				to={makeProfileLink(profile, "followers")}
 				label={`${followers} ${pluralizedFollowers}`}
@@ -57,6 +57,7 @@ export function ProfileHeaderMetrics({
 				style={{
 					...a.flex_row,
 					...t.atoms.text,
+					pointerEvents: "auto",
 				}}
 				to={makeProfileLink(profile, "follows")}
 				label={`${following} following`}
@@ -83,6 +84,7 @@ export function ProfileHeaderMetrics({
 					...a.font_bold,
 					...t.atoms.text,
 					...a.text_md,
+					pointerEvents: "auto",
 				}}
 			>
 				{formatCount(profile.postsCount || 0)}{" "}
@@ -96,6 +98,6 @@ export function ProfileHeaderMetrics({
 					{profile.postsCount === 1 ? "post" : "posts"}
 				</Text>
 			</Text>
-		</View>
+		</div>
 	);
 }

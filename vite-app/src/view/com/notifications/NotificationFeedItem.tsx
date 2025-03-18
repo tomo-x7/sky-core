@@ -12,7 +12,7 @@ import { TID } from "@atproto/common-web";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, type ReactElement, useEffect, useMemo, useState } from "react";
-import { Animated, Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Animated, Pressable, StyleSheet, TouchableOpacity } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -21,6 +21,7 @@ import * as MediaPreview from "#/components/MediaPreview";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
 import { Notification as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
 import { SubtleWebHover } from "#/components/SubtleWebHover";
+import { Text } from "#/components/Typography";
 import {
 	ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon,
 	ChevronTop_Stroke2_Corner0_Rounded as ChevronUpIcon,
@@ -49,7 +50,6 @@ import { Link, TextLink } from "../util/Link";
 import { TimeElapsed } from "../util/TimeElapsed";
 import { PreviewableUserAvatar, UserAvatar } from "../util/UserAvatar";
 import { formatCount } from "../util/numeric/format";
-import { Text } from "../util/text/Text";
 
 const MAX_AUTHORS = 5;
 
@@ -123,7 +123,7 @@ let NotificationFeedItem = ({
 
 	if (item.subjectUri && !item.subject && item.type !== "feedgen-like") {
 		// don't render anything if the target post was deleted or unfindable
-		return <View />;
+		return <div />;
 	}
 
 	if (item.type === "reply" || item.type === "mention" || item.type === "quote") {
@@ -132,14 +132,16 @@ let NotificationFeedItem = ({
 		}
 		const isHighlighted = highlightUnread && !item.notification.isRead;
 		return (
-			<Link href={itemHref} noFeedback accessible={false}>
+			<Link href={itemHref} noFeedback>
 				<Post
 					post={item.subject}
 					style={
-						isHighlighted && {
-							backgroundColor: pal.colors.unreadNotifBg,
-							borderColor: pal.colors.unreadNotifBorder,
-						}
+						isHighlighted
+							? {
+									backgroundColor: pal.colors.unreadNotifBg,
+									borderColor: pal.colors.unreadNotifBorder,
+								}
+							: undefined
 					}
 					hideTopBorder={hideTopBorder}
 				/>
@@ -320,9 +322,9 @@ let NotificationFeedItem = ({
 			<>{firstAuthorLink} signed up with your starter pack</>
 		);
 		icon = (
-			<View style={{ height: 30, width: 30 }}>
+			<div style={{ height: 30, width: 30 }}>
 				<StarterPack width={30} gradient="sky" />
-			</View>
+			</div>
 		);
 	} else {
 		return null;
@@ -347,33 +349,6 @@ let NotificationFeedItem = ({
 			}}
 			href={itemHref}
 			noFeedback
-			accessibilityHint=""
-			accessibilityLabel={a11yLabel}
-			accessible={!isAuthorsExpanded}
-			// @ts-ignore
-			accessibilityActions={
-				hasMultipleAuthors
-					? [
-							{
-								name: "toggleAuthorsExpanded",
-								label: isAuthorsExpanded ? "Collapse list of users" : "Expand list of users",
-							},
-						]
-					: [
-							{
-								name: "viewProfile",
-								label: `View ${authors[0].profile.displayName || authors[0].profile.handle}'s profile`,
-							},
-						]
-			}
-			onAccessibilityAction={(e) => {
-				if (e.nativeEvent.actionName === "activate") {
-					onBeforePress();
-				}
-				if (e.nativeEvent.actionName === "toggleAuthorsExpanded") {
-					onToggleAuthorsExpanded();
-				}
-			}}
 			onPointerEnter={() => {
 				setHover(true);
 			}}
@@ -382,7 +357,7 @@ let NotificationFeedItem = ({
 			}}
 		>
 			<SubtleWebHover hover={hover} />
-			<View
+			<div
 				style={{
 					...styles.layoutIcon,
 					...a.pr_sm,
@@ -391,8 +366,8 @@ let NotificationFeedItem = ({
 				{/* TODO: Prevent conditional rendering and move toward composable
 		  notifications for clearer accessibility labeling */}
 				{icon}
-			</View>
-			<View style={styles.layoutContent}>
+			</div>
+			<div style={styles.layoutContent}>
 				<ExpandListPressable
 					hasMultipleAuthors={hasMultipleAuthors}
 					onToggleAuthorsExpanded={onToggleAuthorsExpanded}
@@ -410,8 +385,6 @@ let NotificationFeedItem = ({
 							...a.self_start,
 							...pal.text,
 						}}
-						accessibilityHint=""
-						accessibilityLabel={a11yLabel}
 					>
 						{notificationContent}
 						<TimeElapsed timestamp={item.notification.indexedAt}>
@@ -443,8 +416,8 @@ let NotificationFeedItem = ({
 					/>
 				) : null}
 				{item.type === "starterpack-joined" ? (
-					<View>
-						<View
+					<div>
+						<div
 							style={{
 								...a.border,
 								...a.p_sm,
@@ -454,10 +427,10 @@ let NotificationFeedItem = ({
 							}}
 						>
 							<StarterPackCard starterPack={item.subject} />
-						</View>
-					</View>
+						</div>
+					</div>
 				) : null}
-			</View>
+			</div>
 		</Link>
 	);
 };
@@ -545,7 +518,7 @@ function CondensedAuthorsList({
 
 	if (!visible) {
 		return (
-			<View style={styles.avis}>
+			<div style={styles.avis}>
 				<TouchableOpacity
 					style={styles.expandedAuthorsCloseBtn}
 					onPress={onToggleAuthorsExpanded}
@@ -564,12 +537,12 @@ function CondensedAuthorsList({
 						Hide
 					</Text>
 				</TouchableOpacity>
-			</View>
+			</div>
 		);
 	}
 	if (authors.length === 1) {
 		return (
-			<View style={styles.avis}>
+			<div style={styles.avis}>
 				<PreviewableUserAvatar
 					size={35}
 					profile={authors[0].profile}
@@ -577,21 +550,21 @@ function CondensedAuthorsList({
 					type={authors[0].profile.associated?.labeler ? "labeler" : "user"}
 				/>
 				{showDmButton ? <SayHelloBtn profile={authors[0].profile} /> : null}
-			</View>
+			</div>
 		);
 	}
 	return (
 		<TouchableOpacity accessibilityRole="none" onPress={onToggleAuthorsExpanded}>
-			<View style={styles.avis}>
+			<div style={styles.avis}>
 				{authors.slice(0, MAX_AUTHORS).map((author) => (
-					<View key={author.href} style={s.mr5}>
+					<div key={author.href} style={s.mr5}>
 						<PreviewableUserAvatar
 							size={35}
 							profile={author.profile}
 							moderation={author.moderation.ui("avatar")}
 							type={author.profile.associated?.labeler ? "labeler" : "user"}
 						/>
-					</View>
+					</div>
 				))}
 				{authors.length > MAX_AUTHORS ? (
 					<Text
@@ -610,7 +583,7 @@ function CondensedAuthorsList({
 						...pal.textLight,
 					}}
 				/>
-			</View>
+			</div>
 		</TouchableOpacity>
 	);
 }
@@ -655,7 +628,7 @@ function ExpandedAuthorsList({
 						})}
 						style={styles.expandedAuthor}
 					>
-						<View style={styles.expandedAuthorAvi}>
+						<div style={styles.expandedAuthorAvi}>
 							<ProfileHoverCard did={author.profile.did}>
 								<UserAvatar
 									size={35}
@@ -664,8 +637,8 @@ function ExpandedAuthorsList({
 									type={author.profile.associated?.labeler ? "labeler" : "user"}
 								/>
 							</ProfileHoverCard>
-						</View>
-						<View style={s.flex1}>
+						</div>
+						<div style={s.flex1}>
 							<Text type="lg-bold" numberOfLines={1} style={pal.text} lineHeight={1.2}>
 								<Text emoji type="lg-bold" style={pal.text} lineHeight={1.2}>
 									{sanitizeDisplayName(author.profile.displayName || author.profile.handle)}
@@ -674,7 +647,7 @@ function ExpandedAuthorsList({
 									{sanitizeHandle(author.profile.handle, "@")}
 								</Text>
 							</Text>
-						</View>
+						</div>
 					</NewLink>
 				))}
 		</Animated.View>

@@ -1,6 +1,5 @@
 import { AtUri } from "@atproto/api";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -49,7 +48,7 @@ export function ProfileFeedHeaderSkeleton() {
 		<Layout.Header.Outer>
 			<Layout.Header.BackButton />
 			<Layout.Header.Content>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.rounded_sm,
@@ -59,7 +58,7 @@ export function ProfileFeedHeaderSkeleton() {
 				/>
 			</Layout.Header.Content>
 			<Layout.Header.Slot>
-				<View
+				<div
 					style={{
 						...a.justify_center,
 						...a.align_center,
@@ -73,7 +72,7 @@ export function ProfileFeedHeaderSkeleton() {
 					}}
 				>
 					<Pin size="lg" fill={t.atoms.text_contrast_low.color} />
-				</View>
+				</div>
 			</Layout.Header.Slot>
 		</Layout.Header.Outer>
 	);
@@ -158,12 +157,13 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 
 	return (
 		<>
-			{/*//@ts-ignore*/}
 			<Layout.Center
 				style={{
 					...t.atoms.bg,
 					...a.z_10,
-					...[a.sticky, a.z_10, { top: 0 }],
+					...a.sticky,
+					...a.z_10,
+					top: 0,
 				}}
 			>
 				<Layout.Header.Outer>
@@ -185,35 +185,25 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 						>
 							{({ hovered, pressed }) => (
 								<>
-									<View
+									<div
 										style={{
 											...a.absolute,
 											...a.inset_0,
-
-											...//@ts-ignore
-											a.rounded_sm,
-
+											...a.rounded_sm,
 											...a.transition_all,
 											...t.atoms.bg_contrast_25,
-
-											...{
-												opacity: 0,
-												left: -2,
-												right: 0,
-											},
-
-											...(pressed && {
-												opacity: 1,
-											}),
-
+											opacity: 0,
+											left: -2,
+											right: 0,
+											...(pressed && { opacity: 1 }),
 											...(hovered && {
 												opacity: 1,
-												transform: [{ scaleX: 1.01 }, { scaleY: 1.1 }],
+												scale: "1.01 1.1",
 											}),
 										}}
 									/>
 
-									<View
+									<div
 										style={{
 											...a.flex_1,
 											...a.flex_row,
@@ -223,7 +213,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 									>
 										{info.avatar && <UserAvatar size={36} type="algo" avatar={info.avatar} />}
 
-										<View style={a.flex_1}>
+										<div style={a.flex_1}>
 											<Text
 												style={{
 													...a.text_md,
@@ -235,7 +225,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 											>
 												{info.displayName}
 											</Text>
-											<View
+											<div
 												style={{
 													...a.flex_row,
 													...{ gap: 6 },
@@ -252,7 +242,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 												>
 													{sanitizeHandle(info.creatorHandle, "@")}
 												</Text>
-												<View
+												<div
 													style={{
 														...a.flex_row,
 														...a.align_center,
@@ -275,12 +265,12 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 													>
 														{formatCount(likeCount)}
 													</Text>
-												</View>
-											</View>
-										</View>
+												</div>
+											</div>
+										</div>
 
 										<Ellipsis size="md" fill={t.atoms.text_contrast_low.color} />
-									</View>
+									</div>
 								</>
 							)}
 						</Button>
@@ -421,8 +411,8 @@ function DialogInner({
 	}, [reportDialogControl]);
 
 	return (
-		<View style={a.gap_md}>
-			<View
+		<div style={a.gap_md}>
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -431,7 +421,7 @@ function DialogInner({
 			>
 				<UserAvatar type="algo" size={48} avatar={info.avatar} />
 
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.gap_2xs,
@@ -469,14 +459,15 @@ function DialogInner({
 									...a.underline,
 									...t.atoms.text_contrast_medium,
 								}}
-								numberOfLines={1}
+								// TODO
+								// numberOfLines={1}
 								onPress={() => control.close()}
 							>
 								{sanitizeHandle(info.creatorHandle, "@")}
 							</InlineLinkText>
 						</>
 					</Text>
-				</View>
+				</div>
 
 				<Button
 					label={"Share this feed"}
@@ -488,7 +479,7 @@ function DialogInner({
 				>
 					<ButtonIcon icon={Share} size="lg" />
 				</Button>
-			</View>
+			</div>
 			<RichText
 				value={rt}
 				style={{
@@ -496,7 +487,7 @@ function DialogInner({
 					...a.leading_snug,
 				}}
 			/>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_sm,
@@ -518,10 +509,10 @@ function DialogInner({
 						</>
 					</InlineLinkText>
 				)}
-			</View>
+			</div>
 			{hasSession && (
 				<>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_sm,
@@ -558,9 +549,9 @@ function DialogInner({
 							<ButtonText>{isPinned ? <>Unpin feed</> : <>Pin feed</>}</ButtonText>
 							<ButtonIcon icon={Pin} position="right" />
 						</Button>
-					</View>
+					</div>
 
-					<View
+					<div
 						style={{
 							...a.pt_xs,
 							...a.gap_lg,
@@ -568,7 +559,7 @@ function DialogInner({
 					>
 						<Divider />
 
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.align_center,
@@ -595,7 +586,7 @@ function DialogInner({
 								<ButtonText>Report feed</ButtonText>
 								<ButtonIcon icon={CircleInfo} position="right" />
 							</Button>
-						</View>
+						</div>
 
 						{info.view && (
 							<ReportDialog
@@ -606,9 +597,9 @@ function DialogInner({
 								}}
 							/>
 						)}
-					</View>
+					</div>
 				</>
 			)}
-		</View>
+		</div>
 	);
 }

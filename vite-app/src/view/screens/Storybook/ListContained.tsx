@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -20,7 +19,7 @@ export function ListContained() {
 
 	return (
 		<>
-			<View style={{ width: "100%", height: 300 }}>
+			<div style={{ width: "100%", height: 300 }}>
 				<ScrollProvider
 					onScroll={(e) => {
 						"worklet";
@@ -37,7 +36,7 @@ export function ListContained() {
 						data={data}
 						renderItem={(item) => {
 							return (
-								<View
+								<div
 									style={{
 										padding: 10,
 										borderBottomWidth: 1,
@@ -45,7 +44,7 @@ export function ListContained() {
 									}}
 								>
 									<Text>{item.item.text}</Text>
-								</View>
+								</div>
 							);
 						}}
 						keyExtractor={(item) => item.id.toString()}
@@ -62,14 +61,14 @@ export function ListContained() {
 						disableVirtualization={true}
 					/>
 				</ScrollProvider>
-			</View>
+			</div>
 
-			<View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
+			<div style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
 				<Toggle.Item name="a" label="Click me" value={animated} onChange={() => setAnimated((prev) => !prev)}>
 					<Toggle.Checkbox />
 					<Toggle.LabelText>Animated Scrolling</Toggle.LabelText>
 				</Toggle.Item>
-			</View>
+			</div>
 
 			<Button
 				variant="solid"

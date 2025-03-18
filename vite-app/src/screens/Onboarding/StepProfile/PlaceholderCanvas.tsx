@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 // import ViewShot from "react-native-view-shot";
 
 import { atoms as a } from "#/alf";
@@ -21,12 +20,13 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 
 	const styles = React.useMemo(
 		() => ({
-			container: [a.absolute, { top: -2000 }],
-			imageContainer: [
-				a.align_center,
-				a.justify_center,
-				{ height: 150 * SIZE_MULTIPLIER, width: 150 * SIZE_MULTIPLIER },
-			],
+			container: { ...a.absolute, top: -2000 },
+			imageContainer: {
+				...a.align_center,
+				...a.justify_center,
+				height: 150 * SIZE_MULTIPLIER,
+				width: 150 * SIZE_MULTIPLIER,
+			},
 		}),
 		[],
 	);
@@ -41,10 +41,10 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 	}));
 
 	return (
-		<View style={styles.container}>
+		<div style={styles.container}>
 			<React.Suspense fallback={null}>
 				{/* <ViewShot
-					// @ts-ignore this library doesn't have types
+					// @ts-expect-error this library doesn't have types
 					ref={viewshotRef}
 					options={{
 						fileName: "placeholderAvatar",
@@ -54,17 +54,16 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 						width: 150 * SIZE_MULTIPLIER,
 					}}
 				> */}
-				<View
+				<div
 					style={{
 						...styles.imageContainer,
 						...{ backgroundColor: avatar.backgroundColor },
 					}}
-					collapsable={false}
 				>
 					<Icon height={85 * SIZE_MULTIPLIER} width={85 * SIZE_MULTIPLIER} style={{ color: "white" }} />
-				</View>
+				</div>
 				{/* </ViewShot> */}
 			</React.Suspense>
-		</View>
+		</div>
 	);
 });

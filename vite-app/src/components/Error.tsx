@@ -27,7 +27,7 @@ export function Error({
 	return (
 		<CenteredView
 			style={{
-				...//@ts-ignore
+				...//@ts-expect-error
 				a.h_full_vh,
 
 				...a.align_center,

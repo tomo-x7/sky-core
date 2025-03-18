@@ -233,7 +233,7 @@ export function ProfileGrid({
 				<ProfileCard.Link
 					key={profile.did}
 					profile={profile}
-					//@ts-ignore
+					//@ts-expect-error
 					style={{
 						...a.flex_1,
 						...(gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]),

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import { useMediaQuery } from "react-responsive";
 
@@ -42,8 +42,16 @@ export function LoadLatestBtn({
 			<PressableScale
 				style={{
 					...styles.loadLatest,
-					...(isDesktop && (isTallViewport ? styles.loadLatestOutOfLine : styles.loadLatestInline)),
-					...(isTablet && (centerColumnOffset ? styles.loadLatestInlineOffset : styles.loadLatestInline)),
+					...(isDesktop
+						? isTallViewport
+							? styles.loadLatestOutOfLine
+							: styles.loadLatestInline
+						: undefined),
+					...(isTablet
+						? centerColumnOffset
+							? styles.loadLatestInlineOffset
+							: styles.loadLatestInline
+						: undefined),
 					...pal.borderDark,
 					...pal.view,
 					...bottomPosition,
@@ -54,10 +62,10 @@ export function LoadLatestBtn({
 				accessibilityHint=""
 				targetScale={0.9}
 			>
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="angle-up" color={pal.colors.text} size={19} />
 				{showIndicator && (
-					<View
+					<div
 						style={{
 							...styles.indicator,
 							...pal.borderDark,
@@ -69,10 +77,9 @@ export function LoadLatestBtn({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	loadLatest: {
 		zIndex: 20,
-		// @ts-ignore
 		position: "fixed",
 		left: 18,
 		borderWidth: StyleSheet.hairlineWidth,
@@ -84,15 +91,12 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	loadLatestInline: {
-		// @ts-expect-error web only
 		left: "calc(50vw - 282px)",
 	},
 	loadLatestInlineOffset: {
-		// @ts-expect-error web only
 		left: "calc(50vw - 432px)",
 	},
 	loadLatestOutOfLine: {
-		// @ts-expect-error web only
 		left: "calc(50vw - 382px)",
 	},
 	indicator: {
@@ -105,4 +109,4 @@ const styles = StyleSheet.create({
 		borderRadius: 6,
 		borderWidth: 1,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

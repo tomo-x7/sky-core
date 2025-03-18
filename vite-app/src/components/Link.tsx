@@ -130,7 +130,7 @@ export function useLink({
 						} else if (action === "replace") {
 							navigation.dispatch(StackActions.replace(...router.matchPath(href)));
 						} else if (action === "navigate") {
-							// @ts-ignore
+							// @ts-expect-error
 							navigation.navigate(...router.matchPath(href));
 						} else {
 							throw Error("Unsupported navigator action.");
@@ -210,7 +210,7 @@ export function Link({
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="link"
 			accessibilityRole="link"
-			//@ts-ignore
+			//@ts-expect-error
 			href={href}
 			onPress={download ? undefined : onPress}
 			{...{

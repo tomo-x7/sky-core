@@ -1,6 +1,6 @@
 import { ComAtprotoServerCreateSession, type ComAtprotoServerDescribeServer } from "@atproto/api";
 import React, { useRef, useState } from "react";
-import { ActivityIndicator, Keyboard, LayoutAnimation, View } from "react-native";
+import { ActivityIndicator, Keyboard, LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -141,15 +141,15 @@ export const LoginForm = ({
 
 	return (
 		<FormContainer titleText={<>Sign in</>}>
-			<View>
+			<div>
 				<TextField.LabelText>Hosting provider</TextField.LabelText>
 				<HostingProvider
 					serviceUrl={serviceUrl}
 					onSelectServiceUrl={setServiceUrl}
 					onOpenDialog={onPressSelectService}
 				/>
-			</View>
-			<View>
+			</div>
+			<div>
 				<TextField.LabelText>Account</TextField.LabelText>
 				<div style={a.gap_sm}>
 					<TextField.Root>
@@ -213,9 +213,9 @@ export const LoginForm = ({
 						</Button>
 					</TextField.Root>
 				</div>
-			</View>
+			</div>
 			{isAuthFactorTokenNeeded && (
-				<View>
+				<div>
 					<TextField.LabelText>2FA Confirmation</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={Ticket} />
@@ -247,7 +247,7 @@ export const LoginForm = ({
 					>
 						Check your email for a sign in code and enter it here.
 					</Text>
-				</View>
+				</div>
 			)}
 			<FormError error={error} />
 			<div

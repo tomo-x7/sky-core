@@ -1,7 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { NewskieDialog } from "#/components/NewskieDialog";
 import { Text } from "#/components/Typography";
 import { isInvalidHandle } from "#/lib/strings/handles";
@@ -18,23 +17,24 @@ export function ProfileHeaderHandle({
 	const invalidHandle = isInvalidHandle(profile.handle);
 	const blockHide = profile.viewer?.blocking || profile.viewer?.blockedBy;
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.gap_xs,
 				...a.align_center,
-				...{ maxWidth: "100%" },
+				maxWidth: "100%",
+				pointerEvents: "none",
 			}}
-			pointerEvents={disableTaps ? "none" : "box-none"}
 		>
 			<NewskieDialog profile={profile} disabled={disableTaps} />
 			{profile.viewer?.followedBy && !blockHide ? (
-				<View
+				<div
 					style={{
 						...t.atoms.bg_contrast_25,
 						...a.rounded_xs,
 						...a.px_sm,
 						...a.py_xs,
+						pointerEvents: "auto",
 					}}
 				>
 					<Text
@@ -45,22 +45,30 @@ export function ProfileHeaderHandle({
 					>
 						Follows you
 					</Text>
-				</View>
+				</div>
 			) : undefined}
 			<Text
 				emoji
 				numberOfLines={1}
 				style={{
-					...//@ts-expect-error
-					(invalidHandle
-						? [a.border, a.text_xs, a.px_sm, a.py_xs, a.rounded_xs, { borderColor: t.palette.contrast_200 }]
-						: [a.text_md, a.leading_snug, t.atoms.text_contrast_medium]),
-
-					...{ wordBreak: "break-all" },
+					...flatten(
+						invalidHandle
+							? [
+									a.border,
+									a.text_xs,
+									a.px_sm,
+									a.py_xs,
+									a.rounded_xs,
+									{ borderColor: t.palette.contrast_200 },
+								]
+							: [a.text_md, a.leading_snug, t.atoms.text_contrast_medium],
+					),
+					wordBreak: "break-all",
+					pointerEvents: "auto",
 				}}
 			>
 				{invalidHandle ? "⚠Invalid Handle" : `@${profile.handle}`}
 			</Text>
-		</View>
+		</div>
 	);
 }

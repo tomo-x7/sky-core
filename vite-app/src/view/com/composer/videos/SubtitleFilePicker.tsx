@@ -1,6 +1,5 @@
 import type React from "react";
 import { useRef } from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -40,7 +39,7 @@ export function SubtitleFilePicker({
 	};
 
 	return (
-		<View style={a.gap_lg}>
+		<div style={a.gap_lg}>
 			<input
 				type="file"
 				accept=".vtt"
@@ -50,7 +49,7 @@ export function SubtitleFilePicker({
 				disabled={disabled}
 				aria-disabled={disabled}
 			/>
-			<View style={a.flex_row}>
+			<div style={a.flex_row}>
 				<Button
 					onPress={handleClick}
 					label={"Select subtitle file (.vtt)"}
@@ -62,7 +61,7 @@ export function SubtitleFilePicker({
 					<ButtonIcon icon={CCIcon} />
 					<ButtonText>Select subtitle file (.vtt)</ButtonText>
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

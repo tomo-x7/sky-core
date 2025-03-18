@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
@@ -26,7 +24,7 @@ export function BackNextButtons({
 	overrideNextText,
 }: BackNextButtonsProps) {
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.justify_between,
@@ -68,6 +66,6 @@ export function BackNextButtons({
 						{isLoading && <ButtonIcon icon={Loader} />}
 					</Button>
 				))}
-		</View>
+		</div>
 	);
 }

@@ -34,7 +34,7 @@ export function ErrorMessage({
 						...{ backgroundColor: theme.palette.error.icon },
 					}}
 				>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="exclamation" style={pal.text} size={16} />
 				</div>
 				<Text
@@ -55,7 +55,7 @@ export function ErrorMessage({
 						accessibilityLabel={"Retry"}
 						accessibilityHint={"Retries the last action, which errored out"}
 					>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="arrows-rotate" style={{ color: theme.palette.error.icon }} size={18} />
 					</TouchableOpacity>
 				)}

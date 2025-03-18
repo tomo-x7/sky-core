@@ -14,9 +14,7 @@ import {
 	moderatePost,
 	moderateProfile,
 } from "@atproto/api";
-/* eslint-disable no-restricted-imports */
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -275,7 +273,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 
 						{scenario[0] === "label" && (
 							<>
-								<View
+								<div
 									style={{
 										...a.border,
 										...a.rounded_sm,
@@ -286,7 +284,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 									}}
 								>
 									<Toggle.Group label="Toggle" type="radio" values={label} onChange={setLabel}>
-										<View
+										<div
 											style={{
 												...a.flex_row,
 												...a.gap_md,
@@ -322,19 +320,19 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 												<Toggle.Radio />
 												<Toggle.LabelText>Custom label</Toggle.LabelText>
 											</Toggle.Item>
-										</View>
+										</div>
 									</Toggle.Group>
 
 									{label[0] === "custom" ? (
 										<CustomLabelForm def={customLabelDef} setDef={setCustomLabelDef} />
 									) : (
 										<>
-											<View style={{ height: 10 }} />
+											<div style={{ height: 10 }} />
 											<Divider />
 										</>
 									)}
 
-									<View style={{ height: 10 }} />
+									<div style={{ height: 10 }} />
 
 									<SmallToggler label="Advanced">
 										<Toggle.Group
@@ -343,7 +341,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 											values={scenarioSwitches}
 											onChange={setScenarioSwitches}
 										>
-											<View
+											<div
 												style={{
 													...a.gap_md,
 													...a.flex_row,
@@ -371,11 +369,11 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 													<Toggle.Checkbox />
 													<Toggle.LabelText>Signed out</Toggle.LabelText>
 												</Toggle.Item>
-											</View>
+											</div>
 										</Toggle.Group>
 
 										{LABELS[label[0] as keyof typeof LABELS]?.configurable !== false && (
-											<View style={a.mt_md}>
+											<div style={a.mt_md}>
 												<Text
 													style={{
 														...a.font_bold,
@@ -392,7 +390,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 													values={visibility}
 													onChange={setVisiblity}
 												>
-													<View
+													<div
 														style={{
 															...a.flex_row,
 															...a.gap_md,
@@ -412,21 +410,21 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 															<Toggle.Radio />
 															<Toggle.LabelText>Ignore</Toggle.LabelText>
 														</Toggle.Item>
-													</View>
+													</div>
 												</Toggle.Group>
-											</View>
+											</div>
 										)}
 									</SmallToggler>
-								</View>
+								</div>
 
-								<View
+								<div
 									style={{
 										...a.flex_row,
 										...a.flex_wrap,
 										...a.gap_md,
 									}}
 								>
-									<View>
+									<div>
 										<Text
 											style={{
 												...a.font_bold,
@@ -438,7 +436,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 										>
 											Target
 										</Text>
-										<View
+										<div
 											style={{
 												...a.border,
 												...a.rounded_full,
@@ -454,7 +452,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 												values={target}
 												onChange={setTarget}
 											>
-												<View
+												<div
 													style={{
 														...a.flex_row,
 														...a.gap_md,
@@ -477,11 +475,11 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 														<Toggle.Radio />
 														<Toggle.LabelText>Embed</Toggle.LabelText>
 													</Toggle.Item>
-												</View>
+												</div>
 											</Toggle.Group>
-										</View>
-									</View>
-								</View>
+										</div>
+									</div>
+								</div>
 							</>
 						)}
 
@@ -504,7 +502,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 							</ToggleButton.Button>
 						</ToggleButton.Group>
 
-						<View
+						<div
 							style={{
 								...a.border,
 								...a.rounded_sm,
@@ -530,7 +528,7 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 								<>
 									<Heading title="Notification" subtitle="quote or reply" />
 									<MockNotifItem notif={replyNotif} moderationOpts={modOpts} />
-									<View style={{ height: 20 }} />
+									<div style={{ height: 20 }} />
 									<Heading title="Notification" subtitle="follow or like" />
 									<MockNotifItem notif={followNotif} moderationOpts={modOpts} />
 								</>
@@ -559,9 +557,9 @@ export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorPara
 									<DataView label="Post Moderation Data" data={postModeration} />
 								</>
 							)}
-						</View>
+						</div>
 
-						<View style={{ height: 400 }} />
+						<div style={{ height: 400 }} />
 					</CenteredView>
 				</ScrollView>
 			</moderationOptsOverrideContext.Provider>
@@ -603,7 +601,7 @@ function CustomLabelForm({
 }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.flex_wrap,
@@ -614,7 +612,7 @@ function CustomLabelForm({
 				...a.mt_md,
 			}}
 		>
-			<View>
+			<div>
 				<Text
 					style={{
 						...a.font_bold,
@@ -626,7 +624,7 @@ function CustomLabelForm({
 				>
 					Blurs
 				</Text>
-				<View
+				<div
 					style={{
 						...a.border,
 						...a.rounded_full,
@@ -642,7 +640,7 @@ function CustomLabelForm({
 						values={[def.blurs]}
 						onChange={(values) => setDef((v) => ({ ...v, blurs: values[0] }))}
 					>
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.gap_md,
@@ -661,11 +659,11 @@ function CustomLabelForm({
 								<Toggle.Radio />
 								<Toggle.LabelText>None</Toggle.LabelText>
 							</Toggle.Item>
-						</View>
+						</div>
 					</Toggle.Group>
-				</View>
-			</View>
-			<View>
+				</div>
+			</div>
+			<div>
 				<Text
 					style={{
 						...a.font_bold,
@@ -677,7 +675,7 @@ function CustomLabelForm({
 				>
 					Severity
 				</Text>
-				<View
+				<div
 					style={{
 						...a.border,
 						...a.rounded_full,
@@ -693,7 +691,7 @@ function CustomLabelForm({
 						values={[def.severity]}
 						onChange={(values) => setDef((v) => ({ ...v, severity: values[0] }))}
 					>
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.gap_md,
@@ -713,11 +711,11 @@ function CustomLabelForm({
 								<Toggle.Radio />
 								<Toggle.LabelText>None</Toggle.LabelText>
 							</Toggle.Item>
-						</View>
+						</div>
 					</Toggle.Group>
-				</View>
-			</View>
-		</View>
+				</div>
+			</div>
+		</div>
 	);
 }
 
@@ -725,8 +723,8 @@ function Toggler({ label, children }: React.PropsWithChildren<{ label: string }>
 	const t = useTheme();
 	const [show, setShow] = React.useState(false);
 	return (
-		<View style={a.mb_md}>
-			<View
+		<div style={a.mb_md}>
+			<div
 				style={{
 					...t.atoms.border_contrast_medium,
 					...a.border,
@@ -745,16 +743,16 @@ function Toggler({ label, children }: React.PropsWithChildren<{ label: string }>
 					<ButtonIcon icon={show ? ChevronTop : ChevronBottom} position="right" />
 				</Button>
 				{show && children}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
 function SmallToggler({ label, children }: React.PropsWithChildren<{ label: string }>) {
 	const [show, setShow] = React.useState(false);
 	return (
-		<View>
-			<View style={a.flex_row}>
+		<div>
+			<div style={a.flex_row}>
 				<Button
 					variant="ghost"
 					color="secondary"
@@ -765,9 +763,9 @@ function SmallToggler({ label, children }: React.PropsWithChildren<{ label: stri
 					<ButtonText>{label}</ButtonText>
 					<ButtonIcon icon={show ? ChevronTop : ChevronBottom} position="right" />
 				</Button>
-			</View>
+			</div>
 			{show && children}
-		</View>
+		</div>
 	);
 }
 
@@ -796,7 +794,7 @@ function ModerationUIView({
 }) {
 	return (
 		<Toggler label={label}>
-			<View style={a.p_lg}>
+			<div style={a.p_lg}>
 				{[
 					"profileList",
 					"profileView",
@@ -809,7 +807,7 @@ function ModerationUIView({
 				].map((key) => {
 					const ui = mod.ui(key as keyof ModerationBehavior);
 					return (
-						<View
+						<div
 							key={key}
 							style={{
 								...a.flex_row,
@@ -829,16 +827,16 @@ function ModerationUIView({
 							<Flag v={ui.alert} label="Alert" />
 							<Flag v={ui.inform} label="Inform" />
 							<Flag v={ui.noOverride} label="No-override" />
-						</View>
+						</div>
 					);
 				})}
-			</View>
+			</div>
 		</Toggler>
 	);
 }
 
 function Spacer() {
-	return <View style={{ height: 30 }} />;
+	return <div style={{ height: 30 }} />;
 }
 
 function MockPostFeedItem({
@@ -888,7 +886,6 @@ function MockPostThreadItem({
 }) {
 	return (
 		<PostThreadItem
-			// @ts-ignore
 			post={post}
 			record={post.record as AppBskyFeedPost.Record}
 			moderation={moderation}
@@ -966,7 +963,7 @@ function MockAccountScreen({
 }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.border_contrast_medium,
 				...a.border,
@@ -975,28 +972,28 @@ function MockAccountScreen({
 		>
 			<ScreenHider style={{}} screenDescription={"profile"} modui={moderation.ui("profileView")}>
 				<ProfileHeaderStandard
-					// @ts-ignore ProfileViewBasic is close enough -prf
+					// @ts-expect-error ProfileViewBasic is close enough -prf
 					profile={profile}
 					moderationOpts={moderationOpts}
-					// @ts-ignore ProfileViewBasic is close enough -esb
+					// @ts-expect-error ProfileViewBasic is close enough -esb
 					descriptionRT={new RichText({ text: profile.description as string })}
 				/>
 			</ScreenHider>
-		</View>
+		</div>
 	);
 }
 
 function Flag({ v, label }: { v: boolean | undefined; label: string }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.align_center,
 				...a.gap_xs,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.justify_center,
 					...a.align_center,
@@ -1012,8 +1009,8 @@ function Flag({ v, label }: { v: boolean | undefined; label: string }) {
 				}}
 			>
 				{v && <Check size="xs" fill={t.palette.contrast_900} />}
-			</View>
+			</div>
 			<P style={a.text_xs}>{label}</P>
-		</View>
+		</div>
 	);
 }

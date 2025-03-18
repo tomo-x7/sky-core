@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
@@ -12,8 +10,8 @@ export function Menus() {
 	// const {closeAllDialogs} = useDialogStateControlContext()
 
 	return (
-		<View style={a.gap_md}>
-			<View
+		<div style={a.gap_md}>
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_start,
@@ -30,9 +28,8 @@ export function Menus() {
 										...a.px_md,
 										...a.rounded_sm,
 										...t.atoms.bg_contrast_50,
-										...((state.hovered || state.focused || state.pressed) && [
-											t.atoms.bg_contrast_200,
-										]),
+										...((state.hovered || state.focused || state.pressed) &&
+											t.atoms.bg_contrast_200),
 									}}
 								>
 									Open
@@ -74,7 +71,7 @@ export function Menus() {
 						</Menu.Item>
 					</Menu.Outer>
 				</Menu.Root>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

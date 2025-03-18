@@ -1,6 +1,5 @@
 import deepEqual from "lodash.isequal";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useGutters } from "#/alf";
 import { Admonition } from "#/components/Admonition";
@@ -29,7 +28,7 @@ export function Screen() {
 				<Layout.Header.Slot />
 			</Layout.Header.Outer>
 			<Layout.Content>
-				<View
+				<div
 					style={{
 						...gutters,
 						...a.gap_xl,
@@ -42,7 +41,7 @@ export function Screen() {
 					{preferences ? (
 						<Inner preferences={preferences} />
 					) : (
-						<View
+						<div
 							style={{
 								...gutters,
 								...a.justify_center,
@@ -50,9 +49,9 @@ export function Screen() {
 							}}
 						>
 							<Loader size="xl" />
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 			</Layout.Content>
 		</Layout.Screen>
 	);

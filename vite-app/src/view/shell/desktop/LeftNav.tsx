@@ -1,9 +1,8 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useLinkProps, useNavigation, useNavigationState } from "@react-navigation/native";
 import React, { type JSX } from "react";
-import { StyleSheet, View } from "react-native";
 
-import { atoms as a, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import type { DialogControlProps } from "#/components/Dialog";
 import * as Menu from "#/components/Menu";
@@ -92,10 +91,10 @@ function ProfileCard() {
 		}));
 
 	return (
-		<View
+		<div
 			style={{
 				...a.my_md,
-				...(!leftNavMinimal && [a.w_full, a.align_start]),
+				...flatten(!leftNavMinimal && [a.w_full, a.align_start]),
 			}}
 		>
 			{!isLoading && profile ? (
@@ -110,37 +109,32 @@ function ProfileCard() {
 									style={{
 										...a.w_full,
 
-										...//@ts-ignore
-										a.transition_color,
+										...a.transition_color,
 
-										...//@ts-ignore
-										(active ? t.atoms.bg_contrast_25 : a.transition_delay_50ms),
+										...(active ? t.atoms.bg_contrast_25 : a.transition_delay_50ms),
 
 										...a.rounded_full,
 										...a.justify_between,
 										...a.align_center,
 										...a.flex_row,
 										...{ gap: 6 },
-										...(!leftNavMinimal && [a.pl_lg, a.pr_md]),
+										...flatten(!leftNavMinimal && [a.pl_lg, a.pr_md]),
 									}}
 								>
-									<View
+									<div
 										style={{
-											...//@ts-ignore
-											(!PlatformInfo.getIsReducedMotionEnabled() && [
-												a.transition_transform,
-												{ transitionDuration: "250ms" },
-												!active && a.transition_delay_50ms,
-											]),
-
+											...flatten(
+												!PlatformInfo.getIsReducedMotionEnabled() && [
+													a.transition_transform,
+													{ transitionDuration: "250ms" },
+													!active && a.transition_delay_50ms,
+												],
+											),
 											...a.relative,
 											...a.z_10,
-
 											...(active && {
-												transform: [
-													{ scale: !leftNavMinimal ? 2 / 3 : 0.8 },
-													{ translateX: !leftNavMinimal ? -22 : 0 },
-												],
+												scale: !leftNavMinimal ? 2 / 3 : 0.8,
+												transform: `translateX(${!leftNavMinimal ? -22 : 0}px)`,
 											}),
 										}}
 									>
@@ -149,23 +143,16 @@ function ProfileCard() {
 											size={size}
 											type={profile?.associated?.labeler ? "labeler" : "user"}
 										/>
-									</View>
+									</div>
 									{!leftNavMinimal && (
 										<>
-											<View
+											<div
 												style={{
 													...a.flex_1,
-
-													...//@ts-ignore
-													a.transition_opacity,
-
-													...//@ts-ignore
-													(!active && a.transition_delay_50ms),
-
-													...{
-														marginLeft: tokens.space.xl * -1,
-														opacity: active ? 1 : 0,
-													},
+													...a.transition_opacity,
+													...(!active && a.transition_delay_50ms),
+													marginLeft: tokens.space.xl * -1,
+													opacity: active ? 1 : 0,
 												}}
 											>
 												<Text
@@ -188,16 +175,14 @@ function ProfileCard() {
 												>
 													{sanitizeHandle(profile.handle, "@")}
 												</Text>
-											</View>
+											</div>
 											<EllipsisIcon
 												aria-hidden={true}
 												style={{
 													...t.atoms.text_contrast_medium,
 
-													...//@ts-ignore
-													a.transition_opacity,
-
-													...{ opacity: active ? 1 : 0 },
+													...a.transition_opacity,
+													opacity: active ? 1 : 0,
 												}}
 												size="sm"
 											/>
@@ -228,7 +213,7 @@ function ProfileCard() {
 				cancelButtonCta={"Cancel"}
 				confirmButtonColor="negative"
 			/>
-		</View>
+		</div>
 	);
 }
 
@@ -269,13 +254,13 @@ function SwitchMenuItems({
 								)}`}
 								onPress={() => onPressSwitchAccount(other.account)}
 							>
-								<View style={{ marginLeft: tokens.space._2xs * -1 }}>
+								<div style={{ marginLeft: tokens.space._2xs * -1 }}>
 									<UserAvatar
 										avatar={other.profile?.avatar}
 										size={20}
 										type={other.profile?.associated?.labeler ? "labeler" : "user"}
 									/>
-								</View>
+								</div>
 								<Menu.ItemText>
 									{sanitizeHandle(other.profile?.handle ?? other.account.handle, "@")}
 								</Menu.ItemText>
@@ -339,7 +324,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 
 	return (
 		<PressableWithHover
-			//@ts-ignore
+			//@ts-expect-error
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -359,7 +344,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 			accessibilityLabel={label}
 			accessibilityHint=""
 		>
-			<View
+			<div
 				style={{
 					...a.align_center,
 					...a.justify_center,
@@ -378,7 +363,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 			>
 				{isCurrent ? iconFilled : icon}
 				{typeof count === "string" && count ? (
-					<View
+					<div
 						style={{
 							...a.absolute,
 							...a.inset_0,
@@ -388,9 +373,6 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 						}}
 					>
 						<Text
-							accessibilityLabel={`${count} unread ${count === "1" ? "item" : "items"}`}
-							accessibilityHint=""
-							accessible={true}
 							numberOfLines={1}
 							style={{
 								...a.absolute,
@@ -400,30 +382,25 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 								...a.text_center,
 								...a.leading_tight,
 
-								...{
-									top: "-10%",
-									left: count.length === 1 ? 12 : 8,
-									backgroundColor: t.palette.primary_500,
-									color: t.palette.white,
-									lineHeight: a.text_sm.fontSize,
-									paddingHorizontal: 4,
-									paddingVertical: 1,
-									minWidth: 16,
-								},
+								top: "-10%",
+								left: count.length === 1 ? 12 : 8,
+								backgroundColor: t.palette.primary_500,
+								color: t.palette.white,
+								lineHeight: a.text_sm.fontSize,
+								padding: "1px 4px",
+								minWidth: 16,
 
-								...(leftNavMinimal && [
-									{
-										top: "10%",
-										left: count.length === 1 ? 20 : 16,
-									},
-								]),
+								...(leftNavMinimal && {
+									top: "10%",
+									left: count.length === 1 ? 20 : 16,
+								}),
 							}}
 						>
 							{count}
 						</Text>
-					</View>
+					</div>
 				) : hasNew ? (
-					<View
+					<div
 						style={{
 							...a.absolute,
 							...a.rounded_full,
@@ -443,7 +420,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 						}}
 					/>
 				) : null}
-			</View>
+			</div>
 			{!leftNavMinimal && (
 				<Text
 					style={{
@@ -499,7 +476,7 @@ function ComposeBtn() {
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.pl_md,
@@ -518,7 +495,7 @@ function ComposeBtn() {
 				<ButtonIcon icon={EditBig} position="left" />
 				<ButtonText>New Post</ButtonText>
 			</Button>
-		</View>
+		</div>
 	);
 }
 
@@ -551,29 +528,22 @@ export function DesktopLeftNav() {
 	}
 
 	return (
-		<View
+		<div
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="navigation"
 			style={{
 				...a.px_xl,
 				...styles.leftNav,
 				...(leftNavMinimal && styles.leftNavMinimal),
-
-				...{
-					transform: [
-						{ translateX: centerColumnOffset ? -450 : -300 },
-						{ translateX: "-100%" },
-						...a.scrollbar_offset.transform,
-					],
-				},
+				transform: `translateX(${centerColumnOffset ? -450 : -300}px) translateX(-100%) ${a.scrollbar_offset.transform}`,
 			}}
 		>
 			{hasSession ? (
 				<ProfileCard />
 			) : isDesktop ? (
-				<View style={a.pt_xl}>
+				<div style={a.pt_xl}>
 					<NavSignupCard />
-				</View>
+				</div>
 			) : null}
 			{hasSession && (
 				<>
@@ -628,20 +598,18 @@ export function DesktopLeftNav() {
 					<ComposeBtn />
 				</>
 			)}
-		</View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	leftNav: {
-		//@ts-ignore
 		position: "fixed",
 		top: 0,
 		paddingTop: 10,
 		paddingBottom: 10,
 		left: "50%",
 		width: 240,
-		// @ts-expect-error web only
 		maxHeight: "100vh",
 		overflowY: "auto",
 	},
@@ -653,7 +621,6 @@ const styles = StyleSheet.create({
 		height: "100%",
 		width: 86,
 		alignItems: "center",
-		//@ts-ignore
 		overflowX: "hidden",
 	},
 	backBtn: {
@@ -663,4 +630,4 @@ const styles = StyleSheet.create({
 		width: 30,
 		height: 30,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

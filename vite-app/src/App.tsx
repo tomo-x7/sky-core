@@ -10,6 +10,7 @@ import { useStarterPackEntry } from "./components/hooks/useStarterPackEntry";
 import { Provider as IntentDialogProvider } from "./components/intents/IntentDialogs";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { QueryProvider } from "./lib/react-query";
+import { Provider as PlaceholderStyleProvider } from "./placeholderStyle";
 import { Provider as A11yProvider } from "./state/a11y";
 import { Provider as MutedThreadsProvider } from "./state/cache/thread-mutes";
 import { Provider as DialogStateProvider } from "./state/dialogs";
@@ -89,43 +90,45 @@ function InnerApp() {
 				<RootSiblingParent>
 					<VideoVolumeProvider>
 						<ActiveVideoProvider>
-							<React.Fragment
-								// Resets the entire tree below when it changes:
-								key={currentAccount?.did}
-							>
-								<QueryProvider currentDid={currentAccount?.did}>
-									<ComposerProvider>
-										<MessagesProvider>
-											{/* LabelDefsProvider MUST come before ModerationOptsProvider */}
-											<LabelDefsProvider>
-												<ModerationOptsProvider>
-													<LoggedOutViewProvider>
-														<SelectedFeedProvider>
-															<HiddenRepliesProvider>
-																<HomeBadgeProvider>
-																	<UnreadNotifsProvider>
-																		<MutedThreadsProvider>
-																			<ProgressGuideProvider>
-																				<TrendingConfigProvider>
-																					<IntentDialogProvider>
-																						<Shell />
-																						<NuxDialogs />
-																					</IntentDialogProvider>
-																				</TrendingConfigProvider>
-																			</ProgressGuideProvider>
-																		</MutedThreadsProvider>
-																	</UnreadNotifsProvider>
-																</HomeBadgeProvider>
-															</HiddenRepliesProvider>
-														</SelectedFeedProvider>
-													</LoggedOutViewProvider>
-												</ModerationOptsProvider>
-											</LabelDefsProvider>
-										</MessagesProvider>
-									</ComposerProvider>
-								</QueryProvider>
-								<ToastContainer />
-							</React.Fragment>
+							<PlaceholderStyleProvider>
+								<React.Fragment
+									// Resets the entire tree below when it changes:
+									key={currentAccount?.did}
+								>
+									<QueryProvider currentDid={currentAccount?.did}>
+										<ComposerProvider>
+											<MessagesProvider>
+												{/* LabelDefsProvider MUST come before ModerationOptsProvider */}
+												<LabelDefsProvider>
+													<ModerationOptsProvider>
+														<LoggedOutViewProvider>
+															<SelectedFeedProvider>
+																<HiddenRepliesProvider>
+																	<HomeBadgeProvider>
+																		<UnreadNotifsProvider>
+																			<MutedThreadsProvider>
+																				<ProgressGuideProvider>
+																					<TrendingConfigProvider>
+																						<IntentDialogProvider>
+																							<Shell />
+																							<NuxDialogs />
+																						</IntentDialogProvider>
+																					</TrendingConfigProvider>
+																				</ProgressGuideProvider>
+																			</MutedThreadsProvider>
+																		</UnreadNotifsProvider>
+																	</HomeBadgeProvider>
+																</HiddenRepliesProvider>
+															</SelectedFeedProvider>
+														</LoggedOutViewProvider>
+													</ModerationOptsProvider>
+												</LabelDefsProvider>
+											</MessagesProvider>
+										</ComposerProvider>
+									</QueryProvider>
+									<ToastContainer />
+								</React.Fragment>
+							</PlaceholderStyleProvider>
 						</ActiveVideoProvider>
 					</VideoVolumeProvider>
 				</RootSiblingParent>

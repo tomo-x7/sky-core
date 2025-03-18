@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { ActivityIndicator, SafeAreaView, StyleSheet, View } from "react-native";
 
+import ActivityIndicator from "#/components/ActivityIndicator";
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
-import { ScrollView, TextInput } from "./util";
+import { ScrollView } from "./util";
 
 enum Stages {
 	InputEmail = 0,
@@ -32,6 +34,7 @@ export function Component() {
 	const [error, setError] = useState<string>("");
 	const { isMobile } = useWebMediaQueries();
 	const { openModal, closeModal } = useModalControls();
+	const phStyleCName = usePlaceholderStyle(pal.colors.textLight);
 
 	const onRequestChange = async () => {
 		if (email === currentAccount?.email) {
@@ -102,7 +105,7 @@ export function Component() {
 					...(isMobile && { paddingHorizontal: 18 }),
 				}}
 			>
-				<View style={styles.titleSection}>
+				<div style={styles.titleSection}>
 					<Text
 						type="title-lg"
 						style={{
@@ -114,7 +117,7 @@ export function Component() {
 						{stage === Stages.ConfirmCode ? "Security Step Required" : ""}
 						{stage === Stages.Done ? "Email Updated" : ""}
 					</Text>
-				</View>
+				</div>
 
 				<Text
 					type="lg"
@@ -136,53 +139,49 @@ export function Component() {
 				</Text>
 
 				{stage === Stages.InputEmail && (
-					<TextInput
+					<input
+						type="text"
 						style={{
 							...styles.textInput,
 							...pal.border,
 							...pal.text,
 						}}
 						placeholder="alice@mail.com"
-						placeholderTextColor={pal.colors.textLight}
 						value={email}
-						onChangeText={setEmail}
-						accessible={true}
-						accessibilityLabel={"Email"}
-						accessibilityHint=""
+						onChange={(ev) => setEmail(ev.target.value)}
 						autoCapitalize="none"
 						autoComplete="email"
 						autoCorrect={"off"}
+						className={phStyleCName}
 					/>
 				)}
 				{stage === Stages.ConfirmCode && (
-					<TextInput
+					<input
+						type="text"
 						style={{
 							...styles.textInput,
 							...pal.border,
 							...pal.text,
 						}}
 						placeholder="XXXXX-XXXXX"
-						placeholderTextColor={pal.colors.textLight}
 						value={confirmationCode}
-						onChangeText={setConfirmationCode}
-						accessible={true}
-						accessibilityLabel={"Confirmation code"}
-						accessibilityHint=""
+						onChange={(ev) => setConfirmationCode(ev.target.value)}
 						autoCapitalize="none"
 						autoComplete="off"
 						autoCorrect={"off"}
+						className={phStyleCName}
 					/>
 				)}
 
 				{error ? <ErrorMessage message={error} style={styles.error} /> : undefined}
 
-				<View style={styles.btnContainer}>
+				<div style={styles.btnContainer}>
 					{isProcessing ? (
-						<View style={styles.btn}>
+						<div style={styles.btn}>
 							<ActivityIndicator color="#fff" />
-						</View>
+						</div>
 					) : (
-						<View style={{ gap: 6 }}>
+						<div style={{ gap: 6 }}>
 							{stage === Stages.InputEmail && (
 								<Button
 									type="primary"
@@ -191,7 +190,7 @@ export function Component() {
 									accessibilityHint=""
 									label={"Request Change"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-									labelStyle={[s.f18]}
+									labelStyle={s.f18}
 								/>
 							)}
 							{stage === Stages.ConfirmCode && (
@@ -202,7 +201,7 @@ export function Component() {
 									accessibilityHint=""
 									label={"Confirm Change"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-									labelStyle={[s.f18]}
+									labelStyle={s.f18}
 								/>
 							)}
 							{stage === Stages.Done && (
@@ -213,7 +212,7 @@ export function Component() {
 									accessibilityHint=""
 									label={"Verify New Email"}
 									labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-									labelStyle={[s.f18]}
+									labelStyle={s.f18}
 								/>
 							)}
 							<Button
@@ -225,17 +224,17 @@ export function Component() {
 								accessibilityHint=""
 								label={"Cancel"}
 								labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-								labelStyle={[s.f18]}
+								labelStyle={s.f18}
 							/>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 			</ScrollView>
 		</SafeAreaView>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	titleSection: {
 		paddingTop: 0,
 		paddingBottom: 14,
@@ -255,14 +254,12 @@ const styles = StyleSheet.create({
 		gap: 6,
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 14,
-		paddingVertical: 12,
+		padding: "12px 14px",
 	},
 	textInput: {
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 14,
-		paddingVertical: 10,
+		padding: "10px 14px",
 		fontSize: 16,
 	},
 	btn: {
@@ -276,4 +273,4 @@ const styles = StyleSheet.create({
 	btnContainer: {
 		paddingTop: 20,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

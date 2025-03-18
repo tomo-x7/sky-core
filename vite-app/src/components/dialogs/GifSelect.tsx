@@ -174,9 +174,9 @@ function GifList({
 				renderItem={renderItem}
 				numColumns={gtMobile ? 3 : 2}
 				columnWrapperStyle={[a.gap_sm]}
-				//@ts-ignore
+				//@ts-expect-error
 				contentContainerStyle={[a.h_full_vh]}
-				//@ts-ignore
+				//@ts-expect-error
 				style={a.h_full_vh}
 				ListHeaderComponent={
 					<>
@@ -274,7 +274,7 @@ export function GifPreview({
 					source={{
 						uri: gif.media_formats.tinygif.url,
 					}}
-					//@ts-ignore
+					//@ts-expect-error
 					contentFit="cover"
 					accessibilityLabel={gif.title}
 					accessibilityHint=""

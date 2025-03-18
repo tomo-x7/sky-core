@@ -1,5 +1,3 @@
-import { StyleSheet, View } from "react-native";
-
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { InfoCircleIcon } from "#/lib/icons";
 import { colors, s } from "#/lib/styles";
@@ -9,15 +7,15 @@ export function HelpTip({ text }: { text: string }) {
 	const bg = useColorSchemeStyle({ backgroundColor: colors.gray1 }, { backgroundColor: colors.gray8 });
 	const fg = useColorSchemeStyle({ color: colors.gray5 }, { color: colors.gray4 });
 	return (
-		<View
+		<div
 			style={{
 				...styles.helptip,
 				...bg,
 			}}
 		>
-			<View style={styles.icon}>
+			<div style={styles.icon}>
 				<InfoCircleIcon size={18} style={fg} strokeWidth={1.5} />
-			</View>
+			</div>
 			<Text
 				type="xs-medium"
 				style={{
@@ -28,11 +26,11 @@ export function HelpTip({ text }: { text: string }) {
 			>
 				{text}
 			</Text>
-		</View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	icon: {
 		width: 18,
 	},
@@ -40,7 +38,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "flex-start",
 		borderRadius: 6,
-		paddingHorizontal: 10,
-		paddingVertical: 8,
+		padding: "8px 10px",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

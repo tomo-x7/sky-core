@@ -468,7 +468,6 @@ let SearchScreenInner = ({
 		<Pager
 			onPageSelected={onPageSelected}
 			renderTabBar={(props) => (
-				// @ts-ignore
 				<Layout.Center
 					style={{
 						...a.z_10,
@@ -648,7 +647,7 @@ export function SearchScreenShell({
 			scrollToTopWeb();
 			setShowAutocomplete(false);
 			updateSearchHistory(item);
-			// @ts-ignore
+			// @ts-expect-error
 			navigation.push(route.name, { ...route.params, q: item });
 		},
 		[updateSearchHistory, navigation, route],
@@ -695,7 +694,7 @@ export function SearchScreenShell({
 		const { q: _q, ...parameters } = (route.params ?? {}) as {
 			[key: string]: string;
 		};
-		// @ts-ignore
+		// @ts-expect-error
 		navigation.replace(route.name, parameters);
 	}, [navigation, route]);
 

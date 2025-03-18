@@ -1,7 +1,6 @@
 import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
-import { View } from "react-native";
 import Animated, { FadeIn, FadeOut, LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -70,7 +69,7 @@ export function AppPasswordsScreen(props: Props) {
 						<LayoutAnimationConfig skipEntering skipExiting>
 							{appPasswords ? (
 								appPasswords.length > 0 ? (
-									<View style={a.overflow_hidden}>
+									<div style={a.overflow_hidden}>
 										{appPasswords.map((appPassword) => (
 											<Animated.View
 												key={appPassword.name}
@@ -84,12 +83,12 @@ export function AppPasswordsScreen(props: Props) {
 												</SettingsList.Item>
 											</Animated.View>
 										))}
-									</View>
+									</div>
 								) : (
 									<EmptyState icon="growth" message={"No app passwords yet"} />
 								)
 							) : (
-								<View
+								<div
 									style={{
 										...a.flex_1,
 										...a.justify_center,
@@ -98,7 +97,7 @@ export function AppPasswordsScreen(props: Props) {
 									}}
 								>
 									<Loader size="xl" />
-								</View>
+								</div>
 							)}
 						</LayoutAnimationConfig>
 					</SettingsList.Container>
@@ -127,7 +126,7 @@ function AppPasswordCard({
 	}, [deleteMutation, appPassword.name]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.border,
@@ -138,7 +137,7 @@ function AppPasswordCard({
 				...t.atoms.border_contrast_low,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.justify_between,
@@ -147,7 +146,7 @@ function AppPasswordCard({
 					...a.gap_sm,
 				}}
 			>
-				<View style={a.gap_xs}>
+				<div style={a.gap_xs}>
 					<Text
 						style={{
 							...t.atoms.text,
@@ -169,7 +168,7 @@ function AppPasswordCard({
 							})}
 						</>
 					</Text>
-				</View>
+				</div>
 				<Button
 					label={"Delete app password"}
 					variant="ghost"
@@ -180,9 +179,9 @@ function AppPasswordCard({
 				>
 					<ButtonIcon icon={TrashIcon} />
 				</Button>
-			</View>
+			</div>
 			{appPassword.privileged && (
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.gap_sm,
@@ -192,7 +191,7 @@ function AppPasswordCard({
 				>
 					<WarningIcon style={{ color: colors.warning[t.scheme] }} />
 					<Text style={t.atoms.text_contrast_high}>Allows access to direct messages</Text>
-				</View>
+				</div>
 			)}
 			<Prompt.Basic
 				control={deleteControl}
@@ -202,6 +201,6 @@ function AppPasswordCard({
 				confirmButtonCta={"Delete"}
 				confirmButtonColor="negative"
 			/>
-		</View>
+		</div>
 	);
 }

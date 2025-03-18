@@ -76,9 +76,9 @@ export const Link = memo(function Link({
 	}
 
 	if (anchorNoUnderline) {
-		// @ts-ignore web only -prf
+		// @ts-expect-error web only -prf
 		props.dataSet = props.dataSet || {};
-		// @ts-ignore web only -prf
+		// @ts-expect-error web only -prf
 		props.dataSet.noUnderline = 1;
 	}
 
@@ -89,7 +89,7 @@ export const Link = memo(function Link({
 			onPress={onPress}
 			accessible={accessible}
 			accessibilityRole="link"
-			// @ts-ignore web only -prf
+			// @ts-expect-error web only -prf
 			href={anchorHref}
 			{...props}
 		>
@@ -161,7 +161,7 @@ export const TextLink = memo(function TextLink({
 			onBeforePress?.();
 			if (onPress) {
 				e?.preventDefault?.();
-				// @ts-ignore function signature differs by platform -prf
+				// @ts-expect-error function signature differs by platform -prf
 				return onPress();
 			}
 			return onPressInner(closeModal, navigation, sanitizeUrl(href), navigationAction, openLink, e);
@@ -198,7 +198,7 @@ export const TextLink = memo(function TextLink({
 			lineHeight={lineHeight}
 			dataSet={dataSet}
 			title={title}
-			// @ts-ignore web only -prf
+			// @ts-expect-error web only -prf
 			hrefAttrs={hrefAttrs} // hack to get open in new tab to work on safari. without this, safari will open in a new window
 			{...props}
 			{...orgProps}
@@ -282,12 +282,12 @@ function onPressInner(
 ) {
 	let shouldHandle = false;
 	const isLeftClick =
-		// @ts-ignore Web only -prf
+		// @ts-expect-error Web only -prf
 		Platform.OS === "web" && (e.button == null || e.button === 0);
-	// @ts-ignore Web only -prf
+	// @ts-expect-error Web only -prf
 	const isMiddleClick = Platform.OS === "web" && e.button === 1;
 	const isMetaKey =
-		// @ts-ignore Web only -prf
+		// @ts-expect-error Web only -prf
 		Platform.OS === "web" && (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
 	const newTab = isMetaKey || isMiddleClick;
 
@@ -296,7 +296,7 @@ function onPressInner(
 	} else if (
 		!e.defaultPrevented && // onPress prevented default
 		(isLeftClick || isMiddleClick) && // ignore everything but left and middle clicks
-		// @ts-ignore Web only -prf
+		// @ts-expect-error Web only -prf
 		[undefined, null, "", "self"].includes(e.currentTarget?.target) // let browser handle "target=_blank" etc.
 	) {
 		e.preventDefault();
@@ -317,10 +317,10 @@ function onPressInner(
 
 			const [routeName, params] = router.matchPath(href);
 			if (navigationAction === "push") {
-				// @ts-ignore we're not able to type check on this one -prf
+				// @ts-expect-error we're not able to type check on this one -prf
 				navigation.dispatch(StackActions.push(routeName, params));
 			} else if (navigationAction === "replace") {
-				// @ts-ignore we're not able to type check on this one -prf
+				// @ts-expect-error we're not able to type check on this one -prf
 				navigation.dispatch(StackActions.replace(routeName, params));
 			} else if (navigationAction === "navigate") {
 				const state = navigation.getState();
@@ -328,7 +328,7 @@ function onPressInner(
 				if (tabState === TabState.InsideAtRoot) {
 					emitSoftReset();
 				} else {
-					// @ts-ignore we're not able to type check on this one -prf
+					// @ts-expect-error we're not able to type check on this one -prf
 					navigation.navigate(routeName, params);
 				}
 			} else {

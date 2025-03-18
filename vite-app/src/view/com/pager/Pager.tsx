@@ -1,6 +1,5 @@
 import React, { type JSX } from "react";
 import { flushSync } from "react-dom";
-import { View } from "react-native";
 
 import { s } from "#/lib/styles";
 
@@ -65,17 +64,17 @@ export const Pager = React.forwardRef(function PagerImpl(
 	);
 
 	return (
-		<View style={s.hContentRegion}>
+		<div style={s.hContentRegion}>
 			{renderTabBar({
 				selectedPage,
-				tabBarAnchor: <View ref={anchorRef} />,
+				tabBarAnchor: <div ref={anchorRef} />,
 				onSelect: (e) => onTabBarSelect(e),
 			})}
 			{React.Children.map(children, (child, i) => (
-				<View style={selectedPage === i ? s.flex1 : s.hidden} key={`page-${i}`}>
+				<div style={selectedPage === i ? s.flex1 : s.hidden} key={`page-${i}`}>
 					{child}
-				</View>
+				</div>
 			))}
-		</View>
+		</div>
 	);
 });

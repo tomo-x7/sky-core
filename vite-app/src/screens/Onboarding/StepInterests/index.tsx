@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -109,7 +108,7 @@ export function StepInterests() {
 	);
 
 	return (
-		<View style={a.align_start}>
+		<div style={a.align_start}>
 			<IconCircle
 				icon={isError ? EmojiSad : Hashtag}
 				style={{
@@ -121,17 +120,11 @@ export function StepInterests() {
 							}
 						: {}),
 				}}
-				iconStyle={[
-					isError
-						? {
-								color: t.palette.negative_900,
-							}
-						: {},
-				]}
+				iconStyle={isError ? { color: t.palette.negative_900 } : {}}
 			/>
 			<TitleText>{title}</TitleText>
 			<DescriptionText>{description}</DescriptionText>
-			<View
+			<div
 				style={{
 					...a.w_full,
 					...a.pt_2xl,
@@ -140,7 +133,7 @@ export function StepInterests() {
 				{isLoading ? (
 					<Loader size="xl" />
 				) : isError || !data ? (
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.p_lg,
@@ -166,14 +159,14 @@ export function StepInterests() {
 							</Text>
 							{error?.message || "an unknown error occurred"}
 						</Text>
-					</View>
+					</div>
 				) : (
 					<Toggle.Group
 						values={interests}
 						onChange={setInterests}
 						label={"Select your interests from the options below"}
 					>
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.gap_md,
@@ -189,13 +182,13 @@ export function StepInterests() {
 									<InterestButton interest={interest} />
 								</Toggle.Item>
 							))}
-						</View>
+						</div>
 					</Toggle.Group>
 				)}
-			</View>
+			</div>
 			<OnboardingControls.Portal>
 				{isError ? (
-					<View
+					<div
 						style={{
 							...a.gap_md,
 							...(gtMobile ? a.flex_row : a.flex_col),
@@ -221,7 +214,7 @@ export function StepInterests() {
 						>
 							<ButtonText>Skip</ButtonText>
 						</Button>
-					</View>
+					</div>
 				) : (
 					<Button
 						disabled={saving || !data}
@@ -236,6 +229,6 @@ export function StepInterests() {
 					</Button>
 				)}
 			</OnboardingControls.Portal>
-		</View>
+		</div>
 	);
 }

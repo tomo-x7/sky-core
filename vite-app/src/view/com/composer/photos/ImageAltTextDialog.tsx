@@ -1,6 +1,6 @@
 import React from "react";
 import { Image } from "react-native";
-import { type ImageStyle, View } from "react-native";
+import type { ImageStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -74,7 +74,7 @@ const ImageAltTextInner = ({
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>
 			<Dialog.Close />
-			<View>
+			<div>
 				<Text
 					style={{
 						...a.text_2xl,
@@ -86,7 +86,7 @@ const ImageAltTextInner = ({
 					Add alt text
 				</Text>
 
-				<View
+				<div
 					style={{
 						...t.atoms.bg_contrast_50,
 						...a.rounded_sm,
@@ -98,22 +98,22 @@ const ImageAltTextInner = ({
 						source={{
 							uri: (image.transformed ?? image.source).path,
 						}}
-						//@ts-ignore
+						//@ts-expect-error
 						contentFit="contain"
 						accessible={true}
 						accessibilityIgnoresInvertColors
 						enableLiveTextInteraction
 					/>
-				</View>
-			</View>
-			<View
+				</div>
+			</div>
+			<div
 				style={{
 					...a.mt_md,
 					...a.gap_md,
 				}}
 			>
-				<View style={a.gap_sm}>
-					<View
+				<div style={a.gap_sm}>
+					<div
 						style={{
 							...a.relative,
 							...{ width: "100%" },
@@ -128,14 +128,15 @@ const ImageAltTextInner = ({
 								}}
 								defaultValue={altText}
 								multiline
-								numberOfLines={3}
+								// TODO
+								// numberOfLines={3}
 								autoFocus
 							/>
 						</TextField.Root>
-					</View>
+					</div>
 
 					{altText.length > MAX_ALT_TEXT && (
-						<View
+						<div
 							style={{
 								...a.pb_sm,
 								...a.flex_row,
@@ -152,9 +153,9 @@ const ImageAltTextInner = ({
 							>
 								<>Alt text will be truncated. Limit: {MAX_ALT_TEXT.toLocaleString()} characters.</>
 							</Text>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 
 				<AltTextCounterWrapper altText={altText}>
 					<Button
@@ -171,7 +172,7 @@ const ImageAltTextInner = ({
 						<ButtonText>Save</ButtonText>
 					</Button>
 				</AltTextCounterWrapper>
-			</View>
+			</div>
 		</Dialog.ScrollableInner>
 	);
 };

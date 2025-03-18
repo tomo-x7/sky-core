@@ -1,14 +1,12 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
 
 import { type TextStyleProp, atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { leading } from "#/alf/typography";
-import { Button, ButtonIcon, ButtonText } from "#/components/Button";
+import { Button, ButtonIcon } from "#/components/Button";
 import { createPortalGroup } from "#/components/Portal";
 import { P, Text } from "#/components/Typography";
 import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components/icons/Chevron";
 import { Context } from "#/screens/Onboarding/state";
-import { useOnboardingDispatch } from "#/state/shell";
 
 const COL_WIDTH = 420;
 
@@ -17,15 +15,14 @@ export const OnboardingControls = createPortalGroup();
 export function Layout({ children }: React.PropsWithChildren) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
-	const onboardDispatch = useOnboardingDispatch();
 	const { state, dispatch } = React.useContext(Context);
-	const scrollview = React.useRef<ScrollView>(null);
+	const scrollview = React.useRef<HTMLDivElement>(null);
 	const prevActiveStep = React.useRef<string>(state.activeStep);
 
 	React.useEffect(() => {
 		if (state.activeStep !== prevActiveStep.current) {
 			prevActiveStep.current = state.activeStep;
-			scrollview.current?.scrollTo({ y: 0, animated: false });
+			scrollview.current?.scrollTo({ top: 0 });
 		}
 	}, [state]);
 
@@ -33,14 +30,9 @@ export function Layout({ children }: React.PropsWithChildren) {
 	const dialogLabel = "Set up your account";
 
 	return (
-		<View
+		<dialog
 			aria-modal
-			// biome-ignore lint/a11y/useSemanticElements: <explanation>
-			role="dialog"
-			aria-role="dialog"
 			aria-label={dialogLabel}
-			accessibilityLabel={dialogLabel}
-			accessibilityHint={"Customizes your Bluesky experience"}
 			style={{
 				...a.fixed,
 				...a.inset_0,
@@ -48,29 +40,8 @@ export function Layout({ children }: React.PropsWithChildren) {
 				...t.atoms.bg,
 			}}
 		>
-			{__DEV__ && (
-				<View
-					style={{
-						...a.absolute,
-						...a.p_xl,
-						...a.z_10,
-						...{ right: 0, top: 0 },
-					}}
-				>
-					<Button
-						variant="ghost"
-						color="negative"
-						size="small"
-						onPress={() => onboardDispatch({ type: "skip" })}
-						// DEV ONLY
-						label="Clear onboarding state"
-					>
-						<ButtonText>Clear</ButtonText>
-					</Button>
-				</View>
-			)}
 			{!gtMobile && state.hasPrev && (
-				<View
+				<div
 					style={{
 						...a.fixed,
 						...a.flex_row,
@@ -84,7 +55,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 						},
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.align_start,
@@ -103,41 +74,40 @@ export function Layout({ children }: React.PropsWithChildren) {
 						>
 							<ButtonIcon icon={ChevronLeft} />
 						</Button>
-					</View>
-				</View>
+					</div>
+				</div>
 			)}
-			<ScrollView
+			<div
 				ref={scrollview}
 				style={{
 					...a.h_full,
 					...a.w_full,
-					...{ paddingTop: 0 },
+					paddingTop: 0,
+					borderWidth: 0,
 				}}
-				contentContainerStyle={{ borderWidth: 0 }}
-				// @ts-ignore web only --prf
-				dataSet={{ "stable-gutters": 1 }}
+				data-stable-gutters={1}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_center,
 						...(gtMobile ? a.px_5xl : a.px_xl),
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...{ maxWidth: COL_WIDTH },
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.w_full,
 								...a.align_center,
 								...paddingTop,
 							}}
 						>
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.gap_sm,
@@ -148,7 +118,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 								{Array(state.totalSteps)
 									.fill(0)
 									.map((_, i) => (
-										<View
+										<div
 											key={i.toString()}
 											style={{
 												...a.flex_1,
@@ -165,10 +135,10 @@ export function Layout({ children }: React.PropsWithChildren) {
 											}}
 										/>
 									))}
-							</View>
-						</View>
+							</div>
+						</div>
 
-						<View
+						<div
 							style={{
 								...a.w_full,
 								...a.mb_5xl,
@@ -176,13 +146,13 @@ export function Layout({ children }: React.PropsWithChildren) {
 							}}
 						>
 							{children}
-						</View>
+						</div>
 
-						<View style={{ height: 400 }} />
-					</View>
-				</View>
-			</ScrollView>
-			<View
+						<div style={{ height: 400 }} />
+					</div>
+				</div>
+			</div>
+			<div
 				style={{
 					...a.fixed,
 					...{ bottom: 0, left: 0, right: 0 },
@@ -194,11 +164,11 @@ export function Layout({ children }: React.PropsWithChildren) {
 					...a.py_2xl,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...{ maxWidth: COL_WIDTH },
-						...(gtMobile && [a.flex_row, a.justify_between]),
+						...flatten(gtMobile && [a.flex_row, a.justify_between]),
 					}}
 				>
 					{gtMobile &&
@@ -215,12 +185,12 @@ export function Layout({ children }: React.PropsWithChildren) {
 								<ButtonIcon icon={ChevronLeft} />
 							</Button>
 						) : (
-							<View style={{ height: 54 }} />
+							<div style={{ height: 54 }} />
 						))}
 					<OnboardingControls.Outlet />
-				</View>
-			</View>
-		</View>
+				</div>
+			</div>
+		</dialog>
 	);
 }
 
@@ -236,7 +206,7 @@ export function TitleText({ children, style }: React.PropsWithChildren<TextStyle
 					lineHeight: leading(a.text_4xl, a.leading_tight),
 				},
 
-				...flatten(style),
+				...style,
 			}}
 		>
 			{children}
@@ -250,7 +220,7 @@ export function DescriptionText({ children, style }: React.PropsWithChildren<Tex
 		<P
 			style={{
 				...t.atoms.text_contrast_medium,
-				...flatten(style),
+				...style,
 			}}
 		>
 			{children}

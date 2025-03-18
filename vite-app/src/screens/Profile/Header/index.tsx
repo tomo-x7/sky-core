@@ -1,7 +1,6 @@
 import type { AppBskyActorDefs, AppBskyLabelerDefs, ModerationOpts, RichText as RichTextAPI } from "@atproto/api";
 import type React from "react";
 import { memo } from "react";
-import { StyleSheet, View } from "react-native";
 
 import { useTheme } from "#/alf";
 import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
@@ -11,9 +10,9 @@ import { ProfileHeaderStandard } from "./ProfileHeaderStandard";
 const ProfileHeaderLoading = (): React.ReactNode => {
 	const t = useTheme();
 	return (
-		<View style={t.atoms.bg}>
+		<div style={t.atoms.bg}>
 			<LoadingPlaceholder width="100%" height={150} style={{ borderRadius: 0 }} />
-			<View
+			<div
 				style={{
 					...t.atoms.bg,
 					...{ borderColor: t.atoms.bg.backgroundColor },
@@ -21,13 +20,13 @@ const ProfileHeaderLoading = (): React.ReactNode => {
 				}}
 			>
 				<LoadingPlaceholder width={90} height={90} style={styles.br45} />
-			</View>
-			<View style={styles.content}>
-				<View style={styles.buttonsLine}>
+			</div>
+			<div style={styles.content}>
+				<div style={styles.buttonsLine}>
 					<LoadingPlaceholder width={140} height={34} style={styles.br50} />
-				</View>
-			</View>
-		</View>
+				</div>
+			</div>
+		</div>
 	);
 };
 const MemoedProfileHeaderLoading = memo(ProfileHeaderLoading);
@@ -60,7 +59,7 @@ let ProfileHeader = ({ setMinimumHeight, ...props }: Props): React.ReactNode => 
 ProfileHeader = memo(ProfileHeader);
 export { ProfileHeader };
 
-const styles = StyleSheet.create({
+const styles = {
 	avi: {
 		position: "absolute",
 		top: 110,
@@ -72,8 +71,9 @@ const styles = StyleSheet.create({
 	},
 	content: {
 		paddingTop: 12,
-		paddingHorizontal: 16,
 		paddingBottom: 8,
+		paddingLeft: 16,
+		paddingRight: 16,
 	},
 	buttonsLine: {
 		flexDirection: "row",
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
 	},
 	br45: { borderRadius: 45 },
 	br50: { borderRadius: 50 },
-});
+} satisfies Record<string, React.CSSProperties>;

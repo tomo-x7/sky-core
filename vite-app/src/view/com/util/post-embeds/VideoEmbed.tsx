@@ -1,7 +1,6 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { useIsWithinMessage } from "#/components/dms/MessageContext";
@@ -87,9 +86,9 @@ export function VideoEmbed({
 	);
 
 	return (
-		<View style={a.pt_xs}>
+		<div style={a.pt_xs}>
 			{cropDisabled ? (
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.overflow_hidden,
@@ -97,13 +96,13 @@ export function VideoEmbed({
 					}}
 				>
 					{contents}
-				</View>
+				</div>
 			) : (
 				<ConstrainedImage fullBleed={crop === "square"} aspectRatio={constrained || 1}>
 					{contents}
 				</ConstrainedImage>
 			)}
-		</View>
+		</div>
 	);
 }
 
@@ -154,7 +153,7 @@ function ViewportObserver({
 	}, [isAnyViewActive, sendPosition]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.flex_row,
@@ -172,7 +171,7 @@ function ViewportObserver({
 					pointerEvents: "none",
 				}}
 			/>
-		</View>
+		</div>
 	);
 }
 

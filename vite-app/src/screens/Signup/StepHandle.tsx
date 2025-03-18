@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -76,8 +75,8 @@ export function StepHandle() {
 	const validCheck = validateServiceHandle(draftValue, state.userDomain);
 	return (
 		<ScreenTransition>
-			<View style={a.gap_lg}>
-				<View>
+			<div style={a.gap_lg}>
+				<div>
 					<TextField.Root>
 						<TextField.Icon icon={At} />
 						<TextField.Input
@@ -98,7 +97,7 @@ export function StepHandle() {
 							autoComplete="off"
 						/>
 					</TextField.Root>
-				</View>
+				</div>
 				{draftValue !== "" && (
 					<Text style={a.text_md}>
 						<>
@@ -116,7 +115,7 @@ export function StepHandle() {
 				)}
 
 				{draftValue !== "" && (
-					<View
+					<div
 						style={{
 							...a.w_full,
 							...a.rounded_sm,
@@ -127,7 +126,7 @@ export function StepHandle() {
 						}}
 					>
 						{state.error ? (
-							<View
+							<div
 								style={{
 									...a.w_full,
 									...a.flex_row,
@@ -144,10 +143,10 @@ export function StepHandle() {
 								>
 									{state.error}
 								</Text>
-							</View>
+							</div>
 						) : undefined}
 						{validCheck.hyphenStartOrEnd ? (
-							<View
+							<div
 								style={{
 									...a.w_full,
 									...a.flex_row,
@@ -164,9 +163,9 @@ export function StepHandle() {
 								>
 									Only contains letters, numbers, and hyphens
 								</Text>
-							</View>
+							</div>
 						) : (
-							<View
+							<div
 								style={{
 									...a.w_full,
 									...a.flex_row,
@@ -183,9 +182,9 @@ export function StepHandle() {
 								>
 									Doesn't begin or end with a hyphen
 								</Text>
-							</View>
+							</div>
 						)}
-						<View
+						<div
 							style={{
 								...a.w_full,
 								...a.flex_row,
@@ -213,10 +212,10 @@ export function StepHandle() {
 									At least 3 characters
 								</Text>
 							)}
-						</View>
-					</View>
+						</div>
+					</div>
 				)}
-			</View>
+			</div>
 			<BackNextButtons
 				isLoading={isLoading}
 				isNextDisabled={!validCheck.overall}

@@ -10,13 +10,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo, useState } from "react";
-import { StyleSheet, View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import type { AppModerationCause } from "#/components/Pills";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
 import { RichText } from "#/components/RichText";
 import { SubtleWebHover } from "#/components/SubtleWebHover";
+import { Text } from "#/components/Typography";
 import { Pin_Stroke2_Corner0_Rounded as PinIcon } from "#/components/icons/Pin";
 import { Repost_Stroke2_Corner2_Rounded as RepostIcon } from "#/components/icons/Repost";
 import { ContentHider } from "#/components/moderation/ContentHider";
@@ -42,7 +42,6 @@ import { PostMeta } from "#/view/com/util/PostMeta";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
-import { Text } from "#/view/com/util/text/Text";
 import { Link, TextLink, TextLinkOnWebOnly } from "../util/Link";
 
 interface FeedItemProps {
@@ -204,14 +203,12 @@ let FeedItemInner = ({
 		precacheProfile(queryClient, post.author);
 	}, [queryClient, post, sendInteraction, feedContext]);
 
-	const outerStyles = [
-		styles.outer,
-		{
-			borderColor: pal.colors.border,
-			paddingBottom: isThreadLastChild || (!isThreadChild && !isThreadParent) ? 8 : undefined,
-			borderTopWidth: hideTopBorder || isThreadChild ? 0 : StyleSheet.hairlineWidth,
-		},
-	];
+	const outerStyles = {
+		...styles.outer,
+		borderColor: pal.colors.border,
+		paddingBottom: isThreadLastChild || (!isThreadChild && !isThreadParent) ? 8 : undefined,
+		borderTopWidth: hideTopBorder || isThreadChild ? 0 : 1,
+	};
 
 	const { currentAccount } = useSession();
 	const isOwner = AppBskyFeedDefs.isReasonRepost(reason) && reason.by.did === currentAccount?.did;
@@ -233,7 +230,6 @@ let FeedItemInner = ({
 			style={outerStyles}
 			href={href}
 			noFeedback
-			accessible={false}
 			onBeforePress={onBeforePress}
 			dataSet={{ feedContext }}
 			onPointerEnter={() => {
@@ -244,10 +240,10 @@ let FeedItemInner = ({
 			}}
 		>
 			<SubtleWebHover hover={hover} />
-			<View style={{ flexDirection: "row", gap: 10, paddingLeft: 8 }}>
-				<View style={{ width: 42 }}>
+			<div style={{ flexDirection: "row", gap: 10, paddingLeft: 8 }}>
+				<div style={{ width: 42 }}>
 					{isThreadChild && (
-						<View
+						<div
 							style={{
 								...styles.replyLine,
 
@@ -259,9 +255,9 @@ let FeedItemInner = ({
 							}}
 						/>
 					)}
-				</View>
+				</div>
 
-				<View style={{ paddingTop: 12, flexShrink: 1 }}>
+				<div style={{ paddingTop: 12, flexShrink: 1 }}>
 					{isReasonFeedSource(reason) ? (
 						<Link href={reason.href}>
 							<Text type="sm-bold" style={pal.textLight} lineHeight={1.2} numberOfLines={1}>
@@ -321,17 +317,17 @@ let FeedItemInner = ({
 							</Text>
 						</Link>
 					) : AppBskyFeedDefs.isReasonPin(reason) ? (
-						<View style={styles.includeReason}>
+						<div style={styles.includeReason}>
 							<PinIcon style={{ color: pal.colors.textLight, marginRight: 3 }} width={13} height={13} />
 							<Text type="sm-bold" style={pal.textLight} lineHeight={1.2} numberOfLines={1}>
 								Pinned
 							</Text>
-						</View>
+						</div>
 					) : null}
-				</View>
-			</View>
-			<View style={styles.layout}>
-				<View style={styles.layoutAvi}>
+				</div>
+			</div>
+			<div style={styles.layout}>
+				<div style={styles.layoutAvi}>
 					<PreviewableUserAvatar
 						size={42}
 						profile={post.author}
@@ -340,7 +336,7 @@ let FeedItemInner = ({
 						onBeforePress={onOpenAuthor}
 					/>
 					{isThreadParent && (
-						<View
+						<div
 							style={{
 								...styles.replyLine,
 
@@ -352,8 +348,8 @@ let FeedItemInner = ({
 							}}
 						/>
 					)}
-				</View>
-				<View style={styles.layoutContent}>
+				</div>
+				<div style={styles.layoutContent}>
 					<PostMeta
 						author={post.author}
 						moderation={moderation}
@@ -379,12 +375,11 @@ let FeedItemInner = ({
 						record={record}
 						richText={richText}
 						onPressReply={onPressReply}
-						logContext="FeedItem"
 						feedContext={feedContext}
 						threadgateRecord={threadgateRecord}
 					/>
-				</View>
-			</View>
+				</div>
+			</div>
 		</Link>
 	);
 };
@@ -438,7 +433,7 @@ let PostContent = ({
 		<ContentHider modui={moderation.ui("contentList")} ignoreMute childContainerStyle={styles.contentHiderChild}>
 			<PostAlerts modui={moderation.ui("contentList")} style={a.py_2xs} additionalCauses={additionalPostAlerts} />
 			{richText.text ? (
-				<View style={styles.postTextContainer}>
+				<div style={styles.postTextContainer}>
 					<RichText
 						enableTags
 						value={richText}
@@ -450,20 +445,20 @@ let PostContent = ({
 						authorHandle={postAuthor.handle}
 						shouldProxyLinks={true}
 					/>
-				</View>
+				</div>
 			) : undefined}
 			{limitLines ? (
 				<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 			) : undefined}
 			{postEmbed ? (
-				<View style={a.pb_xs}>
+				<div style={a.pb_xs}>
 					<PostEmbeds
 						embed={postEmbed}
 						moderation={moderation}
 						onOpen={onOpenEmbed}
 						viewContext={PostEmbedViewContext.Feed}
 					/>
-				</View>
+				</div>
 			) : null}
 		</ContentHider>
 	);
@@ -522,16 +517,16 @@ function ReplyToLabel({
 	}
 
 	return (
-		<View
+		<div
 			style={{
 				...s.flexRow,
 				...s.mb2,
 				...s.alignCenter,
 			}}
 		>
-			{/* @ts-ignore */}
 			<FontAwesomeIcon
 				icon="reply"
+				// @ts-expect-error
 				size={9}
 				style={{
 					...{ color: pal.colors.textLight },
@@ -549,15 +544,14 @@ function ReplyToLabel({
 			>
 				{label}
 			</Text>
-		</View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	outer: {
 		paddingLeft: 10,
 		paddingRight: 15,
-		// @ts-ignore web only -prf
 		cursor: "pointer",
 	},
 	replyLine: {
@@ -607,4 +601,4 @@ const styles = StyleSheet.create({
 	translateLink: {
 		marginBottom: 6,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

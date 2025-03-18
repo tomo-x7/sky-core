@@ -1,6 +1,6 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { type JSX } from "react";
-import { ActivityIndicator, FlatList as RNFlatList, RefreshControl, View } from "react-native";
+import { ActivityIndicator, FlatList as RNFlatList, RefreshControl } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
@@ -84,7 +84,7 @@ export function MyLists({
 		({ item, index }: { item: any; index: number }) => {
 			if (item === EMPTY) {
 				return (
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.align_center,
@@ -93,7 +93,7 @@ export function MyLists({
 							...a.pt_xl,
 						}}
 					>
-						<View
+						<div
 							style={{
 								...a.align_center,
 								...a.justify_center,
@@ -107,7 +107,7 @@ export function MyLists({
 							}}
 						>
 							<ListIcon size="md" fill={t.atoms.text_contrast_low.color} />
-						</View>
+						</div>
 						<Text
 							style={{
 								...a.text_center,
@@ -123,21 +123,21 @@ export function MyLists({
 						>
 							{emptyText}
 						</Text>
-					</View>
+					</div>
 				);
 			} else if (item === ERROR_ITEM) {
 				return <ErrorMessage message={cleanError(error)} onPressTryAgain={onRefresh} />;
 			} else if (item === LOADING) {
 				return (
-					<View style={{ padding: 20 }}>
+					<div style={{ padding: 20 }}>
 						<ActivityIndicator />
-					</View>
+					</div>
 				);
 			}
 			return renderItem ? (
 				renderItem(item, index)
 			) : (
-				<View
+				<div
 					style={{
 						...(index !== 0 && a.border_t),
 						...t.atoms.border_contrast_low,
@@ -146,7 +146,7 @@ export function MyLists({
 					}}
 				>
 					<ListCard.Default view={item} />
-				</View>
+				</div>
 			);
 		},
 		[t, renderItem, error, onRefresh, emptyText],
@@ -154,7 +154,7 @@ export function MyLists({
 
 	if (inline) {
 		return (
-			<View style={style}>
+			<div style={style}>
 				{items.length > 0 && (
 					<RNFlatList
 						data={items}
@@ -172,11 +172,11 @@ export function MyLists({
 						removeClippedSubviews={true}
 					/>
 				)}
-			</View>
+			</div>
 		);
 	} else {
 		return (
-			<View style={style}>
+			<div style={style}>
 				{items.length > 0 && (
 					<List
 						data={items}
@@ -184,13 +184,13 @@ export function MyLists({
 						renderItem={renderItemInner}
 						refreshing={isPTRing}
 						onRefresh={onRefresh}
-						contentContainerStyle={[s.contentContainer]}
+						contentContainerStyle={s.contentContainer}
 						removeClippedSubviews={true}
 						desktopFixedHeight
 						sideBorders={false}
 					/>
 				)}
-			</View>
+			</div>
 		);
 	}
 }

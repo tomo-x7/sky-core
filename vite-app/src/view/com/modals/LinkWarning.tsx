@@ -1,16 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { SafeAreaView } from "#/lib/safe-area-context";
 import { shareUrl } from "#/lib/sharing";
 import { isPossiblyAUrl, splitApexDomain } from "#/lib/strings/url-helpers";
 import { colors, s } from "#/lib/styles";
 import { useModalControls } from "#/state/modals";
 import { Button } from "#/view/com/util/forms/Button";
-import { Text } from "#/view/com/util/text/Text";
 import { ScrollView } from "./util";
 
 export const snapPoints = ["50%"];
@@ -52,10 +53,10 @@ export function Component({
 					...(isMobile && { paddingHorizontal: 18 }),
 				}}
 			>
-				<View style={styles.titleSection}>
+				<div style={styles.titleSection}>
 					{potentiallyMisleading ? (
 						<>
-							{/* @ts-ignore */}
+							{/* @ts-expect-error */}
 							<FontAwesomeIcon icon="circle-exclamation" color={pal.colors.text} size={18} />
 							<Text
 								type="title-lg"
@@ -78,9 +79,9 @@ export function Component({
 							Leaving Bluesky
 						</Text>
 					)}
-				</View>
+				</div>
 
-				<View style={{ gap: 10 }}>
+				<div style={{ gap: 10 }}>
 					<Text type="lg" style={pal.text}>
 						This link is taking you to the following website:
 					</Text>
@@ -92,9 +93,9 @@ export function Component({
 							Make sure this is where you intend to go!
 						</Text>
 					)}
-				</View>
+				</div>
 
-				<View
+				<div
 					style={{
 						...styles.btnContainer,
 						...(isMobile && { paddingBottom: 40 }),
@@ -107,7 +108,7 @@ export function Component({
 						accessibilityHint={share ? "Shares the linked website" : "Opens the linked website"}
 						label={share ? "Share Link" : "Visit Site"}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-						labelStyle={[s.f18]}
+						labelStyle={s.f18}
 					/>
 					<Button
 						type="default"
@@ -118,9 +119,9 @@ export function Component({
 						accessibilityHint={"Cancels opening the linked website"}
 						label={"Cancel"}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-						labelStyle={[s.f18]}
+						labelStyle={s.f18}
 					/>
-				</View>
+				</div>
 			</ScrollView>
 		</SafeAreaView>
 	);
@@ -138,7 +139,7 @@ function LinkBox({ href }: { href: string }) {
 		}
 	}, [href]);
 	return (
-		<View
+		<div
 			style={{
 				...pal.view,
 				...pal.border,
@@ -152,7 +153,7 @@ function LinkBox({ href }: { href: string }) {
 				</Text>
 				{rest}
 			</Text>
-		</View>
+		</div>
 	);
 }
 

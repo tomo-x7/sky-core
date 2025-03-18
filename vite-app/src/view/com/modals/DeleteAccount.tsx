@@ -1,23 +1,23 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, SafeAreaView, TouchableOpacity } from "react-native";
 
 import { atoms as a, useTheme as useNewTheme } from "#/alf";
 import { Text as NewText } from "#/components/Typography";
+import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, gradients, s } from "#/lib/styles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent, useSession, useSessionApi } from "#/state/session";
 import { resetToTab } from "../../../Navigation";
 import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
-import { Text } from "../util/text/Text";
-import { ScrollView, TextInput } from "./util";
 
 export const snapPoints = ["55%"];
 
@@ -35,6 +35,7 @@ export function Component(props: {}) {
 	const [password, setPassword] = React.useState<string>("");
 	const [isProcessing, setIsProcessing] = React.useState<boolean>(false);
 	const [error, setError] = React.useState<string>("");
+	const phStyleCName = usePlaceholderStyle(pal.textLight.color!);
 	const onPressSendEmail = async () => {
 		setError("");
 		setIsProcessing(true);
@@ -82,8 +83,9 @@ export function Component(props: {}) {
 	};
 	return (
 		<SafeAreaView style={s.flex1}>
-			<ScrollView style={pal.view} keyboardShouldPersistTaps="handled">
-				<View
+			{/* 元ScrollView */}
+			<div style={pal.view} /*keyboardShouldPersistTaps="handled"*/>
+				<div
 					style={{
 						...styles.titleContainer,
 						...pal.view,
@@ -129,7 +131,7 @@ export function Component(props: {}) {
 							</Text>
 						</>
 					</Text>
-				</View>
+				</div>
 				{!isEmailSent ? (
 					<>
 						<Text
@@ -142,19 +144,19 @@ export function Component(props: {}) {
 							For security reasons, we'll need to send a confirmation code to your email address.
 						</Text>
 						{error ? (
-							<View style={s.mt10}>
+							<div style={s.mt10}>
 								<ErrorMessage message={error} />
-							</View>
+							</div>
 						) : undefined}
 						{isProcessing ? (
-							<View
+							<div
 								style={{
 									...styles.btn,
 									...s.mt10,
 								}}
 							>
 								<ActivityIndicator />
-							</View>
+							</div>
 						) : (
 							<>
 								<TouchableOpacity
@@ -199,8 +201,8 @@ export function Component(props: {}) {
 							</>
 						)}
 
-						<View>
-							<View
+						<div>
+							<div
 								style={{
 									...a.w_full,
 									...a.flex_row,
@@ -231,8 +233,8 @@ export function Component(props: {}) {
 									You can also temporarily deactivate your account instead, and reactivate it at any
 									time.
 								</NewText>
-							</View>
-						</View>
+							</div>
+						</div>
 					</>
 				) : (
 					<>
@@ -243,11 +245,11 @@ export function Component(props: {}) {
 								...pal.text,
 								...styles.description,
 							}}
-							nativeID="confirmationCode"
 						>
 							Check your inbox for an email with the confirmation code to enter below:
 						</Text>
-						<TextInput
+						<input
+							type="text"
 							style={{
 								...styles.textInput,
 								...pal.borderDark,
@@ -255,13 +257,9 @@ export function Component(props: {}) {
 								...styles.mb20,
 							}}
 							placeholder={"Confirmation code"}
-							placeholderTextColor={pal.textLight.color}
-							keyboardAppearance={theme.colorScheme}
+							className={phStyleCName}
 							value={confirmCode}
-							onChangeText={setConfirmCode}
-							accessibilityLabelledBy="confirmationCode"
-							accessibilityLabel={"Confirmation code"}
-							accessibilityHint={"Input confirmation code for account deletion"}
+							onChange={(ev) => setConfirmCode(ev.target.value)}
 						/>
 						<Text
 							type="lg"
@@ -269,40 +267,35 @@ export function Component(props: {}) {
 								...pal.text,
 								...styles.description,
 							}}
-							nativeID="password"
 						>
 							Please enter your password as well:
 						</Text>
-						<TextInput
+						<input
+							type="password"
 							style={{
 								...styles.textInput,
 								...pal.borderDark,
 								...pal.text,
 							}}
 							placeholder={"Password"}
-							placeholderTextColor={pal.textLight.color}
-							keyboardAppearance={theme.colorScheme}
-							secureTextEntry
+							className={phStyleCName}
 							value={password}
-							onChangeText={setPassword}
-							accessibilityLabelledBy="password"
-							accessibilityLabel={"Password"}
-							accessibilityHint={"Input password for account deletion"}
+							onChange={(ev) => setPassword(ev.target.value)}
 						/>
 						{error ? (
-							<View style={styles.mt20}>
+							<div style={styles.mt20}>
 								<ErrorMessage message={error} />
-							</View>
+							</div>
 						) : undefined}
 						{isProcessing ? (
-							<View
+							<div
 								style={{
 									...styles.btn,
 									...s.mt10,
 								}}
 							>
 								<ActivityIndicator />
-							</View>
+							</div>
 						) : (
 							<>
 								<TouchableOpacity
@@ -345,12 +338,12 @@ export function Component(props: {}) {
 						)}
 					</>
 				)}
-			</ScrollView>
+			</div>
 		</SafeAreaView>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	titleContainer: {
 		display: "flex",
 		flexDirection: "row",
@@ -369,12 +362,12 @@ const styles = StyleSheet.create({
 		overflow: "hidden",
 		whiteSpace: "nowrap",
 		textOverflow: "ellipsis",
-		// @ts-ignore only rendered on web
 		maxWidth: "400px",
 	},
 	description: {
 		textAlign: "center",
-		paddingHorizontal: 22,
+		paddingLeft: 22,
+		paddingRight: 22,
 		marginBottom: 10,
 	},
 	mt20: {
@@ -386,10 +379,10 @@ const styles = StyleSheet.create({
 	textInput: {
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 16,
-		paddingVertical: 12,
+		padding: "12px 16px",
 		fontSize: 20,
-		marginHorizontal: 20,
+		marginLeft: 20,
+		marginRight: 20,
 	},
 	btn: {
 		flexDirection: "row",
@@ -397,9 +390,10 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		borderRadius: 32,
 		padding: 14,
-		marginHorizontal: 20,
+		marginLeft: 20,
+		marginRight: 20,
 	},
 	evilBtn: {
 		backgroundColor: colors.red4,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -95,7 +95,7 @@ function LightboxInner({
 					<div style={styles.aviCenterer}>
 						<img
 							src={img.uri}
-							// @ts-ignore web-only
+							// @ts-expect-error web-only
 							style={
 								{
 									...styles.avi,
@@ -126,7 +126,7 @@ function LightboxInner({
 									...styles.blurredBackground,
 								}}
 							>
-								{/* @ts-ignore */}
+								{/* @ts-expect-error */}
 								<FontAwesomeIcon icon="angle-left" style={styles.icon} size={iconSize} />
 							</button>
 						)}
@@ -141,7 +141,7 @@ function LightboxInner({
 									...styles.blurredBackground,
 								}}
 							>
-								{/* @ts-ignore */}
+								{/* @ts-expect-error */}
 								<FontAwesomeIcon icon="angle-right" style={styles.icon} size={iconSize} />
 							</button>
 						)}
@@ -195,9 +195,7 @@ const styles: Record<string, React.CSSProperties> = {
 		justifyContent: "center",
 	},
 	avi: {
-		// @ts-ignore web-only
 		maxWidth: "calc(min(400px, 100vw))",
-		// @ts-ignore web-only
 		maxHeight: "calc(min(400px, 100vh))",
 		padding: 16,
 		boxSizing: "border-box",

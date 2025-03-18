@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
-// @ts-ignore web only, we will always redirect to the app on web (CORS)
+// @ts-expect-error web only, we will always redirect to the app on web (CORS)
 const REDIRECT_HOST = new URL(window.location.href).host;
 
 export function CaptchaWebView({
@@ -28,11 +28,11 @@ export function CaptchaWebView({
 	}, [onError]);
 
 	const onLoad = React.useCallback(() => {
-		// @ts-ignore web
+		// @ts-expect-error web
 		const frame: HTMLIFrameElement = document.getElementById("captcha-iframe") as HTMLIFrameElement;
 
 		try {
-			// @ts-ignore web
+			// @ts-expect-error web
 			const href = frame?.contentWindow?.location.href;
 			if (!href) return;
 			const urlp = new URL(href);

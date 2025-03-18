@@ -1,10 +1,11 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { StarterPack } from "#/components/icons/StarterPack";
 import { measureHandle, useHandleRef } from "#/lib/hooks/useHandleRef";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -17,7 +18,6 @@ import { useLightboxControls } from "#/state/lightbox";
 import { TextLink } from "#/view/com/util/Link";
 import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { UserAvatar, type UserAvatarType } from "#/view/com/util/UserAvatar";
-import { Text } from "#/view/com/util/text/Text";
 
 export function ProfileSubpageHeader({
 	isLoading,
@@ -94,17 +94,15 @@ export function ProfileSubpageHeader({
 				<Layout.Header.Content />
 				{children}
 			</Layout.Header.Outer>
-			<View
+			<div
 				style={{
 					flexDirection: "row",
 					alignItems: "flex-start",
 					gap: 10,
-					paddingTop: 14,
-					paddingBottom: 14,
-					paddingHorizontal: isMobile ? 12 : 14,
+					padding: `14px ${isMobile ? 12 : 14}px`,
 				}}
 			>
-				<View ref={aviRef} collapsable={false}>
+				<div ref={aviRef}>
 					<Pressable
 						onPress={onPressAvi}
 						accessibilityRole="image"
@@ -118,10 +116,10 @@ export function ProfileSubpageHeader({
 							<UserAvatar type={avatarType} size={58} avatar={avatar} />
 						)}
 					</Pressable>
-				</View>
-				<View style={{ flex: 1, gap: 4 }}>
+				</div>
+				<div style={{ flex: 1, gap: 4 }}>
 					{isLoading ? (
-						<LoadingPlaceholder width={200} height={32} style={{ marginVertical: 6 }} />
+						<LoadingPlaceholder width={200} height={32} style={{ marginTop: 6, marginBottom: 6 }} />
 					) : (
 						<TextLink
 							type="title-xl"
@@ -182,8 +180,8 @@ export function ProfileSubpageHeader({
 							) : null}
 						</Text>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 		</>
 	);
 }

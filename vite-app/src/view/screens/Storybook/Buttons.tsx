@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, type ButtonColor, ButtonIcon, ButtonText, type ButtonVariant } from "#/components/Button";
@@ -9,9 +8,9 @@ import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe
 
 export function Buttons() {
 	return (
-		<View style={a.gap_md}>
+		<div style={a.gap_md}>
 			<H1>Buttons</H1>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.flex_wrap,
@@ -20,7 +19,7 @@ export function Buttons() {
 				}}
 			>
 				{["primary", "secondary", "secondary_inverted", "negative"].map((color) => (
-					<View
+					<div
 						key={color}
 						style={{
 							...a.gap_md,
@@ -48,17 +47,17 @@ export function Buttons() {
 								</Button>
 							</React.Fragment>
 						))}
-					</View>
+					</div>
 				))}
 
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.gap_md,
 						...a.align_start,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.gap_md,
 							...a.align_start,
@@ -80,10 +79,10 @@ export function Buttons() {
 								</Button>
 							</React.Fragment>
 						))}
-					</View>
-				</View>
-			</View>
-			<View
+					</div>
+				</div>
+			</div>
+			<div
 				style={{
 					...a.flex_wrap,
 					...a.gap_md,
@@ -110,8 +109,8 @@ export function Buttons() {
 					<ButtonIcon icon={Globe} position="left" />
 					<ButtonText>Button</ButtonText>
 				</Button>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -135,8 +134,8 @@ export function Buttons() {
 				<Button variant="solid" color="primary" size="large" shape="round" label="Link out">
 					<ButtonIcon icon={ChevronLeft} size="lg" />
 				</Button>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -156,8 +155,8 @@ export function Buttons() {
 				<Button variant="solid" color="primary" size="small" shape="round" label="Link out">
 					<ButtonIcon icon={ChevronLeft} size="lg" />
 				</Button>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -177,8 +176,8 @@ export function Buttons() {
 				<Button variant="solid" color="primary" size="tiny" shape="round" label="Link out">
 					<ButtonIcon icon={ChevronLeft} size="md" />
 				</Button>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -203,8 +202,8 @@ export function Buttons() {
 				<Button variant="ghost" color="primary" size="tiny" shape="round" label="Link out">
 					<ButtonIcon icon={ChevronLeft} />
 				</Button>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_md,
@@ -229,7 +228,7 @@ export function Buttons() {
 				<Button variant="ghost" color="primary" size="tiny" shape="square" label="Link out">
 					<ButtonIcon icon={ChevronLeft} />
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

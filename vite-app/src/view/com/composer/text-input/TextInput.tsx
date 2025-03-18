@@ -10,19 +10,18 @@ import { generateJSON } from "@tiptap/html";
 import { Fragment, Node, Slice } from "@tiptap/pm/model";
 import { EditorContent, type JSONContent, useEditor } from "@tiptap/react";
 import React, { useRef } from "react";
-import { StyleSheet, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
-import { atoms as a, useAlf } from "#/alf";
+import { atoms as a, flatten, useAlf } from "#/alf";
 import { normalizeTextStyles } from "#/alf/typography";
 import { Portal } from "#/components/Portal";
+import { Text } from "#/components/Typography";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { blobToDataUri, isUriImage } from "#/lib/media/util";
 import { useActorAutocompleteFn } from "#/state/queries/actor-autocomplete";
 import { type LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
 import { textInputWebEmitter } from "#/view/com/composer/text-input/textInputWebEmitter";
-import { Text } from "../../util/text/Text";
 import { createSuggestion } from "./web/Autocomplete";
 import type { Emoji } from "./web/EmojiPicker.web";
 import { LinkDecorator } from "./web/LinkDecorator";
@@ -297,7 +296,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 	}));
 
 	const inputStyle = React.useMemo(() => {
-		const style = normalizeTextStyles([a.text_lg, a.leading_snug, t.atoms.text], {
+		const style = normalizeTextStyles(flatten([a.text_lg, a.leading_snug, t.atoms.text]), {
 			fontScale: fonts.scaleMultiplier,
 			fontFamily: fonts.family,
 			flags: {},
@@ -315,23 +314,23 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 
 	return (
 		<>
-			<View
+			<div
 				style={{
 					...styles.container,
-					...(hasRightPadding && styles.rightPadding),
+					...(hasRightPadding ? styles.rightPadding : undefined),
 				}}
 			>
-				{/* @ts-ignore inputStyle is fine */}
 				<EditorContent editor={editor} style={inputStyle} />
-			</View>
+			</div>
 			{isDropping && (
 				<Portal>
 					<Animated.View
+						// @ts-expect-error
 						style={styles.dropContainer}
 						entering={FadeIn.duration(80)}
 						exiting={FadeOut.duration(80)}
 					>
-						<View
+						<div
 							style={{
 								...pal.view,
 								...pal.border,
@@ -348,7 +347,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 							>
 								Drop to add images
 							</Text>
-						</View>
+						</div>
 					</Animated.View>
 				</Portal>
 			)}
@@ -386,7 +385,7 @@ function editorJsonToText(json: JSONContent, isLastDocumentChild = false): strin
 	return text;
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		flex: 1,
 		alignSelf: "flex-start",
@@ -402,7 +401,6 @@ const styles = StyleSheet.create({
 		pointerEvents: "none",
 		alignItems: "center",
 		justifyContent: "center",
-		// @ts-ignore web only -prf
 		position: "fixed",
 		padding: 16,
 		top: 0,
@@ -411,20 +409,18 @@ const styles = StyleSheet.create({
 		right: 0,
 	},
 	dropModal: {
-		// @ts-ignore web only
 		boxShadow: "rgba(0, 0, 0, 0.3) 0px 5px 20px",
 		padding: 8,
 		borderWidth: 1,
 		borderRadius: 16,
 	},
 	dropText: {
-		paddingVertical: 44,
-		paddingHorizontal: 36,
+		padding: "44px 36px",
 		borderStyle: "dashed",
 		borderRadius: 8,
 		borderWidth: 2,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;
 
 function getImageOrVideoFromUri(items: DataTransferItemList, callback: (uri: string) => void) {
 	for (let index = 0; index < items.length; index++) {

@@ -1,7 +1,6 @@
 import React from "react";
-import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import type { Avatar } from "#/screens/Onboarding/StepProfile/index";
 
 export function AvatarCreatorCircle({
@@ -16,7 +15,7 @@ export function AvatarCreatorCircle({
 
 	const styles = React.useMemo(
 		() => ({
-			imageContainer: [
+			imageContainer: flatten([
 				a.rounded_full,
 				a.overflow_hidden,
 				a.align_center,
@@ -28,16 +27,16 @@ export function AvatarCreatorCircle({
 					width: size,
 					backgroundColor: avatar.backgroundColor,
 				},
-			],
+			]),
 		}),
 		[avatar.backgroundColor, size, t.atoms.border_contrast_high],
 	);
 
 	return (
-		<View>
-			<View style={styles.imageContainer}>
+		<div>
+			<div style={styles.imageContainer}>
 				<Icon height={85} width={85} style={{ color: t.palette.white }} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

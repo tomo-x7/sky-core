@@ -1,14 +1,13 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { memo } from "react";
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeftIcon } from "#/components/icons/Arrow";
 import { LabelsOnMe } from "#/components/moderation/LabelsOnMe";
 import { ProfileHeaderAlerts } from "#/components/moderation/ProfileHeaderAlerts";
-import { BACK_HITSLOP } from "#/lib/constants";
 import { measureHandle, useHandleRef } from "#/lib/hooks/useHandleRef";
 import type { NavigationProp } from "#/lib/routes/types";
 import type { Shadow } from "#/state/cache/types";
@@ -89,37 +88,34 @@ let ProfileHeaderShell = ({
 	const isMe = React.useMemo(() => currentAccount?.did === profile.did, [currentAccount, profile]);
 
 	return (
-		<View style={t.atoms.bg} pointerEvents={"box-none"}>
-			<View
-				pointerEvents={"box-none"}
+		<div style={{ ...t.atoms.bg, pointerEvents: "none" }}>
+			<div
 				style={{
 					...a.relative,
-					...{ height: 150 },
+					height: 150,
+					pointerEvents: "none",
 				}}
 			>
 				<StatusBarShadow />
 				<GrowableBanner
 					backButton={
 						!hideBackButton && (
-							<TouchableWithoutFeedback
-								onPress={onPressBack}
-								hitSlop={BACK_HITSLOP}
-								accessibilityRole="button"
-								accessibilityLabel={"Back"}
-								accessibilityHint=""
+							<button
+								type="button"
+								onClick={onPressBack}
+								// TODO
+								// hitSlop={BACK_HITSLOP}
 							>
-								<View
+								<div
 									style={{
 										...styles.backBtnWrapper,
-
-										...{
-											top: 10,
-										},
+										top: 10,
+										pointerEvents: "auto",
 									}}
 								>
 									<ArrowLeftIcon size="lg" fill="white" />
-								</View>
-							</TouchableWithoutFeedback>
+								</div>
+							</button>
 						)
 					}
 				>
@@ -133,22 +129,22 @@ let ProfileHeaderShell = ({
 						/>
 					)}
 				</GrowableBanner>
-			</View>
+			</div>
 			{children}
 			{!isPlaceholderProfile && (
-				<View
+				<div
 					style={{
 						...a.px_lg,
 						...a.py_xs,
+						pointerEvents: "none",
 					}}
-					pointerEvents={"box-none"}
 				>
 					{isMe ? (
 						<LabelsOnMe type="account" labels={profile.labels} />
 					) : (
 						<ProfileHeaderAlerts moderation={moderation} />
 					)}
-				</View>
+				</div>
 			)}
 			<GrowableAvatar style={styles.aviPosition}>
 				<TouchableWithoutFeedback
@@ -157,7 +153,7 @@ let ProfileHeaderShell = ({
 					accessibilityLabel={`View ${profile.handle}'s avatar`}
 					accessibilityHint=""
 				>
-					<View
+					<div
 						style={{
 							...t.atoms.bg,
 							...{ borderColor: t.atoms.bg.backgroundColor },
@@ -165,18 +161,18 @@ let ProfileHeaderShell = ({
 							...(profile.associated?.labeler && styles.aviLabeler),
 						}}
 					>
-						<View ref={aviRef} collapsable={false}>
+						<div ref={aviRef}>
 							<UserAvatar
 								type={profile.associated?.labeler ? "labeler" : "user"}
 								size={90}
 								avatar={profile.avatar}
 								moderation={moderation.ui("avatar")}
 							/>
-						</View>
-					</View>
+						</div>
+					</div>
 				</TouchableWithoutFeedback>
 			</GrowableAvatar>
-		</View>
+		</div>
 	);
 };
 ProfileHeaderShell = memo(ProfileHeaderShell);

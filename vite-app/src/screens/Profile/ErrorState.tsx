@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -21,7 +20,7 @@ export function ErrorState({ error }: { error: string }) {
 	}, [navigation]);
 
 	return (
-		<View style={a.px_xl}>
+		<div style={a.px_xl}>
 			<CircleInfo width={48} style={t.atoms.text_contrast_low} />
 			<Text
 				style={{
@@ -43,7 +42,7 @@ export function ErrorState({ error }: { error: string }) {
 			>
 				This moderation service is unavailable. See below for more details. If this issue persists, contact us.
 			</Text>
-			<View
+			<div
 				style={{
 					...a.relative,
 					...a.py_md,
@@ -61,8 +60,8 @@ export function ErrorState({ error }: { error: string }) {
 				>
 					{error}
 				</Text>
-			</View>
-			<View style={{ flexDirection: "row" }}>
+			</div>
+			<div style={{ flexDirection: "row" }}>
 				<Button
 					size="small"
 					color="secondary"
@@ -73,7 +72,7 @@ export function ErrorState({ error }: { error: string }) {
 				>
 					<ButtonText>Go Back</ButtonText>
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

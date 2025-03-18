@@ -7,9 +7,9 @@ import {
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
-import { type GestureResponderEvent, Text as RNText, StyleSheet, View } from "react-native";
+import { Text as RNText } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { colors } from "#/components/Admonition";
 import { Button } from "#/components/Button";
 import { InlineLinkText } from "#/components/Link";
@@ -131,7 +131,7 @@ export function PostThreadItem({
 function PostThreadItemDeleted({ hideTopBorder }: { hideTopBorder?: boolean }) {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
@@ -151,7 +151,7 @@ function PostThreadItemDeleted({ hideTopBorder }: { hideTopBorder?: boolean }) {
 			>
 				This post has been deleted.
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -275,7 +275,7 @@ let PostThreadItemLoaded = ({
 		return (
 			<>
 				{rootUri !== post.uri && (
-					<View
+					<div
 						style={{
 							...a.pl_lg,
 							...a.flex_row,
@@ -283,8 +283,8 @@ let PostThreadItemLoaded = ({
 							...{ height: a.pt_lg.paddingTop },
 						}}
 					>
-						<View style={{ width: 42 }}>
-							<View
+						<div style={{ width: 42 }}>
+							<div
 								style={{
 									...styles.replyLine,
 
@@ -294,19 +294,19 @@ let PostThreadItemLoaded = ({
 									},
 								}}
 							/>
-						</View>
-					</View>
+						</div>
+					</div>
 				)}
-				<View
+				<div
 					style={{
 						...a.px_lg,
 						...t.atoms.border_contrast_low,
 
 						...// root post styles
-						(rootUri === post.uri && [a.pt_lg]),
+						flatten(rootUri === post.uri && [a.pt_lg]),
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.gap_md,
@@ -319,7 +319,7 @@ let PostThreadItemLoaded = ({
 							moderation={moderation.ui("avatar")}
 							type={post.author.associated?.labeler ? "labeler" : "user"}
 						/>
-						<View style={a.flex_1}>
+						<div style={a.flex_1}>
 							<Link style={s.flex1} href={authorHref} title={authorTitle}>
 								<Text
 									emoji
@@ -350,16 +350,16 @@ let PostThreadItemLoaded = ({
 									{sanitizeHandle(post.author.handle, "@")}
 								</Text>
 							</Link>
-						</View>
+						</div>
 						{showFollowButton && (
-							<View>
+							<div>
 								<PostThreadFollowBtn did={post.author.did} />
-							</View>
+							</div>
 						)}
-					</View>
-					<View style={a.pb_sm}>
+					</div>
+					<div style={a.pb_sm}>
 						<LabelsOnMyPost post={post} style={a.pb_sm} />
-						<ContentHider modui={moderation.ui("contentView")} ignoreMute childContainerStyle={[a.pt_sm]}>
+						<ContentHider modui={moderation.ui("contentView")} ignoreMute childContainerStyle={a.pt_sm}>
 							<PostAlerts
 								modui={moderation.ui("contentView")}
 								size="lg"
@@ -381,13 +381,13 @@ let PostThreadItemLoaded = ({
 								/>
 							) : undefined}
 							{post.embed && (
-								<View style={a.py_xs}>
+								<div style={a.py_xs}>
 									<PostEmbeds
 										embed={post.embed}
 										moderation={moderation}
 										viewContext={PostEmbedViewContext.ThreadHighlighted}
 									/>
-								</View>
+								</div>
 							)}
 						</ContentHider>
 						<ExpandedPostDetails
@@ -398,7 +398,7 @@ let PostThreadItemLoaded = ({
 						/>
 						{post.repostCount !== 0 || post.likeCount !== 0 || post.quoteCount !== 0 ? (
 							// Show this section unless we're *sure* it has no engagement.
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.align_center,
@@ -473,9 +473,9 @@ let PostThreadItemLoaded = ({
 										</Text>
 									</Link>
 								) : null}
-							</View>
+							</div>
 						) : null}
-						<View
+						<div
 							style={{
 								...a.pt_sm,
 								...a.pb_2xs,
@@ -492,12 +492,11 @@ let PostThreadItemLoaded = ({
 								richText={richText}
 								onPressReply={onPressReply}
 								onPostReply={onPostReply}
-								logContext="PostThreadItem"
 								threadgateRecord={threadgateRecord}
 							/>
-						</View>
-					</View>
-				</View>
+						</div>
+					</div>
+				</div>
 			</>
 		);
 	} else {
@@ -522,7 +521,7 @@ let PostThreadItemLoaded = ({
 					profile={post.author}
 					interpretFilterAsBlur
 				>
-					<View
+					<div
 						style={{
 							flexDirection: "row",
 							gap: 10,
@@ -530,9 +529,9 @@ let PostThreadItemLoaded = ({
 							height: isThreadedChildAdjacentTop ? 8 : 16,
 						}}
 					>
-						<View style={{ width: 42 }}>
+						<div style={{ width: 42 }}>
 							{!isThreadedChild && showParentReplyLine && (
-								<View
+								<div
 									style={{
 										...styles.replyLine,
 
@@ -544,10 +543,10 @@ let PostThreadItemLoaded = ({
 									}}
 								/>
 							)}
-						</View>
-					</View>
+						</div>
+					</div>
 
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.px_sm,
@@ -561,7 +560,7 @@ let PostThreadItemLoaded = ({
 					>
 						{/* If we are in threaded mode, the avatar is rendered in PostMeta */}
 						{!isThreadedChild && (
-							<View>
+							<div>
 								<PreviewableUserAvatar
 									size={42}
 									profile={post.author}
@@ -570,7 +569,7 @@ let PostThreadItemLoaded = ({
 								/>
 
 								{showChildReplyLine && (
-									<View
+									<div
 										style={{
 											...styles.replyLine,
 
@@ -582,10 +581,10 @@ let PostThreadItemLoaded = ({
 										}}
 									/>
 								)}
-							</View>
+							</div>
 						)}
 
-						<View style={a.flex_1}>
+						<div style={a.flex_1}>
 							<PostMeta
 								author={post.author}
 								moderation={moderation}
@@ -602,7 +601,7 @@ let PostThreadItemLoaded = ({
 								additionalCauses={additionalPostAlerts}
 							/>
 							{richText?.text ? (
-								<View
+								<div
 									style={{
 										...a.pb_2xs,
 										...a.pr_sm,
@@ -619,30 +618,29 @@ let PostThreadItemLoaded = ({
 										authorHandle={post.author.handle}
 										shouldProxyLinks={true}
 									/>
-								</View>
+								</div>
 							) : undefined}
 							{limitLines ? (
 								<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 							) : undefined}
 							{post.embed && (
-								<View style={a.pb_xs}>
+								<div style={a.pb_xs}>
 									<PostEmbeds
 										embed={post.embed}
 										moderation={moderation}
 										viewContext={PostEmbedViewContext.Feed}
 									/>
-								</View>
+								</div>
 							)}
 							<PostCtrls
 								post={post}
 								record={record}
 								richText={richText}
 								onPressReply={onPressReply}
-								logContext="PostThreadItem"
 								threadgateRecord={threadgateRecord}
 							/>
-						</View>
-					</View>
+						</div>
+					</div>
 					{hasMore ? (
 						<Link
 							style={{
@@ -697,7 +695,7 @@ function PostOuterWrapper({
 	const { state: hover, onIn: onHoverIn, onOut: onHoverOut } = useInteractionState();
 	if (treeView && depth > 0) {
 		return (
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.px_sm,
@@ -710,7 +708,7 @@ function PostOuterWrapper({
 				onPointerLeave={onHoverOut}
 			>
 				{Array.from(Array(depth - 1)).map((_, n: number) => (
-					<View
+					<div
 						key={`${post.uri}-padding-${n}`}
 						style={{
 							...a.ml_sm,
@@ -723,7 +721,7 @@ function PostOuterWrapper({
 						}}
 					/>
 				))}
-				<View style={a.flex_1}>
+				<div style={a.flex_1}>
 					<SubtleWebHover
 						hover={hover}
 						style={{
@@ -732,12 +730,12 @@ function PostOuterWrapper({
 						}}
 					/>
 					{children}
-				</View>
-			</View>
+				</div>
+			</div>
 		);
 	}
 	return (
-		<View
+		<div
 			onPointerEnter={onHoverIn}
 			onPointerLeave={onHoverOut}
 			style={{
@@ -751,7 +749,7 @@ function PostOuterWrapper({
 		>
 			<SubtleWebHover hover={hover} />
 			{children}
-		</View>
+		</div>
 	);
 }
 
@@ -772,7 +770,7 @@ function ExpandedPostDetails({
 	const isRootPost = !("reply" in post.record);
 
 	const onTranslatePress = React.useCallback(
-		(e: GestureResponderEvent) => {
+		(e: React.MouseEvent) => {
 			e.preventDefault();
 			openLink(translatorUrl, true);
 			return false;
@@ -781,7 +779,7 @@ function ExpandedPostDetails({
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.gap_md,
 				...a.pt_md,
@@ -789,7 +787,7 @@ function ExpandedPostDetails({
 			}}
 		>
 			<BackdatedPostIndicator post={post} />
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -830,8 +828,8 @@ function ExpandedPostDetails({
 						</InlineLinkText>
 					</>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -863,7 +861,7 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 				}}
 			>
 				{({ hovered, pressed }) => (
-					<View
+					<div
 						style={{
 							...a.flex_row,
 							...a.align_center,
@@ -889,7 +887,7 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 						>
 							<>Archived from {niceDate(createdAt)}</>
 						</Text>
-					</View>
+					</div>
 				)}
 			</Button>
 			<Prompt.Outer control={control}>
@@ -930,9 +928,9 @@ function getThreadAuthor(post: AppBskyFeedDefs.PostView, record: AppBskyFeedPost
 	}
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	outer: {
-		borderTopWidth: StyleSheet.hairlineWidth,
+		borderTopWidth: 1,
 		paddingLeft: 8,
 	},
 	noTopBorder: {
@@ -940,17 +938,20 @@ const styles = StyleSheet.create({
 	},
 	meta: {
 		flexDirection: "row",
-		paddingVertical: 2,
+		paddingTop: 2,
+		paddingBottom: 2,
 	},
 	metaExpandedLine1: {
-		paddingVertical: 0,
+		paddingTop: 0,
+		paddingBottom: 0,
 	},
 	loadMore: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "flex-start",
 		gap: 4,
-		paddingHorizontal: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
 	},
 	replyLine: {
 		width: 2,
@@ -958,7 +959,6 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 	},
 	cursor: {
-		// @ts-ignore web only
 		cursor: "pointer",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

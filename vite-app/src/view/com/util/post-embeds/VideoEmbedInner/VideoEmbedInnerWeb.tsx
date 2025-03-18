@@ -1,7 +1,6 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
 import type * as HlsTypes from "hls.js";
 import React, { useEffect, useId, useRef, useState } from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
@@ -49,14 +48,12 @@ export function VideoEmbedInnerWeb({
 	}, [lastKnownTime]);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.rounded_md,
 				...a.overflow_hidden,
 			}}
-			accessibilityLabel={"Embedded video player"}
-			accessibilityHint=""
 		>
 			<div ref={containerRef} style={{ height: "100%", width: "100%" }}>
 				<figure style={{ margin: 0, position: "absolute", inset: 0 }}>
@@ -105,7 +102,7 @@ export function VideoEmbedInnerWeb({
 				/>
 				<MediaInsetBorder />
 			</div>
-		</View>
+		</div>
 	);
 }
 
@@ -123,7 +120,7 @@ export class VideoNotFoundError extends Error {
 
 type CachedPromise<T> = Promise<T> & { value: undefined | T };
 const promiseForHls = import(
-	// @ts-ignore
+	// @ts-expect-error
 	"hls.js/dist/hls.min"
 ).then((mod) => mod.default) as CachedPromise<typeof HlsTypes.default>;
 promiseForHls.value = undefined;

@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { H1, Text } from "#/components/Typography";
 
@@ -7,15 +5,15 @@ export function Shadows() {
 	const t = useTheme();
 
 	return (
-		<View style={a.gap_md}>
+		<div style={a.gap_md}>
 			<H1>Shadows</H1>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_5xl,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.justify_center,
@@ -26,9 +24,9 @@ export function Shadows() {
 					}}
 				>
 					<Text>shadow_sm</Text>
-				</View>
+				</div>
 
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.justify_center,
@@ -39,9 +37,9 @@ export function Shadows() {
 					}}
 				>
 					<Text>shadow_md</Text>
-				</View>
+				</div>
 
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.justify_center,
@@ -52,8 +50,8 @@ export function Shadows() {
 					}}
 				>
 					<Text>shadow_lg</Text>
-				</View>
-			</View>
-		</View>
+				</div>
+			</div>
+		</div>
 	);
 }

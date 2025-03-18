@@ -1,5 +1,4 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -18,7 +17,7 @@ export function ProfileHeaderDisplayName({
 	const { gtMobile } = useBreakpoints();
 
 	return (
-		<View pointerEvents="none">
+		<div style={{ pointerEvents: "none" }}>
 			<Text
 				emoji
 				style={{
@@ -33,6 +32,6 @@ export function ProfileHeaderDisplayName({
 					moderation.ui("displayName"),
 				)}
 			</Text>
-		</View>
+		</div>
 	);
 }

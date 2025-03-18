@@ -4,7 +4,7 @@ import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
@@ -13,6 +13,7 @@ import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
 import * as Prompt from "#/components/Prompt";
 import { RichText } from "#/components/RichText";
+import { Text } from "#/components/Typography";
 import { PersonPlus_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
 import * as Hider from "#/components/moderation/Hider";
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
@@ -58,7 +59,6 @@ import { FAB } from "#/view/com/util/fab/FAB";
 import { Button } from "#/view/com/util/forms/Button";
 import { type DropdownItem, NativeDropdown } from "#/view/com/util/forms/NativeDropdown";
 import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
-import { Text } from "#/view/com/util/text/Text";
 
 const SECTION_TITLES_CURATE = ["Posts", "People"];
 
@@ -183,7 +183,7 @@ function ProfileListScreenLoaded({
 					<ListHiddenScreen list={list} preferences={preferences} />
 				</Hider.Mask>
 				<Hider.Content>
-					<View style={s.hContentRegion}>
+					<div style={s.hContentRegion}>
 						<PagerWithHeader
 							items={SECTION_TITLES_CURATE}
 							isHeaderReady={true}
@@ -218,7 +218,7 @@ function ProfileListScreenLoaded({
 							accessibilityLabel={"New post"}
 							accessibilityHint=""
 						/>
-					</View>
+					</div>
 				</Hider.Content>
 			</Hider.Outer>
 		);
@@ -229,7 +229,7 @@ function ProfileListScreenLoaded({
 				<ListHiddenScreen list={list} preferences={preferences} />
 			</Hider.Mask>
 			<Hider.Content>
-				<View style={s.hContentRegion}>
+				<div style={s.hContentRegion}>
 					<Layout.Center>{renderHeader()}</Layout.Center>
 					<AboutSection
 						list={list}
@@ -244,7 +244,7 @@ function ProfileListScreenLoaded({
 						accessibilityLabel={"New post"}
 						accessibilityHint=""
 					/>
-				</View>
+				</div>
 			</Hider.Content>
 		</Hider.Outer>
 	);
@@ -598,27 +598,27 @@ function Header({
 							accessibilityLabel={"Subscribe to this list"}
 							accessibilityHint=""
 						>
-							<View
+							<div
 								style={{
 									...palInverted.view,
 									...styles.btn,
 								}}
 							>
 								<Text style={palInverted.text}>Subscribe</Text>
-							</View>
+							</div>
 						</NativeDropdown>
 					)
 				) : null}
 				<NativeDropdown items={dropdownItems} accessibilityLabel={"More options"} accessibilityHint="">
-					<View
+					<div
 						style={{
 							...pal.viewLight,
 							...styles.btn,
 						}}
 					>
-						{/* @ts-ignore */}
+						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="ellipsis" size={20} color={pal.colors.text} />
-					</View>
+					</div>
 				</NativeDropdown>
 
 				<Prompt.Basic
@@ -652,7 +652,7 @@ function Header({
 				/>
 			</ProfileSubpageHeader>
 			{descriptionRT ? (
-				<View
+				<div
 					style={{
 						...a.px_lg,
 						...a.pt_sm,
@@ -667,7 +667,7 @@ function Header({
 							...a.leading_snug,
 						}}
 					/>
-				</View>
+				</div>
 			) : null}
 		</>
 	);
@@ -711,7 +711,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 
 	const renderPostsEmpty = useCallback(() => {
 		return (
-			<View
+			<div
 				style={{
 					...a.gap_xl,
 					...a.align_center,
@@ -730,12 +730,12 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 						<ButtonText>Start adding people!</ButtonText>
 					</NewButton>
 				)}
-			</View>
+			</div>
 		);
 	}, [onPressAddUser, isOwner]);
 
 	return (
-		<View>
+		<div>
 			<PostFeed
 				enabled={isFocused}
 				feed={feed}
@@ -750,7 +750,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 			{(isScrolledDown || hasNew) && (
 				<LoadLatestBtn onPress={onScrollToTop} label={"Load new posts"} showIndicator={hasNew} />
 			)}
-		</View>
+		</div>
 	);
 });
 
@@ -782,11 +782,11 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 
 	const renderHeader = React.useCallback(() => {
 		if (!isOwner) {
-			return <View />;
+			return <div />;
 		}
 		if (isMobile) {
 			return (
-				<View
+				<div
 					style={{
 						...a.px_sm,
 						...a.py_sm,
@@ -803,11 +803,11 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 						<ButtonIcon icon={PersonPlusIcon} />
 						<ButtonText>Add people</ButtonText>
 					</NewButton>
-				</View>
+				</div>
 			);
 		}
 		return (
-			<View
+			<div
 				style={{
 					...a.px_lg,
 					...a.py_md,
@@ -825,13 +825,13 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					<ButtonIcon icon={PersonPlusIcon} />
 					<ButtonText>Add people</ButtonText>
 				</NewButton>
-			</View>
+			</div>
 		);
 	}, [isOwner, onPressAddUser, isMobile]);
 
 	const renderEmptyState = useCallback(() => {
 		return (
-			<View
+			<div
 				style={{
 					...a.gap_xl,
 					...a.align_center,
@@ -850,12 +850,12 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 						<ButtonText>Start adding people!</ButtonText>
 					</NewButton>
 				)}
-			</View>
+			</div>
 		);
 	}, [onPressAddUser, isOwner]);
 
 	return (
-		<View>
+		<div>
 			<ListMembers
 				list={list.uri}
 				scrollElRef={scrollElRef}
@@ -865,7 +865,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 				onScrolledDownChange={setIsScrolledDown}
 			/>
 			{isScrolledDown && <LoadLatestBtn onPress={onScrollToTop} label={"Scroll to top"} showIndicator={false} />}
-		</View>
+		</div>
 	);
 });
 
@@ -881,7 +881,7 @@ function ErrorScreen({ error }: { error: string }) {
 	}, [navigation]);
 
 	return (
-		<View
+		<div
 			style={{
 				...pal.view,
 				...pal.border,
@@ -911,7 +911,7 @@ function ErrorScreen({ error }: { error: string }) {
 			>
 				{error}
 			</Text>
-			<View style={{ flexDirection: "row" }}>
+			<div style={{ flexDirection: "row" }}>
 				<Button
 					type="default"
 					accessibilityLabel={"Go back"}
@@ -923,19 +923,18 @@ function ErrorScreen({ error }: { error: string }) {
 						Go Back
 					</Text>
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	btn: {
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 6,
-		paddingVertical: 7,
-		paddingHorizontal: 14,
+		padding: "7px 14px",
 		borderRadius: 50,
 		marginLeft: 6,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -70,11 +70,11 @@ export function CaptchaWebView({
 			onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
 			onNavigationStateChange={onNavigationStateChange}
 			scrollEnabled={false}
-			//@ts-ignore
+			//@ts-expect-error
 			onError={(e) => {
 				onError(e.nativeEvent);
 			}}
-			//@ts-ignore
+			//@ts-expect-error
 			onHttpError={(e) => {
 				onError(e.nativeEvent);
 			}}

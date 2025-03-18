@@ -22,7 +22,7 @@ export const Logo = React.forwardRef(function LogoImpl(props: React.SVGProps<SVG
 	return (
 		<svg
 			fill="none"
-			// @ts-ignore it's fiiiiine
+			// @ts-expect-error it's fiiiiine
 			ref={ref}
 			viewBox="0 0 64 66"
 			style={{ width, height, ...props.style }}

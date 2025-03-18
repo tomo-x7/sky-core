@@ -1,7 +1,6 @@
 import React from "react";
-import { View } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import * as Prompt from "#/components/Prompt";
@@ -34,13 +33,13 @@ function Inner() {
 
 	return error || noTopics ? null : (
 		<>
-			<View
+			<div
 				style={{
 					...a.gap_sm,
 					...{ paddingBottom: 2 },
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.align_center,
@@ -68,9 +67,9 @@ function Inner() {
 					>
 						<ButtonIcon icon={X} />
 					</Button>
-				</View>
+				</div>
 
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.flex_wrap,
@@ -89,15 +88,17 @@ function Inner() {
 										<TrendingTopic
 											size="small"
 											topic={topic}
-											style={hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25]}
+											style={flatten(
+												hovered && [t.atoms.border_contrast_high, t.atoms.bg_contrast_25],
+											)}
 										/>
 									)}
 								</TrendingTopicLink>
 							))}
 						</>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 			<Prompt.Basic
 				control={trendingPrompt}
 				title={"Hide trending topics?"}

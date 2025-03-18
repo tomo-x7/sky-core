@@ -1,7 +1,6 @@
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
@@ -117,7 +116,6 @@ export function NotificationsScreen(props: Props) {
 			<Pager
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
-					// @ts-ignore
 					<Layout.Center
 						style={{
 							...a.z_10,
@@ -135,7 +133,7 @@ export function NotificationsScreen(props: Props) {
 				initialPage={initialActiveTab}
 			>
 				{sections.map((section, i) => (
-					<View key={i}>{section.component}</View>
+					<div key={i}>{section.component}</div>
 				))}
 			</Pager>
 			<FAB

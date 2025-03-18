@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		top: 0,
 		pointerEvents: "none",
-		// @ts-ignore web only
+		// @ts-expect-error web only
 		transition: "0.15s ease-in-out opacity",
 	},
 });

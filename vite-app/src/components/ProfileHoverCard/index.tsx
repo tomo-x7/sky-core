@@ -289,11 +289,11 @@ export function ProfileHoverCardInner(props: ProfileHoverCardProps) {
 
 	return (
 		<div
-			// @ts-ignore View is being used as div
+			// @ts-expect-error View is being used as div
 			ref={refs.setReference}
 			onPointerMove={onPointerMoveTarget}
 			onPointerLeave={onPointerLeaveTarget}
-			// @ts-ignore web only prop
+			// @ts-expect-error web only prop
 			onMouseUp={onPress}
 			style={{ flexShrink: 1 }}
 		>

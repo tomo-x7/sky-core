@@ -4,7 +4,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Image } from "react-native";
-import { Keyboard, View } from "react-native";
+import { Keyboard } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -287,7 +287,7 @@ function Container({ children }: { children: React.ReactNode }) {
 	const [state, dispatch] = useWizardState();
 
 	if (state.currentStep === "Profiles" || state.currentStep === "Feeds") {
-		return <View style={a.flex_1}>{children}</View>;
+		return <div style={a.flex_1}>{children}</div>;
 	}
 
 	return (
@@ -335,10 +335,10 @@ function Footer({
 
 	const minimumItems = state.currentStep === "Profiles" ? 8 : 0;
 
-	const textStyles = [a.text_md];
+	const textStyles = a.text_md;
 
 	return (
-		<View
+		<div
 			style={{
 				...a.border_t,
 				...a.align_center,
@@ -354,7 +354,7 @@ function Footer({
 			}}
 		>
 			{items.length > minimumItems && (
-				<View
+				<div
 					style={{
 						...a.absolute,
 						...{ right: 14, top: 31 },
@@ -363,9 +363,9 @@ function Footer({
 					<Text style={a.font_bold}>
 						{items.length}/{state.currentStep === "Profiles" ? STARTER_PACK_MAX_SIZE : 3}
 					</Text>
-				</View>
+				</div>
 			)}
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.gap_xs,
@@ -379,7 +379,7 @@ function Footer({
 						type={state.currentStep === "Profiles" ? "user" : "algo"}
 					/>
 				))}
-			</View>
+			</div>
 			{
 				state.currentStep === "Profiles" ? (
 					<Text
@@ -442,7 +442,7 @@ function Footer({
 					</Text>
 				) : state.currentStep === "Feeds" ? (
 					items.length === 0 ? (
-						<View style={a.gap_sm}>
+						<div style={a.gap_sm}>
 							<Text
 								style={{
 									...a.font_bold,
@@ -460,7 +460,7 @@ function Footer({
 							>
 								Search for feeds that you want to suggest to others.
 							</Text>
-						</View>
+						</div>
 					) : (
 						<Text
 							style={{
@@ -535,7 +535,7 @@ function Footer({
 					)
 				) : null /* Should not happen. */
 			}
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.w_full,
@@ -556,7 +556,7 @@ function Footer({
 						<ButtonText>Edit</ButtonText>
 					</Button>
 				) : (
-					<View style={{ width: 70, height: 35 }} />
+					<div style={{ width: 70, height: 35 }} />
 				)}
 				{state.currentStep === "Profiles" && items.length < 8 ? (
 					<>
@@ -569,7 +569,7 @@ function Footer({
 						>
 							<>Add {8 - items.length} more to continue</>
 						</Text>
-						<View style={{ width: 70 }} />
+						<div style={{ width: 70 }} />
 					</>
 				) : (
 					<Button
@@ -584,7 +584,7 @@ function Footer({
 						{state.processing && <Loader size="xs" style={{ color: "white" }} />}
 					</Button>
 				)}
-			</View>
+			</div>
 			<WizardEditListDialog
 				control={editDialogControl}
 				state={state}
@@ -592,7 +592,7 @@ function Footer({
 				moderationOpts={moderationOpts}
 				profile={profile}
 			/>
-		</View>
+		</div>
 	);
 }
 

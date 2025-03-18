@@ -1,6 +1,5 @@
 import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -179,7 +178,7 @@ export function StepProfile() {
 
 	return (
 		<AvatarContext.Provider value={value}>
-			<View
+			<div
 				style={{
 					...a.align_start,
 					...t.atoms.bg,
@@ -191,7 +190,7 @@ export function StepProfile() {
 				<DescriptionText>
 					Help people know you're not a bot by uploading a picture or creating an avatar.
 				</DescriptionText>
-				<View
+				<div
 					style={{
 						...a.w_full,
 						...a.align_center,
@@ -201,7 +200,7 @@ export function StepProfile() {
 					<AvatarCircle openLibrary={openLibrary} openCreator={creatorControl.open} />
 
 					{error && (
-						<View
+						<div
 							style={{
 								...a.flex_row,
 								...a.gap_sm,
@@ -217,12 +216,12 @@ export function StepProfile() {
 						>
 							<CircleInfo_Stroke2_Corner0_Rounded size="sm" />
 							<Text style={a.leading_snug}>{error}</Text>
-						</View>
+						</div>
 					)}
-				</View>
+				</div>
 
 				<OnboardingControls.Portal>
-					<View
+					<div
 						style={{
 							...a.gap_md,
 							...(gtMobile && { flexDirection: "row-reverse" }),
@@ -249,9 +248,9 @@ export function StepProfile() {
 								{avatar.useCreatedAvatar ? <>Upload a photo instead</> : <>Create an avatar instead</>}
 							</ButtonText>
 						</Button>
-					</View>
+					</div>
 				</OnboardingControls.Portal>
-			</View>
+			</div>
 			<Dialog.Outer control={creatorControl}>
 				<Dialog.Inner
 					label="Avatar creator"
@@ -260,16 +259,16 @@ export function StepProfile() {
 						maxWidth: 410,
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.align_center,
 							...{ paddingTop: 20 },
 						}}
 					>
 						<AvatarCreatorCircle avatar={avatar} />
-					</View>
+					</div>
 
-					<View
+					<div
 						style={{
 							...a.pt_3xl,
 							...a.gap_lg,
@@ -277,12 +276,12 @@ export function StepProfile() {
 					>
 						<AvatarCreatorItems type="emojis" avatar={avatar} setAvatar={setAvatar} />
 						<AvatarCreatorItems type="colors" avatar={avatar} setAvatar={setAvatar} />
-					</View>
-					<View style={a.pt_4xl}>
+					</div>
+					<div style={a.pt_4xl}>
 						<Button variant="solid" color="primary" size="large" label={"Done"} onPress={onDoneCreating}>
 							<ButtonText>Done</ButtonText>
 						</Button>
-					</View>
+					</div>
 				</Dialog.Inner>
 			</Dialog.Outer>
 			<PlaceholderCanvas ref={canvasRef} />

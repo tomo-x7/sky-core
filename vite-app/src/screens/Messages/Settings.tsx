@@ -1,6 +1,5 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
@@ -67,7 +66,7 @@ export function MessagesSettingsScreen(props: Props) {
 						values={[(profile?.associated?.chat?.allowIncoming as AllowIncoming) ?? "following"]}
 						onChange={onSelectMessagesFrom}
 					>
-						<View>
+						<div>
 							<Toggle.Item
 								name="all"
 								label={"Everyone"}
@@ -101,7 +100,7 @@ export function MessagesSettingsScreen(props: Props) {
 								<Toggle.LabelText>No one</Toggle.LabelText>
 								<Toggle.Radio />
 							</Toggle.Item>
-						</View>
+						</div>
 					</Toggle.Group>
 					<Admonition type="tip">
 						You can continue ongoing conversations regardless of which setting you choose.

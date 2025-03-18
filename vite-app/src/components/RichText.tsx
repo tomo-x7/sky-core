@@ -65,7 +65,7 @@ export function RichText({
 					}}
 					onLayout={onLayout}
 					// onTextLayout={onTextLayout}
-					// @ts-ignore web only -prf
+					// @ts-expect-error web only -prf
 					dataSet={WORD_WRAP}
 				>
 					{text}
@@ -80,7 +80,7 @@ export function RichText({
 				numberOfLines={numberOfLines}
 				onLayout={onLayout}
 				// onTextLayout={onTextLayout}
-				// @ts-ignore web only -prf
+				// @ts-expect-error web only -prf
 				dataSet={WORD_WRAP}
 			>
 				{text}
@@ -102,7 +102,7 @@ export function RichText({
 						selectable={selectable}
 						to={`/profile/${mention.did}`}
 						style={flatten(interactiveStyles)}
-						// @ts-ignore TODO
+						// @ts-expect-error TODO
 						dataSet={WORD_WRAP}
 						shouldProxy={shouldProxyLinks}
 						onPress={onLinkPress}
@@ -121,7 +121,7 @@ export function RichText({
 						key={key}
 						to={link.uri}
 						style={flatten(interactiveStyles)}
-						// @ts-ignore TODO
+						// @ts-expect-error TODO
 						dataSet={WORD_WRAP}
 						shareOnLongPress
 						shouldProxy={shouldProxyLinks}
@@ -156,7 +156,7 @@ export function RichText({
 			numberOfLines={numberOfLines}
 			onLayout={onLayout}
 			// onTextLayout={onTextLayout}
-			// @ts-ignore web only -prf
+			// @ts-expect-error web only -prf
 			dataSet={WORD_WRAP}
 		>
 			{els}

@@ -1,8 +1,7 @@
 import { useCallback, useImperativeHandle, useRef, useState } from "react";
-import { View } from "react-native";
 import { useWindowDimensions } from "react-native";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -40,7 +39,7 @@ export function ServerInputDialog({
 	}, [onSelect]);
 
 	return (
-		<Dialog.Outer control={control} onClose={onClose} nativeOptions={{ minHeight: height / 2 }}>
+		<Dialog.Outer control={control} onClose={onClose}>
 			<Dialog.Handle />
 			<DialogInner
 				formRef={formRef}
@@ -111,7 +110,7 @@ function DialogInner({
 
 	return (
 		<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description" accessibilityLabelledBy="dialog-title">
-			<View
+			<div
 				style={{
 					...a.relative,
 					...a.gap_md,
@@ -119,7 +118,6 @@ function DialogInner({
 				}}
 			>
 				<Text
-					nativeID="dialog-title"
 					style={{
 						...a.text_2xl,
 						...a.font_bold,
@@ -148,7 +146,7 @@ function DialogInner({
 				)}
 
 				{fixedOption === "custom" && (
-					<View
+					<div
 						style={{
 							...a.border,
 							...t.atoms.border_contrast_low,
@@ -157,20 +155,19 @@ function DialogInner({
 							...a.py_md,
 						}}
 					>
-						<TextField.LabelText nativeID="address-input-label">Server address</TextField.LabelText>
+						<TextField.LabelText>Server address</TextField.LabelText>
 						<TextField.Root>
 							<TextField.Icon icon={Globe} />
 							<Dialog.Input
 								value={customAddress}
 								onChangeText={setCustomAddress}
 								label="my-server.com"
-								accessibilityLabelledBy="address-input-label"
+								inputMode="url"
 								autoCapitalize="none"
-								keyboardType="url"
 							/>
 						</TextField.Root>
 						{pdsAddressHistory.length > 0 && (
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.flex_wrap,
@@ -194,12 +191,12 @@ function DialogInner({
 										<ButtonText>{uri}</ButtonText>
 									</Button>
 								))}
-							</View>
+							</div>
 						)}
-					</View>
+					</div>
 				)}
 
-				<View style={a.py_xs}>
+				<div style={a.py_xs}>
 					<P
 						style={{
 							...t.atoms.text_contrast_medium,
@@ -223,9 +220,9 @@ function DialogInner({
 							Learn more.
 						</InlineLinkText>
 					</P>
-				</View>
+				</div>
 
-				<View style={gtMobile && [a.flex_row, a.justify_end]}>
+				<div style={flatten(gtMobile && [a.flex_row, a.justify_end])}>
 					<Button
 						variant="outline"
 						color="primary"
@@ -235,8 +232,8 @@ function DialogInner({
 					>
 						<ButtonText>{"Done"}</ButtonText>
 					</Button>
-				</View>
-			</View>
+				</div>
+			</div>
 		</Dialog.ScrollableInner>
 	);
 }

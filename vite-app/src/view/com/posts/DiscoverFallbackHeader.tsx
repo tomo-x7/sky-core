@@ -1,14 +1,12 @@
-import { View } from "react-native";
-
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { InfoCircleIcon } from "#/lib/icons";
 import { TextLink } from "../util/Link";
-import { Text } from "../util/text/Text";
 
 export function DiscoverFallbackHeader() {
 	const pal = usePalette("default");
 	return (
-		<View
+		<div
 			style={{
 				...{
 					flexDirection: "row",
@@ -22,10 +20,10 @@ export function DiscoverFallbackHeader() {
 				...pal.viewLight,
 			}}
 		>
-			<View style={{ width: 68, paddingLeft: 12 }}>
+			<div style={{ width: 68, paddingLeft: 12 }}>
 				<InfoCircleIcon size={36} style={pal.textLight} strokeWidth={1.5} />
-			</View>
-			<View style={{ flex: 1 }}>
+			</div>
+			<div style={{ flex: 1 }}>
 				<Text type="md" style={pal.text}>
 					<>
 						We ran out of posts from your follows. Here's the latest from{" "}
@@ -38,7 +36,7 @@ export function DiscoverFallbackHeader() {
 						.
 					</>
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }

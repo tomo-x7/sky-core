@@ -1,20 +1,17 @@
-import { StyleSheet } from "react-native";
-
 import { colors } from "#/lib/styles";
 
-export const styles = StyleSheet.create({
+export const styles = {
 	bottomBar: {
 		position: "absolute",
 		bottom: 0,
 		left: 0,
 		right: 0,
 		flexDirection: "row",
-		borderTopWidth: StyleSheet.hairlineWidth,
+		borderTopWidth: 1,
 		paddingLeft: 5,
 		paddingRight: 10,
 	},
 	bottomBarWeb: {
-		//@ts-ignore
 		position: "fixed",
 	},
 	ctrl: {
@@ -27,7 +24,8 @@ export const styles = StyleSheet.create({
 		left: "52%",
 		top: 8,
 		backgroundColor: colors.blue3,
-		paddingHorizontal: 4,
+		paddingLeft: 4,
+		paddingRight: 4,
 		paddingBottom: 1,
 		borderRadius: 6,
 		zIndex: 1,
@@ -42,7 +40,7 @@ export const styles = StyleSheet.create({
 		fontSize: 12,
 		fontWeight: "600",
 		color: colors.white,
-		fontVariant: ["tabular-nums"],
+		fontVariant: "tabular-nums",
 	},
 	hasNewBadge: {
 		position: "absolute",
@@ -76,4 +74,4 @@ export const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 100,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

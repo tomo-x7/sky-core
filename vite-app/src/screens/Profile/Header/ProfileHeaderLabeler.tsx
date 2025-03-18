@@ -6,7 +6,6 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
-import { View } from "react-native";
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { type DialogOuterProps, useDialogControl } from "#/components/Dialog";
@@ -130,23 +129,23 @@ let ProfileHeaderLabeler = ({
 			hideBackButton={hideBackButton}
 			isPlaceholderProfile={isPlaceholderProfile}
 		>
-			<View
+			<div
 				style={{
 					...a.px_lg,
 					...a.pt_md,
 					...a.pb_sm,
+					pointerEvents: "none",
 				}}
-				pointerEvents={"box-none"}
 			>
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_end,
 						...a.align_center,
 						...a.gap_xs,
 						...a.pb_lg,
+						pointerEvents: "none",
 					}}
-					pointerEvents={"box-none"}
 				>
 					{isMe ? (
 						<>
@@ -156,7 +155,7 @@ let ProfileHeaderLabeler = ({
 								variant="solid"
 								onPress={onPressEditProfile}
 								label={"Edit profile"}
-								style={a.rounded_full}
+								style={{ ...a.rounded_full, pointerEvents: "auto" }}
 							>
 								<ButtonText>Edit Profile</ButtonText>
 							</Button>
@@ -167,12 +166,12 @@ let ProfileHeaderLabeler = ({
 							<Button
 								label={isSubscribed ? "Unsubscribe from this labeler" : "Subscribe to this labeler"}
 								onPress={onPressSubscribe}
+								style={{ pointerEvents: "auto" }}
 							>
 								{(state) => (
-									<View
+									<div
 										style={{
-											paddingVertical: 9,
-											paddingHorizontal: 12,
+											padding: "9px 12px",
 											borderRadius: 6,
 											gap: 6,
 											backgroundColor: isSubscribed
@@ -197,14 +196,14 @@ let ProfileHeaderLabeler = ({
 										>
 											{isSubscribed ? <>Unsubscribe</> : <>Subscribe to Labeler</>}
 										</Text>
-									</View>
+									</div>
 								)}
 							</Button>
 						</>
 					) : null}
 					<ProfileMenu profile={profile} />
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...a.flex_col,
 						...a.gap_2xs,
@@ -214,12 +213,12 @@ let ProfileHeaderLabeler = ({
 				>
 					<ProfileHeaderDisplayName profile={profile} moderation={moderation} />
 					<ProfileHeaderHandle profile={profile} />
-				</View>
+				</div>
 				{!isPlaceholderProfile && (
 					<>
 						{isSelf && <ProfileHeaderMetrics profile={profile} />}
 						{descriptionRT && !moderation.ui("profileView").blur ? (
-							<View pointerEvents="auto">
+							<div style={{ pointerEvents: "auto" }}>
 								<RichText
 									style={a.text_md}
 									numberOfLines={15}
@@ -227,10 +226,10 @@ let ProfileHeaderLabeler = ({
 									enableTags
 									authorHandle={profile.handle}
 								/>
-							</View>
+							</div>
 						) : undefined}
 						{!isAppLabeler(profile.did) && (
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.gap_xs,
@@ -281,11 +280,11 @@ let ProfileHeaderLabeler = ({
 										)}
 									</Link>
 								)}
-							</View>
+							</div>
 						)}
 					</>
 				)}
-			</View>
+			</div>
 			<CantSubscribePrompt control={cantSubscribePrompt} />
 		</ProfileHeaderShell>
 	);

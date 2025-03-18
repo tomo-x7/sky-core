@@ -5,7 +5,6 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -123,16 +122,16 @@ let ProfileHeaderStandard = ({
 			hideBackButton={hideBackButton}
 			isPlaceholderProfile={isPlaceholderProfile}
 		>
-			<View
+			<div
 				style={{
 					...a.px_lg,
 					...a.pt_md,
 					...a.pb_sm,
 					...a.overflow_hidden,
+					pointerEvents: "none",
 				}}
-				pointerEvents={"box-none"}
 			>
-				<View
+				<div
 					style={{
 						...{ paddingLeft: 90 },
 						...a.flex_row,
@@ -141,8 +140,8 @@ let ProfileHeaderStandard = ({
 						...a.gap_xs,
 						...a.pb_sm,
 						...a.flex_wrap,
+						pointerEvents: "none",
 					}}
-					pointerEvents={"box-none"}
 				>
 					{isMe ? (
 						<>
@@ -152,7 +151,7 @@ let ProfileHeaderStandard = ({
 								variant="solid"
 								onPress={onPressEditProfile}
 								label={"Edit profile"}
-								style={a.rounded_full}
+								style={{ ...a.rounded_full, pointerEvents: "auto" }}
 							>
 								<ButtonText>Edit Profile</ButtonText>
 							</Button>
@@ -167,7 +166,7 @@ let ProfileHeaderStandard = ({
 								label={"Unblock"}
 								disabled={!hasSession}
 								onPress={() => unblockPromptControl.open()}
-								style={a.rounded_full}
+								style={{ ...a.rounded_full, pointerEvents: "auto" }}
 							>
 								<ButtonText>Unblock</ButtonText>
 							</Button>
@@ -186,7 +185,7 @@ let ProfileHeaderStandard = ({
 										: `Follow ${profile.handle}`
 								}
 								onPress={profile.viewer?.following ? onPressUnfollow : onPressFollow}
-								style={a.rounded_full}
+								style={{ ...a.rounded_full, pointerEvents: "auto" }}
 							>
 								<ButtonIcon position="left" icon={profile.viewer?.following ? Check : Plus} />
 								<ButtonText>
@@ -202,23 +201,24 @@ let ProfileHeaderStandard = ({
 						</>
 					) : null}
 					<ProfileMenu profile={profile} />
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						...a.flex_col,
 						...a.gap_2xs,
 						...a.pt_2xs,
 						...a.pb_sm,
+						pointerEvents: "auto",
 					}}
 				>
 					<ProfileHeaderDisplayName profile={profile} moderation={moderation} />
 					<ProfileHeaderHandle profile={profile} />
-				</View>
+				</div>
 				{!isPlaceholderProfile && !isBlockedUser && (
-					<View style={a.gap_md}>
+					<div style={{ ...a.gap_md, pointerEvents: "auto" }}>
 						<ProfileHeaderMetrics profile={profile} />
 						{descriptionRT && !moderation.ui("profileView").blur ? (
-							<View pointerEvents="auto">
+							<div style={{ pointerEvents: "auto" }}>
 								<RichText
 									style={a.text_md}
 									numberOfLines={15}
@@ -226,11 +226,11 @@ let ProfileHeaderStandard = ({
 									enableTags
 									authorHandle={profile.handle}
 								/>
-							</View>
+							</div>
 						) : undefined}
 
 						{!isMe && !isBlockedUser && shouldShowKnownFollowers(profile.viewer?.knownFollowers) && (
-							<View
+							<div
 								style={{
 									...a.flex_row,
 									...a.align_center,
@@ -238,11 +238,11 @@ let ProfileHeaderStandard = ({
 								}}
 							>
 								<KnownFollowers profile={profile} moderationOpts={moderationOpts} />
-							</View>
+							</div>
 						)}
-					</View>
+					</div>
 				)}
-			</View>
+			</div>
 			<Prompt.Basic
 				control={unblockPromptControl}
 				title={"Unblock Account?"}

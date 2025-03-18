@@ -92,7 +92,7 @@ export function ExternalGifEmbed({
 					}} // Web uses the thumb to control playback
 					style={{ flex: 1 }}
 					ref={imageRef}
-					//@ts-ignore
+					//@ts-expect-error
 					autoplay={isAnimating}
 					contentFit="contain"
 					accessibilityIgnoresInvertColors

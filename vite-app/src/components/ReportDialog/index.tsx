@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 
 import type { ReportOption } from "#/lib/moderation/useReportOptions";
 import { useMyLabelersQuery } from "#/state/queries/preferences";
@@ -48,9 +48,9 @@ function ReportDialogInner(props: ReportDialogProps) {
 					<Pressable accessible={false} />
 				</div>
 			) : error || !labelers ? (
-				<View>
+				<div>
 					<Text style={a.text_md}>Something went wrong, please try again.</Text>
-				</View>
+				</div>
 			) : (
 				<ReportDialogLoaded labelers={labelers} {...props} />
 			)}

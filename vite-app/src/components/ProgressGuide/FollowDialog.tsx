@@ -243,9 +243,9 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 	const listHeader = (
 		<Header
 			guide={guide}
-			//@ts-ignore
+			//@ts-expect-error
 			inputRef={inputRef}
-			//@ts-ignore
+			//@ts-expect-error
 			listRef={listRef}
 			searchText={searchText}
 			onSelectTab={onSelectTab}

@@ -2,9 +2,9 @@ import type { AppBskyFeedDefs } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import debounce from "lodash.debounce";
 import React from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import * as FeedCard from "#/components/FeedCard";
@@ -12,6 +12,7 @@ import { IconCircle } from "#/components/IconCircle";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
 import * as ListCard from "#/components/ListCard";
+import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
 import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
 import { FilterTimeline_Stroke2_Corner0_Rounded as FilterTimeline } from "#/components/icons/FilterTimeline";
@@ -39,7 +40,6 @@ import { List, type ListMethods } from "#/view/com/util/List";
 import { FeedFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import { FAB } from "#/view/com/util/fab/FAB";
-import { Text } from "#/view/com/util/text/Text";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Feeds">;
 
@@ -380,15 +380,15 @@ export function FeedsScreen(_props: Props) {
 				return <ErrorMessage message={item.error} />;
 			} else if (item.type === "popularFeedsLoadingMore") {
 				return (
-					<View style={s.p10}>
+					<div style={s.p10}>
 						<ActivityIndicator size="large" />
-					</View>
+					</div>
 				);
 			} else if (item.type === "savedFeedsHeader") {
 				return <FeedsSavedHeader />;
 			} else if (item.type === "savedFeedNoResults") {
 				return (
-					<View
+					<div
 						style={{
 							...pal.border,
 
@@ -398,7 +398,7 @@ export function FeedsScreen(_props: Props) {
 						}}
 					>
 						<NoSavedFeedsOfAnyType />
-					</View>
+					</div>
 				);
 			} else if (item.type === "savedFeedPlaceholder") {
 				return <SavedFeedPlaceholder />;
@@ -408,7 +408,7 @@ export function FeedsScreen(_props: Props) {
 				return (
 					<>
 						<FeedsAboutHeader />
-						<View style={{ paddingHorizontal: 12, paddingBottom: 4 }}>
+						<div style={{ paddingBottom: 4, paddingLeft: 12, paddingRight: 12 }}>
 							<SearchInput
 								placeholder={"Search feeds"}
 								value={query}
@@ -418,14 +418,14 @@ export function FeedsScreen(_props: Props) {
 								onFocus={() => onChangeSearchFocus(true)}
 								onBlur={() => onChangeSearchFocus(false)}
 							/>
-						</View>
+						</div>
 					</>
 				);
 			} else if (item.type === "popularFeedsLoading") {
 				return <FeedFeedLoadingPlaceholder />;
 			} else if (item.type === "popularFeed") {
 				return (
-					<View
+					<div
 						style={{
 							...a.px_lg,
 							...a.pt_lg,
@@ -434,13 +434,14 @@ export function FeedsScreen(_props: Props) {
 					>
 						<FeedCard.Default view={item.feed} />
 						<Divider />
-					</View>
+					</div>
 				);
 			} else if (item.type === "popularFeedsNoResults") {
 				return (
-					<View
+					<div
 						style={{
-							paddingHorizontal: 16,
+							paddingLeft: 16,
+							paddingRight: 16,
 							paddingTop: 10,
 							paddingBottom: "150%",
 						}}
@@ -448,11 +449,11 @@ export function FeedsScreen(_props: Props) {
 						<Text type="lg" style={pal.textLight}>
 							<>No results found for "{query}"</>
 						</Text>
-					</View>
+					</div>
 				);
 			} else if (item.type === "noFollowingFeed") {
 				return (
-					<View
+					<div
 						style={{
 							...pal.border,
 
@@ -462,7 +463,7 @@ export function FeedsScreen(_props: Props) {
 						}}
 					>
 						<NoFollowingFeed />
-					</View>
+					</div>
 				);
 			}
 			return null;
@@ -532,7 +533,7 @@ function FeedOrFollowing({ savedFeed }: { savedFeed: SavedFeedItem }) {
 function FollowingFeed() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.px_lg,
@@ -542,7 +543,7 @@ function FollowingFeed() {
 			}}
 		>
 			<FeedCard.Header>
-				<View
+				<div
 					style={{
 						...a.align_center,
 						...a.justify_center,
@@ -562,10 +563,10 @@ function FollowingFeed() {
 						}}
 						fill={t.palette.white}
 					/>
-				</View>
+				</div>
 				<FeedCard.TitleAndByline title={"Following"} />
 			</FeedCard.Header>
-		</View>
+		</div>
 	);
 }
 
@@ -576,12 +577,12 @@ function SavedFeed({
 }) {
 	const t = useTheme();
 
-	const commonStyle = [a.w_full, a.flex_1, a.px_lg, a.py_md, a.border_b, t.atoms.border_contrast_low];
+	const commonStyle = flatten([a.w_full, a.flex_1, a.px_lg, a.py_md, a.border_b, t.atoms.border_contrast_low]);
 
 	return savedFeed.type === "feed" ? (
 		<FeedCard.Link {...savedFeed}>
 			{({ hovered, pressed }) => (
-				<View
+				<div
 					style={{
 						...commonStyle,
 						...((hovered || pressed) && t.atoms.bg_contrast_25),
@@ -593,13 +594,13 @@ function SavedFeed({
 
 						<ChevronRight size="sm" fill={t.atoms.text_contrast_low.color} />
 					</FeedCard.Header>
-				</View>
+				</div>
 			)}
 		</FeedCard.Link>
 	) : (
 		<ListCard.Link {...savedFeed}>
 			{({ hovered, pressed }) => (
-				<View
+				<div
 					style={{
 						...commonStyle,
 						...((hovered || pressed) && t.atoms.bg_contrast_25),
@@ -611,7 +612,7 @@ function SavedFeed({
 
 						<ChevronRight size="sm" fill={t.atoms.text_contrast_low.color} />
 					</ListCard.Header>
-				</View>
+				</div>
 			)}
 		</ListCard.Link>
 	);
@@ -620,7 +621,7 @@ function SavedFeed({
 function SavedFeedPlaceholder() {
 	const t = useTheme();
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_1,
 				...a.px_lg,
@@ -633,7 +634,7 @@ function SavedFeedPlaceholder() {
 				<FeedCard.AvatarPlaceholder size={28} />
 				<FeedCard.TitleAndBylinePlaceholder />
 			</FeedCard.Header>
-		</View>
+		</div>
 	);
 }
 
@@ -641,7 +642,7 @@ function FeedsSavedHeader() {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.px_md,
@@ -652,7 +653,7 @@ function FeedsSavedHeader() {
 			}}
 		>
 			<IconCircle icon={ListSparkle_Stroke2_Corner0_Rounded} size="lg" />
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_xs,
@@ -669,8 +670,8 @@ function FeedsSavedHeader() {
 					My Feeds
 				</Text>
 				<Text style={t.atoms.text_contrast_high}>All the feeds you've saved, right in one place.</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -678,7 +679,7 @@ function FeedsAboutHeader() {
 	const t = useTheme();
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.px_md,
@@ -688,7 +689,7 @@ function FeedsAboutHeader() {
 			}}
 		>
 			<IconCircle icon={ListMagnifyingGlass_Stroke2_Corner0_Rounded} size="lg" />
-			<View
+			<div
 				style={{
 					...a.flex_1,
 					...a.gap_sm,
@@ -707,12 +708,12 @@ function FeedsAboutHeader() {
 				<Text style={t.atoms.text_contrast_high}>
 					Choose your own timeline! Feeds built by the community help you find content you love.
 				</Text>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	contentContainer: {
 		paddingBottom: 100,
 	},
@@ -722,30 +723,25 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 		gap: 16,
-		paddingHorizontal: 18,
-		paddingVertical: 12,
+		padding: "12px 18px",
 	},
 
 	savedFeed: {
 		flexDirection: "row",
 		alignItems: "center",
-		paddingHorizontal: 16,
-		paddingVertical: 14,
+		padding: "14px 16px",
 		gap: 12,
-		borderBottomWidth: StyleSheet.hairlineWidth,
+		borderBottomWidth: 1,
 	},
-	savedFeedMobile: {
-		paddingVertical: 10,
-	},
+	savedFeedMobile: { paddingTop: 10, paddingBottom: 10 },
 	offlineSlug: {
-		borderWidth: StyleSheet.hairlineWidth,
+		borderWidth: 1,
 		borderRadius: 4,
-		paddingHorizontal: 4,
-		paddingVertical: 2,
+		padding: "2px 4px",
 	},
 	headerBtnGroup: {
 		flexDirection: "row",
 		gap: 15,
 		alignItems: "center",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

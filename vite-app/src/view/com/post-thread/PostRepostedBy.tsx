@@ -95,7 +95,7 @@ export function PostRepostedBy({ uri }: { uri: string }) {
 			ListFooterComponent={
 				<ListFooter isFetchingNextPage={isFetchingNextPage} error={cleanError(error)} onRetry={fetchNextPage} />
 			}
-			// @ts-ignore our .web version only -prf
+			// @ts-expect-error our .web version only -prf
 			desktopFixedHeight
 			initialNumToRender={initialNumToRender}
 			windowSize={11}

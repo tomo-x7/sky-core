@@ -1,6 +1,5 @@
 import type React from "react";
 import { useCallback } from "react";
-import { View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
@@ -51,18 +50,20 @@ export function VolumeControl({
 	}, [drawFocus, setVolume, isZeroVolume, changeMuted]);
 
 	return (
-		<View onPointerEnter={onHover} onPointerLeave={onEndHover} style={a.relative}>
+		<div onPointerEnter={onHover} onPointerLeave={onEndHover} style={a.relative}>
 			{hovered && !isTouchDevice && (
 				<Animated.View
 					entering={FadeIn.duration(100)}
 					exiting={FadeOut.duration(100)}
+					// @ts-expect-error
 					style={{
 						...a.absolute,
 						...a.w_full,
-						...{ height: 100, bottom: "100%" },
+						height: 100,
+						bottom: "100%",
 					}}
 				>
-					<View
+					<div
 						style={{
 							...a.flex_1,
 							...a.mb_xs,
@@ -87,7 +88,7 @@ export function VolumeControl({
 							// @ts-expect-error for old versions of firefox, and then re-using it for targeting the CSS -sfn
 							orient="vertical"
 						/>
-					</View>
+					</div>
 				</Animated.View>
 			)}
 			<ControlButton
@@ -98,7 +99,7 @@ export function VolumeControl({
 				inactiveIcon={UnmuteIcon}
 				onPress={onPressMute}
 			/>
-		</View>
+		</div>
 	);
 }
 

@@ -34,7 +34,7 @@ export function EmptyState({
 				) : icon === "growth" ? (
 					<Growth width={iconSize} fill={pal.colors.emptyStateIcon} />
 				) : (
-					// @ts-ignore
+					// @ts-expect-error
 					<FontAwesomeIcon icon={icon} size={iconSize} style={{ color: pal.colors.emptyStateIcon }} />
 				)}
 			</div>

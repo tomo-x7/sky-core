@@ -1,6 +1,5 @@
 import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
 import * as React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -25,10 +24,10 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 				...a.py_md,
 				...{ paddingHorizontal: 14 },
 			}}
-			hoverStyle={[t.atoms.bg_contrast_25]}
+			hoverStyle={t.atoms.bg_contrast_25}
 		>
-			<View style={a.flex_row}>
-				<View
+			<div style={a.flex_row}>
+				<div
 					style={{
 						alignItems: "center",
 						justifyContent: "center",
@@ -44,8 +43,8 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 						size={30}
 						type={post.author.associated?.labeler ? "labeler" : "user"}
 					/>
-				</View>
-				<View
+				</div>
+				<div
 					style={{
 						alignItems: "center",
 						justifyContent: "center",
@@ -60,9 +59,9 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 						size={30}
 						type={post.author.associated?.labeler ? "labeler" : "user"}
 					/>
-				</View>
-			</View>
-			<View style={a.px_sm}>
+				</div>
+			</div>
+			<div style={a.px_sm}>
 				<Text
 					style={{
 						...{ color: t.palette.primary_500 },
@@ -71,7 +70,7 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 				>
 					Continue thread...
 				</Text>
-			</View>
+			</div>
 		</Link>
 	);
 }

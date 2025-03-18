@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import { useReducedMotion } from "react-native-reanimated";
 
 import { useTheme } from "#/alf";
@@ -70,7 +69,7 @@ export function AnimatedLikeIcon({
 	}, [shouldAnimate, isLiked]);
 
 	return (
-		<View>
+		<div>
 			{isLiked ? (
 				<div ref={likeIconRef}>
 					<HeartIconFilled style={s.likeColor} width={size} />
@@ -114,6 +113,6 @@ export function AnimatedLikeIcon({
 					opacity: 0,
 				}}
 			/>
-		</View>
+		</div>
 	);
 }

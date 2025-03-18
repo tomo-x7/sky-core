@@ -15,7 +15,7 @@ export function LoadMoreRetryBtn({
 	const pal = usePalette("default");
 	return (
 		<Button type="default-light" onPress={onPress} style={styles.loadMoreRetry}>
-			{/* @ts-ignore */}
+			{/* @ts-expect-error */}
 			<FontAwesomeIcon icon="arrow-rotate-left" style={pal.textLight} size={18} />
 			<Text
 				style={{

@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -65,7 +64,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 
 	const isProcessing = isReplacePending || isRemovePending;
 	return (
-		<View
+		<div
 			style={{
 				...a.py_3xl,
 				...a.px_2xl,
@@ -101,7 +100,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 				</>
 			</Text>
 			{hasFeedPinned ? (
-				<View
+				<div
 					style={{
 						...a.flex_row,
 						...a.justify_center,
@@ -132,8 +131,8 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 							{isReplacePending && <ButtonIcon icon={Loader} />}
 						</Button>
 					)}
-				</View>
+				</div>
 			) : undefined}
-		</View>
+		</div>
 	);
 }

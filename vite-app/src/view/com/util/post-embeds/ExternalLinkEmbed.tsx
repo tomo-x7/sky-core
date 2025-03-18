@@ -59,7 +59,7 @@ export const ExternalLinkEmbed = ({
 			{({ hovered }) => (
 				<div
 					style={{
-						...//@ts-ignore
+						...
 						a.transition_color,
 
 						...a.flex_col,
@@ -146,7 +146,7 @@ export const ExternalLinkEmbed = ({
 								<Globe
 									size="xs"
 									style={{
-										...//@ts-ignore
+										...
 										a.transition_color,
 
 										...(hovered ? t.atoms.text_contrast_medium : t.atoms.text_contrast_low),
@@ -155,7 +155,7 @@ export const ExternalLinkEmbed = ({
 								<Text
 									numberOfLines={1}
 									style={{
-										...//@ts-ignore
+										...
 										a.transition_color,
 
 										...a.text_xs,

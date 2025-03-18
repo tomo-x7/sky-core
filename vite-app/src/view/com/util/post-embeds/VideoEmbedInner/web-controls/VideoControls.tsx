@@ -1,7 +1,7 @@
 import type Hls from "hls.js";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
@@ -222,6 +222,7 @@ export function Controls({
 		if (cursorTimeoutRef.current) {
 			clearTimeout(cursorTimeoutRef.current);
 		}
+		// @ts-expect-error
 		cursorTimeoutRef.current = setTimeout(() => {
 			setShowCursor(false);
 			onEndHover();
@@ -298,7 +299,7 @@ export function Controls({
 				onPointerLeave={onPointerLeaveEmptySpace}
 				accessibilityLabel={!focused ? "Unmute video" : playing ? "Pause video" : "Play video"}
 				accessibilityHint=""
-				// @ts-ignore
+				// @ts-expect-error
 				style={{
 					...a.flex_1,
 					...{ cursor: showCursor || !playing ? "pointer" : "none" },
@@ -306,19 +307,14 @@ export function Controls({
 				onPress={onPressEmptySpace}
 			/>
 			{!showControls && !focused && duration > 0 && <TimeIndicator time={Math.floor(duration - currentTime)} />}
-			<View
+			<div
 				style={{
 					...a.flex_shrink_0,
 					...a.w_full,
 					...a.px_xs,
-
-					...//@ts-ignore
-					{ background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7))" },
-
-					...{ opacity: showControls ? 1 : 0 },
-
-					...//@ts-ignore
-					{ transition: "opacity 0.2s ease-in-out" },
+					background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7))",
+					opacity: showControls ? 1 : 0,
+					transition: "opacity 0.2s ease-in-out",
 				}}
 			>
 				{(!volumeHovered || isTouchDevice) && (
@@ -334,7 +330,7 @@ export function Controls({
 						drawFocus={drawFocus}
 					/>
 				)}
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.px_xs,
@@ -352,11 +348,12 @@ export function Controls({
 						inactiveIcon={PlayIcon}
 						onPress={onPressPlayPause}
 					/>
-					<View style={a.flex_1} />
+					<div style={a.flex_1} />
 					<Text
 						style={{
 							...a.px_xs,
-							...{ color: t.palette.white, fontVariant: ["tabular-nums"] },
+							color: t.palette.white,
+							fontVariant: "tabular-nums",
 						}}
 					>
 						{formatTime(currentTime)} / {formatTime(duration)}
@@ -389,21 +386,21 @@ export function Controls({
 							onPress={onPressFullscreen}
 						/>
 					)}
-				</View>
-			</View>
+				</div>
+			</div>
 			{(showSpinner || error) && (
-				<View
-					pointerEvents="none"
+				<div
 					style={{
 						...a.absolute,
 						...a.inset_0,
 						...a.justify_center,
 						...a.align_center,
+						pointerEvents: "none",
 					}}
 				>
 					{showSpinner && <Loader fill={t.palette.white} size="lg" />}
 					{error && <Text style={{ color: t.palette.white }}>An error occurred</Text>}
-				</View>
+				</div>
 			)}
 		</div>
 	);

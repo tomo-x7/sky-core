@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import type { Shadow } from "#/state/cache/types";
 import { useProfileFollowMutationQueue } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
@@ -43,7 +41,7 @@ export function FollowButton({
 	};
 
 	if (!profile.viewer) {
-		return <View />;
+		return <div />;
 	}
 
 	if (profile.viewer.following) {

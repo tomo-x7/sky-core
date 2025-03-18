@@ -45,7 +45,6 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 	ref,
 ) {
 	const onScrollToTop = React.useCallback(() => {
-		// @ts-ignore TODO fix this
 		scrollElRef.current?.scrollTo({
 			animated: false,
 			x: 0,
@@ -65,7 +64,6 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 	}, [isFocused, scrollElRef, setScrollViewTag]);
 
 	return (
-		//@ts-ignore
 		<Layout.Center style={{ flex: 1, minHeight: "100dvh" }}>
 			{isLabelerLoading ? (
 				<div

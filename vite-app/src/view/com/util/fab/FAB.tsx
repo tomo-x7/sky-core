@@ -1,5 +1,3 @@
-import { View } from "react-native";
-
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { FABInner, type FABProps } from "./FABInner";
 
@@ -10,5 +8,5 @@ export const FAB = (_opts: FABProps) => {
 		return <FABInner {..._opts} />;
 	}
 
-	return <View />;
+	return <div />;
 };

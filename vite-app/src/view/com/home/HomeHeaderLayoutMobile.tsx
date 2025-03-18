@@ -1,5 +1,4 @@
 import type React from "react";
-import { View } from "react-native";
 import Animated from "react-native-reanimated";
 
 import type { JSX } from "react";
@@ -29,16 +28,15 @@ export function HomeHeaderLayoutMobile({
 
 	return (
 		<Animated.View
+		// @ts-expect-error
 			style={{
 				...a.fixed,
 				...a.z_10,
 				...t.atoms.bg,
 
-				...{
-					top: 0,
-					left: 0,
-					right: 0,
-				},
+				top: 0,
+				left: 0,
+				right: 0,
 
 				...headerMinimalShellTransform,
 			}}
@@ -51,7 +49,7 @@ export function HomeHeaderLayoutMobile({
 					<Layout.Header.MenuButton />
 				</Layout.Header.Slot>
 
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...a.align_center,
@@ -65,7 +63,7 @@ export function HomeHeaderLayoutMobile({
 					>
 						<Logo width={30} />
 					</PressableScale>
-				</View>
+				</div>
 
 				<Layout.Header.Slot>
 					{hasSession && (

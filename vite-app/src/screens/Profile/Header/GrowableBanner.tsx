@@ -2,7 +2,6 @@ import { useIsFetching } from "@tanstack/react-query";
 import { BlurView } from "expo-blur";
 import type React from "react";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
 import Animated, { runOnJS, type SharedValue, useAnimatedReaction } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
@@ -23,7 +22,7 @@ export function GrowableBanner({
 	// plain non-growable mode for Android/Web
 
 	return (
-		<View
+		<div
 			style={{
 				...a.w_full,
 				...a.h_full,
@@ -31,7 +30,7 @@ export function GrowableBanner({
 		>
 			{children}
 			{backButton}
-		</View>
+		</div>
 	);
 }
 

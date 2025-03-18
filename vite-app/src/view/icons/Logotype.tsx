@@ -6,7 +6,7 @@ const ratio = 17 / 64;
 
 export function Logotype({ fill, ...rest }: { fill?: PathProps["fill"] } & SvgProps) {
 	const pal = usePalette("default");
-	// @ts-ignore it's fiiiiine
+	// @ts-expect-error it's fiiiiine
 	const size = Number.parseInt(rest.width || 32);
 
 	return (

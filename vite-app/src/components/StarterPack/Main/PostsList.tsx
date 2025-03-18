@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import { View } from "react-native";
 import type { SectionRef } from "#/screens/Profile/Sections/types";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { PostFeed } from "#/view/com/posts/PostFeed";
@@ -34,7 +33,7 @@ export const PostsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 	}, []);
 
 	return (
-		<View>
+		<div>
 			<PostFeed
 				feed={feed}
 				pollInterval={60e3}
@@ -42,6 +41,6 @@ export const PostsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 				renderEmptyState={renderPostsEmpty}
 				headerOffset={headerHeight}
 			/>
-		</View>
+		</div>
 	);
 });

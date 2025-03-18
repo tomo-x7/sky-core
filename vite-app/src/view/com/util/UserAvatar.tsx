@@ -175,7 +175,7 @@ let UserAvatar = ({
 					...pal.view,
 				}}
 			>
-				{/* @ts-ignore */}
+				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="exclamation-circle" style={styles.alertIcon} size={Math.floor(size / 3)} />
 			</div>
 		);
@@ -205,7 +205,7 @@ let UserAvatar = ({
 			) : (
 				<HighPriorityImage
 					style={aviStyle}
-					// @ts-ignore
+					// @ts-expect-error
 					contentFit="cover"
 					source={{
 						uri: hackModifyThumbnailPath(avatar, size < 90),

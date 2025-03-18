@@ -1,16 +1,19 @@
 import type { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useState } from "react";
-import { ActivityIndicator, Pressable, SafeAreaView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Pressable } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { HITSLOP_20 } from "#/lib/constants";
 import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { SafeAreaView } from "#/lib/safe-area-context";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { colors, s } from "#/lib/styles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import {
@@ -23,8 +26,7 @@ import {
 import * as Toast from "../util/Toast";
 import { UserAvatar } from "../util/UserAvatar";
 import { Button } from "../util/forms/Button";
-import { Text } from "../util/text/Text";
-import { ScrollView, TextInput } from "./util";
+import { ScrollView } from "./util";
 
 export const snapPoints = ["90%"];
 
@@ -42,6 +44,7 @@ export function Component({
 	const autocomplete = useActorAutocompleteQuery(query);
 	const { data: memberships } = useDangerousListMembershipsQuery();
 	const [isKeyboardVisible] = useIsKeyboardVisible();
+	const phStyleCName = usePlaceholderStyle(pal.colors.textLight);
 
 	const onPressCancelSearch = useCallback(() => setQuery(""), []);
 
@@ -52,38 +55,37 @@ export function Component({
 				...styles.fixedHeight,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...s.flex1,
 					...(isMobile && { paddingHorizontal: 18 }),
 				}}
 			>
-				<View
+				<div
 					style={{
 						...styles.searchContainer,
 						...pal.border,
 					}}
 				>
-					{/* @ts-ignore */}
+					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="search" size={16} />
-					<TextInput
+					<input
+						type="text"
 						style={{
 							...styles.searchInput,
 							...pal.border,
 							...pal.text,
 						}}
 						placeholder={"Search for users"}
-						placeholderTextColor={pal.colors.textLight}
+						className={phStyleCName}
 						value={query}
-						onChangeText={setQuery}
-						accessible={true}
-						accessibilityLabel={"Search"}
-						accessibilityHint=""
+						onChange={(ev) => setQuery(ev.target.value)}
+						// biome-ignore lint/a11y/noAutofocus: <explanation>
 						autoFocus
 						autoCapitalize="none"
 						autoComplete="off"
 						autoCorrect={"off"}
-						selectTextOnFocus
+						onFocus={(ev) => ev.target.select()}
 					/>
 					{query ? (
 						<Pressable
@@ -94,16 +96,16 @@ export function Component({
 							onAccessibilityEscape={onPressCancelSearch}
 							hitSlop={HITSLOP_20}
 						>
-							{/* @ts-ignore */}
+							{/* @ts-expect-error */}
 							<FontAwesomeIcon icon="xmark" size={16} color={pal.colors.textLight} />
 						</Pressable>
 					) : undefined}
-				</View>
+				</div>
 				<ScrollView style={s.flex1} keyboardDismissMode="none" keyboardShouldPersistTaps="always">
 					{autocomplete.isLoading ? (
-						<View style={{ marginVertical: 20 }}>
+						<div style={{ marginTop: 20, marginBottom: 20 }}>
 							<ActivityIndicator />
-						</View>
+						</div>
 					) : autocomplete.data?.length ? (
 						<>
 							{autocomplete.data.slice(0, 40).map((item, i) => (
@@ -129,7 +131,7 @@ export function Component({
 						</Text>
 					)}
 				</ScrollView>
-				<View
+				<div
 					style={{
 						...styles.btnContainer,
 						...{ paddingBottom: isKeyboardVisible ? 10 : 20 },
@@ -144,10 +146,10 @@ export function Component({
 						accessibilityHint=""
 						label={"Done"}
 						labelContainerStyle={{ justifyContent: "center", padding: 4 }}
-						labelStyle={[s.f18]}
+						labelStyle={s.f18}
 					/>
-				</View>
-			</View>
+				</div>
+			</div>
 		</SafeAreaView>
 	);
 }
@@ -204,7 +206,7 @@ function UserResult({
 	}, [list, profile, membership, onChange, listMembershipAddMutation, listMembershipRemoveMutation]);
 
 	return (
-		<View
+		<div
 			style={{
 				...pal.border,
 
@@ -216,15 +218,15 @@ function UserResult({
 				},
 			}}
 		>
-			<View
+			<div
 				style={{
 					width: 54,
 					paddingLeft: 4,
 				}}
 			>
 				<UserAvatar size={40} avatar={profile.avatar} type={profile.associated?.labeler ? "labeler" : "user"} />
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					flex: 1,
 					paddingRight: 10,
@@ -246,9 +248,9 @@ function UserResult({
 				<Text type="md" style={pal.textLight} numberOfLines={1}>
 					{sanitizeHandle(profile.handle, "@")}
 				</Text>
-				{!!profile.viewer?.followedBy && <View style={s.flexRow} />}
-			</View>
-			<View>
+				{!!profile.viewer?.followedBy && <div style={s.flexRow} />}
+			</div>
+			<div>
 				{isProcessing || typeof membership === "undefined" ? (
 					<ActivityIndicator />
 				) : (
@@ -258,14 +260,13 @@ function UserResult({
 						onPress={onToggleMembership}
 					/>
 				)}
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	fixedHeight: {
-		// @ts-ignore web only -prf
 		height: "80vh",
 	},
 	titleSection: {
@@ -283,8 +284,7 @@ const styles = StyleSheet.create({
 		gap: 8,
 		borderWidth: 1,
 		borderRadius: 24,
-		paddingHorizontal: 16,
-		paddingVertical: 10,
+		padding: "10px 16px",
 	},
 	searchInput: {
 		fontSize: 16,
@@ -301,4 +301,4 @@ const styles = StyleSheet.create({
 	btnContainer: {
 		paddingTop: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -54,7 +53,7 @@ export function ExportCarDialog({
 				accessibilityDescribedBy="dialog-description"
 				accessibilityLabelledBy="dialog-title"
 			>
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.gap_lg,
@@ -62,7 +61,6 @@ export function ExportCarDialog({
 					}}
 				>
 					<Text
-						nativeID="dialog-title"
 						style={{
 							...a.text_2xl,
 							...a.font_heavy,
@@ -71,7 +69,6 @@ export function ExportCarDialog({
 						Export My Data
 					</Text>
 					<Text
-						nativeID="dialog-description"
 						style={{
 							...a.text_sm,
 							...a.leading_normal,
@@ -116,7 +113,7 @@ export function ExportCarDialog({
 							.
 						</>
 					</Text>
-				</View>
+				</div>
 			</Dialog.ScrollableInner>
 		</Dialog.Outer>
 	);

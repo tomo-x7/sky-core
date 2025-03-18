@@ -1,6 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
 
 import * as Layout from "#/components/Layout";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -37,18 +36,17 @@ export function LogScreen(props: NativeStackScreenProps<CommonNavigatorParams, "
 		<Layout.Screen>
 			<ViewHeader title="Log" />
 			<ScrollView style={s.flex1}>
-				<View style={s.footerSpacer} />
+				<div style={s.footerSpacer} />
 			</ScrollView>
 		</Layout.Screen>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	entry: {
 		flexDirection: "row",
 		borderTopWidth: 1,
-		paddingVertical: 10,
-		paddingHorizontal: 6,
+		padding: "10px 6px",
 	},
 	summary: {
 		flex: 1,
@@ -57,7 +55,6 @@ const styles = StyleSheet.create({
 		width: 40,
 	},
 	details: {
-		paddingVertical: 10,
-		paddingHorizontal: 6,
+		padding: "10px 6px",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,8 +1,6 @@
-import React from "react";
-import { Image as ExpoImage } from "react-native";
-import { View } from "react-native";
+import React, { useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { atoms as a, flatten, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Pencil_Stroke2_Corner0_Rounded as Pencil } from "#/components/icons/Pencil";
 import { StreamingLive_Stroke2_Corner0_Rounded as StreamingLive } from "#/components/icons/StreamingLive";
@@ -21,7 +19,7 @@ export function AvatarCircle({
 
 	const styles = React.useMemo(
 		() => ({
-			imageContainer: [
+			imageContainer: flatten([
 				a.rounded_full,
 				a.overflow_hidden,
 				a.align_center,
@@ -33,29 +31,23 @@ export function AvatarCircle({
 					height: 200,
 					width: 200,
 				},
-			],
+			]),
 		}),
 		[t.atoms.bg_contrast_25, t.atoms.border_contrast_low],
 	);
 
 	return (
-		<View>
+		<div>
 			{avatar.useCreatedAvatar ? (
 				<AvatarCreatorCircle avatar={avatar} size={200} />
 			) : avatar.image ? (
-				<ExpoImage
-					//@ts-ignore
-					source={avatar.image.path}
-					style={styles.imageContainer}
-					accessibilityIgnoresInvertColors
-					transition={{ duration: 300, effect: "cross-dissolve" }}
-				/>
+				<ImageWithTransition src={avatar.image.path} style={styles.imageContainer} />
 			) : (
-				<View style={styles.imageContainer}>
+				<div style={styles.imageContainer}>
 					<StreamingLive height={100} width={100} style={{ color: t.palette.contrast_200 }} />
-				</View>
+				</div>
 			)}
-			<View
+			<div
 				style={{
 					...a.absolute,
 					...{ bottom: 2, right: 2 },
@@ -71,7 +63,21 @@ export function AvatarCircle({
 				>
 					<ButtonIcon icon={Pencil} />
 				</Button>
-			</View>
-		</View>
+			</div>
+		</div>
+	);
+}
+
+function ImageWithTransition({ src, style }: { src?: string; style?: React.CSSProperties }) {
+	const [loaded, setLoaded] = useState(false);
+	return (
+		<img
+			src={src}
+			onLoad={() => setLoaded(true)}
+			style={{
+				opacity: loaded ? 1 : 0,
+				transition: "opacity 300ms ease-in-out",
+			}}
+		/>
 	);
 }

@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from "react";
-import { View } from "react-native";
 import RNPickerSelect, { type PickerSelectProps } from "react-native-picker-select";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -32,7 +31,6 @@ export function LanguageSettingsScreen(props: Props) {
 		(value: Parameters<PickerSelectProps["onValueChange"]>[0]) => {
 			if (!value) return;
 			if (langPrefs.primaryLanguage !== value) {
-				//@ts-ignore
 				setLangPrefs.setPrimaryLanguage(value);
 			}
 		},
@@ -43,7 +41,6 @@ export function LanguageSettingsScreen(props: Props) {
 		(value: Parameters<PickerSelectProps["onValueChange"]>[0]) => {
 			if (!value) return;
 			if (langPrefs.appLanguage !== value) {
-				//@ts-ignore
 				setLangPrefs.setAppLanguage(sanitizeAppLanguageSetting(value));
 			}
 		},
@@ -55,7 +52,7 @@ export function LanguageSettingsScreen(props: Props) {
 			langPrefs.contentLanguages
 				.map((lang) => LANGUAGES.find((l) => l.code2 === lang))
 				.filter(Boolean)
-				// @ts-ignore
+				// @ts-expect-error
 				.map((l) => languageName(l, langPrefs.appLanguage))
 				.join(", ")
 		);
@@ -74,7 +71,7 @@ export function LanguageSettingsScreen(props: Props) {
 				<SettingsList.Container>
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>App Language</SettingsList.ItemText>
-						<View
+						<div
 							style={{
 								...a.gap_md,
 								...a.w_full,
@@ -83,10 +80,11 @@ export function LanguageSettingsScreen(props: Props) {
 							<Text style={a.leading_snug}>
 								Select which language to use for the app's user interface.
 							</Text>
-							<View
+							<div
 								style={{
 									...a.relative,
-									...[a.w_full, { maxWidth: 400 }],
+									...a.w_full,
+									maxWidth: 400,
 								}}
 							>
 								<RNPickerSelect
@@ -124,7 +122,7 @@ export function LanguageSettingsScreen(props: Props) {
 											flex: 1,
 											width: "100%",
 											cursor: "pointer",
-											// @ts-ignore web only
+											// @ts-expect-error web only
 											"-moz-appearance": "none",
 											"-webkit-appearance": "none",
 											appearance: "none",
@@ -143,7 +141,7 @@ export function LanguageSettingsScreen(props: Props) {
 									}}
 								/>
 
-								<View
+								<div
 									style={{
 										...a.absolute,
 										...t.atoms.bg_contrast_25,
@@ -161,14 +159,14 @@ export function LanguageSettingsScreen(props: Props) {
 									}}
 								>
 									<ChevronDownIcon style={t.atoms.text} />
-								</View>
-							</View>
-						</View>
+								</div>
+							</div>
+						</div>
 					</SettingsList.Group>
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Primary Language</SettingsList.ItemText>
-						<View
+						<div
 							style={{
 								...a.gap_md,
 								...a.w_full,
@@ -177,10 +175,11 @@ export function LanguageSettingsScreen(props: Props) {
 							<Text style={a.leading_snug}>
 								Select your preferred language for translations in your feed.
 							</Text>
-							<View
+							<div
 								style={{
 									...a.relative,
-									...[a.w_full, { maxWidth: 400 }],
+									...a.w_full,
+									maxWidth: 400,
 								}}
 							>
 								<RNPickerSelect
@@ -218,7 +217,7 @@ export function LanguageSettingsScreen(props: Props) {
 											flex: 1,
 											width: "100%",
 											cursor: "pointer",
-											// @ts-ignore web only
+											// @ts-expect-error web only
 											"-moz-appearance": "none",
 											"-webkit-appearance": "none",
 											appearance: "none",
@@ -237,7 +236,7 @@ export function LanguageSettingsScreen(props: Props) {
 									}}
 								/>
 
-								<View
+								<div
 									style={{
 										position: "absolute",
 										top: 1,
@@ -252,14 +251,14 @@ export function LanguageSettingsScreen(props: Props) {
 									}}
 								>
 									<ChevronDownIcon style={t.atoms.text} />
-								</View>
-							</View>
-						</View>
+								</div>
+							</div>
+						</div>
 					</SettingsList.Group>
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Content Languages</SettingsList.ItemText>
-						<View style={a.gap_md}>
+						<div style={a.gap_md}>
 							<Text style={a.leading_snug}>
 								Select which languages you want your subscribed feeds to include. If none are selected,
 								all languages will be shown.
@@ -284,12 +283,13 @@ export function LanguageSettingsScreen(props: Props) {
 										...a.flex_1,
 										...a.text_left,
 									}}
-									numberOfLines={1}
+									// TODO
+									// numberOfLines={1}
 								>
 									{myLanguages.length > 0 ? myLanguages : "Select languages"}
 								</ButtonText>
 							</Button>
-						</View>
+						</div>
 					</SettingsList.Group>
 				</SettingsList.Container>
 			</Layout.Content>

@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
@@ -26,11 +25,11 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 	}, [requestSwitchToAccount, closeAllActiveElements]);
 
 	return (
-		<View style={{ maxWidth: 200 }}>
+		<div style={{ maxWidth: 200 }}>
 			<Link to="/" label="Bluesky - Home">
 				<Logo width={32} />
 			</Link>
-			<View style={a.pt_lg}>
+			<div style={a.pt_lg}>
 				<Text
 					style={{
 						...a.text_3xl,
@@ -40,8 +39,8 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 				>
 					Join the conversation
 				</Text>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.flex_wrap,
@@ -61,8 +60,8 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 				<Button onPress={showSignIn} label={"Sign in"} size="small" variant="solid" color="secondary">
 					<ButtonText>Sign in</ButtonText>
 				</Button>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.mt_md,
 					...a.w_full,
@@ -70,8 +69,8 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 				}}
 			>
 				<AppLanguageDropdown style={{ marginTop: 0 }} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 };
 NavSignupCard = React.memo(NavSignupCard);

@@ -2,15 +2,15 @@ import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { getDataUriSize } from "#/lib/media/util";
 import { gradients, s } from "#/lib/styles";
 import { useModalControls } from "#/state/modals";
-import { Text } from "#/view/com/util/text/Text";
 
 export const snapPoints = ["0%"];
 
@@ -74,8 +74,8 @@ export function Component({
 	};
 
 	return (
-		<View>
-			<View
+		<div>
+			<div
 				style={{
 					...styles.cropper,
 					...pal.borderDark,
@@ -89,8 +89,8 @@ export function Component({
 				>
 					<img ref={imageRef} src={uri} style={{ maxHeight: "75vh" }} alt="" />
 				</ReactCrop>
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...styles.btns,
 					...(isMobile && { paddingHorizontal: 16 }),
@@ -106,7 +106,7 @@ export function Component({
 						Cancel
 					</Text>
 				</TouchableOpacity>
-				<View style={s.flex1} />
+				<div style={s.flex1} />
 				<TouchableOpacity
 					onPress={onPressDone}
 					accessibilityRole="button"
@@ -124,8 +124,8 @@ export function Component({
 						</Text>
 					</LinearGradient>
 				</TouchableOpacity>
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 

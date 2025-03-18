@@ -1,12 +1,9 @@
 import * as EmailValidator from "email-validator";
 import React, { useRef } from "react";
-import { type TextInput, View } from "react-native";
-import type tldts from "tldts";
 
 import { atoms as a } from "#/alf";
 import { Loader } from "#/components/Loader";
 import * as DateField from "#/components/forms/DateField";
-import type { DateFieldRef } from "#/components/forms/DateField/types";
 import { FormError } from "#/components/forms/FormError";
 import { HostingProvider } from "#/components/forms/HostingProvider";
 import * as TextField from "#/components/forms/TextField";
@@ -47,19 +44,11 @@ export function StepInfo({
 	const prevEmailValueRef = useRef<string>(state.email);
 	const passwordValueRef = useRef<string>(state.password);
 
-	const emailInputRef = useRef<TextInput>(null);
-	const passwordInputRef = useRef<TextInput>(null);
-	const birthdateInputRef = useRef<DateFieldRef>(null);
+	const emailInputRef = useRef<HTMLInputElement>(null);
+	const passwordInputRef = useRef<HTMLInputElement>(null);
+	const birthdateInputRef = useRef<HTMLInputElement>(null);
 
 	const [hasWarnedEmail, setHasWarnedEmail] = React.useState<boolean>(false);
-
-	const tldtsRef = React.useRef<typeof tldts>(null);
-	React.useEffect(() => {
-		// @ts-expect-error - valid path
-		import("tldts/dist/index.cjs.min.js").then((tldts) => {
-			tldtsRef.current = tldts;
-		});
-	}, []);
 
 	const onNextPress = () => {
 		const inviteCode = inviteCodeValueRef.current;
@@ -92,8 +81,8 @@ export function StepInfo({
 				field: "email",
 			});
 		}
-		if (emailChanged && tldtsRef.current) {
-			if (isEmailMaybeInvalid(email, tldtsRef.current)) {
+		if (emailChanged) {
+			if (isEmailMaybeInvalid(email)) {
 				prevEmailValueRef.current = email;
 				setHasWarnedEmail(true);
 				return dispatch({
@@ -128,7 +117,7 @@ export function StepInfo({
 
 	return (
 		<ScreenTransition>
-			<View style={a.gap_md}>
+			<div style={a.gap_md}>
 				<FormError error={state.error} />
 				<HostingProvider
 					minimal
@@ -136,13 +125,13 @@ export function StepInfo({
 					onSelectServiceUrl={(v) => dispatch({ type: "setServiceUrl", value: v })}
 				/>
 				{state.isLoading || isLoadingStarterPack ? (
-					<View style={a.align_center}>
+					<div style={a.align_center}>
 						<Loader size="xl" />
-					</View>
+					</div>
 				) : state.serviceDescription ? (
 					<>
 						{state.serviceDescription.inviteCodeRequired && (
-							<View>
+							<div>
 								<TextField.LabelText>Invite code</TextField.LabelText>
 								<TextField.Root isInvalid={state.errorField === "invite-code"}>
 									<TextField.Icon icon={Ticket} />
@@ -157,13 +146,12 @@ export function StepInfo({
 										defaultValue={state.inviteCode}
 										autoCapitalize="none"
 										autoComplete="email"
-										keyboardType="email-address"
 										returnKeyType="next"
 									/>
 								</TextField.Root>
-							</View>
+							</div>
 						)}
-						<View>
+						<div>
 							<TextField.LabelText>Email</TextField.LabelText>
 							<TextField.Root isInvalid={state.errorField === "email"}>
 								<TextField.Icon icon={Envelope} />
@@ -186,12 +174,11 @@ export function StepInfo({
 									defaultValue={state.email}
 									autoCapitalize="none"
 									autoComplete="email"
-									keyboardType="email-address"
 									returnKeyType="next"
 								/>
 							</TextField.Root>
-						</View>
-						<View>
+						</div>
+						<div>
 							<TextField.LabelText>Password</TextField.LabelText>
 							<TextField.Root isInvalid={state.errorField === "password"}>
 								<TextField.Icon icon={Lock} />
@@ -205,15 +192,15 @@ export function StepInfo({
 									}}
 									label={"Choose your password"}
 									defaultValue={state.password}
-									secureTextEntry
+									type="password"
 									autoComplete="new-password"
 									autoCapitalize="none"
 									returnKeyType="next"
-									passwordRules="minlength: 8;"
+									// passwordRules="minlength: 8;"
 								/>
 							</TextField.Root>
-						</View>
-						<View>
+						</div>
+						<div>
 							<DateField.LabelText>Your birth date</DateField.LabelText>
 							<DateField.DateField
 								inputRef={birthdateInputRef}
@@ -225,10 +212,9 @@ export function StepInfo({
 									});
 								}}
 								label={"Date of birth"}
-								accessibilityHint={"Select your date of birth"}
 								maximumDate={new Date()}
 							/>
-						</View>
+						</div>
 						<Policies
 							serviceDescription={state.serviceDescription}
 							needsGuardian={!is18(state.dateOfBirth)}
@@ -236,7 +222,7 @@ export function StepInfo({
 						/>
 					</>
 				) : undefined}
-			</View>
+			</div>
 			<BackNextButtons
 				hideNext={!is13(state.dateOfBirth)}
 				showRetry={isServerError}
