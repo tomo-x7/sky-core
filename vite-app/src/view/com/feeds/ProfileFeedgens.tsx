@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, View, findNodeHandle } from "react-native";
+import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
@@ -126,7 +126,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 			}
 			if (preferences) {
 				return (
-					<View
+					<div
 						style={{
 							...a.border_t,
 							...t.atoms.border_contrast_low,
@@ -135,7 +135,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 						}}
 					>
 						<FeedCard.Default view={item} />
-					</View>
+					</div>
 				);
 			}
 			return null;
@@ -155,7 +155,7 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	}, [isFetchingNextPage]);
 
 	return (
-		<View style={style}>
+		<div style={style}>
 			<List
 				ref={scrollElRef}
 				data={items}
@@ -165,12 +165,12 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 				refreshing={isPTRing}
 				onRefresh={onRefresh}
 				headerOffset={headerOffset}
-				contentContainerStyle={isMobile && { paddingBottom: headerOffset + 100 }}
+				contentContainerStyle={isMobile ? { paddingBottom: headerOffset + 100 } : undefined}
 				removeClippedSubviews={true}
 				desktopFixedHeight
 				onEndReached={onEndReached}
 			/>
-		</View>
+		</div>
 	);
 });
 

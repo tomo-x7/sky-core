@@ -10,7 +10,6 @@ import {
 	type LayoutChangeEvent,
 	ScrollView,
 	StyleSheet,
-	View,
 } from "react-native";
 // @ts-expect-error no type definition
 import ProgressCircle from "react-native-progress/Circle";
@@ -36,6 +35,7 @@ import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
 import { Text as NewText } from "#/components/Typography";
+import { Text } from "#/components/Typography";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { EmojiArc_Stroke2_Corner0_Rounded as EmojiSmile } from "#/components/icons/Emoji";
@@ -85,7 +85,6 @@ import { VideoPreview } from "#/view/com/composer/videos/VideoPreview";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { LazyQuoteEmbed, QuoteX } from "#/view/com/util/post-embeds/QuoteEmbed";
-import { Text } from "#/view/com/util/text/Text";
 import {
 	type ComposerAction,
 	type EmbedDraft,
@@ -492,13 +491,12 @@ export const ComposePost = ({
 				reasonText={"Before creating a post, you must first verify your email."}
 			/>
 			<KeyboardAvoidingView behavior={"height"} keyboardVerticalOffset={keyboardVerticalOffset} style={a.flex_1}>
-				<View
+				<div
 					style={{
 						...a.flex_1,
 						...viewStyles,
 					}}
 					aria-modal
-					accessibilityViewIsModal
 				>
 					<ComposerTopBar
 						canPost={canPost}
@@ -548,13 +546,13 @@ export const ComposePost = ({
 									onError={setError}
 								/>
 								{isWebFooterSticky && post.id === activePost.id && (
-									<View style={styles.stickyFooterWeb}>{footer}</View>
+									<div style={styles.stickyFooterWeb}>{footer}</div>
 								)}
 							</React.Fragment>
 						))}
 					</Animated.ScrollView>
 					{!isWebFooterSticky && footer}
-				</View>
+				</div>
 
 				<Prompt.Basic
 					control={discardPromptControl}
@@ -657,13 +655,13 @@ const ComposerPost = React.memo(function ComposerPost({
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.mx_lg,
 				...(!isActive && styles.inactivePost),
 			}}
 		>
-			<View style={a.flex_row}>
+			<div style={a.flex_row}>
 				<UserAvatar
 					avatar={currentProfile?.avatar}
 					size={50}
@@ -699,7 +697,7 @@ const ComposerPost = React.memo(function ComposerPost({
 					accessibilityLabel={"Write post"}
 					accessibilityHint={`Compose posts up to ${MAX_GRAPHEME_LENGTH} characters in length`}
 				/>
-			</View>
+			</div>
 			{canRemovePost && isActive && (
 				<>
 					<Button
@@ -752,7 +750,7 @@ const ComposerPost = React.memo(function ComposerPost({
 				clearVideo={() => onClearVideo(post.id)}
 				isActivePost={isActive}
 			/>
-		</View>
+		</div>
 	);
 });
 
@@ -781,8 +779,9 @@ function ComposerTopBar({
 }) {
 	const pal = usePalette("default");
 	return (
+		// @ts-expect-error
 		<Animated.View style={topBarAnimatedStyle}>
-			<View style={styles.topbarInner}>
+			<div style={styles.topbarInner}>
 				<Button
 					label="Cancel"
 					variant="ghost"
@@ -799,13 +798,13 @@ function ComposerTopBar({
 				>
 					<ButtonText style={a.text_md}>Cancel</ButtonText>
 				</Button>
-				<View style={a.flex_1} />
+				<div style={a.flex_1} />
 				{isPublishing ? (
 					<>
 						<Text style={pal.textLight}>{publishingStage}</Text>
-						<View style={styles.postBtn}>
+						<div style={styles.postBtn}>
 							<ActivityIndicator />
-						</View>
+						</div>
 					</>
 				) : (
 					<Button
@@ -826,7 +825,7 @@ function ComposerTopBar({
 						</ButtonText>
 					</Button>
 				)}
-			</View>
+			</div>
 			{children}
 		</Animated.View>
 	);
@@ -835,16 +834,16 @@ function ComposerTopBar({
 function AltTextReminder({ error }: { error: string }) {
 	const pal = usePalette("default");
 	return (
-		<View
+		<div
 			style={{
 				...styles.reminderLine,
 				...pal.viewLight,
 			}}
 		>
-			<View style={styles.errorIcon}>
+			<div style={styles.errorIcon}>
 				{/* @ts-expect-error */}
 				<FontAwesomeIcon icon="exclamation" style={{ color: colors.red4 }} size={10} />
-			</View>
+			</div>
 			<Text
 				style={{
 					...pal.text,
@@ -853,7 +852,7 @@ function AltTextReminder({ error }: { error: string }) {
 			>
 				{error}
 			</Text>
-		</View>
+		</div>
 	);
 }
 
@@ -875,7 +874,7 @@ function ComposerEmbeds({
 		<>
 			{embed.media?.type === "images" && <Gallery images={embed.media.images} dispatch={dispatch} />}
 			{embed.media?.type === "gif" && (
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.mt_lg,
@@ -890,10 +889,10 @@ function ComposerEmbeds({
 							dispatch({ type: "embed_update_gif", alt: altText });
 						}}
 					/>
-				</View>
+				</div>
 			)}
 			{!embed.media && embed.link && (
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.mt_lg,
@@ -905,11 +904,12 @@ function ComposerEmbeds({
 						hasQuote={!!embed.quote}
 						onRemove={() => dispatch({ type: "embed_remove_link" })}
 					/>
-				</View>
+				</div>
 			)}
 			<LayoutAnimationConfig skipExiting>
 				{video && (
 					<Animated.View
+						// @ts-expect-error
 						style={{
 							...a.w_full,
 							...a.mt_lg,
@@ -952,20 +952,20 @@ function ComposerEmbeds({
 				)}
 			</LayoutAnimationConfig>
 			{embed.quote?.uri ? (
-				<View style={!video ? [a.mt_md] : []}>
-					<View
+				<div style={!video ? a.mt_md : undefined}>
+					<div
 						style={{
 							...s.mt5,
 							...s.mb2,
 							...s.mb10,
 						}}
 					>
-						<View style={{ pointerEvents: "none" }}>
+						<div style={{ pointerEvents: "none" }}>
 							<LazyQuoteEmbed uri={embed.quote.uri} />
-						</View>
+						</div>
 						{canRemoveQuote && <QuoteX onRemove={() => dispatch({ type: "embed_remove_quote" })} />}
-					</View>
-				</View>
+					</div>
+				</div>
 			) : null}
 		</>
 	);
@@ -996,6 +996,7 @@ function ComposerPills({
 
 	return (
 		<Animated.View
+			// @ts-expect-error
 			style={{
 				...a.flex_row,
 				...a.p_sm,
@@ -1089,7 +1090,7 @@ function ComposerFooter({
 	);
 
 	return (
-		<View
+		<div
 			style={{
 				...a.flex_row,
 				...a.py_xs,
@@ -1101,7 +1102,7 @@ function ComposerFooter({
 				...a.justify_between,
 			}}
 		>
-			<View
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -1141,8 +1142,8 @@ function ComposerFooter({
 						</Button>
 					</ToolbarWrapper>
 				)}
-			</View>
-			<View
+			</div>
+			<div
 				style={{
 					...a.flex_row,
 					...a.align_center,
@@ -1167,8 +1168,8 @@ function ComposerFooter({
 				)}
 				<SelectLangBtn />
 				<CharProgress count={post.shortenedGraphemeLength} style={{ width: 65 }} />
-			</View>
-		</View>
+			</div>
+		</div>
 	);
 }
 
@@ -1315,22 +1316,21 @@ function isEmptyPost(post: PostDraft) {
 	return post.richtext.text.trim().length === 0 && !post.embed.media && !post.embed.link && !post.embed.quote;
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	topbarInner: {
 		flexDirection: "row",
 		alignItems: "center",
-		paddingHorizontal: 8,
+		paddingLeft: 8,
+		paddingRight: 8,
 		height: 54,
 		gap: 4,
 	},
 	postBtn: {
 		borderRadius: 20,
-		paddingHorizontal: 20,
-		paddingVertical: 6,
+		padding: "6px 20px",
 		marginLeft: 12,
 	},
 	stickyFooterWeb: {
-		//@ts-expect-error
 		position: "sticky",
 		bottom: 0,
 	},
@@ -1339,19 +1339,19 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: colors.red1,
 		borderRadius: 6,
-		marginHorizontal: 16,
-		paddingHorizontal: 12,
-		paddingVertical: 10,
+		marginLeft: 16,
+		marginRight: 16,
 		marginBottom: 8,
+		padding: "10px 12px",
 	},
 	reminderLine: {
 		flexDirection: "row",
 		alignItems: "center",
 		borderRadius: 6,
-		marginHorizontal: 16,
-		paddingHorizontal: 8,
-		paddingVertical: 6,
+		marginLeft: 16,
+		marginRight: 16,
 		marginBottom: 8,
+		padding: "6px 8px",
 	},
 	errorIcon: {
 		borderWidth: StyleSheet.hairlineWidth,
@@ -1370,12 +1370,12 @@ const styles = StyleSheet.create({
 	addExtLinkBtn: {
 		borderWidth: 1,
 		borderRadius: 24,
-		paddingHorizontal: 16,
-		paddingVertical: 12,
-		marginHorizontal: 10,
+		padding: "12px 16px",
+		marginLeft: 10,
+		marginRight: 10,
 		marginBottom: 4,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;
 
 function ErrorBanner({
 	error: standardError,
@@ -1412,7 +1412,7 @@ function ErrorBanner({
 			entering={FadeIn}
 			exiting={FadeOut}
 		>
-			<View
+			<div
 				style={{
 					...a.px_md,
 					...a.py_sm,
@@ -1421,7 +1421,7 @@ function ErrorBanner({
 					...t.atoms.bg_contrast_25,
 				}}
 			>
-				<View
+				<div
 					style={{
 						...a.relative,
 						...a.flex_row,
@@ -1453,7 +1453,7 @@ function ErrorBanner({
 					>
 						<ButtonIcon icon={X} />
 					</Button>
-				</View>
+				</div>
 				{videoError && videoState.jobId && (
 					<NewText
 						style={{
@@ -1467,7 +1467,7 @@ function ErrorBanner({
 						<>Job ID: {videoState.jobId}</>
 					</NewText>
 				)}
-			</View>
+			</div>
 		</Animated.View>
 	);
 }

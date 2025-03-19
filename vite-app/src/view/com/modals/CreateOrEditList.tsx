@@ -1,17 +1,10 @@
 import { type AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useMemo, useState } from "react";
-import {
-	ActivityIndicator,
-	KeyboardAvoidingView,
-	ScrollView,
-	StyleSheet,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, ScrollView, TouchableOpacity } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
+import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -21,13 +14,13 @@ import { enforceLen } from "#/lib/strings/helpers";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
 import { colors, gradients, s } from "#/lib/styles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useListCreateMutation, useListMetadataMutation } from "#/state/queries/list";
 import { useAgent } from "#/state/session";
 import * as Toast from "../util/Toast";
 import { EditableUserAvatar } from "../util/UserAvatar";
 import { ErrorMessage } from "../util/error/ErrorMessage";
-import { Text } from "../util/text/Text";
 
 const MAX_NAME = 64; // todo
 const MAX_DESCRIPTION = 300; // todo
@@ -51,6 +44,7 @@ export function Component({
 	const listCreateMutation = useListCreateMutation();
 	const listMetadataMutation = useListMetadataMutation();
 	const agent = useAgent();
+	const phStyleCName = usePlaceholderStyle(colors.gray4);
 
 	const activePurpose = useMemo(() => {
 		if (list?.purpose) {
@@ -183,6 +177,7 @@ export function Component({
 	return (
 		<KeyboardAvoidingView behavior="height">
 			<ScrollView
+				// @ts-expect-error
 				style={{
 					...pal.view,
 
@@ -210,9 +205,9 @@ export function Component({
 					)}
 				</Text>
 				{error !== "" && (
-					<View style={styles.errorContainer}>
+					<div style={styles.errorContainer}>
 						<ErrorMessage message={error} />
-					</View>
+					</div>
 				)}
 				<Text
 					style={{
@@ -222,51 +217,45 @@ export function Component({
 				>
 					List Avatar
 				</Text>
-				<View
+				<div
 					style={{
 						...styles.avi,
 						...{ borderColor: pal.colors.background },
 					}}
 				>
 					<EditableUserAvatar type="list" size={80} avatar={avatar} onSelectNewAvatar={onSelectNewAvatar} />
-				</View>
-				<View style={styles.form}>
-					<View>
-						<View style={styles.labelWrapper}>
+				</div>
+				<div style={styles.form}>
+					<div>
+						<div style={styles.labelWrapper}>
 							<Text
 								style={{
 									...styles.label,
 									...pal.text,
 								}}
-								nativeID="list-name"
 							>
 								List Name
 							</Text>
-						</View>
-						<TextInput
+						</div>
+						<input
 							style={{
 								...styles.textInput,
 								...pal.border,
 								...pal.text,
 							}}
 							placeholder={isCurateList ? "e.g. Great Posters" : "e.g. Spammers"}
-							placeholderTextColor={colors.gray4}
+							className={phStyleCName}
 							value={name}
-							onChangeText={(v) => setName(enforceLen(v, MAX_NAME))}
-							accessible={true}
-							accessibilityLabel={"Name"}
-							accessibilityHint=""
-							accessibilityLabelledBy="list-name"
+							onChange={(v) => setName(enforceLen(v.target.value, MAX_NAME))}
 						/>
-					</View>
-					<View style={s.pb10}>
-						<View style={styles.labelWrapper}>
+					</div>
+					<div style={s.pb10}>
+						<div style={styles.labelWrapper}>
 							<Text
 								style={{
 									...styles.label,
 									...pal.text,
 								}}
-								nativeID="list-description"
 							>
 								Description
 							</Text>
@@ -278,8 +267,8 @@ export function Component({
 							>
 								{graphemeLength}/{MAX_DESCRIPTION}
 							</Text>
-						</View>
-						<TextInput
+						</div>
+						<textarea
 							style={{
 								...styles.textArea,
 								...pal.border,
@@ -290,19 +279,13 @@ export function Component({
 									? "e.g. The posters who never miss."
 									: "e.g. Users that repeatedly reply with ads."
 							}
-							placeholderTextColor={colors.gray4}
-							keyboardAppearance={theme.colorScheme}
-							multiline
+							className={phStyleCName}
 							value={descriptionRt.text}
-							onChangeText={onDescriptionChange}
-							accessible={true}
-							accessibilityLabel={"Description"}
-							accessibilityHint=""
-							accessibilityLabelledBy="list-description"
+							onChange={(ev) => onDescriptionChange(ev.target.value)}
 						/>
-					</View>
+					</div>
 					{isProcessing ? (
-						<View
+						<div
 							style={{
 								...styles.btn,
 								...s.mt10,
@@ -310,7 +293,7 @@ export function Component({
 							}}
 						>
 							<ActivityIndicator />
-						</View>
+						</div>
 					) : (
 						<TouchableOpacity
 							style={{
@@ -327,6 +310,7 @@ export function Component({
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
 								start={{ x: 0, y: 0 }}
 								end={{ x: 1, y: 1 }}
+								// @ts-expect-error
 								style={styles.btn}
 							>
 								<Text
@@ -348,7 +332,7 @@ export function Component({
 						accessibilityHint=""
 						onAccessibilityEscape={onPressCancel}
 					>
-						<View style={styles.btn}>
+						<div style={styles.btn}>
 							<Text
 								style={{
 									...s.black,
@@ -358,15 +342,15 @@ export function Component({
 							>
 								Cancel
 							</Text>
-						</View>
+						</div>
 					</TouchableOpacity>
-				</View>
+				</div>
 			</ScrollView>
 		</KeyboardAvoidingView>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	title: {
 		textAlign: "center",
 		fontWeight: "600",
@@ -378,31 +362,30 @@ const styles = StyleSheet.create({
 		gap: 8,
 		alignItems: "center",
 		justifyContent: "space-between",
-		paddingHorizontal: 4,
-		paddingBottom: 4,
+		padding: 4,
+		paddingTop: 0,
 		marginTop: 20,
 	},
 	label: {
 		fontWeight: "600",
 	},
-	form: {
-		paddingHorizontal: 6,
-	},
+	form: { paddingLeft: 6, paddingRight: 6 },
 	textInput: {
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 14,
-		paddingVertical: 10,
+		padding: "10px 14px",
 		fontSize: 16,
 	},
 	textArea: {
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 12,
+		paddingLeft: 12,
+		paddingRight: 12,
 		paddingTop: 10,
 		fontSize: 16,
 		height: 100,
-		textAlignVertical: "top",
+		// TODO
+		// textAlignVertical: "top",
 	},
 	btn: {
 		flexDirection: "row",
@@ -421,4 +404,4 @@ const styles = StyleSheet.create({
 		marginTop: 4,
 	},
 	errorContainer: { marginTop: 20 },
-});
+} satisfies Record<string, React.CSSProperties>;

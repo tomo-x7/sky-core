@@ -167,7 +167,7 @@ export function MessageInputEmbed({
 						author={post.author}
 						moderation={moderation}
 						timestamp={post.indexedAt}
-						postHref={itemHref} 
+						postHref={itemHref}
 						style={a.flex_0}
 					/>
 					<ContentHider modui={moderation.ui("contentView")}>

@@ -101,7 +101,7 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 							style={styles.item}
 							hoverStyle={t.atoms.bg_contrast_25}
 							onPress={() => onPressItem(i)}
-							accessibilityRole="tab"
+							// accessibilityRole="tab"
 						>
 							<div style={styles.itemInner}>
 								<Text

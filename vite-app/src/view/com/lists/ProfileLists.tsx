@@ -1,7 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
+import { type ListRenderItemInfo, findNodeHandle } from "react-native";
 import { atoms as a, useTheme } from "#/alf";
+import ActivityIndicator from "#/components/ActivityIndicator";
 import * as ListCard from "#/components/ListCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
@@ -122,7 +124,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 				return <FeedLoadingPlaceholder />;
 			}
 			return (
-				<View
+				<div
 					style={{
 						...a.border_t,
 						...t.atoms.border_contrast_low,
@@ -131,7 +133,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 					}}
 				>
 					<ListCard.Default view={item} />
-				</View>
+				</div>
 			);
 		},
 		[error, refetch, onPressRetryLoadMore, t.atoms.border_contrast_low],
@@ -159,7 +161,7 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 				refreshing={isPTRing}
 				onRefresh={onRefresh}
 				headerOffset={headerOffset}
-				contentContainerStyle={isMobile && { paddingBottom: headerOffset + 100 }}
+				contentContainerStyle={isMobile ? { paddingBottom: headerOffset + 100 } : undefined}
 				removeClippedSubviews={true}
 				desktopFixedHeight
 				onEndReached={onEndReached}
@@ -168,6 +170,6 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 	);
 });
 
-const styles = StyleSheet.create({
+const styles = {
 	footer: { paddingTop: 20 },
-});
+} satisfies Record<string, React.CSSProperties>;

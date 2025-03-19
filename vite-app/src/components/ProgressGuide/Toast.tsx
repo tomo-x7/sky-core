@@ -114,7 +114,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 			isOpen && (
 				<Portal>
 					<Animated.View
-					// @ts-expect-error
+						// @ts-expect-error
 						style={{
 							...containerStyle,
 							...animatedStyle,

@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useState } from "react";
-import { ActivityIndicator, KeyboardAvoidingView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 import Animated from "react-native-reanimated";
 
@@ -111,29 +111,29 @@ export function Component({
 				>
 					Edit my profile
 				</Text>
-				<View style={styles.photos}>
+				<div style={styles.photos}>
 					<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
-					<View
+					<div
 						style={{
 							...styles.avi,
 							...{ borderColor: pal.colors.background },
 						}}
 					>
 						<EditableUserAvatar size={80} avatar={userAvatar} onSelectNewAvatar={onSelectNewAvatar} />
-					</View>
-				</View>
+					</div>
+				</div>
 				{updateMutation.isError && (
-					<View style={styles.errorContainer}>
+					<div style={styles.errorContainer}>
 						<ErrorMessage message={cleanError(updateMutation.error)} />
-					</View>
+					</div>
 				)}
 				{imageError !== "" && (
-					<View style={styles.errorContainer}>
+					<div style={styles.errorContainer}>
 						<ErrorMessage message={imageError} />
-					</View>
+					</div>
 				)}
-				<View style={styles.form}>
-					<View>
+				<div style={styles.form}>
+					<div>
 						<Text
 							style={{
 								...styles.label,
@@ -154,8 +154,8 @@ export function Component({
 							value={displayName}
 							onChange={(v) => setDisplayName(enforceLen(v.target.value, MAX_DISPLAY_NAME))}
 						/>
-					</View>
-					<View style={s.pb10}>
+					</div>
+					<div style={s.pb10}>
 						<Text
 							style={{
 								...styles.label,
@@ -175,9 +175,9 @@ export function Component({
 							value={description}
 							onChange={(v) => setDescription(enforceLen(v.target.value, MAX_DESCRIPTION))}
 						/>
-					</View>
+					</div>
 					{updateMutation.isPending ? (
-						<View
+						<div
 							style={{
 								...styles.btn,
 								...s.mt10,
@@ -185,7 +185,7 @@ export function Component({
 							}}
 						>
 							<ActivityIndicator />
-						</View>
+						</div>
 					) : (
 						<TouchableOpacity
 							style={s.mt10}
@@ -198,6 +198,7 @@ export function Component({
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
 								start={{ x: 0, y: 0 }}
 								end={{ x: 1, y: 1 }}
+								// @ts-expect-error
 								style={styles.btn}
 							>
 								<Text
@@ -221,7 +222,7 @@ export function Component({
 							accessibilityHint=""
 							onAccessibilityEscape={onPressCancel}
 						>
-							<View style={styles.btn}>
+							<div style={styles.btn}>
 								<Text
 									style={{
 										...s.black,
@@ -231,16 +232,16 @@ export function Component({
 								>
 									Cancel
 								</Text>
-							</View>
+							</div>
 						</AnimatedTouchableOpacity>
 					)}
-				</View>
+				</div>
 			</div>
 		</KeyboardAvoidingView>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	title: {
 		textAlign: "center",
 		fontWeight: "600",
@@ -249,28 +250,31 @@ const styles = StyleSheet.create({
 	},
 	label: {
 		fontWeight: "600",
-		paddingHorizontal: 4,
+		paddingLeft: 4,
+		paddingRight: 4,
 		paddingBottom: 4,
 		marginTop: 20,
 	},
 	form: {
-		paddingHorizontal: 14,
+		paddingLeft: 14,
+		paddingRight: 14,
 	},
 	textInput: {
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 14,
-		paddingVertical: 10,
+		padding: "10px 14px",
 		fontSize: 16,
 	},
 	textArea: {
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 12,
+		paddingLeft: 12,
+		paddingRight: 12,
 		paddingTop: 10,
 		fontSize: 16,
 		height: 120,
-		textAlignVertical: "top",
+		// TODO
+		// textAlignVertical: "top",
 	},
 	btn: {
 		flexDirection: "row",
@@ -292,7 +296,8 @@ const styles = StyleSheet.create({
 	},
 	photos: {
 		marginBottom: 36,
-		marginHorizontal: -14,
+		marginLeft: -14,
+		marginRight: -14,
 	},
 	errorContainer: { marginTop: 20 },
-});
+} satisfies Record<string, React.CSSProperties>;

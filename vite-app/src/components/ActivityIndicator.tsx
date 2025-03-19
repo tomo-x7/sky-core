@@ -1,8 +1,13 @@
-const ActivityIndicator = ({ size = 24, color = "#000" }: { size?: number; color?: string }) => {
+const ActivityIndicator = ({
+	size = 24,
+	color = "#000",
+	style,
+}: { size?: number; color?: string; style?: React.CSSProperties }) => {
 	return (
 		<>
 			<div
 				style={{
+					...style,
 					width: size,
 					height: size,
 					borderRadius: "50%",

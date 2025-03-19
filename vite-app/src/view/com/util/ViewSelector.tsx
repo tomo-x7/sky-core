@@ -6,15 +6,15 @@ import {
 	RefreshControl,
 	ScrollView,
 	StyleSheet,
-	View,
 } from "react-native";
 
+import { flatten } from "#/alf";
+import { Text } from "#/components/Typography";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { clamp } from "#/lib/numbers";
 import { colors, s } from "#/lib/styles";
 import { FlatList_INTERNAL } from "./Views";
-import { Text } from "./text/Text";
 
 const HEADER_ITEM = { _reactKey: "__header__" };
 const SELECTOR_ITEM = { _reactKey: "__selector__" };
@@ -87,7 +87,7 @@ export const ViewSelector = React.forwardRef<
 				if (renderHeader) {
 					return renderHeader();
 				}
-				return <View />;
+				return <div />;
 			} else if (item === SELECTOR_ITEM) {
 				return <Selector items={sections} selectedIndex={selectedIndex} onSelect={onPressSelection} />;
 			} else {
@@ -136,14 +136,14 @@ export function Selector({
 	};
 
 	return (
-		<View
+		<div
 			style={{
 				width: "100%",
 				backgroundColor: pal.colors.background,
 			}}
 		>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-				<View
+				<div
 					style={{
 						...pal.view,
 						...styles.outer,
@@ -160,7 +160,7 @@ export function Selector({
 								// TODO: Modify the component API such that lint fails
 								// at the invocation site as well
 							>
-								<View
+								<div
 									style={{
 										...styles.item,
 										...(selected && styles.itemSelected),
@@ -168,19 +168,19 @@ export function Selector({
 									}}
 								>
 									<Text
-										style={
-											selected ? [styles.labelSelected, pal.text] : [styles.label, pal.textLight]
-										}
+										style={flatten(
+											selected ? [styles.labelSelected, pal.text] : [styles.label, pal.textLight],
+										)}
 									>
 										{item}
 									</Text>
-								</View>
+								</div>
 							</Pressable>
 						);
 					})}
-				</View>
+				</div>
 			</ScrollView>
-		</View>
+		</div>
 	);
 }
 

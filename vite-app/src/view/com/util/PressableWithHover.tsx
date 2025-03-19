@@ -1,28 +1,53 @@
 import { type PropsWithChildren, forwardRef } from "react";
-import { Pressable, type PressableProps } from "react-native";
-import type { View } from "react-native";
 
+import type React from "react";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
-import { addStyle } from "#/lib/styles";
 
-interface PressableWithHover extends PressableProps {
-	hoverStyle: React.CSSProperties;
+interface PressableWithHover {
+	hoverStyle?: React.CSSProperties;
+	style?: React.CSSProperties;
+	onPress?: React.MouseEventHandler<HTMLAnchorElement>;
+	href?: string;
+	noUnderline?: boolean;
 }
+type props = PropsWithChildren<PressableWithHover> &
+	Omit<JSX.IntrinsicElements["a"], "onClick" | "onMouseEnter" | "onMouseLeave" | "ref">;
 
-export const PressableWithHover = forwardRef<View, PropsWithChildren<PressableWithHover>>(
-	function PressableWithHoverImpl({ children, style, hoverStyle, ...props }, ref) {
-		const { state: hovered, onIn: onHoverIn, onOut: onHoverOut } = useInteractionState();
+export const PressableWithHover = forwardRef<HTMLAnchorElement, props>(function PressableWithHoverImpl(
+	{ children, style, hoverStyle, href, onPress, noUnderline },
+	ref,
+) {
+	const { state: hovered, onIn: onHoverIn, onOut: onHoverOut } = useInteractionState();
 
-		return (
-			<Pressable
-				{...props}
-				style={typeof style !== "function" && hovered ? addStyle(style, hoverStyle) : style}
-				onHoverIn={onHoverIn}
-				onHoverOut={onHoverOut}
-				ref={ref}
-			>
-				{children}
-			</Pressable>
-		);
-	},
-);
+	return (
+		<a
+			style={hovered ? { ...style, ...hoverStyle } : style}
+			onMouseEnter={onHoverIn}
+			onMouseLeave={onHoverOut}
+			ref={ref}
+			{...(noUnderline ? { "data-noUnderline": 1 } : {})}
+			href={href}
+			onClick={onPress}
+		>
+			{children}
+		</a>
+	);
+});
+
+export const PressableWithoutHover = forwardRef<HTMLAnchorElement, props>(function PressableWithoutHoverImpl(
+	{ children, style, hoverStyle, href, onPress, noUnderline, ...rest },
+	ref,
+) {
+	return (
+		<a
+			style={style}
+			ref={ref}
+			{...(noUnderline ? { "data-noUnderline": 1 } : {})}
+			href={href}
+			onClick={onPress}
+			{...rest}
+		>
+			{children}
+		</a>
+	);
+});

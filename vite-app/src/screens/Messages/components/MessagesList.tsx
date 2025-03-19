@@ -244,14 +244,14 @@ export function MessagesList({
 				} else {
 					keyboardIsOpening.set(true);
 				}
-			}, 
+			},
 			onMove: (e) => {
 				"worklet";
 				keyboardHeight.set(e.height);
 				if (e.height > footerHeight.get()) {
 					scrollTo(flatListRef, 0, 1e7, false);
 				}
-			}, 
+			},
 			onEnd: (e) => {
 				"worklet";
 				keyboardHeight.set(e.height);

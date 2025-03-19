@@ -22,9 +22,7 @@ export function ControlButton({
 	const t = useTheme();
 	return (
 		<PressableWithHover
-			accessibilityRole="button"
-			accessibilityLabel={active ? activeLabel : inactiveLabel}
-			accessibilityHint=""
+			// accessibilityRole="button"
 			onPress={onPress}
 			style={{
 				...a.p_xs,

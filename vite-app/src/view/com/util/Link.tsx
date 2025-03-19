@@ -1,7 +1,7 @@
 import { sanitizeUrl } from "@braintree/sanitize-url";
-import { StackActions, useLinkProps } from "@react-navigation/native";
+import { StackActions } from "@react-navigation/native";
 import React, { type JSX, memo, useMemo } from "react";
-import { Platform, Pressable } from "react-native";
+import { Platform } from "react-native";
 import { Text } from "#/components/Typography";
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { type DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
@@ -12,7 +12,7 @@ import { emitSoftReset } from "#/state/events";
 import { useModalControls } from "#/state/modals";
 import { WebAuxClickWrapper } from "#/view/com/util/WebAuxClickWrapper";
 import { router } from "../../../routes";
-import { PressableWithHover } from "./PressableWithHover";
+import { PressableWithHover, PressableWithoutHover } from "./PressableWithHover";
 
 type Event = React.MouseEvent<HTMLAnchorElement, MouseEvent>;
 
@@ -24,7 +24,7 @@ interface Props {
 	hoverStyle?: React.CSSProperties;
 	noFeedback?: boolean;
 	asAnchor?: boolean;
-	dataSet?: Object | undefined;
+	dataSet?: object | undefined;
 	anchorNoUnderline?: boolean;
 	navigationAction?: "push" | "replace" | "navigate";
 	onPointerEnter?: () => void;
@@ -76,27 +76,25 @@ export const Link = memo(function Link({
 	}
 
 	if (anchorNoUnderline) {
-		// @ts-expect-error web only -prf
-		props.dataSet = props.dataSet || {};
-		// @ts-expect-error web only -prf
-		props.dataSet.noUnderline = 1;
+		props.dataSet = { ...props.dataSet, noUnderline: 1 };
 	}
 
-	const Com = props.hoverStyle ? PressableWithHover : Pressable;
+	const Com = props.hoverStyle ? PressableWithHover : PressableWithoutHover;
 	return (
-		<Com
-			style={style}
-			onPress={onPress}
-			accessible={accessible}
-			accessibilityRole="link"
-			// @ts-expect-error web only -prf
-			href={anchorHref}
-			{...props}
-		>
+		<Com style={style} onPress={onPress} href={anchorHref} {...props} {...parseDataset(props.dataSet)}>
 			{children ? children : <Text>{title || "link"}</Text>}
 		</Com>
 	);
 });
+
+function parseDataset(dataset: object | undefined) {
+	if (dataset == null) return {};
+	const result: Record<string, unknown> = {};
+	for (const [k, v] of Object.entries(dataset)) {
+		result[`data-${k}`] = v;
+	}
+	return result;
+}
 
 export const TextLink = memo(function TextLink({
 	type = "md",
@@ -107,7 +105,7 @@ export const TextLink = memo(function TextLink({
 	lineHeight,
 	dataSet,
 	title,
-	onPress,
+	onPress: onPressOuter,
 	onBeforePress,
 	disableMismatchWarning,
 	navigationAction,
@@ -126,9 +124,9 @@ export const TextLink = memo(function TextLink({
 	navigationAction?: "push" | "replace" | "navigate";
 	anchorNoUnderline?: boolean;
 	onBeforePress?: () => void;
-	onPress?: (event: React.MouseEvent) => void;
+	onPress?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
-	const { ...props } = useLinkProps({ to: sanitizeUrl(href) });
+	// const { ...props } = useLinkProps({ to: sanitizeUrl(href) });
 	const navigation = useNavigationDeduped();
 	const { openModal, closeModal } = useModalControls();
 	const openLink = useOpenLink();
@@ -142,8 +140,8 @@ export const TextLink = memo(function TextLink({
 		dataSet.noUnderline = 1;
 	}
 
-	props.onPress = React.useCallback(
-		(e?: Event) => {
+	const onPress = React.useCallback(
+		(e?: React.MouseEvent<HTMLAnchorElement>) => {
 			const requiresWarning =
 				!disableMismatchWarning && linkRequiresWarning(href, typeof text === "string" ? text : "");
 			if (requiresWarning) {
@@ -154,21 +152,21 @@ export const TextLink = memo(function TextLink({
 					href,
 				});
 			}
-			if (href !== "#" && e != null && isModifiedEvent(e as React.MouseEvent)) {
+			if (href !== "#" && e != null && isModifiedEvent(e)) {
 				// Let the browser handle opening in new tab etc.
 				return;
 			}
 			onBeforePress?.();
-			if (onPress) {
+			if (onPressOuter) {
 				e?.preventDefault?.();
 				// @ts-expect-error function signature differs by platform -prf
-				return onPress();
+				return onPressOuter();
 			}
 			return onPressInner(closeModal, navigation, sanitizeUrl(href), navigationAction, openLink, e);
 		},
 		[
 			onBeforePress,
-			onPress,
+			onPressOuter,
 			closeModal,
 			openModal,
 			navigation,
@@ -184,7 +182,7 @@ export const TextLink = memo(function TextLink({
 		if (isExternal) {
 			return {
 				target: "_blank",
-				// rel: 'noopener noreferrer',
+				rel: "noopener noreferrer",
 			};
 		}
 		return {};
@@ -198,12 +196,11 @@ export const TextLink = memo(function TextLink({
 			lineHeight={lineHeight}
 			dataSet={dataSet}
 			title={title}
-			// @ts-expect-error web only -prf
-			hrefAttrs={hrefAttrs} // hack to get open in new tab to work on safari. without this, safari will open in a new window
-			{...props}
 			{...orgProps}
 		>
-			{text}
+			<a href={href} onClick={onPress} {...hrefAttrs}>
+				{text}
+			</a>
 		</Text>
 	);
 });
@@ -296,7 +293,6 @@ function onPressInner(
 	} else if (
 		!e.defaultPrevented && // onPress prevented default
 		(isLeftClick || isMiddleClick) && // ignore everything but left and middle clicks
-		// @ts-expect-error Web only -prf
 		[undefined, null, "", "self"].includes(e.currentTarget?.target) // let browser handle "target=_blank" etc.
 	) {
 		e.preventDefault();
@@ -317,10 +313,8 @@ function onPressInner(
 
 			const [routeName, params] = router.matchPath(href);
 			if (navigationAction === "push") {
-				// @ts-expect-error we're not able to type check on this one -prf
 				navigation.dispatch(StackActions.push(routeName, params));
 			} else if (navigationAction === "replace") {
-				// @ts-expect-error we're not able to type check on this one -prf
 				navigation.dispatch(StackActions.replace(routeName, params));
 			} else if (navigationAction === "navigate") {
 				const state = navigation.getState();

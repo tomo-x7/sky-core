@@ -7,7 +7,6 @@ import {
 	type GestureResponderEvent,
 	Pressable,
 	StyleSheet,
-	View,
 	useWindowDimensions,
 } from "react-native";
 import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
@@ -41,7 +40,7 @@ function PlaceholderOverlay({
 	if (isPlayerActive && !isLoading) return null;
 
 	return (
-		<View
+		<div
 			style={{
 				...a.absolute,
 				...a.inset_0,
@@ -57,7 +56,7 @@ function PlaceholderOverlay({
 			>
 				{!isPlayerActive ? <PlayButtonIcon /> : <ActivityIndicator size="large" color="white" />}
 			</Pressable>
-		</View>
+		</div>
 	);
 }
 

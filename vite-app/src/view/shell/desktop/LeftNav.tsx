@@ -324,7 +324,6 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 
 	return (
 		<PressableWithHover
-			//@ts-expect-error
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -335,14 +334,9 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 				...a.transition_color,
 			}}
 			hoverStyle={t.atoms.bg_contrast_25}
-			// @ts-expect-error the function signature differs on web -prf
 			onPress={onPressWrapped}
 			href={href}
-			dataSet={{ noUnderline: 1 }}
-			// biome-ignore lint/a11y/useSemanticElements: <explanation>
-			role="link"
-			accessibilityLabel={label}
-			accessibilityHint=""
+			noUnderline
 		>
 			<div
 				style={{

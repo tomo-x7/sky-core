@@ -28,7 +28,7 @@ export function HomeHeaderLayoutMobile({
 
 	return (
 		<Animated.View
-		// @ts-expect-error
+			// @ts-expect-error
 			style={{
 				...a.fixed,
 				...a.z_10,
