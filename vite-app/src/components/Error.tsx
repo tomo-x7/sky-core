@@ -27,14 +27,14 @@ export function Error({
 	return (
 		<CenteredView
 			style={{
-				...//@ts-expect-error
-				a.h_full_vh,
+				...a.h_full_vh,
 
 				...a.align_center,
 				...a.gap_5xl,
 				...(!gtMobile && a.justify_between),
 				...t.atoms.border_contrast_low,
-				...{ paddingTop: 175, paddingBottom: 110 },
+				paddingTop: 175,
+				paddingBottom: 110,
 			}}
 			sideBorders={sideBorders}
 		>
@@ -52,8 +52,8 @@ export function Error({
 						...a.text_md,
 						...a.text_center,
 						...t.atoms.text_contrast_high,
-						...{ lineHeight: 1.4 },
-						...(gtMobile ? { width: 450 } : [a.w_full, a.px_lg]),
+						lineHeight: 1.4,
+						...(gtMobile ? { width: 450 } : { ...a.w_full, ...a.px_lg }),
 					}}
 				>
 					{message}
@@ -70,7 +70,8 @@ export function Error({
 						style={{
 							...a.rounded_sm,
 							...a.overflow_hidden,
-							...{ paddingVertical: 10 },
+							paddingTop: 10,
+							paddingBottom: 10,
 						}}
 					>
 						<ButtonText>Retry</ButtonText>
@@ -86,7 +87,8 @@ export function Error({
 						style={{
 							...a.rounded_sm,
 							...a.overflow_hidden,
-							...{ paddingVertical: 10 },
+							paddingTop: 10,
+							paddingBottom: 10,
 						}}
 					>
 						<ButtonText>Go Back</ButtonText>

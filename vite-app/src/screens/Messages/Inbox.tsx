@@ -278,15 +278,7 @@ function MarkAllReadFAB() {
 		},
 	});
 
-	return (
-		<FAB
-			onPress={() => markAllRead()}
-			icon={<CheckIcon size="lg" fill={t.palette.white} />}
-			accessibilityRole="button"
-			accessibilityLabel={"Mark all as read"}
-			accessibilityHint=""
-		/>
-	);
+	return <FAB onPress={() => markAllRead()} icon={<CheckIcon size="lg" fill={t.palette.white} />} />;
 }
 
 function MarkAsReadHeaderButton() {

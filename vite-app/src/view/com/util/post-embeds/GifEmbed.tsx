@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Fill } from "#/components/Fill";
@@ -186,12 +185,14 @@ function AltText({ text }: { text: string }) {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	altContainer: {
 		backgroundColor: "rgba(0, 0, 0, 0.75)",
 		borderRadius: 6,
-		paddingHorizontal: 8,
-		paddingVertical: 6,
+		paddingLeft: 8,
+		paddingRight: 8,
+		paddingTop: 6,
+		paddingBottom: 6,
 		position: "absolute",
 		// Related to margin/gap hack. This keeps the alt label in the same position
 		// on all platforms
@@ -204,4 +205,4 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		fontWeight: "600",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { StyleSheet } from "react-native";
 
 import { Text } from "#/components/Typography";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
@@ -50,7 +49,7 @@ export function Component({
 			<ScrollView
 				style={{
 					...s.flex1,
-					...(isMobile && { paddingHorizontal: 18 }),
+					...(isMobile && { paddingLeft: 18, paddingRight: 18 }),
 				}}
 			>
 				<div style={styles.titleSection}>
@@ -157,7 +156,7 @@ function LinkBox({ href }: { href: string }) {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		flex: 1,
 		paddingBottom: 0,
@@ -175,8 +174,7 @@ const styles = StyleSheet.create({
 		fontWeight: "600",
 	},
 	linkBox: {
-		paddingHorizontal: 12,
-		paddingVertical: 10,
+		padding: "10px 12px",
 		borderRadius: 6,
 		borderWidth: 1,
 	},
@@ -192,4 +190,4 @@ const styles = StyleSheet.create({
 		paddingTop: 20,
 		gap: 6,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

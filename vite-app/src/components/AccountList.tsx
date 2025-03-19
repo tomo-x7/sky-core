@@ -38,7 +38,7 @@ export function AccountList({
 			style={{
 				...a.rounded_md,
 				...a.overflow_hidden,
-				...{ borderWidth: 1 },
+				borderWidth: 1,
 				...t.atoms.border_contrast_low,
 				pointerEvents: pendingDid ? "none" : "auto",
 			}}
@@ -66,7 +66,7 @@ export function AccountList({
 							...a.flex_1,
 							...a.flex_row,
 							...a.align_center,
-							...{ height: 48 },
+							height: 48,
 							...((hovered || pressed) && t.atoms.bg_contrast_25),
 						}}
 					>
@@ -76,7 +76,7 @@ export function AccountList({
 								...a.flex_1,
 								...a.flex_row,
 								...a.py_sm,
-								...{ paddingLeft: 48 },
+								paddingLeft: 48,
 							}}
 						>
 							{otherLabel ?? "Other account"}
@@ -131,7 +131,7 @@ function AccountItem({
 						...a.flex_1,
 						...a.flex_row,
 						...a.align_center,
-						...{ height: 48 },
+						height: 48,
 						...((hovered || pressed || isPendingAccount) && t.atoms.bg_contrast_25),
 					}}
 				>
@@ -161,7 +161,7 @@ function AccountItem({
 						<Check
 							size="sm"
 							style={{
-								...{ color: t.palette.positive_600 },
+								color: t.palette.positive_600,
 								...a.mr_md,
 							}}
 						/>

@@ -3,10 +3,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Image, type ImageStyle, Pressable, TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
+import { Text } from "#/components/Typography";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { colors, s } from "#/lib/styles";
 import { useLightbox, useLightboxControls } from "#/state/lightbox";
-import { Text } from "../util/text/Text";
 import type { ImageSource } from "./ImageViewing/@types";
 import ImageDefaultHeader from "./ImageViewing/components/ImageDefaultHeader";
 

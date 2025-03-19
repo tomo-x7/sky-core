@@ -22,7 +22,7 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 				...a.flex_row,
 				...a.align_center,
 				...a.py_md,
-				...{ paddingHorizontal: 14 },
+				...{ paddingLeft: 14, paddingRight: 14 },
 			}}
 			hoverStyle={t.atoms.bg_contrast_25}
 		>

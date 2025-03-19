@@ -175,7 +175,8 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 								...a.justify_start,
 
 								...{
-									paddingVertical: 2,
+									paddingTop: 2,
+									paddingBottom: 2,
 									paddingRight: 8,
 								},
 							}}

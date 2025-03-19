@@ -1,7 +1,6 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
 import type React from "react";
 import { Image } from "react-native";
-import { StyleSheet } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
@@ -168,12 +167,11 @@ export function VideoItem({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	altContainer: {
 		backgroundColor: "rgba(0, 0, 0, 0.75)",
 		borderRadius: 6,
-		paddingHorizontal: 6,
-		paddingVertical: 3,
+		padding: "3px 6px",
 		position: "absolute",
 		right: 5,
 		bottom: 5,
@@ -184,4 +182,4 @@ const styles = StyleSheet.create({
 		fontSize: 7,
 		fontWeight: "600",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -64,12 +64,14 @@ export function ErrorMessage({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	outer: {
 		flexDirection: "row",
 		alignItems: "center",
-		paddingVertical: 8,
-		paddingHorizontal: 8,
+		paddingTop: 8,
+		paddingBottom: 8,
+		paddingLeft: 8,
+		paddingRight: 8,
 	},
 	errorIcon: {
 		borderRadius: 12,
@@ -84,7 +86,6 @@ const styles = StyleSheet.create({
 		paddingRight: 10,
 	},
 	btn: {
-		paddingHorizontal: 4,
-		paddingVertical: 4,
+		padding: 4,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

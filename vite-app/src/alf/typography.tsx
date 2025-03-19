@@ -62,6 +62,7 @@ export type TextProps = {
 	numberOfLines?: number;
 	onLayout?: (rect: DOMRect) => void;
 	lineHeight?: number;
+	ellipsizeMode?: "tail" | string;
 } & {
 	/**
 	 * Lets the user select text, to use the native copy and paste functionality.

@@ -1,12 +1,11 @@
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyleSheet } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { UserGroupIcon } from "#/lib/icons";
-import { Text } from "./text/Text";
 
 export function EmptyState({
 	icon,
@@ -51,7 +50,7 @@ export function EmptyState({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	iconContainer: {
 		flexDirection: "row",
 		alignItems: "center",
@@ -72,4 +71,4 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		paddingTop: 20,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -514,13 +514,7 @@ export function FeedsScreen(_props: Props) {
 				/>
 			</Layout.Center>
 			{hasSession && (
-				<FAB
-					onPress={onPressCompose}
-					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
-					accessibilityRole="button"
-					accessibilityLabel={"New post"}
-					accessibilityHint=""
-				/>
+				<FAB onPress={onPressCompose} icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />} />
 			)}
 		</Layout.Screen>
 	);

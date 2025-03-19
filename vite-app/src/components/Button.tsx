@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { type AccessibilityProps, Pressable, type PressableProps, StyleSheet } from "react-native";
+import { type AccessibilityProps, Pressable, type PressableProps } from "react-native";
 
 import { atoms as a, flatten, select, tokens, useTheme } from "#/alf";
 import type { Props as SVGIconProps } from "#/components/icons/common";
@@ -473,7 +473,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 							...a.absolute,
 							...a.inset_0,
 							...a.overflow_hidden,
-							...{ borderRadius: flattenedBaseStyles?.borderRadius },
+							borderRadius: flattenedBaseStyles?.borderRadius,
 						}}
 					>
 						<LinearGradient
@@ -625,7 +625,7 @@ export function useSharedButtonTextStyles() {
 			baseStyles.push(a.text_xs, a.leading_tight);
 		}
 
-		return StyleSheet.flatten(baseStyles);
+		return flatten(baseStyles);
 	}, [t, variant, color, size, disabled]);
 }
 
@@ -704,13 +704,11 @@ export function ButtonIcon({
 			style={{
 				...a.z_20,
 
-				...{
-					width: iconContainerSize,
-					height: iconContainerSize,
-					opacity: disabled ? 0.7 : 1,
-					marginLeft: position === "left" ? -2 : 0,
-					marginRight: position === "right" ? -2 : 0,
-				},
+				width: iconContainerSize,
+				height: iconContainerSize,
+				opacity: disabled ? 0.7 : 1,
+				marginLeft: position === "left" ? -2 : 0,
+				marginRight: position === "right" ? -2 : 0,
 			}}
 		>
 			<div

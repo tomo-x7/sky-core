@@ -11,8 +11,10 @@ export function DiscoverFallbackHeader() {
 				...{
 					flexDirection: "row",
 					alignItems: "center",
-					paddingVertical: 12,
-					paddingHorizontal: 12,
+					paddingTop: 12,
+					paddingBottom: 12,
+					paddingLeft: 12,
+					paddingRight: 12,
 					borderTopWidth: 1,
 				},
 

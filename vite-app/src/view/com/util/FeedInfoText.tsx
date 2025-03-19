@@ -1,5 +1,3 @@
-import { StyleSheet } from "react-native";
-
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { useFeedSourceInfoQuery } from "#/state/queries/feed";
@@ -43,6 +41,6 @@ export function FeedNameText({
 	return inner;
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	loadingPlaceholder: { position: "relative", top: 1, left: 2 },
-});
+} satisfies Record<string, React.CSSProperties>;

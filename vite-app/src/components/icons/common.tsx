@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid/non-secure";
-import { StyleSheet } from "react-native";
 import { Defs, LinearGradient, Stop } from "react-native-svg";
 
 import { tokens, useTheme } from "#/alf";
@@ -22,8 +21,7 @@ export const sizes = {
 
 export function useCommonSVGProps(props: Props) {
 	const t = useTheme();
-	const { fill, size, gradient, ...rest } = props;
-	const style = StyleSheet.flatten(rest.style);
+	const { fill, size, gradient, style, ...rest } = props;
 	const _size = Number(size ? sizes[size] : rest.width || sizes.md);
 	let _fill = fill || style?.color || t.palette.primary_500;
 	let gradientDef = null;

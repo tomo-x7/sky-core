@@ -57,7 +57,7 @@ export function HostingProvider({
 							size="tiny"
 							style={{
 								...a.px_xs,
-								...{ marginHorizontal: tokens.space.xs * -1 },
+								...{ marginRight: tokens.space.xs * -1, marginLeft: tokens.space.xs * -1 },
 							}}
 						>
 							<ButtonText style={a.text_sm}>{toNiceDomain(serviceUrl)}</ButtonText>
@@ -79,7 +79,7 @@ export function HostingProvider({
 						...a.pl_md,
 						...a.pr_sm,
 						...a.gap_xs,
-						...{ paddingVertical: 8 },
+						...{ paddingTop: 8, paddingBottom: 8 },
 					}}
 					onPress={onPressSelectService}
 				>

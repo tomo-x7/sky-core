@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from 
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -59,7 +59,7 @@ let SearchLinkCard = ({
 			<div
 				style={{
 					...pal.border,
-					...{ paddingVertical: 16, paddingHorizontal: 12 },
+					...{ paddingTop: 16, paddingBottom: 16, paddingLeft: 12, paddingRight: 12 },
 					...style,
 				}}
 			>
@@ -100,8 +100,10 @@ let SearchProfileCard = ({
 						flexDirection: "row",
 						alignItems: "center",
 						gap: 12,
-						paddingVertical: 8,
-						paddingHorizontal: 12,
+						paddingTop: 8,
+						paddingBottom: 8,
+						paddingLeft: 12,
+						paddingRight: 12,
 					},
 				}}
 			>
@@ -217,7 +219,7 @@ export function DesktopSearch() {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		position: "relative",
 		width: "100%",
@@ -229,4 +231,4 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 6,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

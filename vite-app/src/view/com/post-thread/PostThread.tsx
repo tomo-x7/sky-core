@@ -1,6 +1,6 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
 import React, { memo, useRef, useState } from "react";
-import { StyleSheet, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -644,6 +644,7 @@ function MobileComposePrompt({ onPressReply }: { onPressReply: () => unknown }) 
 	const fabMinimalShellTransform = useMinimalShellFabTransform();
 	return (
 		<Animated.View
+			// @ts-expect-error
 			style={{
 				...styles.prompt,
 				...fabMinimalShellTransform,
@@ -813,11 +814,10 @@ function hasBranchingReplies(node?: ThreadNode) {
 	return true;
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	prompt: {
-		// @ts-expect-error web-only
 		position: "fixed",
 		left: 0,
 		right: 0,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

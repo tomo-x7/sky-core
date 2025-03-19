@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@a
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
-import { ActivityIndicator, Pressable, StyleSheet } from "react-native";
+import { ActivityIndicator, Pressable } from "react-native";
 import { ScrollView as RNGHScrollView } from "react-native-gesture-handler";
 
 import { atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
@@ -947,7 +947,7 @@ function SearchHistory({
 							style={{
 								...a.flex_row,
 								...a.flex_nowrap,
-								...{ marginHorizontal: tokens.space._2xl * -1 },
+								...{ marginLeft: tokens.space._2xl * -1, marginRight: tokens.space._2xl * -1 },
 							}}
 							contentContainerStyle={[a.px_2xl, a.border_0]}
 						>
@@ -1053,10 +1053,11 @@ function scrollToTopWeb() {
 	window.scrollTo(0, 0);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	selectedProfilesContainer: {
 		marginTop: 10,
-		paddingHorizontal: 12,
+		paddingLeft: 12,
+		paddingRight: 12,
 		height: 80,
 	},
 	selectedProfilesContainerMobile: {
@@ -1085,4 +1086,4 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

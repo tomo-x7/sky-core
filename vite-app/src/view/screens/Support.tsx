@@ -2,6 +2,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
 import * as Layout from "#/components/Layout";
+import { Text } from "#/components/Typography";
 import { HELP_DESK_URL } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
@@ -10,7 +11,6 @@ import { useSetMinimalShellMode } from "#/state/shell";
 import { TextLink } from "#/view/com/util/Link";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { CenteredView } from "#/view/com/util/Views";
-import { Text } from "#/view/com/util/text/Text";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Support">;
 export const SupportScreen = (_props: Props) => {

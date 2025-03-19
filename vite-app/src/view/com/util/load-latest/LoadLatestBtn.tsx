@@ -1,10 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import { useMediaQuery } from "react-responsive";
 
 import { useLayoutBreakpoints } from "#/alf";
-import { HITSLOP_20 } from "#/lib/constants";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -56,10 +54,9 @@ export function LoadLatestBtn({
 					...pal.view,
 					...bottomPosition,
 				}}
-				onPress={onPress}
-				hitSlop={HITSLOP_20}
-				accessibilityLabel={label}
-				accessibilityHint=""
+				onClick={onPress}
+				// TODO
+				// hitSlop={HITSLOP_20}
 				targetScale={0.9}
 			>
 				{/* @ts-expect-error */}
@@ -82,7 +79,7 @@ const styles = {
 		zIndex: 20,
 		position: "fixed",
 		left: 18,
-		borderWidth: StyleSheet.hairlineWidth,
+		borderWidth: 1,
 		width: 52,
 		height: 52,
 		borderRadius: 26,

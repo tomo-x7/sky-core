@@ -2,7 +2,7 @@ import type { ComAtprotoServerDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";
-import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
 
 import { flatten } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -164,7 +164,7 @@ function InviteCode({
 		<div
 			style={{
 				...pal.border,
-				...{ borderBottomWidth: 1, paddingHorizontal: 20, paddingVertical: 14 },
+				...{ borderBottomWidth: 1, paddingLeft: 20, paddingRight: 20, paddingTop: 14, paddingBottom: 14 },
 			}}
 		>
 			<TouchableOpacity
@@ -195,7 +195,6 @@ function InviteCode({
 						Copied
 					</Text>
 				)}
-				{/* @ts-expect-error */}
 				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text} />}
 			</TouchableOpacity>
 			{uses.length > 0 ? (
@@ -227,7 +226,7 @@ function InviteCode({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		flex: 1,
 		paddingBottom: 0,
@@ -239,7 +238,8 @@ const styles = StyleSheet.create({
 	},
 	description: {
 		textAlign: "center",
-		paddingHorizontal: 42,
+		paddingLeft: 42,
+		paddingRight: 42,
 		marginBottom: 14,
 	},
 
@@ -254,10 +254,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	empty: {
-		paddingHorizontal: 20,
-		paddingVertical: 20,
+		padding: 20,
 		borderRadius: 16,
-		marginHorizontal: 24,
+		marginLeft: 24,
+		marginRight: 24,
 		marginTop: 10,
 	},
 	emptyText: {
@@ -288,10 +288,9 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 32,
-		paddingHorizontal: 60,
-		paddingVertical: 14,
+		padding: "14px 60px",
 	},
 	btnLabel: {
 		fontSize: 18,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

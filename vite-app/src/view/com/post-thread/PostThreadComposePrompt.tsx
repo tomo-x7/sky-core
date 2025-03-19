@@ -19,9 +19,6 @@ export function PostThreadComposePrompt({
 
 	return (
 		<PressableScale
-			accessibilityRole="button"
-			accessibilityLabel={"Compose reply"}
-			accessibilityHint={"Opens composer"}
 			style={{
 				...(gtMobile ? a.py_xs : { paddingTop: 8, paddingBottom: 11 }),
 				...a.px_sm,
@@ -29,11 +26,11 @@ export function PostThreadComposePrompt({
 				...t.atoms.border_contrast_low,
 				...t.atoms.bg,
 			}}
-			onPress={() => {
+			onClick={() => {
 				onPressCompose();
 			}}
-			onHoverIn={onHoverIn}
-			onHoverOut={onHoverOut}
+			onMouseEnter={onHoverIn}
+			onMouseLeave={onHoverOut}
 		>
 			<div
 				style={{

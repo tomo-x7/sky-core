@@ -12,7 +12,7 @@ import { TID } from "@atproto/common-web";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, type ReactElement, useEffect, useMemo, useState } from "react";
-import { Animated, Pressable, StyleSheet, TouchableOpacity } from "react-native";
+import { Animated, Pressable, TouchableOpacity } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -344,7 +344,7 @@ let NotificationFeedItem = ({
 							borderColor: pal.colors.unreadNotifBorder,
 						}),
 
-				...{ borderTopWidth: hideTopBorder ? 0 : StyleSheet.hairlineWidth },
+				...{ borderTopWidth: hideTopBorder ? 0 : 1 },
 				...a.overflow_hidden,
 			}}
 			href={itemHref}
@@ -672,7 +672,7 @@ function AdditionalPostText({ post }: { post?: AppBskyFeedDefs.PostView }) {
 	}
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	pointer: {
 		cursor: "pointer",
 	},
@@ -719,7 +719,8 @@ const styles = StyleSheet.create({
 	},
 	feedcard: {
 		borderRadius: 8,
-		paddingVertical: 12,
+		paddingTop: 12,
+		paddingBottom: 12,
 		marginTop: 6,
 	},
 
@@ -749,4 +750,4 @@ const styles = StyleSheet.create({
 	expandedAuthorAvi: {
 		marginRight: 5,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

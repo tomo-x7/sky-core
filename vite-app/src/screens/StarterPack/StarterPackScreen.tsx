@@ -711,7 +711,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						style={{
 							...a.rounded_sm,
 							...a.overflow_hidden,
-							...{ paddingVertical: 10 },
+							...{ paddingTop: 10, paddingBottom: 10 },
 						}}
 						disabled={isProcessing}
 						onPress={() => {
@@ -730,7 +730,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						style={{
 							...a.rounded_sm,
 							...a.overflow_hidden,
-							...{ paddingVertical: 10 },
+							...{ paddingTop: 10, paddingBottom: 10 },
 						}}
 						disabled={isProcessing}
 						onPress={goBack}

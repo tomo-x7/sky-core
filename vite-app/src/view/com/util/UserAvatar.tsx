@@ -2,7 +2,7 @@ import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
-import { Image, Pressable, StyleSheet } from "react-native";
+import { Image, Pressable } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 import Svg, { Circle, Path, Rect } from "react-native-svg";
 
@@ -408,7 +408,7 @@ function hackModifyThumbnailPath(uri: string, isEnabled: boolean): string {
 	return isEnabled ? uri.replace("/img/avatar/plain/", "/img/avatar_thumbnail/plain/") : uri;
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	editButtonContainer: {
 		position: "absolute",
 		width: 24,
@@ -429,4 +429,4 @@ const styles = StyleSheet.create({
 	alertIcon: {
 		color: colors.red3,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

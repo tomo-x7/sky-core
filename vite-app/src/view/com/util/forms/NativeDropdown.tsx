@@ -2,8 +2,8 @@ import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
-import { StyleSheet } from "react-native";
 
+import { flatten } from "#/alf";
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 
@@ -21,7 +21,7 @@ export const DropdownMenuItem = (props: ItemProps) => {
 		<DropdownMenu.Item
 			className="nativeDropdown-item"
 			{...props}
-			style={StyleSheet.flatten([styles.item, focused && { backgroundColor: backgroundColor }])}
+			style={flatten([styles.item, focused && { backgroundColor: backgroundColor }])}
 			onFocus={() => {
 				setFocused(true);
 			}}
@@ -153,7 +153,7 @@ function DropdownContent({
 		<DropdownMenu.Content
 			//@ts-expect-error
 			ref={menuRef}
-			style={StyleSheet.flatten([styles.content, dropDownBackgroundColor]) as React.CSSProperties}
+			style={flatten([styles.content, dropDownBackgroundColor])}
 			loop
 		>
 			{items.map((item, index) => {
@@ -161,12 +161,7 @@ function DropdownContent({
 					return (
 						<DropdownMenu.Separator
 							key={getKey(item.label, index)}
-							style={
-								StyleSheet.flatten([
-									styles.separator,
-									{ backgroundColor: separatorColor },
-								]) as React.CSSProperties
-							}
+							style={flatten([styles.separator, { backgroundColor: separatorColor }])}
 						/>
 					);
 				}
@@ -218,7 +213,7 @@ const getKey = (label: string, index: number, id?: string) => {
 	return `${label}_${index}`;
 };
 
-const styles = StyleSheet.create({
+const styles = {
 	separator: {
 		height: 1,
 		marginTop: 4,
@@ -248,7 +243,6 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		fontFamily:
 			'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Liberation Sans", Helvetica, Arial, sans-serif',
-		//@ts-expect-error
 		outline: 0,
 		border: 0,
 	},
@@ -257,4 +251,4 @@ const styles = StyleSheet.create({
 		fontWeight: "600",
 		paddingRight: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,5 +1,4 @@
 import type { AppBskyActorGetProfile as GetProfile } from "@atproto/api";
-import { StyleSheet } from "react-native";
 
 import { Text } from "#/components/Typography";
 import type { TypographyVariant } from "#/lib/ThemeContext";
@@ -68,6 +67,6 @@ export function UserInfoText({
 	return inner;
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	loadingPlaceholder: { position: "relative", top: 1, left: 2 },
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { memo } from "react";
-import { StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -178,7 +178,7 @@ let ProfileHeaderShell = ({
 ProfileHeaderShell = memo(ProfileHeaderShell);
 export { ProfileHeaderShell };
 
-const styles = StyleSheet.create({
+const styles = {
 	backBtnWrapper: {
 		position: "absolute",
 		left: 10,
@@ -212,4 +212,4 @@ const styles = StyleSheet.create({
 	aviLabeler: {
 		borderRadius: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

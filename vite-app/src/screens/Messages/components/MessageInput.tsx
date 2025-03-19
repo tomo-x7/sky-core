@@ -1,7 +1,7 @@
 import Graphemer from "graphemer";
 import React from "react";
 import { flushSync } from "react-dom";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable } from "react-native";
 import TextareaAutosize from "react-textarea-autosize";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -187,17 +187,15 @@ export function MessageInput({
 				</Button>
 				<TextareaAutosize
 					ref={textAreaRef}
-					style={StyleSheet.flatten([
-						a.flex_1,
-						a.px_sm,
-						a.border_0,
-						t.atoms.text,
-						{
-							paddingTop: 10,
-							backgroundColor: "transparent",
-							resize: "none",
-						},
-					])}
+					style={{
+						...a.flex_1,
+						...a.px_sm,
+						...a.border_0,
+						...t.atoms.text,
+						paddingTop: 10,
+						backgroundColor: "transparent",
+						resize: "none",
+					}}
 					maxRows={12}
 					placeholder={"Write a message"}
 					defaultValue=""

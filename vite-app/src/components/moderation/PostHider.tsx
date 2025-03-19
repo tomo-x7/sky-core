@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationUI } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type ComponentProps } from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -10,7 +10,6 @@ import {
 	useModerationDetailsDialogControl,
 } from "#/components/moderation/ModerationDetailsDialog";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
-import { addStyle } from "#/lib/styles";
 import { precacheProfile } from "#/state/queries/profile";
 // import {Link} from '#/components/Link' TODO this imposes some styles that screw things up
 import { Link } from "#/view/com/util/Link";
@@ -49,7 +48,7 @@ export function PostHider({
 
 	if (!blur || (disabled && !modui.noOverride)) {
 		return (
-			<Link style={style} href={href} accessible={false} onBeforePress={onBeforePress} {...props}>
+			<Link style={style} href={href} onBeforePress={onBeforePress} {...props}>
 				{children}
 			</Link>
 		);
@@ -121,7 +120,7 @@ export function PostHider({
 			)}
 		</Pressable>
 	) : (
-		<Link style={addStyle(style, styles.child)} href={href} accessible={false} {...props}>
+		<Link style={{ ...style, ...styles.child }} href={href} {...props}>
 			{children}
 		</Link>
 	);
@@ -134,10 +133,10 @@ function getBlurrableFilter(modui: ModerationUI): ModerationCause | undefined {
 	return modui.filters.find((filter) => !filter.downgraded);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	child: {
 		borderWidth: 0,
 		borderTopWidth: 0,
 		borderRadius: 8,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -96,18 +96,16 @@ export function Deactivated() {
 		>
 			<Layout.Content
 				ignoreTabletLayoutOffset
-				contentContainerStyle={[
-					a.px_2xl,
-					{
-						paddingTop: 64,
-						paddingBottom: 64,
-					},
-				]}
+				contentContainerStyle={{
+					paddingTop: 64,
+					paddingBottom: 64,
+					...a.px_2xl,
+				}}
 			>
 				<div
 					style={{
 						...a.w_full,
-						...{ marginHorizontal: "auto", maxWidth: COL_WIDTH },
+						...{ marginLeft: "auto", marginRight: "auto", maxWidth: COL_WIDTH },
 					}}
 				>
 					<div

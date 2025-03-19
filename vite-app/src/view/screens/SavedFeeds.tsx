@@ -298,8 +298,10 @@ function ListItem({
 						hitSlop={5}
 						style={(state) => ({
 							backgroundColor: pal.viewLight.backgroundColor,
-							paddingHorizontal: 12,
-							paddingVertical: 10,
+							paddingLeft: 12,
+							paddingRight: 12,
+							paddingTop: 10,
+							paddingBottom: 10,
 							borderRadius: 4,
 							marginRight: 8,
 							opacity: state.hovered || state.pressed ? 0.5 : 1,
@@ -314,8 +316,10 @@ function ListItem({
 						hitSlop={5}
 						style={(state) => ({
 							backgroundColor: pal.viewLight.backgroundColor,
-							paddingHorizontal: 12,
-							paddingVertical: 10,
+							paddingLeft: 12,
+							paddingRight: 12,
+							paddingTop: 10,
+							paddingBottom: 10,
 							borderRadius: 4,
 							marginRight: 8,
 							opacity: state.hovered || state.pressed ? 0.5 : 1,
@@ -334,8 +338,10 @@ function ListItem({
 					hitSlop={5}
 					style={(state) => ({
 						marginRight: 8,
-						paddingHorizontal: 12,
-						paddingVertical: 10,
+						paddingLeft: 12,
+						paddingRight: 12,
+						paddingTop: 10,
+						paddingBottom: 10,
 						borderRadius: 4,
 						opacity: state.hovered || state.focused ? 0.5 : 1,
 					})}
@@ -351,8 +357,10 @@ function ListItem({
 					onPress={onTogglePinned}
 					style={(state) => ({
 						backgroundColor: pal.viewLight.backgroundColor,
-						paddingHorizontal: 12,
-						paddingVertical: 10,
+						paddingLeft: 12,
+						paddingRight: 12,
+						paddingTop: 10,
+						paddingBottom: 10,
 						borderRadius: 4,
 						opacity: state.hovered || state.focused ? 0.5 : 1,
 					})}
@@ -375,8 +383,10 @@ function FollowingFeedCard() {
 				...a.flex_1,
 
 				...{
-					paddingHorizontal: 18,
-					paddingVertical: 20,
+					paddingLeft: 18,
+					paddingRight: 18,
+					paddingTop: 20,
+					paddingBottom: 20,
 				},
 			}}
 		>

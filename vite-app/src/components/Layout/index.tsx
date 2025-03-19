@@ -1,5 +1,4 @@
 import React, { useContext, useMemo } from "react";
-import { StyleSheet } from "react-native";
 import { KeyboardAwareScrollView, type KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
 import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
 
@@ -86,14 +85,14 @@ export const Content = React.memo(function Content({
 	);
 });
 
-const scrollViewStyles = StyleSheet.create({
+const scrollViewStyles = {
 	common: {
 		width: "100%",
 	},
 	contentContainer: {
 		paddingBottom: 100,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;
 
 export type KeyboardAwareContentProps = Omit<KeyboardAwareScrollViewProps, "style"> & {
 	children: React.ReactNode;

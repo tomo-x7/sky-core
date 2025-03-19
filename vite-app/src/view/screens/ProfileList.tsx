@@ -4,7 +4,6 @@ import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
@@ -214,9 +213,6 @@ function ProfileListScreenLoaded({
 						<FAB
 							onPress={() => openComposer({})}
 							icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
-							accessibilityRole="button"
-							accessibilityLabel={"New post"}
-							accessibilityHint=""
 						/>
 					</div>
 				</Hider.Content>
@@ -240,9 +236,6 @@ function ProfileListScreenLoaded({
 					<FAB
 						onPress={() => openComposer({})}
 						icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
-						accessibilityRole="button"
-						accessibilityLabel={"New post"}
-						accessibilityHint=""
 					/>
 				</div>
 			</Hider.Content>
@@ -887,9 +880,11 @@ function ErrorScreen({ error }: { error: string }) {
 				...pal.border,
 
 				...{
-					paddingHorizontal: 18,
-					paddingVertical: 14,
-					borderTopWidth: StyleSheet.hairlineWidth,
+					paddingLeft: 18,
+					paddingRight: 18,
+					paddingTop: 14,
+					paddingBottom: 14,
+					borderTopWidth: 1,
 				},
 			}}
 		>

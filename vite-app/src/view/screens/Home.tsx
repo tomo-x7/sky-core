@@ -1,6 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import * as Layout from "#/components/Layout";
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
@@ -73,7 +73,6 @@ function HomeScreenReady({
 	preferences: UsePreferencesQueryResponse;
 	pinnedFeedInfos: SavedFeedSourceInfo[];
 }) {
-	//@ts-expect-error
 	const allFeeds = React.useMemo(() => pinnedFeedInfos.map((f) => f.feedDescriptor), [pinnedFeedInfos]);
 	const maybeRawSelectedFeed: FeedDescriptor | undefined = useSelectedFeed() ?? allFeeds[0];
 	const setSelectedFeed = useSetSelectedFeed();
@@ -141,11 +140,7 @@ function HomeScreenReady({
 		return {
 			mergeFeedEnabled: Boolean(preferences.feedViewPrefs.lab_mergeFeedEnabled),
 			mergeFeedSources: preferences.feedViewPrefs.lab_mergeFeedEnabled
-				? preferences.savedFeeds
-						//@ts-expect-error
-						.filter((f) => f.type === "feed" || f.type === "list")
-						//@ts-expect-error
-						.map((f) => f.value)
+				? preferences.savedFeeds.filter((f) => f.type === "feed" || f.type === "list").map((f) => f.value)
 				: [],
 		};
 	}, [preferences]);
@@ -159,7 +154,6 @@ function HomeScreenReady({
 			renderTabBar={renderTabBar}
 		>
 			{pinnedFeedInfos.length ? (
-				//@ts-expect-error
 				pinnedFeedInfos.map((feedInfo, index) => {
 					const feed = feedInfo.feedDescriptor;
 					if (feed === "following") {
@@ -206,11 +200,11 @@ function HomeScreenReady({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	loading: {
 		height: "100%",
 		alignContent: "center",
 		justifyContent: "center",
 		paddingBottom: 100,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

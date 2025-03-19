@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { ActivityIndicator, Pressable, StyleSheet } from "react-native";
+import { ActivityIndicator, Pressable } from "react-native";
 import { Circle, Path, Svg } from "react-native-svg";
 
 import { Text } from "#/components/Typography";
@@ -97,7 +97,7 @@ export function Component({
 			<ScrollView
 				style={{
 					...s.flex1,
-					...(isMobile && { paddingHorizontal: 18 }),
+					...(isMobile && { paddingLeft: 18, paddingRight: 18 }),
 				}}
 			>
 				{stage === Stages.Reminder && <ReminderIllustration />}
@@ -298,7 +298,7 @@ function ReminderIllustration() {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	titleSection: {
 		paddingTop: 0,
 		paddingBottom: 14,
@@ -316,18 +316,22 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 6,
-		paddingHorizontal: 14,
+		paddingLeft: 14,
+		paddingRight: 14,
 		marginTop: 10,
 	},
 	changeEmailLink: {
-		marginHorizontal: 12,
+		marginLeft: 12,
+		marginRight: 12,
 		marginBottom: 12,
 	},
 	textInput: {
 		borderWidth: 1,
 		borderRadius: 6,
-		paddingHorizontal: 14,
-		paddingVertical: 10,
+		paddingLeft: 14,
+		paddingRight: 14,
+		paddingTop: 10,
+		paddingBottom: 10,
 		fontSize: 16,
 	},
 	btn: {
@@ -341,4 +345,4 @@ const styles = StyleSheet.create({
 	btnContainer: {
 		paddingTop: 20,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyleSheet } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { Button } from "./forms/Button";
-import { Text } from "./text/Text";
 
 export function LoadMoreRetryBtn({
 	label,
@@ -29,17 +28,19 @@ export function LoadMoreRetryBtn({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	loadMoreRetry: {
 		flexDirection: "row",
 		gap: 14,
 		alignItems: "center",
 		borderRadius: 0,
 		marginTop: 1,
-		paddingVertical: 12,
-		paddingHorizontal: 20,
+		paddingTop: 12,
+		paddingBottom: 12,
+		paddingLeft: 20,
+		paddingRight: 20,
 	},
 	label: {
 		flex: 1,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

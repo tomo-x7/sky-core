@@ -25,11 +25,6 @@ export function NewChat({
 	const { mutate: createChat } = useGetConvoForMembers({
 		onSuccess: (data) => {
 			onNewChat(data.convo.id);
-
-			if (!data.convo.lastMessage) {
-				logEvent("chat:create", { logContext: "NewChatDialog" });
-			}
-			logEvent("chat:open", { logContext: "NewChatDialog" });
 		},
 		onError: (error) => {
 			console.error("Failed to create chat", { safeMessage: error });
@@ -55,9 +50,6 @@ export function NewChat({
 					}
 				}}
 				icon={<Plus size="lg" fill={t.palette.white} />}
-				accessibilityRole="button"
-				accessibilityLabel={"New chat"}
-				accessibilityHint=""
 			/>
 
 			<Dialog.Outer control={control}>

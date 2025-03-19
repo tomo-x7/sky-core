@@ -36,9 +36,11 @@ export function AppLanguageDropdown({ style }: ViewStyleProp) {
 	return (
 		<div
 			style={{
-				...// We don't have hitSlop here to increase the tap region,
+				// We don't have hitSlop here to increase the tap region,
 				// alternative is negative margins.
-				{ height: 32, marginVertical: -((32 - 14) / 2) },
+				height: 32,
+				marginTop: -((32 - 14) / 2),
+				marginBottom: -((32 - 14) / 2),
 
 				...style,
 			}}
@@ -49,7 +51,6 @@ export function AppLanguageDropdown({ style }: ViewStyleProp) {
 				<Text aria-hidden={true} style={t.atoms.text_contrast_medium}>
 					{APP_LANGUAGES.find((l) => l.code2 === sanitizedLang)?.name}
 				</Text>
-				{/*@ts-expect-error*/}
 				<ChevronDown fill={t.atoms.text.color} size="xs" style={a.flex_0} />
 			</div>
 			<select

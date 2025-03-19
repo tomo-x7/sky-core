@@ -3,14 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
-import {
-	ActivityIndicator,
-	Keyboard,
-	KeyboardAvoidingView,
-	type LayoutChangeEvent,
-	ScrollView,
-	StyleSheet,
-} from "react-native";
+import { ActivityIndicator, Keyboard, KeyboardAvoidingView, type LayoutChangeEvent, ScrollView } from "react-native";
 // @ts-expect-error no type definition
 import ProgressCircle from "react-native-progress/Circle";
 import Animated, {
@@ -1261,7 +1254,7 @@ function useScrollTracker({
 
 	const topBarAnimatedStyle = useAnimatedStyle(() => {
 		return {
-			borderBottomWidth: StyleSheet.hairlineWidth,
+			borderBottomWidth: 1,
 			borderColor: interpolateColor(
 				hasScrolledToTop.get(),
 				[0, 1],
@@ -1271,7 +1264,7 @@ function useScrollTracker({
 	});
 	const bottomBarAnimatedStyle = useAnimatedStyle(() => {
 		return {
-			borderTopWidth: StyleSheet.hairlineWidth,
+			borderTopWidth: 1,
 			borderColor: interpolateColor(
 				hasScrolledToBottom.get(),
 				[0, 1],
@@ -1354,7 +1347,7 @@ const styles = {
 		padding: "6px 8px",
 	},
 	errorIcon: {
-		borderWidth: StyleSheet.hairlineWidth,
+		borderWidth: 1,
 		borderColor: colors.red4,
 		color: colors.red4,
 		borderRadius: 30,
@@ -1533,7 +1526,7 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 			style={{
 				...a.flex_row,
 				...a.align_center,
-				...{ paddingVertical: 5 },
+				...{ paddingTop: 5, paddingBottom: 5 },
 			}}
 		>
 			<Animated.View style={animatedStyle}>

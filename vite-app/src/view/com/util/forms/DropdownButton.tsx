@@ -2,14 +2,7 @@ import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type React from "react";
 import { type PropsWithChildren, useMemo, useRef } from "react";
-import {
-	Dimensions,
-	type Insets,
-	StyleSheet,
-	TouchableOpacity,
-	TouchableWithoutFeedback,
-	useWindowDimensions,
-} from "react-native";
+import { Dimensions, type Insets, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import RootSiblings from "react-native-root-siblings";
 import { FullWindowOverlay } from "#/components/FullWindowOverlay";
@@ -206,6 +199,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 			>
 				<Animated.View
 					entering={FadeIn}
+					// @ts-expect-error
 					style={{
 						...styles.bg,
 
@@ -215,6 +209,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 				/>
 			</TouchableWithoutFeedback>
 			<Animated.View
+				// @ts-expect-error
 				style={{
 					...styles.menu,
 					...{ left: x, top: y, width },
@@ -296,7 +291,7 @@ function isBtn(item: DropdownItem): item is DropdownItemButton {
 	return !isSep(item) && !isHeading(item);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	bg: {
 		position: "absolute",
 		left: 0,
@@ -307,12 +302,14 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		backgroundColor: "#fff",
 		borderRadius: 14,
-		paddingVertical: 6,
+		paddingTop: 6,
+		paddingBottom: 6,
 	},
 	menuItem: {
 		flexDirection: "row",
 		alignItems: "center",
-		paddingVertical: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
 		paddingLeft: 15,
 		paddingRight: 40,
 	},
@@ -334,12 +331,14 @@ const styles = StyleSheet.create({
 	},
 	separator: {
 		borderTopWidth: 1,
-		marginVertical: 8,
+		marginTop: 8,
+		marginBottom: 8,
 	},
 	heading: {
 		flexDirection: "row",
 		justifyContent: "center",
-		paddingVertical: 10,
+		paddingTop: 10,
+		paddingBottom: 10,
 		paddingLeft: 15,
 		paddingRight: 20,
 		borderBottomWidth: 1,
@@ -349,4 +348,4 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: "600",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

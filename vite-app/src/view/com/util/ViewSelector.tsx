@@ -1,12 +1,5 @@
 import React, { type JSX, useEffect, useState } from "react";
-import {
-	type NativeScrollEvent,
-	type NativeSyntheticEvent,
-	Pressable,
-	RefreshControl,
-	ScrollView,
-	StyleSheet,
-} from "react-native";
+import { type NativeScrollEvent, type NativeSyntheticEvent, Pressable, RefreshControl, ScrollView } from "react-native";
 
 import { flatten } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -184,14 +177,16 @@ export function Selector({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	outer: {
 		flexDirection: "row",
-		paddingHorizontal: 14,
+		paddingLeft: 14,
+		paddingRight: 14,
 	},
 	item: {
 		marginRight: 14,
-		paddingHorizontal: 10,
+		paddingLeft: 10,
+		paddingRight: 10,
 		paddingTop: 8,
 		paddingBottom: 12,
 	},
@@ -209,4 +204,4 @@ const styles = StyleSheet.create({
 		height: 4,
 		bottom: 0,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

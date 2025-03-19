@@ -12,7 +12,7 @@ import {
 } from "@atproto/api";
 import React from "react";
 import { Image } from "react-native";
-import { InteractionManager, StyleSheet } from "react-native";
+import { InteractionManager } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -286,12 +286,14 @@ export function MaybeListCard({ view }: { view: AppBskyGraphDefs.ListView }) {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	altContainer: {
 		backgroundColor: "rgba(0, 0, 0, 0.75)",
 		borderRadius: 6,
-		paddingHorizontal: 6,
-		paddingVertical: 3,
+		paddingLeft: 6,
+		paddingRight: 6,
+		paddingTop: 3,
+		paddingBottom: 3,
 		position: "absolute",
 		right: 6,
 		bottom: 6,
@@ -302,9 +304,11 @@ const styles = StyleSheet.create({
 		fontWeight: "600",
 	},
 	customFeedOuter: {
-		borderWidth: StyleSheet.hairlineWidth,
+		borderWidth: 1,
 		borderRadius: 8,
-		paddingHorizontal: 12,
-		paddingVertical: 12,
+		paddingLeft: 12,
+		paddingRight: 12,
+		paddingTop: 12,
+		paddingBottom: 12,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

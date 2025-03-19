@@ -344,7 +344,8 @@ export function LabelText({ children }: { children: React.ReactNode }) {
 				...t.atoms.text_contrast_low,
 
 				...{
-					paddingHorizontal: 10,
+					paddingLeft: 10,
+					paddingRight: 10,
 				},
 			}}
 		>

@@ -2,7 +2,7 @@ import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { Text } from "#/components/Typography";
@@ -93,7 +93,7 @@ export function Component({
 			<div
 				style={{
 					...styles.btns,
-					...(isMobile && { paddingHorizontal: 16 }),
+					...(isMobile && { paddingLeft: 16, paddingRight: 16 }),
 				}}
 			>
 				<TouchableOpacity
@@ -117,6 +117,7 @@ export function Component({
 						colors={[gradients.blueLight.start, gradients.blueLight.end]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 1 }}
+						// @ts-expect-error
 						style={styles.btn}
 					>
 						<Text type="xl-medium" style={s.white}>
@@ -129,7 +130,7 @@ export function Component({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	cropper: {
 		marginLeft: "auto",
 		marginRight: "auto",
@@ -150,7 +151,6 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		borderRadius: 4,
-		paddingVertical: 8,
-		paddingHorizontal: 24,
+		padding: "8px 24px",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

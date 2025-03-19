@@ -1,5 +1,3 @@
-import { StyleSheet } from "react-native";
-
 import { usePalette } from "#/lib/hooks/usePalette";
 import { toPostLanguages, useLanguagePrefs } from "#/state/preferences/languages";
 import { ToggleButton } from "#/view/com/util/forms/ToggleButton";
@@ -42,14 +40,16 @@ export function LanguageToggle({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	languageToggle: {
 		borderTopWidth: 1,
 		borderRadius: 0,
-		paddingHorizontal: 6,
-		paddingVertical: 12,
+		paddingLeft: 6,
+		paddingRight: 6,
+		paddingTop: 12,
+		paddingBottom: 12,
 	},
 	dimmed: {
 		opacity: 0.5,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

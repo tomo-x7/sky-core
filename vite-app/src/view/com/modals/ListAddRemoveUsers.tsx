@@ -58,7 +58,7 @@ export function Component({
 			<div
 				style={{
 					...s.flex1,
-					...(isMobile && { paddingHorizontal: 18 }),
+					...(isMobile && { paddingLeft: 18, paddingRight: 18 }),
 				}}
 			>
 				<div
@@ -124,7 +124,7 @@ export function Component({
 							type="xl"
 							style={{
 								...pal.textLight,
-								...{ paddingHorizontal: 12, paddingVertical: 16 },
+								...{ paddingLeft: 12, paddingRight: 12, paddingTop: 16, paddingBottom: 16 },
 							}}
 						>
 							<>No results found for {query}</>
@@ -214,7 +214,8 @@ function UserResult({
 					flexDirection: "row",
 					alignItems: "center",
 					borderTopWidth: noBorder ? 0 : 1,
-					paddingHorizontal: 8,
+					paddingLeft: 8,
+					paddingRight: 8,
 				},
 			}}
 		>

@@ -517,8 +517,10 @@ function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 
 										...{
 											right: count.length === 1 ? 6 : 0,
-											paddingHorizontal: 4,
-											paddingVertical: 1,
+											paddingLeft: 4,
+											paddingRight: 4,
+											paddingTop: 1,
+											paddingBottom: 1,
 											backgroundColor: t.palette.primary_500,
 										},
 									}}

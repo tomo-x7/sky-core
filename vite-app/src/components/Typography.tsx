@@ -16,9 +16,10 @@ export function Text({
 	dataSet,
 	onLayout,
 	type = "md",
+	ellipsizeMode,
 	...rest
 }: TextProps) {
-	//TODO numberOfLinesの実装、lineHeightの実装
+	//TODO numberOfLines,lineHeight,ellipsizeModeの実装
 	const { fonts, flags } = useAlf();
 	const t = useTheme();
 	const t2 = useTheme2();

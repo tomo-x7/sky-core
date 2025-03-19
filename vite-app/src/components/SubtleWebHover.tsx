@@ -1,5 +1,3 @@
-import { StyleSheet } from "react-native";
-
 import { type ViewStyleProp, useTheme } from "#/alf";
 import { isTouchDevice } from "#/lib/browser";
 
@@ -32,7 +30,7 @@ export function SubtleWebHover({ style, hover }: ViewStyleProp & { hover: boolea
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		position: "absolute",
 		left: 0,
@@ -40,7 +38,6 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		top: 0,
 		pointerEvents: "none",
-		// @ts-expect-error web only
 		transition: "0.15s ease-in-out opacity",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

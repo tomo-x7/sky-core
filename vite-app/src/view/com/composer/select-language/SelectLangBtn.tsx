@@ -1,13 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useMemo } from "react";
-import { StyleSheet } from "react-native";
 
+import { Text } from "#/components/Typography";
 import { LANG_DROPDOWN_HITSLOP } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useModalControls } from "#/state/modals";
 import { hasPostLanguage, toPostLanguages, useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences/languages";
 import { DropdownButton, type DropdownItem, type DropdownItemButton } from "#/view/com/util/forms/DropdownButton";
-import { Text } from "#/view/com/util/text/Text";
 import { codeToLanguageName } from "../../../../locale/helpers";
 
 export function SelectLangBtn() {
@@ -101,11 +100,12 @@ export function SelectLangBtn() {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	button: {
-		marginHorizontal: 15,
+		marginLeft: 15,
+		marginRight: 15,
 	},
 	label: {
 		maxWidth: 100,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

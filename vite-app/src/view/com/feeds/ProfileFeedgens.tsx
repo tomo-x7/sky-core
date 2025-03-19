@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ActivityIndicator, type ListRenderItemInfo, StyleSheet, findNodeHandle } from "react-native";
+import { ActivityIndicator, type ListRenderItemInfo, findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
@@ -174,6 +174,6 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 	);
 });
 
-const styles = StyleSheet.create({
+const styles = {
 	footer: { paddingTop: 20 },
-});
+} satisfies Record<string, React.CSSProperties>;

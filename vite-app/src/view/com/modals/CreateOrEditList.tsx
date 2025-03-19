@@ -180,10 +180,8 @@ export function Component({
 				// @ts-expect-error
 				style={{
 					...pal.view,
-
-					...{
-						paddingHorizontal: isMobile ? 16 : 0,
-					},
+					paddingLeft: isMobile ? 16 : 0,
+					paddingRight: isMobile ? 16 : 0,
 				}}
 			>
 				<Text

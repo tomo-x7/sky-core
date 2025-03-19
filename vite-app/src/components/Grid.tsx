@@ -21,10 +21,8 @@ export function Row({
 					...a.flex_row,
 					...a.flex_1,
 
-					...{
-						marginLeft: -gap / 2,
-						marginRight: -gap / 2,
-					},
+					marginLeft: -gap / 2,
+					marginRight: -gap / 2,
 
 					...style,
 				}}
@@ -48,13 +46,9 @@ export function Col({
 		<div
 			style={{
 				...a.flex_col,
-
-				...{
-					paddingLeft: gap / 2,
-					paddingRight: gap / 2,
-					width: `${width * 100}%`,
-				},
-
+				paddingLeft: gap / 2,
+				paddingRight: gap / 2,
+				width: `${width * 100}%`,
 				...style,
 			}}
 		>

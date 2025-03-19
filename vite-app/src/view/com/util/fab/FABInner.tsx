@@ -1,16 +1,15 @@
 import { LinearGradient } from "expo-linear-gradient";
-import type { ComponentProps, JSX } from "react";
-import { StyleSheet, type TouchableWithoutFeedback } from "react-native";
-import Animated from "react-native-reanimated";
+import type { JSX } from "react";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
 import { gradients } from "#/lib/styles";
 
-export interface FABProps extends ComponentProps<typeof TouchableWithoutFeedback> {
+export type FABProps = {
 	icon: JSX.Element;
-}
+	onPress: React.MouseEventHandler;
+};
 
 export function FABInner({ icon, onPress, ...props }: FABProps) {
 	const { isMobile, isTablet } = useWebMediaQueries();
@@ -21,7 +20,7 @@ export function FABInner({ icon, onPress, ...props }: FABProps) {
 	const tabletSpacing = isTablet ? { right: 50, bottom: 50 } : { right: 24, bottom: clamp(0, 15, 60) + 15 };
 
 	return (
-		<Animated.View
+		<div
 			style={{
 				...styles.outer,
 				...size,
@@ -30,7 +29,7 @@ export function FABInner({ icon, onPress, ...props }: FABProps) {
 			}}
 		>
 			<PressableScale
-				onPress={(evt) => {
+				onClick={(evt) => {
 					onPress?.(evt);
 				}}
 				targetScale={0.9}
@@ -48,11 +47,11 @@ export function FABInner({ icon, onPress, ...props }: FABProps) {
 					{icon}
 				</LinearGradient>
 			</PressableScale>
-		</Animated.View>
+		</div>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	sizeRegular: {
 		width: 60,
 		height: 60,
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
 		borderRadius: 35,
 	},
 	outer: {
-		// @ts-expect-error web-only
 		position: "fixed",
 		zIndex: 1,
 		cursor: "pointer",
@@ -73,4 +71,4 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

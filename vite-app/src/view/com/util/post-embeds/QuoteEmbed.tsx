@@ -14,7 +14,7 @@ import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { RichText } from "#/components/RichText";
@@ -295,18 +295,20 @@ function viewRecordToPostView(viewRecord: AppBskyEmbedRecord.ViewRecord): AppBsk
 	};
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	errorContainer: {
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 4,
 		borderRadius: 8,
 		marginTop: 8,
-		paddingVertical: 14,
-		paddingHorizontal: 14,
-		borderWidth: StyleSheet.hairlineWidth,
+		paddingTop: 14,
+		paddingBottom: 14,
+		paddingLeft: 14,
+		paddingRight: 14,
+		borderWidth: 1,
 	},
 	alert: {
 		marginBottom: 6,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

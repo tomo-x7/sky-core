@@ -1,7 +1,7 @@
+import { Text } from "#/components/Typography";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { InfoCircleIcon } from "#/lib/icons";
 import { colors, s } from "#/lib/styles";
-import { Text } from "#/view/com/util/text/Text";
 
 export function HelpTip({ text }: { text: string }) {
 	const bg = useColorSchemeStyle({ backgroundColor: colors.gray1 }, { backgroundColor: colors.gray8 });

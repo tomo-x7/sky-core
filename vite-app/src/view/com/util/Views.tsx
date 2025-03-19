@@ -35,7 +35,7 @@ export const CenteredView = React.forwardRef(function CenteredView(
 		topBorder,
 		...props
 	}: React.PropsWithChildren<
-		Omit<ViewProps, "style"> & { sideBorders?: boolean; topBorder?: boolean; style: React.CSSProperties }
+		Omit<ViewProps, "style"> & { sideBorders?: boolean; topBorder?: boolean; style?: React.CSSProperties }
 	>,
 	ref: React.Ref<HTMLDivElement>,
 ) {

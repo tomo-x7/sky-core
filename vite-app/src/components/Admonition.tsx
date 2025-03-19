@@ -95,7 +95,7 @@ export function Outer({
 					...a.rounded_sm,
 					...a.border,
 					...t.atoms.bg_contrast_25,
-					...{ borderColor },
+					borderColor,
 					...style,
 				}}
 			>

@@ -102,7 +102,7 @@ export function Component() {
 			<ScrollView
 				style={{
 					...s.flex1,
-					...(isMobile && { paddingHorizontal: 18 }),
+					...(isMobile && { paddingLeft: 18, paddingRight: 18 }),
 				}}
 			>
 				<div style={styles.titleSection}>

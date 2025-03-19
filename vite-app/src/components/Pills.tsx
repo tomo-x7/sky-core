@@ -73,8 +73,10 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 						t.atoms.bg_contrast_25,
 						{
 							gap: 5,
-							paddingHorizontal: 5,
-							paddingVertical: 5,
+							paddingLeft: 5,
+							paddingRight: 5,
+							paddingTop: 5,
+							paddingBottom: 5,
 						},
 					],
 					avi: 16,
@@ -87,8 +89,10 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 						!noBg ? t.atoms.bg_contrast_25 : {},
 						{
 							gap: 3,
-							paddingHorizontal: 3,
-							paddingVertical: 3,
+							paddingLeft: 3,
+							paddingRight: 3,
+							paddingTop: 3,
+							paddingBottom: 3,
 						},
 					],
 					avi: 12,
@@ -153,8 +157,10 @@ export function FollowsYou({ size = "sm" }: CommonProps) {
 			default:
 				return [
 					{
-						paddingHorizontal: 6,
-						paddingVertical: 3,
+						paddingLeft: 6,
+						paddingRight: 6,
+						paddingTop: 3,
+						paddingBottom: 3,
 						borderRadius: 4,
 					},
 				];

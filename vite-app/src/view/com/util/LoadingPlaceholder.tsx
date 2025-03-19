@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { StyleSheet } from "react-native";
 
 import { atoms as a, useTheme as useTheme_NEW } from "#/alf";
 import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
@@ -260,9 +259,11 @@ export function FeedLoadingPlaceholder({
 		<div
 			style={{
 				...{
-					paddingHorizontal: 12,
-					paddingVertical: 18,
-					borderTopWidth: showTopBorder ? StyleSheet.hairlineWidth : 0,
+					paddingLeft: 12,
+					paddingRight: 12,
+					paddingTop: 18,
+					paddingBottom: 18,
+					borderTopWidth: showTopBorder ? 1 : 0,
 				},
 
 				...pal.border,
@@ -369,14 +370,14 @@ export function ChatListLoadingPlaceholder() {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	loadingPlaceholder: {
 		borderRadius: 6,
 	},
 	post: {
 		flexDirection: "row",
 		alignItems: "flex-start",
-		paddingHorizontal: 10,
+		paddingLeft: 10,
 		paddingTop: 20,
 		paddingBottom: 5,
 		paddingRight: 15,
@@ -417,4 +418,4 @@ const styles = StyleSheet.create({
 		borderRadius: 999,
 		marginRight: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

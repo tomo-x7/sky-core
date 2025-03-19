@@ -41,7 +41,8 @@ export function InterestButton({ interest }: { interest: string }) {
 			style={{
 				...{
 					backgroundColor: t.palette.contrast_100,
-					paddingVertical: 15,
+					paddingTop: 15,
+					paddingBottom: 15,
 				},
 
 				...a.rounded_full,

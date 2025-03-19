@@ -57,7 +57,7 @@ export function HomeHeaderLayoutMobile({
 				>
 					<PressableScale
 						targetScale={0.9}
-						onPress={() => {
+						onClick={() => {
 							emitSoftReset();
 						}}
 					>

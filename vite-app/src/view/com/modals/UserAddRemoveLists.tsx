@@ -1,6 +1,6 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { useCallback } from "react";
-import { ActivityIndicator, StyleSheet, useWindowDimensions } from "react-native";
+import { ActivityIndicator, useWindowDimensions } from "react-native";
 
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -174,7 +174,7 @@ function ListItem({
 			style={{
 				...styles.listItem,
 				...pal.border,
-				...(index !== 0 && { borderTopWidth: StyleSheet.hairlineWidth }),
+				...(index !== 0 && { borderTopWidth: 1 }),
 			}}
 		>
 			<div style={styles.listItemAvi}>
@@ -235,7 +235,7 @@ const styles: Record<string, React.CSSProperties> = {
 		gap: 10,
 		paddingTop: 10,
 		paddingBottom: 0,
-		borderTopWidth: StyleSheet.hairlineWidth,
+		borderTopWidth: 1,
 	},
 	footerBtn: {
 		padding: "12px 24px",

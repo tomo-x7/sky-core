@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 
 import { Text } from "#/components/Typography";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
@@ -35,7 +34,7 @@ export function Component({ href }: { href: string }) {
 			style={{
 				...s.flex1,
 				...pal.view,
-				...{ paddingHorizontal: 20, paddingTop: 10 },
+				...{ paddingLeft: 20, paddingRight: 20, paddingTop: 10 },
 			}}
 		>
 			<Text
@@ -82,7 +81,7 @@ export function Component({ href }: { href: string }) {
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	title: {
 		textAlign: "center",
 		fontWeight: "600",
@@ -95,4 +94,4 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		rowGap: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

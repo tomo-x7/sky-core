@@ -80,11 +80,9 @@ export function AvatarPlaceholder({ size = 40 }: Omit<AvatarProps, "src">) {
 			style={{
 				...t.atoms.bg_contrast_25,
 
-				...{
-					width: size,
-					height: size,
-					borderRadius: 8,
-				},
+				width: size,
+				height: size,
+				borderRadius: 8,
 			}}
 		/>
 	);
@@ -137,10 +135,8 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 					...a.rounded_xs,
 					...t.atoms.bg_contrast_50,
 
-					...{
-						width: "60%",
-						height: 14,
-					},
+					width: "60%",
+					height: 14,
 				}}
 			/>
 			{creator && (
@@ -149,10 +145,8 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 						...a.rounded_xs,
 						...t.atoms.bg_contrast_25,
 
-						...{
-							width: "40%",
-							height: 10,
-						},
+						width: "40%",
+						height: 10,
 					}}
 				/>
 			)}

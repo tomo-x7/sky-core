@@ -1,7 +1,6 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { StyleSheet } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { KnownFollowers, shouldShowKnownFollowers } from "#/components/KnownFollowers";
@@ -199,11 +198,13 @@ export function ProfileCardWithFollowBtn({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	outer: {
-		borderTopWidth: StyleSheet.hairlineWidth,
-		paddingHorizontal: 6,
-		paddingVertical: 4,
+		borderTopWidth: 1,
+		paddingLeft: 6,
+		paddingRight: 6,
+		paddingTop: 4,
+		paddingBottom: 4,
 	},
 	outerNoBorder: {
 		borderTopWidth: 0,
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
 		width: 40,
 		height: 40,
 		borderRadius: 20,
-		resizeMode: "cover",
+		objectFit: "cover",
 	},
 	layoutContent: {
 		flex: 1,
@@ -248,15 +249,19 @@ const styles = StyleSheet.create({
 	},
 	pill: {
 		borderRadius: 4,
-		paddingHorizontal: 6,
-		paddingVertical: 2,
+		paddingLeft: 6,
+		paddingRight: 6,
+		paddingTop: 2,
+		paddingBottom: 2,
 		justifyContent: "center",
 	},
 	btn: {
-		paddingVertical: 7,
+		paddingTop: 7,
+		paddingBottom: 7,
 		borderRadius: 50,
 		marginLeft: 6,
-		paddingHorizontal: 14,
+		paddingLeft: 14,
+		paddingRight: 14,
 	},
 
 	followedBy: {
@@ -280,4 +285,4 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingRight: 10,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

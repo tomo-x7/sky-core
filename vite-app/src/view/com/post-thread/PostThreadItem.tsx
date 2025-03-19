@@ -871,8 +871,10 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 
 							...{
 								gap: 3,
-								paddingHorizontal: 6,
-								paddingVertical: 3,
+								paddingLeft: 6,
+								paddingRight: 6,
+								paddingTop: 3,
+								paddingBottom: 3,
 							},
 						}}
 					>

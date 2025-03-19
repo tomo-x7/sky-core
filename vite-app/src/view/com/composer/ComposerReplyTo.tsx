@@ -4,12 +4,12 @@ import { Image } from "react-native";
 import { LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { Text } from "#/components/Typography";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import type { ComposerOptsPostRef } from "#/state/shell/composer";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 import { MaybeQuoteEmbed } from "#/view/com/util/post-embeds/QuoteEmbed";
-import { Text } from "#/view/com/util/text/Text";
 
 export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 	const t = useTheme();

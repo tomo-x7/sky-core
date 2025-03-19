@@ -44,15 +44,13 @@ export function AvatarStack({
 						...t.atoms.bg_contrast_25,
 						...a.relative,
 
-						...{
-							width: size,
-							height: size,
-							left: i * -halfSize,
-							borderWidth: 1,
-							borderColor: backgroundColor ?? t.atoms.bg.backgroundColor,
-							borderRadius: 999,
-							zIndex: 3 - i,
-						},
+						width: size,
+						height: size,
+						left: i * -halfSize,
+						borderWidth: 1,
+						borderColor: backgroundColor ?? t.atoms.bg.backgroundColor,
+						borderRadius: 999,
+						zIndex: 3 - i,
 					}}
 				>
 					{item.profile && (

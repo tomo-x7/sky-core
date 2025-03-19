@@ -2,7 +2,6 @@ import { type AppBskyActorDefs, type ModerationOpts, RichText as RichTextAPI, mo
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet } from "react-native";
 import { SafeAreaView } from "#/lib/safe-area-context";
 
 import { navigate } from "#/Navigation";
@@ -471,13 +470,7 @@ function ProfileScreenLoaded({
 					: null}
 			</PagerWithHeader>
 			{hasSession && (
-				<FAB
-					onPress={onPressCompose}
-					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />}
-					accessibilityRole="button"
-					accessibilityLabel={"New post"}
-					accessibilityHint=""
-				/>
+				<FAB onPress={onPressCompose} icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={s.white} />} />
 			)}
 		</ScreenHider>
 	);
@@ -513,22 +506,25 @@ function useRichText(text: string): [RichTextAPI, boolean] {
 	return [resolvedRT ?? rawRT, isResolving];
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	container: {
 		flexDirection: "column",
 		height: "100%",
-		// @ts-expect-error Web-only.
 		overflowAnchor: "none", // Fixes jumps when switching tabs while scrolled down.
 	},
 	loading: {
-		paddingVertical: 10,
-		paddingHorizontal: 14,
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingLeft: 14,
+		paddingRight: 14,
 	},
 	emptyState: {
-		paddingVertical: 40,
+		paddingTop: 40,
+		paddingBottom: 40,
 	},
 	loadingMoreFooter: {
-		paddingVertical: 20,
+		paddingTop: 20,
+		paddingBottom: 20,
 	},
 	endItem: {
 		paddingTop: 20,
@@ -536,4 +532,4 @@ const styles = StyleSheet.create({
 		color: colors.gray5,
 		textAlign: "center",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

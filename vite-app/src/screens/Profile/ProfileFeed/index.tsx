@@ -2,7 +2,6 @@ import { useIsFocused, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import * as Layout from "#/components/Layout";
@@ -217,34 +216,28 @@ export function ProfileFeedScreenInner({
 				<FAB
 					onPress={() => openComposer({})}
 					icon={<ComposeIcon2 strokeWidth={1.5} size={29} style={{ color: "white" }} />}
-					accessibilityRole="button"
-					accessibilityLabel={"New post"}
-					accessibilityHint=""
 				/>
 			)}
 		</>
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	btn: {
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 6,
-		paddingVertical: 7,
-		paddingHorizontal: 14,
+		padding: "7px 14px",
 		borderRadius: 50,
 		marginLeft: 6,
 	},
 	notFoundContainer: {
 		margin: 10,
-		paddingHorizontal: 18,
-		paddingVertical: 14,
+		padding: "14px 18px",
 		borderRadius: 6,
 	},
 	aboutSectionContainer: {
-		paddingVertical: 4,
-		paddingHorizontal: 16,
+		padding: "4px 16px",
 		gap: 12,
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

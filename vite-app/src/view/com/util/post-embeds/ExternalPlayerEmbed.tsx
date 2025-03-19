@@ -2,13 +2,7 @@ import type { AppBskyEmbedExternal } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image } from "react-native";
-import {
-	ActivityIndicator,
-	type GestureResponderEvent,
-	Pressable,
-	StyleSheet,
-	useWindowDimensions,
-} from "react-native";
+import { ActivityIndicator, type GestureResponderEvent, Pressable, useWindowDimensions } from "react-native";
 import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
 import { WebView } from "react-native-webview";
 
@@ -235,7 +229,7 @@ export function ExternalPlayer({
 	);
 }
 
-const styles = StyleSheet.create({
+const styles = {
 	overlayContainer: {
 		flex: 1,
 		justifyContent: "center",
@@ -254,4 +248,4 @@ const styles = StyleSheet.create({
 		width: "100%",
 		overflow: "hidden",
 	},
-});
+} satisfies Record<string, React.CSSProperties>;

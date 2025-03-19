@@ -146,8 +146,10 @@ function FeedgenErrorMessage({
 
 					...{
 						borderTopWidth: 1,
-						paddingHorizontal: 20,
-						paddingVertical: 18,
+						paddingLeft: 20,
+						paddingRight: 20,
+						paddingTop: 18,
+						paddingBottom: 18,
 						gap: 12,
 					},
 				}}
