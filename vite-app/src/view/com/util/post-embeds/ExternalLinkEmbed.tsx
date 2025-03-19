@@ -1,6 +1,5 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import React from "react";
-import { Image } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
@@ -71,12 +70,11 @@ export const ExternalLinkEmbed = ({
 					}}
 				>
 					{imageUri && !embedPlayerParams ? (
-						<Image
+						<img
 							style={{
 								aspectRatio: 1.91,
 							}}
-							source={{ uri: imageUri }}
-							accessibilityIgnoresInvertColors
+							src={imageUri}
 						/>
 					) : undefined}
 

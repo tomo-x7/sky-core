@@ -10,7 +10,6 @@ import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { Image } from "react-native";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -36,6 +35,7 @@ import { ReportDialog, useReportDialogControl } from "#/components/moderation/Re
 import { batchedUpdates } from "#/lib/batchedUpdates";
 import { HITSLOP_20 } from "#/lib/constants";
 import { isBlockedOrBlocking, isMuted } from "#/lib/moderation/blocked-and-muted";
+import { prefetch } from "#/lib/prefetchImage";
 import { makeProfileLink, makeStarterPackLink } from "#/lib/routes/links";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
@@ -170,7 +170,7 @@ function StarterPackScreenLoaded({
 		shortenLink(makeStarterPackLink(starterPack.creator.did, rkey)).then((res) => {
 			setLink(res.url);
 		});
-		Image.prefetch(getStarterPackOgCard(starterPack))
+		prefetch(getStarterPackOgCard(starterPack))
 			.then(() => {
 				setImageLoaded(true);
 			})

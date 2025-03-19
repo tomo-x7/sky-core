@@ -1,6 +1,5 @@
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
 import React from "react";
-import { Image } from "react-native";
 import { LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -99,15 +98,7 @@ function ComposerReplyToImages({
 				...a.mx_xs,
 			}}
 		>
-			{(images.length === 1 && (
-				<Image
-					source={{ uri: images[0].thumb }}
-					style={a.flex_1}
-					//@ts-expect-error
-					cachePolicy="memory-disk"
-					accessibilityIgnoresInvertColors
-				/>
-			)) ||
+			{(images.length === 1 && <img src={images[0].thumb} style={a.flex_1} />) ||
 				(images.length === 2 && (
 					<div
 						style={{
@@ -116,18 +107,8 @@ function ComposerReplyToImages({
 							...a.gap_2xs,
 						}}
 					>
-						<Image
-							source={{ uri: images[0].thumb }}
-							style={a.flex_1} //@ts-expect-error
-							cachePolicy="memory-disk"
-							accessibilityIgnoresInvertColors
-						/>
-						<Image
-							source={{ uri: images[1].thumb }}
-							style={a.flex_1} //@ts-expect-error
-							cachePolicy="memory-disk"
-							accessibilityIgnoresInvertColors
-						/>
+						<img src={images[0].thumb} style={a.flex_1} />
+						<img src={images[1].thumb} style={a.flex_1} />
 					</div>
 				)) ||
 				(images.length === 3 && (
@@ -138,30 +119,15 @@ function ComposerReplyToImages({
 							...a.gap_2xs,
 						}}
 					>
-						<Image
-							source={{ uri: images[0].thumb }}
-							style={a.flex_1} //@ts-expect-error
-							cachePolicy="memory-disk"
-							accessibilityIgnoresInvertColors
-						/>
+						<img src={images[0].thumb} style={a.flex_1} />
 						<div
 							style={{
 								...a.flex_1,
 								...a.gap_2xs,
 							}}
 						>
-							<Image
-								source={{ uri: images[1].thumb }}
-								style={a.flex_1} //@ts-expect-error
-								cachePolicy="memory-disk"
-								accessibilityIgnoresInvertColors
-							/>
-							<Image
-								source={{ uri: images[2].thumb }}
-								style={a.flex_1} //@ts-expect-error
-								cachePolicy="memory-disk"
-								accessibilityIgnoresInvertColors
-							/>
+							<img src={images[1].thumb} style={a.flex_1} />
+							<img src={images[2].thumb} style={a.flex_1} />
 						</div>
 					</div>
 				)) ||
@@ -179,18 +145,8 @@ function ComposerReplyToImages({
 								...a.gap_2xs,
 							}}
 						>
-							<Image
-								source={{ uri: images[0].thumb }}
-								style={a.flex_1} //@ts-expect-error
-								cachePolicy="memory-disk"
-								accessibilityIgnoresInvertColors
-							/>
-							<Image
-								source={{ uri: images[1].thumb }}
-								style={a.flex_1} //@ts-expect-error
-								cachePolicy="memory-disk"
-								accessibilityIgnoresInvertColors
-							/>
+							<img src={images[0].thumb} style={a.flex_1} />
+							<img src={images[1].thumb} style={a.flex_1} />
 						</div>
 						<div
 							style={{
@@ -199,18 +155,8 @@ function ComposerReplyToImages({
 								...a.gap_2xs,
 							}}
 						>
-							<Image
-								source={{ uri: images[2].thumb }}
-								style={a.flex_1} //@ts-expect-error
-								cachePolicy="memory-disk"
-								accessibilityIgnoresInvertColors
-							/>
-							<Image
-								source={{ uri: images[3].thumb }}
-								style={a.flex_1} //@ts-expect-error
-								cachePolicy="memory-disk"
-								accessibilityIgnoresInvertColors
-							/>
+							<img src={images[2].thumb} style={a.flex_1} />
+							<img src={images[3].thumb} style={a.flex_1} />
 						</div>
 					</div>
 				))}

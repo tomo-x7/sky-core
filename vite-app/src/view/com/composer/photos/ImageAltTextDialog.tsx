@@ -1,6 +1,4 @@
 import React from "react";
-import { Image } from "react-native";
-import type { ImageStyle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -52,7 +50,7 @@ const ImageAltTextInner = ({
 }): React.ReactNode => {
 	const t = useTheme();
 
-	const imageStyle = React.useMemo<ImageStyle>(() => {
+	const imageStyle = React.useMemo<React.CSSProperties>(() => {
 		const maxWidth = 450;
 		const source = image.transformed ?? image.source;
 
@@ -93,16 +91,9 @@ const ImageAltTextInner = ({
 						...a.overflow_hidden,
 					}}
 				>
-					<Image
-						style={imageStyle}
-						source={{
-							uri: (image.transformed ?? image.source).path,
-						}}
-						//@ts-expect-error
-						contentFit="contain"
-						accessible={true}
-						accessibilityIgnoresInvertColors
-						enableLiveTextInteraction
+					<img
+						style={{ ...imageStyle, objectFit: "contain", userSelect: "text" }}
+						src={(image.transformed ?? image.source).path}
 					/>
 				</div>
 			</div>

@@ -1,6 +1,5 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
 import type React from "react";
-import { Image } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
@@ -88,20 +87,15 @@ export function ImageItem({
 				...{ aspectRatio: 1, maxWidth: 100 },
 			}}
 		>
-			<Image
+			<img
 				key={thumbnail}
-				source={{ uri: thumbnail }}
+				src={thumbnail}
 				style={{
 					...a.flex_1,
 					...a.rounded_xs,
 					...t.atoms.bg_contrast_25,
+					objectFit: "cover",
 				}}
-				//@ts-expect-error
-				contentFit="cover"
-				accessible={true}
-				accessibilityIgnoresInvertColors
-				accessibilityHint={alt}
-				accessibilityLabel=""
 			/>
 			<MediaInsetBorder style={a.rounded_xs} />
 			{children}

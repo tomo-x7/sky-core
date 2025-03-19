@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useState } from "react";
-import { Image, type ImageStyle, Pressable, TouchableWithoutFeedback } from "react-native";
+import { Pressable, TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 import { Text } from "#/components/Typography";
@@ -95,26 +95,16 @@ function LightboxInner({
 					<div style={styles.aviCenterer}>
 						<img
 							src={img.uri}
-							// @ts-expect-error web-only
-							style={
-								{
-									...styles.avi,
-									borderRadius:
-										img.type === "circle-avi" ? "50%" : img.type === "rect-avi" ? "10%" : 0,
-								} as ImageStyle
-							}
+							style={{
+								...styles.avi,
+								borderRadius: img.type === "circle-avi" ? "50%" : img.type === "rect-avi" ? "10%" : 0,
+							}}
 							alt={img.alt}
 						/>
 					</div>
 				) : (
 					<div style={styles.imageCenterer}>
-						<Image
-							accessibilityIgnoresInvertColors
-							source={img}
-							style={styles.image as ImageStyle}
-							accessibilityLabel={img.alt}
-							accessibilityHint=""
-						/>
+						<img src={img.uri} style={styles.image} />
 						{canGoLeft && (
 							<button
 								type="button"

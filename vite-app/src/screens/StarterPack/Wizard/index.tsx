@@ -3,7 +3,6 @@ import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { Image } from "react-native";
 import { Keyboard } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
@@ -18,6 +17,7 @@ import { Text } from "#/components/Typography";
 import { STARTER_PACK_MAX_SIZE } from "#/lib/constants";
 import { useEnableKeyboardControllerScreen } from "#/lib/hooks/useEnableKeyboardController";
 import { createSanitizedDisplayName } from "#/lib/moderation/create-sanitized-display-name";
+import { prefetch } from "#/lib/prefetchImage";
 import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -170,7 +170,7 @@ function WizardInner({
 
 	const onSuccessCreate = (data: { uri: string; cid: string }) => {
 		const rkey = new AtUri(data.uri).rkey;
-		Image.prefetch(getStarterPackOgCard(currentProfile!.did, rkey));
+		prefetch(getStarterPackOgCard(currentProfile!.did, rkey));
 		dispatch({ type: "SetProcessing", processing: false });
 		navigation.replace("StarterPack", {
 			name: currentAccount!.handle,

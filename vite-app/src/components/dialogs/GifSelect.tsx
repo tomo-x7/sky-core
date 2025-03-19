@@ -1,6 +1,4 @@
 import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { Image } from "react-native";
-import type { TextInput } from "react-native";
 import { useWindowDimensions } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -60,7 +58,7 @@ function GifList({
 }) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
-	const textInputRef = useRef<TextInput>(null);
+	const textInputRef = useRef<HTMLInputElement>(null);
 	const listRef = useRef<ListMethods>(null);
 	const [undeferredSearch, setSearch] = useState("");
 	const search = useThrottledValue(undeferredSearch, 500);
@@ -96,7 +94,7 @@ function GifList({
 	const onGoBack = useCallback(() => {
 		if (isSearching) {
 			// clear the input and reset the state
-			textInputRef.current?.clear();
+			if (textInputRef.current) textInputRef.current.value = "";
 			setSearch("");
 		} else {
 			control.close();
@@ -150,7 +148,8 @@ function GifList({
 							listRef.current?.scrollToOffset({ offset: 0, animated: false });
 						}}
 						returnKeyType="search"
-						clearButtonMode="while-editing"
+						// TODO
+						// clearButtonMode="while-editing"
 						inputRef={textInputRef}
 						maxLength={50}
 						onKeyPress={({ nativeEvent }) => {
@@ -176,7 +175,6 @@ function GifList({
 				columnWrapperStyle={[a.gap_sm]}
 				//@ts-expect-error
 				contentContainerStyle={[a.h_full_vh]}
-				//@ts-expect-error
 				style={a.h_full_vh}
 				ListHeaderComponent={
 					<>
@@ -263,23 +261,18 @@ export function GifPreview({
 			onPress={onPress}
 		>
 			{({ pressed }) => (
-				<Image
+				<img
 					style={{
 						...a.flex_1,
 						...a.mb_sm,
 						...a.rounded_sm,
-						...{ aspectRatio: 1, opacity: pressed ? 0.8 : 1 },
+						aspectRatio: 1,
+						opacity: pressed ? 0.8 : 1,
 						...t.atoms.bg_contrast_25,
+						objectFit: "cover",
 					}}
-					source={{
-						uri: gif.media_formats.tinygif.url,
-					}}
-					//@ts-expect-error
-					contentFit="cover"
-					accessibilityLabel={gif.title}
-					accessibilityHint=""
-					cachePolicy="none"
-					accessibilityIgnoresInvertColors
+					// キャッシュを無効化
+					src={`${gif.media_formats.tinygif.url}?t=${new Date().getTime()}`}
 				/>
 			)}
 		</Button>

@@ -1,6 +1,5 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
-import { Image } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -99,18 +98,14 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								Share this starter pack and help people join your community on Bluesky.
 							</Text>
 						</div>
-						<Image
-							source={{ uri: imageUrl }}
+						<img
+							src={imageUrl}
 							style={{
 								...a.rounded_sm,
-
-								...{
-									aspectRatio: 1200 / 630,
-									transform: [{ scale: isTabletOrDesktop ? 0.85 : 1 }],
-									marginTop: isTabletOrDesktop ? -20 : 0,
-								},
+								aspectRatio: 1200 / 630,
+								marginTop: isTabletOrDesktop ? -20 : 0,
+								scale: isTabletOrDesktop ? 0.85 : 1,
 							}}
-							accessibilityIgnoresInvertColors={true}
 						/>
 						<div
 							style={{

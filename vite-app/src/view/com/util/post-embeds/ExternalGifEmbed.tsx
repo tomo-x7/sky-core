@@ -1,13 +1,13 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import React from "react";
-import { Image } from "react-native";
-import { ActivityIndicator, type GestureResponderEvent, Pressable } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 import { Fill } from "#/components/Fill";
 import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
+import { prefetch } from "#/lib/prefetchImage";
 import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
 import { useExternalEmbedsPrefs } from "#/state/preferences";
 
@@ -30,18 +30,18 @@ export function ExternalGifEmbed({
 	const [isAnimating, setIsAnimating] = React.useState(true);
 
 	// Used for controlling animation
-	const imageRef = React.useRef<Image>(null);
+	const imageRef = React.useRef<HTMLImageElement>(null);
 
 	const load = React.useCallback(() => {
 		setIsPlayerActive(true);
-		Image.prefetch(params.playerUri).then(() => {
+		prefetch(params.playerUri).then(() => {
 			// Replace the image once it's fetched
 			setIsPrefetched(true);
 		});
 	}, [params.playerUri]);
 
 	const onPlayPress = React.useCallback(
-		(event: GestureResponderEvent) => {
+		(event: React.MouseEvent<HTMLButtonElement>) => {
 			// Don't propagate on web
 			event.preventDefault();
 
@@ -56,13 +56,7 @@ export function ExternalGifEmbed({
 				return;
 			}
 			// Control animation on native
-			setIsAnimating((prev) => {
-				if (prev) {
-					return false;
-				} else {
-					return true;
-				}
-			});
+			setIsAnimating((prev) => !prev);
 		},
 		[consentDialogControl, externalEmbedsPrefs, isPlayerActive, load, params.source],
 	);
@@ -70,7 +64,8 @@ export function ExternalGifEmbed({
 	return (
 		<>
 			<EmbedConsentDialog control={consentDialogControl} source={params.source} onAccept={load} />
-			<Pressable
+			<button
+				type="button"
 				style={{
 					...{ height: 300 },
 					...a.w_full,
@@ -81,24 +76,13 @@ export function ExternalGifEmbed({
 						borderBottomRightRadius: 0,
 					},
 				}}
-				onPress={onPlayPress}
-				accessibilityRole="button"
-				accessibilityHint={"Plays the GIF"}
-				accessibilityLabel={`Play ${link.title}`}
+				onClick={onPlayPress}
 			>
-				<Image
-					source={{
-						uri: !isPrefetched || !isAnimating ? link.thumb : params.playerUri,
-					}} // Web uses the thumb to control playback
-					style={{ flex: 1 }}
+				<img
+					src={!isPrefetched || !isAnimating ? link.thumb : params.playerUri} // Web uses the thumb to control playback
+					style={{ flex: 1, objectFit: "contain" }}
 					ref={imageRef}
-					//@ts-expect-error
-					autoplay={isAnimating}
-					contentFit="contain"
-					accessibilityIgnoresInvertColors
-					accessibilityLabel={link.title}
-					accessibilityHint={link.title}
-					cachePolicy={"memory-disk"} // cant control playback with memory-disk on ios
+					// autoplay={isAnimating}
 				/>
 
 				{(!isPrefetched || !isAnimating) && (
@@ -126,7 +110,7 @@ export function ExternalGifEmbed({
 						)}
 					</Fill>
 				)}
-			</Pressable>
+			</button>
 		</>
 	);
 }

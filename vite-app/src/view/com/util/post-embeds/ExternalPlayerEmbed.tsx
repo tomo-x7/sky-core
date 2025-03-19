@@ -1,7 +1,6 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image } from "react-native";
 import { ActivityIndicator, type GestureResponderEvent, Pressable, useWindowDimensions } from "react-native";
 import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
 import { WebView } from "react-native-webview";
@@ -203,7 +202,7 @@ export function ExternalPlayer({
 			>
 				{link.thumb && (!isPlayerActive || isLoading) ? (
 					<>
-						<Image style={a.flex_1} source={{ uri: link.thumb }} accessibilityIgnoresInvertColors />
+						<img style={a.flex_1} src={link.thumb} />
 						<Fill
 							style={{
 								...(t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg),

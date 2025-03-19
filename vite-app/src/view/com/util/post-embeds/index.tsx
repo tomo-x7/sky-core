@@ -11,7 +11,6 @@ import {
 	moderateUserList,
 } from "@atproto/api";
 import React from "react";
-import { Image } from "react-native";
 import { InteractionManager } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
@@ -20,6 +19,7 @@ import * as ListCard from "#/components/ListCard";
 import { Embed as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
 import { type HandleRef, measureHandle } from "#/lib/hooks/useHandleRef";
 import { usePalette } from "#/lib/hooks/usePalette";
+import { prefetch } from "#/lib/prefetchImage";
 import { useLightboxControls } from "#/state/lightbox";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { FeedSourceCard } from "#/view/com/feeds/FeedSourceCard";
@@ -148,8 +148,7 @@ export function PostEmbeds({
 			};
 			const onPressIn = (_: number) => {
 				InteractionManager.runAfterInteractions(() => {
-					//@ts-expect-error
-					Image.prefetch(items.map((i) => i.uri));
+					for (const src of items.map((i) => i.uri)) prefetch(src);
 				});
 			};
 

@@ -27,7 +27,6 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 				allowsMultipleSelection: true,
 			}),
 		);
-		//@ts-expect-error
 		const results = await Promise.all(images.map((img) => createComposerImage(img)));
 
 		onAdd(results);
@@ -44,7 +43,7 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 			color="primary"
 			disabled={disabled}
 		>
-			<Image size="lg" style={disabled && t.atoms.text_contrast_low} />
+			<Image size="lg" style={disabled ? t.atoms.text_contrast_low : {}} />
 		</Button>
 	);
 }

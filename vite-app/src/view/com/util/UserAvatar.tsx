@@ -2,7 +2,7 @@ import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
-import { Image, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 import Svg, { Circle, Path, Rect } from "react-native-svg";
 
@@ -21,7 +21,6 @@ import { makeProfileLink } from "#/lib/routes/links";
 import { colors } from "#/lib/styles";
 import { precacheProfile } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
-import { HighPriorityImage } from "#/view/com/util/images/Image";
 import { openCamera, openCropper, openPicker } from "../../../lib/media/picker";
 
 export type UserAvatarType = "user" | "algo" | "list" | "labeler";
@@ -191,29 +190,15 @@ let UserAvatar = ({
 
 	return avatar ? (
 		<div style={containerStyle}>
-			{usePlainRNImage ? (
-				<Image
-					accessibilityIgnoresInvertColors
-					style={aviStyle}
-					resizeMode="cover"
-					source={{
-						uri: hackModifyThumbnailPath(avatar, size < 90),
-					}}
-					blurRadius={moderation?.blur ? BLUR_AMOUNT : 0}
-					onLoad={onLoad}
-				/>
-			) : (
-				<HighPriorityImage
-					style={aviStyle}
-					// @ts-expect-error
-					contentFit="cover"
-					source={{
-						uri: hackModifyThumbnailPath(avatar, size < 90),
-					}}
-					blurRadius={moderation?.blur ? BLUR_AMOUNT : 0}
-					onLoad={onLoad}
-				/>
-			)}
+			<img
+				style={{
+					...aviStyle,
+					objectFit: "cover",
+					...(moderation?.blur ? { filter: `blur(${BLUR_AMOUNT})` } : {}),
+				}}
+				src={hackModifyThumbnailPath(avatar, size < 90)}
+				onLoad={onLoad}
+			/>
 			<MediaInsetBorder style={{ borderRadius: aviStyle.borderRadius }} />
 			{alert}
 		</div>
@@ -312,11 +297,7 @@ let EditableUserAvatar = ({
 			<Menu.Trigger label={"Edit avatar"}>
 				{({ props }) => (
 					<Pressable {...props}>
-						{avatar ? (
-							<HighPriorityImage style={aviStyle} source={{ uri: avatar }} accessibilityRole="image" />
-						) : (
-							<DefaultAvatar type={type} size={size} />
-						)}
+						{avatar ? <img style={aviStyle} src={avatar} /> : <DefaultAvatar type={type} size={size} />}
 						<div
 							style={{
 								...styles.editButtonContainer,
