@@ -2,7 +2,6 @@ import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
-import { TouchableOpacity } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { Text } from "#/components/Typography";
@@ -96,23 +95,13 @@ export function Component({
 					...(isMobile && { paddingLeft: 16, paddingRight: 16 }),
 				}}
 			>
-				<TouchableOpacity
-					onPress={onPressCancel}
-					accessibilityRole="button"
-					accessibilityLabel={"Cancel image crop"}
-					accessibilityHint={"Exits image cropping process"}
-				>
+				<button onClick={onPressCancel} type="button">
 					<Text type="xl" style={pal.link}>
 						Cancel
 					</Text>
-				</TouchableOpacity>
+				</button>
 				<div style={s.flex1} />
-				<TouchableOpacity
-					onPress={onPressDone}
-					accessibilityRole="button"
-					accessibilityLabel={"Save image crop"}
-					accessibilityHint={"Saves image crop settings"}
-				>
+				<button onClick={onPressDone} type="button">
 					<LinearGradient
 						colors={[gradients.blueLight.start, gradients.blueLight.end]}
 						start={{ x: 0, y: 0 }}
@@ -124,7 +113,7 @@ export function Component({
 							Done
 						</Text>
 					</LinearGradient>
-				</TouchableOpacity>
+				</button>
 			</div>
 		</div>
 	);

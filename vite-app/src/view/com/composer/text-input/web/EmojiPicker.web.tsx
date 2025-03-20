@@ -2,10 +2,10 @@ import Picker from "@emoji-mart/react";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React from "react";
-import { useWindowDimensions } from "react-native";
 
 import { atoms as a, flatten } from "#/alf";
 import { Portal } from "#/components/Portal";
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { textInputWebEmitter } from "#/view/com/composer/text-input/textInputWebEmitter";
 
 const HEIGHT_OFFSET = 40;

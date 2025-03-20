@@ -2,9 +2,9 @@ import type { ComAtprotoServerDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setStringAsync } from "expo-clipboard";
 import React from "react";
-import { ActivityIndicator, TouchableOpacity } from "react-native";
 
 import { flatten } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -167,17 +167,7 @@ function InviteCode({
 				...{ borderBottomWidth: 1, paddingLeft: 20, paddingRight: 20, paddingTop: 14, paddingBottom: 14 },
 			}}
 		>
-			<TouchableOpacity
-				style={styles.inviteCode}
-				onPress={onPress}
-				accessibilityRole="button"
-				accessibilityLabel={
-					invites.available.length === 1
-						? "Invite codes: 1 available"
-						: `Invite codes: ${invites.available.length} available`
-				}
-				accessibilityHint={"Opens list of invite codes"}
-			>
+			<button type="button" style={styles.inviteCode} onClick={onPress}>
 				<Text
 					type={used ? "md" : "md-bold"}
 					style={used ? flatten([pal.textLight, styles.strikeThrough]) : pal.text}
@@ -196,7 +186,7 @@ function InviteCode({
 					</Text>
 				)}
 				{!used && <FontAwesomeIcon icon={["far", "clone"]} style={pal.text} />}
-			</TouchableOpacity>
+			</button>
 			{uses.length > 0 ? (
 				<div
 					style={{

@@ -1,8 +1,9 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { type JSX } from "react";
-import { ActivityIndicator, FlatList as RNFlatList, RefreshControl } from "react-native";
+import { FlatList as RNFlatList, RefreshControl } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as ListCard from "#/components/ListCard";
 import { Text } from "#/components/Typography";
 import { BulletList_Stroke2_Corner0_Rounded as ListIcon } from "#/components/icons/BulletList";

@@ -1,6 +1,6 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
 import { useCallback, useMemo } from "react";
-import { ActivityIndicator, FlatList } from "react-native";
+import { FlatList } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -11,6 +11,7 @@ import { useLikedByQuery } from "#/state/queries/post-liked-by";
 import { useResolveUriQuery } from "#/state/queries/resolve-uri";
 import { ProfileCardWithFollowBtn } from "#/view/com/profile/ProfileCard";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
+import { ActivityIndicator } from "./ActivityIndicator";
 
 interface LikesDialogProps {
 	control: Dialog.DialogOuterProps["control"];

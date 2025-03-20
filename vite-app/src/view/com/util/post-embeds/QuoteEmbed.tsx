@@ -14,13 +14,11 @@ import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { TouchableOpacity } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { RichText } from "#/components/RichText";
 import { SubtleWebHover } from "#/components/SubtleWebHover";
 import { Text } from "#/components/Typography";
-import { HITSLOP_20 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { InfoCircleIcon } from "#/lib/icons";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -248,7 +246,8 @@ export function QuoteEmbed({
 
 export function QuoteX({ onRemove }: { onRemove: () => void }) {
 	return (
-		<TouchableOpacity
+		<button
+			type="button"
 			style={{
 				...a.absolute,
 				...a.p_xs,
@@ -262,16 +261,13 @@ export function QuoteX({ onRemove }: { onRemove: () => void }) {
 					backgroundColor: "rgba(0, 0, 0, 0.75)",
 				},
 			}}
-			onPress={onRemove}
-			accessibilityRole="button"
-			accessibilityLabel={"Remove quote"}
-			accessibilityHint={"Removes quoted post"}
-			onAccessibilityEscape={onRemove}
-			hitSlop={HITSLOP_20}
+			onClick={onRemove}
+			// onAccessibilityEscape={onRemove}
+			// hitSlop={HITSLOP_20}
 		>
 			{/* @ts-expect-error */}
 			<FontAwesomeIcon size={12} icon="xmark" style={s.white} />
-		</TouchableOpacity>
+		</button>
 	);
 }
 

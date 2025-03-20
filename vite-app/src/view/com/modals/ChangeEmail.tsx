@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import ActivityIndicator from "#/components/ActivityIndicator";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";

@@ -1,5 +1,4 @@
 import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { useWindowDimensions } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -62,7 +61,6 @@ function GifList({
 	const listRef = useRef<ListMethods>(null);
 	const [undeferredSearch, setSearch] = useState("");
 	const search = useThrottledValue(undeferredSearch, 500);
-	const { height } = useWindowDimensions();
 
 	const isSearching = search.length > 0;
 

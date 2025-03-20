@@ -5,9 +5,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import EventEmitter from "eventemitter3";
 import React, { useRef } from "react";
-import { AppState } from "react-native";
 
 import BroadcastChannel from "#/lib/broadcast";
+import { AppState } from "#/state/appstate";
 import { useAgent, useSession } from "#/state/session";
 import { useModerationOpts } from "../../preferences/moderation-opts";
 import { truncateAndInvalidate } from "../util";

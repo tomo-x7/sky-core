@@ -2,11 +2,11 @@ import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type React from "react";
 import { type PropsWithChildren, useMemo, useRef } from "react";
-import { Dimensions, type Insets, TouchableOpacity, TouchableWithoutFeedback, useWindowDimensions } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import RootSiblings from "react-native-root-siblings";
 import { FullWindowOverlay } from "#/components/FullWindowOverlay";
 import { Text } from "#/components/Typography";
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { useTheme } from "#/lib/ThemeContext";
 import { HITSLOP_10 } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -45,7 +45,13 @@ interface DropdownButtonProps {
 	openUpwards?: boolean;
 	rightOffset?: number;
 	bottomOffset?: number;
-	hitSlop?: Insets;
+	/**@deprecated 未実装 */
+	hitSlop?: {
+		top?: number | undefined;
+		left?: number | undefined;
+		bottom?: number | undefined;
+		right?: number | undefined;
+	};
 	accessibilityLabel?: string;
 	accessibilityHint?: string;
 }
@@ -69,7 +75,7 @@ export function DropdownButton({
 
 	const onPress = (e: React.MouseEvent<HTMLButtonElement>) => {
 		const ref = ref1.current || ref2.current;
-		const { height: winHeight } = Dimensions.get("window");
+		const { height: winHeight } = useWindowDimensions();
 		const pressY = e.nativeEvent.pageY;
 		const rect = ref?.getBoundingClientRect();
 		if (rect == null) return;
@@ -192,11 +198,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 	return (
 		<FullWindowOverlay>
 			{/* This TouchableWithoutFeedback renders the background so if the user clicks outside, the dropdown closes */}
-			<TouchableWithoutFeedback
-				onPress={onOuterPress}
-				accessibilityLabel={"Toggle dropdown"}
-				accessibilityHint=""
-			>
+			<button type="button" onClick={onOuterPress}>
 				<Animated.View
 					entering={FadeIn}
 					// @ts-expect-error
@@ -207,7 +209,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 						{ top: -pageY, bottom: pageY - screenHeight },
 					}}
 				/>
-			</TouchableWithoutFeedback>
+			</button>
 			<Animated.View
 				// @ts-expect-error
 				style={{
@@ -219,13 +221,11 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 				{items.map((item, index) => {
 					if (isBtn(item)) {
 						return (
-							<TouchableOpacity
+							<button
+								type="button"
 								key={index}
 								style={styles.menuItem}
-								onPress={() => onPressItem(index)}
-								accessibilityRole="button"
-								accessibilityLabel={item.label}
-								accessibilityHint={`Selects option ${index + 1} of ${numItems}`}
+								onClick={() => onPressItem(index)}
 							>
 								{item.icon && (
 									<FontAwesomeIcon
@@ -242,7 +242,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 								>
 									{item.label}
 								</Text>
-							</TouchableOpacity>
+							</button>
 						);
 					} else if (isSep(item)) {
 						return (

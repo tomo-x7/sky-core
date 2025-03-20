@@ -2,8 +2,6 @@ import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { LayoutAnimation, Pressable } from "react-native";
-import { Linking } from "react-native";
 import { useReducedMotion } from "react-native-reanimated";
 
 import { atoms as a, tokens, useTheme } from "#/alf";
@@ -94,10 +92,9 @@ export function SettingsScreen(props: Props) {
 						<>
 							<SettingsList.PressableItem
 								label={"Switch account"}
-								accessibilityHint={"Shows other accounts you can switch to"}
 								onPress={() => {
 									if (!reducedMotion) {
-										LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+										// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 									}
 									setShowAccounts((s) => !s);
 								}}
@@ -165,11 +162,7 @@ export function SettingsScreen(props: Props) {
 						<SettingsList.ItemIcon icon={EarthIcon} />
 						<SettingsList.ItemText>Languages</SettingsList.ItemText>
 					</SettingsList.LinkItem>
-					<SettingsList.PressableItem
-						onPress={() => Linking.openURL(HELP_DESK_URL)}
-						label={"Help"}
-						accessibilityHint={"Opens helpdesk in browser"}
-					>
+					<SettingsList.PressableItem onPress={() => window.open(HELP_DESK_URL, "_blank")} label={"Help"}>
 						<SettingsList.ItemIcon icon={CircleQuestionIcon} />
 						<SettingsList.ItemText>Help</SettingsList.ItemText>
 						<SettingsList.Chevron />
@@ -192,7 +185,7 @@ export function SettingsScreen(props: Props) {
 							<SettingsList.PressableItem
 								onPress={() => {
 									if (!reducedMotion) {
-										LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+										// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 									}
 									setShowDevOptions((d) => !d);
 								}}
@@ -348,7 +341,8 @@ function AccountRow({
 				<Menu.Root>
 					<Menu.Trigger label={"Account options"}>
 						{({ props, state }) => (
-							<Pressable
+							<button
+								type="button"
 								{...props}
 								style={{
 									...a.absolute,
@@ -359,7 +353,7 @@ function AccountRow({
 								}}
 							>
 								<DotsHorizontal size="md" style={t.atoms.text} />
-							</Pressable>
+							</button>
 						)}
 					</Menu.Trigger>
 					<Menu.Outer showCancel>

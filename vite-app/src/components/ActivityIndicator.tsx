@@ -1,8 +1,11 @@
-const ActivityIndicator = ({
+const id = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(6))));
+export const ActivityIndicator = ({
 	size = 24,
 	color = "#000",
 	style,
-}: { size?: number; color?: string; style?: React.CSSProperties }) => {
+}: { size?: number | "large"; color?: string; style?: React.CSSProperties }) => {
+	// TODO 数字決める
+	if (size === "large") size = 24;
 	return (
 		<>
 			<div
@@ -13,11 +16,11 @@ const ActivityIndicator = ({
 					borderRadius: "50%",
 					border: `3px solid ${color}`,
 					borderTop: "3px solid transparent",
-					animation: "spin 1s linear infinite",
+					animation: `spin_${id} 1s linear infinite`,
 				}}
 			/>
 			<style>
-				{`@keyframes spin {
+				{`@keyframes spin_${id} {
   						0% { transform: rotate(0deg); }
   						100% { transform: rotate(360deg); }
 				}`}
@@ -25,5 +28,3 @@ const ActivityIndicator = ({
 		</>
 	);
 };
-
-export default ActivityIndicator;

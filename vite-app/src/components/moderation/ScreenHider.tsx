@@ -1,7 +1,6 @@
 import type { ModerationUI } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { TouchableWithoutFeedback } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -116,13 +115,11 @@ export function ScreenHider({
 						>
 							{desc.name}.{" "}
 						</Text>
-						<TouchableWithoutFeedback
-							onPress={() => {
+						<button
+							type="button"
+							onClick={() => {
 								control.open();
 							}}
-							accessibilityRole="button"
-							accessibilityLabel={"Learn more about this warning"}
-							accessibilityHint=""
 						>
 							<Text
 								style={{
@@ -134,7 +131,7 @@ export function ScreenHider({
 							>
 								Learn More
 							</Text>
-						</TouchableWithoutFeedback>
+						</button>
 						<ModerationDetailsDialog control={control} modcause={blur} />
 					</>
 				)}{" "}

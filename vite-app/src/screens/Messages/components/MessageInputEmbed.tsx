@@ -1,7 +1,6 @@
 import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, RichText as RichTextAPI, moderatePost } from "@atproto/api";
 import { type RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -205,7 +204,7 @@ export function MessageInputEmbed({
 			<Button
 				label={"Remove embed"}
 				onPress={() => {
-					LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+					// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 					setEmbed(undefined);
 				}}
 				size="tiny"

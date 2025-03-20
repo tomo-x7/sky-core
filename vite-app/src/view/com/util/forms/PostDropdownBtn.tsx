@@ -1,7 +1,6 @@
 import type { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, RichText as RichTextAPI } from "@atproto/api";
 import type React from "react";
 import { memo, useMemo, useState } from "react";
-import type { PressableProps } from "react-native";
 
 import { atoms as a, flatten, useTheme as useAlf } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
@@ -28,7 +27,13 @@ let PostDropdownBtn = ({
 	record: AppBskyFeedPost.Record;
 	richText: RichTextAPI;
 	style?: React.CSSProperties;
-	hitSlop?: PressableProps["hitSlop"];
+	/**@deprecated 未実装 */
+	hitSlop?: {
+		top?: number | undefined;
+		left?: number | undefined;
+		bottom?: number | undefined;
+		right?: number | undefined;
+	};
 	size?: "lg" | "md" | "sm";
 	timestamp: string;
 	threadgateRecord?: AppBskyFeedThreadgate.Record;

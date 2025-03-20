@@ -1,6 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { findNodeHandle } from "react-native";
 import { Text } from "#/components/Typography";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -19,10 +18,9 @@ interface FeedSectionProps {
 	isFocused: boolean;
 	scrollElRef: ListRef;
 	ignoreFilterFor?: string;
-	setScrollViewTag: (tag: number | null) => void;
 }
 export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function FeedSectionImpl(
-	{ feed, headerHeight, isFocused, scrollElRef, ignoreFilterFor, setScrollViewTag },
+	{ feed, headerHeight, isFocused, scrollElRef, ignoreFilterFor },
 	ref,
 ) {
 	const queryClient = useQueryClient();
@@ -49,13 +47,6 @@ export const ProfileFeedSection = React.forwardRef<SectionRef, FeedSectionProps>
 	const renderPostsEmpty = React.useCallback(() => {
 		return <EmptyState icon="growth" message={"No posts yet."} />;
 	}, []);
-
-	React.useEffect(() => {
-		if (isFocused && scrollElRef.current) {
-			const nativeTag = findNodeHandle(scrollElRef.current);
-			setScrollViewTag(nativeTag);
-		}
-	}, [isFocused, scrollElRef, setScrollViewTag]);
 
 	return (
 		<div>

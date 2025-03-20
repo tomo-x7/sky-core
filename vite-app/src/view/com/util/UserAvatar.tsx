@@ -2,7 +2,6 @@ import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
-import { Pressable } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 import Svg, { Circle, Path, Rect } from "react-native-svg";
 
@@ -296,7 +295,7 @@ let EditableUserAvatar = ({
 		<Menu.Root>
 			<Menu.Trigger label={"Edit avatar"}>
 				{({ props }) => (
-					<Pressable {...props}>
+					<button type="button" {...props}>
 						{avatar ? <img style={aviStyle} src={avatar} /> : <DefaultAvatar type={type} size={size} />}
 						<div
 							style={{
@@ -306,7 +305,7 @@ let EditableUserAvatar = ({
 						>
 							<CameraFilled height={14} width={14} style={t.atoms.text} />
 						</div>
-					</Pressable>
+					</button>
 				)}
 			</Menu.Trigger>
 			<Menu.Outer showCancel>
@@ -365,7 +364,6 @@ let PreviewableUserAvatar = ({
 			) : (
 				<Link
 					label={`${profile.displayName || profile.handle}'s avatar`}
-					accessibilityHint={"Opens this profile"}
 					to={makeProfileLink({
 						did: profile.did,
 						handle: profile.handle,

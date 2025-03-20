@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Text as RNText } from "react-native";
 
 import { InlineLinkText, createStaticClick, createStaticClickIfUnmodified } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -79,7 +78,7 @@ export function RichTextTag({
 						label={label}
 						style={textStyle}
 					>
-						{<RNText ref={menuProps.ref}>{display}</RNText>}
+						{<span ref={menuProps.ref}>{display}</span>}
 					</InlineLinkText>
 				)}
 			</Menu.Trigger>

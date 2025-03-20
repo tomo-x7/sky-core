@@ -1,5 +1,4 @@
 import React from "react";
-import { Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -39,7 +38,8 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 				<Menu.Trigger label={"Repost or quote post"}>
 					{({ props, state }) => {
 						return (
-							<Pressable
+							<button
+								type="button"
 								{...props}
 								style={{
 									...a.rounded_full,
@@ -55,7 +55,7 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 									repostCount={repostCount}
 									big={big}
 								/>
-							</Pressable>
+							</button>
 						);
 					}}
 				</Menu.Trigger>

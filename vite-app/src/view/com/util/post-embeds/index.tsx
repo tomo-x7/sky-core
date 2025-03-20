@@ -147,9 +147,9 @@ export function PostEmbeds({
 				})();
 			};
 			const onPressIn = (_: number) => {
-				InteractionManager.runAfterInteractions(() => {
+				setTimeout(() => {
 					for (const src of items.map((i) => i.uri)) prefetch(src);
-				});
+				},0);
 			};
 
 			if (images.length === 1) {

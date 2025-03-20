@@ -1,7 +1,6 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Pressable } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import * as Layout from "#/components/Layout";
@@ -103,19 +102,13 @@ export function ProfileSubpageHeader({
 				}}
 			>
 				<div ref={aviRef}>
-					<Pressable
-						onPress={onPressAvi}
-						accessibilityRole="image"
-						accessibilityLabel={"View the avatar"}
-						accessibilityHint=""
-						style={{ width: 58 }}
-					>
+					<button type="button" onClick={onPressAvi} style={{ width: 58 }}>
 						{avatarType === "starter-pack" ? (
 							<StarterPack width={58} gradient="sky" />
 						) : (
 							<UserAvatar type={avatarType} size={58} avatar={avatar} />
 						)}
-					</Pressable>
+					</button>
 				</div>
 				<div style={{ flex: 1, gap: 4 }}>
 					{isLoading ? (

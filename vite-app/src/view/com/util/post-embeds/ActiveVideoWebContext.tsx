@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
-import { useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 
 const Context = React.createContext<{
 	activeViewId: string | null;

@@ -1,5 +1,4 @@
 import { useCallback, useImperativeHandle, useRef, useState } from "react";
-import { useWindowDimensions } from "react-native";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
@@ -21,7 +20,6 @@ export function ServerInputDialog({
 	control: Dialog.DialogOuterProps["control"];
 	onSelect: (url: string) => void;
 }) {
-	const { height } = useWindowDimensions();
 	const formRef = useRef<DialogInnerRef>(null);
 
 	// persist these options between dialog open/close

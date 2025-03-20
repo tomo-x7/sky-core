@@ -1,5 +1,3 @@
-import { Keyboard } from "react-native";
-
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -7,6 +5,7 @@ import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { Shield_Stroke2_Corner0_Rounded } from "#/components/icons/Shield";
+import { Keyboard } from "#/lib/Keyboard";
 import {
 	ADULT_CONTENT_LABELS,
 	type AdultSelfLabel,
@@ -49,7 +48,6 @@ export function LabelsBtn({
 					control.open();
 				}}
 				label={"Content warnings"}
-				accessibilityHint={"Opens a dialog to add a content warning to your post"}
 			>
 				<ButtonIcon icon={hasLabel ? Check : Shield_Stroke2_Corner0_Rounded} />
 				<ButtonText /*numberOfLines={1}  //TODO*/>

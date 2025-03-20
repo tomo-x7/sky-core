@@ -1,13 +1,9 @@
 import React from "react";
-import { Pressable } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
-import { ScaleAndFadeIn } from "#/lib/custom-animations/ScaleAndFade";
-import { ShrinkAndPop } from "#/lib/custom-animations/ShrinkAndPop";
 
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+// const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 let lastIndex = 0;
 
@@ -15,7 +11,7 @@ export function ChatEmptyPill() {
 	const t = useTheme();
 	const [promptIndex, setPromptIndex] = React.useState(lastIndex);
 
-	const scale = useSharedValue(1);
+	// const scale = useSharedValue(1);
 
 	const prompts = React.useMemo(() => {
 		return [
@@ -38,9 +34,9 @@ export function ChatEmptyPill() {
 		lastIndex = randomPromptIndex;
 	}, [prompts.length]);
 
-	const animatedStyle = useAnimatedStyle(() => ({
-		transform: [{ scale: scale.get() }],
-	}));
+	// const animatedStyle = useAnimatedStyle(() => ({
+	// 	transform: [{ scale: scale.get() }],
+	// }));
 
 	return (
 		<div
@@ -55,18 +51,18 @@ export function ChatEmptyPill() {
 				},
 			}}
 		>
-			<AnimatedPressable
+			<button
+				type="button"
 				style={{
 					...a.px_xl,
 					...a.py_md,
 					...a.rounded_full,
 					...t.atoms.bg_contrast_25,
 					...a.align_center,
-					...animatedStyle,
 				}}
-				entering={ScaleAndFadeIn}
-				exiting={ShrinkAndPop}
-				onPress={onPress}
+				// entering={ScaleAndFadeIn}
+				// exiting={ShrinkAndPop}
+				onClick={onPress}
 			>
 				<Text
 					style={{
@@ -77,7 +73,7 @@ export function ChatEmptyPill() {
 				>
 					{prompts[promptIndex]}
 				</Text>
-			</AnimatedPressable>
+			</button>
 		</div>
 	);
 }

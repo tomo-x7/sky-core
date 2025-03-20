@@ -12,7 +12,7 @@ import { useColorScheme } from "#/lib/useColorScheme";
 
 import darkSplashImage from "./assets/splash-dark.png";
 import splashImage from "./assets/splash.png";
-import { useOnLayout } from "./lib/onLayout";
+import { useOnLayout } from "./components/hooks/useOnLayout";
 import { useReduceMotion } from "./lib/useReduceMotion";
 import { Logotype } from "./view/icons/Logotype";
 

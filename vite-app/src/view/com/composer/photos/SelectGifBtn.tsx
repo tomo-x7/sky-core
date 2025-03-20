@@ -1,10 +1,10 @@
 import { useCallback, useRef } from "react";
-import { Keyboard } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { GifSelectDialog } from "#/components/dialogs/GifSelect";
 import { GifSquare_Stroke2_Corner0_Rounded as GifIcon } from "#/components/icons/Gif";
+import { Keyboard } from "#/lib/Keyboard";
 import type { Gif } from "#/state/queries/tenor";
 
 type Props = {
@@ -27,14 +27,13 @@ export function SelectGifBtn({ onClose, onSelectGif, disabled }: Props) {
 			<Button
 				onPress={onPressSelectGif}
 				label={"Select GIF"}
-				accessibilityHint={"Opens GIF select dialog"}
 				style={a.p_sm}
 				variant="ghost"
 				shape="round"
 				color="primary"
 				disabled={disabled}
 			>
-				<GifIcon size="lg" style={disabled && t.atoms.text_contrast_low} />
+				<GifIcon size="lg" style={disabled ? t.atoms.text_contrast_low : undefined} />
 			</Button>
 
 			<GifSelectDialog controlRef={ref} onClose={onClose} onSelectGif={onSelectGif} />

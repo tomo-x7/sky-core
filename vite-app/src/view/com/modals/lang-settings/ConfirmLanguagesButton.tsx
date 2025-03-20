@@ -1,5 +1,4 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Text } from "react-native";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -34,7 +33,7 @@ export const ConfirmLanguagesButton = ({
 					// @ts-expect-error
 					style={styles.btn}
 				>
-					<Text
+					<span
 						style={{
 							...s.white,
 							...s.bold,
@@ -42,7 +41,7 @@ export const ConfirmLanguagesButton = ({
 						}}
 					>
 						<>Done{extraText}</>
-					</Text>
+					</span>
 				</LinearGradient>
 			</button>
 		</div>

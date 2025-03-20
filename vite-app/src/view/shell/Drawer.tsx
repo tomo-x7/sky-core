@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { type JSX } from "react";
-import { Linking, ScrollView, TouchableOpacity } from "react-native";
+import { Linking, ScrollView } from "react-native";
 
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -58,12 +58,7 @@ let DrawerProfileCard = ({
 	const { data: profile } = useProfileQuery({ did: account.did });
 
 	return (
-		<TouchableOpacity
-			accessibilityLabel={"Profile"}
-			accessibilityHint={"Navigates to your profile"}
-			onPress={onPressProfile}
-			style={a.gap_sm}
-		>
+		<button type="button" onClick={onPressProfile} style={a.gap_sm}>
 			<UserAvatar
 				size={52}
 				avatar={profile?.avatar}
@@ -126,7 +121,7 @@ let DrawerProfileCard = ({
 					{profile?.followsCount === 1 ? "following" : "following"}
 				</>
 			</Text>
-		</TouchableOpacity>
+		</button>
 	);
 };
 DrawerProfileCard = React.memo(DrawerProfileCard);
@@ -487,7 +482,11 @@ SettingsMenuItem = React.memo(SettingsMenuItem);
 function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 	const t = useTheme();
 	return (
-		<Button onPress={onClick ?? undefined} accessibilityRole="tab" label={label}>
+		<Button
+			onPress={onClick}
+			// accessibilityRole="tab"
+			label={label}
+		>
 			{({ hovered, pressed }) => (
 				<div
 					style={{

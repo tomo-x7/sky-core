@@ -1,7 +1,7 @@
 import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
-import { ActivityIndicator } from "react-native";
 
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as Layout from "#/components/Layout";
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";

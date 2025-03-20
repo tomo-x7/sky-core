@@ -1,5 +1,5 @@
 import React, { type JSX, useEffect, useState } from "react";
-import { type NativeScrollEvent, type NativeSyntheticEvent, Pressable, RefreshControl, ScrollView } from "react-native";
+import { type NativeScrollEvent, type NativeSyntheticEvent, RefreshControl, ScrollView } from "react-native";
 
 import { flatten } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -145,11 +145,10 @@ export function Selector({
 					{items.map((item, i) => {
 						const selected = i === selectedIndex;
 						return (
-							<Pressable
+							<button
+								type="button"
 								key={item}
-								onPress={() => onPressItem(i)}
-								accessibilityLabel={item}
-								accessibilityHint={`Selects ${item}`}
+								onClick={() => onPressItem(i)}
 								// TODO: Modify the component API such that lint fails
 								// at the invocation site as well
 							>
@@ -168,7 +167,7 @@ export function Selector({
 										{item}
 									</Text>
 								</div>
-							</Pressable>
+							</button>
 						);
 					})}
 				</div>

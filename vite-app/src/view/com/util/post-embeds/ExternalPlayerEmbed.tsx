@@ -1,14 +1,15 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { ActivityIndicator, type GestureResponderEvent, Pressable, useWindowDimensions } from "react-native";
 import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
 import { WebView } from "react-native-webview";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { useDialogControl } from "#/components/Dialog";
 import { Fill } from "#/components/Fill";
 import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { NavigationProp } from "#/lib/routes/types";
 import { type EmbedPlayerParams, getPlayerAspect } from "#/lib/strings/embed-player";
@@ -27,7 +28,7 @@ function PlaceholderOverlay({
 }: {
 	isLoading: boolean;
 	isPlayerActive: boolean;
-	onPress: (event: GestureResponderEvent) => void;
+	onPress: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
 	// If the player is active and not loading, we don't want to show the overlay.
 	if (isPlayerActive && !isLoading) return null;
@@ -40,15 +41,9 @@ function PlaceholderOverlay({
 				...styles.overlayLayer,
 			}}
 		>
-			<Pressable
-				accessibilityRole="button"
-				accessibilityLabel={"Play Video"}
-				accessibilityHint={"Plays the video"}
-				onPress={onPress}
-				style={styles.overlayContainer}
-			>
+			<button type="button" onClick={onPress} style={styles.overlayContainer}>
 				{!isPlayerActive ? <PlayButtonIcon /> : <ActivityIndicator size="large" color="white" />}
-			</Pressable>
+			</button>
 		</div>
 	);
 }
@@ -171,7 +166,7 @@ export function ExternalPlayer({
 	}, []);
 
 	const onPlayPress = React.useCallback(
-		(event: GestureResponderEvent) => {
+		(event: React.MouseEvent<HTMLButtonElement>) => {
 			// Prevent this from propagating upward on web
 			event.preventDefault();
 

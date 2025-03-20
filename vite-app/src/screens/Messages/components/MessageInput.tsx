@@ -1,7 +1,6 @@
 import Graphemer from "graphemer";
 import React from "react";
 import { flushSync } from "react-dom";
-import { Pressable } from "react-native";
 import TextareaAutosize from "react-textarea-autosize";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -216,10 +215,8 @@ export function MessageInput({
 					// in these cases.
 					onKeyDown={isTouchDevice && isMobile ? undefined : onKeyDown}
 				/>
-				<Pressable
-					accessibilityRole="button"
-					accessibilityLabel={"Send message"}
-					accessibilityHint=""
+				<button
+					type="button"
 					style={{
 						...a.rounded_full,
 						...a.align_center,
@@ -232,7 +229,7 @@ export function MessageInput({
 							backgroundColor: t.palette.primary_500,
 						},
 					}}
-					onPress={onSubmit}
+					onClick={onSubmit}
 				>
 					<PaperPlane
 						fill={t.palette.white}
@@ -241,7 +238,7 @@ export function MessageInput({
 							...{ left: 1 },
 						}}
 					/>
-				</Pressable>
+				</button>
 			</div>
 		</div>
 	);

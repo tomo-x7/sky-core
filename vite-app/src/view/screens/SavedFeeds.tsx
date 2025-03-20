@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
-import { ActivityIndicator, Pressable } from "react-native";
+import React, { useState } from "react";
 import Animated, { LinearTransition } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
@@ -269,7 +269,17 @@ function ListItem({
 	const onPressRemove = React.useCallback(async () => {
 		setCurrentFeeds(currentFeeds.filter((f) => f.id !== feed.id));
 	}, [feed, currentFeeds, setCurrentFeeds]);
-
+	const [pressed, setPressed] = useState(false);
+	const [hovered, setHovered] = useState(false);
+	const [focused, setFocused] = useState(false);
+	const btnProps = {
+		onMouseDown: () => setPressed(true),
+		onMouseUp: () => setPressed(false),
+		onMouseEnter: () => setHovered(true),
+		onMouseLeave: () => setHovered(false),
+		onFocus: () => setFocused(true),
+		onBlur: () => setFocused(false),
+	} satisfies JSX.IntrinsicElements["button"];
 	return (
 		<Animated.View
 			// @ts-expect-error
@@ -292,11 +302,11 @@ function ListItem({
 			)}
 			{isPinned ? (
 				<>
-					<Pressable
-						accessibilityRole="button"
-						onPress={onPressUp}
-						hitSlop={5}
-						style={(state) => ({
+					<button
+						type="button"
+						onClick={onPressUp}
+						// hitSlop={5}
+						style={{
 							backgroundColor: pal.viewLight.backgroundColor,
 							paddingLeft: 12,
 							paddingRight: 12,
@@ -304,17 +314,18 @@ function ListItem({
 							paddingBottom: 10,
 							borderRadius: 4,
 							marginRight: 8,
-							opacity: state.hovered || state.pressed ? 0.5 : 1,
-						})}
+							opacity: hovered || pressed ? 0.5 : 1,
+						}}
+						{...btnProps}
 					>
 						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="arrow-up" size={14} style={pal.textLight} />
-					</Pressable>
-					<Pressable
-						accessibilityRole="button"
-						onPress={onPressDown}
-						hitSlop={5}
-						style={(state) => ({
+					</button>
+					<button
+						type="button"
+						onClick={onPressDown}
+						// hitSlop={5}
+						style={{
 							backgroundColor: pal.viewLight.backgroundColor,
 							paddingLeft: 12,
 							paddingRight: 12,
@@ -322,52 +333,52 @@ function ListItem({
 							paddingBottom: 10,
 							borderRadius: 4,
 							marginRight: 8,
-							opacity: state.hovered || state.pressed ? 0.5 : 1,
-						})}
+							opacity: hovered || pressed ? 0.5 : 1,
+						}}
+						{...btnProps}
 					>
 						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="arrow-down" size={14} style={pal.textLight} />
-					</Pressable>
+					</button>
 				</>
 			) : (
-				<Pressable
-					accessibilityRole="button"
-					accessibilityLabel={"Remove from my feeds"}
-					accessibilityHint=""
-					onPress={onPressRemove}
-					hitSlop={5}
-					style={(state) => ({
+				<button
+					type="button"
+					onClick={onPressRemove}
+					// hitSlop={5}
+					style={{
 						marginRight: 8,
 						paddingLeft: 12,
 						paddingRight: 12,
 						paddingTop: 10,
 						paddingBottom: 10,
 						borderRadius: 4,
-						opacity: state.hovered || state.focused ? 0.5 : 1,
-					})}
+						opacity: hovered || focused ? 0.5 : 1,
+					}}
+					{...btnProps}
 				>
 					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
-				</Pressable>
+				</button>
 			)}
 			<div style={{ paddingRight: 16 }}>
-				<Pressable
-					accessibilityRole="button"
-					hitSlop={5}
-					onPress={onTogglePinned}
-					style={(state) => ({
+				<button
+					type="button"
+					// hitSlop={5}
+					onClick={onTogglePinned}
+					style={{
 						backgroundColor: pal.viewLight.backgroundColor,
 						paddingLeft: 12,
 						paddingRight: 12,
 						paddingTop: 10,
 						paddingBottom: 10,
 						borderRadius: 4,
-						opacity: state.hovered || state.focused ? 0.5 : 1,
-					})}
+						opacity: hovered || focused ? 0.5 : 1,
+					}}
 				>
 					{/* @ts-expect-error */}
 					<FontAwesomeIcon icon="thumb-tack" size={14} color={isPinned ? colors.blue3 : pal.colors.icon} />
-				</Pressable>
+				</button>
 			</div>
 		</Animated.View>
 	);

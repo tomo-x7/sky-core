@@ -1,10 +1,9 @@
 import type { AppBskyActorDefs, AppBskyGraphDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useState } from "react";
-import { ActivityIndicator, Pressable } from "react-native";
 
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
-import { HITSLOP_20 } from "#/lib/constants";
 import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -88,17 +87,16 @@ export function Component({
 						onFocus={(ev) => ev.target.select()}
 					/>
 					{query ? (
-						<Pressable
-							onPress={onPressCancelSearch}
-							accessibilityRole="button"
-							accessibilityLabel={"Cancel search"}
-							accessibilityHint={"Exits inputting search query"}
-							onAccessibilityEscape={onPressCancelSearch}
-							hitSlop={HITSLOP_20}
+						<button
+							type="button"
+							onClick={onPressCancelSearch}
+							// TODO
+							// onAccessibilityEscape={onPressCancelSearch}
+							// hitSlop={HITSLOP_20}
 						>
 							{/* @ts-expect-error */}
 							<FontAwesomeIcon icon="xmark" size={16} color={pal.colors.textLight} />
-						</Pressable>
+						</button>
 					) : undefined}
 				</div>
 				<ScrollView style={s.flex1} keyboardDismissMode="none" keyboardShouldPersistTaps="always">

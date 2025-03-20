@@ -1,9 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { type ListRenderItemInfo, findNodeHandle } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 import { atoms as a, useTheme } from "#/alf";
-import ActivityIndicator from "#/components/ActivityIndicator";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as ListCard from "#/components/ListCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
@@ -29,11 +29,10 @@ interface ProfileListsProps {
 	headerOffset: number;
 	enabled?: boolean;
 	style?: React.CSSProperties;
-	setScrollViewTag: (tag: number | null) => void;
 }
 
 export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(function ProfileListsImpl(
-	{ did, scrollElRef, headerOffset, enabled, style, setScrollViewTag },
+	{ did, scrollElRef, headerOffset, enabled, style },
 	ref,
 ) {
 	const t = useTheme();
@@ -138,13 +137,6 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 		},
 		[error, refetch, onPressRetryLoadMore, t.atoms.border_contrast_low],
 	);
-
-	React.useEffect(() => {
-		if (enabled && scrollElRef.current) {
-			const nativeTag = findNodeHandle(scrollElRef.current);
-			setScrollViewTag(nativeTag);
-		}
-	}, [enabled, scrollElRef, setScrollViewTag]);
 
 	const ProfileListsFooter = React.useCallback(() => {
 		return isFetchingNextPage ? <ActivityIndicator style={styles.footer} /> : null;

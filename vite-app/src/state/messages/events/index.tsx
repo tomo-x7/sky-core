@@ -1,6 +1,6 @@
 import React from "react";
-import { AppState } from "react-native";
 
+import { AppState } from "#/state/appstate";
 import { MessagesEventBus } from "#/state/messages/events/agent";
 import { useAgent, useSession } from "#/state/session";
 

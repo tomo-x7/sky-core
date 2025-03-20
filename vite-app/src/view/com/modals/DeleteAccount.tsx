@@ -1,8 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { ActivityIndicator, SafeAreaView, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native";
 
 import { atoms as a, useTheme as useNewTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text as NewText } from "#/components/Typography";
 import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
@@ -159,13 +160,7 @@ export function Component(props: {}) {
 							</div>
 						) : (
 							<>
-								<TouchableOpacity
-									style={styles.mt20}
-									onPress={onPressSendEmail}
-									accessibilityRole="button"
-									accessibilityLabel={"Send email"}
-									accessibilityHint={"Sends email with confirmation code for account deletion"}
-								>
+								<button type="button" style={styles.mt20} onClick={onPressSendEmail}>
 									<LinearGradient
 										colors={[gradients.blueLight.start, gradients.blueLight.end]}
 										start={{ x: 0, y: 0 }}
@@ -182,22 +177,20 @@ export function Component(props: {}) {
 											Send Email
 										</Text>
 									</LinearGradient>
-								</TouchableOpacity>
-								<TouchableOpacity
+								</button>
+								<button
+									type="button"
 									style={{
 										...styles.btn,
 										...s.mt10,
 									}}
-									onPress={onCancel}
-									accessibilityRole="button"
-									accessibilityLabel={"Cancel account deletion"}
-									accessibilityHint=""
-									onAccessibilityEscape={onCancel}
+									onClick={onCancel}
+									// onAccessibilityEscape={onCancel}
 								>
 									<Text type="button-lg" style={pal.textLight}>
 										Cancel
 									</Text>
-								</TouchableOpacity>
+								</button>
 							</>
 						)}
 
@@ -298,16 +291,14 @@ export function Component(props: {}) {
 							</div>
 						) : (
 							<>
-								<TouchableOpacity
+								<button
+									type="button"
 									style={{
 										...styles.btn,
 										...styles.evilBtn,
 										...styles.mt20,
 									}}
-									onPress={onPressConfirmDelete}
-									accessibilityRole="button"
-									accessibilityLabel={"Confirm delete account"}
-									accessibilityHint=""
+									onClick={onPressConfirmDelete}
 								>
 									<Text
 										type="button-lg"
@@ -318,22 +309,20 @@ export function Component(props: {}) {
 									>
 										Delete my account
 									</Text>
-								</TouchableOpacity>
-								<TouchableOpacity
+								</button>
+								<button
+									type="button"
 									style={{
 										...styles.btn,
 										...s.mt10,
 									}}
-									onPress={onCancel}
-									accessibilityRole="button"
-									accessibilityLabel={"Cancel account deletion"}
-									accessibilityHint={"Exits account deletion process"}
-									onAccessibilityEscape={onCancel}
+									onClick={onCancel}
+									// onAccessibilityEscape={onCancel}
 								>
 									<Text type="button-lg" style={pal.textLight}>
 										Cancel
 									</Text>
-								</TouchableOpacity>
+								</button>
 							</>
 						)}
 					</>

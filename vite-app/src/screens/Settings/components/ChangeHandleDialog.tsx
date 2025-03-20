@@ -1,7 +1,6 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
-import { useWindowDimensions } from "react-native";
 import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
@@ -36,8 +35,6 @@ export function ChangeHandleDialog({
 }: {
 	control: Dialog.DialogControlProps;
 }) {
-	const { height } = useWindowDimensions();
-
 	return (
 		<Dialog.Outer control={control}>
 			<ChangeHandleDialogInner />
@@ -530,7 +527,6 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 
 				<Button
 					label={"Use default provider"}
-					accessibilityHint={"Returns to previous page"}
 					onPress={goToServiceHandle}
 					variant="outline"
 					color="secondary"

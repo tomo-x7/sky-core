@@ -2,15 +2,16 @@ import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { BskyAgent } from "@atproto/api";
 import * as EmailValidator from "email-validator";
 import React, { useState } from "react";
-import { ActivityIndicator, Keyboard } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { FormError } from "#/components/forms/FormError";
 import { HostingProvider } from "#/components/forms/HostingProvider";
 import * as TextField from "#/components/forms/TextField";
 import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
+import { Keyboard } from "#/lib/Keyboard";
 import { isNetworkError } from "#/lib/strings/errors";
 import { cleanError } from "#/lib/strings/errors";
 import { FormContainer } from "./FormContainer";
@@ -140,14 +141,7 @@ export const ForgotPasswordForm = ({
 					...a.justify_center,
 				}}
 			>
-				<Button
-					onPress={onEmailSent}
-					label={"Go to next"}
-					accessibilityHint={"Navigates to the next screen"}
-					size="large"
-					variant="ghost"
-					color="secondary"
-				>
+				<Button onPress={onEmailSent} label={"Go to next"} size="large" variant="ghost" color="secondary">
 					<ButtonText>Already have a code?</ButtonText>
 				</Button>
 			</div>

@@ -1,6 +1,5 @@
 import type { ModerationUI } from "@atproto/api";
 import React from "react";
-import { Pressable } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { tokens, useTheme as useAlfTheme } from "#/alf";
@@ -82,7 +81,7 @@ export function UserBanner({
 			<Menu.Root>
 				<Menu.Trigger label={"Edit avatar"}>
 					{({ props }) => (
-						<Pressable {...props}>
+						<button type="button" {...props}>
 							{banner ? (
 								<img style={styles.bannerImage} src={banner} />
 							) : (
@@ -101,7 +100,7 @@ export function UserBanner({
 							>
 								<CameraFilled height={14} width={14} style={t.atoms.text} />
 							</div>
-						</Pressable>
+						</button>
 					)}
 				</Menu.Trigger>
 				<Menu.Outer showCancel>

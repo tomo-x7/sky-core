@@ -1,6 +1,5 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
 import React, { memo, useRef, useState } from "react";
-import { useWindowDimensions } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -9,6 +8,8 @@ import { Header } from "#/components/Layout";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { SettingsSliderVertical_Stroke2_Corner0_Rounded as SettingsSlider } from "#/components/icons/SettingsSlider";
 import { ScrollProvider } from "#/lib/ScrollContext";
 import { HITSLOP_10 } from "#/lib/constants";
@@ -17,7 +18,6 @@ import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransfor
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { clamp } from "#/lib/numbers";
-import { useOnLayout } from "#/lib/onLayout";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";

@@ -1,8 +1,9 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { useCallback } from "react";
-import { ActivityIndicator, useWindowDimensions } from "react-native";
 
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";

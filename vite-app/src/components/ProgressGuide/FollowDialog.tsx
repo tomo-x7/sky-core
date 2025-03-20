@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ScrollView, TextInput, useWindowDimensions } from "react-native";
+import { ScrollView } from "react-native";
 import Animated, { LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
 import { type ViewStyleProp, atoms as a, flatten, tokens, useBreakpoints, useTheme } from "#/alf";
@@ -9,12 +9,13 @@ import * as Dialog from "#/components/Dialog";
 import * as ProfileCard from "#/components/ProfileCard";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as SearchIcon } from "#/components/icons/MagnifyingGlass2";
 import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/components/icons/Person";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { useOnLayout } from "#/lib/onLayout";
 import { cleanError } from "#/lib/strings/errors";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorSearchPaginated } from "#/state/queries/actor-search";
@@ -50,7 +51,6 @@ type Item =
 export function FollowDialog({ guide }: { guide: Follow10ProgressGuide }) {
 	const control = Dialog.useDialogControl();
 	const { gtMobile } = useBreakpoints();
-	const { height: minHeight } = useWindowDimensions();
 
 	return (
 		<>
@@ -95,7 +95,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 	const [searchText, setSearchText] = useState(lastSearchText);
 	const moderationOpts = useModerationOpts();
 	const listRef = useRef<ListMethods>(null);
-	const inputRef = useRef<TextInput>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 	const [headerHeight, setHeaderHeight] = useState(0);
 	const { currentAccount } = useSession();
 	const [suggestedAccounts, setSuggestedAccounts] = useState<Map<string, AppBskyActorDefs.ProfileView[]>>(
@@ -232,7 +232,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 
 	const onSelectTab = useCallback((interest: string) => {
 		setSelectedInterest(interest);
-		inputRef.current?.clear();
+		if (inputRef.current) inputRef.current.value = "";
 		setSearchText("");
 		listRef.current?.scrollToOffset({
 			offset: 0,
@@ -243,9 +243,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 	const listHeader = (
 		<Header
 			guide={guide}
-			//@ts-expect-error
 			inputRef={inputRef}
-			//@ts-expect-error
 			listRef={listRef}
 			searchText={searchText}
 			onSelectTab={onSelectTab}
@@ -307,7 +305,7 @@ let Header = ({
 	interestsDisplayNames,
 }: {
 	guide: Follow10ProgressGuide;
-	inputRef: React.RefObject<TextInput>;
+	inputRef: React.RefObject<HTMLInputElement>;
 	listRef: React.RefObject<ListMethods>;
 	onSelectTab: (v: string) => void;
 	searchText: string;
@@ -663,13 +661,14 @@ function SearchInput({
 }: {
 	onChangeText: (text: string) => void;
 	onEscape: () => void;
-	inputRef: React.RefObject<TextInput>;
+	inputRef: React.RefObject<HTMLInputElement>;
 	defaultValue: string;
 }) {
 	const t = useTheme();
 	const { state: hovered, onIn: onMouseEnter, onOut: onMouseLeave } = useInteractionState();
 	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
 	const interacted = hovered || focused;
+	const phStyleCName = usePlaceholderStyle(t.palette.contrast_500);
 
 	return (
 		<div
@@ -686,11 +685,12 @@ function SearchInput({
 			}}
 		>
 			<SearchIcon size="md" fill={interacted ? t.palette.primary_500 : t.palette.contrast_300} />
-			<TextInput
+			<input
+				type="text"
 				ref={inputRef}
 				placeholder={"Search by name or interest"}
 				defaultValue={defaultValue}
-				onChangeText={onChangeText}
+				onChange={(ev) => onChangeText(ev.target.value)}
 				onFocus={onFocus}
 				onBlur={onBlur}
 				style={{
@@ -699,21 +699,18 @@ function SearchInput({
 					...a.text_md,
 					...t.atoms.text,
 				}}
-				placeholderTextColor={t.palette.contrast_500}
-				keyboardAppearance={t.name === "light" ? "light" : "dark"}
-				returnKeyType="search"
-				clearButtonMode="while-editing"
+				className={phStyleCName}
+				enterKeyHint="search"
+				// clearButtonMode="while-editing"
 				maxLength={50}
-				onKeyPress={({ nativeEvent }) => {
+				onKeyDown={({ nativeEvent }) => {
 					if (nativeEvent.key === "Escape") {
 						onEscape();
 					}
 				}}
-				autoCorrect={"off"}
+				autoCorrect="off"
 				autoComplete="off"
 				autoCapitalize="none"
-				accessibilityLabel={"Search profiles"}
-				accessibilityHint={"Searches for profiles"}
 			/>
 		</div>
 	);

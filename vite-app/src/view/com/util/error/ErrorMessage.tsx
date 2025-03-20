@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TouchableOpacity } from "react-native";
 
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -48,16 +47,10 @@ export function ErrorMessage({
 					{message}
 				</Text>
 				{onPressTryAgain && (
-					<TouchableOpacity
-						style={styles.btn}
-						onPress={onPressTryAgain}
-						accessibilityRole="button"
-						accessibilityLabel={"Retry"}
-						accessibilityHint={"Retries the last action, which errored out"}
-					>
+					<button type="button" style={styles.btn} onClick={onPressTryAgain}>
 						{/* @ts-expect-error */}
 						<FontAwesomeIcon icon="arrows-rotate" style={{ color: theme.palette.error.icon }} size={18} />
-					</TouchableOpacity>
+					</button>
 				)}
 			</div>
 		</Layout.Center>

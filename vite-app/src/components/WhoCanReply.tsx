@@ -1,6 +1,5 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
 import React from "react";
-import { Platform } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -70,16 +69,7 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 			<Button
 				label={isThreadAuthor ? "Edit who can reply" : "Who can reply"}
 				onPress={onPressOpen}
-				{...(isThreadAuthor
-					? Platform.select({
-							web: {
-								onHoverIn: prefetchPostInteractionSettings,
-							},
-							native: {
-								onPressIn: prefetchPostInteractionSettings,
-							},
-						})
-					: {})}
+				{...(isThreadAuthor ? { onHoverIn: prefetchPostInteractionSettings } : {})}
 				hitSlop={HITSLOP_10}
 			>
 				{({ hovered }) => (

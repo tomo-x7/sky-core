@@ -207,10 +207,6 @@ export function Link({
 				...a.justify_start,
 				...rest.style,
 			}}
-			// biome-ignore lint/a11y/useSemanticElements: <explanation>
-			role="link"
-			accessibilityRole="link"
-			//@ts-expect-error
 			href={href}
 			onPress={download ? undefined : onPress}
 			{...{
@@ -234,7 +230,7 @@ export type InlineLinkProps = React.PropsWithChildren<
 	BaseLinkProps &
 		TextStyleProp &
 		Pick<TextProps, "selectable"> &
-		Pick<ButtonProps, "label" | "accessibilityHint"> & {
+		Pick<ButtonProps, "label"> & {
 			disableUnderline?: boolean;
 			title?: TextProps["title"];
 			overridePresentation?: boolean;
@@ -277,7 +273,6 @@ export function InlineLinkText({
 	return (
 		<a
 			unselectable={selectable ? "off" : "on"}
-			accessibilityHint=""
 			{...rest}
 			style={{
 				...{ color: t.palette.primary_500 },

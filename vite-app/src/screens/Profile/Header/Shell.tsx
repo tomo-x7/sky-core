@@ -1,7 +1,6 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { memo } from "react";
-import { TouchableWithoutFeedback } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -147,12 +146,7 @@ let ProfileHeaderShell = ({
 				</div>
 			)}
 			<GrowableAvatar style={styles.aviPosition}>
-				<TouchableWithoutFeedback
-					onPress={onPressAvi}
-					accessibilityRole="image"
-					accessibilityLabel={`View ${profile.handle}'s avatar`}
-					accessibilityHint=""
-				>
+				<button type="button" onClick={onPressAvi}>
 					<div
 						style={{
 							...t.atoms.bg,
@@ -170,7 +164,7 @@ let ProfileHeaderShell = ({
 							/>
 						</div>
 					</div>
-				</TouchableWithoutFeedback>
+				</button>
 			</GrowableAvatar>
 		</div>
 	);

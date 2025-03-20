@@ -1,7 +1,6 @@
 import { sanitizeUrl } from "@braintree/sanitize-url";
 import { StackActions } from "@react-navigation/native";
 import React, { type JSX, memo, useMemo } from "react";
-import { Platform } from "react-native";
 import { Text } from "#/components/Typography";
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { type DebouncedNavigationProp, useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
@@ -275,21 +274,16 @@ function onPressInner(
 	// biome-ignore lint/style/useDefaultParameterLast: <explanation>
 	navigationAction: "push" | "replace" | "navigate" | undefined = "push",
 	openLink: (href: string) => void,
-	e?: Event,
+	e?: React.MouseEvent<HTMLAnchorElement>,
 ) {
 	let shouldHandle = false;
-	const isLeftClick =
-		// @ts-expect-error Web only -prf
-		Platform.OS === "web" && (e.button == null || e.button === 0);
-	// @ts-expect-error Web only -prf
-	const isMiddleClick = Platform.OS === "web" && e.button === 1;
-	const isMetaKey =
-		// @ts-expect-error Web only -prf
-		Platform.OS === "web" && (e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
+	const isLeftClick = e?.button == null || e?.button === 0;
+	const isMiddleClick = e?.button === 1;
+	const isMetaKey = e?.metaKey || e?.altKey || e?.ctrlKey || e?.shiftKey;
 	const newTab = isMetaKey || isMiddleClick;
 
-	if (Platform.OS !== "web" || !e) {
-		shouldHandle = e ? !e.defaultPrevented : true;
+	if (!e) {
+		shouldHandle = true;
 	} else if (
 		!e.defaultPrevented && // onPress prevented default
 		(isLeftClick || isMiddleClick) && // ignore everything but left and middle clicks

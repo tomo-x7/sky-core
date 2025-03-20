@@ -1,12 +1,7 @@
 import React from "react";
-import { Pressable } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
-import { ScaleAndFadeIn, ScaleAndFadeOut } from "#/lib/custom-animations/ScaleAndFade";
-
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function NewMessagesPill({
 	onPress: onPressInner,
@@ -15,15 +10,9 @@ export function NewMessagesPill({
 }) {
 	const t = useTheme();
 
-	const scale = useSharedValue(1);
-
 	const onPress = React.useCallback(() => {
 		onPressInner?.();
 	}, [onPressInner]);
-
-	const animatedStyle = useAnimatedStyle(() => ({
-		transform: [{ scale: scale.get() }],
-	}));
 
 	return (
 		<div
@@ -38,7 +27,8 @@ export function NewMessagesPill({
 				pointerEvents: "none",
 			}}
 		>
-			<AnimatedPressable
+			<button
+				type="button"
 				style={{
 					...a.py_sm,
 					...a.rounded_full,
@@ -53,17 +43,13 @@ export function NewMessagesPill({
 						shadowOpacity: 0.125,
 						shadowRadius: 12,
 						shadowOffset: { width: 0, height: 5 },
-						pointerEvents: "box-only",
+						pointerEvents: "none",
 					},
-
-					...animatedStyle,
 				}}
-				entering={ScaleAndFadeIn}
-				exiting={ScaleAndFadeOut}
-				onPress={onPress}
+				onClick={onPress}
 			>
-				<Text style={a.font_bold}>New messages</Text>
-			</AnimatedPressable>
+				<Text style={{ ...a.font_bold, pointerEvents: "auto" }}>New messages</Text>
+			</button>
 		</div>
 	);
 }

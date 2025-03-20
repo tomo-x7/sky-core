@@ -1,7 +1,6 @@
 import type Hls from "hls.js";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
@@ -292,19 +291,16 @@ export function Controls({
 			onBlur={onBlur}
 			onKeyDown={onKeyDown}
 		>
-			<Pressable
-				accessibilityRole="button"
+			<button
+				type="button"
 				onPointerEnter={onPointerMoveEmptySpace}
 				onPointerMove={onPointerMoveEmptySpace}
 				onPointerLeave={onPointerLeaveEmptySpace}
-				accessibilityLabel={!focused ? "Unmute video" : playing ? "Pause video" : "Play video"}
-				accessibilityHint=""
-				// @ts-expect-error
 				style={{
 					...a.flex_1,
 					...{ cursor: showCursor || !playing ? "pointer" : "none" },
 				}}
-				onPress={onPressEmptySpace}
+				onClick={onPressEmptySpace}
 			/>
 			{!showControls && !focused && duration > 0 && <TimeIndicator time={Math.floor(duration - currentTime)} />}
 			<div

@@ -1,6 +1,6 @@
 import { atoms, useAlf, useTheme } from "#/alf";
 import { type TextProps, normalizeTextStyles, renderChildrenWithEmoji } from "#/alf/typography";
-import { useOnLayout } from "#/lib/onLayout";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
 export type { TextProps };
 import { useTheme as useTheme2 } from "#/lib/ThemeContext";
 

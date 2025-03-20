@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useState } from "react";
-import { Pressable, TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 import { Text } from "#/components/Typography";
@@ -84,12 +83,10 @@ function LightboxInner({
 	const isAvi = img.type === "circle-avi" || img.type === "rect-avi";
 	return (
 		<div style={styles.mask}>
-			<TouchableWithoutFeedback
-				onPress={onClose}
-				accessibilityRole="button"
-				accessibilityLabel={"Close image viewer"}
-				accessibilityHint={"Exits image view"}
-				onAccessibilityEscape={onClose}
+			<button
+				type="button"
+				onClick={onClose}
+				// onAccessibilityEscape={onClose}
 			>
 				{isAvi ? (
 					<div style={styles.aviCenterer}>
@@ -137,20 +134,19 @@ function LightboxInner({
 						)}
 					</div>
 				)}
-			</TouchableWithoutFeedback>
+			</button>
 			{img.alt ? (
 				<div style={styles.footer}>
-					<Pressable
-						accessibilityLabel={"Expand alt text"}
-						accessibilityHint={"If alt text is long, toggles alt text expanded state"}
-						onPress={() => {
+					<button
+						type="button"
+						onClick={() => {
 							setAltExpanded(!isAltExpanded);
 						}}
 					>
 						<Text style={s.white} numberOfLines={isAltExpanded ? 0 : 3} ellipsizeMode="tail">
 							{img.alt}
 						</Text>
-					</Pressable>
+					</button>
 				</div>
 			) : null}
 			<div style={styles.closeBtn}>

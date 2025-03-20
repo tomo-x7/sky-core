@@ -1,7 +1,6 @@
 import type { ComAtprotoServerCreateAppPassword } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { useWindowDimensions } from "react-native";
 import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -23,7 +22,6 @@ export function AddAppPasswordDialog({
 	control: Dialog.DialogControlProps;
 	passwords: string[];
 }) {
-	const { height } = useWindowDimensions();
 	return (
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />

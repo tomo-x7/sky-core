@@ -1,6 +1,5 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import React from "react";
-import { Pressable } from "react-native";
 
 import { atoms as a, flatten, useGutters, useTheme } from "#/alf";
 import * as Admonition from "#/components/Admonition";
@@ -180,7 +179,7 @@ function Inner(props: ReportDialogProps) {
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
 							{/* Here to capture focus for a hot sec to prevent flash */}
-							<Pressable accessible={false} />
+							<button type="button" />
 						</div>
 					) : labelersLoadError || !allLabelers ? (
 						<Admonition.Outer type="error">

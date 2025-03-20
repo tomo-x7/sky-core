@@ -1,10 +1,10 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useState } from "react";
-import { ActivityIndicator, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
-import Animated from "react-native-reanimated";
 
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { MAX_DESCRIPTION, MAX_DISPLAY_NAME } from "#/lib/constants";
@@ -20,8 +20,6 @@ import * as Toast from "#/view/com/util/Toast";
 import { EditableUserAvatar } from "#/view/com/util/UserAvatar";
 import { UserBanner } from "#/view/com/util/UserBanner";
 import { ErrorMessage } from "../util/error/ErrorMessage";
-
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
 export const snapPoints = ["fullscreen"];
 
@@ -187,13 +185,7 @@ export function Component({
 							<ActivityIndicator />
 						</div>
 					) : (
-						<TouchableOpacity
-							style={s.mt10}
-							onPress={onPressSave}
-							accessibilityRole="button"
-							accessibilityLabel={"Save"}
-							accessibilityHint={"Saves any changes to your profile"}
-						>
+						<button type="button" style={s.mt10} onClick={onPressSave}>
 							<LinearGradient
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
 								start={{ x: 0, y: 0 }}
@@ -210,17 +202,15 @@ export function Component({
 									Save Changes
 								</Text>
 							</LinearGradient>
-						</TouchableOpacity>
+						</button>
 					)}
 					{!updateMutation.isPending && (
-						<AnimatedTouchableOpacity
-							exiting={undefined}
+						<button
+							type="button"
+							// exiting={undefined}
 							style={s.mt5}
-							onPress={onPressCancel}
-							accessibilityRole="button"
-							accessibilityLabel={"Cancel profile editing"}
-							accessibilityHint=""
-							onAccessibilityEscape={onPressCancel}
+							onClick={onPressCancel}
+							// onAccessibilityEscape={onPressCancel}
 						>
 							<div style={styles.btn}>
 								<Text
@@ -233,7 +223,7 @@ export function Component({
 									Cancel
 								</Text>
 							</div>
-						</AnimatedTouchableOpacity>
+						</button>
 					)}
 				</div>
 			</div>

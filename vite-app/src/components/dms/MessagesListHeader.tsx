@@ -2,7 +2,6 @@ import type { AppBskyActorDefs, ModerationCause, ModerationDecision } from "@atp
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
-import { TouchableOpacity } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Link } from "#/components/Link";
@@ -10,7 +9,6 @@ import { Text } from "#/components/Typography";
 import { ConvoMenu } from "#/components/dms/ConvoMenu";
 import { Bell2Off_Filled_Corner0_Rounded as BellStroke } from "#/components/icons/Bell2";
 import { PostAlerts } from "#/components/moderation/PostAlerts";
-import { BACK_HITSLOP } from "#/lib/constants";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { NavigationProp } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
@@ -66,13 +64,12 @@ export let MessagesListHeader = ({
 				...a.py_sm,
 			}}
 		>
-			<TouchableOpacity
-				onPress={onPressBack}
-				hitSlop={BACK_HITSLOP}
+			<button
+				type="button"
+				onClick={onPressBack}
+				// TODO
+				// hitSlop={BACK_HITSLOP}
 				style={{ width: 30, height: 30, marginTop: 6 }}
-				accessibilityRole="button"
-				accessibilityLabel={"Back"}
-				accessibilityHint=""
 			>
 				<FontAwesomeIcon
 					size="3x" //TODO もともと18だったので大きさ見て調整
@@ -82,7 +79,7 @@ export let MessagesListHeader = ({
 					}}
 					color={t.atoms.text.color}
 				/>
-			</TouchableOpacity>
+			</button>
 			{profile && moderation && blockInfo ? (
 				<HeaderReady profile={profile} moderation={moderation} blockInfo={blockInfo} />
 			) : (

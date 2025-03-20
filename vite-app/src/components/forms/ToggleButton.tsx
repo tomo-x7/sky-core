@@ -1,14 +1,12 @@
 import React from "react";
-import type { AccessibilityProps } from "react-native";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 
-type ItemProps = Omit<Toggle.ItemProps, "style" | "role" | "children"> &
-	AccessibilityProps & {
-		children: React.ReactElement;
-	};
+type ItemProps = Omit<Toggle.ItemProps, "style" | "role" | "children"> & {
+	children: React.ReactElement;
+};
 
 export type GroupProps = Omit<Toggle.GroupProps, "style" | "type"> & {
 	multiple?: boolean;

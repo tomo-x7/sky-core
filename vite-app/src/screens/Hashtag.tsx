@@ -93,7 +93,6 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 			<Pager
 				onPageSelected={onPageSelected}
 				renderTabBar={(props) => (
-					//@ts-expect-error
 					<Layout.Center
 						style={{
 							...a.z_10,
@@ -195,7 +194,6 @@ function HashtagScreenTab({
 					onRefresh={onRefresh}
 					onEndReached={onEndReached}
 					onEndReachedThreshold={4}
-					// @ts-expect-error web only -prf
 					desktopFixedHeight
 					ListFooterComponent={
 						<ListFooter

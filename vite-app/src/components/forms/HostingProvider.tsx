@@ -1,5 +1,4 @@
 import React from "react";
-import { Keyboard } from "react-native";
 
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -7,6 +6,7 @@ import { useDialogControl } from "#/components/Dialog";
 import { Text } from "#/components/Typography";
 import { Globe_Stroke2_Corner0_Rounded as GlobeIcon } from "#/components/icons/Globe";
 import { PencilLine_Stroke2_Corner0_Rounded as PencilIcon } from "#/components/icons/Pencil";
+import { Keyboard } from "#/lib/Keyboard";
 import { toNiceDomain } from "#/lib/strings/url-helpers";
 import { ServerInputDialog } from "#/view/com/auth/server-input";
 
@@ -50,7 +50,6 @@ export function HostingProvider({
 						You are creating an account on{" "}
 						<Button
 							label={toNiceDomain(serviceUrl)}
-							accessibilityHint={"Changes hosting provider"}
 							onPress={onPressSelectService}
 							variant="ghost"
 							color="secondary"
@@ -68,7 +67,6 @@ export function HostingProvider({
 			) : (
 				<Button
 					label={toNiceDomain(serviceUrl)}
-					accessibilityHint={"Changes hosting provider"}
 					variant="solid"
 					color="secondary"
 					style={{

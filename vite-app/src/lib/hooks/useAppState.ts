@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AppState } from "react-native";
+import { AppState } from "#/state/appstate";
 
 export function useAppState() {
 	const [state, setState] = useState(AppState.currentState);

@@ -2,9 +2,10 @@ import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 
 import { atoms as a } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";

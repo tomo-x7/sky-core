@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { ActivityIndicator, Pressable } from "react-native";
 import { Circle, Path, Svg } from "react-native-svg";
 
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -160,17 +160,11 @@ export function Component({
 								{currentAccount?.email || "(no email)"}
 							</Text>
 						</div>
-						<Pressable
-							accessibilityRole="link"
-							accessibilityLabel={"Change my email"}
-							accessibilityHint=""
-							onPress={onEmailIncorrect}
-							style={styles.changeEmailLink}
-						>
+						<button type="button" onClick={onEmailIncorrect} style={styles.changeEmailLink}>
 							<Text type="lg" style={pal.link}>
 								Change
 							</Text>
-						</Pressable>
+						</button>
 					</>
 				) : stage === Stages.ConfirmCode ? (
 					<input

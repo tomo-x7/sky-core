@@ -7,7 +7,6 @@ import {
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
-import { Text as RNText } from "react-native";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { colors } from "#/components/Admonition";
@@ -853,7 +852,6 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 		<>
 			<Button
 				label={"Archived post"}
-				accessibilityHint={"Shows information about when this post was created"}
 				onPress={(e) => {
 					e.preventDefault();
 					e.stopPropagation();
@@ -896,9 +894,8 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 				<Prompt.TitleText>Archived post</Prompt.TitleText>
 				<Prompt.DescriptionText>
 					<>
-						This post claims to have been created on{" "}
-						<RNText style={a.font_bold}>{niceDate(createdAt)}</RNText>, but was first seen by Bluesky on{" "}
-						<RNText style={a.font_bold}>{niceDate(indexedAt)}</RNText>.
+						This post claims to have been created on <span style={a.font_bold}>{niceDate(createdAt)}</span>,
+						but was first seen by Bluesky on <span style={a.font_bold}>{niceDate(indexedAt)}</span>.
 					</>
 				</Prompt.DescriptionText>
 				<Text

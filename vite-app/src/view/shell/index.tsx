@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 import { FlatNavigator, RoutesContainer } from "#/Navigation";
@@ -69,15 +68,14 @@ function ShellInner() {
 			{showDrawerDelayedExit && (
 				<>
 					<RemoveScrollBar />
-					<TouchableWithoutFeedback
-						onPress={(ev) => {
+					<button
+						type="button"
+						onClick={(ev) => {
 							// Only close if press happens outside of the drawer
 							if (ev.target === ev.currentTarget) {
 								setDrawerOpen(false);
 							}
 						}}
-						accessibilityLabel={"Close drawer menu"}
-						accessibilityHint=""
 					>
 						<div
 							style={{
@@ -105,7 +103,7 @@ function ShellInner() {
 								<DrawerContent />
 							</div>
 						</div>
-					</TouchableWithoutFeedback>
+					</button>
 				</>
 			)}
 		</>

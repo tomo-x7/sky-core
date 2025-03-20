@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, type PressableStateCallbackType } from "react-native";
 
 import { flatten } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { choose } from "#/lib/functions";
@@ -18,13 +18,12 @@ export type ButtonType =
 	| "default-light";
 
 // Augment type for react-native-web (see https://github.com/necolas/react-native-web/issues/1684#issuecomment-766451866)
-declare module "react-native" {
-	interface PressableStateCallbackType {
-		// @ts-expect-error web only
-		hovered?: boolean;
-		focused?: boolean;
-	}
-}
+// declare module "react-native" {
+// 	interface PressableStateCallbackType {
+// 		hovered?: boolean;
+// 		focused?: boolean;
+// 	}
+// }
 
 // TODO: Enforce that button always has a label
 export function Button({
@@ -143,7 +142,7 @@ export function Button({
 	);
 
 	const getStyle = React.useCallback(
-		(state: PressableStateCallbackType) => {
+		(state: { pressed: boolean; hovered: boolean; focused: boolean }) => {
 			const arr = [typeOuterStyle, styles.outer, style];
 			if (state.pressed) {
 				arr.push({ opacity: 0.6 });

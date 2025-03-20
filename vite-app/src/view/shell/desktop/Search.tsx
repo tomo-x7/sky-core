@@ -2,9 +2,9 @@ import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from 
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ActivityIndicator, TouchableOpacity } from "react-native";
 
 import { atoms as a } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -48,9 +48,9 @@ let SearchLinkCard = ({
 
 	if (onPress) {
 		return (
-			<TouchableOpacity onPress={onPress} accessibilityLabel={label} accessibilityHint="">
+			<button type="button" onClick={onPress}>
 				{inner}
-			</TouchableOpacity>
+			</button>
 		);
 	}
 

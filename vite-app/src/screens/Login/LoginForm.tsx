@@ -1,8 +1,8 @@
 import { ComAtprotoServerCreateSession, type ComAtprotoServerDescribeServer } from "@atproto/api";
 import React, { useRef, useState } from "react";
-import { ActivityIndicator, Keyboard, LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -12,6 +12,7 @@ import * as TextField from "#/components/forms/TextField";
 import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
 import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
+import { Keyboard } from "#/lib/Keyboard";
 import { isNetworkError } from "#/lib/strings/errors";
 import { cleanError } from "#/lib/strings/errors";
 import { createFullHandle } from "#/lib/strings/handles";
@@ -66,7 +67,7 @@ export const LoginForm = ({
 	const onPressNext = async () => {
 		if (isProcessing) return;
 		Keyboard.dismiss();
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+		// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 		setError("");
 
 		const identifier = identifierValueRef.current.toLowerCase().trim();
@@ -117,7 +118,7 @@ export const LoginForm = ({
 			setHasCheckedForStarterPack(true);
 		} catch (e: any) {
 			const errMsg = e.toString();
-			LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+			// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 			setIsProcessing(false);
 			if (e instanceof ComAtprotoServerCreateSession.AuthFactorTokenRequiredError) {
 				setIsAuthFactorTokenNeeded(true);
@@ -197,7 +198,6 @@ export const LoginForm = ({
 						<Button
 							onPress={onPressForgotPassword}
 							label={"Forgot password?"}
-							accessibilityHint={"Opens password reset form"}
 							variant="solid"
 							color="secondary"
 							style={{
@@ -264,7 +264,6 @@ export const LoginForm = ({
 				{!serviceDescription && error ? (
 					<Button
 						label={"Retry"}
-						accessibilityHint={"Retries signing in"}
 						variant="solid"
 						color="secondary"
 						size="large"
@@ -285,14 +284,7 @@ export const LoginForm = ({
 						</Text>
 					</>
 				) : (
-					<Button
-						label={"Next"}
-						accessibilityHint={"Navigates to the next screen"}
-						variant="solid"
-						color="primary"
-						size="large"
-						onPress={onPressNext}
-					>
+					<Button label={"Next"} variant="solid" color="primary" size="large" onPress={onPressNext}>
 						<ButtonText>Next</ButtonText>
 						{isProcessing && <ButtonIcon icon={Loader} />}
 					</Button>

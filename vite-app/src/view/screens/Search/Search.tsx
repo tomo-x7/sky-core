@@ -2,25 +2,24 @@ import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@a
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
-import { ActivityIndicator, Pressable } from "react-native";
 import { ScrollView as RNGHScrollView } from "react-native-gesture-handler";
 
 import { atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
 import * as Layout from "#/components/Layout";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
 import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon } from "#/components/icons/Chevron";
 import { Earth_Stroke2_Corner0_Rounded as EarthIcon } from "#/components/icons/Globe";
 import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
 import { APP_LANGUAGES, LANGUAGES } from "#/lib/../locale/languages";
-import { createHitslop } from "#/lib/constants";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { MagnifyingGlassIcon } from "#/lib/icons";
-import { useOnLayout } from "#/lib/onLayout";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { NavigationProp } from "#/lib/routes/types";
 import type { NativeStackScreenProps, SearchTabNavigatorParams } from "#/lib/routes/types";
@@ -340,7 +339,7 @@ function SearchLanguageDropdown({
 		<Menu.Root>
 			<Menu.Trigger label={`Filter search by language (currently: ${currentLanguageLabel})`}>
 				{({ props }) => (
-					<Button {...props} label={props.accessibilityLabel} size="small" color="secondary" variant="solid">
+					<Button {...props} size="small" color="secondary" variant="solid">
 						<ButtonIcon icon={EarthIcon} />
 						<ButtonText>{currentLanguageLabel}</ButtonText>
 						<ButtonIcon icon={ChevronDownIcon} />
@@ -987,16 +986,14 @@ function SearchHistory({
 											{sanitizeDisplayName(profile.displayName || profile.handle)}
 										</Text>
 									</Link>
-									<Pressable
-										accessibilityRole="button"
-										accessibilityLabel={"Remove profile"}
-										accessibilityHint={"Removes profile from search history"}
-										onPress={() => onRemoveProfileClick(profile)}
-										hitSlop={createHitslop(6)}
+									<button
+										type="button"
+										onClick={() => onRemoveProfileClick(profile)}
+										// hitSlop={createHitslop(6)}
 										style={styles.profileRemoveBtn}
 									>
 										<XIcon size="xs" style={t.atoms.text_contrast_low} />
-									</Pressable>
+									</button>
 								</div>
 							))}
 						</RNGHScrollView>
@@ -1019,17 +1016,17 @@ function SearchHistory({
 									...a.mt_xs,
 								}}
 							>
-								<Pressable
-									accessibilityRole="button"
-									onPress={() => onItemClick(historyItem)}
-									hitSlop={HITSLOP_10}
+								<button
+									type="button"
+									onClick={() => onItemClick(historyItem)}
+									// hitSlop={HITSLOP_10}
 									style={{
 										...a.flex_1,
 										...a.py_md,
 									}}
 								>
 									<Text style={a.text_md}>{historyItem}</Text>
-								</Pressable>
+								</button>
 								<Button
 									label={`Remove ${historyItem}`}
 									onPress={() => onRemoveItemClick(historyItem)}

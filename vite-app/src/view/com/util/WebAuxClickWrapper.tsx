@@ -1,7 +1,6 @@
 import type React from "react";
-import { Platform } from "react-native";
 
-const onMouseUp = (e: React.MouseEvent & { target: HTMLElement }) => {
+const onMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
 	// Only handle whenever it is the middle button
 	if (e.button !== 1 || e.target.closest("a") || e.target.tagName === "A") {
 		return;
@@ -17,10 +16,7 @@ const onMouseDown = (e: React.MouseEvent) => {
 };
 
 export function WebAuxClickWrapper({ children }: React.PropsWithChildren) {
-	if (Platform.OS !== "web") return children;
-
 	return (
-		// @ts-expect-error web only
 		<div onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
 			{children}
 		</div>

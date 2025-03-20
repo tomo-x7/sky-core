@@ -1,6 +1,7 @@
 import React, { type JSX } from "react";
-import { ActivityIndicator, type ListRenderItemInfo } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";

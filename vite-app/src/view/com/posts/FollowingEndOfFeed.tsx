@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Dimensions } from "react-native";
 
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -27,7 +26,7 @@ export function FollowingEndOfFeed() {
 			style={{
 				...styles.container,
 				...pal.border,
-				...{ minHeight: Dimensions.get("window").height * 0.75 },
+				...{ minHeight: window.innerHeight * 0.75 },
 			}}
 		>
 			<div style={styles.inner}>

@@ -5,7 +5,6 @@ import {
 	interpretLabelValueDefinitions,
 } from "@atproto/api";
 import React from "react";
-import { findNodeHandle } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
@@ -29,19 +28,9 @@ interface LabelsSectionProps {
 	scrollElRef: ListRef;
 	headerHeight: number;
 	isFocused: boolean;
-	setScrollViewTag: (tag: number | null) => void;
 }
 export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionProps>(function LabelsSectionImpl(
-	{
-		isLabelerLoading,
-		labelerInfo,
-		labelerError,
-		moderationOpts,
-		scrollElRef,
-		headerHeight,
-		isFocused,
-		setScrollViewTag,
-	},
+	{ isLabelerLoading, labelerInfo, labelerError, moderationOpts, scrollElRef, headerHeight, isFocused },
 	ref,
 ) {
 	const onScrollToTop = React.useCallback(() => {
@@ -55,13 +44,6 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 	React.useImperativeHandle(ref, () => ({
 		scrollToTop: onScrollToTop,
 	}));
-
-	React.useEffect(() => {
-		if (isFocused && scrollElRef.current) {
-			const nativeTag = findNodeHandle(scrollElRef.current);
-			setScrollViewTag(nativeTag);
-		}
-	}, [isFocused, scrollElRef, setScrollViewTag]);
 
 	return (
 		<Layout.Center style={{ flex: 1, minHeight: "100dvh" }}>

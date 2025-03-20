@@ -1,5 +1,5 @@
 import type React from "react";
-import type { AccessibilityProps, AccessibilityRole, PressableProps } from "react-native";
+import type { AccessibilityRole } from "react-native";
 
 import type { TextStyleProp, ViewStyleProp } from "#/alf";
 import type * as Dialog from "#/components/Dialog";
@@ -15,20 +15,6 @@ export type ItemContextType = {
 
 export type RadixPassThroughTriggerProps = {
 	ref: React.RefObject<any>;
-	id: string;
-	type: "button";
-	disabled: boolean;
-	"data-disabled": boolean;
-	"data-state": string;
-	"aria-controls"?: string;
-	"aria-haspopup"?: boolean;
-	"aria-expanded"?: AccessibilityProps["aria-expanded"];
-	onKeyDown: (e: React.KeyboardEvent) => void;
-	/**
-	 * Radix provides this, but we override on web to use `onPress` instead,
-	 * which is less sensitive while scrolling.
-	 */
-	onPointerDown: PressableProps["onPointerDown"];
 };
 export type TriggerProps = {
 	children(props: TriggerChildProps): React.ReactNode;
@@ -53,9 +39,6 @@ export type TriggerChildProps = {
 		onBlur: () => void;
 		onMouseEnter: () => void;
 		onMouseLeave: () => void;
-		accessibilityHint?: string;
-		accessibilityLabel: string;
-		accessibilityRole: AccessibilityRole;
 	};
 };
 

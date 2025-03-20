@@ -1,8 +1,8 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import React from "react";
-import { ActivityIndicator } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { useDialogControl } from "#/components/Dialog";
 import { Fill } from "#/components/Fill";
 import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";

@@ -1,6 +1,5 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
 import React from "react";
-import { Keyboard } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
 	cancelAnimation,
@@ -13,6 +12,7 @@ import Animated, {
 import { atoms as a } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
 import { MessageMenu } from "#/components/dms/MessageMenu";
+import { Keyboard } from "#/lib/Keyboard";
 import { HITSLOP_10 } from "#/lib/constants";
 
 export function ActionsWrapper({

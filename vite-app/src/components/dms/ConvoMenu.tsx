@@ -1,7 +1,6 @@
 import type { ChatBskyConvoDefs, ModerationCause } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
-import { Keyboard, Pressable } from "react-native";
 
 import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
@@ -19,6 +18,7 @@ import {
 	PersonX_Stroke2_Corner0_Rounded as PersonX,
 } from "#/components/icons/Person";
 import { SpeakerVolumeFull_Stroke2_Corner0_Rounded as Unmute } from "#/components/icons/Speaker";
+import { Keyboard } from "#/lib/Keyboard";
 import type { NavigationProp } from "#/lib/routes/types";
 import type { Shadow } from "#/state/cache/types";
 import { useConvoQuery, useMarkAsReadMutation } from "#/state/queries/messages/conversation";
@@ -67,24 +67,24 @@ let ConvoMenu = ({
 				{!hideTrigger && (
 					<div style={style}>
 						<Menu.Trigger label={"Chat settings"}>
-							{({ props, state }) => (
-								<Pressable
-									{...props}
-									onPress={() => {
+							{({ props: { onBlur, onFocus, onMouseEnter, onMouseLeave, onPress }, state }) => (
+								<button
+									type="button"
+									onClick={() => {
 										Keyboard.dismiss();
-										props.onPress();
+										onPress();
 									}}
 									style={{
 										...a.p_sm,
 										...a.rounded_full,
 										...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),
-
-										...// make sure pfp is in the middle
-										{ marginLeft: -10 },
+										// make sure pfp is in the middle
+										marginLeft: -10,
 									}}
+									{...{ onBlur, onFocus, onMouseEnter, onMouseLeave }}
 								>
 									<DotsHorizontal size="md" style={t.atoms.text} />
-								</Pressable>
+								</button>
 							)}
 						</Menu.Trigger>
 					</div>

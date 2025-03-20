@@ -1,6 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { type AccessibilityProps, Pressable, type PressableProps } from "react-native";
 
 import { atoms as a, flatten, select, tokens, useTheme } from "#/alf";
 import type { Props as SVGIconProps } from "#/components/icons/common";
@@ -68,16 +67,14 @@ export type ButtonProps = {
 	onFocus?: (ev: React.FocusEvent<HTMLButtonElement, Element>) => void;
 	onBlur?: (ev: React.FocusEvent<HTMLButtonElement, Element>) => void;
 	className?: string;
-} & AccessibilityProps &
-	VariantProps & {
+} & VariantProps & {
 		/**
 		 * For a11y, try to make this descriptive and clear
 		 */
-		label: string;
+		label?: string;
 		style?: React.CSSProperties;
 		hoverStyle?: React.CSSProperties;
 		children: NonTextElements | ((context: ButtonContext) => NonTextElements);
-		PressableComponent?: React.ComponentType<PressableProps>;
 	};
 
 export type ButtonTextProps = { style?: React.CSSProperties; children?: React.ReactNode } & VariantProps & {
@@ -107,7 +104,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			disabled = false,
 			style,
 			hoverStyle: hoverStyleProp,
-			PressableComponent = Pressable,
 			onPressIn: onPressInOuter,
 			onPressOut: onPressOutOuter,
 			onHoverIn: onHoverInOuter,
@@ -447,7 +443,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		const flattenedBaseStyles = flatten([baseStyles, style]);
 		return (
 			<button
-				accessibilityHint={undefined} // optional
 				{...rest}
 				ref={ref}
 				aria-label={label}

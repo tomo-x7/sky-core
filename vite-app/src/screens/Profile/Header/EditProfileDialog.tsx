@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useCallback, useEffect, useState } from "react";
-import { Dimensions } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -20,7 +19,7 @@ import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 const DISPLAY_NAME_MAX_GRAPHEMES = 64;
 const DESCRIPTION_MAX_GRAPHEMES = 256;
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_HEIGHT = window.innerHeight;
 
 export function EditProfileDialog({
 	profile,

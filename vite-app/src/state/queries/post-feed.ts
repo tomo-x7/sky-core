@@ -9,8 +9,6 @@ import {
 } from "@atproto/api";
 import { type InfiniteData, type QueryClient, type QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 import React, { useCallback, useEffect, useRef } from "react";
-import { AppState } from "react-native";
-
 import { FeedTuner, type FeedTunerFn } from "#/lib/api/feed-manip";
 import { AuthorFeedAPI } from "#/lib/api/feed/author";
 import { CustomFeedAPI } from "#/lib/api/feed/custom";
@@ -28,6 +26,7 @@ import { DEFAULT_LOGGED_OUT_PREFERENCES } from "#/state/queries/preferences/cons
 import { useAgent } from "#/state/session";
 import * as userActionHistory from "#/state/userActionHistory";
 import { KnownError } from "#/view/com/posts/PostFeedErrorMessage";
+import { AppState } from "../appstate";
 import { useFeedTuners } from "../preferences/feed-tuners";
 import { useModerationOpts } from "../preferences/moderation-opts";
 import { usePreferencesQuery } from "./preferences";

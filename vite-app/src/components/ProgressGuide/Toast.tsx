@@ -1,9 +1,9 @@
 import React, { useImperativeHandle } from "react";
-import { Pressable, useWindowDimensions } from "react-native";
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Portal } from "#/components/Portal";
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { Text } from "../Typography";
 import { AnimatedCheck, type AnimatedCheckRef } from "../anim/AnimatedCheck";
 
@@ -120,7 +120,8 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 							...animatedStyle,
 						}}
 					>
-						<Pressable
+						<button
+							type="button"
 							style={{
 								...t.atoms.bg,
 								...a.flex_row,
@@ -132,17 +133,9 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 								...a.px_lg,
 								...a.py_md,
 								...a.shadow_sm,
-
-								...{
-									shadowRadius: 8,
-									shadowOpacity: 0.1,
-									shadowOffset: { width: 0, height: 2 },
-									elevation: 8,
-								},
+								boxShadow: "0px 2px 8px rgba(0,0,0,0.1)",
 							}}
-							onPress={close}
-							accessibilityLabel={"Tap to dismiss"}
-							accessibilityHint=""
+							onClick={close}
 						>
 							<AnimatedCheck fill={t.palette.primary_500} ref={animatedCheckRef} />
 							<div>
@@ -165,7 +158,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 									</Text>
 								)}
 							</div>
-						</Pressable>
+						</button>
 					</Animated.View>
 				</Portal>
 			)

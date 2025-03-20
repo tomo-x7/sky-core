@@ -1,5 +1,4 @@
 import React from "react";
-import { type ColorValue, Dimensions } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
 	clamp,
@@ -15,6 +14,7 @@ import Animated, {
 	withTiming,
 } from "react-native-reanimated";
 
+type ColorValue = React.CSSProperties["color"];
 interface GestureAction {
 	color: ColorValue;
 	action: () => void;
@@ -29,7 +29,7 @@ interface GestureActions {
 	rightSecond?: GestureAction;
 }
 
-const MAX_WIDTH = Dimensions.get("screen").width;
+const MAX_WIDTH = screen.width;
 const ICON_SIZE = 32;
 
 export function GestureActionView({

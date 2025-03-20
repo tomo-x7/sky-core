@@ -5,8 +5,7 @@ import {
 	AtUri,
 	type RichText as RichTextAPI,
 } from "@atproto/api";
-import React, { memo, useCallback } from "react";
-import { Pressable, type PressableStateCallbackType } from "react-native";
+import React, { memo, useCallback, useState } from "react";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
@@ -61,6 +60,8 @@ let PostCtrls = ({
 	const loggedOutWarningPromptControl = useDialogControl();
 	const { sendInteraction } = useFeedFeedbackContext();
 	const { captureAction } = useProgressGuideControls();
+	const [pressed, setPressed] = useState(false);
+	const [hovered, setHovered] = useState(false);
 	const isBlocked = Boolean(
 		post.author.viewer?.blocking || post.author.viewer?.blockedBy || post.author.viewer?.blockingByList,
 	);
@@ -162,18 +163,31 @@ let PostCtrls = ({
 	}, [post.uri, post.author, sendInteraction, feedContext]);
 
 	const btnStyle = React.useCallback(
-		({ pressed, hovered }: PressableStateCallbackType) => [
-			a.gap_xs,
-			a.rounded_full,
-			a.flex_row,
-			a.justify_center,
-			a.align_center,
-			a.overflow_hidden,
-			{ padding: 5 },
-			(pressed || hovered) && t.atoms.bg_contrast_25,
-		],
+		({
+			pressed,
+			hovered,
+		}: {
+			pressed?: boolean;
+			hovered?: boolean;
+			focused?: boolean;
+		}) => ({
+			...a.gap_xs,
+			...a.rounded_full,
+			...a.flex_row,
+			...a.justify_center,
+			...a.align_center,
+			...a.overflow_hidden,
+			padding: 5,
+			...((pressed || hovered) && t.atoms.bg_contrast_25),
+		}),
 		[t.atoms.bg_contrast_25],
 	);
+	const btnProps = {
+		onMouseDown: () => setPressed(true),
+		onMouseUp: () => setPressed(false),
+		onMouseEnter: () => setHovered(true),
+		onMouseLeave: () => setHovered(false),
+	};
 
 	return (
 		<div
@@ -190,17 +204,16 @@ let PostCtrls = ({
 					...(replyDisabled ? { opacity: 0.5 } : undefined),
 				}}
 			>
-				<Pressable
-					style={btnStyle}
-					onPress={() => {
+				<button
+					type="button"
+					style={btnStyle({ hovered, pressed })}
+					onClick={() => {
 						if (!replyDisabled) {
 							requireAuth(() => onPressReply());
 						}
 					}}
-					accessibilityRole="button"
-					accessibilityLabel={`Reply (${post.replyCount || 0} ${post.replyCount === 1 ? "reply" : "replies"})`}
-					accessibilityHint=""
-					hitSlop={POST_CTRL_HITSLOP}
+					{...btnProps}
+					// hitSlop={POST_CTRL_HITSLOP}
 				>
 					<Bubble
 						style={{
@@ -220,7 +233,7 @@ let PostCtrls = ({
 							{formatCount(post.replyCount)}
 						</Text>
 					) : undefined}
-				</Pressable>
+				</button>
 			</div>
 			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
 				<RepostButton
@@ -233,17 +246,12 @@ let PostCtrls = ({
 				/>
 			</div>
 			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
-				<Pressable
-					style={btnStyle}
-					onPress={() => requireAuth(() => onPressToggleLike())}
-					accessibilityRole="button"
-					accessibilityLabel={
-						post.viewer?.like
-							? `Unlike (${post.likeCount || 0} ${post.likeCount === 1 ? "like" : "likes"})`
-							: `Like (${post.likeCount || 0} ${post.likeCount === 1 ? "like" : "likes"})`
-					}
-					accessibilityHint=""
-					hitSlop={POST_CTRL_HITSLOP}
+				<button
+					type="button"
+					style={btnStyle({ pressed, hovered })}
+					onClick={() => requireAuth(() => onPressToggleLike())}
+					// hitSlop={POST_CTRL_HITSLOP}
+					{...btnProps}
 				>
 					<AnimatedLikeIcon
 						isLiked={Boolean(post.viewer?.like)}
@@ -256,24 +264,23 @@ let PostCtrls = ({
 						isLiked={Boolean(post.viewer?.like)}
 						hasBeenToggled={hasLikeIconBeenToggled}
 					/>
-				</Pressable>
+				</button>
 			</div>
 			{big && (
 				<>
 					<div style={a.align_center}>
-						<Pressable
-							style={btnStyle}
-							onPress={() => {
+						<button
+							type="button"
+							style={btnStyle({ pressed, hovered })}
+							onClick={() => {
 								if (shouldShowLoggedOutWarning) {
 									loggedOutWarningPromptControl.open();
 								} else {
 									onShare();
 								}
 							}}
-							accessibilityRole="button"
-							accessibilityLabel={"Share"}
-							accessibilityHint=""
-							hitSlop={POST_CTRL_HITSLOP}
+							{...btnProps}
+							// hitSlop={POST_CTRL_HITSLOP}
 						>
 							<ArrowOutOfBox
 								style={{
@@ -282,7 +289,7 @@ let PostCtrls = ({
 								}}
 								width={22}
 							/>
-						</Pressable>
+						</button>
 					</div>
 					<Prompt.Basic
 						control={loggedOutWarningPromptControl}

@@ -86,21 +86,17 @@ export function Root({
 	);
 }
 
-const RadixTriggerPassThrough = React.forwardRef(
-	(
-		props: {
-			children: (
-				props: RadixPassThroughTriggerProps & {
-					ref: React.Ref<any>;
-				},
-			) => React.ReactNode;
-		},
-		ref,
-	) => {
-		// @ts-expect-error Radix provides no types of this stuff
-		return props.children({ ...props, ref });
-	},
-);
+const RadixTriggerPassThrough = React.forwardRef<
+	any,
+	{
+		children: (props: RadixPassThroughTriggerProps) => React.ReactNode;
+	}
+>((props, ref) => {
+	return props.children({
+		...props,
+		ref: ref as React.RefObject<any>,
+	});
+});
 RadixTriggerPassThrough.displayName = "RadixTriggerPassThrough";
 
 export function Trigger({ children, label, role = "button", hint }: TriggerProps) {
@@ -125,7 +121,6 @@ export function Trigger({ children, label, role = "button", hint }: TriggerProps
 							// No-op override to prevent false positive that interprets mobile scroll as a tap.
 							// This requires the custom onPress handler below to compensate.
 							// https://github.com/radix-ui/primitives/issues/1912
-							onPointerDown: undefined,
 							onPress: () => {
 								if (window.event instanceof KeyboardEvent) {
 									// The onPointerDown hack above is not relevant to this press, so don't do anything.
@@ -142,9 +137,6 @@ export function Trigger({ children, label, role = "button", hint }: TriggerProps
 							onBlur: onBlur,
 							onMouseEnter,
 							onMouseLeave,
-							accessibilityHint: hint,
-							accessibilityLabel: label,
-							accessibilityRole: role,
 						},
 					})
 				}

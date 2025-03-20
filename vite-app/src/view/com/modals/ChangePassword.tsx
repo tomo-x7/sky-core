@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as EmailValidator from "email-validator";
 import { useState } from "react";
-import { TouchableOpacity } from "react-native";
 
-import ActivityIndicator from "#/components/ActivityIndicator";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -158,12 +157,7 @@ export function Component() {
 								...s.mt10,
 							}}
 						>
-							<TouchableOpacity
-								onPress={() => setStage(Stages.ChangePassword)}
-								accessibilityRole="button"
-								accessibilityLabel={"Go to next"}
-								accessibilityHint={"Navigates to the next screen"}
-							>
+							<button type="button" onClick={() => setStage(Stages.ChangePassword)}>
 								<Text
 									type="xl"
 									style={{
@@ -173,7 +167,7 @@ export function Component() {
 								>
 									Already have a code?
 								</Text>
-							</TouchableOpacity>
+							</button>
 						</div>
 					)}
 					{stage === Stages.ChangePassword && (

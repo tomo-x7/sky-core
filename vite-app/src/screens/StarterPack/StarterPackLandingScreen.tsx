@@ -1,8 +1,6 @@
 import { AppBskyGraphDefs, AppBskyGraphStarterpack, AtUri, type ModerationOpts } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Pressable } from "react-native";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -27,8 +25,6 @@ import * as bsky from "#/types/bsky";
 import { LoggedOutScreenState } from "#/view/com/auth/LoggedOut";
 import { formatCount } from "#/view/com/util/numeric/format";
 import { Logo } from "#/view/icons/Logo";
-
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 interface AppClipMessage {
 	action: "present" | "store";
@@ -360,8 +356,8 @@ export function AppClipOverlay({
 	if (!visible) return;
 
 	return (
-		<AnimatedPressable
-			accessibilityRole="button"
+		<button
+			type="button"
 			style={{
 				...a.absolute,
 				...a.inset_0,
@@ -371,9 +367,9 @@ export function AppClipOverlay({
 					zIndex: 1,
 				},
 			}}
-			entering={FadeIn}
-			exiting={FadeOut}
-			onPress={() => setIsVisible(false)}
+			// entering={FadeIn}
+			// exiting={FadeOut}
+			onClick={() => setIsVisible(false)}
 		>
 			<div
 				style={{
@@ -408,6 +404,6 @@ export function AppClipOverlay({
 					</Text>
 				</div>
 			</div>
-		</AnimatedPressable>
+		</button>
 	);
 }

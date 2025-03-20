@@ -1,6 +1,5 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import React, { type JSX, useCallback } from "react";
-import { Dimensions } from "react-native";
 
 import { ListFooter } from "#/components/Lists";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -178,7 +177,7 @@ export function ListMembers({
 				onRefresh={onRefresh}
 				headerOffset={headerOffset}
 				contentContainerStyle={{
-					minHeight: Dimensions.get("window").height * 1.5,
+					minHeight: window.innerHeight * 1.5,
 				}}
 				onScrolledDownChange={onScrolledDownChange}
 				onEndReached={onEndReached}

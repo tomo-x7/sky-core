@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import { createContext, useCallback, useContext } from "react";
-import { Keyboard } from "react-native";
 
 import {
 	type TextStyleProp,
@@ -17,6 +16,7 @@ import { ScrollbarOffsetContext } from "#/components/Layout/context";
 import { Text } from "#/components/Typography";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeft } from "#/components/icons/Arrow";
 import { Menu_Stroke2_Corner0_Rounded as Menu } from "#/components/icons/Menu";
+import { Keyboard } from "#/lib/Keyboard";
 import { HITSLOP_30 } from "#/lib/constants";
 import type { NavigationProp } from "#/lib/routes/types";
 import { useSetDrawerOpen } from "#/state/shell";

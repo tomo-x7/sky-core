@@ -1,11 +1,11 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
 import throttle from "lodash.throttle";
 import React from "react";
-import { AppState, type AppStateStatus } from "react-native";
 
 import { FEEDBACK_FEEDS, STAGING_FEEDS } from "#/lib/constants";
 import type { FeedDescriptor, FeedPostSliceItem } from "#/state/queries/post-feed";
 import { getItemsForFeedback } from "#/view/com/posts/PostFeed";
+import { AppState } from "./appstate";
 import { useAgent } from "./session";
 
 type StateContext = {
@@ -85,8 +85,8 @@ export function useFeedFeedback(feed: FeedDescriptor, hasSession: boolean) {
 		if (!enabled) {
 			return;
 		}
-		const sub = AppState.addEventListener("change", (state: AppStateStatus) => {
-			if (state === "background") {
+		const sub = AppState.addEventListener("change", (state) => {
+			if (state === "inactive") {
 				sendToFeed.flush();
 			}
 		});

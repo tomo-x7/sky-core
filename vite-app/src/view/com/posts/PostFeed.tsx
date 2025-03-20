@@ -1,9 +1,10 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type JSX, memo } from "react";
-import { ActivityIndicator, AppState, Dimensions, type ListRenderItemInfo } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 
 import { useBreakpoints, useLayoutBreakpoints } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { ProgressGuide, SuggestedFollows } from "#/components/FeedInterstitials";
 import { PostFeedVideoGridRow, PostFeedVideoGridRowPlaceholder } from "#/components/feeds/PostFeedVideoGridRow";
 import { TrendingInterstitial } from "#/components/interstitials/Trending";
@@ -11,6 +12,7 @@ import { TrendingVideos as TrendingVideosInterstitial } from "#/components/inter
 import { DISCOVER_FEED_URI, KNOWN_SHUTDOWN_FEEDS } from "#/lib/constants";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
 import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
+import { AppState } from "#/state/appstate";
 import { listenPostCreated } from "#/state/events";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
 import { useTrendingSettings } from "#/state/preferences/trending";
@@ -651,7 +653,7 @@ let PostFeed = ({
 				headerOffset={headerOffset}
 				progressViewOffset={progressViewOffset}
 				contentContainerStyle={{
-					minHeight: Dimensions.get("window").height * 1.5,
+					minHeight: window.innerHeight * 1.5,
 				}}
 				onScrolledDownChange={onScrolledDownChange}
 				onEndReached={onEndReached}

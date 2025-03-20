@@ -1,9 +1,10 @@
 import { type AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useMemo, useState } from "react";
-import { ActivityIndicator, KeyboardAvoidingView, ScrollView, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -293,16 +294,14 @@ export function Component({
 							<ActivityIndicator />
 						</div>
 					) : (
-						<TouchableOpacity
+						<button
+							type="button"
 							style={{
 								...s.mt10,
 								...(isDescriptionOver && s.dimmed),
 							}}
 							disabled={isDescriptionOver}
-							onPress={onPressSave}
-							accessibilityRole="button"
-							accessibilityLabel={"Save"}
-							accessibilityHint=""
+							onClick={onPressSave}
 						>
 							<LinearGradient
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
@@ -320,15 +319,13 @@ export function Component({
 									Save
 								</Text>
 							</LinearGradient>
-						</TouchableOpacity>
+						</button>
 					)}
-					<TouchableOpacity
+					<button
+						type="button"
 						style={s.mt5}
-						onPress={onPressCancel}
-						accessibilityRole="button"
-						accessibilityLabel={"Cancel"}
-						accessibilityHint=""
-						onAccessibilityEscape={onPressCancel}
+						onClick={onPressCancel}
+						// onAccessibilityEscape={onPressCancel}
 					>
 						<div style={styles.btn}>
 							<Text
@@ -341,7 +338,7 @@ export function Component({
 								Cancel
 							</Text>
 						</div>
-					</TouchableOpacity>
+					</button>
 				</div>
 			</ScrollView>
 		</KeyboardAvoidingView>

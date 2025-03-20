@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Keyboard } from "react-native";
 
 import { useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
+import { Keyboard } from "#/lib/Keyboard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { Dimensions } from "#/lib/media/types";
-import { useOnLayout } from "#/lib/onLayout";
 import { colors, s } from "#/lib/styles";
 import type { ComposerImage } from "#/state/gallery";
 import type { PostAction } from "../state/composer";

@@ -1,8 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ActivityIndicator, type ListRenderItemInfo, findNodeHandle } from "react-native";
+import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as FeedCard from "#/components/FeedCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
@@ -29,11 +30,10 @@ interface ProfileFeedgensProps {
 	headerOffset: number;
 	enabled?: boolean;
 	style?: React.CSSProperties;
-	setScrollViewTag: (tag: number | null) => void;
 }
 
 export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps>(function ProfileFeedgensImpl(
-	{ did, scrollElRef, headerOffset, enabled, style, setScrollViewTag },
+	{ did, scrollElRef, headerOffset, enabled, style },
 	ref,
 ) {
 	const t = useTheme();
@@ -142,13 +142,6 @@ export const ProfileFeedgens = React.forwardRef<SectionRef, ProfileFeedgensProps
 		},
 		[t, error, refetch, onPressRetryLoadMore, preferences],
 	);
-
-	React.useEffect(() => {
-		if (enabled && scrollElRef.current) {
-			const nativeTag = findNodeHandle(scrollElRef.current);
-			setScrollViewTag(nativeTag);
-		}
-	}, [enabled, scrollElRef, setScrollViewTag]);
 
 	const ProfileFeedgensFooter = React.useCallback(() => {
 		return isFetchingNextPage ? <ActivityIndicator style={styles.footer} /> : null;

@@ -13,7 +13,7 @@
  */
 
 import React from "react";
-import type { FlatList, FlatListProps, ScrollViewProps, ViewProps } from "react-native";
+import type { FlatList, FlatListProps, ScrollViewProps } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { useLayoutBreakpoints } from "#/alf";
@@ -35,7 +35,11 @@ export const CenteredView = React.forwardRef(function CenteredView(
 		topBorder,
 		...props
 	}: React.PropsWithChildren<
-		Omit<ViewProps, "style"> & { sideBorders?: boolean; topBorder?: boolean; style?: React.CSSProperties }
+		Omit<JSX.IntrinsicElements["div"], "style"> & {
+			sideBorders?: boolean;
+			topBorder?: boolean;
+			style?: React.CSSProperties;
+		}
 	>,
 	ref: React.Ref<HTMLDivElement>,
 ) {

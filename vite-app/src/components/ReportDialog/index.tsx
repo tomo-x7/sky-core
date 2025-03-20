@@ -1,5 +1,4 @@
 import React from "react";
-import { Pressable } from "react-native";
 
 import type { ReportOption } from "#/lib/moderation/useReportOptions";
 import { useMyLabelersQuery } from "#/state/queries/preferences";
@@ -45,7 +44,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 				>
 					<Loader size="xl" />
 					{/* Here to capture focus for a hot sec to prevent flash */}
-					<Pressable accessible={false} />
+					<button type="button" />
 				</div>
 			) : error || !labelers ? (
 				<div>

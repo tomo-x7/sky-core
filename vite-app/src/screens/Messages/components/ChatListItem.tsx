@@ -243,19 +243,7 @@ function ChatListItemReady({
 					<PreviewableUserAvatar profile={profile} size={52} moderation={moderation.ui("avatar")} />
 				</div>
 
-				<Link
-					to={`/messages/${convo.id}`}
-					label={displayName}
-					accessibilityHint={
-						!isDeletedAccount
-							? `Go to conversation with ${profile.handle}`
-							: "This conversation is with a deleted or a deactivated account. Press for options"
-					}
-					accessibilityActions={undefined}
-					onPress={onPress}
-					onLongPress={undefined}
-					onAccessibilityAction={onLongPress}
-				>
+				<Link to={`/messages/${convo.id}`} label={displayName} onPress={onPress} onLongPress={undefined}>
 					{({ hovered, pressed, focused }) => (
 						<div
 							style={{

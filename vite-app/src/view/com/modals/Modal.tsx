@@ -1,5 +1,3 @@
-import { TouchableWithoutFeedback } from "react-native";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -90,10 +88,13 @@ function Modal({ modal }: { modal: ModalIface }) {
 	}
 
 	return (
-		<TouchableWithoutFeedback onPress={onPressMask}>
-			{/* @ts-expect-error */}
-			<Animated.View style={styles.mask} entering={FadeIn.duration(150)} exiting={FadeOut}>
-				<TouchableWithoutFeedback onPress={onInnerPress}>
+		<button type="button" onClick={onPressMask}>
+			<div
+				style={styles.mask}
+				// entering={FadeIn.duration(150)}
+				// exiting={FadeOut}
+			>
+				<button type="button" onClick={onInnerPress}>
 					<div
 						style={{
 							...styles.container,
@@ -104,9 +105,9 @@ function Modal({ modal }: { modal: ModalIface }) {
 					>
 						{element}
 					</div>
-				</TouchableWithoutFeedback>
-			</Animated.View>
-		</TouchableWithoutFeedback>
+				</button>
+			</div>
+		</button>
 	);
 }
 

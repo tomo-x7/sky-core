@@ -1,8 +1,8 @@
 import { nanoid } from "nanoid/non-secure";
 import React from "react";
-import { ActivityIndicator } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { FormError } from "#/components/forms/FormError";
 import { createFullHandle } from "#/lib/strings/handles";
 import { ScreenTransition } from "#/screens/Login/ScreenTransition";
@@ -78,7 +78,7 @@ export function StepCaptcha() {
 						<CaptchaWebView
 							url={url}
 							stateParam={stateParam}
-							state={state}
+							// state={state}
 							onSuccess={onSuccess}
 							onError={onError}
 						/>

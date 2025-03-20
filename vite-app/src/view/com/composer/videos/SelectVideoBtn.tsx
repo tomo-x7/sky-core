@@ -1,6 +1,5 @@
 import type { ImagePickerAsset } from "expo-image-picker";
 import { useCallback } from "react";
-import { Keyboard } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -8,6 +7,7 @@ import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { VideoClip_Stroke2_Corner0_Rounded as VideoClipIcon } from "#/components/icons/VideoClip";
+import { Keyboard } from "#/lib/Keyboard";
 import { SUPPORTED_MIME_TYPES, type SupportedMimeTypes } from "#/lib/constants";
 import { BSKY_SERVICE } from "#/lib/constants";
 import { useVideoLibraryPermission } from "#/lib/hooks/usePermissions";
@@ -68,14 +68,13 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 			<Button
 				onPress={onPressSelectVideo}
 				label={"Select video"}
-				accessibilityHint={"Opens video picker"}
 				style={a.p_sm}
 				variant="ghost"
 				shape="round"
 				color="primary"
 				disabled={disabled}
 			>
-				<VideoClipIcon size="lg" style={disabled && t.atoms.text_contrast_low} />
+				<VideoClipIcon size="lg" style={disabled ? t.atoms.text_contrast_low : undefined} />
 			</Button>
 			<VerifyEmailPrompt control={control} />
 		</>

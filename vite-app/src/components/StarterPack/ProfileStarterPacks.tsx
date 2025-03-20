@@ -1,7 +1,7 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
-import React, { useCallback, useEffect, useImperativeHandle, useState } from "react";
-import { type ListRenderItemInfo, findNodeHandle } from "react-native";
+import React, { useCallback, useImperativeHandle, useState } from "react";
+import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -33,7 +33,6 @@ interface ProfileFeedgensProps {
 	headerOffset: number;
 	enabled?: boolean;
 	style?: React.CSSProperties;
-	setScrollViewTag: (tag: number | null) => void;
 	isMe: boolean;
 }
 
@@ -42,7 +41,7 @@ function keyExtractor(item: AppBskyGraphDefs.StarterPackView) {
 }
 
 export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensProps>(function ProfileFeedgensImpl(
-	{ scrollElRef, did, headerOffset, enabled, style, setScrollViewTag, isMe },
+	{ scrollElRef, did, headerOffset, enabled, style, isMe },
 	ref,
 ) {
 	const t = useTheme();
@@ -76,13 +75,6 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 			console.error("Failed to load more starter packs", { message: err });
 		}
 	}, [isFetching, hasNextPage, fetchNextPage]);
-
-	useEffect(() => {
-		if (enabled && scrollElRef.current) {
-			const nativeTag = findNodeHandle(scrollElRef.current);
-			setScrollViewTag(nativeTag);
-		}
-	}, [enabled, scrollElRef, setScrollViewTag]);
 
 	const renderItem = ({ item, index }: ListRenderItemInfo<AppBskyGraphDefs.StarterPackView>) => {
 		return (

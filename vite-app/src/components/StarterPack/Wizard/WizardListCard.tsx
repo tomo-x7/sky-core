@@ -7,13 +7,13 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { Keyboard } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import { Checkbox } from "#/components/forms/Toggle";
+import { Keyboard } from "#/lib/Keyboard";
 import { DISCOVER_FEED_URI, STARTER_PACK_MAX_SIZE } from "#/lib/constants";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";

@@ -1,5 +1,3 @@
-import { Text } from "react-native";
-
 import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
@@ -68,7 +66,7 @@ export function NotificationSettingsScreen(props: Props) {
 						<SettingsList.Item>
 							<Admonition type="warning" style={a.flex_1}>
 								<>
-									<Text style={a.font_bold}>Experimental:</Text> When this preference is enabled,
+									<span style={a.font_bold}>Experimental:</span> When this preference is enabled,
 									you'll only receive reply and quote notifications from users you follow. We'll
 									continue to add more controls here over time.
 								</>

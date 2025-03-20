@@ -1,8 +1,8 @@
 import { BskyAgent } from "@atproto/api";
 import { useState } from "react";
-import { ActivityIndicator } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { FormError } from "#/components/forms/FormError";

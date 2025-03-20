@@ -2,7 +2,6 @@ import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React, { useImperativeHandle } from "react";
-import { TouchableWithoutFeedback } from "react-native";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 import { FlatList, type FlatListProps } from "#/lib/flatlist";
 
@@ -93,11 +92,7 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 				<Portal>
 					<Context.Provider value={context}>
 						<RemoveScrollBar />
-						<TouchableWithoutFeedback
-							accessibilityHint={undefined}
-							accessibilityLabel={"Close active dialog"}
-							onPress={handleBackgroundPress}
-						>
+						<button type="button" onClick={handleBackgroundPress}>
 							<div
 								style={{
 									...a.fixed,
@@ -130,7 +125,7 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 									{children}
 								</div>
 							</div>
-						</TouchableWithoutFeedback>
+						</button>
 					</Context.Provider>
 				</Portal>
 			)}
@@ -264,7 +259,6 @@ function Backdrop() {
 	return (
 		<div style={{ opacity: 0.8 }}>
 			<div
-				//@ts-expect-error
 				style={{
 					...a.fixed,
 					...a.inset_0,

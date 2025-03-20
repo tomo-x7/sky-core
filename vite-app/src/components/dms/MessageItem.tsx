@@ -1,6 +1,5 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, RichText as RichTextAPI } from "@atproto/api";
 import React, { useCallback, useMemo, useRef } from "react";
-import { type GestureResponderEvent, LayoutAnimation } from "react-native";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
@@ -76,7 +75,7 @@ let MessageItem = ({
 
 	const lastInGroupRef = useRef(isLastInGroup);
 	if (lastInGroupRef.current !== isLastInGroup) {
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+		// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 		lastInGroupRef.current = isLastInGroup;
 	}
 
@@ -156,7 +155,7 @@ let MessageItemMetadata = ({
 	const { message } = item;
 
 	const handleRetry = useCallback(
-		(e: GestureResponderEvent) => {
+		(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
 			if (item.type === "pending-message" && item.retry) {
 				e.preventDefault();
 				item.retry();

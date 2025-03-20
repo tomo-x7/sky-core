@@ -3,7 +3,7 @@ import { QueryClient, focusManager, onlineManager } from "@tanstack/react-query"
 import { PersistQueryClientProvider, type PersistQueryClientProviderProps } from "@tanstack/react-query-persist-client";
 import type React from "react";
 import { useRef, useState } from "react";
-import { AppState } from "react-native";
+import { AppState } from "#/state/appstate";
 import { listenNetworkConfirmed, listenNetworkLost } from "#/state/events";
 
 // any query keys in this array will be persisted to AsyncStorage

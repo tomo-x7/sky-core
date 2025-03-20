@@ -1,7 +1,6 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationUI } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type ComponentProps } from "react";
-import { Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -55,15 +54,13 @@ export function PostHider({
 	}
 
 	return !override ? (
-		<Pressable
-			onPress={() => {
+		<button
+			type="button"
+			onClick={() => {
 				if (!modui.noOverride) {
 					setOverride((v) => !v);
 				}
 			}}
-			accessibilityRole="button"
-			accessibilityHint={override ? "Hides the content" : "Shows the content"}
-			accessibilityLabel=""
 			style={{
 				...a.flex_row,
 				...a.align_center,
@@ -80,13 +77,11 @@ export function PostHider({
 			}}
 		>
 			<ModerationDetailsDialog control={control} modcause={blur} />
-			<Pressable
-				onPress={() => {
+			<button
+				type="button"
+				onClick={() => {
 					control.open();
 				}}
-				accessibilityRole="button"
-				accessibilityLabel={"Learn more about this warning"}
-				accessibilityHint=""
 			>
 				<div
 					style={{
@@ -105,7 +100,7 @@ export function PostHider({
 				>
 					<desc.icon size="sm" fill={t.atoms.text_contrast_medium.color} />
 				</div>
-			</Pressable>
+			</button>
 			<Text
 				style={{
 					...t.atoms.text_contrast_medium,
@@ -118,7 +113,7 @@ export function PostHider({
 			{!modui.noOverride && (
 				<Text style={{ color: t.palette.primary_500 }}>{override ? <>Hide</> : <>Show</>}</Text>
 			)}
-		</Pressable>
+		</button>
 	) : (
 		<Link style={{ ...style, ...styles.child }} href={href} {...props}>
 			{children}

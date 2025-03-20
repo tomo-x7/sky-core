@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import { Keyboard } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -11,6 +10,7 @@ import { CC_Stroke2_Corner0_Rounded as CCIcon } from "#/components/icons/CC";
 import { PageText_Stroke2_Corner0_Rounded as PageTextIcon } from "#/components/icons/PageText";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { Warning_Stroke2_Corner0_Rounded as WarningIcon } from "#/components/icons/Warning";
+import { Keyboard } from "#/lib/Keyboard";
 import { MAX_ALT_TEXT } from "#/lib/constants";
 import { useEnforceMaxGraphemeCount } from "#/lib/strings/helpers";
 import { LANGUAGES } from "#/locale/languages";
@@ -40,12 +40,11 @@ export function SubtitleDialogBtn(props: Props) {
 		>
 			<Button
 				label={"Captions & alt text"}
-				accessibilityHint={"Opens captions and alt text dialog"}
 				size="small"
 				color="secondary"
 				variant="ghost"
 				onPress={() => {
-					if (Keyboard.isVisible()) Keyboard.dismiss();
+					Keyboard.dismiss();
 					control.open();
 				}}
 			>

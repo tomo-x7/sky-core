@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
-import { ActivityIndicator, Keyboard, KeyboardAvoidingView, type LayoutChangeEvent, ScrollView } from "react-native";
+import { KeyboardAvoidingView, type LayoutChangeEvent, ScrollView } from "react-native";
 // @ts-expect-error no type definition
 import ProgressCircle from "react-native-progress/Circle";
 import Animated, {
@@ -24,6 +24,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
@@ -33,13 +34,13 @@ import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { EmojiArc_Stroke2_Corner0_Rounded as EmojiSmile } from "#/components/icons/Emoji";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { Keyboard } from "#/lib/Keyboard";
 import * as apilib from "#/lib/api/index";
 import { EmbeddingDisabledError } from "#/lib/api/resolve";
 import { until } from "#/lib/async/until";
 import { MAX_GRAPHEME_LENGTH, SUPPORTED_MIME_TYPES, type SupportedMimeTypes } from "#/lib/constants";
 import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
 import { useEmail } from "#/lib/hooks/useEmail";
-import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -123,7 +124,6 @@ export const ComposePost = ({
 	const { closeAllModals } = useModalControls();
 	const { data: preferences } = usePreferencesQuery();
 
-	const [isKeyboardVisible] = useIsKeyboardVisible({ iosUseWillEvents: true });
 	const [isPublishing, setIsPublishing] = useState(false);
 	const [publishingStage, setPublishingStage] = useState("");
 	const [error, setError] = useState("");
@@ -787,7 +787,6 @@ function ComposerTopBar({
 						...{ paddingLeft: 7, paddingRight: 7 },
 					}}
 					onPress={onCancel}
-					accessibilityHint="Closes post composer and discards post draft"
 				>
 					<ButtonText style={a.text_md}>Cancel</ButtonText>
 				</Button>
@@ -1126,7 +1125,6 @@ function ComposerFooter({
 							onPress={onEmojiButtonPress}
 							style={a.p_sm}
 							label={"Open emoji picker"}
-							accessibilityHint={"Opens emoji picker"}
 							variant="ghost"
 							shape="round"
 							color="primary"
@@ -1466,7 +1464,6 @@ function ErrorBanner({
 }
 
 function ToolbarWrapper({
-	style,
 	children,
 }: {
 	style: React.CSSProperties;

@@ -11,8 +11,7 @@ import { AtUri } from "@atproto/api";
 import { TID } from "@atproto/common-web";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { memo, type ReactElement, useEffect, useMemo, useState } from "react";
-import { Animated, Pressable, TouchableOpacity } from "react-native";
+import React, { memo, type ReactElement, useMemo, useState } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -448,9 +447,9 @@ function ExpandListPressable({
 }) {
 	if (hasMultipleAuthors) {
 		return (
-			<Pressable onPress={onToggleAuthorsExpanded} style={styles.expandedAuthorsTrigger} accessible={false}>
+			<button type="button" onClick={onToggleAuthorsExpanded} style={styles.expandedAuthorsTrigger}>
 				{children}
-			</Pressable>
+			</button>
 		);
 	} else {
 		return <>{children}</>;
@@ -519,13 +518,7 @@ function CondensedAuthorsList({
 	if (!visible) {
 		return (
 			<div style={styles.avis}>
-				<TouchableOpacity
-					style={styles.expandedAuthorsCloseBtn}
-					onPress={onToggleAuthorsExpanded}
-					accessibilityRole="button"
-					accessibilityLabel={"Hide user list"}
-					accessibilityHint={"Collapses list of users for a given notification"}
-				>
+				<button type="button" style={styles.expandedAuthorsCloseBtn} onClick={onToggleAuthorsExpanded}>
 					<ChevronUpIcon
 						size="md"
 						style={{
@@ -536,7 +529,7 @@ function CondensedAuthorsList({
 					<Text type="sm-medium" style={pal.text}>
 						Hide
 					</Text>
-				</TouchableOpacity>
+				</button>
 			</div>
 		);
 	}
@@ -554,7 +547,7 @@ function CondensedAuthorsList({
 		);
 	}
 	return (
-		<TouchableOpacity accessibilityRole="none" onPress={onToggleAuthorsExpanded}>
+		<button type="button" onClick={onToggleAuthorsExpanded}>
 			<div style={styles.avis}>
 				{authors.slice(0, MAX_AUTHORS).map((author) => (
 					<div key={author.href} style={s.mr5}>
@@ -584,7 +577,7 @@ function CondensedAuthorsList({
 					}}
 				/>
 			</div>
-		</TouchableOpacity>
+		</button>
 	);
 }
 
@@ -598,22 +591,22 @@ function ExpandedAuthorsList({
 	const pal = usePalette("default");
 	const heightInterp = useAnimatedValue(visible ? 1 : 0);
 	const targetHeight = authors.length * (EXPANDED_AUTHOR_EL_HEIGHT + 10); /*10=margin*/
-	const heightStyle = {
-		height: Animated.multiply(heightInterp, targetHeight),
-	};
-	useEffect(() => {
-		Animated.timing(heightInterp, {
-			toValue: visible ? 1 : 0,
-			duration: 200,
-			useNativeDriver: false,
-		}).start();
-	}, [heightInterp, visible]);
+	// const heightStyle = {
+	// 	height: Animated.multiply(heightInterp, targetHeight),
+	// };
+	// useEffect(() => {
+	// 	Animated.timing(heightInterp, {
+	// 		toValue: visible ? 1 : 0,
+	// 		duration: 200,
+	// 		useNativeDriver: false,
+	// 	}).start();
+	// }, [heightInterp, visible]);
 
 	return (
-		<Animated.View
+		<div
 			style={{
 				...a.overflow_hidden,
-				...heightStyle,
+				// ...heightStyle,
 			}}
 		>
 			{visible &&
@@ -621,7 +614,6 @@ function ExpandedAuthorsList({
 					<NewLink
 						key={author.profile.did}
 						label={author.profile.displayName || author.profile.handle}
-						accessibilityHint={"Opens this profile"}
 						to={makeProfileLink({
 							did: author.profile.did,
 							handle: author.profile.handle,
@@ -650,7 +642,7 @@ function ExpandedAuthorsList({
 						</div>
 					</NewLink>
 				))}
-		</Animated.View>
+		</div>
 	);
 }
 

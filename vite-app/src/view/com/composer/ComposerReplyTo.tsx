@@ -1,6 +1,5 @@
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
 import React from "react";
-import { LayoutAnimation } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -18,10 +17,10 @@ export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 
 	const onPress = React.useCallback(() => {
 		setShowFull((prev) => !prev);
-		LayoutAnimation.configureNext({
-			duration: 350,
-			update: { type: "spring", springDamping: 0.7 },
-		});
+		// LayoutAnimation.configureNext({
+		// 	duration: 350,
+		// 	update: { type: "spring", springDamping: 0.7 },
+		// });
 	}, []);
 
 	const quoteEmbed = React.useMemo(() => {

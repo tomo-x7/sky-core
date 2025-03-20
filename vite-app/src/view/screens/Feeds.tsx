@@ -2,9 +2,9 @@ import type { AppBskyFeedDefs } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import debounce from "lodash.debounce";
 import React from "react";
-import { ActivityIndicator } from "react-native";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
+import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { ButtonIcon } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import * as FeedCard from "#/components/FeedCard";

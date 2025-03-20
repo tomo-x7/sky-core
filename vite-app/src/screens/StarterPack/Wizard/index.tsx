@@ -3,7 +3,6 @@ import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { Keyboard } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -14,6 +13,7 @@ import { ListMaybePlaceholder } from "#/components/Lists";
 import { Loader } from "#/components/Loader";
 import { WizardEditListDialog } from "#/components/StarterPack/Wizard/WizardEditListDialog";
 import { Text } from "#/components/Typography";
+import { Keyboard } from "#/lib/Keyboard";
 import { STARTER_PACK_MAX_SIZE } from "#/lib/constants";
 import { useEnableKeyboardControllerScreen } from "#/lib/hooks/useEnableKeyboardController";
 import { createSanitizedDisplayName } from "#/lib/moderation/create-sanitized-display-name";
@@ -234,14 +234,10 @@ function WizardInner({
 			return;
 		}
 
-		const keyboardVisible = Keyboard.isVisible();
 		Keyboard.dismiss();
-		setTimeout(
-			() => {
-				dispatch({ type: "Next" });
-			},
-			keyboardVisible ? 16 : 0,
-		);
+		setTimeout(() => {
+			dispatch({ type: "Next" });
+		}, 16);
 	};
 
 	return (
@@ -249,7 +245,6 @@ function WizardInner({
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton
 					label={"Back"}
-					accessibilityHint={"Returns to the previous step"}
 					onPress={(evt) => {
 						if (state.currentStep !== "Details") {
 							evt.preventDefault();

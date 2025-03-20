@@ -1,7 +1,6 @@
 import { type ChatBskyConvoDefs, RichText } from "@atproto/api";
 // import * as Clipboard from "expo-clipboard";
 import React from "react";
-import { LayoutAnimation, Pressable } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
@@ -59,7 +58,7 @@ export let MessageMenu = ({
 	}, [langPrefs.primaryLanguage, message.text, openLink]);
 
 	const onDelete = React.useCallback(() => {
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+		// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 		convo
 			.deleteMessage(message.id)
 			.then(() => Toast.show("Message deleted"))
@@ -72,7 +71,8 @@ export let MessageMenu = ({
 				<div style={{ opacity: triggerOpacity }}>
 					<Menu.Trigger label={"Chat settings"}>
 						{({ props, state }) => (
-							<Pressable
+							<button
+								type="button"
 								{...props}
 								style={{
 									...a.p_sm,
@@ -81,7 +81,7 @@ export let MessageMenu = ({
 								}}
 							>
 								<DotsHorizontal size="md" style={t.atoms.text} />
-							</Pressable>
+							</button>
 						)}
 					</Menu.Trigger>
 				</div>

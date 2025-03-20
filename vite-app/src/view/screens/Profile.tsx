@@ -163,8 +163,6 @@ function ProfileScreenLoaded({
 	});
 	const [currentPage, setCurrentPage] = React.useState(0);
 
-	const [scrollViewTag, setScrollViewTag] = React.useState<number | null>(null);
-
 	const postsSectionRef = React.useRef<SectionRef>(null);
 	const repliesSectionRef = React.useRef<SectionRef>(null);
 	const mediaSectionRef = React.useRef<SectionRef>(null);
@@ -350,7 +348,6 @@ function ProfileScreenLoaded({
 								scrollElRef={scrollElRef as ListRef}
 								headerHeight={headerHeight}
 								isFocused={isFocused}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -362,7 +359,6 @@ function ProfileScreenLoaded({
 								scrollElRef={scrollElRef as ListRef}
 								headerOffset={headerHeight}
 								enabled={isFocused}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -375,7 +371,6 @@ function ProfileScreenLoaded({
 								isFocused={isFocused}
 								scrollElRef={scrollElRef as ListRef}
 								ignoreFilterFor={profile.did}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -388,7 +383,6 @@ function ProfileScreenLoaded({
 								isFocused={isFocused}
 								scrollElRef={scrollElRef as ListRef}
 								ignoreFilterFor={profile.did}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -401,7 +395,6 @@ function ProfileScreenLoaded({
 								isFocused={isFocused}
 								scrollElRef={scrollElRef as ListRef}
 								ignoreFilterFor={profile.did}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -414,7 +407,6 @@ function ProfileScreenLoaded({
 								isFocused={isFocused}
 								scrollElRef={scrollElRef as ListRef}
 								ignoreFilterFor={profile.did}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -427,7 +419,6 @@ function ProfileScreenLoaded({
 								isFocused={isFocused}
 								scrollElRef={scrollElRef as ListRef}
 								ignoreFilterFor={profile.did}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -439,7 +430,6 @@ function ProfileScreenLoaded({
 								scrollElRef={scrollElRef as ListRef}
 								headerOffset={headerHeight}
 								enabled={isFocused}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -452,7 +442,6 @@ function ProfileScreenLoaded({
 								scrollElRef={scrollElRef as ListRef}
 								headerOffset={headerHeight}
 								enabled={isFocused}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}
@@ -464,7 +453,6 @@ function ProfileScreenLoaded({
 								scrollElRef={scrollElRef as ListRef}
 								headerOffset={headerHeight}
 								enabled={isFocused}
-								setScrollViewTag={setScrollViewTag}
 							/>
 						)
 					: null}

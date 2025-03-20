@@ -7,7 +7,6 @@ import {
 } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { memo, useCallback } from "react";
-import { Platform, type PressableProps } from "react-native";
 
 import { useBreakpoints } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
@@ -80,7 +79,13 @@ let PostDropdownMenuItems = ({
 	record: AppBskyFeedPost.Record;
 	richText: RichTextAPI;
 	style?: React.CSSProperties;
-	hitSlop?: PressableProps["hitSlop"];
+	/**@deprecated 未実装 */
+	hitSlop?: {
+		top?: number | undefined;
+		left?: number | undefined;
+		bottom?: number | undefined;
+		right?: number | undefined;
+	};
 	size?: "lg" | "md" | "sm";
 	timestamp: string;
 	threadgateRecord?: AppBskyFeedThreadgate.Record;
@@ -539,14 +544,9 @@ let PostDropdownMenuItems = ({
 										label={"Edit interaction settings"}
 										onPress={() => postInteractionSettingsDialogControl.open()}
 										{...(isAuthor
-											? Platform.select({
-													web: {
-														onHoverIn: prefetchPostInteractionSettings,
-													},
-													native: {
-														onPressIn: prefetchPostInteractionSettings,
-													},
-												})
+											? {
+													onHoverIn: prefetchPostInteractionSettings,
+												}
 											: {})}
 									>
 										<Menu.ItemText>{"Edit interaction settings"}</Menu.ItemText>

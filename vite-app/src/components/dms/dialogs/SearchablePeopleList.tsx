@@ -1,7 +1,6 @@
 import { type ModerationOpts, moderateProfile } from "@atproto/api";
 import type React from "react";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { TextInput } from "react-native";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -9,11 +8,12 @@ import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
 import { canBeMessaged } from "#/components/dms/util";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
-import { useOnLayout } from "#/lib/onLayout";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
+import { usePlaceholderStyle } from "#/placeholderStyle";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { useListConvosQuery } from "#/state/queries/messages/list-conversations";
@@ -59,7 +59,7 @@ export function SearchablePeopleList({
 	const [headerHeight, setHeaderHeight] = useState(0);
 	const listRef = useRef<ListMethods>(null);
 	const { currentAccount } = useSession();
-	const inputRef = useRef<TextInput>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const [searchText, setSearchText] = useState("");
 
@@ -261,7 +261,7 @@ export function SearchablePeopleList({
 				</div>
 				<div style={a.pt_xs}>
 					<SearchInput
-						inputRef={inputRef as React.RefObject<TextInput>}
+						inputRef={inputRef}
 						value={searchText}
 						onChangeText={(text) => {
 							setSearchText(text);
@@ -463,12 +463,13 @@ function SearchInput({
 	value: string;
 	onChangeText: (text: string) => void;
 	onEscape: () => void;
-	inputRef: React.RefObject<TextInput>;
+	inputRef: React.RefObject<HTMLInputElement>;
 }) {
 	const t = useTheme();
 	const { state: hovered, onIn: onMouseEnter, onOut: onMouseLeave } = useInteractionState();
 	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();
 	const interacted = hovered || focused;
+	const phStyleCName = usePlaceholderStyle(t.palette.contrast_500);
 
 	return (
 		<div
@@ -483,12 +484,12 @@ function SearchInput({
 			}}
 		>
 			<Search size="md" fill={interacted ? t.palette.primary_500 : t.palette.contrast_300} />
-			<TextInput
-				// @ts-expect-error bottom sheet input types issue — esb
+			<input
+				type="text"
 				ref={inputRef}
 				placeholder={"Search"}
 				value={value}
-				onChangeText={onChangeText}
+				onChange={(ev) => onChangeText(ev.target.value)}
 				onFocus={onFocus}
 				onBlur={onBlur}
 				style={{
@@ -497,12 +498,11 @@ function SearchInput({
 					...a.text_md,
 					...t.atoms.text,
 				}}
-				placeholderTextColor={t.palette.contrast_500}
-				keyboardAppearance={t.name === "light" ? "light" : "dark"}
-				returnKeyType="search"
-				clearButtonMode="while-editing"
+				className={phStyleCName}
+				enterKeyHint="search"
+				// clearButtonMode="while-editing"
 				maxLength={50}
-				onKeyPress={({ nativeEvent }) => {
+				onKeyDown={({ nativeEvent }) => {
 					if (nativeEvent.key === "Escape") {
 						onEscape();
 					}
@@ -510,9 +510,8 @@ function SearchInput({
 				autoCorrect={"off"}
 				autoComplete="off"
 				autoCapitalize="none"
+				// biome-ignore lint/a11y/noAutofocus: <explanation>
 				autoFocus
-				accessibilityLabel={"Search profiles"}
-				accessibilityHint={"Searches for profiles"}
 			/>
 		</div>
 	);
