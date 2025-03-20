@@ -1,6 +1,6 @@
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 
+import { LinearGradient } from "expo-linear-gradient";
 import { atoms as a, flatten, select, tokens, useTheme } from "#/alf";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 

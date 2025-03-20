@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid/non-secure";
-import { Defs, LinearGradient, Stop } from "react-native-svg";
 
 import { tokens, useTheme } from "#/alf";
 
@@ -31,13 +30,13 @@ export function useCommonSVGProps(props: Props) {
 		const config = tokens.gradients[gradient];
 		_fill = `url(#${id})`;
 		gradientDef = (
-			<Defs>
-				<LinearGradient id={id} x1="0" y1="0" x2="100%" y2="0" gradientTransform="rotate(45)">
+			<defs>
+				<linearGradient id={id} x1="0" y1="0" x2="100%" y2="0" gradientTransform="rotate(45)">
 					{config.values.map(([stop, fill]) => (
-						<Stop key={stop} offset={stop} stopColor={fill} />
+						<stop key={stop} offset={stop} stopColor={fill} />
 					))}
-				</LinearGradient>
-			</Defs>
+				</linearGradient>
+			</defs>
 		);
 	}
 

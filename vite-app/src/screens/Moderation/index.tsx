@@ -1,7 +1,6 @@
 import { LABELS } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import { Fragment, useCallback } from "react";
-import { Linking } from "react-native";
 
 import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -9,7 +8,7 @@ import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
 import * as LabelingService from "#/components/LabelingServiceCard";
 import * as Layout from "#/components/Layout";
-import { InlineLinkText, Link } from "#/components/Link";
+import { Link } from "#/components/Link";
 import { ListMaybePlaceholder } from "#/components/Lists";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -351,32 +350,6 @@ export function ModerationScreenInner({
 									</div>
 								</Toggle.Item>
 							</div>
-							{disabledOnIOS && (
-								<div
-									style={{
-										...a.pb_lg,
-										...a.px_lg,
-									}}
-								>
-									<Text>
-										<>
-											Adult content can only be enabled via the Web at{" "}
-											<InlineLinkText
-												label={"The Bluesky web application"}
-												to=""
-												onPress={(evt) => {
-													evt.preventDefault();
-													Linking.openURL("https://bsky.app/");
-													return false;
-												}}
-											>
-												bsky.app
-											</InlineLinkText>
-											.
-										</>
-									</Text>
-								</div>
-							)}
 							<Divider />
 						</>
 					)}

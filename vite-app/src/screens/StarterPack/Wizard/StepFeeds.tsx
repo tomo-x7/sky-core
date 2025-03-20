@@ -1,7 +1,5 @@
 import type { AppBskyFeedDefs, ModerationOpts } from "@atproto/api";
 import { useState } from "react";
-import type { ListRenderItemInfo } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
@@ -14,6 +12,7 @@ import { DISCOVER_FEED_URI } from "#/lib/constants";
 import { useWizardState } from "#/screens/StarterPack/Wizard/State";
 import { useA11y } from "#/state/a11y";
 import { useGetPopularFeedsQuery, usePopularFeedsSearch, useSavedFeeds } from "#/state/queries/feed";
+import type { ListRenderItemInfo } from "#/temp";
 import { List } from "#/view/com/util/List";
 
 function keyExtractor(item: AppBskyFeedDefs.GeneratorView) {
@@ -93,7 +92,8 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 				onEndReached={!query && !screenReaderEnabled ? () => fetchNextPage() : undefined}
 				onEndReachedThreshold={2}
 				keyboardDismissMode="on-drag"
-				renderScrollComponent={(props) => <KeyboardAwareScrollView {...props} />}
+				// renderScrollComponent={(props) => <KeyboardAwareScrollView {...props} />}
+				renderScrollComponent={(props: any) => <div {...props} />}
 				keyboardShouldPersistTaps="handled"
 				disableFullWindowScroll={true}
 				sideBorders={false}

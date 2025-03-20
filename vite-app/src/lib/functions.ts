@@ -60,7 +60,6 @@ export function isPlainArray(value: unknown) {
 }
 
 // Copied from: https://github.com/jonschlinkert/is-plain-object
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
 export function isPlainObject(o: any): o is Object {
 	if (!hasObjectPrototype(o)) {
 		return false;

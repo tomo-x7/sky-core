@@ -2,7 +2,6 @@ import type { AppBskyEmbedExternal } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
-import { WebView } from "react-native-webview";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -78,18 +77,21 @@ function Player({
 				...styles.playerLayer,
 			}}
 		>
-			<WebView
-				javaScriptEnabled={true}
-				onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
-				mediaPlaybackRequiresUserAction={false}
-				allowsInlineMediaPlayback
-				bounces={false}
-				allowsFullscreenVideo
-				nestedScrollEnabled
-				source={{ uri: params.playerUri }}
+			<iframe
+				// WebView from react-native-webview
+				title="unknown"
+				// javaScriptEnabled={true}
+				// onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
+				// mediaPlaybackRequiresUserAction={false}
+				// allowsInlineMediaPlayback
+				// bounces={false}
+				// allowsFullscreenVideo
+				// nestedScrollEnabled
+				// source={{ uri: params.playerUri }}
+				src={params.playerUri}
 				onLoad={onLoad}
 				style={styles.webview}
-				setSupportMultipleWindows={false} // Prevent any redirects from opening a new window (ads)
+				// setSupportMultipleWindows={false} // Prevent any redirects from opening a new window (ads)
 			/>
 		</EventStopper>
 	);

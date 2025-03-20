@@ -72,11 +72,9 @@ export class EmbeddingDisabledError extends Error {
 
 export async function resolveLink(agent: BskyAgent, uri: string): Promise<ResolvedLink> {
 	if (isShortLink(uri)) {
-		//biome-ignore lint/style/noParameterAssign:
 		uri = await resolveShortLink(uri);
 	}
 	if (isBskyPostUrl(uri)) {
-		//biome-ignore lint/style/noParameterAssign:
 		uri = convertBskyAppUrlIfNeeded(uri);
 		const [_0, user, _1, rkey] = uri.split("/").filter(Boolean);
 		const recordUri = makeRecordUri(user, "app.bsky.feed.post", rkey);
@@ -95,7 +93,6 @@ export async function resolveLink(agent: BskyAgent, uri: string): Promise<Resolv
 		};
 	}
 	if (isBskyCustomFeedUrl(uri)) {
-		//biome-ignore lint/style/noParameterAssign:
 		uri = convertBskyAppUrlIfNeeded(uri);
 		const [_0, handleOrDid, _1, rkey] = uri.split("/").filter(Boolean);
 		const did = await fetchDid(handleOrDid);
@@ -112,7 +109,6 @@ export async function resolveLink(agent: BskyAgent, uri: string): Promise<Resolv
 		};
 	}
 	if (isBskyListUrl(uri)) {
-		//biome-ignore lint/style/noParameterAssign:
 		uri = convertBskyAppUrlIfNeeded(uri);
 		const [_0, handleOrDid, _1, rkey] = uri.split("/").filter(Boolean);
 		const did = await fetchDid(handleOrDid);

@@ -6,7 +6,6 @@ interface FoundMention {
 export function getMentionAt(text: string, cursorPos: number): FoundMention | undefined {
 	const re = /(^|\s)@([a-z0-9.]*)/gi;
 	let match: RegExpExecArray | null;
-	// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 	while ((match = re.exec(text))) {
 		const spaceOffset = match[1].length;
 		const index = match.index + spaceOffset;

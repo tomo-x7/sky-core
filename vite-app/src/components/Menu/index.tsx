@@ -99,7 +99,7 @@ const RadixTriggerPassThrough = React.forwardRef<
 });
 RadixTriggerPassThrough.displayName = "RadixTriggerPassThrough";
 
-export function Trigger({ children, label, role = "button", hint }: TriggerProps) {
+export function Trigger({ children, label, hint }: TriggerProps) {
 	const { control } = useMenuContext();
 	const { state: hovered, onIn: onMouseEnter, onOut: onMouseLeave } = useInteractionState();
 	const { state: focused, onIn: onFocus, onOut: onBlur } = useInteractionState();

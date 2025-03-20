@@ -4,7 +4,6 @@ import React, { useCallback, useState } from "react";
 
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
-import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { SafeAreaView } from "#/lib/safe-area-context";
@@ -42,7 +41,7 @@ export function Component({
 	const [query, setQuery] = useState("");
 	const autocomplete = useActorAutocompleteQuery(query);
 	const { data: memberships } = useDangerousListMembershipsQuery();
-	const [isKeyboardVisible] = useIsKeyboardVisible();
+	// const [isKeyboardVisible] = useIsKeyboardVisible();
 	const phStyleCName = usePlaceholderStyle(pal.colors.textLight);
 
 	const onPressCancelSearch = useCallback(() => setQuery(""), []);
@@ -132,7 +131,8 @@ export function Component({
 				<div
 					style={{
 						...styles.btnContainer,
-						...{ paddingBottom: isKeyboardVisible ? 10 : 20 },
+						// ...{ paddingBottom: isKeyboardVisible ? 10 : 20 },
+						paddingBottom: 20,
 					}}
 				>
 					<Button

@@ -1,8 +1,6 @@
 import { type $Typed, type AppBskyEmbedRecord, AppBskyRichtextFacet, RichText } from "@atproto/api";
 import React, { useCallback, useRef } from "react";
-import type { LayoutChangeEvent } from "react-native";
-import { useKeyboardHandler } from "react-native-keyboard-controller";
-import Animated, { runOnJS, scrollTo, useAnimatedRef, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import Animated, { runOnJS, useAnimatedRef, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
 import { Loader } from "#/components/Loader";
@@ -10,6 +8,7 @@ import { Text } from "#/components/Typography";
 import { ChatEmptyPill } from "#/components/dms/ChatEmptyPill";
 import { MessageItem } from "#/components/dms/MessageItem";
 import { NewMessagesPill } from "#/components/dms/NewMessagesPill";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
 import { ScrollProvider } from "#/lib/ScrollContext";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
 import { convertBskyAppUrlIfNeeded, isBskyPostUrl } from "#/lib/strings/url-helpers";
@@ -232,37 +231,37 @@ export function MessagesList({
 	// We use this value to keep track of when we want to disable the animation.
 	const layoutScrollWithoutAnimation = useSharedValue(false);
 
-	useKeyboardHandler(
-		{
-			onStart: (e) => {
-				"worklet";
-				// Immediate updates - like opening the emoji picker - will have a duration of zero. In those cases, we should
-				// just update the height here instead of having the `onMove` event do it (that event will not fire!)
-				if (e.duration === 0) {
-					layoutScrollWithoutAnimation.set(true);
-					keyboardHeight.set(e.height);
-				} else {
-					keyboardIsOpening.set(true);
-				}
-			},
-			onMove: (e) => {
-				"worklet";
-				keyboardHeight.set(e.height);
-				if (e.height > footerHeight.get()) {
-					scrollTo(flatListRef, 0, 1e7, false);
-				}
-			},
-			onEnd: (e) => {
-				"worklet";
-				keyboardHeight.set(e.height);
-				if (e.height > footerHeight.get()) {
-					scrollTo(flatListRef, 0, 1e7, false);
-				}
-				keyboardIsOpening.set(false);
-			},
-		},
-		[footerHeight],
-	);
+	// useKeyboardHandler(
+	// 	{
+	// 		onStart: (e) => {
+	// 			"worklet";
+	// 			// Immediate updates - like opening the emoji picker - will have a duration of zero. In those cases, we should
+	// 			// just update the height here instead of having the `onMove` event do it (that event will not fire!)
+	// 			if (e.duration === 0) {
+	// 				layoutScrollWithoutAnimation.set(true);
+	// 				keyboardHeight.set(e.height);
+	// 			} else {
+	// 				keyboardIsOpening.set(true);
+	// 			}
+	// 		},
+	// 		onMove: (e) => {
+	// 			"worklet";
+	// 			keyboardHeight.set(e.height);
+	// 			if (e.height > footerHeight.get()) {
+	// 				scrollTo(flatListRef, 0, 1e7, false);
+	// 			}
+	// 		},
+	// 		onEnd: (e) => {
+	// 			"worklet";
+	// 			keyboardHeight.set(e.height);
+	// 			if (e.height > footerHeight.get()) {
+	// 				scrollTo(flatListRef, 0, 1e7, false);
+	// 			}
+	// 			keyboardIsOpening.set(false);
+	// 		},
+	// 	},
+	// 	[footerHeight],
+	// );
 
 	const animatedListStyle = useAnimatedStyle(() => ({
 		marginBottom: Math.max(keyboardHeight.get(), footerHeight.get()),
@@ -349,18 +348,14 @@ export function MessagesList({
 	);
 
 	// -- List layout changes (opening emoji keyboard, etc.)
-	const onListLayout = React.useCallback(
-		(e: LayoutChangeEvent) => {
-			layoutHeight.set(e.nativeEvent.layout.height);
+	useOnLayout((e) => {
+		layoutHeight.set(e.height);
 
-			flatListRef.current?.scrollToEnd({
-				animated: !layoutScrollWithoutAnimation.get(),
-			});
-			layoutScrollWithoutAnimation.set(false);
-		},
-		[flatListRef, layoutScrollWithoutAnimation, layoutHeight],
-	);
-
+		flatListRef.current?.scrollToEnd({
+			animated: !layoutScrollWithoutAnimation.get(),
+		});
+		layoutScrollWithoutAnimation.set(false);
+	}, flatListRef);
 	const scrollToEndOnPress = React.useCallback(() => {
 		flatListRef.current?.scrollToOffset({
 			offset: prevContentHeight.current,
@@ -391,7 +386,6 @@ export function MessagesList({
 					removeClippedSubviews={false}
 					sideBorders={false}
 					onContentSizeChange={onContentSizeChange}
-					onLayout={onListLayout}
 					onStartReached={onStartReached}
 					onScrollToIndexFailed={onScrollToIndexFailed}
 					scrollEventThrottle={100}

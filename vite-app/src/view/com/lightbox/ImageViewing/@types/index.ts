@@ -19,5 +19,3 @@ export type ImageSource = {
 	alt?: string;
 	type: "image" | "circle-avi" | "rect-avi";
 };
-
-export type Transform = Exclude<>;

@@ -1,25 +1,20 @@
 import { type ForwardedRef, useEffect, useMemo, useRef } from "react";
-import type { ScrollView } from "react-native";
-import { Platform, findNodeHandle } from "react-native";
 
 import { mergeRefs } from "#/lib/merge-refs";
 
-type Props<Scrollable extends ScrollView = ScrollView> = {
+type Props = {
 	cursor?: string;
-	outerRef?: ForwardedRef<Scrollable>;
+	outerRef?: ForwardedRef<HTMLDivElement>;
 };
 
-export function useDraggableScroll<Scrollable extends ScrollView = ScrollView>({
-	outerRef,
-	cursor = "grab",
-}: Props<Scrollable> = {}) {
-	const ref = useRef<Scrollable>(null);
+export function useDraggableScroll({ outerRef, cursor = "grab" }: Props = {}) {
+	const ref = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		if (Platform.OS !== "web" || !ref.current) {
+		if (!ref.current) {
 			return;
 		}
-		const slider = findNodeHandle(ref.current) as unknown as HTMLDivElement;
+		const slider = ref.current;
 		if (!slider) {
 			return;
 		}

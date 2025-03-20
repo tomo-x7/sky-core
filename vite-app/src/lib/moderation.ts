@@ -88,7 +88,6 @@ export function isLabelerSubscribed(
 	labeler: string | AppBskyLabelerDefs.LabelerView | AppBskyLabelerDefs.LabelerViewDetailed,
 	modOpts: ModerationOpts,
 ) {
-	//biome-ignore lint/style/noParameterAssign:
 	labeler = typeof labeler === "string" ? labeler : labeler.creator.did;
 	if (isAppLabeler(labeler)) {
 		return true;

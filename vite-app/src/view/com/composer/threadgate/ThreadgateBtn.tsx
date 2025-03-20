@@ -18,9 +18,8 @@ export function ThreadgateBtn({
 	threadgateAllowUISettings: ThreadgateAllowUISetting[];
 	onChangeThreadgateAllowUISettings: (v: ThreadgateAllowUISetting[]) => void;
 
-	style?: React.CSSProperties>;
-})
-{
+	style?: React.CSSProperties;
+}) {
 	const control = Dialog.useDialogControl();
 
 	const onPress = () => {
@@ -34,16 +33,13 @@ export function ThreadgateBtn({
 
 	return (
 		<>
-			<Button
-				variant="solid"
-				color="secondary"
-				size="small"
-				onPress={onPress}
-				label={label}
-				accessibilityHint={"Opens a dialog to choose who can reply to this thread"}
-			>
+			<Button variant="solid" color="secondary" size="small" onPress={onPress} label={label}>
 				<ButtonIcon icon={anyoneCanInteract ? Earth : Group} />
-				<ButtonText numberOfLines={1}>{label}</ButtonText>
+				<ButtonText
+				//  numberOfLines={1}
+				>
+					{label}
+				</ButtonText>
 			</Button>
 			<PostInteractionSettingsControlledDialog
 				control={control}

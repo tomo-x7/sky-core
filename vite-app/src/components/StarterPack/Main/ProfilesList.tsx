@@ -1,7 +1,6 @@
 import { type AppBskyActorDefs, type AppBskyGraphGetList, AtUri, type ModerationOpts } from "@atproto/api";
 import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import React, { useCallback } from "react";
-import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
@@ -12,6 +11,7 @@ import { isBlockedOrBlocking } from "#/lib/moderation/blocked-and-muted";
 import type { SectionRef } from "#/screens/Profile/Sections/types";
 import { useAllListMembersQuery } from "#/state/queries/list-members";
 import { useSession } from "#/state/session";
+import type { ListRenderItemInfo } from "#/temp";
 import { List, type ListRef } from "#/view/com/util/List";
 
 function keyExtractor(item: AppBskyActorDefs.ProfileViewBasic, index: number) {

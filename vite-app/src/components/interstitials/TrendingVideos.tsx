@@ -1,7 +1,6 @@
 import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import { ScrollView } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -105,11 +104,12 @@ export function TrendingVideos() {
 				</Button>
 			</div>
 			<BlockDrawerGesture>
-				<ScrollView
-					horizontal
-					showsHorizontalScrollIndicator={false}
-					decelerationRate="fast"
-					snapToInterval={CARD_WIDTH + a.gap_sm.gap}
+				<div
+				// ScrollView
+				// horizontal
+				// showsHorizontalScrollIndicator={false}
+				// decelerationRate="fast"
+				// snapToInterval={CARD_WIDTH + a.gap_sm.gap}
 				>
 					<div
 						style={{
@@ -136,7 +136,7 @@ export function TrendingVideos() {
 							<VideoCards data={data} />
 						)}
 					</div>
-				</ScrollView>
+				</div>
 			</BlockDrawerGesture>
 			<Prompt.Basic
 				control={trendingPrompt}

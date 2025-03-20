@@ -2,10 +2,8 @@ import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { FlatList, RefreshControl } from "react-native";
 
 import { atoms as a } from "#/alf";
-import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -117,28 +115,29 @@ export function ModerationBlockedAccounts(props: Props) {
 						)}
 					</div>
 				) : (
-					<FlatList
-						style={!isTabletOrDesktop && styles.flex1}
-						data={profiles}
-						keyExtractor={(item: ActorDefs.ProfileView) => item.did}
-						refreshControl={
-							<RefreshControl
-								refreshing={isPTRing}
-								onRefresh={onRefresh}
-								tintColor={pal.colors.text}
-								titleColor={pal.colors.text}
-							/>
-						}
-						onEndReached={onEndReached}
-						renderItem={renderItem}
-						initialNumToRender={15}
+					<div
+						// FlatList
+						style={!isTabletOrDesktop ? styles.flex1 : undefined}
+						// data={profiles}
+						// keyExtractor={(item: ActorDefs.ProfileView) => item.did}
+						// refreshControl={
+						// 	<RefreshControl
+						// 		refreshing={isPTRing}
+						// 		onRefresh={onRefresh}
+						// 		tintColor={pal.colors.text}
+						// 		titleColor={pal.colors.text}
+						// 	/>
+						// }
+						// onEndReached={onEndReached}
+						// renderItem={renderItem}
+						// initialNumToRender={15}
 						// FIXME(dan)
 
-						ListFooterComponent={() => (
-							<div style={styles.footer}>
-								{(isFetching || isFetchingNextPage) && <ActivityIndicator />}
-							</div>
-						)}
+						// ListFooterComponent={() => (
+						// 	<div style={styles.footer}>
+						// 		{(isFetching || isFetchingNextPage) && <ActivityIndicator />}
+						// 	</div>
+						// )}
 						// @ts-expect-error our .web version only -prf
 						desktopFixedHeight
 					/>

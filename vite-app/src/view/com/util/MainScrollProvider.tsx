@@ -1,6 +1,5 @@
 import EventEmitter from "eventemitter3";
 import React, { useCallback, useEffect } from "react";
-import type { NativeScrollEvent } from "react-native";
 import { useSharedValue, withSpring } from "react-native-reanimated";
 
 import { ScrollProvider } from "#/lib/ScrollContext";
@@ -42,7 +41,7 @@ export function MainScrollProvider({ children }: { children: React.ReactNode }) 
 	});
 
 	const onScroll = useCallback(
-		(e: NativeScrollEvent) => {
+		(e: any) => {
 			"worklet";
 			const offsetY = Math.max(0, e.contentOffset.y);
 

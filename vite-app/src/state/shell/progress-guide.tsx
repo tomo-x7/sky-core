@@ -120,7 +120,6 @@ export function Provider({ children }: React.PropsWithChildren) {
 			endProgressGuide() {
 				setLocalGuideState(undefined);
 				mutateAsync(undefined);
-				logEvent("progressGuide:hide", {});
 			},
 
 			captureAction(action: ProgressGuideAction, count = 1) {
@@ -182,7 +181,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 				mutateAsync(guide?.isComplete ? undefined : guide);
 			},
 		};
-	}, [activeProgressGuide, mutateAsync, setLocalGuideState]);
+	}, [activeProgressGuide, mutateAsync]);
 
 	return (
 		<ProgressGuideContext.Provider value={localGuideState}>

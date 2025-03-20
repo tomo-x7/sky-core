@@ -25,6 +25,7 @@ if (process.env.NODE_ENV !== "production") {
 			thrownErrors.add(err);
 			throw err;
 		} else if (!thrownErrors.has(msgOrError)) {
+			// biome-ignore lint/style/noArguments: <explanation>
 			return realConsoleError.apply(this, arguments as any);
 		}
 	};

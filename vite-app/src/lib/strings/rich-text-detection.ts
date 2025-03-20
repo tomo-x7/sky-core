@@ -10,7 +10,6 @@ export function detectLinkables(text: string): DetectedLinkable[] {
 	const segments = [];
 	let match: RegExpExecArray | null;
 	let start = 0;
-	// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 	while ((match = re.exec(text))) {
 		let matchIndex = match.index;
 		let matchValue = match[0];

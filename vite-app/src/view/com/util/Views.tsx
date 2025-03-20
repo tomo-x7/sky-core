@@ -13,14 +13,11 @@
  */
 
 import React from "react";
-import type { FlatList, FlatListProps, ScrollViewProps } from "react-native";
-import Animated from "react-native-reanimated";
 
 import { useLayoutBreakpoints } from "#/alf";
 import { useDialogContext } from "#/components/Dialog";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { addStyle } from "#/lib/styles";
 
 interface AddedProps {
 	desktopFixedHeight?: boolean | number;
@@ -60,91 +57,25 @@ export const CenteredView = React.forwardRef(function CenteredView(
 	return <div ref={ref} style={style} {...props} />;
 });
 
-export const FlatList_INTERNAL = React.forwardRef(function FlatListImpl<ItemT>(
-	{
-		contentContainerStyle,
-		style,
-		contentOffset,
-		desktopFixedHeight,
-		...props
-	}: React.PropsWithChildren<Omit<FlatListProps<ItemT>, "CellRendererComponent"> & AddedProps>,
-	ref: React.Ref<FlatList<ItemT>>,
-) {
-	const { isMobile } = useWebMediaQueries();
-	const { centerColumnOffset } = useLayoutBreakpoints();
-	const { isWithinDialog } = useDialogContext();
-	if (!isMobile) {
-		contentContainerStyle = addStyle(contentContainerStyle, styles.containerScroll);
-	}
-	if (centerColumnOffset && !isWithinDialog) {
-		style = addStyle(style, styles.containerOffset);
-	}
-	if (contentOffset && contentOffset?.y !== 0) {
-		// NOTE
-		// we use paddingTop & contentOffset to space around the floating header
-		// but reactnative web puts the paddingTop on the wrong element (style instead of the contentContainer)
-		// so we manually correct it here
-		// -prf
-		style = addStyle(style, {
-			paddingTop: 0,
-		});
-		contentContainerStyle = addStyle(contentContainerStyle, {
-			paddingTop: Math.abs(contentOffset.y),
-		});
-	}
-	if (desktopFixedHeight) {
-		if (typeof desktopFixedHeight === "number") {
-			// @ts-expect-error Web only -prf
-			style = addStyle(style, {
-				height: `calc(100vh - ${desktopFixedHeight}px)`,
-			});
-		} else {
-			style = addStyle(style, styles.fixedHeight);
-		}
-		if (!isMobile) {
-			// NOTE
-			// react native web produces *three* wrapping divs
-			// the first two use the `style` prop and the innermost uses the
-			// `contentContainerStyle`. Unfortunately the stable-gutter style
-			// needs to be applied to only the "middle" of these. To hack
-			// around this, we set data-stable-gutters which can then be
-			// styled in our external CSS.
-			// -prf
-			// @ts-expect-error web only -prf
-			props.dataSet = props.dataSet || {};
-			// @ts-expect-error web only -prf
-			props.dataSet.stableGutters = "1";
-		}
-	}
-	return (
-		<Animated.FlatList
-			ref={ref}
-			contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
-			style={style}
-			contentOffset={contentOffset}
-			{...props}
-		/>
-	);
-});
-
 /**
  * @deprecated use `Layout` components
  */
 export const ScrollView = React.forwardRef(function ScrollViewImpl(
-	{ contentContainerStyle, ...props }: React.PropsWithChildren<ScrollViewProps>,
-	ref: React.Ref<Animated.ScrollView>,
+	{ ...props }: React.PropsWithChildren<JSX.IntrinsicElements["div"]>,
+	ref: React.Ref<HTMLDivElement>,
 ) {
 	const { isMobile } = useWebMediaQueries();
 	const { centerColumnOffset } = useLayoutBreakpoints();
-	if (!isMobile) {
-		contentContainerStyle = addStyle(contentContainerStyle, styles.containerScroll);
-	}
-	if (centerColumnOffset) {
-		contentContainerStyle = addStyle(contentContainerStyle, styles.containerOffset);
-	}
+	// if (!isMobile) {
+	// 	contentContainerStyle = addStyle(contentContainerStyle, styles.containerScroll);
+	// }
+	// if (centerColumnOffset) {
+	// 	contentContainerStyle = addStyle(contentContainerStyle, styles.containerOffset);
+	// }
 	return (
-		<Animated.ScrollView
-			contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
+		<div
+			// Animated.ScrollView
+			// contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
 			ref={ref}
 			{...props}
 		/>

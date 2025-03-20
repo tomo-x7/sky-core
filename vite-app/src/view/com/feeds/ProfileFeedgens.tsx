@@ -1,6 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -9,6 +8,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
 import { usePreferencesQuery } from "#/state/queries/preferences";
 import { RQKEY, useProfileFeedgensQuery } from "#/state/queries/profile-feedgens";
+import type { ListRenderItemInfo } from "#/temp";
 import { EmptyState } from "#/view/com/util/EmptyState";
 import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { List, type ListRef } from "../util/List";

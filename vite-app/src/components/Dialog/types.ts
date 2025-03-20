@@ -1,9 +1,6 @@
 import type React from "react";
-import type { AccessibilityProps, ScrollViewProps } from "react-native";
 
 import type { ViewStyleProp } from "#/alf";
-
-type A11yProps = Required<AccessibilityProps>;
 
 /**
  * Mutated by useImperativeHandle to provide a public API for controlling the
@@ -15,7 +12,7 @@ type A11yProps = Required<AccessibilityProps>;
  * would need to create a function to wrap `.open()` with.
  */
 export type DialogControlRefProps = {
-	open: (options?: DialogControlOpenOptions & React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+	open: (options?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	close: (callback?: () => void) => void;
 };
 
@@ -37,16 +34,6 @@ export type DialogContextProps = {
 	isWithinDialog: boolean;
 };
 
-export type DialogControlOpenOptions = {
-	/**
-	 * NATIVE ONLY
-	 *
-	 * Optional index of the snap point to open the bottom sheet to. Defaults to
-	 * 0, which is the first snap point (i.e. "open").
-	 */
-	index?: number;
-};
-
 export type DialogOuterProps = {
 	control: DialogControlProps;
 	onClose?: () => void;
@@ -60,9 +47,7 @@ type DialogInnerPropsBase<T> = React.PropsWithChildren<ViewStyleProp> & T;
 export type DialogInnerProps =
 	| DialogInnerPropsBase<{
 			label?: undefined;
-			accessibilityLabelledBy: A11yProps["aria-labelledby"];
 			accessibilityDescribedBy: string;
-			keyboardDismissMode?: ScrollViewProps["keyboardDismissMode"];
 			contentContainerStyle?: React.CSSProperties;
 			header?: React.ReactNode;
 	  }>
@@ -70,7 +55,6 @@ export type DialogInnerProps =
 			label?: string;
 			accessibilityLabelledBy?: undefined;
 			accessibilityDescribedBy?: undefined;
-			keyboardDismissMode?: ScrollViewProps["keyboardDismissMode"];
 			contentContainerStyle?: React.CSSProperties;
 			header?: React.ReactNode;
 	  }>;

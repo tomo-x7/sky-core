@@ -2,7 +2,6 @@ import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { ScrollView } from "react-native";
 
 import { atoms as a, tokens, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -140,11 +139,12 @@ export function ExploreTrendingVideos() {
 				</div>
 			</div>
 			<BlockDrawerGesture>
-				<ScrollView
-					horizontal
-					showsHorizontalScrollIndicator={false}
-					decelerationRate="fast"
-					snapToInterval={CARD_WIDTH + tokens.space.sm}
+				<div
+				// ScrollView
+				// horizontal
+				// showsHorizontalScrollIndicator={false}
+				// decelerationRate="fast"
+				// snapToInterval={CARD_WIDTH + tokens.space.sm}
 				>
 					<div
 						style={{
@@ -172,7 +172,7 @@ export function ExploreTrendingVideos() {
 							<VideoCards data={data} />
 						)}
 					</div>
-				</ScrollView>
+				</div>
 			</BlockDrawerGesture>
 			{!isSavedAlready && (
 				<div

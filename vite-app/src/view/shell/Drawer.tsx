@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { type JSX } from "react";
-import { Linking, ScrollView } from "react-native";
 
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -180,16 +179,23 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	}, [navigation, setDrawerOpen]);
 
 	const onPressFeedback = React.useCallback(() => {
-		Linking.openURL(
+		window.open(
 			FEEDBACK_FORM_URL({
 				email: currentAccount?.email,
 				handle: currentAccount?.handle,
 			}),
 		);
+		// Linking.openURL(
+		// 	FEEDBACK_FORM_URL({
+		// 		email: currentAccount?.email,
+		// 		handle: currentAccount?.handle,
+		// 	}),
+		// );
 	}, [currentAccount]);
 
 	const onPressHelp = React.useCallback(() => {
-		Linking.openURL(HELP_DESK_URL);
+		window.open(HELP_DESK_URL);
+		// Linking.openURL(HELP_DESK_URL);
 	}, []);
 
 	// rendering
@@ -204,13 +210,14 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 				...t.atoms.border_contrast_low,
 			}}
 		>
-			<ScrollView
+			<div
+				// ScrollView
 				style={a.flex_1}
-				contentContainerStyle={[
-					{
-						paddingTop: a.pt_xl.paddingTop,
-					},
-				]}
+				// contentContainerStyle={[
+				// 	{
+				// 		paddingTop: a.pt_xl.paddingTop,
+				// 	},
+				// ]}
 			>
 				<div style={a.px_xl}>
 					{hasSession && currentAccount ? (
@@ -257,7 +264,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 					/>
 					<ExtraLinks />
 				</div>
-			</ScrollView>
+			</div>
 			<DrawerFooter onPressFeedback={onPressFeedback} onPressHelp={onPressHelp} />
 		</div>
 	);

@@ -390,7 +390,6 @@ function prepareForHashing(v: any): any {
 	if (Array.isArray(v)) {
 		let pure = true;
 		const mapped = v.map((value) => {
-			// biome-ignore lint/suspicious/noAssignInExpressions lint/style/noParameterAssign: <explanation>
 			if (value !== (value = prepareForHashing(value))) {
 				pure = false;
 			}
@@ -411,7 +410,6 @@ function prepareForHashing(v: any): any {
 				continue;
 			}
 			// `prepareObject` returned a value that's different from what we had before
-			// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 			if (value !== (value = prepareForHashing(value))) {
 				pure = false;
 			}

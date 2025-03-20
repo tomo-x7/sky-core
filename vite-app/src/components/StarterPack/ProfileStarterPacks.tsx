@@ -1,7 +1,6 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useImperativeHandle, useState } from "react";
-import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -20,6 +19,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import type { NavigationProp } from "#/lib/routes/types";
 import { parseStarterPackUri } from "#/lib/strings/starter-pack";
 import { useActorStarterPacksQuery } from "#/state/queries/actor-starter-packs";
+import type { ListRenderItemInfo } from "#/temp";
 import { List, type ListRef } from "#/view/com/util/List";
 import { FeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 

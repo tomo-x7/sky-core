@@ -1,21 +1,20 @@
 import * as React from "react";
-import type { ScrollView } from "react-native";
 import { useAnimatedRef } from "react-native-reanimated";
 
 import type { JSX } from "react";
 import { atoms as a } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Pager, type PagerRef, type RenderTabBarFnProps } from "#/view/com/pager/Pager";
-import type { ListMethods } from "../util/List";
 import { TabBar } from "./TabBar";
 
-export interface PagerWithHeaderChildParams {
+interface PagerWithHeaderChildParams {
 	headerHeight: number;
 	isFocused: boolean;
-	scrollElRef: React.MutableRefObject<ListMethods | ScrollView | null>;
+	// scrollElRef: React.MutableRefObject<ListMethods | ScrollView | null>;
+	scrollElRef: React.MutableRefObject<any>;
 }
 
-export interface PagerWithHeaderProps {
+interface PagerWithHeaderProps {
 	children:
 		| (((props: PagerWithHeaderChildParams) => JSX.Element) | null)[]
 		| ((props: PagerWithHeaderChildParams) => JSX.Element);
@@ -148,7 +147,8 @@ function PagerItem({
 	return renderTab({
 		headerHeight: 0,
 		isFocused,
-		scrollElRef: scrollElRef as React.MutableRefObject<ListMethods | ScrollView | null>,
+		// scrollElRef: scrollElRef as React.MutableRefObject<ListMethods | ScrollView | null>,
+		scrollElRef: scrollElRef as React.MutableRefObject<any>,
 	});
 }
 

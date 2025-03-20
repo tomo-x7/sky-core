@@ -1,5 +1,4 @@
 import React, { type JSX } from "react";
-import type { ListRenderItemInfo } from "react-native";
 
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
@@ -7,6 +6,7 @@ import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useNotificationFeedQuery } from "#/state/queries/notifications/feed";
+import type { ListRenderItemInfo } from "#/temp";
 import { EmptyState } from "#/view/com/util/EmptyState";
 import { List, type ListRef } from "#/view/com/util/List";
 import { LoadMoreRetryBtn } from "#/view/com/util/LoadMoreRetryBtn";

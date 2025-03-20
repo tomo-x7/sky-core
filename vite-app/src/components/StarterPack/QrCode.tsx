@@ -1,7 +1,7 @@
 import { type AppBskyGraphDefs, AppBskyGraphStarterpack } from "@atproto/api";
-// @ts-expect-error missing types
-import QRCode from "react-native-qrcode-styled";
+import { QRCodeSVG } from "qrcode.react";
 // import ViewShot from "react-native-view-shot";
+import QRCodeLogo from "../../assets/logo.png";
 
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
@@ -104,41 +104,76 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 		);
 	};
 
-export function QrCodeInner({ link }: { link: string }) {
+function QrCodeInner({ link }: { link: string }) {
 	const t = useTheme();
 
 	return (
-		<QRCode
-			data={link}
+		<div
 			style={{
 				...a.rounded_sm,
-				...{ height: 225, width: 225, backgroundColor: "#f3f3f3" },
+				height: 225,
+				width: 225,
+				backgroundColor: "#f3f3f3",
+				padding: "20px",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
 			}}
-			pieceSize={8}
-			padding={20}
-			// pieceLiquidRadius={2}
-			pieceBorderRadius={4.5}
-			outerEyesOptions={{
-				topLeft: {
-					borderRadius: [12, 12, 0, 12],
-					color: t.palette.primary_500,
-				},
-				topRight: {
-					borderRadius: [12, 12, 12, 0],
-					color: t.palette.primary_500,
-				},
-				bottomLeft: {
-					borderRadius: [12, 0, 12, 12],
-					color: t.palette.primary_500,
-				},
-			}}
-			innerEyesOptions={{ borderRadius: 3 }}
-			logo={{
-				href: require("../../../assets/logo.png"),
-				scale: 0.95,
-				padding: 2,
-				hidePieces: true,
-			}}
-		/>
+		>
+			<QRCodeSVG
+				value={link}
+				size={185} // paddingを引いたサイズ
+				bgColor="#f3f3f3"
+				fgColor="#000000"
+				level="Q"
+				imageSettings={{
+					src: QRCodeLogo, // 画像のパス
+					x: undefined,
+					y: undefined,
+					height: 40,
+					width: 40,
+					excavate: true, // ロゴ部分のQRコードを削除
+				}}
+			/>
+		</div>
 	);
 }
+
+// function QrCodeInner({ link }: { link: string }) {
+// 	const t = useTheme();
+
+// 	return (
+// 		<QRCode
+// 			data={link}
+// 			style={{
+// 				...a.rounded_sm,
+// 				...{ height: 225, width: 225, backgroundColor: "#f3f3f3" },
+// 			}}
+// 			pieceSize={8}
+// 			padding={20}
+// 			// pieceLiquidRadius={2}
+// 			pieceBorderRadius={4.5}
+// 			outerEyesOptions={{
+// 				topLeft: {
+// 					borderRadius: [12, 12, 0, 12],
+// 					color: t.palette.primary_500,
+// 				},
+// 				topRight: {
+// 					borderRadius: [12, 12, 12, 0],
+// 					color: t.palette.primary_500,
+// 				},
+// 				bottomLeft: {
+// 					borderRadius: [12, 0, 12, 12],
+// 					color: t.palette.primary_500,
+// 				},
+// 			}}
+// 			innerEyesOptions={{ borderRadius: 3 }}
+// 			logo={{
+// 				href: require("../../../assets/logo.png"),
+// 				scale: 0.95,
+// 				padding: 2,
+// 				hidePieces: true,
+// 			}}
+// 		/>
+// 	);
+// }

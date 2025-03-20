@@ -16,7 +16,6 @@ export function LinearGradientBackground({
 	start?: [number, number];
 	end?: [number, number];
 }) {
-	//@ts-expect-error
 	const colors = gradients[gradient].values.map(([_, color]) => {
 		return color;
 	});

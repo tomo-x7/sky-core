@@ -2,7 +2,6 @@ import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import type { ListRenderItemInfo } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -17,6 +16,7 @@ import { cleanError } from "#/lib/strings/errors";
 import { enforceLen } from "#/lib/strings/helpers";
 import { useSearchPostsQuery } from "#/state/queries/search-posts";
 import { useSetMinimalShellMode } from "#/state/shell";
+import type { ListRenderItemInfo } from "#/temp";
 import { Pager } from "#/view/com/pager/Pager";
 import { TabBar } from "#/view/com/pager/TabBar";
 import { Post } from "#/view/com/post/Post";

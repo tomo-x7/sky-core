@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { Linking } from "react-native";
 
 import {
 	createBskyAppAbsoluteUrl,
@@ -12,18 +11,16 @@ import {
 export function useOpenLink() {
 	const openLink = useCallback(async (url: string, override?: boolean, shouldProxy?: boolean) => {
 		if (isBskyRSSUrl(url) && isRelativeUrl(url)) {
-			//biome-ignore lint/style/noParameterAssign:
 			url = createBskyAppAbsoluteUrl(url);
 		}
 
 		if (!isBskyAppUrl(url)) {
 			if (shouldProxy) {
-				//biome-ignore lint/style/noParameterAssign:
 				url = createProxiedUrl(url);
 			}
 		}
-
-		Linking.openURL(url);
+		window.open(url);
+		// Linking.openURL(url);
 	}, []);
 
 	return openLink;

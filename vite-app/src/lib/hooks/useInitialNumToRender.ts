@@ -1,5 +1,4 @@
-import { useWindowDimensions } from "react-native";
-
+import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
 
 const MIN_POST_HEIGHT = 100;

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from "react";
-import type { ScrollView } from "react-native";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -22,7 +21,7 @@ const OFFSCREEN_ITEM_WIDTH = 20;
 
 export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBarProps) {
 	const t = useTheme();
-	const scrollElRef = useRef<ScrollView>(null);
+	const scrollElRef = useRef<HTMLDivElement>(null);
 	const itemRefs = useRef<Array<Element>>([]);
 	const { gtMobile } = useBreakpoints();
 	const styles = gtMobile ? desktopStyles : mobileStyles;
@@ -31,6 +30,7 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 		// On the web, the primary interaction is tapping.
 		// Scrolling under tap feels disorienting so only adjust the scroll offset
 		// when tapping on an item out of view--and we adjust by almost an entire page.
+		// @ts-expect-error
 		const parent = scrollElRef?.current?.getScrollableNode?.();
 		if (!parent) {
 			return;
@@ -87,10 +87,10 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 			// accessibilityRole="tablist"
 		>
 			<DraggableScrollView
-				horizontal={true}
-				showsHorizontalScrollIndicator={false}
+				// horizontal={true}
+				// showsHorizontalScrollIndicator={false}
 				ref={scrollElRef}
-				contentContainerStyle={styles.contentContainer}
+				// contentContainerStyle={styles.contentContainer}
 			>
 				{items.map((item, i) => {
 					const selected = i === selectedPage;

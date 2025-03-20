@@ -3,7 +3,6 @@ import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -286,7 +285,11 @@ function Container({ children }: { children: React.ReactNode }) {
 	}
 
 	return (
-		<KeyboardAwareScrollView style={a.flex_1} keyboardShouldPersistTaps="handled">
+		<div
+			// KeyboardAwareScrollView
+			style={a.flex_1}
+			// keyboardShouldPersistTaps="handled"
+		>
 			{children}
 			{state.currentStep === "Details" && (
 				<Button
@@ -304,7 +307,7 @@ function Container({ children }: { children: React.ReactNode }) {
 					<ButtonText>Next</ButtonText>
 				</Button>
 			)}
-		</KeyboardAwareScrollView>
+		</div>
 	);
 }
 

@@ -334,8 +334,6 @@ export class MessagesEventBus {
 					/*
 					 * We only care about new events
 					 */
-
-					// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
 					if (ev.rev > (this.latestRev = this.latestRev || ev.rev)) {
 						/*
 						 * Update rev regardless of if it's a ev type we care about or not

@@ -1,5 +1,4 @@
 import React from "react";
-import { ScrollView } from "react-native";
 
 import { atoms as a, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -20,7 +19,7 @@ export function TrendingInterstitial() {
 	return enabled && !trendingDisabled ? <Inner /> : null;
 }
 
-export function Inner() {
+function Inner() {
 	const t = useTheme();
 	const gutters = useGutters([0, "base", 0, "base"]);
 	const trendingPrompt = Prompt.usePromptControl();
@@ -40,7 +39,10 @@ export function Inner() {
 			}}
 		>
 			<BlockDrawerGesture>
-				<ScrollView horizontal showsHorizontalScrollIndicator={false} decelerationRate="fast">
+				<div
+				// ScrollView
+				//  horizontal showsHorizontalScrollIndicator={false} decelerationRate="fast"
+				>
 					<div
 						style={{
 							...gutters,
@@ -109,7 +111,7 @@ export function Inner() {
 							</>
 						)}
 					</div>
-				</ScrollView>
+				</div>
 			</BlockDrawerGesture>
 
 			<Prompt.Basic

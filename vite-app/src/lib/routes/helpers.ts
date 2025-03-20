@@ -4,7 +4,6 @@ import type { RouteParams, State } from "./types";
 
 export function getRootNavigation<T extends {}>(nav: NavigationProp<T>): NavigationProp<T> {
 	while (nav.getParent()) {
-		//biome-ignore lint/style/noParameterAssign:
 		nav = nav.getParent();
 	}
 	return nav;

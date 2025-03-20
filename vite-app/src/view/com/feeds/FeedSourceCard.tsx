@@ -1,7 +1,6 @@
 import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Linking } from "react-native";
 
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
@@ -191,7 +190,8 @@ export function FeedSourceCardLoaded({
 					const shouldOpenInNewTab = shouldClickOpenNewTab(e);
 					if (feed.type === "feed") {
 						if (shouldOpenInNewTab) {
-							Linking.openURL(`/profile/${feed.creatorDid}/feed/${new AtUri(feed.uri).rkey}`);
+							location.href = `/profile/${feed.creatorDid}/feed/${new AtUri(feed.uri).rkey}`;
+							// Linking.openURL(`/profile/${feed.creatorDid}/feed/${new AtUri(feed.uri).rkey}`);
 						} else {
 							navigation.push("ProfileFeed", {
 								name: feed.creatorDid,
@@ -200,7 +200,8 @@ export function FeedSourceCardLoaded({
 						}
 					} else if (feed.type === "list") {
 						if (shouldOpenInNewTab) {
-							Linking.openURL(`/profile/${feed.creatorDid}/lists/${new AtUri(feed.uri).rkey}`);
+							location.href = `/profile/${feed.creatorDid}/lists/${new AtUri(feed.uri).rkey}`;
+							// Linking.openURL(`/profile/${feed.creatorDid}/lists/${new AtUri(feed.uri).rkey}`);
 						} else {
 							navigation.push("ProfileList", {
 								name: feed.creatorDid,

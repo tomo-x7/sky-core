@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ScrollView } from "react-native";
 import Animated, { LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
 import { type ViewStyleProp, atoms as a, flatten, tokens, useBreakpoints, useTheme } from "#/alf";
@@ -423,7 +422,7 @@ let Tabs = ({
 	hasSearchText: boolean;
 	interestsDisplayNames: Record<string, string>;
 }): React.ReactNode => {
-	const listRef = useRef<ScrollView>(null);
+	const listRef = useRef<HTMLDivElement>(null);
 	const [scrollX, setScrollX] = useState(0);
 	const [totalWidth, setTotalWidth] = useState(0);
 	const pendingTabOffsets = useRef<{ x: number; width: number }[]>([]);
@@ -451,13 +450,13 @@ let Tabs = ({
 
 		if (shouldScrollToLeftEdge) {
 			listRef.current?.scrollTo({
-				x: btnLayout.x - tokens.space.lg,
-				animated: true,
+				left: btnLayout.x - tokens.space.lg,
+				behavior: "smooth",
 			});
 		} else if (shouldScrollToRightEdge) {
 			listRef.current?.scrollTo({
-				x: btnLayout.x - totalWidth + btnLayout.width + tokens.space.lg,
-				animated: true,
+				left: btnLayout.x - totalWidth + btnLayout.width + tokens.space.lg,
+				behavior: "smooth",
 			});
 		}
 	}
@@ -478,18 +477,19 @@ let Tabs = ({
 	}
 
 	return (
-		<ScrollView
+		<div
 			ref={listRef}
-			horizontal
-			contentContainerStyle={[a.gap_sm, a.px_lg]}
-			showsHorizontalScrollIndicator={false}
-			decelerationRate="fast"
-			snapToOffsets={
-				tabOffsets.length === interests.length ? tabOffsets.map((o) => o.x - tokens.space.xl) : undefined
-			}
-			onLayout={(evt) => setTotalWidth(evt.nativeEvent.layout.width)}
-			scrollEventThrottle={200} // big throttle
-			onScroll={(evt) => setScrollX(evt.nativeEvent.contentOffset.x)}
+			// ScrollView
+			// horizontal
+			// contentContainerStyle={[a.gap_sm, a.px_lg]}
+			// showsHorizontalScrollIndicator={false}
+			// decelerationRate="fast"
+			// snapToOffsets={
+			// 	tabOffsets.length === interests.length ? tabOffsets.map((o) => o.x - tokens.space.xl) : undefined
+			// }
+			// onLayout={(evt) => setTotalWidth(evt.nativeEvent.layout.width)}
+			// scrollEventThrottle={200} // big throttle
+			// onScroll={(evt) => setScrollX(evt.nativeEvent.contentOffset.x)}
 		>
 			{interests.map((interest, i) => {
 				const active = interest === selectedInterest && !hasSearchText;
@@ -505,7 +505,7 @@ let Tabs = ({
 					/>
 				);
 			})}
-		</ScrollView>
+		</div>
 	);
 };
 Tabs = memo(Tabs);

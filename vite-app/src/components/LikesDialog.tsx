@@ -1,6 +1,5 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
 import { useCallback, useMemo } from "react";
-import { FlatList } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
@@ -98,13 +97,14 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 					<Text style={a.text_center}>Nobody has liked this yet. Maybe you should be the first!</Text>
 				</div>
 			) : (
-				<FlatList
-					data={likes}
-					keyExtractor={(item) => item.actor.did}
-					onEndReached={onEndReached}
-					renderItem={renderItem}
-					initialNumToRender={15}
-					ListFooterComponent={<ListFooterComponent isFetching={isFetchingNextPage} />}
+				<div
+				// FlatList
+				// data={likes}
+				// keyExtractor={(item) => item.actor.did}
+				// onEndReached={onEndReached}
+				// renderItem={renderItem}
+				// initialNumToRender={15}
+				// ListFooterComponent={<ListFooterComponent isFetching={isFetchingNextPage} />}
 				/>
 			)}
 			<Dialog.Close />

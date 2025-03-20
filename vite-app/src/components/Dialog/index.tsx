@@ -137,7 +137,6 @@ export function Inner({
 	children,
 	style,
 	label,
-	accessibilityLabelledBy,
 	accessibilityDescribedBy,
 	header,
 	contentContainerStyle,
@@ -151,7 +150,6 @@ export function Inner({
 		<FocusScope loop asChild trapped>
 			<dialog
 				aria-label={label}
-				aria-labelledby={accessibilityLabelledBy}
 				aria-describedby={accessibilityDescribedBy}
 				onClick={stopPropagation}
 				//@ts-expect-error

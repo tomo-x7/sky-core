@@ -1,7 +1,6 @@
 import { ComAtprotoServerCreateAccount, type ComAtprotoServerDescribeServer } from "@atproto/api";
 import * as EmailValidator from "email-validator";
 import React, { useCallback } from "react";
-import { LayoutAnimation } from "react-native";
 
 import { DEFAULT_SERVICE } from "#/lib/constants";
 import { cleanError } from "#/lib/strings/errors";
@@ -98,7 +97,7 @@ export function reducer(s: SignupState, a: SignupAction): SignupState {
 	switch (a.type) {
 		case "prev": {
 			if (s.activeStep !== SignupStep.INFO) {
-				LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+				// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 				next.activeStep--;
 				next.error = "";
 				next.errorField = undefined;
@@ -107,7 +106,7 @@ export function reducer(s: SignupState, a: SignupAction): SignupState {
 		}
 		case "next": {
 			if (s.activeStep !== SignupStep.CAPTCHA) {
-				LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+				// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 				next.activeStep++;
 				next.error = "";
 				next.errorField = undefined;
@@ -123,7 +122,7 @@ export function reducer(s: SignupState, a: SignupAction): SignupState {
 			break;
 		}
 		case "setServiceDescription": {
-			LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+			// LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
 			next.serviceDescription = a.value;
 			next.userDomain = a.value?.availableUserDomains[0] ?? "";

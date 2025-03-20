@@ -11,7 +11,6 @@ import {
 	moderateUserList,
 } from "@atproto/api";
 import React from "react";
-import { InteractionManager } from "react-native";
 import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -149,7 +148,7 @@ export function PostEmbeds({
 			const onPressIn = (_: number) => {
 				setTimeout(() => {
 					for (const src of items.map((i) => i.uri)) prefetch(src);
-				},0);
+				}, 0);
 			};
 
 			if (images.length === 1) {

@@ -1,10 +1,8 @@
 import type React from "react";
-import { ScrollView } from "react-native";
 
 import { atoms as a } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
-import { useIsKeyboardVisible } from "#/lib/hooks/useIsKeyboardVisible";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 
@@ -29,19 +27,20 @@ export const LoggedOutLayout = ({
 		borderLeftWidth: 1,
 	});
 
-	const [isKeyboardVisible] = useIsKeyboardVisible();
+	// const [isKeyboardVisible] = useIsKeyboardVisible();
 
 	if (isMobile) {
 		if (scrollable) {
 			return (
-				<ScrollView
+				<div
+					// ScrollView
 					style={a.flex_1}
-					keyboardShouldPersistTaps="handled"
-					keyboardDismissMode="none"
-					contentContainerStyle={[{ paddingBottom: isKeyboardVisible ? 300 : 0 }]}
+					// keyboardShouldPersistTaps="handled"
+					// keyboardDismissMode="none"
+					// contentContainerStyle={[{ paddingBottom: isKeyboardVisible ? 300 : 0 }]}
 				>
 					<div style={a.pt_md}>{children}</div>
-				</ScrollView>
+				</div>
 			);
 		} else {
 			return <div style={a.pt_md}>{children}</div>;
@@ -90,11 +89,12 @@ export const LoggedOutLayout = ({
 						...contentBg,
 					}}
 				>
-					<ScrollView
+					<div
+						// ScrollView
 						style={a.flex_1}
-						contentContainerStyle={styles.scrollViewContentContainer}
-						keyboardShouldPersistTaps="handled"
-						keyboardDismissMode="on-drag"
+						// contentContainerStyle={styles.scrollViewContentContainer}
+						// keyboardShouldPersistTaps="handled"
+						// keyboardDismissMode="on-drag"
 					>
 						<div
 							style={{
@@ -104,7 +104,7 @@ export const LoggedOutLayout = ({
 						>
 							{children}
 						</div>
-					</ScrollView>
+					</div>
 				</div>
 			) : (
 				<div

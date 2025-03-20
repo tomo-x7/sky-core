@@ -3,7 +3,6 @@ export function cleanError(str: any): string {
 		return "";
 	}
 	if (typeof str !== "string") {
-		//biome-ignore lint/style/noParameterAssign:
 		str = str.toString();
 	}
 	if (isNetworkError(str)) {

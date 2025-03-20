@@ -1,7 +1,6 @@
 import { type AppBskyActorDefs, AppBskyEmbedVideo } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type JSX, memo } from "react";
-import type { ListRenderItemInfo } from "react-native";
 
 import { useBreakpoints, useLayoutBreakpoints } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -29,6 +28,7 @@ import {
 } from "#/state/queries/post-feed";
 import { useSession } from "#/state/session";
 import { useProgressGuide } from "#/state/shell/progress-guide";
+import type { ListRenderItemInfo } from "#/temp";
 import { List, type ListRef } from "#/view/com/util/List";
 import { LoadMoreRetryBtn } from "#/view/com/util/LoadMoreRetryBtn";
 import { PostFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";

@@ -6,7 +6,6 @@ export function shortenLinks(rt: RichText): RichText {
 	if (!rt.facets?.length) {
 		return rt;
 	}
-	//biome-ignore lint/style/noParameterAssign:
 	rt = rt.clone();
 	// enumerate the link facets
 	if (rt.facets) {
@@ -38,7 +37,6 @@ export function stripInvalidMentions(rt: RichText): RichText {
 	if (!rt.facets?.length) {
 		return rt;
 	}
-	//biome-ignore lint/style/noParameterAssign:
 	rt = rt.clone();
 	if (rt.facets) {
 		rt.facets = rt.facets?.filter((facet) => {

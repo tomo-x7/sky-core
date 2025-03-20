@@ -1,5 +1,15 @@
-import type { AlertButton, AlertStatic } from "react-native";
-
+interface AlertStatic {
+	alert: (title: string, message?: string, buttons?: AlertButton[], options?: AlertOptions) => void;
+}
+interface AlertOptions {
+	userInterfaceStyle?: "unspecified" | "light" | "dark" | undefined;
+}
+interface AlertButton {
+	text?: string | undefined;
+	onPress?: ((value?: string) => void) | undefined;
+	isPreferred?: boolean | undefined;
+	style?: "default" | "cancel" | "destructive" | undefined;
+}
 class WebAlert implements Pick<AlertStatic, "alert"> {
 	public alert(title: string, message?: string, buttons?: AlertButton[]): void {
 		if (buttons === undefined || buttons.length === 0) {

@@ -1,5 +1,4 @@
 import type React from "react";
-import type { AccessibilityRole } from "react-native";
 
 import type { TextStyleProp, ViewStyleProp } from "#/alf";
 import type * as Dialog from "#/components/Dialog";
@@ -20,7 +19,6 @@ export type TriggerProps = {
 	children(props: TriggerChildProps): React.ReactNode;
 	label: string;
 	hint?: string;
-	role?: AccessibilityRole;
 };
 export type TriggerChildProps = {
 	isNative: false;

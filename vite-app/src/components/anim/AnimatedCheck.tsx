@@ -1,11 +1,10 @@
 import React from "react";
-import Animated, { Easing, useAnimatedProps, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
-import Svg, { Circle, Path } from "react-native-svg";
+import { Easing, useAnimatedProps, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 
 import { type Props, useCommonSVGProps } from "#/components/icons/common";
 
-const AnimatedPath = Animated.createAnimatedComponent(Path);
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+// const AnimatedPath = Animated.createAnimatedComponent(Path);
+// const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const PATH = "M14.1 27.2l7.1 7.2 16.7-16.8";
 
@@ -54,9 +53,9 @@ export const AnimatedCheck = React.forwardRef<AnimatedCheckRef, AnimatedCheckPro
 	}, [play, playOnMount]);
 
 	return (
-		<Svg fill="none" {...rest} viewBox="0 0 52 52" width={size} height={size} style={style}>
-			<AnimatedCircle
-				animatedProps={circleAnimatedProps}
+		<svg fill="none" {...rest} viewBox="0 0 52 52" width={size} height={size} style={style}>
+			<circle
+				// animatedProps={circleAnimatedProps}
 				cx="26"
 				cy="26"
 				r="24"
@@ -65,13 +64,13 @@ export const AnimatedCheck = React.forwardRef<AnimatedCheckRef, AnimatedCheckPro
 				strokeWidth={4}
 				strokeDasharray={166}
 			/>
-			<AnimatedPath
-				animatedProps={checkAnimatedProps}
+			<path
+				// animatedProps={checkAnimatedProps}
 				stroke={fill}
 				d={PATH}
 				strokeWidth={4}
 				strokeDasharray={48}
 			/>
-		</Svg>
+		</svg>
 	);
 });

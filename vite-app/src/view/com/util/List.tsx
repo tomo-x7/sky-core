@@ -1,5 +1,4 @@
 import React, { isValidElement, type JSX, memo, startTransition, useRef } from "react";
-import type { FlatListProps } from "react-native";
 import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
 import * as Layout from "#/components/Layout";
@@ -8,14 +7,8 @@ import { batchedUpdates } from "#/lib/batchedUpdates";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 
 export type ListMethods = any; // TODO: Better types.
-export type ListProps<ItemT> = Omit<
-	FlatListProps<ItemT>,
-	| "onScroll" // Use ScrollContext instead.
-	| "refreshControl" // Pass refreshing and/or onRefresh instead.
-	| "contentOffset" // Pass headerOffset instead.
-	| "style"
-	| "contentContainerStyle"
-> & {
+export type ListProps<ItemT> = any & {
+	//> & // | "contentContainerStyle" // | "style" // | "contentOffset" // Pass headerOffset instead. // | "refreshControl" // Pass refreshing and/or onRefresh instead. // | "onScroll" // Use ScrollContext instead. // FlatListProps<ItemT>, //Omit<
 	onScrolledDownChange?: (isScrolledDown: boolean) => void;
 	headerOffset?: number;
 	refreshing?: boolean;
@@ -74,7 +67,7 @@ function ListImpl<ItemT>(
 		if (isValidElement(ListHeaderComponent)) {
 			headerComponent = ListHeaderComponent;
 		} else {
-			// @ts-expect-error Nah it's fine.
+			//// @ts-expect-error Nah it's fine.
 			headerComponent = <ListHeaderComponent />;
 		}
 	}
@@ -84,7 +77,7 @@ function ListImpl<ItemT>(
 		if (isValidElement(ListFooterComponent)) {
 			footerComponent = ListFooterComponent;
 		} else {
-			// @ts-expect-error Nah it's fine.
+			//// @ts-expect-error Nah it's fine.
 			footerComponent = <ListFooterComponent />;
 		}
 	}
@@ -94,7 +87,7 @@ function ListImpl<ItemT>(
 		if (isValidElement(ListEmptyComponent)) {
 			emptyComponent = ListEmptyComponent;
 		} else {
-			// @ts-expect-error Nah it's fine.
+			//// @ts-expect-error Nah it's fine.
 			emptyComponent = <ListEmptyComponent />;
 		}
 	}

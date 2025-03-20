@@ -1,7 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useState } from "react";
-import { KeyboardAvoidingView } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -98,7 +97,11 @@ export function Component({
 	}, [updateMutation, profile, onUpdate, closeModal, displayName, description, newUserAvatar, newUserBanner]);
 
 	return (
-		<KeyboardAvoidingView style={s.flex1} behavior="height">
+		<div
+			// KeyboardAvoidingView
+			style={s.flex1}
+			// behavior="height"
+		>
 			{/* TODO 元ScrollView */}
 			<div style={pal.view}>
 				<Text
@@ -227,7 +230,7 @@ export function Component({
 					)}
 				</div>
 			</div>
-		</KeyboardAvoidingView>
+		</div>
 	);
 }
 

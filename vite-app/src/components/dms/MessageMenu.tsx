@@ -1,5 +1,4 @@
 import { type ChatBskyConvoDefs, RichText } from "@atproto/api";
-// import * as Clipboard from "expo-clipboard";
 import React from "react";
 
 import { atoms as a, useTheme } from "#/alf";

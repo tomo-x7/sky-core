@@ -1,5 +1,4 @@
 import React, { useContext, useMemo } from "react";
-import { KeyboardAwareScrollView, type KeyboardAwareScrollViewProps } from "react-native-keyboard-controller";
 import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
 
 import { atoms as a, useBreakpoints, useLayoutBreakpoints, useTheme } from "#/alf";
@@ -94,10 +93,10 @@ const scrollViewStyles = {
 	},
 } satisfies Record<string, React.CSSProperties>;
 
-export type KeyboardAwareContentProps = Omit<KeyboardAwareScrollViewProps, "style"> & {
+export type KeyboardAwareContentProps = JSX.IntrinsicElements["div"] & {
 	children: React.ReactNode;
 	style: React.CSSProperties;
-	contentContainerStyle?: React.CSSProperties;
+	// contentContainerStyle?: React.CSSProperties;
 };
 
 /**
@@ -108,22 +107,21 @@ export type KeyboardAwareContentProps = Omit<KeyboardAwareScrollViewProps, "styl
 export const KeyboardAwareContent = React.memo(function LayoutScrollView({
 	children,
 	style,
-	contentContainerStyle,
 	...props
 }: KeyboardAwareContentProps) {
 	return (
-		<KeyboardAwareScrollView
-			// @ts-expect-error
+		<div
+			// KeyboardAwareScrollView
 			style={{
 				...scrollViewStyles.common,
 				...style,
 			}}
-			contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
-			keyboardShouldPersistTaps="handled"
+			// contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
+			// keyboardShouldPersistTaps="handled"
 			{...props}
 		>
 			<Center>{children}</Center>
-		</KeyboardAwareScrollView>
+		</div>
 	);
 });
 

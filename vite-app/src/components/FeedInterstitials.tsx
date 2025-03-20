@@ -173,7 +173,7 @@ export function SuggestedFollows({ feed }: { feed: FeedDescriptor }) {
 	}
 }
 
-export function SuggestedFollowsProfile({ did }: { did: string }) {
+function SuggestedFollowsProfile({ did }: { did: string }) {
 	const {
 		isLoading: isSuggestionsLoading,
 		data,
@@ -192,14 +192,14 @@ export function SuggestedFollowsProfile({ did }: { did: string }) {
 	);
 }
 
-export function SuggestedFollowsHome() {
+function SuggestedFollowsHome() {
 	const { isLoading: isSuggestionsLoading, profiles, error } = useExperimentalSuggestedUsersQuery();
 	return (
 		<ProfileGrid isSuggestionsLoading={isSuggestionsLoading} profiles={profiles} error={error} viewContext="feed" />
 	);
 }
 
-export function ProfileGrid({
+function ProfileGrid({
 	isSuggestionsLoading,
 	error,
 	profiles,

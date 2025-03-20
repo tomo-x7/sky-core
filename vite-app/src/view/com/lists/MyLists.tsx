@@ -1,6 +1,5 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { type JSX } from "react";
-import { FlatList as RNFlatList, RefreshControl } from "react-native";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -157,20 +156,21 @@ export function MyLists({
 		return (
 			<div style={style}>
 				{items.length > 0 && (
-					<RNFlatList
-						data={items}
-						keyExtractor={(item) => (item.uri ? item.uri : item._reactKey)}
-						renderItem={renderItemInner}
-						refreshControl={
-							<RefreshControl
-								refreshing={isPTRing}
-								onRefresh={onRefresh}
-								tintColor={pal.colors.text}
-								titleColor={pal.colors.text}
-							/>
-						}
-						contentContainerStyle={[s.contentContainer]}
-						removeClippedSubviews={true}
+					<div
+					// FlatList
+					// data={items}
+					// keyExtractor={(item) => (item.uri ? item.uri : item._reactKey)}
+					// renderItem={renderItemInner}
+					// refreshControl={
+					// 	<RefreshControl
+					// 		refreshing={isPTRing}
+					// 		onRefresh={onRefresh}
+					// 		tintColor={pal.colors.text}
+					// 		titleColor={pal.colors.text}
+					// 	/>
+					// }
+					// contentContainerStyle={[s.contentContainer]}
+					// removeClippedSubviews={true}
 					/>
 				)}
 			</div>

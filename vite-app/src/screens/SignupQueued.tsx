@@ -1,5 +1,4 @@
 import React from "react";
-import { ScrollView } from "react-native";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -77,13 +76,14 @@ export function SignupQueued() {
 
 	return (
 		<Modal visible presentationStyle="formSheet" style={a.util_screen_outer}>
-			<ScrollView
+			<div
+				// ScrollView
 				style={{
 					...a.flex_1,
 					...t.atoms.bg,
 				}}
-				contentContainerStyle={{ borderWidth: 0 }}
-				bounces={false}
+				// contentContainerStyle={{ borderWidth: 0 }}
+				// bounces={false}
 			>
 				<div
 					style={{
@@ -172,7 +172,7 @@ export function SignupQueued() {
 						)}
 					</div>
 				</div>
-			</ScrollView>
+			</div>
 			{!webLayout && (
 				<div
 					style={{

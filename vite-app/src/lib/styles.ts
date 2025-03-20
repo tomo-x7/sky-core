@@ -1,4 +1,3 @@
-import type { StyleProp } from "react-native";
 import type { Theme, TypographyVariant } from "./ThemeContext";
 
 // 1 is lightest, 2 is light, 3 is mid, 4 is dark, 5 is darkest
@@ -232,11 +231,4 @@ export function lh(theme: Theme, type: TypographyVariant, height: number): React
 	return {
 		lineHeight: Math.round((Number.parseFloat(String(theme.typography[type].fontSize)) || 16) * height),
 	};
-}
-/**@deprecated */
-export function addStyle<T>(base: StyleProp<T>, addedStyle: StyleProp<T>): StyleProp<T> {
-	if (Array.isArray(base)) {
-		return base.concat([addedStyle]);
-	}
-	return [base, addedStyle];
 }

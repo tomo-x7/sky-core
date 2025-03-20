@@ -1,7 +1,6 @@
 import { type AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useMemo, useState } from "react";
-import { KeyboardAvoidingView, ScrollView } from "react-native";
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -176,9 +175,12 @@ export function Component({
 	]);
 
 	return (
-		<KeyboardAvoidingView behavior="height">
-			<ScrollView
-				// @ts-expect-error
+		<div
+		// KeyboardAvoidingView
+		// behavior="height"
+		>
+			<div
+				// ScrollView
 				style={{
 					...pal.view,
 					paddingLeft: isMobile ? 16 : 0,
@@ -340,8 +342,8 @@ export function Component({
 						</div>
 					</button>
 				</div>
-			</ScrollView>
-		</KeyboardAvoidingView>
+			</div>
+		</div>
 	);
 }
 

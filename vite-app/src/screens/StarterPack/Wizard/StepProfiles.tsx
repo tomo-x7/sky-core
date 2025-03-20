@@ -1,7 +1,5 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { useState } from "react";
-import type { ListRenderItemInfo } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
@@ -13,6 +11,7 @@ import { useWizardState } from "#/screens/StarterPack/Wizard/State";
 import { useA11y } from "#/state/a11y";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { useActorSearchPaginated } from "#/state/queries/actor-search";
+import type { ListRenderItemInfo } from "#/temp";
 import type * as bsky from "#/types/bsky";
 import { List } from "#/view/com/util/List";
 
@@ -75,11 +74,11 @@ export function StepProfiles({
 				</div>
 			</div>
 			<List
-				// @ts-expect-error
 				data={query ? results : topFollowers}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}
-				renderScrollComponent={(props) => <KeyboardAwareScrollView {...props} />}
+				// renderScrollComponent={(props) => <KeyboardAwareScrollView {...props} />}
+				renderScrollComponent={(props: any) => <div {...props} />}
 				keyboardShouldPersistTaps="handled"
 				disableFullWindowScroll={true}
 				sideBorders={false}

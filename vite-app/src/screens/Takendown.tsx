@@ -2,7 +2,6 @@ import { type ComAtprotoAdminDefs, ComAtprotoModerationDefs } from "@atproto/api
 import { useMutation } from "@tanstack/react-query";
 import Graphemer from "graphemer";
 import { useMemo, useState } from "react";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -109,12 +108,13 @@ export function Takendown() {
 
 	return (
 		<Modal visible presentationStyle="formSheet" style={a.util_screen_outer}>
-			<KeyboardAwareScrollView
+			<div
+				// KeyboardAwareScrollView
 				style={{
 					...a.flex_1,
 					...t.atoms.bg,
 				}}
-				centerContent
+				// centerContent
 			>
 				<div
 					style={{
@@ -254,7 +254,7 @@ export function Takendown() {
 						)}
 					</div>
 				</div>
-			</KeyboardAwareScrollView>
+			</div>
 			{!webLayout && (
 				<div
 					style={{

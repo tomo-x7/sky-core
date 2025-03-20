@@ -2,7 +2,6 @@ import Graphemer from "graphemer";
 import { useCallback, useMemo } from "react";
 
 export function enforceLen(str: string, len: number, ellipsis = false, mode: "end" | "middle" = "end"): string {
-	//biome-ignore lint/style/noParameterAssign:
 	str = str || "";
 	if (str.length > len) {
 		if (ellipsis) {

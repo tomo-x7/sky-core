@@ -29,7 +29,6 @@ import { Heart2_Filled_Stroke2_Corner0_Rounded as HeartIconFilled } from "#/comp
 import { PersonPlus_Filled_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
 import { Repost_Stroke2_Corner2_Rounded as RepostIcon } from "#/components/icons/Repost";
 import { StarterPack } from "#/components/icons/StarterPack";
-import { useAnimatedValue } from "#/lib/hooks/useAnimatedValue";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
 import type { NavigationProp } from "#/lib/routes/types";
@@ -589,8 +588,8 @@ function ExpandedAuthorsList({
 	authors: Author[];
 }) {
 	const pal = usePalette("default");
-	const heightInterp = useAnimatedValue(visible ? 1 : 0);
-	const targetHeight = authors.length * (EXPANDED_AUTHOR_EL_HEIGHT + 10); /*10=margin*/
+	// const heightInterp = useAnimatedValue(visible ? 1 : 0);
+	// const targetHeight = authors.length * (EXPANDED_AUTHOR_EL_HEIGHT + 10); /*10=margin*/
 	// const heightStyle = {
 	// 	height: Animated.multiply(heightInterp, targetHeight),
 	// };

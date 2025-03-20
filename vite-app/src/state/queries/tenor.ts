@@ -1,5 +1,4 @@
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { Platform } from "react-native";
 
 import { GIF_FEATURED, GIF_SEARCH } from "#/lib/constants";
 
@@ -41,14 +40,7 @@ function createTenorApi<Input extends object>(
 		const params = new URLSearchParams();
 
 		// set client key based on platform
-		params.set(
-			"client_key",
-			Platform.select({
-				ios: "bluesky-ios",
-				android: "bluesky-android",
-				default: "bluesky-web",
-			}),
-		);
+		params.set("client_key", "bluesky-web");
 
 		// 30 is divisible by 2 and 3, so both 2 and 3 column layouts can be used
 		params.set("limit", "30");

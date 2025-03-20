@@ -3,19 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
-import { KeyboardAvoidingView, type LayoutChangeEvent, ScrollView } from "react-native";
 // @ts-expect-error no type definition
 import ProgressCircle from "react-native-progress/Circle";
 import Animated, {
-	type AnimatedRef,
 	Easing,
 	FadeIn,
 	FadeOut,
 	interpolateColor,
 	LayoutAnimationConfig,
 	runOnUI,
-	scrollTo,
-	useAnimatedRef,
 	useAnimatedStyle,
 	useDerivedValue,
 	useSharedValue,
@@ -31,6 +27,7 @@ import * as Prompt from "#/components/Prompt";
 import { Text as NewText } from "#/components/Typography";
 import { Text } from "#/components/Typography";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { EmojiArc_Stroke2_Corner0_Rounded as EmojiSmile } from "#/components/icons/Emoji";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
@@ -425,7 +422,7 @@ export const ComposePost = ({
 		}
 	}, [openEmojiPicker]);
 
-	const scrollViewRef = useAnimatedRef<Animated.ScrollView>();
+	const scrollViewRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		if (composerState.mutableNeedsFocusActive) {
 			composerState.mutableNeedsFocusActive = false;
@@ -444,7 +441,7 @@ export const ComposePost = ({
 		scrollViewRef,
 		stickyBottom: isLastThreadedPost,
 	});
-
+	useOnLayout(onScrollViewLayout, scrollViewRef);
 	const keyboardVerticalOffset = useKeyboardVerticalOffset();
 
 	const footer = (
@@ -483,7 +480,12 @@ export const ComposePost = ({
 				}}
 				reasonText={"Before creating a post, you must first verify your email."}
 			/>
-			<KeyboardAvoidingView behavior={"height"} keyboardVerticalOffset={keyboardVerticalOffset} style={a.flex_1}>
+			<div
+				// KeyboardAvoidingView
+				// behavior={"height"}
+				// keyboardVerticalOffset={keyboardVerticalOffset}
+				style={a.flex_1}
+			>
 				<div
 					style={{
 						...a.flex_1,
@@ -511,14 +513,14 @@ export const ComposePost = ({
 						/>
 					</ComposerTopBar>
 
-					<Animated.ScrollView
+					<div
+						// Animated.ScrollView
 						ref={scrollViewRef}
 						onScroll={scrollHandler}
 						contentContainerStyle={a.flex_grow}
 						style={a.flex_1}
 						keyboardShouldPersistTaps="always"
 						onContentSizeChange={onScrollViewContentSizeChange}
-						onLayout={onScrollViewLayout}
 					>
 						{replyTo ? <ComposerReplyTo replyTo={replyTo} /> : undefined}
 						{thread.posts.map((post, index) => (
@@ -543,7 +545,7 @@ export const ComposePost = ({
 								)}
 							</React.Fragment>
 						))}
-					</Animated.ScrollView>
+					</div>
 					{!isWebFooterSticky && footer}
 				</div>
 
@@ -555,7 +557,7 @@ export const ComposePost = ({
 					confirmButtonCta={"Discard"}
 					confirmButtonColor="negative"
 				/>
-			</KeyboardAvoidingView>
+			</div>
 		</>
 	);
 };
@@ -996,12 +998,13 @@ function ComposerPills({
 				...bottomBarAnimatedStyle,
 			}}
 		>
-			<ScrollView
-				contentContainerStyle={[a.gap_sm]}
-				horizontal={true}
-				bounces={false}
-				keyboardShouldPersistTaps="always"
-				showsHorizontalScrollIndicator={false}
+			<div
+			// ScrollView
+			// contentContainerStyle={[a.gap_sm]}
+			// horizontal={true}
+			// bounces={false}
+			// keyboardShouldPersistTaps="always"
+			// showsHorizontalScrollIndicator={false}
 			>
 				{isReply ? null : (
 					<ThreadgateBtn
@@ -1034,7 +1037,7 @@ function ComposerPills({
 						}}
 					/>
 				) : null}
-			</ScrollView>
+			</div>
 		</Animated.View>
 	);
 }
@@ -1172,7 +1175,7 @@ function useScrollTracker({
 	scrollViewRef,
 	stickyBottom,
 }: {
-	scrollViewRef: AnimatedRef<Animated.ScrollView>;
+	scrollViewRef: React.RefObject<HTMLDivElement>;
 	stickyBottom: boolean;
 }) {
 	const t = useTheme();
@@ -1228,7 +1231,8 @@ function useScrollTracker({
 			}
 			showHideBottomBorder({ newContentHeight });
 			if (shouldScrollToBottom) {
-				scrollTo(scrollViewRef, 0, newContentHeight, true);
+				// scrollTo(scrollViewRef, 0, newContentHeight, true);
+				scrollViewRef.current?.scrollTo(0, newContentHeight);
 			}
 		},
 		[showHideBottomBorder, scrollViewRef, contentHeight, stickyBottom, contentOffset, scrollViewHeight],
@@ -1242,14 +1246,13 @@ function useScrollTracker({
 	);
 
 	const onScrollViewLayout = useCallback(
-		(evt: LayoutChangeEvent) => {
+		(evt: DOMRect) => {
 			showHideBottomBorder({
-				newScrollViewHeight: evt.nativeEvent.layout.height,
+				newScrollViewHeight: evt.height,
 			});
 		},
 		[showHideBottomBorder],
 	);
-
 	const topBarAnimatedStyle = useAnimatedStyle(() => {
 		return {
 			borderBottomWidth: 1,

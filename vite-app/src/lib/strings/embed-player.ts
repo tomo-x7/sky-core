@@ -1,8 +1,6 @@
-import { Dimensions } from "react-native";
-
 import { isSafari } from "#/lib/browser";
 
-const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+const { innerHeight: SCREEN_HEIGHT } = window;
 
 const IFRAME_HOST = window.location.host === "localhost:8100" ? "http://localhost:8100" : "https://bsky.app";
 

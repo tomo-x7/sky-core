@@ -1,6 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { SafeAreaView } from "react-native";
 
 import { atoms as a, useTheme as useNewTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -10,6 +9,7 @@ import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/i
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, gradients, s } from "#/lib/styles";
 import { usePlaceholderStyle } from "#/placeholderStyle";

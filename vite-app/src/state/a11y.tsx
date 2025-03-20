@@ -1,6 +1,4 @@
 import React from "react";
-import { AccessibilityInfo } from "react-native";
-import { PlatformInfo } from "../../modules/expo-bluesky-swiss-army";
 
 const Context = React.createContext({
 	reduceMotionEnabled: false,
@@ -12,36 +10,37 @@ export function useA11y() {
 }
 
 export function Provider({ children }: React.PropsWithChildren) {
-	const [reduceMotionEnabled, setReduceMotionEnabled] = React.useState(() =>
-		PlatformInfo.getIsReducedMotionEnabled(),
-	);
-	const [screenReaderEnabled, setScreenReaderEnabled] = React.useState(false);
+	// const [reduceMotionEnabled, setReduceMotionEnabled] = React.useState(() =>
+	// 	PlatformInfo.getIsReducedMotionEnabled(),
+	// );
+	// const [screenReaderEnabled, setScreenReaderEnabled] = React.useState(false);
 
-	React.useEffect(() => {
-		const reduceMotionChangedSubscription = AccessibilityInfo.addEventListener("reduceMotionChanged", (enabled) => {
-			setReduceMotionEnabled(enabled);
-		});
-		const screenReaderChangedSubscription = AccessibilityInfo.addEventListener("screenReaderChanged", (enabled) => {
-			setScreenReaderEnabled(enabled);
-		});
-		(async () => {
-			const [_reduceMotionEnabled, _screenReaderEnabled] = await Promise.all([
-				AccessibilityInfo.isReduceMotionEnabled(),
-				AccessibilityInfo.isScreenReaderEnabled(),
-			]);
-			setReduceMotionEnabled(_reduceMotionEnabled);
-			setScreenReaderEnabled(_screenReaderEnabled);
-		})();
+	// React.useEffect(() => {
+	// 	const reduceMotionChangedSubscription = AccessibilityInfo.addEventListener("reduceMotionChanged", (enabled) => {
+	// 		setReduceMotionEnabled(enabled);
+	// 	});
+	// 	const screenReaderChangedSubscription = AccessibilityInfo.addEventListener("screenReaderChanged", (enabled) => {
+	// 		setScreenReaderEnabled(enabled);
+	// 	});
+	// 	(async () => {
+	// 		const [_reduceMotionEnabled, _screenReaderEnabled] = await Promise.all([
+	// 			AccessibilityInfo.isReduceMotionEnabled(),
+	// 			AccessibilityInfo.isScreenReaderEnabled(),
+	// 		]);
+	// 		setReduceMotionEnabled(_reduceMotionEnabled);
+	// 		setScreenReaderEnabled(_screenReaderEnabled);
+	// 	})();
 
-		return () => {
-			reduceMotionChangedSubscription.remove();
-			screenReaderChangedSubscription.remove();
-		};
-	}, []);
+	// 	return () => {
+	// 		reduceMotionChangedSubscription.remove();
+	// 		screenReaderChangedSubscription.remove();
+	// 	};
+	// }, []);
 
 	const ctx = React.useMemo(() => {
 		return {
-			reduceMotionEnabled,
+			// TODO とりあえずfalseにしておく
+			reduceMotionEnabled: false,
 			/**
 			 * Always returns true on web. For now, we're using this for mobile a11y,
 			 * so we reset to false on web.
@@ -50,7 +49,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 			 */
 			screenReaderEnabled: false,
 		};
-	}, [reduceMotionEnabled]);
+	}, []);
 
 	return <Context.Provider value={ctx}>{children}</Context.Provider>;
 }

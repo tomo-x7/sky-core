@@ -71,7 +71,6 @@ export function toShareUrl(url: string): string {
 	if (!url.startsWith("https")) {
 		const urlp = new URL("https://bsky.app");
 		urlp.pathname = url;
-		//biome-ignore lint/style/noParameterAssign:
 		url = urlp.toString();
 	}
 	return url;
@@ -269,7 +268,6 @@ export function labelToDomain(label: string): string | undefined {
 }
 
 export function isPossiblyAUrl(str: string): boolean {
-	//biome-ignore lint/style/noParameterAssign:
 	str = str.trim();
 	if (str.startsWith("http://")) {
 		return true;

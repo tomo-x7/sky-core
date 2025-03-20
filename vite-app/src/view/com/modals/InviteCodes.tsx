@@ -1,6 +1,5 @@
 import type { ComAtprotoServerDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { setStringAsync } from "expo-clipboard";
 import React from "react";
 
 import { flatten } from "#/alf";
@@ -155,7 +154,7 @@ function InviteCode({
 	const uses = invite.uses;
 
 	const onPress = React.useCallback(() => {
-		setStringAsync(invite.code);
+		new Clipboard().writeText(invite.code);
 		Toast.show("Copied to clipboard", "clipboard-check");
 		setInviteCopied(invite.code);
 	}, [setInviteCopied, invite]);

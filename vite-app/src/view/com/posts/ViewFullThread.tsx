@@ -1,6 +1,5 @@
 import { AtUri } from "@atproto/api";
 import React from "react";
-import Svg, { Circle, Line } from "react-native-svg";
 
 import { SubtleWebHover } from "#/components/SubtleWebHover";
 import { Text } from "#/components/Typography";
@@ -32,12 +31,12 @@ export function ViewFullThread({ uri }: { uri: string }) {
 				style={{ top: 8, bottom: -5 }}
 			/>
 			<div style={styles.viewFullThreadDots}>
-				<Svg width="4" height="40">
-					<Line x1="2" y1="0" x2="2" y2="15" stroke={pal.colors.replyLine} strokeWidth="2" />
-					<Circle cx="2" cy="22" r="1.5" fill={pal.colors.replyLineDot} />
-					<Circle cx="2" cy="28" r="1.5" fill={pal.colors.replyLineDot} />
-					<Circle cx="2" cy="34" r="1.5" fill={pal.colors.replyLineDot} />
-				</Svg>
+				<svg width="4" height="40">
+					<line x1="2" y1="0" x2="2" y2="15" stroke={pal.colors.replyLine} strokeWidth="2" />
+					<circle cx="2" cy="22" r="1.5" fill={pal.colors.replyLineDot} />
+					<circle cx="2" cy="28" r="1.5" fill={pal.colors.replyLineDot} />
+					<circle cx="2" cy="34" r="1.5" fill={pal.colors.replyLineDot} />
+				</svg>
 			</div>
 			<Text
 				type="md"
