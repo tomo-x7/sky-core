@@ -59,16 +59,10 @@ export function NoFeedsPinned({
 			<div
 				style={{
 					...a.align_center,
-
-					...//@ts-expect-error
-					a.h_full_vh,
-
+					...a.h_full_vh,
 					...a.py_3xl,
 					...a.px_xl,
-
-					...{
-						paddingTop: headerOffset + a.py_3xl.paddingTop,
-					},
+					paddingTop: headerOffset + a.py_3xl.paddingTop,
 				}}
 			>
 				<div

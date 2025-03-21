@@ -644,7 +644,7 @@ let PostFeed = ({
 			<List
 				ref={scrollElRef}
 				data={feedItems}
-				keyExtractor={(item) => item.key}
+				keyExtractor={(item:any) => item.key}
 				renderItem={renderItem}
 				ListFooterComponent={FeedFooter}
 				ListHeaderComponent={ListHeaderComponent}

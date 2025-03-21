@@ -44,7 +44,6 @@ export const PasswordUpdatedForm = ({
 				<Button
 					onPress={onPressNext}
 					label={"Close alert"}
-					accessibilityHint={"Closes password update alert"}
 					variant="solid"
 					color="primary"
 					size="large"

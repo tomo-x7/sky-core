@@ -207,7 +207,8 @@ export function Link({
 				...a.justify_start,
 				...rest.style,
 			}}
-			href={href}
+			// TODO
+			// href={href}
 			onPress={download ? undefined : onPress}
 			{...{
 				hrefAttrs: {

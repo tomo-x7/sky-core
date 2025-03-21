@@ -175,8 +175,9 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 							<TextField.Icon icon={CodeBracketsIcon} />
 							<TextField.Input
 								label="Embed HTML code"
-								editable={false}
-								selection={{ start: 0, end: snippet.length }}
+								contentEditable={false}
+								// TODO
+								// selection={{ start: 0, end: snippet.length }}
 								value={snippet}
 							/>
 						</TextField.Root>

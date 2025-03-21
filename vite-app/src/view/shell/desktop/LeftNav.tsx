@@ -104,7 +104,6 @@ function ProfileCard() {
 							const active = state.hovered || state.focused || control.isOpen;
 							return (
 								<Button
-									label={props.accessibilityLabel}
 									{...props}
 									style={{
 										...a.w_full,

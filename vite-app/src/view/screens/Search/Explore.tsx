@@ -624,7 +624,7 @@ export function Explore() {
 		<List
 			data={items}
 			renderItem={renderItem}
-			keyExtractor={(item) => item.key}
+			keyExtractor={(item:any) => item.key}
 			desktopFixedHeight
 			contentContainerStyle={{ paddingBottom: 100 }}
 			keyboardShouldPersistTaps="handled"

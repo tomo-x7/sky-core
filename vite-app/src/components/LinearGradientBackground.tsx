@@ -23,6 +23,7 @@ export function LinearGradientBackground({
 	assertValidColors(colors);
 
 	return (
+		// @ts-expect-error
 		<LinearGradient colors={colors} style={style} start={start} end={end}>
 			{children}
 		</LinearGradient>

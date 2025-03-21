@@ -117,7 +117,6 @@ export const ProfileKnownFollowersScreen = ({ route }: Props) => {
 						onRetry={fetchNextPage}
 					/>
 				}
-				// @ts-expect-error our .web version only -prf
 				desktopFixedHeight
 				initialNumToRender={initialNumToRender}
 				windowSize={11}

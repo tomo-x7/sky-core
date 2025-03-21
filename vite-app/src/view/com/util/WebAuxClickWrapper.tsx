@@ -2,6 +2,7 @@ import type React from "react";
 
 const onMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
 	// Only handle whenever it is the middle button
+	// @ts-expect-error
 	if (e.button !== 1 || e.target.closest("a") || e.target.tagName === "A") {
 		return;
 	}

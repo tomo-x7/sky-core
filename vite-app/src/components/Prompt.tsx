@@ -35,7 +35,6 @@ export function Outer({
 			<Dialog.Handle />
 			<Context.Provider value={context}>
 				<Dialog.ScrollableInner
-					accessibilityLabelledBy={titleId}
 					accessibilityDescribedBy={descriptionId}
 					style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 				>

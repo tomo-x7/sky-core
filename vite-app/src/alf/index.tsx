@@ -18,7 +18,6 @@ export * from "./fonts";
 export * as tokens from "./tokens";
 export * from "./types";
 export * from "./util/flatten";
-export * from "./util/platform";
 export * from "./util/themeSelector";
 export * from "./util/useGutters";
 

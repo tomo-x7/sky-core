@@ -120,13 +120,6 @@ function ContentHiderActive({
 					}
 				}}
 				label={desc.name}
-				accessibilityHint={
-					modui.noOverride
-						? "Learn more about the moderation applied to this content"
-						: override
-							? "Hides the content"
-							: "Shows the content"
-				}
 			>
 				{(state) => (
 					<div
@@ -210,7 +203,7 @@ function ContentHiderActive({
 									...{ color: t.palette.primary_500 },
 									...a.text_sm,
 
-									...//@ts-expect-error
+									...
 									(state.hovered && { textDecoration: "underline" }),
 								}}
 							>

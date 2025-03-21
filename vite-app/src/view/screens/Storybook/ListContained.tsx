@@ -34,7 +34,7 @@ export function ListContained() {
 				>
 					<List
 						data={data}
-						renderItem={(item) => {
+						renderItem={(item:any) => {
 							return (
 								<div
 									style={{
@@ -47,7 +47,7 @@ export function ListContained() {
 								</div>
 							);
 						}}
-						keyExtractor={(item) => item.id.toString()}
+						keyExtractor={(item:any) => item.id.toString()}
 						disableFullWindowScroll={true}
 						style={{ flex: 1 }}
 						onStartReached={() => {

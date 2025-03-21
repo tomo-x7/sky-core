@@ -79,7 +79,7 @@ export function EmbedConsentDialog({
 						style={gtMobile ? a.flex_1 : undefined}
 						label="Enable external media"
 						onPress={onShowAllPress}
-						onAccessibilityEscape={control.close}
+						// onAccessibilityEscape={control.close}
 						color="primary"
 						size="large"
 						variant="solid"
@@ -90,7 +90,7 @@ export function EmbedConsentDialog({
 						style={gtMobile ? a.flex_1 : undefined}
 						label="Enable this source only"
 						onPress={onShowPress}
-						onAccessibilityEscape={control.close}
+						// onAccessibilityEscape={control.close}
 						color="secondary"
 						size="large"
 						variant="solid"
@@ -99,7 +99,7 @@ export function EmbedConsentDialog({
 					</Button>
 					<Button
 						label="No thanks"
-						onAccessibilityEscape={control.close}
+						// onAccessibilityEscape={control.close}
 						onPress={onHidePress}
 						color="secondary"
 						size="large"

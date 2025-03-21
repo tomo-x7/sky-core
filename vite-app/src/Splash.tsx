@@ -1,4 +1,3 @@
-import * as SplashScreen from "expo-splash-screen";
 import React, { useCallback, useEffect } from "react";
 import Animated, {
 	Easing,
@@ -107,32 +106,28 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 
 	useEffect(() => {
 		if (isReady) {
-			SplashScreen.hideAsync()
-				.then(() => {
-					intro.set(() =>
-						withTiming(1, { duration: 400, easing: Easing.out(Easing.cubic) }, async () => {
-							// set these values to check animation at specific point
-							outroLogo.set(() =>
-								withTiming(1, { duration: 1200, easing: Easing.in(Easing.cubic) }, () => {
-									runOnJS(onFinish)();
-								}),
-							);
-							outroApp.set(() =>
-								withTiming(1, {
-									duration: 1200,
-									easing: Easing.inOut(Easing.cubic),
-								}),
-							);
-							outroAppOpacity.set(() =>
-								withTiming(1, {
-									duration: 1200,
-									easing: Easing.in(Easing.cubic),
-								}),
-							);
+			intro.set(() =>
+				withTiming(1, { duration: 400, easing: Easing.out(Easing.cubic) }, async () => {
+					// set these values to check animation at specific point
+					outroLogo.set(() =>
+						withTiming(1, { duration: 1200, easing: Easing.in(Easing.cubic) }, () => {
+							runOnJS(onFinish)();
 						}),
 					);
-				})
-				.catch(() => {});
+					outroApp.set(() =>
+						withTiming(1, {
+							duration: 1200,
+							easing: Easing.inOut(Easing.cubic),
+						}),
+					);
+					outroAppOpacity.set(() =>
+						withTiming(1, {
+							duration: 1200,
+							easing: Easing.in(Easing.cubic),
+						}),
+					);
+				}),
+			);
 		}
 	}, [onFinish, intro, outroLogo, outroApp, outroAppOpacity, isReady]);
 

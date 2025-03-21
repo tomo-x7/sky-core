@@ -9,6 +9,7 @@ export function ScreenTransition({
 	children: React.ReactNode;
 }) {
 	return (
+		// @ts-expect-error
 		<Animated.View style={style} entering={FadeInRight} exiting={FadeOutLeft}>
 			{children}
 		</Animated.View>

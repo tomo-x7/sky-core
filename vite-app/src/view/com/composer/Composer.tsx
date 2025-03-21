@@ -516,6 +516,7 @@ export const ComposePost = ({
 					<div
 						// Animated.ScrollView
 						ref={scrollViewRef}
+						// @ts-expect-error
 						onScroll={scrollHandler}
 						contentContainerStyle={a.flex_grow}
 						style={a.flex_1}

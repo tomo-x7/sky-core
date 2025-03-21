@@ -74,7 +74,6 @@ export function RichTextTag({
 							}).onPress(e);
 						}}
 						onLongPress={createStaticClick(menuProps.onPress).onPress}
-						accessibilityHint={hint}
 						label={label}
 						style={textStyle}
 					>

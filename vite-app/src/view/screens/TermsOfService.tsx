@@ -26,7 +26,6 @@ export const TermsOfServiceScreen = (_props: Props) => {
 		<Layout.Screen>
 			<ViewHeader title={"Terms of Service"} />
 			<ScrollView
-				// @ts-expect-error
 				style={{
 					...s.hContentRegion,
 					...pal.view,

@@ -185,14 +185,14 @@ let SearchScreenPostResults = ({
 					{posts.length ? (
 						<List
 							data={items}
-							renderItem={({ item }) => {
+							renderItem={({ item }:any) => {
 								if (item.type === "post") {
 									return <Post post={item.post} />;
 								} else {
 									return null;
 								}
 							}}
-							keyExtractor={(item) => item.key}
+							keyExtractor={(item:any) => item.key}
 							refreshing={isPTR}
 							onRefresh={onPullToRefresh}
 							onEndReached={onEndReached}
@@ -228,8 +228,8 @@ let SearchScreenUserResults = ({
 			{results.length ? (
 				<List
 					data={results}
-					renderItem={({ item }) => <ProfileCardWithFollowBtn profile={item} noBg />}
-					keyExtractor={(item) => item.did}
+					renderItem={({ item }:{item:any}) => <ProfileCardWithFollowBtn profile={item} noBg />}
+					keyExtractor={(item:any) => item.did}
 					desktopFixedHeight
 					contentContainerStyle={{ paddingBottom: 100 }}
 				/>
@@ -262,7 +262,7 @@ let SearchScreenFeedsResults = ({
 			{results.length ? (
 				<List
 					data={results}
-					renderItem={({ item }) => (
+					renderItem={({ item }:{item:any}) => (
 						<div
 							style={{
 								...a.border_b,
@@ -274,7 +274,7 @@ let SearchScreenFeedsResults = ({
 							<FeedCard.Default view={item} />
 						</div>
 					)}
-					keyExtractor={(item) => item.uri}
+					keyExtractor={(item:any) => item.uri}
 					desktopFixedHeight
 					contentContainerStyle={{ paddingBottom: 100 }}
 				/>

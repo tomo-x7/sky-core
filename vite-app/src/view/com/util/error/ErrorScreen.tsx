@@ -111,7 +111,6 @@ export function ErrorScreen({
 							color="secondary_inverted"
 							size="small"
 							label={"Retry"}
-							accessibilityHint={"Retries the last action, which errored out"}
 						>
 							<ButtonIcon icon={ArrowRotateCounterClockwiseIcon} />
 							<ButtonText>Try again</ButtonText>

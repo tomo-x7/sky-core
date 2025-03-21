@@ -85,7 +85,6 @@ export function MessageProfileButton({
 		return (
 			<>
 				<Button
-					accessibilityRole="button"
 					size="small"
 					color="secondary"
 					variant="solid"

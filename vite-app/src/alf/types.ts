@@ -136,22 +136,19 @@ export type ThemedAtoms = {
 		borderColor: string;
 	};
 	shadow_sm: {
-		shadowRadius: number;
-		shadowOpacity: number;
-		elevation: number;
-		shadowColor: string;
+		shadowRadius?: number;
+		shadowOpacity?: number;
+		shadowColor?: string;
 	};
 	shadow_md: {
-		shadowRadius: number;
-		shadowOpacity: number;
-		elevation: number;
-		shadowColor: string;
+		shadowRadius?: number;
+		shadowOpacity?: number;
+		shadowColor?: string;
 	};
 	shadow_lg: {
-		shadowRadius: number;
-		shadowOpacity: number;
-		elevation: number;
-		shadowColor: string;
+		shadowRadius?: number;
+		shadowOpacity?: number;
+		shadowColor?: string;
 	};
 };
 export type Theme = {

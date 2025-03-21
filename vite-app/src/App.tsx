@@ -5,7 +5,6 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { ThemeProvider as Alf } from "./alf";
 import { useColorModeTheme } from "./alf/util/useColorModeTheme";
 import { Provider as PortalProvider } from "./components/Portal";
-import { NuxDialogs } from "./components/dialogs/nuxs";
 import { useStarterPackEntry } from "./components/hooks/useStarterPackEntry";
 import { Provider as IntentDialogProvider } from "./components/intents/IntentDialogs";
 import { ThemeProvider } from "./lib/ThemeContext";
@@ -111,7 +110,7 @@ function InnerApp() {
 																					<TrendingConfigProvider>
 																						<IntentDialogProvider>
 																							<Shell />
-																							<NuxDialogs />
+																							{/* <NuxDialogs /> */}
 																						</IntentDialogProvider>
 																					</TrendingConfigProvider>
 																				</ProgressGuideProvider>

@@ -96,7 +96,6 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 	if (data)
 		return (
 			<List
-				// @ts-expect-error
 				data={getSortedProfiles()}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}

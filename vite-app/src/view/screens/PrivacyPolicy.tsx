@@ -26,7 +26,6 @@ export const PrivacyPolicyScreen = (_props: Props) => {
 		<Layout.Screen>
 			<ViewHeader title={"Privacy Policy"} />
 			<ScrollView
-				// @ts-expect-error
 				style={{
 					...s.hContentRegion,
 					...pal.view,

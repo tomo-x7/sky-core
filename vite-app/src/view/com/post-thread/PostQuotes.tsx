@@ -117,7 +117,6 @@ export function PostQuotes({ uri }: { uri: string }) {
 					endMessageText={`That's all, folks!`}
 				/>
 			}
-			// @ts-expect-error our .web version only -prf
 			desktopFixedHeight
 			initialNumToRender={initialNumToRender}
 			windowSize={11}

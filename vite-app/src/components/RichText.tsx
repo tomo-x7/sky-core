@@ -65,7 +65,6 @@ export function RichText({
 					}}
 					onLayout={onLayout}
 					// onTextLayout={onTextLayout}
-					// @ts-expect-error web only -prf
 					dataSet={WORD_WRAP}
 				>
 					{text}
@@ -80,7 +79,6 @@ export function RichText({
 				numberOfLines={numberOfLines}
 				onLayout={onLayout}
 				// onTextLayout={onTextLayout}
-				// @ts-expect-error web only -prf
 				dataSet={WORD_WRAP}
 			>
 				{text}
@@ -156,7 +154,6 @@ export function RichText({
 			numberOfLines={numberOfLines}
 			onLayout={onLayout}
 			// onTextLayout={onTextLayout}
-			// @ts-expect-error web only -prf
 			dataSet={WORD_WRAP}
 		>
 			{els}

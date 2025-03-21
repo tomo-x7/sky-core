@@ -16,6 +16,7 @@ export function ScreenTransition({
 		<Animated.View
 			entering={FadeIn.duration(90)}
 			exiting={FadeOut.duration(90)} // Totally vibes based
+			// @ts-expect-error
 			style={style}
 		>
 			{children}

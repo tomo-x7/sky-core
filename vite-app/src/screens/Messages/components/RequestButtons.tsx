@@ -75,7 +75,6 @@ export function RejectMenu({
 						<Button
 							{...triggerProps}
 							{...props}
-							label={triggerProps.accessibilityLabel}
 							style={a.flex_1}
 							color={color}
 							variant={variant}

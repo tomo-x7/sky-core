@@ -500,7 +500,7 @@ export function FeedsScreen(_props: Props) {
 				<List
 					ref={listRef}
 					data={items}
-					keyExtractor={(item) => item.key}
+					keyExtractor={(item:any) => item.key}
 					contentContainerStyle={styles.contentContainer}
 					renderItem={renderItem}
 					refreshing={isPTR}

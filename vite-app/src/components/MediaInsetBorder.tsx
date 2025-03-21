@@ -27,13 +27,9 @@ export function MediaInsetBorder({
 				...a.rounded_md,
 				...a.border,
 				...(opaque
-					? [t.atoms.border_contrast_low]
-					: [isLight ? t.atoms.border_contrast_low : t.atoms.border_contrast_high, { opacity: 0.6 }]),
-
-				...{
-					pointerEvents: "none",
-				},
-
+					? t.atoms.border_contrast_low
+					: { ...(isLight ? t.atoms.border_contrast_low : t.atoms.border_contrast_high), opacity: 0.6 }),
+				pointerEvents: "none",
 				...style,
 			}}
 		>

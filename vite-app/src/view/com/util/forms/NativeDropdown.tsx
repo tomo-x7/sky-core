@@ -9,10 +9,10 @@ import { usePalette } from "#/lib/hooks/usePalette";
 
 // Custom Dropdown Menu Components
 // ==
-export const DropdownMenuRoot = DropdownMenu.Root;
+ const DropdownMenuRoot = DropdownMenu.Root;
 
 type ItemProps = React.ComponentProps<(typeof DropdownMenu)["Item"]>;
-export const DropdownMenuItem = (props: ItemProps) => {
+const DropdownMenuItem = (props: ItemProps) => {
 	const theme = useTheme();
 	const [focused, setFocused] = React.useState(false);
 	const backgroundColor = theme.colorScheme === "dark" ? "#fff1" : "#0001";

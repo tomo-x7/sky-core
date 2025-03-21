@@ -7,7 +7,7 @@ interface IDialogContext {
 	/**
 	 * The currently active `useDialogControl` hooks.
 	 */
-	activeDialogs: React.MutableRefObject<Map<string, React.MutableRefObject<DialogControlRefProps>>>;
+	activeDialogs: React.MutableRefObject<Map<string, React.MutableRefObject<DialogControlRefProps|null>>>;
 	/**
 	 * The currently open dialogs, referenced by their IDs, generated from
 	 * `useId`.
@@ -47,7 +47,7 @@ export function Provider({ children }: React.PropsWithChildren) {
 	const closeAllDialogs = React.useCallback(() => {
 		openDialogs.current.forEach((id) => {
 			const dialog = activeDialogs.current.get(id);
-			if (dialog) dialog.current.close();
+			if (dialog) dialog.current?.close();
 		});
 
 		return openDialogs.current.size > 0;

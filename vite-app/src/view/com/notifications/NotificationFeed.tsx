@@ -135,7 +135,7 @@ export function NotificationFeed({
 			<List
 				ref={scrollElRef}
 				data={items}
-				keyExtractor={(item) => item._reactKey}
+				keyExtractor={(item:any) => item._reactKey}
 				renderItem={renderItem}
 				ListHeaderComponent={ListHeaderComponent}
 				ListFooterComponent={FeedFooter}

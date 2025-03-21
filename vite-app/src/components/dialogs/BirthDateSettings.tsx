@@ -100,7 +100,6 @@ function BirthdayInner({
 					value={date}
 					onChangeDate={(newDate) => setDate(new Date(newDate))}
 					label={"Birthday"}
-					accessibilityHint={"Enter your birth date"}
 					maximumDate={getDateAgo(13)}
 				/>
 			</div>

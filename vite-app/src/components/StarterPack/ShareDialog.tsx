@@ -42,24 +42,6 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 		control.close();
 	};
 
-	const onSave = async () => {
-		const res = await requestMediaLibraryPermissionsAsync();
-
-		if (!res) {
-			Toast.show("You must grant access to your photo library to save the image.", "xmark");
-			return;
-		}
-
-		try {
-			await saveImageToMediaLibrary({ uri: imageUrl });
-			Toast.show("Image saved to your camera roll!");
-			control.close();
-		} catch (e: unknown) {
-			Toast.show("An error occurred while saving the QR code!", "xmark");
-			console.error("Failed to save QR code", { error: e });
-			return;
-		}
-	};
 
 	return (
 		<>

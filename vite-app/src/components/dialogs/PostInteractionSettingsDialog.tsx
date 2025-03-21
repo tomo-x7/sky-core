@@ -524,11 +524,8 @@ function Selectable({
 			disabled={disabled}
 			onPress={onPress}
 			label={label}
-			accessibilityRole="checkbox"
+			// accessibilityRole="checkbox"
 			aria-checked={isSelected}
-			accessibilityState={{
-				checked: isSelected,
-			}}
 			style={a.flex_1}
 		>
 			{({ hovered, focused }) => (

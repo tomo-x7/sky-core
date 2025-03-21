@@ -180,7 +180,7 @@ export function AppearanceToggleButtonGroup({
 	const t = useTheme();
 	return (
 		<>
-			<SettingsList.Group contentContainerStyle={[a.gap_sm]} iconInset={false}>
+			<SettingsList.Group contentContainerStyle={a.gap_sm} iconInset={false}>
 				<SettingsList.ItemIcon icon={Icon} />
 				<SettingsList.ItemText>{title}</SettingsList.ItemText>
 				{description && (

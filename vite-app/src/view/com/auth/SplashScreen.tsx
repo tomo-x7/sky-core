@@ -128,7 +128,6 @@ export const SplashScreen = ({
 							<Button
 								onPress={onPressCreateAccount}
 								label={"Create new account"}
-								accessibilityHint={"Opens flow to create a new Bluesky account"}
 								size="large"
 								variant="solid"
 								color="primary"
@@ -138,7 +137,6 @@ export const SplashScreen = ({
 							<Button
 								onPress={onPressSignin}
 								label={"Sign in"}
-								accessibilityHint={"Opens flow to sign in to your existing Bluesky account"}
 								size="large"
 								variant="solid"
 								color="secondary"

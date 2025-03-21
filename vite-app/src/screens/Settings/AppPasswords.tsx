@@ -73,6 +73,7 @@ export function AppPasswordsScreen(props: Props) {
 										{appPasswords.map((appPassword) => (
 											<Animated.View
 												key={appPassword.name}
+												// @ts-expect-error
 												style={a.w_full}
 												entering={FadeIn}
 												exiting={FadeOut}

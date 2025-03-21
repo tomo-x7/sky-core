@@ -26,7 +26,6 @@ export const CommunityGuidelinesScreen = (_props: Props) => {
 		<Layout.Screen>
 			<ViewHeader title={"Community Guidelines"} />
 			<ScrollView
-				// @ts-expect-error
 				style={{
 					...s.hContentRegion,
 					...pal.view,

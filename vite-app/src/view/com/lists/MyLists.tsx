@@ -181,7 +181,7 @@ export function MyLists({
 				{items.length > 0 && (
 					<List
 						data={items}
-						keyExtractor={(item) => (item.uri ? item.uri : item._reactKey)}
+						keyExtractor={(item:any) => (item.uri ? item.uri : item._reactKey)}
 						renderItem={renderItemInner}
 						refreshing={isPTRing}
 						onRefresh={onRefresh}

@@ -29,7 +29,7 @@ export function AccessibilitySettingsScreen(props: Props) {
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<SettingsList.Container>
-					<SettingsList.Group contentContainerStyle={[a.gap_sm]}>
+					<SettingsList.Group contentContainerStyle={a.gap_sm}>
 						<SettingsList.ItemIcon icon={AccessibilityIcon} />
 						<SettingsList.ItemText>Alt text</SettingsList.ItemText>
 						<Toggle.Item

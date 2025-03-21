@@ -555,9 +555,7 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 								...a.flex_1,
 								...a.leading_snug,
 								...a.font_bold,
-
-								...//@ts-expect-error
-								{ overflowWrap: "break-word", wordBreak: "break-word" },
+								 overflowWrap: "break-word", wordBreak: "break-word" 
 							}}
 						>
 							{word.targets.find((t) => t === "content") ? (

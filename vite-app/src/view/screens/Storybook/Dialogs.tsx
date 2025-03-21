@@ -184,7 +184,6 @@ export function Dialogs() {
 			<Dialog.Outer control={scrollable}>
 				<Dialog.ScrollableInner
 					accessibilityDescribedBy="dialog-description"
-					accessibilityLabelledBy="dialog-title"
 				>
 					<div
 						style={{
@@ -233,7 +232,6 @@ export function Dialogs() {
 			<Dialog.Outer control={testDialog}>
 				<Dialog.ScrollableInner
 					accessibilityDescribedBy="dialog-description"
-					accessibilityLabelledBy="dialog-title"
 				>
 					<div
 						style={{

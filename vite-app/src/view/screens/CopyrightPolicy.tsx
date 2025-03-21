@@ -26,7 +26,6 @@ export const CopyrightPolicyScreen = (_props: Props) => {
 		<Layout.Screen>
 			<ViewHeader title={"Copyright Policy"} />
 			<ScrollView
-				// @ts-expect-error
 				style={{
 					...s.hContentRegion,
 					...pal.view,
