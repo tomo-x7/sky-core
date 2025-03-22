@@ -2,16 +2,16 @@
 
 import type { Image as RNImage } from "react-native-image-crop-picker";
 
-import type { CameraOpts, CropperOptions } from "./types";
+import type { CropperOptions } from "./types";
 export { openPicker } from "./picker.shared";
 import { unstable__openModal } from "#/state/modals";
 
-export async function openCamera(_opts: CameraOpts): Promise<RNImage> {
-	// const mediaType = opts.mediaType || 'photo' TODO
-	throw new Error("TODO");
-}
+// export async function openCamera(_opts: CameraOpts): Promise<RNImage> {
+// 	// const mediaType = opts.mediaType || 'photo' TODO
+// 	throw new Error("TODO");
+// }
 
-export async function openCropper(opts: CropperOptions): Promise<RNImage> {
+export function openCropper(opts: CropperOptions): Promise<RNImage> {
 	// TODO handle more opts
 	return new Promise((resolve, reject) => {
 		unstable__openModal({

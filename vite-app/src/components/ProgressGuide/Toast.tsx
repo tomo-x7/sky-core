@@ -1,5 +1,4 @@
 import React, { useImperativeHandle } from "react";
-import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Portal } from "#/components/Portal";
@@ -22,8 +21,8 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 	function ProgressGuideToast({ title, subtitle, visibleDuration }, ref) {
 		const t = useTheme();
 		const [isOpen, setIsOpen] = React.useState(false);
-		const translateY = useSharedValue(0);
-		const opacity = useSharedValue(0);
+		// const translateY = useSharedValue(0);
+		// const opacity = useSharedValue(0);
 		const animatedCheckRef = React.useRef<AnimatedCheckRef | null>(null);
 		const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 		const winDim = useWindowDimensions();
@@ -40,47 +39,47 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 			}
 
 			// animate the opacity then set isOpen to false when done
-			const setIsntOpen = () => setIsOpen(false);
-			opacity.set(() =>
-				withTiming(
-					0,
-					{
-						duration: 400,
-						easing: Easing.out(Easing.cubic),
-					},
-					() => runOnJS(setIsntOpen)(),
-				),
-			);
-		}, [opacity]);
+			// const setIsntOpen = () => setIsOpen(false);
+			// opacity.set(() =>
+			// 	withTiming(
+			// 		0,
+			// 		{
+			// 			duration: 400,
+			// 			easing: Easing.out(Easing.cubic),
+			// 		},
+			// 		() => runOnJS(setIsntOpen)(),
+			// 	),
+			// );
+		}, []);
 
 		const open = React.useCallback(() => {
 			// set isOpen=true to render
 			setIsOpen(true);
 
 			// animate the vertical translation, the opacity, and the checkmark
-			const playCheckmark = () => animatedCheckRef.current?.play();
-			opacity.set(0);
-			opacity.set(() =>
-				withTiming(
-					1,
-					{
-						duration: 100,
-						easing: Easing.out(Easing.cubic),
-					},
-					() => runOnJS(playCheckmark)(),
-				),
-			);
-			translateY.set(0);
-			translateY.set(() =>
-				withTiming(10, {
-					duration: 500,
-					easing: Easing.out(Easing.cubic),
-				}),
-			);
+			// const playCheckmark = () => animatedCheckRef.current?.play();
+			// opacity.set(0);
+			// opacity.set(() =>
+			// 	withTiming(
+			// 		1,
+			// 		{
+			// 			duration: 100,
+			// 			easing: Easing.out(Easing.cubic),
+			// 		},
+			// 		() => runOnJS(playCheckmark)(),
+			// 	),
+			// );
+			// translateY.set(0);
+			// translateY.set(() =>
+			// 	withTiming(10, {
+			// 		duration: 500,
+			// 		easing: Easing.out(Easing.cubic),
+			// 	}),
+			// );
 
 			// start the countdown timer to autoclose
 			timeoutRef.current = setTimeout(close, visibleDuration || 5e3);
-		}, [translateY, opacity, close, visibleDuration]);
+		}, [close, visibleDuration]);
 
 		useImperativeHandle(
 			ref,
@@ -102,22 +101,22 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 				top: 0,
 				left,
 				right,
-			};
+			} satisfies React.CSSProperties;
 		}, [winDim.width]);
 
-		const animatedStyle = useAnimatedStyle(() => ({
-			transform: `translateY(${translateY.get()}px)`,
-			opacity: opacity.get(),
-		}));
+		// const animatedStyle = useAnimatedStyle(() => ({
+		// 	transform: `translateY(${translateY.get()}px)`,
+		// 	opacity: opacity.get(),
+		// }));
 
 		return (
 			isOpen && (
 				<Portal>
-					<Animated.View
-						// @ts-expect-error
+					<div
+						// Animated.View
 						style={{
 							...containerStyle,
-							...animatedStyle,
+							// ...animatedStyle,
 						}}
 					>
 						<button
@@ -159,7 +158,7 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 								)}
 							</div>
 						</button>
-					</Animated.View>
+					</div>
 				</Portal>
 			)
 		);

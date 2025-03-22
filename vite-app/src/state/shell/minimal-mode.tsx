@@ -1,5 +1,5 @@
 import React from "react";
-import { type SharedValue, useSharedValue, withSpring } from "react-native-reanimated";
+import { type SharedValue, useSharedValue } from "../SharedValue";
 
 type StateContext = {
 	headerMode: SharedValue<number>;
@@ -10,9 +10,6 @@ type SetContext = (v: boolean) => void;
 const stateContext = React.createContext<StateContext>({
 	headerMode: {
 		value: 0,
-		addListener() {},
-		removeListener() {},
-		modify() {},
 		get() {
 			return 0;
 		},
@@ -20,9 +17,6 @@ const stateContext = React.createContext<StateContext>({
 	},
 	footerMode: {
 		value: 0,
-		addListener() {},
-		removeListener() {},
-		modify() {},
 		get() {
 			return 0;
 		},
@@ -36,17 +30,8 @@ export function Provider({ children }: React.PropsWithChildren) {
 	const footerMode = useSharedValue(0);
 	const setMode = React.useCallback(
 		(v: boolean) => {
-			"worklet";
-			headerMode.set(() =>
-				withSpring(v ? 1 : 0, {
-					overshootClamping: true,
-				}),
-			);
-			footerMode.set(() =>
-				withSpring(v ? 1 : 0, {
-					overshootClamping: true,
-				}),
-			);
+			headerMode.set(v ? 1 : 0);
+			footerMode.set(v ? 1 : 0);
 		},
 		[headerMode, footerMode],
 	);

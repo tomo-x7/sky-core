@@ -1,5 +1,3 @@
-import { interpolate, useAnimatedStyle } from "react-native-reanimated";
-
 import { useMinimalShellMode } from "#/state/shell/minimal-mode";
 import { useShellLayout } from "#/state/shell/shell-layout";
 
@@ -9,45 +7,32 @@ export function useMinimalShellHeaderTransform() {
 	const { headerMode } = useMinimalShellMode();
 	const { headerHeight } = useShellLayout();
 
-	const headerTransform = useAnimatedStyle(() => {
-		const headerModeValue = headerMode.get();
-		return {
-			pointerEvents: headerModeValue === 0 ? "auto" : "none",
-			opacity: (1 - headerModeValue) ** 2,
-			transform: [
-				{
-					translateY: interpolate(headerModeValue, [0, 1], [0, -headerHeight.get()]),
-				},
-			],
-		};
-	});
-
-	return headerTransform;
+	const headerModeValue = headerMode.get();
+	return {
+		pointerEvents: headerModeValue === 0 ? "auto" : "none",
+		opacity: (1 - headerModeValue) ** 2,
+		transform: `translateY(${headerModeValue === 0 ? 0 : -headerHeight.get()}px)`,
+		transition: "opacity 200ms,transform 200ms",
+	} satisfies React.CSSProperties;
 }
 
 export function useMinimalShellFooterTransform() {
 	const { footerMode } = useMinimalShellMode();
 	const { footerHeight } = useShellLayout();
 
-	const footerTransform = useAnimatedStyle(() => {
-		const footerModeValue = footerMode.get();
-		return {
-			pointerEvents: footerModeValue === 0 ? "auto" : "none",
-			opacity: (1 - footerModeValue) ** 2,
-			transform: `translateY(${interpolate(footerModeValue, [0, 1], [0, footerHeight.get()])}px)`,
-		} satisfies React.CSSProperties;
-	});
-
-	return footerTransform;
+	const footerModeValue = footerMode.value;
+	return {
+		pointerEvents: footerModeValue === 0 ? "auto" : "none",
+		opacity: (1 - footerModeValue) ** 2,
+		transform: `translateY(${footerModeValue === 0 ? 0 : footerHeight.value}px)`,
+		transition: "opacity 200ms,transform 200ms",
+	} satisfies React.CSSProperties;
 }
 
 export function useMinimalShellFabTransform() {
 	const { footerMode } = useMinimalShellMode();
 
-	const fabTransform = useAnimatedStyle(() => {
-		return {
-			transform: `translateY(${interpolate(footerMode.get(), [0, 1], [-44, 0])}px)`,
-		};
-	});
-	return fabTransform;
+	return {
+		transform: `translateY(${footerMode.value === 0 ? -44 : 0}px)`,
+	} satisfies React.CSSProperties;
 }

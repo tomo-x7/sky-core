@@ -1,15 +1,14 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
-import React from "react";
+import React, { type RefObject, useRef } from "react";
 
 import { atoms as a, useBreakpoints } from "#/alf";
-import { type HandleRef, useHandleRef } from "#/lib/hooks/useHandleRef";
 import { PostEmbedViewContext } from "#/view/com/util/post-embeds/types";
 import type { Dimensions } from "../../lightbox/ImageViewing/@types";
 import { GalleryItem } from "./Gallery";
 
 interface ImageLayoutGridProps {
 	images: AppBskyEmbedImages.ViewImage[];
-	onPress?: (index: number, containerRefs: HandleRef[], fetchedDims: (Dimensions | null)[]) => void;
+	onPress?: (index: number, containerRefs: RefObject<HTMLElement>[], fetchedDims: (Dimensions | null)[]) => void;
 	onLongPress?: (index: number) => void;
 	onPressIn?: (index: number) => void;
 	style?: React.CSSProperties;
@@ -42,7 +41,7 @@ export function ImageLayoutGrid({ style, ...props }: ImageLayoutGridProps) {
 
 interface ImageLayoutGridInnerProps {
 	images: AppBskyEmbedImages.ViewImage[];
-	onPress?: (index: number, containerRefs: HandleRef[], fetchedDims: (Dimensions | null)[]) => void;
+	onPress?: (index: number, containerRefs: RefObject<HTMLElement>[], fetchedDims: (Dimensions | null)[]) => void;
 	onLongPress?: (index: number) => void;
 	onPressIn?: (index: number) => void;
 	viewContext?: PostEmbedViewContext;
@@ -53,10 +52,10 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 	const gap = props.gap;
 	const count = props.images.length;
 
-	const containerRef1 = useHandleRef();
-	const containerRef2 = useHandleRef();
-	const containerRef3 = useHandleRef();
-	const containerRef4 = useHandleRef();
+	const containerRef1 = useRef<HTMLDivElement>(null);
+	const containerRef2 = useRef<HTMLDivElement>(null);
+	const containerRef3 = useRef<HTMLDivElement>(null);
+	const containerRef4 = useRef<HTMLDivElement>(null);
 	const thumbDimsRef = React.useRef<(Dimensions | null)[]>([]);
 
 	switch (count) {

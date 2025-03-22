@@ -2,7 +2,6 @@ import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type React from "react";
 import { type PropsWithChildren, useMemo, useRef } from "react";
-import Animated, { FadeIn } from "react-native-reanimated";
 import RootSiblings from "react-native-root-siblings";
 import { FullWindowOverlay } from "#/components/FullWindowOverlay";
 import { Text } from "#/components/Typography";
@@ -199,9 +198,9 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 		<FullWindowOverlay>
 			{/* This TouchableWithoutFeedback renders the background so if the user clicks outside, the dropdown closes */}
 			<button type="button" onClick={onOuterPress}>
-				<Animated.View
-					entering={FadeIn}
-					// @ts-expect-error
+				<div
+					// Animated.View
+					// entering={FadeIn}
 					style={{
 						...styles.bg,
 
@@ -210,8 +209,8 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 					}}
 				/>
 			</button>
-			<Animated.View
-				// @ts-expect-error
+			<div
+				// Animated.View
 				style={{
 					...styles.menu,
 					...{ left: x, top: y, width },
@@ -276,7 +275,7 @@ const DropdownItems = ({ onOuterPress, x, y, pageY, width, items, onPressItem, o
 					}
 					return null;
 				})}
-			</Animated.View>
+			</div>
 		</FullWindowOverlay>
 	);
 };

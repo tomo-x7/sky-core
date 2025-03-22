@@ -1,5 +1,4 @@
 import React from "react";
-import { Easing, useAnimatedProps, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 
 import { type Props, useCommonSVGProps } from "#/components/icons/common";
 
@@ -21,36 +20,36 @@ export const AnimatedCheck = React.forwardRef<AnimatedCheckRef, AnimatedCheckPro
 	ref,
 ) {
 	const { fill, size, style, ...rest } = useCommonSVGProps(props);
-	const circleAnim = useSharedValue(0);
-	const checkAnim = useSharedValue(0);
+	// const circleAnim = useSharedValue(0);
+	// const checkAnim = useSharedValue(0);
 
-	const circleAnimatedProps = useAnimatedProps(() => ({
-		strokeDashoffset: 166 - circleAnim.get() * 166,
-	}));
-	const checkAnimatedProps = useAnimatedProps(() => ({
-		strokeDashoffset: 48 - 48 * checkAnim.get(),
-	}));
+	// const circleAnimatedProps = useAnimatedProps(() => ({
+	// 	strokeDashoffset: 166 - circleAnim.get() * 166,
+	// }));
+	// const checkAnimatedProps = useAnimatedProps(() => ({
+	// 	strokeDashoffset: 48 - 48 * checkAnim.get(),
+	// }));
 
-	const play = React.useCallback(
-		(cb?: () => void) => {
-			circleAnim.set(0);
-			checkAnim.set(0);
+	// const play = React.useCallback(
+	// 	(cb?: () => void) => {
+	// 		circleAnim.set(0);
+	// 		checkAnim.set(0);
 
-			circleAnim.set(() => withTiming(1, { duration: 500, easing: Easing.linear }));
-			checkAnim.set(() => withDelay(500, withTiming(1, { duration: 300, easing: Easing.linear }, cb)));
-		},
-		[circleAnim, checkAnim],
-	);
+	// 		circleAnim.set(() => withTiming(1, { duration: 500, easing: Easing.linear }));
+	// 		checkAnim.set(() => withDelay(500, withTiming(1, { duration: 300, easing: Easing.linear }, cb)));
+	// 	},
+	// 	[circleAnim, checkAnim],
+	// );
 
-	React.useImperativeHandle(ref, () => ({
-		play,
-	}));
+	// React.useImperativeHandle(ref, () => ({
+	// 	play,
+	// }));
 
-	React.useEffect(() => {
-		if (playOnMount) {
-			play();
-		}
-	}, [play, playOnMount]);
+	// React.useEffect(() => {
+	// 	if (playOnMount) {
+	// 		play();
+	// 	}
+	// }, [play, playOnMount]);
 
 	return (
 		<svg fill="none" {...rest} viewBox="0 0 52 52" width={size} height={size} style={style}>

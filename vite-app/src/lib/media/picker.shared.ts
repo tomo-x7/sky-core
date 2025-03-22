@@ -1,4 +1,3 @@
-// TODO: replace global i18n instance with one returned from useLingui -sfn
 import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 
 import * as Toast from "#/view/com/util/Toast";

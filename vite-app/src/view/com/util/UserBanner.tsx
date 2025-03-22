@@ -13,7 +13,7 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useCameraPermission, usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { colors } from "#/lib/styles";
 import { EventStopper } from "#/view/com/util/EventStopper";
-import { openCamera, openCropper, openPicker } from "../../../lib/media/picker";
+import { openCropper, openPicker } from "../../../lib/media/picker";
 
 export function UserBanner({
 	type,
@@ -33,17 +33,17 @@ export function UserBanner({
 	const { requestPhotoAccessIfNeeded } = usePhotoLibraryPermission();
 	const sheetWrapper = useSheetWrapper();
 
-	const onOpenCamera = React.useCallback(async () => {
-		if (!(await requestCameraAccessIfNeeded())) {
-			return;
-		}
-		onSelectNewBanner?.(
-			await openCamera({
-				width: 3000,
-				height: 1000,
-			}),
-		);
-	}, [onSelectNewBanner, requestCameraAccessIfNeeded]);
+	// const onOpenCamera = React.useCallback(async () => {
+	// 	if (!(await requestCameraAccessIfNeeded())) {
+	// 		return;
+	// 	}
+	// 	onSelectNewBanner?.(
+	// 		await openCamera({
+	// 			width: 3000,
+	// 			height: 1000,
+	// 		}),
+	// 	);
+	// }, [onSelectNewBanner, requestCameraAccessIfNeeded]);
 
 	const onOpenLibrary = React.useCallback(async () => {
 		if (!(await requestPhotoAccessIfNeeded())) {

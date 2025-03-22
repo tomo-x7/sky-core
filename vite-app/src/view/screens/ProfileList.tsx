@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { useCallback, useMemo } from "react";
-import { useAnimatedRef } from "react-native-reanimated";
+import React, { useCallback, useMemo, useRef } from "react";
 
 import { atoms as a } from "#/alf";
 import { ButtonIcon, ButtonText, Button as NewButton } from "#/components/Button";
@@ -137,7 +136,7 @@ function ProfileListScreenLoaded({
 	const isScreenFocused = useIsFocused();
 	const isHidden = (list as AppBskyGraphDefs.ListView).labels?.findIndex((l) => l.val === "!hide") !== -1;
 	const isOwner = currentAccount?.did === list.creator.did;
-	const scrollElRef = useAnimatedRef();
+	const scrollElRef = useRef();
 
 	const moderation = React.useMemo(() => {
 		return moderateUserList(list, moderationOpts);

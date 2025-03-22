@@ -1,9 +1,5 @@
-// @ts-expect-error no type definition -prf
-import ProgressCircle from "react-native-progress/Circle";
-// @ts-expect-error no type definition -prf
-import ProgressPie from "react-native-progress/Pie";
-
 import { atoms as a } from "#/alf";
+import { ProgressCircle, ProgressPie } from "#/components/Progress";
 import { Text } from "#/components/Typography";
 import { MAX_GRAPHEME_LENGTH } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";

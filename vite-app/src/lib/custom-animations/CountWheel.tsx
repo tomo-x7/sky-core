@@ -1,5 +1,4 @@
 import React from "react";
-import { useReducedMotion } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -45,7 +44,8 @@ export function CountWheel({
 	hasBeenToggled: boolean;
 }) {
 	const t = useTheme();
-	const shouldAnimate = !useReducedMotion() && hasBeenToggled;
+	// const shouldAnimate = !useReducedMotion() && hasBeenToggled;
+	const shouldAnimate = hasBeenToggled;
 	const shouldRoll = decideShouldRoll(isLiked, likeCount);
 
 	const countView = React.useRef<HTMLDivElement>(null);

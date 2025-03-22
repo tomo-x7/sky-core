@@ -62,13 +62,7 @@ export function ErrorState({ error }: { error: string }) {
 				</Text>
 			</div>
 			<div style={{ flexDirection: "row" }}>
-				<Button
-					size="small"
-					color="secondary"
-					variant="solid"
-					label={"Go Back"}
-					onPress={onPressBack}
-				>
+				<Button size="small" color="secondary" variant="solid" label={"Go Back"} onPress={onPressBack}>
 					<ButtonText>Go Back</ButtonText>
 				</Button>
 			</div>

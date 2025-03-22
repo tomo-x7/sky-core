@@ -1,8 +1,8 @@
 import EventEmitter from "eventemitter3";
 import React, { useCallback, useEffect } from "react";
-import { useSharedValue, withSpring } from "react-native-reanimated";
 
 import { ScrollProvider } from "#/lib/ScrollContext";
+import { useSharedValue } from "#/state/SharedValue";
 import { useMinimalShellMode } from "#/state/shell";
 import { useShellLayout } from "#/state/shell/shell-layout";
 
@@ -22,12 +22,7 @@ export function MainScrollProvider({ children }: { children: React.ReactNode }) 
 
 	const setMode = React.useCallback(
 		(v: boolean) => {
-			"worklet";
-			headerMode.set(() =>
-				withSpring(v ? 1 : 0, {
-					overshootClamping: true,
-				}),
-			);
+			headerMode.set(v ? 1 : 0);
 		},
 		[headerMode],
 	);

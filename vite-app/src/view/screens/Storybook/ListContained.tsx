@@ -21,7 +21,7 @@ export function ListContained() {
 		<>
 			<div style={{ width: "100%", height: 300 }}>
 				<ScrollProvider
-					onScroll={(e) => {
+					onScroll={(e: any) => {
 						"worklet";
 						console.log(
 							JSON.stringify({
@@ -34,7 +34,7 @@ export function ListContained() {
 				>
 					<List
 						data={data}
-						renderItem={(item:any) => {
+						renderItem={(item: any) => {
 							return (
 								<div
 									style={{
@@ -47,7 +47,7 @@ export function ListContained() {
 								</div>
 							);
 						}}
-						keyExtractor={(item:any) => item.id.toString()}
+						keyExtractor={(item: any) => item.id.toString()}
 						disableFullWindowScroll={true}
 						style={{ flex: 1 }}
 						onStartReached={() => {

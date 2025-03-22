@@ -1,19 +1,9 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
 import React from "react";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, {
-	cancelAnimation,
-	runOnJS,
-	useAnimatedStyle,
-	useSharedValue,
-	withTiming,
-} from "react-native-reanimated";
 
-import { atoms as a } from "#/alf";
+import { atoms as a, flatten } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
 import { MessageMenu } from "#/components/dms/MessageMenu";
-import { Keyboard } from "#/lib/Keyboard";
-import { HITSLOP_10 } from "#/lib/constants";
 
 export function ActionsWrapper({
 	message,
@@ -25,61 +15,74 @@ export function ActionsWrapper({
 	children: React.ReactNode;
 }) {
 	const menuControl = useMenuControl();
+	const viewRef = React.useRef(null);
 
-	const scale = useSharedValue(1);
+	const [showActions, setShowActions] = React.useState(false);
 
-	const animatedStyle = useAnimatedStyle(() => ({
-		transform: [{ scale: scale.get() }],
-	}));
+	const onMouseEnter = React.useCallback(() => {
+		setShowActions(true);
+	}, []);
 
-	const open = React.useCallback(() => {
-		Keyboard.dismiss();
-		menuControl.open();
-	}, [menuControl]);
+	const onMouseLeave = React.useCallback(() => {
+		setShowActions(false);
+	}, []);
 
-	const shrink = React.useCallback(() => {
-		"worklet";
-		cancelAnimation(scale);
-		scale.set(() => withTiming(1, { duration: 200 }));
-	}, [scale]);
-
-	const doubleTapGesture = Gesture.Tap().numberOfTaps(2).hitSlop(HITSLOP_10).onEnd(open).runOnJS(true);
-
-	const pressAndHoldGesture = Gesture.LongPress()
-		.onStart(() => {
-			"worklet";
-			scale.set(() =>
-				withTiming(1.05, { duration: 200 }, (finished) => {
-					if (!finished) return;
-					runOnJS(open)();
-					shrink();
-				}),
-			);
-		})
-		.onTouchesUp(shrink)
-		.onTouchesMove(shrink)
-		.cancelsTouchesInView(false);
-
-	const composedGestures = Gesture.Exclusive(doubleTapGesture, pressAndHoldGesture);
+	// We need to handle the `onFocus` separately because we want to know if there is a related target (the element
+	// that is losing focus). If there isn't that means the focus is coming from a dropdown that is now closed.
+	const onFocus = React.useCallback<React.FocusEventHandler>((e) => {
+		if (e.nativeEvent.relatedTarget == null) return;
+		setShowActions(true);
+	}, []);
 
 	return (
-		<GestureDetector gesture={composedGestures}>
-			<Animated.View
-				style={{
-					...{
-						maxWidth: "80%",
-					},
+		<div
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+			onFocus={onFocus}
+			onBlur={onMouseLeave}
+			style={flatten([a.flex_1, a.flex_row])}
+			ref={viewRef}
+		>
+			{isFromSelf && (
+				<div
+					style={{
+						...a.mr_xl,
+						...a.justify_center,
 
-					...(isFromSelf ? a.self_end : a.self_start),
-					...animatedStyle,
+						...{
+							marginLeft: "auto",
+						},
+					}}
+				>
+					<MessageMenu
+						message={message}
+						control={menuControl}
+						triggerOpacity={showActions || menuControl.isOpen ? 1 : 0}
+					/>
+				</div>
+			)}
+			<div
+				style={{
+					maxWidth: "80%",
 				}}
-				accessible={true}
-				accessibilityActions={[{ name: "activate", label: "Open message options" }]}
-				onAccessibilityAction={open}
 			>
 				{children}
-				<MessageMenu message={message} control={menuControl} />
-			</Animated.View>
-		</GestureDetector>
+			</div>
+			{!isFromSelf && (
+				<div
+					style={{
+						...a.flex_row,
+						...a.align_center,
+						...a.ml_xl,
+					}}
+				>
+					<MessageMenu
+						message={message}
+						control={menuControl}
+						triggerOpacity={showActions || menuControl.isOpen ? 1 : 0}
+					/>
+				</div>
+			)}
+		</div>
 	);
 }

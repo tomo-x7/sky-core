@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useAnimatedRef } from "react-native-reanimated";
 
 import type { JSX } from "react";
 import { atoms as a } from "#/alf";
@@ -140,7 +139,7 @@ function PagerItem({
 	isFocused: boolean;
 	renderTab: ((props: PagerWithHeaderChildParams) => JSX.Element) | null;
 }) {
-	const scrollElRef = useAnimatedRef();
+	const scrollElRef = React.useRef();
 	if (renderTab == null) {
 		return null;
 	}

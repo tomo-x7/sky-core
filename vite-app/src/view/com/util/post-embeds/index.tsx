@@ -11,12 +11,11 @@ import {
 	moderateUserList,
 } from "@atproto/api";
 import React from "react";
-import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
 import { Embed as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
-import { type HandleRef, measureHandle } from "#/lib/hooks/useHandleRef";
+import { type MeasuredDimensions, measureHandle } from "#/lib/hooks/useHandleRef";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { prefetch } from "#/lib/prefetchImage";
 import { useLightboxControls } from "#/state/lightbox";
@@ -137,13 +136,19 @@ export function PostEmbeds({
 					index,
 				});
 			};
-			const onPress = (index: number, refs: HandleRef[], fetchedDims: (Dimensions | null)[]) => {
+			const onPress = (
+				index: number,
+				refs: React.RefObject<HTMLElement>[],
+				fetchedDims: (Dimensions | null)[],
+			) => {
 				const handles = refs.map((r) => r.current);
-				runOnUI(() => {
-					"worklet";
-					const rects = handles.map(measureHandle);
-					runOnJS(_openLightbox)(index, rects, fetchedDims);
-				})();
+				// runOnUI(() => {
+				// 	"worklet";
+				// 	const rects = handles.map(measureHandle);
+				// 	runOnJS(_openLightbox)(index, rects, fetchedDims);
+				// })();
+				const rects = handles.map(measureHandle);
+				_openLightbox(index, rects, fetchedDims);
 			};
 			const onPressIn = (_: number) => {
 				setTimeout(() => {

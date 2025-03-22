@@ -1,5 +1,4 @@
 import React from "react";
-import Animated, { LinearTransition } from "react-native-reanimated";
 
 import { type TextStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -360,25 +359,16 @@ export function Switch() {
 				...(hovered ? baseHoverStyles : {}),
 			}}
 		>
-			<Animated.View
-				layout={LinearTransition.duration(100)}
+			<div
+				// Animated.View
+				// layout={LinearTransition.duration(100)}
 				style={{
 					...a.rounded_full,
-					// @ts-expect-error
 					height: 16,
-					// @ts-expect-error
 					width: 16,
-
 					...(selected
-						? {
-								backgroundColor: t.palette.primary_500,
-								alignSelf: "flex-end",
-							}
-						: {
-								backgroundColor: t.palette.contrast_400,
-								alignSelf: "flex-start",
-							}),
-
+						? { backgroundColor: t.palette.primary_500, alignSelf: "flex-end" }
+						: { backgroundColor: t.palette.contrast_400, alignSelf: "flex-start" }),
 					...indicatorStyles,
 				}}
 			/>

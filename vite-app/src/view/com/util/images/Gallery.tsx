@@ -1,10 +1,10 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
 import type React from "react";
 
+import type { RefObject } from "react";
 import { atoms as a, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
-import type { HandleRef } from "#/lib/hooks/useHandleRef";
 import type { Dimensions } from "#/lib/media/types";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 import { PostEmbedViewContext } from "#/view/com/util/post-embeds/types";
@@ -14,13 +14,13 @@ type EventFunction = (index: number) => void;
 interface Props {
 	images: AppBskyEmbedImages.ViewImage[];
 	index: number;
-	onPress?: (index: number, containerRefs: HandleRef[], fetchedDims: (Dimensions | null)[]) => void;
+	onPress?: (index: number, containerRefs: RefObject<HTMLDivElement>[], fetchedDims: (Dimensions | null)[]) => void;
 	onLongPress?: EventFunction;
 	onPressIn?: EventFunction;
 	imageStyle?: React.CSSProperties;
 	viewContext?: PostEmbedViewContext;
 	insetBorderStyle?: React.CSSProperties;
-	containerRefs: HandleRef[];
+	containerRefs: RefObject<HTMLDivElement>[];
 	thumbDimsRef: React.MutableRefObject<(Dimensions | null)[]>;
 }
 

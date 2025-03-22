@@ -41,13 +41,7 @@ export const PasswordUpdatedForm = ({
 					...a.justify_center,
 				}}
 			>
-				<Button
-					onPress={onPressNext}
-					label={"Close alert"}
-					variant="solid"
-					color="primary"
-					size="large"
-				>
+				<Button onPress={onPressNext} label={"Close alert"} variant="solid" color="primary" size="large">
 					<ButtonText>Okay</ButtonText>
 				</Button>
 			</div>

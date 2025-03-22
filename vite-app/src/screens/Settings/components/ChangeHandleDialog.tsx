@@ -1,7 +1,6 @@
 import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
-import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
@@ -90,20 +89,30 @@ function ChangeHandleDialogInner() {
 						onPressTryAgain={refetch}
 					/>
 				) : serviceInfo ? (
-					<LayoutAnimationConfig skipEntering skipExiting>
+					<div
+					// LayoutAnimationConfig
+					// skipEntering
+					// skipExiting
+					>
 						{page === "provided-handle" ? (
-							<Animated.View key={page}>
+							<div
+								// Animated.View
+								key={page}
+							>
 								<ProvidedHandlePage
 									serviceInfo={serviceInfo}
 									goToOwnHandle={() => setPage("own-handle")}
 								/>
-							</Animated.View>
+							</div>
 						) : (
-							<Animated.View key={page}>
+							<div
+								// Animated.View
+								key={page}
+							>
 								<OwnHandlePage goToServiceHandle={() => setPage("provided-handle")} />
-							</Animated.View>
+							</div>
 						)}
-					</LayoutAnimationConfig>
+					</div>
 				) : (
 					<div
 						style={{
@@ -157,7 +166,10 @@ function ProvidedHandlePage({
 	const isInvalid = !validation.handleChars || !validation.hyphenStartOrEnd || !validation.totalLength;
 
 	return (
-		<LayoutAnimationConfig skipEntering>
+		<div
+		// LayoutAnimationConfig
+		// skipEntering
+		>
 			<div
 				style={{
 					...a.flex_1,
@@ -165,16 +177,25 @@ function ProvidedHandlePage({
 				}}
 			>
 				{isSuccess && (
-					<Animated.View entering={FadeIn} exiting={FadeOut}>
+					<div
+					// Animated.View
+					// entering={FadeIn}
+					// exiting={FadeOut}
+					>
 						<SuccessMessage text={"Handle changed!"} />
-					</Animated.View>
+					</div>
 				)}
 				{error && (
-					<Animated.View entering={FadeIn} exiting={FadeOut}>
+					<div
+					//Animated.View
+					// entering={FadeIn}
+					// exiting={FadeOut}
+					>
 						<ChangeHandleError error={error} />
-					</Animated.View>
+					</div>
 				)}
-				<Animated.View
+				<div
+					// Animated.View
 					style={{
 						...a.flex_1,
 						...a.gap_md,
@@ -240,9 +261,9 @@ function ProvidedHandlePage({
 						<ButtonText>I have my own domain</ButtonText>
 						<ButtonIcon icon={ArrowRightIcon} position="right" />
 					</Button>
-				</Animated.View>
+				</div>
 			</div>
-		</LayoutAnimationConfig>
+		</div>
 	);
 }
 
@@ -297,17 +318,29 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 			}}
 		>
 			{isSuccess && (
-				<Animated.View entering={FadeIn} exiting={FadeOut}>
+				<div
+				// Animated.View
+				// entering={FadeIn}
+				// exiting={FadeOut}
+				>
 					<SuccessMessage text={"Handle changed!"} />
-				</Animated.View>
+				</div>
 			)}
 			{error && (
-				<Animated.View entering={FadeIn} exiting={FadeOut}>
+				<div
+				// Animated.View
+				// entering={FadeIn}
+				// exiting={FadeOut}
+				>
 					<ChangeHandleError error={error} />
-				</Animated.View>
+				</div>
 			)}
 			{verifyError && (
-				<Animated.View entering={FadeIn} exiting={FadeOut}>
+				<div
+				// Animated.View
+				// entering={FadeIn}
+				// exiting={FadeOut}
+				>
 					<Admonition type="error">
 						{verifyError instanceof DidMismatchError ? (
 							<>Wrong DID returned from server. Received: {verifyError.did}</>
@@ -315,9 +348,10 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							<>Failed to verify handle. Please try again.</>
 						)}
 					</Admonition>
-				</Animated.View>
+				</div>
 			)}
-			<Animated.View
+			<div
+				// Animated.View
 				style={{
 					...a.flex_1,
 					...a.gap_md,
@@ -479,13 +513,19 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 						</CopyButton>
 					</>
 				)}
-			</Animated.View>
+			</div>
 			{isVerified && (
-				<Animated.View entering={FadeIn} exiting={FadeOut}>
+				<div
+				// Animated.View
+				// entering={FadeIn}
+				// exiting={FadeOut}
+				>
 					<SuccessMessage text={"Domain verified!"} />
-				</Animated.View>
+				</div>
 			)}
-			<Animated.View>
+			<div
+			// Animated.View
+			>
 				{currentAccount?.handle?.endsWith(".bsky.social") && (
 					<Admonition type="info" style={a.mb_md}>
 						<>
@@ -536,7 +576,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					<ButtonIcon icon={ArrowLeftIcon} position="left" />
 					<ButtonText>Nevermind, create a handle for me</ButtonText>
 				</Button>
-			</Animated.View>
+			</div>
 		</div>
 	);
 }

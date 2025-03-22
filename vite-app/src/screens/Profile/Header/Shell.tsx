@@ -1,13 +1,12 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
-import React, { memo } from "react";
-import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
+import React, { memo, useRef } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeftIcon } from "#/components/icons/Arrow";
 import { LabelsOnMe } from "#/components/moderation/LabelsOnMe";
 import { ProfileHeaderAlerts } from "#/components/moderation/ProfileHeaderAlerts";
-import { measureHandle, useHandleRef } from "#/lib/hooks/useHandleRef";
+import { type MeasuredDimensions, measureHandle } from "#/lib/hooks/useHandleRef";
 import type { NavigationProp } from "#/lib/routes/types";
 import type { Shadow } from "#/state/cache/types";
 import { useLightboxControls } from "#/state/lightbox";
@@ -38,7 +37,7 @@ let ProfileHeaderShell = ({
 	const { openLightbox } = useLightboxControls();
 	const navigation = useNavigation<NavigationProp>();
 
-	const aviRef = useHandleRef();
+	const aviRef = useRef<HTMLDivElement>(null);
 
 	const onPressBack = React.useCallback(() => {
 		if (navigation.canGoBack()) {
@@ -76,13 +75,16 @@ let ProfileHeaderShell = ({
 		const avatar = profile.avatar;
 		if (avatar && !(modui.blur && modui.noOverride)) {
 			const aviHandle = aviRef.current;
-			runOnUI(() => {
-				"worklet";
-				const rect = measureHandle(aviHandle);
-				runOnJS(_openLightbox)(avatar, rect);
-			})();
+			// runOnUI(() => {
+			// 	"worklet";
+			// 	const rect = measureHandle(aviHandle);
+			// 	// runOnJS(_openLightbox)(avatar, rect);
+			// 	_openLightbox(avatar,rect)
+			// })();
+			const rect = measureHandle(aviHandle);
+			_openLightbox(avatar, rect);
 		}
-	}, [profile, moderation, _openLightbox, aviRef]);
+	}, [profile, moderation, _openLightbox]);
 
 	const isMe = React.useMemo(() => currentAccount?.did === profile.did, [currentAccount, profile]);
 

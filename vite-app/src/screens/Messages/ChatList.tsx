@@ -1,8 +1,7 @@
 import type { ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useAnimatedRef } from "react-native-reanimated";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -62,7 +61,7 @@ export function MessagesScreen({ navigation, route }: Props) {
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const newChatControl = useDialogControl();
-	const scrollElRef: ListRef = useAnimatedRef();
+	const scrollElRef: ListRef = useRef(null);
 	const pushToConversation = route.params?.pushToConversation;
 
 	// Whenever we have `pushToConversation` set, it means we pressed a notification for a chat without being on
@@ -166,16 +165,15 @@ export function MessagesScreen({ navigation, route }: Props) {
 	);
 
 	const onSoftReset = useCallback(async () => {
-		scrollElRef.current?.scrollToOffset({
-			animated: false,
-			offset: 0,
+		(scrollElRef.current as HTMLElement)?.scrollTo({
+			top: 0,
 		});
 		try {
 			await refetch();
 		} catch (err) {
 			console.error("Failed to refresh conversations", { message: err });
 		}
-	}, [scrollElRef, refetch]);
+	}, [refetch]);
 
 	const isScreenFocused = useIsFocused();
 	useEffect(() => {

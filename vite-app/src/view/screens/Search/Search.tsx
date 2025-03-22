@@ -2,7 +2,6 @@ import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@a
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
-import { ScrollView as RNGHScrollView } from "react-native-gesture-handler";
 
 import { atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -185,14 +184,14 @@ let SearchScreenPostResults = ({
 					{posts.length ? (
 						<List
 							data={items}
-							renderItem={({ item }:any) => {
+							renderItem={({ item }: any) => {
 								if (item.type === "post") {
 									return <Post post={item.post} />;
 								} else {
 									return null;
 								}
 							}}
-							keyExtractor={(item:any) => item.key}
+							keyExtractor={(item: any) => item.key}
 							refreshing={isPTR}
 							onRefresh={onPullToRefresh}
 							onEndReached={onEndReached}
@@ -228,8 +227,8 @@ let SearchScreenUserResults = ({
 			{results.length ? (
 				<List
 					data={results}
-					renderItem={({ item }:{item:any}) => <ProfileCardWithFollowBtn profile={item} noBg />}
-					keyExtractor={(item:any) => item.did}
+					renderItem={({ item }: { item: any }) => <ProfileCardWithFollowBtn profile={item} noBg />}
+					keyExtractor={(item: any) => item.did}
 					desktopFixedHeight
 					contentContainerStyle={{ paddingBottom: 100 }}
 				/>
@@ -262,7 +261,7 @@ let SearchScreenFeedsResults = ({
 			{results.length ? (
 				<List
 					data={results}
-					renderItem={({ item }:{item:any}) => (
+					renderItem={({ item }: { item: any }) => (
 						<div
 							style={{
 								...a.border_b,
@@ -274,7 +273,7 @@ let SearchScreenFeedsResults = ({
 							<FeedCard.Default view={item} />
 						</div>
 					)}
-					keyExtractor={(item:any) => item.uri}
+					keyExtractor={(item: any) => item.uri}
 					desktopFixedHeight
 					contentContainerStyle={{ paddingBottom: 100 }}
 				/>
@@ -870,7 +869,10 @@ let AutocompleteResults = ({
 			{(isAutocompleteFetching && !autocompleteData?.length) || !moderationOpts ? (
 				<Loader />
 			) : (
-				<Layout.Content keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
+				<Layout.Content
+				// keyboardShouldPersistTaps="handled"
+				// keyboardDismissMode="on-drag"
+				>
 					<SearchLinkCard
 						label={`Search for "${searchText}"`}
 						onPress={undefined}
@@ -915,7 +917,10 @@ function SearchHistory({
 	const t = useTheme();
 
 	return (
-		<Layout.Content keyboardDismissMode="interactive" keyboardShouldPersistTaps="handled">
+		<Layout.Content
+		// keyboardDismissMode="interactive"
+		// keyboardShouldPersistTaps="handled"
+		>
 			<div
 				style={{
 					...a.w_full,
@@ -940,15 +945,16 @@ function SearchHistory({
 							...(!gtMobile && styles.selectedProfilesContainerMobile),
 						}}
 					>
-						<RNGHScrollView
-							keyboardShouldPersistTaps="handled"
-							horizontal={true}
+						<div
+							// ScrollView from react-native-gesture-handler
+							// keyboardShouldPersistTaps="handled"
+							// horizontal={true}
 							style={{
 								...a.flex_row,
 								...a.flex_nowrap,
 								...{ marginLeft: tokens.space._2xl * -1, marginRight: tokens.space._2xl * -1 },
 							}}
-							contentContainerStyle={[a.px_2xl, a.border_0]}
+							// contentContainerStyle={[a.px_2xl, a.border_0]}
 						>
 							{selectedProfiles.slice(0, 5).map((profile, index) => (
 								<div
@@ -996,7 +1002,7 @@ function SearchHistory({
 									</button>
 								</div>
 							))}
-						</RNGHScrollView>
+						</div>
 					</div>
 				)}
 				{searchHistory.length > 0 && (

@@ -1,7 +1,5 @@
 import { type $Typed, type AppBskyEmbedRecord, AppBskyRichtextFacet, RichText } from "@atproto/api";
 import React, { useCallback, useRef } from "react";
-import Animated, { runOnJS, useAnimatedRef, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
-import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -15,6 +13,7 @@ import { convertBskyAppUrlIfNeeded, isBskyPostUrl } from "#/lib/strings/url-help
 import { ChatDisabled } from "#/screens/Messages/components/ChatDisabled";
 import { MessageInput } from "#/screens/Messages/components/MessageInput";
 import { MessageListError } from "#/screens/Messages/components/MessageListError";
+import { useSharedValue } from "#/state/SharedValue";
 import { isConvoActive, useConvoActive } from "#/state/messages/convo";
 import { type ConvoItem, ConvoStatus } from "#/state/messages/convo/types";
 import { useGetPost } from "#/state/queries/post";
@@ -78,7 +77,7 @@ export function MessagesList({
 	const getPost = useGetPost();
 	const { embedUri, setEmbed } = useMessageEmbed();
 
-	const flatListRef = useAnimatedRef<ListMethods>();
+	const flatListRef = useRef<ListMethods>();
 
 	const [newMessagesPill, setNewMessagesPill] = React.useState({
 		show: false,
@@ -184,7 +183,6 @@ export function MessagesList({
 			convoState.isFetchingHistory,
 			convoState.items.length,
 			// these are stable
-			flatListRef,
 			isAtTop,
 			isAtBottom,
 			layoutHeight,
@@ -198,7 +196,8 @@ export function MessagesList({
 	}, [convoState, hasScrolled, layoutHeight]);
 
 	const onScroll = React.useCallback(
-		(e: ReanimatedScrollEvent) => {
+		// TODO
+		(e: any) => {
 			"worklet";
 			layoutHeight.set(e.layoutMeasurement.height);
 			const bottomOffset = e.contentOffset.y + e.layoutMeasurement.height;
@@ -212,10 +211,11 @@ export function MessagesList({
 				newMessagesPill.show &&
 				(e.contentOffset.y > newMessagesPill.startContentOffset + 200 || isAtBottom.get())
 			) {
-				runOnJS(setNewMessagesPill)({
-					show: false,
-					startContentOffset: 0,
-				});
+				// runOnJS(setNewMessagesPill)({
+				// 	show: false,
+				// 	startContentOffset: 0,
+				// });
+				setNewMessagesPill({ show: false, startContentOffset: 0 });
 			}
 		},
 		[layoutHeight, newMessagesPill, isAtBottom, isAtTop],
@@ -263,13 +263,13 @@ export function MessagesList({
 	// 	[footerHeight],
 	// );
 
-	const animatedListStyle = useAnimatedStyle(() => ({
-		marginBottom: Math.max(keyboardHeight.get(), footerHeight.get()),
-	}));
+	// const animatedListStyle = useAnimatedStyle(() => ({
+	// 	marginBottom: Math.max(keyboardHeight.get(), footerHeight.get()),
+	// }));
 
-	const animatedStickyViewStyle = useAnimatedStyle(() => ({
-		transform: [{ translateY: -Math.max(keyboardHeight.get(), footerHeight.get()) }],
-	}));
+	// const animatedStickyViewStyle = useAnimatedStyle(() => ({
+	// 	transform: [{ translateY: -Math.max(keyboardHeight.get(), footerHeight.get()) }],
+	// }));
 
 	// -- Message sending
 	const onSendMessage = useCallback(
@@ -361,7 +361,7 @@ export function MessagesList({
 			offset: prevContentHeight.current,
 			animated: true,
 		});
-	}, [flatListRef]);
+	}, []);
 
 	return (
 		<>
@@ -374,7 +374,7 @@ export function MessagesList({
 					keyExtractor={keyExtractor}
 					disableFullWindowScroll={true}
 					disableVirtualization={true}
-					style={animatedListStyle}
+					// style={animatedListStyle}
 					// The extra two items account for the header and the footer components
 					initialNumToRender={62}
 					maxToRenderPerBatch={32}
@@ -392,7 +392,10 @@ export function MessagesList({
 					ListHeaderComponent={<MaybeLoader isLoading={convoState.isFetchingHistory} />}
 				/>
 			</ScrollProvider>
-			<Animated.View style={animatedStickyViewStyle}>
+			<div
+			// Animated.View
+			// style={animatedStickyViewStyle}
+			>
 				{convoState.status === ConvoStatus.Disabled ? (
 					<ChatDisabled />
 				) : blocked ? (
@@ -425,7 +428,7 @@ export function MessagesList({
 						</MessageInput>
 					))
 				)}
-			</Animated.View>
+			</div>
 
 			<EmojiPicker
 				pinToTop

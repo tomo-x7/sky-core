@@ -1,7 +1,6 @@
 import type { ComAtprotoServerCreateAppPassword } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import Animated, { FadeIn, FadeOut, LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
@@ -76,9 +75,17 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 	return (
 		<Dialog.ScrollableInner label={"Add app password"}>
 			<div>
-				<LayoutAnimationConfig skipEntering skipExiting>
+				<div
+				// LayoutAnimationConfig
+				// skipEntering
+				// skipExiting
+				>
 					{!data ? (
-						<Animated.View style={a.gap_lg} key={0}>
+						<div
+							// Animated.View
+							style={a.gap_lg}
+							key={0}
+						>
 							<Text
 								style={{
 									...a.text_2xl,
@@ -112,11 +119,18 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								</TextInput.Root>
 							</div>
 							{error instanceof DisplayableError && (
-								<Animated.View entering={FadeIn} exiting={FadeOut}>
+								<div
+								// Animated.View
+								// entering={FadeIn}
+								// exiting={FadeOut}
+								>
 									<Admonition type="error">{error.message}</Admonition>
-								</Animated.View>
+								</div>
 							)}
-							<Animated.View style={a.gap_lg}>
+							<div
+								// Animated.View
+								style={a.gap_lg}
+							>
 								<Toggle.Item
 									name="privileged"
 									type="checkbox"
@@ -150,16 +164,25 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								</Button>
 								{!!apiError ||
 									(error && !(error instanceof DisplayableError) && (
-										<Animated.View entering={FadeIn} exiting={FadeOut}>
+										<div
+										// Animated.View
+										// entering={FadeIn}
+										// exiting={FadeOut}
+										>
 											<Admonition type="error">
 												Failed to create app password. Please try again.
 											</Admonition>
-										</Animated.View>
+										</div>
 									))}
-							</Animated.View>
-						</Animated.View>
+							</div>
+						</div>
 					) : (
-						<Animated.View style={a.gap_lg} entering={FadeIn.delay(200)} key={1}>
+						<div
+							// Animated.View
+							style={a.gap_lg}
+							// entering={FadeIn.delay(200)}
+							key={1}
+						>
 							<Text
 								style={{
 									...a.text_2xl,
@@ -206,9 +229,9 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 							>
 								<ButtonText>Done</ButtonText>
 							</Button>
-						</Animated.View>
+						</div>
 					)}
-				</LayoutAnimationConfig>
+				</div>
 			</div>
 			<Dialog.Close />
 		</Dialog.ScrollableInner>

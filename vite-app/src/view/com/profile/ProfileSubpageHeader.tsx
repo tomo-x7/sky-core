@@ -1,12 +1,11 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { type MeasuredDimensions, runOnJS, runOnUI } from "react-native-reanimated";
+import React, { useRef } from "react";
 
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import { StarterPack } from "#/components/icons/StarterPack";
-import { measureHandle, useHandleRef } from "#/lib/hooks/useHandleRef";
+import { type MeasuredDimensions, measureHandle } from "#/lib/hooks/useHandleRef";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -48,7 +47,7 @@ export function ProfileSubpageHeader({
 	const { openLightbox } = useLightboxControls();
 	const pal = usePalette("default");
 	const canGoBack = navigation.canGoBack();
-	const aviRef = useHandleRef();
+	const aviRef = useRef<HTMLDivElement>(null);
 
 	const _openLightbox = React.useCallback(
 		(uri: string, thumbRect: MeasuredDimensions | null) => {
@@ -78,13 +77,15 @@ export function ProfileSubpageHeader({
 			avatar // TODO && !(view.moderation.avatar.blur && view.moderation.avatar.noOverride)
 		) {
 			const aviHandle = aviRef.current;
-			runOnUI(() => {
-				"worklet";
-				const rect = measureHandle(aviHandle);
-				runOnJS(_openLightbox)(avatar, rect);
-			})();
+			// runOnUI(() => {
+			// 	"worklet";
+			// 	const rect = measureHandle(aviHandle);
+			// 	runOnJS(_openLightbox)(avatar, rect);
+			// })();
+			const rect = measureHandle(aviHandle);
+			_openLightbox(avatar, rect);
 		}
-	}, [_openLightbox, avatar, aviRef]);
+	}, [_openLightbox, avatar]);
 
 	return (
 		<>

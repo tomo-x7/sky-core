@@ -19,7 +19,7 @@ import { makeProfileLink } from "#/lib/routes/links";
 import { colors } from "#/lib/styles";
 import { precacheProfile } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
-import { openCamera, openCropper, openPicker } from "../../../lib/media/picker";
+import { openCropper, openPicker } from "../../../lib/media/picker";
 
 export type UserAvatarType = "user" | "algo" | "list" | "labeler";
 
@@ -237,19 +237,19 @@ let EditableUserAvatar = ({
 		};
 	}, [type, size]);
 
-	const onOpenCamera = React.useCallback(async () => {
-		if (!(await requestCameraAccessIfNeeded())) {
-			return;
-		}
+	// const onOpenCamera = React.useCallback(async () => {
+	// 	if (!(await requestCameraAccessIfNeeded())) {
+	// 		return;
+	// 	}
 
-		onSelectNewAvatar(
-			await openCamera({
-				width: 1000,
-				height: 1000,
-				cropperCircleOverlay: true,
-			}),
-		);
-	}, [onSelectNewAvatar, requestCameraAccessIfNeeded]);
+	// 	onSelectNewAvatar(
+	// 		await openCamera({
+	// 			width: 1000,
+	// 			height: 1000,
+	// 			cropperCircleOverlay: true,
+	// 		}),
+	// 	);
+	// }, [onSelectNewAvatar, requestCameraAccessIfNeeded]);
 
 	const onOpenLibrary = React.useCallback(async () => {
 		if (!(await requestPhotoAccessIfNeeded())) {

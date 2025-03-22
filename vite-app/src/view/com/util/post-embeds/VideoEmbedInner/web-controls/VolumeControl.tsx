@@ -1,6 +1,5 @@
 import type React from "react";
 import { useCallback } from "react";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
 import { Mute_Stroke2_Corner0_Rounded as MuteIcon } from "#/components/icons/Mute";
@@ -52,10 +51,10 @@ export function VolumeControl({
 	return (
 		<div onPointerEnter={onHover} onPointerLeave={onEndHover} style={a.relative}>
 			{hovered && !isTouchDevice && (
-				<Animated.View
-					entering={FadeIn.duration(100)}
-					exiting={FadeOut.duration(100)}
-					// @ts-expect-error
+				<div
+					// Animated.View
+					// entering={FadeIn.duration(100)}
+					// exiting={FadeOut.duration(100)}
 					style={{
 						...a.absolute,
 						...a.w_full,
@@ -89,7 +88,7 @@ export function VolumeControl({
 							orient="vertical"
 						/>
 					</div>
-				</Animated.View>
+				</div>
 			)}
 			<ControlButton
 				active={muted || volume === 0}

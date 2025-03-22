@@ -3,26 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
-// @ts-expect-error no type definition
-import ProgressCircle from "react-native-progress/Circle";
-import Animated, {
-	Easing,
-	FadeIn,
-	FadeOut,
-	interpolateColor,
-	LayoutAnimationConfig,
-	runOnUI,
-	useAnimatedStyle,
-	useDerivedValue,
-	useSharedValue,
-	withRepeat,
-	withTiming,
-} from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
+import { ProgressCircle } from "#/components/Progress";
 import * as Prompt from "#/components/Prompt";
 import { Text as NewText } from "#/components/Typography";
 import { Text } from "#/components/Typography";
@@ -36,7 +22,6 @@ import * as apilib from "#/lib/api/index";
 import { EmbeddingDisabledError } from "#/lib/api/resolve";
 import { until } from "#/lib/async/until";
 import { MAX_GRAPHEME_LENGTH, SUPPORTED_MIME_TYPES, type SupportedMimeTypes } from "#/lib/constants";
-import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
 import { useEmail } from "#/lib/hooks/useEmail";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -44,6 +29,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { mimeToExt } from "#/lib/media/video/util";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
+import { useSharedValue } from "#/state/SharedValue";
 import { useDialogStateControlContext } from "#/state/dialogs";
 import { emitPostCreated } from "#/state/events";
 import { type ComposerImage, pasteImage } from "#/state/gallery";
@@ -432,7 +418,7 @@ export const ComposePost = ({
 
 	const isLastThreadedPost = thread.posts.length > 1 && nextPost === undefined;
 	const {
-		scrollHandler,
+		// scrollHandler,
 		onScrollViewContentSizeChange,
 		onScrollViewLayout,
 		topBarAnimatedStyle,
@@ -517,7 +503,7 @@ export const ComposePost = ({
 						// Animated.ScrollView
 						ref={scrollViewRef}
 						// @ts-expect-error
-						onScroll={scrollHandler}
+						// onScroll={scrollHandler}
 						contentContainerStyle={a.flex_grow}
 						style={a.flex_1}
 						keyboardShouldPersistTaps="always"
@@ -775,8 +761,10 @@ function ComposerTopBar({
 }) {
 	const pal = usePalette("default");
 	return (
-		// @ts-expect-error
-		<Animated.View style={topBarAnimatedStyle}>
+		<div
+			// Animated.View
+			style={topBarAnimatedStyle}
+		>
 			<div style={styles.topbarInner}>
 				<Button
 					label="Cancel"
@@ -822,7 +810,7 @@ function ComposerTopBar({
 				)}
 			</div>
 			{children}
-		</Animated.View>
+		</div>
 	);
 }
 
@@ -901,10 +889,13 @@ function ComposerEmbeds({
 					/>
 				</div>
 			)}
-			<LayoutAnimationConfig skipExiting>
+			<div
+			// LayoutAnimationConfig
+			// skipExiting
+			>
 				{video && (
-					<Animated.View
-						// @ts-expect-error
+					<div
+						// Animated.View
 						style={{
 							...a.w_full,
 							...a.mt_lg,
@@ -943,9 +934,9 @@ function ComposerEmbeds({
 								});
 							}}
 						/>
-					</Animated.View>
+					</div>
 				)}
-			</LayoutAnimationConfig>
+			</div>
 			{embed.quote?.uri ? (
 				<div style={!video ? a.mt_md : undefined}>
 					<div
@@ -990,8 +981,8 @@ function ComposerPills({
 	}
 
 	return (
-		<Animated.View
-			// @ts-expect-error
+		<div
+			// Animated.View
 			style={{
 				...a.flex_row,
 				...a.p_sm,
@@ -1039,7 +1030,7 @@ function ComposerPills({
 					/>
 				) : null}
 			</div>
-		</Animated.View>
+		</div>
 	);
 }
 
@@ -1184,11 +1175,9 @@ function useScrollTracker({
 	const scrollViewHeight = useSharedValue(Number.POSITIVE_INFINITY);
 	const contentHeight = useSharedValue(0);
 
-	const hasScrolledToTop = useDerivedValue(() => withTiming(contentOffset.get() === 0 ? 1 : 0));
+	const hasScrolledToTop = contentOffset.get() === 0 ? 1 : 0;
 
-	const hasScrolledToBottom = useDerivedValue(() =>
-		withTiming(contentHeight.get() - contentOffset.get() - 5 <= scrollViewHeight.get() ? 1 : 0),
-	);
+	const hasScrolledToBottom = contentHeight.get() - contentOffset.get() - 5 <= scrollViewHeight.get() ? 1 : 0;
 
 	const showHideBottomBorder = useCallback(
 		({
@@ -1208,16 +1197,16 @@ function useScrollTracker({
 		[contentHeight, contentOffset, scrollViewHeight],
 	);
 
-	const scrollHandler = useAnimatedScrollHandler({
-		onScroll: (event) => {
-			"worklet";
-			showHideBottomBorder({
-				newContentOffset: event.contentOffset.y,
-				newContentHeight: event.contentSize.height,
-				newScrollViewHeight: event.layoutMeasurement.height,
-			});
-		},
-	});
+	// const scrollHandler = useAnimatedScrollHandler({
+	// 	onScroll: (event) => {
+	// 		"worklet";
+	// 		showHideBottomBorder({
+	// 			newContentOffset: event.contentOffset.y,
+	// 			newContentHeight: event.contentSize.height,
+	// 			newScrollViewHeight: event.layoutMeasurement.height,
+	// 		});
+	// 	},
+	// });
 
 	const onScrollViewContentSizeChangeUIThread = useCallback(
 		(newContentHeight: number) => {
@@ -1241,7 +1230,8 @@ function useScrollTracker({
 
 	const onScrollViewContentSizeChange = useCallback(
 		(_width: number, height: number) => {
-			runOnUI(onScrollViewContentSizeChangeUIThread)(height);
+			// runOnUI(onScrollViewContentSizeChangeUIThread)(height);
+			onScrollViewContentSizeChangeUIThread(height);
 		},
 		[onScrollViewContentSizeChangeUIThread],
 	);
@@ -1254,29 +1244,17 @@ function useScrollTracker({
 		},
 		[showHideBottomBorder],
 	);
-	const topBarAnimatedStyle = useAnimatedStyle(() => {
-		return {
-			borderBottomWidth: 1,
-			borderColor: interpolateColor(
-				hasScrolledToTop.get(),
-				[0, 1],
-				[t.atoms.border_contrast_medium.borderColor, "transparent"],
-			),
-		};
-	});
-	const bottomBarAnimatedStyle = useAnimatedStyle(() => {
-		return {
-			borderTopWidth: 1,
-			borderColor: interpolateColor(
-				hasScrolledToBottom.get(),
-				[0, 1],
-				[t.atoms.border_contrast_medium.borderColor, "transparent"],
-			),
-		};
-	});
+	const topBarAnimatedStyle = {
+		borderBottomWidth: 1,
+		borderColor: hasScrolledToTop === 0 ? t.atoms.border_contrast_medium.borderColor : "transparent",
+	} satisfies React.CSSProperties;
+	const bottomBarAnimatedStyle = {
+		borderTopWidth: 1,
+		borderColor: hasScrolledToBottom === 0 ? t.atoms.border_contrast_medium.borderColor : "transparent",
+	} satisfies React.CSSProperties;
 
 	return {
-		scrollHandler,
+		// scrollHandler,
 		onScrollViewContentSizeChange,
 		onScrollViewLayout,
 		topBarAnimatedStyle,
@@ -1399,13 +1377,14 @@ function ErrorBanner({
 	if (!error) return null;
 
 	return (
-		<Animated.View
+		<div
+			// Animated.View
 			style={{
 				...a.px_lg,
 				...a.pb_sm,
 			}}
-			entering={FadeIn}
-			exiting={FadeOut}
+			// entering={FadeIn}
+			// exiting={FadeOut}
 		>
 			<div
 				style={{
@@ -1463,7 +1442,7 @@ function ErrorBanner({
 					</NewText>
 				)}
 			</div>
-		</Animated.View>
+		</div>
 	);
 }
 
@@ -1482,24 +1461,24 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 	const shouldRotate = state.status === "processing" && (progress === 0 || progress === 1);
 	let wheelProgress = shouldRotate ? 0.33 : progress;
 
-	const rotate = useDerivedValue(() => {
-		if (shouldRotate) {
-			return withRepeat(
-				withTiming(360, {
-					duration: 2500,
-					easing: Easing.out(Easing.cubic),
-				}),
-				-1,
-			);
-		}
-		return 0;
-	});
+	// const rotate = useDerivedValue(() => {
+	// 	if (shouldRotate) {
+	// 		return withRepeat(
+	// 			withTiming(360, {
+	// 				duration: 2500,
+	// 				easing: Easing.out(Easing.cubic),
+	// 			}),
+	// 			-1,
+	// 		);
+	// 	}
+	// 	return 0;
+	// });
 
-	const animatedStyle = useAnimatedStyle(() => {
-		return {
-			transform: [{ rotateZ: `${rotate.get()}deg` }],
-		};
-	});
+	// const animatedStyle = useAnimatedStyle(() => {
+	// 	return {
+	// 		transform: [{ rotateZ: `${rotate.get()}deg` }],
+	// 	};
+	// });
 
 	let text = "";
 
@@ -1530,7 +1509,10 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 				...{ paddingTop: 5, paddingBottom: 5 },
 			}}
 		>
-			<Animated.View style={animatedStyle}>
+			<div
+			// Animated.View
+			// style={animatedStyle}
+			>
 				<ProgressCircle
 					size={30}
 					borderWidth={1}
@@ -1538,7 +1520,7 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 					color={state.status === "error" ? t.palette.negative_500 : t.palette.primary_500}
 					progress={wheelProgress}
 				/>
-			</Animated.View>
+			</div>
 			<NewText
 				style={{
 					...a.font_bold,

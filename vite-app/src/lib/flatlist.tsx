@@ -15,7 +15,7 @@ export type FlatListProps<T> = {
 	maxToRenderPerBatch?: number;
 	keyboardDismissMode?: "on-drag" | "none" | "interactive";
 	scrollIndicatorInsets?: { top: number };
-	itemLayoutAnimation?: any;
+	// itemLayoutAnimation?: any;
 };
 
 export const FlatList = forwardRef<HTMLDivElement, FlatListProps<any>>(function FlatList(
@@ -34,7 +34,7 @@ export const FlatList = forwardRef<HTMLDivElement, FlatListProps<any>>(function 
 		maxToRenderPerBatch = 10,
 		keyboardDismissMode,
 		scrollIndicatorInsets,
-		itemLayoutAnimation,
+		// itemLayoutAnimation,
 	},
 	ref,
 ) {

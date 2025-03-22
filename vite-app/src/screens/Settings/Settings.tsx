@@ -2,7 +2,6 @@ import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { useReducedMotion } from "react-native-reanimated";
 
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { AvatarStackWithFetch } from "#/components/AvatarStack";
@@ -51,7 +50,8 @@ import { UserAvatar } from "#/view/com/util/UserAvatar";
 
 type Props = NativeStackScreenProps<CommonNavigatorParams, "Settings">;
 export function SettingsScreen(props: Props) {
-	const reducedMotion = useReducedMotion();
+	// const reducedMotion = useReducedMotion();
+	const reducedMotion = false;
 	const { logoutEveryAccount } = useSessionApi();
 	const { accounts, currentAccount } = useSession();
 	const switchAccountControl = useDialogControl();

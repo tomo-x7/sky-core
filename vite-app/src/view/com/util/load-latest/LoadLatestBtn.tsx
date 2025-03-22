@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Animated from "react-native-reanimated";
 import { useMediaQuery } from "react-responsive";
 
 import { useLayoutBreakpoints } from "#/alf";
@@ -36,7 +35,10 @@ export function LoadLatestBtn({
 	const bottomPosition = isTablet ? { bottom: 50 } : { bottom: clamp(0, 15, 60) + 15 };
 
 	return (
-		<Animated.View style={showBottomBar && fabMinimalShellTransform}>
+		<div
+			// Animated.View
+			style={showBottomBar ? fabMinimalShellTransform : undefined}
+		>
 			<PressableScale
 				style={{
 					...styles.loadLatest,
@@ -70,7 +72,7 @@ export function LoadLatestBtn({
 					/>
 				)}
 			</PressableScale>
-		</Animated.View>
+		</div>
 	);
 }
 

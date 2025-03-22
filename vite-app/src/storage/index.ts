@@ -1,20 +1,25 @@
 import { useCallback, useEffect, useState } from "react";
-import { MMKV } from "react-native-mmkv";
 
 import type { Account, Device } from "./schema";
 
 export * from "./schema";
 
+const listeners: Map<string, Set<() => void>> = new Map();
 /**
  * Generic storage class. DO NOT use this directly. Instead, use the exported
  * storage instances below.
  */
 export class Storage<Scopes extends unknown[], Schema> {
 	protected sep = ":";
-	protected store: MMKV;
+	// protected store: MMKV;
+	protected id: string;
 
 	constructor({ id }: { id: string }) {
-		this.store = new MMKV({ id });
+		// this.store = new MMKV({ id });
+		this.id = id;
+	}
+	protected getKey(scopes: unknown[]) {
+		return `${this.id}::${scopes.join(this.sep)}`;
 	}
 
 	/**
@@ -25,7 +30,10 @@ export class Storage<Scopes extends unknown[], Schema> {
 	 */
 	set<Key extends keyof Schema>(scopes: [...Scopes, Key], data: Schema[Key]): void {
 		// stored as `{ data: <value> }` structure to ease stringification
-		this.store.set(scopes.join(this.sep), JSON.stringify({ data }));
+		// this.store.set(scopes.join(this.sep), JSON.stringify({ data }));
+		const key = this.getKey(scopes);
+		localStorage.setItem(key, JSON.stringify({ data }));
+		listeners.get(key)?.forEach((callback) => callback());
 	}
 
 	/**
@@ -35,7 +43,8 @@ export class Storage<Scopes extends unknown[], Schema> {
 	 *   `get([scope, key])`
 	 */
 	get<Key extends keyof Schema>(scopes: [...Scopes, Key]): Schema[Key] | undefined {
-		const res = this.store.getString(scopes.join(this.sep));
+		// const res = this.store.getString(scopes.join(this.sep));
+		const res = localStorage.getItem(this.getKey(scopes));
 		if (!res) return undefined;
 		// parsed from storage structure `{ data: <value> }`
 		return JSON.parse(res).data;
@@ -48,7 +57,10 @@ export class Storage<Scopes extends unknown[], Schema> {
 	 *   `remove([scope, key])`
 	 */
 	remove<Key extends keyof Schema>(scopes: [...Scopes, Key]) {
-		this.store.delete(scopes.join(this.sep));
+		// this.store.delete(scopes.join(this.sep));
+		const key = this.getKey(scopes);
+		localStorage.removeItem(key);
+		listeners.get(key)?.forEach((callback) => callback());
 	}
 
 	/**
@@ -67,11 +79,19 @@ export class Storage<Scopes extends unknown[], Schema> {
 	 * @returns Listener - call `remove()` to stop listening
 	 */
 	addOnValueChangedListener<Key extends keyof Schema>(scopes: [...Scopes, Key], callback: () => void) {
-		return this.store.addOnValueChangedListener((key) => {
-			if (key === scopes.join(this.sep)) {
-				callback();
-			}
-		});
+		// return this.store.addOnValueChangedListener((key) => {
+		// 	if (key === scopes.join(this.sep)) {
+		// 		callback();
+		// 	}
+		// });
+		const key = this.getKey(scopes);
+		if (!listeners.has(key)) listeners.set(key, new Set());
+		listeners.get(key)!.add(callback);
+		return {
+			remove: () => {
+				listeners.get(key)?.delete(callback);
+			},
+		};
 	}
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import type { SharedValue } from "react-native-reanimated";
+import type { SharedValue } from "#/state/SharedValue";
 
 export const PagerHeaderContext = React.createContext<{
 	scrollY: SharedValue<number>;

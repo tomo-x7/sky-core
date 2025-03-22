@@ -1,6 +1,5 @@
 import { AppBskyGraphStarterpack } from "@atproto/api";
 import React from "react";
-import Animated, { FadeIn, LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
@@ -83,7 +82,10 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 						starterPack.record,
 						AppBskyGraphStarterpack.isRecord,
 					) ? (
-						<Animated.View entering={!isFetchedAtMount ? FadeIn : undefined}>
+						<div
+						// Animated.View
+						// entering={!isFetchedAtMount ? FadeIn : undefined}
+						>
 							<LinearGradientBackground
 								style={{
 									...a.mx_lg,
@@ -112,7 +114,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 									)}
 								</Text>
 							</LinearGradientBackground>
-						</Animated.View>
+						</div>
 					) : null}
 					<div
 						style={{
@@ -157,7 +159,11 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 							</Text>
 						</div>
 
-						<LayoutAnimationConfig skipEntering skipExiting>
+						<div
+						// LayoutAnimationConfig
+						// skipEntering
+						// skipExiting
+						>
 							{state.activeStep === SignupStep.INFO ? (
 								<StepInfo
 									onPressBack={onPressBack}
@@ -170,7 +176,7 @@ export function Signup({ onPressBack }: { onPressBack: () => void }) {
 							) : (
 								<StepCaptcha />
 							)}
-						</LayoutAnimationConfig>
+						</div>
 
 						<Divider />
 

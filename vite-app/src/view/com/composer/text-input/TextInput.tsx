@@ -10,7 +10,6 @@ import { generateJSON } from "@tiptap/html";
 import { Fragment, Node, Slice } from "@tiptap/pm/model";
 import { EditorContent, type JSONContent, useEditor } from "@tiptap/react";
 import React, { useRef } from "react";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 import { atoms as a, flatten, useAlf } from "#/alf";
 import { normalizeTextStyles } from "#/alf/typography";
@@ -324,11 +323,11 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 			</div>
 			{isDropping && (
 				<Portal>
-					<Animated.View
-						// @ts-expect-error
+					<div
+						// Animated.View
 						style={styles.dropContainer}
-						entering={FadeIn.duration(80)}
-						exiting={FadeOut.duration(80)}
+						// entering={FadeIn.duration(80)}
+						// exiting={FadeOut.duration(80)}
 					>
 						<div
 							style={{
@@ -348,7 +347,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 								Drop to add images
 							</Text>
 						</div>
-					</Animated.View>
+					</div>
 				</Portal>
 			)}
 		</>

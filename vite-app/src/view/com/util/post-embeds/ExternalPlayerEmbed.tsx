@@ -1,7 +1,6 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import Animated, { measure, runOnJS, useAnimatedRef, useFrameCallback } from "react-native-reanimated";
+import React, { useRef } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -122,46 +121,47 @@ export function ExternalPlayer({
 		});
 	}, [params.type, windowDims.width, link.thumb]);
 
-	const viewRef = useAnimatedRef();
-	const frameCallback = useFrameCallback(() => {
-		const measurement = measure(viewRef);
-		if (!measurement) return;
+	const viewRef = useRef<HTMLDivElement>(null);
+	// TODO
+	// const frameCallback = useFrameCallback(() => {
+	// 	const measurement = measureHandle(viewRef.current);
+	// 	if (!measurement) return;
 
-		const { height: winHeight, width: winWidth } = windowDims;
+	// 	const { height: winHeight, width: winWidth } = windowDims;
 
-		// Get the proper screen height depending on what is going on
-		const realWinHeight = winHeight; // On web, we always want the actual screen height
+	// 	// Get the proper screen height depending on what is going on
+	// 	const realWinHeight = winHeight; // On web, we always want the actual screen height
 
-		const top = measurement.pageY;
-		const bot = measurement.pageY + measurement.height;
+	// 	const top = measurement.pageY;
+	// 	const bot = measurement.pageY + measurement.height;
 
-		// We can use the same logic on all platforms against the screenHeight that we get above
-		const isVisible = top <= realWinHeight && bot >= 0;
+	// 	// We can use the same logic on all platforms against the screenHeight that we get above
+	// 	const isVisible = top <= realWinHeight && bot >= 0;
 
-		if (!isVisible) {
-			runOnJS(setPlayerActive)(false);
-		}
-	}, false); // False here disables autostarting the callback
+	// 	if (!isVisible) {
+	// 		runOnJS(setPlayerActive)(false);
+	// 	}
+	// }, false); // False here disables autostarting the callback
 
 	// watch for leaving the viewport due to scrolling
-	React.useEffect(() => {
-		// We don't want to do anything if the player isn't active
-		if (!isPlayerActive) return;
+	// React.useEffect(() => {
+	// 	// We don't want to do anything if the player isn't active
+	// 	if (!isPlayerActive) return;
 
-		// Interval for scrolling works in most cases, However, for twitch embeds, if we navigate away from the screen the webview will
-		// continue playing. We need to watch for the blur event
-		const unsubscribe = navigation.addListener("blur", () => {
-			setPlayerActive(false);
-		});
+	// 	// Interval for scrolling works in most cases, However, for twitch embeds, if we navigate away from the screen the webview will
+	// 	// continue playing. We need to watch for the blur event
+	// 	const unsubscribe = navigation.addListener("blur", () => {
+	// 		setPlayerActive(false);
+	// 	});
 
-		// Start watching for changes
-		frameCallback.setActive(true);
+	// 	// Start watching for changes
+	// 	frameCallback.setActive(true);
 
-		return () => {
-			unsubscribe();
-			frameCallback.setActive(false);
-		};
-	}, [navigation, isPlayerActive, frameCallback]);
+	// 	return () => {
+	// 		unsubscribe();
+	// 		frameCallback.setActive(false);
+	// 	};
+	// }, [navigation, isPlayerActive, frameCallback]);
 
 	const onLoad = React.useCallback(() => {
 		setIsLoading(false);
@@ -189,9 +189,9 @@ export function ExternalPlayer({
 	return (
 		<>
 			<EmbedConsentDialog control={consentDialogControl} source={params.source} onAccept={onAcceptConsent} />
-			<Animated.View
+			<div
+				// Animated.View
 				ref={viewRef}
-				collapsable={false}
 				style={{
 					...aspect,
 					...a.overflow_hidden,
@@ -220,7 +220,7 @@ export function ExternalPlayer({
 				)}
 				<PlaceholderOverlay isLoading={isLoading} isPlayerActive={isPlayerActive} onPress={onPlayPress} />
 				<Player isPlayerActive={isPlayerActive} params={params} onLoad={onLoad} />
-			</Animated.View>
+			</div>
 		</>
 	);
 }

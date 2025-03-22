@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from "react";
-import RNPickerSelect, { type PickerSelectProps } from "react-native-picker-select";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -28,7 +27,7 @@ export function LanguageSettingsScreen(props: Props) {
 	}, [openModal]);
 
 	const onChangePrimaryLanguage = useCallback(
-		(value: Parameters<PickerSelectProps["onValueChange"]>[0]) => {
+		(value: string) => {
 			if (!value) return;
 			if (langPrefs.primaryLanguage !== value) {
 				setLangPrefs.setPrimaryLanguage(value);
@@ -38,7 +37,7 @@ export function LanguageSettingsScreen(props: Props) {
 	);
 
 	const onChangeAppLanguage = useCallback(
-		(value: Parameters<PickerSelectProps["onValueChange"]>[0]) => {
+		(value: string) => {
 			if (!value) return;
 			if (langPrefs.appLanguage !== value) {
 				setLangPrefs.setAppLanguage(sanitizeAppLanguageSetting(value));
@@ -87,7 +86,7 @@ export function LanguageSettingsScreen(props: Props) {
 									maxWidth: 400,
 								}}
 							>
-								<RNPickerSelect
+								{/* <RNPickerSelect
 									darkTheme={t.scheme === "dark"}
 									placeholder={{}}
 									value={sanitizeAppLanguageSetting(langPrefs.appLanguage)}
@@ -145,7 +144,42 @@ export function LanguageSettingsScreen(props: Props) {
 											borderRadius: a.rounded_xs.borderRadius,
 										},
 									}}
-								/>
+								/> */}
+								<select
+									onChange={(ev) => onChangeAppLanguage(ev.target.value)}
+									style={{
+										flex: 1,
+										width: "100%",
+										cursor: "pointer",
+										// @ts-expect-error web only
+										"-moz-appearance": "none",
+										"-webkit-appearance": "none",
+										appearance: "none",
+										outline: 0,
+										borderWidth: 0,
+										backgroundColor: t.atoms.bg_contrast_25.backgroundColor,
+										color: t.atoms.text.color,
+										fontSize: 14,
+										fontFamily: "inherit",
+										letterSpacing: 0.5,
+										fontWeight: a.font_bold.fontWeight,
+										paddingLeft: 14,
+										paddingRight: 14,
+										paddingTop: 8,
+										paddingBottom: 8,
+										borderRadius: a.rounded_xs.borderRadius,
+									}}
+								>
+									{APP_LANGUAGES.filter((l) => Boolean(l.code2)).map((l) => (
+										<option
+											key={l.code2}
+											value={l.code2}
+											selected={l.code2 === sanitizeAppLanguageSetting(langPrefs.appLanguage)}
+										>
+											{l.name}
+										</option>
+									))}
+								</select>
 
 								<div
 									style={{
@@ -188,7 +222,7 @@ export function LanguageSettingsScreen(props: Props) {
 									maxWidth: 400,
 								}}
 							>
-								<RNPickerSelect
+								{/* <RNPickerSelect
 									darkTheme={t.scheme === "dark"}
 									placeholder={{}}
 									value={langPrefs.primaryLanguage}
@@ -246,7 +280,42 @@ export function LanguageSettingsScreen(props: Props) {
 											borderRadius: a.rounded_xs.borderRadius,
 										},
 									}}
-								/>
+								/> */}
+								<select
+									onChange={(ev) => onChangePrimaryLanguage(ev.target.value)}
+									style={{
+										flex: 1,
+										width: "100%",
+										cursor: "pointer",
+										// @ts-expect-error web only
+										"-moz-appearance": "none",
+										"-webkit-appearance": "none",
+										appearance: "none",
+										outline: 0,
+										borderWidth: 0,
+										backgroundColor: t.atoms.bg_contrast_25.backgroundColor,
+										color: t.atoms.text.color,
+										fontSize: 14,
+										fontFamily: "inherit",
+										letterSpacing: 0.5,
+										fontWeight: a.font_bold.fontWeight,
+										paddingLeft: 14,
+										paddingRight: 14,
+										paddingTop: 8,
+										paddingBottom: 8,
+										borderRadius: a.rounded_xs.borderRadius,
+									}}
+								>
+									{LANGUAGES.filter((l) => Boolean(l.code2)).map((l) => (
+										<option
+											key={l.code2 + l.code3}
+											value={l.code2}
+											selected={l.code2 === langPrefs.primaryLanguage}
+										>
+											{languageName(l, langPrefs.appLanguage)}
+										</option>
+									))}
+								</select>
 
 								<div
 									style={{

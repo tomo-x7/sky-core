@@ -107,7 +107,7 @@ function DialogInner({
 	const isFirstTimeUser = accounts.length === 0;
 
 	return (
-		<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description" >
+		<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description">
 			<div
 				style={{
 					...a.relative,

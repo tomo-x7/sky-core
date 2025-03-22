@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import RNPickerSelect from "react-native-picker-select";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -259,7 +258,7 @@ function SubtitleFileRow({
 					>
 						{file.name}
 					</Text>
-					<RNPickerSelect
+					{/* <RNPickerSelect
 						placeholder={{
 							label: "Select language...",
 							value: "",
@@ -271,7 +270,15 @@ function SubtitleFileRow({
 							value: langCode(lang),
 						}))}
 						style={{ viewContainer: { maxWidth: 200, flex: 1 } }}
-					/>
+					/> */}
+					<select onChange={(ev) => handleValueChange(ev.target.value)} style={{ maxWidth: 200, flex: 1 }}>
+						<option value="">Select language...</option>
+						{otherLanguages.map((lang) => (
+							<option key={langCode(lang)} value={langCode(lang)} selected={langCode(lang) === language}>
+								{`${lang.name} (${langCode(lang)})`}
+							</option>
+						))}
+					</select>
 				</div>
 			</div>
 			<Button

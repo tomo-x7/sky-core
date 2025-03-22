@@ -1,6 +1,5 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Animated, { LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
 import { type ViewStyleProp, atoms as a, flatten, tokens, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -283,7 +282,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 			initialNumToRender={8}
 			maxToRenderPerBatch={8}
 			onEndReached={onEndReached}
-			itemLayoutAnimation={LinearTransition}
+			// itemLayoutAnimation={LinearTransition}
 			ListFooterComponent={
 				<ListFooter isFetchingNextPage={isFetchingNextPage} error={cleanError(error)} onRetry={fetchNextPage} />
 			}
@@ -578,16 +577,21 @@ let FollowProfileCard = ({
 	}, [hasFollowed, profile.did, candidates, setSuggestedAccounts]);
 
 	return (
-		<LayoutAnimationConfig skipEntering={!isSuggestion}>
-			<Animated.View>
+		<div
+		// LayoutAnimationConfig
+		// skipEntering={!isSuggestion}
+		>
+			<div
+			// Animated.View
+			>
 				<FollowProfileCardInner
 					profile={profile}
 					moderationOpts={moderationOpts}
 					onFollow={() => setHasFollowed(true)}
 					noBorder={noBorder}
 				/>
-			</Animated.View>
-		</LayoutAnimationConfig>
+			</div>
+		</div>
 	);
 };
 FollowProfileCard = memo(FollowProfileCard);

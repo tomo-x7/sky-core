@@ -1,8 +1,7 @@
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
-import React, { useCallback, useMemo } from "react";
-import { useAnimatedRef } from "react-native-reanimated";
+import React, { useCallback, useMemo, useRef } from "react";
 
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -166,7 +165,7 @@ export function ProfileFeedScreenInner({
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
 	const queryClient = useQueryClient();
 	const feedFeedback = useFeedFeedback(feed, hasSession);
-	const scrollElRef = useAnimatedRef() as ListRef;
+	const scrollElRef = useRef(null) as ListRef;
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({

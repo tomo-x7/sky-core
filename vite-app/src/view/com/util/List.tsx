@@ -1,5 +1,4 @@
 import React, { isValidElement, type JSX, memo, startTransition, useRef } from "react";
-import type { ReanimatedScrollEvent } from "react-native-reanimated/lib/typescript/hook/commonTypes";
 
 import * as Layout from "#/components/Layout";
 import { useScrollHandlers } from "#/lib/ScrollContext";
@@ -228,10 +227,7 @@ function ListImpl<ItemT>(
 					width: element?.scrollWidth,
 					height: element?.scrollHeight,
 				},
-			} as Exclude<
-				ReanimatedScrollEvent,
-				"velocity" | "eventName" | "zoomScale" | "targetContentOffset" | "contentInset"
-			>,
+			},
 			null as any,
 		);
 	});

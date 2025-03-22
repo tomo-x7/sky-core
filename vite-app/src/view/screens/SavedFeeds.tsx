@@ -4,7 +4,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import Animated, { LinearTransition } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -281,13 +280,13 @@ function ListItem({
 		onBlur: () => setFocused(false),
 	} satisfies JSX.IntrinsicElements["button"];
 	return (
-		<Animated.View
-			// @ts-expect-error
+		<div
+			// Animated.View
 			style={{
 				...styles.itemContainer,
 				...pal.border,
 			}}
-			layout={LinearTransition.duration(100)}
+			// layout={LinearTransition.duration(100)}
 		>
 			{feed.type === "timeline" ? (
 				<FollowingFeedCard />
@@ -380,7 +379,7 @@ function ListItem({
 					<FontAwesomeIcon icon="thumb-tack" size={14} color={isPinned ? colors.blue3 : pal.colors.icon} />
 				</button>
 			</div>
-		</Animated.View>
+		</div>
 	);
 }
 

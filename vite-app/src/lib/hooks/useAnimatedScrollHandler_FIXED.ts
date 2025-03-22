@@ -1,15 +1,38 @@
-// Be warned. This Hook is very buggy unless used in a very constrained way.
-// To use it safely:
-//
-// - DO NOT pass its return value as a prop to any user-defined component.
-// - DO NOT pass its return value to more than a single component.
-//
-// In other words, the only safe way to use it is next to the leaf Reanimated View.
-//
-// Relevant bug reports:
-// - https://github.com/software-mansion/react-native-reanimated/issues/5345
-// - https://github.com/software-mansion/react-native-reanimated/issues/5360
-// - https://github.com/software-mansion/react-native-reanimated/issues/5364
-//
-// It's great when it works though.
-export { useAnimatedScrollHandler } from "react-native-reanimated";
+// export const useAnimatedScrollHandler: typeof useAnimatedScrollHandler_BUGGY = (config, deps) => {
+// 	const ref = useRef(config);
+// 	useEffect(() => {
+// 		ref.current = config;
+// 	});
+// 	return useAnimatedScrollHandler_BUGGY(
+// 		{
+// 			onBeginDrag(e, ctx) {
+// 				if (typeof ref.current !== "function" && ref.current.onBeginDrag) {
+// 					ref.current.onBeginDrag(e, ctx);
+// 				}
+// 			},
+// 			onEndDrag(e, ctx) {
+// 				if (typeof ref.current !== "function" && ref.current.onEndDrag) {
+// 					ref.current.onEndDrag(e, ctx);
+// 				}
+// 			},
+// 			onMomentumBegin(e, ctx) {
+// 				if (typeof ref.current !== "function" && ref.current.onMomentumBegin) {
+// 					ref.current.onMomentumBegin(e, ctx);
+// 				}
+// 			},
+// 			onMomentumEnd(e, ctx) {
+// 				if (typeof ref.current !== "function" && ref.current.onMomentumEnd) {
+// 					ref.current.onMomentumEnd(e, ctx);
+// 				}
+// 			},
+// 			onScroll(e, ctx) {
+// 				if (typeof ref.current === "function") {
+// 					ref.current(e, ctx);
+// 				} else if (ref.current.onScroll) {
+// 					ref.current.onScroll(e, ctx);
+// 				}
+// 			},
+// 		},
+// 		deps,
+// 	);
+// };

@@ -7,7 +7,7 @@ interface IDialogContext {
 	/**
 	 * The currently active `useDialogControl` hooks.
 	 */
-	activeDialogs: React.MutableRefObject<Map<string, React.MutableRefObject<DialogControlRefProps|null>>>;
+	activeDialogs: React.MutableRefObject<Map<string, React.MutableRefObject<DialogControlRefProps | null>>>;
 	/**
 	 * The currently open dialogs, referenced by their IDs, generated from
 	 * `useId`.

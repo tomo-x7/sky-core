@@ -1,5 +1,5 @@
 import React from "react";
-import { type SharedValue, useSharedValue } from "react-native-reanimated";
+import { type SharedValue, useSharedValue } from "../SharedValue";
 
 type StateContext = {
 	headerHeight: SharedValue<number>;
@@ -9,9 +9,6 @@ type StateContext = {
 const stateContext = React.createContext<StateContext>({
 	headerHeight: {
 		value: 0,
-		addListener() {},
-		removeListener() {},
-		modify() {},
 		get() {
 			return 0;
 		},
@@ -19,9 +16,6 @@ const stateContext = React.createContext<StateContext>({
 	},
 	footerHeight: {
 		value: 0,
-		addListener() {},
-		removeListener() {},
-		modify() {},
 		get() {
 			return 0;
 		},

@@ -1,12 +1,4 @@
-import React, { useCallback, useEffect } from "react";
-import Animated, {
-	Easing,
-	interpolate,
-	runOnJS,
-	useAnimatedStyle,
-	useSharedValue,
-	withTiming,
-} from "react-native-reanimated";
+import React, { useCallback } from "react";
 import { useColorScheme } from "#/lib/useColorScheme";
 
 import darkSplashImage from "./assets/splash-dark.png";
@@ -41,10 +33,10 @@ type Props = {
 
 export function Splash(props: React.PropsWithChildren<Props>) {
 	"use no memo";
-	const intro = useSharedValue(0);
-	const outroLogo = useSharedValue(0);
-	const outroApp = useSharedValue(0);
-	const outroAppOpacity = useSharedValue(0);
+	// const intro = useSharedValue(0);
+	// const outroLogo = useSharedValue(0);
+	// const outroApp = useSharedValue(0);
+	// const outroAppOpacity = useSharedValue(0);
 	const [isAnimationComplete, setIsAnimationComplete] = React.useState(false);
 	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
 	const [isLayoutReady, setIsLayoutReady] = React.useState(false);
@@ -54,84 +46,84 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 	const colorScheme = useColorScheme();
 	const isDarkMode = colorScheme === "dark";
 
-	const logoAnimation = useAnimatedStyle(() => {
-		return {
-			transform: [
-				{
-					scale: interpolate(intro.get(), [0, 1], [0.8, 1], "clamp"),
-				},
-				{
-					scale: interpolate(outroLogo.get(), [0, 0.08, 1], [1, 0.8, 500], "clamp"),
-				},
-			],
-			opacity: interpolate(intro.get(), [0, 1], [0, 1], "clamp"),
-		};
-	});
-	const bottomLogoAnimation = useAnimatedStyle(() => {
-		return {
-			opacity: interpolate(intro.get(), [0, 1], [0, 1], "clamp"),
-		};
-	});
-	const reducedLogoAnimation = useAnimatedStyle(() => {
-		return {
-			transform: [
-				{
-					scale: interpolate(intro.get(), [0, 1], [0.8, 1], "clamp"),
-				},
-			],
-			opacity: interpolate(intro.get(), [0, 1], [0, 1], "clamp"),
-		};
-	});
+	// const logoAnimation = useAnimatedStyle(() => {
+	// 	return {
+	// 		transform: [
+	// 			{
+	// 				scale: interpolate(intro.get(), [0, 1], [0.8, 1], "clamp"),
+	// 			},
+	// 			{
+	// 				scale: interpolate(outroLogo.get(), [0, 0.08, 1], [1, 0.8, 500], "clamp"),
+	// 			},
+	// 		],
+	// 		opacity: interpolate(intro.get(), [0, 1], [0, 1], "clamp"),
+	// 	};
+	// });
+	// const bottomLogoAnimation = useAnimatedStyle(() => {
+	// 	return {
+	// 		opacity: interpolate(intro.get(), [0, 1], [0, 1], "clamp"),
+	// 	};
+	// });
+	// const reducedLogoAnimation = useAnimatedStyle(() => {
+	// 	return {
+	// 		transform: [
+	// 			{
+	// 				scale: interpolate(intro.get(), [0, 1], [0.8, 1], "clamp"),
+	// 			},
+	// 		],
+	// 		opacity: interpolate(intro.get(), [0, 1], [0, 1], "clamp"),
+	// 	};
+	// });
 
-	const logoWrapperAnimation = useAnimatedStyle(() => {
-		return {
-			opacity: interpolate(outroAppOpacity.get(), [0, 0.1, 0.2, 1], [1, 1, 0, 0], "clamp"),
-		};
-	});
+	// const logoWrapperAnimation = useAnimatedStyle(() => {
+	// 	return {
+	// 		opacity: interpolate(outroAppOpacity.get(), [0, 0.1, 0.2, 1], [1, 1, 0, 0], "clamp"),
+	// 	};
+	// });
 
-	const appAnimation = useAnimatedStyle(() => {
-		return {
-			transform: [
-				{
-					scale: interpolate(outroApp.get(), [0, 1], [1.1, 1], "clamp"),
-				},
-			],
-			opacity: interpolate(outroAppOpacity.get(), [0, 0.1, 0.2, 1], [0, 0, 1, 1], "clamp"),
-		};
-	});
+	// const appAnimation = useAnimatedStyle(() => {
+	// 	return {
+	// 		transform: [
+	// 			{
+	// 				scale: interpolate(outroApp.get(), [0, 1], [1.1, 1], "clamp"),
+	// 			},
+	// 		],
+	// 		opacity: interpolate(outroAppOpacity.get(), [0, 0.1, 0.2, 1], [0, 0, 1, 1], "clamp"),
+	// 	};
+	// });
 
 	const onFinish = useCallback(() => setIsAnimationComplete(true), []);
 	const onLayout = useCallback(() => setIsLayoutReady(true), []);
 	const onLoadEnd = useCallback(() => setIsImageLoaded(true), []);
 
-	useEffect(() => {
-		if (isReady) {
-			intro.set(() =>
-				withTiming(1, { duration: 400, easing: Easing.out(Easing.cubic) }, async () => {
-					// set these values to check animation at specific point
-					outroLogo.set(() =>
-						withTiming(1, { duration: 1200, easing: Easing.in(Easing.cubic) }, () => {
-							runOnJS(onFinish)();
-						}),
-					);
-					outroApp.set(() =>
-						withTiming(1, {
-							duration: 1200,
-							easing: Easing.inOut(Easing.cubic),
-						}),
-					);
-					outroAppOpacity.set(() =>
-						withTiming(1, {
-							duration: 1200,
-							easing: Easing.in(Easing.cubic),
-						}),
-					);
-				}),
-			);
-		}
-	}, [onFinish, intro, outroLogo, outroApp, outroAppOpacity, isReady]);
+	// useEffect(() => {
+	// 	if (isReady) {
+	// 		intro.set(() =>
+	// 			withTiming(1, { duration: 400, easing: Easing.out(Easing.cubic) }, async () => {
+	// 				// set these values to check animation at specific point
+	// 				outroLogo.set(() =>
+	// 					withTiming(1, { duration: 1200, easing: Easing.in(Easing.cubic) }, () => {
+	// 						runOnJS(onFinish)();
+	// 					}),
+	// 				);
+	// 				outroApp.set(() =>
+	// 					withTiming(1, {
+	// 						duration: 1200,
+	// 						easing: Easing.inOut(Easing.cubic),
+	// 					}),
+	// 				);
+	// 				outroAppOpacity.set(() =>
+	// 					withTiming(1, {
+	// 						duration: 1200,
+	// 						easing: Easing.in(Easing.cubic),
+	// 					}),
+	// 				);
+	// 			}),
+	// 		);
+	// 	}
+	// }, [onFinish, intro, outroLogo, outroApp, outroAppOpacity, isReady]);
 
-	const logoAnimations = reduceMotion === true ? reducedLogoAnimation : logoAnimation;
+	// const logoAnimations = reduceMotion === true ? reducedLogoAnimation : logoAnimation;
 	// special off-spec color for dark mode
 	const logoBg = isDarkMode ? "#0F1824" : "#fff";
 
@@ -145,9 +137,10 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 						style={absoluteFillObject}
 					/>
 
-					<Animated.View
+					<div
+						// Animated.View
 						style={{
-							...bottomLogoAnimation,
+							// ...bottomLogoAnimation,
 
 							position: "absolute",
 							bottom: 40,
@@ -159,29 +152,41 @@ export function Splash(props: React.PropsWithChildren<Props>) {
 						}}
 					>
 						<Logotype fill="#fff" width={90} />
-					</Animated.View>
+					</div>
 				</div>
 			)}
 			{isReady && (
 				<>
-					<Animated.View style={{ flex: 1, ...appAnimation }}>{props.children}</Animated.View>
+					<div
+						// Animated.View
+						style={{
+							flex: 1,
+							//  ...appAnimation
+						}}
+					>
+						{props.children}
+					</div>
 
 					{!isAnimationComplete && (
-						<Animated.View
+						<div
+							// Animated.View
 							style={{
 								...absoluteFillObject,
-								...logoWrapperAnimation,
+								// ...logoWrapperAnimation,
 
 								flex: 1,
 								justifyContent: "center",
 								alignItems: "center",
-								transform: [{ translateY: 0 }, { scale: 0.1 }], // scale from 1000px to 100px
+								// transform: [{ translateY: 0 }, { scale: 0.1 }], // scale from 1000px to 100px
 							}}
 						>
-							<Animated.View style={logoAnimations}>
+							<div
+							// Animated.View
+							// style={logoAnimations}
+							>
 								<Logo fill={logoBg} />
-							</Animated.View>
-						</Animated.View>
+							</div>
+						</div>
 					)}
 				</>
 			)}

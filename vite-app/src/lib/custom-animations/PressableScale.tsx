@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useReducedMotion } from "react-native-reanimated";
 import { isTouchDevice } from "#/lib/browser";
 
 const DEFAULT_TARGET_SCALE = isTouchDevice ? 0.98 : 1;
@@ -14,7 +13,8 @@ export function PressableScale({
 }: {
 	targetScale?: number;
 } & JSX.IntrinsicElements["button"]) {
-	const reducedMotion = useReducedMotion();
+	// const reducedMotion = useReducedMotion();
+	const reducedMotion = false;
 	const [isHover, setIsHover] = useState(false);
 
 	return (

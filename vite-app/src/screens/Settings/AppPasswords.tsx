@@ -1,7 +1,6 @@
 import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
-import Animated, { FadeIn, FadeOut, LayoutAnimationConfig, LinearTransition } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Admonition, colors } from "#/components/Admonition";
@@ -66,23 +65,27 @@ export function AppPasswordsScreen(props: Props) {
 							</Button>
 						</SettingsList.Item>
 						<SettingsList.Divider />
-						<LayoutAnimationConfig skipEntering skipExiting>
+						<div
+						// LayoutAnimationConfig
+						// skipEntering
+						// skipExiting
+						>
 							{appPasswords ? (
 								appPasswords.length > 0 ? (
 									<div style={a.overflow_hidden}>
 										{appPasswords.map((appPassword) => (
-											<Animated.View
+											<div
+												// Animated.View
 												key={appPassword.name}
-												// @ts-expect-error
 												style={a.w_full}
-												entering={FadeIn}
-												exiting={FadeOut}
-												layout={LinearTransition.delay(150)}
+												// entering={FadeIn}
+												// exiting={FadeOut}
+												// layout={LinearTransition.delay(150)}
 											>
 												<SettingsList.Item>
 													<AppPasswordCard appPassword={appPassword} />
 												</SettingsList.Item>
-											</Animated.View>
+											</div>
 										))}
 									</div>
 								) : (
@@ -100,7 +103,7 @@ export function AppPasswordsScreen(props: Props) {
 									<Loader size="xl" />
 								</div>
 							)}
-						</LayoutAnimationConfig>
+						</div>
 					</SettingsList.Container>
 				)}
 			</Layout.Content>

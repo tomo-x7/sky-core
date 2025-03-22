@@ -1,6 +1,7 @@
 import type React from "react";
 import { createContext, useContext, useMemo } from "react";
-import type { ScrollHandlers } from "react-native-reanimated";
+
+type ScrollHandlers<T> = any;
 
 const ScrollContext = createContext<ScrollHandlers<any>>({
 	onBeginDrag: undefined,

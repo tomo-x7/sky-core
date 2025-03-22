@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a } from "#/alf";
 import { DEFAULT_SERVICE } from "#/lib/constants";
@@ -141,9 +140,13 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 			style={a.flex_1}
 		>
 			<LoggedOutLayout leadin="" title={title} description={description} scrollable>
-				<LayoutAnimationConfig skipEntering skipExiting>
+				<div
+				// LayoutAnimationConfig
+				// skipEntering
+				// skipExiting
+				>
 					<ScreenTransition key={currentForm}>{content}</ScreenTransition>
-				</LayoutAnimationConfig>
+				</div>
 			</LoggedOutLayout>
 		</div>
 	);

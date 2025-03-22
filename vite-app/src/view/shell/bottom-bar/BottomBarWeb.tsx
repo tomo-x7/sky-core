@@ -1,6 +1,5 @@
 import { useNavigationState } from "@react-navigation/native";
 import React from "react";
-import Animated from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -62,10 +61,10 @@ export function BottomBarWeb() {
 	}, [requestSwitchToAccount, closeAllActiveElements]);
 
 	return (
-		<Animated.View
+		<div
+			// Animated.View
 			// biome-ignore lint/a11y/useSemanticElements: <explanation>
 			role="navigation"
-			// @ts-expect-error
 			style={{
 				...styles.bottomBar,
 				...styles.bottomBarWeb,
@@ -232,7 +231,7 @@ export function BottomBarWeb() {
 					</div>
 				</>
 			)}
-		</Animated.View>
+		</div>
 	);
 }
 

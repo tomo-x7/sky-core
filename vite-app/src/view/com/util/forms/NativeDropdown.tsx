@@ -9,7 +9,7 @@ import { usePalette } from "#/lib/hooks/usePalette";
 
 // Custom Dropdown Menu Components
 // ==
- const DropdownMenuRoot = DropdownMenu.Root;
+const DropdownMenuRoot = DropdownMenu.Root;
 
 type ItemProps = React.ComponentProps<(typeof DropdownMenu)["Item"]>;
 const DropdownMenuItem = (props: ItemProps) => {

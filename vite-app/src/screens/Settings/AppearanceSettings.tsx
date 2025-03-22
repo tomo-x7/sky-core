@@ -1,6 +1,5 @@
 import type React from "react";
 import { useCallback } from "react";
-import Animated, { LayoutAnimationConfig } from "react-native-reanimated";
 
 import { atoms as a, useAlf, useTheme } from "#/alf";
 import * as Layout from "#/components/Layout";
@@ -57,7 +56,11 @@ export function AppearanceSettingsScreen(props: Props) {
 	);
 
 	return (
-		<LayoutAnimationConfig skipExiting skipEntering>
+		<div
+		// LayoutAnimationConfig
+		// skipExiting
+		// skipEntering
+		>
 			<Layout.Screen>
 				<Layout.Header.Outer>
 					<Layout.Header.BackButton />
@@ -90,7 +93,9 @@ export function AppearanceSettingsScreen(props: Props) {
 						/>
 
 						{colorMode !== "light" && (
-							<Animated.View>
+							<div
+							// Animated.View
+							>
 								<AppearanceToggleButtonGroup
 									title={"Dark theme"}
 									icon={MoonIcon}
@@ -107,10 +112,12 @@ export function AppearanceSettingsScreen(props: Props) {
 									values={[darkTheme ?? "dim"]}
 									onChange={onChangeDarkTheme}
 								/>
-							</Animated.View>
+							</div>
 						)}
 
-						<Animated.View>
+						<div
+						// Animated.View
+						>
 							<SettingsList.Divider />
 
 							<AppearanceToggleButtonGroup
@@ -151,11 +158,11 @@ export function AppearanceSettingsScreen(props: Props) {
 								values={[fonts.scale]}
 								onChange={onChangeFontScale}
 							/>
-						</Animated.View>
+						</div>
 					</SettingsList.Container>
 				</Layout.Content>
 			</Layout.Screen>
-		</LayoutAnimationConfig>
+		</div>
 	);
 }
 

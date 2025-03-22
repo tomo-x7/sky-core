@@ -1,7 +1,6 @@
 import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { ScrollView } from "react-native-gesture-handler";
 
 import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -312,11 +311,12 @@ function ProfileGrid({
 				</div>
 			) : (
 				<BlockDrawerGesture>
-					<ScrollView
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
-						decelerationRate="fast"
+					<div
+					// ScrollView from react-native-gesture-handler
+					// horizontal
+					// showsHorizontalScrollIndicator={false}
+					// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
+					// decelerationRate="fast"
 					>
 						<div
 							style={{
@@ -364,7 +364,7 @@ function ProfileGrid({
 								</CardOuter>
 							</Button>
 						</div>
-					</ScrollView>
+					</div>
 				</BlockDrawerGesture>
 			)}
 		</div>
@@ -480,11 +480,12 @@ export function SuggestedFeeds() {
 				</div>
 			) : (
 				<BlockDrawerGesture>
-					<ScrollView
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
-						decelerationRate="fast"
+					<div
+					// ScrollView from react-native-gesture-handler
+					// horizontal
+					// showsHorizontalScrollIndicator={false}
+					// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
+					// decelerationRate="fast"
 					>
 						<div
 							style={{
@@ -533,7 +534,7 @@ export function SuggestedFeeds() {
 								</CardOuter>
 							</Button>
 						</div>
-					</ScrollView>
+					</div>
 				</BlockDrawerGesture>
 			)}
 		</div>

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import Animated, { FadeOutUp, useReducedMotion, ZoomIn } from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, type ButtonProps } from "#/components/Button";
@@ -8,14 +7,15 @@ import { Text } from "#/components/Typography";
 export function CopyButton({ style, value, onPress: onPressProp, ...props }: ButtonProps & { value: string }) {
 	const [hasBeenCopied, setHasBeenCopied] = useState(false);
 	const t = useTheme();
-	const isReducedMotionEnabled = useReducedMotion();
+	// const isReducedMotionEnabled = useReducedMotion();
+	const isReducedMotionEnabled = false;
 
 	useEffect(() => {
 		if (hasBeenCopied) {
 			const timeout = setTimeout(() => setHasBeenCopied(false), isReducedMotionEnabled ? 2000 : 100);
 			return () => clearTimeout(timeout);
 		}
-	}, [hasBeenCopied, isReducedMotionEnabled]);
+	}, [hasBeenCopied]);
 
 	const onPress = useCallback(
 		(evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -29,18 +29,20 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 	return (
 		<div style={a.relative}>
 			{hasBeenCopied && (
-				<Animated.View
-					entering={ZoomIn.duration(100)}
-					exiting={FadeOutUp.duration(2000)}
+				<div
+					// Animated.View
+					// entering={ZoomIn.duration(100)}
+					// exiting={FadeOutUp.duration(2000)}
 					style={{
 						...a.absolute,
-						...{ bottom: "100%", right: 0 },
+						bottom: "100%",
+						right: 0,
 						...a.justify_center,
 						...a.gap_sm,
 						...a.z_10,
 						...a.pb_sm,
+						pointerEvents: "none",
 					}}
-					pointerEvents="none"
 				>
 					<Text
 						style={{
@@ -52,7 +54,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 					>
 						Copied!
 					</Text>
-				</Animated.View>
+				</div>
 			)}
 			<Button
 				style={{

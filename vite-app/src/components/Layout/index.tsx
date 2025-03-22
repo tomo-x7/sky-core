@@ -1,5 +1,4 @@
 import React, { useContext, useMemo } from "react";
-import Animated, { type AnimatedScrollViewProps, useAnimatedProps } from "react-native-reanimated";
 
 import { atoms as a, useBreakpoints, useLayoutBreakpoints, useTheme } from "#/alf";
 import { useDialogContext } from "#/components/Dialog";
@@ -33,7 +32,7 @@ export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }
 	);
 });
 
-export type ContentProps = Omit<AnimatedScrollViewProps, "style"> & {
+export type ContentProps = Omit<JSX.IntrinsicElements["div"], "style"> & {
 	style?: React.CSSProperties;
 	contentContainerStyle?: React.CSSProperties;
 	ignoreTabletLayoutOffset?: boolean;
@@ -51,36 +50,33 @@ export const Content = React.memo(function Content({
 }: ContentProps) {
 	const t = useTheme();
 	const { footerHeight } = useShellLayout();
-	const animatedProps = useAnimatedProps(() => {
-		return {
-			scrollIndicatorInsets: {
-				bottom: footerHeight.get(),
-				top: 0,
-				right: 1,
-			},
-		} satisfies AnimatedScrollViewProps;
-	});
+	// const animatedProps = useAnimatedProps(() => {
+	// 	return {
+	// 		scrollIndicatorInsets: {
+	// 			bottom: footerHeight.get(),
+	// 			top: 0,
+	// 			right: 1,
+	// 		},
+	// 	} satisfies AnimatedScrollViewProps;
+	// });
 
 	return (
-		<Animated.ScrollView
+		<div
+			// Animated.ScrollView
 			id="content"
-			automaticallyAdjustsScrollIndicatorInsets={false}
-			indicatorStyle={t.scheme === "dark" ? "white" : "black"}
+			// automaticallyAdjustsScrollIndicatorInsets={false}
+			// indicatorStyle={t.scheme === "dark" ? "white" : "black"}
 			// sets the scroll inset to the height of the footer
-			animatedProps={animatedProps}
-			// @ts-expect-error
+			// animatedProps={animatedProps}
 			style={{
 				...scrollViewStyles.common,
 				...style,
 			}}
-			contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
+			// contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
 			{...props}
 		>
-			<Center ignoreTabletLayoutOffset={ignoreTabletLayoutOffset}>
-				{/* @ts-expect-error web only -esb */}
-				{children}
-			</Center>
-		</Animated.ScrollView>
+			<Center ignoreTabletLayoutOffset={ignoreTabletLayoutOffset}>{children}</Center>
+		</div>
 	);
 });
 

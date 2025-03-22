@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { requestMediaLibraryPermissionsAsync } from "expo-image-picker";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
@@ -8,10 +7,8 @@ import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { saveImageToMediaLibrary } from "#/lib/media/manip";
 import { shareUrl } from "#/lib/sharing";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
-import * as Toast from "#/view/com/util/Toast";
 
 interface Props {
 	starterPack: AppBskyGraphDefs.StarterPackView;
@@ -41,7 +38,6 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 		shareUrl(link);
 		control.close();
 	};
-
 
 	return (
 		<>

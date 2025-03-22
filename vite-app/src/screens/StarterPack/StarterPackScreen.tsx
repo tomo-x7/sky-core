@@ -660,7 +660,9 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 	});
 
 	return (
-		<Layout.Content centerContent>
+		<Layout.Content
+		// centerContent
+		>
 			<div
 				style={{
 					...a.py_4xl,

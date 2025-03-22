@@ -1,4 +1,4 @@
-import type { MeasuredDimensions } from "react-native-reanimated";
+import type { MeasuredDimensions } from "#/lib/hooks/useHandleRef";
 
 export type Dimensions = {
 	width: number;

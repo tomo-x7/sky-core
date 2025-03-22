@@ -1,5 +1,4 @@
 import React from "react";
-import { useReducedMotion } from "react-native-reanimated";
 
 import { useTheme } from "#/alf";
 import {
@@ -48,7 +47,8 @@ export function AnimatedLikeIcon({
 }) {
 	const t = useTheme();
 	const size = big ? 22 : 18;
-	const shouldAnimate = !useReducedMotion() && hasBeenToggled;
+	// const shouldAnimate = !useReducedMotion() && hasBeenToggled;
+	const shouldAnimate = hasBeenToggled;
 	const prevIsLiked = React.useRef(isLiked);
 
 	const likeIconRef = React.useRef<HTMLDivElement>(null);

@@ -1,6 +1,5 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
 import React, { memo, useRef, useState } from "react";
-import Animated from "react-native-reanimated";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
@@ -643,19 +642,18 @@ ThreadMenu = memo(ThreadMenu);
 function MobileComposePrompt({ onPressReply }: { onPressReply: () => unknown }) {
 	const fabMinimalShellTransform = useMinimalShellFabTransform();
 	return (
-		<Animated.View
-			// @ts-expect-error
+		<div
+			// Animated.View
 			style={{
 				...styles.prompt,
 				...fabMinimalShellTransform,
-
 				...{
 					bottom: clamp(0, 13, 60),
 				},
 			}}
 		>
 			<PostThreadComposePrompt onPressCompose={onPressReply} />
-		</Animated.View>
+		</div>
 	);
 }
 

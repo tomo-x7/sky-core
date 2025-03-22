@@ -1,11 +1,11 @@
 import type React from "react";
-import Animated from "react-native-reanimated";
 
 import type { JSX } from "react";
 import { atoms as a, useTheme } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
+import { useOnLayout } from "#/components/hooks/useOnLayout";
 import { Hashtag_Stroke2_Corner0_Rounded as FeedsIcon } from "#/components/icons/Hashtag";
 import { HITSLOP_10 } from "#/lib/constants";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
@@ -25,10 +25,12 @@ export function HomeHeaderLayoutMobile({
 	const { headerHeight } = useShellLayout();
 	const headerMinimalShellTransform = useMinimalShellHeaderTransform();
 	const { hasSession } = useSession();
-
+	const ref = useOnLayout((e) => {
+		headerHeight.set(e.height);
+	});
 	return (
-		<Animated.View
-			// @ts-expect-error
+		<div
+			// Animated.View
 			style={{
 				...a.fixed,
 				...a.z_10,
@@ -40,9 +42,7 @@ export function HomeHeaderLayoutMobile({
 
 				...headerMinimalShellTransform,
 			}}
-			onLayout={(e) => {
-				headerHeight.set(e.nativeEvent.layout.height);
-			}}
+			ref={ref}
 		>
 			<Layout.Header.Outer noBottomBorder>
 				<Layout.Header.Slot>
@@ -89,6 +89,6 @@ export function HomeHeaderLayoutMobile({
 				</Layout.Header.Slot>
 			</Layout.Header.Outer>
 			{children}
-		</Animated.View>
+		</div>
 	);
 }

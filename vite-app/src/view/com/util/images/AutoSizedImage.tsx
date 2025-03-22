@@ -1,11 +1,10 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
-import React, { useRef } from "react";
+import React, { type RefObject, useRef } from "react";
 
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
 import { ArrowsDiagonalOut_Stroke2_Corner0_Rounded as Fullscreen } from "#/components/icons/ArrowsDiagonal";
-import { type HandleRef, useHandleRef } from "#/lib/hooks/useHandleRef";
 import type { Dimensions } from "#/lib/media/types";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 
@@ -74,13 +73,13 @@ export function AutoSizedImage({
 	image: AppBskyEmbedImages.ViewImage;
 	crop?: "none" | "square" | "constrained";
 	hideBadge?: boolean;
-	onPress?: (containerRef: HandleRef, fetchedDims: Dimensions | null) => void;
+	onPress?: (containerRef: RefObject<HTMLElement>, fetchedDims: Dimensions | null) => void;
 	onLongPress?: () => void;
 	onPressIn?: () => void;
 }) {
 	const t = useTheme();
 	const largeAlt = useLargeAltBadgeEnabled();
-	const containerRef = useHandleRef();
+	const containerRef = useRef<HTMLDivElement>(null);
 	const fetchedDimsRef = useRef<{ width: number; height: number } | null>(null);
 
 	let aspectRatio: number | undefined;

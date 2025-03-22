@@ -1,9 +1,10 @@
-import type { Image as RNImage } from "react-native-image-crop-picker";
-
 import type { Dimensions } from "./types";
 import { blobToDataUri, getDataUriSize } from "./util";
 
-export async function compressIfNeeded(img: RNImage, maxSize: number): Promise<RNImage> {
+export async function compressIfNeeded(
+	img: { size: number; path: string; width: number; height: number },
+	maxSize: number,
+) {
 	if (img.size < maxSize) {
 		return img;
 	}
@@ -66,7 +67,7 @@ interface DoResizeOpts {
 	maxSize: number;
 }
 
-async function doResize(dataUri: string, opts: DoResizeOpts): Promise<RNImage> {
+async function doResize(dataUri: string, opts: DoResizeOpts) {
 	let newDataUri: string | undefined = undefined;
 
 	for (let i = 0; i <= 10; i++) {

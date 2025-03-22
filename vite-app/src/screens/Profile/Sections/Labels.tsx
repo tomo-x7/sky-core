@@ -14,7 +14,6 @@ import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { LabelerLabelPreference } from "#/components/moderation/LabelPreference";
 import { useScrollHandlers } from "#/lib/ScrollContext";
-import { useAnimatedScrollHandler } from "#/lib/hooks/useAnimatedScrollHandler_FIXED";
 import { isLabelerSubscribed, lookupLabelValueDefinition } from "#/lib/moderation";
 import type { ListRef } from "#/view/com/util/List";
 import { ErrorState } from "../ErrorState";
@@ -91,20 +90,20 @@ export function ProfileLabelsSectionInner({
 		onScroll: onScrollFromContext,
 		onMomentumEnd: onMomentumEndFromContext,
 	} = useScrollHandlers();
-	const scrollHandler = useAnimatedScrollHandler({
-		onBeginDrag(e, ctx) {
-			onBeginDragFromContext?.(e, ctx);
-		},
-		onEndDrag(e, ctx) {
-			onEndDragFromContext?.(e, ctx);
-		},
-		onScroll(e, ctx) {
-			onScrollFromContext?.(e, ctx);
-		},
-		onMomentumEnd(e, ctx) {
-			onMomentumEndFromContext?.(e, ctx);
-		},
-	});
+	// const scrollHandler = useAnimatedScrollHandler({
+	// 	onBeginDrag(e, ctx) {
+	// 		onBeginDragFromContext?.(e, ctx);
+	// 	},
+	// 	onEndDrag(e, ctx) {
+	// 		onEndDragFromContext?.(e, ctx);
+	// 	},
+	// 	onScroll(e, ctx) {
+	// 		onScrollFromContext?.(e, ctx);
+	// 	},
+	// 	onMomentumEnd(e, ctx) {
+	// 		onMomentumEndFromContext?.(e, ctx);
+	// 	},
+	// });
 
 	const { labelValues } = labelerInfo.policies;
 	const isSubscribed = isLabelerSubscribed(labelerInfo, moderationOpts);
@@ -117,15 +116,14 @@ export function ProfileLabelsSectionInner({
 
 	return (
 		<Layout.Content
-			// @ts-expect-error TODO fix this
 			ref={scrollElRef}
-			scrollEventThrottle={1}
+			// scrollEventThrottle={1}
 			contentContainerStyle={{
 				paddingTop: headerHeight,
 				borderWidth: 0,
 			}}
-			contentOffset={{ x: 0, y: headerHeight * -1 }}
-			onScroll={scrollHandler}
+			// contentOffset={{ x: 0, y: headerHeight * -1 }}
+			// onScroll={scrollHandler}
 		>
 			<div
 				style={{
