@@ -130,6 +130,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	const t = useTheme();
 	const setDrawerOpen = useSetDrawerOpen();
 	const navigation = useNavigation<NavigationProp>();
+	// @ts-expect-error
 	const { isAtHome, isAtSearch, isAtFeeds, isAtNotifications, isAtMyProfile, isAtMessages } = useNavigationTabState();
 	const { hasSession, currentAccount } = useSession();
 

@@ -222,7 +222,9 @@ function ChatListItemReady({
 	const hasUnread = convo.unreadCount > 0 && !isDeletedAccount;
 
 	return (
-		<GestureActionView actions={actions}>
+		<GestureActionView
+		// actions={actions}
+		>
 			<div
 				onMouseEnter={onMouseEnter}
 				onMouseLeave={onMouseLeave}
