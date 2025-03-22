@@ -1,7 +1,7 @@
 import React from "react";
 
-import { LinearGradient } from "expo-linear-gradient";
 import { atoms as a, flatten, select, tokens, useTheme } from "#/alf";
+import { LinearGradient } from "#/components/LinearGradient";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 
 export type ButtonVariant = "solid" | "outline" | "ghost" | "gradient";

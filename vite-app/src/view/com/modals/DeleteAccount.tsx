@@ -1,5 +1,5 @@
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
+import { LinearGradient } from "#/components/LinearGradient";
 
 import { atoms as a, useTheme as useNewTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -12,7 +12,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, gradients, s } from "#/lib/styles";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent, useSession, useSessionApi } from "#/state/session";

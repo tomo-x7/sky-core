@@ -1,6 +1,7 @@
 import type { ModerationUI } from "@atproto/api";
 import React from "react";
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
 
 import { tokens, useTheme as useAlfTheme } from "#/alf";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";

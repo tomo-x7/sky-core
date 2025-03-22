@@ -1,6 +1,7 @@
 /// <reference lib="dom" />
 
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
 
 import type { CropperOptions } from "./types";
 export { openPicker } from "./picker.shared";

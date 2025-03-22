@@ -11,7 +11,7 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { colors, s } from "#/lib/styles";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import {

@@ -1,4 +1,7 @@
-import { type Action, type ActionCrop, SaveFormat, manipulateAsync } from "expo-image-manipulator";
+// import type { Action, ActionCrop } from "expo-image-manipulator";
+// TODO
+type Action = any;
+type ActionCrop = any;
 import { nanoid } from "nanoid/non-secure";
 
 import { POST_IMG_MAX } from "#/lib/constants";
@@ -104,9 +107,10 @@ export async function manipulateImage(img: ComposerImage, trans: ImageTransforma
 	}
 
 	const source = img.source;
-	const result = await manipulateAsync(source.path, actions, {
-		format: SaveFormat.PNG,
-	});
+	// TODO
+	const result = {} as any; //await manipulateAsync(source.path, actions, {
+	// 	format: SaveFormat.PNG,
+	// });
 
 	return {
 		alt: img.alt,
@@ -137,12 +141,12 @@ export async function compressImage(img: ComposerImage): Promise<ImageMeta> {
 	for (let i = 10; i > 0; i--) {
 		// Float precision
 		const factor = i / 10;
-
-		const res = await manipulateAsync(source.path, [{ resize: { width: w, height: h } }], {
-			compress: factor,
-			format: SaveFormat.JPEG,
-			base64: true,
-		});
+		// TODO
+		const res = {} as any; //await manipulateAsync(source.path, [{ resize: { width: w, height: h } }], {
+		// compress: factor,
+		// 	format: SaveFormat.JPEG,
+		// 	base64: true,
+		// });
 
 		const base64 = res.base64;
 

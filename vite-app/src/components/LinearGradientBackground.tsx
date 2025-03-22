@@ -1,5 +1,5 @@
-import { LinearGradient } from "expo-linear-gradient";
 import type React from "react";
+import { LinearGradient } from "#/components/LinearGradient";
 
 import { gradients } from "#/alf/tokens";
 

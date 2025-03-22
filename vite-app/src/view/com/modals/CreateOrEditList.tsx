@@ -1,7 +1,8 @@
 import { type AppBskyGraphDefs, RichText as RichTextAPI } from "@atproto/api";
-import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useMemo, useState } from "react";
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
+import { LinearGradient } from "#/components/LinearGradient";
 
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
@@ -14,7 +15,7 @@ import { enforceLen } from "#/lib/strings/helpers";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { shortenLinks, stripInvalidMentions } from "#/lib/strings/rich-text-manip";
 import { colors, gradients, s } from "#/lib/styles";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useListCreateMutation, useListMetadataMutation } from "#/state/queries/list";
 import { useAgent } from "#/state/session";
@@ -309,7 +310,6 @@ export function Component({
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
 								start={{ x: 0, y: 0 }}
 								end={{ x: 1, y: 1 }}
-								// @ts-expect-error
 								style={styles.btn}
 							>
 								<Text

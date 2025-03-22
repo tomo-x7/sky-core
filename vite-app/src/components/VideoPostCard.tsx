@@ -5,8 +5,8 @@ import {
 	AppBskyFeedPost,
 	type ModerationDecision,
 } from "@atproto/api";
-import { LinearGradient } from "expo-linear-gradient";
 import { useMemo } from "react";
+import { LinearGradient } from "#/components/LinearGradient";
 
 import { atoms as a, useTheme } from "#/alf";
 import { BLUE_HUE } from "#/alf/util/colorGeneration";

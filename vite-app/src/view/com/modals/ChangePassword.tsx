@@ -10,7 +10,7 @@ import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError, isNetworkError } from "#/lib/strings/errors";
 import { checkAndFormatResetCode } from "#/lib/strings/password";
 import { colors, s } from "#/lib/styles";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import { ErrorMessage } from "../util/error/ErrorMessage";

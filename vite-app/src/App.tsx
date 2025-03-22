@@ -9,7 +9,7 @@ import { useStarterPackEntry } from "./components/hooks/useStarterPackEntry";
 import { Provider as IntentDialogProvider } from "./components/intents/IntentDialogs";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { QueryProvider } from "./lib/react-query";
-import { Provider as PlaceholderStyleProvider } from "./placeholderStyle";
+import { Provider as PlaceholderStyleProvider } from "./lib/placeholderStyle";
 import { Provider as A11yProvider } from "./state/a11y";
 import { Provider as MutedThreadsProvider } from "./state/cache/thread-mutes";
 import { Provider as DialogStateProvider } from "./state/dialogs";

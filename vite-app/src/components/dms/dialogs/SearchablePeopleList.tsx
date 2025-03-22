@@ -13,7 +13,7 @@ import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { useListConvosQuery } from "#/state/queries/messages/list-conversations";

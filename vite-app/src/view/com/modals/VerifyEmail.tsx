@@ -8,7 +8,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, s } from "#/lib/styles";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useAgent, useSession } from "#/state/session";
 import * as Toast from "../util/Toast";

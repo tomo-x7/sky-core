@@ -1,4 +1,4 @@
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "#/components/LinearGradient";
 
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -30,7 +30,6 @@ export const ConfirmLanguagesButton = ({
 					colors={[gradients.blueLight.start, gradients.blueLight.end]}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
-					// @ts-expect-error
 					style={styles.btn}
 				>
 					<span

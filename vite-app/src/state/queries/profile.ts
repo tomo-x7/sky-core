@@ -10,7 +10,8 @@ import {
 } from "@atproto/api";
 import { type QueryClient, keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
 
 import { uploadBlob } from "#/lib/api";
 import { until } from "#/lib/async/until";

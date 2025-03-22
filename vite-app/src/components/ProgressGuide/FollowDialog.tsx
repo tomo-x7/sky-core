@@ -13,7 +13,7 @@ import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/compon
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { cleanError } from "#/lib/strings/errors";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorSearchPaginated } from "#/state/queries/actor-search";

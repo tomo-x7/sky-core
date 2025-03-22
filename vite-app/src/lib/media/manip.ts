@@ -1,11 +1,9 @@
-import { Image } from "react-native-image-crop-picker";
+// import type { Image } from "react-native-image-crop-picker";
+type Image = any;
 import type { Dimensions } from "./types";
 import { blobToDataUri, getDataUriSize } from "./util";
 
-export async function compressIfNeeded(
-	img: Image,
-	maxSize: number,
-) {
+export async function compressIfNeeded(img: Image, maxSize: number) {
 	if (img.size < maxSize) {
 		return img;
 	}

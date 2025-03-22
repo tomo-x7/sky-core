@@ -1,7 +1,8 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useState } from "react";
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
+import { LinearGradient } from "#/components/LinearGradient";
 
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
@@ -12,7 +13,7 @@ import { compressIfNeeded } from "#/lib/media/manip";
 import { cleanError } from "#/lib/strings/errors";
 import { enforceLen } from "#/lib/strings/helpers";
 import { colors, gradients, s } from "#/lib/styles";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { useProfileUpdateMutation } from "#/state/queries/profile";
 import * as Toast from "#/view/com/util/Toast";
@@ -193,7 +194,6 @@ export function Component({
 								colors={[gradients.blueLight.start, gradients.blueLight.end]}
 								start={{ x: 0, y: 0 }}
 								end={{ x: 1, y: 1 }}
-								// @ts-expect-error
 								style={styles.btn}
 							>
 								<Text

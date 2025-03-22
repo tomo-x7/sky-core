@@ -1,5 +1,5 @@
-import { LinearGradient } from "expo-linear-gradient";
 import type { JSX } from "react";
+import { LinearGradient } from "#/components/LinearGradient";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
 import { useMinimalShellFabTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";

@@ -2,7 +2,8 @@ import type { ModerationUI } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, useMemo } from "react";
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
 
 import { tokens, useTheme } from "#/alf";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";

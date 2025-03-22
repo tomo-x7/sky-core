@@ -1,6 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { useCallback, useEffect, useState } from "react";
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
 
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";

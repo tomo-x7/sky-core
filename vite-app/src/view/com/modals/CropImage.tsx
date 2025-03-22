@@ -1,8 +1,8 @@
-import { SaveFormat, manipulateAsync } from "expo-image-manipulator";
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
-import type { Image as RNImage } from "react-native-image-crop-picker";
+// import type { Image as RNImage } from "react-native-image-crop-picker";
+type RNImage = any;
+import { LinearGradient } from "#/components/LinearGradient";
 
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -40,26 +40,26 @@ export function Component({
 	};
 	const onPressDone = async () => {
 		const img = imageRef.current!;
-
-		const result = await manipulateAsync(
-			uri,
-			isEmpty
-				? []
-				: [
-						{
-							crop: {
-								originX: (crop.x * img.naturalWidth) / 100,
-								originY: (crop.y * img.naturalHeight) / 100,
-								width: (crop.width * img.naturalWidth) / 100,
-								height: (crop.height * img.naturalHeight) / 100,
-							},
-						},
-					],
-			{
-				base64: true,
-				format: SaveFormat.JPEG,
-			},
-		);
+		// TODO
+		const result = {} as any; //await manipulateAsync(
+		// 	uri,
+		// 	isEmpty
+		// 		? []
+		// 		: [
+		// 				{
+		// 					crop: {
+		// 						originX: (crop.x * img.naturalWidth) / 100,
+		// 						originY: (crop.y * img.naturalHeight) / 100,
+		// 						width: (crop.width * img.naturalWidth) / 100,
+		// 						height: (crop.height * img.naturalHeight) / 100,
+		// 					},
+		// 				},
+		// 			],
+		// 	{
+		// 		base64: true,
+		// 		format: SaveFormat.JPEG,
+		// 	},
+		// );
 
 		onSelect({
 			path: result.uri,
@@ -106,7 +106,6 @@ export function Component({
 						colors={[gradients.blueLight.start, gradients.blueLight.end]}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 1 }}
-						// @ts-expect-error
 						style={styles.btn}
 					>
 						<Text type="xl-medium" style={s.white}>

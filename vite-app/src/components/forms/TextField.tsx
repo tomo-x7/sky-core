@@ -5,7 +5,7 @@ import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 import { mergeRefs } from "#/lib/merge-refs";
-import { usePlaceholderStyle } from "#/placeholderStyle";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 
 const Context = React.createContext<{
 	inputRef: React.RefObject<HTMLInputElement> | null;
