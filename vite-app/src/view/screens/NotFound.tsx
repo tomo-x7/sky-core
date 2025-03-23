@@ -1,10 +1,10 @@
-import { StackActions, useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
+import { useNavigate } from "react-router-dom";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
-import type { NavigationProp } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
@@ -12,24 +12,23 @@ import { Button } from "#/view/com/util/forms/Button";
 
 export const NotFoundScreen = () => {
 	const pal = usePalette("default");
-	const navigation = useNavigation<NavigationProp>();
 	const setMinimalShellMode = useSetMinimalShellMode();
+	const navigate = useNavigate();
 
 	useFocusEffect(
 		React.useCallback(() => {
 			setMinimalShellMode(false);
 		}, [setMinimalShellMode]),
 	);
-
-	const canGoBack = navigation.canGoBack();
+	const canGoBack = history.length > 1;
 	const onPressHome = React.useCallback(() => {
 		if (canGoBack) {
-			navigation.goBack();
+			navigate(-1);
 		} else {
-			navigation.navigate("HomeTab");
-			navigation.dispatch(StackActions.popToTop());
+			navigate("/");
+			// navigation.dispatch(StackActions.popToTop());
 		}
-	}, [navigation, canGoBack]);
+	}, [navigate, canGoBack]);
 
 	return (
 		<Layout.Screen>

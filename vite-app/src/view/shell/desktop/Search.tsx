@@ -1,15 +1,14 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
-import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { NavigationProp } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { s } from "#/lib/styles";
@@ -143,10 +142,10 @@ export { SearchProfileCard };
 
 export function DesktopSearch() {
 	const pal = usePalette("default");
-	const navigation = useNavigation<NavigationProp>();
 	const [isActive, setIsActive] = React.useState<boolean>(false);
 	const [query, setQuery] = React.useState<string>("");
 	const { data: autocompleteData, isFetching } = useActorAutocompleteQuery(query, true);
+	const navigate = useNavigate();
 
 	const moderationOpts = useModerationOpts();
 
@@ -163,8 +162,9 @@ export function DesktopSearch() {
 	const onSubmit = React.useCallback(() => {
 		setIsActive(false);
 		if (!query.length) return;
-		navigation.dispatch(StackActions.push("Search", { q: query }));
-	}, [query, navigation]);
+		// navigation.dispatch(StackActions.push("Search", { q: query }));
+		navigate(`/search?q=${encodeURIComponent(query)}`);
+	}, [query, navigate]);
 
 	const onSearchProfileCardPress = React.useCallback(() => {
 		setQuery("");

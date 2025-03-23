@@ -2,15 +2,9 @@ import type { Route, RouteParams } from "./types";
 
 export class Router {
 	routes: [string, Route][] = [];
-	constructor(description: Record<string, string | string[]>) {
+	constructor(description: Readonly<Record<string, string>>) {
 		for (const [screen, pattern] of Object.entries(description)) {
-			if (typeof pattern === "string") {
-				this.routes.push([screen, createRoute(pattern)]);
-			} else {
-				pattern.forEach((subPattern) => {
-					this.routes.push([screen, createRoute(subPattern)]);
-				});
-			}
+			this.routes.push([screen, createRoute(pattern)]);
 		}
 	}
 
@@ -69,5 +63,6 @@ function createRoute(pattern: string): Route {
 
 			return str + (hasQp ? `?${qp.toString()}` : "");
 		},
+		pattern,
 	};
 }

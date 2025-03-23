@@ -1,8 +1,6 @@
-import { StackActions, useNavigation } from "@react-navigation/native";
-
+import { useNavigate } from "react-router-dom";
 import type { DialogOuterProps } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useLeaveConvo } from "#/state/queries/messages/leave-conversation";
 import * as Toast from "#/view/com/util/Toast";
 
@@ -17,12 +15,13 @@ export function LeaveConvoPrompt({
 	currentScreen: "list" | "conversation";
 	hasMessages?: boolean;
 }) {
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const { mutate: leaveConvo } = useLeaveConvo(convoId, {
 		onMutate: () => {
 			if (currentScreen === "conversation") {
-				navigation.dispatch(StackActions.replace("Messages", {}));
+				// navigation.dispatch(StackActions.replace("Messages", {}));
+				navigate("/messages");
 			}
 		},
 		onError: () => {

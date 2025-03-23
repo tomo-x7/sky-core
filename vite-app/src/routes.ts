@@ -1,6 +1,6 @@
 import { Router } from "./lib/routes/router";
 
-export const router = new Router({
+export const routes = {
 	Home: "/",
 	Search: "/search",
 	Feeds: "/feeds",
@@ -15,7 +15,7 @@ export const router = new Router({
 	ModerationBlockedAccounts: "/moderation/blocked-accounts",
 	ModerationInteractionSettings: "/moderation/interaction-settings",
 	// profiles, threads, lists
-	Profile: ["/profile/:name", "/profile/:name/rss"],
+	Profile: "/profile/:name",
 	ProfileFollowers: "/profile/:name/followers",
 	ProfileFollows: "/profile/:name/follows",
 	ProfileKnownFollowers: "/profile/:name/known-followers",
@@ -68,4 +68,6 @@ export const router = new Router({
 	StarterPackShort: "/starter-pack-short/:code",
 	StarterPackWizard: "/starter-pack/create",
 	VideoFeed: "/video-feed",
-});
+} as const;
+
+export const router = new Router(routes);

@@ -308,7 +308,7 @@ export function BadgeButton({
 	onPress,
 }: {
 	label: string;
-	onPress: (evt: React.MouseEvent<HTMLButtonElement>) => void;
+	onPress: (evt: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
 	const t = useTheme();
 	return (

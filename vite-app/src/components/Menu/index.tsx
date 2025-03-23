@@ -210,7 +210,7 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 				{...rest}
 				className="radix-dropdown-item"
 				onClick={(e) => {
-					onPress(e);
+					onPress(e as unknown as React.MouseEvent<HTMLAnchorElement>);
 
 					/**
 					 * Ported forward from Radix

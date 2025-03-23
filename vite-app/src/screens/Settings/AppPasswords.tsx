@@ -1,5 +1,4 @@
 import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -13,7 +12,6 @@ import { Text } from "#/components/Typography";
 import { PlusLarge_Stroke2_Corner0_Rounded as PlusIcon } from "#/components/icons/Plus";
 import { Trash_Stroke2_Corner0_Rounded as TrashIcon } from "#/components/icons/Trash";
 import { Warning_Stroke2_Corner0_Rounded as WarningIcon } from "#/components/icons/Warning";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { useAppPasswordDeleteMutation, useAppPasswordsQuery } from "#/state/queries/app-passwords";
 import { EmptyState } from "#/view/com/util/EmptyState";
@@ -22,8 +20,7 @@ import { ErrorScreen } from "#/view/com/util/error/ErrorScreen";
 import { AddAppPasswordDialog } from "./components/AddAppPasswordDialog";
 import * as SettingsList from "./components/SettingsList";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "AppPasswords">;
-export function AppPasswordsScreen(props: Props) {
+export function AppPasswordsScreen() {
 	const { data: appPasswords, error } = useAppPasswordsQuery();
 	const createAppPasswordControl = useDialogControl();
 

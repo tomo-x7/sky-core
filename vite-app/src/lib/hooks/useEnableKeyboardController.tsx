@@ -1,5 +1,5 @@
-import { useFocusEffect } from "@react-navigation/native";
 import { createContext, useCallback, useContext, useEffect } from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 const KeyboardControllerRefCountContext = createContext<{
 	incrementRefCount: () => void;

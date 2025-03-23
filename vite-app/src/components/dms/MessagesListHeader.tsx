@@ -1,8 +1,8 @@
 import type { AppBskyActorDefs, ModerationCause, ModerationDecision } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Link } from "#/components/Link";
 import { Text } from "#/components/Typography";
@@ -10,7 +10,6 @@ import { ConvoMenu } from "#/components/dms/ConvoMenu";
 import { Bell2Off_Filled_Corner0_Rounded as BellStroke } from "#/components/icons/Bell2";
 import { PostAlerts } from "#/components/moderation/PostAlerts";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { NavigationProp } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import type { Shadow } from "#/state/cache/profile-shadow";
 import { isConvoActive, useConvo } from "#/state/messages/convo";
@@ -28,7 +27,7 @@ export let MessagesListHeader = ({
 }): React.ReactNode => {
 	const t = useTheme();
 	const { gtTablet } = useBreakpoints();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const blockInfo = React.useMemo(() => {
 		if (!moderation) return;
@@ -43,12 +42,12 @@ export let MessagesListHeader = ({
 	}, [moderation]);
 
 	const onPressBack = useCallback(() => {
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.navigate("Messages", {});
+			navigate("/messages");
 		}
-	}, [navigation]);
+	}, [navigate]);
 
 	return (
 		<div

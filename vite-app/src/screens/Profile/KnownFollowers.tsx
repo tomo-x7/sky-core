@@ -1,11 +1,12 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import * as Layout from "#/components/Layout";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { useProfileKnownFollowersQuery } from "#/state/queries/known-followers";
 import { useResolveDidQuery } from "#/state/queries/resolve-uri";
@@ -28,15 +29,14 @@ function keyExtractor(item: AppBskyActorDefs.ProfileViewBasic) {
 	return item.did;
 }
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileKnownFollowers">;
-export const ProfileKnownFollowersScreen = ({ route }: Props) => {
+export const ProfileKnownFollowersScreen = () => {
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const initialNumToRender = useInitialNumToRender();
 
-	const { name } = route.params;
+	const { name } = useParams<RouteParam<"ProfileKnownFollowers">>();
 
 	const [isPTRing, setIsPTRing] = React.useState(false);
-	const { data: resolvedDid, isLoading: isDidLoading, error: resolveError } = useResolveDidQuery(route.params.name);
+	const { data: resolvedDid, isLoading: isDidLoading, error: resolveError } = useResolveDidQuery(name);
 	const {
 		data,
 		isLoading: isFollowersLoading,

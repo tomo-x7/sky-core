@@ -1,4 +1,3 @@
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
@@ -7,10 +6,10 @@ import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
 import { Loader } from "#/components/Loader";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { SettingsGear2_Stroke2_Corner0_Rounded as SettingsIcon } from "#/components/icons/SettingsGear2";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { ComposeIcon2 } from "#/lib/icons";
-import type { NativeStackScreenProps, NotificationsTabNavigatorParams } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { emitSoftReset, listenSoftReset } from "#/state/events";
 import { RQKEY as NOTIFS_RQKEY } from "#/state/queries/notifications/feed";
@@ -31,8 +30,7 @@ import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
 // But let's at least persist it during the sesssion.
 let lastActiveTab = 0;
 
-type Props = NativeStackScreenProps<NotificationsTabNavigatorParams, "Notifications">;
-export function NotificationsScreen(props: Props) {
+export function NotificationsScreen() {
 	const { openComposer } = useComposerControls();
 	const unreadNotifs = useUnreadNotifications();
 	const hasNew = !!unreadNotifs;
@@ -160,7 +158,7 @@ function NotificationsTab({
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
 	const scrollElRef = React.useRef<ListMethods>(null);
 	const queryClient = useQueryClient();
-	const isScreenFocused = useIsFocused();
+	const isScreenFocused = true; //useIsFocused();
 	const isFocusedAndActive = isScreenFocused && isActive;
 
 	// event handlers

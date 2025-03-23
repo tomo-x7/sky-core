@@ -1,9 +1,4 @@
-import type { NavigationState, PartialState } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
 import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
-
-export type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type CommonNavigatorParams = {
 	NotFound: undefined;
@@ -14,11 +9,11 @@ export type CommonNavigatorParams = {
 	ModerationBlockedAccounts: undefined;
 	ModerationInteractionSettings: undefined;
 	Settings: undefined;
-	Profile: { name: string; hideBackButton?: boolean };
+	Profile: { name: string }; //hideBackButtonはstate
 	ProfileFollowers: { name: string };
 	ProfileFollows: { name: string };
 	ProfileKnownFollowers: { name: string };
-	ProfileSearch: { name: string; q?: string };
+	ProfileSearch: { name: string }; //qはsearch param
 	ProfileList: { name: string; rkey: string };
 	PostThread: { name: string; rkey: string };
 	PostLikedBy: { name: string; rkey: string };
@@ -27,7 +22,7 @@ export type CommonNavigatorParams = {
 	ProfileFeed: {
 		name: string;
 		rkey: string;
-		feedCacheKey?: "discover" | "explore" | undefined;
+		// feedCacheKey?: "discover" | "explore" | undefined; //state
 	};
 	ProfileFeedLikedBy: { name: string; rkey: string };
 	ProfileLabelerLikedBy: { name: string };
@@ -53,28 +48,20 @@ export type CommonNavigatorParams = {
 	ContentAndMediaSettings: undefined;
 	AboutSettings: undefined;
 	AppIconSettings: undefined;
-	Search: { q?: string };
+	Search: undefined; //qはsearch params
 	Hashtag: { tag: string; author?: string };
 	Topic: { topic: string };
-	MessagesConversation: { conversation: string; embed?: string; accept?: true };
+	MessagesConversation: { conversation: string /*embed?: string; accept?: true*/ }; //embed,acceptはたぶんstate
 	MessagesSettings: undefined;
 	MessagesInbox: undefined;
 	NotificationSettings: undefined;
 	Feeds: undefined;
 	Start: { name: string; rkey: string };
-	StarterPack: { name: string; rkey: string; new?: boolean };
+	StarterPack: { name: string; rkey: string }; //newはstate
 	StarterPackShort: { code: string };
 	StarterPackWizard: undefined;
 	StarterPackEdit: { rkey?: string };
 	VideoFeed: VideoFeedSourceContext;
-};
-
-export type BottomTabNavigatorParams = CommonNavigatorParams & {
-	HomeTab: undefined;
-	SearchTab: undefined;
-	NotificationsTab: undefined;
-	MyProfileTab: undefined;
-	MessagesTab: undefined;
 };
 
 export type HomeTabNavigatorParams = CommonNavigatorParams & {
@@ -87,10 +74,6 @@ export type SearchTabNavigatorParams = CommonNavigatorParams & {
 
 export type NotificationsTabNavigatorParams = CommonNavigatorParams & {
 	Notifications: undefined;
-};
-
-export type MyProfileTabNavigatorParams = CommonNavigatorParams & {
-	MyProfile: undefined;
 };
 
 export type MessagesTabNavigatorParams = CommonNavigatorParams & {
@@ -108,22 +91,20 @@ export type FlatNavigatorParams = CommonNavigatorParams & {
 };
 
 export type AllNavigatorParams = CommonNavigatorParams & {
-	HomeTab: undefined;
-	Home: undefined;
-	SearchTab: undefined;
-	Search: { q?: string };
-	Feeds: undefined;
-	NotificationsTab: undefined;
-	Notifications: undefined;
-	MyProfileTab: undefined;
-	Hashtag: { tag: string; author?: string };
+	// HomeTab: undefined;
+	// Home: undefined;
+	// SearchTab: undefined;
+	// Feeds: undefined;
+	// NotificationsTab: undefined;
+	// Notifications: undefined;
+	// MyProfileTab: undefined;
+	Hashtag: { tag: string /*author?: string*/ }; //authorはsearch params
 	Topic: { topic: string };
-	MessagesTab: undefined;
-	Messages: { animation?: "push" | "pop" };
+	// MessagesTab: undefined;
+	Messages: undefined; //{ animation?: "push" | "pop" };//state
 	Start: { name: string; rkey: string };
-	StarterPack: { name: string; rkey: string; new?: boolean };
 	StarterPackShort: { code: string };
-	StarterPackWizard: undefined;
+	// StarterPackWizard: undefined;
 	StarterPackEdit: { rkey?: string };
 };
 
@@ -131,13 +112,17 @@ export type AllNavigatorParams = CommonNavigatorParams & {
 // this isn't strictly correct but it should be close enough
 // a TS wizard might be able to get this 100%
 // -prf
-export type NavigationProp = NativeStackNavigationProp<AllNavigatorParams>;
+// export type NavigationProp = NativeStackNavigationProp<AllNavigatorParams>;
 
-export type State = NavigationState | Omit<PartialState<NavigationState>, "stale">;
+// export type State = NavigationState | Omit<PartialState<NavigationState>, "stale">;
 
 export type RouteParams = Record<string, string>;
-export type MatchResult = { params: RouteParams };
+type MatchResult = { params: RouteParams };
 export type Route = {
 	match: (path: string) => MatchResult | undefined;
 	build: (params: RouteParams) => string;
+	pattern: string;
 };
+
+export type RouteParam<T extends keyof K, K = AllNavigatorParams> = (K[T] extends undefined ? {} : K[T]) &
+	Record<string, undefined>;

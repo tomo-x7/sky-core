@@ -10,12 +10,10 @@ import { Phone_Stroke2_Corner0_Rounded as PhoneIcon } from "#/components/icons/P
 import { TextSize_Stroke2_Corner0_Rounded as TextSize } from "#/components/icons/TextSize";
 import { TitleCase_Stroke2_Corner0_Rounded as Aa } from "#/components/icons/TitleCase";
 import type { Props as SVGIconProps } from "#/components/icons/common";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { useSetThemePrefs, useThemePrefs } from "#/state/shell";
 import * as SettingsList from "./components/SettingsList";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "AppearanceSettings">;
-export function AppearanceSettingsScreen(props: Props) {
+export function AppearanceSettingsScreen() {
 	const { fonts } = useAlf();
 
 	const { colorMode, darkTheme } = useThemePrefs();

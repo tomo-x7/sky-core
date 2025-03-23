@@ -1,7 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
-import type { NavigationProp } from "#/lib/routes/types";
+import { useNavigate } from "react-router-dom";
 import type { FeedSourceInfo } from "#/state/queries/feed";
 import { useSession } from "#/state/session";
 import type { RenderTabBarFnProps } from "#/view/com/pager/Pager";
@@ -16,7 +15,7 @@ export function HomeHeader(
 ) {
 	const { feeds } = props;
 	const { hasSession } = useSession();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const hasPinnedCustom = React.useMemo<boolean>(() => {
 		if (!hasSession) return false;
@@ -35,8 +34,8 @@ export function HomeHeader(
 	}, [hasPinnedCustom, feeds]);
 
 	const onPressFeedsLink = React.useCallback(() => {
-		navigation.navigate("Feeds");
-	}, [navigation]);
+		navigate("/feeds");
+	}, [navigate]);
 
 	const onSelect = React.useCallback(
 		(index: number) => {

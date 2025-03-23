@@ -1,4 +1,3 @@
-import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
@@ -9,6 +8,7 @@ import { Divider } from "#/components/Divider";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
 import { type SessionAccount, useAgent, useSession, useSessionApi } from "#/state/session";

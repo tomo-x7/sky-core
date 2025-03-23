@@ -1,10 +1,9 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useFocusEffect } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -15,7 +14,6 @@ import { FilterTimeline_Stroke2_Corner0_Rounded as FilterTimeline } from "#/comp
 import { FloppyDisk_Stroke2_Corner0_Rounded as SaveIcon } from "#/components/icons/FloppyDisk";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { colors, s } from "#/lib/styles";
 import { NoFollowingFeed } from "#/screens/Feeds/NoFollowingFeed";
 import { NoSavedFeedsOfAnyType } from "#/screens/Feeds/NoSavedFeedsOfAnyType";
@@ -26,8 +24,7 @@ import { FeedSourceCard } from "#/view/com/feeds/FeedSourceCard";
 import { TextLink } from "#/view/com/util/Link";
 import * as Toast from "#/view/com/util/Toast";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "SavedFeeds">;
-export function SavedFeeds(props: Props) {
+export function SavedFeeds() {
 	const { data: preferences } = usePreferencesQuery();
 	if (!preferences) {
 		return <div />;
@@ -44,7 +41,7 @@ function SavedFeedsInner({
 	const { isMobile, isDesktop } = useWebMediaQueries();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { mutateAsync: overwriteSavedFeeds, isPending: isOverwritePending } = useOverwriteSavedFeedsMutation();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	/*
 	 * Use optimistic data if exists and no error, otherwise fallback to remote
@@ -67,12 +64,12 @@ function SavedFeedsInner({
 		try {
 			await overwriteSavedFeeds(currentFeeds);
 			Toast.show("Feeds updated!");
-			navigation.navigate("Feeds");
+			navigate("/feeds");
 		} catch (e) {
 			Toast.show("There was an issue contacting the server", "xmark");
 			console.error("Failed to toggle pinned feed", { message: e });
 		}
-	}, [overwriteSavedFeeds, currentFeeds, navigation]);
+	}, [overwriteSavedFeeds, currentFeeds, navigate]);
 
 	return (
 		<Layout.Screen>

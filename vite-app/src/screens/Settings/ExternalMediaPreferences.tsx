@@ -4,13 +4,11 @@ import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import * as Toggle from "#/components/forms/Toggle";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { type EmbedPlayerSource, externalEmbedLabels } from "#/lib/strings/embed-player";
 import { useExternalEmbedsPrefs, useSetExternalEmbedPref } from "#/state/preferences";
 import * as SettingsList from "./components/SettingsList";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "PreferencesExternalEmbeds">;
-export function ExternalMediaPreferencesScreen(props: Props) {
+export function ExternalMediaPreferencesScreen() {
 	return (
 		<Layout.Screen>
 			<Layout.Header.Outer>

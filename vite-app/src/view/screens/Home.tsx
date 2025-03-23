@@ -1,11 +1,12 @@
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
+import { useNavigate, useParams } from "react-router-dom";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as Layout from "#/components/Layout";
 import { PROD_DEFAULT_FEED } from "#/lib/constants";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
-import type { HomeTabNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { HomeTabNavigatorParams, RouteParam } from "#/lib/routes/types";
 import { NoFeedsPinned } from "#/screens/Home/NoFeedsPinned";
 import { emitSoftReset } from "#/state/events";
 import { type SavedFeedSourceInfo, usePinnedFeedsInfos } from "#/state/queries/feed";
@@ -23,12 +24,13 @@ import { CustomFeedEmptyState } from "#/view/com/posts/CustomFeedEmptyState";
 import { FollowingEmptyState } from "#/view/com/posts/FollowingEmptyState";
 import { FollowingEndOfFeed } from "#/view/com/posts/FollowingEndOfFeed";
 
-type Props = NativeStackScreenProps<HomeTabNavigatorParams, "Home" | "Start">;
-export function HomeScreen(props: Props) {
+export function HomeScreen() {
 	const { setShowLoggedOut } = useLoggedOutViewControls();
 	const { data: preferences } = usePreferencesQuery();
 	const { currentAccount } = useSession();
 	const { data: pinnedFeedInfos, isLoading: isPinnedFeedsLoading } = usePinnedFeedsInfos();
+	const params = useParams<RouteParam<"Home" | "Start", HomeTabNavigatorParams>>();
+	const navigate = useNavigate();
 
 	React.useEffect(() => {
 		if (!currentAccount) {
@@ -40,19 +42,19 @@ export function HomeScreen(props: Props) {
 			}
 		}
 
-		const params = props.route.params;
-		if (currentAccount && props.route.name === "Start" && params?.name && params?.rkey) {
-			props.navigation.navigate("StarterPack", {
-				rkey: params.rkey,
-				name: params.name,
-			});
+		if (currentAccount && params.name === "Start" && params?.name && params?.rkey) {
+			navigate(`/starter-pack/${params.name}/${params.rkey}`);
+			// props.navigation.navigate("StarterPack", {
+			// 	rkey: params.rkey,
+			// 	name: params.name,
+			// });
 		}
-	}, [currentAccount, props.navigation, props.route.name, props.route.params, setShowLoggedOut]);
+	}, [currentAccount, params.name, params.rkey, navigate, setShowLoggedOut]);
 
 	if (preferences && pinnedFeedInfos && !isPinnedFeedsLoading) {
 		return (
 			<Layout.Screen>
-				<HomeScreenReady {...props} preferences={preferences} pinnedFeedInfos={pinnedFeedInfos} />
+				<HomeScreenReady preferences={preferences} pinnedFeedInfos={pinnedFeedInfos} />
 			</Layout.Screen>
 		);
 	} else {
@@ -69,7 +71,7 @@ export function HomeScreen(props: Props) {
 function HomeScreenReady({
 	preferences,
 	pinnedFeedInfos,
-}: Props & {
+}: {
 	preferences: UsePreferencesQueryResponse;
 	pinnedFeedInfos: SavedFeedSourceInfo[];
 }) {

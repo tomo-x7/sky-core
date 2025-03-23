@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -9,7 +9,6 @@ import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { canBeMessaged } from "#/components/dms/util";
 import { Message_Stroke2_Corner0_Rounded as Message } from "#/components/icons/Message";
 import { useEmail } from "#/lib/hooks/useEmail";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useGetConvoAvailabilityQuery } from "#/state/queries/messages/get-convo-availability";
 import { useGetConvoForMembers } from "#/state/queries/messages/get-convo-for-members";
 import * as Toast from "#/view/com/util/Toast";
@@ -20,14 +19,14 @@ export function MessageProfileButton({
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
 	const t = useTheme();
-	const navigation = useNavigation<NavigationProp>();
 	const { needsEmailVerification } = useEmail();
 	const verifyEmailControl = useDialogControl();
+	const navigate = useNavigate();
 
 	const { data: convoAvailability } = useGetConvoAvailabilityQuery(profile.did);
 	const { mutate: initiateConvo } = useGetConvoForMembers({
 		onSuccess: ({ convo }) => {
-			navigation.navigate("MessagesConversation", { conversation: convo.id });
+			navigate(`/messages/${convo.id}`);
 		},
 		onError: () => {
 			Toast.show("Failed to create conversation");
@@ -45,13 +44,11 @@ export function MessageProfileButton({
 		}
 
 		if (convoAvailability.convo) {
-			navigation.navigate("MessagesConversation", {
-				conversation: convoAvailability.convo.id,
-			});
+			navigate(`/messages/${convoAvailability.convo.id}`);
 		} else {
 			initiateConvo([profile.did]);
 		}
-	}, [needsEmailVerification, verifyEmailControl, navigation, profile.did, initiateConvo, convoAvailability]);
+	}, [needsEmailVerification, verifyEmailControl, navigate, profile.did, initiateConvo, convoAvailability]);
 
 	if (!convoAvailability) {
 		// show pending state based on declaration

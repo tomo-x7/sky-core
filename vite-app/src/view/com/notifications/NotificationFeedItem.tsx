@@ -9,10 +9,10 @@ import {
 } from "@atproto/api";
 import { AtUri } from "@atproto/api";
 import { TID } from "@atproto/common-web";
-import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, type ReactElement, useMemo, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Link as NewLink } from "#/components/Link";
@@ -31,7 +31,6 @@ import { Repost_Stroke2_Corner2_Rounded as RepostIcon } from "#/components/icons
 import { StarterPack } from "#/components/icons/StarterPack";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { NavigationProp } from "#/lib/routes/types";
 import { forceLTR } from "#/lib/strings/bidi";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -457,8 +456,8 @@ function ExpandListPressable({
 
 function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 	const agent = useAgent();
-	const navigation = useNavigation<NavigationProp>();
 	const [isLoading, setIsLoading] = React.useState(false);
+	const navigate = useNavigate();
 
 	if (
 		profile.associated?.chat?.allowIncoming === "none" ||
@@ -487,9 +486,7 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 						},
 						{ headers: DM_SERVICE_HEADERS },
 					);
-					navigation.navigate("MessagesConversation", {
-						conversation: res.data.convo.id,
-					});
+					navigate(`/messages/${res.data.convo.id}`);
 				} catch (e) {
 				} finally {
 					setIsLoading(false);

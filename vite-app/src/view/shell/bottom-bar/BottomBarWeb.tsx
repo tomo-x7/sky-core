@@ -1,6 +1,6 @@
-import { useNavigationState } from "@react-navigation/native";
 import React from "react";
 
+import { useLocation, useMatch } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -23,9 +23,8 @@ import {
 	UserCircle_Filled_Corner0_Rounded as UserCircleFilled,
 } from "#/components/icons/UserCircle";
 import { useMinimalShellFooterTransform } from "#/lib/hooks/useMinimalShellTransform";
-import { getCurrentRoute, isTab } from "#/lib/routes/helpers";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
+import { routes } from "#/routes";
 import { useHomeBadge } from "#/state/home-badge";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
 import { useUnreadNotifications } from "#/state/queries/notifications/unread";
@@ -243,27 +242,19 @@ const NavItem: React.FC<{
 	notificationCount?: string;
 }> = ({ children, href, routeName, hasNew, notificationCount }) => {
 	const { currentAccount } = useSession();
-	const currentRoute = useNavigationState((state) => {
-		if (!state) {
-			return { name: "Home" };
-		}
-		return getCurrentRoute(state);
-	});
+	const isMatchHref = useMatch(href) != null;
+	const isProfile = useMatch(routes.Profile) != null;
+	const location = useLocation();
 
 	// Checks whether we're on someone else's profile
 	const isOnDifferentProfile =
-		currentRoute.name === "Profile" &&
+		isProfile &&
 		routeName === "Profile" &&
-		(currentRoute.params as CommonNavigatorParams["Profile"]).name !== currentAccount?.handle;
+		(currentAccount?.handle == null || !location.pathname.includes(currentAccount.handle));
 
-	const isActive =
-		currentRoute.name === "Profile"
-			? isTab(currentRoute.name, routeName) &&
-				(currentRoute.params as CommonNavigatorParams["Profile"]).name ===
-					(routeName === "Profile"
-						? currentAccount?.handle
-						: (currentRoute.params as CommonNavigatorParams["Profile"]).name)
-			: isTab(currentRoute.name, routeName);
+	const isActive = isProfile
+		? isMatchHref && currentAccount?.handle != null && location.pathname.includes(currentAccount.handle)
+		: isMatchHref;
 
 	return (
 		<Link

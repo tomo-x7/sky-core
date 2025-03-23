@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/core";
 import { useEffect, useState } from "react";
 
+import { useLocation } from "react-router-dom";
 import { atoms as a, useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
 import { Divider } from "#/components/Divider";
@@ -14,19 +14,18 @@ import { DesktopFeeds } from "#/view/shell/desktop/Feeds";
 import { DesktopSearch } from "#/view/shell/desktop/Search";
 import { SidebarTrendingTopics } from "#/view/shell/desktop/SidebarTrendingTopics";
 
-function useWebQueryParams() {
-	const navigation = useNavigation();
+function useWebQueryParams(): Record<string, string> {
+	const location = useLocation();
 	const [params, setParams] = useState<Record<string, string>>({});
 
 	useEffect(() => {
-		return navigation.addListener("state", (e) => {
-			try {
-				const { state } = e.data;
-				const lastRoute = state.routes[state.routes.length - 1];
-				setParams(lastRoute.params);
-			} catch (err) {}
-		});
-	}, [navigation]);
+		const searchParams = new URLSearchParams(location.search);
+		const newParams: Record<string, string> = {};
+		for (const [key, value] of searchParams.entries()) {
+			newParams[key] = value;
+		}
+		setParams(newParams);
+	}, [location.search]);
 
 	return params;
 }

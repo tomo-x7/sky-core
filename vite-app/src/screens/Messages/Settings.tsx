@@ -1,4 +1,3 @@
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback } from "react";
 
 import { atoms as a } from "#/alf";
@@ -6,7 +5,6 @@ import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
 import { useUpdateActorDeclaration } from "#/state/queries/messages/actor-declaration";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useSession } from "#/state/session";
@@ -14,8 +12,7 @@ import * as Toast from "#/view/com/util/Toast";
 
 type AllowIncoming = "all" | "none" | "following";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "MessagesSettings">;
-export function MessagesSettingsScreen(props: Props) {
+export function MessagesSettingsScreen() {
 	const { currentAccount } = useSession();
 	const { data: profile } = useProfileQuery({
 		did: currentAccount!.did,

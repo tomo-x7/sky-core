@@ -1,18 +1,18 @@
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import * as Layout from "#/components/Layout";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
+import type { RouteParam } from "#/lib/routes/types";
 import { makeRecordUri } from "#/lib/strings/url-helpers";
 import { usePostThreadQuery } from "#/state/queries/post-thread";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { PostQuotes as PostQuotesComponent } from "#/view/com/post-thread/PostQuotes";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "PostQuotes">;
-export const PostQuotesScreen = ({ route }: Props) => {
+export const PostQuotesScreen = () => {
 	const setMinimalShellMode = useSetMinimalShellMode();
-	const { name, rkey } = route.params;
-	const uri = makeRecordUri(name, "app.bsky.feed.post", rkey);
+	const { name, rkey } = useParams<RouteParam<"PostQuotes">>();
+	const uri = makeRecordUri(name!, "app.bsky.feed.post", rkey!);
 	const { data: post } = usePostThreadQuery(uri);
 
 	let quoteCount: number | undefined;

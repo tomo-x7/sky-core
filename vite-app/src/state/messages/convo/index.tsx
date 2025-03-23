@@ -1,7 +1,7 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
-import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useContext, useState, useSyncExternalStore } from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import { useAppState } from "#/lib/hooks/useAppState";
 import { Convo } from "#/state/messages/convo/agent";

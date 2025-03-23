@@ -1,5 +1,3 @@
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-
 import * as Layout from "#/components/Layout";
 import * as Toggle from "#/components/forms/Toggle";
 import { Bubbles_Stroke2_Corner2_Rounded as BubblesIcon } from "#/components/icons/Bubble";
@@ -8,15 +6,13 @@ import { Home_Stroke2_Corner2_Rounded as HomeIcon } from "#/components/icons/Hom
 import { Macintosh_Stroke2_Corner2_Rounded as MacintoshIcon } from "#/components/icons/Macintosh";
 import { Play_Stroke2_Corner2_Rounded as PlayIcon } from "#/components/icons/Play";
 import { Trending2_Stroke2_Corner2_Rounded as Graph } from "#/components/icons/Trending2";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { useAutoplayDisabled, useSetAutoplayDisabled } from "#/state/preferences";
 import { useInAppBrowser, useSetInAppBrowser } from "#/state/preferences/in-app-browser";
 import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences/trending";
 import { useTrendingConfig } from "#/state/trending-config";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "ContentAndMediaSettings">;
-export function ContentAndMediaSettingsScreen(props: Props) {
+export function ContentAndMediaSettingsScreen() {
 	const autoplayDisabledPref = useAutoplayDisabled();
 	const setAutoplayDisabledPref = useSetAutoplayDisabled();
 	const inAppBrowserPref = useInAppBrowser();

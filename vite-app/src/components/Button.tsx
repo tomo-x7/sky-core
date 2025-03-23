@@ -51,7 +51,7 @@ type NonTextElements = React.ReactElement | Iterable<React.ReactElement | null |
 
 export type ButtonProps = {
 	disabled?: boolean;
-	onPress?: React.MouseEventHandler<HTMLButtonElement>;
+	onPress?: React.MouseEventHandler;
 	hitSlop?:
 		| number
 		| {
@@ -60,12 +60,12 @@ export type ButtonProps = {
 				left?: number;
 				right?: number;
 		  };
-	onHoverIn?: React.MouseEventHandler<HTMLButtonElement>;
-	onHoverOut?: React.MouseEventHandler<HTMLButtonElement>;
-	onPressIn?: React.MouseEventHandler<HTMLButtonElement>;
-	onPressOut?: React.MouseEventHandler<HTMLButtonElement>;
-	onFocus?: (ev: React.FocusEvent<HTMLButtonElement, Element>) => void;
-	onBlur?: (ev: React.FocusEvent<HTMLButtonElement, Element>) => void;
+	onHoverIn?: React.MouseEventHandler;
+	onHoverOut?: React.MouseEventHandler;
+	onPressIn?: React.MouseEventHandler;
+	onPressOut?: React.MouseEventHandler;
+	onFocus?: (ev: React.FocusEvent<HTMLAnchorElement, Element>) => void;
+	onBlur?: (ev: React.FocusEvent<HTMLAnchorElement, Element>) => void;
 	className?: string;
 } & VariantProps & {
 		/**
@@ -75,6 +75,7 @@ export type ButtonProps = {
 		style?: React.CSSProperties;
 		hoverStyle?: React.CSSProperties;
 		children: NonTextElements | ((context: ButtonContext) => NonTextElements);
+		href?: string;
 	};
 
 export type ButtonTextProps = { style?: React.CSSProperties; children?: React.ReactNode } & VariantProps & {
@@ -92,7 +93,7 @@ export function useButtonContext() {
 	return React.useContext(Context);
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 	(
 		{
 			children,
@@ -110,6 +111,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			onHoverOut: onHoverOutOuter,
 			onFocus: onFocusOuter,
 			onBlur: onBlurOuter,
+			href,
 			...rest
 		},
 		ref,
@@ -122,7 +124,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		});
 
 		const onPressIn = React.useCallback(
-			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+			(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					pressed: true,
@@ -132,7 +134,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			[onPressInOuter],
 		);
 		const onPressOut = React.useCallback(
-			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+			(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					pressed: false,
@@ -142,7 +144,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			[onPressOutOuter],
 		);
 		const onHoverIn = React.useCallback(
-			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+			(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					hovered: true,
@@ -152,7 +154,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			[onHoverInOuter],
 		);
 		const onHoverOut = React.useCallback(
-			(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+			(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 				setState((s) => ({
 					...s,
 					hovered: false,
@@ -162,7 +164,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			[onHoverOutOuter],
 		);
 		const onFocus = React.useCallback(
-			(e: React.FocusEvent<HTMLButtonElement, Element>) => {
+			(e: React.FocusEvent<HTMLAnchorElement, Element>) => {
 				setState((s) => ({
 					...s,
 					focused: true,
@@ -172,7 +174,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			[onFocusOuter],
 		);
 		const onBlur = React.useCallback(
-			(e: React.FocusEvent<HTMLButtonElement, Element>) => {
+			(e: React.FocusEvent<HTMLAnchorElement, Element>) => {
 				setState((s) => ({
 					...s,
 					focused: false,
@@ -442,11 +444,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 		const flattenedBaseStyles = flatten([baseStyles, style]);
 		return (
-			<button
+			<a
 				{...rest}
 				ref={ref}
 				aria-label={label}
 				aria-pressed={state.pressed}
+				// @ts-expect-error スタイルで頑張る
 				disabled={disabled || false}
 				style={{
 					...a.flex_row,
@@ -454,6 +457,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					...a.justify_center,
 					...flattenedBaseStyles,
 					...(state.hovered || state.pressed ? { ...hoverStyles, ...hoverStyleProp } : {}),
+					pointerEvents: disabled ? "none" : "auto",
 				}}
 				onFocus={onFocus}
 				onBlur={onBlur}
@@ -461,6 +465,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				onMouseUp={onPressOut}
 				onMouseEnter={onHoverIn}
 				onMouseLeave={onHoverOut}
+				href={href}
 			>
 				{variant === "gradient" && gradientValues && (
 					<div
@@ -486,7 +491,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				<Context.Provider value={context}>
 					{typeof children === "function" ? children(context) : children}
 				</Context.Provider>
-			</button>
+			</a>
 		);
 	},
 );

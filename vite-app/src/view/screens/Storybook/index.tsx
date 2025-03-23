@@ -1,10 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { ThemeProvider, atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useSetThemePrefs } from "#/state/shell";
 import { ListContained } from "#/view/screens/Storybook/ListContained";
 import { Admonitions } from "./Admonitions";
@@ -43,7 +42,7 @@ export function Storybook() {
 function StorybookInner() {
 	const { setColorMode, setDarkTheme } = useSetThemePrefs();
 	const [showContainedList, setShowContainedList] = React.useState(false);
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -111,7 +110,7 @@ function StorybookInner() {
 							variant="solid"
 							color="primary"
 							size="small"
-							onPress={() => navigation.navigate("SharedPreferencesTester")}
+							onPress={() => /*navigation.navigate("SharedPreferencesTester")*/ void 0}
 							label="two"
 						>
 							<ButtonText>Open Shared Prefs Tester</ButtonText>

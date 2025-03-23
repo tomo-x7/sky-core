@@ -12,8 +12,8 @@ import { MagnifyingGlass2_Stroke2_Corner0_Rounded as SearchIcon } from "#/compon
 import { PersonGroup_Stroke2_Corner2_Rounded as PersonGroupIcon } from "#/components/icons/Person";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
-import { cleanError } from "#/lib/strings/errors";
 import { usePlaceholderStyle } from "#/lib/placeholderStyle";
+import { cleanError } from "#/lib/strings/errors";
 import { popularInterests, useInterestsDisplayNames } from "#/screens/Onboarding/state";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorSearchPaginated } from "#/state/queries/actor-search";

@@ -1,11 +1,10 @@
 import { type AppBskyActorDefs, AppBskyFeedGetAuthorFeed, AtUri } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import * as Prompt from "#/components/Prompt";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
-import type { NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
 import { useRemoveFeedMutation } from "#/state/queries/preferences";
@@ -68,7 +67,6 @@ function FeedgenErrorMessage({
 	savedFeedConfig?: AppBskyActorDefs.SavedFeed;
 }) {
 	const pal = usePalette("default");
-	const navigation = useNavigation<NavigationProp>();
 	const msg = React.useMemo(
 		() =>
 			({
@@ -93,10 +91,11 @@ function FeedgenErrorMessage({
 	const [ownerDid] = safeParseFeedgenUri(uri);
 	const removePromptControl = Prompt.usePromptControl();
 	const { mutateAsync: removeFeed } = useRemoveFeedMutation();
+	const navigate = useNavigate();
 
 	const onViewProfile = React.useCallback(() => {
-		navigation.navigate("Profile", { name: ownerDid });
-	}, [navigation, ownerDid]);
+		navigate(`/profile/${ownerDid}`);
+	}, [navigate, ownerDid]);
 
 	const onPressRemoveFeed = React.useCallback(() => {
 		removePromptControl.open();

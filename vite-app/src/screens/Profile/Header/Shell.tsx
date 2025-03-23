@@ -1,13 +1,12 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React, { memo, useRef } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeftIcon } from "#/components/icons/Arrow";
 import { LabelsOnMe } from "#/components/moderation/LabelsOnMe";
 import { ProfileHeaderAlerts } from "#/components/moderation/ProfileHeaderAlerts";
 import { type MeasuredDimensions, measureHandle } from "#/lib/hooks/useHandleRef";
-import type { NavigationProp } from "#/lib/routes/types";
 import type { Shadow } from "#/state/cache/types";
 import { useLightboxControls } from "#/state/lightbox";
 import { useSession } from "#/state/session";
@@ -35,17 +34,17 @@ let ProfileHeaderShell = ({
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const { openLightbox } = useLightboxControls();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const aviRef = useRef<HTMLDivElement>(null);
 
 	const onPressBack = React.useCallback(() => {
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.navigate("Home");
+			navigate("/");
 		}
-	}, [navigation]);
+	}, [navigate]);
 
 	const _openLightbox = React.useCallback(
 		(uri: string, thumbRect: MeasuredDimensions | null) => {

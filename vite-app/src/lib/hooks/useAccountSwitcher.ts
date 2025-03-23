@@ -32,7 +32,7 @@ export function useAccountSwitcher() {
 				}
 			} catch (e) {
 				console.error("switch account: selectAccount failed", {
-					//@ts-ignore
+					//@ts-expect-error
 					message: e.message,
 				});
 				requestSwitchToAccount({ requestedAccount: account.did });

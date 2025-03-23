@@ -1,23 +1,22 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import type { NavigationProp } from "#/lib/routes/types";
 
 export function ErrorState({ error }: { error: string }) {
 	const t = useTheme();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const onPressBack = React.useCallback(() => {
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.navigate("Home");
+			navigate("/");
 		}
-	}, [navigation]);
+	}, [navigate]);
 
 	return (
 		<div style={a.px_xl}>

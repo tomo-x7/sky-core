@@ -1,8 +1,7 @@
 import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { AvatarStackWithFetch } from "#/components/AvatarStack";
 import { useDialogControl } from "#/components/Dialog";
@@ -31,7 +30,6 @@ import { Window_Stroke2_Corner2_Rounded as WindowIcon } from "#/components/icons
 import { IS_INTERNAL } from "#/lib/app-info";
 import { HELP_DESK_URL } from "#/lib/constants";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
-import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { ProfileHeaderDisplayName } from "#/screens/Profile/Header/DisplayName";
 import { ProfileHeaderHandle } from "#/screens/Profile/Header/Handle";
@@ -48,8 +46,7 @@ import { useCloseAllActiveElements } from "#/state/util";
 import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "Settings">;
-export function SettingsScreen(props: Props) {
+export function SettingsScreen() {
 	// const reducedMotion = useReducedMotion();
 	const reducedMotion = false;
 	const { logoutEveryAccount } = useSessionApi();
@@ -241,11 +238,11 @@ function ProfilePreview({
 
 function DevOptions() {
 	const onboardingDispatch = useOnboardingDispatch();
-	const navigation = useNavigation<NavigationProp>();
 	const { mutate: deleteChatDeclarationRecord } = useDeleteActorDeclaration();
+	const navigate = useNavigate();
 
 	const resetOnboarding = async () => {
-		navigation.navigate("Home");
+		navigate("/");
 		onboardingDispatch({ type: "start" });
 		Toast.show("Onboarding reset");
 	};
@@ -257,16 +254,13 @@ function DevOptions() {
 
 	return (
 		<>
-			<SettingsList.PressableItem onPress={() => navigation.navigate("Log")} label={"Open system log"}>
+			<SettingsList.PressableItem onPress={() => navigate("/sys/log")} label={"Open system log"}>
 				<SettingsList.ItemText>System log</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.PressableItem onPress={() => navigation.navigate("Debug")} label={"Open storybook page"}>
+			<SettingsList.PressableItem onPress={() => navigate("/sys/debug")} label={"Open storybook page"}>
 				<SettingsList.ItemText>Storybook</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.PressableItem
-				onPress={() => navigation.navigate("DebugMod")}
-				label={"Open moderation debug page"}
-			>
+			<SettingsList.PressableItem onPress={() => navigate("/sys/debug-mod")} label={"Open moderation debug page"}>
 				<SettingsList.ItemText>Debug Moderation</SettingsList.ItemText>
 			</SettingsList.PressableItem>
 			<SettingsList.PressableItem onPress={() => deleteChatDeclarationRecord()} label={"Open storybook page"}>

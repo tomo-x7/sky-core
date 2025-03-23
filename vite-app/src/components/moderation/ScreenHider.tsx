@@ -1,7 +1,7 @@
 import type { ModerationUI } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -11,7 +11,6 @@ import {
 } from "#/components/moderation/ModerationDetailsDialog";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
-import type { NavigationProp } from "#/lib/routes/types";
 import { CenteredView } from "#/view/com/util/Views";
 
 export function ScreenHider({
@@ -28,7 +27,7 @@ export function ScreenHider({
 }>) {
 	const t = useTheme();
 	const [override, setOverride] = React.useState(false);
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 	const { isMobile } = useWebMediaQueries();
 	const control = useModerationDetailsDialogControl();
 	const blur = modui.blurs[0];
@@ -152,10 +151,10 @@ export function ScreenHider({
 					style={a.rounded_full}
 					label={"Go back"}
 					onPress={() => {
-						if (navigation.canGoBack()) {
-							navigation.goBack();
+						if (history.length > 1) {
+							navigate(-1);
 						} else {
-							navigation.navigate("Home");
+							navigate("/");
 						}
 					}}
 				>

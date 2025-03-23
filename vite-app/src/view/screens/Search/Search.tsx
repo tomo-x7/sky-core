@@ -1,8 +1,8 @@
 import { type AppBskyActorDefs, type AppBskyFeedDefs, moderateProfile } from "@atproto/api";
-import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
 
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
@@ -11,6 +11,7 @@ import * as Layout from "#/components/Layout";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { useOnLayout } from "#/components/hooks/useOnLayout";
 import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon } from "#/components/icons/Chevron";
 import { Earth_Stroke2_Corner0_Rounded as EarthIcon } from "#/components/icons/Globe";
@@ -20,8 +21,6 @@ import { HITSLOP_10 } from "#/lib/constants";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { MagnifyingGlassIcon } from "#/lib/icons";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { NavigationProp } from "#/lib/routes/types";
-import type { NativeStackScreenProps, SearchTabNavigatorParams } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { augmentSearchQuery } from "#/lib/strings/helpers";
 import { languageName } from "#/locale/helpers";
@@ -532,10 +531,10 @@ let SearchScreenInner = ({
 };
 SearchScreenInner = React.memo(SearchScreenInner);
 
-export function SearchScreen(props: NativeStackScreenProps<SearchTabNavigatorParams, "Search">) {
-	const queryParam = props.route?.params?.q ?? "";
-
-	return <SearchScreenShell queryParam={queryParam} />;
+export function SearchScreen() {
+	const [params] = useSearchParams();
+	const query = params.get("q") ?? "";
+	return <SearchScreenShell queryParam={query} />;
 }
 
 export function SearchScreenShell({
@@ -551,12 +550,11 @@ export function SearchScreenShell({
 }) {
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
-	const navigation = useNavigation<NavigationProp>();
-	const route = useRoute();
 	const textInput = React.useRef<HTMLInputElement>(null);
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { currentAccount } = useSession();
 	const queryClient = useQueryClient();
+	const navigate = useNavigate();
 
 	// Query terms
 	const [searchText, setSearchText] = React.useState<string>(queryParam);
@@ -645,10 +643,10 @@ export function SearchScreenShell({
 			scrollToTopWeb();
 			setShowAutocomplete(false);
 			updateSearchHistory(item);
-			// @ts-expect-error
-			navigation.push(route.name, { ...route.params, q: item });
+			// navigation.push(route.name, { ...route.params, q: item });
+			console.log("from src/view/screens/Search/Search.tsx:651 何すればいいのかよくわからん");
 		},
-		[updateSearchHistory, navigation, route],
+		[updateSearchHistory],
 	);
 
 	const onPressCancelSearch = React.useCallback(() => {
@@ -656,8 +654,8 @@ export function SearchScreenShell({
 		textInput.current?.blur();
 		setShowAutocomplete(false);
 		// Empty params resets the URL to be /search rather than /search?q=
-		navigation.replace("Search", {});
-	}, [navigation]);
+		navigate("/search", { replace: true });
+	}, [navigate]);
 
 	const onSubmit = React.useCallback(() => {
 		navigateToItem(searchText);
@@ -688,13 +686,12 @@ export function SearchScreenShell({
 
 	const onSoftReset = React.useCallback(() => {
 		// Empty params resets the URL to be /search rather than /search?q=
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { q: _q, ...parameters } = (route.params ?? {}) as {
-			[key: string]: string;
-		};
-		// @ts-expect-error
-		navigation.replace(route.name, parameters);
-	}, [navigation, route]);
+		// const { q: _q, ...parameters } = (route.params ?? {}) as {
+		// 	[key: string]: string;
+		// };
+		// navigation.replace(route.name, parameters);
+		navigate(location.pathname);
+	}, [navigate]);
 
 	useFocusEffect(
 		React.useCallback(() => {

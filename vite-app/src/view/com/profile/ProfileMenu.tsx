@@ -1,8 +1,8 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { memo } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Menu from "#/components/Menu";
 import * as Prompt from "#/components/Prompt";
@@ -22,7 +22,6 @@ import { SpeakerVolumeFull_Stroke2_Corner0_Rounded as Unmute } from "#/component
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
 import { HITSLOP_20 } from "#/lib/constants";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { NavigationProp } from "#/lib/routes/types";
 import { shareText, shareUrl } from "#/lib/sharing";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import type { Shadow } from "#/state/cache/types";
@@ -47,13 +46,13 @@ let ProfileMenu = ({
 	const { openModal } = useModalControls();
 	const reportDialogControl = useReportDialogControl();
 	const queryClient = useQueryClient();
-	const navigation = useNavigation<NavigationProp>();
 	const isSelf = currentAccount?.did === profile.did;
 	const isFollowing = profile.viewer?.following;
 	const isBlocked = profile.viewer?.blocking || profile.viewer?.blockedBy;
 	const isFollowingBlockedAccount = isFollowing && isBlocked;
 	const isLabelerAndNotBlocked = !!profile.associated?.labeler && !isBlocked;
 	const [devModeEnabled] = useDevModeEnabled();
+	const navigate = useNavigate();
 
 	const [queueMute, queueUnmute] = useProfileMuteMutationQueue(profile);
 	const [queueBlock, queueUnblock] = useProfileBlockMutationQueue(profile);
@@ -175,8 +174,8 @@ let ProfileMenu = ({
 	}, [profile.did]);
 
 	const onPressSearch = React.useCallback(() => {
-		navigation.navigate("ProfileSearch", { name: profile.handle });
-	}, [navigation, profile.handle]);
+		navigate(`/profile${profile.handle}/search`);
+	}, [navigate, profile.handle]);
 
 	return (
 		<EventStopper onKeyDown={false}>

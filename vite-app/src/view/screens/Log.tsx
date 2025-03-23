@@ -1,17 +1,16 @@
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import * as Layout from "#/components/Layout";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useGetTimeAgo } from "#/lib/hooks/useTimeAgo";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { useTickEveryMinute } from "#/state/shell";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { ScrollView } from "#/view/com/util/Views";
 
-export function LogScreen(props: NativeStackScreenProps<CommonNavigatorParams, "Log">) {
+export function LogScreen() {
 	const pal = usePalette("default");
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const [expanded, setExpanded] = React.useState<string[]>([]);

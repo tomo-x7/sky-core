@@ -1,7 +1,7 @@
 import type { ChatBskyConvoDefs, ModerationCause } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React, { useCallback } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
 import * as Prompt from "#/components/Prompt";
@@ -19,7 +19,6 @@ import {
 } from "#/components/icons/Person";
 import { SpeakerVolumeFull_Stroke2_Corner0_Rounded as Unmute } from "#/components/icons/Speaker";
 import { Keyboard } from "#/lib/Keyboard";
-import type { NavigationProp } from "#/lib/routes/types";
 import type { Shadow } from "#/state/cache/types";
 import { useConvoQuery, useMarkAsReadMutation } from "#/state/queries/messages/conversation";
 import { useMuteConvo } from "#/state/queries/messages/mute-conversation";
@@ -142,8 +141,8 @@ function MenuContent({
 	reportControl: Prompt.PromptControlProps;
 	blockedByListControl: Prompt.PromptControlProps;
 }) {
-	const navigation = useNavigation<NavigationProp>();
 	const { mutate: markAsRead } = useMarkAsReadMutation();
+	const navigate = useNavigate();
 
 	const { listBlocks, userBlock } = blockInfo;
 	const isBlocking = userBlock || !!listBlocks.length;
@@ -153,8 +152,8 @@ function MenuContent({
 	const { data: convo } = useConvoQuery(initialConvo);
 
 	const onNavigateToProfile = useCallback(() => {
-		navigation.navigate("Profile", { name: profile.did });
-	}, [navigation, profile.did]);
+		navigate(`/profile/${profile.did}`);
+	}, [navigate, profile.did]);
 
 	const { mutate: muteConvo } = useMuteConvo(convoId, {
 		onSuccess: (data) => {

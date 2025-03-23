@@ -5,9 +5,9 @@ import {
 	AtUri,
 	type RichText as RichTextAPI,
 } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React, { memo, useCallback } from "react";
 
+import { useMatch, useNavigate, useParams } from "react-router-dom";
 import { useBreakpoints } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -43,13 +43,12 @@ import { Trash_Stroke2_Corner0_Rounded as Trash } from "#/components/icons/Trash
 import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
-import { getCurrentRoute } from "#/lib/routes/helpers";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { shareText, shareUrl } from "#/lib/sharing";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { getTranslatorLink } from "#/locale/helpers";
+import { routes } from "#/routes";
 import type { Shadow } from "#/state/cache/post-shadow";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
@@ -99,7 +98,6 @@ let PostDropdownMenuItems = ({
 	const { hidePost } = useHiddenPostsApi();
 	const feedFeedback = useFeedFeedbackContext();
 	const openLink = useOpenLink();
-	const navigation = useNavigation<NavigationProp>();
 	const { mutedWordsDialogControl } = useGlobalDialogsControlContext();
 	const blockPromptControl = useDialogControl();
 	const reportDialogControl = useReportDialogControl();
@@ -113,6 +111,7 @@ let PostDropdownMenuItems = ({
 	const hideReplyConfirmControl = useDialogControl();
 	const { mutateAsync: toggleReplyVisibility } = useToggleReplyVisibilityMutation();
 	const [devModeEnabled] = useDevModeEnabled();
+	const navigate = useNavigate();
 
 	const postUri = post.uri;
 	const postCid = post.cid;
@@ -147,6 +146,9 @@ let PostDropdownMenuItems = ({
 		rootPostUri: rootUri,
 	});
 
+	const isPostThread = useMatch(routes.PostThread);
+	const params = useParams();
+
 	const href = React.useMemo(() => {
 		const urip = new AtUri(postUri);
 		return makeProfileLink(postAuthor, "post", urip.rkey);
@@ -158,18 +160,16 @@ let PostDropdownMenuItems = ({
 		deletePostMutate({ uri: postUri }).then(
 			() => {
 				Toast.show("Post deleted");
-
-				const route = getCurrentRoute(navigation.getState());
-				if (route.name === "PostThread") {
-					const params = route.params as CommonNavigatorParams["PostThread"];
+				if (isPostThread) {
+					// paramsは{name:string,rkey:string}
 					if (
 						currentAccount &&
 						isAuthor &&
 						(params.name === currentAccount.handle || params.name === currentAccount.did)
 					) {
-						const currentHref = makeProfileLink(postAuthor, "post", params.rkey);
-						if (currentHref === href && navigation.canGoBack()) {
-							navigation.goBack();
+						const currentHref = makeProfileLink(postAuthor, "post", params.rkey!);
+						if (currentHref === href && history.length > 1) {
+							navigate(-1);
 						}
 					}
 				}
@@ -179,7 +179,7 @@ let PostDropdownMenuItems = ({
 				Toast.show("Failed to delete post, please try again", "xmark");
 			},
 		);
-	}, [navigation, postUri, deletePostMutate, postAuthor, currentAccount, isAuthor, href]);
+	}, [params, isPostThread, navigate, postUri, deletePostMutate, postAuthor, currentAccount, isAuthor, href]);
 
 	const onToggleThreadMute = React.useCallback(() => {
 		try {
@@ -243,12 +243,9 @@ let PostDropdownMenuItems = ({
 
 	const onSelectChatToShareTo = React.useCallback(
 		(conversation: string) => {
-			navigation.navigate("MessagesConversation", {
-				conversation,
-				embed: postUri,
-			});
+			navigate(`/messages/${conversation}`, { state: { embed: postUri } });
 		},
-		[navigation, postUri],
+		[navigate, postUri],
 	);
 
 	const onToggleQuotePostAttachment = React.useCallback(async () => {

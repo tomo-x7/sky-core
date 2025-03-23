@@ -2,13 +2,13 @@ import { AtUri } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "#/alf";
 import { atoms as a } from "#/alf";
 import { shouldClickOpenNewTab } from "#/components/Link";
 import * as Prompt from "#/components/Prompt";
 import { RichText } from "#/components/RichText";
 import { Text } from "#/components/Typography";
-import { useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { s } from "#/lib/styles";
@@ -87,7 +87,8 @@ export function FeedSourceCardLoaded({
 	const t = useTheme();
 	const pal = usePalette("default");
 	const removePromptControl = Prompt.usePromptControl();
-	const navigation = useNavigationDeduped();
+	// const navigation = useNavigationDeduped();
+	const navigate = useNavigate();
 
 	const { isPending: isAddSavedFeedPending, mutateAsync: addSavedFeeds } = useAddSavedFeedsMutation();
 	const { isPending: isRemovePending, mutateAsync: removeFeed } = useRemoveFeedMutation();
@@ -190,23 +191,25 @@ export function FeedSourceCardLoaded({
 					const shouldOpenInNewTab = shouldClickOpenNewTab(e);
 					if (feed.type === "feed") {
 						if (shouldOpenInNewTab) {
-							location.href = `/profile/${feed.creatorDid}/feed/${new AtUri(feed.uri).rkey}`;
+							window.open(`/profile/${feed.creatorDid}/feed/${new AtUri(feed.uri).rkey}`, "_blank");
 							// Linking.openURL(`/profile/${feed.creatorDid}/feed/${new AtUri(feed.uri).rkey}`);
 						} else {
-							navigation.push("ProfileFeed", {
-								name: feed.creatorDid,
-								rkey: new AtUri(feed.uri).rkey,
-							});
+							navigate(`/profile/${feed.creatorDid}/feed/${new AtUri(feed.uri).rkey}`);
+							// navigation.push("ProfileFeed", {
+							// 	name: feed.creatorDid,
+							// 	rkey: new AtUri(feed.uri).rkey,
+							// });
 						}
 					} else if (feed.type === "list") {
 						if (shouldOpenInNewTab) {
-							location.href = `/profile/${feed.creatorDid}/lists/${new AtUri(feed.uri).rkey}`;
+							window.open(`/profile/${feed.creatorDid}/lists/${new AtUri(feed.uri).rkey}`, "_blank");
 							// Linking.openURL(`/profile/${feed.creatorDid}/lists/${new AtUri(feed.uri).rkey}`);
 						} else {
-							navigation.push("ProfileList", {
-								name: feed.creatorDid,
-								rkey: new AtUri(feed.uri).rkey,
-							});
+							navigate(`/profile/${feed.creatorDid}/lists/${new AtUri(feed.uri).rkey}`);
+							// navigation.push("ProfileList", {
+							// 	name: feed.creatorDid,
+							// 	rkey: new AtUri(feed.uri).rkey,
+							// });
 						}
 					}
 				}}

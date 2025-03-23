@@ -1,18 +1,14 @@
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-
 import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import { InlineLinkText } from "#/components/Link";
 import * as Toggle from "#/components/forms/Toggle";
 import { Accessibility_Stroke2_Corner2_Rounded as AccessibilityIcon } from "#/components/icons/Accessibility";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { useRequireAltTextEnabled, useSetRequireAltTextEnabled } from "#/state/preferences";
 import { useLargeAltBadgeEnabled, useSetLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "AccessibilitySettings">;
-export function AccessibilitySettingsScreen(props: Props) {
+export function AccessibilitySettingsScreen() {
 	const requireAltTextEnabled = useRequireAltTextEnabled();
 	const setRequireAltTextEnabled = useSetRequireAltTextEnabled();
 	const largeAltBadgeEnabled = useLargeAltBadgeEnabled();

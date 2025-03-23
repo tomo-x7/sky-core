@@ -1,5 +1,3 @@
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-
 import { atoms as a, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -14,7 +12,6 @@ import { Lock_Stroke2_Corner2_Rounded as LockIcon } from "#/components/icons/Loc
 import { PencilLine_Stroke2_Corner2_Rounded as PencilIcon } from "#/components/icons/Pencil";
 import { Trash_Stroke2_Corner2_Rounded } from "#/components/icons/Trash";
 import { Verified_Stroke2_Corner2_Rounded as VerifiedIcon } from "#/components/icons/Verified";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { useModalControls } from "#/state/modals";
 import { useSession } from "#/state/session";
@@ -22,8 +19,7 @@ import { ChangeHandleDialog } from "./components/ChangeHandleDialog";
 import { DeactivateAccountDialog } from "./components/DeactivateAccountDialog";
 import { ExportCarDialog } from "./components/ExportCarDialog";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "AccountSettings">;
-export function AccountSettingsScreen(props: Props) {
+export function AccountSettingsScreen() {
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const { openModal } = useModalControls();

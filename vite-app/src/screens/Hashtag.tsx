@@ -1,16 +1,16 @@
 import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { useFocusEffect } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { ArrowOutOfBox_Stroke2_Corner0_Rounded as Share } from "#/components/icons/ArrowOutOfBox";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { shareUrl } from "#/lib/sharing";
 import { cleanError } from "#/lib/strings/errors";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -31,11 +31,11 @@ const keyExtractor = (item: PostView, index: number) => {
 	return `${item.uri}-${index}`;
 };
 
-export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNavigatorParams, "Hashtag">) {
-	const { tag, author } = route.params;
+export default function HashtagScreen() {
+	const { tag, author } = useParams<RouteParam<"Hashtag">>();
 
 	const fullTag = React.useMemo(() => {
-		return `#${decodeURIComponent(tag)}`;
+		return `#${decodeURIComponent(tag!)}`;
 	}, [tag]);
 
 	const headerTitle = React.useMemo(() => {
@@ -49,7 +49,7 @@ export default function HashtagScreen({ route }: NativeStackScreenProps<CommonNa
 
 	const onShare = React.useCallback(() => {
 		const url = new URL("https://bsky.app");
-		url.pathname = `/hashtag/${decodeURIComponent(tag)}`;
+		url.pathname = `/hashtag/${decodeURIComponent(tag!)}`;
 		if (author) {
 			url.searchParams.set("author", author);
 		}

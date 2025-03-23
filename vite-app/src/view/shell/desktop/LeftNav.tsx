@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useLinkProps, useNavigation, useNavigationState } from "@react-navigation/native";
 import React, { type JSX } from "react";
 
+import { useLocation, useMatch, useNavigate, useParams } from "react-router-dom";
 import { atoms as a, flatten, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import type { DialogControlProps } from "#/components/Dialog";
@@ -45,13 +45,10 @@ import {
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { getCurrentRoute, isTab } from "#/lib/routes/helpers";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { isInvalidHandle, sanitizeHandle } from "#/lib/strings/handles";
 import { emitSoftReset } from "#/state/events";
-import { useHomeBadge } from "#/state/home-badge";
 import { useFetchHandle } from "#/state/queries/handle";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
 import { useUnreadNotifications } from "#/state/queries/notifications/unread";
@@ -65,7 +62,7 @@ import { PressableWithHover } from "#/view/com/util/PressableWithHover";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { NavSignupCard } from "#/view/shell/NavSignupCard";
 import { PlatformInfo } from "../../../../modules/expo-bluesky-swiss-army";
-import { router } from "../../../routes";
+import { router, routes } from "../../../routes";
 
 const NAV_ICON_WIDTH = 28;
 
@@ -294,18 +291,14 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 	const { currentAccount } = useSession();
 	const { leftNavMinimal } = useLayoutBreakpoints();
 	const [pathName] = React.useMemo(() => router.matchPath(href), [href]);
-	const currentRouteInfo = useNavigationState((state) => {
-		if (!state) {
-			return { name: "Home" };
-		}
-		return getCurrentRoute(state);
-	});
-	const isCurrent =
-		currentRouteInfo.name === "Profile"
-			? isTab(currentRouteInfo.name, pathName) &&
-				(currentRouteInfo.params as CommonNavigatorParams["Profile"]).name === currentAccount?.handle
-			: isTab(currentRouteInfo.name, pathName);
-	const { onPress } = useLinkProps({ to: href });
+	const isProfile = useMatch(routes.Profile);
+	const isMatchHref = useMatch(pathName);
+	const location = useLocation();
+	const navigate = useNavigate();
+	const isCurrent = isProfile
+		? isMatchHref && currentAccount?.handle && location.pathname.includes(currentAccount.handle)
+		: isMatchHref;
+	// const { onPress } = useLinkProps({ to: href });
 	const onPressWrapped = React.useCallback(
 		(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 			if (e.ctrlKey || e.metaKey || e.altKey) {
@@ -315,10 +308,10 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 			if (isCurrent) {
 				emitSoftReset();
 			} else {
-				onPress();
+				navigate(href);
 			}
 		},
-		[onPress, isCurrent],
+		[navigate, href, isCurrent],
 	);
 
 	return (
@@ -430,20 +423,19 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 
 function ComposeBtn() {
 	const { currentAccount } = useSession();
-	const { getState } = useNavigation();
 	const { openComposer } = useComposerControls();
 	const { leftNavMinimal } = useLayoutBreakpoints();
 	const [isFetchingHandle, setIsFetchingHandle] = React.useState(false);
 	const fetchHandle = useFetchHandle();
 
 	const getProfileHandle = async () => {
-		const routes = getState()?.routes;
-		const currentRoute = routes?.[routes?.length - 1];
+		const currentLocation = useLocation();
+		const currentParams = useParams();
 
-		if (currentRoute?.name === "Profile") {
-			let handle: string | undefined = (currentRoute.params as CommonNavigatorParams["Profile"]).name;
+		if (currentLocation.pathname.startsWith("/profile")) {
+			let handle: string | undefined = currentParams.name;
 
-			if (handle.startsWith("did:")) {
+			if (handle?.startsWith("did:")) {
 				try {
 					setIsFetchingHandle(true);
 					handle = await fetchHandle(handle);
@@ -514,7 +506,6 @@ export function DesktopLeftNav() {
 	const { isDesktop } = useWebMediaQueries();
 	const { leftNavMinimal, centerColumnOffset } = useLayoutBreakpoints();
 	const numUnreadNotifications = useUnreadNotifications();
-	const hasHomeBadge = useHomeBadge();
 
 	if (!hasSession && !isDesktop) {
 		return null;

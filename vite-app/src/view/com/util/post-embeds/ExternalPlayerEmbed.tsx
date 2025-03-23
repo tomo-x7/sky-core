@@ -1,5 +1,4 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React, { useRef } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -9,7 +8,6 @@ import { Fill } from "#/components/Fill";
 import { EmbedConsentDialog } from "#/components/dialogs/EmbedConsent";
 import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
-import type { NavigationProp } from "#/lib/routes/types";
 import { type EmbedPlayerParams, getPlayerAspect } from "#/lib/strings/embed-player";
 import { useExternalEmbedsPrefs } from "#/state/preferences";
 import { EventStopper } from "../EventStopper";
@@ -105,7 +103,6 @@ export function ExternalPlayer({
 	params: EmbedPlayerParams;
 }) {
 	const t = useTheme();
-	const navigation = useNavigation<NavigationProp>();
 	const windowDims = useWindowDimensions();
 	const externalEmbedsPrefs = useExternalEmbedsPrefs();
 	const consentDialogControl = useDialogControl();

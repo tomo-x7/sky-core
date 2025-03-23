@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useLocation } from "react-router-dom";
 import { atoms as a, useBreakpoints } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
@@ -26,11 +26,11 @@ function PostThreadFollowBtnLoaded({
 }: {
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
-	const navigation = useNavigation();
 	const { gtMobile } = useBreakpoints();
 	const profile = useProfileShadow(profileUnshadowed);
 	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 	const requireAuth = useRequireAuth();
+	const location = useLocation();
 
 	const isFollowing = !!profile.viewer?.following;
 	const isFollowedBy = !!profile.viewer?.followedBy;
@@ -50,21 +50,26 @@ function PostThreadFollowBtnLoaded({
 	 * sudden rendering of the button. However, on web if we do this, there's an obvious flicker once the
 	 * button renders. So, we update the state in both cases.
 	 */
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	React.useEffect(() => {
-		const updateWasFollowing = () => {
-			if (wasFollowing !== isFollowing) {
-				setWasFollowing(isFollowing);
-			}
-		};
+		if (wasFollowing !== isFollowing) {
+			setWasFollowing(isFollowing);
+		}
+		// const updateWasFollowing = () => {
+		// 	if (wasFollowing !== isFollowing) {
+		// 		setWasFollowing(isFollowing);
+		// 	}
+		// };
 
-		const unsubscribeFocus = navigation.addListener("focus", updateWasFollowing);
-		const unsubscribeBlur = navigation.addListener("blur", updateWasFollowing);
+		// const unsubscribeFocus = navigation.addListener("focus", updateWasFollowing);
+		// const unsubscribeBlur = navigation.addListener("blur", updateWasFollowing);
 
-		return () => {
-			unsubscribeFocus();
-			unsubscribeBlur();
-		};
-	}, [isFollowing, wasFollowing, navigation]);
+		// return () => {
+		// 	unsubscribeFocus();
+		// 	unsubscribeBlur();
+		// };
+	}, [location, isFollowing, wasFollowing]);
 
 	const onPress = React.useCallback(() => {
 		if (!isFollowing) {

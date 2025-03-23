@@ -1,7 +1,7 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useImperativeHandle, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -16,7 +16,6 @@ import { useGenerateStarterPackMutation } from "#/lib/generate-starterpack";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
 import { useEmail } from "#/lib/hooks/useEmail";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import type { NavigationProp } from "#/lib/routes/types";
 import { parseStarterPackUri } from "#/lib/strings/starter-pack";
 import { useActorStarterPacksQuery } from "#/state/queries/actor-starter-packs";
 import type { ListRenderItemInfo } from "#/temp";
@@ -113,7 +112,7 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 
 function CreateAnother() {
 	const t = useTheme();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	return (
 		<div
@@ -131,7 +130,7 @@ function CreateAnother() {
 				color="secondary"
 				size="small"
 				style={a.self_center}
-				onPress={() => navigation.navigate("StarterPackWizard")}
+				onPress={() => navigate("/starter-pack/create")}
 			>
 				<ButtonText>Create another</ButtonText>
 				<ButtonIcon icon={Plus} position="right" />
@@ -141,10 +140,10 @@ function CreateAnother() {
 }
 const className = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(6))));
 function Empty() {
-	const navigation = useNavigation<NavigationProp>();
 	const confirmDialogControl = useDialogControl();
 	const followersDialogControl = useDialogControl();
 	const errorDialogControl = useDialogControl();
+	const navigate = useNavigate();
 
 	const { needsEmailVerification } = useEmail();
 	const verifyEmailControl = useDialogControl();
@@ -155,10 +154,7 @@ function Empty() {
 		onSuccess: ({ uri }) => {
 			const parsed = parseStarterPackUri(uri);
 			if (parsed) {
-				navigation.push("StarterPack", {
-					name: parsed.name,
-					rkey: parsed.rkey,
-				});
+				navigate(`/starter-pack/${parsed.name}/${parsed.rkey}`);
 			}
 			setIsGenerating(false);
 		},
@@ -243,7 +239,7 @@ function Empty() {
 						if (needsEmailVerification) {
 							verifyEmailControl.open();
 						} else {
-							navigation.navigate("StarterPackWizard");
+							navigate("/starter-pack/create");
 						}
 					}}
 					style={{
@@ -268,7 +264,7 @@ function Empty() {
 						color="secondary"
 						cta={"Let me choose"}
 						onPress={() => {
-							navigation.navigate("StarterPackWizard");
+							navigate("/starter-pack/create");
 						}}
 					/>
 				</Prompt.Actions>

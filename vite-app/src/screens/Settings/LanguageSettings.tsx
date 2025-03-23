@@ -8,14 +8,12 @@ import { Check_Stroke2_Corner0_Rounded as CheckIcon } from "#/components/icons/C
 import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDownIcon } from "#/components/icons/Chevron";
 import { PlusLarge_Stroke2_Corner0_Rounded as PlusIcon } from "#/components/icons/Plus";
 import { APP_LANGUAGES, LANGUAGES } from "#/lib/../locale/languages";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { languageName, sanitizeAppLanguageSetting } from "#/locale/helpers";
 import { useModalControls } from "#/state/modals";
 import { useLanguagePrefs, useLanguagePrefsApi } from "#/state/preferences";
 import * as SettingsList from "./components/SettingsList";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "LanguageSettings">;
-export function LanguageSettingsScreen(props: Props) {
+export function LanguageSettingsScreen() {
 	const langPrefs = useLanguagePrefs();
 	const setLangPrefs = useLanguagePrefsApi();
 	const t = useTheme();

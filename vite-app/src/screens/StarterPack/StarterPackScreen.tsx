@@ -6,11 +6,10 @@ import {
 	RichText as RichTextAPI,
 } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -37,7 +36,7 @@ import { HITSLOP_20 } from "#/lib/constants";
 import { isBlockedOrBlocking, isMuted } from "#/lib/moderation/blocked-and-muted";
 import { prefetch } from "#/lib/prefetchImage";
 import { makeProfileLink, makeStarterPackLink } from "#/lib/routes/links";
-import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { getStarterPackOgCard } from "#/lib/strings/starter-pack";
 import { bulkWriteFollows } from "#/screens/Onboarding/util";
@@ -58,25 +57,17 @@ import { PagerWithHeader } from "#/view/com/pager/PagerWithHeader";
 import { ProfileSubpageHeader } from "#/view/com/profile/ProfileSubpageHeader";
 import * as Toast from "#/view/com/util/Toast";
 
-type StarterPackScreeProps = NativeStackScreenProps<CommonNavigatorParams, "StarterPack">;
-type StarterPackScreenShortProps = NativeStackScreenProps<CommonNavigatorParams, "StarterPackShort">;
-
-export function StarterPackScreen({ route }: StarterPackScreeProps) {
+export function StarterPackScreen() {
 	return (
 		<Layout.Screen>
-			<StarterPackScreenInner routeParams={route.params} />
+			<StarterPackScreenInner />
 		</Layout.Screen>
 	);
 }
 
-export function StarterPackScreenShort({ route }: StarterPackScreenShortProps) {
-	const {
-		data: resolvedStarterPack,
-		isLoading,
-		isError,
-	} = useResolvedStarterPackShortLink({
-		code: route.params.code,
-	});
+export function StarterPackScreenShort() {
+	const { code } = useParams<RouteParam<"StarterPackShort">>();
+	const { data: resolvedStarterPack, isLoading, isError } = useResolvedStarterPackShortLink({ code: code! });
 
 	if (isLoading || isError || !resolvedStarterPack) {
 		return (
@@ -92,17 +83,14 @@ export function StarterPackScreenShort({ route }: StarterPackScreenShortProps) {
 	}
 	return (
 		<Layout.Screen>
-			<StarterPackScreenInner routeParams={resolvedStarterPack} />
+			<StarterPackScreenInner />
 		</Layout.Screen>
 	);
 }
 
-export function StarterPackScreenInner({
-	routeParams,
-}: {
-	routeParams: StarterPackScreeProps["route"]["params"];
-}) {
-	const { name, rkey } = routeParams;
+export function StarterPackScreenInner() {
+	const { name, rkey } = useParams<RouteParam<"StarterPack">>();
+	const nw: boolean | undefined = useLocation().state.new;
 	const { currentAccount } = useSession();
 
 	const moderationOpts = useModerationOpts();
@@ -131,21 +119,21 @@ export function StarterPackScreenInner({
 	}
 
 	if (!starterPack.list && starterPack.creator.did === currentAccount?.did) {
-		return <InvalidStarterPack rkey={rkey} />;
+		return <InvalidStarterPack rkey={rkey!} />;
 	}
 
-	return (
-		<StarterPackScreenLoaded starterPack={starterPack} routeParams={routeParams} moderationOpts={moderationOpts} />
-	);
+	return <StarterPackScreenLoaded starterPack={starterPack} rkey={rkey!} nw={nw} moderationOpts={moderationOpts} />;
 }
 
 function StarterPackScreenLoaded({
 	starterPack,
-	routeParams,
+	nw,
+	rkey,
 	moderationOpts,
 }: {
 	starterPack: AppBskyGraphDefs.StarterPackView;
-	routeParams: StarterPackScreeProps["route"]["params"];
+	nw?: boolean;
+	rkey: string;
 	moderationOpts: ModerationOpts;
 }) {
 	const showPeopleTab = Boolean(starterPack.list);
@@ -181,10 +169,10 @@ function StarterPackScreenLoaded({
 	}, [shareDialogControl, shortenLink, starterPack]);
 
 	React.useEffect(() => {
-		if (routeParams.new) {
+		if (nw) {
 			onOpenShareDialog();
 		}
-	}, [onOpenShareDialog, routeParams.new]);
+	}, [onOpenShareDialog, nw]);
 
 	return (
 		<>
@@ -192,7 +180,7 @@ function StarterPackScreenLoaded({
 				items={tabs}
 				isHeaderReady={true}
 				renderHeader={() => (
-					<Header starterPack={starterPack} routeParams={routeParams} onOpenShareDialog={onOpenShareDialog} />
+					<Header starterPack={starterPack} rkey={rkey} onOpenShareDialog={onOpenShareDialog} />
 				)}
 			>
 				{showPeopleTab
@@ -245,11 +233,11 @@ function StarterPackScreenLoaded({
 
 function Header({
 	starterPack,
-	routeParams,
+	rkey,
 	onOpenShareDialog,
 }: {
 	starterPack: AppBskyGraphDefs.StarterPackView;
-	routeParams: StarterPackScreeProps["route"]["params"];
+	rkey: string;
 	onOpenShareDialog: () => void;
 }) {
 	const t = useTheme();
@@ -266,28 +254,29 @@ function Header({
 	const isOwn = creator?.did === currentAccount?.did;
 	const joinedAllTimeCount = starterPack.joinedAllTimeCount ?? 0;
 
-	const navigation = useNavigation<NavigationProp>();
+	// const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
-	React.useEffect(() => {
-		const onFocus = () => {
-			if (hasSession) return;
-			setActiveStarterPack({
-				uri: starterPack.uri,
-			});
-		};
-		const onBeforeRemove = () => {
-			if (hasSession) return;
-			setActiveStarterPack(undefined);
-		};
+	// React.useEffect(() => {
+	// 	const onFocus = () => {
+	// 		if (hasSession) return;
+	// 		setActiveStarterPack({
+	// 			uri: starterPack.uri,
+	// 		});
+	// 	};
+	// 	const onBeforeRemove = () => {
+	// 		if (hasSession) return;
+	// 		setActiveStarterPack(undefined);
+	// 	};
 
-		navigation.addListener("focus", onFocus);
-		navigation.addListener("beforeRemove", onBeforeRemove);
+	// 	navigation.addListener("focus", onFocus);
+	// 	navigation.addListener("beforeRemove", onBeforeRemove);
 
-		return () => {
-			navigation.removeListener("focus", onFocus);
-			navigation.removeListener("beforeRemove", onBeforeRemove);
-		};
-	}, [hasSession, navigation, setActiveStarterPack, starterPack.uri]);
+	// 	return () => {
+	// 		navigation.removeListener("focus", onFocus);
+	// 		navigation.removeListener("beforeRemove", onBeforeRemove);
+	// 	};
+	// }, [hasSession, navigation, setActiveStarterPack, starterPack.uri]);
 
 	const onFollowAll = async () => {
 		if (!starterPack.list) return;
@@ -397,11 +386,7 @@ function Header({
 								{isProcessing && <Loader size="xs" />}
 							</Button>
 						)}
-						<OverflowMenu
-							routeParams={routeParams}
-							starterPack={starterPack}
-							onOpenShareDialog={onOpenShareDialog}
-						/>
+						<OverflowMenu rkey={rkey} starterPack={starterPack} onOpenShareDialog={onOpenShareDialog} />
 					</div>
 				) : null}
 			</ProfileSubpageHeader>
@@ -472,11 +457,11 @@ function Header({
 
 function OverflowMenu({
 	starterPack,
-	routeParams,
+	rkey,
 	onOpenShareDialog,
 }: {
 	starterPack: AppBskyGraphDefs.StarterPackView;
-	routeParams: StarterPackScreeProps["route"]["params"];
+	rkey: string;
 	onOpenShareDialog: () => void;
 }) {
 	const t = useTheme();
@@ -484,7 +469,7 @@ function OverflowMenu({
 	const { currentAccount } = useSession();
 	const reportDialogControl = useReportDialogControl();
 	const deleteDialogControl = useDialogControl();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const {
 		mutate: deleteStarterPack,
@@ -493,10 +478,11 @@ function OverflowMenu({
 	} = useDeleteStarterPackMutation({
 		onSuccess: () => {
 			deleteDialogControl.close(() => {
-				if (navigation.canGoBack()) {
-					navigation.popToTop();
+				if (history.length > 1) {
+					// navigation.popToTop();
+					navigate(-1);
 				} else {
-					navigation.navigate("Home");
+					navigate("/");
 				}
 			});
 		},
@@ -514,7 +500,7 @@ function OverflowMenu({
 		}
 
 		deleteStarterPack({
-			rkey: routeParams.rkey,
+			rkey,
 			listUri: starterPack.list.uri,
 		});
 	};
@@ -543,9 +529,7 @@ function OverflowMenu({
 							<Menu.Item
 								label={"Edit starter pack"}
 								onPress={() => {
-									navigation.navigate("StarterPackEdit", {
-										rkey: routeParams.rkey,
-									});
+									navigate(`/starter-pack/edit/${rkey}`);
 								}}
 							>
 								<Menu.ItemText>Edit</Menu.ItemText>
@@ -635,15 +619,14 @@ function OverflowMenu({
 
 function InvalidStarterPack({ rkey }: { rkey: string }) {
 	const t = useTheme();
-	const navigation = useNavigation<NavigationProp>();
 	const { gtMobile } = useBreakpoints();
 	const [isProcessing, setIsProcessing] = React.useState(false);
-
+	const navigate = useNavigate();
 	const goBack = () => {
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.replace("Home");
+			navigate("/", { replace: true });
 		}
 	};
 

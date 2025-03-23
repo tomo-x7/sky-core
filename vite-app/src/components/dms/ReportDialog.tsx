@@ -5,11 +5,11 @@ import {
 	type ComAtprotoModerationCreateReport,
 	RichText as RichTextAPI,
 } from "@atproto/api";
-import { StackActions, useNavigation } from "@react-navigation/native";
 import { useMutation } from "@tanstack/react-query";
 import type React from "react";
 import { memo, useMemo, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -22,7 +22,6 @@ import * as Toggle from "#/components/forms/Toggle";
 import { ChevronLeft_Stroke2_Corner0_Rounded as Chevron } from "#/components/icons/Chevron";
 import { PaperPlane_Stroke2_Corner0_Rounded as SendIcon } from "#/components/icons/PaperPlane";
 import type { ReportOption } from "#/lib/moderation/useReportOptions";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useLeaveConvo } from "#/state/queries/messages/leave-conversation";
 import { useProfileBlockMutationQueue, useProfileQuery } from "#/state/queries/profile";
@@ -312,18 +311,19 @@ function DoneStep({
 	currentScreen: "list" | "conversation";
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 }) {
-	const navigation = useNavigation<NavigationProp>();
 	const control = Dialog.useDialogContext();
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
 	const [actions, setActions] = useState<string[]>(["block", "leave"]);
 	const shadow = useProfileShadow(profile);
 	const [queueBlock] = useProfileBlockMutationQueue(shadow);
+	const navigate = useNavigate();
 
 	const { mutate: leaveConvo } = useLeaveConvo(convoId, {
 		onMutate: () => {
 			if (currentScreen === "conversation") {
-				navigation.dispatch(StackActions.replace("Messages", {}));
+				// navigation.dispatch(StackActions.replace("Messages", {}));
+				navigate("/messages");
 			}
 		},
 		onError: () => {

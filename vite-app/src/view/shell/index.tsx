@@ -1,8 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
-import { FlatNavigator, RoutesContainer } from "#/Navigation";
+import { useLocation } from "react-router-dom";
+import { FlatNavigator } from "#/Navigation";
 import { atoms as a, select, useTheme } from "#/alf";
 import { Outlet as PortalOutlet } from "#/components/Portal";
 import { MutedWordsDialog } from "#/components/dialogs/MutedWords";
@@ -10,7 +10,6 @@ import { SigninDialog } from "#/components/dialogs/Signin";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { useIntentHandler } from "#/lib/hooks/useIntentHandler";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import type { NavigationProp } from "#/lib/routes/types";
 import { colors } from "#/lib/styles";
 import { useIsDrawerOpen, useSetDrawerOpen } from "#/state/shell";
 import { useComposerKeyboardShortcut } from "#/state/shell/composer/useComposerKeyboardShortcut";
@@ -26,10 +25,10 @@ function ShellInner() {
 	const isDrawerOpen = useIsDrawerOpen();
 	const setDrawerOpen = useSetDrawerOpen();
 	const { isDesktop } = useWebMediaQueries();
-	const navigator = useNavigation<NavigationProp>();
 	const closeAllActiveElements = useCloseAllActiveElements();
 	const showDrawer = !isDesktop && isDrawerOpen;
 	const [showDrawerDelayedExit, setShowDrawerDelayedExit] = useState(showDrawer);
+	const location = useLocation();
 
 	useLayoutEffect(() => {
 		if (showDrawer !== showDrawerDelayedExit) {
@@ -47,12 +46,10 @@ function ShellInner() {
 	useComposerKeyboardShortcut();
 	useIntentHandler();
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: pathnameを検知するため
 	useEffect(() => {
-		const unsubscribe = navigator.addListener("state", () => {
-			closeAllActiveElements();
-		});
-		return unsubscribe;
-	}, [navigator, closeAllActiveElements]);
+		closeAllActiveElements();
+	}, [location.pathname, closeAllActiveElements]);
 
 	return (
 		<>
@@ -119,9 +116,9 @@ export const Shell: React.FC = function ShellImpl() {
 				...pageBg,
 			}}
 		>
-			<RoutesContainer>
-				<ShellInner />
-			</RoutesContainer>
+			{/* <RoutesContainer> */}
+			<ShellInner />
+			{/* </RoutesContainer> */}
 		</div>
 	);
 };

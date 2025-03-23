@@ -1,9 +1,9 @@
 import { type AppBskyActorDefs, type AppBskyGraphDefs, AtUri, type ModerationOpts } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
+import { useNavigate, useParams } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -17,7 +17,7 @@ import { STARTER_PACK_MAX_SIZE } from "#/lib/constants";
 import { useEnableKeyboardControllerScreen } from "#/lib/hooks/useEnableKeyboardController";
 import { createSanitizedDisplayName } from "#/lib/moderation/create-sanitized-display-name";
 import { prefetch } from "#/lib/prefetchImage";
-import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { enforceLen } from "#/lib/strings/helpers";
@@ -41,10 +41,8 @@ import * as Toast from "#/view/com/util/Toast";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { Provider } from "./State";
 
-export function Wizard({
-	route,
-}: NativeStackScreenProps<CommonNavigatorParams, "StarterPackEdit" | "StarterPackWizard">) {
-	const { rkey } = route.params ?? {};
+export function Wizard() {
+	const { rkey } = useParams<RouteParam<"StarterPackEdit" | "StarterPackWizard">>();
 	const { currentAccount } = useSession();
 	const moderationOpts = useModerationOpts();
 
@@ -118,7 +116,7 @@ function WizardInner({
 	profile: AppBskyActorDefs.ProfileViewDetailed;
 	moderationOpts: ModerationOpts;
 }) {
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const [state, dispatch] = useWizardState();
 	const { currentAccount } = useSession();
@@ -127,12 +125,6 @@ function WizardInner({
 		staleTime: 0,
 	});
 	const parsed = parseStarterPackUri(currentStarterPack?.uri);
-
-	React.useEffect(() => {
-		navigation.setOptions({
-			gestureEnabled: false,
-		});
-	}, [navigation]);
 
 	useEnableKeyboardControllerScreen(true);
 
@@ -171,21 +163,14 @@ function WizardInner({
 		const rkey = new AtUri(data.uri).rkey;
 		prefetch(getStarterPackOgCard(currentProfile!.did, rkey));
 		dispatch({ type: "SetProcessing", processing: false });
-		navigation.replace("StarterPack", {
-			name: currentAccount!.handle,
-			rkey,
-			new: true,
-		});
+		navigate(`/starter-pack/${currentAccount!.handle}/${rkey}`, { state: { new: true }, replace: true });
 	};
 
 	const onSuccessEdit = () => {
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.replace("StarterPack", {
-				name: currentAccount!.handle,
-				rkey: parsed!.rkey,
-			});
+			navigate(`/starter-pack/${currentAccount?.handle}/${parsed?.rkey}`);
 		}
 	};
 

@@ -1,23 +1,14 @@
-import { sanitizeUrl } from "@braintree/sanitize-url";
-import { StackActions, useLinkProps } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { type TextStyleProp, atoms as a, useTheme } from "#/alf";
 import { Button, type ButtonProps } from "#/components/Button";
 import type { TextProps } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { BSKY_DOWNLOAD_URL } from "#/lib/constants";
-import { useNavigationDeduped } from "#/lib/hooks/useNavigationDeduped";
 import { useOpenLink } from "#/lib/hooks/useOpenLink";
-import type { AllNavigatorParams } from "#/lib/routes/types";
 import { shareUrl } from "#/lib/sharing";
-import {
-	convertBskyAppUrlIfNeeded,
-	isBskyDownloadUrl,
-	isExternalUrl,
-	linkRequiresWarning,
-} from "#/lib/strings/url-helpers";
-import { router } from "#/routes";
+import { isBskyDownloadUrl, isExternalUrl, linkRequiresWarning } from "#/lib/strings/url-helpers";
 import { useModalControls } from "#/state/modals";
 
 /**
@@ -26,11 +17,11 @@ import { useModalControls } from "#/state/modals";
  */
 export { useButtonContext as useLinkContext } from "#/components/Button";
 
-type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0], "to"> & {
+type BaseLinkProps = {
 	/**
 	 * The React Navigation `StackAction` to perform when the link is pressed.
 	 */
-	action?: "push" | "replace" | "navigate";
+	action?: "replace" | "navigate";
 
 	/**
 	 * If true, will warn the user if the link text does not match the href.
@@ -46,14 +37,7 @@ type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0]
 	 * DO NOT use this for navigation, that's what the `to` prop is for.
 	 */
 
-	onPress?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => void | false;
-
-	/**
-	 * Callback for when the link is long pressed (on native). Prevent default
-	 * and return `false` to exit early and prevent default long press hander.
-	 */
-
-	onLongPress?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => void | false;
+	onPress?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void | false;
 
 	/**
 	 * Web-only attribute. Sets `download` attr on web.
@@ -61,24 +45,19 @@ type BaseLinkProps = Pick<Parameters<typeof useLinkProps<AllNavigatorParams>>[0]
 	download?: string;
 
 	/**
-	 * Native-only attribute. If true, will open the share sheet on long press.
-	 */
-	shareOnLongPress?: boolean;
-
-	/**
 	 * Whether the link should be opened through the redirect proxy.
 	 */
 	shouldProxy?: boolean;
+	to: string;
+	state?: undefined | Record<string | number, unknown>;
 };
 
 export function useLink({
 	to,
 	displayText,
-	action = "push",
+	action = "navigate",
 	disableMismatchWarning,
 	onPress: outerOnPress,
-	onLongPress: outerOnLongPress,
-	shareOnLongPress,
 	overridePresentation,
 	shouldProxy,
 }: BaseLinkProps & {
@@ -86,22 +65,23 @@ export function useLink({
 	overridePresentation?: boolean;
 	shouldProxy?: boolean;
 }) {
-	const navigation = useNavigationDeduped();
-	const { href } = useLinkProps<AllNavigatorParams>({
-		to: typeof to === "string" ? convertBskyAppUrlIfNeeded(sanitizeUrl(to)) : to,
-	});
-	const isExternal = isExternalUrl(href);
+	// const navigation = useNavigationDeduped();
+	// const { href } = useLinkProps<AllNavigatorParams>({
+	// 	to: typeof to === "string" ? convertBskyAppUrlIfNeeded(sanitizeUrl(to)) : to,
+	// });
+	const isExternal = isExternalUrl(to);
 	const { openModal, closeModal } = useModalControls();
 	const openLink = useOpenLink();
+	const navigate = useNavigate();
 
 	const onPress = React.useCallback(
-		(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
+		(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 			const exitEarlyIfFalse = outerOnPress?.(e);
 
 			if (exitEarlyIfFalse === false) return;
 
 			const requiresWarning = Boolean(
-				!disableMismatchWarning && displayText && isExternal && linkRequiresWarning(href, displayText),
+				!disableMismatchWarning && displayText && isExternal && linkRequiresWarning(to, displayText),
 			);
 
 			e.preventDefault();
@@ -110,28 +90,25 @@ export function useLink({
 				openModal({
 					name: "link-warning",
 					text: displayText,
-					href: href,
+					href: to,
 				});
 			} else {
 				if (isExternal) {
-					openLink(href, overridePresentation, shouldProxy);
+					openLink(to, overridePresentation, shouldProxy);
 				} else {
 					const shouldOpenInNewTab = shouldClickOpenNewTab(e);
 
-					if (isBskyDownloadUrl(href)) {
+					if (isBskyDownloadUrl(to)) {
 						shareUrl(BSKY_DOWNLOAD_URL);
-					} else if (shouldOpenInNewTab || href.startsWith("http") || href.startsWith("mailto")) {
-						openLink(href);
+					} else if (shouldOpenInNewTab || to.startsWith("http") || to.startsWith("mailto")) {
+						openLink(to);
 					} else {
 						closeModal(); // close any active modals
 
-						if (action === "push") {
-							navigation.dispatch(StackActions.push(...router.matchPath(href)));
-						} else if (action === "replace") {
-							navigation.dispatch(StackActions.replace(...router.matchPath(href)));
+						if (action === "replace") {
+							navigate(to);
 						} else if (action === "navigate") {
-							// @ts-expect-error
-							navigation.navigate(...router.matchPath(href));
+							navigate(to, { replace: true });
 						} else {
 							throw Error("Unsupported navigator action.");
 						}
@@ -144,31 +121,30 @@ export function useLink({
 			disableMismatchWarning,
 			displayText,
 			isExternal,
-			href,
 			openModal,
 			openLink,
 			closeModal,
 			action,
-			navigation,
+			navigate,
 			overridePresentation,
 			shouldProxy,
+			to,
 		],
 	);
 
-	const onLongPress = React.useCallback(
-		(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
-			const exitEarlyIfFalse = outerOnLongPress?.(e);
-			if (exitEarlyIfFalse === false) return;
-			return undefined;
-		},
-		[outerOnLongPress],
-	);
+	// const onLongPress = React.useCallback(
+	// 	(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
+	// 		const exitEarlyIfFalse = outerOnLongPress?.(e);
+	// 		if (exitEarlyIfFalse === false) return;
+	// 		return undefined;
+	// 	},
+	// 	[outerOnLongPress],
+	// );
 
 	return {
 		isExternal,
-		href,
+		to,
 		onPress,
-		onLongPress,
 	};
 }
 
@@ -185,14 +161,17 @@ export type LinkProps = Omit<BaseLinkProps, "disableMismatchWarning"> & Omit<But
 export function Link({
 	children,
 	to,
-	action = "push",
+	action = "navigate",
 	onPress: outerOnPress,
-	onLongPress: outerOnLongPress,
 	download,
 	shouldProxy,
 	...rest
 }: LinkProps) {
-	const { href, isExternal, onPress } = useLink({
+	const {
+		to: href,
+		isExternal,
+		onPress,
+	} = useLink({
 		to,
 		displayText: typeof children === "string" ? children : "",
 		action,
@@ -241,15 +220,13 @@ export type InlineLinkProps = React.PropsWithChildren<
 export function InlineLinkText({
 	children,
 	to,
-	action = "push",
+	action = "navigate",
 	disableMismatchWarning,
 	style,
 	onPress: outerOnPress,
-	onLongPress: outerOnLongPress,
 	download,
 	selectable,
 	label,
-	shareOnLongPress,
 	disableUnderline,
 	overridePresentation,
 	shouldProxy,
@@ -257,14 +234,16 @@ export function InlineLinkText({
 }: InlineLinkProps) {
 	const t = useTheme();
 	const stringChildren = typeof children === "string";
-	const { href, isExternal, onPress } = useLink({
+	const {
+		to: href,
+		isExternal,
+		onPress,
+	} = useLink({
 		to,
 		displayText: stringChildren ? children : "",
 		action,
 		disableMismatchWarning,
 		onPress: outerOnPress,
-		onLongPress: outerOnLongPress,
-		shareOnLongPress,
 		overridePresentation,
 		shouldProxy: shouldProxy,
 	});
@@ -330,7 +309,7 @@ export function createStaticClick(onPressHandler: Exclude<BaseLinkProps["onPress
 } {
 	return {
 		to: "#",
-		onPress(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) {
+		onPress(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
 			e.preventDefault();
 			onPressHandler(e);
 			return false;
@@ -352,7 +331,7 @@ export function createStaticClickIfUnmodified(onPressHandler: Exclude<BaseLinkPr
 	onPress: Exclude<BaseLinkProps["onPress"], undefined>;
 } {
 	return {
-		onPress(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) {
+		onPress(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
 			if (!isModifiedClickEvent(e)) {
 				e.preventDefault();
 				onPressHandler(e);

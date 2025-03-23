@@ -1,5 +1,4 @@
 import { LABELS } from "@atproto/api";
-import { useFocusEffect } from "@react-navigation/native";
 import { Fragment, useCallback } from "react";
 
 import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -15,6 +14,7 @@ import { Text } from "#/components/Typography";
 import { BirthDateSettingsDialog } from "#/components/dialogs/BirthDateSettings";
 import { useGlobalDialogsControlContext } from "#/components/dialogs/Context";
 import * as Toggle from "#/components/forms/Toggle";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/components/icons/Chevron";
 import { CircleBanSign_Stroke2_Corner0_Rounded as CircleBanSign } from "#/components/icons/CircleBanSign";
 import { EditBig_Stroke2_Corner0_Rounded as EditBig } from "#/components/icons/EditBig";
@@ -24,7 +24,6 @@ import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Per
 import type { Props as SVGIconProps } from "#/components/icons/common";
 import { GlobalLabelPreference } from "#/components/moderation/LabelPreference";
 import { getLabelingServiceTitle } from "#/lib/moderation";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import {
 	type UsePreferencesQueryResponse,
 	useMyLabelersQuery,
@@ -73,7 +72,7 @@ function ErrorState({ error }: { error: string }) {
 	);
 }
 
-export function ModerationScreen(_props: NativeStackScreenProps<CommonNavigatorParams, "Moderation">) {
+export function ModerationScreen() {
 	const { isLoading: isPreferencesLoading, error: preferencesError, data: preferences } = usePreferencesQuery();
 
 	const isLoading = isPreferencesLoading;

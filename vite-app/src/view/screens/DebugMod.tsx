@@ -29,7 +29,6 @@ import {
 	ChevronTop_Stroke2_Corner0_Rounded as ChevronTop,
 } from "#/components/icons/Chevron";
 import { useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { ProfileHeaderStandard } from "#/screens/Profile/Header/ProfileHeaderStandard";
 import { moderationOptsOverrideContext } from "#/state/preferences/moderation-opts";
 import type { FeedNotification } from "#/state/queries/notifications/types";
@@ -44,7 +43,7 @@ import { ProfileCard } from "../com/profile/ProfileCard";
 
 const LABEL_VALUES: (keyof typeof LABELS)[] = Object.keys(LABELS) as (keyof typeof LABELS)[];
 
-export const DebugModScreen = (props: NativeStackScreenProps<CommonNavigatorParams, "DebugMod">) => {
+export const DebugModScreen = () => {
 	const t = useTheme();
 	const [scenario, setScenario] = React.useState<string[]>(["label"]);
 	const [scenarioSwitches, setScenarioSwitches] = React.useState<string[]>([]);

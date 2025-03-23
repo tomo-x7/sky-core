@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
 import { createContext, useCallback, useContext } from "react";
 
+import { useNavigate } from "react-router-dom";
 import {
 	type TextStyleProp,
 	atoms as a,
@@ -18,7 +18,6 @@ import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeft } from "#/components/ico
 import { Menu_Stroke2_Corner0_Rounded as Menu } from "#/components/icons/Menu";
 import { Keyboard } from "#/lib/Keyboard";
 import { HITSLOP_30 } from "#/lib/constants";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useSetDrawerOpen } from "#/state/shell";
 
 export function Outer({
@@ -102,19 +101,19 @@ export function Slot({ children }: { children?: React.ReactNode }) {
 }
 
 export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const onPressBack = useCallback(
-		(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		(evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 			onPress?.(evt);
 			if (evt.defaultPrevented) return;
-			if (navigation.canGoBack()) {
-				navigation.goBack();
+			if (history.length > 1) {
+				navigate(-1);
 			} else {
-				navigation.navigate("Home");
+				navigate("/");
 			}
 		},
-		[onPress, navigation],
+		[onPress, navigate],
 	);
 
 	return (

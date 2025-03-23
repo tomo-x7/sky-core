@@ -1,18 +1,16 @@
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { TextLink } from "#/view/com/util/Link";
 import { ScrollView } from "#/view/com/util/Views";
 import { ViewHeader } from "../com/util/ViewHeader";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "CopyrightPolicy">;
-export const CopyrightPolicyScreen = (_props: Props) => {
+export const CopyrightPolicyScreen = () => {
 	const pal = usePalette("default");
 	const setMinimalShellMode = useSetMinimalShellMode();
 

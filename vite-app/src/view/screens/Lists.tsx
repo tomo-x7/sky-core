@@ -1,7 +1,8 @@
 import { AtUri } from "@atproto/api";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -9,19 +10,16 @@ import * as Layout from "#/components/Layout";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { PlusLarge_Stroke2_Corner0_Rounded as PlusIcon } from "#/components/icons/Plus";
 import { useEmail } from "#/lib/hooks/useEmail";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useModalControls } from "#/state/modals";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { MyLists } from "#/view/com/lists/MyLists";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "Lists">;
-export function ListsScreen(props: Props) {
+export function ListsScreen() {
 	const setMinimalShellMode = useSetMinimalShellMode();
-	const navigation = useNavigation<NavigationProp>();
 	const { openModal } = useModalControls();
 	const { needsEmailVerification } = useEmail();
 	const control = useDialogControl();
+	const navigate = useNavigate();
 
 	useFocusEffect(
 		React.useCallback(() => {
@@ -41,14 +39,11 @@ export function ListsScreen(props: Props) {
 			onSave: (uri: string) => {
 				try {
 					const urip = new AtUri(uri);
-					navigation.navigate("ProfileList", {
-						name: urip.hostname,
-						rkey: urip.rkey,
-					});
+					navigate(`/profile/${urip.hostname}/lists/${urip.rkey}`);
 				} catch {}
 			},
 		});
-	}, [needsEmailVerification, control, openModal, navigation]);
+	}, [needsEmailVerification, control, openModal, navigate]);
 
 	return (
 		<Layout.Screen>

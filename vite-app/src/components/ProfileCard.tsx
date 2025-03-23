@@ -107,10 +107,11 @@ export function Link({
 	return (
 		<InternalLink
 			label={`View ${profile.displayName || sanitizeHandle(profile.handle)}'s profile`}
-			to={{
-				screen: "Profile",
-				params: { name: profile.did },
-			}}
+			to={`/profile/${profile.did}`}
+			// to={{
+			// 	screen: "Profile",
+			// 	params: { name: profile.did },
+			// }}
 			style={{
 				...a.flex_col,
 				...style,
@@ -312,7 +313,7 @@ export function FollowButtonInner({
 	const [queueFollow, queueUnfollow] = useProfileFollowMutationQueue(profile);
 	const isRound = Boolean(rest.shape && rest.shape === "round");
 
-	const onPressFollow = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const onPressFollow = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		e.preventDefault();
 		e.stopPropagation();
 		try {
@@ -329,7 +330,7 @@ export function FollowButtonInner({
 		}
 	};
 
-	const onPressUnfollow = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const onPressUnfollow = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		e.preventDefault();
 		e.stopPropagation();
 		try {

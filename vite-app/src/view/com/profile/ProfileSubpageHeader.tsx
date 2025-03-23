@@ -1,5 +1,4 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React, { useRef } from "react";
 
 import * as Layout from "#/components/Layout";
@@ -9,7 +8,6 @@ import { type MeasuredDimensions, measureHandle } from "#/lib/hooks/useHandleRef
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { NavigationProp } from "#/lib/routes/types";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { emitSoftReset } from "#/state/events";
 import { useLightboxControls } from "#/state/lightbox";
@@ -42,11 +40,10 @@ export function ProfileSubpageHeader({
 		| undefined;
 	avatarType: UserAvatarType | "starter-pack";
 }>) {
-	const navigation = useNavigation<NavigationProp>();
 	const { isMobile } = useWebMediaQueries();
 	const { openLightbox } = useLightboxControls();
 	const pal = usePalette("default");
-	const canGoBack = navigation.canGoBack();
+	const canGoBack = history.length > 1;
 	const aviRef = useRef<HTMLDivElement>(null);
 
 	const _openLightbox = React.useCallback(

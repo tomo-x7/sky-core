@@ -1,17 +1,17 @@
 import { type AppBskyActorDefs, type ModerationOpts, RichText as RichTextAPI, moderateProfile } from "@atproto/api";
-import { useFocusEffect } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo } from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { SafeAreaView } from "#/lib/safe-area-context";
 
-import { navigate } from "#/Navigation";
+import { useNavigate, useParams } from "react-router-dom";
 import { atoms as a } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { ProfileStarterPacks } from "#/components/StarterPack/ProfileStarterPacks";
 import { ScreenHider } from "#/components/moderation/ScreenHider";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { ComposeIcon2 } from "#/lib/icons";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { combinedDisplayName } from "#/lib/strings/display-names";
 import { cleanError } from "#/lib/strings/errors";
 import { isInvalidHandle } from "#/lib/strings/handles";
@@ -40,20 +40,21 @@ interface SectionRef {
 	scrollToTop: () => void;
 }
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "Profile">;
-export function ProfileScreen(props: Props) {
+export function ProfileScreen() {
 	return (
 		<Layout.Screen style={a.pt_0}>
-			<ProfileScreenInner {...props} />
+			<ProfileScreenInner />
 		</Layout.Screen>
 	);
 }
 
-function ProfileScreenInner({ route }: Props) {
+function ProfileScreenInner() {
 	const { currentAccount } = useSession();
 	const queryClient = useQueryClient();
-	const name = route.params.name === "me" ? currentAccount?.did : route.params.name;
+	const { name: paramName, hideBackButton } = useParams<RouteParam<"Profile">>();
+	const name = paramName === "me" ? currentAccount?.did : paramName;
 	const moderationOpts = useModerationOpts();
+	const navigate = useNavigate();
 	const {
 		data: resolvedDid,
 		error: resolveError,
@@ -83,10 +84,10 @@ function ProfileScreenInner({ route }: Props) {
 		if (resolveError) {
 			if (name === "lulaoficial.bsky.social") {
 				console.log("Applying redirect to lula.com.br");
-				navigate("Profile", { name: "lula.com.br" });
+				navigate("/bsky.app/profile/lula.com.br", { replace: true });
 			}
 		}
-	}, [name, resolveError]);
+	}, [name, resolveError, navigate]);
 
 	// When we open the profile, we want to reset the posts query if we are blocked.
 	React.useEffect(() => {
@@ -121,7 +122,7 @@ function ProfileScreenInner({ route }: Props) {
 				profile={profile}
 				moderationOpts={moderationOpts}
 				isPlaceholderProfile={isPlaceholderProfile}
-				hideBackButton={!!route.params.hideBackButton}
+				hideBackButton={!!hideBackButton}
 			/>
 		);
 	}

@@ -44,7 +44,7 @@ export type ItemProps = React.PropsWithChildren<
 	Omit<JSX.IntrinsicElements["button"], "style" | "onClick"> &
 		ViewStyleProp & {
 			label: string;
-			onPress: (e: React.MouseEvent<HTMLButtonElement>) => void;
+			onPress: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 		}
 >;
 

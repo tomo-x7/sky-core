@@ -245,7 +245,7 @@ function ChatListItemReady({
 					<PreviewableUserAvatar profile={profile} size={52} moderation={moderation.ui("avatar")} />
 				</div>
 
-				<Link to={`/messages/${convo.id}`} label={displayName} onPress={onPress} onLongPress={undefined}>
+				<Link to={`/messages/${convo.id}`} label={displayName} onPress={onPress}>
 					{({ hovered, pressed, focused }) => (
 						<div
 							style={{

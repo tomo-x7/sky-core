@@ -6,12 +6,10 @@ import { Beaker_Stroke2_Corner2_Rounded as BeakerIcon } from "#/components/icons
 import { Bubbles_Stroke2_Corner2_Rounded as BubblesIcon } from "#/components/icons/Bubble";
 import { CloseQuote_Stroke2_Corner1_Rounded as QuoteIcon } from "#/components/icons/Quote";
 import { Repost_Stroke2_Corner2_Rounded as RepostIcon } from "#/components/icons/Repost";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { usePreferencesQuery, useSetFeedViewPreferencesMutation } from "#/state/queries/preferences";
 import * as SettingsList from "./components/SettingsList";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "PreferencesFollowingFeed">;
-export function FollowingFeedPreferencesScreen(props: Props) {
+export function FollowingFeedPreferencesScreen() {
 	const { data: preferences } = usePreferencesQuery();
 	const { mutate: setFeedViewPref, variables } = useSetFeedViewPreferencesMutation();
 

@@ -1,19 +1,17 @@
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import { HELP_DESK_URL } from "#/lib/constants";
 import { usePalette } from "#/lib/hooks/usePalette";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { TextLink } from "#/view/com/util/Link";
 import { ViewHeader } from "#/view/com/util/ViewHeader";
 import { CenteredView } from "#/view/com/util/Views";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "Support">;
-export const SupportScreen = (_props: Props) => {
+export const SupportScreen = () => {
 	const pal = usePalette("default");
 	const setMinimalShellMode = useSetMinimalShellMode();
 

@@ -1,13 +1,14 @@
 import type { ChatBskyConvoDefs, ChatBskyConvoListConvos } from "@atproto/api";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { ListFooter } from "#/components/Lists";
 import { Text } from "#/components/Typography";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { useRefreshOnFocus } from "#/components/hooks/useRefreshOnFocus";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeftIcon } from "#/components/icons/Arrow";
 import { ArrowRotateCounterClockwise_Stroke2_Corner0_Rounded as RetryIcon } from "#/components/icons/ArrowRotateCounterClockwise";
@@ -16,7 +17,6 @@ import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfoIcon } from "#/componen
 import { Message_Stroke2_Corner0_Rounded as MessageIcon } from "#/components/icons/Message";
 import { useAppState } from "#/lib/hooks/useAppState";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import type { CommonNavigatorParams, NativeStackScreenProps, NavigationProp } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { MESSAGE_SCREEN_POLL_INTERVAL } from "#/state/messages/convo/const";
 import { useMessagesEventBus } from "#/state/messages/events";
@@ -29,8 +29,7 @@ import * as Toast from "#/view/com/util/Toast";
 import { FAB } from "#/view/com/util/fab/FAB";
 import { RequestListItem } from "./components/RequestListItem";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "MessagesInbox">;
-export function MessagesInboxScreen(props: Props) {
+export function MessagesInboxScreen() {
 	const { gtTablet } = useBreakpoints();
 
 	const listConvosQuery = useListConvosQuery({ status: "request" });
@@ -82,7 +81,6 @@ function RequestList({
 	hasUnreadConvos: boolean;
 }) {
 	const t = useTheme();
-	const navigation = useNavigation<NavigationProp>();
 
 	// Request the poll interval to be 10s (or whatever the MESSAGE_SCREEN_POLL_INTERVAL is set to in the future)
 	// but only when the screen is active
@@ -100,6 +98,7 @@ function RequestList({
 
 	const initialNumToRender = useInitialNumToRender({ minItemHeight: 130 });
 	const [isPTRing, setIsPTRing] = useState(false);
+	const navigate = useNavigate();
 
 	const { isLoading, isFetchingNextPage, hasNextPage, fetchNextPage, isError, error, refetch } = listConvosQuery;
 
@@ -211,10 +210,11 @@ function RequestList({
 										size="small"
 										label={"Go back"}
 										onPress={() => {
-											if (navigation.canGoBack()) {
-												navigation.goBack();
+											if (history.length > 1) {
+												navigate(-1);
 											} else {
-												navigation.navigate("Messages", { animation: "pop" });
+												// navigation.navigate("Messages", { animation: "pop" });
+												navigate("/messages", { state: { animation: "pop" } });
 											}
 										}}
 									>

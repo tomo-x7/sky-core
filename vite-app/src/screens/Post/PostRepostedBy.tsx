@@ -1,17 +1,17 @@
-import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import * as Layout from "#/components/Layout";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
+import type { RouteParam } from "#/lib/routes/types";
 import { makeRecordUri } from "#/lib/strings/url-helpers";
 import { usePostThreadQuery } from "#/state/queries/post-thread";
 import { useSetMinimalShellMode } from "#/state/shell";
 import { PostRepostedBy as PostRepostedByComponent } from "#/view/com/post-thread/PostRepostedBy";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "PostRepostedBy">;
-export const PostRepostedByScreen = ({ route }: Props) => {
-	const { name, rkey } = route.params;
-	const uri = makeRecordUri(name, "app.bsky.feed.post", rkey);
+export const PostRepostedByScreen = () => {
+	const { name, rkey } = useParams<RouteParam<"PostRepostedBy">>();
+	const uri = makeRecordUri(name!, "app.bsky.feed.post", rkey!);
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { data: post } = usePostThreadQuery(uri);
 

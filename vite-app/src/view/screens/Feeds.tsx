@@ -1,7 +1,7 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
-import { useFocusEffect } from "@react-navigation/native";
 import debounce from "lodash.debounce";
 import React from "react";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
@@ -22,7 +22,6 @@ import { SettingsGear2_Stroke2_Corner0_Rounded as Gear } from "#/components/icon
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { ComposeIcon2 } from "#/lib/icons";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { s } from "#/lib/styles";
 import { NoFollowingFeed } from "#/screens/Feeds/NoFollowingFeed";
@@ -40,8 +39,6 @@ import { List, type ListMethods } from "#/view/com/util/List";
 import { FeedFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import { FAB } from "#/view/com/util/fab/FAB";
-
-type Props = NativeStackScreenProps<CommonNavigatorParams, "Feeds">;
 
 type FlatlistSlice =
 	| {
@@ -97,7 +94,7 @@ type FlatlistSlice =
 			key: string;
 	  };
 
-export function FeedsScreen(_props: Props) {
+export function FeedsScreen() {
 	const pal = usePalette("default");
 	const { openComposer } = useComposerControls();
 	const { isMobile } = useWebMediaQueries();

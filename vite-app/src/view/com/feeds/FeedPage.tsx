@@ -1,12 +1,9 @@
 import type { AppBskyActorDefs } from "@atproto/api";
-import { type NavigationProp, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type JSX } from "react";
 
 import { useHeaderOffset } from "#/components/hooks/useHeaderOffset";
 import { ComposeIcon2 } from "#/lib/icons";
-import { TabState, getRootNavigation, getTabState } from "#/lib/routes/helpers";
-import type { AllNavigatorParams } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { listenSoftReset } from "#/state/events";
 import { FeedFeedbackProvider, useFeedFeedback } from "#/state/feed-feedback";
@@ -46,7 +43,7 @@ export function FeedPage({
 	feedInfo: SavedFeedSourceInfo;
 }) {
 	const { hasSession } = useSession();
-	const navigation = useNavigation<NavigationProp<AllNavigatorParams>>();
+	// const navigation = useNavigation<NavigationProp<AllNavigatorParams>>();
 	const queryClient = useQueryClient();
 	const { openComposer } = useComposerControls();
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
@@ -73,13 +70,13 @@ export function FeedPage({
 	}, [headerOffset, setMinimalShellMode]);
 
 	const onSoftReset = React.useCallback(() => {
-		const isScreenFocused = getTabState(getRootNavigation(navigation).getState(), "Home") === TabState.InsideAtRoot;
-		if (isScreenFocused && isPageFocused) {
-			scrollToTop();
-			truncateAndInvalidate(queryClient, FEED_RQKEY(feed));
-			setHasNew(false);
-		}
-	}, [navigation, isPageFocused, scrollToTop, queryClient, feed]);
+		// const isScreenFocused = getTabState(getRootNavigation(navigation).getState(), "Home") === TabState.InsideAtRoot;
+		// if (isScreenFocused && isPageFocused) {
+		scrollToTop();
+		truncateAndInvalidate(queryClient, FEED_RQKEY(feed));
+		setHasNew(false);
+		// }
+	}, [scrollToTop, queryClient, feed]);
 
 	// fires when page within screen is activated/deactivated
 	React.useEffect(() => {

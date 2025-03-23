@@ -6,7 +6,7 @@ export function flatten(
 	for (const style of stylesArr) {
 		if (style == null) continue;
 		for (const [key, value] of Object.entries(style)) {
-			//@ts-ignore
+			//@ts-expect-error
 			result[key] = value;
 		}
 	}

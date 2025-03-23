@@ -1,7 +1,7 @@
 import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, RichText as RichTextAPI, moderatePost } from "@atproto/api";
-import { type RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import { useLocation, useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Loader } from "#/components/Loader";
@@ -12,7 +12,6 @@ import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Time
 import { ContentHider } from "#/components/moderation/ContentHider";
 import { PostAlerts } from "#/components/moderation/PostAlerts";
 import { makeProfileLink } from "#/lib/routes/links";
-import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
 import { convertBskyAppUrlIfNeeded, isBskyPostUrl, makeRecordUri } from "#/lib/strings/url-helpers";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { usePostQuery } from "#/state/queries/post";
@@ -20,9 +19,9 @@ import * as bsky from "#/types/bsky";
 import { PostMeta } from "#/view/com/util/PostMeta";
 
 export function useMessageEmbed() {
-	const route = useRoute<RouteProp<CommonNavigatorParams, "MessagesConversation">>();
-	const navigation = useNavigation<NavigationProp>();
-	const embedFromParams = route.params.embed;
+	const state = useLocation().state;
+	const embedFromParams = state.embed;
+	const navigate = useNavigate();
 
 	const [embedUri, setEmbed] = useState(embedFromParams);
 
@@ -35,7 +34,8 @@ export function useMessageEmbed() {
 		setEmbed: useCallback(
 			(embedUrl: string | undefined) => {
 				if (!embedUrl) {
-					navigation.setParams({ embed: "" });
+					const { embed, ...newState } = state || {}; // embed を削除
+					navigate(location.pathname, { state: newState, replace: true });
 					setEmbed(undefined);
 					return;
 				}
@@ -48,7 +48,7 @@ export function useMessageEmbed() {
 
 				setEmbed(uri);
 			},
-			[embedFromParams, navigation],
+			[embedFromParams, navigate, state],
 		),
 	};
 }

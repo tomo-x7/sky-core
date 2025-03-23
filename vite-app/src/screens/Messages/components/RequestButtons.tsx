@@ -1,8 +1,8 @@
 import { type ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
-import { StackActions, useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, type ButtonProps, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -12,7 +12,6 @@ import { ReportDialog } from "#/components/dms/ReportDialog";
 import { CircleX_Stroke2_Corner0_Rounded } from "#/components/icons/CircleX";
 import { Flag_Stroke2_Corner0_Rounded as FlagIcon } from "#/components/icons/Flag";
 import { PersonX_Stroke2_Corner0_Rounded as PersonXIcon } from "#/components/icons/Person";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useAcceptConversation } from "#/state/queries/messages/accept-conversation";
 import { precacheConvoQuery } from "#/state/queries/messages/conversation";
@@ -38,11 +37,12 @@ export function RejectMenu({
 	currentScreen: "list" | "conversation";
 }) {
 	const shadowedProfile = useProfileShadow(profile);
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 	const { mutate: leaveConvo } = useLeaveConvo(convo.id, {
 		onMutate: () => {
 			if (currentScreen === "conversation") {
-				navigation.dispatch(StackActions.pop());
+				// navigation.dispatch(StackActions.pop());
+				navigate(-1);
 			}
 		},
 		onError: () => {
@@ -139,17 +139,14 @@ export function AcceptChatButton({
 	currentScreen: "list" | "conversation";
 }) {
 	const queryClient = useQueryClient();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const { mutate: acceptConvo, isPending } = useAcceptConversation(convo.id, {
 		onMutate: () => {
 			onAcceptConvo?.();
 			if (currentScreen === "list") {
 				precacheConvoQuery(queryClient, { ...convo, status: "accepted" });
-				navigation.navigate("MessagesConversation", {
-					conversation: convo.id,
-					accept: true,
-				});
+				navigate(`messages/${convo.id}`, { state: { accept: true } });
 			}
 		},
 		onError: () => {
@@ -193,12 +190,13 @@ export function DeleteChatButton({
 	convo: ChatBskyConvoDefs.ConvoView;
 	currentScreen: "list" | "conversation";
 }) {
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const { mutate: leaveConvo } = useLeaveConvo(convo.id, {
 		onMutate: () => {
 			if (currentScreen === "conversation") {
-				navigation.dispatch(StackActions.pop());
+				// navigation.dispatch(StackActions.pop());
+				navigate(-1);
 			}
 		},
 		onError: () => {

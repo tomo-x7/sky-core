@@ -1,9 +1,7 @@
-import { useNavigation, useNavigationState } from "@react-navigation/native";
-
+import { useMatch, useNavigate } from "react-router-dom";
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { InlineLinkText, createStaticClick } from "#/components/Link";
-import { getCurrentRoute } from "#/lib/routes/helpers";
-import type { NavigationProp } from "#/lib/routes/types";
+import { routes } from "#/routes";
 import { emitSoftReset } from "#/state/events";
 import { usePinnedFeedsInfos } from "#/state/queries/feed";
 import { useSelectedFeed, useSetSelectedFeed } from "#/state/shell/selected-feed";
@@ -13,13 +11,8 @@ export function DesktopFeeds() {
 	const { data: pinnedFeedInfos, error, isLoading } = usePinnedFeedsInfos();
 	const selectedFeed = useSelectedFeed();
 	const setSelectedFeed = useSetSelectedFeed();
-	const navigation = useNavigation<NavigationProp>();
-	const route = useNavigationState((state) => {
-		if (!state) {
-			return { name: "Home" };
-		}
-		return getCurrentRoute(state);
-	});
+	const navigate = useNavigate();
+	const isHome = useMatch(routes.Home);
 
 	if (isLoading) {
 		return (
@@ -67,7 +60,7 @@ export function DesktopFeeds() {
 		>
 			{pinnedFeedInfos.map((feedInfo) => {
 				const feed = feedInfo.feedDescriptor;
-				const current = route.name === "Home" && feed === selectedFeed;
+				const current = isHome && feed === selectedFeed;
 
 				return (
 					<InlineLinkText
@@ -75,8 +68,8 @@ export function DesktopFeeds() {
 						label={feedInfo.displayName}
 						{...createStaticClick(() => {
 							setSelectedFeed(feed);
-							navigation.navigate("Home");
-							if (route.name === "Home" && feed === selectedFeed) {
+							navigate("/");
+							if (isHome && feed === selectedFeed) {
 								emitSoftReset();
 							}
 						})}

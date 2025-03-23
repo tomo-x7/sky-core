@@ -1,10 +1,9 @@
 import { AppBskyGraphDefs, AtUri, type ModerationOpts, RichText as RichTextAPI, moderateUserList } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useRef } from "react";
 
+import { useNavigate, useParams } from "react-router-dom";
 import { atoms as a } from "#/alf";
 import { ButtonIcon, ButtonText, Button as NewButton } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -12,6 +11,7 @@ import * as Layout from "#/components/Layout";
 import * as Prompt from "#/components/Prompt";
 import { RichText } from "#/components/RichText";
 import { Text } from "#/components/Typography";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { PersonPlus_Stroke2_Corner0_Rounded as PersonPlusIcon } from "#/components/icons/Person";
 import * as Hider from "#/components/moderation/Hider";
 import { ReportDialog, useReportDialogControl } from "#/components/moderation/ReportDialog";
@@ -20,8 +20,7 @@ import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { ComposeIcon2 } from "#/lib/icons";
 import { makeListLink } from "#/lib/routes/links";
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
-import type { NavigationProp } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { shareUrl } from "#/lib/sharing";
 import { cleanError } from "#/lib/strings/errors";
 import { toShareUrl } from "#/lib/strings/url-helpers";
@@ -64,19 +63,18 @@ interface SectionRef {
 	scrollToTop: () => void;
 }
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileList">;
-export function ProfileListScreen(props: Props) {
+export function ProfileListScreen() {
 	return (
 		<Layout.Screen>
-			<ProfileListScreenInner {...props} />
+			<ProfileListScreenInner />
 		</Layout.Screen>
 	);
 }
 
-function ProfileListScreenInner(props: Props) {
-	const { name: handleOrDid, rkey } = props.route.params;
+function ProfileListScreenInner() {
+	const { name: handleOrDid, rkey } = useParams<RouteParam<"ProfileList">>();
 	const { data: resolvedUri, error: resolveError } = useResolveUriQuery(
-		AtUri.make(handleOrDid, "app.bsky.graph.list", rkey).toString(),
+		AtUri.make(handleOrDid!, "app.bsky.graph.list", rkey).toString(),
 	);
 	const { data: preferences } = usePreferencesQuery();
 	const { data: list, error: listError } = useListQuery(resolvedUri?.uri);
@@ -101,11 +99,11 @@ function ProfileListScreenInner(props: Props) {
 
 	return resolvedUri && list && moderationOpts && preferences ? (
 		<ProfileListScreenLoaded
-			{...props}
 			uri={resolvedUri.uri}
 			list={list}
 			moderationOpts={moderationOpts}
 			preferences={preferences}
+			rkey={rkey!}
 		/>
 	) : (
 		<LoadingScreen />
@@ -113,27 +111,27 @@ function ProfileListScreenInner(props: Props) {
 }
 
 function ProfileListScreenLoaded({
-	route,
 	uri,
 	list,
 	moderationOpts,
 	preferences,
-}: Props & {
+	rkey,
+}: {
 	uri: string;
 	list: AppBskyGraphDefs.ListView;
 	moderationOpts: ModerationOpts;
 	preferences: UsePreferencesQueryResponse;
+	rkey: string;
 }) {
 	const queryClient = useQueryClient();
 	const { openComposer } = useComposerControls();
 	const setMinimalShellMode = useSetMinimalShellMode();
 	const { currentAccount } = useSession();
-	const { rkey } = route.params;
 	const feedSectionRef = React.useRef<SectionRef>(null);
 	const aboutSectionRef = React.useRef<SectionRef>(null);
 	const { openModal } = useModalControls();
 	const isCurateList = list.purpose === AppBskyGraphDefs.CURATELIST;
-	const isScreenFocused = useIsFocused();
+	const isScreenFocused = true; //useIsFocused();
 	const isHidden = (list as AppBskyGraphDefs.ListView).labels?.findIndex((l) => l.val === "!hide") !== -1;
 	const isOwner = currentAccount?.did === list.creator.did;
 	const scrollElRef = useRef();
@@ -253,7 +251,6 @@ function Header({
 }) {
 	const pal = usePalette("default");
 	const palInverted = usePalette("inverted");
-	const navigation = useNavigation<NavigationProp>();
 	const { currentAccount } = useSession();
 	const reportDialogControl = useReportDialogControl();
 	const { openModal } = useModalControls();
@@ -265,6 +262,7 @@ function Header({
 	const isBlocking = !!list.viewer?.blocked;
 	const isMuting = !!list.viewer?.muted;
 	const isOwner = list.creator.did === currentAccount?.did;
+	const navigate = useNavigate();
 
 	const { mutateAsync: addSavedFeeds, isPending: isAddSavedFeedPending } = useAddSavedFeedsMutation();
 	const { mutateAsync: removeSavedFeed, isPending: isRemovePending } = useRemoveFeedMutation();
@@ -368,12 +366,12 @@ function Header({
 		}
 
 		Toast.show("List deleted");
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.navigate("Home");
+			navigate("/");
 		}
-	}, [list, listDeleteMutation, navigation, removeSavedFeed, savedFeedConfig]);
+	}, [list, listDeleteMutation, navigate, removeSavedFeed, savedFeedConfig]);
 
 	const onPressReport = useCallback(() => {
 		reportDialogControl.open();
@@ -680,7 +678,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 	const queryClient = useQueryClient();
 	const [hasNew, setHasNew] = React.useState(false);
 	const [isScrolledDown, setIsScrolledDown] = React.useState(false);
-	const isScreenFocused = useIsFocused();
+	const isScreenFocused = true; //useIsFocused();
 
 	const onScrollToTop = useCallback(() => {
 		scrollElRef.current?.scrollToOffset({
@@ -699,7 +697,7 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 			return;
 		}
 		return listenSoftReset(onScrollToTop);
-	}, [onScrollToTop, isScreenFocused]);
+	}, [onScrollToTop]);
 
 	const renderPostsEmpty = useCallback(() => {
 		return (
@@ -863,14 +861,14 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 
 function ErrorScreen({ error }: { error: string }) {
 	const pal = usePalette("default");
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 	const onPressBack = useCallback(() => {
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.navigate("Home");
+			navigate("/");
 		}
-	}, [navigation]);
+	}, [navigate]);
 
 	return (
 		<div

@@ -1,5 +1,3 @@
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-
 import * as Layout from "#/components/Layout";
 import { CodeLines_Stroke2_Corner2_Rounded as CodeLinesIcon } from "#/components/icons/CodeLines";
 import { Globe_Stroke2_Corner0_Rounded as GlobeIcon } from "#/components/icons/Globe";
@@ -7,12 +5,10 @@ import { Newspaper_Stroke2_Corner2_Rounded as NewspaperIcon } from "#/components
 import { Wrench_Stroke2_Corner2_Rounded as WrenchIcon } from "#/components/icons/Wrench";
 import { appVersion, bundleInfo } from "#/lib/app-info";
 import { STATUS_PAGE_URL } from "#/lib/constants";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
 import * as SettingsList from "#/screens/Settings/components/SettingsList";
 import { useDevModeEnabled } from "#/state/preferences/dev-mode";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "AboutSettings">;
-export function AboutSettingsScreen(props: Props) {
+export function AboutSettingsScreen() {
 	const [devModeEnabled, setDevModeEnabled] = useDevModeEnabled();
 
 	return (

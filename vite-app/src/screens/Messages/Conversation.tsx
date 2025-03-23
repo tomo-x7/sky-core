@@ -1,8 +1,7 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
-import { type RouteProp, useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useCallback } from "react";
 
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
@@ -12,9 +11,10 @@ import { Loader } from "#/components/Loader";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
 import { MessagesListBlockedFooter } from "#/components/dms/MessagesListBlockedFooter";
 import { MessagesListHeader } from "#/components/dms/MessagesListHeader";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { useEmail } from "#/lib/hooks/useEmail";
 import { useEnableKeyboardControllerScreen } from "#/lib/hooks/useEnableKeyboardController";
-import type { CommonNavigatorParams, NavigationProp } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { MessagesList } from "#/screens/Messages/components/MessagesList";
 import { type Shadow, useMaybeProfileShadow } from "#/state/cache/profile-shadow";
 import { ConvoProvider, isConvoActive, useConvo } from "#/state/messages/convo";
@@ -24,12 +24,11 @@ import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useSetMinimalShellMode } from "#/state/shell";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "MessagesConversation">;
-export function MessagesConversationScreen({ route }: Props) {
+export function MessagesConversationScreen() {
 	const { gtMobile } = useBreakpoints();
 	const setMinimalShellMode = useSetMinimalShellMode();
 
-	const convoId = route.params.conversation;
+	const convoId = useParams<RouteParam<"MessagesConversation">>().conversation!;
 	const { setCurrentConvoId } = useCurrentConvoId();
 
 	useEnableKeyboardControllerScreen(true);
@@ -168,10 +167,11 @@ function InnerReady({
 	setHasScrolled: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const convoState = useConvo();
-	const navigation = useNavigation<NavigationProp>();
-	const { params } = useRoute<RouteProp<CommonNavigatorParams, "MessagesConversation">>();
+	const { conversation } = useParams<RouteParam<"MessagesConversation">>();
+	const { embed, accept }: { embed?: string; accept?: string } = useLocation().state;
 	const verifyEmailControl = useDialogControl();
 	const { needsEmailVerification } = useEmail();
+	const navigate = useNavigate();
 
 	React.useEffect(() => {
 		if (needsEmailVerification) {
@@ -187,7 +187,7 @@ function InnerReady({
 					hasScrolled={hasScrolled}
 					setHasScrolled={setHasScrolled}
 					blocked={moderation?.blocked}
-					hasAcceptOverride={!!params.accept}
+					hasAcceptOverride={!!accept}
 					footer={
 						<MessagesListBlockedFooter
 							recipient={recipient}
@@ -202,7 +202,7 @@ function InnerReady({
 				reasonText={"Before you may message another user, you must first verify your email."}
 				control={verifyEmailControl}
 				onCloseWithoutVerifying={() => {
-					navigation.navigate("Home");
+					navigate(-1);
 				}}
 			/>
 		</>

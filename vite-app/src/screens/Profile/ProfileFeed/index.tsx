@@ -1,15 +1,13 @@
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useRef } from "react";
 
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useSetTitle } from "#/lib/hooks/useSetTitle";
 import { ComposeIcon2 } from "#/lib/icons";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
-import type { NavigationProp } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { makeRecordUri } from "#/lib/strings/url-helpers";
 import { s } from "#/lib/styles";
 import { ProfileFeedHeader, ProfileFeedHeaderSkeleton } from "#/screens/Profile/components/ProfileFeedHeader";
@@ -31,28 +29,24 @@ import { FAB } from "#/view/com/util/fab/FAB";
 import { Button } from "#/view/com/util/forms/Button";
 import { LoadLatestBtn } from "#/view/com/util/load-latest/LoadLatestBtn";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileFeed">;
-export function ProfileFeedScreen(props: Props) {
-	const { rkey, name: handleOrDid } = props.route.params;
+export function ProfileFeedScreen() {
+	const { rkey, name: handleOrDid } = useParams<RouteParam<"ProfileFeed">>();
+	const feedCacheKey: string | undefined = useLocation().state?.feedCacheKey;
 
-	const feedParams: FeedParams | undefined = props.route.params.feedCacheKey
-		? {
-				feedCacheKey: props.route.params.feedCacheKey,
-			}
-		: undefined;
+	const feedParams: FeedParams | undefined = feedCacheKey ? ({ feedCacheKey } as FeedParams) : undefined;
 	const pal = usePalette("default");
-	const navigation = useNavigation<NavigationProp>();
 
-	const uri = useMemo(() => makeRecordUri(handleOrDid, "app.bsky.feed.generator", rkey), [rkey, handleOrDid]);
+	const uri = useMemo(() => makeRecordUri(handleOrDid!, "app.bsky.feed.generator", rkey!), [rkey, handleOrDid]);
 	const { error, data: resolvedUri } = useResolveUriQuery(uri);
+	const navigate = useNavigate();
 
 	const onPressBack = React.useCallback(() => {
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.navigate("Home");
+			navigate("/");
 		}
-	}, [navigation]);
+	}, [navigate]);
 
 	if (error) {
 		return (
@@ -155,7 +149,7 @@ export function ProfileFeedScreenInner({
 }) {
 	const { hasSession } = useSession();
 	const { openComposer } = useComposerControls();
-	const isScreenFocused = useIsFocused();
+	const isScreenFocused = true; //useIsFocused();
 
 	useSetTitle(feedInfo?.displayName);
 
@@ -181,7 +175,7 @@ export function ProfileFeedScreenInner({
 			return;
 		}
 		return listenSoftReset(onScrollToTop);
-	}, [onScrollToTop, isScreenFocused]);
+	}, [onScrollToTop]);
 
 	const renderPostsEmpty = useCallback(() => {
 		return <EmptyState icon="hashtag" message={"This feed is empty."} />;

@@ -1,23 +1,20 @@
-import { StackActions, useNavigation } from "@react-navigation/native";
-
-import type { NavigationProp } from "#/lib/routes/types";
-import { router } from "#/routes";
+import { useNavigate } from "react-router-dom";
 
 export function useGoBack(onGoBack?: () => unknown) {
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 	return () => {
 		onGoBack?.();
-		if (navigation.canGoBack()) {
-			navigation.goBack();
+		if (history.length > 1) {
+			navigate(-1);
 		} else {
-			navigation.navigate("HomeTab");
+			navigate("/");
 			// Checking the state for routes ensures that web doesn't encounter errors while going back
-			if (navigation.getState()?.routes) {
-				navigation.dispatch(StackActions.push(...router.matchPath("/")));
-			} else {
-				navigation.navigate("HomeTab");
-				navigation.dispatch(StackActions.popToTop());
-			}
+			// if (navigation.getState()?.routes) {
+			// 	navigation.dispatch(StackActions.push(...router.matchPath("/")));
+			// } else {
+			navigate("/");
+			// navigation.dispatch(StackActions.popToTop());
+			// }
 		}
 	};
 }

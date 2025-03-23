@@ -1,7 +1,7 @@
 import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
@@ -11,7 +11,6 @@ import { Text } from "#/components/Typography";
 import { ArrowRight_Stroke2_Corner0_Rounded as Arrow } from "#/components/icons/Arrow";
 import { Hashtag_Stroke2_Corner0_Rounded as Hashtag } from "#/components/icons/Hashtag";
 import { PersonPlus_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
-import type { NavigationProp } from "#/lib/routes/types";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useGetPopularFeedsQuery } from "#/state/queries/feed";
 import type { FeedDescriptor } from "#/state/queries/post-feed";
@@ -213,7 +212,7 @@ function ProfileGrid({
 }) {
 	const t = useTheme();
 	const moderationOpts = useModerationOpts();
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 	const { gtMobile } = useBreakpoints();
 	const isLoading = isSuggestionsLoading || !moderationOpts;
 	const maxLength = gtMobile ? 4 : 6;
@@ -332,7 +331,7 @@ function ProfileGrid({
 							<Button
 								label={"Browse more accounts on the Explore page"}
 								onPress={() => {
-									navigation.navigate("SearchTab");
+									navigate("/search");
 								}}
 							>
 								<CardOuter style={{ ...a.flex_1, borderWidth: 0 }}>
@@ -377,7 +376,7 @@ export function SuggestedFeeds() {
 	const { data, isLoading, error } = useGetPopularFeedsQuery({
 		limit: numFeedsToDisplay,
 	});
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 	const { gtMobile } = useBreakpoints();
 
 	const feeds = React.useMemo(() => {
@@ -501,7 +500,7 @@ export function SuggestedFeeds() {
 							<Button
 								label={"Browse more feeds on the Explore page"}
 								onPress={() => {
-									navigation.navigate("SearchTab");
+									navigate("/search");
 								}}
 								style={a.flex_col}
 							>

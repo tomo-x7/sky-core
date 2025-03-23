@@ -1,8 +1,7 @@
 import type { ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { type DialogControlProps, useDialogControl } from "#/components/Dialog";
@@ -11,6 +10,7 @@ import { Link } from "#/components/Link";
 import { ListFooter } from "#/components/Lists";
 import { Text } from "#/components/Typography";
 import { NewChat } from "#/components/dms/dialogs/NewChatDialog";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { useRefreshOnFocus } from "#/components/hooks/useRefreshOnFocus";
 import { ArrowRotateCounterClockwise_Stroke2_Corner0_Rounded as Retry } from "#/components/icons/ArrowRotateCounterClockwise";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
@@ -19,7 +19,6 @@ import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Pl
 import { SettingsSliderVertical_Stroke2_Corner0_Rounded as SettingsSlider } from "#/components/icons/SettingsSlider";
 import { useAppState } from "#/lib/hooks/useAppState";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import type { MessagesTabNavigatorParams } from "#/lib/routes/types";
 import { cleanError } from "#/lib/strings/errors";
 import { listenSoftReset } from "#/state/events";
 import { MESSAGE_SCREEN_POLL_INTERVAL } from "#/state/messages/convo/const";
@@ -56,13 +55,13 @@ function keyExtractor(item: ListItem) {
 	return item.type === "INBOX" ? "INBOX" : item.conversation.id;
 }
 
-type Props = NativeStackScreenProps<MessagesTabNavigatorParams, "Messages">;
-export function MessagesScreen({ navigation, route }: Props) {
+export function MessagesScreen() {
 	const t = useTheme();
 	const { currentAccount } = useSession();
 	const newChatControl = useDialogControl();
 	const scrollElRef: ListRef = useRef(null);
-	const pushToConversation = route.params?.pushToConversation;
+	const pushToConversation = undefined; //route.params?.pushToConversation;
+	const navigation = useNavigate();
 
 	// Whenever we have `pushToConversation` set, it means we pressed a notification for a chat without being on
 	// this tab. We should immediately push to the conversation after pressing the notification.
@@ -70,10 +69,11 @@ export function MessagesScreen({ navigation, route }: Props) {
 	// the conversation is the same as before
 	useEffect(() => {
 		if (pushToConversation) {
-			navigation.navigate("MessagesConversation", {
-				conversation: pushToConversation,
-			});
-			navigation.setParams({ pushToConversation: undefined });
+			navigation(`/messages/${pushToConversation}`);
+			// navigation.navigate("MessagesConversation", {
+			// 	conversation: pushToConversation,
+			// });
+			// navigation.setParams({ pushToConversation: undefined });
 		}
 	}, [navigation, pushToConversation]);
 
@@ -160,7 +160,10 @@ export function MessagesScreen({ navigation, route }: Props) {
 	}, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 
 	const onNewChat = useCallback(
-		(conversation: string) => navigation.navigate("MessagesConversation", { conversation }),
+		(conversation: string) => {
+			// navigation.navigate("MessagesConversation", { conversation })
+			navigation(`/messages/${conversation}`);
+		},
 		[navigation],
 	);
 
@@ -175,7 +178,10 @@ export function MessagesScreen({ navigation, route }: Props) {
 		}
 	}, [refetch]);
 
-	const isScreenFocused = useIsFocused();
+	// const isScreenFocused = useIsFocused();
+	// TODO
+	const isScreenFocused = true;
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (!isScreenFocused) {
 			return;

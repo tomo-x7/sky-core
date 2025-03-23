@@ -6,13 +6,11 @@ import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
 import * as Toggle from "#/components/forms/Toggle";
 import { Beaker_Stroke2_Corner2_Rounded as BeakerIcon } from "#/components/icons/Beaker";
-import type { AllNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
 import { useNotificationFeedQuery } from "#/state/queries/notifications/feed";
 import { useNotificationSettingsMutation } from "#/state/queries/notifications/settings";
 import * as SettingsList from "./components/SettingsList";
 
-type Props = NativeStackScreenProps<AllNavigatorParams, "NotificationSettings">;
-export function NotificationSettingsScreen(props: Props) {
+export function NotificationSettingsScreen() {
 	const {
 		data,
 		isError: isQueryError,

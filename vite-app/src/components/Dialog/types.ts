@@ -12,7 +12,7 @@ import type { ViewStyleProp } from "#/alf";
  * would need to create a function to wrap `.open()` with.
  */
 export type DialogControlRefProps = {
-	open: (options?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+	open: (options?: React.MouseEvent) => void;
 	close: (callback?: () => void) => void;
 };
 

@@ -9,14 +9,13 @@ import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/i
 import { useTheme } from "#/lib/ThemeContext";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
+import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { SafeAreaView } from "#/lib/safe-area-context";
 import { cleanError } from "#/lib/strings/errors";
 import { colors, gradients, s } from "#/lib/styles";
-import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { useModalControls } from "#/state/modals";
 import { DM_SERVICE_HEADERS } from "#/state/queries/messages/const";
 import { useAgent, useSession, useSessionApi } from "#/state/session";
-import { resetToTab } from "../../../Navigation";
 import * as Toast from "../util/Toast";
 import { ErrorMessage } from "../util/error/ErrorMessage";
 
@@ -71,7 +70,7 @@ export function Component(props: {}) {
 				token,
 			});
 			Toast.show("Your account has been deleted");
-			resetToTab("HomeTab");
+			// resetToTab("HomeTab");
 			removeAccount(currentAccount);
 			closeModal();
 		} catch (e: any) {

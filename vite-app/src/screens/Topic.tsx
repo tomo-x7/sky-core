@@ -1,16 +1,16 @@
 import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
-import { useFocusEffect } from "@react-navigation/native";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { ArrowOutOfBox_Stroke2_Corner0_Rounded as Share } from "#/components/icons/ArrowOutOfBox";
 import { HITSLOP_10 } from "#/lib/constants";
 import { useInitialNumToRender } from "#/lib/hooks/useInitialNumToRender";
-import type { CommonNavigatorParams } from "#/lib/routes/types";
+import type { RouteParam } from "#/lib/routes/types";
 import { shareUrl } from "#/lib/sharing";
 import { cleanError } from "#/lib/strings/errors";
 import { enforceLen } from "#/lib/strings/helpers";
@@ -30,11 +30,11 @@ const keyExtractor = (item: PostView, index: number) => {
 	return `${item.uri}-${index}`;
 };
 
-export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavigatorParams, "Topic">) {
-	const { topic } = route.params;
+export default function TopicScreen() {
+	const { topic } = useParams<RouteParam<"Topic">>();
 
 	const headerTitle = React.useMemo(() => {
-		return enforceLen(decodeURIComponent(topic), 24, true, "middle");
+		return enforceLen(decodeURIComponent(topic!), 24, true, "middle");
 	}, [topic]);
 
 	const onShare = React.useCallback(() => {
@@ -64,11 +64,11 @@ export default function TopicScreen({ route }: NativeStackScreenProps<CommonNavi
 		return [
 			{
 				title: "Top",
-				component: <TopicScreenTab topic={topic} sort="top" active={activeTab === 0} />,
+				component: <TopicScreenTab topic={topic!} sort="top" active={activeTab === 0} />,
 			},
 			{
 				title: "Latest",
-				component: <TopicScreenTab topic={topic} sort="latest" active={activeTab === 1} />,
+				component: <TopicScreenTab topic={topic!} sort="latest" active={activeTab === 1} />,
 			},
 		];
 	}, [topic, activeTab]);

@@ -1,14 +1,15 @@
 import { useMemo } from "react";
 
-import type { CommonNavigatorParams, NativeStackScreenProps } from "#/lib/routes/types";
+import { useParams, useSearchParams } from "react-router-dom";
+import type { RouteParam } from "#/lib/routes/types";
 import { useProfileQuery } from "#/state/queries/profile";
 import { useResolveDidQuery } from "#/state/queries/resolve-uri";
 import { useSession } from "#/state/session";
 import { SearchScreenShell } from "#/view/screens/Search/Search";
 
-type Props = NativeStackScreenProps<CommonNavigatorParams, "ProfileSearch">;
-export const ProfileSearchScreen = ({ route }: Props) => {
-	const { name, q: queryParam = "" } = route.params;
+export const ProfileSearchScreen = () => {
+	const { name } = useParams<RouteParam<"ProfileSearch">>();
+	const queryParam = useSearchParams()[0].get("q") ?? "";
 	const { currentAccount } = useSession();
 
 	const { data: resolvedDid } = useResolveDidQuery(name);
@@ -16,7 +17,7 @@ export const ProfileSearchScreen = ({ route }: Props) => {
 
 	const fixedParams = useMemo(
 		() => ({
-			from: profile?.handle ?? name,
+			from: profile?.handle ?? name!,
 		}),
 		[profile?.handle, name],
 	);

@@ -255,12 +255,13 @@ let ProfileHeaderLabeler = ({
 
 								{typeof likeCount === "number" && (
 									<Link
-										to={{
-											screen: "ProfileLabelerLikedBy",
-											params: {
-												name: labeler.creator.handle || labeler.creator.did,
-											},
-										}}
+										to={`/profile/${labeler.creator.handle || labeler.creator.did}/labeler/liked-by`}
+										// to={{
+										// 	screen: "ProfileLabelerLikedBy",
+										// 	params: {
+										// 		name: labeler.creator.handle || labeler.creator.did,
+										// 	},
+										// }}
 										size="tiny"
 										label={`Liked by ${likeCount} ${likeCount === 1 ? "user" : "users"}`}
 									>

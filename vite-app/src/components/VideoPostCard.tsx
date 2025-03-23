@@ -132,13 +132,14 @@ export function VideoPostCard({
 	return (
 		<Link
 			label={`Video from ${author.handle}: ${text}`}
-			to={{
-				screen: "VideoFeed",
-				params: {
-					...sourceContext,
-					initialPostUri: post.uri,
-				},
-			}}
+			to={"/video-feed"}
+			// to={{
+			// 	screen: "VideoFeed",
+			// 	params: {
+			// 		...sourceContext,
+			// 		initialPostUri: post.uri,
+			// 	},
+			// }}
 			onPress={() => {
 				onInteract?.();
 			}}
@@ -500,13 +501,14 @@ export function CompactVideoPostCard({
 	return (
 		<Link
 			label={"View video"}
-			to={{
-				screen: "VideoFeed",
-				params: {
-					...sourceContext,
-					initialPostUri: post.uri,
-				},
-			}}
+			to={"/video-feed"}
+			// to={{
+			// 	screen: "VideoFeed",
+			// 	params: {
+			// 		...sourceContext,
+			// 		initialPostUri: post.uri,
+			// 	},
+			// }}
 			onPress={() => {
 				onInteract?.();
 			}}

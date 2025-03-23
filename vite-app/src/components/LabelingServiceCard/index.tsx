@@ -162,12 +162,13 @@ export function Default({ labeler, style }: LabelingServiceProps & ViewStyleProp
 export function Link({ children, labeler }: LabelingServiceProps & Pick<LinkProps, "children">) {
 	return (
 		<InternalLink
-			to={{
-				screen: "Profile",
-				params: {
-					name: labeler.creator.handle,
-				},
-			}}
+			to={`/profile/${labeler.creator.handle}`}
+			// to={{
+			// 	screen: "Profile",
+			// 	params: {
+			// 		name: labeler.creator.handle,
+			// 	},
+			// }}
 			label={`View the labeling service provided by @${labeler.creator.handle}`}
 		>
 			{children}

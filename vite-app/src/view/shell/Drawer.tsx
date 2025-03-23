@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { type JSX } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Divider } from "#/components/Divider";
@@ -32,9 +32,9 @@ import {
 } from "#/components/icons/UserCircle";
 import { FEEDBACK_FORM_URL, HELP_DESK_URL } from "#/lib/constants";
 import { useNavigationTabState } from "#/lib/hooks/useNavigationTabState";
-import type { NavigationProp } from "#/lib/routes/types";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { colors } from "#/lib/styles";
+import { router, routes } from "#/routes";
 import { useKawaiiMode } from "#/state/preferences/kawaii";
 import { useUnreadNotifications } from "#/state/queries/notifications/unread";
 import { useProfileQuery } from "#/state/queries/profile";
@@ -129,27 +129,26 @@ export { DrawerProfileCard };
 let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	const t = useTheme();
 	const setDrawerOpen = useSetDrawerOpen();
-	const navigation = useNavigation<NavigationProp>();
 	// @ts-expect-error
 	const { isAtHome, isAtSearch, isAtFeeds, isAtNotifications, isAtMyProfile, isAtMessages } = useNavigationTabState();
 	const { hasSession, currentAccount } = useSession();
+	const navigate = useNavigate();
 
 	// events
 	// =
 
 	const onPressTab = React.useCallback(
 		(tab: string) => {
-			const state = navigation.getState();
 			setDrawerOpen(false);
 			// hack because we have flat navigator for web and MyProfile does not exist on the web navigator -ansh
 			if (tab === "MyProfile") {
-				navigation.navigate("Profile", { name: currentAccount!.handle });
+				navigate(`/profile/${currentAccount?.handle}`);
 			} else {
-				// @ts-expect-error must be Home, Search, Notifications, or MyProfile
-				navigation.navigate(tab);
+				const tabPattern = router.matchName(tab)?.pattern;
+				navigate(routes[tab as keyof typeof routes] ?? "/");
 			}
 		},
-		[navigation, setDrawerOpen, currentAccount],
+		[navigate, setDrawerOpen, currentAccount],
 	);
 
 	const onPressHome = React.useCallback(() => onPressTab("Home"), [onPressTab]);
@@ -165,19 +164,19 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	}, [onPressTab]);
 
 	const onPressMyFeeds = React.useCallback(() => {
-		navigation.navigate("Feeds");
+		navigate("/feeds");
 		setDrawerOpen(false);
-	}, [navigation, setDrawerOpen]);
+	}, [navigate, setDrawerOpen]);
 
 	const onPressLists = React.useCallback(() => {
-		navigation.navigate("Lists");
+		navigate("/lists");
 		setDrawerOpen(false);
-	}, [navigation, setDrawerOpen]);
+	}, [navigate, setDrawerOpen]);
 
 	const onPressSettings = React.useCallback(() => {
-		navigation.navigate("Settings");
+		navigate("/settings");
 		setDrawerOpen(false);
-	}, [navigation, setDrawerOpen]);
+	}, [navigate, setDrawerOpen]);
 
 	const onPressFeedback = React.useCallback(() => {
 		window.open(
@@ -320,7 +319,7 @@ interface MenuItemProps {
 	label: string;
 	count?: string;
 	bold?: boolean;
-	onClick: React.MouseEventHandler<HTMLButtonElement>;
+	onClick: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 let SearchMenuItem = ({

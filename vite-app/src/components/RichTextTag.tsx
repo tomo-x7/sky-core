@@ -1,13 +1,12 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
-import { InlineLinkText, createStaticClick, createStaticClickIfUnmodified } from "#/components/Link";
+import { useNavigate } from "react-router-dom";
+import { InlineLinkText, createStaticClickIfUnmodified } from "#/components/Link";
 import { Loader } from "#/components/Loader";
 import * as Menu from "#/components/Menu";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
 import { Mute_Stroke2_Corner0_Rounded as Mute } from "#/components/icons/Mute";
 import { Person_Stroke2_Corner0_Rounded as Person } from "#/components/icons/Person";
-import type { NavigationProp } from "#/lib/routes/types";
 import { isInvalidHandle } from "#/lib/strings/handles";
 import {
 	usePreferencesQuery,
@@ -37,9 +36,9 @@ export function RichTextTag({
 		variables: optimisticRemove,
 		reset: resetRemove,
 	} = useRemoveMutedWordsMutation();
-	const navigation = useNavigation<NavigationProp>();
 	const label = `Hashtag ${tag}`;
 	const hint = `Click to open tag menu for ${tag}`;
+	const navigate = useNavigate();
 
 	const isMuted = Boolean(
 		(preferences?.moderationPrefs.mutedWords?.find((m) => m.value === tag && m.targets.includes("tag")) ??
@@ -63,17 +62,18 @@ export function RichTextTag({
 			<Menu.Trigger label={label} hint={hint}>
 				{({ props: menuProps }) => (
 					<InlineLinkText
-						to={{
-							screen: "Hashtag",
-							params: { tag: encodeURIComponent(tag) },
-						}}
+						to={`/hashtag/${encodeURIComponent(tag)}`}
+						// to={{
+						// 	screen: "Hashtag",
+						// 	params: { tag: encodeURIComponent(tag) },
+						// }}
 						{...menuProps}
 						onPress={(e) => {
 							return createStaticClickIfUnmodified(() => {
 								menuProps.onPress();
 							}).onPress(e);
 						}}
-						onLongPress={createStaticClick(menuProps.onPress).onPress}
+						// onLongPress={createStaticClick(menuProps.onPress).onPress}
 						label={label}
 						style={textStyle}
 					>
@@ -86,9 +86,7 @@ export function RichTextTag({
 					<Menu.Item
 						label={`See ${tag} posts`}
 						onPress={() => {
-							navigation.push("Hashtag", {
-								tag: encodeURIComponent(tag),
-							});
+							navigate(`/hashtag/${encodeURIComponent(tag)}`);
 						}}
 					>
 						<Menu.ItemText>
@@ -100,10 +98,9 @@ export function RichTextTag({
 						<Menu.Item
 							label={`See ${tag} posts by user`}
 							onPress={() => {
-								navigation.push("Hashtag", {
-									tag: encodeURIComponent(tag),
-									author: authorHandle,
-								});
+								navigate(
+									`/hashtag/${encodeURIComponent(tag)}?author=${encodeURIComponent(authorHandle)}`,
+								);
 							}}
 						>
 							<Menu.ItemText>

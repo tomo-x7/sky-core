@@ -1,25 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { Text } from "#/components/Typography";
 import { usePalette } from "#/lib/hooks/usePalette";
-import type { NavigationProp } from "#/lib/routes/types";
 import { s } from "#/lib/styles";
 import { Button } from "../util/forms/Button";
 
 export function FollowingEndOfFeed() {
 	const pal = usePalette("default");
 	const palInverted = usePalette("inverted");
-	const navigation = useNavigation<NavigationProp>();
+	const navigate = useNavigate();
 
 	const onPressFindAccounts = React.useCallback(() => {
-		navigation.navigate("Search", {});
-	}, [navigation]);
+		navigate("/search");
+	}, [navigate]);
 
 	const onPressDiscoverFeeds = React.useCallback(() => {
-		navigation.navigate("Feeds");
-	}, [navigation]);
+		navigate("/feeds");
+	}, [navigate]);
 
 	return (
 		<div
