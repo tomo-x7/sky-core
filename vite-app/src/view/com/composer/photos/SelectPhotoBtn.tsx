@@ -6,8 +6,7 @@ import { Button } from "#/components/Button";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 import { Image_Stroke2_Corner0_Rounded as Image } from "#/components/icons/Image";
 import { usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
-import { openPicker } from "#/lib/media/picker";
-import { type ComposerImage, createComposerImage } from "#/state/gallery";
+import type { ComposerImage } from "#/state/gallery";
 
 type Props = {
 	size: number;
@@ -20,17 +19,21 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 	const t = useTheme();
 	const sheetWrapper = useSheetWrapper();
 
-	const onPressSelectPhotos = useCallback(async () => {
-		const images = await sheetWrapper(
-			openPicker({
-				selectionLimit: 4 - size,
-				allowsMultipleSelection: true,
-			}),
-		);
-		const results = await Promise.all(images.map((img) => createComposerImage(img)));
-
-		onAdd(results);
-	}, [size, onAdd, sheetWrapper]);
+	const onPressSelectPhotos = useCallback(
+		async () => {
+			// const images = await sheetWrapper(
+			// 	openPicker({
+			// 		selectionLimit: 4 - size,
+			// 		allowsMultipleSelection: true,
+			// 	}),
+			// );
+			// const results = await Promise.all(images.map((img) => createComposerImage(img)));
+			// onAdd(results);
+		},
+		[
+			/*size, onAdd, sheetWrapper*/
+		],
+	);
 
 	return (
 		<Button

@@ -1,7 +1,6 @@
 import React from "react";
 
 import { colors } from "#/lib/styles";
-import { useKawaiiMode } from "#/state/preferences/kawaii";
 
 const ratio = 57 / 64;
 
@@ -10,28 +9,16 @@ type Props = {
 	style?: React.CSSProperties;
 } & Omit<JSX.IntrinsicElements["svg"], "style">;
 
-export const Logo = React.forwardRef(function LogoImpl(props: Props, ref) {
+export const Logo = React.forwardRef<SVGSVGElement, Props>(function LogoImpl(props, ref) {
 	const { fill, ...rest } = props;
 	const gradient = fill === "sky";
 	const styles = props.style;
 	const _fill = gradient ? "url(#sky)" : fill || styles?.color || colors.blue3;
 	const size = Number.parseInt(String(rest.width || 32));
 
-	const isKawaii = useKawaiiMode();
-
-	if (isKawaii) {
-		return (
-			<img
-				src={size > 100 ? require("../../../assets/kawaii.png") : require("../../../assets/kawaii_smol.png")}
-				style={{ height: size, aspectRatio: 1.4 }}
-			/>
-		);
-	}
-
 	return (
 		<svg
 			fill="none"
-			// @ts-expect-error it's fiiiiine
 			ref={ref}
 			viewBox="0 0 64 57"
 			{...rest}

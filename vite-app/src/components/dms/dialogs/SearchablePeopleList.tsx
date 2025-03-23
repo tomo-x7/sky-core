@@ -206,9 +206,9 @@ export function SearchablePeopleList({
 	);
 
 	useLayoutEffect(() => {
-		setImmediate(() => {
+		setTimeout(() => {
 			inputRef?.current?.focus();
-		});
+		}, 0);
 	}, []);
 
 	const listHeader = useMemo(() => {

@@ -1,4 +1,3 @@
-import { type ImagePickerOptions, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
 import React from "react";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
@@ -11,14 +10,13 @@ import { ChevronRight_Stroke2_Corner0_Rounded as ChevronRight } from "#/componen
 import { CircleInfo_Stroke2_Corner0_Rounded } from "#/components/icons/CircleInfo";
 import { StreamingLive_Stroke2_Corner0_Rounded as StreamingLive } from "#/components/icons/StreamingLive";
 import { usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
-import { compressIfNeeded } from "#/lib/media/manip";
-import { getDataUriSize } from "#/lib/media/util";
 import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboarding/Layout";
 import { AvatarCircle } from "#/screens/Onboarding/StepProfile/AvatarCircle";
 import { AvatarCreatorCircle } from "#/screens/Onboarding/StepProfile/AvatarCreatorCircle";
 import { AvatarCreatorItems } from "#/screens/Onboarding/StepProfile/AvatarCreatorItems";
 import { PlaceholderCanvas, type PlaceholderCanvasRef } from "#/screens/Onboarding/StepProfile/PlaceholderCanvas";
 import { Context } from "#/screens/Onboarding/state";
+import type { ImagePickerOptions } from "#/temp";
 import { type AvatarColor, type Emoji, avatarColors, emojiItems } from "./types";
 
 export interface Avatar {
@@ -65,39 +63,40 @@ export function StepProfile() {
 	const sheetWrapper = useSheetWrapper();
 	const openPicker = React.useCallback(
 		async (opts?: ImagePickerOptions) => {
-			const response = await sheetWrapper(
-				launchImageLibraryAsync({
-					exif: false,
-					mediaTypes: MediaTypeOptions.Images,
-					quality: 1,
-					...opts,
-					legacy: true,
-				}),
-			);
-
-			return (response.assets ?? [])
-				.slice(0, 1)
-				.filter((asset) => {
-					if (
-						!asset.mimeType?.startsWith("image/") ||
-						(!asset.mimeType?.endsWith("jpeg") &&
-							!asset.mimeType?.endsWith("jpg") &&
-							!asset.mimeType?.endsWith("png"))
-					) {
-						setError("Only .jpg and .png files are supported");
-						return false;
-					}
-					return true;
-				})
-				.map((image) => ({
-					mime: "image/jpeg",
-					height: image.height,
-					width: image.width,
-					path: image.uri,
-					size: getDataUriSize(image.uri),
-				}));
+			// const response = await sheetWrapper(
+			// 	launchImageLibraryAsync({
+			// 		exif: false,
+			// 		mediaTypes: MediaTypeOptions.Images,
+			// 		quality: 1,
+			// 		...opts,
+			// 		legacy: true,
+			// 	}),
+			// );
+			// return (response.assets ?? [])
+			// 	.slice(0, 1)
+			// 	.filter((asset) => {
+			// 		if (
+			// 			!asset.mimeType?.startsWith("image/") ||
+			// 			(!asset.mimeType?.endsWith("jpeg") &&
+			// 				!asset.mimeType?.endsWith("jpg") &&
+			// 				!asset.mimeType?.endsWith("png"))
+			// 		) {
+			// 			setError("Only .jpg and .png files are supported");
+			// 			return false;
+			// 		}
+			// 		return true;
+			// 	})
+			// 	.map((image) => ({
+			// 		mime: "image/jpeg",
+			// 		height: image.height,
+			// 		width: image.width,
+			// 		path: image.uri,
+			// 		size: getDataUriSize(image.uri),
+			// 	}));
 		},
-		[sheetWrapper],
+		[
+			/*sheetWrapper*/
+		],
 	);
 
 	const onContinue = React.useCallback(async () => {
@@ -136,29 +135,30 @@ export function StepProfile() {
 		creatorControl.close();
 	}, [creatorControl]);
 
-	const openLibrary = React.useCallback(async () => {
-		if (!(await requestPhotoAccessIfNeeded())) {
-			return;
-		}
-
-		setError("");
-
-		const items = await sheetWrapper(
-			openPicker({
-				aspect: [1, 1],
-			}),
-		);
-		let image = items[0];
-		if (!image) return;
-
-		image = await compressIfNeeded(image, 1000000);
-
-		setAvatar((prev) => ({
-			...prev,
-			image,
-			useCreatedAvatar: false,
-		}));
-	}, [requestPhotoAccessIfNeeded, openPicker, sheetWrapper]);
+	const openLibrary = React.useCallback(
+		async () => {
+			// if (!(await requestPhotoAccessIfNeeded())) {
+			// 	return;
+			// }
+			// setError("");
+			// const items = await sheetWrapper(
+			// 	openPicker({
+			// 		aspect: [1, 1],
+			// 	}),
+			// );
+			// let image = items[0];
+			// if (!image) return;
+			// image = await compressIfNeeded(image, 1000000);
+			// setAvatar((prev) => ({
+			// 	...prev,
+			// 	image,
+			// 	useCreatedAvatar: false,
+			// }));
+		},
+		[
+			/*requestPhotoAccessIfNeeded, openPicker, sheetWrapper*/
+		],
+	);
 
 	const onSecondaryPress = React.useCallback(() => {
 		if (avatar.useCreatedAvatar) {

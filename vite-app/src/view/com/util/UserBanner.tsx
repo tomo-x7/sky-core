@@ -14,7 +14,7 @@ import { usePalette } from "#/lib/hooks/usePalette";
 import { useCameraPermission, usePhotoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { colors } from "#/lib/styles";
 import { EventStopper } from "#/view/com/util/EventStopper";
-import { openCropper, openPicker } from "../../../lib/media/picker";
+// import { openCropper, openPicker } from "../../../lib/media/picker";
 
 export function UserBanner({
 	type,
@@ -46,31 +46,35 @@ export function UserBanner({
 	// 	);
 	// }, [onSelectNewBanner, requestCameraAccessIfNeeded]);
 
-	const onOpenLibrary = React.useCallback(async () => {
-		if (!(await requestPhotoAccessIfNeeded())) {
-			return;
-		}
-		const items = await sheetWrapper(openPicker());
-		if (!items[0]) {
-			return;
-		}
-
-		try {
-			onSelectNewBanner?.(
-				await openCropper({
-					mediaType: "photo",
-					path: items[0].path,
-					width: 3000,
-					height: 1000,
-					webAspectRatio: 3,
-				}),
-			);
-		} catch (e: any) {
-			if (!String(e).includes("Canceled")) {
-				console.error("Failed to crop banner", { error: e });
-			}
-		}
-	}, [onSelectNewBanner, requestPhotoAccessIfNeeded, sheetWrapper]);
+	const onOpenLibrary = React.useCallback(
+		async () => {
+			// if (!(await requestPhotoAccessIfNeeded())) {
+			// 	return;
+			// }
+			// const items = await sheetWrapper(openPicker());
+			// if (!items[0]) {
+			// 	return;
+			// }
+			// try {
+			// 	onSelectNewBanner?.(
+			// 		await openCropper({
+			// 			mediaType: "photo",
+			// 			path: items[0].path,
+			// 			width: 3000,
+			// 			height: 1000,
+			// 			webAspectRatio: 3,
+			// 		}),
+			// 	);
+			// } catch (e: any) {
+			// 	if (!String(e).includes("Canceled")) {
+			// 		console.error("Failed to crop banner", { error: e });
+			// 	}
+			// }
+		},
+		[
+			/*onSelectNewBanner, requestPhotoAccessIfNeeded, sheetWrapper*/
+		],
+	);
 
 	const onRemoveBanner = React.useCallback(() => {
 		onSelectNewBanner?.(null);

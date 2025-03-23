@@ -1,4 +1,3 @@
-import type { ImagePickerAsset } from "expo-image-picker";
 import { useCallback } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -13,6 +12,7 @@ import { BSKY_SERVICE } from "#/lib/constants";
 import { useVideoLibraryPermission } from "#/lib/hooks/usePermissions";
 import { getHostnameFromUrl } from "#/lib/strings/url-helpers";
 import { useSession } from "#/state/session";
+import type { ImagePickerAsset } from "#/temp";
 import { pickVideo } from "./pickVideo";
 
 const VIDEO_MAX_DURATION = 60 * 1000; // 60s in milliseconds

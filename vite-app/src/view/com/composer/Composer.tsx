@@ -1,7 +1,6 @@
 import { AppBskyFeedDefs, type AppBskyFeedGetPostThread, type BskyAgent, type RichText } from "@atproto/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
-import type { ImagePickerAsset } from "expo-image-picker";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
@@ -42,6 +41,7 @@ import type { Gif } from "#/state/queries/tenor";
 import { useAgent, useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
 import type { ComposerOpts } from "#/state/shell/composer";
+import type { ImagePickerAsset } from "#/temp";
 import { ComposerReplyTo } from "#/view/com/composer/ComposerReplyTo";
 import { ExternalEmbedGif, ExternalEmbedLink } from "#/view/com/composer/ExternalEmbed";
 import { GifAltTextDialog } from "#/view/com/composer/GifAltText";

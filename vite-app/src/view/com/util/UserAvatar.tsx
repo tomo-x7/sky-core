@@ -20,7 +20,7 @@ import { makeProfileLink } from "#/lib/routes/links";
 import { colors } from "#/lib/styles";
 import { precacheProfile } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
-import { openCropper, openPicker } from "../../../lib/media/picker";
+// import { openCropper, openPicker } from "../../../lib/media/picker";
 
 export type UserAvatarType = "user" | "algo" | "list" | "labeler";
 
@@ -252,40 +252,42 @@ let EditableUserAvatar = ({
 	// 	);
 	// }, [onSelectNewAvatar, requestCameraAccessIfNeeded]);
 
-	const onOpenLibrary = React.useCallback(async () => {
-		if (!(await requestPhotoAccessIfNeeded())) {
-			return;
-		}
-
-		const items = await sheetWrapper(
-			openPicker({
-				aspect: [1, 1],
-			}),
-		);
-		const item = items[0];
-		if (!item) {
-			return;
-		}
-
-		try {
-			const croppedImage = await openCropper({
-				mediaType: "photo",
-				cropperCircleOverlay: true,
-				height: 1000,
-				width: 1000,
-				path: item.path,
-				webAspectRatio: 1,
-				webCircularCrop: true,
-			});
-
-			onSelectNewAvatar(croppedImage);
-		} catch (e: any) {
-			// Don't log errors for cancelling selection to sentry on ios or android
-			if (!String(e).toLowerCase().includes("cancel")) {
-				console.error("Failed to crop banner", { error: e });
-			}
-		}
-	}, [onSelectNewAvatar, requestPhotoAccessIfNeeded, sheetWrapper]);
+	const onOpenLibrary = React.useCallback(
+		async () => {
+			// if (!(await requestPhotoAccessIfNeeded())) {
+			// 	return;
+			// }
+			// const items = await sheetWrapper(
+			// 	openPicker({
+			// 		aspect: [1, 1],
+			// 	}),
+			// );
+			// const item = items[0];
+			// if (!item) {
+			// 	return;
+			// }
+			// try {
+			// 	const croppedImage = await openCropper({
+			// 		mediaType: "photo",
+			// 		cropperCircleOverlay: true,
+			// 		height: 1000,
+			// 		width: 1000,
+			// 		path: item.path,
+			// 		webAspectRatio: 1,
+			// 		webCircularCrop: true,
+			// 	});
+			// 	onSelectNewAvatar(croppedImage);
+			// } catch (e: any) {
+			// 	// Don't log errors for cancelling selection to sentry on ios or android
+			// 	if (!String(e).toLowerCase().includes("cancel")) {
+			// 		console.error("Failed to crop banner", { error: e });
+			// 	}
+			// }
+		},
+		[
+			/*onSelectNewAvatar, requestPhotoAccessIfNeeded, sheetWrapper*/
+		],
+	);
 
 	const onRemoveAvatar = React.useCallback(() => {
 		onSelectNewAvatar(null);

@@ -1,5 +1,4 @@
 import { type AppBskyFeedPostgate, AppBskyRichtextFacet, type BskyPreferences, RichText } from "@atproto/api";
-import type { ImagePickerAsset } from "expo-image-picker";
 import { nanoid } from "nanoid/non-secure";
 
 import type { SelfLabel } from "#/lib/moderation";
@@ -12,6 +11,7 @@ import type { Gif } from "#/state/queries/tenor";
 import { threadgateRecordToAllowUISetting } from "#/state/queries/threadgate";
 import type { ThreadgateAllowUISetting } from "#/state/queries/threadgate";
 import type { ComposerOpts } from "#/state/shell/composer";
+import type { ImagePickerAsset } from "#/temp";
 import { type LinkFacetMatch, suggestLinkCardUri } from "#/view/com/composer/text-input/text-input-util";
 import { type VideoAction, type VideoState, createVideoState, videoReducer } from "./video";
 

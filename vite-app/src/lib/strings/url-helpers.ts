@@ -12,7 +12,7 @@ const BSKY_TRUSTED_HOSTS = [
 	"bsky\\.social",
 	"blueskyweb\\.xyz",
 	"blueskyweb\\.zendesk\\.com",
-	...(__DEV__ ? ["localhost:19006", "localhost:8100"] : []),
+	// ...(__DEV__ ? ["localhost:19006", "localhost:8100"] : []),
 ];
 
 /*

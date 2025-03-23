@@ -1,10 +1,9 @@
-import type { ImagePickerAsset } from "expo-image-picker";
-
 import { atoms as a } from "#/alf";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { CompressedVideo } from "#/lib/media/video/types";
 import { clamp } from "#/lib/numbers";
 import { useAutoplayDisabled } from "#/state/preferences";
+import type { ImagePickerAsset } from "#/temp";
 import { ExternalEmbedRemoveBtn } from "#/view/com/composer/ExternalEmbedRemoveBtn";
 import * as Toast from "#/view/com/util/Toast";
 
