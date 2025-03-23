@@ -30,12 +30,12 @@ function useWebQueryParams(): Record<string, string> {
 	return params;
 }
 
-export function DesktopRightNav({ routeName }: { routeName: string }) {
+export function DesktopRightNav() {
 	const t = useTheme();
 	const { hasSession, currentAccount } = useSession();
 	const kawaii = useKawaiiMode();
 	const gutters = useGutters(["base", 0, "base", "wide"]);
-	const isSearchScreen = routeName === "Search";
+	const isSearchScreen = location.pathname === "/search";
 	const webqueryParams = useWebQueryParams();
 	const searchQuery = webqueryParams?.q;
 	const showTrending = !isSearchScreen || (isSearchScreen && !!searchQuery);

@@ -13,7 +13,7 @@ export function Text({
 	style,
 	selectable,
 	title,
-	dataSet,
+	dataset,
 	onLayout,
 	type = "md",
 	ellipsizeMode,
@@ -37,12 +37,12 @@ export function Text({
 		uiTextView: true,
 		selectable,
 		style: s,
-		dataSet: Object.assign({ tooltip: title }, dataSet || {}),
+		dataset: Object.assign({ tooltip: title }, dataset || {}),
 		...rest,
 	};
 
 	return (
-		<div contentEditable ref={ref} {...shared}>
+		<div ref={ref} {...shared}>
 			{renderChildrenWithEmoji(children, shared, emoji ?? false)}
 		</div>
 	);

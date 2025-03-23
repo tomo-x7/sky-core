@@ -195,7 +195,7 @@ export function Link({
 					rel: isExternal ? "noopener noreferrer" : undefined,
 					download,
 				},
-				dataSet: {
+				dataset: {
 					// no underline, only `InlineLink` has underlines
 					noUnderline: "1",
 				},
@@ -278,7 +278,7 @@ export function InlineLinkText({
 					rel: isExternal ? "noopener noreferrer" : undefined,
 					download,
 				},
-				dataSet: {
+				dataset: {
 					// default to no underline, apply this ourselves
 					noUnderline: "1",
 				},

@@ -72,7 +72,7 @@ export type TextProps = {
 	 * Provides `data-*` attributes to the underlying `UITextView` component on
 	 * web only.
 	 */
-	dataSet?: Record<string, string | number | undefined>;
+	dataset?: Record<string, string | number | undefined>;
 	/**
 	 * Appears as a small tooltip on web hover.
 	 */

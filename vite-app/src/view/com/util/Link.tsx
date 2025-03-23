@@ -20,7 +20,7 @@ interface Props {
 	hoverStyle?: React.CSSProperties;
 	noFeedback?: boolean;
 	asAnchor?: boolean;
-	dataSet?: object | undefined;
+	dataset?: object | undefined;
 	anchorNoUnderline?: boolean;
 	navigationAction?: "push" | "replace" | "navigate";
 	onPointerEnter?: () => void;
@@ -73,12 +73,12 @@ export const Link = memo(function Link({
 	}
 
 	if (anchorNoUnderline) {
-		props.dataSet = { ...props.dataSet, noUnderline: 1 };
+		props.dataset = { ...props.dataset, noUnderline: 1 };
 	}
 
 	const Com = props.hoverStyle ? PressableWithHover : PressableWithoutHover;
 	return (
-		<Com style={style} onPress={onPress} href={anchorHref} {...props} {...parseDataset(props.dataSet)}>
+		<Com style={style} onPress={onPress} href={anchorHref} {...props} {...parseDataset(props.dataset)}>
 			{children ? children : <Text>{title || "link"}</Text>}
 		</Com>
 	);
@@ -100,7 +100,7 @@ export const TextLink = memo(function TextLink({
 	text,
 	numberOfLines,
 	lineHeight,
-	dataSet,
+	dataset,
 	title,
 	onPress: onPressOuter,
 	onBeforePress,
@@ -115,7 +115,7 @@ export const TextLink = memo(function TextLink({
 	text: string | JSX.Element | React.ReactNode;
 	numberOfLines?: number;
 	lineHeight?: number;
-	dataSet?: any;
+	dataset?: any;
 	title?: string;
 	disableMismatchWarning?: boolean;
 	navigationAction?: "push" | "replace" | "navigate";
@@ -134,8 +134,8 @@ export const TextLink = memo(function TextLink({
 	}
 
 	if (anchorNoUnderline) {
-		dataSet = dataSet ?? {};
-		dataSet.noUnderline = 1;
+		dataset = dataset ?? {};
+		dataset.noUnderline = 1;
 	}
 
 	const onPress = React.useCallback(
@@ -192,7 +192,7 @@ export const TextLink = memo(function TextLink({
 			style={style}
 			numberOfLines={numberOfLines}
 			lineHeight={lineHeight}
-			dataSet={dataSet}
+			dataset={dataset}
 			title={title}
 			{...orgProps}
 		>

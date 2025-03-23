@@ -83,53 +83,59 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 			style={{
 				...t.atoms.bg,
 				...styles.outer,
+				width: "100%",
+				marginLeft: "auto",
+				marginRight: "auto",
+				maxWidth: "600px",height:"100%",
 			}}
 			// accessibilityRole="tablist"
 		>
-			<DraggableScrollView
+			<div
 				// horizontal={true}
 				// showsHorizontalScrollIndicator={false}
 				ref={scrollElRef}
 				// contentContainerStyle={styles.contentContainer}
+				style={{width:"100%",overflow:"clip",userSelect:"none"}}
 			>
-				{items.map((item, i) => {
-					const selected = i === selectedPage;
-					return (
-						<PressableWithHover
-							key={`${item}-${i}`}
-							ref={(node) => (itemRefs.current[i] = node as any)}
-							style={styles.item}
-							hoverStyle={t.atoms.bg_contrast_25}
-							onPress={() => onPressItem(i)}
-							// accessibilityRole="tab"
-						>
-							<div style={styles.itemInner}>
-								<Text
-									emoji
-									style={{
-										...styles.itemText,
-										...(selected ? t.atoms.text : t.atoms.text_contrast_medium),
-										...a.text_md,
-										...a.font_bold,
-										...{ lineHeight: 20 },
-									}}
-								>
-									{item}
-									<div
+				<div style={{width:"fit-content",flexDirection:"row"}}>
+					{items.map((item, i) => {
+						const selected = i === selectedPage;
+						return (
+							<PressableWithHover
+								key={`${item}-${i}`}
+								ref={(node) => (itemRefs.current[i] = node as any)}
+								style={styles.item}
+								hoverStyle={t.atoms.bg_contrast_25}
+								onPress={() => onPressItem(i)}
+								// accessibilityRole="tab"
+							>
+								<div style={styles.itemInner}>
+									<Text
+										emoji
 										style={{
-											...styles.itemIndicator,
-
-											...(selected && {
-												backgroundColor: t.palette.primary_500,
-											}),
+											...styles.itemText,
+											...(selected ? t.atoms.text : t.atoms.text_contrast_medium),
+											...a.text_md,
+											...a.font_bold,
+											...{ lineHeight: "20%" },
 										}}
-									/>
-								</Text>
-							</div>
-						</PressableWithHover>
-					);
-				})}
-			</DraggableScrollView>
+									>
+										{item}
+										<div
+											style={{
+												...styles.itemIndicator,
+												...(selected && {
+													backgroundColor: t.palette.primary_500,
+												}),
+											}}
+										/>
+									</Text>
+								</div>
+							</PressableWithHover>
+						);
+					})}
+				</div>
+			</div>
 			<div
 				style={{
 					...t.atoms.border_contrast_low,

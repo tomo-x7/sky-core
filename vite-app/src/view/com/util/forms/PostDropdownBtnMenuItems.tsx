@@ -146,7 +146,7 @@ let PostDropdownMenuItems = ({
 		rootPostUri: rootUri,
 	});
 
-	const isPostThread = useMatch(routes.PostThread);
+	const isPostThread = /profile\/.+\/post\/.+/.test(location.pathname)
 	const params = useParams();
 
 	const href = React.useMemo(() => {

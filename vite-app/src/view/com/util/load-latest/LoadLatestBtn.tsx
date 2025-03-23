@@ -61,8 +61,7 @@ export function LoadLatestBtn({
 				// hitSlop={HITSLOP_20}
 				targetScale={0.9}
 			>
-				{/* @ts-expect-error */}
-				<FontAwesomeIcon icon="angle-up" color={pal.colors.text} size={19} />
+				<FontAwesomeIcon icon="angle-up" color={pal.colors.text} size="lg" />
 				{showIndicator && (
 					<div
 						style={{

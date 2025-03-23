@@ -231,7 +231,7 @@ let FeedItemInner = ({
 			href={href}
 			noFeedback
 			onBeforePress={onBeforePress}
-			dataSet={{ feedContext }}
+			dataset={{ feedContext }}
 			onPointerEnter={() => {
 				setHover(true);
 			}}

@@ -11,5 +11,4 @@ export default defineConfig({
 		},
 	},
 	server: { allowedHosts: true, host: true },
-	optimizeDeps: { esbuildOptions: { loader: { ".js": "tsx" } } },
 });

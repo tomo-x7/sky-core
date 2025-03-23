@@ -60,16 +60,14 @@ export function BottomBarWeb() {
 	}, [requestSwitchToAccount, closeAllActiveElements]);
 
 	return (
-		<div
+		<nav
 			// Animated.View
-			// biome-ignore lint/a11y/useSemanticElements: <explanation>
-			role="navigation"
 			style={{
 				...styles.bottomBar,
 				...styles.bottomBarWeb,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
-				...footerMinimalShellTransform,
+				// ...footerMinimalShellTransform,
 			}}
 		>
 			{hasSession ? (
@@ -230,7 +228,7 @@ export function BottomBarWeb() {
 					</div>
 				</>
 			)}
-		</div>
+		</nav>
 	);
 }
 
@@ -242,8 +240,9 @@ const NavItem: React.FC<{
 	notificationCount?: string;
 }> = ({ children, href, routeName, hasNew, notificationCount }) => {
 	const { currentAccount } = useSession();
-	const isMatchHref = useMatch(href) != null;
-	const isProfile = useMatch(routes.Profile) != null;
+	// TODO!!
+	const isMatchHref = false; //useMatch(href) != null;
+	const isProfile = false; //useMatch(routes.Profile) != null;
 	const location = useLocation();
 
 	// Checks whether we're on someone else's profile

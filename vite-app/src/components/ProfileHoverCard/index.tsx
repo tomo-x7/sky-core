@@ -92,7 +92,7 @@ const SHOW_DURATION = 300;
 const HIDE_DELAY = 150;
 const HIDE_DURATION = 200;
 
-export function ProfileHoverCardInner(props: ProfileHoverCardProps) {
+function ProfileHoverCardInner(props: ProfileHoverCardProps) {
 	const { refs, floatingStyles } = useFloating({
 		middleware: floatingMiddlewares,
 	});

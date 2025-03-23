@@ -1,4 +1,4 @@
-import * as Layout from "../components/Layout";
+import * as Layout from "../components/Layout/const";
 import * as tokens from "./tokens";
 
 export const atoms = {

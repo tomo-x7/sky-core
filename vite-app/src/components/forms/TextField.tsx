@@ -139,7 +139,7 @@ export function Input({
 	type = "text",
 	onSubmitEditing,
 	blurOnSubmit = true,
-	enablesReturnKeyAutomatically = false,
+	enablesReturnKeyAutomatically = false,disabled,
 	...rest
 }: InputProps) {
 	const t = useTheme();
@@ -163,6 +163,7 @@ export function Input({
 					onSubmitEditing={onSubmitEditing}
 					blurOnSubmit={blurOnSubmit}
 					enablesReturnKeyAutomatically={enablesReturnKeyAutomatically}
+					disabled={disabled??false}
 					{...rest}
 				/>
 			</Root>
@@ -230,7 +231,7 @@ export function Input({
 						onSubmitEditing?.();
 					}
 				}}
-				disabled={rest.disabled || (enablesReturnKeyAutomatically && val === "")}
+				disabled={disabled }//|| (enablesReturnKeyAutomatically && val === "")}
 			/>
 			<div
 				style={{

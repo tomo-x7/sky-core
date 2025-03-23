@@ -111,7 +111,7 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 			onHoverOut: onHoverOutOuter,
 			onFocus: onFocusOuter,
 			onBlur: onBlurOuter,
-			href,
+			href,onPress,
 			...rest
 		},
 		ref,
@@ -446,6 +446,7 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 		return (
 			<a
 				{...rest}
+				onClick={onPress}
 				ref={ref}
 				aria-label={label}
 				aria-pressed={state.pressed}

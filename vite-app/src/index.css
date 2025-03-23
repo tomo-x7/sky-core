@@ -290,3 +290,23 @@ input[type="range"][orient="vertical"]::-moz-range-thumb {
 	width: 16px;
 	margin-left: -6px;
 }
+
+* {
+	align-items: stretch;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0px solid black;
+	box-sizing: border-box;
+	display: flex;
+	flex-basis: auto;
+	flex-direction: column;
+	flex-shrink: 0;
+	list-style: none;
+	margin: 0px;
+	min-height: 0px;
+	min-width: 0px;
+	padding: 0px;
+	position: relative;
+	text-decoration: none;
+	z-index: 0;
+}
+style,script,title,link,meta,head{display: none;}

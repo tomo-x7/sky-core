@@ -65,7 +65,7 @@ export function RichText({
 					}}
 					onLayout={onLayout}
 					// onTextLayout={onTextLayout}
-					dataSet={WORD_WRAP}
+					dataset={WORD_WRAP}
 				>
 					{text}
 				</Text>
@@ -79,7 +79,7 @@ export function RichText({
 				numberOfLines={numberOfLines}
 				onLayout={onLayout}
 				// onTextLayout={onTextLayout}
-				dataSet={WORD_WRAP}
+				dataset={WORD_WRAP}
 			>
 				{text}
 			</Text>
@@ -101,7 +101,7 @@ export function RichText({
 						to={`/profile/${mention.did}`}
 						style={flatten(interactiveStyles)}
 						// @ts-expect-error TODO
-						dataSet={WORD_WRAP}
+						dataset={WORD_WRAP}
 						shouldProxy={shouldProxyLinks}
 						onPress={onLinkPress}
 					>
@@ -120,7 +120,7 @@ export function RichText({
 						to={link.uri}
 						style={flatten(interactiveStyles)}
 						// @ts-expect-error TODO
-						dataSet={WORD_WRAP}
+						dataset={WORD_WRAP}
 						shareOnLongPress
 						shouldProxy={shouldProxyLinks}
 						onPress={onLinkPress}
@@ -154,7 +154,7 @@ export function RichText({
 			numberOfLines={numberOfLines}
 			onLayout={onLayout}
 			// onTextLayout={onTextLayout}
-			dataSet={WORD_WRAP}
+			dataset={WORD_WRAP}
 		>
 			{els}
 		</Text>

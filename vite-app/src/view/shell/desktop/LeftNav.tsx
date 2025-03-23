@@ -291,8 +291,9 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 	const { currentAccount } = useSession();
 	const { leftNavMinimal } = useLayoutBreakpoints();
 	const [pathName] = React.useMemo(() => router.matchPath(href), [href]);
-	const isProfile = useMatch(routes.Profile);
-	const isMatchHref = useMatch(pathName);
+	// TODO!!
+	const isProfile = false; //useMatch(routes.Profile);
+	const isMatchHref = false; //useMatch(pathName);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const isCurrent = isProfile
@@ -512,9 +513,7 @@ export function DesktopLeftNav() {
 	}
 
 	return (
-		<div
-			// biome-ignore lint/a11y/useSemanticElements: <explanation>
-			role="navigation"
+		<nav
 			style={{
 				...a.px_xl,
 				...styles.leftNav,
@@ -582,7 +581,7 @@ export function DesktopLeftNav() {
 					<ComposeBtn />
 				</>
 			)}
-		</div>
+		</nav>
 	);
 }
 

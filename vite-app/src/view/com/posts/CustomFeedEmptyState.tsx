@@ -41,8 +41,7 @@ export function CustomFeedEmptyState() {
 				<Text type="lg-medium" style={palInverted.text}>
 					Find accounts to follow
 				</Text>
-				{/* @ts-expect-error */}
-				<FontAwesomeIcon icon="angle-right" style={palInverted.text} size={14} />
+				<FontAwesomeIcon icon="angle-right" style={palInverted.text} size="6x" />
 			</Button>
 		</div>
 	);

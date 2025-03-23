@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Route, ScrollRestoration } from "react-router-dom";
-import { useTheme } from "./alf";
+import { Route, Routes, ScrollRestoration } from "react-router-dom";
+import { atoms, useTheme } from "./alf";
 import { useWebScrollRestoration } from "./lib/hooks/useWebScrollRestoration";
 import { bskyTitle } from "./lib/strings/headings";
-import { router } from "./routes";
+import { router, routes } from "./routes";
 import HashtagScreen from "./screens/Hashtag";
 import { MessagesScreen } from "./screens/Messages/ChatList";
 import { MessagesConversationScreen } from "./screens/Messages/Conversation";
@@ -60,6 +60,20 @@ import { SearchScreen } from "./view/screens/Search";
 import { Storybook } from "./view/screens/Storybook";
 import { SupportScreen } from "./view/screens/Support";
 import { TermsOfServiceScreen } from "./view/screens/TermsOfService";
+import { BottomBarWeb } from "./view/shell/bottom-bar/BottomBarWeb";
+import { DesktopLeftNav } from "./view/shell/desktop/LeftNav";
+import { DesktopRightNav } from "./view/shell/desktop/RightNav";
+import { isMobileWeb } from "#/platform/detection";
+import { useWebMediaQueries } from "./lib/hooks/useWebMediaQueries";
+import { PWI_ENABLED } from "./lib/build-flags";
+import { Deactivated } from "./screens/Deactivated";
+import { Onboarding } from "./screens/Onboarding";
+import { SignupQueued } from "./screens/SignupQueued";
+import { Takendown } from "./screens/Takendown";
+import { useSession } from "./state/session";
+import { useOnboardingState } from "./state/shell";
+import { useLoggedOutView, useLoggedOutViewControls } from "./state/shell/logged-out";
+import { LoggedOut } from "./view/com/auth/LoggedOut";
 
 // const navigationRef = createNavigationContainerRef<AllNavigatorParams>();
 
@@ -79,7 +93,6 @@ function Screen({
 	if (options?.title != null) document.title = options.title;
 	return <Route path={path} element={<Com />} />;
 }
-
 /**
  * The FlatNavigator is used by Web to represent the routes
  * in a single ("flat") stack.
@@ -89,319 +102,311 @@ const FlatNavigator = () => {
 	const numUnread = useUnreadNotifications();
 	const screenListeners = useWebScrollRestoration();
 	const title = (page: string) => bskyTitle(page, numUnread);
+	const { hasSession, currentAccount } = useSession();
+	const activeRouteRequiresAuth = false; //TODO
+	const onboardingState = useOnboardingState();
+	const { showLoggedOut } = useLoggedOutView();
+	const { setShowLoggedOut } = useLoggedOutViewControls();
+	const { isMobile, isTabletOrMobile } = useWebMediaQueries();
+	if (!hasSession && (!PWI_ENABLED || activeRouteRequiresAuth)) {
+		return <LoggedOut />;
+	}
+	if (hasSession && currentAccount?.signupQueued) {
+		return <SignupQueued />;
+	}
+	if (hasSession && currentAccount?.status === "takendown") {
+		return <Takendown />;
+	}
+	if (showLoggedOut) {
+		return <LoggedOut onDismiss={() => setShowLoggedOut(false)} />;
+	}
+	if (currentAccount?.status === "deactivated") {
+		return <Deactivated />;
+	}
+	if (onboardingState.isActive) {
+		return <Onboarding />;
+	}
+	// const newDescriptors: typeof descriptors = {};
+	// for (let key in descriptors) {
+	// 	const descriptor = descriptors[key];
+	// 	const requireAuth = descriptor.options.requireAuth ?? false;
+	// 	newDescriptors[key] = {
+	// 		...descriptor,
+	// 		render() {
+	// 			if (requireAuth && !hasSession) {
+	// 				return <View />;
+	// 			} else {
+	// 				return descriptor.render();
+	// 			}
+	// 		},
+	// 	};
+	// }
+
+	// Show the bottom bar if we have a session only on mobile web. If we don't have a session, we want to show it
+	// on both tablet and mobile web so that we see the sign up CTA.
+	const showBottomBar = hasSession ? isMobile : isTabletOrMobile;
+	console.log(showBottomBar ? "showBottomBar" : "hideBottomBar");
 
 	return (
-		<div
-		// screenListeners={screenListeners}
-		// screenOptions={{
-		// 	animationDuration: 285,
-		// 	gestureEnabled: true,
-		// 	fullScreenGestureEnabled: true,
-		// 	headerShown: false,
-		// 	contentStyle: t.atoms.bg,
-		// }}
-		>
-			<ScrollRestoration
+		<>
+			{/* <ScrollRestoration
 				getKey={(location, matches) => {
 					return location.pathname;
 				}}
-			/>
-			<Screen name="Home" getComponent={() => HomeScreen} options={{ title: title("Home") }} />
-			<Screen name="Search" getComponent={() => SearchScreen} options={{ title: title("Search") }} />
-			<Screen
-				name="Notifications"
-				getComponent={() => NotificationsScreen}
-				options={{ title: title("Notifications"), requireAuth: true }}
-			/>
-			<Screen
-				name="Messages"
-				getComponent={() => MessagesScreen}
-				options={{ title: title("Messages"), requireAuth: true }}
-			/>
-			<Screen name="Start" getComponent={() => HomeScreen} options={{ title: title("Home") }} />
-			<Screen name="NotFound" getComponent={() => NotFoundScreen} options={{ title: title("Not Found") }} />
-			<Screen name="Lists" component={ListsScreen} options={{ title: title("Lists"), requireAuth: true }} />
-			<Screen
-				name="Moderation"
-				getComponent={() => ModerationScreen}
-				options={{ title: title("Moderation"), requireAuth: true }}
-			/>
-			<Screen
-				name="ModerationModlists"
-				getComponent={() => ModerationModlistsScreen}
-				options={{ title: title("Moderation Lists"), requireAuth: true }}
-			/>
-			<Screen
-				name="ModerationMutedAccounts"
-				getComponent={() => ModerationMutedAccounts}
-				options={{ title: title("Muted Accounts"), requireAuth: true }}
-			/>
-			<Screen
-				name="ModerationBlockedAccounts"
-				getComponent={() => ModerationBlockedAccounts}
-				options={{ title: title("Blocked Accounts"), requireAuth: true }}
-			/>
-			<Screen
-				name="ModerationInteractionSettings"
-				getComponent={() => ModerationInteractionSettings}
-				options={{
-					title: title("Post Interaction Settings"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="Settings"
-				getComponent={() => SettingsScreen}
-				options={{ title: title("Settings"), requireAuth: true }}
-			/>
-			<Screen
-				name="LanguageSettings"
-				getComponent={() => LanguageSettingsScreen}
-				options={{ title: title("Language Settings"), requireAuth: true }}
-			/>
-			<Screen
-				name="Profile"
-				getComponent={() => ProfileScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={({ route }) => ({
-				// 	title: bskyTitle(`@${route.params.name}`, numUnread),
-				// })}
-			/>
-			<Screen
-				name="ProfileFollowers"
-				getComponent={() => ProfileFollowersScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("People following @${route.params.name}"),
-				// })}
-			/>
-			<Screen
-				name="ProfileFollows"
-				getComponent={() => ProfileFollowsScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("People followed by @${route.params.name}"),
-				// })}
-			/>
-			<Screen
-				name="ProfileKnownFollowers"
-				getComponent={() => ProfileKnownFollowersScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("Followers of @${route.params.name} that you know"),
-				// })}
-			/>
-			<Screen
-				name="ProfileList"
-				getComponent={() => ProfileListScreen}
-				options={{ title: title("List"), requireAuth: true }}
-			/>
-			<Screen
-				name="ProfileSearch"
-				getComponent={() => ProfileSearchScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("Search @${route.params.name}'s posts"),
-				// })}
-			/>
-			<Screen
-				name="PostThread"
-				getComponent={() => PostThreadScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("Post by @${route.params.name}"),
-				// })}
-			/>
-			<Screen
-				name="PostLikedBy"
-				getComponent={() => PostLikedByScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("Post by @${route.params.name}"),
-				// })}
-			/>
-			<Screen
-				name="PostRepostedBy"
-				getComponent={() => PostRepostedByScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("Post by @${route.params.name}"),
-				// })}
-			/>
-			<Screen
-				name="PostQuotes"
-				getComponent={() => PostQuotesScreen}
-				// TODO コンポーネント側でタイトルを設定
-				// options={() => ({
-				// 	title: title("Post by @${route.params.name}"),
-				// })}
-			/>
-			<Screen name="ProfileFeed" getComponent={() => ProfileFeedScreen} options={{ title: title("Feed") }} />
-			<Screen
-				name="ProfileFeedLikedBy"
-				getComponent={() => ProfileFeedLikedByScreen}
-				options={{ title: title("Liked by") }}
-			/>
-			<Screen
-				name="ProfileLabelerLikedBy"
-				getComponent={() => ProfileLabelerLikedByScreen}
-				options={{ title: title("Liked by") }}
-			/>
-			<Screen
-				name="Debug"
-				getComponent={() => Storybook}
-				options={{ title: title("Storybook"), requireAuth: true }}
-			/>
-			<Screen
-				name="DebugMod"
-				getComponent={() => DebugModScreen}
-				options={{ title: title("Moderation states"), requireAuth: true }}
-			/>
-			<Screen name="Log" getComponent={() => LogScreen} options={{ title: title("Log"), requireAuth: true }} />
-			<Screen name="Support" getComponent={() => SupportScreen} options={{ title: title("Support") }} />
-			<Screen
-				name="PrivacyPolicy"
-				getComponent={() => PrivacyPolicyScreen}
-				options={{ title: title("Privacy Policy") }}
-			/>
-			<Screen
-				name="TermsOfService"
-				getComponent={() => TermsOfServiceScreen}
-				options={{ title: title("Terms of Service") }}
-			/>
-			<Screen
-				name="CommunityGuidelines"
-				getComponent={() => CommunityGuidelinesScreen}
-				options={{ title: title("Community Guidelines") }}
-			/>
-			<Screen
-				name="CopyrightPolicy"
-				getComponent={() => CopyrightPolicyScreen}
-				options={{ title: title("Copyright Policy") }}
-			/>
-			<Screen
-				name="AppPasswords"
-				getComponent={() => AppPasswordsScreen}
-				options={{ title: title("App Passwords"), requireAuth: true }}
-			/>
-			<Screen
-				name="SavedFeeds"
-				getComponent={() => SavedFeeds}
-				options={{ title: title("Edit My Feeds"), requireAuth: true }}
-			/>
-			<Screen
-				name="PreferencesFollowingFeed"
-				getComponent={() => FollowingFeedPreferencesScreen}
-				options={{
-					title: title("Following Feed Preferences"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="PreferencesThreads"
-				getComponent={() => ThreadPreferencesScreen}
-				options={{ title: title("Threads Preferences"), requireAuth: true }}
-			/>
-			<Screen
-				name="PreferencesExternalEmbeds"
-				getComponent={() => ExternalMediaPreferencesScreen}
-				options={{
-					title: title("External Media Preferences"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="AccessibilitySettings"
-				getComponent={() => AccessibilitySettingsScreen}
-				options={{
-					title: title("Accessibility Settings"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="AppearanceSettings"
-				getComponent={() => AppearanceSettingsScreen}
-				options={{
-					title: title("Appearance"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="AccountSettings"
-				getComponent={() => AccountSettingsScreen}
-				options={{
-					title: title("Account"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="PrivacyAndSecuritySettings"
-				getComponent={() => PrivacyAndSecuritySettingsScreen}
-				options={{
-					title: title("Privacy and Security"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="ContentAndMediaSettings"
-				getComponent={() => ContentAndMediaSettingsScreen}
-				options={{
-					title: title("Content and Media"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen
-				name="AboutSettings"
-				getComponent={() => AboutSettingsScreen}
-				options={{
-					title: title("About"),
-					requireAuth: true,
-				}}
-			/>
-			<Screen name="Hashtag" getComponent={() => HashtagScreen} options={{ title: title("Hashtag") }} />
-			<Screen name="Topic" getComponent={() => TopicScreen} options={{ title: title("Topic") }} />
-			<Screen
-				name="MessagesConversation"
-				getComponent={() => MessagesConversationScreen}
-				options={{ title: title("Chat"), requireAuth: true }}
-			/>
-			<Screen
-				name="MessagesSettings"
-				getComponent={() => MessagesSettingsScreen}
-				options={{ title: title("Chat settings"), requireAuth: true }}
-			/>
-			<Screen
-				name="MessagesInbox"
-				getComponent={() => MessagesInboxScreen}
-				options={{ title: title("Chat request inbox"), requireAuth: true }}
-			/>
-			<Screen
-				name="NotificationSettings"
-				getComponent={() => NotificationSettingsScreen}
-				options={{ title: title("Notification settings"), requireAuth: true }}
-			/>
-			<Screen name="Feeds" getComponent={() => FeedsScreen} options={{ title: title("Feeds") }} />
-			<Screen
-				name="StarterPack"
-				getComponent={() => StarterPackScreen}
-				options={{ title: title("Starter Pack") }}
-			/>
-			<Screen
-				name="StarterPackShort"
-				getComponent={() => StarterPackScreenShort}
-				options={{ title: title("Starter Pack") }}
-			/>
-			<Screen
-				name="StarterPackWizard"
-				getComponent={() => Wizard}
-				options={{ title: title("Create a starter pack"), requireAuth: true }}
-			/>
-			<Screen
-				name="StarterPackEdit"
-				getComponent={() => Wizard}
-				options={{ title: title("Edit your starter pack"), requireAuth: true }}
-			/>
-		</div>
+			/> */}
+			<main style={atoms.flex_1}>
+				<Routes>
+					<Route path={routes.Home} Component={HomeScreen} /*options={{ title: title("Home") }}*/ />
+					<Route path={routes.Search} Component={SearchScreen} /*options={{ title: title("Search") }}*/ />
+					<Route
+						path={routes.Notifications}
+						Component={NotificationsScreen}
+						/*options={{ title: title("Notifications"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.Messages}
+						Component={MessagesScreen}
+						/*options={{ title: title("Messages"), requireAuth: true }}*/
+					/>
+					<Route path={routes.Start} Component={HomeScreen} /*options={{ title: title("Home") }}*/ />
+					<Route
+						path={routes.Lists}
+						Component={ListsScreen} /*options={{ title: title("Lists"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.Moderation}
+						Component={ModerationScreen}
+						/*options={{ title: title("Moderation"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.ModerationModlists}
+						Component={ModerationModlistsScreen}
+						/*options={{ title: title("Moderation Lists"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.ModerationMutedAccounts}
+						Component={ModerationMutedAccounts}
+						/*options={{ title: title("Muted Accounts"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.ModerationBlockedAccounts}
+						Component={ModerationBlockedAccounts}
+						/*options={{ title: title("Blocked Accounts"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.ModerationInteractionSettings}
+						Component={ModerationInteractionSettings}
+						/*options={{
+							title: title("Post Interaction Settings"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.Settings}
+						Component={SettingsScreen}
+						/*options={{ title: title("Settings"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.LanguageSettings}
+						Component={LanguageSettingsScreen}
+						/*options={{ title: title("Language Settings"), requireAuth: true }}*/
+					/>
+					<Route path={routes.Profile} Component={ProfileScreen} />
+					<Route path={routes.ProfileFollowers} Component={ProfileFollowersScreen} />
+					<Route path={routes.ProfileFollows} Component={ProfileFollowsScreen} />
+					<Route path={routes.ProfileKnownFollowers} Component={ProfileKnownFollowersScreen} />
+					<Route
+						path={routes.ProfileList}
+						Component={ProfileListScreen}
+						/*options={{ title: title("List"), requireAuth: true }}*/
+					/>
+					<Route path={routes.ProfileSearch} Component={ProfileSearchScreen} />
+					<Route path={routes.PostThread} Component={PostThreadScreen} />
+					<Route path={routes.PostLikedBy} Component={PostLikedByScreen} />
+					<Route path={routes.PostRepostedBy} Component={PostRepostedByScreen} />
+					<Route path={routes.PostQuotes} Component={PostQuotesScreen} />
+					<Route
+						path={routes.ProfileFeed}
+						Component={ProfileFeedScreen} /*options={{ title: title("Feed") }}*/
+					/>
+					<Route
+						path={routes.ProfileFeedLikedBy}
+						Component={ProfileFeedLikedByScreen}
+						/*options={{ title: title("Liked by") }}*/
+					/>
+					<Route
+						path={routes.ProfileLabelerLikedBy}
+						Component={ProfileLabelerLikedByScreen}
+						/*options={{ title: title("Liked by") }}*/
+					/>
+					<Route
+						path={routes.Debug}
+						Component={Storybook}
+						/*options={{ title: title("Storybook"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.DebugMod}
+						Component={DebugModScreen}
+						/*options={{ title: title("Moderation states"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.Log}
+						Component={LogScreen}
+						/*options={{ title: title("Log"), requireAuth: true }}*/
+					/>
+					<Route path={routes.Support} Component={SupportScreen} /*options={{ title: title("Support") }}*/ />
+					<Route
+						path={routes.PrivacyPolicy}
+						Component={PrivacyPolicyScreen}
+						/*options={{ title: title("Privacy Policy") }}*/
+					/>
+					<Route
+						path={routes.TermsOfService}
+						Component={TermsOfServiceScreen}
+						/*options={{ title: title("Terms of Service") }}*/
+					/>
+					<Route
+						path={routes.CommunityGuidelines}
+						Component={CommunityGuidelinesScreen}
+						/*options={{ title: title("Community Guidelines") }}*/
+					/>
+					<Route
+						path={routes.CopyrightPolicy}
+						Component={CopyrightPolicyScreen}
+						/*options={{ title: title("Copyright Policy") }}*/
+					/>
+					<Route
+						path={routes.AppPasswords}
+						Component={AppPasswordsScreen}
+						/*options={{ title: title("App Passwords"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.SavedFeeds}
+						Component={SavedFeeds}
+						/*options={{ title: title("Edit My Feeds"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.PreferencesFollowingFeed}
+						Component={FollowingFeedPreferencesScreen}
+						/*options={{
+							title: title("Following Feed Preferences"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.PreferencesThreads}
+						Component={ThreadPreferencesScreen}
+						/*options={{ title: title("Threads Preferences"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.PreferencesExternalEmbeds}
+						Component={ExternalMediaPreferencesScreen}
+						/*options={{
+							title: title("External Media Preferences"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.AccessibilitySettings}
+						Component={AccessibilitySettingsScreen}
+						/*options={{
+							title: title("Accessibility Settings"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.AppearanceSettings}
+						Component={AppearanceSettingsScreen}
+						/*options={{
+							title: title("Appearance"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.AccountSettings}
+						Component={AccountSettingsScreen}
+						/*options={{
+							title: title("Account"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.PrivacyAndSecuritySettings}
+						Component={PrivacyAndSecuritySettingsScreen}
+						/*options={{
+							title: title("Privacy and Security"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.ContentAndMediaSettings}
+						Component={ContentAndMediaSettingsScreen}
+						/*options={{
+							title: title("Content and Media"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route
+						path={routes.AboutSettings}
+						Component={AboutSettingsScreen}
+						/*options={{
+							title: title("About"),
+							requireAuth: true,
+						}}*/
+					/>
+					<Route path={routes.Hashtag} Component={HashtagScreen} /*options={{ title: title("Hashtag") }}*/ />
+					<Route path={routes.Topic} Component={TopicScreen} /*options={{ title: title("Topic") }}*/ />
+					<Route
+						path={routes.MessagesConversation}
+						Component={MessagesConversationScreen}
+						/*options={{ title: title("Chat"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.MessagesSettings}
+						Component={MessagesSettingsScreen}
+						/*options={{ title: title("Chat settings"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.MessagesInbox}
+						Component={MessagesInboxScreen}
+						/*options={{ title: title("Chat request inbox"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.NotificationSettings}
+						Component={NotificationSettingsScreen}
+						/*options={{ title: title("Notification settings"), requireAuth: true }}*/
+					/>
+					<Route path={routes.Feeds} Component={FeedsScreen} /*options={{ title: title("Feeds") }}*/ />
+					<Route
+						path={routes.StarterPack}
+						Component={StarterPackScreen}
+						/*options={{ title: title("Starter Pack") }}*/
+					/>
+					<Route
+						path={routes.StarterPackShort}
+						Component={StarterPackScreenShort}
+						/*options={{ title: title("Starter Pack") }}*/
+					/>
+					<Route
+						path={routes.StarterPackWizard}
+						Component={Wizard}
+						/*options={{ title: title("Create a starter pack"), requireAuth: true }}*/
+					/>
+					<Route
+						path={routes.StarterPackEdit}
+						Component={Wizard}
+						/*options={{ title: title("Edit your starter pack"), requireAuth: true }}*/
+					/>
+					<Route path="*" Component={NotFoundScreen} /*options={{ title: title("Not Found") }}*/ />
+				</Routes>
+			</main>
+			{
+				<>
+					{showBottomBar ? <BottomBarWeb /> : <DesktopLeftNav />}
+					{!isMobile && <DesktopRightNav />}
+				</>
+			}
+		</>
 	);
 };
 
