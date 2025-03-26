@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { hasOwn } from "#/lib/util";
 import { STALE } from "#/state/queries";
 import { useAgent } from "#/state/session";
 
@@ -19,8 +20,7 @@ export function useServiceConfigQuery() {
 				const { data } = await agent.api.app.bsky.unspecced.getConfig();
 				return {
 					checkEmailConfirmed: Boolean(data.checkEmailConfirmed),
-					// @ts-expect-error not included in types atm
-					topicsEnabled: Boolean(data.topicsEnabled),
+					topicsEnabled: Boolean(hasOwn(data, "topicsEnabled") && data.topicsEnabled),
 				};
 			} catch (e) {
 				return {

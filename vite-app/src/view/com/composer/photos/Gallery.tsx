@@ -141,22 +141,18 @@ const GalleryItem = ({
 				}}
 			>
 				{image.alt.length !== 0 ? (
-					//@ts-expect-error
-					<FontAwesomeIcon icon="check" size={10} style={{ color: t.palette.white }} />
+					<FontAwesomeIcon icon="check" /*size={10}*/ size="xl" style={{ color: t.palette.white }} />
 				) : (
-					//@ts-expect-error
-					<FontAwesomeIcon icon="plus" size={10} style={{ color: t.palette.white }} />
+					<FontAwesomeIcon icon="plus" /*size={10}*/ size="xl" style={{ color: t.palette.white }} />
 				)}
 				<Text style={styles.altTextControlLabel}>ALT</Text>
 			</button>
 			<div style={imageControlsStyle}>
 				<button type="button" onClick={onImageEdit} style={styles.imageControl}>
-					{/* @ts-expect-error */}
-					<FontAwesomeIcon icon="pen" size={12} style={{ color: colors.white }} />
+					<FontAwesomeIcon icon="pen" /*size={12}*/ size="xl" style={{ color: colors.white }} />
 				</button>
 				<button type="button" onClick={onRemove} style={styles.imageControl}>
-					{/* @ts-expect-error */}
-					<FontAwesomeIcon icon="xmark" size={16} style={{ color: colors.white }} />
+					<FontAwesomeIcon icon="xmark" /*size={12}*/ size="xl" style={{ color: colors.white }} />
 				</button>
 			</div>
 			<button type="button" onClick={onAltTextEdit} style={styles.altTextHiddenRegion} />
@@ -183,8 +179,7 @@ export function AltTextReminder() {
 					...t.atoms.bg_contrast_25,
 				}}
 			>
-				{/* @ts-expect-error */}
-				<FontAwesomeIcon icon="info" size={12} color={t.atoms.text.color} />
+				<FontAwesomeIcon icon="info" /*size={12}*/ size="xl" color={t.atoms.text.color} />
 			</div>
 			<Text
 				type="sm"

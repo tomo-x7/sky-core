@@ -179,7 +179,6 @@ export function TitleText({ children, style }: { children: React.ReactNode } & T
 				...style,
 			}}
 			numberOfLines={2}
-			emoji
 		>
 			{children}
 		</Text>

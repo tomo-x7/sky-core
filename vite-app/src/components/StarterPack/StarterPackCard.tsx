@@ -74,7 +74,6 @@ export function Card({
 				{!noIcon ? <StarterPackIcon width={40} gradient="sky" /> : null}
 				<div style={a.flex_1}>
 					<Text
-						emoji
 						style={{
 							...a.text_md,
 							...a.font_bold,
@@ -85,7 +84,6 @@ export function Card({
 						{record.name}
 					</Text>
 					<Text
-						emoji
 						style={{
 							...a.leading_snug,
 							...t.atoms.text_contrast_medium,
@@ -99,7 +97,7 @@ export function Card({
 				</div>
 			</div>
 			{!noDescription && record.description ? (
-				<Text emoji numberOfLines={3} style={a.leading_snug}>
+				<Text numberOfLines={3} style={a.leading_snug}>
 					{record.description}
 				</Text>
 			) : null}
@@ -120,6 +118,7 @@ export function Card({
 export function Link({
 	starterPack,
 	children,
+	onPress,
 }: {
 	starterPack: bsky.starterPack.AnyStarterPackView;
 	onPress?: () => void;
@@ -143,6 +142,7 @@ export function Link({
 			to={`/starter-pack/${handleOrDid}/${rkey}`}
 			label={`Navigate to ${record.name}`}
 			onPress={() => {
+				onPress?.();
 				precacheResolvedUri(queryClient, starterPack.creator.handle, starterPack.creator.did);
 				precacheStarterPack(queryClient, starterPack);
 			}}

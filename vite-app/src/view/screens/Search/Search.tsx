@@ -978,7 +978,6 @@ function SearchHistory({
 											size={60}
 										/>
 										<Text
-											emoji
 											style={{
 												...a.text_xs,
 												...a.text_center,

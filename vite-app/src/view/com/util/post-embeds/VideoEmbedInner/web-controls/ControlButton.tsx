@@ -3,7 +3,7 @@ import type React from "react";
 import { atoms as a, useTheme } from "#/alf";
 import { PressableWithHover } from "../../../PressableWithHover";
 
-type SvgProps = JSX.IntrinsicElements["svg"];
+type SvgProps = Omit<JSX.IntrinsicElements["svg"], "ref">;
 export function ControlButton({
 	active,
 	activeLabel,

@@ -11,8 +11,6 @@ import { makeProfileLink } from "#/lib/routes/links";
 import { listUriToHref } from "#/lib/strings/url-helpers";
 import { useSession } from "#/state/session";
 
-export { useDialogControl as useModerationDetailsDialogControl } from "#/components/Dialog";
-
 export interface ModerationDetailsDialogProps {
 	control: Dialog.DialogOuterProps["control"];
 	modcause?: ModerationCause | AppModerationCause;
@@ -98,7 +96,6 @@ function ModerationDetailsDialogInner({
 		name = desc.name;
 		description = (
 			<Text
-				emoji
 				style={{
 					...t.atoms.text,
 					...a.text_md,
@@ -132,7 +129,6 @@ function ModerationDetailsDialogInner({
 				}}
 			>
 				<Text
-					emoji
 					style={{
 						...t.atoms.text,
 						...a.text_2xl,

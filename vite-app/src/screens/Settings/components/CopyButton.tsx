@@ -19,7 +19,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 
 	const onPress = useCallback(
 		(evt: React.MouseEvent<HTMLAnchorElement>) => {
-			new Clipboard().writeText(value);
+			navigator.clipboard.writeText(value);
 			setHasBeenCopied(true);
 			onPressProp?.(evt);
 		},

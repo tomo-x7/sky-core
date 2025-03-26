@@ -67,7 +67,6 @@ let DrawerProfileCard = ({
 			/>
 			<div style={a.gap_2xs}>
 				<Text
-					emoji
 					style={{
 						...a.font_heavy,
 						...a.text_xl,
@@ -79,7 +78,6 @@ let DrawerProfileCard = ({
 					{profile?.displayName || account.handle}
 				</Text>
 				<Text
-					emoji
 					style={{
 						...t.atoms.text_contrast_medium,
 						...a.text_md,

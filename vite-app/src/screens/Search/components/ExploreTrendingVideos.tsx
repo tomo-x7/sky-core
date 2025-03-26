@@ -17,7 +17,6 @@ import { makeCustomFeedLink } from "#/lib/routes/links";
 import { useSavedFeeds } from "#/state/queries/feed";
 import { RQKEY, usePostFeedQuery } from "#/state/queries/post-feed";
 import { useAddSavedFeedsMutation } from "#/state/queries/preferences";
-import { BlockDrawerGesture } from "#/view/shell/BlockDrawerGesture";
 
 const CARD_WIDTH = 100;
 
@@ -138,42 +137,40 @@ export function ExploreTrendingVideos() {
 					</Text>
 				</div>
 			</div>
-			<BlockDrawerGesture>
+			<div
+			// ScrollView
+			// horizontal
+			// showsHorizontalScrollIndicator={false}
+			// decelerationRate="fast"
+			// snapToInterval={CARD_WIDTH + tokens.space.sm}
+			>
 				<div
-				// ScrollView
-				// horizontal
-				// showsHorizontalScrollIndicator={false}
-				// decelerationRate="fast"
-				// snapToInterval={CARD_WIDTH + tokens.space.sm}
-				>
-					<div
-						style={{
-							...a.pt_lg,
-							...a.flex_row,
-							...a.gap_sm,
+					style={{
+						...a.pt_lg,
+						...a.flex_row,
+						...a.gap_sm,
 
-							...{
-								paddingLeft: gutters.paddingLeft,
-								paddingRight: gutters.paddingRight,
-							},
-						}}
-					>
-						{isLoading ? (
-							Array(10)
-								.fill(0)
-								.map((_, i) => (
-									<div key={i.toString()} style={{ width: CARD_WIDTH }}>
-										<CompactVideoPostCardPlaceholder />
-									</div>
-								))
-						) : error || !data ? (
-							<Text>Whoops! Trending videos failed to load.</Text>
-						) : (
-							<VideoCards data={data} />
-						)}
-					</div>
+						...{
+							paddingLeft: gutters.paddingLeft,
+							paddingRight: gutters.paddingRight,
+						},
+					}}
+				>
+					{isLoading ? (
+						Array(10)
+							.fill(0)
+							.map((_, i) => (
+								<div key={i.toString()} style={{ width: CARD_WIDTH }}>
+									<CompactVideoPostCardPlaceholder />
+								</div>
+							))
+					) : error || !data ? (
+						<Text>Whoops! Trending videos failed to load.</Text>
+					) : (
+						<VideoCards data={data} />
+					)}
 				</div>
-			</BlockDrawerGesture>
+			</div>
 			{!isSavedAlready && (
 				<div
 					style={{

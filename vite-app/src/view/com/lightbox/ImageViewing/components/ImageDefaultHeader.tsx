@@ -23,8 +23,7 @@ const ImageDefaultHeader = ({ onRequestClose }: Props) => {
 				// TODO
 				// onAccessibilityEscape={onRequestClose}
 			>
-				{/* @ts-expect-error */}
-				<FontAwesomeIcon icon="close" color={"#fff"} size={22} />
+				<FontAwesomeIcon icon="close" color={"#fff"} /*size={22}*/ size="xl" />
 			</button>
 		</SafeAreaView>
 	);

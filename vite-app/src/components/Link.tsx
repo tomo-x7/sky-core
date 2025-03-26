@@ -186,15 +186,12 @@ export function Link({
 				...a.justify_start,
 				...rest.style,
 			}}
-			// TODO
-			// href={href}
+			href={href}
 			onPress={download ? undefined : onPress}
+			target={download ? undefined : isExternal ? "blank" : undefined}
+			rel={isExternal ? "noopener noreferrer" : undefined}
+			download={download}
 			{...{
-				hrefAttrs: {
-					target: download ? undefined : isExternal ? "blank" : undefined,
-					rel: isExternal ? "noopener noreferrer" : undefined,
-					download,
-				},
 				dataset: {
 					// no underline, only `InlineLink` has underlines
 					noUnderline: "1",
@@ -248,10 +245,10 @@ export function InlineLinkText({
 		shouldProxy: shouldProxy,
 	});
 	const { state: hovered, onIn: onHoverIn, onOut: onHoverOut } = useInteractionState();
-	const flattenedStyle = style || {};
 
 	return (
 		<a
+			className="text"
 			unselectable={selectable ? "off" : "on"}
 			{...rest}
 			style={{
@@ -259,25 +256,21 @@ export function InlineLinkText({
 
 				...(hovered &&
 					!disableUnderline && {
-						...{
-							outline: 0,
-							textDecorationLine: "underline",
-							textDecorationColor: flattenedStyle.color ?? t.palette.primary_500,
-						},
+						outline: 0,
+						textDecorationLine: "underline",
+						textDecorationColor: style?.color ?? t.palette.primary_500,
 					}),
 
-				...flattenedStyle,
+				...style,
 			}}
 			onClick={download ? undefined : onPress}
 			onMouseEnter={onHoverIn}
 			onMouseLeave={onHoverOut}
 			href={href}
+			target={!download && isExternal ? "_blank" : undefined}
+			rel={isExternal ? "noopener noreferrer" : undefined}
+			download={download}
 			{...{
-				hrefAttrs: {
-					target: download ? undefined : isExternal ? "blank" : undefined,
-					rel: isExternal ? "noopener noreferrer" : undefined,
-					download,
-				},
 				dataset: {
 					// default to no underline, apply this ourselves
 					noUnderline: "1",

@@ -35,16 +35,18 @@ export interface TextInputRef {
 interface TextInputProps {
 	richtext: RichText;
 	placeholder: string;
-	suggestedLinks: Set<string>;
+	suggestedLinks?: Set<string>;
 	webForceMinHeight: boolean;
 	hasRightPadding: boolean;
 	isActive: boolean;
-	setRichText: (v: RichText | ((v: RichText) => RichText)) => void;
+	setRichText: (v: RichText /*| ((v: RichText) => RichText)*/) => void;
 	onPhotoPasted: (uri: string) => void;
 	onPressPublish: (richtext: RichText) => void;
 	onNewLink: (uri: string) => void;
 	onError: (err: string) => void;
 	onFocus: () => void;
+	style?: React.CSSProperties;
+	autoFocus?: boolean;
 }
 
 export const TextInput = React.forwardRef(function TextInputImpl(
@@ -59,6 +61,8 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 		onPressPublish,
 		onNewLink,
 		onFocus,
+		style,
+		autoFocus = false,
 	}: // onError, TODO
 	TextInputProps,
 	ref,
@@ -306,7 +310,7 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 		 *
 		 * `lineHeight` should always be defined here, this is defensive.
 		 */
-		style.lineHeight = style.lineHeight ? (`${style.lineHeight}px` as unknown as number) : undefined;
+		style.lineHeight = style.lineHeight ? `${Number.parseFloat(String(style.lineHeight))}px` : undefined;
 		style.minHeight = webForceMinHeight ? 140 : undefined;
 		return style;
 	}, [t, fonts, webForceMinHeight]);
@@ -317,9 +321,10 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 				style={{
 					...styles.container,
 					...(hasRightPadding ? styles.rightPadding : undefined),
+					...style,
 				}}
 			>
-				<EditorContent editor={editor} style={inputStyle} />
+				<EditorContent autoFocus={autoFocus} editor={editor} style={inputStyle} />
 			</div>
 			{isDropping && (
 				<Portal>

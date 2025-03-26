@@ -1,7 +1,6 @@
-import { useMatch, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { InlineLinkText, createStaticClick } from "#/components/Link";
-import { routes } from "#/routes";
 import { emitSoftReset } from "#/state/events";
 import { usePinnedFeedsInfos } from "#/state/queries/feed";
 import { useSelectedFeed, useSetSelectedFeed } from "#/state/shell/selected-feed";
@@ -13,7 +12,7 @@ export function DesktopFeeds() {
 	const setSelectedFeed = useSetSelectedFeed();
 	const navigate = useNavigate();
 	// TODO!!
-	const isHome = false//useMatch(routes.Home);
+	const isHome = false; //useMatch(routes.Home);
 
 	if (isLoading) {
 		return (

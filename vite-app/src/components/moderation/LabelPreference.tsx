@@ -47,7 +47,6 @@ export function Content({
 			}}
 		>
 			<Text
-				emoji
 				style={{
 					...a.font_bold,
 					...(gtPhone ? a.text_sm : a.text_md),
@@ -56,7 +55,6 @@ export function Content({
 				{name}
 			</Text>
 			<Text
-				emoji
 				style={{
 					...t.atoms.text_contrast_medium,
 					...a.leading_snug,
@@ -272,7 +270,6 @@ export function LabelerLabelPreference({
 						}}
 					>
 						<Text
-							emoji
 							style={{
 								...a.font_bold,
 								...t.atoms.text_contrast_low,

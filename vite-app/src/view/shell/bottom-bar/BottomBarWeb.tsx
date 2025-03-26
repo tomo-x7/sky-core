@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useLocation, useMatch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -24,7 +24,6 @@ import {
 } from "#/components/icons/UserCircle";
 import { useMinimalShellFooterTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { makeProfileLink } from "#/lib/routes/links";
-import { routes } from "#/routes";
 import { useHomeBadge } from "#/state/home-badge";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
 import { useUnreadNotifications } from "#/state/queries/notifications/unread";
@@ -263,8 +262,8 @@ const NavItem: React.FC<{
 				...a.pb_lg,
 			}}
 			navigationAction={isOnDifferentProfile ? "push" : "navigate"}
-			aria-role="link"
-			aria-label={routeName}
+			// aria-role="link"
+			// aria-label={routeName}
 		>
 			{children({ isActive })}
 			{notificationCount ? (

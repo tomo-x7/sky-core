@@ -114,7 +114,6 @@ export function TitleAndByline({
 				</Hider.Mask>
 				<Hider.Content>
 					<Text
-						emoji
 						style={{
 							...a.text_md,
 							...a.font_bold,
@@ -128,7 +127,6 @@ export function TitleAndByline({
 			</Hider.Outer>
 			{creator && (
 				<Text
-					emoji
 					style={{
 						...a.leading_snug,
 						...t.atoms.text_contrast_medium,

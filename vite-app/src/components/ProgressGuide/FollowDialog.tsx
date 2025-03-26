@@ -280,7 +280,7 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 			keyboardDismissMode="on-drag"
 			scrollIndicatorInsets={{ top: headerHeight }}
 			initialNumToRender={8}
-			maxToRenderPerBatch={8}
+			// maxToRenderPerBatch={8}
 			onEndReached={onEndReached}
 			// itemLayoutAnimation={LinearTransition}
 			ListFooterComponent={

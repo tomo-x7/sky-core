@@ -103,18 +103,18 @@ export const s = {
 	f18: { fontSize: 18 },
 
 	// line heights
-	"lh13-1": { lineHeight: 13 },
-	"lh13-1.3": { lineHeight: 16.9 }, // 1.3 of 13px
-	"lh14-1": { lineHeight: 14 },
-	"lh14-1.3": { lineHeight: 18.2 }, // 1.3 of 14px
-	"lh15-1": { lineHeight: 15 },
-	"lh15-1.3": { lineHeight: 19.5 }, // 1.3 of 15px
-	"lh16-1": { lineHeight: 16 },
-	"lh16-1.3": { lineHeight: 20.8 }, // 1.3 of 16px
-	"lh17-1": { lineHeight: 17 },
-	"lh17-1.3": { lineHeight: 22.1 }, // 1.3 of 17px
-	"lh18-1": { lineHeight: 18 },
-	"lh18-1.3": { lineHeight: 23.4 }, // 1.3 of 18px
+	"lh13-1": { lineHeight: "13px" },
+	"lh13-1.3": { lineHeight: "16.9px" }, // 1.3 of 13px
+	"lh14-1": { lineHeight: "14px" },
+	"lh14-1.3": { lineHeight: "18.2px" }, // 1.3 of 14px
+	"lh15-1": { lineHeight: "15px" },
+	"lh15-1.3": { lineHeight: "19.5px" }, // 1.3 of 15px
+	"lh16-1": { lineHeight: "16px" },
+	"lh16-1.3": { lineHeight: "20.8px" }, // 1.3 of 16px
+	"lh17-1": { lineHeight: "17px" },
+	"lh17-1.3": { lineHeight: "22.1px" }, // 1.3 of 17px
+	"lh18-1": { lineHeight: "18px" },
+	"lh18-1.3": { lineHeight: "23.4px" }, // 1.3 of 18px
 
 	// margins
 	mr2: { marginRight: 2 },
@@ -229,6 +229,6 @@ export const s = {
 
 export function lh(theme: Theme, type: TypographyVariant, height: number): React.CSSProperties {
 	return {
-		lineHeight: Math.round((Number.parseFloat(String(theme.typography[type].fontSize)) || 16) * height),
+		lineHeight: `${Math.round((Number.parseFloat(String(theme.typography[type].fontSize)) || 16) * height)}px`,
 	};
 }

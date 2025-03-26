@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef } from "react";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { PressableWithHover } from "../util/PressableWithHover";
-import { DraggableScrollView } from "./DraggableScrollView";
 
 export interface TabBarProps {
 	selectedPage: number;
@@ -86,7 +85,8 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 				width: "100%",
 				marginLeft: "auto",
 				marginRight: "auto",
-				maxWidth: "600px",height:"100%",
+				maxWidth: "600px",
+				height: "100%",
 			}}
 			// accessibilityRole="tablist"
 		>
@@ -95,9 +95,18 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 				// showsHorizontalScrollIndicator={false}
 				ref={scrollElRef}
 				// contentContainerStyle={styles.contentContainer}
-				style={{width:"100%",overflow:"clip",userSelect:"none"}}
+				style={{
+					width: "100%",
+					overflow: "auto",
+					userSelect: "none",
+					flexDirection: "row",
+					flexShrink: 1,
+					flexGrow: 1,
+					scrollbarWidth: "none",
+					overflowY: "hidden",
+				}}
 			>
-				<div style={{width:"fit-content",flexDirection:"row"}}>
+				<div style={{ width: "fit-content", flexDirection: "row", flexGrow: 1 }}>
 					{items.map((item, i) => {
 						const selected = i === selectedPage;
 						return (
@@ -111,13 +120,12 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 							>
 								<div style={styles.itemInner}>
 									<Text
-										emoji
 										style={{
 											...styles.itemText,
 											...(selected ? t.atoms.text : t.atoms.text_contrast_medium),
 											...a.text_md,
 											...a.font_bold,
-											...{ lineHeight: "20%" },
+											...{ lineHeight: "20px" },
 										}}
 									>
 										{item}

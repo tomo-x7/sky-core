@@ -4,12 +4,10 @@ import React from "react";
 import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
-import {
-	ModerationDetailsDialog,
-	useModerationDetailsDialogControl,
-} from "#/components/moderation/ModerationDetailsDialog";
+import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
+import { useDialogControl } from "./Dialog";
 
 export type AppModerationCause =
 	| ModerationCause
@@ -60,7 +58,7 @@ export type LabelProps = {
 
 export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelProps) {
 	const t = useTheme();
-	const control = useModerationDetailsDialogControl();
+	const control = useDialogControl();
 	const desc = useModerationCauseDescription(cause);
 	const isLabeler = Boolean(desc.sourceType && desc.sourceDid);
 	const isBlueskyLabel = desc.sourceType === "labeler" && desc.sourceDid === BSKY_LABELER_DID;
@@ -130,7 +128,6 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 						)}
 
 						<Text
-							emoji
 							style={{
 								...flatten(text),
 								...a.font_bold,

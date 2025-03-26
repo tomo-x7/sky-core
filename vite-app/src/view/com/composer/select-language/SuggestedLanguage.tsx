@@ -46,8 +46,7 @@ export function SuggestedLanguage({ text }: { text: string }) {
 					...styles.infoBar,
 				}}
 			>
-				{/* @ts-expect-error */}
-				<FontAwesomeIcon icon="language" style={pal.text} size={24} />
+				<FontAwesomeIcon icon="language" style={pal.text} /* size={24}*/ size={"2xl"} />
 				<Text
 					style={{
 						...pal.text,

@@ -7,7 +7,7 @@ import {
 } from "@atproto/api";
 import React, { memo, useCallback } from "react";
 
-import { useMatch, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useBreakpoints } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -48,7 +48,6 @@ import { shareText, shareUrl } from "#/lib/sharing";
 import { richTextToString } from "#/lib/strings/rich-text-helpers";
 import { toShareUrl } from "#/lib/strings/url-helpers";
 import { getTranslatorLink } from "#/locale/helpers";
-import { routes } from "#/routes";
 import type { Shadow } from "#/state/cache/post-shadow";
 import { useProfileShadow } from "#/state/cache/profile-shadow";
 import { useFeedFeedbackContext } from "#/state/feed-feedback";
@@ -146,7 +145,7 @@ let PostDropdownMenuItems = ({
 		rootPostUri: rootUri,
 	});
 
-	const isPostThread = /profile\/.+\/post\/.+/.test(location.pathname)
+	const isPostThread = /profile\/.+\/post\/.+/.test(location.pathname);
 	const params = useParams();
 
 	const href = React.useMemo(() => {
@@ -200,7 +199,7 @@ let PostDropdownMenuItems = ({
 
 	const onCopyPostText = React.useCallback(() => {
 		const str = richTextToString(richText, true);
-		new Clipboard().writeText(str);
+		navigator.clipboard.writeText(str);
 		Toast.show("Copied to clipboard", "clipboard-check");
 	}, [richText]);
 

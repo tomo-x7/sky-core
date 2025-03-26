@@ -57,8 +57,6 @@ function useMigrateMutes(setThreadMute: SetStateContext) {
 			const migrate = async () => {
 				while (!cancelled) {
 					const threads = persisted.get("mutedThreads");
-
-					// @ts-expect-error findLast is polyfilled - esb
 					const root = threads.findLast((uri) => uri.includes(currentAccount.did));
 
 					if (!root) break;

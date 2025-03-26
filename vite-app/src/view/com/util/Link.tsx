@@ -10,8 +10,6 @@ import { WebAuxClickWrapper } from "#/view/com/util/WebAuxClickWrapper";
 import { router } from "../../../routes";
 import { PressableWithHover, PressableWithoutHover } from "./PressableWithHover";
 
-type Event = React.MouseEvent<HTMLAnchorElement, MouseEvent>;
-
 interface Props {
 	style?: React.CSSProperties;
 	href?: string;
@@ -196,59 +194,10 @@ export const TextLink = memo(function TextLink({
 			title={title}
 			{...orgProps}
 		>
-			<a href={href} onClick={onPress} {...hrefAttrs}>
+			<a className="text" href={href} onClick={onPress} {...hrefAttrs}>
 				{text}
 			</a>
 		</Text>
-	);
-});
-
-/**
- * Only acts as a link on desktop web
- */
-interface TextLinkOnWebOnlyProps {
-	type?: TypographyVariant;
-	style?: React.CSSProperties;
-	href: string;
-	text: string | JSX.Element;
-	numberOfLines?: number;
-	lineHeight?: number;
-	accessible?: boolean;
-	accessibilityLabel?: string;
-	accessibilityHint?: string;
-	title?: string;
-	navigationAction?: "push" | "replace" | "navigate";
-	disableMismatchWarning?: boolean;
-	onBeforePress?: () => void;
-	onPointerEnter?: () => void;
-	anchorNoUnderline?: boolean;
-}
-export const TextLinkOnWebOnly = memo(function DesktopWebTextLink({
-	type = "md",
-	style,
-	href,
-	text,
-	numberOfLines,
-	lineHeight,
-	navigationAction,
-	disableMismatchWarning,
-	onBeforePress,
-	...props
-}: TextLinkOnWebOnlyProps) {
-	return (
-		<TextLink
-			type={type}
-			style={style}
-			href={href}
-			text={text}
-			numberOfLines={numberOfLines}
-			lineHeight={lineHeight}
-			title={props.title}
-			navigationAction={navigationAction}
-			disableMismatchWarning={disableMismatchWarning}
-			onBeforePress={onBeforePress}
-			{...props}
-		/>
 	);
 });
 

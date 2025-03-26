@@ -52,6 +52,7 @@ type NonTextElements = React.ReactElement | Iterable<React.ReactElement | null |
 export type ButtonProps = {
 	disabled?: boolean;
 	onPress?: React.MouseEventHandler;
+	/**@deprecated 未実装 */
 	hitSlop?:
 		| number
 		| {
@@ -76,7 +77,7 @@ export type ButtonProps = {
 		hoverStyle?: React.CSSProperties;
 		children: NonTextElements | ((context: ButtonContext) => NonTextElements);
 		href?: string;
-	};
+	} & Omit<JSX.IntrinsicElements["a"], "children" | "ref">;
 
 export type ButtonTextProps = { style?: React.CSSProperties; children?: React.ReactNode } & VariantProps & {
 		disabled?: boolean;
@@ -111,7 +112,9 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 			onHoverOut: onHoverOutOuter,
 			onFocus: onFocusOuter,
 			onBlur: onBlurOuter,
-			href,onPress,
+			href,
+			onPress,
+			hitSlop, //TODO
 			...rest
 		},
 		ref,
@@ -423,8 +426,7 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 				}
 
 				return {
-					//@ts-expect-error
-					colors: gradient.values.map(([color]) => color) as [string, string, ...string[]],
+					colors: gradient.values.map(([_, color]) => color) as [string, string, ...string[]],
 					hoverColors: gradient.values.map((_) => gradient.hover_value) as [string, string, ...string[]],
 					locations: gradient.values.map(([location]) => location) as [number, number, ...number[]],
 				};
@@ -450,8 +452,7 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 				ref={ref}
 				aria-label={label}
 				aria-pressed={state.pressed}
-				// @ts-expect-error スタイルで頑張る
-				disabled={disabled || false}
+				// disabled={disabled || false} //スタイルで頑張る
 				style={{
 					...a.flex_row,
 					...a.align_center,

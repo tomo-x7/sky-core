@@ -92,7 +92,6 @@ export function VideoPostCard({
 						...a.leading_snug,
 					}}
 					numberOfLines={2}
-					emoji
 				>
 					{text}
 				</Text>

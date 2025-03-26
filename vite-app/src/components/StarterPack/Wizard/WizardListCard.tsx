@@ -72,7 +72,6 @@ function WizardListCard({
 				}}
 			>
 				<Text
-					emoji
 					style={{
 						...a.flex_1,
 						...a.font_bold,

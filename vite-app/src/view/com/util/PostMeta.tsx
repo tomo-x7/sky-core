@@ -83,7 +83,6 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						style={t.atoms.text}
 					>
 						<Text
-							emoji
 							style={{
 								...a.text_md,
 								...a.font_bold,
@@ -106,7 +105,6 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						}}
 					>
 						<Text
-							emoji
 							style={{
 								...a.text_md,
 								...t.atoms.text_contrast_medium,

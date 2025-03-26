@@ -391,7 +391,6 @@ function Footer({
 											...a.font_bold,
 											...textStyles,
 										}}
-										emoji
 									>
 										{getName(items[1] /* [0] is self, skip it */)}{" "}
 									</Text>
@@ -404,7 +403,6 @@ function Footer({
 											...a.font_bold,
 											...textStyles,
 										}}
-										emoji
 									>
 										{getName(items[1] /* [0] is self, skip it */)},{" "}
 									</Text>
@@ -413,7 +411,6 @@ function Footer({
 											...a.font_bold,
 											...textStyles,
 										}}
-										emoji
 									>
 										{getName(items[2])},{" "}
 									</Text>
@@ -459,7 +456,6 @@ function Footer({
 												...a.font_bold,
 												...textStyles,
 											}}
-											emoji
 										>
 											{getName(items[0])}
 										</Text>{" "}
@@ -472,7 +468,6 @@ function Footer({
 												...a.font_bold,
 												...textStyles,
 											}}
-											emoji
 										>
 											{getName(items[0])}
 										</Text>{" "}
@@ -483,7 +478,6 @@ function Footer({
 												...a.font_bold,
 												...textStyles,
 											}}
-											emoji
 										>
 											{getName(items[1])}{" "}
 										</Text>
@@ -496,7 +490,6 @@ function Footer({
 												...a.font_bold,
 												...textStyles,
 											}}
-											emoji
 										>
 											{getName(items[0])},{" "}
 										</Text>
@@ -505,7 +498,6 @@ function Footer({
 												...a.font_bold,
 												...textStyles,
 											}}
-											emoji
 										>
 											{getName(items[1])},{" "}
 										</Text>

@@ -1,11 +1,11 @@
 import { tokens } from "#/alf";
-import { createThemes,  } from "#/alf/themes";
+import { createThemes } from "#/alf/themes";
 import { fontWeight } from "#/alf/tokens";
-import { BLUE_HUE, RED_HUE, GREEN_HUE } from "#/alf/util/colorGeneration";
+import { BLUE_HUE, GREEN_HUE, RED_HUE } from "#/alf/util/colorGeneration";
 import type { Theme } from "./ThemeContext";
 import { colors } from "./styles";
 
-const {darkPalette,dimPalette,lightPalette}=createThemes({
+const { darkPalette, dimPalette, lightPalette } = createThemes({
 	hues: {
 		primary: BLUE_HUE,
 		negative: RED_HUE,

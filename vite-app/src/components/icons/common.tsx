@@ -7,7 +7,7 @@ export type Props = {
 	style?: React.CSSProperties;
 	size?: keyof typeof sizes;
 	gradient?: keyof typeof tokens.gradients;
-} & Omit<JSX.IntrinsicElements["svg"], "style" | "size">;
+} & Omit<JSX.IntrinsicElements["svg"], "style" | "size" | "ref">;
 
 export const sizes = {
 	xs: 12,

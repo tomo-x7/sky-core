@@ -32,11 +32,6 @@ interface AppClipMessage {
 	jsonToStore?: string;
 }
 
-export function postAppClipMessage(message: AppClipMessage) {
-	// @ts-expect-error safari webview only
-	window.webkit.messageHandlers.onMessage.postMessage(JSON.stringify(message));
-}
-
 export function LandingScreen({
 	setScreenState,
 }: {
@@ -115,9 +110,6 @@ function LandingScreenLoaded({
 	const onJoinPress = () => {
 		if (activeStarterPack?.isClip) {
 			setAppClipOverlayVisible(true);
-			postAppClipMessage({
-				action: "present",
-			});
 		} else if (isAndroidWeb) {
 			androidDialogControl.open();
 		} else {
@@ -128,9 +120,6 @@ function LandingScreenLoaded({
 	const onJoinWithoutPress = () => {
 		if (activeStarterPack?.isClip) {
 			setAppClipOverlayVisible(true);
-			postAppClipMessage({
-				action: "present",
-			});
 		} else {
 			setActiveStarterPack(undefined);
 			setScreenState(LoggedOutScreenState.S_CreateAccount);
@@ -211,8 +200,8 @@ function LandingScreenLoaded({
 						>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
-								//@ts-expect-error
-								size={12}
+								// size={12}
+								size="xl"
 								color={t.atoms.text_contrast_medium.color}
 							/>
 							<Text
@@ -389,7 +378,7 @@ export function AppClipOverlay({
 						style={{
 							...a.font_bold,
 							...a.text_4xl,
-							...{ lineHeight: 40, color: "white" },
+							...{ lineHeight: "40px", color: "white" },
 						}}
 					>
 						Download Bluesky to get started!

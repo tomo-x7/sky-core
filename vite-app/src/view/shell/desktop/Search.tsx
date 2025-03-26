@@ -114,7 +114,6 @@ let SearchProfileCard = ({
 				/>
 				<div style={{ flex: 1 }}>
 					<Text
-						emoji
 						type="lg"
 						style={{
 							...s.bold,

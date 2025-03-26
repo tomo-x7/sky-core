@@ -279,7 +279,7 @@ function ListImpl<ItemT>(
 
 	return (
 		<div
-			{...props}
+			// {...props}
 			style={{
 				...style,
 

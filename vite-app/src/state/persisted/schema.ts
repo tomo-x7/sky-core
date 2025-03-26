@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { hasOwn } from "#/lib/util";
 import { deviceLanguageCodes, deviceLocales } from "#/locale/deviceLocales";
 import { findSupportedAppLanguage } from "#/locale/helpers";
 import { PlatformInfo } from "../../../modules/expo-bluesky-swiss-army";
@@ -189,8 +190,7 @@ export function tryParse(rawData: string): Schema | undefined {
 		const errors =
 			parsed.error?.errors?.map((e) => ({
 				code: e.code,
-				// @ts-expect-error exists on some types
-				expected: e?.expected,
+				expected: e && hasOwn(e, "expected") ? e.expected : "",
 				path: e.path?.join("."),
 			})) || [];
 		console.error("persisted store: data failed validation on read", { errors });

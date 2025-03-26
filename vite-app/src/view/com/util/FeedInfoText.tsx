@@ -1,7 +1,7 @@
 import type { TypographyVariant } from "#/lib/ThemeContext";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { useFeedSourceInfoQuery } from "#/state/queries/feed";
-import { TextLinkOnWebOnly } from "./Link";
+import { TextLink } from "./Link";
 import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 export function FeedNameText({
@@ -25,7 +25,7 @@ export function FeedNameText({
 	if (data?.displayName || isError) {
 		const displayName = data?.displayName || uri.split("/").pop() || "";
 		inner = (
-			<TextLinkOnWebOnly
+			<TextLink
 				type={type}
 				style={style}
 				lineHeight={lineHeight}

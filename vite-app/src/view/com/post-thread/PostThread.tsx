@@ -525,7 +525,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 						/>
 					}
 					initialNumToRender={initialNumToRender}
-					windowSize={11}
+					// windowSize={11}
 					sideBorders={false}
 				/>
 			</ScrollProvider>

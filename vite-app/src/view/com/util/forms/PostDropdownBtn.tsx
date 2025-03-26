@@ -59,9 +59,10 @@ let PostDropdownBtn = ({
 		<EventStopper onKeyDown={false}>
 			<Menu.Root control={lazyMenuControl}>
 				<Menu.Trigger label={"Open post options menu"}>
-					{({ props, state }) => {
+					{({ props: { onPress, ...props }, state }) => {
 						return (
 							<button
+								onClick={onPress}
 								{...props}
 								// hitSlop={hitSlop}
 								style={{

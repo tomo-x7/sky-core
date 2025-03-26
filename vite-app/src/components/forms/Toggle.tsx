@@ -48,7 +48,7 @@ export type GroupProps = React.PropsWithChildren<{
 	label: string;
 }>;
 
-export type ItemProps = Omit<JSX.IntrinsicElements["input"], "value" | "onChange"> & {
+export type ItemProps = Omit<JSX.IntrinsicElements["input"], "value" | "onChange" | "ref"> & {
 	type?: "radio" | "checkbox";
 	name: string;
 	label: string;

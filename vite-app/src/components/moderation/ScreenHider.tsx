@@ -5,13 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
-import {
-	ModerationDetailsDialog,
-	useModerationDetailsDialogControl,
-} from "#/components/moderation/ModerationDetailsDialog";
+import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
 import { CenteredView } from "#/view/com/util/Views";
+import { useDialogControl } from "../Dialog";
 
 export function ScreenHider({
 	screenDescription,
@@ -29,7 +27,7 @@ export function ScreenHider({
 	const [override, setOverride] = React.useState(false);
 	const navigate = useNavigate();
 	const { isMobile } = useWebMediaQueries();
-	const control = useModerationDetailsDialogControl();
+	const control = useDialogControl();
 	const blur = modui.blurs[0];
 	const desc = useModerationCauseDescription(blur);
 

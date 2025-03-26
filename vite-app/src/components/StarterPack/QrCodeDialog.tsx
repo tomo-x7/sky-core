@@ -76,7 +76,7 @@ export function QrCodeDialog({
 		setIsProcessing(true);
 		// ref.current?.capture?.().then(async (uri: string) => {
 		// 	const canvas = await getCanvas(uri);
-		// 	// @ts-expect-error web only
+		// 	// @ ts-expect-error web only
 		// 	canvas.toBlob((blob: Blob) => {
 		// 		const item = new ClipboardItem({ "image/png": blob });
 		// 		navigator.clipboard.write([item]);

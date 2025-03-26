@@ -169,10 +169,9 @@ function GifList({
 				key={gtMobile ? "3 cols" : "2 cols"}
 				data={flattenedData}
 				renderItem={renderItem}
-				numColumns={gtMobile ? 3 : 2}
-				columnWrapperStyle={[a.gap_sm]}
-				//@ts-expect-error
-				contentContainerStyle={[a.h_full_vh]}
+				// numColumns={gtMobile ? 3 : 2} //TODO
+				// columnWrapperStyle={a.gap_sm}  //TODO
+				contentContainerStyle={a.h_full_vh}
 				style={a.h_full_vh}
 				ListHeaderComponent={
 					<>

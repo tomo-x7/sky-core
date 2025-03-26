@@ -11,7 +11,6 @@ import { useTrendingSettings, useTrendingSettingsApi } from "#/state/preferences
 import { useTrendingTopics } from "#/state/queries/trending/useTrendingTopics";
 import { useTrendingConfig } from "#/state/trending-config";
 import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
-import { BlockDrawerGesture } from "#/view/shell/BlockDrawerGesture";
 
 export function TrendingInterstitial() {
 	const { enabled } = useTrendingConfig();
@@ -38,81 +37,79 @@ function Inner() {
 				...a.border_t,
 			}}
 		>
-			<BlockDrawerGesture>
+			<div
+			// ScrollView
+			//  horizontal showsHorizontalScrollIndicator={false} decelerationRate="fast"
+			>
 				<div
-				// ScrollView
-				//  horizontal showsHorizontalScrollIndicator={false} decelerationRate="fast"
+					style={{
+						...gutters,
+						...a.flex_row,
+						...a.align_center,
+						...a.gap_lg,
+					}}
 				>
-					<div
-						style={{
-							...gutters,
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_lg,
-						}}
-					>
-						<div style={{ paddingLeft: 4, paddingRight: 2 }}>
-							<Graph size="sm" />
-						</div>
-						{isLoading ? (
-							<div
+					<div style={{ paddingLeft: 4, paddingRight: 2 }}>
+						<Graph size="sm" />
+					</div>
+					{isLoading ? (
+						<div
+							style={{
+								...a.py_lg,
+								...a.flex_row,
+								...a.gap_lg,
+								...a.align_center,
+							}}
+						>
+							<LoadingPlaceholder width={80} height={undefined} style={{ alignSelf: "stretch" }} />
+							<LoadingPlaceholder width={50} height={undefined} style={{ alignSelf: "stretch" }} />
+							<LoadingPlaceholder width={120} height={undefined} style={{ alignSelf: "stretch" }} />
+							<LoadingPlaceholder width={30} height={undefined} style={{ alignSelf: "stretch" }} />
+							<LoadingPlaceholder width={180} height={undefined} style={{ alignSelf: "stretch" }} />
+							<Text
 								style={{
-									...a.py_lg,
-									...a.flex_row,
-									...a.gap_lg,
-									...a.align_center,
+									...t.atoms.text_contrast_medium,
+									...a.text_sm,
+									...a.font_bold,
 								}}
 							>
-								<LoadingPlaceholder width={80} height={undefined} style={{ alignSelf: "stretch" }} />
-								<LoadingPlaceholder width={50} height={undefined} style={{ alignSelf: "stretch" }} />
-								<LoadingPlaceholder width={120} height={undefined} style={{ alignSelf: "stretch" }} />
-								<LoadingPlaceholder width={30} height={undefined} style={{ alignSelf: "stretch" }} />
-								<LoadingPlaceholder width={180} height={undefined} style={{ alignSelf: "stretch" }} />
-								<Text
-									style={{
-										...t.atoms.text_contrast_medium,
-										...a.text_sm,
-										...a.font_bold,
-									}}
-								>
-									{" "}
-								</Text>
-							</div>
-						) : !trending?.topics ? null : (
-							<>
-								{trending.topics.map((topic) => (
-									<TrendingTopicLink key={topic.link} topic={topic}>
-										<div style={a.py_lg}>
-											<Text
-												style={{
-													...t.atoms.text,
-													...a.text_sm,
-													...a.font_bold,
+								{" "}
+							</Text>
+						</div>
+					) : !trending?.topics ? null : (
+						<>
+							{trending.topics.map((topic) => (
+								<TrendingTopicLink key={topic.link} topic={topic}>
+									<div style={a.py_lg}>
+										<Text
+											style={{
+												...t.atoms.text,
+												...a.text_sm,
+												...a.font_bold,
 
-													...// NOTE: we use opacity 0.7 instead of a color to match the color of the home pager tab bar
-													{ opacity: 0.7 },
-												}}
-											>
-												{topic.topic}
-											</Text>
-										</div>
-									</TrendingTopicLink>
-								))}
-								<Button
-									label={"Hide trending topics"}
-									size="tiny"
-									variant="ghost"
-									color="secondary"
-									shape="round"
-									onPress={() => trendingPrompt.open()}
-								>
-									<ButtonIcon icon={X} />
-								</Button>
-							</>
-						)}
-					</div>
+												...// NOTE: we use opacity 0.7 instead of a color to match the color of the home pager tab bar
+												{ opacity: 0.7 },
+											}}
+										>
+											{topic.topic}
+										</Text>
+									</div>
+								</TrendingTopicLink>
+							))}
+							<Button
+								label={"Hide trending topics"}
+								size="tiny"
+								variant="ghost"
+								color="secondary"
+								shape="round"
+								onPress={() => trendingPrompt.open()}
+							>
+								<ButtonIcon icon={X} />
+							</Button>
+						</>
+					)}
 				</div>
-			</BlockDrawerGesture>
+			</div>
 
 			<Prompt.Basic
 				control={trendingPrompt}

@@ -100,7 +100,6 @@ export function TitleAndByline({
 	return (
 		<div style={a.flex_1}>
 			<Text
-				emoji
 				style={{
 					...a.text_md,
 					...a.font_bold,

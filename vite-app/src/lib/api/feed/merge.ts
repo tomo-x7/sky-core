@@ -294,8 +294,7 @@ class MergeFeedSource_Custom extends MergeFeedSource {
 			res.data.feed = res.data.feed.filter((post) => new Date(post.post.indexedAt) > this.minDate);
 			// attach source info
 			for (const post of res.data.feed) {
-				// @ts-expect-error
-				post.__source = this.sourceInfo;
+				(post as typeof post & { __source?: ReasonFeedSource }).__source = this.sourceInfo;
 			}
 			return res;
 		} catch {

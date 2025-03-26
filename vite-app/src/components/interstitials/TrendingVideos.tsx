@@ -16,7 +16,6 @@ import { makeCustomFeedLink } from "#/lib/routes/links";
 import { useTrendingSettingsApi } from "#/state/preferences/trending";
 import { usePostFeedQuery } from "#/state/queries/post-feed";
 import { RQKEY } from "#/state/queries/post-feed";
-import { BlockDrawerGesture } from "#/view/shell/BlockDrawerGesture";
 
 const CARD_WIDTH = 100;
 
@@ -103,41 +102,39 @@ export function TrendingVideos() {
 					<ButtonIcon icon={X} />
 				</Button>
 			</div>
-			<BlockDrawerGesture>
+			<div
+			// ScrollView
+			// horizontal
+			// showsHorizontalScrollIndicator={false}
+			// decelerationRate="fast"
+			// snapToInterval={CARD_WIDTH + a.gap_sm.gap}
+			>
 				<div
-				// ScrollView
-				// horizontal
-				// showsHorizontalScrollIndicator={false}
-				// decelerationRate="fast"
-				// snapToInterval={CARD_WIDTH + a.gap_sm.gap}
-				>
-					<div
-						style={{
-							...a.flex_row,
-							...a.gap_sm,
+					style={{
+						...a.flex_row,
+						...a.gap_sm,
 
-							...{
-								paddingLeft: gutters.paddingLeft,
-								paddingRight: gutters.paddingRight,
-							},
-						}}
-					>
-						{isLoading ? (
-							Array(10)
-								.fill(0)
-								.map((_, i) => (
-									<div key={i.toString()} style={{ width: CARD_WIDTH }}>
-										<CompactVideoPostCardPlaceholder />
-									</div>
-								))
-						) : error || !data ? (
-							<Text>Whoops! Trending videos failed to load.</Text>
-						) : (
-							<VideoCards data={data} />
-						)}
-					</div>
+						...{
+							paddingLeft: gutters.paddingLeft,
+							paddingRight: gutters.paddingRight,
+						},
+					}}
+				>
+					{isLoading ? (
+						Array(10)
+							.fill(0)
+							.map((_, i) => (
+								<div key={i.toString()} style={{ width: CARD_WIDTH }}>
+									<CompactVideoPostCardPlaceholder />
+								</div>
+							))
+					) : error || !data ? (
+						<Text>Whoops! Trending videos failed to load.</Text>
+					) : (
+						<VideoCards data={data} />
+					)}
 				</div>
-			</BlockDrawerGesture>
+			</div>
 			<Prompt.Basic
 				control={trendingPrompt}
 				title={"Hide trending videos?"}

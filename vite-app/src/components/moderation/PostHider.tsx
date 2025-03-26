@@ -4,14 +4,12 @@ import React, { type ComponentProps } from "react";
 
 import { atoms as a, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
-import {
-	ModerationDetailsDialog,
-	useModerationDetailsDialogControl,
-} from "#/components/moderation/ModerationDetailsDialog";
+import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
 import { precacheProfile } from "#/state/queries/profile";
 // import {Link} from '#/components/Link' TODO this imposes some styles that screw things up
 import { Link } from "#/view/com/util/Link";
+import { useDialogControl } from "../Dialog";
 
 interface Props extends ComponentProps<typeof Link> {
 	disabled: boolean;
@@ -37,7 +35,7 @@ export function PostHider({
 	const queryClient = useQueryClient();
 	const t = useTheme();
 	const [override, setOverride] = React.useState(false);
-	const control = useModerationDetailsDialogControl();
+	const control = useDialogControl();
 	const blur = modui.blurs[0] || (interpretFilterAsBlur ? getBlurrableFilter(modui) : undefined);
 	const desc = useModerationCauseDescription(blur);
 

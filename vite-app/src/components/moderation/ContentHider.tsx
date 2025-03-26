@@ -4,16 +4,14 @@ import React from "react";
 import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
-import {
-	ModerationDetailsDialog,
-	useModerationDetailsDialogControl,
-} from "#/components/moderation/ModerationDetailsDialog";
+import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
 import { ADULT_CONTENT_LABELS, isJustAMute } from "#/lib/moderation";
 import { useGlobalLabelStrings } from "#/lib/moderation/useGlobalLabelStrings";
 import { getDefinition, getLabelStrings } from "#/lib/moderation/useLabelInfo";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { useLabelDefinitions } from "#/state/preferences";
+import { useDialogControl } from "../Dialog";
 
 export function ContentHider({
 	modui,
@@ -51,7 +49,7 @@ function ContentHiderActive({
 	const t = useTheme();
 	const { gtMobile } = useBreakpoints();
 	const [override, setOverride] = React.useState(false);
-	const control = useModerationDetailsDialogControl();
+	const control = useDialogControl();
 	const { labelDefs } = useLabelDefinitions();
 	const globalLabelStrings = useGlobalLabelStrings();
 	const blur = modui?.blurs[0];

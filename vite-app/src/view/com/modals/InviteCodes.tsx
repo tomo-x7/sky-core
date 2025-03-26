@@ -154,7 +154,7 @@ function InviteCode({
 	const uses = invite.uses;
 
 	const onPress = React.useCallback(() => {
-		new Clipboard().writeText(invite.code);
+		navigator.clipboard.writeText(invite.code);
 		Toast.show("Copied to clipboard", "clipboard-check");
 		setInviteCopied(invite.code);
 	}, [setInviteCopied, invite]);

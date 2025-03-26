@@ -251,7 +251,6 @@ function SubmitStep({
 						onChangeText={setDetails}
 						label="Text field"
 						style={{ paddingRight: 60 }}
-						// @ts-expect-error
 						numberOfLines={5}
 					/>
 					<div

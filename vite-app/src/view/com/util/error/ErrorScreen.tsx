@@ -55,8 +55,7 @@ export function ErrorScreen({
 							...{ backgroundColor: t.palette.contrast_950 },
 						}}
 					>
-						{/* @ts-expect-error */}
-						<FontAwesomeIcon icon="exclamation" style={pal.textInverted} size={24} />
+						<FontAwesomeIcon icon="exclamation" style={pal.textInverted} /*size={24}*/ size={"2xl"} />
 					</div>
 				</div>
 				<Text

@@ -102,7 +102,6 @@ export const ExternalLinkEmbed = ({
 						>
 							{!embedPlayerParams?.isGif && !embedPlayerParams?.dimensions && (
 								<Text
-									emoji
 									numberOfLines={3}
 									style={{
 										...a.text_md,
@@ -115,7 +114,6 @@ export const ExternalLinkEmbed = ({
 							)}
 							{link.description ? (
 								<Text
-									emoji
 									numberOfLines={link.thumb ? 2 : 4}
 									style={{
 										...a.text_sm,

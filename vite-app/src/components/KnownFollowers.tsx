@@ -185,11 +185,11 @@ function KnownFollowersInner({
 							serverCount > 2 ? (
 								<>
 									Followed by{" "}
-									<Text emoji key={slice[0].profile.did} style={textStyle}>
+									<Text key={slice[0].profile.did} style={textStyle}>
 										{slice[0].profile.displayName}
 									</Text>
 									,{" "}
-									<Text emoji key={slice[1].profile.did} style={textStyle}>
+									<Text key={slice[1].profile.did} style={textStyle}>
 										{slice[1].profile.displayName}
 									</Text>
 									, and {serverCount - 2} {serverCount - 2 === 1 ? "other" : "others"}
@@ -198,11 +198,11 @@ function KnownFollowersInner({
 								// only 2
 								<>
 									Followed by{" "}
-									<Text emoji key={slice[0].profile.did} style={textStyle}>
+									<Text key={slice[0].profile.did} style={textStyle}>
 										{slice[0].profile.displayName}
 									</Text>{" "}
 									and{" "}
-									<Text emoji key={slice[1].profile.did} style={textStyle}>
+									<Text key={slice[1].profile.did} style={textStyle}>
 										{slice[1].profile.displayName}
 									</Text>
 								</>
@@ -211,7 +211,7 @@ function KnownFollowersInner({
 							// 1-n followers, including blocks
 							<>
 								Followed by{" "}
-								<Text emoji key={slice[0].profile.did} style={textStyle}>
+								<Text key={slice[0].profile.did} style={textStyle}>
 									{slice[0].profile.displayName}
 								</Text>{" "}
 								and {serverCount - 1} {serverCount - 1 === 1 ? "other" : "others"}
@@ -220,7 +220,7 @@ function KnownFollowersInner({
 							// only 1
 							<>
 								Followed by{" "}
-								<Text emoji key={slice[0].profile.did} style={textStyle}>
+								<Text key={slice[0].profile.did} style={textStyle}>
 									{slice[0].profile.displayName}
 								</Text>
 							</>

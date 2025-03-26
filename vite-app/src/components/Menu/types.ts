@@ -5,7 +5,7 @@ import type * as Dialog from "#/components/Dialog";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 
 export type ContextType = {
-	control: Dialog.DialogOuterProps["control"];
+	control: Dialog.DialogOuterProps["control"] | null;
 };
 
 export type ItemContextType = {
@@ -13,7 +13,7 @@ export type ItemContextType = {
 };
 
 export type RadixPassThroughTriggerProps = {
-	ref: React.RefObject<any>;
+	ref: React.Ref<any>;
 };
 export type TriggerProps = {
 	children(props: TriggerChildProps): React.ReactNode;
@@ -41,7 +41,7 @@ export type TriggerChildProps = {
 };
 
 export type ItemProps = React.PropsWithChildren<
-	Omit<JSX.IntrinsicElements["button"], "style" | "onClick"> &
+	Omit<JSX.IntrinsicElements["button"], "style" | "onClick" | "ref"> &
 		ViewStyleProp & {
 			label: string;
 			onPress: (e: React.MouseEvent<HTMLAnchorElement>) => void;

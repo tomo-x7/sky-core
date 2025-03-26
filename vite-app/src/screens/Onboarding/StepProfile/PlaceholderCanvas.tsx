@@ -44,7 +44,7 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 		<div style={styles.container}>
 			<React.Suspense fallback={null}>
 				{/* <ViewShot
-					// @ts-expect-error this library doesn't have types
+					// @ ts-expect-error this library doesn't have types
 					ref={viewshotRef}
 					options={{
 						fileName: "placeholderAvatar",

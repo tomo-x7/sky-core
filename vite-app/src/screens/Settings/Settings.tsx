@@ -334,8 +334,9 @@ function AccountRow({
 			{!pendingDid && (
 				<Menu.Root>
 					<Menu.Trigger label={"Account options"}>
-						{({ props, state }) => (
+						{({ props: { onPress, ...props }, state }) => (
 							<button
+								onClick={onPress}
 								type="button"
 								{...props}
 								style={{

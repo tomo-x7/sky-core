@@ -60,7 +60,7 @@ export function RichTextTag({
 	return (
 		<Menu.Root>
 			<Menu.Trigger label={label} hint={hint}>
-				{({ props: menuProps }) => (
+				{({ props: { onPress, ...menuProps } }) => (
 					<InlineLinkText
 						to={`/hashtag/${encodeURIComponent(tag)}`}
 						// to={{
@@ -70,7 +70,7 @@ export function RichTextTag({
 						{...menuProps}
 						onPress={(e) => {
 							return createStaticClickIfUnmodified(() => {
-								menuProps.onPress();
+								onPress();
 							}).onPress(e);
 						}}
 						// onLongPress={createStaticClick(menuProps.onPress).onPress}

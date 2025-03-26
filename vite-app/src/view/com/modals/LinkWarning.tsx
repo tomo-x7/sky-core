@@ -55,8 +55,11 @@ export function Component({
 				<div style={styles.titleSection}>
 					{potentiallyMisleading ? (
 						<>
-							{/* @ts-expect-error */}
-							<FontAwesomeIcon icon="circle-exclamation" color={pal.colors.text} size={18} />
+							<FontAwesomeIcon
+								icon="circle-exclamation"
+								color={pal.colors.text} /*size={18}*/
+								size="xl"
+							/>
 							<Text
 								type="title-lg"
 								style={{

@@ -19,7 +19,6 @@ export function ProfileHeaderDisplayName({
 	return (
 		<div style={{ pointerEvents: "none" }}>
 			<Text
-				emoji
 				style={{
 					...t.atoms.text,
 					...(gtMobile ? a.text_4xl : a.text_3xl),

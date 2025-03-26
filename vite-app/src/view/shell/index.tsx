@@ -1,9 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
-import { useLocation } from "react-router-dom";
-import { FlatNavigator } from "#/Navigation";
-import { atoms as a, select, useTheme } from "#/alf";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
+import { Navigator, OutletWrapper } from "#/Navigation";
+import { atoms as a, atoms, select, useTheme } from "#/alf";
 import { Outlet as PortalOutlet } from "#/components/Portal";
 import { MutedWordsDialog } from "#/components/dialogs/MutedWords";
 import { SigninDialog } from "#/components/dialogs/Signin";
@@ -54,7 +54,14 @@ function ShellInner() {
 	return (
 		<>
 			<ErrorBoundary>
-				<FlatNavigator />
+				<main style={atoms.flex_1}>
+					<OutletWrapper />
+					<ScrollRestoration
+						getKey={(location, matches) => {
+							return location.pathname;
+						}}
+					/>
+				</main>
 			</ErrorBoundary>
 			<Composer winHeight={0} />
 			<ModalsContainer />

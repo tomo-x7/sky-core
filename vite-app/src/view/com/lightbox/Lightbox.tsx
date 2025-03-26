@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useState } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
+import type { SizeProp } from "@fortawesome/fontawesome-svg-core";
 import { Text } from "#/components/Typography";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { colors, s } from "#/lib/styles";
@@ -75,9 +76,8 @@ function LightboxInner({
 	const btnStyle = React.useMemo(() => {
 		return isTabletOrDesktop ? styles.btnTablet : styles.btnMobile;
 	}, [isTabletOrDesktop]);
-	const iconSize = React.useMemo(() => {
-		return isTabletOrDesktop ? 32 : 24;
-	}, [isTabletOrDesktop]);
+	// isTabletOrDesktop ? 32 : 34
+	const iconSize = React.useMemo<SizeProp>(() => (isTabletOrDesktop ? "3x" : "2x"), [isTabletOrDesktop]);
 
 	const img = imgs[index];
 	const isAvi = img.type === "circle-avi" || img.type === "rect-avi";
@@ -113,7 +113,6 @@ function LightboxInner({
 									...styles.blurredBackground,
 								}}
 							>
-								{/* @ts-expect-error */}
 								<FontAwesomeIcon icon="angle-left" style={styles.icon} size={iconSize} />
 							</button>
 						)}
@@ -128,7 +127,6 @@ function LightboxInner({
 									...styles.blurredBackground,
 								}}
 							>
-								{/* @ts-expect-error */}
 								<FontAwesomeIcon icon="angle-right" style={styles.icon} size={iconSize} />
 							</button>
 						)}

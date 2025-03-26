@@ -57,7 +57,18 @@ export function GalleryItem({
 			>
 				<img
 					src={image.thumb}
-					style={a.flex_1}
+					style={{
+						...a.flex_1,
+						objectPosition: "left 50% top 50%",
+						width: "100%",
+						height: "100%",
+						position: "absolute",
+						left: "0px",
+						top: "0px",
+						objectFit: "cover",
+						transitionDuration: "0ms",
+						transitionTimingFunction: "linear",
+					}}
 					onLoad={(e) => {
 						thumbDimsRef.current[index] = {
 							width: e.currentTarget.width,

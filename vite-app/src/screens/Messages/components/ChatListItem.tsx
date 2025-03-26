@@ -284,12 +284,11 @@ function ChatListItemReady({
 										}}
 									>
 										<Text
-											emoji
 											style={{
 												...a.text_md,
 												...t.atoms.text,
 												...a.font_bold,
-												...{ lineHeight: 21 },
+												...{ lineHeight: "21px" },
 												...(isDimStyle && t.atoms.text_contrast_medium),
 											}}
 										>
@@ -302,7 +301,7 @@ function ChatListItemReady({
 												<Text
 													style={{
 														...a.text_sm,
-														...{ lineHeight: 21 },
+														...{ lineHeight: "21px" },
 
 														...t.atoms.text_contrast_medium,
 
@@ -319,7 +318,7 @@ function ChatListItemReady({
 										<Text
 											style={{
 												...a.text_sm,
-												...{ lineHeight: 21 },
+												...{ lineHeight: "21px" },
 												...t.atoms.text_contrast_medium,
 												whiteSpace: "preserve nowrap",
 											}}
@@ -344,7 +343,6 @@ function ChatListItemReady({
 								)}
 
 								<Text
-									emoji
 									numberOfLines={2}
 									style={{
 										...a.text_sm,

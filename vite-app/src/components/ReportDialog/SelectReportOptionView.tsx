@@ -4,7 +4,6 @@ import React from "react";
 import { Link } from "#/components/Link";
 import { DMCA_LINK } from "#/components/ReportDialog/const";
 import { type ReportOption, useReportOptions } from "#/lib/moderation/useReportOptions";
-export { useDialogControl as useReportDialogControl } from "#/components/Dialog";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText, useButtonContext } from "#/components/Button";

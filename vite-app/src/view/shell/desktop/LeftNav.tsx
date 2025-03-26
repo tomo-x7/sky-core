@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import React, { type JSX } from "react";
 
-import { useLocation, useMatch, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { atoms as a, flatten, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import type { DialogControlProps } from "#/components/Dialog";
@@ -62,7 +62,7 @@ import { PressableWithHover } from "#/view/com/util/PressableWithHover";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { NavSignupCard } from "#/view/shell/NavSignupCard";
 import { PlatformInfo } from "../../../../modules/expo-bluesky-swiss-army";
-import { router, routes } from "../../../routes";
+import { router } from "../../../routes";
 
 const NAV_ICON_WIDTH = 28;
 
@@ -373,7 +373,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 								left: count.length === 1 ? 12 : 8,
 								backgroundColor: t.palette.primary_500,
 								color: t.palette.white,
-								lineHeight: a.text_sm.fontSize,
+								lineHeight: `${a.text_sm.fontSize}px`,
 								padding: "1px 4px",
 								minWidth: 16,
 

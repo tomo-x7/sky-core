@@ -19,21 +19,22 @@ export function Menus() {
 			>
 				<Menu.Root control={menuControl}>
 					<Menu.Trigger label="Open basic menu">
-						{({ state, props }) => {
+						{({ state, props: { onPress, ...props } }) => {
 							return (
-								<Text
-									{...props}
-									style={{
-										...a.py_sm,
-										...a.px_md,
-										...a.rounded_sm,
-										...t.atoms.bg_contrast_50,
-										...((state.hovered || state.focused || state.pressed) &&
-											t.atoms.bg_contrast_200),
-									}}
-								>
-									Open
-								</Text>
+								<button type="button" onClick={onPress} {...props}>
+									<Text
+										style={{
+											...a.py_sm,
+											...a.px_md,
+											...a.rounded_sm,
+											...t.atoms.bg_contrast_50,
+											...((state.hovered || state.focused || state.pressed) &&
+												t.atoms.bg_contrast_200),
+										}}
+									>
+										Open
+									</Text>
+								</button>
 							);
 						}}
 					</Menu.Trigger>

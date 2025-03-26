@@ -97,7 +97,7 @@ export function ProfileFollows({ name }: { name: string }) {
 			}
 			desktopFixedHeight
 			initialNumToRender={initialNumToRender}
-			windowSize={11}
+			// windowSize={11}
 			sideBorders={false}
 		/>
 	);

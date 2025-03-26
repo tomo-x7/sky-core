@@ -296,8 +296,8 @@ let EditableUserAvatar = ({
 	return (
 		<Menu.Root>
 			<Menu.Trigger label={"Edit avatar"}>
-				{({ props }) => (
-					<button type="button" {...props}>
+				{({ props: { onPress, ...props } }) => (
+					<button type="button" onClick={onPress} {...props}>
 						{avatar ? <img style={aviStyle} src={avatar} /> : <DefaultAvatar type={type} size={size} />}
 						<div
 							style={{

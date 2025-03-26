@@ -1,14 +1,12 @@
 import type { ModerationUI } from "@atproto/api";
 import React from "react";
 
-import {
-	ModerationDetailsDialog,
-	useModerationDetailsDialogControl,
-} from "#/components/moderation/ModerationDetailsDialog";
+import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
 import {
 	type ModerationCauseDescription,
 	useModerationCauseDescription,
 } from "#/lib/moderation/useModerationCauseDescription";
+import { useDialogControl } from "../Dialog";
 
 type Context = {
 	isContentVisible: boolean;
@@ -35,7 +33,7 @@ export function Outer({
 	allowOverride?: boolean;
 	modui: ModerationUI | undefined;
 }>) {
-	const control = useModerationDetailsDialogControl();
+	const control = useDialogControl();
 	const blur = modui?.blurs[0];
 	const [isContentVisible, setIsContentVisible] = React.useState(isContentVisibleInitialState || !blur);
 	const info = useModerationCauseDescription(blur);

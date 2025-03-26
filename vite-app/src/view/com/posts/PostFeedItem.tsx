@@ -42,7 +42,7 @@ import { PostMeta } from "#/view/com/util/PostMeta";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
-import { Link, TextLink, TextLinkOnWebOnly } from "../util/Link";
+import { Link, TextLink } from "../util/Link";
 
 interface FeedItemProps {
 	record: AppBskyFeedPost.Record;
@@ -295,13 +295,13 @@ let FeedItemInner = ({
 									<>
 										Reposted by{" "}
 										<ProfileHoverCard inline did={reason.by.did}>
-											<TextLinkOnWebOnly
+											<TextLink
 												type="sm-bold"
 												style={pal.textLight}
 												lineHeight={1.2}
 												numberOfLines={1}
 												text={
-													<Text emoji type="sm-bold" style={pal.textLight} lineHeight={1.2}>
+													<Text type="sm-bold" style={pal.textLight} lineHeight={1.2}>
 														{sanitizeDisplayName(
 															reason.by.displayName || sanitizeHandle(reason.by.handle),
 															moderation.ui("displayName"),
@@ -491,14 +491,14 @@ function ReplyToLabel({
 				<>
 					Reply to{" "}
 					<ProfileHoverCard inline did={profile.did}>
-						<TextLinkOnWebOnly
+						<TextLink
 							type="md"
 							style={pal.textLight}
 							lineHeight={1.2}
 							numberOfLines={1}
 							href={makeProfileLink(profile)}
 							text={
-								<Text emoji type="md" style={pal.textLight} lineHeight={1.2}>
+								<Text type="md" style={pal.textLight} lineHeight={1.2}>
 									{profile.displayName
 										? sanitizeDisplayName(profile.displayName)
 										: sanitizeHandle(profile.handle)}

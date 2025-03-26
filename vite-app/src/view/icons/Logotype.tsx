@@ -5,10 +5,9 @@ const ratio = 17 / 64;
 export function Logotype({
 	fill,
 	...rest
-}: { fill?: JSX.IntrinsicElements["svg"]["fill"] } & JSX.IntrinsicElements["svg"]) {
+}: { fill?: JSX.IntrinsicElements["svg"]["fill"] } & Omit<JSX.IntrinsicElements["svg"], "ref">) {
 	const pal = usePalette("default");
-	// @ts-expect-error it's fiiiiine
-	const size = Number.parseInt(rest.width || 32);
+	const size = Number.parseInt(String(rest.width || 32));
 
 	return (
 		<svg fill="none" viewBox="0 0 64 17" {...rest} width={size} height={Number(size) * ratio}>

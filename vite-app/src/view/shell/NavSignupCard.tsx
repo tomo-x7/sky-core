@@ -34,7 +34,7 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 					style={{
 						...a.text_3xl,
 						...a.font_heavy,
-						...{ lineHeight: a.text_3xl.fontSize },
+						...{ lineHeight: `${a.text_3xl.fontSize}px` },
 					}}
 				>
 					Join the conversation

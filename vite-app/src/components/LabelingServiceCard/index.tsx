@@ -41,7 +41,6 @@ export function Avatar({ avatar }: { avatar?: string }) {
 export function Title({ value }: { value: string }) {
 	return (
 		<Text
-			emoji
 			style={{
 				...a.text_md,
 				...a.font_bold,
@@ -59,9 +58,7 @@ export function Description({ value, handle }: { value?: string; handle: string 
 			<RichText value={value} style={a.leading_snug} />
 		</Text>
 	) : (
-		<Text emoji style={a.leading_snug}>
-			{`By ${sanitizeHandle(handle, "@")}`}
-		</Text>
+		<Text style={a.leading_snug}>{`By ${sanitizeHandle(handle, "@")}`}</Text>
 	);
 }
 

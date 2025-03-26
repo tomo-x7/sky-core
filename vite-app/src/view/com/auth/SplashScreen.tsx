@@ -8,7 +8,7 @@ import * as Layout from "#/components/Layout";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
-import { AppClipOverlay, postAppClipMessage } from "#/screens/StarterPack/StarterPackLandingScreen";
+import { AppClipOverlay } from "#/screens/StarterPack/StarterPackLandingScreen";
 import { useKawaiiMode } from "#/state/preferences/kawaii";
 import { ErrorBoundary } from "#/view/com/util/ErrorBoundary";
 import { Logo } from "#/view/icons/Logo";
@@ -32,9 +32,6 @@ export const SplashScreen = ({
 		const clip = getParams.get("clip");
 		if (clip === "true") {
 			setShowClipOverlay(true);
-			postAppClipMessage({
-				action: "present",
-			});
 		}
 	}, []);
 
@@ -56,8 +53,8 @@ export const SplashScreen = ({
 				>
 					<FontAwesomeIcon
 						icon="x"
-						//@ts-expect-error
-						size={24}
+						// size={24}
+						size="2xl"
 						style={{
 							color: String(t.atoms.text.color),
 						}}

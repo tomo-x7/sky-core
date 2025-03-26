@@ -12,7 +12,7 @@ export function PressableScale({
 	...rest
 }: {
 	targetScale?: number;
-} & JSX.IntrinsicElements["button"]) {
+} & Omit<JSX.IntrinsicElements["button"], "ref">) {
 	// const reducedMotion = useReducedMotion();
 	const reducedMotion = false;
 	const [isHover, setIsHover] = useState(false);

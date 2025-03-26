@@ -3,15 +3,14 @@ import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React, { useImperativeHandle } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
-import { FlatList, type FlatListProps } from "#/lib/flatlist";
-
-import hexRgb from "hex-rgb";
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Context } from "#/components/Dialog/context";
 import type { DialogControlProps, DialogInnerProps, DialogOuterProps } from "#/components/Dialog/types";
 import { Portal } from "#/components/Portal";
 import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Times";
+import { preventDefault, stopPropagation } from "#/lib/eventHandler";
+import { FlatList, type FlatListProps } from "#/lib/flatlist";
 import { useA11y } from "#/state/a11y";
 import { useDialogStateControlContext } from "#/state/dialogs";
 
@@ -20,13 +19,6 @@ export * from "#/components/Dialog/shared";
 export * from "#/components/Dialog/types";
 export * from "#/components/Dialog/utils";
 export { Input } from "#/components/forms/TextField";
-
-function stopPropagation<T extends { stopPropagation: () => void } = Event>(e: T) {
-	return e.stopPropagation();
-}
-function preventDefault<T extends { preventDefault: () => void } = Event>(e: T) {
-	e.preventDefault();
-}
 
 export function Outer({ children, control, onClose, webOptions }: React.PropsWithChildren<DialogOuterProps>) {
 	const { gtMobile } = useBreakpoints();
@@ -151,10 +143,9 @@ export function Inner({
 			<dialog
 				aria-label={label}
 				aria-describedby={accessibilityDescribedBy}
-				onClick={stopPropagation}
-				//@ts-expect-error
-				onStartShouldSetResponder={() => true}
-				onTouchEnd={stopPropagation}
+				onClick={stopPropagation(null)}
+				// onStartShouldSetResponder={() => true}
+				onTouchEnd={stopPropagation(null)}
 				style={{
 					...a.relative,
 					...a.rounded_md,
@@ -165,15 +156,15 @@ export function Inner({
 					maxWidth: 600,
 					borderColor: t.palette.contrast_200,
 					// TODO:2pxは適当に決めたので要チェック
-					boxShadow: `2px 2px 30px ${hexRgb(t.palette.black, { alpha: t.name === "light" ? 0.1 : 0.4, format: "css" })}`,
+					boxShadow: `2px 2px 30px ${t.palette.black}`,
 
 					...(!reduceMotionEnabled ? a.zoom_fade_in : {}),
 					...style,
 				}}
 			>
 				<DismissableLayer
-					onInteractOutside={preventDefault}
-					onFocusOutside={preventDefault}
+					onInteractOutside={preventDefault(null)}
+					onFocusOutside={preventDefault(null)}
 					onDismiss={close}
 					style={{ display: "flex", flexDirection: "column" }}
 				>

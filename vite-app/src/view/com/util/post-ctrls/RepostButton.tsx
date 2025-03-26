@@ -36,10 +36,11 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 		<EventStopper onKeyDown={false}>
 			<Menu.Root>
 				<Menu.Trigger label={"Repost or quote post"}>
-					{({ props, state }) => {
+					{({ props: { onPress, ...props }, state }) => {
 						return (
 							<button
 								type="button"
+								onClick={onPress}
 								{...props}
 								style={{
 									...a.rounded_full,

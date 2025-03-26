@@ -3,8 +3,9 @@ import type { AppBskyFeedDefs, ComAtprotoLabelDefs } from "@atproto/api";
 import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, type ButtonSize, ButtonText } from "#/components/Button";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
-import { LabelsOnMeDialog, useLabelsOnMeDialogControl } from "#/components/moderation/LabelsOnMeDialog";
+import { LabelsOnMeDialog } from "#/components/moderation/LabelsOnMeDialog";
 import { useSession } from "#/state/session";
+import { useDialogControl } from "../Dialog";
 
 export function LabelsOnMe({
 	type,
@@ -18,7 +19,7 @@ export function LabelsOnMe({
 	style?: React.CSSProperties;
 }) {
 	const { currentAccount } = useSession();
-	const control = useLabelsOnMeDialogControl();
+	const control = useDialogControl();
 
 	if (!labels || !currentAccount) {
 		return null;

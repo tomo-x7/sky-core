@@ -175,7 +175,6 @@ export function Takendown() {
 												onChangeText={setReason}
 												placeholder={"Why are you appealing?"}
 												multiline
-												// @ts-expect-error
 												numberOfLines={5}
 												autoFocus
 												style={{ paddingBottom: 40, minHeight: 150 }}

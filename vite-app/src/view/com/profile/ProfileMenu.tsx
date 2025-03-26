@@ -174,7 +174,7 @@ let ProfileMenu = ({
 	}, [profile.did]);
 
 	const onPressSearch = React.useCallback(() => {
-		navigate(`/profile${profile.handle}/search`);
+		navigate(`/profile/${profile.handle}/search`);
 	}, [navigate, profile.handle]);
 
 	return (

@@ -90,7 +90,7 @@ export function LikedByList({ uri }: { uri: string }) {
 			}
 			onEndReachedThreshold={3}
 			initialNumToRender={initialNumToRender}
-			windowSize={11}
+			// windowSize={11}
 			sideBorders={false}
 		/>
 	);

@@ -9,7 +9,6 @@ import { useTheme as useTheme2 } from "#/lib/ThemeContext";
  */
 export function Text({
 	children,
-	emoji,
 	style,
 	selectable,
 	title,
@@ -17,6 +16,8 @@ export function Text({
 	onLayout,
 	type = "md",
 	ellipsizeMode,
+	numberOfLines,
+	lineHeight,
 	...rest
 }: TextProps) {
 	//TODO numberOfLines,lineHeight,ellipsizeModeの実装
@@ -24,7 +25,13 @@ export function Text({
 	const t = useTheme();
 	const t2 = useTheme2();
 	const s = normalizeTextStyles(
-		{ ...atoms.text_sm, ...t.atoms.text, ...t2.typography[type], ...style },
+		{
+			...atoms.text_sm,
+			...t.atoms.text,
+			...t2.typography[type],
+			wordBreak: "break-word",
+			...style,
+		},
 		{
 			fontScale: fonts.scaleMultiplier,
 			fontFamily: fonts.family,
@@ -32,9 +39,10 @@ export function Text({
 		},
 	);
 	const ref = useOnLayout(onLayout);
+	s.lineHeight = lineHeight ? lineHeight : "20px";
 
 	const shared = {
-		uiTextView: true,
+		// uiTextView: true,
 		selectable,
 		style: s,
 		dataset: Object.assign({ tooltip: title }, dataset || {}),
@@ -42,8 +50,8 @@ export function Text({
 	};
 
 	return (
-		<div ref={ref} {...shared}>
-			{renderChildrenWithEmoji(children, shared, emoji ?? false)}
+		<div className="text" ref={ref} {...shared}>
+			{renderChildrenWithEmoji(children)}
 		</div>
 	);
 }

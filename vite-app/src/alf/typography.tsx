@@ -43,10 +43,10 @@ export function normalizeTextStyles(
 	if (s?.lineHeight) {
 		const lh = Number.parseFloat(String(s.lineHeight));
 		if (!Number.isNaN(lh) && lh !== 0 && lh <= 2) {
-			s.lineHeight = Math.round(s.fontSize * lh);
+			s.lineHeight = `${Math.round(s.fontSize * lh)}px`;
 		}
 	} else {
-		s.lineHeight = s.fontSize;
+		s.lineHeight = `${Number.parseFloat(String(s.fontSize))}px`;
 	}
 
 	applyFonts(s, fontFamily);
@@ -59,6 +59,7 @@ export type TextProps = {
 	style?: React.CSSProperties;
 	type?: TypographyVariant;
 	children?: React.ReactNode;
+	/**@deprecated 未実装 */
 	numberOfLines?: number;
 	onLayout?: (rect: DOMRect) => void;
 	lineHeight?: number;
@@ -77,13 +78,7 @@ export type TextProps = {
 	 * Appears as a small tooltip on web hover.
 	 */
 	title?: string;
-	/**
-	 * Whether the children could possibly contain emoji.
-	 */
-	emoji?: boolean;
 };
-
-const EMOJI = createEmojiRegex();
 
 export function childHasEmoji(children: React.ReactNode) {
 	let hasEmoji = false;
@@ -95,7 +90,7 @@ export function childHasEmoji(children: React.ReactNode) {
 	return hasEmoji;
 }
 
-export function renderChildrenWithEmoji(children: React.ReactNode, props: Omit<TextProps, "children">, emoji: boolean) {
+export function renderChildrenWithEmoji(children: React.ReactNode) {
 	return children;
 }
 

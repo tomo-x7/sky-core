@@ -291,7 +291,10 @@ input[type="range"][orient="vertical"]::-moz-range-thumb {
 	margin-left: -6px;
 }
 
-* {
+div,
+button,
+a,
+nav {
 	align-items: stretch;
 	background-color: rgba(0, 0, 0, 0);
 	border: 0px solid black;
@@ -309,4 +312,20 @@ input[type="range"][orient="vertical"]::-moz-range-thumb {
 	text-decoration: none;
 	z-index: 0;
 }
-style,script,title,link,meta,head{display: none;}
+
+.text {
+	background-color: rgba(0, 0, 0, 0);
+	border: 0px solid black;
+	box-sizing: border-box;
+	color: rgb(0, 0, 0);
+	display: inline;
+	font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	text-align: start;
+	text-decoration: none;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}

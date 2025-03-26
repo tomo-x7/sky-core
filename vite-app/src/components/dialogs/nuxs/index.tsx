@@ -84,7 +84,6 @@
 // 	}, [activeNux]);
 
 // 	if (__DEV__ && typeof window !== "undefined") {
-// 		// @ts-expect-error
 // 		window.clearNuxDialog = (id: Nux) => {
 // 			if (!__DEV__ || !id) return;
 // 			resetNuxs([id]);

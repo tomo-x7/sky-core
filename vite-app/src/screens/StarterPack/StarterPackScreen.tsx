@@ -434,8 +434,8 @@ function Header({
 						>
 							<FontAwesomeIcon
 								icon="arrow-trend-up"
-								//@ts-expect-error
-								size={12}
+								// size={12}
+								size="xl"
 								color={t.atoms.text_contrast_medium.color}
 							/>
 							<Text

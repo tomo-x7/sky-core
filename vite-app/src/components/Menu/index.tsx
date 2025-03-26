@@ -54,10 +54,10 @@ export function Root({
 	);
 	const onOpenChange = React.useCallback(
 		(open: boolean) => {
-			if (context.control.isOpen && !open) {
+			if (context.control?.isOpen && !open) {
 				context.control.close();
-			} else if (!context.control.isOpen && open) {
-				context.control.open();
+			} else if (!context.control?.isOpen && open) {
+				context.control?.open();
 			}
 		},
 		[context.control],
@@ -65,7 +65,7 @@ export function Root({
 
 	return (
 		<Context.Provider value={context}>
-			{context.control.isOpen && (
+			{context.control?.isOpen && (
 				<Portal>
 					<button
 						type="button"
@@ -74,12 +74,12 @@ export function Root({
 							...a.inset_0,
 							...a.z_50,
 						}}
-						onClick={() => context.control.close()}
+						onClick={() => context.control?.close()}
 						aria-label="Context menu backdrop, click to close the menu."
 					/>
 				</Portal>
 			)}
-			<DropdownMenu.Root open={context.control.isOpen} onOpenChange={onOpenChange}>
+			<DropdownMenu.Root open={context.control?.isOpen} onOpenChange={onOpenChange}>
 				{children}
 			</DropdownMenu.Root>
 		</Context.Provider>
@@ -94,7 +94,7 @@ const RadixTriggerPassThrough = React.forwardRef<
 >((props, ref) => {
 	return props.children({
 		...props,
-		ref: ref as React.RefObject<any>,
+		ref: ref,
 	});
 });
 RadixTriggerPassThrough.displayName = "RadixTriggerPassThrough";
@@ -110,7 +110,7 @@ export function Trigger({ children, label, hint }: TriggerProps) {
 				{(props) =>
 					children({
 						isNative: false,
-						control,
+						control: control!,
 						state: {
 							hovered,
 							focused,
@@ -127,10 +127,10 @@ export function Trigger({ children, label, hint }: TriggerProps) {
 									return;
 								}
 								// Compensate for the disabled onPointerDown above by triggering it manually.
-								if (control.isOpen) {
+								if (control?.isOpen) {
 									control.close();
 								} else {
-									control.open();
+									control?.open();
 								}
 							},
 							onFocus: onFocus,
@@ -217,7 +217,7 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 					 * @see https://www.radix-ui.com/primitives/docs/components/dropdown-menu#item
 					 */
 					if (!e.defaultPrevented) {
-						control.close();
+						control?.close();
 					}
 				}}
 				onFocus={onFocus}

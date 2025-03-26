@@ -50,7 +50,7 @@ export function AboutSettingsScreen() {
 						// 	Toast.show(newDevModeEnabled ? "Developer mode enabled" : "Developer mode disabled");
 						// }}
 						// onPress={() => {
-						// 	new Clipboard().writeText(
+						// 	navigator.clipboard.writeText(
 						// 		`Build version: ${appVersion}; Bundle info: ${bundleInfo}; Bundle date: ${BUNDLE_DATE}; Platform: ${Platform.OS}; Platform version: ${Platform.Version};`,
 						// 	);
 						// 	Toast.show("Copied build version to clipboard");

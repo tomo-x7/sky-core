@@ -150,12 +150,10 @@ function AccountItem({
 							...a.py_sm,
 						}}
 					>
-						<Text emoji style={a.font_bold}>
+						<Text style={a.font_bold}>
 							{sanitizeDisplayName(profile?.displayName || profile?.handle || account.handle)}
 						</Text>{" "}
-						<Text emoji style={t.atoms.text_contrast_medium}>
-							{sanitizeHandle(account.handle)}
-						</Text>
+						<Text style={t.atoms.text_contrast_medium}>{sanitizeHandle(account.handle)}</Text>
 					</Text>
 					{isCurrentAccount ? (
 						<Check

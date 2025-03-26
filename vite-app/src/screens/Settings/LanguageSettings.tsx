@@ -45,14 +45,11 @@ export function LanguageSettingsScreen() {
 	);
 
 	const myLanguages = useMemo(() => {
-		return (
-			langPrefs.contentLanguages
-				.map((lang) => LANGUAGES.find((l) => l.code2 === lang))
-				.filter(Boolean)
-				// @ts-expect-error
-				.map((l) => languageName(l, langPrefs.appLanguage))
-				.join(", ")
-		);
+		return langPrefs.contentLanguages
+			.map((lang) => LANGUAGES.find((l) => l.code2 === lang))
+			.filter(Boolean)
+			.map((l) => languageName(l!, langPrefs.appLanguage))
+			.join(", ");
 	}, [langPrefs.appLanguage, langPrefs.contentLanguages]);
 
 	return (
@@ -123,7 +120,7 @@ export function LanguageSettingsScreen() {
 											flex: 1,
 											width: "100%",
 											cursor: "pointer",
-											// @ts-expect-error web only
+											// @ ts-expect-error web only
 											"-moz-appearance": "none",
 											"-webkit-appearance": "none",
 											appearance: "none",
@@ -259,7 +256,7 @@ export function LanguageSettingsScreen() {
 											flex: 1,
 											width: "100%",
 											cursor: "pointer",
-											// @ts-expect-error web only
+											// @ ts-expect-error web only
 											"-moz-appearance": "none",
 											"-webkit-appearance": "none",
 											appearance: "none",

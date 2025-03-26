@@ -1,8 +1,8 @@
-if ("scrollRestoration" in history) {
-	// Tell the brower not to mess with the scroll.
-	// We're doing that manually below.
-	history.scrollRestoration = "manual";
-}
+// if ("scrollRestoration" in history) {
+// 	// Tell the brower not to mess with the scroll.
+// 	// We're doing that manually below.
+// 	history.scrollRestoration = "manual";
+// }
 
 // function createInitialScrollState() {
 // 	return {

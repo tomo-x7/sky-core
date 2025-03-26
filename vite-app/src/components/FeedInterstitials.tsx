@@ -2,7 +2,7 @@ import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
 import { InlineLinkText } from "#/components/Link";
@@ -20,7 +20,6 @@ import { useSession } from "#/state/session";
 import * as userActionHistory from "#/state/userActionHistory";
 import type { SeenPost } from "#/state/userActionHistory";
 import type * as bsky from "#/types/bsky";
-import { BlockDrawerGesture } from "#/view/shell/BlockDrawerGesture";
 import { ProgressGuideList } from "./ProgressGuide/List";
 
 const MOBILE_CARD_WIDTH = 300;
@@ -231,10 +230,9 @@ function ProfileGrid({
 				<ProfileCard.Link
 					key={profile.did}
 					profile={profile}
-					//@ts-expect-error
 					style={{
 						...a.flex_1,
-						...(gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]),
+						...flatten(gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]),
 					}}
 				>
 					{({ hovered, pressed }) => (
@@ -309,62 +307,60 @@ function ProfileGrid({
 					</div>
 				</div>
 			) : (
-				<BlockDrawerGesture>
+				<div
+				// ScrollView from react-native-gesture-handler
+				// horizontal
+				// showsHorizontalScrollIndicator={false}
+				// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
+				// decelerationRate="fast"
+				>
 					<div
-					// ScrollView from react-native-gesture-handler
-					// horizontal
-					// showsHorizontalScrollIndicator={false}
-					// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
-					// decelerationRate="fast"
+						style={{
+							...a.px_lg,
+							...a.pt_sm,
+							...a.pb_lg,
+							...a.flex_row,
+							...a.gap_md,
+						}}
 					>
-						<div
-							style={{
-								...a.px_lg,
-								...a.pt_sm,
-								...a.pb_lg,
-								...a.flex_row,
-								...a.gap_md,
+						{content}
+
+						<Button
+							label={"Browse more accounts on the Explore page"}
+							onPress={() => {
+								navigate("/search");
 							}}
 						>
-							{content}
-
-							<Button
-								label={"Browse more accounts on the Explore page"}
-								onPress={() => {
-									navigate("/search");
-								}}
-							>
-								<CardOuter style={{ ...a.flex_1, borderWidth: 0 }}>
+							<CardOuter style={{ ...a.flex_1, borderWidth: 0 }}>
+								<div
+									style={{
+										...a.flex_1,
+										...a.justify_center,
+									}}
+								>
 									<div
 										style={{
-											...a.flex_1,
-											...a.justify_center,
+											...a.flex_row,
+											...a.px_lg,
 										}}
 									>
-										<div
+										<Text
 											style={{
-												...a.flex_row,
-												...a.px_lg,
+												...a.pr_xl,
+												...a.flex_1,
+												...a.leading_snug,
 											}}
 										>
-											<Text
-												style={{
-													...a.pr_xl,
-													...a.flex_1,
-													...a.leading_snug,
-												}}
-											>
-												Browse more suggestions on the Explore page
-											</Text>
+											Browse more suggestions on the Explore page
+										</Text>
 
-											<Arrow size="xl" />
-										</div>
+										<Arrow size="xl" />
 									</div>
-								</CardOuter>
-							</Button>
-						</div>
+								</div>
+							</CardOuter>
+						</Button>
 					</div>
-				</BlockDrawerGesture>
+				</div>
 			)}
 		</div>
 	);
@@ -478,63 +474,61 @@ export function SuggestedFeeds() {
 					</div>
 				</div>
 			) : (
-				<BlockDrawerGesture>
+				<div
+				// ScrollView from react-native-gesture-handler
+				// horizontal
+				// showsHorizontalScrollIndicator={false}
+				// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
+				// decelerationRate="fast"
+				>
 					<div
-					// ScrollView from react-native-gesture-handler
-					// horizontal
-					// showsHorizontalScrollIndicator={false}
-					// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
-					// decelerationRate="fast"
+						style={{
+							...a.px_lg,
+							...a.pt_md,
+							...a.pb_xl,
+							...a.flex_row,
+							...a.gap_md,
+						}}
 					>
-						<div
-							style={{
-								...a.px_lg,
-								...a.pt_md,
-								...a.pb_xl,
-								...a.flex_row,
-								...a.gap_md,
-							}}
-						>
-							{content}
+						{content}
 
-							<Button
-								label={"Browse more feeds on the Explore page"}
-								onPress={() => {
-									navigate("/search");
-								}}
-								style={a.flex_col}
-							>
-								<CardOuter style={a.flex_1}>
+						<Button
+							label={"Browse more feeds on the Explore page"}
+							onPress={() => {
+								navigate("/search");
+							}}
+							style={a.flex_col}
+						>
+							<CardOuter style={a.flex_1}>
+								<div
+									style={{
+										...a.flex_1,
+										...a.justify_center,
+									}}
+								>
 									<div
 										style={{
-											...a.flex_1,
-											...a.justify_center,
+											...a.flex_row,
+											...a.px_lg,
 										}}
 									>
-										<div
+										<Text
 											style={{
-												...a.flex_row,
-												...a.px_lg,
+												...a.pr_xl,
+												...a.flex_1,
+												...a.leading_snug,
 											}}
 										>
-											<Text
-												style={{
-													...a.pr_xl,
-													...a.flex_1,
-													...a.leading_snug,
-												}}
-											>
-												Browse more suggestions on the Explore page
-											</Text>
+											Browse more suggestions on the Explore page
+										</Text>
 
-											<Arrow size="xl" />
-										</div>
+										<Arrow size="xl" />
 									</div>
-								</CardOuter>
-							</Button>
-						</div>
+								</div>
+							</CardOuter>
+						</Button>
 					</div>
-				</BlockDrawerGesture>
+				</div>
 			)}
 		</div>
 	);

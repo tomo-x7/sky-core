@@ -13,8 +13,8 @@ export function LinearGradientBackground({
 	style?: React.CSSProperties;
 	gradient?: keyof typeof gradients;
 	children?: React.ReactNode;
-	start?: [number, number];
-	end?: [number, number];
+	start?: { x: number; y: number };
+	end?: { x: number; y: number };
 }) {
 	const colors = gradients[gradient].values.map(([_, color]) => {
 		return color;
@@ -23,7 +23,6 @@ export function LinearGradientBackground({
 	assertValidColors(colors);
 
 	return (
-		// @ts-expect-error
 		<LinearGradient colors={colors} style={style} start={start} end={end}>
 			{children}
 		</LinearGradient>

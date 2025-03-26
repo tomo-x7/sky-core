@@ -1,10 +1,7 @@
-// @ts-expect-error no decl -prf
-import * as findLast from "array.prototype.findlast";
+// import * as findLast from "array.prototype.findlast";
 /// <reference lib="dom" />
 
-findLast.shim();
-// @ts-expect-error
-window.setImmediate = (cb: () => void) => setTimeout(cb, 0);
+// findLast.shim();
 
 // if (process.env.NODE_ENV !== "production") {
 // 	// In development, react-native-web's <View> tries to validate that

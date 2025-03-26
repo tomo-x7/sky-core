@@ -57,7 +57,6 @@ export function RichText({
 				Number.parseFloat(String(flattenedStyle?.fontSize ?? a.text_sm.fontSize)) * emojiMultiplier;
 			return (
 				<Text
-					emoji
 					selectable={selectable}
 					style={{
 						...flatten(plainStyles),
@@ -73,7 +72,6 @@ export function RichText({
 		}
 		return (
 			<Text
-				emoji
 				selectable={selectable}
 				style={flatten(plainStyles)}
 				numberOfLines={numberOfLines}
@@ -100,8 +98,7 @@ export function RichText({
 						selectable={selectable}
 						to={`/profile/${mention.did}`}
 						style={flatten(interactiveStyles)}
-						// @ts-expect-error TODO
-						dataset={WORD_WRAP}
+						// dataset={WORD_WRAP} //TODO
 						shouldProxy={shouldProxyLinks}
 						onPress={onLinkPress}
 					>
@@ -119,12 +116,9 @@ export function RichText({
 						key={key}
 						to={link.uri}
 						style={flatten(interactiveStyles)}
-						// @ts-expect-error TODO
-						dataset={WORD_WRAP}
-						shareOnLongPress
+						// dataset={WORD_WRAP} //TODO
 						shouldProxy={shouldProxyLinks}
 						onPress={onLinkPress}
-						emoji
 					>
 						{toShortUrl(segment.text)}
 					</InlineLinkText>,
@@ -148,7 +142,6 @@ export function RichText({
 
 	return (
 		<Text
-			emoji
 			selectable={selectable}
 			style={flatten(plainStyles)}
 			numberOfLines={numberOfLines}

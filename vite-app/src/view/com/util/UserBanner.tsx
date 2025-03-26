@@ -85,8 +85,8 @@ export function UserBanner({
 		<EventStopper onKeyDown={true}>
 			<Menu.Root>
 				<Menu.Trigger label={"Edit avatar"}>
-					{({ props }) => (
-						<button type="button" {...props}>
+					{({ props: { onPress, ...props } }) => (
+						<button type="button" onClick={onPress} {...props}>
 							{banner ? (
 								<img style={styles.bannerImage} src={banner} />
 							) : (

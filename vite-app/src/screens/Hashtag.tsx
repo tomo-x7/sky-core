@@ -203,7 +203,7 @@ function HashtagScreenTab({
 						/>
 					}
 					initialNumToRender={initialNumToRender}
-					windowSize={11}
+					// windowSize={11}
 				/>
 			)}
 		</>

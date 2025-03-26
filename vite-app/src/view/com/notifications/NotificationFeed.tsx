@@ -147,7 +147,7 @@ export function NotificationFeed({
 				contentContainerStyle={s.contentContainer}
 				desktopFixedHeight
 				initialNumToRender={initialNumToRender}
-				windowSize={11}
+				// windowSize={11}
 				sideBorders={false}
 				removeClippedSubviews={true}
 			/>

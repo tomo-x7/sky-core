@@ -58,7 +58,7 @@ export function ProfileHoverCard(props: ProfileHoverCardProps) {
 		return props.children;
 	} else {
 		return (
-			<div onPointerMove={onPointerMove} style={a.flex_shrink}>
+			<div className="text" onPointerMove={onPointerMove} style={{ ...a.flex_shrink }}>
 				<ProfileHoverCardInner {...props} />
 			</div>
 		);
@@ -293,7 +293,7 @@ function ProfileHoverCardInner(props: ProfileHoverCardProps) {
 			onPointerMove={onPointerMoveTarget}
 			onPointerLeave={onPointerLeaveTarget}
 			onMouseUp={onPress}
-			style={{ flexShrink: 1 }}
+			style={{ flexShrink: 1, display: "inline" }}
 		>
 			{props.children}
 			{isVisible && (

@@ -18,8 +18,11 @@ export interface CameraOpts {
 	freeStyleCropEnabled?: boolean;
 	cropperCircleOverlay?: boolean;
 }
-// @ts-expect-error
-export type CropperOptions = Parameters<typeof openCropper>[0] & {
+// export type CropperOptions = Parameters<typeof openCropper>[0] & {
+// 	webAspectRatio?: number;
+// 	webCircularCrop?: boolean;
+// };
+export type CropperOptions = {
 	webAspectRatio?: number;
 	webCircularCrop?: boolean;
-};
+} & any;

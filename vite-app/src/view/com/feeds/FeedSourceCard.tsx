@@ -170,8 +170,7 @@ export function FeedSourceCardLoaded({
 						// hitSlop={15}
 						style={styles.btn}
 					>
-						{/* @ts-expect-error */}
-						<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
+						<FontAwesomeIcon icon={["far", "trash-can"]} /*size={19}*/ size="xl" color={pal.colors.icon} />
 					</button>
 				)}
 			</div>
@@ -226,7 +225,6 @@ export function FeedSourceCardLoaded({
 					</div>
 					<div style={styles.headerTextContainer}>
 						<Text
-							emoji
 							style={{
 								...pal.text,
 								...s.bold,
@@ -255,11 +253,13 @@ export function FeedSourceCardLoaded({
 								style={styles.btn}
 							>
 								{isSaved ? (
-									//@ts-expect-error
-									<FontAwesomeIcon icon={["far", "trash-can"]} size={19} color={pal.colors.icon} />
+									<FontAwesomeIcon
+										icon={["far", "trash-can"]} /*size={19}*/
+										size="xl"
+										color={pal.colors.icon}
+									/>
 								) : (
-									//@ts-expect-error
-									<FontAwesomeIcon icon="plus" size={18} color={pal.colors.link} />
+									<FontAwesomeIcon icon="plus" /*size={18}*/ size="xl" color={pal.colors.link} />
 								)}
 							</button>
 						</div>

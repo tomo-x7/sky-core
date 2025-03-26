@@ -48,7 +48,6 @@ export function ProfileHeaderHandle({
 				</div>
 			) : undefined}
 			<Text
-				emoji
 				numberOfLines={1}
 				style={{
 					...flatten(

@@ -91,7 +91,6 @@ export function ProfileCard({
 				</div>
 				<div style={styles.layoutContent}>
 					<Text
-						emoji
 						type="lg"
 						style={{
 							...s.bold,
@@ -106,7 +105,7 @@ export function ProfileCard({
 							moderation.ui("displayName"),
 						)}
 					</Text>
-					<Text emoji type="md" style={pal.textLight} numberOfLines={1}>
+					<Text type="md" style={pal.textLight} numberOfLines={1}>
 						{sanitizeHandle(profile.handle, "@")}
 					</Text>
 					<ProfileCardPills followedBy={!!profile.viewer?.followedBy} moderation={moderation} />
@@ -119,7 +118,7 @@ export function ProfileCard({
 			{hasDescription || knownFollowersVisible ? (
 				<div style={styles.details}>
 					{hasDescription && profile.description ? (
-						<Text emoji style={pal.text} numberOfLines={4}>
+						<Text style={pal.text} numberOfLines={4}>
 							{profile.description as string}
 						</Text>
 					) : null}

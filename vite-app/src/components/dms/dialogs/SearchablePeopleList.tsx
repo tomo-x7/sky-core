@@ -14,6 +14,7 @@ import { TimesLarge_Stroke2_Corner0_Rounded as X } from "#/components/icons/Time
 import { usePlaceholderStyle } from "#/lib/placeholderStyle";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
+import { hasOwn } from "#/lib/util";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useActorAutocompleteQuery } from "#/state/queries/actor-autocomplete";
 import { useListConvosQuery } from "#/state/queries/messages/list-conversations";
@@ -89,8 +90,7 @@ export function SearchablePeopleList({
 				}
 
 				_items = _items.sort((item) => {
-					// @ts-expect-error
-					return item.enabled ? -1 : 1;
+					return hasOwn(item, "enabled") && item.enabled ? -1 : 1;
 				});
 			}
 		} else {
@@ -141,8 +141,7 @@ export function SearchablePeopleList({
 
 					// only sort follows
 					followsItems = followsItems.sort((item) => {
-						// @ts-expect-error
-						return item.enabled ? -1 : 1;
+						return hasOwn(item, "enabled") && item.enabled ? -1 : 1;
 					});
 
 					// then append
@@ -163,8 +162,7 @@ export function SearchablePeopleList({
 				}
 
 				_items = _items.sort((item) => {
-					// @ts-expect-error
-					return item.enabled ? -1 : 1;
+					return hasOwn(item, "enabled") && item.enabled ? -1 : 1;
 				});
 			} else {
 				_items.push(...placeholders);
@@ -282,8 +280,7 @@ export function SearchablePeopleList({
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
-			//@ts-expect-error
-			style={[a.py_0, { height: "100vh", maxHeight: 600 }, a.px_0]}
+			style={{ ...a.py_0, height: "100vh", maxHeight: 600, ...a.px_0 }}
 			webInnerContentContainerStyle={a.py_0}
 			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
 			scrollIndicatorInsets={{ top: headerHeight }}
@@ -356,7 +353,6 @@ function ProfileCard({
 								...a.self_start,
 							}}
 							numberOfLines={1}
-							emoji
 						>
 							{displayName}
 						</Text>

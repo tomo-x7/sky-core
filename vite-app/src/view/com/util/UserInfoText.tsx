@@ -7,7 +7,7 @@ import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
 import { STALE } from "#/state/queries";
 import { useProfileQuery } from "#/state/queries/profile";
-import { TextLinkOnWebOnly } from "./Link";
+import { TextLink } from "./Link";
 import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 export function UserInfoText({
@@ -43,14 +43,14 @@ export function UserInfoText({
 		);
 	} else if (profile) {
 		inner = (
-			<TextLinkOnWebOnly
+			<TextLink
 				type={type}
 				style={style}
 				lineHeight={1.2}
 				numberOfLines={1}
 				href={makeProfileLink(profile)}
 				text={
-					<Text emoji type={type} style={{ ...style, lineHeight: 1.2 }} /*lineHeight={1.2}*/>
+					<Text type={type} style={{ ...style, lineHeight: 1.2 }} /*lineHeight={1.2}*/>
 						{`${prefix || ""}${sanitizeDisplayName(
 							typeof profile[attr] === "string" && profile[attr]
 								? (profile[attr] as string)

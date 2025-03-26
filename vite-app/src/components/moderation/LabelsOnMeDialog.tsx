@@ -17,8 +17,6 @@ import * as Toast from "#/view/com/util/Toast";
 import { Divider } from "../Divider";
 import { Loader } from "../Loader";
 
-export { useDialogControl as useLabelsOnMeDialogControl } from "#/components/Dialog";
-
 export interface LabelsOnMeDialogProps {
 	control: Dialog.DialogOuterProps["control"];
 	labels: ComAtprotoLabelDefs.Label[];
@@ -144,7 +142,6 @@ function Label({
 					}}
 				>
 					<Text
-						emoji
 						style={{
 							...a.font_bold,
 							...a.text_md,
@@ -153,7 +150,6 @@ function Label({
 						{strings.name}
 					</Text>
 					<Text
-						emoji
 						style={{
 							...t.atoms.text_contrast_medium,
 							...a.leading_snug,
@@ -329,7 +325,6 @@ function AppealForm({
 					value={details}
 					onChangeText={setDetails}
 					autoFocus={true}
-					// @ts-expect-error
 					numberOfLines={3}
 					multiline
 					maxLength={300}

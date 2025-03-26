@@ -321,7 +321,6 @@ let PostThreadItemLoaded = ({
 						<div style={a.flex_1}>
 							<Link style={s.flex1} href={authorHref} title={authorTitle}>
 								<Text
-									emoji
 									style={{
 										...a.text_lg,
 										...a.font_bold,
@@ -338,7 +337,6 @@ let PostThreadItemLoaded = ({
 							</Link>
 							<Link style={s.flex1} href={authorHref} title={authorTitle}>
 								<Text
-									emoji
 									style={{
 										...a.text_md,
 										...a.leading_snug,

@@ -106,7 +106,7 @@ export function useSharedInputStyles() {
 	}, [t]);
 }
 
-export type InputProps = Omit<JSX.IntrinsicElements["input"], "value" | "onChangeText"> & {
+export type InputProps = Omit<JSX.IntrinsicElements["input"], "value" | "onChangeText" | "ref"> & {
 	label: string;
 	/**
 	 * @deprecated Controlled inputs are *strongly* discouraged. Use `defaultValue` instead where possible.
@@ -123,6 +123,8 @@ export type InputProps = Omit<JSX.IntrinsicElements["input"], "value" | "onChang
 	onSubmitEditing?: () => void;
 	blurOnSubmit?: boolean;
 	enablesReturnKeyAutomatically?: boolean;
+	/**@deprecated 未実装 */
+	numberOfLines?: number;
 };
 
 export function Input({
@@ -139,7 +141,9 @@ export function Input({
 	type = "text",
 	onSubmitEditing,
 	blurOnSubmit = true,
-	enablesReturnKeyAutomatically = false,disabled,
+	enablesReturnKeyAutomatically = false,
+	disabled,
+	numberOfLines,
 	...rest
 }: InputProps) {
 	const t = useTheme();
@@ -163,7 +167,7 @@ export function Input({
 					onSubmitEditing={onSubmitEditing}
 					blurOnSubmit={blurOnSubmit}
 					enablesReturnKeyAutomatically={enablesReturnKeyAutomatically}
-					disabled={disabled??false}
+					disabled={disabled ?? false}
 					{...rest}
 				/>
 			</Root>
@@ -231,7 +235,7 @@ export function Input({
 						onSubmitEditing?.();
 					}
 				}}
-				disabled={disabled }//|| (enablesReturnKeyAutomatically && val === "")}
+				disabled={disabled} //|| (enablesReturnKeyAutomatically && val === "")}
 			/>
 			<div
 				style={{

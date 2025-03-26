@@ -10,7 +10,7 @@ export async function shareUrl(url: string) {
 	//TODO: Web Share APIに対応している場合はそれを使う
 	// React Native Share is not supported by web. Web Share API
 	// has increasing but not full support, so default to clipboard
-	await new Clipboard().writeText(url);
+	await navigator.clipboard.writeText(url);
 	Toast.show("Copied to clipboard", "clipboard-check");
 }
 
@@ -23,6 +23,6 @@ export async function shareUrl(url: string) {
  */
 export async function shareText(text: string) {
 	//TODO: Web Share APIに対応している場合はそれを使う
-	await new Clipboard().writeText(text);
+	await navigator.clipboard.writeText(text);
 	Toast.show("Copied to clipboard", "clipboard-check");
 }

@@ -32,8 +32,7 @@ export function useAccountSwitcher() {
 				}
 			} catch (e) {
 				console.error("switch account: selectAccount failed", {
-					//@ts-expect-error
-					message: e.message,
+					message: (e as Error).message,
 				});
 				requestSwitchToAccount({ requestedAccount: account.did });
 				Toast.show(`Please sign in as @${account.handle}`, "circle-exclamation");

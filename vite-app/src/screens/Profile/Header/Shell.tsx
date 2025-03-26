@@ -105,14 +105,13 @@ let ProfileHeaderShell = ({
 								onClick={onPressBack}
 								// TODO
 								// hitSlop={BACK_HITSLOP}
+								style={{
+									...styles.backBtnWrapper,
+									top: 10,
+									pointerEvents: "auto",
+								}}
 							>
-								<div
-									style={{
-										...styles.backBtnWrapper,
-										top: 10,
-										pointerEvents: "auto",
-									}}
-								>
+								<div>
 									<ArrowLeftIcon size="lg" fill="white" />
 								</div>
 							</button>
@@ -177,6 +176,7 @@ const styles = {
 	backBtnWrapper: {
 		position: "absolute",
 		left: 10,
+		top: 10,
 		width: 30,
 		height: 30,
 		overflow: "hidden",

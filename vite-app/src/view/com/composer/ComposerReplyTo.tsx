@@ -65,12 +65,12 @@ export function ComposerReplyTo({ replyTo }: { replyTo: ComposerOptsPostRef }) {
 				disableNavigation={true}
 			/>
 			<div style={styles.replyToPost}>
-				<Text type="xl-medium" style={t.atoms.text} numberOfLines={1} emoji>
+				<Text type="xl-medium" style={t.atoms.text} numberOfLines={1}>
 					{sanitizeDisplayName(replyTo.author.displayName || sanitizeHandle(replyTo.author.handle))}
 				</Text>
 				<div style={styles.replyToBody}>
 					<div style={styles.replyToText}>
-						<Text type="post-text" style={t.atoms.text} numberOfLines={!showFull ? 6 : undefined} emoji>
+						<Text type="post-text" style={t.atoms.text} numberOfLines={!showFull ? 6 : undefined}>
 							{replyTo.text}
 						</Text>
 					</div>

@@ -47,7 +47,7 @@ export let MessageMenu = ({
 			true,
 		);
 
-		new Clipboard().writeText(str);
+		navigator.clipboard.writeText(str);
 		Toast.show("Copied to clipboard", "clipboard-check");
 	}, [message.text, message.facets]);
 
@@ -69,9 +69,10 @@ export let MessageMenu = ({
 			<Menu.Root control={control}>
 				<div style={{ opacity: triggerOpacity }}>
 					<Menu.Trigger label={"Chat settings"}>
-						{({ props, state }) => (
+						{({ props: { onPress, ...props }, state }) => (
 							<button
 								type="button"
+								onClick={onPress}
 								{...props}
 								style={{
 									...a.p_sm,

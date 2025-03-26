@@ -41,9 +41,9 @@ export function createSuggestion({
 						return;
 					}
 
-					// @ts-expect-error getReferenceClientRect doesnt like that clientRect can return null -prf
+					// getReferenceClientRect doesnt like that clientRect can return null -prf
 					popup = tippy("body", {
-						getReferenceClientRect: props.clientRect,
+						getReferenceClientRect: () => props.clientRect?.()!,
 						appendTo: () => document.body,
 						content: component.element,
 						showOnCreate: true,
@@ -61,8 +61,8 @@ export function createSuggestion({
 					}
 
 					popup?.[0]?.setProps({
-						// @ts-expect-error getReferenceClientRect doesnt like that clientRect can return null -prf
-						getReferenceClientRect: props.clientRect,
+						// getReferenceClientRect doesnt like that clientRect can return null -prf
+						getReferenceClientRect: () => props.clientRect?.()!,
 					});
 				},
 
@@ -178,7 +178,7 @@ const MentionList = forwardRef<MentionListRef, SuggestionProps>(function Mention
 										size={26}
 										type={item.associated?.labeler ? "labeler" : "user"}
 									/>
-									<Text emoji style={pal.text} numberOfLines={1}>
+									<Text style={pal.text} numberOfLines={1}>
 										{displayName}
 									</Text>
 								</div>

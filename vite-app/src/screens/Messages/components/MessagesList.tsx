@@ -377,7 +377,7 @@ export function MessagesList({
 					// style={animatedListStyle}
 					// The extra two items account for the header and the footer components
 					initialNumToRender={62}
-					maxToRenderPerBatch={32}
+					// maxToRenderPerBatch={32}
 					keyboardDismissMode="on-drag"
 					keyboardShouldPersistTaps="handled"
 					maintainVisibleContentPosition={{

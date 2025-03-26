@@ -2,7 +2,7 @@ import React from "react";
 
 import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button as BaseButton, type ButtonProps } from "#/components/Button";
-import { Text as BaseText, type TextProps } from "#/components/Typography";
+import { Text as BaseText } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as ErrorIcon } from "#/components/icons/CircleInfo";
 import { Eye_Stroke2_Corner0_Rounded as InfoIcon } from "#/components/icons/Eye";
 import { Leaf_Stroke2_Corner0_Rounded as TipIcon } from "#/components/icons/Leaf";
@@ -110,7 +110,7 @@ export function Admonition({
 	type,
 	style,
 }: {
-	children: TextProps["children"];
+	children: React.ReactNode;
 	type?: Context["type"];
 	style?: React.CSSProperties;
 }) {

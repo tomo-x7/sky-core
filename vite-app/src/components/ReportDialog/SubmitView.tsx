@@ -174,7 +174,6 @@ export function SubmitView({
 						onChangeText={setDetails}
 						label="Text field"
 						style={{ paddingRight: 60 }}
-						// @ts-expect-error
 						numberOfLines={6}
 					/>
 
@@ -263,7 +262,6 @@ function LabelerToggle({ title }: { title: string }) {
 				}}
 			>
 				<Text
-					emoji
 					style={{
 						...t.atoms.text_contrast_medium,
 						...(ctx.selected && t.atoms.text),

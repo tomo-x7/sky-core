@@ -161,6 +161,7 @@ let PostFeed = ({
 	renderEmptyState: () => JSX.Element;
 	renderEndOfFeed?: () => JSX.Element;
 	headerOffset?: number;
+	/**@deprecated 未実装 */
 	progressViewOffset?: number;
 	desktopFixedHeightOffset?: number;
 	ListHeaderComponent?: () => JSX.Element;
@@ -651,7 +652,7 @@ let PostFeed = ({
 				refreshing={isPTRing}
 				onRefresh={onRefresh}
 				headerOffset={headerOffset}
-				progressViewOffset={progressViewOffset}
+				// progressViewOffset={progressViewOffset}
 				contentContainerStyle={{
 					minHeight: window.innerHeight * 1.5,
 				}}
@@ -662,9 +663,9 @@ let PostFeed = ({
 				extraData={extraData}
 				desktopFixedHeight={desktopFixedHeightOffset ? desktopFixedHeightOffset : true}
 				initialNumToRender={initialNumToRenderOverride ?? initialNumToRender}
-				windowSize={9}
-				maxToRenderPerBatch={1}
-				updateCellsBatchingPeriod={40}
+				// windowSize={9}
+				// maxToRenderPerBatch={1}
+				// updateCellsBatchingPeriod={40}
 				onItemSeen={feedFeedback.onItemSeen}
 			/>
 		</div>

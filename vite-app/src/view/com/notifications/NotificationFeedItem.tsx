@@ -159,7 +159,6 @@ let NotificationFeedItem = ({
 			href={firstAuthor.href}
 			text={
 				<Text
-					emoji
 					style={{
 						...pal.text,
 						...s.bold,
@@ -628,7 +627,7 @@ function ExpandedAuthorsList({
 						</div>
 						<div style={s.flex1}>
 							<Text type="lg-bold" numberOfLines={1} style={pal.text} lineHeight={1.2}>
-								<Text emoji type="lg-bold" style={pal.text} lineHeight={1.2}>
+								<Text type="lg-bold" style={pal.text} lineHeight={1.2}>
 									{sanitizeDisplayName(author.profile.displayName || author.profile.handle)}
 								</Text>{" "}
 								<Text style={pal.textLight} lineHeight={1.2}>
@@ -649,11 +648,7 @@ function AdditionalPostText({ post }: { post?: AppBskyFeedDefs.PostView }) {
 
 		return (
 			<>
-				{text?.length > 0 && (
-					<Text emoji style={pal.textLight}>
-						{text}
-					</Text>
-				)}
+				{text?.length > 0 && <Text style={pal.textLight}>{text}</Text>}
 				<MediaPreview.Embed embed={post.embed} style={styles.additionalPostImages} />
 			</>
 		);

@@ -394,7 +394,6 @@ function Inner(props: ReportDialogProps) {
 											}}
 											label={"Additional details (limit 300 characters)"}
 											style={{ paddingRight: 60 }}
-											// @ts-expect-error
 											numberOfLines={4}
 										/>
 										<div
@@ -527,7 +526,7 @@ function StepTitle({
 								fontVariant: "tabular-nums",
 								width: 24,
 								height: 24,
-								lineHeight: 24,
+								lineHeight: "24px",
 							},
 						}}
 					>

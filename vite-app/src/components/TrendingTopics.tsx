@@ -163,7 +163,7 @@ type ParsedTrendingTopic =
 			uri: AtUri;
 	  };
 
-export function useTopic(raw: TrendingTopicType): ParsedTrendingTopic {
+function useTopic(raw: TrendingTopicType): ParsedTrendingTopic {
 	return React.useMemo(() => {
 		const { topic: displayName, link } = raw;
 

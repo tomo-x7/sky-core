@@ -201,11 +201,7 @@ export function TitleText({ children, style }: React.PropsWithChildren<TextStyle
 				...a.pb_sm,
 				...a.text_4xl,
 				...a.font_bold,
-
-				...{
-					lineHeight: leading(a.text_4xl, a.leading_tight),
-				},
-
+				lineHeight: leading(a.text_4xl, a.leading_tight),
 				...style,
 			}}
 		>

@@ -5,10 +5,9 @@ const ratio = 54 / 61;
 export function Logomark({
 	fill,
 	...rest
-}: { fill?: JSX.IntrinsicElements["path"]["fill"] } & JSX.IntrinsicElements["svg"]) {
+}: { fill?: JSX.IntrinsicElements["path"]["fill"] } & Omit<JSX.IntrinsicElements["svg"], "ref">) {
 	const pal = usePalette("default");
-	// @ts-expect-error it's fiiiiine
-	const size = Number.parseInt(rest.width || 32);
+	const size = Number.parseInt(String(rest.width || 32));
 
 	return (
 		<svg fill="none" viewBox="0 0 61 54" {...rest} width={size} height={Number(size) * ratio}>

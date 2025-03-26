@@ -308,7 +308,7 @@ export function MessagesScreen() {
 				}
 				onEndReachedThreshold={0}
 				initialNumToRender={initialNumToRender}
-				windowSize={11}
+				// windowSize={11}
 				desktopFixedHeight
 				sideBorders={false}
 			/>

@@ -502,12 +502,11 @@ export const ComposePost = ({
 					<div
 						// Animated.ScrollView
 						ref={scrollViewRef}
-						// @ts-expect-error
 						// onScroll={scrollHandler}
-						contentContainerStyle={a.flex_grow}
+						// contentContainerStyle={a.flex_grow}
 						style={a.flex_1}
-						keyboardShouldPersistTaps="always"
-						onContentSizeChange={onScrollViewContentSizeChange}
+						// keyboardShouldPersistTaps="always"
+						// onContentSizeChange={onScrollViewContentSizeChange}
 					>
 						{replyTo ? <ComposerReplyTo replyTo={replyTo} /> : undefined}
 						{thread.posts.map((post, index) => (
@@ -652,7 +651,6 @@ const ComposerPost = React.memo(function ComposerPost({
 				/>
 				<TextInput
 					ref={textInput}
-					//@ts-expect-error
 					style={a.pt_xs}
 					richtext={richtext}
 					placeholder={selectTextInputPlaceholder}
@@ -662,7 +660,6 @@ const ComposerPost = React.memo(function ComposerPost({
 					hasRightPadding={isPartOfThread}
 					isActive={isActive}
 					setRichText={(rt) => {
-						//@ts-expect-error
 						dispatchPost({ type: "update_richtext", richtext: rt });
 					}}
 					onFocus={() => {
@@ -675,9 +672,6 @@ const ComposerPost = React.memo(function ComposerPost({
 					onNewLink={onNewLink}
 					onError={onError}
 					onPressPublish={onPublish}
-					accessible={true}
-					accessibilityLabel={"Write post"}
-					accessibilityHint={`Compose posts up to ${MAX_GRAPHEME_LENGTH} characters in length`}
 				/>
 			</div>
 			{canRemovePost && isActive && (
@@ -824,8 +818,7 @@ function AltTextReminder({ error }: { error: string }) {
 			}}
 		>
 			<div style={styles.errorIcon}>
-				{/* @ts-expect-error */}
-				<FontAwesomeIcon icon="exclamation" style={{ color: colors.red4 }} size={10} />
+				<FontAwesomeIcon icon="exclamation" style={{ color: colors.red4 }} /*size={10}*/ size="xl" />
 			</div>
 			<Text
 				style={{
@@ -905,8 +898,7 @@ function ComposerEmbeds({
 							<VideoPreview
 								asset={video.asset}
 								video={video.video}
-								//@ts-expect-error
-								isActivePost={isActivePost}
+								// isActivePost={isActivePost} //TODO
 								clear={clearVideo}
 							/>
 						)}
@@ -1148,8 +1140,7 @@ function ComposerFooter({
 						shape="round"
 						color="primary"
 					>
-						{/* @ts-expect-error */}
-						<FontAwesomeIcon icon="add" size={20} color={t.palette.primary_500} />
+						<FontAwesomeIcon icon="add" /*size={20}*/ size="2xl" color={t.palette.primary_500} />
 					</Button>
 				)}
 				<SelectLangBtn />

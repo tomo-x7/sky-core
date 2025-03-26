@@ -65,8 +65,7 @@ export function Component({
 						...pal.border,
 					}}
 				>
-					{/* @ts-expect-error */}
-					<FontAwesomeIcon icon="search" size={16} />
+					<FontAwesomeIcon icon="search" /*size={16}*/ size="xl" />
 					<input
 						type="text"
 						style={{

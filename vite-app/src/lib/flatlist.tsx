@@ -74,7 +74,6 @@ export const FlatList = forwardRef<HTMLDivElement, FlatListProps<any>>(function 
 			}}
 		>
 			{ListHeaderComponent}
-
 			<div
 				style={{
 					...contentContainerStyle,

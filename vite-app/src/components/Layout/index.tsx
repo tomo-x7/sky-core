@@ -9,7 +9,7 @@ import { useShellLayout } from "#/state/shell/shell-layout";
 export * from "#/components/Layout/const";
 export * as Header from "#/components/Layout/Header";
 
-export type ScreenProps = JSX.IntrinsicElements["div"] & {
+export type ScreenProps = Omit<JSX.IntrinsicElements["div"], "ref"> & {
 	noInsetTop?: boolean;
 };
 
@@ -32,53 +32,51 @@ export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }
 	);
 });
 
-export type ContentProps = Omit<JSX.IntrinsicElements["div"], "style"> & {
+export type ContentProps = Omit<JSX.IntrinsicElements["div"], "style" | "ref"> & {
 	style?: React.CSSProperties;
 	contentContainerStyle?: React.CSSProperties;
 	ignoreTabletLayoutOffset?: boolean;
 };
 
+const ContentImpl = React.forwardRef<HTMLDivElement, ContentProps>(
+	({ children, style, contentContainerStyle, ignoreTabletLayoutOffset, ...props }, ref) => {
+		const t = useTheme();
+		const { footerHeight } = useShellLayout();
+		// const animatedProps = useAnimatedProps(() => {
+		// 	return {
+		// 		scrollIndicatorInsets: {
+		// 			bottom: footerHeight.get(),
+		// 			top: 0,
+		// 			right: 1,
+		// 		},
+		// 	} satisfies AnimatedScrollViewProps;
+		// });
+
+		return (
+			<div
+				// Animated.ScrollView
+				id="content"
+				// automaticallyAdjustsScrollIndicatorInsets={false}
+				// indicatorStyle={t.scheme === "dark" ? "white" : "black"}
+				// sets the scroll inset to the height of the footer
+				// animatedProps={animatedProps}
+				style={{
+					...scrollViewStyles.common,
+					...style,
+				}}
+				// contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
+				{...props}
+				ref={ref}
+			>
+				<Center ignoreTabletLayoutOffset={ignoreTabletLayoutOffset}>{children}</Center>
+			</div>
+		);
+	},
+);
 /**
  * Default scroll view for simple pages
  */
-export const Content = React.memo(function Content({
-	children,
-	style,
-	contentContainerStyle,
-	ignoreTabletLayoutOffset,
-	...props
-}: ContentProps) {
-	const t = useTheme();
-	const { footerHeight } = useShellLayout();
-	// const animatedProps = useAnimatedProps(() => {
-	// 	return {
-	// 		scrollIndicatorInsets: {
-	// 			bottom: footerHeight.get(),
-	// 			top: 0,
-	// 			right: 1,
-	// 		},
-	// 	} satisfies AnimatedScrollViewProps;
-	// });
-
-	return (
-		<div
-			// Animated.ScrollView
-			id="content"
-			// automaticallyAdjustsScrollIndicatorInsets={false}
-			// indicatorStyle={t.scheme === "dark" ? "white" : "black"}
-			// sets the scroll inset to the height of the footer
-			// animatedProps={animatedProps}
-			style={{
-				...scrollViewStyles.common,
-				...style,
-			}}
-			// contentContainerStyle={[scrollViewStyles.contentContainer, contentContainerStyle]}
-			{...props}
-		>
-			<Center ignoreTabletLayoutOffset={ignoreTabletLayoutOffset}>{children}</Center>
-		</div>
-	);
-});
+export const Content = React.memo(ContentImpl);
 
 const scrollViewStyles = {
 	common: {
@@ -89,7 +87,7 @@ const scrollViewStyles = {
 	},
 } satisfies Record<string, React.CSSProperties>;
 
-export type KeyboardAwareContentProps = JSX.IntrinsicElements["div"] & {
+export type KeyboardAwareContentProps = Omit<JSX.IntrinsicElements["div"], "ref"> & {
 	children: React.ReactNode;
 	style: React.CSSProperties;
 	// contentContainerStyle?: React.CSSProperties;
@@ -121,15 +119,11 @@ export const KeyboardAwareContent = React.memo(function LayoutScrollView({
 	);
 });
 
-/**
- * Utility component to center content within the screen
- */
-export const Center = React.memo(function LayoutContent({
-	children,
-	style,
-	ignoreTabletLayoutOffset,
-	...props
-}: JSX.IntrinsicElements["div"] & { ignoreTabletLayoutOffset?: boolean }) {
+type CenterProps = Omit<JSX.IntrinsicElements["div"], "ref"> & { ignoreTabletLayoutOffset?: boolean };
+const CenterImpl = React.forwardRef<HTMLDivElement, CenterProps>(function LayoutContent(
+	{ children, style, ignoreTabletLayoutOffset, ...props },
+	ref,
+) {
 	const { isWithinOffsetView } = useContext(ScrollbarOffsetContext);
 	const { gtMobile } = useBreakpoints();
 	const { centerColumnOffset } = useLayoutBreakpoints();
@@ -151,12 +145,17 @@ export const Center = React.memo(function LayoutContent({
 
 				...style,
 			}}
+			ref={ref}
 			{...props}
 		>
 			<ScrollbarOffsetContext.Provider value={ctx}>{children}</ScrollbarOffsetContext.Provider>
 		</div>
 	);
 });
+/**
+ * Utility component to center content within the screen
+ */
+export const Center = React.memo(CenterImpl);
 
 /**
  * Only used within `Layout.Screen`, not for reuse

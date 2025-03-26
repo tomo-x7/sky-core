@@ -177,7 +177,6 @@ export function NameAndHandle({
 	return (
 		<div style={a.flex_1}>
 			<Text
-				emoji
 				style={{
 					...a.text_md,
 					...a.font_bold,
@@ -189,7 +188,6 @@ export function NameAndHandle({
 				{name}
 			</Text>
 			<Text
-				emoji
 				style={{
 					...a.leading_snug,
 					...t.atoms.text_contrast_medium,
