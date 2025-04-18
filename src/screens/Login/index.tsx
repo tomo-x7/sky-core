@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import { atoms as a } from "#/alf";
-import { DEFAULT_SERVICE } from "#/lib/constants";
+import { BSKY_SERVICE } from "#/lib/constants";
 import { ForgotPasswordForm } from "#/screens/Login/ForgotPasswordForm";
 import { LoginForm } from "#/screens/Login/LoginForm";
 import { PasswordUpdatedForm } from "#/screens/Login/PasswordUpdatedForm";
@@ -30,7 +30,7 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 	const requestedAccount = accounts.find((acc) => acc.did === requestedAccountSwitchTo);
 
 	const [error, setError] = React.useState<string>("");
-	const [serviceUrl, setServiceUrl] = React.useState<string>(requestedAccount?.service || DEFAULT_SERVICE);
+	const [serviceUrl, setServiceUrl] = React.useState<string>(requestedAccount?.service || BSKY_SERVICE);
 	const [initialHandle, setInitialHandle] = React.useState<string>(requestedAccount?.handle || "");
 	const [currentForm, setCurrentForm] = React.useState<Forms>(
 		requestedAccount ? Forms.Login : accounts.length ? Forms.ChooseAccount : Forms.Login,

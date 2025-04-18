@@ -19,7 +19,6 @@ import { DescriptionText, OnboardingControls, TitleText } from "#/screens/Onboar
 import { Context } from "#/screens/Onboarding/state";
 import { bulkWriteFollows } from "#/screens/Onboarding/util";
 import { useSetHasCheckedForStarterPack } from "#/state/preferences/used-starter-packs";
-import { getAllListMembers } from "#/state/queries/list-members";
 import { preferencesQueryKey } from "#/state/queries/preferences";
 import { RQKEY as profileRQKey } from "#/state/queries/profile";
 import { useAgent } from "#/state/session";
@@ -44,28 +43,6 @@ export function StepFinished() {
 
 		let starterPack: AppBskyGraphDefs.StarterPackView | undefined;
 		let listItems: AppBskyGraphDefs.ListItemView[] | undefined;
-
-		if (activeStarterPack?.uri) {
-			try {
-				const spRes = await agent.app.bsky.graph.getStarterPack({
-					starterPack: activeStarterPack.uri,
-				});
-				starterPack = spRes.data.starterPack;
-			} catch (e) {
-				console.error("Failed to fetch starter pack", { safeMessage: e });
-				// don't tell the user, just get them through onboarding.
-			}
-			try {
-				if (starterPack?.list) {
-					listItems = await getAllListMembers(agent, starterPack.list.uri);
-				}
-			} catch (e) {
-				console.error("Failed to fetch starter pack list items", {
-					safeMessage: e,
-				});
-				// don't tell the user, just get them through onboarding.
-			}
-		}
 
 		try {
 			const { interestsStepResults, profileStepResults } = state;
@@ -163,7 +140,6 @@ export function StepFinished() {
 		agent,
 		dispatch,
 		onboardDispatch,
-		activeStarterPack,
 		state,
 		setActiveStarterPack,
 		setHasCheckedForStarterPack,

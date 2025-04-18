@@ -1,5 +1,4 @@
 import { Outlet, RouterProvider } from "react-router-dom";
-import { PWI_ENABLED } from "./lib/build-flags";
 import { useWebMediaQueries } from "./lib/hooks/useWebMediaQueries";
 import { createRouter } from "./router";
 import { Deactivated } from "./screens/Deactivated";
@@ -28,7 +27,6 @@ export const Navigator = () => {
 export function OutletWrapper() {
 	const numUnread = useUnreadNotifications();
 	const { hasSession, currentAccount } = useSession();
-	const activeRouteRequiresAuth = false; //TODO
 	const onboardingState = useOnboardingState();
 	const { showLoggedOut } = useLoggedOutView();
 	const { setShowLoggedOut } = useLoggedOutViewControls();
@@ -36,13 +34,13 @@ export function OutletWrapper() {
 	// Show the bottom bar if we have a session only on mobile web. If we don't have a session, we want to show it
 	// on both tablet and mobile web so that we see the sign up CTA.
 	const showBottomBar = hasSession ? isMobile : isTabletOrMobile;
-	if (!hasSession && (!PWI_ENABLED || activeRouteRequiresAuth)) {
+	if (!hasSession) {
 		return <LoggedOut />;
 	}
-	if (hasSession && currentAccount?.signupQueued) {
+	if (currentAccount?.signupQueued) {
 		return <SignupQueued />;
 	}
-	if (hasSession && currentAccount?.status === "takendown") {
+	if (currentAccount?.status === "takendown") {
 		return <Takendown />;
 	}
 	if (showLoggedOut) {

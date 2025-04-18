@@ -1,6 +1,4 @@
 import React from "react";
-import { useSession } from "#/state/session";
-import { useActiveStarterPack } from "#/state/shell/starter-pack";
 
 type State = {
 	showLoggedOut: boolean;
@@ -45,12 +43,9 @@ const ControlsContext = React.createContext<Controls>({
 });
 
 export function Provider({ children }: React.PropsWithChildren) {
-	const activeStarterPack = useActiveStarterPack();
-	const { hasSession } = useSession();
-	const shouldShowStarterPack = Boolean(activeStarterPack?.uri) && !hasSession;
 	const [state, setState] = React.useState<State>({
-		showLoggedOut: shouldShowStarterPack,
-		requestedAccountSwitchTo: shouldShowStarterPack ? "starterpack" : undefined,
+		showLoggedOut: false,
+		requestedAccountSwitchTo: undefined,
 	});
 
 	const controls = React.useMemo<Controls>(

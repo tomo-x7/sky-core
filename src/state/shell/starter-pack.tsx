@@ -21,5 +21,5 @@ export function Provider({ children }: { children: React.ReactNode }) {
 	);
 }
 
-export const useActiveStarterPack = () => React.useContext(stateContext);
+export const useActiveStarterPack = () => undefined;
 export const useSetActiveStarterPack = () => React.useContext(setContext);

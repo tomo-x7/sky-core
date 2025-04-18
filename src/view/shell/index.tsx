@@ -1,7 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
-
-import { ScrollRestoration, useLocation } from "react-router-dom";
 import { OutletWrapper } from "#/Navigation";
 import { atoms as a, atoms, select, useTheme } from "#/alf";
 import { Outlet as PortalOutlet } from "#/components/Portal";
@@ -28,7 +26,6 @@ function ShellInner() {
 	const closeAllActiveElements = useCloseAllActiveElements();
 	const showDrawer = !isDesktop && isDrawerOpen;
 	const [showDrawerDelayedExit, setShowDrawerDelayedExit] = useState(showDrawer);
-	const location = useLocation();
 
 	useLayoutEffect(() => {
 		if (showDrawer !== showDrawerDelayedExit) {
@@ -56,11 +53,11 @@ function ShellInner() {
 			<ErrorBoundary>
 				<main style={atoms.flex_1}>
 					<OutletWrapper />
-					<ScrollRestoration
+					{/* <ScrollRestoration
 						getKey={(location, matches) => {
 							return location.pathname;
 						}}
-					/>
+					/> */}
 				</main>
 			</ErrorBoundary>
 			<Composer winHeight={0} />

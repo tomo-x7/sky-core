@@ -2,6 +2,7 @@ import "./view/icons";
 
 import React, { useEffect, useState } from "react";
 import { RootSiblingParent } from "react-native-root-siblings";
+import { Navigator } from "./Navigation";
 import { ThemeProvider as Alf } from "./alf";
 import { useColorModeTheme } from "./alf/util/useColorModeTheme";
 import { Provider as PortalProvider } from "./components/Portal";
@@ -43,7 +44,6 @@ import * as Toast from "./view/com/util/Toast";
 import { ToastContainer } from "./view/com/util/Toast";
 import { Provider as ActiveVideoProvider } from "./view/com/util/post-embeds/ActiveVideoWebContext";
 import { Provider as VideoVolumeProvider } from "./view/com/util/post-embeds/VideoVolumeContext";
-import { Shell } from "./view/shell/index";
 
 /**
  * Begin geolocation ASAP
@@ -109,7 +109,7 @@ function InnerApp() {
 																				<ProgressGuideProvider>
 																					<TrendingConfigProvider>
 																						<IntentDialogProvider>
-																							<Shell />
+																							<Navigator />
 																							{/* <NuxDialogs /> */}
 																						</IntentDialogProvider>
 																					</TrendingConfigProvider>

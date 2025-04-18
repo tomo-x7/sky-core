@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"check": "tsc -b && biome check --write && (knip | grep '(.*)')"
 	},
 	"dependencies": {
 		"@atproto/api": "^0.14.7",
@@ -15,7 +16,6 @@
 		"@atproto/xrpc": "^0.6.10",
 		"@braintree/sanitize-url": "^7.1.1",
 		"@emoji-mart/react": "^1.1.1",
-		"@floating-ui/dom": "^1.6.13",
 		"@floating-ui/react-dom": "^2.1.2",
 		"@fortawesome/fontawesome-svg-core": "^6.7.2",
 		"@fortawesome/free-regular-svg-icons": "^6.7.2",
@@ -41,10 +41,6 @@
 		"@tiptap/pm": "^2.11.5",
 		"@tiptap/react": "^2.11.5",
 		"@tiptap/suggestion": "^2.11.5",
-		"@zxing/text-encoding": "^0.9.0",
-		"array.prototype.findlast": "^1.2.5",
-		"await-lock": "^3.0.0",
-		"base64-js": "^1.5.1",
 		"bcp-47": "^2.1.0",
 		"bcp-47-match": "^2.0.3",
 		"date-fns": "^4.1.0",
@@ -52,11 +48,8 @@
 		"emoji-mart": "^5.6.0",
 		"emoji-regex": "^10.4.0",
 		"eventemitter3": "^5.0.1",
-		"fast-text-encoding": "^1.0.6",
 		"framer-motion": "^12.4.10",
 		"graphemer": "^1.4.0",
-		"hex-rgb": "^5.0.0",
-		"history": "^5.3.0",
 		"hls.js": "^1.5.20",
 		"js-sha256": "^0.11.0",
 		"jwt-decode": "^4.0.0",
@@ -68,27 +61,24 @@
 		"lodash.throttle": "^4.1.1",
 		"multiformats": "^13.3.2",
 		"nanoid": "^5.1.2",
-		"normalize-url": "^8.0.1",
 		"psl": "^1.15.0",
 		"qrcode.react": "^4.2.0",
 		"react": "^18.3.1",
 		"react-compiler-runtime": "19.0.0-beta-40c6c23-20250301",
 		"react-dom": "^18.3.1",
 		"react-image-crop": "^11.0.7",
-		"react-keyed-flatten-children": "^5.0.0",
 		"react-native-root-siblings": "^5.0.1",
 		"react-remove-scroll-bar": "^2.3.8",
 		"react-responsive": "^10.0.1",
 		"react-router-dom": "^7.3.0",
 		"react-textarea-autosize": "^8.5.7",
-		"rn-fetch-blob": "^0.12.0",
 		"tippy.js": "^6.3.7",
 		"tlds": "^1.256.0",
 		"tldts": "^6.1.82",
 		"zod": "^3.24.2"
 	},
 	"devDependencies": {
-		"@types/invariant": "^2.2.37",
+		"@biomejs/biome": "^1.9.4",
 		"@types/lodash.chunk": "^4.2.9",
 		"@types/lodash.debounce": "^4.0.9",
 		"@types/lodash.isequal": "^4.5.8",
@@ -98,11 +88,12 @@
 		"@types/react": "^18.3.18",
 		"@types/react-dom": "^18.3.5",
 		"@vitejs/plugin-react-swc": "^3.8.0",
+		"knip": "^5.50.5",
 		"typescript": "~5.7.2",
 		"vite": "^6.2.0"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["@swc/core", "esbuild"]
+		"onlyBuiltDependencies": ["@biomejs/biome", "@swc/core", "esbuild"]
 	},
 	"resolutions": {
 		"react-is": "^18.0.0"

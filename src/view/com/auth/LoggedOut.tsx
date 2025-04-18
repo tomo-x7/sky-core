@@ -4,8 +4,6 @@ import { atoms as a, tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
 import { Login } from "#/screens/Login";
-import { Signup } from "#/screens/Signup";
-import { LandingScreen } from "#/screens/StarterPack/StarterPackLandingScreen";
 import { useLoggedOutView, useLoggedOutViewControls } from "#/state/shell/logged-out";
 import { useSetMinimalShellMode } from "#/state/shell/minimal-mode";
 import { ErrorBoundary } from "#/view/com/util/ErrorBoundary";
@@ -78,9 +76,7 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 					</Button>
 				) : null}
 
-				{screenState === ScreenState.S_StarterPack ? (
-					<LandingScreen setScreenState={setScreenState} />
-				) : screenState === ScreenState.S_LoginOrCreateAccount ? (
+				{screenState === ScreenState.S_LoginOrCreateAccount ? (
 					<SplashScreen
 						onPressSignin={() => {
 							setScreenState(ScreenState.S_Login);
@@ -97,9 +93,6 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 							clearRequestedAccount();
 						}}
 					/>
-				) : undefined}
-				{screenState === ScreenState.S_CreateAccount ? (
-					<Signup onPressBack={() => setScreenState(ScreenState.S_LoginOrCreateAccount)} />
 				) : undefined}
 			</ErrorBoundary>
 		</div>

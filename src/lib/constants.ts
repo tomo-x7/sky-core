@@ -4,7 +4,6 @@ export const LOCAL_DEV_SERVICE = "http://localhost:2583";
 export const STAGING_SERVICE = "https://staging.bsky.dev";
 export const BSKY_SERVICE = "https://bsky.social";
 export const PUBLIC_BSKY_SERVICE = "https://public.api.bsky.app";
-export const DEFAULT_SERVICE = BSKY_SERVICE;
 const HELP_DESK_LANG = "en-us";
 export const HELP_DESK_URL = `https://blueskyweb.zendesk.com/hc/${HELP_DESK_LANG}`;
 export const EMBED_SERVICE = "https://embed.bsky.app";
@@ -107,7 +106,6 @@ export const HITSLOP_20 = createHitslop(20);
 export const HITSLOP_30 = createHitslop(30);
 export const POST_CTRL_HITSLOP = { top: 5, bottom: 10, left: 10, right: 10 };
 export const LANG_DROPDOWN_HITSLOP = { top: 10, bottom: 10, left: 4, right: 4 };
-export const BACK_HITSLOP = HITSLOP_30;
 export const MAX_POST_LINES = 25;
 
 export const BSKY_APP_ACCOUNT_DID = "did:plc:z72i7hdynmk6r22z27h6tvur";
