@@ -6,8 +6,8 @@ import * as Dialog from "#/components/Dialog";
 import * as Menu from "#/components/Menu";
 import * as Prompt from "#/components/Prompt";
 import { H3, P, Text } from "#/components/Typography";
+import { getIsReducedMotionEnabled } from "#/platform/reduceMotion";
 import { useDialogStateControlContext } from "#/state/dialogs";
-import { PlatformInfo } from "../../../../modules/expo-bluesky-swiss-army";
 
 export function Dialogs() {
 	const scrollable = Dialog.useDialogControl();
@@ -127,7 +127,7 @@ export function Dialogs() {
 				color="primary"
 				size="small"
 				onPress={() => {
-					const isReducedMotionEnabled = PlatformInfo.getIsReducedMotionEnabled();
+					const isReducedMotionEnabled = getIsReducedMotionEnabled();
 					setReducedMotionEnabled(isReducedMotionEnabled);
 				}}
 				label="two"

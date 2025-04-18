@@ -1,9 +1,6 @@
-import { createBrowserRouter, createRoutesFromElements, Routes, Route } from "react-router-dom";
-import { atoms } from "./alf";
-import { PWI_ENABLED } from "./lib/build-flags";
-import { useWebMediaQueries } from "./lib/hooks/useWebMediaQueries";
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import { bskyTitle } from "./lib/strings/headings";
 import { routes } from "./routes";
-import { Deactivated } from "./screens/Deactivated";
 import HashtagScreen from "./screens/Hashtag";
 import { MessagesScreen } from "./screens/Messages/ChatList";
 import { MessagesConversationScreen } from "./screens/Messages/Conversation";
@@ -11,7 +8,6 @@ import { MessagesInboxScreen } from "./screens/Messages/Inbox";
 import { MessagesSettingsScreen } from "./screens/Messages/Settings";
 import { ModerationScreen } from "./screens/Moderation";
 import { Screen as ModerationInteractionSettings } from "./screens/ModerationInteractionSettings";
-import { Onboarding } from "./screens/Onboarding";
 import { PostLikedByScreen } from "./screens/Post/PostLikedBy";
 import { PostQuotesScreen } from "./screens/Post/PostQuotes";
 import { PostRepostedByScreen } from "./screens/Post/PostRepostedBy";
@@ -34,16 +30,9 @@ import { NotificationSettingsScreen } from "./screens/Settings/NotificationSetti
 import { PrivacyAndSecuritySettingsScreen } from "./screens/Settings/PrivacyAndSecuritySettings";
 import { SettingsScreen } from "./screens/Settings/Settings";
 import { ThreadPreferencesScreen } from "./screens/Settings/ThreadPreferences";
-import { SignupQueued } from "./screens/SignupQueued";
 import { StarterPackScreen, StarterPackScreenShort } from "./screens/StarterPack/StarterPackScreen";
 import { Wizard } from "./screens/StarterPack/Wizard";
-import { Takendown } from "./screens/Takendown";
 import TopicScreen from "./screens/Topic";
-import { useUnreadNotifications } from "./state/queries/notifications/unread";
-import { useSession } from "./state/session";
-import { useOnboardingState } from "./state/shell";
-import { useLoggedOutView, useLoggedOutViewControls } from "./state/shell/logged-out";
-import { LoggedOut } from "./view/com/auth/LoggedOut";
 import { CommunityGuidelinesScreen } from "./view/screens/CommunityGuidelines";
 import { CopyrightPolicyScreen } from "./view/screens/CopyrightPolicy";
 import { DebugModScreen } from "./view/screens/DebugMod";
@@ -66,15 +55,8 @@ import { SearchScreen } from "./view/screens/Search";
 import { Storybook } from "./view/screens/Storybook";
 import { SupportScreen } from "./view/screens/Support";
 import { TermsOfServiceScreen } from "./view/screens/TermsOfService";
-import { BottomBarWeb } from "./view/shell/bottom-bar/BottomBarWeb";
-import { DesktopLeftNav } from "./view/shell/desktop/LeftNav";
-import { DesktopRightNav } from "./view/shell/desktop/RightNav";
-import { bskyTitle } from "./lib/strings/headings";
 
-export function createRouter(
-	unreadCountLabel: string,
-	layoutComponent: React.FC,
-) {
+export function createRouter(unreadCountLabel: string, layoutComponent: React.FC) {
 	const title = (page: string) => {
 		document.title = bskyTitle(page, unreadCountLabel);
 		return null;

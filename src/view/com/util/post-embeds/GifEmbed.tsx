@@ -9,9 +9,7 @@ import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { EmbedPlayerParams } from "#/lib/strings/embed-player";
 import { useAutoplayDisabled } from "#/state/preferences";
 import { useLargeAltBadgeEnabled } from "#/state/preferences/large-alt-badge";
-import { GifView } from "../../../../../modules/expo-bluesky-gif-view";
-import type { GifViewHandle } from "../../../../../modules/expo-bluesky-gif-view/src/GifView";
-import type { GifViewStateChangeEvent } from "../../../../../modules/expo-bluesky-gif-view/src/GifView.types";
+import { GifView, type GifViewHandle, type GifViewStateChangeEvent } from "./GifView";
 
 function PlaybackControls({
 	onPress,

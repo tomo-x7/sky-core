@@ -3,7 +3,7 @@ import { z } from "zod";
 import { hasOwn } from "#/lib/util";
 import { deviceLanguageCodes, deviceLocales } from "#/locale/deviceLocales";
 import { findSupportedAppLanguage } from "#/locale/helpers";
-import { PlatformInfo } from "../../../modules/expo-bluesky-swiss-army";
+import { getIsReducedMotionEnabled } from "#/platform/reduceMotion";
 
 const externalEmbedOptions = ["show", "hide"] as const;
 
@@ -163,7 +163,7 @@ export const defaults: Schema = {
 	lastSelectedHomeFeed: undefined,
 	pdsAddressHistory: [],
 	disableHaptics: false,
-	disableAutoplay: PlatformInfo.getIsReducedMotionEnabled(),
+	disableAutoplay: getIsReducedMotionEnabled(),
 	kawaii: false,
 	hasCheckedForStarterPack: false,
 	subtitlesEnabled: true,

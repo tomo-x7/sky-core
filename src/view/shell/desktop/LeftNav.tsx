@@ -48,6 +48,7 @@ import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { makeProfileLink } from "#/lib/routes/links";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { isInvalidHandle, sanitizeHandle } from "#/lib/strings/handles";
+import { getIsReducedMotionEnabled } from "#/platform/reduceMotion";
 import { emitSoftReset } from "#/state/events";
 import { useFetchHandle } from "#/state/queries/handle";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
@@ -61,7 +62,6 @@ import { LoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { PressableWithHover } from "#/view/com/util/PressableWithHover";
 import { UserAvatar } from "#/view/com/util/UserAvatar";
 import { NavSignupCard } from "#/view/shell/NavSignupCard";
-import { PlatformInfo } from "../../../../modules/expo-bluesky-swiss-army";
 import { router } from "../../../routes";
 
 const NAV_ICON_WIDTH = 28;
@@ -120,7 +120,7 @@ function ProfileCard() {
 									<div
 										style={{
 											...flatten(
-												!PlatformInfo.getIsReducedMotionEnabled() && [
+												!getIsReducedMotionEnabled() && [
 													a.transition_transform,
 													{ transitionDuration: "250ms" },
 													!active && a.transition_delay_50ms,

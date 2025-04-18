@@ -1,8 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
-import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
-import { Navigator, OutletWrapper } from "#/Navigation";
+import { ScrollRestoration, useLocation } from "react-router-dom";
+import { OutletWrapper } from "#/Navigation";
 import { atoms as a, atoms, select, useTheme } from "#/alf";
 import { Outlet as PortalOutlet } from "#/components/Portal";
 import { MutedWordsDialog } from "#/components/dialogs/MutedWords";

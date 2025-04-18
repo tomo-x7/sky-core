@@ -1,11 +1,26 @@
 import * as React from "react";
-import type { GifViewProps } from "./GifView.types";
 
 export type GifViewHandle = {
 	playAsync: () => Promise<void>;
 	pauseAsync: () => Promise<void>;
 	toggleAsync: () => Promise<void>;
 };
+export interface GifViewStateChangeEvent {
+	nativeEvent: {
+		isPlaying: boolean;
+		isLoaded: boolean;
+	};
+}
+
+export interface GifViewProps {
+	autoplay?: boolean;
+	source?: string;
+	placeholderSource?: string;
+	onPlayerStateChange?: (event: GifViewStateChangeEvent) => void;
+	style: React.CSSProperties;
+	accessibilityLabel: string;
+	accessibilityHint: string;
+}
 
 const GifView = React.memo(
 	React.forwardRef<GifViewHandle, GifViewProps>((props, ref) => {
