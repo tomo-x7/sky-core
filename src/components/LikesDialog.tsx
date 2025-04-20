@@ -1,7 +1,7 @@
 import type { AppBskyFeedGetLikes as GetLikes } from "@atproto/api";
 import { useCallback, useMemo } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -97,7 +97,9 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 						borderRadius: 12,
 					}}
 				>
-					<Text style={{ textAlign:"center" }}>Nobody has liked this yet. Maybe you should be the first!</Text>
+					<Text style={{ textAlign: "center" }}>
+						Nobody has liked this yet. Maybe you should be the first!
+					</Text>
 				</div>
 			) : (
 				<div
@@ -118,7 +120,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 function ListFooterComponent({ isFetching }: { isFetching: boolean }) {
 	if (isFetching) {
 		return (
-			<div style={{ paddingTop:16 }}>
+			<div style={{ paddingTop: 16 }}>
 				<ActivityIndicator />
 			</div>
 		);

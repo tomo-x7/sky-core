@@ -47,7 +47,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 					<Text
 						style={{
 							fontWeight: "600",
-							textAlign: "right",,
+							textAlign: "right",
 							fontSize: 16,
 							letterSpacing: 0,
 							...t.atoms.text_contrast_high,

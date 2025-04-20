@@ -150,7 +150,7 @@ function WhoCanReplyDialog({
 				label={"Dialog: adjust who can interact with this post"}
 				style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 			>
-				<div style={{ gap:8 }}>
+				<div style={{ gap: 8 }}>
 					<Text
 						style={{
 							fontWeight: "600",

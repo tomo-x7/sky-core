@@ -76,7 +76,7 @@ export function NewskieDialog({
 					label={"New user info dialog"}
 					style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 				>
-					<div style={{ gap:12 }}>
+					<div style={{ gap: 12 }}>
 						<div style={{ ...a.align_center }}>
 							<div
 								style={{

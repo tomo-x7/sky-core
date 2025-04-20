@@ -38,7 +38,7 @@ export function Error({
 			}}
 			sideBorders={sideBorders}
 		>
-			<div style={{ width: "100%", alignItems: "center", gap:16}}>
+			<div style={{ width: "100%", alignItems: "center", gap: 16 }}>
 				<Text
 					style={{
 						fontWeight: "600",
@@ -55,13 +55,18 @@ export function Error({
 						textAlign: "center",
 						...t.atoms.text_contrast_high,
 						lineHeight: 1.4,
-						...(gtMobile ? { width: 450 } : { width: "100%", paddingLeft:16,paddingRight:16}),
+						...(gtMobile ? { width: 450 } : { width: "100%", paddingLeft: 16, paddingRight: 16 }),
 					}}
 				>
 					{message}
 				</Text>
 			</div>
-			<div style={{ gap: 12, ...(gtMobile ? { width: 350 } : { width: "100%", paddingLeft:16,paddingRight:16}) }}>
+			<div
+				style={{
+					gap: 12,
+					...(gtMobile ? { width: 350 } : { width: "100%", paddingLeft: 16, paddingRight: 16 }),
+				}}
+			>
 				{onRetry && (
 					<Button
 						variant="solid"

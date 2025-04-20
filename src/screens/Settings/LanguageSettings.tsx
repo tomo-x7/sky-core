@@ -334,7 +334,7 @@ export function LanguageSettingsScreen() {
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Content Languages</SettingsList.ItemText>
-						<div style={{ gap:12 }}>
+						<div style={{ gap: 12 }}>
 							<Text style={{ ...a.leading_snug }}>
 								Select which languages you want your subscribed feeds to include. If none are selected,
 								all languages will be shown.

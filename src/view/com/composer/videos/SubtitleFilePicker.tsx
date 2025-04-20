@@ -39,7 +39,7 @@ export function SubtitleFilePicker({
 	};
 
 	return (
-		<div style={{ gap:16 }}>
+		<div style={{ gap: 16 }}>
 			<input
 				type="file"
 				accept=".vtt"

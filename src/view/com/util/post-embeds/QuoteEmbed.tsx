@@ -221,7 +221,7 @@ export function QuoteEmbed({
 					...t.atoms.border_contrast_low,
 					...style,
 				}}
-				childContainerstyle={{ ...a.pt_sm }}
+				childContainerStyle={{ ...a.pt_sm }}
 			>
 				<SubtleWebHover hover={hover} />
 				<Link

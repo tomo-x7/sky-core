@@ -18,7 +18,7 @@ export function SelectLabelerView({
 	const { gtMobile } = useBreakpoints();
 
 	return (
-		<div style={{ gap:16 }}>
+		<div style={{ gap: 16 }}>
 			<div
 				style={{
 					justifyContent: "center",
@@ -45,7 +45,7 @@ export function SelectLabelerView({
 				</Text>
 			</div>
 			<Divider />
-			<div style={{ gap:8 }}>
+			<div style={{ gap: 8 }}>
 				{props.labelers.map((labeler) => {
 					return (
 						<Button

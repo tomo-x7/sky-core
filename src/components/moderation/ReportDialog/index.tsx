@@ -1,7 +1,7 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, flatten, useGutters, useTheme } from "#/alf";
+import { flatten, useGutters, useTheme } from "#/alf";
 import * as Admonition from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -170,11 +170,11 @@ function Inner(props: ReportDialogProps) {
 				...{ maxWidth: 500 },
 			}}
 		>
-			<div style={{ gap:24 }}>
+			<div style={{ gap: 24 }}>
 				<StepOuter>
 					<StepTitle index={1} title={copy.subtitle} activeIndex1={state.activeStepIndex1} />
 					{isLoading ? (
-						<div style={{ gap:8 }}>
+						<div style={{ gap: 8 }}>
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
@@ -224,7 +224,7 @@ function Inner(props: ReportDialogProps) {
 									</Button>
 								</div>
 							) : (
-								<div style={{ gap:8 }}>
+								<div style={{ gap: 8 }}>
 									{reportOptions[props.subject.type].map((o) => (
 										<OptionCard
 											key={o.reason}
@@ -313,7 +313,7 @@ function Inner(props: ReportDialogProps) {
 						) : (
 							<>
 								{hasSupportedLabelers ? (
-									<div style={{ gap:8 }}>
+									<div style={{ gap: 8 }}>
 										{hasSingleSupportedLabeler ? (
 											<>
 												<LabelerCard labeler={supportedLabelers[0]} />

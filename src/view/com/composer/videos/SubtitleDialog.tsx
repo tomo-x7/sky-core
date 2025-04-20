@@ -84,7 +84,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 
 	return (
 		<Dialog.ScrollableInner label={"Video settings"}>
-			<div style={{ gap:12 }}>
+			<div style={{ gap: 12 }}>
 				<Text
 					style={{
 						fontSize: 20,

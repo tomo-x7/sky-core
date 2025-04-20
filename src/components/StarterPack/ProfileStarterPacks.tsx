@@ -188,7 +188,7 @@ function Empty() {
 				...{ marginTop: a.border.borderWidth },
 			}}
 		>
-			<div style={{ gap:4 }}>
+			<div style={{ gap: 4 }}>
 				<Text
 					style={{
 						fontWeight: "600",

@@ -410,7 +410,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									color="secondary"
 									value="_atproto"
 									label={"Copy host"}
-									hoverstyle={{ ...a.bg_transparent }}
+									hoverStyle={{ ...a.bg_transparent }}
 									hitSlop={HITSLOP_10}
 								>
 									<Text
@@ -450,7 +450,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									color="secondary"
 									value={`did=${currentAccount?.did}`}
 									label={"Copy TXT record value"}
-									hoverstyle={{ ...a.bg_transparent }}
+									hoverStyle={{ ...a.bg_transparent }}
 									hitSlop={HITSLOP_10}
 								>
 									<Text

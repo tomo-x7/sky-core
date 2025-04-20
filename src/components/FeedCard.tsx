@@ -3,7 +3,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 import { useTheme } from "#/alf";
-import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -53,18 +52,18 @@ export function Link({ view, children, ...props }: Props & Omit<LinkProps, "to" 
 	}, [view, queryClient]);
 
 	return (
-		<InternalLink label={view.displayName} to={href} style={{flexDirection:"column" }} {...props}>
+		<InternalLink label={view.displayName} to={href} style={{ flexDirection: "column" }} {...props}>
 			{children}
 		</InternalLink>
 	);
 }
 
 export function Outer({ children }: { children: React.ReactNode }) {
-	return <div style={{ width: "100%",gap:12 }}>{children}</div>;
+	return <div style={{ width: "100%", gap: 12 }}>{children}</div>;
 }
 
 export function Header({ children }: { children: React.ReactNode }) {
-	return <div style={{ flexDirection: "row", alignItems: "center", gap:12 }}>{children}</div>;
+	return <div style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>{children}</div>;
 }
 
 export type AvatarProps = { src: string | undefined; size?: number };
@@ -129,7 +128,7 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 	const t = useTheme();
 
 	return (
-		<div style={{ flex: 1, gap:4 }}>
+		<div style={{ flex: 1, gap: 4 }}>
 			<div
 				style={{
 					borderRadius: 4,
@@ -162,13 +161,13 @@ export function Description({ description, ...rest }: { description?: string } &
 		return rt;
 	}, [description]);
 	if (!rt) return null;
-	return <RichText value={rt} style={{ lineHeight:1.3 }} disableLinks {...rest} />;
+	return <RichText value={rt} style={{ lineHeight: 1.3 }} disableLinks {...rest} />;
 }
 
 export function DescriptionPlaceholder() {
 	const t = useTheme();
 	return (
-		<div style={{ gap:4}}>
+		<div style={{ gap: 4 }}>
 			<div style={{ borderRadius: 4, width: "100%", ...t.atoms.bg_contrast_50, height: 12 }} />
 			<div style={{ borderRadius: 4, width: "100%", ...t.atoms.bg_contrast_50, height: 12 }} />
 			<div style={{ borderRadius: 4, ...t.atoms.bg_contrast_50, height: 12, width: 100 }} />

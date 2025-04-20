@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -88,7 +88,7 @@ function DialogInner({
 			}}
 		>
 			<div style={{ flex: 1 }}>
-				<div style={{ gap:8 }}>
+				<div style={{ gap: 8 }}>
 					<Text
 						style={{
 							fontSize: 22,
@@ -151,7 +151,7 @@ function DialogInner({
 									updateAdultLabels(values as AdultSelfLabel[]);
 								}}
 							>
-								<div style={{ gap:8 }}>
+								<div style={{ gap: 8 }}>
 									<Toggle.Item name="sexual" label={"Suggestive"}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Suggestive</Toggle.LabelText>

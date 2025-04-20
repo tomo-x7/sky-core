@@ -152,7 +152,7 @@ export function SignupQueued() {
 									{placeInQueue}
 								</Text>
 							)}
-							<P style={{ textAlign: "center", }}>
+							<P style={{ textAlign: "center" }}>
 								{typeof placeInQueue === "number" ? <>left to go.</> : <>You are in line.</>}{" "}
 								{estimatedTime ? (
 									<>We estimate {estimatedTime} until your account is ready.</>

@@ -158,7 +158,7 @@ export function ListHiddenScreen({
 					...(gtMobile ? { width: 350 } : flatten([a.w_full, a.px_lg])),
 				}}
 			>
-				<div style={{ gap:12 }}>
+				<div style={{ gap: 12 }}>
 					{savedFeedConfig ? (
 						<Button
 							variant="solid"

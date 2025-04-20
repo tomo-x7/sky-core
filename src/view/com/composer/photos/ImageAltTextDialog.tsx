@@ -104,7 +104,7 @@ const ImageAltTextInner = ({
 					gap: 12,
 				}}
 			>
-				<div style={{ gap:8 }}>
+				<div style={{ gap: 8 }}>
 					<div
 						style={{
 							position: "relative",

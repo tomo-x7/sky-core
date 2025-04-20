@@ -760,7 +760,7 @@ export function SearchScreenShell({
 							overflow: "hidden",
 						}}
 					>
-						<div style={{ gap:8 }}>
+						<div style={{ gap: 8 }}>
 							<div
 								style={{
 									width: "100%",

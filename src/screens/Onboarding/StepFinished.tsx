@@ -154,7 +154,7 @@ export function StepFinished() {
 			<div
 				style={{
 					paddingTop: 40,
-					gap:28
+					gap: 28,
 				}}
 			>
 				<div

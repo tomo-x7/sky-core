@@ -129,7 +129,7 @@ let MessageItem = ({
 									letterSpacing: 0,
 									...(isFromSelf && { color: t.palette.white }),
 								}}
-								interactivestyle={{ ...a.underline }}
+								interactiveStyle={{ ...a.underline }}
 								enableTags
 								emojiMultiplier={3}
 							/>

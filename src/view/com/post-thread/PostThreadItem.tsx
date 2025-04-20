@@ -362,7 +362,7 @@ let PostThreadItemLoaded = ({
 						<ContentHider
 							modui={moderation.ui("contentView")}
 							ignoreMute
-							childContainerstyle={{ ...a.pt_sm }}
+							childContainerStyle={{ ...a.pt_sm }}
 						>
 							<PostAlerts
 								modui={moderation.ui("contentView")}

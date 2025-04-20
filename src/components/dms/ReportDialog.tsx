@@ -177,7 +177,7 @@ function SubmitStep({
 	}, [params]);
 
 	return (
-		<div style={{ gap:16 }}>
+		<div style={{ gap: 16 }}>
 			<Button
 				size="small"
 				variant="solid"
@@ -242,7 +242,7 @@ function SubmitStep({
 				</Text>
 			</Text>
 			<Divider />
-			<div style={{ gap:12 }}>
+			<div style={{ gap: 12 }}>
 				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
 				<div
@@ -364,7 +364,7 @@ function DoneStep({
 	};
 
 	return (
-		<div style={{ gap:24 }}>
+		<div style={{ gap: 24 }}>
 			<div
 				style={{
 					justifyContent: "center",
@@ -391,7 +391,7 @@ function DoneStep({
 				</Text>
 			</div>
 			<Toggle.Group label={"Block and/or delete this conversation"} values={actions} onChange={setActions}>
-				<div style={{ gap:12 }}>
+				<div style={{ gap: 12 }}>
 					<Toggle.Item name="block" label={"Block user"}>
 						<Toggle.Checkbox />
 						<Toggle.LabelText style={{ ...a.text_md }}>Block user</Toggle.LabelText>
@@ -453,7 +453,7 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 						letterSpacing: 0,
 						lineHeight: 1.3,
 					}}
-					interactivestyle={{ ...a.underline }}
+					interactiveStyle={{ ...a.underline }}
 					enableTags
 				/>
 			</div>

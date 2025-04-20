@@ -1,6 +1,4 @@
 import { useCallback } from "react";
-
-import { atoms as a } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { useAccountSwitcher } from "#/lib/hooks/useAccountSwitcher";
 import { type SessionAccount, useSession } from "#/state/session";
@@ -40,7 +38,7 @@ export function SwitchAccountDialog({
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<Dialog.ScrollableInner label="Switch Account">
-				<div style={{ gap:16 }}>
+				<div style={{ gap: 16 }}>
 					<Text
 						style={{
 							fontSize: 22,

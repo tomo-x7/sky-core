@@ -46,7 +46,7 @@ export function EmbedConsentDialog({
 				label="External Media"
 				style={gtMobile ? { width: "auto", maxWidth: 400 } : a.w_full}
 			>
-				<div style={{ gap:8 }}>
+				<div style={{ gap: 8 }}>
 					<Text
 						style={{
 							fontSize: 22,
@@ -75,7 +75,7 @@ export function EmbedConsentDialog({
 						</Text>
 					</div>
 				</div>
-				<div style={{ gap:12 }}>
+				<div style={{ gap: 12 }}>
 					<Button
 						style={gtMobile ? a.flex_1 : undefined}
 						label="Enable external media"

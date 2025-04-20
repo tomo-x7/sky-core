@@ -1,9 +1,9 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 
 export function Palette() {
 	const t = useTheme();
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<div
 				style={{
 					flexDirection: "row",

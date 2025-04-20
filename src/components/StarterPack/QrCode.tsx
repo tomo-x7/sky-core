@@ -40,7 +40,7 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					gap: 12,
 				}}
 			>
-				<div style={{ gap:8 }}>
+				<div style={{ gap: 8 }}>
 					<Text
 						style={{
 							fontWeight: "600",

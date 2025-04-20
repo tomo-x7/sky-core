@@ -1,7 +1,7 @@
 import { ComAtprotoServerCreateSession, type ComAtprotoServerDescribeServer } from "@atproto/api";
 import React, { useRef, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
@@ -152,7 +152,7 @@ export const LoginForm = ({
 			</div>
 			<div>
 				<TextField.LabelText>Account</TextField.LabelText>
-				<div style={{ gap:8 }}>
+				<div style={{ gap: 8 }}>
 					<TextField.Root>
 						<TextField.Icon icon={AtIcon} />
 						<TextField.Input

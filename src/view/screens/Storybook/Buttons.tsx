@@ -1,6 +1,4 @@
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { Button, type ButtonColor, ButtonIcon, ButtonText, type ButtonVariant } from "#/components/Button";
 import { H1 } from "#/components/Typography";
 import { ChevronLeft_Stroke2_Corner0_Rounded as ChevronLeft } from "#/components/icons/Chevron";
@@ -8,7 +6,7 @@ import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe
 
 export function Buttons() {
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<H1>Buttons</H1>
 			<div
 				style={{

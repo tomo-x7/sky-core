@@ -23,7 +23,7 @@ export function Forms() {
 	return (
 		<div
 			style={{
-				gap:32,
+				gap: 32,
 				alignItems: "flex-start",
 			}}
 		>
@@ -134,7 +134,7 @@ export function Forms() {
 					values={toggleGroupAValues}
 					onChange={setToggleGroupAValues}
 				>
-					<div style={{ gap:12 }}>
+					<div style={{ gap: 12 }}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Switch />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -165,7 +165,7 @@ export function Forms() {
 					values={toggleGroupBValues}
 					onChange={setToggleGroupBValues}
 				>
-					<div style={{ gap:12 }}>
+					<div style={{ gap: 12 }}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Checkbox />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -190,7 +190,7 @@ export function Forms() {
 				</Toggle.Group>
 
 				<Toggle.Group label="Toggle" type="radio" values={toggleGroupCValues} onChange={setToggleGroupCValues}>
-					<div style={{ gap:12 }}>
+					<div style={{ gap: 12 }}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Radio />
 							<Toggle.LabelText>Click me</Toggle.LabelText>

@@ -1,11 +1,11 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { H1, Text } from "#/components/Typography";
 
 export function Shadows() {
 	const t = useTheme();
 
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<H1>Shadows</H1>
 			<div
 				style={{

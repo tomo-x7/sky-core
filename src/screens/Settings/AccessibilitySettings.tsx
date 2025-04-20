@@ -25,7 +25,7 @@ export function AccessibilitySettingsScreen() {
 			</Layout.Header.Outer>
 			<Layout.Content>
 				<SettingsList.Container>
-					<SettingsList.Group contentContainerstyle={{ gap:8 }}>
+					<SettingsList.Group contentContainerStyle={{ gap: 8 }}>
 						<SettingsList.ItemIcon icon={AccessibilityIcon} />
 						<SettingsList.ItemText>Alt text</SettingsList.ItemText>
 						<Toggle.Item

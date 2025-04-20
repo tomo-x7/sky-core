@@ -425,7 +425,7 @@ function Footer({
 					</Text>
 				) : state.currentStep === "Feeds" ? (
 					items.length === 0 ? (
-						<div style={{ gap:8 }}>
+						<div style={{ gap: 8 }}>
 							<Text
 								style={{
 									fontWeight: "600",

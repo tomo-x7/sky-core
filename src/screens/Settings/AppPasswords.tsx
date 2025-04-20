@@ -151,7 +151,7 @@ function AppPasswordCard({
 					gap: 8,
 				}}
 			>
-				<div style={{ gap:4 }}>
+				<div style={{ gap: 4 }}>
 					<Text
 						style={{
 							...t.atoms.text,

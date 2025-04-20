@@ -64,7 +64,7 @@ export function PostInteractionSettingsControlledDialog({
 					width: "100%",
 				}}
 			>
-				<div style={{ gap:12 }}>
+				<div style={{ gap: 12 }}>
 					<Header />
 					<PostInteractionSettingsForm {...rest} />
 					<Text
@@ -245,7 +245,7 @@ export function PostInteractionSettingsDialogControlledInner(props: PostInteract
 				width: "100%",
 			}}
 		>
-			<div style={{ gap:12 }}>
+			<div style={{ gap: 12 }}>
 				<Header />
 
 				{isLoading ? (
@@ -334,8 +334,8 @@ export function PostInteractionSettingsForm({
 					gap: 12,
 				}}
 			>
-				<div style={{ gap:16 }}>
-					<div style={{ gap:8 }}>
+				<div style={{ gap: 16 }}>
+					<div style={{ gap: 8 }}>
 						<Text
 							style={{
 								fontWeight: "600",
@@ -456,7 +456,7 @@ export function PostInteractionSettingsForm({
 									Or combine these options:
 								</Text>
 
-								<div style={{ gap:8 }}>
+								<div style={{ gap: 8 }}>
 									<Selectable
 										label="Mentioned users"
 										isSelected={!!threadgateAllowUISettings.find((v) => v.type === "mention")}

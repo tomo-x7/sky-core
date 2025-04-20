@@ -283,7 +283,7 @@ export function SearchablePeopleList({
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
 			style={{ paddingTop: 0, paddingBottom: 0, height: "100dvh", maxHeight: 600, ...a.px_0 }}
-			webInnerContentContainerstyle={{ ...a.py_0 }}
+			webInnerContentContainerStyle={{ ...a.py_0 }}
 			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
 			scrollIndicatorInsets={{ top: headerHeight }}
 			keyboardDismissMode="on-drag"

@@ -123,8 +123,8 @@ export function Inner({
 			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
 			<Dialog.Close />
-			<div style={{ gap:20 }}>
-				<div style={{ gap:8 }}>
+			<div style={{ gap: 20 }}>
+				<div style={{ gap: 8 }}>
 					<Text
 						style={{
 							fontWeight: "800",
@@ -147,7 +147,7 @@ export function Inner({
 					{currentStep === "StepOne" ? (
 						<div>
 							{reasonText ? (
-								<div style={{ gap:8 }}>
+								<div style={{ gap: 8 }}>
 									<Text
 										style={{
 											fontSize: 16,

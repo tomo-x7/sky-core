@@ -2,7 +2,7 @@ import type { ComAtprotoServerCreateAppPassword } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -83,7 +83,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 					{!data ? (
 						<div
 							// Animated.View
-							style={{ gap:16 }}
+							style={{ gap: 16 }}
 							key={0}
 						>
 							<Text
@@ -131,7 +131,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 							)}
 							<div
 								// Animated.View
-								style={{ gap:16 }}
+								style={{ gap: 16 }}
 							>
 								<Toggle.Item
 									name="privileged"
@@ -182,7 +182,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 					) : (
 						<div
 							// Animated.View
-							style={{ gap:16 }}
+							style={{ gap: 16 }}
 							// entering={FadeIn.delay(200)}
 							key={1}
 						>

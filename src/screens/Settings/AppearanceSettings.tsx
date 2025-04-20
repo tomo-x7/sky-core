@@ -1,7 +1,7 @@
 import type React from "react";
 import { useCallback } from "react";
 
-import { atoms as a, useAlf, useTheme } from "#/alf";
+import { useAlf, useTheme } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import * as ToggleButton from "#/components/forms/ToggleButton";
@@ -185,7 +185,7 @@ export function AppearanceToggleButtonGroup({
 	const t = useTheme();
 	return (
 		<>
-			<SettingsList.Group contentContainerstyle={{ gap:8 }} iconInset={false}>
+			<SettingsList.Group contentContainerStyle={{ gap: 8 }} iconInset={false}>
 				<SettingsList.ItemIcon icon={Icon} />
 				<SettingsList.ItemText>{title}</SettingsList.ItemText>
 				{description && (

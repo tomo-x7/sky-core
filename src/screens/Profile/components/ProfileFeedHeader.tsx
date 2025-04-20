@@ -417,7 +417,7 @@ function DialogInner({
 	}, [reportDialogControl]);
 
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<div
 				style={{
 					flexDirection: "row",

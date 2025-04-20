@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, flatten, select, tokens, useTheme } from "#/alf";
+import { flatten, select, tokens, useTheme } from "#/alf";
 import { LinearGradient } from "#/components/LinearGradient";
 import type { Props as SVGIconProps } from "#/components/icons/common";
 

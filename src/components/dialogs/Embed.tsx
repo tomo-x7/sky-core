@@ -1,7 +1,7 @@
 import { type AppBskyActorDefs, type AppBskyFeedPost, AtUri } from "@atproto/api";
 import { memo, useEffect, useMemo, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -86,8 +86,8 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 
 	return (
 		<Dialog.Inner label="Embed post" style={{ maxWidth: 500 }}>
-			<div style={{ gap:16 }}>
-				<div style={{ gap:8 }}>
+			<div style={{ gap: 16 }}>
+				<div style={{ gap: 8 }}>
 					<Text
 						style={{
 							fontSize: 22,

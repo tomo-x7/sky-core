@@ -136,7 +136,7 @@ export function MessageInputEmbed({
 						alignItems: "center",
 					}}
 				>
-					<Text style={{ textAlign: "center", }}>Could not fetch post</Text>
+					<Text style={{ textAlign: "center" }}>Could not fetch post</Text>
 				</div>
 			);
 			break;

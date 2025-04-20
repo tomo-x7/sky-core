@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as Search } from "#/components/icons/MagnifyingGlass2";
@@ -10,7 +10,7 @@ export function Menus() {
 	// const {closeAllDialogs} = useDialogStateControlContext()
 
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<div
 				style={{
 					flexDirection: "row",

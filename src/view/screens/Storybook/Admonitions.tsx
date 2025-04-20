@@ -1,11 +1,10 @@
-import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { InlineLinkText } from "#/components/Link";
 import { H1 } from "#/components/Typography";
 
 export function Admonitions() {
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<H1>Admonitions</H1>
 			<Admonition>The quick brown fox jumps over the lazy dog.</Admonition>
 			<Admonition type="info">

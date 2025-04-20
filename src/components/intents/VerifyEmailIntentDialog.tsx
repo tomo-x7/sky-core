@@ -60,7 +60,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 			label={"Verify email dialog"}
 			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
-			<div style={{ gap:20 }}>
+			<div style={{ gap: 20 }}>
 				{status === "loading" ? (
 					<div
 						style={{
@@ -73,7 +73,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 						<Loader size="xl" fill={t.atoms.text_contrast_low.color} />
 					</div>
 				) : status === "success" ? (
-					<div style={{ gap:8 }}>
+					<div style={{ gap: 8 }}>
 						<Text
 							style={{
 								fontWeight: "800",
@@ -94,7 +94,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 						</Text>
 					</div>
 				) : status === "failure" ? (
-					<div style={{ gap:8 }}>
+					<div style={{ gap: 8 }}>
 						<Text
 							style={{
 								fontWeight: "800",
@@ -116,7 +116,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 						</Text>
 					</div>
 				) : (
-					<div style={{ gap:8 }}>
+					<div style={{ gap: 8 }}>
 						<Text
 							style={{
 								fontWeight: "800",

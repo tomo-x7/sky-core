@@ -157,7 +157,7 @@ export function Deactivated() {
 							visible to other users.
 						</Text>
 
-						<div style={{ gap:8 }}>
+						<div style={{ gap: 8 }}>
 							<Button
 								label={"Reactivate your account"}
 								size="large"

@@ -142,7 +142,7 @@ function AltTextInner({
 						gap: 12,
 					}}
 				>
-					<div style={{ gap:8 }}>
+					<div style={{ gap: 8 }}>
 						<div style={{ ...a.relative }}>
 							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>

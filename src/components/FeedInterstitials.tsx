@@ -221,7 +221,7 @@ function ProfileGrid({
 		Array(maxLength)
 			.fill(0)
 			.map((_, i) => (
-				<div key={i.toString()} style={gtMobile ? {  flex: "0 0 auto", width: "calc(50% - 6px)" } : undefined}>
+				<div key={i.toString()} style={gtMobile ? { flex: "0 0 auto", width: "calc(50% - 6px)" } : undefined}>
 					<SuggestedFollowPlaceholder />
 				</div>
 			))
@@ -277,7 +277,7 @@ function ProfileGrid({
 					paddingBottom: 4,
 					flexDirection: "row",
 					alignItems: "center",
-					justifyContent: "space-between"
+					justifyContent: "space-between",
 				}}
 			>
 				<Text
@@ -300,7 +300,7 @@ function ProfileGrid({
 						paddingRight: 16,
 						paddingTop: 8,
 						paddingBottom: 16,
-						gap:12
+						gap: 12,
 					}}
 				>
 					<div
@@ -530,7 +530,7 @@ export function SuggestedFeeds() {
 							onPress={() => {
 								navigate("/search");
 							}}
-							style={{ flexDirection:"column"}}
+							style={{ flexDirection: "column" }}
 						>
 							<CardOuter style={{ flex: 1 }}>
 								<div

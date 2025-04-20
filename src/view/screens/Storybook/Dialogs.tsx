@@ -55,7 +55,7 @@ export function Dialogs() {
 	};
 
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<Button
 				variant="outline"
 				color="secondary"

@@ -283,7 +283,7 @@ export function ModerationScreenInner({
 			>
 				Content filters
 			</Text>
-			<div style={{ gap:12 }}>
+			<div style={{ gap: 12 }}>
 				{ageNotSet && (
 					<>
 						<Button

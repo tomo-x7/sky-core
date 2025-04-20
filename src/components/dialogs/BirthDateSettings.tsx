@@ -96,7 +96,7 @@ function BirthdayInner({
 	}, [date, setBirthDate, control, hasChanged]);
 
 	return (
-		<div style={{ gap:16 }}>
+		<div style={{ gap: 16 }}>
 			<div>
 				<DateField
 					value={date}

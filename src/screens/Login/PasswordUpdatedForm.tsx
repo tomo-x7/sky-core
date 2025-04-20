@@ -13,7 +13,7 @@ export const PasswordUpdatedForm = ({
 	return (
 		<FormContainer
 			style={{
-				gap:24,
+				gap: 24,
 				...(!gtMobile && a.mt_5xl),
 			}}
 		>

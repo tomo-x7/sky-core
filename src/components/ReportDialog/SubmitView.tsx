@@ -1,7 +1,7 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { flatten, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -78,7 +78,7 @@ export function SubmitView({
 	}, [params, details, selectedReportOption, selectedServices, onSubmitComplete, agent]);
 
 	return (
-		<div style={{ gap:24 }}>
+		<div style={{ gap: 24 }}>
 			<Button
 				size="small"
 				variant="solid"
@@ -136,7 +136,7 @@ export function SubmitView({
 					}}
 				/>
 			</div>
-			<div style={{ gap:12 }}>
+			<div style={{ gap: 12 }}>
 				<Text style={t.atoms.text_contrast_medium}>Select the moderation service(s) to report to</Text>
 
 				<Toggle.Group label="Select mod services" values={selectedServices} onChange={setSelectedServices}>
@@ -161,7 +161,7 @@ export function SubmitView({
 					</div>
 				</Toggle.Group>
 			</div>
-			<div style={{ gap:12 }}>
+			<div style={{ gap: 12 }}>
 				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
 				<div

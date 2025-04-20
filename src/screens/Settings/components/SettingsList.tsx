@@ -299,7 +299,7 @@ export function BadgeText({
 				...t.atoms.text_contrast_low,
 				fontSize: 16,
 				letterSpacing: 0,
-				textAlign: "right",,
+				textAlign: "right",
 				lineHeight: 1.3,
 				...style,
 			}}
@@ -326,7 +326,7 @@ export function BadgeButton({
 						fontSize: 16,
 						letterSpacing: 0,
 						fontWeight: "400",
-						textAlign: "right",,
+						textAlign: "right",
 						...{ color: pressed ? t.palette.contrast_300 : t.palette.primary_500 },
 					}}
 				>

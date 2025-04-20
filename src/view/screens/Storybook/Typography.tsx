@@ -4,7 +4,7 @@ import { Text } from "#/components/Typography";
 
 export function Typography() {
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<Text selectable style={{ ...a.text_5xl }}>
 				atoms.text_5xl
 			</Text>

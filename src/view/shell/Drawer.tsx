@@ -57,7 +57,7 @@ let DrawerProfileCard = ({
 	const { data: profile } = useProfileQuery({ did: account.did });
 
 	return (
-		<button type="button" onClick={onPressProfile} style={{ gap:8 }}>
+		<button type="button" onClick={onPressProfile} style={{ gap: 8 }}>
 			<UserAvatar
 				size={52}
 				avatar={profile?.avatar}
@@ -65,7 +65,7 @@ let DrawerProfileCard = ({
 				usePlainRNImage={true}
 				type={profile?.associated?.labeler ? "labeler" : "user"}
 			/>
-			<div style={{ gap:2 }}>
+			<div style={{ gap: 2 }}>
 				<Text
 					style={{
 						fontWeight: "800",

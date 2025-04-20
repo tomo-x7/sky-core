@@ -58,7 +58,7 @@ export function SelectReportOptionView(props: {
 	}, [props.params.type]);
 
 	return (
-		<div style={{ gap:16 }}>
+		<div style={{ gap: 16 }}>
 			{props.labelers?.length > 1 ? (
 				<Button
 					size="small"
@@ -97,7 +97,7 @@ export function SelectReportOptionView(props: {
 				</Text>
 			</div>
 			<Divider />
-			<div style={{ gap:8 }}>
+			<div style={{ gap: 8 }}>
 				{reportOptions.map((reportOption) => {
 					return (
 						<Button

@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
 import { H1 } from "#/components/Typography";
 import { ArrowTopRight_Stroke2_Corner0_Rounded as ArrowTopRight } from "#/components/icons/Arrow";
@@ -8,7 +8,7 @@ import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe
 export function Icons() {
 	const t = useTheme();
 	return (
-		<div style={{ gap:12 }}>
+		<div style={{ gap: 12 }}>
 			<H1>Icons</H1>
 			<div
 				style={{

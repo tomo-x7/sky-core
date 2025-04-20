@@ -174,7 +174,7 @@ function GifList({
 				renderItem={renderItem}
 				// numColumns={gtMobile ? 3 : 2} //TODO
 				// columnWrapperstyle={{gap:8}}  //TODO
-				contentContainerstyle={{ ...a.h_full_vh }}
+				contentContainerStyle={{ ...a.h_full_vh }}
 				style={{ ...a.h_full_vh }}
 				ListHeaderComponent={
 					<>
@@ -223,7 +223,7 @@ function DialogError({ details }: { details?: string }) {
 	const control = Dialog.useDialogContext();
 
 	return (
-		<Dialog.ScrollableInner style={{ gap:12 }} label="An error has occurred">
+		<Dialog.ScrollableInner style={{ gap: 12 }} label="An error has occurred">
 			<Dialog.Close />
 			<ErrorScreen
 				title="Oh no!"

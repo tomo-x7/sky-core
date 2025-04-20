@@ -99,7 +99,7 @@ export let MessagesListHeader = ({
 								...t.atoms.bg_contrast_25,
 							}}
 						/>
-						<div style={{ gap:4 }}>
+						<div style={{ gap: 4 }}>
 							<div
 								style={{
 									...{ width: 120, height: 16 },

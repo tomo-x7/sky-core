@@ -1,4 +1,3 @@
-import { atoms as a } from "#/alf";
 import { ProgressCircle, ProgressPie } from "#/components/Progress";
 import { Text } from "#/components/Typography";
 import { MAX_GRAPHEME_LENGTH } from "#/lib/constants";
@@ -35,7 +34,7 @@ export function CharProgress({
 				style={{
 					...{ color: textColor, fontVariant: "tabular-nums" },
 					flexGrow: 1,
-					textAlign: "right",,
+					textAlign: "right",
 					...textStyle,
 				}}
 			>
