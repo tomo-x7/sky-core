@@ -49,7 +49,7 @@ import { PostMeta } from "#/view/com/util/PostMeta";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import { formatCount } from "#/view/com/util/numeric/format";
-import { PostCtrls } from "#/view/com/util/post-ctrls/PostCtrls";
+import { PostCtrls } from "#/units/post/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
 
 export function PostThreadItem({

@@ -33,7 +33,7 @@ import { Link, TextLink } from "../util/Link";
 import { PostMeta } from "../util/PostMeta";
 import { PreviewableUserAvatar } from "../util/UserAvatar";
 import { UserInfoText } from "../util/UserInfoText";
-import { PostCtrls } from "../util/post-ctrls/PostCtrls";
+import { PostCtrls } from "../../../units/post/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "../util/post-embeds";
 
 export function Post({

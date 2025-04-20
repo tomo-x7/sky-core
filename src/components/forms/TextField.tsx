@@ -184,10 +184,10 @@ export function Input({
 		a.px_xs,
 		{
 			// paddingVertical doesn't work w/multiline - esb
-			lineHeight: a.text_md.fontSize * 1.1875,
+			lineHeight:  1.1875,
 
 			minHeight: rest.multiline ? 80 : undefined,
-			minWidth: 0,
+			minWidth: 0,border:"0px",backgroundColor:"transparent"
 		},
 		// fix for autofill styles covering border
 		{

@@ -25,7 +25,7 @@ export const PressableWithHover = forwardRef<HTMLAnchorElement, props>(function 
 			onMouseEnter={onHoverIn}
 			onMouseLeave={onHoverOut}
 			ref={ref}
-			{...(noUnderline ? { "data-noUnderline": 1 } : {})}
+			{...(noUnderline && { "data-no-underline": 1 })}
 			href={href}
 			onClick={onPress}
 		>
@@ -42,7 +42,7 @@ export const PressableWithoutHover = forwardRef<HTMLAnchorElement, props>(functi
 		<a
 			style={style}
 			ref={ref}
-			{...(noUnderline ? { "data-noUnderline": 1 } : {})}
+			{...(noUnderline && { "data-no-underline": 1 })}
 			href={href}
 			onClick={onPress}
 			{...rest}

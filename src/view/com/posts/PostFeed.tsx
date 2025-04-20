@@ -35,7 +35,7 @@ import { PostFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { DiscoverFallbackHeader } from "./DiscoverFallbackHeader";
 import { FeedShutdownMsg } from "./FeedShutdownMsg";
 import { PostFeedErrorMessage } from "./PostFeedErrorMessage";
-import { PostFeedItem } from "./PostFeedItem";
+import { PostFeedItem } from "#/units/post";
 import { ViewFullThread } from "./ViewFullThread";
 
 type FeedRow =

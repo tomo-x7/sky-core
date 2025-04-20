@@ -191,12 +191,7 @@ export function Link({
 			target={download ? undefined : isExternal ? "blank" : undefined}
 			rel={isExternal ? "noopener noreferrer" : undefined}
 			download={download}
-			{...{
-				dataset: {
-					// no underline, only `InlineLink` has underlines
-					noUnderline: "1",
-				},
-			}}
+			noUnderLine
 		>
 			{children}
 		</Button>
@@ -270,12 +265,7 @@ export function InlineLinkText({
 			target={!download && isExternal ? "_blank" : undefined}
 			rel={isExternal ? "noopener noreferrer" : undefined}
 			download={download}
-			{...{
-				dataset: {
-					// default to no underline, apply this ourselves
-					noUnderline: "1",
-				},
-			}}
+			data-no-underline
 		>
 			{children}
 		</a>

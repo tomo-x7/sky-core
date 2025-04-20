@@ -9,7 +9,7 @@ import { Text } from "#/components/Typography";
 import { FormError } from "#/components/forms/FormError";
 import { HostingProvider } from "#/components/forms/HostingProvider";
 import * as TextField from "#/components/forms/TextField";
-import { At_Stroke2_Corner0_Rounded as At } from "#/components/icons/At";
+import { At_Stroke2_Corner0_Rounded as AtIcon } from "#/components/icons/At";
 import { Lock_Stroke2_Corner0_Rounded as Lock } from "#/components/icons/Lock";
 import { Ticket_Stroke2_Corner0_Rounded as Ticket } from "#/components/icons/Ticket";
 import { Keyboard } from "#/lib/Keyboard";
@@ -154,7 +154,7 @@ export const LoginForm = ({
 				<TextField.LabelText>Account</TextField.LabelText>
 				<div style={a.gap_sm}>
 					<TextField.Root>
-						<TextField.Icon icon={At} />
+						<TextField.Icon icon={AtIcon} />
 						<TextField.Input
 							label={"Username or email address"}
 							autoCapitalize="none"

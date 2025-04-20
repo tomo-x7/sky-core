@@ -70,13 +70,16 @@ export const Link = memo(function Link({
 		);
 	}
 
-	if (anchorNoUnderline) {
-		props.dataset = { ...props.dataset, noUnderline: 1 };
-	}
-
 	const Com = props.hoverStyle ? PressableWithHover : PressableWithoutHover;
 	return (
-		<Com style={style} onPress={onPress} href={anchorHref} {...props} {...parseDataset(props.dataset)}>
+		<Com
+			style={style}
+			onPress={onPress}
+			href={anchorHref}
+			{...props}
+			{...parseDataset(props.dataset)}
+			noUnderline={anchorNoUnderline}
+		>
 			{children ? children : <Text>{title || "link"}</Text>}
 		</Com>
 	);

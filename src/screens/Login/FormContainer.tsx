@@ -15,7 +15,7 @@ export function FormContainer({
 	const { gtMobile } = useBreakpoints();
 	const t = useTheme();
 	return (
-		<div
+		<form
 			style={{
 				...a.gap_md,
 				...a.flex_1,
@@ -35,6 +35,6 @@ export function FormContainer({
 				</Text>
 			)}
 			{children}
-		</div>
+		</form>
 	);
 }

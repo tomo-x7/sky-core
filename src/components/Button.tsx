@@ -68,6 +68,7 @@ export type ButtonProps = {
 	onFocus?: (ev: React.FocusEvent<HTMLAnchorElement, Element>) => void;
 	onBlur?: (ev: React.FocusEvent<HTMLAnchorElement, Element>) => void;
 	className?: string;
+	noUnderLine?:boolean
 } & VariantProps & {
 		/**
 		 * For a11y, try to make this descriptive and clear
@@ -115,6 +116,7 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 			href,
 			onPress,
 			hitSlop, //TODO
+			noUnderLine,
 			...rest
 		},
 		ref,
@@ -468,6 +470,7 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 				onMouseEnter={onHoverIn}
 				onMouseLeave={onHoverOut}
 				href={href}
+				{...noUnderLine&&{"data-no-underline":true}}
 			>
 				{variant === "gradient" && gradientValues && (
 					<div

@@ -140,13 +140,7 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 			style={a.flex_1}
 		>
 			<LoggedOutLayout leadin="" title={title} description={description} scrollable>
-				<div
-				// LayoutAnimationConfig
-				// skipEntering
-				// skipExiting
-				>
-					<ScreenTransition key={currentForm}>{content}</ScreenTransition>
-				</div>
+				<div style={{paddingLeft:40,paddingRight:40}}>{content}</div>
 			</LoggedOutLayout>
 		</div>
 	);

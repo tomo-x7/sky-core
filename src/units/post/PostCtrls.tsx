@@ -25,10 +25,10 @@ import { usePostLikeMutationQueue, usePostRepostMutationQueue } from "#/state/qu
 import { useRequireAuth, useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
 import { ProgressGuideAction, useProgressGuideControls } from "#/state/shell/progress-guide";
-import * as Toast from "../Toast";
-import { PostDropdownBtn } from "../forms/PostDropdownBtn";
-import { formatCount } from "../numeric/format";
-import { RepostButton } from "./RepostButton";
+import * as Toast from "../../view/com/util/Toast";
+import { PostDropdownBtn } from "../../view/com/util/forms/PostDropdownBtn";
+import { formatCount } from "../../view/com/util/numeric/format";
+import { RepostButton } from "../../view/com/util/post-ctrls/RepostButton";
 
 let PostCtrls = ({
 	big,

@@ -532,7 +532,6 @@ export function DesktopLeftNav() {
 				<>
 					<NavItem
 						href="/"
-						// hasNew={hasHomeBadge && gate("remove_show_latest_button")}
 						icon={<Home aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						iconFilled={<HomeFilled aria-hidden={true} width={NAV_ICON_WIDTH} style={pal.text} />}
 						label={"Home"}

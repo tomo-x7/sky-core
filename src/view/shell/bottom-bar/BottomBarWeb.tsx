@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useMatch } from "react-router-dom";
 import { atoms as a, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -34,6 +34,7 @@ import { Link } from "#/view/com/util/Link";
 import { Logo } from "#/view/icons/Logo";
 import { Logotype } from "#/view/icons/Logotype";
 import { styles } from "./BottomBarStyles";
+import { routes } from "#/routes";
 
 export function BottomBarWeb() {
 	const { hasSession, currentAccount } = useSession();
@@ -71,7 +72,7 @@ export function BottomBarWeb() {
 		>
 			{hasSession ? (
 				<>
-					<NavItem routeName="Home" href="/" /*hasNew={hasHomeBadge && gate("remove_show_latest_button")}*/>
+					<NavItem routeName="Home" href="/" >
 						{({ isActive }) => {
 							const Icon = isActive ? HomeFilled : Home;
 							return (
@@ -240,8 +241,8 @@ const NavItem: React.FC<{
 }> = ({ children, href, routeName, hasNew, notificationCount }) => {
 	const { currentAccount } = useSession();
 	// TODO!!
-	const isMatchHref = false; //useMatch(href) != null;
-	const isProfile = false; //useMatch(routes.Profile) != null;
+	const isMatchHref = useMatch(href) != null;
+	const isProfile = useMatch(routes.Profile) != null;
 	const location = useLocation();
 
 	// Checks whether we're on someone else's profile

@@ -38,7 +38,7 @@ import { CenteredView, ScrollView } from "#/view/com/util/Views";
 import { ScreenHider } from "../../components/moderation/ScreenHider";
 import { NotificationFeedItem } from "../com/notifications/NotificationFeedItem";
 import { PostThreadItem } from "../com/post-thread/PostThreadItem";
-import { PostFeedItem } from "../com/posts/PostFeedItem";
+import { PostFeedItem } from "#/units/post";
 import { ProfileCard } from "../com/profile/ProfileCard";
 
 const LABEL_VALUES: (keyof typeof LABELS)[] = Object.keys(LABELS) as (keyof typeof LABELS)[];

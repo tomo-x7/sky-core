@@ -2,7 +2,7 @@
  * Note: the dataSet properties are used to leverage custom CSS in public/index.html
  */
 
-import { FontAwesomeIcon, type Props as FontAwesomeProps } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon, type FontAwesomeIconProps, } from "@fortawesome/react-fontawesome";
 import type React from "react";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ const DURATION = 3500;
 
 interface ActiveToast {
 	text: string;
-	icon: FontAwesomeProps["icon"];
+	icon: FontAwesomeIconProps["icon"];
 }
 type GlobalSetActiveToast = (_activeToast: ActiveToast | undefined) => void;
 
@@ -52,7 +52,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = () => {
 // methods
 // =
 
-export function show(text: string, icon: FontAwesomeProps["icon"] = "check") {
+export function show(text: string, icon: FontAwesomeIconProps["icon"] = "check") {
 	if (toastTimeout) {
 		clearTimeout(toastTimeout);
 	}
