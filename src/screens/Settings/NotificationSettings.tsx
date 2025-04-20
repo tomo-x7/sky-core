@@ -52,8 +52,8 @@ export function NotificationSettingsScreen() {
 									name="enabled"
 									label={"Enable priority notifications"}
 									style={{
-										...a.flex_1,
-										...a.justify_between,
+										flex: 1,
+										justifyContent: "space-between",
 									}}
 								>
 									<Toggle.LabelText>Enable priority notifications</Toggle.LabelText>
@@ -62,11 +62,11 @@ export function NotificationSettingsScreen() {
 							</Toggle.Group>
 						</SettingsList.Group>
 						<SettingsList.Item>
-							<Admonition type="warning" style={a.flex_1}>
+							<Admonition type="warning" style={{ flex: 1 }}>
 								<>
-									<span style={a.font_bold}>Experimental:</span> When this preference is enabled,
-									you'll only receive reply and quote notifications from users you follow. We'll
-									continue to add more controls here over time.
+									<span style={{ ...a.font_bold }}>Experimental:</span> When this preference is
+									enabled, you'll only receive reply and quote notifications from users you follow.
+									We'll continue to add more controls here over time.
 								</>
 							</Admonition>
 						</SettingsList.Item>

@@ -55,36 +55,39 @@ export function NoFeedsPinned({
 	}, [overwriteSavedFeeds, preferences.savedFeeds]);
 
 	return (
-		<CenteredView sideBorders style={a.h_full_vh}>
+		<CenteredView sideBorders style={{ ...a.h_full_vh }}>
 			<div
 				style={{
-					...a.align_center,
-					...a.h_full_vh,
-					...a.py_3xl,
-					...a.px_xl,
+					alignItems: "center",
+					height: "100dvh",
+					paddingBottom: 28,
+					paddingLeft: 20,
+					paddingRight: 20,
 					paddingTop: headerOffset + a.py_3xl.paddingTop,
 				}}
 			>
 				<div
 					style={{
-						...a.align_center,
-						...a.gap_sm,
-						...a.pb_xl,
+						alignItems: "center",
+						gap: 8,
+						paddingBottom: 20,
 					}}
 				>
 					<Text
 						style={{
-							...a.text_xl,
-							...a.font_bold,
+							fontSize: 20,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						Whoops!
 					</Text>
 					<Text
 						style={{
-							...a.text_md,
-							...a.text_center,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							textAlign: "center",
+							lineHeight: 1.3,
 							...{ maxWidth: 340 },
 						}}
 					>
@@ -94,10 +97,10 @@ export function NoFeedsPinned({
 
 				<div
 					style={{
-						...a.flex_row,
-						...a.gap_md,
-						...a.justify_center,
-						...a.flex_wrap,
+						flexDirection: "row",
+						gap: 12,
+						justifyContent: "center",
+						flexWrap: "wrap",
 					}}
 				>
 					<Button

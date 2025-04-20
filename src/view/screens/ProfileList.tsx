@@ -644,17 +644,19 @@ function Header({
 			{descriptionRT ? (
 				<div
 					style={{
-						...a.px_lg,
-						...a.pt_sm,
-						...a.pb_sm,
-						...a.gap_md,
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 8,
+						paddingBottom: 8,
+						gap: 12,
 					}}
 				>
 					<RichText
 						value={descriptionRT}
 						style={{
-							...a.text_md,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							lineHeight: 1.3,
 						}}
 					/>
 				</div>
@@ -703,8 +705,8 @@ const FeedSection = React.forwardRef<SectionRef, FeedSectionProps>(function Feed
 		return (
 			<div
 				style={{
-					...a.gap_xl,
-					...a.align_center,
+					gap: 20,
+					alignItems: "center",
 				}}
 			>
 				<EmptyState icon="hashtag" message={"This feed is empty."} />
@@ -778,8 +780,10 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 			return (
 				<div
 					style={{
-						...a.px_sm,
-						...a.py_sm,
+						paddingLeft: 8,
+						paddingRight: 8,
+						paddingTop: 8,
+						paddingBottom: 8,
 					}}
 				>
 					<NewButton
@@ -788,7 +792,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 						color="primary"
 						size="small"
 						variant="outline"
-						style={a.py_md}
+						style={{ ...a.py_md }}
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
 						<ButtonText>Add people</ButtonText>
@@ -799,9 +803,11 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 		return (
 			<div
 				style={{
-					...a.px_lg,
-					...a.py_md,
-					...a.flex_row_reverse,
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingTop: 12,
+					paddingBottom: 12,
+					flexDirection: "row-reverse",
 				}}
 			>
 				<NewButton
@@ -810,7 +816,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					color="primary"
 					size="small"
 					variant="ghost"
-					style={a.py_sm}
+					style={{ ...a.py_sm }}
 				>
 					<ButtonIcon icon={PersonPlusIcon} />
 					<ButtonText>Add people</ButtonText>
@@ -823,8 +829,8 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 		return (
 			<div
 				style={{
-					...a.gap_xl,
-					...a.align_center,
+					gap: 20,
+					alignItems: "center",
 				}}
 			>
 				<EmptyState icon="users-slash" message={"This list is empty."} />

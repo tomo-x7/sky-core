@@ -123,14 +123,17 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 							type="button"
 							style={{
 								...t.atoms.bg,
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_md,
-								...a.border,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 12,
+								border: "1px solid black",
+								borderWidth: 1,
 								...t.atoms.border_contrast_high,
-								...a.rounded_md,
-								...a.px_lg,
-								...a.py_md,
+								borderRadius: 12,
+								paddingLeft: 16,
+								paddingRight: 16,
+								paddingTop: 12,
+								paddingBottom: 12,
 								...a.shadow_sm,
 								boxShadow: "0px 2px 8px rgba(0,0,0,0.1)",
 							}}
@@ -140,8 +143,9 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 							<div>
 								<Text
 									style={{
-										...a.text_md,
-										...a.font_bold,
+										fontSize: 16,
+										letterSpacing: 0,
+										fontWeight: "600",
 									}}
 								>
 									{title}
@@ -149,7 +153,8 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 								{subtitle && (
 									<Text
 										style={{
-											...a.text_sm,
+											fontSize: 14,
+											letterSpacing: 0,
 											...t.atoms.text_contrast_medium,
 										}}
 									>

@@ -83,21 +83,23 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 					{!data ? (
 						<div
 							// Animated.View
-							style={a.gap_lg}
+							style={{ gap:16 }}
 							key={0}
 						>
 							<Text
 								style={{
-									...a.text_2xl,
-									...a.font_bold,
+									fontSize: 22,
+									letterSpacing: 0,
+									fontWeight: "600",
 								}}
 							>
 								Add App Password
 							</Text>
 							<Text
 								style={{
-									...a.text_md,
-									...a.leading_snug,
+									fontSize: 16,
+									letterSpacing: 0,
+									lineHeight: 1.3,
 								}}
 							>
 								Please enter a unique name for this app password or use our randomly generated one.
@@ -129,7 +131,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 							)}
 							<div
 								// Animated.View
-								style={a.gap_lg}
+								style={{ gap:16 }}
 							>
 								<Toggle.Item
 									name="privileged"
@@ -137,14 +139,15 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									label={"Allow access to your direct messages"}
 									value={privileged}
 									onChange={setPrivileged}
-									style={a.flex_1}
+									style={{ flex: 1 }}
 								>
 									<Toggle.Checkbox />
 									<Toggle.LabelText
 										style={{
-											...a.font_normal,
-											...a.text_md,
-											...a.leading_snug,
+											fontWeight: "400",
+											fontSize: 16,
+											letterSpacing: 0,
+											lineHeight: 1.3,
 										}}
 									>
 										Allow access to your direct messages
@@ -155,7 +158,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 									size="large"
 									variant="solid"
 									color="primary"
-									style={a.flex_1}
+									style={{ flex: 1 }}
 									onPress={() => createAppPassword()}
 									disabled={isPending}
 								>
@@ -179,22 +182,24 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 					) : (
 						<div
 							// Animated.View
-							style={a.gap_lg}
+							style={{ gap:16 }}
 							// entering={FadeIn.delay(200)}
 							key={1}
 						>
 							<Text
 								style={{
-									...a.text_2xl,
-									...a.font_bold,
+									fontSize: 22,
+									letterSpacing: 0,
+									fontWeight: "600",
 								}}
 							>
 								Here is your app password!
 							</Text>
 							<Text
 								style={{
-									...a.text_md,
-									...a.leading_snug,
+									fontSize: 16,
+									letterSpacing: 0,
+									lineHeight: 1.3,
 								}}
 							>
 								Use this to sign in to the other app along with your handle.
@@ -211,8 +216,9 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 							</CopyButton>
 							<Text
 								style={{
-									...a.text_md,
-									...a.leading_snug,
+									fontSize: 16,
+									letterSpacing: 0,
+									lineHeight: 1.3,
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -224,7 +230,7 @@ function CreateDialogInner({ passwords }: { passwords: string[] }) {
 								size="large"
 								variant="outline"
 								color="primary"
-								style={a.flex_1}
+								style={{ flex: 1 }}
 								onPress={() => control.close()}
 							>
 								<ButtonText>Done</ButtonText>

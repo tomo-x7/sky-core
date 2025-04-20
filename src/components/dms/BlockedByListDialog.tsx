@@ -1,7 +1,7 @@
 import type { ModerationCause } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
@@ -23,15 +23,16 @@ export function BlockedByListDialog({
 			<Prompt.TitleText>{"User blocked by list"}</Prompt.TitleText>
 			<div
 				style={{
-					...a.gap_sm,
-					...a.pb_lg,
+					gap: 8,
+					paddingBottom: 16,
 				}}
 			>
 				<Text
 					selectable
 					style={{
-						...a.text_md,
-						...a.leading_snug,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_high,
 					}}
 				>
@@ -42,8 +43,9 @@ export function BlockedByListDialog({
 
 				<Text
 					style={{
-						...a.text_md,
-						...a.leading_snug,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_high,
 					}}
 				>
@@ -56,8 +58,9 @@ export function BlockedByListDialog({
 									label={block.source.list.name}
 									to={listUriToHref(block.source.list.uri)}
 									style={{
-										...a.text_md,
-										...a.leading_snug,
+										fontSize: 16,
+										letterSpacing: 0,
+										lineHeight: 1.3,
 									}}
 								>
 									{block.source.list.name}

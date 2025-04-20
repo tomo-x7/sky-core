@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { TimesLarge_Stroke2_Corner0_Rounded as Times } from "#/components/icons/Times";
@@ -17,23 +17,24 @@ export function ProgressGuideList({ style }: { style?: React.CSSProperties }) {
 		return (
 			<div
 				style={{
-					...a.flex_col,
-					...a.gap_md,
+					flexDirection: "column",
+					gap: 12,
 					...style,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.justify_between,
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "space-between",
 					}}
 				>
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.font_bold,
-							...a.text_sm,
+							fontWeight: "600",
+							fontSize: 14,
+							letterSpacing: 0,
 							...{ textTransform: "uppercase" },
 						}}
 					>

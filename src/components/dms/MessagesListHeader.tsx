@@ -54,13 +54,14 @@ export let MessagesListHeader = ({
 			style={{
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
-				...a.border_b,
-				...a.flex_row,
-				...a.align_start,
-				...a.gap_sm,
+				borderBottom: "1px solid black",
+				flexDirection: "row",
+				alignItems: "flex-start",
+				gap: 8,
 				...(gtTablet ? a.pl_lg : a.pl_xl),
-				...a.pr_lg,
-				...a.py_sm,
+				paddingRight: 16,
+				paddingTop: 8,
+				paddingBottom: 8,
 			}}
 		>
 			<button
@@ -85,32 +86,32 @@ export let MessagesListHeader = ({
 				<>
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_md,
-							...a.flex_1,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 12,
+							flex: 1,
 						}}
 					>
 						<div
 							style={{
 								...{ width: PFP_SIZE, height: PFP_SIZE },
-								...a.rounded_full,
+								borderRadius: 999,
 								...t.atoms.bg_contrast_25,
 							}}
 						/>
-						<div style={a.gap_xs}>
+						<div style={{ gap:4 }}>
 							<div
 								style={{
 									...{ width: 120, height: 16 },
-									...a.rounded_xs,
+									borderRadius: 4,
 									...t.atoms.bg_contrast_25,
-									...a.mt_xs,
+									marginTop: 4,
 								}}
 							/>
 							<div
 								style={{
 									...{ width: 175, height: 12 },
-									...a.rounded_xs,
+									borderRadius: 4,
 									...t.atoms.bg_contrast_25,
 								}}
 							/>
@@ -153,27 +154,27 @@ function HeaderReady({
 		latestMessageFromOther?.type === "message" ? latestMessageFromOther.message : undefined;
 
 	return (
-		<div style={a.flex_1}>
+		<div style={{ flex: 1 }}>
 			<div
 				style={{
-					...a.w_full,
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_between,
+					width: "100%",
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "space-between",
 				}}
 			>
 				<Link
 					label={`View ${displayName}'s profile`}
 					style={{
-						...a.flex_row,
-						...a.align_start,
-						...a.gap_md,
-						...a.flex_1,
-						...a.pr_md,
+						flexDirection: "row",
+						alignItems: "flex-start",
+						gap: 12,
+						flex: 1,
+						paddingRight: 12,
 					}}
 					to={makeProfileLink(profile)}
 				>
-					<div style={a.pt_2xs}>
+					<div style={{ ...a.pt_2xs }}>
 						<PreviewableUserAvatar
 							size={PFP_SIZE}
 							profile={profile}
@@ -181,13 +182,14 @@ function HeaderReady({
 							disableHoverCard={moderation.blocked}
 						/>
 					</div>
-					<div style={a.flex_1}>
+					<div style={{ flex: 1 }}>
 						<Text
 							style={{
-								...a.text_md,
-								...a.font_bold,
-								...a.self_start,
-								...a.leading_normal,
+								fontSize: 16,
+								letterSpacing: 0,
+								fontWeight: "600",
+								alignSelf: "flex-start",
+								lineHeight: 1.5,
 							}}
 							numberOfLines={1}
 						>
@@ -197,8 +199,9 @@ function HeaderReady({
 							<Text
 								style={{
 									...t.atoms.text_contrast_medium,
-									...a.text_sm,
-									...a.leading_normal,
+									fontSize: 14,
+									letterSpacing: 0,
+									lineHeight: 1.5,
 									marginTop: -2,
 								}}
 								numberOfLines={1}
@@ -230,7 +233,7 @@ function HeaderReady({
 					paddingLeft: PFP_SIZE + a.gap_md.gap,
 				}}
 			>
-				<PostAlerts modui={moderation.ui("contentList")} size="lg" style={a.pt_xs} />
+				<PostAlerts modui={moderation.ui("contentList")} size="lg" style={{ ...a.pt_xs }} />
 			</div>
 		</div>
 	);

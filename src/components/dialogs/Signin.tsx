@@ -41,14 +41,14 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 			label="Sign in to Bluesky or create a new account"
 			style={gtMobile ? { width: "auto", maxWidth: 420 } : a.w_full}
 		>
-			<div style={a.p_2xl}>
+			<div style={{ ...a.p_2xl }}>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.justify_center,
-						...a.gap_sm,
-						...a.pb_lg,
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "center",
+						gap: 8,
+						paddingBottom: 16,
 					}}
 				>
 					<Logo width={36} />
@@ -59,12 +59,14 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 
 				<Text
 					style={{
-						...a.text_lg,
-						...a.text_center,
+						fontSize: 18,
+						letterSpacing: 0,
+						textAlign: "center",
 						...t.atoms.text,
-						...a.pb_2xl,
-						...a.leading_snug,
-						...a.mx_auto,
+						paddingBottom: 24,
+						lineHeight: 1.3,
+						marginLeft: "auto",
+						marginRight: "auto",
 
 						...{
 							maxWidth: 300,
@@ -76,8 +78,8 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 
 				<div
 					style={{
-						...a.flex_col,
-						...a.gap_md,
+						flexDirection: "column",
+						gap: 12,
 					}}
 				>
 					<Button

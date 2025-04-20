@@ -49,7 +49,7 @@ export function AvatarCircle({
 			)}
 			<div
 				style={{
-					...a.absolute,
+					position: "absolute",
 					...{ bottom: 2, right: 2 },
 				}}
 			>

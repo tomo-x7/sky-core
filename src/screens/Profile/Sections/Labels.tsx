@@ -6,7 +6,7 @@ import {
 } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
@@ -49,8 +49,8 @@ export const ProfileLabelsSection = React.forwardRef<SectionRef, LabelsSectionPr
 			{isLabelerLoading ? (
 				<div
 					style={{
-						...a.w_full,
-						...a.align_center,
+						width: "100%",
+						alignItems: "center",
 					}}
 				>
 					<Loader size="xl" />
@@ -127,9 +127,11 @@ export function ProfileLabelsSectionInner({
 		>
 			<div
 				style={{
-					...a.pt_xl,
-					...a.px_lg,
-					...a.border_t,
+					paddingTop: 20,
+					paddingLeft: 16,
+					paddingRight: 16,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
 					...t.atoms.border_contrast_low,
 				}}
 			>
@@ -137,8 +139,9 @@ export function ProfileLabelsSectionInner({
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
-							...a.leading_snug,
-							...a.text_sm,
+							lineHeight: 1.3,
+							fontSize: 14,
+							letterSpacing: 0,
 						}}
 					>
 						Labels are annotations on users and content. They can be used to hide, warn, and categorize the
@@ -147,18 +150,19 @@ export function ProfileLabelsSectionInner({
 					{labelerInfo.creator.viewer?.blocking ? (
 						<div
 							style={{
-								...a.flex_row,
-								...a.gap_sm,
-								...a.align_center,
-								...a.mt_md,
+								flexDirection: "row",
+								gap: 8,
+								alignItems: "center",
+								marginTop: 12,
 							}}
 						>
 							<CircleInfo size="sm" fill={t.atoms.text_contrast_medium.color} />
 							<Text
 								style={{
 									...t.atoms.text_contrast_high,
-									...a.leading_snug,
-									...a.text_sm,
+									lineHeight: 1.3,
+									fontSize: 14,
+									letterSpacing: 0,
 								}}
 							>
 								Blocking does not prevent this labeler from placing labels on your account.
@@ -168,10 +172,11 @@ export function ProfileLabelsSectionInner({
 					{labelValues.length === 0 ? (
 						<Text
 							style={{
-								...a.pt_xl,
+								paddingTop: 20,
 								...t.atoms.text_contrast_high,
-								...a.leading_snug,
-								...a.text_sm,
+								lineHeight: 1.3,
+								fontSize: 14,
+								letterSpacing: 0,
 							}}
 						>
 							This labeler hasn't declared what labels it publishes, and may not be active.
@@ -179,10 +184,11 @@ export function ProfileLabelsSectionInner({
 					) : !isSubscribed ? (
 						<Text
 							style={{
-								...a.pt_xl,
+								paddingTop: 20,
 								...t.atoms.text_contrast_high,
-								...a.leading_snug,
-								...a.text_sm,
+								lineHeight: 1.3,
+								fontSize: 14,
+								letterSpacing: 0,
 							}}
 						>
 							<>Subscribe to @{labelerInfo.creator.handle} to use these labels:</>
@@ -192,10 +198,10 @@ export function ProfileLabelsSectionInner({
 				{labelDefs.length > 0 && (
 					<div
 						style={{
-							...a.mt_xl,
-							...a.w_full,
-							...a.rounded_md,
-							...a.overflow_hidden,
+							marginTop: 20,
+							width: "100%",
+							borderRadius: 12,
+							overflow: "hidden",
 							...t.atoms.bg_contrast_25,
 						}}
 					>

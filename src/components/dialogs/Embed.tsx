@@ -86,21 +86,23 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 
 	return (
 		<Dialog.Inner label="Embed post" style={{ maxWidth: 500 }}>
-			<div style={a.gap_lg}>
-				<div style={a.gap_sm}>
+			<div style={{ gap:16 }}>
+				<div style={{ gap:8 }}>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_heavy,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "800",
 						}}
 					>
 						Embed post
 					</Text>
 					<Text
 						style={{
-							...a.text_md,
+							fontSize: 16,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
-							...a.leading_normal,
+							lineHeight: 1.5,
 						}}
 					>
 						Embed this post in your website. Simply copy the following snippet and paste it into the HTML
@@ -109,10 +111,11 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 				</div>
 				<div
 					style={{
-						...a.border,
+						border: "1px solid black",
+						borderWidth: 1,
 						...t.atoms.border_contrast_low,
-						...a.rounded_sm,
-						...a.overflow_hidden,
+						borderRadius: 8,
+						overflow: "hidden",
 					}}
 				>
 					<Button
@@ -123,7 +126,7 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 						shape="default"
 						onPress={() => setShowCustomisation((c) => !c)}
 						style={{
-							...a.justify_start,
+							justifyContent: "flex-start",
 							...(showCustomisation && t.atoms.bg_contrast_25),
 						}}
 					>
@@ -134,14 +137,14 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 					{showCustomisation && (
 						<div
 							style={{
-								...a.gap_sm,
-								...a.p_md,
+								gap: 8,
+								padding: 12,
 							}}
 						>
 							<Text
 								style={{
 									...t.atoms.text_contrast_medium,
-									...a.font_bold,
+									fontWeight: "600",
 								}}
 							>
 								Color theme
@@ -166,11 +169,11 @@ function EmbedDialogInner({ postAuthor, postCid, postUri, record, timestamp }: O
 				</div>
 				<div
 					style={{
-						...a.flex_row,
-						...a.gap_sm,
+						flexDirection: "row",
+						gap: 8,
 					}}
 				>
-					<div style={a.flex_1}>
+					<div style={{ flex: 1 }}>
 						<TextField.Root>
 							<TextField.Icon icon={CodeBracketsIcon} />
 							<TextField.Input

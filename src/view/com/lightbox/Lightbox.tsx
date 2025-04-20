@@ -180,7 +180,7 @@ const styles: Record<string, React.CSSProperties> = {
 	},
 	avi: {
 		maxWidth: "calc(min(400px, 100vw))",
-		maxHeight: "calc(min(400px, 100vh))",
+		maxHeight: "calc(min(400px, 100dvh))",
 		padding: 16,
 		boxSizing: "border-box",
 	},

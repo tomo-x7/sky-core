@@ -23,16 +23,16 @@ export function Forms() {
 	return (
 		<div
 			style={{
-				...a.gap_4xl,
-				...a.align_start,
+				gap:32,
+				alignItems: "flex-start",
 			}}
 		>
 			<H1>Forms</H1>
 			<div
 				style={{
-					...a.gap_md,
-					...a.align_start,
-					...a.w_full,
+					gap: 12,
+					alignItems: "flex-start",
+					width: "100%",
 				}}
 			>
 				<H3>InputText</H3>
@@ -41,12 +41,12 @@ export function Forms() {
 
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_start,
-						...a.gap_sm,
+						flexDirection: "row",
+						alignItems: "flex-start",
+						gap: 8,
 					}}
 				>
-					<div style={a.flex_1}>
+					<div style={{ flex: 1 }}>
 						<TextField.Root>
 							<TextField.Icon icon={Globe} />
 							<TextField.Input
@@ -78,7 +78,7 @@ export function Forms() {
 					<TextField.Input value={value} onChangeText={setValue} label="Text field" isInvalid />
 				</TextField.Root>
 
-				<div style={a.w_full}>
+				<div style={{ ...a.w_full }}>
 					<TextField.LabelText>Text field</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={Globe} />
@@ -87,7 +87,7 @@ export function Forms() {
 					</TextField.Root>
 				</div>
 
-				<div style={a.w_full}>
+				<div style={{ ...a.w_full }}>
 					<TextField.LabelText>Textarea</TextField.LabelText>
 					<TextField.Input
 						multiline
@@ -101,7 +101,7 @@ export function Forms() {
 
 				<H3>DateField</H3>
 
-				<div style={a.w_full}>
+				<div style={{ ...a.w_full }}>
 					<LabelText>Date</LabelText>
 					<DateField
 						value={date}
@@ -115,9 +115,9 @@ export function Forms() {
 			</div>
 			<div
 				style={{
-					...a.gap_md,
-					...a.align_start,
-					...a.w_full,
+					gap: 12,
+					alignItems: "flex-start",
+					width: "100%",
 				}}
 			>
 				<H3>Toggles</H3>
@@ -134,7 +134,7 @@ export function Forms() {
 					values={toggleGroupAValues}
 					onChange={setToggleGroupAValues}
 				>
-					<div style={a.gap_md}>
+					<div style={{ gap:12 }}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Switch />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -165,7 +165,7 @@ export function Forms() {
 					values={toggleGroupBValues}
 					onChange={setToggleGroupBValues}
 				>
-					<div style={a.gap_md}>
+					<div style={{ gap:12 }}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Checkbox />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -190,7 +190,7 @@ export function Forms() {
 				</Toggle.Group>
 
 				<Toggle.Group label="Toggle" type="radio" values={toggleGroupCValues} onChange={setToggleGroupCValues}>
-					<div style={a.gap_md}>
+					<div style={{ gap:12 }}>
 						<Toggle.Item name="a" label="Click me">
 							<Toggle.Radio />
 							<Toggle.LabelText>Click me</Toggle.LabelText>
@@ -229,9 +229,9 @@ export function Forms() {
 			</Button>
 			<div
 				style={{
-					...a.gap_md,
-					...a.align_start,
-					...a.w_full,
+					gap: 12,
+					alignItems: "flex-start",
+					width: "100%",
 				}}
 			>
 				<H3>ToggleButton</H3>

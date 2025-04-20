@@ -1,5 +1,3 @@
-
-
 export function Splash() {
 	return (
 		<div id="splash">

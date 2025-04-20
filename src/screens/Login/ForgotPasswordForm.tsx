@@ -3,7 +3,7 @@ import { BskyAgent } from "@atproto/api";
 import * as EmailValidator from "email-validator";
 import React, { useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -95,7 +95,7 @@ export const ForgotPasswordForm = ({
 			<Text
 				style={{
 					...t.atoms.text_contrast_high,
-					...a.leading_snug,
+					lineHeight: 1.3,
 				}}
 			>
 				Enter the email you used to create your account. We'll send you a "reset code" so you can set a new
@@ -104,15 +104,15 @@ export const ForgotPasswordForm = ({
 			<FormError error={error} />
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.pt_md,
+					flexDirection: "row",
+					alignItems: "center",
+					paddingTop: 12,
 				}}
 			>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
-				<div style={a.flex_1} />
+				<div style={{ flex: 1 }} />
 				{!serviceDescription || isProcessing ? (
 					<ActivityIndicator />
 				) : (
@@ -124,7 +124,7 @@ export const ForgotPasswordForm = ({
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
-							...a.pl_md,
+							paddingLeft: 12,
 						}}
 					>
 						Processing...
@@ -134,11 +134,12 @@ export const ForgotPasswordForm = ({
 			<div
 				style={{
 					...t.atoms.border_contrast_medium,
-					...a.border_t,
-					...a.pt_2xl,
-					...a.mt_md,
-					...a.flex_row,
-					...a.justify_center,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
+					paddingTop: 24,
+					marginTop: 12,
+					flexDirection: "row",
+					justifyContent: "center",
 				}}
 			>
 				<Button onPress={onEmailSent} label={"Go to next"} size="large" variant="ghost" color="secondary">

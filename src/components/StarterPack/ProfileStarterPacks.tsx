@@ -79,7 +79,7 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 		return (
 			<div
 				style={{
-					...a.p_lg,
+					padding: 16,
 					...((isTabletOrDesktop || index !== 0) && a.border_t),
 					...t.atoms.border_contrast_low,
 				}}
@@ -117,10 +117,11 @@ function CreateAnother() {
 	return (
 		<div
 			style={{
-				...a.pr_md,
-				...a.pt_lg,
-				...a.gap_lg,
-				...a.border_t,
+				paddingRight: 12,
+				paddingTop: 16,
+				gap: 16,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 				...t.atoms.border_contrast_low,
 			}}
 		>
@@ -129,7 +130,7 @@ function CreateAnother() {
 				variant="solid"
 				color="secondary"
 				size="small"
-				style={a.self_center}
+				style={{ ...a.self_center }}
 				onPress={() => navigate("/starter-pack/create")}
 			>
 				<ButtonText>Create another</ButtonText>
@@ -177,19 +178,22 @@ function Empty() {
 	return (
 		<LinearGradientBackground
 			style={{
-				...a.px_lg,
-				...a.py_lg,
-				...a.justify_between,
-				...a.gap_lg,
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingTop: 16,
+				paddingBottom: 16,
+				justifyContent: "space-between",
+				gap: 16,
 				...a.shadow_lg,
 				...{ marginTop: a.border.borderWidth },
 			}}
 		>
-			<div style={a.gap_xs}>
+			<div style={{ gap:4 }}>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_lg,
+						fontWeight: "600",
+						fontSize: 18,
+						letterSpacing: 0,
 						...{ color: "white" },
 					}}
 				>
@@ -197,7 +201,8 @@ function Empty() {
 				</Text>
 				<Text
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...{ color: "white" },
 					}}
 				>
@@ -206,8 +211,8 @@ function Empty() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
+					flexDirection: "row",
+					gap: 12,
 					...{ marginLeft: "auto" },
 				}}
 			>

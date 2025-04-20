@@ -84,7 +84,7 @@ export const ScrollView = React.forwardRef(function ScrollViewImpl(
 
 const styles = {
 	contentContainer: {
-		minHeight: "100vh",
+		minHeight: "100dvh",
 	},
 	container: {
 		width: "100%",
@@ -102,6 +102,6 @@ const styles = {
 		marginRight: "auto",
 	},
 	fixedHeight: {
-		height: "100vh",
+		height: "100dvh",
 	},
 } as const;

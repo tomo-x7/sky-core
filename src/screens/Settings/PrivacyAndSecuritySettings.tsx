@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as Admonition from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import { InlineLinkText } from "#/components/Link";
@@ -55,13 +55,13 @@ export function PrivacyAndSecuritySettingsScreen() {
 						<PwiOptOut />
 					</SettingsList.Group>
 					<SettingsList.Item>
-						<Admonition.Outer type="tip" style={a.flex_1}>
+						<Admonition.Outer type="tip" style={{ flex: 1 }}>
 							<Admonition.Row>
 								<Admonition.Icon />
 								<div
 									style={{
-										...a.flex_1,
-										...a.gap_sm,
+										flex: 1,
+										gap: 8,
 									}}
 								>
 									<Admonition.Text>

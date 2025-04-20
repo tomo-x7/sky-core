@@ -32,7 +32,7 @@ export function LabelsOnMe({
 	return (
 		<div
 			style={{
-				...a.flex_row,
+				flexDirection: "row",
 				...style,
 			}}
 		>
@@ -47,7 +47,7 @@ export function LabelsOnMe({
 				}}
 			>
 				<ButtonIcon position="left" icon={CircleInfo} />
-				<ButtonText style={a.leading_snug}>
+				<ButtonText style={{ ...a.leading_snug }}>
 					{type === "account" ? (
 						<>
 							{labels.length} {labels.length === 1 ? "label has" : "labels have"} been placed on this

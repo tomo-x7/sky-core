@@ -1,6 +1,6 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
 
-import { atoms as a, tokens } from "#/alf";
+import { tokens } from "#/alf";
 import { KnownFollowers } from "#/components/KnownFollowers";
 import { Text } from "#/components/Typography";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -23,15 +23,15 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 	return (
 		<div
 			style={{
-				...a.relative,
-				...a.flex_1,
+				position: "relative",
+				flex: 1,
 			}}
 		>
 			<ChatListItem convo={convo} showMenu={false}>
 				<div
 					style={{
-						...a.pt_xs,
-						...a.pb_2xs,
+						paddingTop: 4,
+						paddingBottom: 2,
 					}}
 				>
 					<KnownFollowers profile={otherUser} moderationOpts={moderationOpts} minimal showIfEmpty />
@@ -39,9 +39,9 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 				{/* spacer, since you can't nest pressables */}
 				<div
 					style={{
-						...a.pt_md,
-						...a.pb_xs,
-						...a.w_full,
+						paddingTop: 12,
+						paddingBottom: 4,
+						width: "100%",
 						...{ opacity: 0 },
 					}}
 					aria-hidden
@@ -49,9 +49,10 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 					{/* Placeholder text so that it responds to the font height */}
 					<Text
 						style={{
-							...a.text_xs,
-							...a.leading_tight,
-							...a.font_bold,
+							fontSize: 12,
+							letterSpacing: 0,
+							lineHeight: 1.15,
+							fontWeight: "600",
 						}}
 					>
 						Accept Request
@@ -60,12 +61,12 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 			</ChatListItem>
 			<div
 				style={{
-					...a.absolute,
-					...a.pr_md,
-					...a.w_full,
-					...a.flex_row,
-					...a.align_center,
-					...a.gap_sm,
+					position: "absolute",
+					paddingRight: 12,
+					width: "100%",
+					flexDirection: "row",
+					alignItems: "center",
+					gap: 8,
 
 					...{
 						bottom: tokens.space.md,
@@ -81,7 +82,7 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 				) : (
 					<>
 						<DeleteChatButton convo={convo} currentScreen="list" />
-						<div style={a.flex_1} />
+						<div style={{ flex: 1 }} />
 					</>
 				)}
 			</div>

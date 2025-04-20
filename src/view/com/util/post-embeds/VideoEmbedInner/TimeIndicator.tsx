@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 
 /**
@@ -32,8 +32,8 @@ export function TimeIndicator({
 				minHeight: 21,
 				pointerEvents: "none",
 
-				...a.absolute,
-				...a.justify_center,
+				position: "absolute",
+				justifyContent: "center",
 				...style,
 			}}
 		>
@@ -42,7 +42,7 @@ export function TimeIndicator({
 					color: t.palette.white,
 					fontSize: 12,
 					fontVariant: "tabular-nums",
-					...a.font_bold,
+					fontWeight: "600",
 					lineHeight: 1.25,
 				}}
 			>

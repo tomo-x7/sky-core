@@ -105,7 +105,7 @@ export function NotificationsScreen() {
 						variant="ghost"
 						color="secondary"
 						shape="round"
-						style={a.justify_center}
+						style={{ ...a.justify_center }}
 					>
 						<ButtonIcon icon={isLoading ? Loader : SettingsIcon} size="lg" />
 					</Link>
@@ -116,8 +116,8 @@ export function NotificationsScreen() {
 				renderTabBar={(props) => (
 					<Layout.Center
 						style={{
-							...a.z_10,
-							...a.sticky,
+							zIndex: 10,
+							position: "sticky",
 							...{ top: 0 },
 						}}
 					>

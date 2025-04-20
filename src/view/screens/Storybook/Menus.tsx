@@ -10,11 +10,11 @@ export function Menus() {
 	// const {closeAllDialogs} = useDialogStateControlContext()
 
 	return (
-		<div style={a.gap_md}>
+		<div style={{ gap:12 }}>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_start,
+					flexDirection: "row",
+					alignItems: "flex-start",
 				}}
 			>
 				<Menu.Root control={menuControl}>
@@ -24,9 +24,11 @@ export function Menus() {
 								<button type="button" onClick={onPress} {...props}>
 									<Text
 										style={{
-											...a.py_sm,
-											...a.px_md,
-											...a.rounded_sm,
+											paddingTop: 8,
+											paddingBottom: 8,
+											paddingLeft: 12,
+											paddingRight: 12,
+											borderRadius: 8,
 											...t.atoms.bg_contrast_50,
 											...((state.hovered || state.focused || state.pressed) &&
 												t.atoms.bg_contrast_200),

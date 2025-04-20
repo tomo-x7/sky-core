@@ -2,7 +2,7 @@
  * Note: the dataSet properties are used to leverage custom CSS in public/index.html
  */
 
-import { FontAwesomeIcon, type FontAwesomeIconProps, } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon, type FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
 import type React from "react";
 import { useEffect, useState } from "react";
 

@@ -115,11 +115,11 @@ export function MessageInput({
 	useExtractEmbedFromFacets(message, setEmbed);
 
 	return (
-		<div style={a.p_sm}>
+		<div style={{ ...a.p_sm }}>
 			{children}
 			<div
 				style={{
-					...a.flex_row,
+					flexDirection: "row",
 					...t.atoms.bg_contrast_25,
 
 					...{
@@ -151,10 +151,10 @@ export function MessageInput({
 						});
 					}}
 					style={{
-						...a.rounded_full,
-						...a.overflow_hidden,
-						...a.align_center,
-						...a.justify_center,
+						borderRadius: 999,
+						overflow: "hidden",
+						alignItems: "center",
+						justifyContent: "center",
 
 						...{
 							marginTop: 5,
@@ -167,10 +167,13 @@ export function MessageInput({
 					{(state) => (
 						<div
 							style={{
-								...a.absolute,
-								...a.inset_0,
-								...a.align_center,
-								...a.justify_center,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								alignItems: "center",
+								justifyContent: "center",
 
 								...{
 									backgroundColor:
@@ -187,8 +190,9 @@ export function MessageInput({
 				<TextareaAutosize
 					ref={textAreaRef}
 					style={{
-						...a.flex_1,
-						...a.px_sm,
+						flex: 1,
+						paddingLeft: 8,
+						paddingRight: 8,
 						...a.border_0,
 						...t.atoms.text,
 						paddingTop: 10,
@@ -218,9 +222,9 @@ export function MessageInput({
 				<button
 					type="button"
 					style={{
-						...a.rounded_full,
-						...a.align_center,
-						...a.justify_center,
+						borderRadius: 999,
+						alignItems: "center",
+						justifyContent: "center",
 
 						...{
 							height: 30,
@@ -234,7 +238,7 @@ export function MessageInput({
 					<PaperPlane
 						fill={t.palette.white}
 						style={{
-							...a.relative,
+							position: "relative",
 							...{ left: 1 },
 						}}
 					/>

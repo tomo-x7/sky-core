@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { flatten, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import * as Prompt from "#/components/Prompt";
@@ -35,23 +35,24 @@ function Inner() {
 		<>
 			<div
 				style={{
-					...a.gap_sm,
+					gap: 8,
 					...{ paddingBottom: 2 },
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_xs,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 4,
 					}}
 				>
 					<Graph size="sm" />
 					<Text
 						style={{
-							...a.flex_1,
-							...a.text_sm,
-							...a.font_bold,
+							flex: 1,
+							fontSize: 14,
+							letterSpacing: 0,
+							fontWeight: "600",
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -71,8 +72,8 @@ function Inner() {
 
 				<div
 					style={{
-						...a.flex_row,
-						...a.flex_wrap,
+						flexDirection: "row",
+						flexWrap: "wrap",
 						...{ gap: "6px 4px" },
 					}}
 				>

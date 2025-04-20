@@ -60,18 +60,20 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 				<>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_heavy,
-							...a.pb_xs,
-							...a.leading_tight,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "800",
+							paddingBottom: 4,
+							lineHeight: 1.15,
 						}}
 					>
 						{isAccount ? <>Labels on your account</> : <>Labels on your content</>}
 					</Text>
 					<Text
 						style={{
-							...a.text_md,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							lineHeight: 1.3,
 						}}
 					>
 						{containsSelfLabel ? (
@@ -83,8 +85,9 @@ function LabelsOnMeDialogInner(props: LabelsOnMeDialogProps) {
 
 					<div
 						style={{
-							...a.py_lg,
-							...a.gap_md,
+							paddingTop: 16,
+							paddingBottom: 16,
+							gap: 12,
 						}}
 					>
 						{labels.map((label) => (
@@ -122,29 +125,31 @@ function Label({
 	return (
 		<div
 			style={{
-				...a.border,
+				border: "1px solid black",
+				borderWidth: 1,
 				...t.atoms.border_contrast_low,
-				...a.rounded_sm,
-				...a.overflow_hidden,
+				borderRadius: 8,
+				overflow: "hidden",
 			}}
 		>
 			<div
 				style={{
-					...a.p_md,
-					...a.gap_sm,
-					...a.flex_row,
+					padding: 12,
+					gap: 8,
+					flexDirection: "row",
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.gap_xs,
+						flex: 1,
+						gap: 4,
 					}}
 				>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_md,
+							fontWeight: "600",
+							fontSize: 16,
+							letterSpacing: 0,
 						}}
 					>
 						{strings.name}
@@ -152,7 +157,7 @@ function Label({
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 					>
 						{strings.description}
@@ -175,8 +180,10 @@ function Label({
 			<Divider />
 			<div
 				style={{
-					...a.px_md,
-					...a.py_sm,
+					paddingLeft: 12,
+					paddingRight: 12,
+					paddingTop: 8,
+					paddingBottom: 8,
 					...t.atoms.bg_contrast_25,
 				}}
 			>
@@ -185,16 +192,16 @@ function Label({
 				) : (
 					<div
 						style={{
-							...a.flex_row,
-							...a.justify_between,
-							...a.gap_xl,
+							flexDirection: "row",
+							justifyContent: "space-between",
+							gap: 20,
 							...{ paddingBottom: 1 },
 						}}
 					>
 						<Text
 							style={{
-								...a.flex_1,
-								...a.leading_snug,
+								flex: 1,
+								lineHeight: 1.3,
 								...t.atoms.text_contrast_medium,
 							}}
 							numberOfLines={1}
@@ -214,9 +221,10 @@ function Label({
 							<div>
 								<Text
 									style={{
-										...a.leading_snug,
-										...a.text_sm,
-										...a.italic,
+										lineHeight: 1.3,
+										fontSize: 14,
+										letterSpacing: 0,
+										fontStyle: "italic",
 										...t.atoms.text_contrast_medium,
 									}}
 								>
@@ -285,18 +293,20 @@ function AppealForm({
 			<div>
 				<Text
 					style={{
-						...a.text_2xl,
-						...a.font_bold,
-						...a.pb_xs,
-						...a.leading_tight,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "600",
+						paddingBottom: 4,
+						lineHeight: 1.15,
 					}}
 				>
 					<>Appeal "{strings.name}" label</>
 				</Text>
 				<Text
 					style={{
-						...a.text_md,
-						...a.leading_snug,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 					}}
 				>
 					<>
@@ -306,8 +316,9 @@ function AppealForm({
 							to={makeProfileLink(labeler ? labeler.creator : { did: label.src, handle: "" })}
 							onPress={() => void control.close()}
 							style={{
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							{sourceName}
@@ -316,7 +327,7 @@ function AppealForm({
 					</>
 				</Text>
 			</div>
-			<div style={a.my_md}>
+			<div style={{ ...a.my_md }}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={`Please explain why you think this label was incorrectly applied by ${

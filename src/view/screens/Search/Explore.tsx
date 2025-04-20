@@ -45,34 +45,36 @@ function SuggestedItemsHeader({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.px_lg,
-				...a.py_lg,
-				...a.pt_2xl,
-				...a.gap_md,
-				...a.border_b,
+				flexDirection: "row",
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingBottom: 16,
+				paddingTop: 24,
+				gap: 12,
+				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_low,
 				...style,
 			}}
 		>
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_sm,
+					flex: 1,
+					gap: 8,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_sm,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 8,
 					}}
 				>
 					<Icon size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_heavy,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "800",
 							...t.atoms.text,
 						}}
 					>
@@ -82,7 +84,7 @@ function SuggestedItemsHeader({
 				<Text
 					style={{
 						...t.atoms.text_contrast_high,
-						...a.leading_snug,
+						lineHeight: 1.3,
 					}}
 				>
 					{description}
@@ -148,24 +150,26 @@ function LoadMore({
 				label={"Load more"}
 				onPress={item.onLoadMore}
 				style={{
-					...a.relative,
-					...a.w_full,
+					position: "relative",
+					width: "100%",
 				}}
 			>
 				{({ hovered, pressed }) => (
 					<div
 						style={{
-							...a.flex_1,
-							...a.flex_row,
-							...a.align_center,
-							...a.px_lg,
-							...a.py_md,
+							flex: 1,
+							flexDirection: "row",
+							alignItems: "center",
+							paddingLeft: 16,
+							paddingRight: 16,
+							paddingTop: 12,
+							paddingBottom: 12,
 							...((hovered || pressed) && t.atoms.bg_contrast_25),
 						}}
 					>
 						<div
 							style={{
-								...a.relative,
+								position: "relative",
 
 								...{
 									height: 32,
@@ -175,10 +179,10 @@ function LoadMore({
 						>
 							<div
 								style={{
-									...a.align_center,
-									...a.justify_center,
+									alignItems: "center",
+									justifyContent: "center",
 									...t.atoms.bg_contrast_25,
-									...a.absolute,
+									position: "absolute",
 
 									...{
 										width: 30,
@@ -200,7 +204,7 @@ function LoadMore({
 										key={_item.key}
 										style={{
 											...t.atoms.bg_contrast_25,
-											...a.absolute,
+											position: "absolute",
 
 											...{
 												width: 30,
@@ -231,8 +235,8 @@ function LoadMore({
 
 						<Text
 							style={{
-								...a.pl_sm,
-								...a.leading_snug,
+								paddingLeft: 8,
+								lineHeight: 1.3,
 								...(hovered ? t.atoms.text : t.atoms.text_contrast_medium),
 							}}
 						>
@@ -241,8 +245,8 @@ function LoadMore({
 
 						<div
 							style={{
-								...a.flex_1,
-								...a.align_end,
+								flex: 1,
+								alignItems: "flex-end",
 							}}
 						>
 							{item.isLoadingMore && <Loader size="lg" />}
@@ -534,7 +538,7 @@ export function Explore() {
 					return (
 						<div
 							style={{
-								...a.border_b,
+								borderBottom: "1px solid black",
 								...t.atoms.border_contrast_low,
 							}}
 						>
@@ -546,10 +550,12 @@ export function Explore() {
 					return (
 						<div
 							style={{
-								...a.border_b,
+								borderBottom: "1px solid black",
 								...t.atoms.border_contrast_low,
-								...a.px_lg,
-								...a.py_lg,
+								paddingLeft: 16,
+								paddingRight: 16,
+								paddingTop: 16,
+								paddingBottom: 16,
 							}}
 						>
 							<FeedCard.Default view={item.feed} />
@@ -569,40 +575,42 @@ export function Explore() {
 					return (
 						<div
 							style={{
-								...a.border_t,
-								...a.pt_md,
-								...a.px_md,
+								borderTop: "1px solid black",
+								borderTopWidth: 1,
+								paddingTop: 12,
+								paddingLeft: 12,
+								paddingRight: 12,
 								...t.atoms.border_contrast_low,
 							}}
 						>
 							<div
 								style={{
-									...a.flex_row,
-									...a.gap_md,
-									...a.p_lg,
-									...a.rounded_sm,
+									flexDirection: "row",
+									gap: 12,
+									padding: 16,
+									borderRadius: 8,
 									...t.atoms.bg_contrast_25,
 								}}
 							>
 								<CircleInfo size="md" fill={t.palette.negative_400} />
 								<div
 									style={{
-										...a.flex_1,
-										...a.gap_sm,
+										flex: 1,
+										gap: 8,
 									}}
 								>
 									<Text
 										style={{
-											...a.font_bold,
-											...a.leading_snug,
+											fontWeight: "600",
+											lineHeight: 1.3,
 										}}
 									>
 										{item.message}
 									</Text>
 									<Text
 										style={{
-											...a.italic,
-											...a.leading_snug,
+											fontStyle: "italic",
+											lineHeight: 1.3,
 											...t.atoms.text_contrast_medium,
 										}}
 									>

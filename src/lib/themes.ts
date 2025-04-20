@@ -1,17 +1,8 @@
 import { tokens } from "#/alf";
-import { createThemes } from "#/alf/themes";
+import { darkPalette, dimPalette, lightPalette } from "#/alf/theme";
 import { fontWeight } from "#/alf/tokens";
-import { BLUE_HUE, GREEN_HUE, RED_HUE } from "#/alf/util/colorGeneration";
 import type { Theme } from "./ThemeContext";
 import { colors } from "./styles";
-
-const { darkPalette, dimPalette, lightPalette } = createThemes({
-	hues: {
-		primary: BLUE_HUE,
-		negative: RED_HUE,
-		positive: GREEN_HUE,
-	},
-});
 
 export const defaultTheme: Theme = {
 	colorScheme: "light",

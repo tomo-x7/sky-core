@@ -90,7 +90,8 @@ function ProfileCard() {
 	return (
 		<div
 			style={{
-				...a.my_md,
+				marginTop: 12,
+				marginBottom: 12,
 				...flatten(!leftNavMinimal && [a.w_full, a.align_start]),
 			}}
 		>
@@ -103,16 +104,19 @@ function ProfileCard() {
 								<Button
 									{...props}
 									style={{
-										...a.w_full,
+										width: "100%",
 
-										...a.transition_color,
+										transitionProperty:
+											"color, background-color, border-color, text-decoration-color, fill, stroke",
+										transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+										transitionDuration: "100ms",
 
 										...(active ? t.atoms.bg_contrast_25 : a.transition_delay_50ms),
 
-										...a.rounded_full,
-										...a.justify_between,
-										...a.align_center,
-										...a.flex_row,
+										borderRadius: 999,
+										justifyContent: "space-between",
+										alignItems: "center",
+										flexDirection: "row",
 										...{ gap: 6 },
 										...flatten(!leftNavMinimal && [a.pl_lg, a.pr_md]),
 									}}
@@ -126,8 +130,8 @@ function ProfileCard() {
 													!active && a.transition_delay_50ms,
 												],
 											),
-											...a.relative,
-											...a.z_10,
+											position: "relative",
+											zIndex: 10,
 											...(active && {
 												scale: !leftNavMinimal ? 2 / 3 : 0.8,
 												transform: `translateX(${!leftNavMinimal ? -22 : 0}px)`,
@@ -144,8 +148,10 @@ function ProfileCard() {
 										<>
 											<div
 												style={{
-													...a.flex_1,
-													...a.transition_opacity,
+													flex: 1,
+													transitionProperty: "opacity",
+													transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+													transitionDuration: "100ms",
 													...(!active && a.transition_delay_50ms),
 													marginLeft: tokens.space.xl * -1,
 													opacity: active ? 1 : 0,
@@ -153,9 +159,10 @@ function ProfileCard() {
 											>
 												<Text
 													style={{
-														...a.font_heavy,
-														...a.text_sm,
-														...a.leading_snug,
+														fontWeight: "800",
+														fontSize: 14,
+														letterSpacing: 0,
+														lineHeight: 1.3,
 													}}
 													numberOfLines={1}
 												>
@@ -163,8 +170,9 @@ function ProfileCard() {
 												</Text>
 												<Text
 													style={{
-														...a.text_xs,
-														...a.leading_snug,
+														fontSize: 12,
+														letterSpacing: 0,
+														lineHeight: 1.3,
 														...t.atoms.text_contrast_medium,
 													}}
 													numberOfLines={1}
@@ -177,7 +185,9 @@ function ProfileCard() {
 												style={{
 													...t.atoms.text_contrast_medium,
 
-													...a.transition_opacity,
+													transitionProperty: "opacity",
+													transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+													transitionDuration: "100ms",
 													opacity: active ? 1 : 0,
 												}}
 												size="sm"
@@ -318,13 +328,15 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 	return (
 		<PressableWithHover
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.p_md,
-				...a.rounded_sm,
-				...a.gap_sm,
-				...a.outline_inset_1,
-				...a.transition_color,
+				flexDirection: "row",
+				alignItems: "center",
+				padding: 12,
+				borderRadius: 8,
+				gap: 8,
+				outlineOffset: "-1px",
+				transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
+				transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+				transitionDuration: "100ms",
 			}}
 			hoverStyle={t.atoms.bg_contrast_25}
 			onPress={onPressWrapped}
@@ -333,9 +345,9 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 		>
 			<div
 				style={{
-					...a.align_center,
-					...a.justify_center,
-					...a.z_10,
+					alignItems: "center",
+					justifyContent: "center",
+					zIndex: 10,
 
 					...{
 						width: 24,
@@ -352,8 +364,10 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 				{typeof count === "string" && count ? (
 					<div
 						style={{
-							...a.absolute,
-							...a.inset_0,
+							position: "absolute",
+							top: 0,
+							left: 0,
+							bottom: 0,
 
 							...// more breathing room
 							{ right: -20 },
@@ -362,13 +376,12 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 						<Text
 							numberOfLines={1}
 							style={{
-								...a.absolute,
-								...a.text_xs,
-								...a.font_bold,
-								...a.rounded_full,
-								...a.text_center,
-								...a.leading_tight,
-
+								position: "absolute",
+								fontSize: 12,
+								letterSpacing: 0,
+								fontWeight: "600",
+								borderRadius: 999,
+								textAlign: "center",
 								top: "-10%",
 								left: count.length === 1 ? 12 : 8,
 								backgroundColor: t.palette.primary_500,
@@ -376,7 +389,6 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 								lineHeight: `${a.text_sm.fontSize}px`,
 								padding: "1px 4px",
 								minWidth: 16,
-
 								...(leftNavMinimal && {
 									top: "10%",
 									left: count.length === 1 ? 20 : 16,
@@ -389,8 +401,8 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 				) : hasNew ? (
 					<div
 						style={{
-							...a.absolute,
-							...a.rounded_full,
+							position: "absolute",
+							borderRadius: 999,
 
 							...{
 								backgroundColor: t.palette.primary_500,
@@ -411,7 +423,8 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 			{!leftNavMinimal && (
 				<Text
 					style={{
-						...a.text_xl,
+						fontSize: 20,
+						letterSpacing: 0,
 						...(isCurrent ? a.font_heavy : a.font_normal),
 					}}
 				>
@@ -464,9 +477,9 @@ function ComposeBtn() {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.pl_md,
-				...a.pt_xl,
+				flexDirection: "row",
+				paddingLeft: 12,
+				paddingTop: 20,
 			}}
 		>
 			<Button
@@ -476,7 +489,7 @@ function ComposeBtn() {
 				size="large"
 				variant="solid"
 				color="primary"
-				style={a.rounded_full}
+				style={{ ...a.rounded_full }}
 			>
 				<ButtonIcon icon={EditBig} position="left" />
 				<ButtonText>New Post</ButtonText>
@@ -515,7 +528,8 @@ export function DesktopLeftNav() {
 	return (
 		<nav
 			style={{
-				...a.px_xl,
+				paddingLeft: 20,
+				paddingRight: 20,
 				...styles.leftNav,
 				...(leftNavMinimal && styles.leftNavMinimal),
 				transform: `translateX(${centerColumnOffset ? -450 : -300}px) translateX(-100%) ${a.scrollbar_offset.transform}`,
@@ -524,7 +538,7 @@ export function DesktopLeftNav() {
 			{hasSession ? (
 				<ProfileCard />
 			) : isDesktop ? (
-				<div style={a.pt_xl}>
+				<div style={{ ...a.pt_xl }}>
 					<NavSignupCard />
 				</div>
 			) : null}
@@ -592,7 +606,7 @@ const styles = {
 		paddingBottom: 10,
 		left: "50%",
 		width: 240,
-		maxHeight: "100vh",
+		maxHeight: "100dvh",
 		overflowY: "auto",
 	},
 	leftNavMinimal: {

@@ -1,7 +1,7 @@
 import type { AppBskyFeedDefs, ModerationOpts } from "@atproto/api";
 import { useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
 import { ScreenTransition } from "#/components/StarterPack/Wizard/ScreenTransition";
 import { WizardFeedCard } from "#/components/StarterPack/Wizard/WizardListCard";
@@ -68,17 +68,19 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 	};
 
 	return (
-		<ScreenTransition style={a.flex_1} direction={state.transitionDirection}>
+		<ScreenTransition style={{ flex: 1 }} direction={state.transitionDirection}>
 			<div
 				style={{
-					...a.border_b,
+					borderBottom: "1px solid black",
 					...t.atoms.border_contrast_medium,
 				}}
 			>
 				<div
 					style={{
-						...a.py_sm,
-						...a.px_md,
+						paddingTop: 8,
+						paddingBottom: 8,
+						paddingLeft: 12,
+						paddingRight: 12,
 						...{ height: 60 },
 					}}
 				>
@@ -101,10 +103,11 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 				ListEmptyComponent={
 					<div
 						style={{
-							...a.flex_1,
-							...a.align_center,
-							...a.mt_lg,
-							...a.px_lg,
+							flex: 1,
+							alignItems: "center",
+							marginTop: 16,
+							paddingLeft: 16,
+							paddingRight: 16,
 						}}
 					>
 						{isLoading ? (
@@ -112,11 +115,12 @@ export function StepFeeds({ moderationOpts }: { moderationOpts: ModerationOpts }
 						) : (
 							<Text
 								style={{
-									...a.font_bold,
-									...a.text_lg,
-									...a.text_center,
-									...a.mt_lg,
-									...a.leading_snug,
+									fontWeight: "600",
+									fontSize: 18,
+									letterSpacing: 0,
+									textAlign: "center",
+									marginTop: 16,
+									lineHeight: 1.3,
 								}}
 							>
 								No feeds found. Try searching for something else.

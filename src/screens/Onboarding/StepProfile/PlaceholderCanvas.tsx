@@ -1,7 +1,4 @@
-import React from "react";
-// import ViewShot from "react-native-view-shot";
-
-import { atoms as a } from "#/alf";
+import React, { type CSSProperties } from "react";
 import { useAvatar } from "#/screens/Onboarding/StepProfile/index";
 
 const SIZE_MULTIPLIER = 5;
@@ -20,10 +17,10 @@ export const PlaceholderCanvas = React.forwardRef<PlaceholderCanvasRef, {}>(func
 
 	const styles = React.useMemo(
 		() => ({
-			container: { ...a.absolute, top: -2000 },
+			container: { position: "absolute", top: -2000 } satisfies CSSProperties,
 			imageContainer: {
-				...a.align_center,
-				...a.justify_center,
+				alignItems: "center",
+				justifyContent: "center",
 				height: 150 * SIZE_MULTIPLIER,
 				width: 150 * SIZE_MULTIPLIER,
 			},

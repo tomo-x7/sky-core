@@ -1,7 +1,7 @@
 import deepEqual from "lodash.isequal";
 import React from "react";
 
-import { atoms as a, useGutters } from "#/alf";
+import { useGutters } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import { Loader } from "#/components/Loader";
@@ -31,7 +31,7 @@ export function Screen() {
 				<div
 					style={{
 						...gutters,
-						...a.gap_xl,
+						gap: 20,
 					}}
 				>
 					<Admonition type="tip">
@@ -44,8 +44,8 @@ export function Screen() {
 						<div
 							style={{
 								...gutters,
-								...a.justify_center,
-								...a.align_center,
+								justifyContent: "center",
+								alignItems: "center",
 							}}
 						>
 							<Loader size="xl" />

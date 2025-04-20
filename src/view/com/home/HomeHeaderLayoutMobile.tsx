@@ -1,7 +1,7 @@
 import type React from "react";
 
 import type { JSX } from "react";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
@@ -32,8 +32,8 @@ export function HomeHeaderLayoutMobile({
 		<div
 			// Animated.View
 			style={{
-				...a.fixed,
-				...a.z_10,
+				position: "fixed",
+				zIndex: 10,
 				...t.atoms.bg,
 
 				top: 0,
@@ -51,8 +51,8 @@ export function HomeHeaderLayoutMobile({
 
 				<div
 					style={{
-						...a.flex_1,
-						...a.align_center,
+						flex: 1,
+						alignItems: "center",
 					}}
 				>
 					<PressableScale
@@ -76,7 +76,7 @@ export function HomeHeaderLayoutMobile({
 							color="secondary"
 							shape="square"
 							style={{
-								...a.justify_center,
+								justifyContent: "center",
 
 								...{
 									marginRight: -Layout.BUTTON_VISUAL_ALIGNMENT_OFFSET,

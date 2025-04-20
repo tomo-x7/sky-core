@@ -1,7 +1,7 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import React, { useRef } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { useDialogControl } from "#/components/Dialog";
 import { Fill } from "#/components/Fill";
@@ -32,8 +32,11 @@ function PlaceholderOverlay({
 	return (
 		<div
 			style={{
-				...a.absolute,
-				...a.inset_0,
+				position: "absolute",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
 				...styles.overlayLayer,
 			}}
 		>
@@ -69,8 +72,11 @@ function Player({
 	return (
 		<EventStopper
 			style={{
-				...a.absolute,
-				...a.inset_0,
+				position: "absolute",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
 				...styles.playerLayer,
 			}}
 		>
@@ -191,12 +197,12 @@ export function ExternalPlayer({
 				ref={viewRef}
 				style={{
 					...aspect,
-					...a.overflow_hidden,
+					overflow: "hidden",
 				}}
 			>
 				{link.thumb && (!isPlayerActive || isLoading) ? (
 					<>
-						<img style={a.flex_1} src={link.thumb} />
+						<img style={{ flex: 1 }} src={link.thumb} />
 						<Fill
 							style={{
 								...(t.name === "light" ? t.atoms.bg_contrast_975 : t.atoms.bg),

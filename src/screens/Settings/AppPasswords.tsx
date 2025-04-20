@@ -43,7 +43,7 @@ export function AppPasswordsScreen() {
 				) : (
 					<SettingsList.Container>
 						<SettingsList.Item>
-							<Admonition type="tip" style={a.flex_1}>
+							<Admonition type="tip" style={{ flex: 1 }}>
 								Use app passwords to sign in to other Bluesky clients without giving full access to your
 								account or password.
 							</Admonition>
@@ -55,7 +55,7 @@ export function AppPasswordsScreen() {
 								color="primary"
 								variant="solid"
 								onPress={() => createAppPasswordControl.open()}
-								style={a.flex_1}
+								style={{ flex: 1 }}
 							>
 								<ButtonIcon icon={PlusIcon} />
 								<ButtonText>Add App Password</ButtonText>
@@ -69,12 +69,12 @@ export function AppPasswordsScreen() {
 						>
 							{appPasswords ? (
 								appPasswords.length > 0 ? (
-									<div style={a.overflow_hidden}>
+									<div style={{ ...a.overflow_hidden }}>
 										{appPasswords.map((appPassword) => (
 											<div
 												// Animated.View
 												key={appPassword.name}
-												style={a.w_full}
+												style={{ ...a.w_full }}
 												// entering={FadeIn}
 												// exiting={FadeOut}
 												// layout={LinearTransition.delay(150)}
@@ -91,10 +91,11 @@ export function AppPasswordsScreen() {
 							) : (
 								<div
 									style={{
-										...a.flex_1,
-										...a.justify_center,
-										...a.align_center,
-										...a.py_4xl,
+										flex: 1,
+										justifyContent: "center",
+										alignItems: "center",
+										paddingTop: 32,
+										paddingBottom: 32,
 									}}
 								>
 									<Loader size="xl" />
@@ -129,30 +130,34 @@ function AppPasswordCard({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.border,
-				...a.rounded_sm,
-				...a.px_md,
-				...a.py_sm,
+				width: "100%",
+				border: "1px solid black",
+				borderWidth: 1,
+				borderRadius: 8,
+				paddingLeft: 12,
+				paddingRight: 12,
+				paddingTop: 8,
+				paddingBottom: 8,
 				...t.atoms.bg_contrast_25,
 				...t.atoms.border_contrast_low,
 			}}
 		>
 			<div
 				style={{
-					...a.flex_row,
-					...a.justify_between,
-					...a.align_start,
-					...a.w_full,
-					...a.gap_sm,
+					flexDirection: "row",
+					justifyContent: "space-between",
+					alignItems: "flex-start",
+					width: "100%",
+					gap: 8,
 				}}
 			>
-				<div style={a.gap_xs}>
+				<div style={{ gap:4 }}>
 					<Text
 						style={{
 							...t.atoms.text,
-							...a.text_md,
-							...a.font_bold,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						{appPassword.name}
@@ -175,7 +180,7 @@ function AppPasswordCard({
 					variant="ghost"
 					color="negative"
 					size="small"
-					style={a.bg_transparent}
+					style={{ ...a.bg_transparent }}
 					onPress={() => deleteControl.open()}
 				>
 					<ButtonIcon icon={TrashIcon} />
@@ -184,10 +189,10 @@ function AppPasswordCard({
 			{appPassword.privileged && (
 				<div
 					style={{
-						...a.flex_row,
-						...a.gap_sm,
-						...a.align_center,
-						...a.mt_md,
+						flexDirection: "row",
+						gap: 8,
+						alignItems: "center",
+						marginTop: 12,
 					}}
 				>
 					<WarningIcon style={{ color: colors.warning[t.scheme] }} />

@@ -95,7 +95,7 @@ export function ProfileCard({
 						style={{
 							...s.bold,
 							...pal.text,
-							...a.self_start,
+							alignSelf: "flex-start",
 						}}
 						numberOfLines={1}
 						lineHeight={1.2}
@@ -125,9 +125,9 @@ export function ProfileCard({
 					{knownFollowersVisible ? (
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_sm,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 8,
 								...(!!hasDescription && a.mt_md),
 							}}
 						>
@@ -153,7 +153,7 @@ export function ProfileCardPills({
 	}
 
 	return (
-		<Pills.Row style={a.pt_xs}>
+		<Pills.Row style={{ ...a.pt_xs }}>
 			{followedBy && <Pills.FollowsYou />}
 			{modui.alerts.map((alert) => (
 				<Pills.Label key={getModerationCauseKey(alert)} cause={alert} />

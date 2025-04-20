@@ -47,10 +47,10 @@ export function AccountSettingsScreen() {
                 ItemText is also flex: 1. So we need to set flex: 0 on the ItemText to prevent it from growing, but if we did that everywhere
                 it wouldn't push the BadgeText/Chevron/whatever to the right.
                 TODO: find a general solution for this. workaround in this case is to set the ItemText to flex: 1 and BadgeText to flex: 0 -sfn */}
-						<SettingsList.ItemText style={a.flex_0}>Email</SettingsList.ItemText>
+						<SettingsList.ItemText style={{ flex: "0 0 auto" }}>Email</SettingsList.ItemText>
 						{currentAccount && (
 							<>
-								<SettingsList.BadgeText style={a.flex_1}>
+								<SettingsList.BadgeText style={{ flex: 1 }}>
 									{currentAccount.email || "(no email)"}
 								</SettingsList.BadgeText>
 								{currentAccount.emailConfirmed && (
@@ -64,19 +64,21 @@ export function AccountSettingsScreen() {
 							label={"Verify your email"}
 							onPress={() => verifyEmailControl.open()}
 							style={{
-								...a.my_xs,
-								...a.mx_lg,
-								...a.rounded_md,
+								marginTop: 4,
+								marginBottom: 4,
+								marginLeft: 16,
+								marginRight: 16,
+								borderRadius: 12,
 								...{ backgroundColor: t.palette.primary_50 },
 							}}
 							hoverStyle={{ backgroundColor: t.palette.primary_100 }}
-							contentContainerStyle={{ ...a.rounded_md, ...a.px_lg }}
+							contentContainerStyle={{ borderRadius: 12, ...a.px_lg }}
 						>
 							<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
 							<SettingsList.ItemText
 								style={{
 									...{ color: t.palette.primary_500 },
-									...a.font_bold,
+									fontWeight: "600",
 								}}
 							>
 								Verify your email

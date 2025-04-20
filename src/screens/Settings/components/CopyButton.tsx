@@ -27,28 +27,29 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 	);
 
 	return (
-		<div style={a.relative}>
+		<div style={{ ...a.relative }}>
 			{hasBeenCopied && (
 				<div
 					// Animated.View
 					// entering={ZoomIn.duration(100)}
 					// exiting={FadeOutUp.duration(2000)}
 					style={{
-						...a.absolute,
+						position: "absolute",
 						bottom: "100%",
 						right: 0,
-						...a.justify_center,
-						...a.gap_sm,
-						...a.z_10,
-						...a.pb_sm,
+						justifyContent: "center",
+						gap: 8,
+						zIndex: 10,
+						paddingBottom: 8,
 						pointerEvents: "none",
 					}}
 				>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_right,
-							...a.text_md,
+							fontWeight: "600",
+							textAlign: "right",,
+							fontSize: 16,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_high,
 						}}
 					>
@@ -58,8 +59,8 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 			)}
 			<Button
 				style={{
-					...a.flex_1,
-					...a.justify_between,
+					flex: 1,
+					justifyContent: "space-between",
 					...style,
 				}}
 				onPress={onPress}

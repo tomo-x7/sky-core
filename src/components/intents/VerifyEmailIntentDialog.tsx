@@ -60,50 +60,55 @@ function Inner({ control }: { control: DialogControlProps }) {
 			label={"Verify email dialog"}
 			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
-			<div style={a.gap_xl}>
+			<div style={{ gap:20 }}>
 				{status === "loading" ? (
 					<div
 						style={{
-							...a.py_2xl,
-							...a.align_center,
-							...a.justify_center,
+							paddingTop: 24,
+							paddingBottom: 24,
+							alignItems: "center",
+							justifyContent: "center",
 						}}
 					>
 						<Loader size="xl" fill={t.atoms.text_contrast_low.color} />
 					</div>
 				) : status === "success" ? (
-					<div style={a.gap_sm}>
+					<div style={{ gap:8 }}>
 						<Text
 							style={{
-								...a.font_heavy,
-								...a.text_2xl,
+								fontWeight: "800",
+								fontSize: 22,
+								letterSpacing: 0,
 							}}
 						>
 							Email Verified
 						</Text>
 						<Text
 							style={{
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							Thanks, you have successfully verified your email address. You can close this dialog.
 						</Text>
 					</div>
 				) : status === "failure" ? (
-					<div style={a.gap_sm}>
+					<div style={{ gap:8 }}>
 						<Text
 							style={{
-								...a.font_heavy,
-								...a.text_2xl,
+								fontWeight: "800",
+								fontSize: 22,
+								letterSpacing: 0,
 							}}
 						>
 							Invalid Verification Code
 						</Text>
 						<Text
 							style={{
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							The verification code you have provided is invalid. Please make sure that you have used the
@@ -111,26 +116,29 @@ function Inner({ control }: { control: DialogControlProps }) {
 						</Text>
 					</div>
 				) : (
-					<div style={a.gap_sm}>
+					<div style={{ gap:8 }}>
 						<Text
 							style={{
-								...a.font_heavy,
-								...a.text_2xl,
+								fontWeight: "800",
+								fontSize: 22,
+								letterSpacing: 0,
 							}}
 						>
 							Email Resent
 						</Text>
 						<Text
 							style={{
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							We have sent another verification email to{" "}
 							<Text
 								style={{
-									...a.text_md,
-									...a.font_bold,
+									fontSize: 16,
+									letterSpacing: 0,
+									fontWeight: "600",
 								}}
 							>
 								{currentAccount?.email}

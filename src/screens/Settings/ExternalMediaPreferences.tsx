@@ -21,7 +21,7 @@ export function ExternalMediaPreferencesScreen() {
 			<Layout.Content>
 				<SettingsList.Container>
 					<SettingsList.Item>
-						<Admonition type="info" style={a.flex_1}>
+						<Admonition type="info" style={{ flex: 1 }}>
 							External media may allow websites to collect information about you and your device. No
 							information is sent or requested until you press the "play" button.
 						</Admonition>
@@ -30,8 +30,8 @@ export function ExternalMediaPreferencesScreen() {
 						<SettingsList.ItemText>Enable media players for</SettingsList.ItemText>
 						<div
 							style={{
-								...a.mt_sm,
-								...a.w_full,
+								marginTop: 8,
+								width: "100%",
 							}}
 						>
 							{Object.entries(externalEmbedLabels)
@@ -68,12 +68,13 @@ function PrefSelector({
 			value={sources?.[source] === "show"}
 			onChange={() => setExternalEmbedPref(source, sources?.[source] === "show" ? "hide" : "show")}
 			style={{
-				...a.flex_1,
-				...a.py_md,
+				flex: 1,
+				paddingTop: 12,
+				paddingBottom: 12,
 			}}
 		>
 			<Toggle.Platform />
-			<Toggle.LabelText style={a.text_md}>{label}</Toggle.LabelText>
+			<Toggle.LabelText style={{ ...a.text_md }}>{label}</Toggle.LabelText>
 		</Toggle.Item>
 	);
 }

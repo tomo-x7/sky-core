@@ -1,13 +1,16 @@
 import type React from "react";
 
-import { type ViewStyleProp, atoms as a } from "#/alf";
+import type { ViewStyleProp } from "#/alf";
 
 export function Fill({ children, style }: { children?: React.ReactNode } & ViewStyleProp) {
 	return (
 		<div
 			style={{
-				...a.absolute,
-				...a.inset_0,
+				position: "absolute",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
 				...style,
 			}}
 		>

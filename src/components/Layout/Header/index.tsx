@@ -41,16 +41,17 @@ export function Outer({
 		<div
 			ref={headerRef}
 			style={{
-				...a.w_full,
+				width: "100%",
 				...(!noBottomBorder && a.border_b),
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_sm,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 8,
 
 				...flatten(sticky ? [a.sticky, { top: 0 }, a.z_10, t.atoms.bg] : []),
 
 				...gutters,
-				...a.py_xs,
+				paddingTop: 4,
+				paddingBottom: 4,
 				...{ minHeight: 52 },
 				...t.atoms.border_contrast_low,
 				...flatten(gtMobile ? [a.mx_auto, { maxWidth: 600 }] : []),
@@ -77,8 +78,8 @@ export function Content({
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.justify_center,
+				flex: 1,
+				justifyContent: "center",
 				...{ minHeight: HEADER_SLOT_SIZE },
 			}}
 		>
@@ -91,7 +92,7 @@ export function Slot({ children }: { children?: React.ReactNode }) {
 	return (
 		<div
 			style={{
-				...a.z_50,
+				zIndex: 50,
 				...{ width: HEADER_SLOT_SIZE },
 			}}
 		>
@@ -128,7 +129,7 @@ export function BackButton({ onPress, style, ...props }: Partial<ButtonProps>) {
 				hitSlop={HITSLOP_30}
 				style={{
 					...{ marginLeft: -BUTTON_VISUAL_ALIGNMENT_OFFSET },
-					...a.bg_transparent,
+					backgroundColor: "transparent",
 					...style,
 				}}
 				{...props}
@@ -172,9 +173,10 @@ export function TitleText({ children, style }: { children: React.ReactNode } & T
 	return (
 		<Text
 			style={{
-				...a.text_lg,
-				...a.font_heavy,
-				...a.leading_tight,
+				fontSize: 18,
+				letterSpacing: 0,
+				fontWeight: "800",
+				lineHeight: 1.15,
 				...(gtMobile && a.text_xl),
 				...style,
 			}}
@@ -191,8 +193,9 @@ export function SubtitleText({ children }: { children: React.ReactNode }) {
 	return (
 		<Text
 			style={{
-				...a.text_sm,
-				...a.leading_snug,
+				fontSize: 14,
+				letterSpacing: 0,
+				lineHeight: 1.3,
 				...t.atoms.text_contrast_medium,
 			}}
 			numberOfLines={2}

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { PressableWithHover } from "../util/PressableWithHover";
 
@@ -123,8 +123,9 @@ export function TabBar({ selectedPage, items, onSelect, onPressSelected }: TabBa
 										style={{
 											...styles.itemText,
 											...(selected ? t.atoms.text : t.atoms.text_contrast_medium),
-											...a.text_md,
-											...a.font_bold,
+											fontSize: 16,
+											letterSpacing: 0,
+											fontWeight: "600",
 											...{ lineHeight: "20px" },
 										}}
 									>

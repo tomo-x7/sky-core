@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, type AppBskyGraphGetList, AtUri, type Moderation
 import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import React, { useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
 import { Default as ProfileCard } from "#/components/ProfileCard";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
@@ -70,9 +70,10 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 		return (
 			<div
 				style={{
-					...a.p_lg,
+					padding: 16,
 					...t.atoms.border_contrast_low,
-					...a.border_t,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
 				}}
 			>
 				<ProfileCard profile={item} moderationOpts={moderationOpts} logContext="StarterPackProfilesList" />
@@ -84,7 +85,7 @@ export const ProfilesList = React.forwardRef<SectionRef, ProfilesListProps>(func
 		return (
 			<div
 				style={{
-					...a.h_full_vh,
+					height: "100dvh",
 					...{ marginTop: headerHeight, marginBottom: bottomBarOffset },
 				}}
 			>

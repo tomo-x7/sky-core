@@ -180,20 +180,20 @@ export function StepProfile() {
 		<AvatarContext.Provider value={value}>
 			<div
 				style={{
-					...a.align_start,
+					alignItems: "flex-start",
 					...t.atoms.bg,
-					...a.justify_between,
+					justifyContent: "space-between",
 				}}
 			>
-				<IconCircle icon={StreamingLive} style={a.mb_2xl} />
+				<IconCircle icon={StreamingLive} style={{ ...a.mb_2xl }} />
 				<TitleText>Give your profile a face</TitleText>
 				<DescriptionText>
 					Help people know you're not a bot by uploading a picture or creating an avatar.
 				</DescriptionText>
 				<div
 					style={{
-						...a.w_full,
-						...a.align_center,
+						width: "100%",
+						alignItems: "center",
 						...{ paddingTop: gtMobile ? 80 : 40 },
 					}}
 				>
@@ -202,20 +202,23 @@ export function StepProfile() {
 					{error && (
 						<div
 							style={{
-								...a.flex_row,
-								...a.gap_sm,
-								...a.align_center,
-								...a.mt_xl,
-								...a.py_md,
-								...a.px_lg,
-								...a.border,
-								...a.rounded_md,
+								flexDirection: "row",
+								gap: 8,
+								alignItems: "center",
+								marginTop: 20,
+								paddingTop: 12,
+								paddingBottom: 12,
+								paddingLeft: 16,
+								paddingRight: 16,
+								border: "1px solid black",
+								borderWidth: 1,
+								borderRadius: 12,
 								...t.atoms.bg_contrast_25,
 								...t.atoms.border_contrast_low,
 							}}
 						>
 							<CircleInfo_Stroke2_Corner0_Rounded size="sm" />
-							<Text style={a.leading_snug}>{error}</Text>
+							<Text style={{ ...a.leading_snug }}>{error}</Text>
 						</div>
 					)}
 				</div>
@@ -223,7 +226,7 @@ export function StepProfile() {
 				<OnboardingControls.Portal>
 					<div
 						style={{
-							...a.gap_md,
+							gap: 12,
 							...(gtMobile && { flexDirection: "row-reverse" }),
 						}}
 					>
@@ -261,7 +264,7 @@ export function StepProfile() {
 				>
 					<div
 						style={{
-							...a.align_center,
+							alignItems: "center",
 							...{ paddingTop: 20 },
 						}}
 					>
@@ -270,14 +273,14 @@ export function StepProfile() {
 
 					<div
 						style={{
-							...a.pt_3xl,
-							...a.gap_lg,
+							paddingTop: 28,
+							gap: 16,
 						}}
 					>
 						<AvatarCreatorItems type="emojis" avatar={avatar} setAvatar={setAvatar} />
 						<AvatarCreatorItems type="colors" avatar={avatar} setAvatar={setAvatar} />
 					</div>
-					<div style={a.pt_4xl}>
+					<div style={{ ...a.pt_4xl }}>
 						<Button variant="solid" color="primary" size="large" label={"Done"} onPress={onDoneCreating}>
 							<ButtonText>Done</ButtonText>
 						</Button>

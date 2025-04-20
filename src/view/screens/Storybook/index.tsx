@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { ThemeProvider, atoms as a } from "#/alf";
+import { ThemeProvider } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { useSetThemePrefs } from "#/state/shell";
@@ -48,8 +48,8 @@ function StorybookInner() {
 		<>
 			<div
 				style={{
-					...a.p_xl,
-					...a.gap_5xl,
+					padding: 20,
+					gap: 40,
 					...{ paddingBottom: 100 },
 				}}
 			>
@@ -57,9 +57,9 @@ function StorybookInner() {
 					<>
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_start,
-								...a.gap_md,
+								flexDirection: "row",
+								alignItems: "flex-start",
+								gap: 12,
 							}}
 						>
 							<Button

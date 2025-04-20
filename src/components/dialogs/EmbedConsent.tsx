@@ -46,11 +46,12 @@ export function EmbedConsentDialog({
 				label="External Media"
 				style={gtMobile ? { width: "auto", maxWidth: 400 } : a.w_full}
 			>
-				<div style={a.gap_sm}>
+				<div style={{ gap:8 }}>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_bold,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						External Media
@@ -58,9 +59,9 @@ export function EmbedConsentDialog({
 
 					<div
 						style={{
-							...a.mt_sm,
-							...a.mb_2xl,
-							...a.gap_lg,
+							marginTop: 8,
+							marginBottom: 24,
+							gap: 16,
 						}}
 					>
 						<Text>
@@ -74,7 +75,7 @@ export function EmbedConsentDialog({
 						</Text>
 					</div>
 				</div>
-				<div style={a.gap_md}>
+				<div style={{ gap:12 }}>
 					<Button
 						style={gtMobile ? a.flex_1 : undefined}
 						label="Enable external media"

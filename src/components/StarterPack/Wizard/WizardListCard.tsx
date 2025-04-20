@@ -8,7 +8,7 @@ import {
 } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
@@ -55,29 +55,32 @@ function WizardListCard({
 			disabled={btnType === "remove" || disabled}
 			onChange={onPress}
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.px_lg,
-				...a.py_md,
-				...a.gap_md,
-				...a.border_b,
+				flexDirection: "row",
+				alignItems: "center",
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingTop: 12,
+				paddingBottom: 12,
+				gap: 12,
+				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_low,
 			}}
 		>
 			<UserAvatar size={45} avatar={avatar} moderation={moderationUi} type={type} />
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_2xs,
+					flex: 1,
+					gap: 2,
 				}}
 			>
 				<Text
 					style={{
-						...a.flex_1,
-						...a.font_bold,
-						...a.text_md,
-						...a.leading_tight,
-						...a.self_start,
+						flex: 1,
+						fontWeight: "600",
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.15,
+						alignSelf: "flex-start",
 					}}
 					numberOfLines={1}
 				>
@@ -85,8 +88,8 @@ function WizardListCard({
 				</Text>
 				<Text
 					style={{
-						...a.flex_1,
-						...a.leading_tight,
+						flex: 1,
+						lineHeight: 1.15,
 						...t.atoms.text_contrast_medium,
 					}}
 					numberOfLines={1}
@@ -103,7 +106,7 @@ function WizardListCard({
 					color="secondary"
 					size="small"
 					style={{
-						...a.self_center,
+						alignSelf: "center",
 						...{ marginLeft: "auto" },
 					}}
 					onPress={onPress}

@@ -1,7 +1,7 @@
 import type { AppBskyEmbedRecord } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
 import { MessageContextProvider } from "./MessageContext";
 
@@ -16,7 +16,8 @@ let MessageItemEmbed = ({
 		<MessageContextProvider>
 			<div
 				style={{
-					...a.my_xs,
+					marginTop: 4,
+					marginBottom: 4,
 					...t.atoms.bg,
 				}}
 			>

@@ -1,4 +1,4 @@
-import { type TextStyleProp, type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type TextStyleProp, type ViewStyleProp, useTheme } from "#/alf";
 import type { Growth_Stroke2_Corner0_Rounded as Growth } from "#/components/icons/Growth";
 import type { Props } from "#/components/icons/common";
 
@@ -17,9 +17,9 @@ export function IconCircle({
 	return (
 		<div
 			style={{
-				...a.justify_center,
-				...a.align_center,
-				...a.rounded_full,
+				justifyContent: "center",
+				alignItems: "center",
+				borderRadius: 999,
 
 				...{
 					width: size === "lg" ? 52 : 64,

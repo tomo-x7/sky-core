@@ -58,26 +58,28 @@ export function MessagesListBlockedFooter({
 		<div
 			style={{
 				...(hasMessages && a.pt_md),
-				...a.pb_xl,
-				...a.gap_lg,
+				paddingBottom: 20,
+				gap: 16,
 			}}
 		>
 			<Divider />
 			<Text
 				style={{
-					...a.text_md,
-					...a.font_bold,
-					...a.text_center,
+					fontSize: 16,
+					letterSpacing: 0,
+					fontWeight: "600",
+					textAlign: "center",
 				}}
 			>
 				{isBlocking ? <>You have blocked this user</> : <>This user has blocked you</>}
 			</Text>
 			<div
 				style={{
-					...a.flex_row,
-					...a.justify_between,
-					...a.gap_lg,
-					...a.px_md,
+					flexDirection: "row",
+					justifyContent: "space-between",
+					gap: 16,
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 			>
 				<Button
@@ -85,7 +87,7 @@ export function MessagesListBlockedFooter({
 					color="secondary"
 					variant="solid"
 					size="small"
-					style={a.flex_1}
+					style={{ flex: 1 }}
 					onPress={leaveConvoControl.open}
 				>
 					<ButtonText style={{ color: t.palette.negative_500 }}>Leave chat</ButtonText>
@@ -95,7 +97,7 @@ export function MessagesListBlockedFooter({
 					color="secondary"
 					variant="solid"
 					size="small"
-					style={a.flex_1}
+					style={{ flex: 1 }}
 					onPress={reportControl.open}
 				>
 					<ButtonText style={{ color: t.palette.negative_500 }}>Report</ButtonText>
@@ -106,7 +108,7 @@ export function MessagesListBlockedFooter({
 						color="secondary"
 						variant="solid"
 						size="small"
-						style={a.flex_1}
+						style={{ flex: 1 }}
 						onPress={onUnblockPress}
 					>
 						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>
@@ -116,9 +118,10 @@ export function MessagesListBlockedFooter({
 			{isBlocking && !gtMobile && (
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_center,
-						...a.px_md,
+						flexDirection: "row",
+						justifyContent: "center",
+						paddingLeft: 12,
+						paddingRight: 12,
 					}}
 				>
 					<Button
@@ -126,7 +129,7 @@ export function MessagesListBlockedFooter({
 						color="secondary"
 						variant="solid"
 						size="small"
-						style={a.flex_1}
+						style={{ flex: 1 }}
 						onPress={onUnblockPress}
 					>
 						<ButtonText style={{ color: t.palette.primary_500 }}>Unblock</ButtonText>

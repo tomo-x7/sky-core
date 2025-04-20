@@ -60,24 +60,25 @@ export function Card({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.gap_md,
+				width: "100%",
+				gap: 12,
 			}}
 		>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_sm,
-					...a.w_full,
+					flexDirection: "row",
+					gap: 8,
+					width: "100%",
 				}}
 			>
 				{!noIcon ? <StarterPackIcon width={40} gradient="sky" /> : null}
-				<div style={a.flex_1}>
+				<div style={{ flex: 1 }}>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
+							lineHeight: 1.3,
 						}}
 						numberOfLines={2}
 					>
@@ -85,7 +86,7 @@ export function Card({
 					</Text>
 					<Text
 						style={{
-							...a.leading_snug,
+							lineHeight: 1.3,
 							...t.atoms.text_contrast_medium,
 						}}
 						numberOfLines={1}
@@ -97,14 +98,14 @@ export function Card({
 				</div>
 			</div>
 			{!noDescription && record.description ? (
-				<Text numberOfLines={3} style={a.leading_snug}>
+				<Text numberOfLines={3} style={{ ...a.leading_snug }}>
 					{record.description}
 				</Text>
 			) : null}
 			{!!joinedAllTimeCount && joinedAllTimeCount >= 50 && (
 				<Text
 					style={{
-						...a.font_bold,
+						fontWeight: "600",
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -147,8 +148,8 @@ export function Link({
 				precacheStarterPack(queryClient, starterPack);
 			}}
 			style={{
-				...a.flex_col,
-				...a.align_start,
+				flexDirection: "column",
+				alignItems: "flex-start",
 			}}
 		>
 			{children}
@@ -167,9 +168,10 @@ export function Embed({
 	return (
 		<div
 			style={{
-				...a.border,
-				...a.rounded_sm,
-				...a.overflow_hidden,
+				border: "1px solid black",
+				borderWidth: 1,
+				borderRadius: 8,
+				overflow: "hidden",
 				...t.atoms.border_contrast_low,
 			}}
 		>
@@ -177,14 +179,16 @@ export function Embed({
 				<img
 					src={imageUri}
 					style={{
-						...a.w_full,
+						width: "100%",
 						aspectRatio: 1.91,
 					}}
 				/>
 				<div
 					style={{
-						...a.px_sm,
-						...a.py_md,
+						paddingLeft: 8,
+						paddingRight: 8,
+						paddingTop: 12,
+						paddingBottom: 12,
 					}}
 				>
 					<Card starterPack={starterPack} />

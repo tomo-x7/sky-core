@@ -8,12 +8,12 @@ import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe
 export function Icons() {
 	const t = useTheme();
 	return (
-		<div style={a.gap_md}>
+		<div style={{ gap:12 }}>
 			<H1>Icons</H1>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_xl,
+					flexDirection: "row",
+					gap: 20,
 				}}
 			>
 				<Globe size="xs" fill={t.atoms.text.color} />
@@ -24,8 +24,8 @@ export function Icons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_xl,
+					flexDirection: "row",
+					gap: 20,
 				}}
 			>
 				<ArrowTopRight size="xs" fill={t.atoms.text.color} />
@@ -36,8 +36,8 @@ export function Icons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_xl,
+					flexDirection: "row",
+					gap: 20,
 				}}
 			>
 				<CalendarDays size="xs" fill={t.atoms.text.color} />
@@ -48,8 +48,8 @@ export function Icons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_xl,
+					flexDirection: "row",
+					gap: 20,
 				}}
 			>
 				<Loader size="xs" fill={t.atoms.text.color} />
@@ -60,8 +60,8 @@ export function Icons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_xl,
+					flexDirection: "row",
+					gap: 20,
 				}}
 			>
 				<Globe size="xs" gradient="sky" />

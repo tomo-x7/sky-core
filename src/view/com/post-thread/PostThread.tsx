@@ -391,7 +391,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 			return (
 				<div
 					style={{
-						...a.p_lg,
+						padding: 16,
 						...(index !== 0 && a.border_t),
 						...t.atoms.border_contrast_low,
 						...t.atoms.bg_contrast_25,
@@ -399,8 +399,9 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 				>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_md,
+							fontWeight: "600",
+							fontSize: 16,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -412,7 +413,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 			return (
 				<div
 					style={{
-						...a.p_lg,
+						padding: 16,
 						...(index !== 0 && a.border_t),
 						...t.atoms.border_contrast_low,
 						...t.atoms.bg_contrast_25,
@@ -420,8 +421,9 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 				>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_md,
+							fontWeight: "600",
+							fontSize: 16,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
 						}}
 					>

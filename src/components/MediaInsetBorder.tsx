@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, useTheme } from "#/alf";
 import { Fill } from "#/components/Fill";
 
 /**
@@ -24,8 +24,9 @@ export function MediaInsetBorder({
 	return (
 		<Fill
 			style={{
-				...a.rounded_md,
-				...a.border,
+				borderRadius: 12,
+				border: "1px solid black",
+				borderWidth: 1,
 				...(opaque
 					? t.atoms.border_contrast_low
 					: { ...(isLight ? t.atoms.border_contrast_low : t.atoms.border_contrast_high), opacity: 0.6 }),

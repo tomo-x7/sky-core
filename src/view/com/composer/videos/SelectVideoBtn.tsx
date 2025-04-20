@@ -68,7 +68,7 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 			<Button
 				onPress={onPressSelectVideo}
 				label={"Select video"}
-				style={a.p_sm}
+				style={{ ...a.p_sm }}
 				variant="ghost"
 				shape="round"
 				color="primary"

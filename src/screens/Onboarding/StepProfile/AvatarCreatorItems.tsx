@@ -55,10 +55,10 @@ export function AvatarCreatorItems({
 	);
 
 	return (
-		<div style={a.w_full}>
+		<div style={{ ...a.w_full }}>
 			<Text
 				style={{
-					...a.pb_md,
+					paddingBottom: 12,
 					...t.atoms.text_contrast_medium,
 				}}
 			>
@@ -66,11 +66,11 @@ export function AvatarCreatorItems({
 			</Text>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_start,
-					...a.justify_start,
-					...a.flex_wrap,
-					...a.gap_md,
+					flexDirection: "row",
+					alignItems: "flex-start",
+					justifyContent: "flex-start",
+					flexWrap: "wrap",
+					gap: 12,
 				}}
 			>
 				{isEmojis
@@ -88,8 +88,8 @@ export function AvatarCreatorItems({
 								{avatar.placeholder.name === emojiName && (
 									<div
 										style={{
-											...a.absolute,
-											...a.rounded_full,
+											position: "absolute",
+											borderRadius: 999,
 											...ACTIVE_BORDER_STYLES,
 
 											...{
@@ -113,9 +113,12 @@ export function AvatarCreatorItems({
 									<>
 										<div
 											style={{
-												...a.absolute,
-												...a.inset_0,
-												...a.rounded_full,
+												position: "absolute",
+												top: 0,
+												left: 0,
+												right: 0,
+												bottom: 0,
+												borderRadius: 999,
 
 												...{
 													opacity: ctx.hovered || ctx.pressed ? 0.8 : 1,
@@ -127,8 +130,8 @@ export function AvatarCreatorItems({
 										{avatar.backgroundColor === color && (
 											<div
 												style={{
-													...a.absolute,
-													...a.rounded_full,
+													position: "absolute",
+													borderRadius: 999,
 													...ACTIVE_BORDER_STYLES,
 
 													...{

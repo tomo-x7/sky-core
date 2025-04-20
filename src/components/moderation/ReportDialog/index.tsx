@@ -57,18 +57,20 @@ function Invalid() {
 		<Dialog.ScrollableInner label={"Report dialog"}>
 			<Text
 				style={{
-					...a.font_heavy,
-					...a.text_xl,
-					...a.leading_snug,
-					...a.pb_xs,
+					fontWeight: "800",
+					fontSize: 20,
+					letterSpacing: 0,
+					lineHeight: 1.3,
+					paddingBottom: 4,
 				}}
 			>
 				Invalid report subject
 			</Text>
 			<Text
 				style={{
-					...a.text_md,
-					...a.leading_snug,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.3,
 				}}
 			>
 				Something wasn't quite right with the data you're trying to report. Please contact support.
@@ -164,15 +166,15 @@ function Inner(props: ReportDialogProps) {
 		<Dialog.ScrollableInner
 			label={"Report dialog"}
 			style={{
-				...a.w_full,
+				width: "100%",
 				...{ maxWidth: 500 },
 			}}
 		>
-			<div style={a.gap_2xl}>
+			<div style={{ gap:24 }}>
 				<StepOuter>
 					<StepTitle index={1} title={copy.subtitle} activeIndex1={state.activeStepIndex1} />
 					{isLoading ? (
-						<div style={a.gap_sm}>
+						<div style={{ gap:8 }}>
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
 							<OptionCardSkeleton />
@@ -200,12 +202,12 @@ function Inner(props: ReportDialogProps) {
 							{state.selectedOption ? (
 								<div
 									style={{
-										...a.flex_row,
-										...a.align_center,
-										...a.gap_md,
+										flexDirection: "row",
+										alignItems: "center",
+										gap: 12,
 									}}
 								>
-									<div style={a.flex_1}>
+									<div style={{ flex: 1 }}>
 										<OptionCard option={state.selectedOption} />
 									</div>
 									<Button
@@ -222,7 +224,7 @@ function Inner(props: ReportDialogProps) {
 									</Button>
 								</div>
 							) : (
-								<div style={a.gap_sm}>
+								<div style={{ gap:8 }}>
 									{reportOptions[props.subject.type].map((o) => (
 										<OptionCard
 											key={o.reason}
@@ -238,13 +240,16 @@ function Inner(props: ReportDialogProps) {
 											{({ hovered, pressed }) => (
 												<div
 													style={{
-														...a.flex_row,
-														...a.align_center,
-														...a.w_full,
-														...a.px_md,
-														...a.py_sm,
-														...a.rounded_sm,
-														...a.border,
+														flexDirection: "row",
+														alignItems: "center",
+														width: "100%",
+														paddingLeft: 12,
+														paddingRight: 12,
+														paddingTop: 8,
+														paddingBottom: 8,
+														borderRadius: 8,
+														border: "1px solid black",
+														borderWidth: 1,
 														...flatten(
 															hovered || pressed
 																? [t.atoms.border_contrast_high]
@@ -254,9 +259,9 @@ function Inner(props: ReportDialogProps) {
 												>
 													<Text
 														style={{
-															...a.flex_1,
-															...a.italic,
-															...a.leading_snug,
+															flex: 1,
+															fontStyle: "italic",
+															lineHeight: 1.3,
 														}}
 													>
 														Need to report a copyright violation?
@@ -282,12 +287,12 @@ function Inner(props: ReportDialogProps) {
 								) : (
 									<div
 										style={{
-											...a.flex_row,
-											...a.align_center,
-											...a.gap_md,
+											flexDirection: "row",
+											alignItems: "center",
+											gap: 12,
 										}}
 									>
-										<div style={a.flex_1}>
+										<div style={{ flex: 1 }}>
 											<LabelerCard labeler={state.selectedLabeler} />
 										</div>
 										<Button
@@ -308,7 +313,7 @@ function Inner(props: ReportDialogProps) {
 						) : (
 							<>
 								{hasSupportedLabelers ? (
-									<div style={a.gap_sm}>
+									<div style={{ gap:8 }}>
 										{hasSingleSupportedLabeler ? (
 											<>
 												<LabelerCard labeler={supportedLabelers[0]} />
@@ -352,21 +357,21 @@ function Inner(props: ReportDialogProps) {
 						<>
 							<div
 								style={{
-									...a.pb_xs,
-									...a.gap_xs,
+									paddingBottom: 4,
+									gap: 4,
 								}}
 							>
 								<Text
 									style={{
-										...a.leading_snug,
-										...a.pb_xs,
+										lineHeight: 1.3,
+										paddingBottom: 4,
 									}}
 								>
 									Your report will be sent to{" "}
 									<Text
 										style={{
-											...a.font_bold,
-											...a.leading_snug,
+											fontWeight: "600",
+											lineHeight: 1.3,
 										}}
 									>
 										{state.selectedLabeler?.creator.displayName}
@@ -398,11 +403,11 @@ function Inner(props: ReportDialogProps) {
 										/>
 										<div
 											style={{
-												...a.absolute,
-												...a.flex_row,
-												...a.align_center,
-												...a.pr_md,
-												...a.pb_sm,
+												position: "absolute",
+												flexDirection: "row",
+												alignItems: "center",
+												paddingRight: 12,
+												paddingBottom: 8,
 
 												...{
 													bottom: 0,
@@ -456,8 +461,8 @@ function StepOuter({ children }: { children: React.ReactNode }) {
 	return (
 		<div
 			style={{
-				...a.gap_md,
-				...a.w_full,
+				gap: 12,
+				width: "100%",
 			}}
 		>
 			{children}
@@ -480,17 +485,18 @@ function StepTitle({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_sm,
-				...a.pr_3xl,
+				flexDirection: "row",
+				gap: 8,
+				paddingRight: 28,
 			}}
 		>
 			<div
 				style={{
-					...a.justify_center,
-					...a.align_center,
-					...a.rounded_full,
-					...a.border,
+					justifyContent: "center",
+					alignItems: "center",
+					borderRadius: 999,
+					border: "1px solid black",
+					borderWidth: 1,
 
 					...{
 						width: 24,
@@ -513,8 +519,8 @@ function StepTitle({
 				) : (
 					<Text
 						style={{
-							...a.font_heavy,
-							...a.text_center,
+							fontWeight: "800",
+							textAlign: "center",
 							...t.atoms.text,
 
 							...{
@@ -536,10 +542,11 @@ function StepTitle({
 			</div>
 			<Text
 				style={{
-					...a.flex_1,
-					...a.font_heavy,
-					...a.text_lg,
-					...a.leading_snug,
+					flex: 1,
+					fontWeight: "800",
+					fontSize: 18,
+					letterSpacing: 0,
+					lineHeight: 1.3,
 					...(active ? t.atoms.text : t.atoms.text_contrast_medium),
 
 					...{
@@ -570,28 +577,32 @@ function OptionCard({
 			{({ hovered, pressed }) => (
 				<div
 					style={{
-						...a.w_full,
+						width: "100%",
 						...gutters,
-						...a.py_sm,
-						...a.rounded_sm,
-						...a.border,
+						paddingTop: 8,
+						paddingBottom: 8,
+						borderRadius: 8,
+						border: "1px solid black",
+						borderWidth: 1,
 						...t.atoms.bg_contrast_25,
 						...flatten(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
 					}}
 				>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
+							lineHeight: 1.3,
 						}}
 					>
 						{option.title}
 					</Text>
 					<Text
 						style={{
-							...a.text_sm,
-							...a.leading_snug,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.3,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -608,9 +619,10 @@ function OptionCardSkeleton() {
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.rounded_sm,
-				...a.border,
+				width: "100%",
+				borderRadius: 8,
+				border: "1px solid black",
+				borderWidth: 1,
 				...t.atoms.bg_contrast_25,
 				...t.atoms.border_contrast_low,
 
@@ -641,32 +653,35 @@ function LabelerCard({
 			{({ hovered, pressed }) => (
 				<div
 					style={{
-						...a.w_full,
-						...a.p_sm,
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_sm,
-						...a.rounded_md,
-						...a.border,
+						width: "100%",
+						padding: 8,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 8,
+						borderRadius: 12,
+						border: "1px solid black",
+						borderWidth: 1,
 						...t.atoms.bg_contrast_25,
 						...flatten(hovered || pressed ? [t.atoms.border_contrast_high] : [t.atoms.border_contrast_low]),
 					}}
 				>
 					<UserAvatar type="labeler" size={36} avatar={labeler.creator.avatar} />
-					<div style={a.flex_1}>
+					<div style={{ flex: 1 }}>
 						<Text
 							style={{
-								...a.text_md,
-								...a.font_bold,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								fontWeight: "600",
+								lineHeight: 1.3,
 							}}
 						>
 							{title}
 						</Text>
 						<Text
 							style={{
-								...a.text_sm,
-								...a.leading_snug,
+								fontSize: 14,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 								...t.atoms.text_contrast_medium,
 							}}
 						>

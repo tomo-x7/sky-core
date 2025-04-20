@@ -29,17 +29,17 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 		<div
 			style={{
 				...t.atoms.bg,
-				...a.p_lg,
-				...a.gap_md,
-				...a.align_center,
+				padding: 16,
+				gap: 12,
+				alignItems: "center",
 			}}
 		>
 			{otherUser && <KnownFollowers profile={otherUser} moderationOpts={moderationOpts} showIfEmpty />}
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
-					...a.w_full,
+					flexDirection: "row",
+					gap: 12,
+					width: "100%",
 					...(otherUser && a.pt_sm),
 				}}
 			>
@@ -70,8 +70,8 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 			</div>
 			<div
 				style={{
-					...a.w_full,
-					...a.flex_row,
+					width: "100%",
+					flexDirection: "row",
 				}}
 			>
 				<AcceptChatButton

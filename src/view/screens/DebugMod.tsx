@@ -34,11 +34,11 @@ import { moderationOptsOverrideContext } from "#/state/preferences/moderation-op
 import type { FeedNotification } from "#/state/queries/notifications/types";
 import { groupNotifications, shouldFilterNotif } from "#/state/queries/notifications/util";
 import { useSession } from "#/state/session";
+import { PostFeedItem } from "#/units/post";
 import { CenteredView, ScrollView } from "#/view/com/util/Views";
 import { ScreenHider } from "../../components/moderation/ScreenHider";
 import { NotificationFeedItem } from "../com/notifications/NotificationFeedItem";
 import { PostThreadItem } from "../com/post-thread/PostThreadItem";
-import { PostFeedItem } from "#/units/post";
 import { ProfileCard } from "../com/profile/ProfileCard";
 
 const LABEL_VALUES: (keyof typeof LABELS)[] = Object.keys(LABELS) as (keyof typeof LABELS)[];
@@ -243,15 +243,18 @@ export const DebugModScreen = () => {
 					<CenteredView
 						style={{
 							...t.atoms.bg,
-							...a.px_lg,
-							...a.py_lg,
+							paddingLeft: 16,
+							paddingRight: 16,
+							paddingTop: 16,
+							paddingBottom: 16,
 						}}
 					>
 						<H1
 							style={{
-								...a.text_5xl,
-								...a.font_bold,
-								...a.pb_lg,
+								fontSize: 40,
+								letterSpacing: 0,
+								fontWeight: "600",
+								paddingBottom: 16,
 							}}
 						>
 							Moderation states
@@ -274,20 +277,21 @@ export const DebugModScreen = () => {
 							<>
 								<div
 									style={{
-										...a.border,
-										...a.rounded_sm,
-										...a.mt_lg,
-										...a.mb_lg,
-										...a.p_lg,
+										border: "1px solid black",
+										borderWidth: 1,
+										borderRadius: 8,
+										marginTop: 16,
+										marginBottom: 16,
+										padding: 16,
 										...t.atoms.border_contrast_medium,
 									}}
 								>
 									<Toggle.Group label="Toggle" type="radio" values={label} onChange={setLabel}>
 										<div
 											style={{
-												...a.flex_row,
-												...a.gap_md,
-												...a.flex_wrap,
+												flexDirection: "row",
+												gap: 12,
+												flexWrap: "wrap",
 											}}
 										>
 											{LABEL_VALUES.map((labelValue) => {
@@ -342,10 +346,10 @@ export const DebugModScreen = () => {
 										>
 											<div
 												style={{
-													...a.gap_md,
-													...a.flex_row,
-													...a.flex_wrap,
-													...a.pt_md,
+													gap: 12,
+													flexDirection: "row",
+													flexWrap: "wrap",
+													paddingTop: 12,
 												}}
 											>
 												<Toggle.Item name="targetMe" label="Target is me">
@@ -372,13 +376,14 @@ export const DebugModScreen = () => {
 										</Toggle.Group>
 
 										{LABELS[label[0] as keyof typeof LABELS]?.configurable !== false && (
-											<div style={a.mt_md}>
+											<div style={{ ...a.mt_md }}>
 												<Text
 													style={{
-														...a.font_bold,
-														...a.text_xs,
+														fontWeight: "600",
+														fontSize: 12,
+														letterSpacing: 0,
 														...t.atoms.text,
-														...a.pb_sm,
+														paddingBottom: 8,
 													}}
 												>
 													Preference
@@ -391,10 +396,10 @@ export const DebugModScreen = () => {
 												>
 													<div
 														style={{
-															...a.flex_row,
-															...a.gap_md,
-															...a.flex_wrap,
-															...a.align_center,
+															flexDirection: "row",
+															gap: 12,
+															flexWrap: "wrap",
+															alignItems: "center",
 														}}
 													>
 														<Toggle.Item name="hide" label="Hide">
@@ -418,29 +423,33 @@ export const DebugModScreen = () => {
 
 								<div
 									style={{
-										...a.flex_row,
-										...a.flex_wrap,
-										...a.gap_md,
+										flexDirection: "row",
+										flexWrap: "wrap",
+										gap: 12,
 									}}
 								>
 									<div>
 										<Text
 											style={{
-												...a.font_bold,
-												...a.text_xs,
+												fontWeight: "600",
+												fontSize: 12,
+												letterSpacing: 0,
 												...t.atoms.text,
-												...a.pl_md,
-												...a.pb_xs,
+												paddingLeft: 12,
+												paddingBottom: 4,
 											}}
 										>
 											Target
 										</Text>
 										<div
 											style={{
-												...a.border,
-												...a.rounded_full,
-												...a.px_md,
-												...a.py_sm,
+												border: "1px solid black",
+												borderWidth: 1,
+												borderRadius: 999,
+												paddingLeft: 12,
+												paddingRight: 12,
+												paddingTop: 8,
+												paddingBottom: 8,
 												...t.atoms.border_contrast_medium,
 												...t.atoms.bg,
 											}}
@@ -453,9 +462,9 @@ export const DebugModScreen = () => {
 											>
 												<div
 													style={{
-														...a.flex_row,
-														...a.gap_md,
-														...a.flex_wrap,
+														flexDirection: "row",
+														gap: 12,
+														flexWrap: "wrap",
 													}}
 												>
 													<Toggle.Item name="account" label="Account">
@@ -503,10 +512,11 @@ export const DebugModScreen = () => {
 
 						<div
 							style={{
-								...a.border,
-								...a.rounded_sm,
-								...a.mt_lg,
-								...a.p_md,
+								border: "1px solid black",
+								borderWidth: 1,
+								borderRadius: 8,
+								marginTop: 16,
+								padding: 12,
 								...t.atoms.border_contrast_medium,
 							}}
 						>
@@ -571,9 +581,10 @@ function Heading({ title, subtitle }: { title: string; subtitle?: string }) {
 	return (
 		<H3
 			style={{
-				...a.text_3xl,
-				...a.font_bold,
-				...a.pb_md,
+				fontSize: 26,
+				letterSpacing: 0,
+				fontWeight: "600",
+				paddingBottom: 12,
 			}}
 		>
 			{title}{" "}
@@ -581,7 +592,8 @@ function Heading({ title, subtitle }: { title: string; subtitle?: string }) {
 				<H3
 					style={{
 						...t.atoms.text_contrast_medium,
-						...a.text_lg,
+						fontSize: 18,
+						letterSpacing: 0,
 					}}
 				>
 					{subtitle}
@@ -602,33 +614,37 @@ function CustomLabelForm({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.flex_wrap,
-				...a.gap_md,
+				flexDirection: "row",
+				flexWrap: "wrap",
+				gap: 12,
 				...t.atoms.bg_contrast_25,
-				...a.rounded_md,
-				...a.p_md,
-				...a.mt_md,
+				borderRadius: 12,
+				padding: 12,
+				marginTop: 12,
 			}}
 		>
 			<div>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_xs,
+						fontWeight: "600",
+						fontSize: 12,
+						letterSpacing: 0,
 						...t.atoms.text,
-						...a.pl_md,
-						...a.pb_xs,
+						paddingLeft: 12,
+						paddingBottom: 4,
 					}}
 				>
 					Blurs
 				</Text>
 				<div
 					style={{
-						...a.border,
-						...a.rounded_full,
-						...a.px_md,
-						...a.py_sm,
+						border: "1px solid black",
+						borderWidth: 1,
+						borderRadius: 999,
+						paddingLeft: 12,
+						paddingRight: 12,
+						paddingTop: 8,
+						paddingBottom: 8,
 						...t.atoms.border_contrast_medium,
 						...t.atoms.bg,
 					}}
@@ -641,9 +657,9 @@ function CustomLabelForm({
 					>
 						<div
 							style={{
-								...a.flex_row,
-								...a.gap_md,
-								...a.flex_wrap,
+								flexDirection: "row",
+								gap: 12,
+								flexWrap: "wrap",
 							}}
 						>
 							<Toggle.Item name="content" label="Content">
@@ -665,21 +681,25 @@ function CustomLabelForm({
 			<div>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_xs,
+						fontWeight: "600",
+						fontSize: 12,
+						letterSpacing: 0,
 						...t.atoms.text,
-						...a.pl_md,
-						...a.pb_xs,
+						paddingLeft: 12,
+						paddingBottom: 4,
 					}}
 				>
 					Severity
 				</Text>
 				<div
 					style={{
-						...a.border,
-						...a.rounded_full,
-						...a.px_md,
-						...a.py_sm,
+						border: "1px solid black",
+						borderWidth: 1,
+						borderRadius: 999,
+						paddingLeft: 12,
+						paddingRight: 12,
+						paddingTop: 8,
+						paddingBottom: 8,
 						...t.atoms.border_contrast_medium,
 						...t.atoms.bg,
 					}}
@@ -692,10 +712,10 @@ function CustomLabelForm({
 					>
 						<div
 							style={{
-								...a.flex_row,
-								...a.gap_md,
-								...a.flex_wrap,
-								...a.align_center,
+								flexDirection: "row",
+								gap: 12,
+								flexWrap: "wrap",
+								alignItems: "center",
 							}}
 						>
 							<Toggle.Item name="alert" label="Alert">
@@ -722,13 +742,14 @@ function Toggler({ label, children }: React.PropsWithChildren<{ label: string }>
 	const t = useTheme();
 	const [show, setShow] = React.useState(false);
 	return (
-		<div style={a.mb_md}>
+		<div style={{ ...a.mb_md }}>
 			<div
 				style={{
 					...t.atoms.border_contrast_medium,
-					...a.border,
-					...a.rounded_sm,
-					...a.p_xs,
+					border: "1px solid black",
+					borderWidth: 1,
+					borderRadius: 8,
+					padding: 4,
 				}}
 			>
 				<Button
@@ -751,7 +772,7 @@ function SmallToggler({ label, children }: React.PropsWithChildren<{ label: stri
 	const [show, setShow] = React.useState(false);
 	return (
 		<div>
-			<div style={a.flex_row}>
+			<div style={{ ...a.flex_row }}>
 				<Button
 					variant="ghost"
 					color="secondary"
@@ -775,7 +796,7 @@ function DataView({ label, data }: { label: string; data: any }) {
 			<Text
 				style={{
 					...{ fontFamily: "monospace" },
-					...a.p_md,
+					padding: 12,
 				}}
 			>
 				{JSON.stringify(data, null, 2)}
@@ -793,7 +814,7 @@ function ModerationUIView({
 }) {
 	return (
 		<Toggler label={label}>
-			<div style={a.p_lg}>
+			<div style={{ ...a.p_lg }}>
 				{[
 					"profileList",
 					"profileView",
@@ -809,13 +830,13 @@ function ModerationUIView({
 						<div
 							key={key}
 							style={{
-								...a.flex_row,
-								...a.gap_md,
+								flexDirection: "row",
+								gap: 12,
 							}}
 						>
 							<Text
 								style={{
-									...a.font_bold,
+									fontWeight: "600",
 									...{ width: 100 },
 								}}
 							>
@@ -851,9 +872,11 @@ function MockPostFeedItem({
 			<P
 				style={{
 					...t.atoms.bg_contrast_25,
-					...a.px_lg,
-					...a.py_md,
-					...a.mb_lg,
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingTop: 12,
+					paddingBottom: 12,
+					marginBottom: 16,
 				}}
 			>
 				Filtered from the feed
@@ -913,8 +936,10 @@ function MockNotifItem({
 			<P
 				style={{
 					...t.atoms.bg_contrast_25,
-					...a.px_lg,
-					...a.py_md,
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingTop: 12,
+					paddingBottom: 12,
 				}}
 			>
 				Filtered from the feed
@@ -938,9 +963,11 @@ function MockAccountCard({
 			<P
 				style={{
 					...t.atoms.bg_contrast_25,
-					...a.px_lg,
-					...a.py_md,
-					...a.mb_lg,
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingTop: 12,
+					paddingBottom: 12,
+					marginBottom: 16,
 				}}
 			>
 				Filtered from the listing
@@ -965,8 +992,9 @@ function MockAccountScreen({
 		<div
 			style={{
 				...t.atoms.border_contrast_medium,
-				...a.border,
-				...a.mb_md,
+				border: "1px solid black",
+				borderWidth: 1,
+				marginBottom: 12,
 			}}
 		>
 			<ScreenHider style={{}} screenDescription={"profile"} modui={moderation.ui("profileView")}>
@@ -987,17 +1015,18 @@ function Flag({ v, label }: { v: boolean | undefined; label: string }) {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_xs,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 4,
 			}}
 		>
 			<div
 				style={{
-					...a.justify_center,
-					...a.align_center,
-					...a.rounded_xs,
-					...a.border,
+					justifyContent: "center",
+					alignItems: "center",
+					borderRadius: 4,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.border_contrast_medium,
 
 					...{
@@ -1009,7 +1038,7 @@ function Flag({ v, label }: { v: boolean | undefined; label: string }) {
 			>
 				{v && <Check size="xs" fill={t.palette.contrast_900} />}
 			</div>
-			<P style={a.text_xs}>{label}</P>
+			<P style={{ ...a.text_xs }}>{label}</P>
 		</div>
 	);
 }

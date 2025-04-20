@@ -124,7 +124,7 @@ export const LoginForm = ({
 				setIsAuthFactorTokenNeeded(true);
 			} else {
 				onAttemptFailed();
-				if (errMsg.includes("Token is invalid")) {
+				if (errMsg.includes("tokenspace is invalid")) {
 					setError("Invalid 2FA confirmation code.");
 				} else if (
 					errMsg.includes("Authentication Required") ||
@@ -152,7 +152,7 @@ export const LoginForm = ({
 			</div>
 			<div>
 				<TextField.LabelText>Account</TextField.LabelText>
-				<div style={a.gap_sm}>
+				<div style={{ gap:8 }}>
 					<TextField.Root>
 						<TextField.Icon icon={AtIcon} />
 						<TextField.Input
@@ -201,12 +201,12 @@ export const LoginForm = ({
 							variant="solid"
 							color="secondary"
 							style={{
-								...a.rounded_sm,
+								borderRadius: 8,
 
 								...// t.atoms.bg_contrast_100,
 								{ marginLeft: "auto", left: 6, padding: 6 },
 
-								...a.z_10,
+								zIndex: 10,
 							}}
 						>
 							<ButtonText>Forgot?</ButtonText>
@@ -240,9 +240,10 @@ export const LoginForm = ({
 					</TextField.Root>
 					<Text
 						style={{
-							...a.text_sm,
+							fontSize: 14,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
-							...a.mt_sm,
+							marginTop: 8,
 						}}
 					>
 						Check your email for a sign in code and enter it here.
@@ -252,15 +253,15 @@ export const LoginForm = ({
 			<FormError error={error} />
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.pt_md,
+					flexDirection: "row",
+					alignItems: "center",
+					paddingTop: 12,
 				}}
 			>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
-				<div style={a.flex_1} />
+				<div style={{ flex: 1 }} />
 				{!serviceDescription && error ? (
 					<Button
 						label={"Retry"}
@@ -277,7 +278,7 @@ export const LoginForm = ({
 						<Text
 							style={{
 								...t.atoms.text_contrast_high,
-								...a.pl_md,
+								paddingLeft: 12,
 							}}
 						>
 							Connecting...

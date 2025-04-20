@@ -53,18 +53,18 @@ export function Link({ view, children, ...props }: Props & Omit<LinkProps, "to" 
 	}, [view, queryClient]);
 
 	return (
-		<InternalLink label={view.displayName} to={href} style={a.flex_col} {...props}>
+		<InternalLink label={view.displayName} to={href} style={{flexDirection:"column" }} {...props}>
 			{children}
 		</InternalLink>
 	);
 }
 
 export function Outer({ children }: { children: React.ReactNode }) {
-	return <div style={{ ...a.w_full, ...a.gap_md }}>{children}</div>;
+	return <div style={{ width: "100%",gap:12 }}>{children}</div>;
 }
 
 export function Header({ children }: { children: React.ReactNode }) {
-	return <div style={{ ...a.flex_row, ...a.align_center, ...a.gap_md }}>{children}</div>;
+	return <div style={{ flexDirection: "row", alignItems: "center", gap:12 }}>{children}</div>;
 }
 
 export type AvatarProps = { src: string | undefined; size?: number };
@@ -98,12 +98,13 @@ export function TitleAndByline({
 	const t = useTheme();
 
 	return (
-		<div style={a.flex_1}>
+		<div style={{ flex: 1 }}>
 			<Text
 				style={{
-					...a.text_md,
-					...a.font_bold,
-					...a.leading_snug,
+					fontSize: 16,
+					letterSpacing: 0,
+					fontWeight: "600",
+					lineHeight: 1.3,
 				}}
 				numberOfLines={1}
 			>
@@ -112,7 +113,7 @@ export function TitleAndByline({
 			{creator && (
 				<Text
 					style={{
-						...a.leading_snug,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_medium,
 					}}
 					numberOfLines={1}
@@ -128,10 +129,10 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 	const t = useTheme();
 
 	return (
-		<div style={{ ...a.flex_1, ...a.gap_xs }}>
+		<div style={{ flex: 1, gap:4 }}>
 			<div
 				style={{
-					...a.rounded_xs,
+					borderRadius: 4,
 					...t.atoms.bg_contrast_50,
 
 					width: "60%",
@@ -141,7 +142,7 @@ export function TitleAndBylinePlaceholder({ creator }: { creator?: boolean }) {
 			{creator && (
 				<div
 					style={{
-						...a.rounded_xs,
+						borderRadius: 4,
 						...t.atoms.bg_contrast_25,
 
 						width: "40%",
@@ -161,16 +162,16 @@ export function Description({ description, ...rest }: { description?: string } &
 		return rt;
 	}, [description]);
 	if (!rt) return null;
-	return <RichText value={rt} style={a.leading_snug} disableLinks {...rest} />;
+	return <RichText value={rt} style={{ lineHeight:1.3 }} disableLinks {...rest} />;
 }
 
 export function DescriptionPlaceholder() {
 	const t = useTheme();
 	return (
-		<div style={a.gap_xs}>
-			<div style={{ ...a.rounded_xs, ...a.w_full, ...t.atoms.bg_contrast_50, height: 12 }} />
-			<div style={{ ...a.rounded_xs, ...a.w_full, ...t.atoms.bg_contrast_50, height: 12 }} />
-			<div style={{ ...a.rounded_xs, ...a.w_full, ...t.atoms.bg_contrast_50, height: 12, width: 100 }} />
+		<div style={{ gap:4}}>
+			<div style={{ borderRadius: 4, width: "100%", ...t.atoms.bg_contrast_50, height: 12 }} />
+			<div style={{ borderRadius: 4, width: "100%", ...t.atoms.bg_contrast_50, height: 12 }} />
+			<div style={{ borderRadius: 4, ...t.atoms.bg_contrast_50, height: 12, width: 100 }} />
 		</div>
 	);
 }
@@ -180,7 +181,8 @@ export function Likes({ count }: { count: number }) {
 	return (
 		<Text
 			style={{
-				...a.text_sm,
+				fontSize: 14,
+				letterSpacing: 0,
 				...t.atoms.text_contrast_medium,
 			}}
 		>

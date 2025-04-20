@@ -36,14 +36,15 @@ export function HostingProvider({
 			{minimal ? (
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.flex_wrap,
+						flexDirection: "row",
+						alignItems: "center",
+						flexWrap: "wrap",
 					}}
 				>
 					<Text
 						style={{
-							...a.text_sm,
+							fontSize: 14,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -55,11 +56,12 @@ export function HostingProvider({
 							color="secondary"
 							size="tiny"
 							style={{
-								...a.px_xs,
+								paddingLeft: 4,
+								paddingRight: 4,
 								...{ marginRight: tokens.space.xs * -1, marginLeft: tokens.space.xs * -1 },
 							}}
 						>
-							<ButtonText style={a.text_sm}>{toNiceDomain(serviceUrl)}</ButtonText>
+							<ButtonText style={{ ...a.text_sm }}>{toNiceDomain(serviceUrl)}</ButtonText>
 							<ButtonIcon icon={PencilIcon} />
 						</Button>
 					</Text>
@@ -70,13 +72,13 @@ export function HostingProvider({
 					variant="solid"
 					color="secondary"
 					style={{
-						...a.w_full,
-						...a.flex_row,
-						...a.align_center,
-						...a.rounded_sm,
-						...a.pl_md,
-						...a.pr_sm,
-						...a.gap_xs,
+						width: "100%",
+						flexDirection: "row",
+						alignItems: "center",
+						borderRadius: 8,
+						paddingLeft: 12,
+						paddingRight: 8,
+						gap: 4,
 						...{ paddingTop: 8, paddingBottom: 8 },
 					}}
 					onPress={onPressSelectService}
@@ -85,16 +87,16 @@ export function HostingProvider({
 						const interacted = hovered || pressed;
 						return (
 							<>
-								<div style={a.pr_xs}>
+								<div style={{ ...a.pr_xs }}>
 									<GlobeIcon
 										size="md"
 										fill={interacted ? t.palette.contrast_800 : t.palette.contrast_500}
 									/>
 								</div>
-								<Text style={a.text_md}>{toNiceDomain(serviceUrl)}</Text>
+								<Text style={{ ...a.text_md }}>{toNiceDomain(serviceUrl)}</Text>
 								<div
 									style={{
-										...a.rounded_sm,
+										borderRadius: 8,
 										...(interacted ? t.atoms.bg_contrast_300 : t.atoms.bg_contrast_100),
 										...{ marginLeft: "auto", padding: 6 },
 									}}

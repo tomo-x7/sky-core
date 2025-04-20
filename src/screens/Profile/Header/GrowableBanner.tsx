@@ -1,7 +1,5 @@
 import type React from "react";
 
-import { atoms as a } from "#/alf";
-
 export function GrowableBanner({
 	backButton,
 	children,
@@ -14,8 +12,8 @@ export function GrowableBanner({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.h_full,
+				width: "100%",
+				height: "100%",
 			}}
 		>
 			{children}

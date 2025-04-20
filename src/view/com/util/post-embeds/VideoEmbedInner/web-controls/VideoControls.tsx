@@ -297,7 +297,7 @@ export function Controls({
 				onPointerMove={onPointerMoveEmptySpace}
 				onPointerLeave={onPointerLeaveEmptySpace}
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...{ cursor: showCursor || !playing ? "pointer" : "none" },
 				}}
 				onClick={onPressEmptySpace}
@@ -306,8 +306,9 @@ export function Controls({
 			<div
 				style={{
 					...a.flex_shrink_0,
-					...a.w_full,
-					...a.px_xs,
+					width: "100%",
+					paddingLeft: 4,
+					paddingRight: 4,
 					background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7))",
 					opacity: showControls ? 1 : 0,
 					transition: "opacity 0.2s ease-in-out",
@@ -328,12 +329,13 @@ export function Controls({
 				)}
 				<div
 					style={{
-						...a.flex_1,
-						...a.px_xs,
-						...a.pb_sm,
-						...a.gap_sm,
-						...a.flex_row,
-						...a.align_center,
+						flex: 1,
+						paddingLeft: 4,
+						paddingRight: 4,
+						paddingBottom: 8,
+						gap: 8,
+						flexDirection: "row",
+						alignItems: "center",
 					}}
 				>
 					<ControlButton
@@ -344,10 +346,11 @@ export function Controls({
 						inactiveIcon={PlayIcon}
 						onPress={onPressPlayPause}
 					/>
-					<div style={a.flex_1} />
+					<div style={{ flex: 1 }} />
 					<Text
 						style={{
-							...a.px_xs,
+							paddingLeft: 4,
+							paddingRight: 4,
 							color: t.palette.white,
 							fontVariant: "tabular-nums",
 						}}
@@ -387,10 +390,13 @@ export function Controls({
 			{(showSpinner || error) && (
 				<div
 					style={{
-						...a.absolute,
-						...a.inset_0,
-						...a.justify_center,
-						...a.align_center,
+						position: "absolute",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						justifyContent: "center",
+						alignItems: "center",
 						pointerEvents: "none",
 					}}
 				>

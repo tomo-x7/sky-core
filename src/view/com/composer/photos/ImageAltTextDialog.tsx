@@ -75,10 +75,11 @@ const ImageAltTextInner = ({
 			<div>
 				<Text
 					style={{
-						...a.text_2xl,
-						...a.font_bold,
-						...a.leading_tight,
-						...a.pb_sm,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "600",
+						lineHeight: 1.15,
+						paddingBottom: 8,
 					}}
 				>
 					Add alt text
@@ -87,8 +88,8 @@ const ImageAltTextInner = ({
 				<div
 					style={{
 						...t.atoms.bg_contrast_50,
-						...a.rounded_sm,
-						...a.overflow_hidden,
+						borderRadius: 8,
+						overflow: "hidden",
 					}}
 				>
 					<img
@@ -99,14 +100,14 @@ const ImageAltTextInner = ({
 			</div>
 			<div
 				style={{
-					...a.mt_md,
-					...a.gap_md,
+					marginTop: 12,
+					gap: 12,
 				}}
 			>
-				<div style={a.gap_sm}>
+				<div style={{ gap:8 }}>
 					<div
 						style={{
-							...a.relative,
+							position: "relative",
 							...{ width: "100%" },
 						}}
 					>
@@ -129,16 +130,16 @@ const ImageAltTextInner = ({
 					{altText.length > MAX_ALT_TEXT && (
 						<div
 							style={{
-								...a.pb_sm,
-								...a.flex_row,
-								...a.gap_xs,
+								paddingBottom: 8,
+								flexDirection: "row",
+								gap: 4,
 							}}
 						>
 							<CircleInfo fill={t.palette.negative_500} />
 							<Text
 								style={{
-									...a.italic,
-									...a.leading_snug,
+									fontStyle: "italic",
+									lineHeight: 1.3,
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -158,7 +159,7 @@ const ImageAltTextInner = ({
 						onPress={() => {
 							control.close();
 						}}
-						style={a.flex_grow}
+						style={{ ...a.flex_grow }}
 					>
 						<ButtonText>Save</ButtonText>
 					</Button>

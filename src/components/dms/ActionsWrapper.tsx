@@ -46,8 +46,8 @@ export function ActionsWrapper({
 			{isFromSelf && (
 				<div
 					style={{
-						...a.mr_xl,
-						...a.justify_center,
+						marginRight: 20,
+						justifyContent: "center",
 
 						...{
 							marginLeft: "auto",
@@ -71,9 +71,9 @@ export function ActionsWrapper({
 			{!isFromSelf && (
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.ml_xl,
+						flexDirection: "row",
+						alignItems: "center",
+						marginLeft: 20,
 					}}
 				>
 					<MessageMenu

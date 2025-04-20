@@ -20,12 +20,14 @@ export function PostThreadShowHiddenReplies({
 			{({ hovered, pressed }) => (
 				<div
 					style={{
-						...a.flex_1,
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_sm,
-						...a.py_lg,
-						...a.px_xl,
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 8,
+						paddingTop: 16,
+						paddingBottom: 16,
+						paddingLeft: 20,
+						paddingRight: 20,
 						...(!hideTopBorder && a.border_t),
 						...t.atoms.border_contrast_low,
 						...(hovered || pressed ? t.atoms.bg_contrast_25 : t.atoms.bg),
@@ -34,8 +36,8 @@ export function PostThreadShowHiddenReplies({
 					<div
 						style={{
 							...t.atoms.bg_contrast_25,
-							...a.align_center,
-							...a.justify_center,
+							alignItems: "center",
+							justifyContent: "center",
 
 							...{
 								width: 26,
@@ -50,7 +52,7 @@ export function PostThreadShowHiddenReplies({
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.flex_1,
+							flex: 1,
 						}}
 						numberOfLines={1}
 					>

@@ -147,35 +147,36 @@ export function StepFinished() {
 	]);
 
 	return (
-		<div style={a.align_start}>
-			<IconCircle icon={Check} style={a.mb_2xl} />
+		<div style={{ ...a.align_start }}>
+			<IconCircle icon={Check} style={{ ...a.mb_2xl }} />
 			<TitleText>You're ready to go!</TitleText>
 			<DescriptionText>We hope you have a wonderful time. Remember, Bluesky is:</DescriptionText>
 			<div
 				style={{
-					...a.pt_5xl,
-					...a.gap_3xl,
+					paddingTop: 40,
+					gap:28
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.w_full,
-						...a.gap_lg,
+						flexDirection: "row",
+						alignItems: "center",
+						width: "100%",
+						gap: 16,
 					}}
 				>
 					<IconCircle icon={Growth} size="lg" style={{ width: 48, height: 48 }} />
 					<div
 						style={{
-							...a.flex_1,
-							...a.gap_xs,
+							flex: 1,
+							gap: 4,
 						}}
 					>
 						<Text
 							style={{
-								...a.font_bold,
-								...a.text_lg,
+								fontWeight: "600",
+								fontSize: 18,
+								letterSpacing: 0,
 							}}
 						>
 							Public
@@ -183,8 +184,9 @@ export function StepFinished() {
 						<Text
 							style={{
 								...t.atoms.text_contrast_medium,
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							Your posts, likes, and blocks are public. Mutes are private.
@@ -193,23 +195,24 @@ export function StepFinished() {
 				</div>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.w_full,
-						...a.gap_lg,
+						flexDirection: "row",
+						alignItems: "center",
+						width: "100%",
+						gap: 16,
 					}}
 				>
 					<IconCircle icon={News} size="lg" style={{ width: 48, height: 48 }} />
 					<div
 						style={{
-							...a.flex_1,
-							...a.gap_xs,
+							flex: 1,
+							gap: 4,
 						}}
 					>
 						<Text
 							style={{
-								...a.font_bold,
-								...a.text_lg,
+								fontWeight: "600",
+								fontSize: 18,
+								letterSpacing: 0,
 							}}
 						>
 							Open
@@ -217,8 +220,9 @@ export function StepFinished() {
 						<Text
 							style={{
 								...t.atoms.text_contrast_medium,
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							Never lose access to your followers or data.
@@ -227,23 +231,24 @@ export function StepFinished() {
 				</div>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.w_full,
-						...a.gap_lg,
+						flexDirection: "row",
+						alignItems: "center",
+						width: "100%",
+						gap: 16,
 					}}
 				>
 					<IconCircle icon={Trending} size="lg" style={{ width: 48, height: 48 }} />
 					<div
 						style={{
-							...a.flex_1,
-							...a.gap_xs,
+							flex: 1,
+							gap: 4,
 						}}
 					>
 						<Text
 							style={{
-								...a.font_bold,
-								...a.text_lg,
+								fontWeight: "600",
+								fontSize: 18,
+								letterSpacing: 0,
 							}}
 						>
 							Flexible
@@ -251,8 +256,9 @@ export function StepFinished() {
 						<Text
 							style={{
 								...t.atoms.text_contrast_medium,
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							Choose the algorithms that power your custom feeds.

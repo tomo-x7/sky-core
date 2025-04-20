@@ -1,7 +1,7 @@
 import React from "react";
 import { LinearGradient } from "#/components/LinearGradient";
 
-import { atoms as a, useTheme as useNewTheme } from "#/alf";
+import { useTheme as useNewTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text as NewText } from "#/components/Typography";
 import { Text } from "#/components/Typography";
@@ -196,19 +196,19 @@ export function Component(props: {}) {
 						<div>
 							<div
 								style={{
-									...a.w_full,
-									...a.flex_row,
-									...a.gap_sm,
-									...a.mt_lg,
-									...a.p_lg,
-									...a.rounded_sm,
+									width: "100%",
+									flexDirection: "row",
+									gap: 8,
+									marginTop: 16,
+									padding: 16,
+									borderRadius: 8,
 									...t.atoms.bg_contrast_25,
 								}}
 							>
 								<CircleInfo
 									size="md"
 									style={{
-										...a.relative,
+										position: "relative",
 
 										...{
 											top: -1,
@@ -218,8 +218,8 @@ export function Component(props: {}) {
 
 								<NewText
 									style={{
-										...a.leading_snug,
-										...a.flex_1,
+										lineHeight: 1.3,
+										flex: 1,
 									}}
 								>
 									You can also temporarily deactivate your account instead, and reactivate it at any

@@ -80,8 +80,8 @@ export function CountWheel({
 				<Text
 					style={{
 						...(big ? a.text_md : { fontSize: 15 }),
-						...a.user_select_none,
-						...(isLiked ? { ...a.font_bold, ...s.likeColor } : { color: t.palette.contrast_500 }),
+						userSelect: "none",
+						...(isLiked ? { fontWeight: "600", ...s.likeColor } : { color: t.palette.contrast_500 }),
 					}}
 				>
 					{formattedCount}
@@ -92,8 +92,8 @@ export function CountWheel({
 					<Text
 						style={{
 							...(big ? a.text_md : { fontSize: 15 }),
-							...a.user_select_none,
-							...(isLiked ? { ...a.font_bold, ...s.likeColor } : { color: t.palette.contrast_500 }),
+							userSelect: "none",
+							...(isLiked ? { fontWeight: "600", ...s.likeColor } : { color: t.palette.contrast_500 }),
 						}}
 					>
 						{formattedPrevCount}

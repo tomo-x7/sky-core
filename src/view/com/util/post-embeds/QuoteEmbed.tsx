@@ -70,7 +70,8 @@ export function MaybeQuoteEmbed({
 			<div
 				style={{
 					...styles.errorContainer,
-					...a.border,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.border_contrast_low,
 				}}
 			>
@@ -85,7 +86,8 @@ export function MaybeQuoteEmbed({
 			<div
 				style={{
 					...styles.errorContainer,
-					...a.border,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.border_contrast_low,
 				}}
 			>
@@ -101,7 +103,8 @@ export function MaybeQuoteEmbed({
 			<div
 				style={{
 					...styles.errorContainer,
-					...a.border,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.border_contrast_low,
 				}}
 			>
@@ -210,14 +213,15 @@ export function QuoteEmbed({
 			<ContentHider
 				modui={moderation?.ui("contentList")}
 				style={{
-					...a.rounded_md,
-					...a.p_md,
-					...a.mt_sm,
-					...a.border,
+					borderRadius: 12,
+					padding: 12,
+					marginTop: 8,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.border_contrast_low,
 					...style,
 				}}
-				childContainerStyle={a.pt_sm}
+				childContainerstyle={{ ...a.pt_sm }}
 			>
 				<SubtleWebHover hover={hover} />
 				<Link
@@ -235,8 +239,10 @@ export function QuoteEmbed({
 							timestamp={quote.indexedAt}
 						/>
 					</div>
-					{moderation ? <PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} /> : null}
-					{richText ? <RichText value={richText} style={a.text_md} numberOfLines={20} disableLinks /> : null}
+					{moderation ? <PostAlerts modui={moderation.ui("contentView")} style={{ ...a.py_xs }} /> : null}
+					{richText ? (
+						<RichText value={richText} style={{ ...a.text_md }} numberOfLines={20} disableLinks />
+					) : null}
 					{embed && <PostEmbeds embed={embed} moderation={moderation} />}
 				</Link>
 			</ContentHider>
@@ -249,11 +255,11 @@ export function QuoteX({ onRemove }: { onRemove: () => void }) {
 		<button
 			type="button"
 			style={{
-				...a.absolute,
-				...a.p_xs,
-				...a.rounded_full,
-				...a.align_center,
-				...a.justify_center,
+				position: "absolute",
+				padding: 4,
+				borderRadius: 999,
+				alignItems: "center",
+				justifyContent: "center",
 
 				...{
 					top: 16,

@@ -5,20 +5,22 @@ export function Shadows() {
 	const t = useTheme();
 
 	return (
-		<div style={a.gap_md}>
+		<div style={{ gap:12 }}>
 			<H1>Shadows</H1>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_5xl,
+					flexDirection: "row",
+					gap: 40,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.justify_center,
-						...a.px_lg,
-						...a.py_2xl,
+						flex: 1,
+						justifyContent: "center",
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 24,
+						paddingBottom: 24,
 						...t.atoms.bg,
 						...t.atoms.shadow_sm,
 					}}
@@ -28,10 +30,12 @@ export function Shadows() {
 
 				<div
 					style={{
-						...a.flex_1,
-						...a.justify_center,
-						...a.px_lg,
-						...a.py_2xl,
+						flex: 1,
+						justifyContent: "center",
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 24,
+						paddingBottom: 24,
 						...t.atoms.bg,
 						...t.atoms.shadow_md,
 					}}
@@ -41,10 +45,12 @@ export function Shadows() {
 
 				<div
 					style={{
-						...a.flex_1,
-						...a.justify_center,
-						...a.px_lg,
-						...a.py_2xl,
+						flex: 1,
+						justifyContent: "center",
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 24,
+						paddingBottom: 24,
 						...t.atoms.bg,
 						...t.atoms.shadow_lg,
 					}}

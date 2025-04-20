@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 
 // const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -41,10 +41,10 @@ export function ChatEmptyPill() {
 	return (
 		<div
 			style={{
-				...a.absolute,
-				...a.w_full,
-				...a.z_10,
-				...a.align_center,
+				position: "absolute",
+				width: "100%",
+				zIndex: 10,
+				alignItems: "center",
 
 				...{
 					top: -50,
@@ -54,11 +54,13 @@ export function ChatEmptyPill() {
 			<button
 				type="button"
 				style={{
-					...a.px_xl,
-					...a.py_md,
-					...a.rounded_full,
+					paddingLeft: 20,
+					paddingRight: 20,
+					paddingTop: 12,
+					paddingBottom: 12,
+					borderRadius: 999,
 					...t.atoms.bg_contrast_25,
-					...a.align_center,
+					alignItems: "center",
 				}}
 				// entering={ScaleAndFadeIn}
 				// exiting={ShrinkAndPop}
@@ -66,8 +68,8 @@ export function ChatEmptyPill() {
 			>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.pointer_events_none,
+						fontWeight: "600",
+						pointerEvents: "none",
 					}}
 					selectable={false}
 				>

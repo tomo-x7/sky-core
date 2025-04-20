@@ -103,18 +103,21 @@ function GifList({
 		return (
 			<div
 				style={{
-					...a.relative,
-					...a.mb_lg,
-					...a.flex_row,
-					...a.align_center,
+					position: "relative",
+					marginBottom: 16,
+					flexDirection: "row",
+					alignItems: "center",
 					...(!gtMobile && a.gap_md),
 				}}
 			>
 				{/* cover top corners */}
 				<div
 					style={{
-						...a.absolute,
-						...a.inset_0,
+						position: "absolute",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
 
 						...{
 							borderBottomLeftRadius: 8,
@@ -170,9 +173,9 @@ function GifList({
 				data={flattenedData}
 				renderItem={renderItem}
 				// numColumns={gtMobile ? 3 : 2} //TODO
-				// columnWrapperStyle={a.gap_sm}  //TODO
-				contentContainerStyle={a.h_full_vh}
-				style={a.h_full_vh}
+				// columnWrapperstyle={{gap:8}}  //TODO
+				contentContainerstyle={{ ...a.h_full_vh }}
+				style={{ ...a.h_full_vh }}
 				ListHeaderComponent={
 					<>
 						{listHeader}
@@ -220,7 +223,7 @@ function DialogError({ details }: { details?: string }) {
 	const control = Dialog.useDialogContext();
 
 	return (
-		<Dialog.ScrollableInner style={a.gap_md} label="An error has occurred">
+		<Dialog.ScrollableInner style={{ gap:12 }} label="An error has occurred">
 			<Dialog.Close />
 			<ErrorScreen
 				title="Oh no!"
@@ -252,7 +255,7 @@ export function GifPreview({
 		<Button
 			label={`Select GIF "${gif.title}"`}
 			style={{
-				...a.flex_1,
+				flex: 1,
 				...(gtTablet ? { maxWidth: "33%" } : { maxWidth: "50%" }),
 			}}
 			onPress={onPress}
@@ -260,9 +263,9 @@ export function GifPreview({
 			{({ pressed }) => (
 				<img
 					style={{
-						...a.flex_1,
-						...a.mb_sm,
-						...a.rounded_sm,
+						flex: 1,
+						marginBottom: 8,
+						borderRadius: 8,
 						aspectRatio: 1,
 						opacity: pressed ? 0.8 : 1,
 						...t.atoms.bg_contrast_25,

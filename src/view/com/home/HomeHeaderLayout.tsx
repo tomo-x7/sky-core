@@ -44,19 +44,19 @@ function HomeHeaderLayoutDesktopAndTablet({
 				<Layout.Center>
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
+							flexDirection: "row",
+							alignItems: "center",
 							...gutters,
-							...a.pt_md,
+							paddingTop: 12,
 							...t.atoms.bg,
 						}}
 					>
 						<div style={{ width: 34 }} />
 						<div
 							style={{
-								...a.flex_1,
-								...a.align_center,
-								...a.justify_center,
+								flex: 1,
+								alignItems: "center",
+								justifyContent: "center",
 							}}
 						>
 							<Logo width={kawaii ? 60 : 28} />
@@ -69,7 +69,7 @@ function HomeHeaderLayoutDesktopAndTablet({
 							variant="ghost"
 							color="secondary"
 							shape="square"
-							style={a.justify_center}
+							style={{ ...a.justify_center }}
 						>
 							<ButtonIcon icon={FeedsIcon} size="lg" />
 						</Link>
@@ -79,9 +79,9 @@ function HomeHeaderLayoutDesktopAndTablet({
 			{tabBarAnchor}
 			<Layout.Center
 				style={{
-					...a.sticky,
-					...a.z_10,
-					...a.align_center,
+					position: "sticky",
+					zIndex: 10,
+					alignItems: "center",
 					...t.atoms.bg,
 					...{ top: 0 },
 				}}

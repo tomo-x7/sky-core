@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 import React, { useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { ChevronRight_Stroke2_Corner0_Rounded as Chevron } from "#/components/icons/Chevron";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
@@ -36,8 +36,8 @@ export function AccountList({
 	return (
 		<div
 			style={{
-				...a.rounded_md,
-				...a.overflow_hidden,
+				borderRadius: 12,
+				overflow: "hidden",
 				borderWidth: 1,
 				...t.atoms.border_contrast_low,
 				pointerEvents: pendingDid ? "none" : "auto",
@@ -56,26 +56,27 @@ export function AccountList({
 				</React.Fragment>
 			))}
 			<Button
-				style={a.flex_1}
+				style={{ flex: 1 }}
 				onPress={pendingDid ? undefined : onPressAddAccount}
 				label={"Sign in to account that is not listed"}
 			>
 				{({ hovered, pressed }) => (
 					<div
 						style={{
-							...a.flex_1,
-							...a.flex_row,
-							...a.align_center,
+							flex: 1,
+							flexDirection: "row",
+							alignItems: "center",
 							height: 48,
 							...((hovered || pressed) && t.atoms.bg_contrast_25),
 						}}
 					>
 						<Text
 							style={{
-								...a.align_baseline,
-								...a.flex_1,
-								...a.flex_row,
-								...a.py_sm,
+								alignItems: "baseline",
+								flex: 1,
+								flexDirection: "row",
+								paddingTop: 8,
+								paddingBottom: 8,
 								paddingLeft: 48,
 							}}
 						>
@@ -85,7 +86,7 @@ export function AccountList({
 							size="sm"
 							style={{
 								...t.atoms.text,
-								...a.mr_md,
+								marginRight: 12,
 							}}
 						/>
 					</div>
@@ -117,7 +118,7 @@ function AccountItem({
 	return (
 		<Button
 			key={account.did}
-			style={a.flex_1}
+			style={{ flex: 1 }}
 			onPress={onPress}
 			label={
 				isCurrentAccount
@@ -128,14 +129,14 @@ function AccountItem({
 			{({ hovered, pressed }) => (
 				<div
 					style={{
-						...a.flex_1,
-						...a.flex_row,
-						...a.align_center,
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
 						height: 48,
 						...((hovered || pressed || isPendingAccount) && t.atoms.bg_contrast_25),
 					}}
 				>
-					<div style={a.p_md}>
+					<div style={{ padding: 12 }}>
 						<UserAvatar
 							avatar={profile?.avatar}
 							size={24}
@@ -144,13 +145,14 @@ function AccountItem({
 					</div>
 					<Text
 						style={{
-							...a.align_baseline,
-							...a.flex_1,
-							...a.flex_row,
-							...a.py_sm,
+							alignItems: "baseline",
+							flex: 1,
+							flexDirection: "row",
+							paddingTop: 8,
+							paddingBottom: 8,
 						}}
 					>
-						<Text style={a.font_bold}>
+						<Text style={{ fontWeight: "600" }}>
 							{sanitizeDisplayName(profile?.displayName || profile?.handle || account.handle)}
 						</Text>{" "}
 						<Text style={t.atoms.text_contrast_medium}>{sanitizeHandle(account.handle)}</Text>
@@ -160,7 +162,7 @@ function AccountItem({
 							size="sm"
 							style={{
 								color: t.palette.positive_600,
-								...a.mr_md,
+								marginRight: 12,
 							}}
 						/>
 					) : (
@@ -168,7 +170,7 @@ function AccountItem({
 							size="sm"
 							style={{
 								...t.atoms.text,
-								...a.mr_md,
+								marginRight: 12,
 							}}
 						/>
 					)}

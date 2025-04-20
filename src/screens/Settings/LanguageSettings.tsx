@@ -67,17 +67,17 @@ export function LanguageSettingsScreen() {
 						<SettingsList.ItemText>App Language</SettingsList.ItemText>
 						<div
 							style={{
-								...a.gap_md,
-								...a.w_full,
+								gap: 12,
+								width: "100%",
 							}}
 						>
-							<Text style={a.leading_snug}>
+							<Text style={{ ...a.leading_snug }}>
 								Select which language to use for the app's user interface.
 							</Text>
 							<div
 								style={{
-									...a.relative,
-									...a.w_full,
+									position: "relative",
+									width: "100%",
 									maxWidth: 400,
 								}}
 							>
@@ -178,12 +178,12 @@ export function LanguageSettingsScreen() {
 
 								<div
 									style={{
-										...a.absolute,
+										position: "absolute",
 										...t.atoms.bg_contrast_25,
-										...a.rounded_xs,
-										...a.pointer_events_none,
-										...a.align_center,
-										...a.justify_center,
+										borderRadius: 4,
+										pointerEvents: "none",
+										alignItems: "center",
+										justifyContent: "center",
 
 										...{
 											top: 1,
@@ -203,17 +203,17 @@ export function LanguageSettingsScreen() {
 						<SettingsList.ItemText>Primary Language</SettingsList.ItemText>
 						<div
 							style={{
-								...a.gap_md,
-								...a.w_full,
+								gap: 12,
+								width: "100%",
 							}}
 						>
-							<Text style={a.leading_snug}>
+							<Text style={{ ...a.leading_snug }}>
 								Select your preferred language for translations in your feed.
 							</Text>
 							<div
 								style={{
-									...a.relative,
-									...a.w_full,
+									position: "relative",
+									width: "100%",
 									maxWidth: 400,
 								}}
 							>
@@ -334,8 +334,8 @@ export function LanguageSettingsScreen() {
 					<SettingsList.Divider />
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Content Languages</SettingsList.ItemText>
-						<div style={a.gap_md}>
-							<Text style={a.leading_snug}>
+						<div style={{ gap:12 }}>
+							<Text style={{ ...a.leading_snug }}>
 								Select which languages you want your subscribed feeds to include. If none are selected,
 								all languages will be shown.
 							</Text>
@@ -347,7 +347,7 @@ export function LanguageSettingsScreen() {
 								variant="solid"
 								onPress={onPressContentLanguages}
 								style={{
-									...a.justify_start,
+									justifyContent: "flex-start",
 									...{ maxWidth: 400 },
 								}}
 							>
@@ -355,9 +355,10 @@ export function LanguageSettingsScreen() {
 								<ButtonText
 									style={{
 										...t.atoms.text,
-										...a.text_md,
-										...a.flex_1,
-										...a.text_left,
+										fontSize: 16,
+										letterSpacing: 0,
+										flex: 1,
+										textAlign: "left",
 									}}
 									// TODO
 									// numberOfLines={1}

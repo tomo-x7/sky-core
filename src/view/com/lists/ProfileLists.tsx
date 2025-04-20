@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as ListCard from "#/components/ListCard";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
@@ -125,10 +125,13 @@ export const ProfileLists = React.forwardRef<SectionRef, ProfileListsProps>(func
 			return (
 				<div
 					style={{
-						...a.border_t,
+						borderTop: "1px solid black",
+						borderTopWidth: 1,
 						...t.atoms.border_contrast_low,
-						...a.px_lg,
-						...a.py_lg,
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 16,
+						paddingBottom: 16,
 					}}
 				>
 					<ListCard.Default view={item} />

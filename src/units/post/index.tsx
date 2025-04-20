@@ -36,12 +36,12 @@ import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
 import { useMergedThreadgateHiddenReplies } from "#/state/threadgate-hidden-replies";
 import * as bsky from "#/types/bsky";
+import { PostCtrls } from "#/units/post/PostCtrls";
 import { FeedNameText } from "#/view/com/util/FeedInfoText";
+import { Link, TextLink } from "#/view/com/util/Link";
 import { PostMeta } from "#/view/com/util/PostMeta";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
-import { PostCtrls } from "#/units/post/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
-import { Link, TextLink } from "#/view/com/util/Link";
 
 interface FeedItemProps {
 	record: AppBskyFeedPost.Record;
@@ -466,7 +466,7 @@ const PostContent = memo(
 					<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 				) : undefined}
 				{postEmbed ? (
-					<div style={{paddingBottom:4}}>
+					<div style={{ paddingBottom: 4 }}>
 						<PostEmbeds
 							embed={postEmbed}
 							moderation={moderation}

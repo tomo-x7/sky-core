@@ -26,14 +26,17 @@ function PlaybackControls({
 		<button
 			type="button"
 			style={{
-				...a.absolute,
-				...a.align_center,
-				...a.justify_center,
+				position: "absolute",
+				alignItems: "center",
+				justifyContent: "center",
 				...(!isLoaded && a.border),
 				...t.atoms.border_contrast_medium,
-				...a.inset_0,
-				...a.w_full,
-				...a.h_full,
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
+				width: "100%",
+				height: "100%",
 
 				...{
 					zIndex: 2,
@@ -46,8 +49,8 @@ function PlaybackControls({
 				<div>
 					<div
 						style={{
-							...a.align_center,
-							...a.justify_center,
+							alignItems: "center",
+							justifyContent: "center",
 						}}
 					>
 						<Loader size="xl" />
@@ -99,9 +102,10 @@ export function GifEmbed({
 	return (
 		<div
 			style={{
-				...a.rounded_md,
-				...a.overflow_hidden,
-				...a.border,
+				borderRadius: 12,
+				overflow: "hidden",
+				border: "1px solid black",
+				borderWidth: 1,
 				...t.atoms.border_contrast_low,
 				...{ aspectRatio: params.dimensions!.width / params.dimensions!.height },
 				...style,
@@ -109,7 +113,7 @@ export function GifEmbed({
 		>
 			<div
 				style={{
-					...a.absolute,
+					position: "absolute",
 
 					.../*
 					 * Aspect ratio was being clipped weirdly on web -esb

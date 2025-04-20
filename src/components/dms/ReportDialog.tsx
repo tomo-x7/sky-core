@@ -78,9 +78,10 @@ function DialogInner({
 		) : (
 			<div
 				style={{
-					...a.w_full,
-					...a.py_5xl,
-					...a.align_center,
+					width: "100%",
+					paddingTop: 40,
+					paddingBottom: 40,
+					alignItems: "center",
 				}}
 			>
 				<Loader />
@@ -176,7 +177,7 @@ function SubmitStep({
 	}, [params]);
 
 	return (
-		<div style={a.gap_lg}>
+		<div style={{ gap:16 }}>
 			<Button
 				size="small"
 				variant="solid"
@@ -189,21 +190,23 @@ function SubmitStep({
 			</Button>
 			<div
 				style={{
-					...a.justify_center,
+					justifyContent: "center",
 					...(gtMobile ? a.gap_sm : a.gap_xs),
 				}}
 			>
 				<Text
 					style={{
-						...a.text_2xl,
-						...a.font_bold,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "600",
 					}}
 				>
 					{copy.title}
 				</Text>
 				<Text
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -213,14 +216,16 @@ function SubmitStep({
 			{params.type === "convoMessage" && <PreviewMessage message={params.message} />}
 			<Text
 				style={{
-					...a.text_md,
+					fontSize: 16,
+					letterSpacing: 0,
 					...t.atoms.text_contrast_medium,
 				}}
 			>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_md,
+						fontWeight: "600",
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -228,21 +233,22 @@ function SubmitStep({
 				</Text>{" "}
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_md,
+						fontWeight: "600",
+						fontSize: 16,
+						letterSpacing: 0,
 					}}
 				>
 					{reportOption.title}
 				</Text>
 			</Text>
 			<Divider />
-			<div style={a.gap_md}>
+			<div style={{ gap:12 }}>
 				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
 				<div
 					style={{
-						...a.relative,
-						...a.w_full,
+						position: "relative",
+						width: "100%",
 					}}
 				>
 					<Dialog.Input
@@ -255,11 +261,11 @@ function SubmitStep({
 					/>
 					<div
 						style={{
-							...a.absolute,
-							...a.flex_row,
-							...a.align_center,
-							...a.pr_md,
-							...a.pb_sm,
+							position: "absolute",
+							flexDirection: "row",
+							alignItems: "center",
+							paddingRight: 12,
+							paddingBottom: 8,
 
 							...{
 								bottom: 0,
@@ -273,18 +279,18 @@ function SubmitStep({
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_end,
-					...a.gap_lg,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "flex-end",
+					gap: 16,
 				}}
 			>
 				{error && (
 					<Text
 						style={{
-							...a.flex_1,
-							...a.italic,
-							...a.leading_snug,
+							flex: 1,
+							fontStyle: "italic",
+							lineHeight: 1.3,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -358,24 +364,26 @@ function DoneStep({
 	};
 
 	return (
-		<div style={a.gap_2xl}>
+		<div style={{ gap:24 }}>
 			<div
 				style={{
-					...a.justify_center,
+					justifyContent: "center",
 					...(gtMobile ? a.gap_sm : a.gap_xs),
 				}}
 			>
 				<Text
 					style={{
-						...a.text_2xl,
-						...a.font_bold,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "600",
 					}}
 				>
 					Report submitted
 				</Text>
 				<Text
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -383,21 +391,21 @@ function DoneStep({
 				</Text>
 			</div>
 			<Toggle.Group label={"Block and/or delete this conversation"} values={actions} onChange={setActions}>
-				<div style={a.gap_md}>
+				<div style={{ gap:12 }}>
 					<Toggle.Item name="block" label={"Block user"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={a.text_md}>Block user</Toggle.LabelText>
+						<Toggle.LabelText style={{ ...a.text_md }}>Block user</Toggle.LabelText>
 					</Toggle.Item>
 					<Toggle.Item name="leave" label={"Delete conversation"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={a.text_md}>Delete conversation</Toggle.LabelText>
+						<Toggle.LabelText style={{ ...a.text_md }}>Delete conversation</Toggle.LabelText>
 					</Toggle.Item>
 				</div>
 			</Toggle.Group>
 			<div
 				style={{
-					...a.gap_md,
-					...a.flex_row_reverse,
+					gap: 12,
+					flexDirection: "row-reverse",
 				}}
 			>
 				<Button
@@ -424,30 +432,28 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 	}, [message.text, message.facets]);
 
 	return (
-		<div style={a.align_start}>
+		<div style={{ ...a.align_start }}>
 			<div
 				style={{
-					...a.py_sm,
-					...a.my_2xs,
-					...a.rounded_md,
-
-					...{
-						paddingLeft: 14,
-						paddingRight: 14,
-						backgroundColor: t.palette.contrast_50,
-						borderRadius: 17,
-					},
-
-					...{ borderBottomLeftRadius: 2 },
+					paddingTop: 8,
+					paddingBottom: 8,
+					marginTop: 2,
+					marginBottom: 2,
+					paddingLeft: 14,
+					paddingRight: 14,
+					backgroundColor: t.palette.contrast_50,
+					borderRadius: 17,
+					borderBottomLeftRadius: 2,
 				}}
 			>
 				<RichText
 					value={rt}
 					style={{
-						...a.text_md,
-						...a.leading_snug,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 					}}
-					interactiveStyle={a.underline}
+					interactivestyle={{ ...a.underline }}
 					enableTags
 				/>
 			</div>
@@ -460,8 +466,8 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 					prevMessage: null,
 				}}
 				style={{
-					...a.text_left,
-					...a.mb_0,
+					textAlign: "left",
+					marginBottom: 0,
 				}}
 			/>
 		</div>

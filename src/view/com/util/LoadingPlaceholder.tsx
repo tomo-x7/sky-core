@@ -162,9 +162,9 @@ export function NotificationLoadingPlaceholder({
 			<div
 				style={{
 					...{ width: 60 },
-					...a.align_end,
-					...a.pr_sm,
-					...a.pt_2xs,
+					alignItems: "flex-end",
+					paddingRight: 8,
+					paddingTop: 2,
 				}}
 			>
 				<HeartIconFilled size="xl" style={{ color: pal.colors.backgroundLight }} />
@@ -172,7 +172,7 @@ export function NotificationLoadingPlaceholder({
 			<div style={{ flex: 1 }}>
 				<div
 					style={{
-						...a.flex_row,
+						flexDirection: "row",
 						...s.mb10,
 					}}
 				>
@@ -334,19 +334,20 @@ export function ChatListItemLoadingPlaceholder({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_md,
-				...a.px_lg,
-				...a.mt_lg,
+				flexDirection: "row",
+				gap: 12,
+				paddingLeft: 16,
+				paddingRight: 16,
+				marginTop: 16,
 				...t.atoms.bg,
 				...style,
 			}}
 		>
-			<LoadingPlaceholder width={52} height={52} style={a.rounded_full} />
+			<LoadingPlaceholder width={52} height={52} style={{ ...a.rounded_full }} />
 			<div>
-				<LoadingPlaceholder width={140} height={12} style={a.mt_xs} />
-				<LoadingPlaceholder width={120} height={8} style={a.mt_sm} />
-				<LoadingPlaceholder width={80 + random * 100} height={8} style={a.mt_sm} />
+				<LoadingPlaceholder width={140} height={12} style={{ ...a.mt_xs }} />
+				<LoadingPlaceholder width={120} height={8} style={{ ...a.mt_sm }} />
+				<LoadingPlaceholder width={80 + random * 100} height={8} style={{ ...a.mt_sm }} />
 			</div>
 		</div>
 	);

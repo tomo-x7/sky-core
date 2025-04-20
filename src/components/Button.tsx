@@ -68,7 +68,7 @@ export type ButtonProps = {
 	onFocus?: (ev: React.FocusEvent<HTMLAnchorElement, Element>) => void;
 	onBlur?: (ev: React.FocusEvent<HTMLAnchorElement, Element>) => void;
 	className?: string;
-	noUnderLine?:boolean
+	noUnderLine?: boolean;
 } & VariantProps & {
 		/**
 		 * For a11y, try to make this descriptive and clear
@@ -212,25 +212,25 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 						});
 					}
 				} else if (variant === "outline") {
-					baseStyles.push(a.border, t.atoms.bg, {
-						borderWidth: 1,
-					});
+					baseStyles.push({ border: "1px solid black", ...t.atoms.bg, borderWidth: 1 });
 
 					if (!disabled) {
-						baseStyles.push(a.border, {
-							borderColor: t.palette.primary_500,
-						});
-						hoverStyles.push(a.border, {
+						baseStyles.push({ border: "1px solid black", borderColor: t.palette.primary_500 });
+						hoverStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							backgroundColor: t.palette.primary_50,
 						});
 					} else {
-						baseStyles.push(a.border, {
+						baseStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							borderColor: t.palette.primary_200,
 						});
 					}
 				} else if (variant === "ghost") {
 					if (!disabled) {
-						baseStyles.push(t.atoms.bg);
+						baseStyles.push({ ...t.atoms.bg });
 						hoverStyles.push({
 							backgroundColor: t.palette.primary_100,
 						});
@@ -239,29 +239,31 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 			} else if (color === "secondary") {
 				if (variant === "solid") {
 					if (!disabled) {
-						baseStyles.push(t.atoms.bg_contrast_25);
-						hoverStyles.push(t.atoms.bg_contrast_50);
+						baseStyles.push({ ...t.atoms.bg_contrast_25 });
+						hoverStyles.push({ ...t.atoms.bg_contrast_50 });
 					} else {
-						baseStyles.push(t.atoms.bg_contrast_100);
+						baseStyles.push({ ...t.atoms.bg_contrast_100 });
 					}
 				} else if (variant === "outline") {
-					baseStyles.push(a.border, t.atoms.bg, {
-						borderWidth: 1,
-					});
+					baseStyles.push({ border: "1px solid black", borderWidth: 1, ...t.atoms.bg });
 
 					if (!disabled) {
-						baseStyles.push(a.border, {
+						baseStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							borderColor: t.palette.contrast_300,
 						});
-						hoverStyles.push(t.atoms.bg_contrast_50);
+						hoverStyles.push({ ...t.atoms.bg_contrast_50 });
 					} else {
-						baseStyles.push(a.border, {
+						baseStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							borderColor: t.palette.contrast_200,
 						});
 					}
 				} else if (variant === "ghost") {
 					if (!disabled) {
-						baseStyles.push(t.atoms.bg);
+						baseStyles.push({ ...t.atoms.bg });
 						hoverStyles.push({
 							backgroundColor: t.palette.contrast_25,
 						});
@@ -282,23 +284,25 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 						});
 					}
 				} else if (variant === "outline") {
-					baseStyles.push(a.border, t.atoms.bg, {
-						borderWidth: 1,
-					});
+					baseStyles.push({ border: "1px solid black", borderWidth: 1, ...t.atoms.bg });
 
 					if (!disabled) {
-						baseStyles.push(a.border, {
+						baseStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							borderColor: t.palette.contrast_300,
 						});
-						hoverStyles.push(t.atoms.bg_contrast_50);
+						hoverStyles.push({ ...t.atoms.bg_contrast_50 });
 					} else {
-						baseStyles.push(a.border, {
+						baseStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							borderColor: t.palette.contrast_200,
 						});
 					}
 				} else if (variant === "ghost") {
 					if (!disabled) {
-						baseStyles.push(t.atoms.bg);
+						baseStyles.push({ ...t.atoms.bg });
 						hoverStyles.push({
 							backgroundColor: t.palette.contrast_25,
 						});
@@ -323,25 +327,29 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 						});
 					}
 				} else if (variant === "outline") {
-					baseStyles.push(a.border, t.atoms.bg, {
-						borderWidth: 1,
-					});
+					baseStyles.push({ border: "1px solid black", borderWidth: 1, ...t.atoms.bg });
 
 					if (!disabled) {
-						baseStyles.push(a.border, {
+						baseStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							borderColor: t.palette.negative_500,
 						});
-						hoverStyles.push(a.border, {
+						hoverStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							backgroundColor: t.palette.negative_50,
 						});
 					} else {
-						baseStyles.push(a.border, {
+						baseStyles.push({
+							border: "1px solid black",
+							borderWidth: 1,
 							borderColor: t.palette.negative_200,
 						});
 					}
 				} else if (variant === "ghost") {
 					if (!disabled) {
-						baseStyles.push(t.atoms.bg);
+						baseStyles.push({ ...t.atoms.bg });
 						hoverStyles.push({
 							backgroundColor: t.palette.negative_100,
 						});
@@ -391,12 +399,12 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 				}
 
 				if (shape === "round") {
-					baseStyles.push(a.rounded_full);
+					baseStyles.push({ borderRadius: 999 });
 				} else if (shape === "square") {
 					if (size === "tiny") {
-						baseStyles.push(a.rounded_xs);
+						baseStyles.push({ borderRadius: 4 });
 					} else {
-						baseStyles.push(a.rounded_sm);
+						baseStyles.push({ borderRadius: 8 });
 					}
 				}
 			}
@@ -456,9 +464,9 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 				aria-pressed={state.pressed}
 				// disabled={disabled || false} //スタイルで頑張る
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_center,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "center",
 					...flattenedBaseStyles,
 					...(state.hovered || state.pressed ? { ...hoverStyles, ...hoverStyleProp } : {}),
 					pointerEvents: disabled ? "none" : "auto",
@@ -470,14 +478,17 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 				onMouseEnter={onHoverIn}
 				onMouseLeave={onHoverOut}
 				href={href}
-				{...noUnderLine&&{"data-no-underline":true}}
+				{...(noUnderLine && { "data-no-underline": true })}
 			>
 				{variant === "gradient" && gradientValues && (
 					<div
 						style={{
-							...a.absolute,
-							...a.inset_0,
-							...a.overflow_hidden,
+							position: "absolute",
+							top: 0,
+							left: 0,
+							right: 0,
+							bottom: 0,
+							overflow: "hidden",
 							borderRadius: flattenedBaseStyles?.borderRadius,
 						}}
 					>
@@ -487,8 +498,11 @@ export const Button = React.forwardRef<HTMLAnchorElement, ButtonProps>(
 							start={{ x: 0, y: 0 }}
 							end={{ x: 1, y: 1 }}
 							style={{
-								...a.absolute,
-								...a.inset_0,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
 							}}
 						/>
 					</div>
@@ -623,11 +637,11 @@ export function useSharedButtonTextStyles() {
 		}
 
 		if (size === "large") {
-			baseStyles.push(a.text_md, a.leading_tight);
+			baseStyles.push({ fontSize: 16, letterSpacing: 0, lineHeight: 1.15 });
 		} else if (size === "small") {
-			baseStyles.push(a.text_sm, a.leading_tight);
+			baseStyles.push({ fontSize: 14, letterSpacing: 0, lineHeight: 1.15 });
 		} else if (size === "tiny") {
-			baseStyles.push(a.text_xs, a.leading_tight);
+			baseStyles.push({ fontSize: 12, letterSpacing: 0, lineHeight: 1.15 });
 		}
 
 		return flatten(baseStyles);
@@ -641,8 +655,8 @@ export function ButtonText({ children, style, ...rest }: ButtonTextProps) {
 		<div
 			{...rest}
 			style={{
-				...a.font_bold,
-				...a.text_center,
+				fontWeight: "600",
+				textAlign: "center",
 				...textStyles,
 				...style,
 			}}
@@ -707,7 +721,7 @@ export function ButtonIcon({
 	return (
 		<div
 			style={{
-				...a.z_20,
+				zIndex: 20,
 
 				width: iconContainerSize,
 				height: iconContainerSize,
@@ -718,7 +732,7 @@ export function ButtonIcon({
 		>
 			<div
 				style={{
-					...a.absolute,
+					position: "absolute",
 					width: iconSize,
 					height: iconSize,
 					top: "50%",

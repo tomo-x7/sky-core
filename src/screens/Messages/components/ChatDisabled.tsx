@@ -13,20 +13,21 @@ import * as Toast from "#/view/com/util/Toast";
 export function ChatDisabled() {
 	const t = useTheme();
 	return (
-		<div style={a.p_md}>
+		<div style={{ ...a.p_md }}>
 			<div
 				style={{
-					...a.align_start,
-					...a.p_xl,
-					...a.rounded_md,
+					alignItems: "flex-start",
+					padding: 20,
+					borderRadius: 12,
 					...t.atoms.bg_contrast_25,
 				}}
 			>
 				<Text
 					style={{
-						...a.text_md,
-						...a.font_bold,
-						...a.pb_sm,
+						fontSize: 16,
+						letterSpacing: 0,
+						fontWeight: "600",
+						paddingBottom: 8,
 						...t.atoms.text_contrast_high,
 					}}
 				>
@@ -34,8 +35,9 @@ export function ChatDisabled() {
 				</Text>
 				<Text
 					style={{
-						...a.text_sm,
-						...a.leading_snug,
+						fontSize: 14,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -58,7 +60,7 @@ function AppealDialog() {
 				size="small"
 				onPress={control.open}
 				label={"Appeal this decision"}
-				style={a.mt_sm}
+				style={{ ...a.mt_sm }}
 			>
 				<ButtonText>{"Appeal this decision"}</ButtonText>
 			</Button>
@@ -107,23 +109,25 @@ function DialogInner() {
 		<Dialog.ScrollableInner label={"Appeal this decision"}>
 			<Text
 				style={{
-					...a.text_2xl,
-					...a.font_bold,
-					...a.pb_xs,
-					...a.leading_tight,
+					fontSize: 22,
+					letterSpacing: 0,
+					fontWeight: "600",
+					paddingBottom: 4,
+					lineHeight: 1.15,
 				}}
 			>
 				Appeal this decision
 			</Text>
 			<Text
 				style={{
-					...a.text_md,
-					...a.leading_snug,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.3,
 				}}
 			>
 				This appeal will be sent to Bluesky's moderation service.
 			</Text>
-			<div style={a.my_md}>
+			<div style={{ ...a.my_md }}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={"Please explain why you think your chats were incorrectly disabled"}

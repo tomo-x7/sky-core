@@ -68,19 +68,19 @@ function DeactivateAccountDialogInner({
 				Your profile, posts, feeds, and lists will no longer be visible to other Bluesky users. You can
 				reactivate your account at any time by logging in.
 			</Prompt.DescriptionText>
-			<div style={a.pb_xl}>
+			<div style={{ ...a.pb_xl }}>
 				<Divider />
 				<div
 					style={{
-						...a.gap_sm,
-						...a.pt_lg,
-						...a.pb_xl,
+						gap: 8,
+						paddingTop: 16,
+						paddingBottom: 20,
 					}}
 				>
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 					>
 						There is no time limit for account deactivation, come back any time.
@@ -88,7 +88,7 @@ function DeactivateAccountDialogInner({
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 					>
 						If you're trying to change your handle or email, do so before you deactivate.
@@ -113,19 +113,19 @@ function DeactivateAccountDialogInner({
 			{error && (
 				<div
 					style={{
-						...a.flex_row,
-						...a.gap_sm,
-						...a.mt_md,
-						...a.p_md,
-						...a.rounded_sm,
+						flexDirection: "row",
+						gap: 8,
+						marginTop: 12,
+						padding: 12,
+						borderRadius: 8,
 						...t.atoms.bg_contrast_25,
 					}}
 				>
 					<CircleInfo size="md" fill={t.palette.negative_400} />
 					<Text
 						style={{
-							...a.flex_1,
-							...a.leading_snug,
+							flex: 1,
+							lineHeight: 1.3,
 						}}
 					>
 						{error}

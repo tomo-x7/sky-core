@@ -92,9 +92,10 @@ function MutedWordsInner() {
 			<div>
 				<Text
 					style={{
-						...a.text_md,
-						...a.font_bold,
-						...a.pb_sm,
+						fontSize: 16,
+						letterSpacing: 0,
+						fontWeight: "600",
+						paddingBottom: 8,
 						...t.atoms.text_contrast_high,
 					}}
 				>
@@ -102,8 +103,8 @@ function MutedWordsInner() {
 				</Text>
 				<Text
 					style={{
-						...a.pb_lg,
-						...a.leading_snug,
+						paddingBottom: 16,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -111,7 +112,7 @@ function MutedWordsInner() {
 					appear in many posts, since it can result in no posts being shown.
 				</Text>
 
-				<div style={a.pb_sm}>
+				<div style={{ ...a.pb_sm }}>
 					<Dialog.Input
 						autoCorrect={"off"}
 						autoCapitalize="none"
@@ -131,8 +132,8 @@ function MutedWordsInner() {
 
 				<div
 					style={{
-						...a.pb_xl,
-						...a.gap_sm,
+						paddingBottom: 20,
+						gap: 8,
 					}}
 				>
 					<Toggle.Group
@@ -143,9 +144,10 @@ function MutedWordsInner() {
 					>
 						<Text
 							style={{
-								...a.pb_xs,
-								...a.text_sm,
-								...a.font_bold,
+								paddingBottom: 4,
+								fontSize: 14,
+								letterSpacing: 0,
+								fontWeight: "600",
 								...t.atoms.text_contrast_medium,
 							}}
 						>
@@ -155,33 +157,37 @@ function MutedWordsInner() {
 						<div
 							style={{
 								...flatten(gtMobile ? [a.flex_row, a.align_center, a.justify_start] : undefined),
-								...a.gap_sm,
+								gap: 8,
 							}}
 						>
 							<div
 								style={{
-									...a.flex_1,
-									...a.flex_row,
-									...a.justify_start,
-									...a.align_center,
-									...a.gap_sm,
+									flex: 1,
+									flexDirection: "row",
+									justifyContent: "flex-start",
+									alignItems: "center",
+									gap: 8,
 								}}
 							>
-								<Toggle.Item label="Mute this word until you unmute it" name="forever" style={a.flex_1}>
+								<Toggle.Item
+									label="Mute this word until you unmute it"
+									name="forever"
+									style={{ flex: 1 }}
+								>
 									<TargetToggle>
 										<div
 											style={{
-												...a.flex_1,
-												...a.flex_row,
-												...a.align_center,
-												...a.gap_sm,
+												flex: 1,
+												flexDirection: "row",
+												alignItems: "center",
+												gap: 8,
 											}}
 										>
 											<Toggle.Radio />
 											<Toggle.LabelText
 												style={{
-													...a.flex_1,
-													...a.leading_tight,
+													flex: 1,
+													lineHeight: 1.15,
 												}}
 											>
 												Forever
@@ -190,21 +196,21 @@ function MutedWordsInner() {
 									</TargetToggle>
 								</Toggle.Item>
 
-								<Toggle.Item label="Mute this word for 24 hours" name="24_hours" style={a.flex_1}>
+								<Toggle.Item label="Mute this word for 24 hours" name="24_hours" style={{ flex: 1 }}>
 									<TargetToggle>
 										<div
 											style={{
-												...a.flex_1,
-												...a.flex_row,
-												...a.align_center,
-												...a.gap_sm,
+												flex: 1,
+												flexDirection: "row",
+												alignItems: "center",
+												gap: 8,
 											}}
 										>
 											<Toggle.Radio />
 											<Toggle.LabelText
 												style={{
-													...a.flex_1,
-													...a.leading_tight,
+													flex: 1,
+													lineHeight: 1.15,
 												}}
 											>
 												24 hours
@@ -216,28 +222,28 @@ function MutedWordsInner() {
 
 							<div
 								style={{
-									...a.flex_1,
-									...a.flex_row,
-									...a.justify_start,
-									...a.align_center,
-									...a.gap_sm,
+									flex: 1,
+									flexDirection: "row",
+									justifyContent: "flex-start",
+									alignItems: "center",
+									gap: 8,
 								}}
 							>
-								<Toggle.Item label="Mute this word for 7 days" name="7_days" style={a.flex_1}>
+								<Toggle.Item label="Mute this word for 7 days" name="7_days" style={{ flex: 1 }}>
 									<TargetToggle>
 										<div
 											style={{
-												...a.flex_1,
-												...a.flex_row,
-												...a.align_center,
-												...a.gap_sm,
+												flex: 1,
+												flexDirection: "row",
+												alignItems: "center",
+												gap: 8,
 											}}
 										>
 											<Toggle.Radio />
 											<Toggle.LabelText
 												style={{
-													...a.flex_1,
-													...a.leading_tight,
+													flex: 1,
+													lineHeight: 1.15,
 												}}
 											>
 												7 days
@@ -246,21 +252,21 @@ function MutedWordsInner() {
 									</TargetToggle>
 								</Toggle.Item>
 
-								<Toggle.Item label="Mute this word for 30 days" name="30_days" style={a.flex_1}>
+								<Toggle.Item label="Mute this word for 30 days" name="30_days" style={{ flex: 1 }}>
 									<TargetToggle>
 										<div
 											style={{
-												...a.flex_1,
-												...a.flex_row,
-												...a.align_center,
-												...a.gap_sm,
+												flex: 1,
+												flexDirection: "row",
+												alignItems: "center",
+												gap: 8,
 											}}
 										>
 											<Toggle.Radio />
 											<Toggle.LabelText
 												style={{
-													...a.flex_1,
-													...a.leading_tight,
+													flex: 1,
+													lineHeight: 1.15,
 												}}
 											>
 												30 days
@@ -280,9 +286,10 @@ function MutedWordsInner() {
 					>
 						<Text
 							style={{
-								...a.pb_xs,
-								...a.text_sm,
-								...a.font_bold,
+								paddingBottom: 4,
+								fontSize: 14,
+								letterSpacing: 0,
+								fontWeight: "600",
 								...t.atoms.text_contrast_medium,
 							}}
 						>
@@ -291,27 +298,31 @@ function MutedWordsInner() {
 
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_sm,
-								...a.flex_wrap,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 8,
+								flexWrap: "wrap",
 							}}
 						>
-							<Toggle.Item label="Mute this word in post text and tags" name="content" style={a.flex_1}>
+							<Toggle.Item
+								label="Mute this word in post text and tags"
+								name="content"
+								style={{ flex: 1 }}
+							>
 								<TargetToggle>
 									<div
 										style={{
-											...a.flex_1,
-											...a.flex_row,
-											...a.align_center,
-											...a.gap_sm,
+											flex: 1,
+											flexDirection: "row",
+											alignItems: "center",
+											gap: 8,
 										}}
 									>
 										<Toggle.Radio />
 										<Toggle.LabelText
 											style={{
-												...a.flex_1,
-												...a.leading_tight,
+												flex: 1,
+												lineHeight: 1.15,
 											}}
 										>
 											Text & tags
@@ -321,21 +332,21 @@ function MutedWordsInner() {
 								</TargetToggle>
 							</Toggle.Item>
 
-							<Toggle.Item label="Mute this word in tags only" name="tag" style={a.flex_1}>
+							<Toggle.Item label="Mute this word in tags only" name="tag" style={{ flex: 1 }}>
 								<TargetToggle>
 									<div
 										style={{
-											...a.flex_1,
-											...a.flex_row,
-											...a.align_center,
-											...a.gap_sm,
+											flex: 1,
+											flexDirection: "row",
+											alignItems: "center",
+											gap: 8,
 										}}
 									>
 										<Toggle.Radio />
 										<Toggle.LabelText
 											style={{
-												...a.flex_1,
-												...a.leading_tight,
+												flex: 1,
+												lineHeight: 1.15,
 											}}
 										>
 											Tags only
@@ -350,9 +361,10 @@ function MutedWordsInner() {
 					<div>
 						<Text
 							style={{
-								...a.pb_xs,
-								...a.text_sm,
-								...a.font_bold,
+								paddingBottom: 4,
+								fontSize: 14,
+								letterSpacing: 0,
+								fontWeight: "600",
 								...t.atoms.text_contrast_medium,
 							}}
 						>
@@ -362,8 +374,8 @@ function MutedWordsInner() {
 							label="Do not apply this mute word to users you follow"
 							name="exclude_following"
 							style={{
-								...a.flex_row,
-								...a.justify_between,
+								flexDirection: "row",
+								justifyContent: "space-between",
 							}}
 							value={excludeFollowing}
 							onChange={setExcludeFollowing}
@@ -371,17 +383,17 @@ function MutedWordsInner() {
 							<TargetToggle>
 								<div
 									style={{
-										...a.flex_1,
-										...a.flex_row,
-										...a.align_center,
-										...a.gap_sm,
+										flex: 1,
+										flexDirection: "row",
+										alignItems: "center",
+										gap: 8,
 									}}
 								>
 									<Toggle.Checkbox />
 									<Toggle.LabelText
 										style={{
-											...a.flex_1,
-											...a.leading_tight,
+											flex: 1,
+											lineHeight: 1.15,
 										}}
 									>
 										Exclude users you follow
@@ -391,7 +403,7 @@ function MutedWordsInner() {
 						</Toggle.Item>
 					</div>
 
-					<div style={a.pt_xs}>
+					<div style={{ ...a.pt_xs }}>
 						<Button
 							disabled={isPending || !field}
 							label="Add mute word with chosen settings"
@@ -408,21 +420,17 @@ function MutedWordsInner() {
 					{error && (
 						<div
 							style={{
-								...a.mb_lg,
-								...a.flex_row,
-								...a.rounded_sm,
-								...a.p_md,
-								...a.mb_xs,
+								flexDirection: "row",
+								borderRadius: 8,
+								padding: 12,
+								marginBottom: 4,
 								...t.atoms.bg_contrast_25,
-
-								...{
-									backgroundColor: t.palette.negative_400,
-								},
+								backgroundColor: t.palette.negative_400,
 							}}
 						>
 							<Text
 								style={{
-									...a.italic,
+									fontStyle: "italic",
 									...{ color: t.palette.white },
 								}}
 							>
@@ -434,12 +442,13 @@ function MutedWordsInner() {
 
 				<Divider />
 
-				<div style={a.pt_2xl}>
+				<div style={{ ...a.pt_2xl }}>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
-							...a.pb_md,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
+							paddingBottom: 12,
 							...t.atoms.text_contrast_high,
 						}}
 					>
@@ -451,15 +460,17 @@ function MutedWordsInner() {
 					) : preferencesError || !preferences ? (
 						<div
 							style={{
-								...a.py_md,
-								...a.px_lg,
-								...a.rounded_md,
+								paddingTop: 12,
+								paddingBottom: 12,
+								paddingLeft: 16,
+								paddingRight: 16,
+								borderRadius: 12,
 								...t.atoms.bg_contrast_25,
 							}}
 						>
 							<Text
 								style={{
-									...a.italic,
+									fontStyle: "italic",
 									...t.atoms.text_contrast_high,
 								}}
 							>
@@ -480,15 +491,17 @@ function MutedWordsInner() {
 					) : (
 						<div
 							style={{
-								...a.py_md,
-								...a.px_lg,
-								...a.rounded_md,
+								paddingTop: 12,
+								paddingBottom: 12,
+								paddingLeft: 16,
+								paddingRight: 16,
+								borderRadius: 12,
 								...t.atoms.bg_contrast_25,
 							}}
 						>
 							<Text
 								style={{
-									...a.italic,
+									fontStyle: "italic",
 									...t.atoms.text_contrast_high,
 								}}
 							>
@@ -528,33 +541,35 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 			/>
 			<div
 				style={{
-					...a.flex_row,
-					...a.justify_between,
-					...a.py_md,
-					...a.px_lg,
-					...a.rounded_md,
-					...a.gap_md,
+					flexDirection: "row",
+					justifyContent: "space-between",
+					paddingTop: 12,
+					paddingBottom: 12,
+					paddingLeft: 16,
+					paddingRight: 16,
+					borderRadius: 12,
+					gap: 12,
 					...style,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.gap_xs,
+						flex: 1,
+						gap: 4,
 					}}
 				>
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_sm,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 8,
 						}}
 					>
 						<Text
 							style={{
-								...a.flex_1,
-								...a.leading_snug,
-								...a.font_bold,
+								flex: 1,
+								lineHeight: 1.3,
+								fontWeight: "600",
 								overflowWrap: "break-word",
 								wordBreak: "break-word",
 							}}
@@ -564,14 +579,14 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 									{word.value}{" "}
 									<Text
 										style={{
-											...a.font_normal,
+											fontWeight: "400",
 											...t.atoms.text_contrast_medium,
 										}}
 									>
 										in{" "}
 										<Text
 											style={{
-												...a.font_bold,
+												fontWeight: "600",
 												...t.atoms.text_contrast_medium,
 											}}
 										>
@@ -584,14 +599,14 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 									{word.value}{" "}
 									<Text
 										style={{
-											...a.font_normal,
+											fontWeight: "400",
 											...t.atoms.text_contrast_medium,
 										}}
 									>
 										in{" "}
 										<Text
 											style={{
-												...a.font_bold,
+												fontWeight: "600",
 												...t.atoms.text_contrast_medium,
 											}}
 										>
@@ -606,17 +621,18 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 					{(expiryDate || word.actorTarget === "exclude-following") && (
 						<div
 							style={{
-								...a.flex_1,
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_sm,
+								flex: 1,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 8,
 							}}
 						>
 							<Text
 								style={{
-									...a.flex_1,
-									...a.text_xs,
-									...a.leading_snug,
+									flex: 1,
+									fontSize: 12,
+									letterSpacing: 0,
+									lineHeight: 1.3,
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -649,7 +665,7 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 					variant="outline"
 					color="secondary"
 					onPress={() => control.open()}
-					style={a.ml_sm}
+					style={{ ...a.ml_sm }}
 				>
 					<ButtonIcon icon={isPending ? Loader : X} />
 				</Button>
@@ -665,15 +681,17 @@ function TargetToggle({ children }: React.PropsWithChildren) {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.justify_between,
-				...a.gap_xs,
-				...a.flex_1,
-				...a.py_sm,
-				...a.px_sm,
+				flexDirection: "row",
+				alignItems: "center",
+				justifyContent: "space-between",
+				gap: 4,
+				flex: 1,
+				paddingTop: 8,
+				paddingBottom: 8,
+				paddingLeft: 8,
+				paddingRight: 8,
 				...(gtMobile && a.px_md),
-				...a.rounded_sm,
+				borderRadius: 8,
 				...t.atoms.bg_contrast_25,
 				...((ctx.hovered || ctx.focused) && t.atoms.bg_contrast_50),
 

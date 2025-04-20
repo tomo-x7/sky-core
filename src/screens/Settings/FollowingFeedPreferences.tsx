@@ -1,4 +1,3 @@
-import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import * as Toggle from "#/components/forms/Toggle";
@@ -35,7 +34,7 @@ export function FollowingFeedPreferencesScreen() {
 			<Layout.Content>
 				<SettingsList.Container>
 					<SettingsList.Item>
-						<Admonition type="tip" style={a.flex_1}>
+						<Admonition type="tip" style={{ flex: 1 }}>
 							These settings only apply to the Following feed.
 						</Admonition>
 					</SettingsList.Item>
@@ -105,11 +104,11 @@ export function FollowingFeedPreferencesScreen() {
 								})
 							}
 							style={{
-								...a.w_full,
-								...a.gap_md,
+								width: "100%",
+								gap: 12,
 							}}
 						>
-							<Toggle.LabelText style={a.flex_1}>
+							<Toggle.LabelText style={{ flex: 1 }}>
 								Show samples of your saved feeds in your Following feed
 							</Toggle.LabelText>
 							<Toggle.Platform />

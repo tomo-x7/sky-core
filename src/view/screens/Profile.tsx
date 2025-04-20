@@ -42,7 +42,7 @@ interface SectionRef {
 
 export function ProfileScreen() {
 	return (
-		<Layout.Screen style={a.pt_0}>
+		<Layout.Screen style={{ ...a.pt_0 }}>
 			<ProfileScreenInner />
 		</Layout.Screen>
 	);
@@ -106,7 +106,7 @@ function ProfileScreenInner() {
 	}
 	if (resolveError || profileError) {
 		return (
-			<SafeAreaView style={a.flex_1}>
+			<SafeAreaView style={{ flex: 1 }}>
 				<ErrorScreen
 					title={profileError ? "Not Found" : "Oops!"}
 					message={cleanError(resolveError || profileError)}
@@ -128,7 +128,7 @@ function ProfileScreenInner() {
 	}
 	// should never happen
 	return (
-		<SafeAreaView style={a.flex_1}>
+		<SafeAreaView style={{ flex: 1 }}>
 			<ErrorScreen
 				title="Oops!"
 				message="Something went wrong and we're not sure what."

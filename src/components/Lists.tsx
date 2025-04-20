@@ -36,10 +36,11 @@ export function ListFooter({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.align_center,
-				...a.border_t,
-				...a.pb_lg,
+				width: "100%",
+				alignItems: "center",
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
+				paddingBottom: 16,
 				...t.atoms.border_contrast_low,
 				...{ height: height ?? 180, paddingTop: 30 },
 				...style,
@@ -55,7 +56,8 @@ export function ListFooter({
 				) : (
 					<Text
 						style={{
-							...a.text_sm,
+							fontSize: 14,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_low,
 						}}
 					>
@@ -81,24 +83,26 @@ function ListFooterMaybeError({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.px_lg,
+				width: "100%",
+				paddingLeft: 16,
+				paddingRight: 16,
 			}}
 		>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
-					...a.p_md,
-					...a.rounded_sm,
-					...a.align_center,
+					flexDirection: "row",
+					gap: 12,
+					padding: 12,
+					borderRadius: 8,
+					alignItems: "center",
 					...t.atoms.bg_contrast_25,
 				}}
 			>
 				<Text
 					style={{
-						...a.flex_1,
-						...a.text_sm,
+						flex: 1,
+						fontSize: 14,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 					numberOfLines={2}
@@ -109,12 +113,14 @@ function ListFooterMaybeError({
 					variant="gradient"
 					label={"Press to retry"}
 					style={{
-						...a.align_center,
-						...a.justify_center,
-						...a.rounded_sm,
-						...a.overflow_hidden,
-						...a.px_md,
-						...a.py_sm,
+						alignItems: "center",
+						justifyContent: "center",
+						borderRadius: 8,
+						overflow: "hidden",
+						paddingLeft: 12,
+						paddingRight: 12,
+						paddingTop: 8,
+						paddingBottom: 8,
 					}}
 					onPress={onRetry}
 				>
@@ -161,8 +167,8 @@ let ListMaybePlaceholder = ({
 		return (
 			<CenteredView
 				style={{
-					...a.h_full_vh,
-					...a.align_center,
+					height: "100dvh",
+					alignItems: "center",
 					...(!gtMobile ? a.justify_between : a.gap_5xl),
 					...t.atoms.border_contrast_low,
 					paddingTop: 175,
@@ -173,8 +179,8 @@ let ListMaybePlaceholder = ({
 			>
 				<div
 					style={{
-						...a.w_full,
-						...a.align_center,
+						width: "100%",
+						alignItems: "center",
 						...{ top: 100 },
 					}}
 				>

@@ -3,7 +3,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, type ButtonProps, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -75,7 +74,7 @@ export function RejectMenu({
 						<Button
 							{...triggerProps}
 							{...props}
-							style={a.flex_1}
+							style={{ flex: 1 }}
 							color={color}
 							variant={variant}
 							size={size}
@@ -169,7 +168,7 @@ export function AcceptChatButton({
 			size={size}
 			variant={variant}
 			color={color}
-			style={a.flex_1}
+			style={{ flex: 1 }}
 			onPress={onPressAccept}
 		>
 			{isPending ? <ButtonIcon icon={Loader} /> : <ButtonText>{label || "Accept"}</ButtonText>}
@@ -215,7 +214,7 @@ export function DeleteChatButton({
 			size={size}
 			variant={variant}
 			color={color}
-			style={a.flex_1}
+			style={{ flex: 1 }}
 			onPress={onPressDelete}
 			{...props}
 		>

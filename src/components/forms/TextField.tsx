@@ -52,11 +52,12 @@ export function Root({ children, isInvalid = false }: RootProps) {
 		<Context.Provider value={context}>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.relative,
-					...a.w_full,
-					...a.px_md,
+					flexDirection: "row",
+					alignItems: "center",
+					position: "relative",
+					width: "100%",
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 				{...{
 					onClick: () => inputRef.current?.focus(),
@@ -184,10 +185,12 @@ export function Input({
 		a.px_xs,
 		{
 			// paddingVertical doesn't work w/multiline - esb
-			lineHeight:  1.1875,
+			lineHeight: 1.1875,
 
 			minHeight: rest.multiline ? 80 : undefined,
-			minWidth: 0,border:"0px",backgroundColor:"transparent"
+			minWidth: 0,
+			border: "0px",
+			backgroundColor: "transparent",
 		},
 		// fix for autofill styles covering border
 		{
@@ -239,10 +242,13 @@ export function Input({
 			/>
 			<div
 				style={{
-					...a.z_10,
-					...a.absolute,
-					...a.inset_0,
-					...a.rounded_sm,
+					zIndex: 10,
+					position: "absolute",
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					borderRadius: 8,
 					...t.atoms.bg_contrast_25,
 					...{ borderColor: "transparent", borderWidth: 2 },
 					...(ctx.hovered ? chromeHover : {}),
@@ -260,10 +266,11 @@ export function LabelText({ children }: React.PropsWithChildren) {
 	return (
 		<Text
 			style={{
-				...a.text_sm,
-				...a.font_bold,
+				fontSize: 14,
+				letterSpacing: 0,
+				fontWeight: "600",
 				...t.atoms.text_contrast_medium,
-				...a.mb_sm,
+				marginBottom: 8,
 			}}
 		>
 			{children}
@@ -291,8 +298,8 @@ export function Icon({ icon: Comp }: { icon: React.ComponentType<SVGIconProps> }
 	return (
 		<div
 			style={{
-				...a.z_20,
-				...a.pr_xs,
+				zIndex: 20,
+				paddingRight: 4,
 			}}
 		>
 			<Comp
@@ -316,12 +323,13 @@ export function SuffixText({ children, style }: React.PropsWithChildren<TextStyl
 		<Text
 			numberOfLines={1}
 			style={{
-				...a.z_20,
-				...a.pr_sm,
-				...a.text_md,
+				zIndex: 20,
+				paddingRight: 8,
+				fontSize: 16,
+				letterSpacing: 0,
 				...t.atoms.text_contrast_medium,
-				...a.pointer_events_none,
-				...a.leading_snug,
+				pointerEvents: "none",
+				lineHeight: 1.3,
 				marginTop: -2,
 				...((ctx.hovered || ctx.focused) && { color: t.palette.contrast_800 }),
 				...style,

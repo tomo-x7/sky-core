@@ -18,24 +18,26 @@ export function SelectLabelerView({
 	const { gtMobile } = useBreakpoints();
 
 	return (
-		<div style={a.gap_lg}>
+		<div style={{ gap:16 }}>
 			<div
 				style={{
-					...a.justify_center,
+					justifyContent: "center",
 					...(gtMobile ? a.gap_sm : a.gap_xs),
 				}}
 			>
 				<Text
 					style={{
-						...a.text_2xl,
-						...a.font_bold,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "600",
 					}}
 				>
 					Select moderator
 				</Text>
 				<Text
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -43,7 +45,7 @@ export function SelectLabelerView({
 				</Text>
 			</div>
 			<Divider />
-			<div style={a.gap_sm}>
+			<div style={{ gap:8 }}>
 				{props.labelers.map((labeler) => {
 					return (
 						<Button
@@ -72,8 +74,8 @@ function LabelerButton({
 	return (
 		<LabelingServiceCard.Outer
 			style={{
-				...a.p_md,
-				...a.rounded_sm,
+				padding: 12,
+				borderRadius: 8,
 				...t.atoms.bg_contrast_25,
 				...(interacted && t.atoms.bg_contrast_50),
 			}}
@@ -89,8 +91,9 @@ function LabelerButton({
 				<Text
 					style={{
 						...t.atoms.text_contrast_medium,
-						...a.text_sm,
-						...a.font_bold,
+						fontSize: 14,
+						letterSpacing: 0,
+						fontWeight: "600",
 					}}
 				>
 					@{labeler.creator.handle}

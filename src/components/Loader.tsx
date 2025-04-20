@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Loader_Stroke2_Corner0_Rounded as Icon } from "#/components/icons/Loader";
 import { type Props, useCommonSVGProps } from "#/components/icons/common";
 
@@ -9,9 +9,9 @@ export function Loader(props: Props) {
 	return (
 		<div
 			style={{
-				...a.relative,
-				...a.justify_center,
-				...a.align_center,
+				position: "relative",
+				justifyContent: "center",
+				alignItems: "center",
 				...{ width: common.size, height: common.size },
 			}}
 		>
@@ -20,8 +20,11 @@ export function Loader(props: Props) {
 				<Icon
 					{...props}
 					style={{
-						...a.absolute,
-						...a.inset_0,
+						position: "absolute",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
 						...t.atoms.text_contrast_high,
 						...props.style,
 					}}

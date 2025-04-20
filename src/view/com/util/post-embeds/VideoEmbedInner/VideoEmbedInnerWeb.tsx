@@ -1,8 +1,6 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
 import type * as HlsTypes from "hls.js";
 import React, { useEffect, useId, useRef, useState } from "react";
-
-import { atoms as a } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { useNonReactiveCallback } from "#/lib/hooks/useNonReactiveCallback";
 import { Controls } from "./web-controls/VideoControls";
@@ -50,9 +48,9 @@ export function VideoEmbedInnerWeb({
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.rounded_md,
-				...a.overflow_hidden,
+				flex: 1,
+				borderRadius: 12,
+				overflow: "hidden",
 			}}
 		>
 			<div ref={containerRef} style={{ height: "100%", width: "100%" }}>

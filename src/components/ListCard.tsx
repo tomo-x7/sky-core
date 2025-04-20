@@ -2,7 +2,7 @@ import { type AppBskyGraphDefs, AtUri, type ModerationUI, moderateUserList } fro
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Avatar, Description, Header, Outer, SaveButton } from "#/components/FeedCard";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
 import { Text } from "#/components/Typography";
@@ -93,7 +93,7 @@ export function TitleAndByline({
 	const { currentAccount } = useSession();
 
 	return (
-		<div style={a.flex_1}>
+		<div style={{ flex: 1 }}>
 			<Hider.Outer
 				modui={modUi}
 				isContentVisibleInitialState={creator && currentAccount?.did === creator.did}
@@ -102,10 +102,11 @@ export function TitleAndByline({
 				<Hider.Mask>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
-							...a.leading_snug,
-							...a.italic,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
+							lineHeight: 1.3,
+							fontStyle: "italic",
 						}}
 						numberOfLines={1}
 					>
@@ -115,9 +116,10 @@ export function TitleAndByline({
 				<Hider.Content>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
+							lineHeight: 1.3,
 						}}
 						numberOfLines={1}
 					>
@@ -128,7 +130,7 @@ export function TitleAndByline({
 			{creator && (
 				<Text
 					style={{
-						...a.leading_snug,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_medium,
 					}}
 					numberOfLines={1}

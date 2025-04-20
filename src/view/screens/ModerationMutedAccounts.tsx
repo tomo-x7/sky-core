@@ -1,10 +1,8 @@
 import type { AppBskyActorDefs as ActorDefs } from "@atproto/api";
 import React from "react";
-import { useFocusEffect } from "#/components/hooks/useFocusEffect";
-
-import { atoms as a } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
+import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { usePalette } from "#/lib/hooks/usePalette";
 import { useWebMediaQueries } from "#/lib/hooks/useWebMediaQueries";
 import { cleanError } from "#/lib/strings/errors";
@@ -68,7 +66,7 @@ export function ModerationMutedAccounts() {
 			<ViewHeader title={"Muted Accounts"} showOnDesktop />
 			<Layout.Center
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...{ paddingBottom: 100 },
 				}}
 			>

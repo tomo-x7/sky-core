@@ -113,7 +113,7 @@ export function Group({
 	return (
 		<GroupContext.Provider value={context}>
 			<div
-				style={a.w_full}
+				style={{ ...a.w_full }}
 				role={groupRole}
 				{...(groupRole === "radiogroup"
 					? {
@@ -195,9 +195,9 @@ export function Item({
 					onFocus={onFocus}
 					onBlur={onBlur}
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_sm,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 8,
 						...style,
 					}}
 				/>
@@ -213,8 +213,8 @@ export function LabelText({ children, style }: React.PropsWithChildren<TextStyle
 	return (
 		<Text
 			style={{
-				...a.font_bold,
-				...a.leading_tight,
+				fontWeight: "600",
+				lineHeight: 1.15,
 
 				...{
 					userSelect: "none",
@@ -311,9 +311,9 @@ export function Checkbox() {
 	return (
 		<div
 			style={{
-				...a.justify_center,
-				...a.align_center,
-				...a.rounded_xs,
+				justifyContent: "center",
+				alignItems: "center",
+				borderRadius: 4,
 				...t.atoms.border_contrast_high,
 
 				borderWidth: 1,
@@ -343,8 +343,8 @@ export function Switch() {
 	return (
 		<div
 			style={{
-				...a.relative,
-				...a.rounded_full,
+				position: "relative",
+				borderRadius: 999,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_high,
 
@@ -363,7 +363,7 @@ export function Switch() {
 				// Animated.View
 				// layout={LinearTransition.duration(100)}
 				style={{
-					...a.rounded_full,
+					borderRadius: 999,
 					height: 16,
 					width: 16,
 					...(selected
@@ -390,9 +390,9 @@ export function Radio() {
 	return (
 		<div
 			style={{
-				...a.justify_center,
-				...a.align_center,
-				...a.rounded_full,
+				justifyContent: "center",
+				alignItems: "center",
+				borderRadius: 999,
 				...t.atoms.border_contrast_high,
 
 				...{
@@ -408,8 +408,8 @@ export function Radio() {
 			{selected ? (
 				<div
 					style={{
-						...a.absolute,
-						...a.rounded_full,
+						position: "absolute",
+						borderRadius: 999,
 						...{ height: 16, width: 16 },
 
 						...(selected

@@ -30,16 +30,18 @@ export function NoFollowingFeed() {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.flex_wrap,
-				...a.align_center,
-				...a.py_md,
-				...a.px_lg,
+				flexDirection: "row",
+				flexWrap: "wrap",
+				alignItems: "center",
+				paddingTop: 12,
+				paddingBottom: 12,
+				paddingLeft: 16,
+				paddingRight: 16,
 			}}
 		>
 			<Text
 				style={{
-					...a.leading_snug,
+					lineHeight: 1.3,
 					...t.atoms.text_contrast_medium,
 				}}
 			>
@@ -49,7 +51,7 @@ export function NoFollowingFeed() {
 						to="/"
 						label={"Add the default feed of only people you follow"}
 						onPress={addRecommendedFeeds}
-						style={a.leading_snug}
+						style={{ ...a.leading_snug }}
 					>
 						Click here to add one.
 					</InlineLinkText>

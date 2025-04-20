@@ -102,7 +102,7 @@ function ContentHiderActive({
 	return (
 		<div
 			style={{
-				...a.overflow_hidden,
+				overflow: "hidden",
 				...style,
 			}}
 		>
@@ -122,14 +122,16 @@ function ContentHiderActive({
 				{(state) => (
 					<div
 						style={{
-							...a.flex_row,
-							...a.w_full,
-							...a.justify_start,
-							...a.align_center,
-							...a.py_md,
-							...a.px_lg,
-							...a.gap_xs,
-							...a.rounded_sm,
+							flexDirection: "row",
+							width: "100%",
+							justifyContent: "flex-start",
+							alignItems: "center",
+							paddingTop: 12,
+							paddingBottom: 12,
+							paddingLeft: 16,
+							paddingRight: 16,
+							gap: 4,
+							borderRadius: 8,
 							...t.atoms.bg_contrast_25,
 							...flatten(gtMobile ? [a.gap_sm, a.py_lg, a.mt_xs, a.px_xl] : []),
 							...((state.hovered || state.pressed) && t.atoms.bg_contrast_50),
@@ -138,10 +140,10 @@ function ContentHiderActive({
 						<desc.icon size="md" fill={t.atoms.text_contrast_medium.color} style={{ marginLeft: -2 }} />
 						<Text
 							style={{
-								...a.flex_1,
-								...a.text_left,
-								...a.font_bold,
-								...a.leading_snug,
+								flex: 1,
+								textAlign: "left",
+								fontWeight: "600",
+								lineHeight: 1.3,
 								...(gtMobile && a.font_bold),
 								...t.atoms.text_contrast_medium,
 
@@ -156,8 +158,8 @@ function ContentHiderActive({
 						{!modui.noOverride && (
 							<Text
 								style={{
-									...a.font_bold,
-									...a.leading_snug,
+									fontWeight: "600",
+									lineHeight: 1.3,
 									...(gtMobile && a.font_bold),
 									...t.atoms.text_contrast_high,
 
@@ -178,17 +180,18 @@ function ContentHiderActive({
 						control.open();
 					}}
 					label={"Learn more about the moderation applied to this content."}
-					style={a.pt_sm}
+					style={{ ...a.pt_sm }}
 				>
 					{(state) => (
 						<Text
 							style={{
-								...a.flex_1,
-								...a.text_sm,
-								...a.font_normal,
-								...a.leading_snug,
+								flex: 1,
+								fontSize: 14,
+								letterSpacing: 0,
+								fontWeight: "400",
+								lineHeight: 1.3,
 								...t.atoms.text_contrast_medium,
-								...a.text_left,
+								textAlign: "left",
 							}}
 						>
 							{desc.sourceType === "user" ? (
@@ -199,7 +202,8 @@ function ContentHiderActive({
 							<Text
 								style={{
 									...{ color: t.palette.primary_500 },
-									...a.text_sm,
+									fontSize: 14,
+									letterSpacing: 0,
 
 									...(state.hovered && { textDecoration: "underline" }),
 								}}

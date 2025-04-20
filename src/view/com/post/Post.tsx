@@ -29,11 +29,11 @@ import * as bsky from "#/types/bsky";
 import { ContentHider } from "../../../components/moderation/ContentHider";
 import { LabelsOnMyPost } from "../../../components/moderation/LabelsOnMe";
 import { PostAlerts } from "../../../components/moderation/PostAlerts";
+import { PostCtrls } from "../../../units/post/PostCtrls";
 import { Link, TextLink } from "../util/Link";
 import { PostMeta } from "../util/PostMeta";
 import { PreviewableUserAvatar } from "../util/UserAvatar";
 import { UserInfoText } from "../util/UserInfoText";
-import { PostCtrls } from "../../../units/post/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "../util/post-embeds";
 
 export function Post({
@@ -225,7 +225,7 @@ function PostInner({
 						style={styles.contentHider}
 						childContainerStyle={styles.contentHiderChild}
 					>
-						<PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} />
+						<PostAlerts modui={moderation.ui("contentView")} style={{ ...a.py_xs }} />
 						{richText.text ? (
 							<div style={styles.postTextContainer}>
 								<RichText
@@ -233,8 +233,9 @@ function PostInner({
 									value={richText}
 									numberOfLines={limitLines ? MAX_POST_LINES : undefined}
 									style={{
-										...a.flex_1,
-										...a.text_md,
+										flex: 1,
+										fontSize: 16,
+										letterSpacing: 0,
 									}}
 									authorHandle={post.author.handle}
 									shouldProxyLinks={true}

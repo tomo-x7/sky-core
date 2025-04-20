@@ -43,7 +43,7 @@ export const RepostButton = ({ isReposted, repostCount, onRepost, onQuote, big, 
 								onClick={onPress}
 								{...props}
 								style={{
-									...a.rounded_full,
+									borderRadius: 999,
 
 									...((state.hovered || state.pressed) && {
 										backgroundColor: t.palette.contrast_25,
@@ -105,9 +105,9 @@ const RepostInner = ({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_xs,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 4,
 				...{ padding: 5 },
 			}}
 		>
@@ -118,7 +118,7 @@ const RepostInner = ({
 						...color,
 						...(big ? a.text_md : { fontSize: 15 }),
 						...(isReposted ? a.font_bold : undefined),
-						...a.user_select_none,
+						userSelect: "none",
 					}}
 				>
 					{formatCount(repostCount)}

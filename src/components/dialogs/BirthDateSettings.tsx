@@ -29,21 +29,23 @@ export function BirthDateSettingsDialog({
 			<Dialog.ScrollableInner label={"My Birthday"}>
 				<div
 					style={{
-						...a.gap_sm,
-						...a.pb_lg,
+						gap: 8,
+						paddingBottom: 16,
 					}}
 				>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_bold,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						My Birthday
 					</Text>
 					<Text
 						style={{
-							...a.text_md,
+							fontSize: 16,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -58,7 +60,7 @@ export function BirthDateSettingsDialog({
 						message={
 							error?.toString() || "We were unable to load your birth date preferences. Please try again."
 						}
-						style={a.rounded_sm}
+						style={{ ...a.rounded_sm }}
 					/>
 				) : (
 					<BirthdayInner control={control} preferences={preferences} />
@@ -94,7 +96,7 @@ function BirthdayInner({
 	}, [date, setBirthDate, control, hasChanged]);
 
 	return (
-		<div style={a.gap_lg}>
+		<div style={{ gap:16 }}>
 			<div>
 				<DateField
 					value={date}
@@ -103,11 +105,11 @@ function BirthdayInner({
 					maximumDate={getDateAgo(13)}
 				/>
 			</div>
-			{isError ? <ErrorMessage message={cleanError(error)} style={a.rounded_sm} /> : undefined}
+			{isError ? <ErrorMessage message={cleanError(error)} style={{ ...a.rounded_sm }} /> : undefined}
 			<div
 				style={{
-					...a.flex_row,
-					...a.justify_end,
+					flexDirection: "row",
+					justifyContent: "flex-end",
 				}}
 			>
 				<Button

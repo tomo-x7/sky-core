@@ -29,8 +29,8 @@ export function ImageLayoutGrid({ style, ...props }: ImageLayoutGridProps) {
 			<div
 				style={{
 					...gap,
-					...a.rounded_md,
-					...a.overflow_hidden,
+					borderRadius: 12,
+					overflow: "hidden",
 				}}
 			>
 				<ImageLayoutGridInner {...props} gap={gap} />
@@ -64,14 +64,14 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 			return (
 				<div
 					style={{
-						...a.flex_1,
-						...a.flex_row,
+						flex: 1,
+						flexDirection: "row",
 						...gap,
 					}}
 				>
 					<div
 						style={{
-							...a.flex_1,
+							flex: 1,
 							...{ aspectRatio: 1 },
 						}}
 					>
@@ -85,7 +85,7 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					</div>
 					<div
 						style={{
-							...a.flex_1,
+							flex: 1,
 							...{ aspectRatio: 1 },
 						}}
 					>
@@ -106,14 +106,14 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 			return (
 				<div
 					style={{
-						...a.flex_1,
-						...a.flex_row,
+						flex: 1,
+						flexDirection: "row",
 						...gap,
 					}}
 				>
 					<div
 						style={{
-							...a.flex_1,
+							flex: 1,
 							...{ aspectRatio: 1 },
 						}}
 					>
@@ -127,12 +127,12 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					</div>
 					<div
 						style={{
-							...a.flex_1,
+							flex: 1,
 							...{ aspectRatio: 1 },
 							...gap,
 						}}
 					>
-						<div style={a.flex_1}>
+						<div style={{ flex: 1 }}>
 							<GalleryItem
 								{...props}
 								index={1}
@@ -141,7 +141,7 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 								thumbDimsRef={thumbDimsRef}
 							/>
 						</div>
-						<div style={a.flex_1}>
+						<div style={{ flex: 1 }}>
 							<GalleryItem
 								{...props}
 								index={2}
@@ -161,13 +161,13 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 				<>
 					<div
 						style={{
-							...a.flex_row,
+							flexDirection: "row",
 							...gap,
 						}}
 					>
 						<div
 							style={{
-								...a.flex_1,
+								flex: 1,
 								...{ aspectRatio: 1.5 },
 							}}
 						>
@@ -181,7 +181,7 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 						</div>
 						<div
 							style={{
-								...a.flex_1,
+								flex: 1,
 								...{ aspectRatio: 1.5 },
 							}}
 						>
@@ -196,13 +196,13 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					</div>
 					<div
 						style={{
-							...a.flex_row,
+							flexDirection: "row",
 							...gap,
 						}}
 					>
 						<div
 							style={{
-								...a.flex_1,
+								flex: 1,
 								...{ aspectRatio: 1.5 },
 							}}
 						>
@@ -216,7 +216,7 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 						</div>
 						<div
 							style={{
-								...a.flex_1,
+								flex: 1,
 								...{ aspectRatio: 1.5 },
 							}}
 						>

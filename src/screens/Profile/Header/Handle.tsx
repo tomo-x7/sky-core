@@ -19,9 +19,9 @@ export function ProfileHeaderHandle({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_xs,
-				...a.align_center,
+				flexDirection: "row",
+				gap: 4,
+				alignItems: "center",
 				maxWidth: "100%",
 				pointerEvents: "none",
 			}}
@@ -31,16 +31,19 @@ export function ProfileHeaderHandle({
 				<div
 					style={{
 						...t.atoms.bg_contrast_25,
-						...a.rounded_xs,
-						...a.px_sm,
-						...a.py_xs,
+						borderRadius: 4,
+						paddingLeft: 8,
+						paddingRight: 8,
+						paddingTop: 4,
+						paddingBottom: 4,
 						pointerEvents: "auto",
 					}}
 				>
 					<Text
 						style={{
 							...t.atoms.text,
-							...a.text_sm,
+							fontSize: 14,
+							letterSpacing: 0,
 						}}
 					>
 						Follows you

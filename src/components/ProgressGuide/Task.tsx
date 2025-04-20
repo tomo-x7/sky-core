@@ -22,8 +22,8 @@ export function ProgressGuideTask({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_sm,
+				flexDirection: "row",
+				gap: 8,
 				...(!subtitle && a.align_center),
 			}}
 		>
@@ -41,16 +41,17 @@ export function ProgressGuideTask({
 			)}
 			<div
 				style={{
-					...a.flex_col,
-					...a.gap_2xs,
+					flexDirection: "column",
+					gap: 2,
 					...(subtitle && { marginTop: -2 }),
 				}}
 			>
 				<Text
 					style={{
-						...a.text_sm,
-						...a.font_bold,
-						...a.leading_tight,
+						fontSize: 14,
+						letterSpacing: 0,
+						fontWeight: "600",
+						lineHeight: 1.15,
 						...(tabularNumsTitle && { fontVariant: "tabular-nums" }),
 					}}
 				>
@@ -59,9 +60,10 @@ export function ProgressGuideTask({
 				{subtitle && (
 					<Text
 						style={{
-							...a.text_sm,
+							fontSize: 14,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
-							...a.leading_tight,
+							lineHeight: 1.15,
 						}}
 					>
 						{subtitle}

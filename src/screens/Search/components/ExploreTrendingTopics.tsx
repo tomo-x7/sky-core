@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, tokens, useGutters, useTheme } from "#/alf";
+import { tokens, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { GradientFill } from "#/components/GradientFill";
 import * as Prompt from "#/components/Prompt";
@@ -34,33 +34,35 @@ function Inner() {
 		<>
 			<div
 				style={{
-					...a.flex_row,
-					...a.px_lg,
-					...a.py_lg,
-					...a.pt_2xl,
-					...a.gap_md,
-					...a.border_b,
+					flexDirection: "row",
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingBottom: 16,
+					paddingTop: 24,
+					gap: 12,
+					borderBottom: "1px solid black",
 					...t.atoms.border_contrast_low,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.gap_sm,
+						flex: 1,
+						gap: 8,
 					}}
 				>
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_sm,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 8,
 						}}
 					>
 						<Trending size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
 						<Text
 							style={{
-								...a.text_2xl,
-								...a.font_heavy,
+								fontSize: 22,
+								letterSpacing: 0,
+								fontWeight: "800",
 								...t.atoms.text,
 							}}
 						>
@@ -68,17 +70,20 @@ function Inner() {
 						</Text>
 						<div
 							style={{
-								...a.py_xs,
-								...a.px_sm,
-								...a.rounded_sm,
-								...a.overflow_hidden,
+								paddingTop: 4,
+								paddingBottom: 4,
+								paddingLeft: 8,
+								paddingRight: 8,
+								borderRadius: 8,
+								overflow: "hidden",
 							}}
 						>
 							<GradientFill gradient={tokens.gradients.primary} />
 							<Text
 								style={{
-									...a.text_sm,
-									...a.font_heavy,
+									fontSize: 14,
+									letterSpacing: 0,
+									fontWeight: "800",
 									...{ color: "white" },
 								}}
 							>
@@ -89,7 +94,7 @@ function Inner() {
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 					>
 						What people are posting about.
@@ -109,15 +114,15 @@ function Inner() {
 
 			<div
 				style={{
-					...a.pt_md,
-					...a.pb_lg,
+					paddingTop: 12,
+					paddingBottom: 16,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_start,
-						...a.flex_wrap,
+						flexDirection: "row",
+						justifyContent: "flex-start",
+						flexWrap: "wrap",
 						...{ rowGap: 8, columnGap: 6 },
 						...gutters,
 					}}

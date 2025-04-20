@@ -42,15 +42,15 @@ export function GalleryItem({
 	const hasAlt = !!image.alt;
 	const hideBadges = viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia;
 	return (
-		<div style={a.flex_1} ref={containerRefs[index]}>
+		<div style={{ flex: 1 }} ref={containerRefs[index]}>
 			<button
 				type="button"
 				onClick={onPress ? () => onPress(index, containerRefs, thumbDimsRef.current.slice()) : undefined}
 				onMouseDown={onPressIn ? () => onPressIn(index) : undefined}
 				// onLongPress={onLongPress ? () => onLongPress(index) : undefined}
 				style={{
-					...a.flex_1,
-					...a.overflow_hidden,
+					flex: 1,
+					overflow: "hidden",
 					...t.atoms.bg_contrast_25,
 					...imageStyle,
 				}}
@@ -58,7 +58,7 @@ export function GalleryItem({
 				<img
 					src={image.thumb}
 					style={{
-						...a.flex_1,
+						flex: 1,
 						objectPosition: "left 50% top 50%",
 						width: "100%",
 						height: "100%",
@@ -81,10 +81,10 @@ export function GalleryItem({
 			{hasAlt && !hideBadges ? (
 				<div
 					style={{
-						...a.absolute,
-						...a.flex_row,
-						...a.align_center,
-						...a.rounded_xs,
+						position: "absolute",
+						flexDirection: "row",
+						alignItems: "center",
+						borderRadius: 4,
 						...t.atoms.bg_contrast_25,
 
 						...{
@@ -100,7 +100,7 @@ export function GalleryItem({
 				>
 					<Text
 						style={{
-							...a.font_heavy,
+							fontWeight: "800",
 							...(largeAltBadge ? a.text_xs : { fontSize: 8 }),
 						}}
 					>

@@ -75,17 +75,18 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 				{({ hovered }) => (
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_xs,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 4,
 							...style,
 						}}
 					>
 						<Icon color={t.palette.contrast_400} width={16} settings={settings} />
 						<Text
 							style={{
-								...a.text_sm,
-								...a.leading_tight,
+								fontSize: 14,
+								letterSpacing: 0,
+								lineHeight: 1.15,
 								...t.atoms.text_contrast_medium,
 								...(hovered && a.underline),
 							}}
@@ -149,12 +150,13 @@ function WhoCanReplyDialog({
 				label={"Dialog: adjust who can interact with this post"}
 				style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 			>
-				<div style={a.gap_sm}>
+				<div style={{ gap:8 }}>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_xl,
-							...a.pb_sm,
+							fontWeight: "600",
+							fontSize: 20,
+							letterSpacing: 0,
+							paddingBottom: 8,
 						}}
 					>
 						Who can interact with this post?
@@ -181,9 +183,10 @@ function Rules({
 		<>
 			<Text
 				style={{
-					...a.text_sm,
-					...a.leading_snug,
-					...a.flex_wrap,
+					fontSize: 14,
+					letterSpacing: 0,
+					lineHeight: 1.3,
+					flexWrap: "wrap",
 					...t.atoms.text_contrast_medium,
 				}}
 			>
@@ -209,9 +212,10 @@ function Rules({
 			{embeddingDisabled && (
 				<Text
 					style={{
-						...a.text_sm,
-						...a.leading_snug,
-						...a.flex_wrap,
+						fontSize: 14,
+						letterSpacing: 0,
+						lineHeight: 1.3,
+						flexWrap: "wrap",
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -242,8 +246,9 @@ function Rule({
 					label={`@${post.author.handle}`}
 					to={makeProfileLink(post.author)}
 					style={{
-						...a.text_sm,
-						...a.leading_snug,
+						fontSize: 14,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 					}}
 				>
 					@{post.author.handle}
@@ -259,8 +264,9 @@ function Rule({
 					label={`@${post.author.handle}`}
 					to={makeProfileLink(post.author)}
 					style={{
-						...a.text_sm,
-						...a.leading_snug,
+						fontSize: 14,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 					}}
 				>
 					@{post.author.handle}
@@ -278,8 +284,9 @@ function Rule({
 						label={list.name}
 						to={makeListLink(listUrip.hostname, listUrip.rkey)}
 						style={{
-							...a.text_sm,
-							...a.leading_snug,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.3,
 						}}
 					>
 						{list.name}

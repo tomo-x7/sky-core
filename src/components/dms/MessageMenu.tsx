@@ -1,7 +1,7 @@
 import { type ChatBskyConvoDefs, RichText } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
 import * as Prompt from "#/components/Prompt";
 import { usePromptControl } from "#/components/Prompt";
@@ -75,8 +75,8 @@ export let MessageMenu = ({
 								onClick={onPress}
 								{...props}
 								style={{
-									...a.p_sm,
-									...a.rounded_full,
+									padding: 8,
+									borderRadius: 999,
 									...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),
 								}}
 							>

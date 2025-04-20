@@ -19,8 +19,9 @@ export function Container({ children }: { children: React.ReactNode }) {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.py_md,
+				flex: 1,
+				paddingTop: 12,
+				paddingBottom: 12,
 			}}
 		>
 			{children}
@@ -49,7 +50,7 @@ export function Group({
 	return (
 		<div
 			style={{
-				...a.w_full,
+				width: "100%",
 				...style,
 			}}
 		>
@@ -57,7 +58,7 @@ export function Group({
 				<ItemContext.Provider value={context}>
 					<Item
 						style={{
-							...a.pb_2xs,
+							paddingBottom: 2,
 							...{ minHeight: 42 },
 						}}
 					>
@@ -65,10 +66,10 @@ export function Group({
 					</Item>
 					<Item
 						style={{
-							...a.flex_col,
-							...a.pt_2xs,
-							...a.align_start,
-							...a.gap_0,
+							flexDirection: "column",
+							paddingTop: 2,
+							alignItems: "flex-start",
+							gap: 0,
 							...contentContainerStyle,
 						}}
 						iconInset={iconInset}
@@ -104,12 +105,14 @@ export function Item({
 	return (
 		<div
 			style={{
-				...a.px_xl,
-				...a.py_sm,
-				...a.align_center,
-				...a.gap_md,
-				...a.w_full,
-				...a.flex_row,
+				paddingLeft: 20,
+				paddingRight: 20,
+				paddingTop: 8,
+				paddingBottom: 8,
+				alignItems: "center",
+				gap: 12,
+				width: "100%",
+				flexDirection: "row",
 				...{ minHeight: 48 },
 
 				...(iconInset && {
@@ -217,7 +220,7 @@ export function ItemIcon({
 	const content = (
 		<div
 			style={{
-				...a.z_20,
+				zIndex: 20,
 				...{ width: iconSize, height: iconSize },
 			}}
 		>
@@ -239,10 +242,11 @@ export function ItemText({ style, ...props }: React.ComponentProps<typeof Button
 	const content = (
 		<Button.ButtonText
 			style={{
-				...a.text_md,
-				...a.font_normal,
-				...a.text_left,
-				...a.flex_1,
+				fontSize: 16,
+				letterSpacing: 0,
+				fontWeight: "400",
+				textAlign: "left",
+				flex: 1,
 				...(destructive ? { color: t.palette.negative_500 } : t.atoms.text),
 				...style,
 			}}
@@ -262,10 +266,12 @@ export function Divider({ style }: ViewStyleProp) {
 	return (
 		<div
 			style={{
-				...a.border_t,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 				...t.atoms.border_contrast_medium,
-				...a.w_full,
-				...a.my_sm,
+				width: "100%",
+				marginTop: 8,
+				marginBottom: 8,
 				...style,
 			}}
 		/>
@@ -291,9 +297,10 @@ export function BadgeText({
 		<Text
 			style={{
 				...t.atoms.text_contrast_low,
-				...a.text_md,
-				...a.text_right,
-				...a.leading_snug,
+				fontSize: 16,
+				letterSpacing: 0,
+				textAlign: "right",,
+				lineHeight: 1.3,
 				...style,
 			}}
 			numberOfLines={1}
@@ -316,9 +323,10 @@ export function BadgeButton({
 			{({ pressed }) => (
 				<Button.ButtonText
 					style={{
-						...a.text_md,
-						...a.font_normal,
-						...a.text_right,
+						fontSize: 16,
+						letterSpacing: 0,
+						fontWeight: "400",
+						textAlign: "right",,
 						...{ color: pressed ? t.palette.contrast_300 : t.palette.primary_500 },
 					}}
 				>

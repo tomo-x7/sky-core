@@ -19,23 +19,25 @@ export function ErrorState({ error }: { error: string }) {
 	}, [navigate]);
 
 	return (
-		<div style={a.px_xl}>
+		<div style={{ ...a.px_xl }}>
 			<CircleInfo width={48} style={t.atoms.text_contrast_low} />
 			<Text
 				style={{
-					...a.text_xl,
-					...a.font_bold,
-					...a.pb_md,
-					...a.pt_xl,
+					fontSize: 20,
+					letterSpacing: 0,
+					fontWeight: "600",
+					paddingBottom: 12,
+					paddingTop: 20,
 				}}
 			>
 				Hmmmm, we couldn't load that moderation service.
 			</Text>
 			<Text
 				style={{
-					...a.text_md,
-					...a.leading_normal,
-					...a.pb_md,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.5,
+					paddingBottom: 12,
 					...t.atoms.text_contrast_medium,
 				}}
 			>
@@ -43,18 +45,21 @@ export function ErrorState({ error }: { error: string }) {
 			</Text>
 			<div
 				style={{
-					...a.relative,
-					...a.py_md,
-					...a.px_lg,
-					...a.rounded_md,
-					...a.mb_2xl,
+					position: "relative",
+					paddingTop: 12,
+					paddingBottom: 12,
+					paddingLeft: 16,
+					paddingRight: 16,
+					borderRadius: 12,
+					marginBottom: 24,
 					...t.atoms.bg_contrast_25,
 				}}
 			>
 				<Text
 					style={{
-						...a.text_md,
-						...a.leading_normal,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.5,
 					}}
 				>
 					{error}

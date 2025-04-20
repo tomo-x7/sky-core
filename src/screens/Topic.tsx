@@ -2,7 +2,6 @@ import type { PostView } from "@atproto/api/dist/client/types/app/bsky/feed/defs
 import React from "react";
 
 import { useParams } from "react-router-dom";
-import { atoms as a } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
@@ -80,8 +79,8 @@ export default function TopicScreen() {
 				renderTabBar={(props) => (
 					<Layout.Center
 						style={{
-							...a.z_10,
-							...a.sticky,
+							zIndex: 10,
+							position: "sticky",
 							...{ top: 0 },
 						}}
 					>

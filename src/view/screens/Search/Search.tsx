@@ -50,7 +50,7 @@ import { SearchLinkCard, SearchProfileCard } from "#/view/shell/desktop/Search";
 function Loader() {
 	return (
 		<Layout.Content>
-			<div style={a.py_xl}>
+			<div style={{ ...a.py_xl }}>
 				<ActivityIndicator />
 			</div>
 		</Layout.Content>
@@ -62,15 +62,15 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 
 	return (
 		<Layout.Content>
-			<div style={a.p_xl}>
+			<div style={{ ...a.p_xl }}>
 				<div
 					style={{
 						...t.atoms.bg_contrast_25,
-						...a.rounded_sm,
-						...a.p_lg,
+						borderRadius: 8,
+						padding: 16,
 					}}
 				>
-					<Text style={a.text_md}>{message}</Text>
+					<Text style={{ ...a.text_md }}>{message}</Text>
 
 					{error && (
 						<>
@@ -263,10 +263,12 @@ let SearchScreenFeedsResults = ({
 					renderItem={({ item }: { item: any }) => (
 						<div
 							style={{
-								...a.border_b,
+								borderBottom: "1px solid black",
 								...t.atoms.border_contrast_low,
-								...a.px_lg,
-								...a.py_lg,
+								paddingLeft: 16,
+								paddingRight: 16,
+								paddingTop: 16,
+								paddingBottom: 16,
 							}}
 						>
 							<FeedCard.Default view={item} />
@@ -467,8 +469,8 @@ let SearchScreenInner = ({
 			renderTabBar={(props) => (
 				<Layout.Center
 					style={{
-						...a.z_10,
-						...a.sticky,
+						zIndex: 10,
+						position: "sticky",
 						...{ top: headerHeight },
 					}}
 				>
@@ -485,21 +487,23 @@ let SearchScreenInner = ({
 		<Explore />
 	) : (
 		<Layout.Center>
-			<div style={a.flex_1}>
+			<div style={{ flex: 1 }}>
 				{gtTablet && (
 					<div
 						style={{
-							...a.border_b,
+							borderBottom: "1px solid black",
 							...t.atoms.border_contrast_low,
-							...a.px_lg,
-							...a.pt_sm,
-							...a.pb_lg,
+							paddingLeft: 16,
+							paddingRight: 16,
+							paddingTop: 8,
+							paddingBottom: 16,
 						}}
 					>
 						<Text
 							style={{
-								...a.text_2xl,
-								...a.font_heavy,
+								fontSize: 22,
+								letterSpacing: 0,
+								fontWeight: "800",
 							}}
 						>
 							Search
@@ -509,17 +513,19 @@ let SearchScreenInner = ({
 
 				<div
 					style={{
-						...a.align_center,
-						...a.justify_center,
-						...a.py_4xl,
-						...a.gap_lg,
+						alignItems: "center",
+						justifyContent: "center",
+						paddingTop: 32,
+						paddingBottom: 32,
+						gap: 16,
 					}}
 				>
 					<MagnifyingGlassIcon strokeWidth={3} size={60} style={t.atoms.text_contrast_medium} />
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.text_md,
+							fontSize: 16,
+							letterSpacing: 0,
 						}}
 					>
 						Find posts, users, and feeds on Bluesky
@@ -719,10 +725,9 @@ export function SearchScreenShell({
 			<div
 				ref={headerRef}
 				style={{
-					...a.relative,
-					...a.z_10,
-
-					...{ position: "sticky", top: 0 },
+					zIndex: 10,
+					position: "sticky",
+					top: 0,
 				}}
 			>
 				<Layout.Center style={t.atoms.bg}>
@@ -748,22 +753,23 @@ export function SearchScreenShell({
 					)}
 					<div
 						style={{
-							...a.px_md,
-							...a.pt_sm,
-							...a.pb_sm,
-							...a.overflow_hidden,
+							paddingLeft: 12,
+							paddingRight: 12,
+							paddingTop: 8,
+							paddingBottom: 8,
+							overflow: "hidden",
 						}}
 					>
-						<div style={a.gap_sm}>
+						<div style={{ gap:8 }}>
 							<div
 								style={{
-									...a.w_full,
-									...a.flex_row,
+									width: "100%",
+									flexDirection: "row",
 									...a.align_stretch,
-									...a.gap_xs,
+									gap: 4,
 								}}
 							>
-								<div style={a.flex_1}>
+								<div style={{ flex: 1 }}>
 									<SearchInput
 										ref={textInput}
 										value={searchText}
@@ -782,7 +788,7 @@ export function SearchScreenShell({
 										size="large"
 										variant="ghost"
 										color="secondary"
-										style={a.px_sm}
+										style={{ ...a.px_sm }}
 										onPress={onPressCancelSearch}
 										hitSlop={HITSLOP_10}
 									>
@@ -794,10 +800,10 @@ export function SearchScreenShell({
 							{showFilters && !showHeader && (
 								<div
 									style={{
-										...a.flex_row,
-										...a.align_center,
-										...a.justify_between,
-										...a.gap_sm,
+										flexDirection: "row",
+										alignItems: "center",
+										justifyContent: "space-between",
+										gap: 8,
 									}}
 								>
 									<SearchLanguageDropdown value={params.lang} onChange={params.setLang} />
@@ -920,16 +926,18 @@ function SearchHistory({
 		>
 			<div
 				style={{
-					...a.w_full,
-					...a.px_md,
+					width: "100%",
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 			>
 				{(searchHistory.length > 0 || selectedProfiles.length > 0) && (
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
-							...a.p_md,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
+							padding: 12,
 						}}
 					>
 						Recent Searches
@@ -947,7 +955,7 @@ function SearchHistory({
 							// keyboardShouldPersistTaps="handled"
 							// horizontal={true}
 							style={{
-								...a.flex_row,
+								flexDirection: "row",
 								...a.flex_nowrap,
 								...{ marginLeft: tokens.space._2xl * -1, marginRight: tokens.space._2xl * -1 },
 							}}
@@ -968,8 +976,8 @@ function SearchHistory({
 										anchorNoUnderline
 										onBeforePress={() => onProfileClick(profile)}
 										style={{
-											...a.align_center,
-											...a.w_full,
+											alignItems: "center",
+											width: "100%",
 										}}
 									>
 										<UserAvatar
@@ -979,8 +987,9 @@ function SearchHistory({
 										/>
 										<Text
 											style={{
-												...a.text_xs,
-												...a.text_center,
+												fontSize: 12,
+												letterSpacing: 0,
+												textAlign: "center",
 												...styles.profileName,
 											}}
 											numberOfLines={1}
@@ -1004,18 +1013,18 @@ function SearchHistory({
 				{searchHistory.length > 0 && (
 					<div
 						style={{
-							...a.pl_md,
-							...a.pr_xs,
-							...a.mt_md,
+							paddingLeft: 12,
+							paddingRight: 4,
+							marginTop: 12,
 						}}
 					>
 						{searchHistory.slice(0, 5).map((historyItem, index) => (
 							<div
 								key={index}
 								style={{
-									...a.flex_row,
-									...a.align_center,
-									...a.mt_xs,
+									flexDirection: "row",
+									alignItems: "center",
+									marginTop: 4,
 								}}
 							>
 								<button
@@ -1023,11 +1032,12 @@ function SearchHistory({
 									onClick={() => onItemClick(historyItem)}
 									// hitSlop={HITSLOP_10}
 									style={{
-										...a.flex_1,
-										...a.py_md,
+										flex: 1,
+										paddingTop: 12,
+										paddingBottom: 12,
 									}}
 								>
-									<Text style={a.text_md}>{historyItem}</Text>
+									<Text style={{ ...a.text_md }}>{historyItem}</Text>
 								</button>
 								<Button
 									label={`Remove ${historyItem}`}

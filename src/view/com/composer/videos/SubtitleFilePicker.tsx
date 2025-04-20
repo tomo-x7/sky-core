@@ -39,17 +39,17 @@ export function SubtitleFilePicker({
 	};
 
 	return (
-		<div style={a.gap_lg}>
+		<div style={{ gap:16 }}>
 			<input
 				type="file"
 				accept=".vtt"
 				ref={ref}
-				style={a.hidden}
+				style={{ ...a.hidden }}
 				onChange={handlePick}
 				disabled={disabled}
 				aria-disabled={disabled}
 			/>
-			<div style={a.flex_row}>
+			<div style={{ ...a.flex_row }}>
 				<Button
 					onPress={handleClick}
 					label={"Select subtitle file (.vtt)"}

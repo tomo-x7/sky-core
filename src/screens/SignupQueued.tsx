@@ -75,11 +75,11 @@ export function SignupQueued() {
 	const webLayout = gtMobile;
 
 	return (
-		<Modal visible presentationStyle="formSheet" style={a.util_screen_outer}>
+		<Modal visible presentationStyle="formSheet" style={{ ...a.util_screen_outer }}>
 			<div
 				// ScrollView
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...t.atoms.bg,
 				}}
 				// contentContainerStyle={{ borderWidth: 0 }}
@@ -87,23 +87,24 @@ export function SignupQueued() {
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_center,
+						flexDirection: "row",
+						justifyContent: "center",
 						...(gtMobile ? a.pt_4xl : flatten([a.px_xl, a.pt_xl])),
 					}}
 				>
 					<div
 						style={{
-							...a.flex_1,
+							flex: 1,
 							...{ maxWidth: COL_WIDTH },
 						}}
 					>
 						<div
 							style={{
-								...a.w_full,
-								...a.justify_center,
-								...a.align_center,
-								...a.my_4xl,
+								width: "100%",
+								justifyContent: "center",
+								alignItems: "center",
+								marginTop: 32,
+								marginBottom: 32,
 							}}
 						>
 							<Logo width={120} />
@@ -111,9 +112,10 @@ export function SignupQueued() {
 
 						<Text
 							style={{
-								...a.text_4xl,
-								...a.font_heavy,
-								...a.pb_sm,
+								fontSize: 32,
+								letterSpacing: 0,
+								fontWeight: "800",
+								paddingBottom: 8,
 							}}
 						>
 							You're in line
@@ -124,12 +126,15 @@ export function SignupQueued() {
 
 						<div
 							style={{
-								...a.rounded_sm,
-								...a.px_2xl,
-								...a.py_4xl,
-								...a.mt_2xl,
-								...a.mb_md,
-								...a.border,
+								borderRadius: 8,
+								paddingLeft: 24,
+								paddingRight: 24,
+								paddingTop: 32,
+								paddingBottom: 32,
+								marginTop: 24,
+								marginBottom: 12,
+								border: "1px solid black",
+								borderWidth: 1,
 								...t.atoms.bg_contrast_25,
 								...t.atoms.border_contrast_medium,
 							}}
@@ -137,16 +142,17 @@ export function SignupQueued() {
 							{typeof placeInQueue === "number" && (
 								<Text
 									style={{
-										...a.text_5xl,
-										...a.text_center,
-										...a.font_heavy,
-										...a.mb_2xl,
+										fontSize: 40,
+										letterSpacing: 0,
+										textAlign: "center",
+										fontWeight: "800",
+										marginBottom: 24,
 									}}
 								>
 									{placeInQueue}
 								</Text>
 							)}
-							<P style={a.text_center}>
+							<P style={{ textAlign: "center", }}>
 								{typeof placeInQueue === "number" ? <>left to go.</> : <>You are in line.</>}{" "}
 								{estimatedTime ? (
 									<>We estimate {estimatedTime} until your account is ready.</>
@@ -159,10 +165,10 @@ export function SignupQueued() {
 						{webLayout && (
 							<div
 								style={{
-									...a.w_full,
-									...a.flex_row,
-									...a.justify_between,
-									...a.pt_5xl,
+									width: "100%",
+									flexDirection: "row",
+									justifyContent: "space-between",
+									paddingTop: 40,
 									...{ paddingBottom: 200 },
 								}}
 							>
@@ -176,7 +182,7 @@ export function SignupQueued() {
 			{!webLayout && (
 				<div
 					style={{
-						...a.align_center,
+						alignItems: "center",
 						...t.atoms.bg,
 						...(gtMobile ? a.px_5xl : a.px_xl),
 						...{ paddingBottom: a.pb_5xl.paddingBottom },
@@ -184,8 +190,8 @@ export function SignupQueued() {
 				>
 					<div
 						style={{
-							...a.w_full,
-							...a.gap_sm,
+							width: "100%",
+							gap: 8,
 							...{ maxWidth: COL_WIDTH },
 						}}
 					>

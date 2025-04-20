@@ -106,7 +106,7 @@ function PostThreadFollowBtnLoaded({
 			size="small"
 			variant="solid"
 			color={isFollowing ? "secondary" : "secondary_inverted"}
-			style={a.rounded_full}
+			style={{ ...a.rounded_full }}
 		>
 			{gtMobile && <ButtonIcon icon={isFollowing ? Check : Plus} position="left" size="sm" />}
 			<ButtonText>{!isFollowing ? isFollowedBy ? <>Follow Back</> : <>Follow</> : <>Following</>}</ButtonText>

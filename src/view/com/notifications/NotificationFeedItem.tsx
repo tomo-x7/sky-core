@@ -13,7 +13,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { memo, type ReactElement, useMemo, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Link as NewLink } from "#/components/Link";
 import * as MediaPreview from "#/components/MediaPreview";
@@ -341,7 +341,7 @@ let NotificationFeedItem = ({
 						}),
 
 				...{ borderTopWidth: hideTopBorder ? 0 : 1 },
-				...a.overflow_hidden,
+				overflow: "hidden",
 			}}
 			href={itemHref}
 			noFeedback
@@ -356,7 +356,7 @@ let NotificationFeedItem = ({
 			<div
 				style={{
 					...styles.layoutIcon,
-					...a.pr_sm,
+					paddingRight: 8,
 				}}
 			>
 				{/* TODO: Prevent conditional rendering and move toward composable
@@ -378,7 +378,7 @@ let NotificationFeedItem = ({
 					<Text
 						style={{
 							...styles.meta,
-							...a.self_start,
+							alignSelf: "flex-start",
 							...pal.text,
 						}}
 					>
@@ -405,7 +405,8 @@ let NotificationFeedItem = ({
 						style={{
 							...t.atoms.bg,
 							...t.atoms.border_contrast_low,
-							...a.border,
+							border: "1px solid black",
+							borderWidth: 1,
 							...styles.feedcard,
 						}}
 						showLikes
@@ -415,10 +416,11 @@ let NotificationFeedItem = ({
 					<div>
 						<div
 							style={{
-								...a.border,
-								...a.p_sm,
-								...a.rounded_sm,
-								...a.mt_sm,
+								border: "1px solid black",
+								borderWidth: 1,
+								padding: 8,
+								borderRadius: 8,
+								marginTop: 8,
 								...t.atoms.border_contrast_low,
 							}}
 						>
@@ -472,7 +474,7 @@ function SayHelloBtn({ profile }: { profile: AppBskyActorDefs.ProfileView }) {
 			color="primary"
 			size="small"
 			style={{
-				...a.self_center,
+				alignSelf: "center",
 				...{ marginLeft: "auto" },
 			}}
 			disabled={isLoading}
@@ -600,7 +602,7 @@ function ExpandedAuthorsList({
 	return (
 		<div
 			style={{
-				...a.overflow_hidden,
+				overflow: "hidden",
 				// ...heightStyle,
 			}}
 		>

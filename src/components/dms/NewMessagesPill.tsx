@@ -17,10 +17,10 @@ export function NewMessagesPill({
 	return (
 		<div
 			style={{
-				...a.absolute,
-				...a.w_full,
-				...a.z_10,
-				...a.align_center,
+				position: "absolute",
+				width: "100%",
+				zIndex: 10,
+				alignItems: "center",
 
 				bottom: 70,
 				// Don't prevent scrolling in this area _except_ for in the pill itself
@@ -30,10 +30,12 @@ export function NewMessagesPill({
 			<button
 				type="button"
 				style={{
-					...a.py_sm,
-					...a.rounded_full,
+					paddingTop: 8,
+					paddingBottom: 8,
+					borderRadius: 999,
 					...a.shadow_sm,
-					...a.border,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.bg_contrast_50,
 					...t.atoms.border_contrast_medium,
 
@@ -48,7 +50,7 @@ export function NewMessagesPill({
 				}}
 				onClick={onPress}
 			>
-				<Text style={{ ...a.font_bold, pointerEvents: "auto" }}>New messages</Text>
+				<Text style={{ fontWeight: "600", pointerEvents: "auto" }}>New messages</Text>
 			</button>
 		</div>
 	);

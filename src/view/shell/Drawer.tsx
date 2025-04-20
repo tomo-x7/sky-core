@@ -57,7 +57,7 @@ let DrawerProfileCard = ({
 	const { data: profile } = useProfileQuery({ did: account.did });
 
 	return (
-		<button type="button" onClick={onPressProfile} style={a.gap_sm}>
+		<button type="button" onClick={onPressProfile} style={{ gap:8 }}>
 			<UserAvatar
 				size={52}
 				avatar={profile?.avatar}
@@ -65,13 +65,14 @@ let DrawerProfileCard = ({
 				usePlainRNImage={true}
 				type={profile?.associated?.labeler ? "labeler" : "user"}
 			/>
-			<div style={a.gap_2xs}>
+			<div style={{ gap:2 }}>
 				<Text
 					style={{
-						...a.font_heavy,
-						...a.text_xl,
-						...a.mt_2xs,
-						...a.leading_tight,
+						fontWeight: "800",
+						fontSize: 20,
+						letterSpacing: 0,
+						marginTop: 2,
+						lineHeight: 1.15,
 					}}
 					numberOfLines={1}
 				>
@@ -80,8 +81,9 @@ let DrawerProfileCard = ({
 				<Text
 					style={{
 						...t.atoms.text_contrast_medium,
-						...a.text_md,
-						...a.leading_tight,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.15,
 					}}
 					numberOfLines={1}
 				>
@@ -90,15 +92,17 @@ let DrawerProfileCard = ({
 			</div>
 			<Text
 				style={{
-					...a.text_md,
+					fontSize: 16,
+					letterSpacing: 0,
 					...t.atoms.text_contrast_medium,
 				}}
 			>
 				<>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						{formatCount(profile?.followersCount ?? 0)}
@@ -109,8 +113,9 @@ let DrawerProfileCard = ({
 				<>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						{formatCount(profile?.followsCount ?? 0)}
@@ -202,7 +207,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 	return (
 		<div
 			style={{
-				...a.flex_1,
+				flex: 1,
 				...a.border_r,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
@@ -210,26 +215,26 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 		>
 			<div
 				// ScrollView
-				style={a.flex_1}
+				style={{ flex: 1 }}
 				// contentContainerStyle={[
 				// 	{
 				// 		paddingTop: a.pt_xl.paddingTop,
 				// 	},
 				// ]}
 			>
-				<div style={a.px_xl}>
+				<div style={{ ...a.px_xl }}>
 					{hasSession && currentAccount ? (
 						<DrawerProfileCard account={currentAccount} onPressProfile={onPressProfile} />
 					) : (
-						<div style={a.pr_xl}>
+						<div style={{ ...a.pr_xl }}>
 							<NavSignupCard />
 						</div>
 					)}
 
 					<Divider
 						style={{
-							...a.mt_xl,
-							...a.mb_sm,
+							marginTop: 20,
+							marginBottom: 8,
 						}}
 					/>
 				</div>
@@ -253,11 +258,11 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 					</>
 				)}
 
-				<div style={a.px_xl}>
+				<div style={{ ...a.px_xl }}>
 					<Divider
 						style={{
-							...a.mb_xl,
-							...a.mt_sm,
+							marginBottom: 20,
+							marginTop: 8,
 						}}
 					/>
 					<ExtraLinks />
@@ -280,11 +285,11 @@ let DrawerFooter = ({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_sm,
-				...a.flex_wrap,
-				...a.pl_xl,
-				...a.pt_md,
+				flexDirection: "row",
+				gap: 8,
+				flexWrap: "wrap",
+				paddingLeft: 20,
+				paddingTop: 12,
 
 				...{
 					paddingBottom: tokens.space.xl,
@@ -495,45 +500,47 @@ function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 			{({ hovered, pressed }) => (
 				<div
 					style={{
-						...a.flex_1,
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_md,
-						...a.py_md,
-						...a.px_xl,
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 12,
+						paddingTop: 12,
+						paddingBottom: 12,
+						paddingLeft: 20,
+						paddingRight: 20,
 						...((hovered || pressed) && t.atoms.bg_contrast_25),
 					}}
 				>
-					<div style={a.relative}>
+					<div style={{ ...a.relative }}>
 						{icon}
 						{count ? (
 							<div
 								style={{
-									...a.absolute,
-									...a.inset_0,
-									...a.align_end,
-									...{ top: -4, right: a.gap_sm.gap * -1 },
+									position: "absolute",
+									left: 0,
+									bottom: 0,
+									alignItems: "flex-end",
+									top: -4,
+									right: a.gap_sm.gap * -1,
 								}}
 							>
 								<div
 									style={{
-										...a.rounded_full,
-
-										...{
-											right: count.length === 1 ? 6 : 0,
-											paddingLeft: 4,
-											paddingRight: 4,
-											paddingTop: 1,
-											paddingBottom: 1,
-											backgroundColor: t.palette.primary_500,
-										},
+										borderRadius: 999,
+										right: count.length === 1 ? 6 : 0,
+										paddingLeft: 4,
+										paddingRight: 4,
+										paddingTop: 1,
+										paddingBottom: 1,
+										backgroundColor: t.palette.primary_500,
 									}}
 								>
 									<Text
 										style={{
-											...a.text_xs,
-											...a.leading_tight,
-											...a.font_bold,
+											fontSize: 12,
+											letterSpacing: 0,
+											lineHeight: 1.15,
+											fontWeight: "600",
 											fontVariant: "tabular-nums",
 											color: colors.white,
 										}}
@@ -547,10 +554,11 @@ function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 					</div>
 					<Text
 						style={{
-							...a.flex_1,
-							...a.text_2xl,
+							flex: 1,
+							fontSize: 22,
+							letterSpacing: 0,
 							...(bold && a.font_heavy),
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 						numberOfLines={1}
 					>
@@ -569,16 +577,20 @@ function ExtraLinks() {
 	return (
 		<div
 			style={{
-				...a.flex_col,
-				...a.gap_md,
-				...a.flex_wrap,
+				flexDirection: "column",
+				gap: 12,
+				flexWrap: "wrap",
 			}}
 		>
-			<InlineLinkText style={a.text_md} label={"Terms of Service"} to="https://bsky.social/about/support/tos">
+			<InlineLinkText
+				style={{ ...a.text_md }}
+				label={"Terms of Service"}
+				to="https://bsky.social/about/support/tos"
+			>
 				Terms of Service
 			</InlineLinkText>
 			<InlineLinkText
-				style={a.text_md}
+				style={{ ...a.text_md }}
 				to="https://bsky.social/about/support/privacy-policy"
 				label={"Privacy Policy"}
 			>
@@ -589,7 +601,7 @@ function ExtraLinks() {
 					<>
 						Logo by{" "}
 						<InlineLinkText
-							style={a.text_md}
+							style={{ ...a.text_md }}
 							to="/profile/sawaratsuki.bsky.social"
 							label="@sawaratsuki.bsky.social"
 						>

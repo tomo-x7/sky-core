@@ -29,13 +29,13 @@ import {
 import { useSession } from "#/state/session";
 import { useProgressGuide } from "#/state/shell/progress-guide";
 import type { ListRenderItemInfo } from "#/temp";
+import { PostFeedItem } from "#/units/post";
 import { List, type ListRef } from "#/view/com/util/List";
 import { LoadMoreRetryBtn } from "#/view/com/util/LoadMoreRetryBtn";
 import { PostFeedLoadingPlaceholder } from "#/view/com/util/LoadingPlaceholder";
 import { DiscoverFallbackHeader } from "./DiscoverFallbackHeader";
 import { FeedShutdownMsg } from "./FeedShutdownMsg";
 import { PostFeedErrorMessage } from "./PostFeedErrorMessage";
-import { PostFeedItem } from "#/units/post";
 import { ViewFullThread } from "./ViewFullThread";
 
 type FeedRow =

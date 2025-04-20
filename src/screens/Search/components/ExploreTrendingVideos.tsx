@@ -72,36 +72,38 @@ export function ExploreTrendingVideos() {
 	}
 
 	return (
-		<div style={a.pb_xl}>
+		<div style={{ ...a.pb_xl }}>
 			<div
 				style={{
-					...a.flex_row,
-					...a.px_lg,
-					...a.py_lg,
-					...a.pt_2xl,
-					...a.gap_md,
-					...a.border_b,
+					flexDirection: "row",
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingBottom: 16,
+					paddingTop: 24,
+					gap: 12,
+					borderBottom: "1px solid black",
 					...t.atoms.border_contrast_low,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.gap_sm,
+						flex: 1,
+						gap: 8,
 					}}
 				>
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_sm,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 8,
 						}}
 					>
 						<Graph size="lg" fill={t.palette.primary_500} style={{ marginLeft: -2 }} />
 						<Text
 							style={{
-								...a.text_2xl,
-								...a.font_heavy,
+								fontSize: 22,
+								letterSpacing: 0,
+								fontWeight: "800",
 								...t.atoms.text,
 							}}
 						>
@@ -109,17 +111,20 @@ export function ExploreTrendingVideos() {
 						</Text>
 						<div
 							style={{
-								...a.py_xs,
-								...a.px_sm,
-								...a.rounded_sm,
-								...a.overflow_hidden,
+								paddingTop: 4,
+								paddingBottom: 4,
+								paddingLeft: 8,
+								paddingRight: 8,
+								borderRadius: 8,
+								overflow: "hidden",
 							}}
 						>
 							<GradientFill gradient={tokens.gradients.primary} />
 							<Text
 								style={{
-									...a.text_sm,
-									...a.font_heavy,
+									fontSize: 14,
+									letterSpacing: 0,
+									fontWeight: "800",
 									...{ color: "white" },
 								}}
 							>
@@ -130,7 +135,7 @@ export function ExploreTrendingVideos() {
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 					>
 						Popular videos in your network.
@@ -146,9 +151,9 @@ export function ExploreTrendingVideos() {
 			>
 				<div
 					style={{
-						...a.pt_lg,
-						...a.flex_row,
-						...a.gap_sm,
+						paddingTop: 16,
+						flexDirection: "row",
+						gap: 8,
 
 						...{
 							paddingLeft: gutters.paddingLeft,
@@ -175,18 +180,19 @@ export function ExploreTrendingVideos() {
 				<div
 					style={{
 						...gutters,
-						...a.pt_lg,
-						...a.flex_row,
-						...a.align_center,
-						...a.justify_between,
-						...a.gap_xl,
+						paddingTop: 16,
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "space-between",
+						gap: 20,
 					}}
 				>
 					<Text
 						style={{
-							...a.flex_1,
-							...a.text_sm,
-							...a.leading_snug,
+							flex: 1,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.3,
 						}}
 					>
 						Pin the trending videos feed to your home screen for easy access
@@ -247,31 +253,31 @@ function VideoCards({
 					to={href}
 					label={"View more"}
 					style={{
-						...a.justify_center,
-						...a.align_center,
-						...a.flex_1,
-						...a.rounded_md,
+						justifyContent: "center",
+						alignItems: "center",
+						flex: 1,
+						borderRadius: 12,
 						...t.atoms.bg_contrast_25,
 					}}
 				>
 					{({ pressed }) => (
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_md,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 12,
 
 								...{
 									opacity: pressed ? 0.6 : 1,
 								},
 							}}
 						>
-							<Text style={a.text_md}>View more</Text>
+							<Text style={{ ...a.text_md }}>View more</Text>
 							<div
 								style={{
-									...a.align_center,
-									...a.justify_center,
-									...a.rounded_full,
+									alignItems: "center",
+									justifyContent: "center",
+									borderRadius: 999,
 
 									...{
 										width: 34,

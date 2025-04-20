@@ -1,7 +1,7 @@
 import { AppBskyEmbedImages, AppBskyEmbedRecord, AppBskyEmbedRecordWithMedia, AppBskyFeedPost } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -94,68 +94,69 @@ function ComposerReplyToImages({
 		<div
 			style={{
 				...styles.imagesContainer,
-				...a.mx_xs,
+				marginLeft: 4,
+				marginRight: 4,
 			}}
 		>
-			{(images.length === 1 && <img src={images[0].thumb} style={a.flex_1} />) ||
+			{(images.length === 1 && <img src={images[0].thumb} style={{ flex: 1 }} />) ||
 				(images.length === 2 && (
 					<div
 						style={{
-							...a.flex_1,
-							...a.flex_row,
-							...a.gap_2xs,
+							flex: 1,
+							flexDirection: "row",
+							gap: 2,
 						}}
 					>
-						<img src={images[0].thumb} style={a.flex_1} />
-						<img src={images[1].thumb} style={a.flex_1} />
+						<img src={images[0].thumb} style={{ flex: 1 }} />
+						<img src={images[1].thumb} style={{ flex: 1 }} />
 					</div>
 				)) ||
 				(images.length === 3 && (
 					<div
 						style={{
-							...a.flex_1,
-							...a.flex_row,
-							...a.gap_2xs,
+							flex: 1,
+							flexDirection: "row",
+							gap: 2,
 						}}
 					>
-						<img src={images[0].thumb} style={a.flex_1} />
+						<img src={images[0].thumb} style={{ flex: 1 }} />
 						<div
 							style={{
-								...a.flex_1,
-								...a.gap_2xs,
+								flex: 1,
+								gap: 2,
 							}}
 						>
-							<img src={images[1].thumb} style={a.flex_1} />
-							<img src={images[2].thumb} style={a.flex_1} />
+							<img src={images[1].thumb} style={{ flex: 1 }} />
+							<img src={images[2].thumb} style={{ flex: 1 }} />
 						</div>
 					</div>
 				)) ||
 				(images.length === 4 && (
 					<div
 						style={{
-							...a.flex_1,
-							...a.gap_2xs,
+							flex: 1,
+							gap: 2,
 						}}
 					>
 						<div
 							style={{
-								...a.flex_1,
-								...a.flex_row,
-								...a.gap_2xs,
+								flex: 1,
+								flexDirection: "row",
+								gap: 2,
 							}}
 						>
-							<img src={images[0].thumb} style={a.flex_1} />
-							<img src={images[1].thumb} style={a.flex_1} />
+							<img src={images[0].thumb} style={{ flex: 1 }} />
+							<img src={images[1].thumb} style={{ flex: 1 }} />
 						</div>
 						<div
 							style={{
-								...a.flex_1,
-								...a.flex_row,
-								...a.gap_2xs,
+								flex: 1,
+								flexDirection: "row",
+								gap: 2,
 							}}
 						>
-							<img src={images[2].thumb} style={a.flex_1} />
-							<img src={images[3].thumb} style={a.flex_1} />
+							<img src={images[2].thumb} style={{ flex: 1 }} />
+							<img src={images[3].thumb} style={{ flex: 1 }} />
 						</div>
 					</div>
 				))}

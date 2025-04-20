@@ -19,14 +19,15 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 		<Link
 			href={postHref}
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.py_md,
+				flexDirection: "row",
+				alignItems: "center",
+				paddingTop: 12,
+				paddingBottom: 12,
 				...{ paddingLeft: 14, paddingRight: 14 },
 			}}
 			hoverStyle={t.atoms.bg_contrast_25}
 		>
-			<div style={a.flex_row}>
+			<div style={{ ...a.flex_row }}>
 				<div
 					style={{
 						alignItems: "center",
@@ -61,11 +62,12 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 					/>
 				</div>
 			</div>
-			<div style={a.px_sm}>
+			<div style={{ ...a.px_sm }}>
 				<Text
 					style={{
 						...{ color: t.palette.primary_500 },
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 					}}
 				>
 					Continue thread...

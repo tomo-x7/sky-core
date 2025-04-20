@@ -49,20 +49,20 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.flex_row,
-				...a.align_center,
-				...a.pb_2xs,
-				...a.gap_xs,
-				...a.z_10,
+				flex: 1,
+				flexDirection: "row",
+				alignItems: "center",
+				paddingBottom: 2,
+				gap: 4,
+				zIndex: 10,
 				...opts.style,
 			}}
 		>
 			{opts.showAvatar && (
 				<div
 					style={{
-						...a.self_center,
-						...a.mr_2xs,
+						alignSelf: "center",
+						marginRight: 2,
 					}}
 				>
 					<PreviewableUserAvatar
@@ -74,7 +74,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 				</div>
 			)}
 			<ProfileHoverCard inline did={opts.author.did}>
-				<Text numberOfLines={1} style={a.flex_shrink}>
+				<Text numberOfLines={1} style={{ ...a.flex_shrink }}>
 					<WebOnlyInlineLinkText
 						to={profileLink}
 						label={"View profile"}
@@ -84,9 +84,10 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 					>
 						<Text
 							style={{
-								...a.text_md,
-								...a.font_bold,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								fontWeight: "600",
+								lineHeight: 1.3,
 							}}
 						>
 							{forceLTR(sanitizeDisplayName(displayName, opts.moderation?.ui("displayName")))}
@@ -99,16 +100,18 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						disableUnderline
 						onPress={onBeforePressAuthor}
 						style={{
-							...a.text_md,
+							fontSize: 16,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 					>
 						<Text
 							style={{
-								...a.text_md,
+								fontSize: 16,
+								letterSpacing: 0,
 								...t.atoms.text_contrast_medium,
-								...a.leading_snug,
+								lineHeight: 1.3,
 							}}
 						>
 							{NON_BREAKING_SPACE + sanitizeHandle(handle, "@")}
@@ -119,7 +122,8 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 			{
 				<Text
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -136,9 +140,10 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 						disableUnderline
 						onPress={onBeforePressPost}
 						style={{
-							...a.text_md,
+							fontSize: 16,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
-							...a.leading_snug,
+							lineHeight: 1.3,
 
 							whiteSpace: "nowrap",
 						}}

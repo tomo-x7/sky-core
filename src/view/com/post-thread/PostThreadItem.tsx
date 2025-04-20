@@ -43,13 +43,13 @@ import { useSession } from "#/state/session";
 import { useComposerControls } from "#/state/shell/composer";
 import { useMergedThreadgateHiddenReplies } from "#/state/threadgate-hidden-replies";
 import * as bsky from "#/types/bsky";
+import { PostCtrls } from "#/units/post/PostCtrls";
 import { PostThreadFollowBtn } from "#/view/com/post-thread/PostThreadFollowBtn";
 import { Link, TextLink } from "#/view/com/util/Link";
 import { PostMeta } from "#/view/com/util/PostMeta";
 import { PreviewableUserAvatar } from "#/view/com/util/UserAvatar";
 import { ErrorMessage } from "#/view/com/util/error/ErrorMessage";
 import { formatCount } from "#/view/com/util/numeric/format";
-import { PostCtrls } from "#/units/post/PostCtrls";
 import { PostEmbedViewContext, PostEmbeds } from "#/view/com/util/post-embeds";
 
 export function PostThreadItem({
@@ -134,10 +134,10 @@ function PostThreadItemDeleted({ hideTopBorder }: { hideTopBorder?: boolean }) {
 			style={{
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
-				...a.p_xl,
-				...a.pl_lg,
-				...a.flex_row,
-				...a.gap_md,
+				padding: 20,
+				paddingLeft: 16,
+				flexDirection: "row",
+				gap: 12,
 				...(!hideTopBorder && a.border_t),
 			}}
 		>
@@ -145,7 +145,7 @@ function PostThreadItemDeleted({ hideTopBorder }: { hideTopBorder?: boolean }) {
 			<Text
 				style={{
 					...t.atoms.text_contrast_medium,
-					...a.mt_2xs,
+					marginTop: 2,
 				}}
 			>
 				This post has been deleted.
@@ -276,9 +276,9 @@ let PostThreadItemLoaded = ({
 				{rootUri !== post.uri && (
 					<div
 						style={{
-							...a.pl_lg,
-							...a.flex_row,
-							...a.pb_xs,
+							paddingLeft: 16,
+							flexDirection: "row",
+							paddingBottom: 4,
 							...{ height: a.pt_lg.paddingTop },
 						}}
 					>
@@ -298,7 +298,8 @@ let PostThreadItemLoaded = ({
 				)}
 				<div
 					style={{
-						...a.px_lg,
+						paddingLeft: 16,
+						paddingRight: 16,
 						...t.atoms.border_contrast_low,
 
 						...// root post styles
@@ -307,9 +308,9 @@ let PostThreadItemLoaded = ({
 				>
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_md,
-							...a.pb_md,
+							flexDirection: "row",
+							gap: 12,
+							paddingBottom: 12,
 						}}
 					>
 						<PreviewableUserAvatar
@@ -318,14 +319,15 @@ let PostThreadItemLoaded = ({
 							moderation={moderation.ui("avatar")}
 							type={post.author.associated?.labeler ? "labeler" : "user"}
 						/>
-						<div style={a.flex_1}>
+						<div style={{ flex: 1 }}>
 							<Link style={s.flex1} href={authorHref} title={authorTitle}>
 								<Text
 									style={{
-										...a.text_lg,
-										...a.font_bold,
-										...a.leading_snug,
-										...a.self_start,
+										fontSize: 18,
+										letterSpacing: 0,
+										fontWeight: "600",
+										lineHeight: 1.3,
+										alignSelf: "flex-start",
 									}}
 									numberOfLines={1}
 								>
@@ -338,8 +340,9 @@ let PostThreadItemLoaded = ({
 							<Link style={s.flex1} href={authorHref} title={authorTitle}>
 								<Text
 									style={{
-										...a.text_md,
-										...a.leading_snug,
+										fontSize: 16,
+										letterSpacing: 0,
+										lineHeight: 1.3,
 										...t.atoms.text_contrast_medium,
 									}}
 									numberOfLines={1}
@@ -354,14 +357,18 @@ let PostThreadItemLoaded = ({
 							</div>
 						)}
 					</div>
-					<div style={a.pb_sm}>
-						<LabelsOnMyPost post={post} style={a.pb_sm} />
-						<ContentHider modui={moderation.ui("contentView")} ignoreMute childContainerStyle={a.pt_sm}>
+					<div style={{ ...a.pb_sm }}>
+						<LabelsOnMyPost post={post} style={{ ...a.pb_sm }} />
+						<ContentHider
+							modui={moderation.ui("contentView")}
+							ignoreMute
+							childContainerstyle={{ ...a.pt_sm }}
+						>
 							<PostAlerts
 								modui={moderation.ui("contentView")}
 								size="lg"
 								includeMute
-								style={a.pb_sm}
+								style={{ ...a.pb_sm }}
 								additionalCauses={additionalPostAlerts}
 							/>
 							{richText?.text ? (
@@ -370,15 +377,16 @@ let PostThreadItemLoaded = ({
 									selectable
 									value={richText}
 									style={{
-										...a.flex_1,
-										...a.text_xl,
+										flex: 1,
+										fontSize: 20,
+										letterSpacing: 0,
 									}}
 									authorHandle={post.author.handle}
 									shouldProxyLinks={true}
 								/>
 							) : undefined}
 							{post.embed && (
-								<div style={a.py_xs}>
+								<div style={{ ...a.py_xs }}>
 									<PostEmbeds
 										embed={post.embed}
 										moderation={moderation}
@@ -397,13 +405,15 @@ let PostThreadItemLoaded = ({
 							// Show this section unless we're *sure* it has no engagement.
 							<div
 								style={{
-									...a.flex_row,
-									...a.align_center,
-									...a.gap_lg,
-									...a.border_t,
-									...a.border_b,
-									...a.mt_md,
-									...a.py_md,
+									flexDirection: "row",
+									alignItems: "center",
+									gap: 16,
+									borderTop: "1px solid black",
+									borderTopWidth: 1,
+									borderBottom: "1px solid black",
+									marginTop: 12,
+									paddingTop: 12,
+									paddingBottom: 12,
 									...t.atoms.border_contrast_low,
 								}}
 							>
@@ -411,14 +421,16 @@ let PostThreadItemLoaded = ({
 									<Link href={repostsHref} title={repostsTitle}>
 										<Text
 											style={{
-												...a.text_md,
+												fontSize: 16,
+												letterSpacing: 0,
 												...t.atoms.text_contrast_medium,
 											}}
 										>
 											<Text
 												style={{
-													...a.text_md,
-													...a.font_bold,
+													fontSize: 16,
+													letterSpacing: 0,
+													fontWeight: "600",
 													...t.atoms.text,
 												}}
 											>
@@ -432,14 +444,16 @@ let PostThreadItemLoaded = ({
 									<Link href={quotesHref} title={quotesTitle}>
 										<Text
 											style={{
-												...a.text_md,
+												fontSize: 16,
+												letterSpacing: 0,
 												...t.atoms.text_contrast_medium,
 											}}
 										>
 											<Text
 												style={{
-													...a.text_md,
-													...a.font_bold,
+													fontSize: 16,
+													letterSpacing: 0,
+													fontWeight: "600",
 													...t.atoms.text,
 												}}
 											>
@@ -453,14 +467,16 @@ let PostThreadItemLoaded = ({
 									<Link href={likesHref} title={likesTitle}>
 										<Text
 											style={{
-												...a.text_md,
+												fontSize: 16,
+												letterSpacing: 0,
 												...t.atoms.text_contrast_medium,
 											}}
 										>
 											<Text
 												style={{
-													...a.text_md,
-													...a.font_bold,
+													fontSize: 16,
+													letterSpacing: 0,
+													fontWeight: "600",
 													...t.atoms.text,
 												}}
 											>
@@ -474,8 +490,8 @@ let PostThreadItemLoaded = ({
 						) : null}
 						<div
 							style={{
-								...a.pt_sm,
-								...a.pb_2xs,
+								paddingTop: 8,
+								paddingBottom: 2,
 
 								...{
 									marginLeft: -5,
@@ -545,9 +561,10 @@ let PostThreadItemLoaded = ({
 
 					<div
 						style={{
-							...a.flex_row,
-							...a.px_sm,
-							...a.gap_md,
+							flexDirection: "row",
+							paddingLeft: 8,
+							paddingRight: 8,
+							gap: 12,
 
 							...{
 								paddingBottom:
@@ -581,7 +598,7 @@ let PostThreadItemLoaded = ({
 							</div>
 						)}
 
-						<div style={a.flex_1}>
+						<div style={{ flex: 1 }}>
 							<PostMeta
 								author={post.author}
 								moderation={moderation}
@@ -589,27 +606,28 @@ let PostThreadItemLoaded = ({
 								postHref={postHref}
 								showAvatar={isThreadedChild}
 								avatarSize={24}
-								style={a.pb_xs}
+								style={{ ...a.pb_xs }}
 							/>
-							<LabelsOnMyPost post={post} style={a.pb_xs} />
+							<LabelsOnMyPost post={post} style={{ ...a.pb_xs }} />
 							<PostAlerts
 								modui={moderation.ui("contentList")}
-								style={a.pb_2xs}
+								style={{ ...a.pb_2xs }}
 								additionalCauses={additionalPostAlerts}
 							/>
 							{richText?.text ? (
 								<div
 									style={{
-										...a.pb_2xs,
-										...a.pr_sm,
+										paddingBottom: 2,
+										paddingRight: 8,
 									}}
 								>
 									<RichText
 										enableTags
 										value={richText}
 										style={{
-											...a.flex_1,
-											...a.text_md,
+											flex: 1,
+											fontSize: 16,
+											letterSpacing: 0,
 										}}
 										numberOfLines={limitLines ? MAX_POST_LINES : undefined}
 										authorHandle={post.author.handle}
@@ -621,7 +639,7 @@ let PostThreadItemLoaded = ({
 								<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 							) : undefined}
 							{post.embed && (
-								<div style={a.pb_xs}>
+								<div style={{ ...a.pb_xs }}>
 									<PostEmbeds
 										embed={post.embed}
 										moderation={moderation}
@@ -656,8 +674,9 @@ let PostThreadItemLoaded = ({
 							<Text
 								style={{
 									...t.atoms.text_contrast_medium,
-									...a.font_bold,
-									...a.text_sm,
+									fontWeight: "600",
+									fontSize: 14,
+									letterSpacing: 0,
 								}}
 							>
 								More
@@ -694,9 +713,9 @@ function PostOuterWrapper({
 		return (
 			<div
 				style={{
-					...a.flex_row,
-					...a.px_sm,
-					...a.flex_row,
+					paddingLeft: 8,
+					paddingRight: 8,
+					flexDirection: "row",
 					...t.atoms.border_contrast_low,
 					...styles.cursor,
 					...(depth === 1 && a.border_t),
@@ -708,7 +727,7 @@ function PostOuterWrapper({
 					<div
 						key={`${post.uri}-padding-${n}`}
 						style={{
-							...a.ml_sm,
+							marginLeft: 8,
 							...t.atoms.border_contrast_low,
 
 							...{
@@ -718,7 +737,7 @@ function PostOuterWrapper({
 						}}
 					/>
 				))}
-				<div style={a.flex_1}>
+				<div style={{ flex: 1 }}>
 					<SubtleWebHover
 						hover={hover}
 						style={{
@@ -736,8 +755,10 @@ function PostOuterWrapper({
 			onPointerEnter={onHoverIn}
 			onPointerLeave={onHoverOut}
 			style={{
-				...a.border_t,
-				...a.px_sm,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
+				paddingLeft: 8,
+				paddingRight: 8,
 				...t.atoms.border_contrast_low,
 				...(showParentReplyLine && hasPrecedingItem && styles.noTopBorder),
 				...(hideTopBorder && styles.noTopBorder),
@@ -778,23 +799,24 @@ function ExpandedPostDetails({
 	return (
 		<div
 			style={{
-				...a.gap_md,
-				...a.pt_md,
-				...a.align_start,
+				gap: 12,
+				paddingTop: 12,
+				alignItems: "flex-start",
 			}}
 		>
 			<BackdatedPostIndicator post={post} />
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.flex_wrap,
-					...a.gap_sm,
+					flexDirection: "row",
+					alignItems: "center",
+					flexWrap: "wrap",
+					gap: 8,
 				}}
 			>
 				<Text
 					style={{
-						...a.text_sm,
+						fontSize: 14,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -805,7 +827,8 @@ function ExpandedPostDetails({
 					<>
 						<Text
 							style={{
-								...a.text_sm,
+								fontSize: 14,
+								letterSpacing: 0,
 								...t.atoms.text_contrast_medium,
 							}}
 						>
@@ -816,7 +839,8 @@ function ExpandedPostDetails({
 							to={translatorUrl}
 							label={"Translate"}
 							style={{
-								...a.text_sm,
+								fontSize: 14,
+								letterSpacing: 0,
 								...pal.link,
 							}}
 							onPress={onTranslatePress}
@@ -859,9 +883,9 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 				{({ hovered, pressed }) => (
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.rounded_full,
+							flexDirection: "row",
+							alignItems: "center",
+							borderRadius: 999,
 							...t.atoms.bg_contrast_25,
 							...((hovered || pressed) && t.atoms.bg_contrast_50),
 
@@ -877,9 +901,10 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 						<CalendarClockIcon fill={orange} size="sm" aria-hidden />
 						<Text
 							style={{
-								...a.text_xs,
-								...a.font_bold,
-								...a.leading_tight,
+								fontSize: 12,
+								letterSpacing: 0,
+								fontWeight: "600",
+								lineHeight: 1.15,
 								...t.atoms.text_contrast_medium,
 							}}
 						>
@@ -892,16 +917,18 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 				<Prompt.TitleText>Archived post</Prompt.TitleText>
 				<Prompt.DescriptionText>
 					<>
-						This post claims to have been created on <span style={a.font_bold}>{niceDate(createdAt)}</span>,
-						but was first seen by Bluesky on <span style={a.font_bold}>{niceDate(indexedAt)}</span>.
+						This post claims to have been created on{" "}
+						<span style={{ ...a.font_bold }}>{niceDate(createdAt)}</span>, but was first seen by Bluesky on{" "}
+						<span style={{ ...a.font_bold }}>{niceDate(indexedAt)}</span>.
 					</>
 				</Prompt.DescriptionText>
 				<Text
 					style={{
-						...a.text_md,
-						...a.leading_snug,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_high,
-						...a.pb_xl,
+						paddingBottom: 20,
 					}}
 				>
 					Bluesky cannot confirm the authenticity of the claimed date.

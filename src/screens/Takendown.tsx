@@ -107,37 +107,38 @@ export function Takendown() {
 	useEnableKeyboardController(true);
 
 	return (
-		<Modal visible presentationStyle="formSheet" style={a.util_screen_outer}>
+		<Modal visible presentationStyle="formSheet" style={{ ...a.util_screen_outer }}>
 			<div
 				// KeyboardAwareScrollView
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...t.atoms.bg,
 				}}
 				// centerContent
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_center,
+						flexDirection: "row",
+						justifyContent: "center",
 						...(gtMobile ? a.pt_4xl : flatten([a.px_xl, a.pt_4xl])),
 					}}
 				>
 					<div
 						style={{
-							...a.flex_1,
+							flex: 1,
 							...{ maxWidth: COL_WIDTH, minHeight: COL_WIDTH },
 						}}
 					>
-						<div style={a.pb_xl}>
+						<div style={{ ...a.pb_xl }}>
 							<Logo width={64} />
 						</div>
 
 						<Text
 							style={{
-								...a.text_4xl,
-								...a.font_heavy,
-								...a.pb_md,
+								fontSize: 32,
+								letterSpacing: 0,
+								fontWeight: "800",
+								paddingBottom: 12,
 							}}
 						>
 							{isAppealling ? <>Appeal suspension</> : <>Your account has been suspended</>}
@@ -146,16 +147,16 @@ export function Takendown() {
 						{isAppealling ? (
 							<div
 								style={{
-									...a.relative,
-									...a.w_full,
-									...a.mt_xl,
+									position: "relative",
+									width: "100%",
+									marginTop: 20,
 								}}
 							>
 								{isSuccess ? (
 									<P
 										style={{
 											...t.atoms.text_contrast_medium,
-											...a.text_center,
+											textAlign: "center",
 										}}
 									>
 										Your appeal has been submitted. If your appeal succeeds, you will receive an
@@ -183,11 +184,11 @@ export function Takendown() {
 										</TextField.Root>
 										<div
 											style={{
-												...a.absolute,
-												...a.flex_row,
-												...a.align_center,
-												...a.pr_md,
-												...a.pb_sm,
+												position: "absolute",
+												flexDirection: "row",
+												alignItems: "center",
+												paddingRight: 12,
+												paddingBottom: 8,
 
 												...{
 													bottom: 0,
@@ -205,10 +206,11 @@ export function Takendown() {
 								{error && (
 									<Text
 										style={{
-											...a.text_md,
-											...a.leading_normal,
+											fontSize: 16,
+											letterSpacing: 0,
+											lineHeight: 1.5,
 											...{ color: t.palette.negative_500 },
-											...a.mt_lg,
+											marginTop: 16,
 										}}
 									>
 										{cleanError(error)}
@@ -223,8 +225,9 @@ export function Takendown() {
 										label={"Bluesky Social Terms of Service"}
 										to="https://bsky.social/about/support/tos"
 										style={{
-											...a.text_md,
-											...a.leading_normal,
+											fontSize: 16,
+											letterSpacing: 0,
+											lineHeight: 1.5,
 										}}
 										overridePresentation
 									>
@@ -240,10 +243,10 @@ export function Takendown() {
 						{webLayout && (
 							<div
 								style={{
-									...a.w_full,
-									...a.flex_row,
-									...a.justify_between,
-									...a.pt_5xl,
+									width: "100%",
+									flexDirection: "row",
+									justifyContent: "space-between",
+									paddingTop: 40,
 									...{ paddingBottom: 200 },
 								}}
 							>
@@ -257,7 +260,7 @@ export function Takendown() {
 			{!webLayout && (
 				<div
 					style={{
-						...a.align_center,
+						alignItems: "center",
 						...t.atoms.bg,
 						...(gtMobile ? a.px_5xl : a.px_xl),
 						...{ paddingBottom: a.pb_5xl.paddingBottom },
@@ -265,8 +268,8 @@ export function Takendown() {
 				>
 					<div
 						style={{
-							...a.w_full,
-							...a.gap_sm,
+							width: "100%",
+							gap: 8,
 							...{ maxWidth: COL_WIDTH },
 						}}
 					>

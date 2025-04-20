@@ -31,25 +31,28 @@ export function ConstrainedImage({
 	}, [aspectRatio, gtMobile]);
 
 	return (
-		<div style={a.w_full}>
+		<div style={{ ...a.w_full }}>
 			<div
 				style={{
-					...a.overflow_hidden,
+					overflow: "hidden",
 					...{ paddingTop: outerAspectRatio },
 				}}
 			>
 				<div
 					style={{
-						...a.absolute,
-						...a.inset_0,
-						...a.flex_row,
+						position: "absolute",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						flexDirection: "row",
 					}}
 				>
 					<div
 						style={{
-							...a.h_full,
-							...a.rounded_md,
-							...a.overflow_hidden,
+							height: "100%",
+							borderRadius: 12,
+							overflow: "hidden",
 							...t.atoms.bg_contrast_25,
 							...(fullBleed ? a.w_full : { aspectRatio }),
 						}}
@@ -110,8 +113,8 @@ export function AutoSizedImage({
 		<div ref={containerRef} style={{ flex: 1 }}>
 			<img
 				style={{
-					...a.w_full,
-					...a.h_full,
+					width: "100%",
+					height: "100%",
 					objectFit: isContain ? "contain" : "cover",
 				}}
 				src={image.thumb}
@@ -129,8 +132,8 @@ export function AutoSizedImage({
 			{(hasAlt || isCropped) && !hideBadge ? (
 				<div
 					style={{
-						...a.absolute,
-						...a.flex_row,
+						position: "absolute",
+						flexDirection: "row",
 						bottom: a.p_xs.padding,
 						right: a.p_xs.padding,
 						gap: 3,
@@ -140,7 +143,7 @@ export function AutoSizedImage({
 					{isCropped && (
 						<div
 							style={{
-								...a.rounded_xs,
+								borderRadius: 4,
 								...t.atoms.bg_contrast_25,
 								padding: 3,
 								opacity: 0.8,
@@ -153,8 +156,8 @@ export function AutoSizedImage({
 					{hasAlt && (
 						<div
 							style={{
-								...a.justify_center,
-								...a.rounded_xs,
+								justifyContent: "center",
+								borderRadius: 4,
 								...t.atoms.bg_contrast_25,
 								padding: 3,
 								opacity: 0.8,
@@ -164,7 +167,7 @@ export function AutoSizedImage({
 						>
 							<Text
 								style={{
-									...a.font_heavy,
+									fontWeight: "800",
 									...(largeAlt ? a.text_xs : { fontSize: 8 }),
 								}}
 							>
@@ -185,9 +188,9 @@ export function AutoSizedImage({
 				// onLongPress={onLongPress}
 				onMouseDown={onPressIn}
 				style={{
-					...a.w_full,
-					...a.rounded_md,
-					...a.overflow_hidden,
+					width: "100%",
+					borderRadius: 12,
+					overflow: "hidden",
 					...t.atoms.bg_contrast_25,
 					...{ aspectRatio: max ?? 1 },
 				}}
@@ -203,7 +206,7 @@ export function AutoSizedImage({
 					onClick={() => onPress?.(containerRef, fetchedDimsRef.current)}
 					// onLongPress={onLongPress}
 					onMouseDown={onPressIn}
-					style={a.h_full}
+					style={{ ...a.h_full }}
 				>
 					{contents}
 				</button>

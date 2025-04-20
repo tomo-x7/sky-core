@@ -116,10 +116,10 @@ export function MessageInputEmbed({
 			content = (
 				<div
 					style={{
-						...a.flex_1,
+						flex: 1,
 						...{ minHeight: 64 },
-						...a.justify_center,
-						...a.align_center,
+						justifyContent: "center",
+						alignItems: "center",
 					}}
 				>
 					<Loader />
@@ -130,13 +130,13 @@ export function MessageInputEmbed({
 			content = (
 				<div
 					style={{
-						...a.flex_1,
+						flex: 1,
 						...{ minHeight: 64 },
-						...a.justify_center,
-						...a.align_center,
+						justifyContent: "center",
+						alignItems: "center",
 					}}
 				>
-					<Text style={a.text_center}>Could not fetch post</Text>
+					<Text style={{ textAlign: "center", }}>Could not fetch post</Text>
 				</div>
 			);
 			break;
@@ -151,13 +151,14 @@ export function MessageInputEmbed({
 			content = (
 				<div
 					style={{
-						...a.flex_1,
+						flex: 1,
 						...t.atoms.bg,
 						...t.atoms.border_contrast_low,
-						...a.rounded_md,
-						...a.border,
-						...a.p_sm,
-						...a.mb_sm,
+						borderRadius: 12,
+						border: "1px solid black",
+						borderWidth: 1,
+						padding: 8,
+						marginBottom: 8,
 						pointerEvents: "none",
 					}}
 				>
@@ -167,17 +168,18 @@ export function MessageInputEmbed({
 						moderation={moderation}
 						timestamp={post.indexedAt}
 						postHref={itemHref}
-						style={a.flex_0}
+						style={{ flex: "0 0 auto" }}
 					/>
 					<ContentHider modui={moderation.ui("contentView")}>
-						<PostAlerts modui={moderation.ui("contentView")} style={a.py_xs} />
+						<PostAlerts modui={moderation.ui("contentView")} style={{ ...a.py_xs }} />
 						{rt.text && (
-							<div style={a.mt_xs}>
+							<div style={{ ...a.mt_xs }}>
 								<RichText
 									enableTags
 									value={rt}
 									style={{
-										...a.text_sm,
+										fontSize: 14,
+										letterSpacing: 0,
 										...t.atoms.text_contrast_high,
 									}}
 									authorHandle={post.author.handle}
@@ -185,7 +187,7 @@ export function MessageInputEmbed({
 								/>
 							</div>
 						)}
-						<MediaPreview.Embed embed={post.embed} style={a.mt_sm} />
+						<MediaPreview.Embed embed={post.embed} style={{ ...a.mt_sm }} />
 					</ContentHider>
 				</div>
 			);
@@ -196,8 +198,8 @@ export function MessageInputEmbed({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_sm,
+				flexDirection: "row",
+				gap: 8,
 			}}
 		>
 			{content}

@@ -49,10 +49,11 @@ export function TitleText({ children }: React.PropsWithChildren) {
 	return (
 		<Text
 			style={{
-				...a.text_2xl,
-				...a.font_bold,
-				...a.pb_sm,
-				...a.leading_snug,
+				fontSize: 22,
+				letterSpacing: 0,
+				fontWeight: "600",
+				paddingBottom: 8,
+				lineHeight: 1.3,
 			}}
 		>
 			{children}
@@ -66,10 +67,11 @@ export function DescriptionText({ children, selectable }: React.PropsWithChildre
 		<Text
 			selectable={selectable}
 			style={{
-				...a.text_md,
-				...a.leading_snug,
+				fontSize: 16,
+				letterSpacing: 0,
+				lineHeight: 1.3,
 				...t.atoms.text_contrast_high,
-				...a.pb_lg,
+				paddingBottom: 16,
 			}}
 		>
 			{children}
@@ -83,9 +85,9 @@ export function Actions({ children }: React.PropsWithChildren) {
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.gap_md,
-				...a.justify_end,
+				width: "100%",
+				gap: 12,
+				justifyContent: "flex-end",
 				...flatten(gtMobile ? [a.flex_row, a.flex_row_reverse, a.justify_start] : [a.flex_col]),
 			}}
 		>

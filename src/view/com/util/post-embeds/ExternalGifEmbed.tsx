@@ -1,7 +1,7 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { useDialogControl } from "#/components/Dialog";
 import { Fill } from "#/components/Fill";
@@ -68,8 +68,8 @@ export function ExternalGifEmbed({
 				type="button"
 				style={{
 					...{ height: 300 },
-					...a.w_full,
-					...a.overflow_hidden,
+					width: "100%",
+					overflow: "hidden",
 
 					...{
 						borderBottomLeftRadius: 0,
@@ -88,8 +88,8 @@ export function ExternalGifEmbed({
 				{(!isPrefetched || !isAnimating) && (
 					<Fill
 						style={{
-							...a.align_center,
-							...a.justify_center,
+							alignItems: "center",
+							justifyContent: "center",
 						}}
 					>
 						<Fill

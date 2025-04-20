@@ -18,14 +18,15 @@ export function Header({
 	return (
 		<div
 			style={{
-				...a.relative,
-				...a.w_full,
-				...a.py_sm,
-				...a.flex_row,
-				...a.justify_center,
-				...a.align_center,
+				position: "relative",
+				width: "100%",
+				paddingTop: 8,
+				paddingBottom: 8,
+				flexDirection: "row",
+				justifyContent: "center",
+				alignItems: "center",
 				...{ minHeight: 50 },
-				...a.border_b,
+				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_medium,
 				...t.atoms.bg,
 				...{ borderTopLeftRadius: a.rounded_md.borderRadius },
@@ -36,7 +37,7 @@ export function Header({
 			{renderLeft && (
 				<div
 					style={{
-						...a.absolute,
+						position: "absolute",
 						...{ left: 6 },
 					}}
 				>
@@ -47,7 +48,7 @@ export function Header({
 			{renderRight && (
 				<div
 					style={{
-						...a.absolute,
+						position: "absolute",
 						...{ right: 6 },
 					}}
 				>
@@ -68,9 +69,10 @@ export function HeaderText({
 	return (
 		<Text
 			style={{
-				...a.text_lg,
-				...a.text_center,
-				...a.font_bold,
+				fontSize: 18,
+				letterSpacing: 0,
+				textAlign: "center",
+				fontWeight: "600",
 				...style,
 			}}
 		>

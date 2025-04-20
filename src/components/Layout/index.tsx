@@ -22,7 +22,7 @@ export const Screen = React.memo(function Screen({ style, noInsetTop, ...props }
 			<WebCenterBorders />
 			<div
 				style={{
-					...a.util_screen_outer,
+					minHeight: "100dvh",
 					...{ paddingTop: 0 },
 					...style,
 				}}
@@ -132,8 +132,9 @@ const CenterImpl = React.forwardRef<HTMLDivElement, CenterProps>(function Layout
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.mx_auto,
+				width: "100%",
+				marginLeft: "auto",
+				marginRight: "auto",
 
 				...(gtMobile && {
 					maxWidth: 600,
@@ -167,17 +168,16 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 	return gtMobile ? (
 		<div
 			style={{
-				...a.fixed,
-				...a.inset_0,
+				position: "fixed",
+				top: 0,
+				right: 0,
+				bottom: 0,
 				...a.border_l,
 				...a.border_r,
 				...t.atoms.border_contrast_low,
-
-				...{
-					width: 602,
-					left: "50%",
-					transform: `translateX(-50%) translateX(${centerColumnOffset ? -150 : 0}px) ${a.scrollbar_offset.transform}`,
-				},
+				width: 602,
+				left: "50%",
+				transform: `translateX(-50%) translateX(${centerColumnOffset ? -150 : 0}px) ${a.scrollbar_offset.transform}`,
 			}}
 		/>
 	) : null;

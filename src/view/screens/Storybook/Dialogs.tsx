@@ -55,7 +55,7 @@ export function Dialogs() {
 	};
 
 	return (
-		<div style={a.gap_md}>
+		<div style={{ gap:12 }}>
 			<Button
 				variant="outline"
 				color="secondary"
@@ -157,7 +157,7 @@ export function Dialogs() {
 						<Menu.Trigger label="Open menu">
 							{({ props }) => (
 								<Button
-									style={a.mt_2xl}
+									style={{ ...a.mt_2xl }}
 									label="Open menu"
 									color="primary"
 									variant="solid"
@@ -185,9 +185,9 @@ export function Dialogs() {
 				<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description">
 					<div
 						style={{
-							...a.relative,
-							...a.gap_md,
-							...a.w_full,
+							position: "relative",
+							gap: 12,
+							width: "100%",
 						}}
 					>
 						<H3>Dialog</H3>
@@ -206,8 +206,8 @@ export function Dialogs() {
 						<div style={{ height: 1000 }} />
 						<div
 							style={{
-								...a.flex_row,
-								...a.justify_end,
+								flexDirection: "row",
+								justifyContent: "flex-end",
 							}}
 						>
 							<Button
@@ -231,9 +231,9 @@ export function Dialogs() {
 				<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description">
 					<div
 						style={{
-							...a.relative,
-							...a.gap_md,
-							...a.w_full,
+							position: "relative",
+							gap: 12,
+							width: "100%",
 						}}
 					>
 						<Text>

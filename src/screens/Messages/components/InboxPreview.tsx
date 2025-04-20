@@ -19,31 +19,34 @@ export function InboxPreview({
 		<Link
 			label={"Chat request inbox"}
 			style={{
-				...a.flex_1,
-				...a.px_xl,
-				...a.py_sm,
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_md,
-				...a.border_t,
+				flex: 1,
+				paddingLeft: 20,
+				paddingRight: 20,
+				paddingTop: 8,
+				paddingBottom: 8,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 12,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 				...{ marginTop: a.border_t.borderTopWidth * -1 },
-				...a.border_b,
+				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_low,
 				...{ minHeight: 44 },
-				...a.rounded_0,
+				borderRadius: 0,
 			}}
 			to="/messages/inbox"
 			color="secondary"
 			variant="solid"
 		>
-			<div style={a.relative}>
+			<div style={{ ...a.relative }}>
 				<ButtonIcon icon={EnvelopeIcon} size="lg" />
 				{profiles.length > 0 && (
 					<div
 						style={{
-							...a.absolute,
-							...a.rounded_full,
-							...a.z_20,
+							position: "absolute",
+							borderRadius: 999,
+							zIndex: 20,
 
 							...{
 								top: -4,
@@ -58,9 +61,9 @@ export function InboxPreview({
 			</div>
 			<ButtonText
 				style={{
-					...a.flex_1,
-					...a.font_bold,
-					...a.text_left,
+					flex: 1,
+					fontWeight: "600",
+					textAlign: "left",
 				}}
 				// TODO
 				// numberOfLines={1}

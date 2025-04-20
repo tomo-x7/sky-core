@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { PressableWithHover } from "../../../PressableWithHover";
 
 type SvgProps = Omit<JSX.IntrinsicElements["svg"], "ref">;
@@ -25,8 +25,8 @@ export function ControlButton({
 			// accessibilityRole="button"
 			onPress={onPress}
 			style={{
-				...a.p_xs,
-				...a.rounded_full,
+				padding: 4,
+				borderRadius: 999,
 				...{ transition: "background-color 0.1s" },
 			}}
 			hoverStyle={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}

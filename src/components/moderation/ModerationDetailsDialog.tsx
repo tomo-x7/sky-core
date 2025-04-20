@@ -49,7 +49,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={a.text_sm}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ ...a.text_sm }}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have blocked.
@@ -72,7 +72,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={a.text_sm}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ ...a.text_sm }}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have muted.
@@ -98,8 +98,9 @@ function ModerationDetailsDialogInner({
 			<Text
 				style={{
 					...t.atoms.text,
-					...a.text_md,
-					...a.leading_snug,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.3,
 				}}
 			>
 				{desc.description}
@@ -125,15 +126,16 @@ function ModerationDetailsDialogInner({
 			<div
 				style={{
 					...xGutters,
-					...a.pb_lg,
+					paddingBottom: 16,
 				}}
 			>
 				<Text
 					style={{
 						...t.atoms.text,
-						...a.text_2xl,
-						...a.font_heavy,
-						...a.mb_sm,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "800",
+						marginBottom: 8,
 					}}
 				>
 					{name}
@@ -141,8 +143,9 @@ function ModerationDetailsDialogInner({
 				<Text
 					style={{
 						...t.atoms.text,
-						...a.text_sm,
-						...a.leading_snug,
+						fontSize: 14,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 					}}
 				>
 					{description}
@@ -152,8 +155,10 @@ function ModerationDetailsDialogInner({
 				<div
 					style={{
 						...xGutters,
-						...a.py_md,
-						...a.border_t,
+						paddingTop: 12,
+						paddingBottom: 12,
+						borderTop: "1px solid black",
+						borderTopWidth: 1,
 						...t.atoms.bg_contrast_25,
 						...t.atoms.border_contrast_low,
 
@@ -167,8 +172,9 @@ function ModerationDetailsDialogInner({
 						<Text
 							style={{
 								...t.atoms.text,
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							This label was applied by the author.
@@ -177,16 +183,16 @@ function ModerationDetailsDialogInner({
 						<>
 							<div
 								style={{
-									...a.flex_row,
-									...a.justify_between,
-									...a.gap_xl,
+									flexDirection: "row",
+									justifyContent: "space-between",
+									gap: 20,
 									...{ paddingBottom: 1 },
 								}}
 							>
 								<Text
 									style={{
-										...a.flex_1,
-										...a.leading_snug,
+										flex: 1,
+										lineHeight: 1.3,
 										...t.atoms.text_contrast_medium,
 									}}
 									numberOfLines={1}
@@ -209,9 +215,10 @@ function ModerationDetailsDialogInner({
 									<div>
 										<Text
 											style={{
-												...a.leading_snug,
-												...a.text_sm,
-												...a.italic,
+												lineHeight: 1.3,
+												fontSize: 14,
+												letterSpacing: 0,
+												fontStyle: "italic",
 												...t.atoms.text_contrast_medium,
 											}}
 										>

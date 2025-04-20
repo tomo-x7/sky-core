@@ -1,6 +1,6 @@
 import { moderateProfile } from "@atproto/api";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
 import { useProfilesQuery } from "#/state/queries/profile";
 import type * as bsky from "#/types/bsky";
@@ -36,13 +36,20 @@ export function AvatarStack({
 			}));
 
 	return (
-		<div style={{ ...a.flex_row, ...a.align_center, ...a.relative, width: size + (items.length - 1) * halfSize }}>
+		<div
+			style={{
+				flexDirection: "row",
+				alignItems: "center",
+				position: "relative",
+				width: size + (items.length - 1) * halfSize,
+			}}
+		>
 			{items.map((item, i) => (
 				<div
 					key={item.key}
 					style={{
 						...t.atoms.bg_contrast_25,
-						...a.relative,
+						position: "relative",
 
 						width: size,
 						height: size,

@@ -29,11 +29,12 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 			<Link to="/" label="Bluesky - Home">
 				<Logo width={32} />
 			</Link>
-			<div style={a.pt_lg}>
+			<div style={{ ...a.pt_lg }}>
 				<Text
 					style={{
-						...a.text_3xl,
-						...a.font_heavy,
+						fontSize: 26,
+						letterSpacing: 0,
+						fontWeight: "800",
 						...{ lineHeight: `${a.text_3xl.fontSize}px` },
 					}}
 				>
@@ -42,10 +43,10 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.flex_wrap,
-					...a.gap_sm,
-					...a.pt_md,
+					flexDirection: "row",
+					flexWrap: "wrap",
+					gap: 8,
+					paddingTop: 12,
 				}}
 			>
 				<Button
@@ -63,8 +64,8 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 			</div>
 			<div
 				style={{
-					...a.mt_md,
-					...a.w_full,
+					marginTop: 12,
+					width: "100%",
 					...{ height: 32 },
 				}}
 			>

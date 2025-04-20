@@ -517,7 +517,7 @@ export const List = memo(React.forwardRef(ListImpl)) as <ItemT>(
 
 const styles: Record<string, React.CSSProperties> = {
 	minHeightViewport: {
-		minHeight: "100vh",
+		minHeight: "100dvh",
 	},
 	parentTreeVisibilityDetector: {
 		position: "fixed",

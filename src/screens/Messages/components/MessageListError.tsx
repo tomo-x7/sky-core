@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
@@ -26,19 +26,20 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 	return (
 		<div
 			style={{
-				...a.py_md,
-				...a.w_full,
-				...a.flex_row,
-				...a.justify_center,
+				paddingTop: 12,
+				paddingBottom: 12,
+				width: "100%",
+				flexDirection: "row",
+				justifyContent: "center",
 			}}
 		>
 			<div
 				style={{
-					...a.flex_1,
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_center,
-					...a.gap_sm,
+					flex: 1,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "center",
+					gap: 8,
 					...{ maxWidth: 400 },
 				}}
 			>
@@ -46,7 +47,7 @@ export function MessageListError({ item }: { item: ConvoItem & { type: "error" }
 
 				<Text
 					style={{
-						...a.leading_snug,
+						lineHeight: 1.3,
 						...t.atoms.text_contrast_medium,
 					}}
 				>

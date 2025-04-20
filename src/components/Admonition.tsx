@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button as BaseButton, type ButtonProps } from "#/components/Button";
 import { Text as BaseText } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as ErrorIcon } from "#/components/icons/CircleInfo";
@@ -46,10 +46,11 @@ export function Text({ children, style, ...rest }: { children?: React.ReactNode;
 		<BaseText
 			{...rest}
 			style={{
-				...a.flex_1,
-				...a.text_sm,
-				...a.leading_snug,
-				...a.pr_md,
+				flex: 1,
+				fontSize: 14,
+				letterSpacing: 0,
+				lineHeight: 1.3,
+				paddingRight: 12,
 				...style,
 			}}
 		>
@@ -67,7 +68,7 @@ export function Button({ children, ...props }: Omit<ButtonProps, "size" | "varia
 }
 
 export function Row({ children }: { children: React.ReactNode }) {
-	return <div style={{ ...a.flex_1, ...a.flex_row, ...a.align_center, ...a.gap_sm }}>{children}</div>;
+	return <div style={{ flex: 1, flexDirection: "row", alignItems: "center", gap: 8 }}>{children}</div>;
 }
 
 export function Outer({
@@ -91,9 +92,10 @@ export function Outer({
 		<Context.Provider value={{ type }}>
 			<div
 				style={{
-					...(gtMobile ? a.p_md : a.p_sm),
-					...a.rounded_sm,
-					...a.border,
+					padding: gtMobile ? 12 : 8,
+					borderRadius: 8,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.bg_contrast_25,
 					borderColor,
 					...style,

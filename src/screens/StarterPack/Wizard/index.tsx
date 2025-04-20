@@ -90,7 +90,7 @@ export function Wizard() {
 		<Layout.Screen
 			style={{
 				...{ minHeight: 0 },
-				...a.flex_1,
+				flex: 1,
 			}}
 		>
 			<Provider starterPack={starterPack} listItems={listItems}>
@@ -225,7 +225,7 @@ function WizardInner({
 	};
 
 	return (
-		<Layout.Center style={a.flex_1}>
+		<Layout.Center style={{ flex: 1 }}>
 			<Layout.Header.Outer>
 				<Layout.Header.BackButton
 					label={"Back"}
@@ -266,13 +266,13 @@ function Container({ children }: { children: React.ReactNode }) {
 	const [state, dispatch] = useWizardState();
 
 	if (state.currentStep === "Profiles" || state.currentStep === "Feeds") {
-		return <div style={a.flex_1}>{children}</div>;
+		return <div style={{ flex: 1 }}>{children}</div>;
 	}
 
 	return (
 		<div
 			// KeyboardAwareScrollView
-			style={a.flex_1}
+			style={{ flex: 1 }}
 			// keyboardShouldPersistTaps="handled"
 		>
 			{children}
@@ -283,8 +283,9 @@ function Container({ children }: { children: React.ReactNode }) {
 					color="primary"
 					size="large"
 					style={{
-						...a.mx_xl,
-						...a.mb_lg,
+						marginLeft: 20,
+						marginRight: 20,
+						marginBottom: 16,
 						...{ marginTop: 35 },
 					}}
 					onPress={() => dispatch({ type: "Next" })}
@@ -323,11 +324,13 @@ function Footer({
 	return (
 		<div
 			style={{
-				...a.border_t,
-				...a.align_center,
-				...a.px_lg,
-				...a.pt_xl,
-				...a.gap_md,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
+				alignItems: "center",
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingTop: 20,
+				gap: 12,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_medium,
 
@@ -339,19 +342,19 @@ function Footer({
 			{items.length > minimumItems && (
 				<div
 					style={{
-						...a.absolute,
+						position: "absolute",
 						...{ right: 14, top: 31 },
 					}}
 				>
-					<Text style={a.font_bold}>
+					<Text style={{ ...a.font_bold }}>
 						{items.length}/{state.currentStep === "Profiles" ? STARTER_PACK_MAX_SIZE : 3}
 					</Text>
 				</div>
 			)}
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_xs,
+					flexDirection: "row",
+					gap: 4,
 				}}
 			>
 				{items.slice(0, 6).map((p, index) => (
@@ -367,7 +370,7 @@ function Footer({
 				state.currentStep === "Profiles" ? (
 					<Text
 						style={{
-							...a.text_center,
+							textAlign: "center",
 							...textStyles,
 						}}
 					>
@@ -378,7 +381,7 @@ function Footer({
 								<>
 									<Text
 										style={{
-											...a.font_bold,
+											fontWeight: "600",
 											...textStyles,
 										}}
 									>
@@ -388,7 +391,7 @@ function Footer({
 									<Text> </Text>
 									<Text
 										style={{
-											...a.font_bold,
+											fontWeight: "600",
 											...textStyles,
 										}}
 									>
@@ -400,7 +403,7 @@ function Footer({
 								<>
 									<Text
 										style={{
-											...a.font_bold,
+											fontWeight: "600",
 											...textStyles,
 										}}
 									>
@@ -408,7 +411,7 @@ function Footer({
 									</Text>
 									<Text
 										style={{
-											...a.font_bold,
+											fontWeight: "600",
 											...textStyles,
 										}}
 									>
@@ -422,11 +425,11 @@ function Footer({
 					</Text>
 				) : state.currentStep === "Feeds" ? (
 					items.length === 0 ? (
-						<div style={a.gap_sm}>
+						<div style={{ gap:8 }}>
 							<Text
 								style={{
-									...a.font_bold,
-									...a.text_center,
+									fontWeight: "600",
+									textAlign: "center",
 									...textStyles,
 								}}
 							>
@@ -434,7 +437,7 @@ function Footer({
 							</Text>
 							<Text
 								style={{
-									...a.text_center,
+									textAlign: "center",
 									...textStyles,
 								}}
 							>
@@ -444,7 +447,7 @@ function Footer({
 					) : (
 						<Text
 							style={{
-								...a.text_center,
+								textAlign: "center",
 								...textStyles,
 							}}
 						>
@@ -453,7 +456,7 @@ function Footer({
 									<>
 										<Text
 											style={{
-												...a.font_bold,
+												fontWeight: "600",
 												...textStyles,
 											}}
 										>
@@ -465,7 +468,7 @@ function Footer({
 									<>
 										<Text
 											style={{
-												...a.font_bold,
+												fontWeight: "600",
 												...textStyles,
 											}}
 										>
@@ -475,7 +478,7 @@ function Footer({
 										<Text> </Text>
 										<Text
 											style={{
-												...a.font_bold,
+												fontWeight: "600",
 												...textStyles,
 											}}
 										>
@@ -487,7 +490,7 @@ function Footer({
 									<>
 										<Text
 											style={{
-												...a.font_bold,
+												fontWeight: "600",
 												...textStyles,
 											}}
 										>
@@ -495,7 +498,7 @@ function Footer({
 										</Text>
 										<Text
 											style={{
-												...a.font_bold,
+												fontWeight: "600",
 												...textStyles,
 											}}
 										>
@@ -512,11 +515,11 @@ function Footer({
 			}
 			<div
 				style={{
-					...a.flex_row,
-					...a.w_full,
-					...a.justify_between,
-					...a.align_center,
-					...a.mt_md,
+					flexDirection: "row",
+					width: "100%",
+					justifyContent: "space-between",
+					alignItems: "center",
+					marginTop: 12,
 				}}
 			>
 				{isEditEnabled ? (
@@ -537,7 +540,7 @@ function Footer({
 					<>
 						<Text
 							style={{
-								...a.font_bold,
+								fontWeight: "600",
 								...textStyles,
 								...t.atoms.text_contrast_medium,
 							}}

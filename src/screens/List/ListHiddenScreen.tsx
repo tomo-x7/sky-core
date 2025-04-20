@@ -87,9 +87,9 @@ export function ListHiddenScreen({
 	return (
 		<CenteredView
 			style={{
-				...a.flex_1,
-				...a.align_center,
-				...a.gap_5xl,
+				flex: 1,
+				alignItems: "center",
+				gap: 40,
 				...(!gtMobile && a.justify_between),
 				...t.atoms.border_contrast_low,
 				...{ paddingTop: 175, paddingBottom: 110 },
@@ -98,22 +98,23 @@ export function ListHiddenScreen({
 		>
 			<div
 				style={{
-					...a.w_full,
-					...a.align_center,
-					...a.gap_lg,
+					width: "100%",
+					alignItems: "center",
+					gap: 16,
 				}}
 			>
 				<EyeSlash style={{ color: t.atoms.text_contrast_medium.color }} height={42} width={42} />
 				<div
 					style={{
-						...a.gap_sm,
-						...a.align_center,
+						gap: 8,
+						alignItems: "center",
 					}}
 				>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_3xl,
+							fontWeight: "600",
+							fontSize: 26,
+							letterSpacing: 0,
 						}}
 					>
 						{list.creator.viewer?.blocking || list.creator.viewer?.blockedBy ? (
@@ -124,9 +125,11 @@ export function ListHiddenScreen({
 					</Text>
 					<Text
 						style={{
-							...a.text_md,
-							...a.text_center,
-							...a.px_md,
+							fontSize: 16,
+							letterSpacing: 0,
+							textAlign: "center",
+							paddingLeft: 12,
+							paddingRight: 12,
 							...t.atoms.text_contrast_high,
 							...{ lineHeight: 1.4 },
 						}}
@@ -141,8 +144,9 @@ export function ListHiddenScreen({
 						) : (
 							<>
 								This list – created by{" "}
-								<Text style={a.font_bold}>{sanitizeHandle(list.creator.handle, "@")}</Text> – contains
-								possible violations of Bluesky's community guidelines in its name or description.
+								<Text style={{ ...a.font_bold }}>{sanitizeHandle(list.creator.handle, "@")}</Text> –
+								contains possible violations of Bluesky's community guidelines in its name or
+								description.
 							</>
 						)}
 					</Text>
@@ -150,11 +154,11 @@ export function ListHiddenScreen({
 			</div>
 			<div
 				style={{
-					...a.gap_md,
+					gap: 12,
 					...(gtMobile ? { width: 350 } : flatten([a.w_full, a.px_lg])),
 				}}
 			>
-				<div style={a.gap_md}>
+				<div style={{ gap:12 }}>
 					{savedFeedConfig ? (
 						<Button
 							variant="solid"

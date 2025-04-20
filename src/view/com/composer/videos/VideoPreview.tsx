@@ -1,4 +1,3 @@
-import { atoms as a } from "#/alf";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
 import type { CompressedVideo } from "#/lib/media/video/types";
 import { clamp } from "#/lib/numbers";
@@ -33,12 +32,12 @@ export function VideoPreview({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.rounded_sm,
+				width: "100%",
+				borderRadius: 8,
 				...{ aspectRatio },
-				...a.overflow_hidden,
+				overflow: "hidden",
 				...{ backgroundColor: "black" },
-				...a.relative,
+				position: "relative",
 			}}
 		>
 			<ExternalEmbedRemoveBtn onRemove={clear} />
@@ -62,10 +61,13 @@ export function VideoPreview({
 					{autoplayDisabled && (
 						<div
 							style={{
-								...a.absolute,
-								...a.inset_0,
-								...a.justify_center,
-								...a.align_center,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								justifyContent: "center",
+								alignItems: "center",
 							}}
 						>
 							<PlayButtonIcon />

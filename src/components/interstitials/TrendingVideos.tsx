@@ -56,9 +56,10 @@ export function TrendingVideos() {
 	return (
 		<div
 			style={{
-				...a.pt_lg,
-				...a.pb_lg,
-				...a.border_t,
+				paddingTop: 16,
+				paddingBottom: 16,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 				...t.atoms.border_contrast_low,
 				...t.atoms.bg_contrast_25,
 			}}
@@ -66,26 +67,27 @@ export function TrendingVideos() {
 			<div
 				style={{
 					...gutters,
-					...a.pb_sm,
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_between,
+					paddingBottom: 8,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "space-between",
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_xs,
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 4,
 					}}
 				>
 					<Graph />
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
+							lineHeight: 1.3,
 						}}
 					>
 						Trending Videos
@@ -111,8 +113,8 @@ export function TrendingVideos() {
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.gap_sm,
+						flexDirection: "row",
+						gap: 8,
 
 						...{
 							paddingLeft: gutters.paddingLeft,
@@ -185,31 +187,31 @@ function VideoCards({
 					to={href}
 					label={"View more"}
 					style={{
-						...a.justify_center,
-						...a.align_center,
-						...a.flex_1,
-						...a.rounded_md,
+						justifyContent: "center",
+						alignItems: "center",
+						flex: 1,
+						borderRadius: 12,
 						...t.atoms.bg,
 					}}
 				>
 					{({ pressed }) => (
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_md,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 12,
 
 								...{
 									opacity: pressed ? 0.6 : 1,
 								},
 							}}
 						>
-							<Text style={a.text_md}>View more</Text>
+							<Text style={{ ...a.text_md }}>View more</Text>
 							<div
 								style={{
-									...a.align_center,
-									...a.justify_center,
-									...a.rounded_full,
+									alignItems: "center",
+									justifyContent: "center",
+									borderRadius: 999,
 
 									...{
 										width: 34,

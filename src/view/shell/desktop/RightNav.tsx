@@ -49,7 +49,7 @@ export function DesktopRightNav() {
 		<div
 			style={{
 				...gutters,
-				...a.gap_lg,
+				gap: 16,
 
 				position: "fixed",
 				left: "50%",
@@ -70,7 +70,7 @@ export function DesktopRightNav() {
 			{showTrending && <SidebarTrendingTopics />}
 			<Text
 				style={{
-					...a.leading_snug,
+					lineHeight: 1.3,
 					...t.atoms.text_contrast_low,
 				}}
 			>
@@ -121,7 +121,7 @@ export function DesktopRightNav() {
 			{!hasSession && leftNavMinimal && (
 				<div
 					style={{
-						...a.w_full,
+						width: "100%",
 						...{ height: 32 },
 					}}
 				>

@@ -1,6 +1,4 @@
 import React, { useRef } from "react";
-
-import { atoms as a } from "#/alf";
 import { BSKY_SERVICE } from "#/lib/constants";
 import { ForgotPasswordForm } from "#/screens/Login/ForgotPasswordForm";
 import { LoginForm } from "#/screens/Login/LoginForm";
@@ -11,7 +9,6 @@ import { type SessionAccount, useSession } from "#/state/session";
 import { useLoggedOutView } from "#/state/shell/logged-out";
 import { LoggedOutLayout } from "#/view/com/util/layouts/LoggedOutLayout";
 import { ChooseAccountForm } from "./ChooseAccountForm";
-import { ScreenTransition } from "./ScreenTransition";
 
 enum Forms {
 	Login = 0,
@@ -137,10 +134,10 @@ export const Login = ({ onPressBack }: { onPressBack: () => void }) => {
 		<div
 			// KeyboardAvoidingView
 			// behavior="padding"
-			style={a.flex_1}
+			style={{ flex: 1 }}
 		>
 			<LoggedOutLayout leadin="" title={title} description={description} scrollable>
-				<div style={{paddingLeft:40,paddingRight:40}}>{content}</div>
+				<div style={{ paddingLeft: 40, paddingRight: 40 }}>{content}</div>
 			</LoggedOutLayout>
 		</div>
 	);

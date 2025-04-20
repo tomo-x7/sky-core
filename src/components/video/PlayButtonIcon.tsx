@@ -10,7 +10,7 @@ export function PlayButtonIcon({ size = 32 }: { size?: number }) {
 		<>
 			<div
 				style={{
-					...a.rounded_full,
+					borderRadius: 999,
 
 					...{
 						backgroundColor: bg,
@@ -24,7 +24,7 @@ export function PlayButtonIcon({ size = 32 }: { size?: number }) {
 					},
 				}}
 			/>
-			<PlayIcon width={size} fill={fg} style={a.absolute} />
+			<PlayIcon width={size} fill={fg} style={{ ...a.absolute }} />
 		</>
 	);
 }

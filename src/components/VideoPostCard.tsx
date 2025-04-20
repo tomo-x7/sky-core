@@ -8,7 +8,7 @@ import {
 import { useMemo } from "react";
 import { LinearGradient } from "#/components/LinearGradient";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { BLUE_HUE } from "#/alf/util/colorGeneration";
 import { select } from "#/alf/util/themeSelector";
 import { Link } from "#/components/Link";
@@ -81,15 +81,16 @@ export function VideoPostCard({
 	const textAndAuthor = (
 		<div
 			style={{
-				...a.pr_xs,
+				paddingRight: 4,
 				...{ paddingTop: 6, gap: 4 },
 			}}
 		>
 			{text && (
 				<Text
 					style={{
-						...a.text_md,
-						...a.leading_snug,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.3,
 					}}
 					numberOfLines={2}
 				>
@@ -98,15 +99,15 @@ export function VideoPostCard({
 			)}
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_xs,
-					...a.align_center,
+					flexDirection: "row",
+					gap: 4,
+					alignItems: "center",
 				}}
 			>
 				<div
 					style={{
-						...a.relative,
-						...a.rounded_full,
+						position: "relative",
+						borderRadius: 999,
 						...{ width: 20, height: 20 },
 					}}
 				>
@@ -115,9 +116,10 @@ export function VideoPostCard({
 				</div>
 				<Text
 					style={{
-						...a.flex_1,
-						...a.text_sm,
-						...a.leading_tight,
+						flex: 1,
+						fontSize: 14,
+						letterSpacing: 0,
+						lineHeight: 1.15,
 						...t.atoms.text_contrast_medium,
 					}}
 					numberOfLines={1}
@@ -145,7 +147,7 @@ export function VideoPostCard({
 			onPressIn={onPressIn}
 			onPressOut={onPressOut}
 			style={{
-				...a.flex_col,
+				flexDirection: "column",
 
 				...{
 					alignItems: undefined,
@@ -157,9 +159,9 @@ export function VideoPostCard({
 				<Hider.Mask>
 					<div
 						style={{
-							...a.justify_center,
-							...a.rounded_md,
-							...a.overflow_hidden,
+							justifyContent: "center",
+							borderRadius: 12,
+							overflow: "hidden",
 
 							...{
 								backgroundColor: black,
@@ -170,8 +172,8 @@ export function VideoPostCard({
 						<img
 							src={thumbnail}
 							style={{
-								...a.w_full,
-								...a.h_full,
+								width: "100%",
+								height: "100%",
 								opacity: pressed ? 0.8 : 1,
 								filter: "blur(100px)",
 							}}
@@ -179,18 +181,24 @@ export function VideoPostCard({
 						<MediaInsetBorder />
 						<div
 							style={{
-								...a.absolute,
-								...a.inset_0,
-								...a.justify_center,
-								...a.align_center,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								justifyContent: "center",
+								alignItems: "center",
 							}}
 						>
 							<div
 								style={{
-									...a.absolute,
-									...a.inset_0,
-									...a.justify_center,
-									...a.align_center,
+									position: "absolute",
+									top: 0,
+									left: 0,
+									right: 0,
+									bottom: 0,
+									justifyContent: "center",
+									alignItems: "center",
 
 									...{
 										backgroundColor: "black",
@@ -200,14 +208,15 @@ export function VideoPostCard({
 							/>
 							<div
 								style={{
-									...a.align_center,
-									...a.gap_xs,
+									alignItems: "center",
+									gap: 4,
 								}}
 							>
 								<Eye size="lg" fill="white" />
 								<Text
 									style={{
-										...a.text_sm,
+										fontSize: 14,
+										letterSpacing: 0,
 										...{ color: "white" },
 									}}
 								>
@@ -221,9 +230,9 @@ export function VideoPostCard({
 				<Hider.Content>
 					<div
 						style={{
-							...a.justify_center,
-							...a.rounded_md,
-							...a.overflow_hidden,
+							justifyContent: "center",
+							borderRadius: 12,
+							overflow: "hidden",
 
 							...{
 								backgroundColor: black,
@@ -234,8 +243,8 @@ export function VideoPostCard({
 						<img
 							src={thumbnail}
 							style={{
-								...a.w_full,
-								...a.h_full,
+								width: "100%",
+								height: "100%",
 								opacity: pressed ? 0.8 : 1,
 							}}
 						/>
@@ -243,19 +252,21 @@ export function VideoPostCard({
 
 						<div
 							style={{
-								...a.absolute,
-								...a.inset_0,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
 							}}
 						>
 							<div
 								style={{
-									...a.absolute,
-									...a.inset_0,
-									...a.pt_2xl,
-
-									...{
-										top: "auto",
-									},
+									position: "absolute",
+									top: "auto",
+									left: 0,
+									right: 0,
+									bottom: 0,
+									paddingTop: 24,
 								}}
 							>
 								<LinearGradient
@@ -264,34 +275,38 @@ export function VideoPostCard({
 									start={{ x: 0, y: 1 }}
 									end={{ x: 0, y: 0 }}
 									style={{
-										...a.absolute,
-										...a.inset_0,
+										position: "absolute",
+										top: 0,
+										left: 0,
+										right: 0,
+										bottom: 0,
 										...{ opacity: 0.9 },
 									}}
 								/>
 
 								<div
 									style={{
-										...a.relative,
-										...a.z_10,
-										...a.p_md,
-										...a.flex_row,
-										...a.gap_md,
+										position: "relative",
+										zIndex: 10,
+										padding: 12,
+										flexDirection: "row",
+										gap: 12,
 									}}
 								>
 									{likeCount > 0 && (
 										<div
 											style={{
-												...a.flex_row,
-												...a.align_center,
-												...a.gap_xs,
+												flexDirection: "row",
+												alignItems: "center",
+												gap: 4,
 											}}
 										>
 											<Heart size="sm" fill="white" />
 											<Text
 												style={{
-													...a.text_sm,
-													...a.font_bold,
+													fontSize: 14,
+													letterSpacing: 0,
+													fontWeight: "600",
 													...{ color: "white" },
 												}}
 											>
@@ -302,16 +317,17 @@ export function VideoPostCard({
 									{repostCount > 0 && (
 										<div
 											style={{
-												...a.flex_row,
-												...a.align_center,
-												...a.gap_xs,
+												flexDirection: "row",
+												alignItems: "center",
+												gap: 4,
 											}}
 										>
 											<Repost size="sm" fill="white" />
 											<Text
 												style={{
-													...a.text_sm,
-													...a.font_bold,
+													fontSize: 14,
+													letterSpacing: 0,
+													fontWeight: "600",
 													...{ color: "white" },
 												}}
 											>
@@ -335,11 +351,11 @@ export function VideoPostCardPlaceholder() {
 	const black = getBlackColor(t);
 
 	return (
-		<div style={a.flex_1}>
+		<div style={{ flex: 1 }}>
 			<div
 				style={{
-					...a.rounded_md,
-					...a.overflow_hidden,
+					borderRadius: 12,
+					overflow: "hidden",
 
 					...{
 						backgroundColor: black,
@@ -362,17 +378,17 @@ export function VideoPostCardTextPlaceholder({
 	const t = useTheme();
 
 	return (
-		<div style={a.flex_1}>
+		<div style={{ flex: 1 }}>
 			<div
 				style={{
-					...a.pr_xs,
+					paddingRight: 4,
 					...{ paddingTop: 8, gap: 6 },
 				}}
 			>
 				<div
 					style={{
-						...a.w_full,
-						...a.rounded_xs,
+						width: "100%",
+						borderRadius: 4,
 						...t.atoms.bg_contrast_50,
 
 						...{
@@ -382,28 +398,24 @@ export function VideoPostCardTextPlaceholder({
 				/>
 				<div
 					style={{
-						...a.w_full,
-						...a.rounded_xs,
+						borderRadius: 4,
 						...t.atoms.bg_contrast_50,
-
-						...{
-							height: 14,
-							width: "70%",
-						},
+						height: 14,
+						width: "70%",
 					}}
 				/>
 				{author ? (
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_xs,
-							...a.align_center,
+							flexDirection: "row",
+							gap: 4,
+							alignItems: "center",
 						}}
 					>
 						<div
 							style={{
-								...a.relative,
-								...a.rounded_full,
+								position: "relative",
+								borderRadius: 999,
 								...{ width: 20, height: 20 },
 							}}
 						>
@@ -412,9 +424,10 @@ export function VideoPostCardTextPlaceholder({
 						</div>
 						<Text
 							style={{
-								...a.flex_1,
-								...a.text_sm,
-								...a.leading_tight,
+								flex: 1,
+								fontSize: 14,
+								letterSpacing: 0,
+								lineHeight: 1.15,
 								...t.atoms.text_contrast_medium,
 							}}
 							numberOfLines={1}
@@ -425,14 +438,14 @@ export function VideoPostCardTextPlaceholder({
 				) : (
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_xs,
-							...a.align_center,
+							flexDirection: "row",
+							gap: 4,
+							alignItems: "center",
 						}}
 					>
 						<div
 							style={{
-								...a.rounded_full,
+								borderRadius: 999,
 								...t.atoms.bg_contrast_50,
 
 								...{
@@ -443,7 +456,7 @@ export function VideoPostCardTextPlaceholder({
 						/>
 						<div
 							style={{
-								...a.rounded_xs,
+								borderRadius: 4,
 								...t.atoms.bg_contrast_25,
 
 								...{
@@ -514,7 +527,7 @@ export function CompactVideoPostCard({
 			onPressIn={onPressIn}
 			onPressOut={onPressOut}
 			style={{
-				...a.flex_col,
+				flexDirection: "column",
 
 				...{
 					alignItems: undefined,
@@ -526,9 +539,9 @@ export function CompactVideoPostCard({
 				<Hider.Mask>
 					<div
 						style={{
-							...a.justify_center,
-							...a.rounded_md,
-							...a.overflow_hidden,
+							justifyContent: "center",
+							borderRadius: 12,
+							overflow: "hidden",
 
 							...{
 								backgroundColor: black,
@@ -539,8 +552,8 @@ export function CompactVideoPostCard({
 						<img
 							src={thumbnail}
 							style={{
-								...a.w_full,
-								...a.h_full,
+								width: "100%",
+								height: "100%",
 								opacity: pressed ? 0.8 : 1,
 								filter: "blur(100px)",
 							}}
@@ -548,18 +561,24 @@ export function CompactVideoPostCard({
 						<MediaInsetBorder />
 						<div
 							style={{
-								...a.absolute,
-								...a.inset_0,
-								...a.justify_center,
-								...a.align_center,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								justifyContent: "center",
+								alignItems: "center",
 							}}
 						>
 							<div
 								style={{
-									...a.absolute,
-									...a.inset_0,
-									...a.justify_center,
-									...a.align_center,
+									position: "absolute",
+									top: 0,
+									left: 0,
+									right: 0,
+									bottom: 0,
+									justifyContent: "center",
+									alignItems: "center",
 
 									...{
 										backgroundColor: "black",
@@ -569,14 +588,15 @@ export function CompactVideoPostCard({
 							/>
 							<div
 								style={{
-									...a.align_center,
-									...a.gap_xs,
+									alignItems: "center",
+									gap: 4,
 								}}
 							>
 								<Eye size="lg" fill="white" />
 								<Text
 									style={{
-										...a.text_sm,
+										fontSize: 14,
+										letterSpacing: 0,
 										...{ color: "white" },
 									}}
 								>
@@ -589,9 +609,9 @@ export function CompactVideoPostCard({
 				<Hider.Content>
 					<div
 						style={{
-							...a.justify_center,
-							...a.rounded_md,
-							...a.overflow_hidden,
+							justifyContent: "center",
+							borderRadius: 12,
+							overflow: "hidden",
 
 							...{
 								backgroundColor: black,
@@ -602,8 +622,8 @@ export function CompactVideoPostCard({
 						<img
 							src={thumbnail}
 							style={{
-								...a.w_full,
-								...a.h_full,
+								width: "100%",
+								height: "100%",
 								...{ opacity: pressed ? 0.8 : 1 },
 							}}
 						/>
@@ -611,22 +631,27 @@ export function CompactVideoPostCard({
 
 						<div
 							style={{
-								...a.absolute,
-								...a.inset_0,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
 							}}
 						>
 							<div
 								style={{
-									...a.absolute,
-									...a.inset_0,
-									...a.p_sm,
-									...{ bottom: "auto" },
+									position: "absolute",
+									top: 0,
+									left: 0,
+									right: 0,
+									bottom: "auto",
+									padding: 8,
 								}}
 							>
 								<div
 									style={{
-										...a.relative,
-										...a.rounded_full,
+										position: "relative",
+										borderRadius: 999,
 										...{ width: 20, height: 20 },
 									}}
 								>
@@ -636,13 +661,12 @@ export function CompactVideoPostCard({
 							</div>
 							<div
 								style={{
-									...a.absolute,
-									...a.inset_0,
-									...a.pt_2xl,
-
-									...{
-										top: "auto",
-									},
+									position: "absolute",
+									top: "auto",
+									left: 0,
+									right: 0,
+									bottom: 0,
+									paddingTop: 24,
 								}}
 							>
 								<LinearGradient
@@ -651,34 +675,38 @@ export function CompactVideoPostCard({
 									start={{ x: 0, y: 1 }}
 									end={{ x: 0, y: 0 }}
 									style={{
-										...a.absolute,
-										...a.inset_0,
+										position: "absolute",
+										top: 0,
+										left: 0,
+										right: 0,
+										bottom: 0,
 										...{ opacity: 0.9 },
 									}}
 								/>
 
 								<div
 									style={{
-										...a.relative,
-										...a.z_10,
-										...a.p_sm,
-										...a.flex_row,
-										...a.gap_md,
+										position: "relative",
+										zIndex: 10,
+										padding: 8,
+										flexDirection: "row",
+										gap: 12,
 									}}
 								>
 									{likeCount > 0 && (
 										<div
 											style={{
-												...a.flex_row,
-												...a.align_center,
-												...a.gap_xs,
+												flexDirection: "row",
+												alignItems: "center",
+												gap: 4,
 											}}
 										>
 											<Heart size="sm" fill="white" />
 											<Text
 												style={{
-													...a.text_sm,
-													...a.font_bold,
+													fontSize: 14,
+													letterSpacing: 0,
+													fontWeight: "600",
 													...{ color: "white" },
 												}}
 											>
@@ -701,11 +729,11 @@ export function CompactVideoPostCardPlaceholder() {
 	const black = getBlackColor(t);
 
 	return (
-		<div style={a.flex_1}>
+		<div style={{ flex: 1 }}>
 			<div
 				style={{
-					...a.rounded_md,
-					...a.overflow_hidden,
+					borderRadius: 12,
+					overflow: "hidden",
 
 					...{
 						backgroundColor: black,

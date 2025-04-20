@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 
-import { type ViewStyleProp, atoms as a } from "#/alf";
+import type { ViewStyleProp } from "#/alf";
 
 const Context = createContext({
 	gap: 0,
@@ -18,8 +18,8 @@ export function Row({
 		<Context.Provider value={useMemo(() => ({ gap }), [gap])}>
 			<div
 				style={{
-					...a.flex_row,
-					...a.flex_1,
+					flexDirection: "row",
+					flex: 1,
 
 					marginLeft: -gap / 2,
 					marginRight: -gap / 2,
@@ -45,7 +45,7 @@ export function Col({
 	return (
 		<div
 			style={{
-				...a.flex_col,
+				flexDirection: "column",
 				paddingLeft: gap / 2,
 				paddingRight: gap / 2,
 				width: `${width * 100}%`,

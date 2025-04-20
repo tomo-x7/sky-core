@@ -40,11 +40,12 @@ export function SwitchAccountDialog({
 		<Dialog.Outer control={control}>
 			<Dialog.Handle />
 			<Dialog.ScrollableInner label="Switch Account">
-				<div style={a.gap_lg}>
+				<div style={{ gap:16 }}>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_bold,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						Switch Account

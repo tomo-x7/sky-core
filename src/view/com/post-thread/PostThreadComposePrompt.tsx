@@ -21,8 +21,10 @@ export function PostThreadComposePrompt({
 		<PressableScale
 			style={{
 				...(gtMobile ? a.py_xs : { paddingTop: 8, paddingBottom: 11 }),
-				...a.px_sm,
-				...a.border_t,
+				paddingLeft: 8,
+				paddingRight: 8,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 				...t.atoms.border_contrast_low,
 				...t.atoms.bg,
 			}}
@@ -34,14 +36,16 @@ export function PostThreadComposePrompt({
 		>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.p_sm,
-					...a.gap_sm,
-					...a.rounded_full,
+					flexDirection: "row",
+					alignItems: "center",
+					padding: 8,
+					gap: 8,
+					borderRadius: 999,
 					...((!gtMobile || hovered) && t.atoms.bg_contrast_25),
 
-					...a.transition_color,
+					transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
+					transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+					transitionDuration: "100ms",
 				}}
 			>
 				<UserAvatar
@@ -51,7 +55,8 @@ export function PostThreadComposePrompt({
 				/>
 				<Text
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>

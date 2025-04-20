@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as TextField from "#/components/forms/TextField";
 import { MagnifyingGlass2_Stroke2_Corner0_Rounded as MagnifyingGlassIcon } from "#/components/icons/MagnifyingGlass2";
@@ -25,8 +25,8 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.relative,
+				width: "100%",
+				position: "relative",
 			}}
 		>
 			<TextField.Root>
@@ -53,13 +53,16 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
 			{showClear && (
 				<div
 					style={{
-						...a.absolute,
-						...a.z_20,
-						...a.my_auto,
-						...a.inset_0,
-						...a.justify_center,
-						...a.pr_sm,
-						...{ left: "auto" },
+						position: "absolute",
+						zIndex: 20,
+						marginTop: "auto",
+						marginBottom: "auto",
+						top: 0,
+						right: 0,
+						bottom: 0,
+						justifyContent: "center",
+						paddingRight: 8,
+						left: "auto",
 					}}
 				>
 					<Button

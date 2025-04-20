@@ -76,7 +76,7 @@ export const atoms = {
 		height: "100%",
 	},
 	h_full_vh: {
-		height: "100vh",
+		height: "100dvh",
 	},
 
 	/**
@@ -84,7 +84,7 @@ export const atoms = {
 	 * the screen and extend beyond.
 	 */
 	util_screen_outer: {
-		minHeight: "100vh",
+		minHeight: "100dvh",
 	},
 
 	/*
@@ -1000,4 +1000,4 @@ export const atoms = {
 	scrollbar_offset: {
 		transform: `translateX(${Layout.SCROLLBAR_OFFSET})`,
 	},
-} satisfies Record<string, React.CSSProperties>;
+} as const;

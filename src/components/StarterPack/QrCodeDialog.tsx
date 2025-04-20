@@ -1,8 +1,5 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 import React from "react";
-// import type ViewShot from "react-native-view-shot";
-
-import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
@@ -98,9 +95,9 @@ export function QrCodeDialog({
 			<Dialog.ScrollableInner label={"Create a QR code for a starter pack"}>
 				<div
 					style={{
-						...a.flex_1,
-						...a.align_center,
-						...a.gap_5xl,
+						flex: 1,
+						alignItems: "center",
+						gap: 40,
 					}}
 				>
 					<React.Suspense fallback={<Loading />}>
@@ -116,9 +113,9 @@ export function QrCodeDialog({
 								) : (
 									<div
 										style={{
-											...a.w_full,
-											...a.gap_md,
-											...a.flex_row_reverse,
+											width: "100%",
+											gap: 12,
+											flexDirection: "row-reverse",
 										}}
 									>
 										<Button
@@ -154,8 +151,8 @@ function Loading() {
 	return (
 		<div
 			style={{
-				...a.align_center,
-				...a.p_xl,
+				alignItems: "center",
+				padding: 20,
 			}}
 		>
 			<Loader size="xl" />

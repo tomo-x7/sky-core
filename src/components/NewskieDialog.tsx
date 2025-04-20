@@ -53,7 +53,7 @@ export function NewskieDialog({
 	if (!createdAt || daysOld > 7) return null;
 
 	return (
-		<div style={a.pr_2xs}>
+		<div style={{ ...a.pr_2xs }}>
 			<Button
 				disabled={disabled}
 				label={"This user is new here. Press for more info about when they joined."}
@@ -76,8 +76,8 @@ export function NewskieDialog({
 					label={"New user info dialog"}
 					style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 				>
-					<div style={a.gap_md}>
-						<div style={a.align_center}>
+					<div style={{ gap:12 }}>
+						<div style={{ ...a.align_center }}>
 							<div
 								style={{
 									height: 60,
@@ -89,15 +89,19 @@ export function NewskieDialog({
 									height={64}
 									fill="#FFC404"
 									style={{
-										...a.absolute,
-										...a.inset_0,
+										position: "absolute",
+										top: 0,
+										left: 0,
+										right: 0,
+										bottom: 0,
 									}}
 								/>
 							</div>
 							<Text
 								style={{
-									...a.font_bold,
-									...a.text_xl,
+									fontWeight: "600",
+									fontSize: 20,
+									letterSpacing: 0,
 								}}
 							>
 								{isMe ? <>Welcome, friend!</> : <>Say hello!</>}
@@ -105,9 +109,10 @@ export function NewskieDialog({
 						</div>
 						<Text
 							style={{
-								...a.text_md,
-								...a.text_center,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								textAlign: "center",
+								lineHeight: 1.3,
 							}}
 						>
 							{profile.joinedViaStarterPack ? (
@@ -130,11 +135,12 @@ export function NewskieDialog({
 							>
 								<div
 									style={{
-										...a.w_full,
-										...a.mt_sm,
-										...a.p_lg,
-										...a.border,
-										...a.rounded_sm,
+										width: "100%",
+										marginTop: 8,
+										padding: 16,
+										border: "1px solid black",
+										borderWidth: 1,
+										borderRadius: 8,
 										...t.atoms.border_contrast_low,
 									}}
 								>

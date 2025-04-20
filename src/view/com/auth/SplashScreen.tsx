@@ -62,30 +62,30 @@ export const SplashScreen = ({
 			)}
 			<Layout.Center
 				style={{
-					...a.h_full,
-					...a.flex_1,
+					height: "100%",
+					flex: 1,
 				}}
 				ignoreTabletLayoutOffset
 			>
 				<div
 					style={{
-						...a.h_full,
-						...a.justify_center,
+						height: "100%",
+						justifyContent: "center",
 
 						paddingBottom: "20vh",
 
 						...(isMobileWeb && a.pb_5xl),
 						...t.atoms.border_contrast_medium,
-						...a.align_center,
-						...a.gap_5xl,
-						...a.flex_1,
+						alignItems: "center",
+						gap: 40,
+						flex: 1,
 					}}
 				>
 					<ErrorBoundary>
 						<div
 							style={{
-								...a.justify_center,
-								...a.align_center,
+								justifyContent: "center",
+								alignItems: "center",
 							}}
 						>
 							<Logo width={kawaii ? 300 : 92} fill="sky" />
@@ -93,8 +93,8 @@ export const SplashScreen = ({
 							{!kawaii && (
 								<div
 									style={{
-										...a.pb_sm,
-										...a.pt_5xl,
+										paddingBottom: 8,
+										paddingTop: 40,
 									}}
 								>
 									<Logotype width={161} fill={t.atoms.text.color} />
@@ -103,8 +103,9 @@ export const SplashScreen = ({
 
 							<Text
 								style={{
-									...a.text_md,
-									...a.font_bold,
+									fontSize: 16,
+									letterSpacing: 0,
+									fontWeight: "600",
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -114,10 +115,11 @@ export const SplashScreen = ({
 
 						<div
 							style={{
-								...a.w_full,
-								...a.px_xl,
-								...a.gap_md,
-								...a.pb_2xl,
+								width: "100%",
+								paddingLeft: 20,
+								paddingRight: 20,
+								gap: 12,
+								paddingBottom: 24,
 								...{ maxWidth: 320 },
 							}}
 						>
@@ -154,15 +156,18 @@ function Footer() {
 	return (
 		<div
 			style={{
-				...a.absolute,
-				...a.inset_0,
-				...{ top: "auto" },
-				...a.p_xl,
-				...a.border_t,
-				...a.flex_row,
-				...a.flex_wrap,
-				...a.gap_xl,
-				...a.flex_1,
+				position: "absolute",
+				left: 0,
+				right: 0,
+				bottom: 0,
+				top: "auto",
+				padding: 20,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
+				flexDirection: "row",
+				flexWrap: "wrap",
+				gap: 20,
+				flex: 1,
 				...t.atoms.border_contrast_medium,
 			}}
 		>
@@ -175,7 +180,7 @@ function Footer() {
 			<InlineLinkText label={"See jobs at Bluesky"} to="https://bsky.social/about/join">
 				Jobs
 			</InlineLinkText>
-			<div style={a.flex_1} />
+			<div style={{ flex: 1 }} />
 			<AppLanguageDropdown />
 		</div>
 	);

@@ -1,6 +1,4 @@
 import { useCallback } from "react";
-
-import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -45,14 +43,15 @@ export function MessagesSettingsScreen() {
 			<Layout.Content>
 				<div
 					style={{
-						...a.p_lg,
-						...a.gap_md,
+						padding: 16,
+						gap: 12,
 					}}
 				>
 					<Text
 						style={{
-							...a.text_lg,
-							...a.font_bold,
+							fontSize: 18,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						Allow new messages from
@@ -68,8 +67,9 @@ export function MessagesSettingsScreen() {
 								name="all"
 								label={"Everyone"}
 								style={{
-									...a.justify_between,
-									...a.py_sm,
+									justifyContent: "space-between",
+									paddingTop: 8,
+									paddingBottom: 8,
 								}}
 							>
 								<Toggle.LabelText>Everyone</Toggle.LabelText>
@@ -79,8 +79,9 @@ export function MessagesSettingsScreen() {
 								name="following"
 								label={"Users I follow"}
 								style={{
-									...a.justify_between,
-									...a.py_sm,
+									justifyContent: "space-between",
+									paddingTop: 8,
+									paddingBottom: 8,
 								}}
 							>
 								<Toggle.LabelText>Users I follow</Toggle.LabelText>
@@ -90,8 +91,9 @@ export function MessagesSettingsScreen() {
 								name="none"
 								label={"No one"}
 								style={{
-									...a.justify_between,
-									...a.py_sm,
+									justifyContent: "space-between",
+									paddingTop: 8,
+									paddingBottom: 8,
 								}}
 							>
 								<Toggle.LabelText>No one</Toggle.LabelText>

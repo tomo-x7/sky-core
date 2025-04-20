@@ -132,8 +132,11 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 					type="button"
 					onClick={close}
 					style={{
-						...a.fixed,
-						...a.inset_0,
+						position: "fixed",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
 					}}
 				/>
 
@@ -173,8 +176,11 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 					type="button"
 					onClick={close}
 					style={{
-						...a.fixed,
-						...a.inset_0,
+						position: "fixed",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
 					}}
 				/>
 			</FocusScope>

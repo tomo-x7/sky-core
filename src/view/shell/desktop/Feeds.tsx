@@ -27,7 +27,7 @@ export function DesktopFeeds() {
 						<div
 							key={i}
 							style={{
-								...a.rounded_sm,
+								borderRadius: 8,
 								...t.atoms.bg_contrast_25,
 
 								...{
@@ -74,8 +74,9 @@ export function DesktopFeeds() {
 							}
 						})}
 						style={{
-							...a.text_md,
-							...a.leading_snug,
+							fontSize: 16,
+							letterSpacing: 0,
+							lineHeight: 1.3,
 							...flatten(current ? [a.font_bold, t.atoms.text] : [t.atoms.text_contrast_medium]),
 						}}
 						// TODO
@@ -89,8 +90,9 @@ export function DesktopFeeds() {
 				to="/feeds"
 				label={"More feeds"}
 				style={{
-					...a.text_md,
-					...a.leading_snug,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.3,
 				}}
 				// TODO
 				// numberOfLines={1}

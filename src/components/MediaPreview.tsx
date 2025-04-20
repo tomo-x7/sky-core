@@ -59,8 +59,8 @@ export function Outer({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_xs,
+				flexDirection: "row",
+				gap: 4,
 				...style,
 			}}
 		>
@@ -82,8 +82,8 @@ export function ImageItem({
 	return (
 		<div
 			style={{
-				...a.relative,
-				...a.flex_1,
+				position: "relative",
+				flex: 1,
 				...{ aspectRatio: 1, maxWidth: 100 },
 			}}
 		>
@@ -91,13 +91,13 @@ export function ImageItem({
 				key={thumbnail}
 				src={thumbnail}
 				style={{
-					...a.flex_1,
-					...a.rounded_xs,
+					flex: 1,
+					borderRadius: 4,
 					...t.atoms.bg_contrast_25,
 					objectFit: "cover",
 				}}
 			/>
-			<MediaInsetBorder style={a.rounded_xs} />
+			<MediaInsetBorder style={{ ...a.rounded_xs }} />
 			{children}
 		</div>
 	);
@@ -108,10 +108,13 @@ export function GifItem({ thumbnail, alt }: { thumbnail: string; alt?: string })
 		<ImageItem thumbnail={thumbnail} alt={alt}>
 			<div
 				style={{
-					...a.absolute,
-					...a.inset_0,
-					...a.justify_center,
-					...a.align_center,
+					position: "absolute",
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					justifyContent: "center",
+					alignItems: "center",
 				}}
 			>
 				<PlayButtonIcon size={24} />
@@ -135,10 +138,10 @@ export function VideoItem({
 			<div
 				style={{
 					...{ backgroundColor: "black" },
-					...a.flex_1,
+					flex: 1,
 					...{ aspectRatio: 1, maxWidth: 100 },
-					...a.justify_center,
-					...a.align_center,
+					justifyContent: "center",
+					alignItems: "center",
 				}}
 			>
 				<PlayButtonIcon size={24} />
@@ -149,10 +152,13 @@ export function VideoItem({
 		<ImageItem thumbnail={thumbnail} alt={alt}>
 			<div
 				style={{
-					...a.absolute,
-					...a.inset_0,
-					...a.justify_center,
-					...a.align_center,
+					position: "absolute",
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					justifyContent: "center",
+					alignItems: "center",
 				}}
 			>
 				<PlayButtonIcon size={24} />

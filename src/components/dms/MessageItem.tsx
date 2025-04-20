@@ -125,10 +125,11 @@ let MessageItem = ({
 							<RichText
 								value={rt}
 								style={{
-									...a.text_md,
+									fontSize: 16,
+									letterSpacing: 0,
 									...(isFromSelf && { color: t.palette.white }),
 								}}
-								interactiveStyle={a.underline}
+								interactivestyle={{ ...a.underline }}
 								enableTags
 								emojiMultiplier={3}
 							/>
@@ -184,9 +185,10 @@ let MessageItemMetadata = ({
 	return (
 		<Text
 			style={{
-				...a.text_xs,
-				...a.mt_2xs,
-				...a.mb_lg,
+				fontSize: 12,
+				letterSpacing: 0,
+				marginTop: 2,
+				marginBottom: 16,
 				...t.atoms.text_contrast_medium,
 				...style,
 			}}
@@ -195,7 +197,8 @@ let MessageItemMetadata = ({
 				{({ timeElapsed }) => (
 					<Text
 						style={{
-							...a.text_xs,
+							fontSize: 12,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -209,7 +212,8 @@ let MessageItemMetadata = ({
 					&middot;{" "}
 					<Text
 						style={{
-							...a.text_xs,
+							fontSize: 12,
+							letterSpacing: 0,
 
 							...{
 								color: t.palette.negative_400,
@@ -226,7 +230,7 @@ let MessageItemMetadata = ({
 								label={"Click to retry failed message"}
 								to="#"
 								onPress={handleRetry}
-								style={a.text_xs}
+								style={{ ...a.text_xs }}
 							>
 								{"Retry"}
 							</InlineLinkText>

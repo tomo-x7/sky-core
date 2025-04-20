@@ -36,22 +36,24 @@ export function ErrorScreen({
 			)}
 			<div
 				style={{
-					...a.px_xl,
-					...a.py_2xl,
+					paddingLeft: 20,
+					paddingRight: 20,
+					paddingTop: 24,
+					paddingBottom: 24,
 				}}
 			>
 				<div
 					style={{
-						...a.mb_md,
-						...a.align_center,
+						marginBottom: 12,
+						alignItems: "center",
 					}}
 				>
 					<div
 						style={{
-							...a.rounded_full,
+							borderRadius: 999,
 							...{ width: 50, height: 50 },
-							...a.align_center,
-							...a.justify_center,
+							alignItems: "center",
+							justifyContent: "center",
 							...{ backgroundColor: t.palette.contrast_950 },
 						}}
 					>
@@ -60,19 +62,21 @@ export function ErrorScreen({
 				</div>
 				<Text
 					style={{
-						...a.text_center,
-						...a.font_heavy,
-						...a.text_2xl,
-						...a.mb_md,
+						textAlign: "center",
+						fontWeight: "800",
+						fontSize: 22,
+						letterSpacing: 0,
+						marginBottom: 12,
 					}}
 				>
 					{title}
 				</Text>
 				<Text
 					style={{
-						...a.text_center,
-						...a.text_md,
-						...a.mb_xl,
+						textAlign: "center",
+						fontSize: 16,
+						letterSpacing: 0,
+						marginBottom: 20,
 					}}
 				>
 					{message}
@@ -80,21 +84,25 @@ export function ErrorScreen({
 				{details && (
 					<div
 						style={{
-							...a.w_full,
-							...a.border,
+							width: "100%",
+							border: "1px solid black",
+							borderWidth: 1,
 							...t.atoms.border_contrast_medium,
 							...t.atoms.bg_contrast_25,
-							...a.mb_xl,
-							...a.py_sm,
-							...a.px_lg,
-							...a.rounded_xs,
-							...a.overflow_hidden,
+							marginBottom: 20,
+							paddingTop: 8,
+							paddingBottom: 8,
+							paddingLeft: 16,
+							paddingRight: 16,
+							borderRadius: 4,
+							overflow: "hidden",
 						}}
 					>
 						<Text
 							style={{
-								...a.text_center,
-								...a.text_md,
+								textAlign: "center",
+								fontSize: 16,
+								letterSpacing: 0,
 								...t.atoms.text_contrast_high,
 							}}
 						>
@@ -103,7 +111,7 @@ export function ErrorScreen({
 					</div>
 				)}
 				{onPressTryAgain && (
-					<div style={a.align_center}>
+					<div style={{ ...a.align_center }}>
 						<Button
 							onPress={onPressTryAgain}
 							variant="solid"

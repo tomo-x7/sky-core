@@ -38,9 +38,9 @@ export function Row({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.flex_wrap,
-				...a.gap_xs,
+				flexDirection: "row",
+				flexWrap: "wrap",
+				gap: 4,
 				...flatten(styles),
 				...style,
 			}}
@@ -114,9 +114,9 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 				{({ hovered, pressed }) => (
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.rounded_full,
+							flexDirection: "row",
+							alignItems: "center",
+							borderRadius: 999,
 							...flatten(outer),
 							...((hovered || pressed) && t.atoms.bg_contrast_50),
 						}}
@@ -130,8 +130,8 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 						<Text
 							style={{
 								...flatten(text),
-								...a.font_bold,
-								...a.leading_tight,
+								fontWeight: "600",
+								lineHeight: 1.15,
 								...t.atoms.text_contrast_medium,
 								paddingRight: 3,
 							}}
@@ -168,14 +168,15 @@ export function FollowsYou({ size = "sm" }: CommonProps) {
 		<div
 			style={{
 				...flatten(variantStyles),
-				...a.justify_center,
+				justifyContent: "center",
 				...t.atoms.bg_contrast_25,
 			}}
 		>
 			<Text
 				style={{
-					...a.text_xs,
-					...a.leading_tight,
+					fontSize: 12,
+					letterSpacing: 0,
+					lineHeight: 1.15,
 				}}
 			>
 				Follows You

@@ -86,12 +86,12 @@ export function VideoEmbed({
 	);
 
 	return (
-		<div style={a.pt_xs}>
+		<div style={{ ...a.pt_xs }}>
 			{cropDisabled ? (
 				<div
 					style={{
-						...a.w_full,
-						...a.overflow_hidden,
+						width: "100%",
+						overflow: "hidden",
 						...{ aspectRatio: max ?? 1 },
 					}}
 				>
@@ -107,7 +107,7 @@ export function VideoEmbed({
 }
 
 /**
- * Renders a 100vh tall div and watches it with an IntersectionObserver to
+ * Renders a 100dvh tall div and watches it with an IntersectionObserver to
  * send the position of the div when it's near the screen.
  */
 function ViewportObserver({
@@ -125,7 +125,7 @@ function ViewportObserver({
 	const isWithinMessage = useIsWithinMessage();
 
 	// Send position when scrolling. This is done with an IntersectionObserver
-	// observing a div of 100vh height
+	// observing a div of 100dvh height
 	useEffect(() => {
 		if (!ref.current) return;
 		if (isFullscreen && !isFirefox) return;
@@ -155,8 +155,8 @@ function ViewportObserver({
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.flex_row,
+				flex: 1,
+				flexDirection: "row",
 			}}
 		>
 			{nearScreen && children}
@@ -164,7 +164,7 @@ function ViewportObserver({
 				ref={ref}
 				style={{
 					// Don't escape bounds when in a message
-					...(isWithinMessage ? { top: 0, height: "100%" } : { top: "calc(50% - 50vh)", height: "100vh" }),
+					...(isWithinMessage ? { top: 0, height: "100%" } : { top: "calc(50% - 50vh)", height: "100dvh" }),
 					position: "absolute",
 					left: "50%",
 					width: 1,

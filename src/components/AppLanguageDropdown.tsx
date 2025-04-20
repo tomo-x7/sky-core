@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { ChevronBottom_Stroke2_Corner0_Rounded as ChevronDown } from "#/components/icons/Chevron";
 import { sanitizeAppLanguageSetting } from "#/locale/helpers";
@@ -46,19 +46,26 @@ export function AppLanguageDropdown({ style }: ViewStyleProp) {
 			}}
 		>
 			<div
-				style={{ ...a.flex_row, ...a.gap_sm, ...a.align_center, ...a.flex_shrink, ...a.h_full, ...t.atoms.bg }}
+				style={{
+					flexDirection: "row",
+					gap: 8,
+					alignItems: "center",
+					flexShrink: 1,
+					height: "100%",
+					...t.atoms.bg,
+				}}
 			>
 				<Text aria-hidden={true} style={t.atoms.text_contrast_medium}>
 					{APP_LANGUAGES.find((l) => l.code2 === sanitizedLang)?.name}
 				</Text>
-				<ChevronDown fill={t.atoms.text.color} size="xs" style={a.flex_0} />
+				<ChevronDown fill={t.atoms.text.color} size="xs" style={{ flex: "0 0 auto" }} />
 			</div>
 			<select
 				value={sanitizedLang}
 				onChange={onChangeAppLanguage}
 				style={{
-					fontSize: a.text_sm.fontSize,
-					letterSpacing: a.text_sm.letterSpacing,
+					fontSize: 14,
+					letterSpacing: 0,
 					cursor: "pointer",
 					position: "absolute",
 					inset: 0,

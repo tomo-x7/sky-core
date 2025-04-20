@@ -20,12 +20,12 @@ export function Outer({ children, style }: React.PropsWithChildren<ViewStyleProp
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_md,
-				...a.w_full,
-				...a.p_lg,
-				...a.pr_md,
-				...a.overflow_hidden,
+				flexDirection: "row",
+				gap: 12,
+				width: "100%",
+				padding: 16,
+				paddingRight: 12,
+				overflow: "hidden",
 				...style,
 			}}
 		>
@@ -42,9 +42,10 @@ export function Title({ value }: { value: string }) {
 	return (
 		<Text
 			style={{
-				...a.text_md,
-				...a.font_bold,
-				...a.leading_tight,
+				fontSize: 16,
+				letterSpacing: 0,
+				fontWeight: "600",
+				lineHeight: 1.15,
 			}}
 		>
 			{value}
@@ -55,10 +56,10 @@ export function Title({ value }: { value: string }) {
 export function Description({ value, handle }: { value?: string; handle: string }) {
 	return value ? (
 		<Text numberOfLines={2}>
-			<RichText value={value} style={a.leading_snug} />
+			<RichText value={value} style={{ ...a.leading_snug }} />
 		</Text>
 	) : (
-		<Text style={a.leading_snug}>{`By ${sanitizeHandle(handle, "@")}`}</Text>
+		<Text style={{ ...a.leading_snug }}>{`By ${sanitizeHandle(handle, "@")}`}</Text>
 	);
 }
 
@@ -67,18 +68,18 @@ export function RegionalNotice() {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_xs,
-				...a.pt_2xs,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 4,
+				paddingTop: 2,
 				...{ marginLeft: -2 },
 			}}
 		>
 			<Flag fill={t.atoms.text_contrast_low.color} size="sm" />
 			<Text
 				style={{
-					...a.italic,
-					...a.leading_snug,
+					fontStyle: "italic",
+					lineHeight: 1.3,
 				}}
 			>
 				Required in your region
@@ -92,8 +93,9 @@ export function LikeCount({ likeCount }: { likeCount: number }) {
 	return (
 		<Text
 			style={{
-				...a.mt_sm,
-				...a.text_sm,
+				marginTop: 8,
+				fontSize: 14,
+				letterSpacing: 0,
 				...t.atoms.text_contrast_medium,
 				...{ fontWeight: "600" },
 			}}
@@ -109,17 +111,17 @@ export function Content({ children }: React.PropsWithChildren) {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.flex_row,
-				...a.gap_md,
-				...a.align_center,
-				...a.justify_between,
+				flex: 1,
+				flexDirection: "row",
+				gap: 12,
+				alignItems: "center",
+				justifyContent: "space-between",
 			}}
 		>
 			<div
 				style={{
-					...a.gap_2xs,
-					...a.flex_1,
+					gap: 2,
+					flex: 1,
 				}}
 			>
 				{children}
@@ -127,7 +129,7 @@ export function Content({ children }: React.PropsWithChildren) {
 			<ChevronRight
 				size="md"
 				style={{
-					...a.z_10,
+					zIndex: 10,
 					...t.atoms.text_contrast_low,
 				}}
 			/>

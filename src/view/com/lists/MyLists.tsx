@@ -86,18 +86,19 @@ export function MyLists({
 				return (
 					<div
 						style={{
-							...a.flex_1,
-							...a.align_center,
-							...a.gap_sm,
-							...a.px_xl,
-							...a.pt_xl,
+							flex: 1,
+							alignItems: "center",
+							gap: 8,
+							paddingLeft: 20,
+							paddingRight: 20,
+							paddingTop: 20,
 						}}
 					>
 						<div
 							style={{
-								...a.align_center,
-								...a.justify_center,
-								...a.rounded_full,
+								alignItems: "center",
+								justifyContent: "center",
+								borderRadius: 999,
 								...t.atoms.bg_contrast_25,
 
 								...{
@@ -110,10 +111,11 @@ export function MyLists({
 						</div>
 						<Text
 							style={{
-								...a.text_center,
-								...a.flex_1,
-								...a.text_sm,
-								...a.leading_snug,
+								textAlign: "center",
+								flex: 1,
+								fontSize: 14,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 								...t.atoms.text_contrast_medium,
 
 								...{
@@ -141,8 +143,10 @@ export function MyLists({
 					style={{
 						...(index !== 0 && a.border_t),
 						...t.atoms.border_contrast_low,
-						...a.px_lg,
-						...a.py_lg,
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 16,
+						paddingBottom: 16,
 					}}
 				>
 					<ListCard.Default view={item} />

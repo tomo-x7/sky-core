@@ -143,7 +143,8 @@ export function Scrubber({
 			style={{
 				...{ height: isTouchDevice ? 32 : 18, width: "100%" },
 				...a.flex_shrink_0,
-				...a.px_xs,
+				paddingLeft: 4,
+				paddingRight: 4,
 			}}
 			onPointerEnter={onStartHover}
 			onPointerLeave={onEndHover}
@@ -165,9 +166,9 @@ export function Scrubber({
 			>
 				<div
 					style={{
-						...a.w_full,
-						...a.rounded_full,
-						...a.overflow_hidden,
+						width: "100%",
+						borderRadius: 999,
+						overflow: "hidden",
 						backgroundColor: "rgba(255, 255, 255, 0.4)",
 						height: hovered || scrubberActive ? 6 : 3,
 
@@ -177,7 +178,7 @@ export function Scrubber({
 					{duration > 0 && (
 						<div
 							style={{
-								...a.h_full,
+								height: "100%",
 								backgroundColor: t.palette.white,
 								width: `${progressPercent}%`,
 							}}
@@ -208,9 +209,9 @@ export function Scrubber({
 				>
 					<div
 						style={{
-							...a.w_full,
-							...a.h_full,
-							...a.rounded_full,
+							width: "100%",
+							height: "100%",
+							borderRadius: 999,
 							backgroundColor: t.palette.white,
 							scale: hovered || scrubberActive || focused ? (scrubberActive ? 1 : 0.6) : 0,
 						}}

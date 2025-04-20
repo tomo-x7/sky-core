@@ -68,26 +68,27 @@ export function GifAltTextDialogLoaded({
 				// hitSlop={HITSLOP_10}
 				onClick={control.open}
 				style={{
-					...a.absolute,
+					position: "absolute",
 					...{ top: 8, left: 8 },
 					...{ borderRadius: 6 },
-					...a.pl_xs,
-					...a.pr_sm,
-					...a.py_2xs,
-					...a.flex_row,
-					...a.gap_xs,
-					...a.align_center,
+					paddingLeft: 4,
+					paddingRight: 8,
+					paddingTop: 2,
+					paddingBottom: 2,
+					flexDirection: "row",
+					gap: 4,
+					alignItems: "center",
 					...{ backgroundColor: "rgba(0, 0, 0, 0.75)" },
 				}}
 			>
 				{altText ? (
-					<Check size="xs" fill={t.palette.white} style={a.ml_xs} />
+					<Check size="xs" fill={t.palette.white} style={{ ...a.ml_xs }} />
 				) : (
 					<Plus size="sm" fill={t.palette.white} />
 				)}
 				<Text
 					style={{
-						...a.font_bold,
+						fontWeight: "600",
 						...{ color: t.palette.white },
 					}}
 				>
@@ -134,15 +135,15 @@ function AltTextInner({
 
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>
-			<div style={a.flex_col_reverse}>
+			<div style={{ ...a.flex_col_reverse }}>
 				<div
 					style={{
-						...a.mt_md,
-						...a.gap_md,
+						marginTop: 12,
+						gap: 12,
 					}}
 				>
-					<div style={a.gap_sm}>
-						<div style={a.relative}>
+					<div style={{ gap:8 }}>
+						<div style={{ ...a.relative }}>
 							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
@@ -166,16 +167,16 @@ function AltTextInner({
 						{altText.length > MAX_ALT_TEXT && (
 							<div
 								style={{
-									...a.pb_sm,
-									...a.flex_row,
-									...a.gap_xs,
+									paddingBottom: 8,
+									flexDirection: "row",
+									gap: 4,
 								}}
 							>
 								<CircleInfo fill={t.palette.negative_500} />
 								<Text
 									style={{
-										...a.italic,
-										...a.leading_snug,
+										fontStyle: "italic",
+										lineHeight: 1.3,
 										...t.atoms.text_contrast_medium,
 									}}
 								>
@@ -194,7 +195,7 @@ function AltTextInner({
 							onPress={() => {
 								control.close();
 							}}
-							style={a.flex_grow}
+							style={{ ...a.flex_grow }}
 						>
 							<ButtonText>Save</ButtonText>
 						</Button>
@@ -204,15 +205,16 @@ function AltTextInner({
 				<div>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_bold,
-							...a.leading_tight,
-							...a.pb_sm,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "600",
+							lineHeight: 1.15,
+							paddingBottom: 8,
 						}}
 					>
 						Add alt text
 					</Text>
-					<div style={a.align_center}>
+					<div style={{ ...a.align_center }}>
 						<GifEmbed
 							thumb={thumb}
 							altText={altText}

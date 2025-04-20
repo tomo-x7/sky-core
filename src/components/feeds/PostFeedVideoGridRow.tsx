@@ -31,8 +31,8 @@ export function PostFeedVideoGridRow({
 		<div style={gutters}>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_sm,
+					flexDirection: "row",
+					gap: 8,
 				}}
 			>
 				<Grid.Row gap={a.gap_sm.gap}>
@@ -57,8 +57,8 @@ export function PostFeedVideoGridRowPlaceholder() {
 		<div style={gutters}>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_sm,
+					flexDirection: "row",
+					gap: 8,
 				}}
 			>
 				<VideoPostCardPlaceholder />

@@ -1,6 +1,6 @@
 import { LinearGradient } from "#/components/LinearGradient";
 
-import { type ViewStyleProp, atoms as a, type tokens } from "#/alf";
+import type { ViewStyleProp, tokens } from "#/alf";
 
 export function GradientFill({
 	gradient,
@@ -27,8 +27,11 @@ export function GradientFill({
 			start={{ x: 0, y: 0 }}
 			end={{ x: 1, y: 1 }}
 			style={{
-				...a.absolute,
-				...a.inset_0,
+				position: "absolute",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
 				...style,
 			}}
 		/>

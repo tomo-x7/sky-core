@@ -5,7 +5,7 @@ import {
 	AtUri,
 	type RichText as RichTextAPI,
 } from "@atproto/api";
-import React, { memo, useCallback, useState } from "react";
+import React, { type CSSProperties, memo, useCallback, useState } from "react";
 
 import { atoms as a, flatten, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
@@ -170,16 +170,17 @@ let PostCtrls = ({
 			pressed?: boolean;
 			hovered?: boolean;
 			focused?: boolean;
-		}) => ({
-			...a.gap_xs,
-			...a.rounded_full,
-			...a.flex_row,
-			...a.justify_center,
-			...a.align_center,
-			...a.overflow_hidden,
-			padding: 5,
-			...((pressed || hovered) && t.atoms.bg_contrast_25),
-		}),
+		}) =>
+			({
+				gap: 4,
+				borderRadius: 999,
+				flexDirection: "row",
+				justifyContent: "center",
+				alignItems: "center",
+				overflow: "hidden",
+				padding: 5,
+				...((pressed || hovered) && t.atoms.bg_contrast_25),
+			}) satisfies CSSProperties,
 		[t.atoms.bg_contrast_25],
 	);
 	const btnProps = {
@@ -192,9 +193,9 @@ let PostCtrls = ({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.justify_between,
-				...a.align_center,
+				flexDirection: "row",
+				justifyContent: "space-between",
+				alignItems: "center",
 				...style,
 			}}
 		>
@@ -227,7 +228,7 @@ let PostCtrls = ({
 							style={{
 								...defaultCtrlColor,
 								...(big ? a.text_md : { fontSize: 15 }),
-								...a.user_select_none,
+								userSelect: "none",
 							}}
 						>
 							{formatCount(post.replyCount)}
@@ -268,7 +269,7 @@ let PostCtrls = ({
 			</div>
 			{big && (
 				<>
-					<div style={a.align_center}>
+					<div style={{ ...a.align_center }}>
 						<button
 							type="button"
 							style={btnStyle({ pressed, hovered })}

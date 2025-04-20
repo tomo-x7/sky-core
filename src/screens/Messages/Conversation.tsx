@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from 
 import React, { useCallback } from "react";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { Error } from "#/components/Error";
@@ -54,7 +54,7 @@ export function MessagesConversationScreen() {
 		<Layout.Screen
 			style={{
 				...{ minHeight: 0 },
-				...a.flex_1,
+				flex: 1,
 			}}
 		>
 			<ConvoProvider key={convoId} convoId={convoId}>
@@ -96,7 +96,7 @@ function Inner() {
 
 	if (convoState.status === ConvoStatus.Error) {
 		return (
-			<Layout.Center style={a.flex_1}>
+			<Layout.Center style={{ flex: 1 }}>
 				<MessagesListHeader />
 				<Error
 					title={"Something went wrong"}
@@ -109,14 +109,14 @@ function Inner() {
 	}
 
 	return (
-		<Layout.Center style={a.flex_1}>
+		<Layout.Center style={{ flex: 1 }}>
 			{!readyToShow &&
 				(moderation ? (
 					<MessagesListHeader moderation={moderation} profile={recipient} />
 				) : (
 					<MessagesListHeader />
 				))}
-			<div style={a.flex_1}>
+			<div style={{ flex: 1 }}>
 				{moderation && recipient ? (
 					<InnerReady
 						moderation={moderation}
@@ -127,21 +127,21 @@ function Inner() {
 				) : (
 					<div
 						style={{
-							...a.align_center,
-							...a.gap_sm,
-							...a.flex_1,
+							alignItems: "center",
+							gap: 8,
+							flex: 1,
 						}}
 					/>
 				)}
 				{!readyToShow && (
 					<div
 						style={{
-							...a.absolute,
-							...a.z_10,
-							...a.w_full,
-							...a.h_full,
-							...a.justify_center,
-							...a.align_center,
+							position: "absolute",
+							zIndex: 10,
+							width: "100%",
+							height: "100%",
+							justifyContent: "center",
+							alignItems: "center",
 							...t.atoms.bg,
 						}}
 					>

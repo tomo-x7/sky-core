@@ -27,10 +27,11 @@ export function TrendingTopic({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.rounded_full,
-				...a.border,
+				flexDirection: "row",
+				alignItems: "center",
+				borderRadius: 999,
+				border: "1px solid black",
+				borderWidth: 1,
 				...t.atoms.border_contrast_medium,
 				...t.atoms.bg,
 
@@ -88,8 +89,8 @@ export function TrendingTopic({
         */}
 			<Text
 				style={{
-					...a.font_bold,
-					...a.leading_tight,
+					fontWeight: "600",
+					lineHeight: 1.15,
 					...flatten(isSmall ? [a.text_sm] : [a.text_md, { paddingBottom: 1 }]),
 				}}
 				numberOfLines={1}
@@ -112,8 +113,9 @@ export function TrendingTopicSkeleton({
 	return (
 		<div
 			style={{
-				...a.rounded_full,
-				...a.border,
+				borderRadius: 999,
+				border: "1px solid black",
+				borderWidth: 1,
 				...t.atoms.border_contrast_medium,
 				...t.atoms.bg_contrast_25,
 

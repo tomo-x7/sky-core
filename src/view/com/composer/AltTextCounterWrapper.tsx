@@ -13,15 +13,15 @@ export function AltTextCounterWrapper({
 }) {
 	const t = useTheme();
 	return (
-		<div style={a.flex_row}>
+		<div style={{ ...a.flex_row }}>
 			<CharProgress
 				style={{
 					...a.flex_col_reverse,
-					...a.align_center,
-					...a.mr_xs,
+					alignItems: "center",
+					marginRight: 4,
 					...{ minWidth: 50, gap: 1 },
 				}}
-				textStyle={{ marginRight: 0, ...a.text_sm, ...t.atoms.text_contrast_medium }}
+				textStyle={{ marginRight: 0, fontSize: 14, letterSpacing: 0, ...t.atoms.text_contrast_medium }}
 				size={26}
 				count={altText?.length || 0}
 				max={MAX_ALT_TEXT}

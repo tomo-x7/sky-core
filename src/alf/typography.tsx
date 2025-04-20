@@ -2,7 +2,7 @@ import createEmojiRegex from "emoji-regex";
 import type React from "react";
 import { Children } from "react";
 import type { TypographyVariant } from "#/lib/ThemeContext";
-import { type Alf, applyFonts, atoms } from ".";
+import { type Alf, applyFonts } from ".";
 
 /**
  * Util to calculate lineHeight from a text size atom and a leading atom
@@ -14,8 +14,8 @@ export function leading<Size extends { fontSize?: number }, Leading extends { li
 	textSize: Size,
 	leading: Leading,
 ) {
-	const size = textSize?.fontSize || atoms.text_md.fontSize;
-	const lineHeight = leading?.lineHeight || atoms.leading_normal.lineHeight;
+	const size = textSize?.fontSize || 16;
+	const lineHeight = leading?.lineHeight || 1.5;
 	return Math.round(size * lineHeight);
 }
 
@@ -38,7 +38,7 @@ export function normalizeTextStyles(
 ) {
 	const s = styles;
 	// should always be defined on these components
-	s.fontSize = (Number.parseFloat(String(s.fontSize)) || atoms.text_md.fontSize) * fontScale;
+	s.fontSize = (Number.parseFloat(String(s.fontSize)) || 16) * fontScale;
 
 	if (s?.lineHeight) {
 		const lh = Number.parseFloat(String(s.lineHeight));

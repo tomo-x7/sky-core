@@ -1,7 +1,7 @@
 import { BskyAgent } from "@atproto/api";
 import { useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
@@ -83,8 +83,8 @@ export const SetNewPasswordForm = ({
 		<FormContainer titleText={<>Set new password</>}>
 			<Text
 				style={{
-					...a.leading_snug,
-					...a.mb_sm,
+					lineHeight: 1.3,
+					marginBottom: 8,
 				}}
 			>
 				You will receive an email with a "reset code." Enter that code here, then enter your new password.
@@ -130,15 +130,15 @@ export const SetNewPasswordForm = ({
 			<FormError error={error} />
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.pt_lg,
+					flexDirection: "row",
+					alignItems: "center",
+					paddingTop: 16,
 				}}
 			>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>Back</ButtonText>
 				</Button>
-				<div style={a.flex_1} />
+				<div style={{ flex: 1 }} />
 				{isProcessing ? (
 					<ActivityIndicator />
 				) : (
@@ -150,7 +150,7 @@ export const SetNewPasswordForm = ({
 					<Text
 						style={{
 							...t.atoms.text_contrast_high,
-							...a.pl_md,
+							paddingLeft: 12,
 						}}
 					>
 						Updating...

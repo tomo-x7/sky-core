@@ -61,17 +61,18 @@ export function PostInteractionSettingsControlledDialog({
 				label="Edit post interaction settings"
 				style={{
 					...{ maxWidth: 500 },
-					...a.w_full,
+					width: "100%",
 				}}
 			>
-				<div style={a.gap_md}>
+				<div style={{ gap:12 }}>
 					<Header />
 					<PostInteractionSettingsForm {...rest} />
 					<Text
 						style={{
-							...a.pt_sm,
-							...a.text_sm,
-							...a.leading_snug,
+							paddingTop: 8,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.3,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -79,7 +80,7 @@ export function PostInteractionSettingsControlledDialog({
 							You can set default interaction settings in{" "}
 							<Text
 								style={{
-									...a.font_bold,
+									fontWeight: "600",
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -99,22 +100,24 @@ export function Header() {
 	return (
 		<div
 			style={{
-				...a.gap_md,
-				...a.pb_sm,
+				gap: 12,
+				paddingBottom: 8,
 			}}
 		>
 			<Text
 				style={{
-					...a.text_2xl,
-					...a.font_bold,
+					fontSize: 22,
+					letterSpacing: 0,
+					fontWeight: "600",
 				}}
 			>
 				Post interaction settings
 			</Text>
 			<Text
 				style={{
-					...a.text_md,
-					...a.pb_xs,
+					fontSize: 16,
+					letterSpacing: 0,
+					paddingBottom: 4,
 				}}
 			>
 				Customize who can interact with this post.
@@ -239,19 +242,20 @@ export function PostInteractionSettingsDialogControlledInner(props: PostInteract
 			label="Edit post interaction settings"
 			style={{
 				...{ maxWidth: 500 },
-				...a.w_full,
+				width: "100%",
 			}}
 		>
-			<div style={a.gap_md}>
+			<div style={{ gap:12 }}>
 				<Header />
 
 				{isLoading ? (
 					<div
 						style={{
-							...a.flex_1,
-							...a.py_4xl,
-							...a.align_center,
-							...a.justify_center,
+							flex: 1,
+							paddingTop: 32,
+							paddingBottom: 32,
+							alignItems: "center",
+							justifyContent: "center",
 						}}
 					>
 						<Loader size="xl" />
@@ -326,16 +330,17 @@ export function PostInteractionSettingsForm({
 		<div>
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_md,
+					flex: 1,
+					gap: 12,
 				}}
 			>
-				<div style={a.gap_lg}>
-					<div style={a.gap_sm}>
+				<div style={{ gap:16 }}>
+					<div style={{ gap:8 }}>
 						<Text
 							style={{
-								...a.font_bold,
-								...a.text_lg,
+								fontWeight: "600",
+								fontSize: 18,
+								letterSpacing: 0,
 							}}
 						>
 							Quote settings
@@ -352,8 +357,8 @@ export function PostInteractionSettingsForm({
 							value={quotesEnabled}
 							onChange={onChangeQuotesEnabled}
 							style={{
-								...a.justify_between,
-								...a.pt_xs,
+								justifyContent: "space-between",
+								paddingTop: 4,
 							}}
 						>
 							<Text style={t.atoms.text_contrast_medium}>Allow quote posts</Text>
@@ -366,20 +371,22 @@ export function PostInteractionSettingsForm({
 					{replySettingsDisabled && (
 						<div
 							style={{
-								...a.px_md,
-								...a.py_sm,
-								...a.rounded_sm,
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_sm,
+								paddingLeft: 12,
+								paddingRight: 12,
+								paddingTop: 8,
+								paddingBottom: 8,
+								borderRadius: 8,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 8,
 								...t.atoms.bg_contrast_25,
 							}}
 						>
 							<CircleInfo fill={t.atoms.text_contrast_low.color} />
 							<Text
 								style={{
-									...a.flex_1,
-									...a.leading_snug,
+									flex: 1,
+									lineHeight: 1.3,
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -390,7 +397,7 @@ export function PostInteractionSettingsForm({
 
 					<div
 						style={{
-							...a.gap_sm,
+							gap: 8,
 
 							...{
 								opacity: replySettingsDisabled ? 0.3 : 1,
@@ -399,8 +406,9 @@ export function PostInteractionSettingsForm({
 					>
 						<Text
 							style={{
-								...a.font_bold,
-								...a.text_lg,
+								fontWeight: "600",
+								fontSize: 18,
+								letterSpacing: 0,
 							}}
 						>
 							Reply settings
@@ -408,7 +416,7 @@ export function PostInteractionSettingsForm({
 
 						<Text
 							style={{
-								...a.pt_sm,
+								paddingTop: 8,
 								...t.atoms.text_contrast_medium,
 							}}
 						>
@@ -417,8 +425,8 @@ export function PostInteractionSettingsForm({
 
 						<div
 							style={{
-								...a.flex_row,
-								...a.gap_sm,
+								flexDirection: "row",
+								gap: 8,
 							}}
 						>
 							<Selectable
@@ -441,14 +449,14 @@ export function PostInteractionSettingsForm({
 							<>
 								<Text
 									style={{
-										...a.pt_sm,
+										paddingTop: 8,
 										...t.atoms.text_contrast_medium,
 									}}
 								>
 									Or combine these options:
 								</Text>
 
-								<div style={a.gap_sm}>
+								<div style={{ gap:8 }}>
 									<Selectable
 										label="Mentioned users"
 										isSelected={!!threadgateAllowUISettings.find((v) => v.type === "mention")}
@@ -496,7 +504,7 @@ export function PostInteractionSettingsForm({
 				color="primary"
 				size="large"
 				variant="solid"
-				style={a.mt_xl}
+				style={{ ...a.mt_xl }}
 			>
 				<ButtonText>"Save"</ButtonText>
 				{isSaving && <ButtonIcon icon={Loader} position="right" />}
@@ -526,17 +534,17 @@ function Selectable({
 			label={label}
 			// accessibilityRole="checkbox"
 			aria-checked={isSelected}
-			style={a.flex_1}
+			style={{ flex: 1 }}
 		>
 			{({ hovered, focused }) => (
 				<div
 					style={{
-						...a.flex_1,
-						...a.flex_row,
-						...a.align_center,
-						...a.justify_between,
-						...a.rounded_sm,
-						...a.p_md,
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "space-between",
+						borderRadius: 8,
+						padding: 12,
 
 						...// for consistency with checkmark icon visible or not
 						{ minHeight: 40 },
@@ -553,7 +561,8 @@ function Selectable({
 				>
 					<Text
 						style={{
-							...a.text_sm,
+							fontSize: 14,
+							letterSpacing: 0,
 							...(isSelected && a.font_bold),
 						}}
 					>

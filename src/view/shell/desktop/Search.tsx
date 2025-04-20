@@ -3,7 +3,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Text } from "#/components/Typography";
 import { SearchInput } from "#/components/forms/SearchInput";
@@ -118,7 +117,7 @@ let SearchProfileCard = ({
 						style={{
 							...s.bold,
 							...pal.text,
-							...a.self_start,
+							alignSelf: "flex-start",
 						}}
 						numberOfLines={1}
 						lineHeight={1.2}

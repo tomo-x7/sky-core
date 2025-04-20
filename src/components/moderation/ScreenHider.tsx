@@ -41,7 +41,7 @@ export function ScreenHider({
 	return (
 		<CenteredView
 			style={{
-				...a.flex_1,
+				flex: 1,
 
 				...{
 					paddingTop: 100,
@@ -55,15 +55,15 @@ export function ScreenHider({
 		>
 			<div
 				style={{
-					...a.align_center,
-					...a.mb_md,
+					alignItems: "center",
+					marginBottom: 12,
 				}}
 			>
 				<div
 					style={{
 						...t.atoms.bg_contrast_975,
-						...a.align_center,
-						...a.justify_center,
+						alignItems: "center",
+						justifyContent: "center",
 
 						...{
 							borderRadius: 25,
@@ -77,10 +77,11 @@ export function ScreenHider({
 			</div>
 			<Text
 				style={{
-					...a.text_4xl,
-					...a.font_bold,
-					...a.text_center,
-					...a.mb_md,
+					fontSize: 32,
+					letterSpacing: 0,
+					fontWeight: "600",
+					textAlign: "center",
+					marginBottom: 12,
 					...t.atoms.text,
 				}}
 			>
@@ -88,11 +89,13 @@ export function ScreenHider({
 			</Text>
 			<Text
 				style={{
-					...a.text_lg,
-					...a.mb_md,
-					...a.px_lg,
-					...a.text_center,
-					...a.leading_snug,
+					fontSize: 18,
+					letterSpacing: 0,
+					marginBottom: 12,
+					paddingLeft: 16,
+					paddingRight: 16,
+					textAlign: "center",
+					lineHeight: 1.3,
 					...t.atoms.text_contrast_medium,
 				}}
 			>
@@ -103,11 +106,12 @@ export function ScreenHider({
 						<>This {screenDescription} has been flagged:</>{" "}
 						<Text
 							style={{
-								...a.text_lg,
-								...a.font_bold,
-								...a.leading_snug,
+								fontSize: 18,
+								letterSpacing: 0,
+								fontWeight: "600",
+								lineHeight: 1.3,
 								...t.atoms.text,
-								...a.ml_xs,
+								marginLeft: 4,
 							}}
 						>
 							{desc.name}.{" "}
@@ -120,8 +124,9 @@ export function ScreenHider({
 						>
 							<Text
 								style={{
-									...a.text_lg,
-									...a.leading_snug,
+									fontSize: 18,
+									letterSpacing: 0,
+									lineHeight: 1.3,
 									...{ color: t.palette.primary_500 },
 									...{ cursor: "pointer" },
 								}}
@@ -133,20 +138,21 @@ export function ScreenHider({
 					</>
 				)}{" "}
 			</Text>
-			{isMobile && <div style={a.flex_1} />}
+			{isMobile && <div style={{ flex: 1 }} />}
 			<div
 				style={{
-					...a.flex_row,
-					...a.justify_center,
-					...a.my_md,
-					...a.gap_md,
+					flexDirection: "row",
+					justifyContent: "center",
+					marginTop: 12,
+					marginBottom: 12,
+					gap: 12,
 				}}
 			>
 				<Button
 					variant="solid"
 					color="primary"
 					size="large"
-					style={a.rounded_full}
+					style={{ ...a.rounded_full }}
 					label={"Go back"}
 					onPress={() => {
 						if (history.length > 1) {
@@ -163,7 +169,7 @@ export function ScreenHider({
 						variant="solid"
 						color="secondary"
 						size="large"
-						style={a.rounded_full}
+						style={{ ...a.rounded_full }}
 						label={"Show anyway"}
 						onPress={() => setOverride((v) => !v)}
 					>

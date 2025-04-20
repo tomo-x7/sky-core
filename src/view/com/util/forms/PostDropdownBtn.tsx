@@ -2,7 +2,7 @@ import type { AppBskyFeedDefs, AppBskyFeedPost, AppBskyFeedThreadgate, RichText 
 import type React from "react";
 import { memo, useMemo, useState } from "react";
 
-import { atoms as a, flatten, useTheme as useAlf } from "#/alf";
+import { flatten, useTheme as useAlf } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
 import * as Menu from "#/components/Menu";
 import { DotGrid_Stroke2_Corner0_Rounded as DotsHorizontal } from "#/components/icons/DotGrid";
@@ -67,7 +67,7 @@ let PostDropdownBtn = ({
 								// hitSlop={hitSlop}
 								style={{
 									...style,
-									...a.rounded_full,
+									borderRadius: 999,
 									...flatten((state.hovered || state.pressed) && [alf.atoms.bg_contrast_25]),
 								}}
 							>

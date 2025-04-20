@@ -78,7 +78,7 @@ export function SubmitView({
 	}, [params, details, selectedReportOption, selectedServices, onSubmitComplete, agent]);
 
 	return (
-		<div style={a.gap_2xl}>
+		<div style={{ gap:24 }}>
 			<Button
 				size="small"
 				variant="solid"
@@ -91,34 +91,36 @@ export function SubmitView({
 			</Button>
 			<div
 				style={{
-					...a.w_full,
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_between,
-					...a.gap_lg,
-					...a.p_md,
-					...a.rounded_md,
-					...a.border,
+					width: "100%",
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "space-between",
+					gap: 16,
+					padding: 12,
+					borderRadius: 12,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.border_contrast_low,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.gap_xs,
+						flex: 1,
+						gap: 4,
 					}}
 				>
 					<Text
 						style={{
-							...a.text_md,
-							...a.font_bold,
+							fontSize: 16,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						{selectedReportOption.title}
 					</Text>
 					<Text
 						style={{
-							...a.leading_tight,
+							lineHeight: 1.15,
 							...{ maxWidth: 400 },
 						}}
 					>
@@ -129,20 +131,20 @@ export function SubmitView({
 				<Check
 					size="md"
 					style={{
-						...a.pr_sm,
+						paddingRight: 8,
 						...t.atoms.text_contrast_low,
 					}}
 				/>
 			</div>
-			<div style={a.gap_md}>
+			<div style={{ gap:12 }}>
 				<Text style={t.atoms.text_contrast_medium}>Select the moderation service(s) to report to</Text>
 
 				<Toggle.Group label="Select mod services" values={selectedServices} onChange={setSelectedServices}>
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_md,
-							...a.flex_wrap,
+							flexDirection: "row",
+							gap: 12,
+							flexWrap: "wrap",
 						}}
 					>
 						{labelers.map((labeler) => {
@@ -159,13 +161,13 @@ export function SubmitView({
 					</div>
 				</Toggle.Group>
 			</div>
-			<div style={a.gap_md}>
+			<div style={{ gap:12 }}>
 				<Text style={t.atoms.text_contrast_medium}>Optionally provide additional information below:</Text>
 
 				<div
 					style={{
-						...a.relative,
-						...a.w_full,
+						position: "relative",
+						width: "100%",
 					}}
 				>
 					<Dialog.Input
@@ -179,11 +181,11 @@ export function SubmitView({
 
 					<div
 						style={{
-							...a.absolute,
-							...a.flex_row,
-							...a.align_center,
-							...a.pr_md,
-							...a.pb_sm,
+							position: "absolute",
+							flexDirection: "row",
+							alignItems: "center",
+							paddingRight: 12,
+							paddingBottom: 8,
 
 							...{
 								bottom: 0,
@@ -197,19 +199,19 @@ export function SubmitView({
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_end,
-					...a.gap_lg,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "flex-end",
+					gap: 16,
 				}}
 			>
 				{!selectedServices.length ||
 					(error && (
 						<Text
 							style={{
-								...a.flex_1,
-								...a.italic,
-								...a.leading_snug,
+								flex: 1,
+								fontStyle: "italic",
+								lineHeight: 1.3,
 								...t.atoms.text_contrast_medium,
 							}}
 						>
@@ -240,13 +242,13 @@ function LabelerToggle({ title }: { title: string }) {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_md,
-				...a.p_md,
-				...a.pr_lg,
-				...a.rounded_sm,
-				...a.overflow_hidden,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 12,
+				padding: 12,
+				paddingRight: 16,
+				borderRadius: 8,
+				overflow: "hidden",
 				...t.atoms.bg_contrast_25,
 				...flatten(ctx.selected ? [t.atoms.bg_contrast_50] : []),
 			}}
@@ -254,11 +256,11 @@ function LabelerToggle({ title }: { title: string }) {
 			<Toggle.Checkbox />
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_between,
-					...a.gap_lg,
-					...a.z_10,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "space-between",
+					gap: 16,
+					zIndex: 10,
 				}}
 			>
 				<Text

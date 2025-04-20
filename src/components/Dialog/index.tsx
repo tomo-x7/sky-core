@@ -87,12 +87,16 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 						<button type="button" onClick={handleBackgroundPress}>
 							<div
 								style={{
-									...a.fixed,
-									...a.inset_0,
-									...a.z_10,
-									...a.px_xl,
+									position: "fixed",
+									top: 0,
+									left: 0,
+									right: 0,
+									bottom: 0,
+									zIndex: 10,
+									paddingLeft: 20,
+									paddingRight: 20,
 									...(webOptions?.alignCenter ? a.justify_center : undefined),
-									...a.align_center,
+									alignItems: "center",
 
 									overflowY: "auto",
 									paddingTop: gtMobile ? "10vh" : a.pt_xl.paddingTop,
@@ -107,9 +111,9 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 								 */}
 								<div
 									style={{
-										...a.w_full,
-										...a.z_20,
-										...a.align_center,
+										width: "100%",
+										zIndex: 20,
+										alignItems: "center",
 
 										...{ minHeight: "60vh", position: "static" },
 									}}
@@ -147,10 +151,11 @@ export function Inner({
 				// onStartShouldSetResponder={() => true}
 				onTouchEnd={stopPropagation(null)}
 				style={{
-					...a.relative,
-					...a.rounded_md,
-					...a.w_full,
-					...a.border,
+					position: "relative",
+					borderRadius: 12,
+					width: "100%",
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.bg,
 
 					maxWidth: 600,
@@ -190,13 +195,14 @@ export const InnerFlatList = React.forwardRef<
 		<Inner
 			label={label}
 			style={{
-				...a.overflow_hidden,
-				...a.px_0,
+				overflow: "hidden",
+				paddingLeft: 0,
+				paddingRight: 0,
 				// 100 minus 10vh of paddingVertical
 				maxHeight: "80vh",
 				...webInnerStyle,
 			}}
-			contentContainerStyle={{ ...a.px_0, ...webInnerContentContainerStyle }}
+			contentContainerStyle={{ paddingLeft: 0, paddingRight: 0, ...webInnerContentContainerStyle }}
 		>
 			<FlatList
 				ref={ref}
@@ -215,8 +221,8 @@ export function Close() {
 	return (
 		<div
 			style={{
-				...a.absolute,
-				...a.z_10,
+				position: "absolute",
+				zIndex: 10,
 
 				...{
 					top: a.pt_md.paddingTop,
@@ -249,8 +255,11 @@ function Backdrop() {
 		<div style={{ opacity: 0.8 }}>
 			<div
 				style={{
-					...a.fixed,
-					...a.inset_0,
+					position: "fixed",
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
 					...{ backgroundColor: t.palette.black },
 					...(!reduceMotionEnabled && a.fade_in),
 				}}

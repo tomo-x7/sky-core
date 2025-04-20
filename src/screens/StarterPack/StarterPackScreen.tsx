@@ -352,9 +352,9 @@ function Header({
 				{hasSession ? (
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_sm,
-							...a.align_center,
+							flexDirection: "row",
+							gap: 8,
+							alignItems: "center",
 						}}
 					>
 						{isOwn ? (
@@ -377,9 +377,9 @@ function Header({
 								disabled={isProcessing}
 								onPress={onFollowAll}
 								style={{
-									...a.flex_row,
-									...a.gap_xs,
-									...a.align_center,
+									flexDirection: "row",
+									gap: 4,
+									alignItems: "center",
 								}}
 							>
 								<ButtonText>Follow all</ButtonText>
@@ -393,18 +393,20 @@ function Header({
 			{!hasSession || richText || joinedAllTimeCount >= 25 ? (
 				<div
 					style={{
-						...a.px_lg,
-						...a.pt_md,
-						...a.pb_sm,
-						...a.gap_md,
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 12,
+						paddingBottom: 8,
+						gap: 12,
 					}}
 				>
 					{richText ? (
 						<RichText
 							value={richText}
 							style={{
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						/>
 					) : null}
@@ -421,15 +423,15 @@ function Header({
 							color="primary"
 							size="large"
 						>
-							<ButtonText style={a.text_lg}>Join Bluesky</ButtonText>
+							<ButtonText style={{ ...a.text_lg }}>Join Bluesky</ButtonText>
 						</Button>
 					) : null}
 					{joinedAllTimeCount >= 25 ? (
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_sm,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 8,
 							}}
 						>
 							<FontAwesomeIcon
@@ -440,8 +442,9 @@ function Header({
 							/>
 							<Text
 								style={{
-									...a.font_bold,
-									...a.text_sm,
+									fontWeight: "600",
+									fontSize: 14,
+									letterSpacing: 0,
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -577,24 +580,25 @@ function OverflowMenu({
 				{deleteError && (
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_sm,
-							...a.rounded_sm,
-							...a.p_md,
-							...a.mb_lg,
-							...a.border,
+							flexDirection: "row",
+							gap: 8,
+							borderRadius: 8,
+							padding: 12,
+							marginBottom: 16,
+							border: "1px solid black",
+							borderWidth: 1,
 							...t.atoms.border_contrast_medium,
 							...t.atoms.bg_contrast_25,
 						}}
 					>
 						<div
 							style={{
-								...a.flex_1,
-								...a.gap_2xs,
+								flex: 1,
+								gap: 2,
 							}}
 						>
-							<Text style={a.font_bold}>Unable to delete</Text>
-							<Text style={a.leading_snug}>{cleanError(deleteError)}</Text>
+							<Text style={{ ...a.font_bold }}>Unable to delete</Text>
+							<Text style={{ ...a.leading_snug }}>{cleanError(deleteError)}</Text>
 						</div>
 						<CircleInfo size="sm" fill={t.palette.negative_400} />
 					</div>
@@ -648,31 +652,35 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 		>
 			<div
 				style={{
-					...a.py_4xl,
-					...a.px_xl,
-					...a.align_center,
-					...a.gap_5xl,
+					paddingTop: 32,
+					paddingBottom: 32,
+					paddingLeft: 20,
+					paddingRight: 20,
+					alignItems: "center",
+					gap: 40,
 				}}
 			>
 				<div
 					style={{
-						...a.w_full,
-						...a.align_center,
-						...a.gap_lg,
+						width: "100%",
+						alignItems: "center",
+						gap: 16,
 					}}
 				>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_3xl,
+							fontWeight: "600",
+							fontSize: 26,
+							letterSpacing: 0,
 						}}
 					>
 						Starter pack is invalid
 					</Text>
 					<Text
 						style={{
-							...a.text_md,
-							...a.text_center,
+							fontSize: 16,
+							letterSpacing: 0,
+							textAlign: "center",
 							...t.atoms.text_contrast_high,
 							lineHeight: 1.4,
 							...(gtMobile ? { width: 450 } : flatten([a.w_full, a.px_lg])),
@@ -684,7 +692,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 				</div>
 				<div
 					style={{
-						...a.gap_md,
+						gap: 12,
 						...(gtMobile ? { width: 350 } : flatten([a.w_full, a.px_lg])),
 					}}
 				>
@@ -694,8 +702,8 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						label={"Delete starter pack"}
 						size="large"
 						style={{
-							...a.rounded_sm,
-							...a.overflow_hidden,
+							borderRadius: 8,
+							overflow: "hidden",
 							...{ paddingTop: 10, paddingBottom: 10 },
 						}}
 						disabled={isProcessing}
@@ -713,8 +721,8 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 						label={"Return to previous page"}
 						size="large"
 						style={{
-							...a.rounded_sm,
-							...a.overflow_hidden,
+							borderRadius: 8,
+							overflow: "hidden",
 							...{ paddingTop: 10, paddingBottom: 10 },
 						}}
 						disabled={isProcessing}

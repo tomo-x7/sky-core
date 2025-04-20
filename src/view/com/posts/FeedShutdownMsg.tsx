@@ -66,34 +66,43 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 	return (
 		<div
 			style={{
-				...a.py_3xl,
-				...a.px_2xl,
-				...a.gap_xl,
+				paddingTop: 28,
+				paddingBottom: 28,
+				paddingLeft: 24,
+				paddingRight: 24,
+				gap: 20,
 				...t.atoms.border_contrast_low,
-				...a.border_t,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 			}}
 		>
 			<Text
 				style={{
-					...a.text_5xl,
-					...a.font_bold,
+					fontSize: 40,
+					letterSpacing: 0,
+					fontWeight: "600",
 					...t.atoms.text,
-					...a.text_center,
+					textAlign: "center",
 				}}
 			>
 				:(
 			</Text>
 			<Text
 				style={{
-					...a.text_md,
-					...a.leading_snug,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.3,
 					...t.atoms.text,
-					...a.text_center,
+					textAlign: "center",
 				}}
 			>
 				<>
 					This feed is no longer online. We are showing{" "}
-					<InlineLinkText label={"The Discover feed"} to="/profile/bsky.app/feed/whats-hot" style={a.text_md}>
+					<InlineLinkText
+						label={"The Discover feed"}
+						to="/profile/bsky.app/feed/whats-hot"
+						style={{ ...a.text_md }}
+					>
 						Discover
 					</InlineLinkText>{" "}
 					instead.
@@ -102,9 +111,9 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 			{hasFeedPinned ? (
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_center,
-						...a.gap_sm,
+						flexDirection: "row",
+						justifyContent: "center",
+						gap: 8,
 					}}
 				>
 					<Button

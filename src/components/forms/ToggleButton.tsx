@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { flatten, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 
@@ -18,10 +18,10 @@ export function Group({ children, multiple, ...props }: GroupProps) {
 		<Toggle.Group type={multiple ? "checkbox" : "radio"} {...props}>
 			<div
 				style={{
-					...a.w_full,
-					...a.flex_row,
-					...a.rounded_sm,
-					...a.overflow_hidden,
+					width: "100%",
+					flexDirection: "row",
+					borderRadius: 8,
+					overflow: "hidden",
 					...t.atoms.border_contrast_low,
 					...{ borderWidth: 1 },
 				}}
@@ -37,8 +37,8 @@ export function Button({ children, ...props }: ItemProps) {
 		<Toggle.Item
 			{...props}
 			style={{
-				...a.flex_grow,
-				...a.flex_1,
+				flexGrow: 1,
+				flex: 1,
 			}}
 		>
 			<ButtonInner>{children}</ButtonInner>
@@ -93,9 +93,11 @@ function ButtonInner({ children }: React.PropsWithChildren) {
 					marginLeft: -1,
 				},
 
-				...a.flex_grow,
-				...a.py_md,
-				...a.px_md,
+				flexGrow: 1,
+				paddingTop: 12,
+				paddingBottom: 12,
+				paddingLeft: 12,
+				paddingRight: 12,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
 				...baseStyles,
@@ -128,8 +130,8 @@ export function ButtonText({ children }: { children: React.ReactNode }) {
 	return (
 		<Text
 			style={{
-				...a.text_center,
-				...a.font_bold,
+				textAlign: "center",
+				fontWeight: "600",
 				...t.atoms.text_contrast_medium,
 				...textStyles,
 			}}

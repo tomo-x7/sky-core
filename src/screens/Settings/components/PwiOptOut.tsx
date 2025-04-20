@@ -66,8 +66,8 @@ export function PwiOptOut() {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.gap_sm,
+				flex: 1,
+				gap: 8,
 			}}
 		>
 			<Toggle.Item
@@ -76,16 +76,16 @@ export function PwiOptOut() {
 				value={isOptedOut}
 				onChange={onToggleOptOut}
 				label={"Discourage apps from showing my account to logged-out users"}
-				style={a.w_full}
+				style={{ ...a.w_full }}
 			>
-				<Toggle.LabelText style={a.flex_1}>
+				<Toggle.LabelText style={{ flex: 1 }}>
 					Discourage apps from showing my account to logged-out users
 				</Toggle.LabelText>
 				<Toggle.Platform />
 			</Toggle.Item>
 			<Text
 				style={{
-					...a.leading_snug,
+					lineHeight: 1.3,
 					...t.atoms.text_contrast_high,
 				}}
 			>

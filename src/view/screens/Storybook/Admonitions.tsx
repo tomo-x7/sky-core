@@ -5,7 +5,7 @@ import { H1 } from "#/components/Typography";
 
 export function Admonitions() {
 	return (
-		<div style={a.gap_md}>
+		<div style={{ gap:12 }}>
 			<H1>Admonitions</H1>
 			<Admonition>The quick brown fox jumps over the lazy dog.</Admonition>
 			<Admonition type="info">

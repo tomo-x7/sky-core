@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { Warning_Stroke2_Corner0_Rounded as Warning } from "#/components/icons/Warning";
 
@@ -11,19 +11,19 @@ export function FormError({ error }: { error?: string }) {
 		<div
 			style={{
 				...{ backgroundColor: t.palette.negative_400 },
-				...a.flex_row,
-				...a.rounded_sm,
-				...a.p_md,
-				...a.gap_sm,
+				flexDirection: "row",
+				borderRadius: 8,
+				padding: 12,
+				gap: 8,
 			}}
 		>
 			<Warning fill={t.palette.white} size="md" />
-			<div style={a.flex_1}>
+			<div style={{ flex: 1 }}>
 				<Text
 					style={{
 						...{ color: t.palette.white },
-						...a.font_bold,
-						...a.leading_snug,
+						fontWeight: "600",
+						lineHeight: 1.3,
 					}}
 				>
 					{error}

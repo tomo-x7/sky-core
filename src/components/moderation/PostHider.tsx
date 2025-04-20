@@ -2,7 +2,7 @@ import type { AppBskyActorDefs, ModerationCause, ModerationUI } from "@atproto/a
 import { useQueryClient } from "@tanstack/react-query";
 import React, { type ComponentProps } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
 import { useModerationCauseDescription } from "#/lib/moderation/useModerationCauseDescription";
@@ -60,10 +60,11 @@ export function PostHider({
 				}
 			}}
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_sm,
-				...a.py_md,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 8,
+				paddingTop: 12,
+				paddingBottom: 12,
 
 				...{
 					paddingLeft: 6,
@@ -84,8 +85,8 @@ export function PostHider({
 				<div
 					style={{
 						...t.atoms.bg_contrast_25,
-						...a.align_center,
-						...a.justify_center,
+						alignItems: "center",
+						justifyContent: "center",
 
 						...{
 							width: iconSize,
@@ -102,7 +103,7 @@ export function PostHider({
 			<Text
 				style={{
 					...t.atoms.text_contrast_medium,
-					...a.flex_1,
+					flex: 1,
 				}}
 				numberOfLines={1}
 			>

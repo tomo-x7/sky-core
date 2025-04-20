@@ -1,6 +1,6 @@
 import type { AppBskyUnspeccedDefs } from "@atproto/api";
 
-import { atoms as a, useGutters, useTheme } from "#/alf";
+import { useGutters, useTheme } from "#/alf";
 import { TrendingTopic, TrendingTopicLink, TrendingTopicSkeleton } from "#/components/TrendingTopics";
 import { Text } from "#/components/Typography";
 import { Hashtag_Stroke2_Corner0_Rounded } from "#/components/icons/Hashtag";
@@ -23,26 +23,27 @@ function Inner() {
 		<>
 			<div
 				style={{
-					...a.flex_row,
-					...a.px_lg,
-					...a.py_lg,
-					...a.pt_2xl,
-					...a.gap_md,
-					...a.border_b,
+					flexDirection: "row",
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingBottom: 16,
+					paddingTop: 24,
+					gap: 12,
+					borderBottom: "1px solid black",
 					...t.atoms.border_contrast_low,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_1,
-						...a.gap_sm,
+						flex: 1,
+						gap: 8,
 					}}
 				>
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_sm,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 8,
 						}}
 					>
 						<Hashtag_Stroke2_Corner0_Rounded
@@ -52,8 +53,9 @@ function Inner() {
 						/>
 						<Text
 							style={{
-								...a.text_2xl,
-								...a.font_heavy,
+								fontSize: 22,
+								letterSpacing: 0,
+								fontWeight: "800",
 								...t.atoms.text,
 							}}
 						>
@@ -64,7 +66,7 @@ function Inner() {
 						<Text
 							style={{
 								...t.atoms.text_contrast_high,
-								...a.leading_snug,
+								lineHeight: 1.3,
 							}}
 						>
 							Content from across the network we think you might like.
@@ -73,7 +75,7 @@ function Inner() {
 						<Text
 							style={{
 								...t.atoms.text_contrast_high,
-								...a.leading_snug,
+								lineHeight: 1.3,
 							}}
 						>
 							Feeds we think you might like.
@@ -84,15 +86,15 @@ function Inner() {
 
 			<div
 				style={{
-					...a.pt_md,
-					...a.pb_lg,
+					paddingTop: 12,
+					paddingBottom: 16,
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_start,
-						...a.flex_wrap,
+						flexDirection: "row",
+						justifyContent: "flex-start",
+						flexWrap: "wrap",
 						...{ rowGap: 8, columnGap: 6 },
 						...gutters,
 					}}

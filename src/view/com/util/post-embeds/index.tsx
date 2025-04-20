@@ -80,7 +80,7 @@ export function PostEmbeds({
 		// custom feed embed (i.e. generator view)
 		if (AppBskyFeedDefs.isGeneratorView(embed.record)) {
 			return (
-				<div style={a.mt_sm}>
+				<div style={{ ...a.mt_sm }}>
 					<MaybeFeedCard view={embed.record} />
 				</div>
 			);
@@ -89,7 +89,7 @@ export function PostEmbeds({
 		// list embed
 		if (AppBskyGraphDefs.isListView(embed.record)) {
 			return (
-				<div style={a.mt_sm}>
+				<div style={{ ...a.mt_sm }}>
 					<MaybeListCard view={embed.record} />
 				</div>
 			);
@@ -98,7 +98,7 @@ export function PostEmbeds({
 		// starter pack embed
 		if (AppBskyGraphDefs.isStarterPackViewBasic(embed.record)) {
 			return (
-				<div style={a.mt_sm}>
+				<div style={{ ...a.mt_sm }}>
 					<StarterPackCard starterPack={embed.record} />
 				</div>
 			);
@@ -162,7 +162,7 @@ export function PostEmbeds({
 					<ContentHider modui={moderation?.ui("contentMedia")}>
 						<div
 							style={{
-								...a.mt_sm,
+								marginTop: 8,
 								...style,
 							}}
 						>
@@ -188,7 +188,7 @@ export function PostEmbeds({
 				<ContentHider modui={moderation?.ui("contentMedia")}>
 					<div
 						style={{
-							...a.mt_sm,
+							marginTop: 8,
 							...style,
 						}}
 					>
@@ -214,7 +214,7 @@ export function PostEmbeds({
 					link={link}
 					onOpen={onOpen}
 					style={{
-						...a.mt_sm,
+						marginTop: 8,
 						...style,
 					}}
 				/>
@@ -277,10 +277,11 @@ export function MaybeListCard({ view }: { view: AppBskyGraphDefs.ListView }) {
 		<ContentHider modui={moderation?.ui("contentList")}>
 			<div
 				style={{
-					...a.border,
+					border: "1px solid black",
+					borderWidth: 1,
 					...t.atoms.border_contrast_medium,
-					...a.p_md,
-					...a.rounded_sm,
+					padding: 12,
+					borderRadius: 8,
 				}}
 			>
 				<ListCard.Default view={view} />

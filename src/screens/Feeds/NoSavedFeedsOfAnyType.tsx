@@ -1,7 +1,7 @@
 import { TID } from "@atproto/common-web";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
@@ -29,16 +29,16 @@ export function NoSavedFeedsOfAnyType() {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.flex_wrap,
-				...a.justify_between,
-				...a.p_xl,
-				...a.gap_md,
+				flexDirection: "row",
+				flexWrap: "wrap",
+				justifyContent: "space-between",
+				padding: 20,
+				gap: 12,
 			}}
 		>
 			<Text
 				style={{
-					...a.leading_snug,
+					lineHeight: 1.3,
 					...t.atoms.text_contrast_medium,
 					...{ maxWidth: 310 },
 				}}

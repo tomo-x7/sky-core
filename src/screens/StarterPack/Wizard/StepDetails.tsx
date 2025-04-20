@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ScreenTransition } from "#/components/StarterPack/Wizard/ScreenTransition";
 import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
@@ -21,33 +21,38 @@ export function StepDetails() {
 		<ScreenTransition direction={state.transitionDirection}>
 			<div
 				style={{
-					...a.px_xl,
-					...a.gap_xl,
-					...a.mt_4xl,
+					paddingLeft: 20,
+					paddingRight: 20,
+					gap: 20,
+					marginTop: 32,
 				}}
 			>
 				<div
 					style={{
-						...a.gap_md,
-						...a.align_center,
-						...a.px_md,
-						...a.mb_md,
+						gap: 12,
+						alignItems: "center",
+						paddingLeft: 12,
+						paddingRight: 12,
+						marginBottom: 12,
 					}}
 				>
 					<StarterPack width={90} gradient="sky" />
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_3xl,
+							fontWeight: "600",
+							fontSize: 26,
+							letterSpacing: 0,
 						}}
 					>
 						Invites, but personal
 					</Text>
 					<Text
 						style={{
-							...a.text_center,
-							...a.text_md,
-							...a.px_md,
+							textAlign: "center",
+							fontSize: 16,
+							letterSpacing: 0,
+							paddingLeft: 12,
+							paddingRight: 12,
 						}}
 					>
 						Invite your friends to follow your favorite feeds and people

@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import type { JSX } from "react";
-import { atoms as a } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Pager, type PagerRef, type RenderTabBarFnProps } from "#/view/com/pager/Pager";
 import { TabBar } from "./TabBar";
@@ -115,8 +114,8 @@ let PagerTabBar = ({
 			{tabBarAnchor}
 			<Layout.Center
 				style={{
-					...a.z_10,
-					...a.sticky,
+					zIndex: 10,
+					position: "sticky",
 					...{ top: 0, display: isHeaderReady ? undefined : "none" },
 				}}
 			>

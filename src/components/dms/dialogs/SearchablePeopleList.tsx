@@ -215,27 +215,29 @@ export function SearchablePeopleList({
 			<div
 				ref={ref}
 				style={{
-					...a.relative,
-					...a.pt_lg,
-					...a.pb_xs,
-					...a.px_lg,
-					...a.border_b,
+					position: "relative",
+					paddingTop: 16,
+					paddingBottom: 4,
+					paddingLeft: 16,
+					paddingRight: 16,
+					borderBottom: "1px solid black",
 					...t.atoms.border_contrast_low,
 					...t.atoms.bg,
 				}}
 			>
 				<div
 					style={{
-						...a.relative,
-						...a.justify_center,
+						position: "relative",
+						justifyContent: "center",
 					}}
 				>
 					<Text
 						style={{
-							...a.z_10,
-							...a.text_lg,
-							...a.font_heavy,
-							...a.leading_tight,
+							zIndex: 10,
+							fontSize: 18,
+							letterSpacing: 0,
+							fontWeight: "800",
+							lineHeight: 1.15,
 							...t.atoms.text_contrast_high,
 						}}
 					>
@@ -248,8 +250,8 @@ export function SearchablePeopleList({
 						variant={"ghost"}
 						color="secondary"
 						style={{
-							...a.absolute,
-							...a.z_20,
+							position: "absolute",
+							zIndex: 20,
 							...{ right: -4 },
 						}}
 						onPress={() => control.close()}
@@ -257,7 +259,7 @@ export function SearchablePeopleList({
 						<ButtonIcon icon={X} size="md" />
 					</Button>
 				</div>
-				<div style={a.pt_xs}>
+				<div style={{ ...a.pt_xs }}>
 					<SearchInput
 						inputRef={inputRef}
 						value={searchText}
@@ -280,8 +282,8 @@ export function SearchablePeopleList({
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
-			style={{ ...a.py_0, height: "100vh", maxHeight: 600, ...a.px_0 }}
-			webInnerContentContainerStyle={a.py_0}
+			style={{ paddingTop: 0, paddingBottom: 0, height: "100dvh", maxHeight: 600, ...a.px_0 }}
+			webInnerContentContainerstyle={{ ...a.py_0 }}
 			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
 			scrollIndicatorInsets={{ top: headerHeight }}
 			keyboardDismissMode="on-drag"
@@ -317,12 +319,14 @@ function ProfileCard({
 			{({ hovered, pressed, focused }) => (
 				<div
 					style={{
-						...a.flex_1,
-						...a.py_md,
-						...a.px_lg,
-						...a.gap_md,
-						...a.align_center,
-						...a.flex_row,
+						flex: 1,
+						paddingTop: 12,
+						paddingBottom: 12,
+						paddingLeft: 16,
+						paddingRight: 16,
+						gap: 12,
+						alignItems: "center",
+						flexDirection: "row",
 
 						...(!enabled
 							? { opacity: 0.5 }
@@ -341,16 +345,16 @@ function ProfileCard({
 					/>
 					<div
 						style={{
-							...a.flex_1,
-							...a.gap_2xs,
+							flex: 1,
+							gap: 2,
 						}}
 					>
 						<Text
 							style={{
 								...t.atoms.text,
-								...a.font_bold,
-								...a.leading_tight,
-								...a.self_start,
+								fontWeight: "600",
+								lineHeight: 1.15,
+								alignSelf: "flex-start",
 							}}
 							numberOfLines={1}
 						>
@@ -358,7 +362,7 @@ function ProfileCard({
 						</Text>
 						<Text
 							style={{
-								...a.leading_tight,
+								lineHeight: 1.15,
 								...t.atoms.text_contrast_high,
 							}}
 							numberOfLines={2}
@@ -378,37 +382,39 @@ function ProfileCardSkeleton() {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.py_md,
-				...a.px_lg,
-				...a.gap_md,
-				...a.align_center,
-				...a.flex_row,
+				flex: 1,
+				paddingTop: 12,
+				paddingBottom: 12,
+				paddingLeft: 16,
+				paddingRight: 16,
+				gap: 12,
+				alignItems: "center",
+				flexDirection: "row",
 			}}
 		>
 			<div
 				style={{
-					...a.rounded_full,
+					borderRadius: 999,
 					...{ width: 42, height: 42 },
 					...t.atoms.bg_contrast_25,
 				}}
 			/>
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_sm,
+					flex: 1,
+					gap: 8,
 				}}
 			>
 				<div
 					style={{
-						...a.rounded_xs,
+						borderRadius: 4,
 						...{ width: 80, height: 14 },
 						...t.atoms.bg_contrast_25,
 					}}
 				/>
 				<div
 					style={{
-						...a.rounded_xs,
+						borderRadius: 4,
 						...{ width: 120, height: 10 },
 						...t.atoms.bg_contrast_25,
 					}}
@@ -423,16 +429,18 @@ function Empty({ message }: { message: string }) {
 	return (
 		<div
 			style={{
-				...a.p_lg,
-				...a.py_xl,
-				...a.align_center,
-				...a.gap_md,
+				padding: 16,
+				paddingTop: 20,
+				paddingBottom: 20,
+				alignItems: "center",
+				gap: 12,
 			}}
 		>
 			<Text
 				style={{
-					...a.text_sm,
-					...a.italic,
+					fontSize: 14,
+					letterSpacing: 0,
+					fontStyle: "italic",
 					...t.atoms.text_contrast_high,
 				}}
 			>
@@ -440,7 +448,8 @@ function Empty({ message }: { message: string }) {
 			</Text>
 			<Text
 				style={{
-					...a.text_xs,
+					fontSize: 12,
+					letterSpacing: 0,
 					...t.atoms.text_contrast_low,
 				}}
 			>
@@ -474,9 +483,9 @@ function SearchInput({
 				onMouseLeave,
 			}}
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_sm,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 8,
 			}}
 		>
 			<Search size="md" fill={interacted ? t.palette.primary_500 : t.palette.contrast_300} />
@@ -489,9 +498,11 @@ function SearchInput({
 				onFocus={onFocus}
 				onBlur={onBlur}
 				style={{
-					...a.flex_1,
-					...a.py_md,
-					...a.text_md,
+					flex: 1,
+					paddingTop: 12,
+					paddingBottom: 12,
+					fontSize: 16,
+					letterSpacing: 0,
 					...t.atoms.text,
 				}}
 				className={phStyleCName}

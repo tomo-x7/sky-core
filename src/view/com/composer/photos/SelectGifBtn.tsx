@@ -27,7 +27,7 @@ export function SelectGifBtn({ onClose, onSelectGif, disabled }: Props) {
 			<Button
 				onPress={onPressSelectGif}
 				label={"Select GIF"}
-				style={a.p_sm}
+				style={{ ...a.p_sm }}
 				variant="ghost"
 				shape="round"
 				color="primary"

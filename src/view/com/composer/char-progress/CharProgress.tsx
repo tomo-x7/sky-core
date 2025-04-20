@@ -24,18 +24,18 @@ export function CharProgress({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.justify_between,
-				...a.gap_sm,
+				flexDirection: "row",
+				alignItems: "center",
+				justifyContent: "space-between",
+				gap: 8,
 				...style,
 			}}
 		>
 			<Text
 				style={{
 					...{ color: textColor, fontVariant: "tabular-nums" },
-					...a.flex_grow,
-					...a.text_right,
+					flexGrow: 1,
+					textAlign: "right",,
 					...textStyle,
 				}}
 			>

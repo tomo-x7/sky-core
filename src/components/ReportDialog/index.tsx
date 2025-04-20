@@ -38,7 +38,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 			{isLoading ? (
 				<div
 					style={{
-						...a.align_center,
+						alignItems: "center",
 						...{ height: 100 },
 					}}
 				>
@@ -48,7 +48,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 				</div>
 			) : error || !labelers ? (
 				<div>
-					<Text style={a.text_md}>Something went wrong, please try again.</Text>
+					<Text style={{ ...a.text_md }}>Something went wrong, please try again.</Text>
 				</div>
 			) : (
 				<ReportDialogLoaded labelers={labelers} {...props} />

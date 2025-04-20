@@ -124,22 +124,23 @@ let ProfileHeaderStandard = ({
 		>
 			<div
 				style={{
-					...a.px_lg,
-					...a.pt_md,
-					...a.pb_sm,
-					...a.overflow_hidden,
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingTop: 12,
+					paddingBottom: 8,
+					overflow: "hidden",
 					pointerEvents: "none",
 				}}
 			>
 				<div
 					style={{
 						...{ paddingLeft: 90 },
-						...a.flex_row,
-						...a.align_center,
-						...a.justify_end,
-						...a.gap_xs,
-						...a.pb_sm,
-						...a.flex_wrap,
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "flex-end",
+						gap: 4,
+						paddingBottom: 8,
+						flexWrap: "wrap",
 						pointerEvents: "none",
 					}}
 				>
@@ -151,7 +152,7 @@ let ProfileHeaderStandard = ({
 								variant="solid"
 								onPress={onPressEditProfile}
 								label={"Edit profile"}
-								style={{ ...a.rounded_full, pointerEvents: "auto" }}
+								style={{ borderRadius: 999, pointerEvents: "auto" }}
 							>
 								<ButtonText>Edit Profile</ButtonText>
 							</Button>
@@ -166,7 +167,7 @@ let ProfileHeaderStandard = ({
 								label={"Unblock"}
 								disabled={!hasSession}
 								onPress={() => unblockPromptControl.open()}
-								style={{ ...a.rounded_full, pointerEvents: "auto" }}
+								style={{ borderRadius: 999, pointerEvents: "auto" }}
 							>
 								<ButtonText>Unblock</ButtonText>
 							</Button>
@@ -185,7 +186,7 @@ let ProfileHeaderStandard = ({
 										: `Follow ${profile.handle}`
 								}
 								onPress={profile.viewer?.following ? onPressUnfollow : onPressFollow}
-								style={{ ...a.rounded_full, pointerEvents: "auto" }}
+								style={{ borderRadius: 999, pointerEvents: "auto" }}
 							>
 								<ButtonIcon position="left" icon={profile.viewer?.following ? Check : Plus} />
 								<ButtonText>
@@ -204,10 +205,10 @@ let ProfileHeaderStandard = ({
 				</div>
 				<div
 					style={{
-						...a.flex_col,
-						...a.gap_2xs,
-						...a.pt_2xs,
-						...a.pb_sm,
+						flexDirection: "column",
+						gap: 2,
+						paddingTop: 2,
+						paddingBottom: 8,
 						pointerEvents: "auto",
 					}}
 				>
@@ -215,12 +216,12 @@ let ProfileHeaderStandard = ({
 					<ProfileHeaderHandle profile={profile} />
 				</div>
 				{!isPlaceholderProfile && !isBlockedUser && (
-					<div style={{ ...a.gap_md, pointerEvents: "auto" }}>
+					<div style={{ gap: 12, pointerEvents: "auto" }}>
 						<ProfileHeaderMetrics profile={profile} />
 						{descriptionRT && !moderation.ui("profileView").blur ? (
 							<div style={{ pointerEvents: "auto" }}>
 								<RichText
-									style={a.text_md}
+									style={{ ...a.text_md }}
 									numberOfLines={15}
 									value={descriptionRT}
 									enableTags
@@ -232,9 +233,9 @@ let ProfileHeaderStandard = ({
 						{!isMe && !isBlockedUser && shouldShowKnownFollowers(profile.viewer?.knownFollowers) && (
 							<div
 								style={{
-									...a.flex_row,
-									...a.align_center,
-									...a.gap_sm,
+									flexDirection: "row",
+									alignItems: "center",
+									gap: 8,
 								}}
 							>
 								<KnownFollowers profile={profile} moderationOpts={moderationOpts} />

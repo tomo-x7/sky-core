@@ -3,7 +3,7 @@ import type { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query
 import { useCallback, useMemo, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { ListFooter } from "#/components/Lists";
@@ -134,27 +134,29 @@ function RequestList({
 							<>
 								<div
 									style={{
-										...a.pt_3xl,
-										...a.align_center,
+										paddingTop: 28,
+										alignItems: "center",
 									}}
 								>
 									<CircleInfoIcon width={48} fill={t.atoms.text_contrast_low.color} />
 									<Text
 										style={{
-											...a.pt_md,
-											...a.pb_sm,
-											...a.text_2xl,
-											...a.font_bold,
+											paddingTop: 12,
+											paddingBottom: 8,
+											fontSize: 22,
+											letterSpacing: 0,
+											fontWeight: "600",
 										}}
 									>
 										Whoops!
 									</Text>
 									<Text
 										style={{
-											...a.text_md,
-											...a.pb_xl,
-											...a.text_center,
-											...a.leading_snug,
+											fontSize: 16,
+											letterSpacing: 0,
+											paddingBottom: 20,
+											textAlign: "center",
+											lineHeight: 1.3,
 											...t.atoms.text_contrast_medium,
 											...{ maxWidth: 360 },
 										}}
@@ -178,27 +180,29 @@ function RequestList({
 							<>
 								<div
 									style={{
-										...a.pt_3xl,
-										...a.align_center,
+										paddingTop: 28,
+										alignItems: "center",
 									}}
 								>
 									<MessageIcon width={48} fill={t.palette.primary_500} />
 									<Text
 										style={{
-											...a.pt_md,
-											...a.pb_sm,
-											...a.text_2xl,
-											...a.font_bold,
+											paddingTop: 12,
+											paddingBottom: 8,
+											fontSize: 22,
+											letterSpacing: 0,
+											fontWeight: "600",
 										}}
 									>
 										Inbox zero!
 									</Text>
 									<Text
 										style={{
-											...a.text_md,
-											...a.pb_xl,
-											...a.text_center,
-											...a.leading_snug,
+											fontSize: 16,
+											letterSpacing: 0,
+											paddingBottom: 20,
+											textAlign: "center",
+											lineHeight: 1.3,
 											...t.atoms.text_contrast_medium,
 										}}
 									>

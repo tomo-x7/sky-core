@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -21,15 +21,15 @@ export function ProfileHeaderMetrics({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_sm,
-				...a.align_center,
+				flexDirection: "row",
+				gap: 8,
+				alignItems: "center",
 				pointerEvents: "none",
 			}}
 		>
 			<InlineLinkText
 				style={{
-					...a.flex_row,
+					flexDirection: "row",
 					...t.atoms.text,
 					pointerEvents: "auto",
 				}}
@@ -38,8 +38,9 @@ export function ProfileHeaderMetrics({
 			>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_md,
+						fontWeight: "600",
+						fontSize: 16,
+						letterSpacing: 0,
 					}}
 				>
 					{followers}{" "}
@@ -47,7 +48,8 @@ export function ProfileHeaderMetrics({
 				<Text
 					style={{
 						...t.atoms.text_contrast_medium,
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 					}}
 				>
 					{pluralizedFollowers}
@@ -55,7 +57,7 @@ export function ProfileHeaderMetrics({
 			</InlineLinkText>
 			<InlineLinkText
 				style={{
-					...a.flex_row,
+					flexDirection: "row",
 					...t.atoms.text,
 					pointerEvents: "auto",
 				}}
@@ -64,8 +66,9 @@ export function ProfileHeaderMetrics({
 			>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_md,
+						fontWeight: "600",
+						fontSize: 16,
+						letterSpacing: 0,
 					}}
 				>
 					{following}{" "}
@@ -73,7 +76,8 @@ export function ProfileHeaderMetrics({
 				<Text
 					style={{
 						...t.atoms.text_contrast_medium,
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 					}}
 				>
 					{pluralizedFollowings}
@@ -81,9 +85,10 @@ export function ProfileHeaderMetrics({
 			</InlineLinkText>
 			<Text
 				style={{
-					...a.font_bold,
+					fontWeight: "600",
 					...t.atoms.text,
-					...a.text_md,
+					fontSize: 16,
+					letterSpacing: 0,
 					pointerEvents: "auto",
 				}}
 			>
@@ -91,8 +96,9 @@ export function ProfileHeaderMetrics({
 				<Text
 					style={{
 						...t.atoms.text_contrast_medium,
-						...a.font_normal,
-						...a.text_md,
+						fontWeight: "400",
+						fontSize: 16,
+						letterSpacing: 0,
 					}}
 				>
 					{profile.postsCount === 1 ? "post" : "posts"}

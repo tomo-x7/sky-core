@@ -110,15 +110,16 @@ function DialogInner({
 		<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description">
 			<div
 				style={{
-					...a.relative,
-					...a.gap_md,
-					...a.w_full,
+					position: "relative",
+					gap: 12,
+					width: "100%",
 				}}
 			>
 				<Text
 					style={{
-						...a.text_2xl,
-						...a.font_bold,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "600",
 					}}
 				>
 					Choose your account provider
@@ -146,11 +147,14 @@ function DialogInner({
 				{fixedOption === "custom" && (
 					<div
 						style={{
-							...a.border,
+							border: "1px solid black",
+							borderWidth: 1,
 							...t.atoms.border_contrast_low,
-							...a.rounded_sm,
-							...a.px_md,
-							...a.py_md,
+							borderRadius: 8,
+							paddingLeft: 12,
+							paddingRight: 12,
+							paddingTop: 12,
+							paddingBottom: 12,
 						}}
 					>
 						<TextField.LabelText>Server address</TextField.LabelText>
@@ -167,9 +171,9 @@ function DialogInner({
 						{pdsAddressHistory.length > 0 && (
 							<div
 								style={{
-									...a.flex_row,
-									...a.flex_wrap,
-									...a.mt_xs,
+									flexDirection: "row",
+									flexWrap: "wrap",
+									marginTop: 4,
 								}}
 							>
 								{pdsAddressHistory.map((uri) => (
@@ -179,10 +183,12 @@ function DialogInner({
 										color="primary"
 										label={uri}
 										style={{
-											...a.px_sm,
-											...a.py_xs,
-											...a.rounded_sm,
-											...a.gap_sm,
+											paddingLeft: 8,
+											paddingRight: 8,
+											paddingTop: 4,
+											paddingBottom: 4,
+											borderRadius: 8,
+											gap: 8,
 										}}
 										onPress={() => setCustomAddress(uri)}
 									>
@@ -194,13 +200,14 @@ function DialogInner({
 					</div>
 				)}
 
-				<div style={a.py_xs}>
+				<div style={{ ...a.py_xs }}>
 					<P
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.text_sm,
-							...a.leading_snug,
-							...a.flex_1,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.3,
+							flex: 1,
 						}}
 					>
 						{isFirstTimeUser ? (

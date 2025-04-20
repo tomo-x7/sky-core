@@ -2,7 +2,7 @@ import type { AppBskyFeedDefs } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 import React, { useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as FeedCard from "#/components/FeedCard";
 import { useBottomBarOffset } from "#/lib/hooks/useBottomBarOffset";
 import type { SectionRef } from "#/screens/Profile/Sections/types";
@@ -42,8 +42,9 @@ export const FeedsList = React.forwardRef<SectionRef, ProfilesListProps>(functio
 		return (
 			<div
 				style={{
-					...a.p_lg,
-					...a.border_t,
+					padding: 16,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
 					...t.atoms.border_contrast_low,
 				}}
 			>

@@ -57,10 +57,10 @@ export function MessageProfileButton({
 				<div
 					aria-hidden={true}
 					style={{
-						...a.justify_center,
-						...a.align_center,
+						justifyContent: "center",
+						alignItems: "center",
 						...t.atoms.bg_contrast_25,
-						...a.rounded_full,
+						borderRadius: 999,
 						...{ width: 34, height: 34 },
 					}}
 				>
@@ -87,7 +87,7 @@ export function MessageProfileButton({
 					variant="solid"
 					shape="round"
 					label={`Message ${profile.handle}`}
-					style={a.justify_center}
+					style={{ ...a.justify_center }}
 					onPress={onPress}
 				>
 					<ButtonIcon icon={Message} size="md" />

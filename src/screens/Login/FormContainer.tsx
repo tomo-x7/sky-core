@@ -17,8 +17,8 @@ export function FormContainer({
 	return (
 		<form
 			style={{
-				...a.gap_md,
-				...a.flex_1,
+				gap: 12,
+				flex: 1,
 				...flatten(!gtMobile && [a.px_lg, a.py_md]),
 				...style,
 			}}
@@ -26,8 +26,9 @@ export function FormContainer({
 			{titleText && !gtMobile && (
 				<Text
 					style={{
-						...a.text_xl,
-						...a.font_bold,
+						fontSize: 20,
+						letterSpacing: 0,
+						fontWeight: "600",
 						...t.atoms.text_contrast_high,
 					}}
 				>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
 import { Embed as StarterPackEmbed } from "#/components/StarterPack/StarterPackCard";
 import { Text } from "#/components/Typography";
@@ -39,7 +39,7 @@ export const ExternalEmbedGif = ({
 	return (
 		<div
 			style={{
-				...a.overflow_hidden,
+				overflow: "hidden",
 				...t.atoms.border_contrast_medium,
 			}}
 		>
@@ -50,9 +50,9 @@ export const ExternalEmbedGif = ({
 			) : error ? (
 				<Container
 					style={{
-						...a.align_start,
-						...a.p_md,
-						...a.gap_xs,
+						alignItems: "flex-start",
+						padding: 12,
+						gap: 4,
 					}}
 				>
 					<Text numberOfLines={1} style={t.atoms.text_contrast_high}>
@@ -115,8 +115,8 @@ export const ExternalEmbedLink = ({
 	return (
 		<div
 			style={{
-				...a.mb_xl,
-				...a.overflow_hidden,
+				marginBottom: 20,
+				overflow: "hidden",
 				...t.atoms.border_contrast_medium,
 			}}
 		>
@@ -125,9 +125,9 @@ export const ExternalEmbedLink = ({
 			) : error ? (
 				<Container
 					style={{
-						...a.align_start,
-						...a.p_md,
-						...a.gap_xs,
+						alignItems: "flex-start",
+						padding: 12,
+						gap: 4,
 					}}
 				>
 					<Text numberOfLines={1} style={t.atoms.text_contrast_high}>
@@ -158,11 +158,13 @@ function Container({
 	return (
 		<div
 			style={{
-				...a.rounded_sm,
-				...a.border,
-				...a.align_center,
-				...a.justify_center,
-				...a.py_5xl,
+				borderRadius: 8,
+				border: "1px solid black",
+				borderWidth: 1,
+				alignItems: "center",
+				justifyContent: "center",
+				paddingTop: 40,
+				paddingBottom: 40,
 				...t.atoms.bg_contrast_25,
 				...t.atoms.border_contrast_medium,
 				...style,

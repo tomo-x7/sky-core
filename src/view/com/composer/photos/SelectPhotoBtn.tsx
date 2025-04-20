@@ -39,7 +39,7 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 		<Button
 			onPress={onPressSelectPhotos}
 			label={"Gallery"}
-			style={a.p_sm}
+			style={{ ...a.p_sm }}
 			variant="ghost"
 			shape="round"
 			color="primary"

@@ -108,11 +108,11 @@ export function StepInterests() {
 	);
 
 	return (
-		<div style={a.align_start}>
+		<div style={{ ...a.align_start }}>
 			<IconCircle
 				icon={isError ? EmojiSad : Hashtag}
 				style={{
-					...a.mb_2xl,
+					marginBottom: 24,
 
 					...(isError
 						? {
@@ -126,8 +126,8 @@ export function StepInterests() {
 			<DescriptionText>{description}</DescriptionText>
 			<div
 				style={{
-					...a.w_full,
-					...a.pt_2xl,
+					width: "100%",
+					paddingTop: 24,
 				}}
 			>
 				{isLoading ? (
@@ -135,20 +135,21 @@ export function StepInterests() {
 				) : isError || !data ? (
 					<div
 						style={{
-							...a.w_full,
-							...a.p_lg,
-							...a.rounded_md,
+							width: "100%",
+							padding: 16,
+							borderRadius: 12,
 
 							...{
 								backgroundColor: t.palette.negative_50,
 							},
 						}}
 					>
-						<Text style={a.text_md}>
+						<Text style={{ ...a.text_md }}>
 							<Text
 								style={{
-									...a.text_md,
-									...a.font_bold,
+									fontSize: 16,
+									letterSpacing: 0,
+									fontWeight: "600",
 
 									...{
 										color: t.palette.negative_900,
@@ -168,9 +169,9 @@ export function StepInterests() {
 					>
 						<div
 							style={{
-								...a.flex_row,
-								...a.gap_md,
-								...a.flex_wrap,
+								flexDirection: "row",
+								gap: 12,
+								flexWrap: "wrap",
 							}}
 						>
 							{data.interests.map((interest) => (
@@ -190,7 +191,7 @@ export function StepInterests() {
 				{isError ? (
 					<div
 						style={{
-							...a.gap_md,
+							gap: 12,
 							...(gtMobile ? a.flex_row : a.flex_col),
 						}}
 					>

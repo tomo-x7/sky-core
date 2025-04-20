@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { type TextStyleProp, atoms as a, useTheme } from "#/alf";
+import { type TextStyleProp, useTheme } from "#/alf";
 import { Button, type ButtonProps } from "#/components/Button";
 import type { TextProps } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
@@ -183,7 +183,7 @@ export function Link({
 		<Button
 			{...rest}
 			style={{
-				...a.justify_start,
+				justifyContent: "flex-start",
 				...rest.style,
 			}}
 			href={href}

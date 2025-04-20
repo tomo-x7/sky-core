@@ -22,8 +22,8 @@ export function ProfileHeaderDisplayName({
 				style={{
 					...t.atoms.text,
 					...(gtMobile ? a.text_4xl : a.text_3xl),
-					...a.self_start,
-					...a.font_heavy,
+					alignSelf: "flex-start",
+					fontWeight: "800",
 				}}
 			>
 				{sanitizeDisplayName(

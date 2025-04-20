@@ -15,12 +15,14 @@ export function Outer({ children }: React.PropsWithChildren) {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.gap_sm,
-				...a.px_lg,
-				...a.py_lg,
-				...a.justify_between,
-				...a.flex_wrap,
+				flexDirection: "row",
+				gap: 8,
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingTop: 16,
+				paddingBottom: 16,
+				justifyContent: "space-between",
+				flexWrap: "wrap",
 			}}
 		>
 			{children}
@@ -42,13 +44,13 @@ export function Content({
 	return (
 		<div
 			style={{
-				...a.gap_xs,
-				...a.flex_1,
+				gap: 4,
+				flex: 1,
 			}}
 		>
 			<Text
 				style={{
-					...a.font_bold,
+					fontWeight: "600",
 					...(gtPhone ? a.text_sm : a.text_md),
 				}}
 			>
@@ -57,7 +59,7 @@ export function Content({
 			<Text
 				style={{
 					...t.atoms.text_contrast_medium,
-					...a.leading_snug,
+					lineHeight: 1.3,
 				}}
 			>
 				{description}
@@ -86,7 +88,7 @@ export function Buttons({
 		<div
 			style={{
 				...{ minHeight: 35 },
-				...a.w_full,
+				width: "100%",
 			}}
 		>
 			<ToggleButton.Group
@@ -226,10 +228,10 @@ export function LabelerLabelPreference({
 				{cantConfigure && (
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_xs,
-							...a.align_center,
-							...a.mt_xs,
+							flexDirection: "row",
+							gap: 4,
+							alignItems: "center",
+							marginTop: 4,
 						}}
 					>
 						<CircleInfo size="sm" fill={t.atoms.text_contrast_high.color} />
@@ -237,8 +239,8 @@ export function LabelerLabelPreference({
 						<Text
 							style={{
 								...t.atoms.text_contrast_medium,
-								...a.font_bold,
-								...a.italic,
+								fontWeight: "600",
+								fontStyle: "italic",
 							}}
 						>
 							{adultDisabled ? (
@@ -246,7 +248,11 @@ export function LabelerLabelPreference({
 							) : isGlobalLabel ? (
 								<>
 									Configured in{" "}
-									<InlineLinkText label={"moderation settings"} to="/moderation" style={a.text_sm}>
+									<InlineLinkText
+										label={"moderation settings"}
+										to="/moderation"
+										style={{ ...a.text_sm }}
+									>
 										moderation settings
 									</InlineLinkText>
 									.
@@ -261,17 +267,20 @@ export function LabelerLabelPreference({
 					<div
 						style={{
 							...{ minHeight: 35 },
-							...a.px_md,
-							...a.py_md,
-							...a.rounded_sm,
-							...a.border,
+							paddingLeft: 12,
+							paddingRight: 12,
+							paddingTop: 12,
+							paddingBottom: 12,
+							borderRadius: 8,
+							border: "1px solid black",
+							borderWidth: 1,
 							...t.atoms.border_contrast_low,
-							...a.self_start,
+							alignSelf: "flex-start",
 						}}
 					>
 						<Text
 							style={{
-								...a.font_bold,
+								fontWeight: "600",
 								...t.atoms.text_contrast_low,
 							}}
 						>

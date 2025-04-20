@@ -1,7 +1,7 @@
 import { subDays } from "date-fns";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "../Typography";
 import { localDateString } from "./util";
 
@@ -55,24 +55,28 @@ let DateDivider = ({ date: dateStr }: { date: string }): React.ReactNode => {
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.my_lg,
+				width: "100%",
+				marginTop: 16,
+				marginBottom: 16,
 			}}
 		>
 			<Text
 				style={{
-					...a.text_xs,
-					...a.text_center,
+					fontSize: 12,
+					letterSpacing: 0,
+					textAlign: "center",
 					...t.atoms.bg,
 					...t.atoms.text_contrast_medium,
-					...a.px_md,
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 			>
 				<Text
 					style={{
-						...a.text_xs,
+						fontSize: 12,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
-						...a.font_bold,
+						fontWeight: "600",
 					}}
 				>
 					{date}

@@ -33,8 +33,9 @@ export function SubtitleDialogBtn(props: Props) {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.my_xs,
+				flexDirection: "row",
+				marginTop: 4,
+				marginBottom: 4,
 			}}
 		>
 			<Button
@@ -83,12 +84,13 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 
 	return (
 		<Dialog.ScrollableInner label={"Video settings"}>
-			<div style={a.gap_md}>
+			<div style={{ gap:12 }}>
 				<Text
 					style={{
-						...a.text_xl,
-						...a.font_bold,
-						...a.leading_tight,
+						fontSize: 20,
+						letterSpacing: 0,
+						fontWeight: "600",
+						lineHeight: 1.15,
 					}}
 				>
 					Alt text
@@ -114,17 +116,20 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 
 				<div
 					style={{
-						...a.border_t,
-						...a.w_full,
+						borderTop: "1px solid black",
+						borderTopWidth: 1,
+						width: "100%",
 						...t.atoms.border_contrast_medium,
-						...a.my_md,
+						marginTop: 12,
+						marginBottom: 12,
 					}}
 				/>
 				<Text
 					style={{
-						...a.text_xl,
-						...a.font_bold,
-						...a.leading_tight,
+						fontSize: 20,
+						letterSpacing: 0,
+						fontWeight: "600",
+						lineHeight: 1.15,
 					}}
 				>
 					Captions (.vtt)
@@ -152,7 +157,8 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 				{subtitleMissingLanguage && (
 					<Text
 						style={{
-							...a.text_sm,
+							fontSize: 14,
+							letterSpacing: 0,
 							...t.atoms.text_contrast_medium,
 						}}
 					>
@@ -162,8 +168,8 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_end,
+						flexDirection: "row",
+						justifyContent: "flex-end",
 					}}
 				>
 					<Button
@@ -175,7 +181,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 							saveAltText(altText);
 							control.close();
 						}}
-						style={a.mt_lg}
+						style={{ ...a.mt_lg }}
 					>
 						<ButtonText>Done</ButtonText>
 					</Button>
@@ -213,31 +219,33 @@ function SubtitleFileRow({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.justify_between,
-				...a.py_md,
-				...a.px_lg,
-				...a.rounded_md,
-				...a.gap_md,
+				flexDirection: "row",
+				justifyContent: "space-between",
+				paddingTop: 12,
+				paddingBottom: 12,
+				paddingLeft: 16,
+				paddingRight: 16,
+				borderRadius: 12,
+				gap: 12,
 				...style,
 			}}
 		>
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_xs,
-					...a.justify_center,
+					flex: 1,
+					gap: 4,
+					justifyContent: "center",
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_sm,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 8,
 					}}
 				>
 					{language === "" ? (
-						<WarningIcon style={a.flex_shrink_0} fill={t.palette.negative_500} size="sm" />
+						<WarningIcon style={{ ...a.flex_shrink_0 }} fill={t.palette.negative_500} size="sm" />
 					) : (
 						<PageTextIcon
 							style={{
@@ -249,10 +257,10 @@ function SubtitleFileRow({
 					)}
 					<Text
 						style={{
-							...a.flex_1,
-							...a.leading_snug,
-							...a.font_bold,
-							...a.mb_2xs,
+							flex: 1,
+							lineHeight: 1.3,
+							fontWeight: "600",
+							marginBottom: 2,
 						}}
 						numberOfLines={1}
 					>
@@ -288,7 +296,7 @@ function SubtitleFileRow({
 				variant="outline"
 				color="secondary"
 				onPress={() => setCaptions((subs) => subs.filter((s) => s.lang !== language))}
-				style={a.ml_sm}
+				style={{ ...a.ml_sm }}
 			>
 				<ButtonIcon icon={X} />
 			</Button>

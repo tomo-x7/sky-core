@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
@@ -95,7 +95,7 @@ function SavedFeedsInner({
 					<div
 						style={{
 							...pal.border,
-							...a.border_b,
+							borderBottom: "1px solid black",
 						}}
 					>
 						<NoSavedFeedsOfAnyType />
@@ -148,7 +148,7 @@ function SavedFeedsInner({
 					<div
 						style={{
 							...pal.border,
-							...a.border_b,
+							borderBottom: "1px solid black",
 						}}
 					>
 						<NoFollowingFeed />
@@ -385,9 +385,9 @@ function FollowingFeedCard() {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.flex_1,
+				flexDirection: "row",
+				alignItems: "center",
+				flex: 1,
 
 				...{
 					paddingLeft: 18,
@@ -399,9 +399,9 @@ function FollowingFeedCard() {
 		>
 			<div
 				style={{
-					...a.align_center,
-					...a.justify_center,
-					...a.rounded_sm,
+					alignItems: "center",
+					justifyContent: "center",
+					borderRadius: 8,
 
 					...{
 						width: 36,

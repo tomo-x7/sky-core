@@ -2,7 +2,7 @@ import React from "react";
 
 import { useColorScheme } from "#/lib/useColorScheme";
 import { useThemePrefs } from "../../state/shell";
-import { dark, dim, light } from "../themes";
+import { dark, dim, light } from "../theme";
 import type { ThemeName } from "../types";
 
 export function useColorModeTheme(): ThemeName {

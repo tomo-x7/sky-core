@@ -27,10 +27,10 @@ export function Error({
 	return (
 		<CenteredView
 			style={{
-				...a.h_full_vh,
+				height: "100dvh",
 
-				...a.align_center,
-				...a.gap_5xl,
+				alignItems: "center",
+				gap: 40,
 				...(!gtMobile && a.justify_between),
 				...t.atoms.border_contrast_low,
 				paddingTop: 175,
@@ -38,28 +38,30 @@ export function Error({
 			}}
 			sideBorders={sideBorders}
 		>
-			<div style={{ ...a.w_full, ...a.align_center, ...a.gap_lg }}>
+			<div style={{ width: "100%", alignItems: "center", gap:16}}>
 				<Text
 					style={{
-						...a.font_bold,
-						...a.text_3xl,
+						fontWeight: "600",
+						fontSize: 26,
+						letterSpacing: 0,
 					}}
 				>
 					{title}
 				</Text>
 				<Text
 					style={{
-						...a.text_md,
-						...a.text_center,
+						fontSize: 16,
+						letterSpacing: 0,
+						textAlign: "center",
 						...t.atoms.text_contrast_high,
 						lineHeight: 1.4,
-						...(gtMobile ? { width: 450 } : { ...a.w_full, ...a.px_lg }),
+						...(gtMobile ? { width: 450 } : { width: "100%", paddingLeft:16,paddingRight:16}),
 					}}
 				>
 					{message}
 				</Text>
 			</div>
-			<div style={{ ...a.gap_md, ...(gtMobile ? { width: 350 } : { ...a.w_full, ...a.px_lg }) }}>
+			<div style={{ gap: 12, ...(gtMobile ? { width: 350 } : { width: "100%", paddingLeft:16,paddingRight:16}) }}>
 				{onRetry && (
 					<Button
 						variant="solid"
@@ -68,8 +70,8 @@ export function Error({
 						onPress={onRetry}
 						size="large"
 						style={{
-							...a.rounded_sm,
-							...a.overflow_hidden,
+							borderRadius: 8,
+							overflow: "hidden",
 							paddingTop: 10,
 							paddingBottom: 10,
 						}}
@@ -85,8 +87,8 @@ export function Error({
 						onPress={goBack}
 						size="large"
 						style={{
-							...a.rounded_sm,
-							...a.overflow_hidden,
+							borderRadius: 8,
+							overflow: "hidden",
 							paddingTop: 10,
 							paddingBottom: 10,
 						}}

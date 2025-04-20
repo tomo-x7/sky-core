@@ -2,7 +2,7 @@ import type { ChatBskyConvoDefs, ModerationCause } from "@atproto/api";
 import React, { useCallback } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, useTheme } from "#/alf";
 import * as Menu from "#/components/Menu";
 import * as Prompt from "#/components/Prompt";
 import { BlockedByListDialog } from "#/components/dms/BlockedByListDialog";
@@ -74,8 +74,8 @@ let ConvoMenu = ({
 										onPress();
 									}}
 									style={{
-										...a.p_sm,
-										...a.rounded_full,
+										padding: 8,
+										borderRadius: 999,
 										...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),
 										// make sure pfp is in the middle
 										marginLeft: -10,

@@ -131,19 +131,20 @@ let ProfileHeaderLabeler = ({
 		>
 			<div
 				style={{
-					...a.px_lg,
-					...a.pt_md,
-					...a.pb_sm,
+					paddingLeft: 16,
+					paddingRight: 16,
+					paddingTop: 12,
+					paddingBottom: 8,
 					pointerEvents: "none",
 				}}
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_end,
-						...a.align_center,
-						...a.gap_xs,
-						...a.pb_lg,
+						flexDirection: "row",
+						justifyContent: "flex-end",
+						alignItems: "center",
+						gap: 4,
+						paddingBottom: 16,
 						pointerEvents: "none",
 					}}
 				>
@@ -155,7 +156,7 @@ let ProfileHeaderLabeler = ({
 								variant="solid"
 								onPress={onPressEditProfile}
 								label={"Edit profile"}
-								style={{ ...a.rounded_full, pointerEvents: "auto" }}
+								style={{ borderRadius: 999, pointerEvents: "auto" }}
 							>
 								<ButtonText>Edit Profile</ButtonText>
 							</Button>
@@ -189,9 +190,9 @@ let ProfileHeaderLabeler = ({
 													color: isSubscribed ? t.palette.contrast_700 : t.palette.white,
 												},
 
-												...a.font_bold,
-												...a.text_center,
-												...a.leading_tight,
+												fontWeight: "600",
+												textAlign: "center",
+												lineHeight: 1.15,
 											}}
 										>
 											{isSubscribed ? <>Unsubscribe</> : <>Subscribe to Labeler</>}
@@ -205,10 +206,10 @@ let ProfileHeaderLabeler = ({
 				</div>
 				<div
 					style={{
-						...a.flex_col,
-						...a.gap_2xs,
-						...a.pt_2xs,
-						...a.pb_md,
+						flexDirection: "column",
+						gap: 2,
+						paddingTop: 2,
+						paddingBottom: 12,
 					}}
 				>
 					<ProfileHeaderDisplayName profile={profile} moderation={moderation} />
@@ -220,7 +221,7 @@ let ProfileHeaderLabeler = ({
 						{descriptionRT && !moderation.ui("profileView").blur ? (
 							<div style={{ pointerEvents: "auto" }}>
 								<RichText
-									style={a.text_md}
+									style={{ ...a.text_md }}
 									numberOfLines={15}
 									value={descriptionRT}
 									enableTags
@@ -231,10 +232,10 @@ let ProfileHeaderLabeler = ({
 						{!isAppLabeler(profile.did) && (
 							<div
 								style={{
-									...a.flex_row,
-									...a.gap_xs,
-									...a.align_center,
-									...a.pt_lg,
+									flexDirection: "row",
+									gap: 4,
+									alignItems: "center",
+									paddingTop: 16,
 								}}
 							>
 								<Button
@@ -268,8 +269,9 @@ let ProfileHeaderLabeler = ({
 										{({ hovered, focused, pressed }) => (
 											<Text
 												style={{
-													...a.font_bold,
-													...a.text_sm,
+													fontWeight: "600",
+													fontSize: 14,
+													letterSpacing: 0,
 													...t.atoms.text_contrast_medium,
 													...((hovered || focused || pressed) && t.atoms.text_contrast_high),
 												}}

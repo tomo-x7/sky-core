@@ -8,22 +8,22 @@ import { Globe_Stroke2_Corner0_Rounded as Globe } from "#/components/icons/Globe
 
 export function Buttons() {
 	return (
-		<div style={a.gap_md}>
+		<div style={{ gap:12 }}>
 			<H1>Buttons</H1>
 			<div
 				style={{
-					...a.flex_row,
-					...a.flex_wrap,
-					...a.gap_md,
-					...a.align_start,
+					flexDirection: "row",
+					flexWrap: "wrap",
+					gap: 12,
+					alignItems: "flex-start",
 				}}
 			>
 				{["primary", "secondary", "secondary_inverted", "negative"].map((color) => (
 					<div
 						key={color}
 						style={{
-							...a.gap_md,
-							...a.align_start,
+							gap: 12,
+							alignItems: "flex-start",
 						}}
 					>
 						{["solid", "outline", "ghost"].map((variant) => (
@@ -52,15 +52,15 @@ export function Buttons() {
 
 				<div
 					style={{
-						...a.flex_row,
-						...a.gap_md,
-						...a.align_start,
+						flexDirection: "row",
+						gap: 12,
+						alignItems: "flex-start",
 					}}
 				>
 					<div
 						style={{
-							...a.gap_md,
-							...a.align_start,
+							gap: 12,
+							alignItems: "flex-start",
 						}}
 					>
 						{["gradient_sky", "gradient_midnight", "gradient_sunrise"].map((name) => (
@@ -84,9 +84,9 @@ export function Buttons() {
 			</div>
 			<div
 				style={{
-					...a.flex_wrap,
-					...a.gap_md,
-					...a.align_start,
+					flexWrap: "wrap",
+					gap: 12,
+					alignItems: "flex-start",
 				}}
 			>
 				<Button variant="solid" color="primary" size="large" label="Link out">
@@ -112,9 +112,9 @@ export function Buttons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
-					...a.align_center,
+					flexDirection: "row",
+					gap: 12,
+					alignItems: "center",
 				}}
 			>
 				<Button variant="solid" color="primary" size="large" label="Link out">
@@ -137,9 +137,9 @@ export function Buttons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
-					...a.align_center,
+					flexDirection: "row",
+					gap: 12,
+					alignItems: "center",
 				}}
 			>
 				<Button variant="solid" color="primary" size="small" label="Link out">
@@ -158,9 +158,9 @@ export function Buttons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
-					...a.align_center,
+					flexDirection: "row",
+					gap: 12,
+					alignItems: "center",
 				}}
 			>
 				<Button variant="solid" color="primary" size="tiny" label="Link out">
@@ -179,9 +179,9 @@ export function Buttons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
-					...a.align_center,
+					flexDirection: "row",
+					gap: 12,
+					alignItems: "center",
 				}}
 			>
 				<Button variant="solid" color="primary" size="large" shape="round" label="Link out">
@@ -205,9 +205,9 @@ export function Buttons() {
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_md,
-					...a.align_start,
+					flexDirection: "row",
+					gap: 12,
+					alignItems: "flex-start",
 				}}
 			>
 				<Button variant="solid" color="primary" size="large" shape="square" label="Link out">

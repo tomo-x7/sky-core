@@ -123,12 +123,13 @@ export function Inner({
 			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
 		>
 			<Dialog.Close />
-			<div style={a.gap_xl}>
-				<div style={a.gap_sm}>
+			<div style={{ gap:20 }}>
+				<div style={{ gap:8 }}>
 					<Text
 						style={{
-							...a.font_heavy,
-							...a.text_2xl,
+							fontWeight: "800",
+							fontSize: 22,
+							letterSpacing: 0,
 						}}
 					>
 						{uiStrings[currentStep].title}
@@ -136,8 +137,8 @@ export function Inner({
 					{error ? (
 						<div
 							style={{
-								...a.rounded_sm,
-								...a.overflow_hidden,
+								borderRadius: 8,
+								overflow: "hidden",
 							}}
 						>
 							<ErrorMessage message={error} />
@@ -146,27 +147,30 @@ export function Inner({
 					{currentStep === "StepOne" ? (
 						<div>
 							{reasonText ? (
-								<div style={a.gap_sm}>
+								<div style={{ gap:8 }}>
 									<Text
 										style={{
-											...a.text_md,
-											...a.leading_snug,
+											fontSize: 16,
+											letterSpacing: 0,
+											lineHeight: 1.3,
 										}}
 									>
 										{reasonText}
 									</Text>
 									<Text
 										style={{
-											...a.text_md,
-											...a.leading_snug,
+											fontSize: 16,
+											letterSpacing: 0,
+											lineHeight: 1.3,
 										}}
 									>
 										Don't have access to{" "}
 										<Text
 											style={{
-												...a.text_md,
-												...a.leading_snug,
-												...a.font_bold,
+												fontSize: 16,
+												letterSpacing: 0,
+												lineHeight: 1.3,
+												fontWeight: "600",
 											}}
 										>
 											{currentAccount?.email}
@@ -176,8 +180,9 @@ export function Inner({
 											to="#"
 											label="Change email address"
 											style={{
-												...a.text_md,
-												...a.leading_snug,
+												fontSize: 16,
+												letterSpacing: 0,
+												lineHeight: 1.3,
 											}}
 											onPress={(e) => {
 												e.preventDefault();
@@ -195,17 +200,19 @@ export function Inner({
 							) : (
 								<Text
 									style={{
-										...a.text_md,
-										...a.leading_snug,
+										fontSize: 16,
+										letterSpacing: 0,
+										lineHeight: 1.3,
 									}}
 								>
 									<>
 										You'll receive an email at{" "}
 										<Text
 											style={{
-												...a.text_md,
-												...a.leading_snug,
-												...a.font_bold,
+												fontSize: 16,
+												letterSpacing: 0,
+												lineHeight: 1.3,
+												fontWeight: "600",
 											}}
 										>
 											{currentAccount?.email}
@@ -216,8 +223,9 @@ export function Inner({
 										to="#"
 										label="Change email address"
 										style={{
-											...a.text_md,
-											...a.leading_snug,
+											fontSize: 16,
+											letterSpacing: 0,
+											lineHeight: 1.3,
 										}}
 										onPress={(e) => {
 											e.preventDefault();
@@ -235,8 +243,9 @@ export function Inner({
 					) : (
 						<Text
 							style={{
-								...a.text_md,
-								...a.leading_snug,
+								fontSize: 16,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							{uiStrings[currentStep].message}
@@ -257,7 +266,7 @@ export function Inner({
 				) : null}
 				<div
 					style={{
-						...a.gap_sm,
+						gap: 8,
 						...flatten(gtMobile ? [a.flex_row_reverse, a.ml_auto] : undefined),
 					}}
 				>

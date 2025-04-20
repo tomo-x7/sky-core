@@ -61,7 +61,7 @@ export function DisableEmail2FADialog({
 			control.close();
 		} catch (e) {
 			const errMsg = String(e);
-			if (errMsg.includes("Token is invalid")) {
+			if (errMsg.includes("tokenspace is invalid")) {
 				setError("Invalid 2FA confirmation code.");
 			} else {
 				setError(cleanError(errMsg));
@@ -77,15 +77,16 @@ export function DisableEmail2FADialog({
 			<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description">
 				<div
 					style={{
-						...a.relative,
-						...a.gap_md,
-						...a.w_full,
+						position: "relative",
+						gap: 12,
+						width: "100%",
 					}}
 				>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_bold,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "600",
 							...t.atoms.text,
 						}}
 					>
@@ -107,7 +108,7 @@ export function DisableEmail2FADialog({
 					{stage === Stages.Email ? (
 						<div
 							style={{
-								...a.gap_sm,
+								gap: 8,
 								...flatten(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
 							}}
 						>
@@ -135,7 +136,7 @@ export function DisableEmail2FADialog({
 						</div>
 					) : stage === Stages.ConfirmCode ? (
 						<div>
-							<div style={a.mb_md}>
+							<div style={{ ...a.mb_md }}>
 								<TextField.LabelText>Confirmation code</TextField.LabelText>
 								<TextField.Root>
 									<TextField.Icon icon={Lock} />
@@ -154,7 +155,7 @@ export function DisableEmail2FADialog({
 							</div>
 							<div
 								style={{
-									...a.gap_sm,
+									gap: 8,
 									...flatten(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
 								}}
 							>

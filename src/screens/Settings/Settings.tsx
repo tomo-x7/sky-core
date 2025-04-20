@@ -74,12 +74,13 @@ export function SettingsScreen() {
 				<SettingsList.Container>
 					<div
 						style={{
-							...a.px_xl,
-							...a.pt_md,
-							...a.pb_md,
-							...a.w_full,
-							...a.gap_2xs,
-							...a.align_center,
+							paddingLeft: 20,
+							paddingRight: 20,
+							paddingTop: 12,
+							paddingBottom: 12,
+							width: "100%",
+							gap: 2,
+							alignItems: "center",
 							...{ minHeight: 160 },
 						}}
 					>
@@ -316,7 +317,7 @@ function AccountRow({
 	};
 
 	return (
-		<div style={a.relative}>
+		<div style={{ ...a.relative }}>
 			<SettingsList.PressableItem onPress={onSwitchAccount} label={"Switch account"}>
 				{moderationOpts && profile ? (
 					<UserAvatar
@@ -340,10 +341,10 @@ function AccountRow({
 								type="button"
 								{...props}
 								style={{
-									...a.absolute,
+									position: "absolute",
 									...{ top: 10, right: tokens.space.lg },
-									...a.p_xs,
-									...a.rounded_full,
+									padding: 4,
+									borderRadius: 999,
 									...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),
 								}}
 							>

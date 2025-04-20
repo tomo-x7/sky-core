@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text as TypoText } from "#/components/Typography";
 
@@ -9,15 +9,17 @@ export function Container({ children }: { children: React.ReactNode }) {
 	return (
 		<div
 			style={{
-				...a.flex_1,
+				flex: 1,
 				...t.atoms.bg_contrast_25,
-				...a.justify_center,
-				...a.align_center,
-				...a.px_lg,
-				...a.border,
+				justifyContent: "center",
+				alignItems: "center",
+				paddingLeft: 16,
+				paddingRight: 16,
+				border: "1px solid black",
+				borderWidth: 1,
 				...t.atoms.border_contrast_low,
-				...a.rounded_sm,
-				...a.gap_lg,
+				borderRadius: 8,
+				gap: 16,
 			}}
 		>
 			{children}
@@ -30,10 +32,11 @@ export function Text({ children }: { children: React.ReactNode }) {
 	return (
 		<TypoText
 			style={{
-				...a.text_center,
+				textAlign: "center",
 				...t.atoms.text_contrast_high,
-				...a.text_md,
-				...a.leading_snug,
+				fontSize: 16,
+				letterSpacing: 0,
+				lineHeight: 1.3,
 				...{ maxWidth: 300 },
 			}}
 		>

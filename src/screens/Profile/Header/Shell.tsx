@@ -2,7 +2,7 @@ import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 import React, { memo, useRef } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ArrowLeft_Stroke2_Corner0_Rounded as ArrowLeftIcon } from "#/components/icons/Arrow";
 import { LabelsOnMe } from "#/components/moderation/LabelsOnMe";
 import { ProfileHeaderAlerts } from "#/components/moderation/ProfileHeaderAlerts";
@@ -91,7 +91,7 @@ let ProfileHeaderShell = ({
 		<div style={{ ...t.atoms.bg, pointerEvents: "none" }}>
 			<div
 				style={{
-					...a.relative,
+					position: "relative",
 					height: 150,
 					pointerEvents: "none",
 				}}
@@ -133,8 +133,10 @@ let ProfileHeaderShell = ({
 			{!isPlaceholderProfile && (
 				<div
 					style={{
-						...a.px_lg,
-						...a.py_xs,
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 4,
+						paddingBottom: 4,
 						pointerEvents: "none",
 					}}
 				>

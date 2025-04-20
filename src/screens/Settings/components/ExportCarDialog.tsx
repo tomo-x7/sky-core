@@ -52,23 +52,25 @@ export function ExportCarDialog({
 			<Dialog.ScrollableInner accessibilityDescribedBy="dialog-description">
 				<div
 					style={{
-						...a.relative,
-						...a.gap_lg,
-						...a.w_full,
+						position: "relative",
+						gap: 16,
+						width: "100%",
 					}}
 				>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_heavy,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "800",
 						}}
 					>
 						Export My Data
 					</Text>
 					<Text
 						style={{
-							...a.text_sm,
-							...a.leading_normal,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.5,
 							...t.atoms.text_contrast_high,
 						}}
 					>
@@ -93,9 +95,10 @@ export function ExportCarDialog({
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.text_sm,
-							...a.leading_snug,
-							...a.flex_1,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.3,
+							flex: 1,
 						}}
 					>
 						<>
@@ -103,7 +106,7 @@ export function ExportCarDialog({
 							<InlineLinkText
 								label={"View blogpost for more details"}
 								to="https://docs.bsky.app/blog/repo-export"
-								style={a.text_sm}
+								style={{ ...a.text_sm }}
 							>
 								this blogpost
 							</InlineLinkText>

@@ -70,9 +70,12 @@ export function Root({
 					<button
 						type="button"
 						style={{
-							...a.fixed,
-							...a.inset_0,
-							...a.z_50,
+							position: "fixed",
+							top: 0,
+							left: 0,
+							right: 0,
+							bottom: 0,
+							zIndex: 50,
 						}}
 						onClick={() => context.control?.close()}
 						aria-label="Context menu backdrop, click to close the menu."
@@ -166,14 +169,15 @@ export function Outer({
 			>
 				<div
 					style={{
-						...a.rounded_sm,
-						...a.p_xs,
-						...a.border,
+						borderRadius: 8,
+						padding: 4,
+						border: "1px solid black",
+						borderWidth: 1,
 						...(t.name === "light" ? t.atoms.bg : t.atoms.bg_contrast_25),
 						...t.atoms.shadow_md,
 						...t.atoms.border_contrast_low,
 
-						...a.overflow_auto,
+						overflow: "auto",
 
 						...(!reduceMotionEnabled && a.zoom_fade_in),
 
@@ -256,8 +260,8 @@ export function ItemText({ children, style }: ItemTextProps) {
 	return (
 		<Text
 			style={{
-				...a.flex_1,
-				...a.font_bold,
+				flex: 1,
+				fontWeight: "600",
 				...t.atoms.text_contrast_high,
 				...style,
 				...(disabled && t.atoms.text_contrast_low),
@@ -294,9 +298,9 @@ export function ItemRadio({ selected }: { selected: boolean }) {
 	return (
 		<div
 			style={{
-				...a.justify_center,
-				...a.align_center,
-				...a.rounded_full,
+				justifyContent: "center",
+				alignItems: "center",
+				borderRadius: 999,
 				...t.atoms.border_contrast_high,
 
 				...{
@@ -309,8 +313,8 @@ export function ItemRadio({ selected }: { selected: boolean }) {
 			{selected ? (
 				<div
 					style={{
-						...a.absolute,
-						...a.rounded_full,
+						position: "absolute",
+						borderRadius: 999,
 						...{ height: 14, width: 14 },
 
 						...(selected
@@ -330,9 +334,9 @@ export function LabelText({ children }: { children: React.ReactNode }) {
 	return (
 		<Text
 			style={{
-				...a.font_bold,
-				...a.pt_md,
-				...a.pb_sm,
+				fontWeight: "600",
+				paddingTop: 12,
+				paddingBottom: 8,
 				...t.atoms.text_contrast_low,
 
 				...{

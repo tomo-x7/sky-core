@@ -231,14 +231,14 @@ function ChatListItemReady({
 				onFocus={onFocus}
 				onBlur={onMouseLeave}
 				style={{
-					...a.relative,
+					position: "relative",
 					...t.atoms.bg,
 				}}
 			>
 				<div
 					style={{
-						...a.z_10,
-						...a.absolute,
+						zIndex: 10,
+						position: "absolute",
 						...{ top: tokens.space.md, left: tokens.space.lg },
 					}}
 				>
@@ -249,12 +249,14 @@ function ChatListItemReady({
 					{({ hovered, pressed, focused }) => (
 						<div
 							style={{
-								...a.flex_row,
+								flexDirection: "row",
 								...(isDeletedAccount ? a.align_center : a.align_start),
-								...a.flex_1,
-								...a.px_lg,
-								...a.py_md,
-								...a.gap_md,
+								flex: 1,
+								paddingLeft: 16,
+								paddingRight: 16,
+								paddingTop: 12,
+								paddingBottom: 12,
+								gap: 12,
 								...((hovered || pressed || focused) && t.atoms.bg_contrast_25),
 							}}
 						>
@@ -263,31 +265,32 @@ function ChatListItemReady({
 
 							<div
 								style={{
-									...a.flex_1,
-									...a.justify_center,
+									flex: 1,
+									justifyContent: "center",
 									...{ paddingRight: 45 },
 								}}
 							>
 								<div
 									style={{
-										...a.w_full,
-										...a.flex_row,
-										...a.align_end,
-										...a.pb_2xs,
+										width: "100%",
+										flexDirection: "row",
+										alignItems: "flex-end",
+										paddingBottom: 2,
 									}}
 								>
 									<Text
 										numberOfLines={1}
 										style={{
 											...{ maxWidth: "85%" },
-											...a.leading_normal,
+											lineHeight: 1.5,
 										}}
 									>
 										<Text
 											style={{
-												...a.text_md,
+												fontSize: 16,
+												letterSpacing: 0,
 												...t.atoms.text,
-												...a.font_bold,
+												fontWeight: "600",
 												...{ lineHeight: "21px" },
 												...(isDimStyle && t.atoms.text_contrast_medium),
 											}}
@@ -300,7 +303,8 @@ function ChatListItemReady({
 											{({ timeElapsed }) => (
 												<Text
 													style={{
-														...a.text_sm,
+														fontSize: 14,
+														letterSpacing: 0,
 														...{ lineHeight: "21px" },
 
 														...t.atoms.text_contrast_medium,
@@ -317,7 +321,8 @@ function ChatListItemReady({
 									{(convo.muted || moderation.blocked) && (
 										<Text
 											style={{
-												...a.text_sm,
+												fontSize: 14,
+												letterSpacing: 0,
 												...{ lineHeight: "21px" },
 												...t.atoms.text_contrast_medium,
 												whiteSpace: "preserve nowrap",
@@ -333,9 +338,10 @@ function ChatListItemReady({
 									<Text
 										numberOfLines={1}
 										style={{
-											...a.text_sm,
+											fontSize: 14,
+											letterSpacing: 0,
 											...t.atoms.text_contrast_medium,
-											...a.pb_xs,
+											paddingBottom: 4,
 										}}
 									>
 										@{profile.handle}
@@ -345,8 +351,9 @@ function ChatListItemReady({
 								<Text
 									numberOfLines={2}
 									style={{
-										...a.text_sm,
-										...a.leading_snug,
+										fontSize: 14,
+										letterSpacing: 0,
+										lineHeight: 1.3,
 										...(hasUnread ? a.font_bold : t.atoms.text_contrast_high),
 										...(isDimStyle && t.atoms.text_contrast_medium),
 									}}
@@ -354,7 +361,7 @@ function ChatListItemReady({
 									{lastMessage}
 								</Text>
 
-								<PostAlerts modui={moderation.ui("contentList")} size="lg" style={a.pt_xs} />
+								<PostAlerts modui={moderation.ui("contentList")} size="lg" style={{ ...a.pt_xs }} />
 
 								{children}
 							</div>
@@ -362,8 +369,8 @@ function ChatListItemReady({
 							{hasUnread && (
 								<div
 									style={{
-										...a.absolute,
-										...a.rounded_full,
+										position: "absolute",
+										borderRadius: 999,
 
 										...{
 											backgroundColor: isDimStyle
@@ -391,10 +398,10 @@ function ChatListItemReady({
 						hideTrigger={false}
 						blockInfo={blockInfo}
 						style={{
-							...a.absolute,
-							...a.h_full,
+							position: "absolute",
+							height: "100%",
 							...a.self_end,
-							...a.justify_center,
+							justifyContent: "center",
 
 							...{
 								right: tokens.space.lg,

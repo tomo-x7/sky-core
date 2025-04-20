@@ -8,9 +8,8 @@ import {
 	setFontFamily as persistFontFamily,
 	setFontScale as persistFontScale,
 } from "./fonts";
-import { createThemes, defaultTheme } from "./themes";
+import { light, themes } from "./theme";
 import type { Theme, ThemeName } from "./types";
-import { BLUE_HUE, GREEN_HUE, RED_HUE } from "./util/colorGeneration";
 
 export { atoms } from "./atoms";
 export * from "./breakpoints";
@@ -24,7 +23,7 @@ export * from "./util/useGutters";
 export type Alf = {
 	themeName: ThemeName;
 	theme: Theme;
-	themes: ReturnType<typeof createThemes>;
+	themes: typeof themes;
 	fonts: {
 		scale: Exclude<Device["fontScale"], undefined>;
 		scaleMultiplier: number;
@@ -44,14 +43,8 @@ export type Alf = {
  */
 export const Context = React.createContext<Alf>({
 	themeName: "light",
-	theme: defaultTheme,
-	themes: createThemes({
-		hues: {
-			primary: BLUE_HUE,
-			negative: RED_HUE,
-			positive: GREEN_HUE,
-		},
-	}),
+	theme: light,
+	themes: themes,
 	fonts: {
 		scale: getFontScale(),
 		scaleMultiplier: computeFontScaleMultiplier(getFontScale()),
@@ -75,15 +68,6 @@ export function ThemeProvider({ children, theme: themeName }: React.PropsWithChi
 		setFontFamily(fontFamily);
 		persistFontFamily(fontFamily);
 	}, []);
-	const themes = React.useMemo(() => {
-		return createThemes({
-			hues: {
-				primary: BLUE_HUE,
-				negative: RED_HUE,
-				positive: GREEN_HUE,
-			},
-		});
-	}, []);
 
 	const value = React.useMemo<Alf>(
 		() => ({
@@ -99,15 +83,7 @@ export function ThemeProvider({ children, theme: themeName }: React.PropsWithChi
 			},
 			flags: {},
 		}),
-		[
-			themeName,
-			themes,
-			fontScale,
-			setFontScaleAndPersist,
-			fontFamily,
-			setFontFamilyAndPersist,
-			fontScaleMultiplier,
-		],
+		[themeName, fontScale, setFontScaleAndPersist, fontFamily, setFontFamilyAndPersist, fontScaleMultiplier],
 	);
 
 	return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -50,8 +50,8 @@ export function ProfileFeedHeaderSkeleton() {
 			<Layout.Header.Content>
 				<div
 					style={{
-						...a.w_full,
-						...a.rounded_sm,
+						width: "100%",
+						borderRadius: 8,
 						...t.atoms.bg_contrast_25,
 						...{ height: 40 },
 					}}
@@ -60,9 +60,9 @@ export function ProfileFeedHeaderSkeleton() {
 			<Layout.Header.Slot>
 				<div
 					style={{
-						...a.justify_center,
-						...a.align_center,
-						...a.rounded_full,
+						justifyContent: "center",
+						alignItems: "center",
+						borderRadius: 999,
 						...t.atoms.bg_contrast_25,
 
 						...{
@@ -160,9 +160,8 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 			<Layout.Center
 				style={{
 					...t.atoms.bg,
-					...a.z_10,
-					...a.sticky,
-					...a.z_10,
+					position: "sticky",
+					zIndex: 10,
 					top: 0,
 				}}
 			>
@@ -172,7 +171,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 						<Button
 							label={"Open feed info screen"}
 							style={{
-								...a.justify_start,
+								justifyContent: "flex-start",
 
 								...{
 									paddingTop: 2,
@@ -188,10 +187,13 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 								<>
 									<div
 										style={{
-											...a.absolute,
-											...a.inset_0,
-											...a.rounded_sm,
-											...a.transition_all,
+											position: "absolute",
+											top: 0,
+											bottom: 0,
+											borderRadius: 8,
+											transitionProperty: "all",
+											transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+											transitionDuration: "100ms",
 											...t.atoms.bg_contrast_25,
 											opacity: 0,
 											left: -2,
@@ -206,20 +208,21 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 
 									<div
 										style={{
-											...a.flex_1,
-											...a.flex_row,
-											...a.align_center,
-											...a.gap_sm,
+											flex: 1,
+											flexDirection: "row",
+											alignItems: "center",
+											gap: 8,
 										}}
 									>
 										{info.avatar && <UserAvatar size={36} type="algo" avatar={info.avatar} />}
 
-										<div style={a.flex_1}>
+										<div style={{ flex: 1 }}>
 											<Text
 												style={{
-													...a.text_md,
-													...a.font_heavy,
-													...a.leading_tight,
+													fontSize: 16,
+													letterSpacing: 0,
+													fontWeight: "800",
+													lineHeight: 1.15,
 													...(gtMobile && a.text_lg),
 												}}
 												numberOfLines={2}
@@ -228,15 +231,16 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 											</Text>
 											<div
 												style={{
-													...a.flex_row,
+													flexDirection: "row",
 													...{ gap: 6 },
 												}}
 											>
 												<Text
 													style={{
-														...a.flex_shrink,
-														...a.text_sm,
-														...a.leading_snug,
+														flexShrink: 1,
+														fontSize: 14,
+														letterSpacing: 0,
+														lineHeight: 1.3,
 														...t.atoms.text_contrast_medium,
 													}}
 													numberOfLines={1}
@@ -245,8 +249,8 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 												</Text>
 												<div
 													style={{
-														...a.flex_row,
-														...a.align_center,
+														flexDirection: "row",
+														alignItems: "center",
 														...{ gap: 2 },
 													}}
 												>
@@ -258,8 +262,9 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 													/>
 													<Text
 														style={{
-															...a.text_sm,
-															...a.leading_snug,
+															fontSize: 14,
+															letterSpacing: 0,
+															lineHeight: 1.3,
 															...t.atoms.text_contrast_medium,
 														}}
 														numberOfLines={1}
@@ -412,27 +417,28 @@ function DialogInner({
 	}, [reportDialogControl]);
 
 	return (
-		<div style={a.gap_md}>
+		<div style={{ gap:12 }}>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.gap_md,
+					flexDirection: "row",
+					alignItems: "center",
+					gap: 12,
 				}}
 			>
 				<UserAvatar type="algo" size={48} avatar={info.avatar} />
 
 				<div
 					style={{
-						...a.flex_1,
-						...a.gap_2xs,
+						flex: 1,
+						gap: 2,
 					}}
 				>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_heavy,
-							...a.leading_tight,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "800",
+							lineHeight: 1.15,
 						}}
 						numberOfLines={2}
 					>
@@ -440,8 +446,9 @@ function DialogInner({
 					</Text>
 					<Text
 						style={{
-							...a.text_sm,
-							...a.leading_tight,
+							fontSize: 14,
+							letterSpacing: 0,
+							lineHeight: 1.15,
 							...t.atoms.text_contrast_medium,
 						}}
 						numberOfLines={1}
@@ -455,9 +462,10 @@ function DialogInner({
 									handle: info.creatorHandle,
 								})}
 								style={{
-									...a.text_sm,
-									...a.leading_tight,
-									...a.underline,
+									fontSize: 14,
+									letterSpacing: 0,
+									lineHeight: 1.15,
+									textDecorationLine: "underline",
 									...t.atoms.text_contrast_medium,
 								}}
 								// TODO
@@ -484,15 +492,16 @@ function DialogInner({
 			<RichText
 				value={rt}
 				style={{
-					...a.text_md,
-					...a.leading_snug,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.3,
 				}}
 			/>
 			<div
 				style={{
-					...a.flex_row,
-					...a.gap_sm,
-					...a.align_center,
+					flexDirection: "row",
+					gap: 8,
+					alignItems: "center",
 				}}
 			>
 				{typeof likeCount === "number" && (
@@ -500,7 +509,7 @@ function DialogInner({
 						label={"View users who like this feed"}
 						to={makeCustomFeedLink(info.creatorDid, feedRkey, "liked-by")}
 						style={{
-							...a.underline,
+							textDecorationLine: "underline",
 							...t.atoms.text_contrast_medium,
 						}}
 						onPress={() => control.close()}
@@ -515,10 +524,10 @@ function DialogInner({
 				<>
 					<div
 						style={{
-							...a.flex_row,
-							...a.gap_sm,
-							...a.align_center,
-							...a.pt_sm,
+							flexDirection: "row",
+							gap: 8,
+							alignItems: "center",
+							paddingTop: 8,
 						}}
 					>
 						<Button
@@ -528,7 +537,7 @@ function DialogInner({
 							variant="solid"
 							color="secondary"
 							onPress={onToggleLiked}
-							style={a.flex_1}
+							style={{ flex: 1 }}
 						>
 							{isLiked ? (
 								<HeartFilled size="sm" fill={t.palette.like} />
@@ -545,7 +554,7 @@ function DialogInner({
 							variant="solid"
 							color={isPinned ? "secondary" : "primary"}
 							onPress={onTogglePinned}
-							style={a.flex_1}
+							style={{ flex: 1 }}
 						>
 							<ButtonText>{isPinned ? <>Unpin feed</> : <>Pin feed</>}</ButtonText>
 							<ButtonIcon icon={Pin} position="right" />
@@ -554,23 +563,23 @@ function DialogInner({
 
 					<div
 						style={{
-							...a.pt_xs,
-							...a.gap_lg,
+							paddingTop: 4,
+							gap: 16,
 						}}
 					>
 						<Divider />
 
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_sm,
-								...a.justify_between,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 8,
+								justifyContent: "space-between",
 							}}
 						>
 							<Text
 								style={{
-									...a.italic,
+									fontStyle: "italic",
 									...t.atoms.text_contrast_medium,
 								}}
 							>

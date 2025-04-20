@@ -114,9 +114,9 @@ function KnownFollowersInner({
 			onPress={onLinkPress}
 			to={makeProfileLink(profile, "known-followers")}
 			style={{
-				...a.flex_row,
+				flexDirection: "row",
 				...(minimal ? a.gap_sm : a.gap_md),
-				...a.align_center,
+				alignItems: "center",
 				...{ marginLeft: -AVI_BORDER },
 			}}
 		>
@@ -138,8 +138,8 @@ function KnownFollowersInner({
 							<div
 								key={prof.did}
 								style={{
-									...a.absolute,
-									...a.rounded_full,
+									position: "absolute",
+									borderRadius: 999,
 
 									...{
 										borderWidth: AVI_BORDER,
@@ -240,8 +240,9 @@ function EmptyFallback({ show }: { show?: boolean }) {
 	return (
 		<Text
 			style={{
-				...a.text_sm,
-				...a.leading_snug,
+				fontSize: 14,
+				letterSpacing: 0,
+				lineHeight: 1.3,
 				...t.atoms.text_contrast_medium,
 			}}
 		>

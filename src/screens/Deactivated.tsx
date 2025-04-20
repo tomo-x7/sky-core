@@ -90,8 +90,8 @@ export function Deactivated() {
 	return (
 		<div
 			style={{
-				...a.util_screen_outer,
-				...a.flex_1,
+				minHeight: "100dvh",
+				flex: 1,
 			}}
 		>
 			<Layout.Content
@@ -99,21 +99,22 @@ export function Deactivated() {
 				contentContainerStyle={{
 					paddingTop: 64,
 					paddingBottom: 64,
-					...a.px_2xl,
+					paddingLeft: 24,
+					paddingRight: 24,
 				}}
 			>
 				<div
 					style={{
-						...a.w_full,
+						width: "100%",
 						...{ marginLeft: "auto", marginRight: "auto", maxWidth: COL_WIDTH },
 					}}
 				>
 					<div
 						style={{
-							...a.w_full,
-							...a.justify_center,
-							...a.align_center,
-							...a.pb_5xl,
+							width: "100%",
+							justifyContent: "center",
+							alignItems: "center",
+							paddingBottom: 40,
 						}}
 					>
 						<Logo width={40} />
@@ -121,39 +122,42 @@ export function Deactivated() {
 
 					<div
 						style={{
-							...a.gap_xs,
-							...a.pb_3xl,
+							gap: 4,
+							paddingBottom: 28,
 						}}
 					>
 						<Text
 							style={{
-								...a.text_xl,
-								...a.font_bold,
-								...a.leading_snug,
+								fontSize: 20,
+								letterSpacing: 0,
+								fontWeight: "600",
+								lineHeight: 1.3,
 							}}
 						>
 							Welcome back!
 						</Text>
 						<Text
 							style={{
-								...a.text_sm,
-								...a.leading_snug,
+								fontSize: 14,
+								letterSpacing: 0,
+								lineHeight: 1.3,
 							}}
 						>
 							<>You previously deactivated @{currentAccount?.handle}.</>
 						</Text>
 						<Text
 							style={{
-								...a.text_sm,
-								...a.leading_snug,
-								...a.pb_md,
+								fontSize: 14,
+								letterSpacing: 0,
+								lineHeight: 1.3,
+								paddingBottom: 12,
 							}}
 						>
 							You can reactivate your account to continue logging in. Your profile and posts will be
 							visible to other users.
 						</Text>
 
-						<div style={a.gap_sm}>
+						<div style={{ gap:8 }}>
 							<Button
 								label={"Reactivate your account"}
 								size="large"
@@ -178,19 +182,19 @@ export function Deactivated() {
 						{error && (
 							<div
 								style={{
-									...a.flex_row,
-									...a.gap_sm,
-									...a.mt_md,
-									...a.p_md,
-									...a.rounded_sm,
+									flexDirection: "row",
+									gap: 8,
+									marginTop: 12,
+									padding: 12,
+									borderRadius: 8,
 									...t.atoms.bg_contrast_25,
 								}}
 							>
 								<CircleInfo size="md" fill={t.palette.negative_400} />
 								<Text
 									style={{
-										...a.flex_1,
-										...a.leading_snug,
+										flex: 1,
+										lineHeight: 1.3,
 									}}
 								>
 									{error}
@@ -199,7 +203,7 @@ export function Deactivated() {
 						)}
 					</div>
 
-					<div style={a.pb_3xl}>
+					<div style={{ ...a.pb_3xl }}>
 						<Divider />
 					</div>
 
@@ -208,8 +212,8 @@ export function Deactivated() {
 							<Text
 								style={{
 									...t.atoms.text_contrast_medium,
-									...a.pb_md,
-									...a.leading_snug,
+									paddingBottom: 12,
+									lineHeight: 1.3,
 								}}
 							>
 								Or, sign in to one of your other accounts.
@@ -226,8 +230,8 @@ export function Deactivated() {
 							<Text
 								style={{
 									...t.atoms.text_contrast_medium,
-									...a.pb_md,
-									...a.leading_snug,
+									paddingBottom: 12,
+									lineHeight: 1.3,
 								}}
 							>
 								Or, continue with another account.

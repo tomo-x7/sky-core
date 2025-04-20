@@ -49,28 +49,30 @@ export function VolumeControl({
 	}, [drawFocus, setVolume, isZeroVolume, changeMuted]);
 
 	return (
-		<div onPointerEnter={onHover} onPointerLeave={onEndHover} style={a.relative}>
+		<div onPointerEnter={onHover} onPointerLeave={onEndHover} style={{ ...a.relative }}>
 			{hovered && !isTouchDevice && (
 				<div
 					// Animated.View
 					// entering={FadeIn.duration(100)}
 					// exiting={FadeOut.duration(100)}
 					style={{
-						...a.absolute,
-						...a.w_full,
+						position: "absolute",
+						width: "100%",
 						height: 100,
 						bottom: "100%",
 					}}
 				>
 					<div
 						style={{
-							...a.flex_1,
-							...a.mb_xs,
-							...a.px_2xs,
-							...a.py_xs,
+							flex: 1,
+							marginBottom: 4,
+							paddingLeft: 2,
+							paddingRight: 2,
+							paddingTop: 4,
+							paddingBottom: 4,
 							...{ backgroundColor: "rgba(0, 0, 0, 0.6)" },
-							...a.rounded_xs,
-							...a.align_center,
+							borderRadius: 4,
+							alignItems: "center",
 						}}
 					>
 						<input

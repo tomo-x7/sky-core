@@ -84,15 +84,16 @@ function DialogInner({
 			label={"Add a content warning"}
 			style={{
 				...{ maxWidth: 500 },
-				...a.w_full,
+				width: "100%",
 			}}
 		>
-			<div style={a.flex_1}>
-				<div style={a.gap_sm}>
+			<div style={{ flex: 1 }}>
+				<div style={{ gap:8 }}>
 					<Text
 						style={{
-							...a.text_2xl,
-							...a.font_bold,
+							fontSize: 22,
+							letterSpacing: 0,
+							fontWeight: "600",
 						}}
 					>
 						Add a content warning
@@ -100,7 +101,7 @@ function DialogInner({
 					<Text
 						style={{
 							...t.atoms.text_contrast_medium,
-							...a.leading_snug,
+							lineHeight: 1.3,
 						}}
 					>
 						Choose self-labels that are applicable for the media you are posting. If none are selected, this
@@ -110,23 +111,25 @@ function DialogInner({
 
 				<div
 					style={{
-						...a.my_md,
-						...a.gap_lg,
+						marginTop: 12,
+						marginBottom: 12,
+						gap: 16,
 					}}
 				>
 					<div>
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.justify_between,
-								...a.pb_sm,
+								flexDirection: "row",
+								alignItems: "center",
+								justifyContent: "space-between",
+								paddingBottom: 8,
 							}}
 						>
 							<Text
 								style={{
-									...a.font_bold,
-									...a.text_lg,
+									fontWeight: "600",
+									fontSize: 18,
+									letterSpacing: 0,
 								}}
 							>
 								Adult Content
@@ -134,9 +137,10 @@ function DialogInner({
 						</div>
 						<div
 							style={{
-								...a.p_md,
-								...a.rounded_sm,
-								...a.border,
+								padding: 12,
+								borderRadius: 8,
+								border: "1px solid black",
+								borderWidth: 1,
 								...t.atoms.border_contrast_medium,
 							}}
 						>
@@ -147,7 +151,7 @@ function DialogInner({
 									updateAdultLabels(values as AdultSelfLabel[]);
 								}}
 							>
-								<div style={a.gap_sm}>
+								<div style={{ gap:8 }}>
 									<Toggle.Item name="sexual" label={"Suggestive"}>
 										<Toggle.Checkbox />
 										<Toggle.LabelText>Suggestive</Toggle.LabelText>
@@ -165,7 +169,7 @@ function DialogInner({
 							{labels.includes("sexual") || labels.includes("nudity") || labels.includes("porn") ? (
 								<Text
 									style={{
-										...a.mt_sm,
+										marginTop: 8,
 										...t.atoms.text_contrast_medium,
 									}}
 								>
@@ -185,16 +189,17 @@ function DialogInner({
 					<div>
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.justify_between,
-								...a.pb_sm,
+								flexDirection: "row",
+								alignItems: "center",
+								justifyContent: "space-between",
+								paddingBottom: 8,
 							}}
 						>
 							<Text
 								style={{
-									...a.font_bold,
-									...a.text_lg,
+									fontWeight: "600",
+									fontSize: 18,
+									letterSpacing: 0,
 								}}
 							>
 								Other
@@ -202,9 +207,10 @@ function DialogInner({
 						</div>
 						<div
 							style={{
-								...a.p_md,
-								...a.rounded_sm,
-								...a.border,
+								padding: 12,
+								borderRadius: 8,
+								border: "1px solid black",
+								borderWidth: 1,
 								...t.atoms.border_contrast_medium,
 							}}
 						>
@@ -223,7 +229,7 @@ function DialogInner({
 							{labels.includes("graphic-media") ? (
 								<Text
 									style={{
-										...a.mt_sm,
+										marginTop: 8,
 										...t.atoms.text_contrast_medium,
 									}}
 								>
@@ -236,9 +242,9 @@ function DialogInner({
 			</div>
 			<div
 				style={{
-					...a.mt_sm,
-					...a.flex_row,
-					...a.ml_auto,
+					marginTop: 8,
+					flexDirection: "row",
+					marginLeft: "auto",
 				}}
 			>
 				<Button label={"Done"} onPress={() => control.close()} color="primary" size={"small"} variant="solid">

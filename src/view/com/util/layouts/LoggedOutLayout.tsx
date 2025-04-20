@@ -34,16 +34,16 @@ export const LoggedOutLayout = ({
 			return (
 				<div
 					// ScrollView
-					style={a.flex_1}
+					style={{ flex: 1 }}
 					// keyboardShouldPersistTaps="handled"
 					// keyboardDismissMode="none"
 					// contentContainerStyle={[{ paddingBottom: isKeyboardVisible ? 300 : 0 }]}
 				>
-					<div style={a.pt_md}>{children}</div>
+					<div style={{ ...a.pt_md }}>{children}</div>
 				</div>
 			);
 		} else {
-			return <div style={a.pt_md}>{children}</div>;
+			return <div style={{ ...a.pt_md }}>{children}</div>;
 		}
 	}
 	return (
@@ -91,7 +91,7 @@ export const LoggedOutLayout = ({
 				>
 					<div
 						// ScrollView
-						style={a.flex_1}
+						style={{ flex: 1 }}
 						// contentContainerStyle={styles.scrollViewContentContainer}
 						// keyboardShouldPersistTaps="handled"
 						// keyboardDismissMode="on-drag"
@@ -99,7 +99,8 @@ export const LoggedOutLayout = ({
 						<div
 							style={{
 								...styles.contentWrapper,
-								...a.my_auto,
+								marginTop: "auto",
+								marginBottom: "auto",
 							}}
 						>
 							{children}
@@ -123,7 +124,7 @@ export const LoggedOutLayout = ({
 const styles = {
 	container: {
 		flexDirection: "row",
-		height: "100vh",
+		height: "100dvh",
 	},
 	side: {
 		flex: 1,

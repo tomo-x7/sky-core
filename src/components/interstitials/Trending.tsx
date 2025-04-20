@@ -34,7 +34,8 @@ function Inner() {
 		<div
 			style={{
 				...t.atoms.border_contrast_low,
-				...a.border_t,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 			}}
 		>
 			<div
@@ -44,9 +45,9 @@ function Inner() {
 				<div
 					style={{
 						...gutters,
-						...a.flex_row,
-						...a.align_center,
-						...a.gap_lg,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: 16,
 					}}
 				>
 					<div style={{ paddingLeft: 4, paddingRight: 2 }}>
@@ -55,10 +56,11 @@ function Inner() {
 					{isLoading ? (
 						<div
 							style={{
-								...a.py_lg,
-								...a.flex_row,
-								...a.gap_lg,
-								...a.align_center,
+								paddingTop: 16,
+								paddingBottom: 16,
+								flexDirection: "row",
+								gap: 16,
+								alignItems: "center",
 							}}
 						>
 							<LoadingPlaceholder width={80} height={undefined} style={{ alignSelf: "stretch" }} />
@@ -69,8 +71,9 @@ function Inner() {
 							<Text
 								style={{
 									...t.atoms.text_contrast_medium,
-									...a.text_sm,
-									...a.font_bold,
+									fontSize: 14,
+									letterSpacing: 0,
+									fontWeight: "600",
 								}}
 							>
 								{" "}
@@ -80,12 +83,13 @@ function Inner() {
 						<>
 							{trending.topics.map((topic) => (
 								<TrendingTopicLink key={topic.link} topic={topic}>
-									<div style={a.py_lg}>
+									<div style={{ ...a.py_lg }}>
 										<Text
 											style={{
 												...t.atoms.text,
-												...a.text_sm,
-												...a.font_bold,
+												fontSize: 14,
+												letterSpacing: 0,
+												fontWeight: "600",
 
 												...// NOTE: we use opacity 0.7 instead of a color to match the color of the home pager tab bar
 												{ opacity: 0.7 },

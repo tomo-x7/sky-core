@@ -13,23 +13,25 @@ export const PasswordUpdatedForm = ({
 	return (
 		<FormContainer
 			style={{
-				...a.gap_2xl,
+				gap:24,
 				...(!gtMobile && a.mt_5xl),
 			}}
 		>
 			<Text
 				style={{
-					...a.text_3xl,
-					...a.font_bold,
-					...a.text_center,
+					fontSize: 26,
+					letterSpacing: 0,
+					fontWeight: "600",
+					textAlign: "center",
 				}}
 			>
 				Password updated!
 			</Text>
 			<Text
 				style={{
-					...a.text_center,
-					...a.mx_auto,
+					textAlign: "center",
+					marginLeft: "auto",
+					marginRight: "auto",
 					...{ maxWidth: "80%" },
 				}}
 			>
@@ -37,8 +39,8 @@ export const PasswordUpdatedForm = ({
 			</Text>
 			<div
 				style={{
-					...a.flex_row,
-					...a.justify_center,
+					flexDirection: "row",
+					justifyContent: "center",
 				}}
 			>
 				<Button onPress={onPressNext} label={"Close alert"} variant="solid" color="primary" size="large">

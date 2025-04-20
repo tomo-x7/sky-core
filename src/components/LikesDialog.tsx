@@ -71,10 +71,11 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 		<Dialog.Inner label={"Users that have liked this content or profile"}>
 			<Text
 				style={{
-					...a.text_2xl,
-					...a.font_bold,
-					...a.leading_tight,
-					...a.pb_lg,
+					fontSize: 22,
+					letterSpacing: 0,
+					fontWeight: "600",
+					lineHeight: 1.15,
+					paddingBottom: 16,
 				}}
 			>
 				Liked by
@@ -89,12 +90,14 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 				<div
 					style={{
 						...t.atoms.bg_contrast_50,
-						...a.px_md,
-						...a.py_xl,
-						...a.rounded_md,
+						paddingLeft: 12,
+						paddingRight: 12,
+						paddingTop: 20,
+						paddingBottom: 20,
+						borderRadius: 12,
 					}}
 				>
-					<Text style={a.text_center}>Nobody has liked this yet. Maybe you should be the first!</Text>
+					<Text style={{ textAlign:"center" }}>Nobody has liked this yet. Maybe you should be the first!</Text>
 				</div>
 			) : (
 				<div
@@ -115,7 +118,7 @@ export function LikesDialogInner({ control, uri }: LikesDialogProps) {
 function ListFooterComponent({ isFetching }: { isFetching: boolean }) {
 	if (isFetching) {
 		return (
-			<div style={a.pt_lg}>
+			<div style={{ paddingTop:16 }}>
 				<ActivityIndicator />
 			</div>
 		);

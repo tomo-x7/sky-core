@@ -424,9 +424,10 @@ export function FeedsScreen() {
 				return (
 					<div
 						style={{
-							...a.px_lg,
-							...a.pt_lg,
-							...a.gap_lg,
+							paddingLeft: 16,
+							paddingRight: 16,
+							paddingTop: 16,
+							gap: 16,
 						}}
 					>
 						<FeedCard.Default view={item.feed} />
@@ -485,7 +486,7 @@ export function FeedsScreen() {
 							color="secondary"
 							shape="round"
 							style={{
-								...a.justify_center,
+								justifyContent: "center",
 								...{ right: -3 },
 							}}
 						>
@@ -526,18 +527,20 @@ function FollowingFeed() {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.px_lg,
-				...a.py_md,
-				...a.border_b,
+				flex: 1,
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingTop: 12,
+				paddingBottom: 12,
+				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_low,
 			}}
 		>
 			<FeedCard.Header>
 				<div
 					style={{
-						...a.align_center,
-						...a.justify_center,
+						alignItems: "center",
+						justifyContent: "center",
 
 						...{
 							width: 28,
@@ -614,10 +617,12 @@ function SavedFeedPlaceholder() {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.px_lg,
-				...a.py_md,
-				...a.border_b,
+				flex: 1,
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingTop: 12,
+				paddingBottom: 12,
+				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_low,
 			}}
 		>
@@ -635,26 +640,29 @@ function FeedsSavedHeader() {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.px_md,
-				...a.py_lg,
-				...a.gap_md,
-				...a.border_b,
+				flexDirection: "row",
+				paddingLeft: 12,
+				paddingRight: 12,
+				paddingTop: 16,
+				paddingBottom: 16,
+				gap: 12,
+				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_low,
 			}}
 		>
 			<IconCircle icon={ListSparkle_Stroke2_Corner0_Rounded} size="lg" />
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_xs,
+					flex: 1,
+					gap: 4,
 				}}
 			>
 				<Text
 					style={{
-						...a.flex_1,
-						...a.text_2xl,
-						...a.font_heavy,
+						flex: 1,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "800",
 						...t.atoms.text,
 					}}
 				>
@@ -672,25 +680,27 @@ function FeedsAboutHeader() {
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.px_md,
-				...a.pt_lg,
-				...a.pb_lg,
-				...a.gap_md,
+				flexDirection: "row",
+				paddingLeft: 12,
+				paddingRight: 12,
+				paddingTop: 16,
+				paddingBottom: 16,
+				gap: 12,
 			}}
 		>
 			<IconCircle icon={ListMagnifyingGlass_Stroke2_Corner0_Rounded} size="lg" />
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_sm,
+					flex: 1,
+					gap: 8,
 				}}
 			>
 				<Text
 					style={{
-						...a.flex_1,
-						...a.text_2xl,
-						...a.font_heavy,
+						flex: 1,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "800",
 						...t.atoms.text,
 					}}
 				>

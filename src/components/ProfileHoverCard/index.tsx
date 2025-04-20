@@ -325,10 +325,11 @@ let Card = ({ did, hide }: { did: string; hide: () => void }): React.ReactNode =
 	return (
 		<div
 			style={{
-				...a.p_lg,
-				...a.border,
-				...a.rounded_md,
-				...a.overflow_hidden,
+				padding: 16,
+				border: "1px solid black",
+				borderWidth: 1,
+				borderRadius: 12,
+				overflow: "hidden",
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
 				...t.atoms.shadow_lg,
@@ -341,7 +342,7 @@ let Card = ({ did, hide }: { did: string; hide: () => void }): React.ReactNode =
 			{data && moderationOpts ? (
 				<Inner profile={data} moderationOpts={moderationOpts} hide={hide} />
 			) : (
-				<div style={a.justify_center}>
+				<div style={{ ...a.justify_center }}>
 					<Loader size="xl" />
 				</div>
 			)}
@@ -383,9 +384,9 @@ function Inner({
 		<div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.justify_between,
-					...a.align_start,
+					flexDirection: "row",
+					justifyContent: "space-between",
+					alignItems: "flex-start",
 				}}
 			>
 				<Link to={profileURL} label={"View profile"} onPress={hide}>
@@ -407,7 +408,7 @@ function Inner({
 							size="small"
 							color="secondary"
 							variant="solid"
-							style={a.rounded_full}
+							style={{ ...a.rounded_full }}
 						>
 							<ButtonText>{"View profile"}</ButtonText>
 						</Link>
@@ -417,7 +418,7 @@ function Inner({
 							color={profileShadow.viewer?.following ? "secondary" : "primary"}
 							variant="solid"
 							label={profileShadow.viewer?.following ? "Following" : "Follow"}
-							style={a.rounded_full}
+							style={{ ...a.rounded_full }}
 							onPress={profileShadow.viewer?.following ? unfollow : follow}
 						>
 							<ButtonIcon position="left" icon={profileShadow.viewer?.following ? Check : Plus} />
@@ -428,17 +429,18 @@ function Inner({
 			<Link to={profileURL} label={"View profile"} onPress={hide}>
 				<div
 					style={{
-						...a.pb_sm,
-						...a.flex_1,
+						paddingBottom: 8,
+						flex: 1,
 					}}
 				>
 					<Text
 						style={{
-							...a.pt_md,
-							...a.pb_xs,
-							...a.text_lg,
-							...a.font_bold,
-							...a.self_start,
+							paddingTop: 12,
+							paddingBottom: 4,
+							fontSize: 18,
+							letterSpacing: 0,
+							fontWeight: "600",
+							alignSelf: "flex-start",
 						}}
 					>
 						{sanitizeDisplayName(
@@ -453,9 +455,9 @@ function Inner({
 			{isBlockedUser && (
 				<div
 					style={{
-						...a.flex_row,
-						...a.flex_wrap,
-						...a.gap_xs,
+						flexDirection: "row",
+						flexWrap: "wrap",
+						gap: 4,
 					}}
 				>
 					{moderation.ui("profileView").alerts.map((cause) => (
@@ -467,10 +469,10 @@ function Inner({
 				<>
 					<div
 						style={{
-							...a.flex_row,
-							...a.flex_wrap,
-							...a.gap_md,
-							...a.pt_xs,
+							flexDirection: "row",
+							flexWrap: "wrap",
+							gap: 12,
+							paddingTop: 4,
 						}}
 					>
 						<InlineLinkText
@@ -481,8 +483,9 @@ function Inner({
 						>
 							<Text
 								style={{
-									...a.text_md,
-									...a.font_bold,
+									fontSize: 16,
+									letterSpacing: 0,
+									fontWeight: "600",
 								}}
 							>
 								{followers}{" "}
@@ -497,8 +500,9 @@ function Inner({
 						>
 							<Text
 								style={{
-									...a.text_md,
-									...a.font_bold,
+									fontSize: 16,
+									letterSpacing: 0,
+									fontWeight: "600",
 								}}
 							>
 								{following}{" "}
@@ -508,7 +512,7 @@ function Inner({
 					</div>
 
 					{profile.description?.trim() && !moderation.ui("profileView").blur ? (
-						<div style={a.pt_md}>
+						<div style={{ ...a.pt_md }}>
 							<RichText numberOfLines={8} value={descriptionRT} onLinkPress={hide} />
 						</div>
 					) : undefined}
@@ -516,10 +520,10 @@ function Inner({
 					{!isMe && shouldShowKnownFollowers(profile.viewer?.knownFollowers) && (
 						<div
 							style={{
-								...a.flex_row,
-								...a.align_center,
-								...a.gap_sm,
-								...a.pt_md,
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 8,
+								paddingTop: 12,
 							}}
 						>
 							<KnownFollowers profile={profile} moderationOpts={moderationOpts} onLinkPress={hide} />

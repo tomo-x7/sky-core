@@ -8,34 +8,35 @@ export function Links() {
 	return (
 		<div
 			style={{
-				...a.gap_md,
-				...a.align_start,
+				gap: 12,
+				alignItems: "flex-start",
 			}}
 		>
 			<H1>Links</H1>
 			<div
 				style={{
-					...a.gap_md,
-					...a.align_start,
+					gap: 12,
+					alignItems: "flex-start",
 				}}
 			>
-				<InlineLinkText label="foo" to="https://google.com" style={a.text_lg}>
+				<InlineLinkText label="foo" to="https://google.com" style={{ ...a.text_lg }}>
 					https://google.com
 				</InlineLinkText>
-				<InlineLinkText label="foo" to="https://google.com" style={a.text_lg}>
+				<InlineLinkText label="foo" to="https://google.com" style={{ ...a.text_lg }}>
 					External with custom children (google.com)
 				</InlineLinkText>
 				<InlineLinkText
 					label="foo"
 					to="https://bsky.social"
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_low,
 					}}
 				>
 					Internal (bsky.social)
 				</InlineLinkText>
-				<InlineLinkText label="foo" to="https://bsky.app/profile/bsky.app" style={a.text_md}>
+				<InlineLinkText label="foo" to="https://bsky.app/profile/bsky.app" style={{ ...a.text_md }}>
 					Internal (bsky.app)
 				</InlineLinkText>
 
@@ -52,18 +53,18 @@ export function Links() {
 				<Link label="View @bsky.app's profile" to="https://bsky.app/profile/bsky.app">
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_md,
-							...a.rounded_md,
-							...a.p_md,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 12,
+							borderRadius: 12,
+							padding: 12,
 							...t.atoms.bg_contrast_25,
 						}}
 					>
 						<div
 							style={{
 								...{ width: 32, height: 32 },
-								...a.rounded_full,
+								borderRadius: 999,
 								...t.atoms.bg_contrast_200,
 							}}
 						/>

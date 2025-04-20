@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import { capitalize } from "#/lib/strings/capitalize";
@@ -45,8 +45,9 @@ export function InterestButton({ interest }: { interest: string }) {
 					paddingBottom: 15,
 				},
 
-				...a.rounded_full,
-				...a.px_2xl,
+				borderRadius: 999,
+				paddingLeft: 24,
+				paddingRight: 24,
 				...(ctx.hovered ? styles.hovered : {}),
 				...(ctx.focused ? styles.hovered : {}),
 				...(ctx.pressed ? styles.hovered : {}),
@@ -57,7 +58,7 @@ export function InterestButton({ interest }: { interest: string }) {
 			<Text
 				style={{
 					...{ color: t.palette.contrast_900 },
-					...a.font_bold,
+					fontWeight: "600",
 					...(ctx.selected ? styles.textSelected : {}),
 				}}
 			>

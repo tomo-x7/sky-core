@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as TextField from "#/components/forms/TextField";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
@@ -32,8 +32,8 @@ export function DateFieldButton({
 	return (
 		<div
 			style={{
-				...a.relative,
-				...a.w_full,
+				position: "relative",
+				width: "100%",
 			}}
 			{...{
 				onMouseOver: onHoverIn,
@@ -54,13 +54,14 @@ export function DateFieldButton({
 					borderColor: "transparent",
 					borderWidth: 2,
 
-					...a.py_md,
-					...a.flex_row,
-					...a.flex_1,
-					...a.w_full,
-					...a.rounded_sm,
+					paddingTop: 12,
+					paddingBottom: 12,
+					flexDirection: "row",
+					flex: 1,
+					width: "100%",
+					borderRadius: 8,
 					...t.atoms.bg_contrast_25,
-					...a.align_center,
+					alignItems: "center",
 					...(hovered ? chromeHover : {}),
 					...(focused || pressed ? chromeFocus : {}),
 					...(isInvalid || isInvalid ? chromeError : {}),
@@ -70,10 +71,11 @@ export function DateFieldButton({
 				<TextField.Icon icon={CalendarDays} />
 				<Text
 					style={{
-						...a.text_md,
-						...a.pl_xs,
+						fontSize: 16,
+						letterSpacing: 0,
+						paddingLeft: 4,
 						...t.atoms.text,
-						...{ lineHeight: a.text_md.fontSize * 1.1875 },
+						...{ lineHeight: 16 * 1.1875 },
 					}}
 				>
 					{new Date(value).toUTCString()}

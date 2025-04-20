@@ -34,21 +34,25 @@ export function Layout({ children }: React.PropsWithChildren) {
 			aria-modal
 			aria-label={dialogLabel}
 			style={{
-				...a.fixed,
-				...a.inset_0,
-				...a.flex_1,
+				position: "fixed",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
+				flex: 1,
 				...t.atoms.bg,
 			}}
 		>
 			{!gtMobile && state.hasPrev && (
 				<div
 					style={{
-						...a.fixed,
-						...a.flex_row,
-						...a.w_full,
-						...a.justify_center,
-						...a.z_20,
-						...a.px_xl,
+						position: "fixed",
+						flexDirection: "row",
+						width: "100%",
+						justifyContent: "center",
+						zIndex: 20,
+						paddingLeft: 20,
+						paddingRight: 20,
 
 						...{
 							top: paddingTop.paddingTop - 1,
@@ -57,8 +61,8 @@ export function Layout({ children }: React.PropsWithChildren) {
 				>
 					<div
 						style={{
-							...a.w_full,
-							...a.align_start,
+							width: "100%",
+							alignItems: "flex-start",
 							...{ maxWidth: COL_WIDTH },
 						}}
 					>
@@ -69,7 +73,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 							size="small"
 							shape="round"
 							label={"Go back to previous step"}
-							style={a.absolute}
+							style={{ ...a.absolute }}
 							onPress={() => dispatch({ type: "prev" })}
 						>
 							<ButtonIcon icon={ChevronLeft} />
@@ -80,8 +84,8 @@ export function Layout({ children }: React.PropsWithChildren) {
 			<div
 				ref={scrollview}
 				style={{
-					...a.h_full,
-					...a.w_full,
+					height: "100%",
+					width: "100%",
 					paddingTop: 0,
 					borderWidth: 0,
 				}}
@@ -89,29 +93,29 @@ export function Layout({ children }: React.PropsWithChildren) {
 			>
 				<div
 					style={{
-						...a.flex_row,
-						...a.justify_center,
+						flexDirection: "row",
+						justifyContent: "center",
 						...(gtMobile ? a.px_5xl : a.px_xl),
 					}}
 				>
 					<div
 						style={{
-							...a.flex_1,
+							flex: 1,
 							...{ maxWidth: COL_WIDTH },
 						}}
 					>
 						<div
 							style={{
-								...a.w_full,
-								...a.align_center,
+								width: "100%",
+								alignItems: "center",
 								...paddingTop,
 							}}
 						>
 							<div
 								style={{
-									...a.flex_row,
-									...a.gap_sm,
-									...a.w_full,
+									flexDirection: "row",
+									gap: 8,
+									width: "100%",
 									...{ paddingTop: 17, maxWidth: "60%" },
 								}}
 							>
@@ -121,9 +125,9 @@ export function Layout({ children }: React.PropsWithChildren) {
 										<div
 											key={i.toString()}
 											style={{
-												...a.flex_1,
-												...a.pt_xs,
-												...a.rounded_full,
+												flex: 1,
+												paddingTop: 4,
+												borderRadius: 999,
 												...t.atoms.bg_contrast_50,
 
 												...{
@@ -140,8 +144,8 @@ export function Layout({ children }: React.PropsWithChildren) {
 
 						<div
 							style={{
-								...a.w_full,
-								...a.mb_5xl,
+								width: "100%",
+								marginBottom: 40,
 								...{ paddingTop: gtMobile ? 20 : 40 },
 							}}
 						>
@@ -154,19 +158,21 @@ export function Layout({ children }: React.PropsWithChildren) {
 			</div>
 			<div
 				style={{
-					...a.fixed,
+					position: "fixed",
 					...{ bottom: 0, left: 0, right: 0 },
 					...t.atoms.bg,
 					...t.atoms.border_contrast_low,
-					...a.border_t,
-					...a.align_center,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
+					alignItems: "center",
 					...(gtMobile ? a.px_5xl : a.px_xl),
-					...a.py_2xl,
+					paddingTop: 24,
+					paddingBottom: 24,
 				}}
 			>
 				<div
 					style={{
-						...a.w_full,
+						width: "100%",
 						...{ maxWidth: COL_WIDTH },
 						...flatten(gtMobile && [a.flex_row, a.justify_between]),
 					}}
@@ -198,9 +204,10 @@ export function TitleText({ children, style }: React.PropsWithChildren<TextStyle
 	return (
 		<Text
 			style={{
-				...a.pb_sm,
-				...a.text_4xl,
-				...a.font_bold,
+				paddingBottom: 8,
+				fontSize: 32,
+				letterSpacing: 0,
+				fontWeight: "600",
 				lineHeight: leading(a.text_4xl, a.leading_tight),
 				...style,
 			}}

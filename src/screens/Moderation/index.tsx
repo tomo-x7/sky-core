@@ -37,12 +37,13 @@ import { ViewHeader } from "#/view/com/util/ViewHeader";
 function ErrorState({ error }: { error: string }) {
 	const t = useTheme();
 	return (
-		<div style={a.p_xl}>
+		<div style={{ ...a.p_xl }}>
 			<Text
 				style={{
-					...a.text_md,
-					...a.leading_normal,
-					...a.pb_md,
+					fontSize: 16,
+					letterSpacing: 0,
+					lineHeight: 1.5,
+					paddingBottom: 12,
 					...t.atoms.text_contrast_medium,
 				}}
 			>
@@ -51,18 +52,21 @@ function ErrorState({ error }: { error: string }) {
 			</Text>
 			<div
 				style={{
-					...a.relative,
-					...a.py_md,
-					...a.px_lg,
-					...a.rounded_md,
-					...a.mb_2xl,
+					position: "relative",
+					paddingTop: 12,
+					paddingBottom: 12,
+					paddingLeft: 16,
+					paddingRight: 16,
+					borderRadius: 12,
+					marginBottom: 24,
 					...t.atoms.bg_contrast_25,
 				}}
 			>
 				<Text
 					style={{
-						...a.text_md,
-						...a.leading_normal,
+						fontSize: 16,
+						letterSpacing: 0,
+						lineHeight: 1.5,
 					}}
 				>
 					{error}
@@ -106,27 +110,28 @@ function SubItem({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.flex_row,
-				...a.align_center,
-				...a.justify_between,
-				...a.p_lg,
-				...a.gap_sm,
+				width: "100%",
+				flexDirection: "row",
+				alignItems: "center",
+				justifyContent: "space-between",
+				padding: 16,
+				gap: 8,
 				...style,
 			}}
 		>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.gap_md,
+					flexDirection: "row",
+					alignItems: "center",
+					gap: 12,
 				}}
 			>
 				<Icon size="md" style={t.atoms.text_contrast_medium} />
 				<Text
 					style={{
-						...a.text_sm,
-						...a.font_bold,
+						fontSize: 14,
+						letterSpacing: 0,
+						fontWeight: "600",
 					}}
 				>
 					{title}
@@ -191,16 +196,18 @@ export function ModerationScreenInner({
 	return (
 		<div
 			style={{
-				...a.pt_2xl,
-				...a.px_lg,
+				paddingTop: 24,
+				paddingLeft: 16,
+				paddingRight: 16,
 				...(gtMobile && a.px_2xl),
 			}}
 		>
 			<Text
 				style={{
-					...a.text_md,
-					...a.font_bold,
-					...a.pb_md,
+					fontSize: 16,
+					letterSpacing: 0,
+					fontWeight: "600",
+					paddingBottom: 12,
 					...t.atoms.text_contrast_high,
 				}}
 			>
@@ -208,9 +215,9 @@ export function ModerationScreenInner({
 			</Text>
 			<div
 				style={{
-					...a.w_full,
-					...a.rounded_md,
-					...a.overflow_hidden,
+					width: "100%",
+					borderRadius: 12,
+					overflow: "hidden",
 					...t.atoms.bg_contrast_25,
 				}}
 			>
@@ -266,16 +273,17 @@ export function ModerationScreenInner({
 			</div>
 			<Text
 				style={{
-					...a.pt_2xl,
-					...a.pb_md,
-					...a.text_md,
-					...a.font_bold,
+					paddingTop: 24,
+					paddingBottom: 12,
+					fontSize: 16,
+					letterSpacing: 0,
+					fontWeight: "600",
 					...t.atoms.text_contrast_high,
 				}}
 			>
 				Content filters
 			</Text>
-			<div style={a.gap_md}>
+			<div style={{ gap:12 }}>
 				{ageNotSet && (
 					<>
 						<Button
@@ -287,10 +295,12 @@ export function ModerationScreenInner({
 								birthdateDialogControl.open();
 							}}
 							style={{
-								...a.justify_between,
-								...a.rounded_md,
-								...a.px_lg,
-								...a.py_lg,
+								justifyContent: "space-between",
+								borderRadius: 12,
+								paddingLeft: 16,
+								paddingRight: 16,
+								paddingTop: 16,
+								paddingBottom: 16,
 							}}
 						>
 							<ButtonText>Confirm your age:</ButtonText>
@@ -302,9 +312,9 @@ export function ModerationScreenInner({
 				)}
 				<div
 					style={{
-						...a.w_full,
-						...a.rounded_md,
-						...a.overflow_hidden,
+						width: "100%",
+						borderRadius: 12,
+						overflow: "hidden",
 						...t.atoms.bg_contrast_25,
 					}}
 				>
@@ -312,17 +322,19 @@ export function ModerationScreenInner({
 						<>
 							<div
 								style={{
-									...a.py_lg,
-									...a.px_lg,
-									...a.flex_row,
-									...a.align_center,
-									...a.justify_between,
+									paddingTop: 16,
+									paddingBottom: 16,
+									paddingLeft: 16,
+									paddingRight: 16,
+									flexDirection: "row",
+									alignItems: "center",
+									justifyContent: "space-between",
 									...(disabledOnIOS ? { opacity: 0.5 } : undefined),
 								}}
 							>
 								<Text
 									style={{
-										...a.font_bold,
+										fontWeight: "600",
 										...t.atoms.text_contrast_high,
 									}}
 								>
@@ -337,9 +349,9 @@ export function ModerationScreenInner({
 								>
 									<div
 										style={{
-											...a.flex_row,
-											...a.align_center,
-											...a.gap_sm,
+											flexDirection: "row",
+											alignItems: "center",
+											gap: 8,
 										}}
 									>
 										<Text style={t.atoms.text_contrast_medium}>
@@ -367,10 +379,11 @@ export function ModerationScreenInner({
 			</div>
 			<Text
 				style={{
-					...a.text_md,
-					...a.font_bold,
-					...a.pt_2xl,
-					...a.pb_md,
+					fontSize: 16,
+					letterSpacing: 0,
+					fontWeight: "600",
+					paddingTop: 24,
+					paddingBottom: 12,
 					...t.atoms.text_contrast_high,
 				}}
 			>
@@ -379,9 +392,9 @@ export function ModerationScreenInner({
 			{isLabelersLoading ? (
 				<div
 					style={{
-						...a.w_full,
-						...a.align_center,
-						...a.p_lg,
+						width: "100%",
+						alignItems: "center",
+						padding: 16,
 					}}
 				>
 					<Loader size="xl" />
@@ -389,8 +402,8 @@ export function ModerationScreenInner({
 			) : labelersError || !labelers ? (
 				<div
 					style={{
-						...a.p_lg,
-						...a.rounded_sm,
+						padding: 16,
+						borderRadius: 8,
 						...t.atoms.bg_contrast_25,
 					}}
 				>
@@ -399,7 +412,7 @@ export function ModerationScreenInner({
 			) : (
 				<div
 					style={{
-						...a.rounded_sm,
+						borderRadius: 8,
 						...t.atoms.bg_contrast_25,
 					}}
 				>

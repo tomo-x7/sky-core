@@ -4,7 +4,6 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "#/alf";
-import { atoms as a } from "#/alf";
 import { shouldClickOpenNewTab } from "#/components/Link";
 import * as Prompt from "#/components/Prompt";
 import { RichText } from "#/components/RichText";
@@ -217,7 +216,7 @@ export function FeedSourceCardLoaded({
 				<div
 					style={{
 						...styles.headerContainer,
-						...a.align_center,
+						alignItems: "center",
 					}}
 				>
 					<div style={s.mr10}>

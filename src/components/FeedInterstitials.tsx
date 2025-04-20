@@ -30,10 +30,11 @@ function CardOuter({ children, style }: { children: React.ReactNode | React.Reac
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.p_lg,
-				...a.rounded_md,
-				...a.border,
+				width: "100%",
+				padding: 16,
+				borderRadius: 12,
+				border: "1px solid black",
+				borderWidth: 1,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
 				...(!gtMobile
@@ -52,7 +53,7 @@ function CardOuter({ children, style }: { children: React.ReactNode | React.Reac
 export function SuggestedFollowPlaceholder() {
 	const t = useTheme();
 	return (
-		<CardOuter style={{ ...a.gap_md, ...t.atoms.border_contrast_low }}>
+		<CardOuter style={{ gap: 12, ...t.atoms.border_contrast_low }}>
 			<ProfileCard.Header>
 				<ProfileCard.AvatarPlaceholder />
 				<ProfileCard.NameAndHandlePlaceholder />
@@ -65,7 +66,7 @@ export function SuggestedFollowPlaceholder() {
 export function SuggestedFeedsCardPlaceholder() {
 	const t = useTheme();
 	return (
-		<CardOuter style={{ ...a.gap_sm, ...t.atoms.border_contrast_low }}>
+		<CardOuter style={{ gap: 8, ...t.atoms.border_contrast_low }}>
 			<FeedCard.Header>
 				<FeedCard.AvatarPlaceholder />
 				<FeedCard.TitleAndBylinePlaceholder creator />
@@ -220,7 +221,7 @@ function ProfileGrid({
 		Array(maxLength)
 			.fill(0)
 			.map((_, i) => (
-				<div key={i.toString()} style={gtMobile ? { ...a.flex_0, width: "calc(50% - 6px)" } : undefined}>
+				<div key={i.toString()} style={gtMobile ? {  flex: "0 0 auto", width: "calc(50% - 6px)" } : undefined}>
 					<SuggestedFollowPlaceholder />
 				</div>
 			))
@@ -231,12 +232,12 @@ function ProfileGrid({
 					key={profile.did}
 					profile={profile}
 					style={{
-						...a.flex_1,
+						flex: 1,
 						...flatten(gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]),
 					}}
 				>
 					{({ hovered, pressed }) => (
-						<CardOuter style={{ ...a.flex_1, ...(hovered || pressed ? t.atoms.border_contrast_high : {}) }}>
+						<CardOuter style={{ flex: 1, ...(hovered || pressed ? t.atoms.border_contrast_high : {}) }}>
 							<ProfileCard.Outer>
 								<ProfileCard.Header>
 									<ProfileCard.Avatar profile={profile} moderationOpts={moderationOpts} />
@@ -262,12 +263,28 @@ function ProfileGrid({
 	}
 
 	return (
-		<div style={{ ...a.border_t, ...t.atoms.border_contrast_low, ...t.atoms.bg_contrast_25 }}>
-			<div style={{ ...a.p_lg, ...a.pb_xs, ...a.flex_row, ...a.align_center, ...a.justify_between }}>
+		<div
+			style={{
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
+				...t.atoms.border_contrast_low,
+				...t.atoms.bg_contrast_25,
+			}}
+		>
+			<div
+				style={{
+					padding: 16,
+					paddingBottom: 4,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "space-between"
+				}}
+			>
 				<Text
 					style={{
-						...a.text_sm,
-						...a.font_bold,
+						fontSize: 14,
+						letterSpacing: 0,
+						fontWeight: "600",
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -276,13 +293,22 @@ function ProfileGrid({
 				<Person fill={t.atoms.text_contrast_low.color} size="sm" />
 			</div>
 			{gtMobile ? (
-				<div style={{ ...a.flex_1, ...a.px_lg, ...a.pt_sm, ...a.pb_lg, ...a.gap_md }}>
+				<div
+					style={{
+						flex: 1,
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 8,
+						paddingBottom: 16,
+						gap:12
+					}}
+				>
 					<div
 						style={{
-							...a.flex_1,
-							...a.flex_row,
-							...a.flex_wrap,
-							...a.gap_sm,
+							flex: 1,
+							flexDirection: "row",
+							flexWrap: "wrap",
+							gap: 8,
 						}}
 					>
 						{content}
@@ -290,10 +316,10 @@ function ProfileGrid({
 
 					<div
 						style={{
-							...a.flex_row,
-							...a.justify_end,
-							...a.align_center,
-							...a.gap_md,
+							flexDirection: "row",
+							justifyContent: "flex-end",
+							alignItems: "center",
+							gap: 12,
 						}}
 					>
 						<InlineLinkText
@@ -316,11 +342,12 @@ function ProfileGrid({
 				>
 					<div
 						style={{
-							...a.px_lg,
-							...a.pt_sm,
-							...a.pb_lg,
-							...a.flex_row,
-							...a.gap_md,
+							paddingLeft: 16,
+							paddingRight: 16,
+							paddingTop: 8,
+							paddingBottom: 16,
+							flexDirection: "row",
+							gap: 12,
 						}}
 					>
 						{content}
@@ -331,24 +358,25 @@ function ProfileGrid({
 								navigate("/search");
 							}}
 						>
-							<CardOuter style={{ ...a.flex_1, borderWidth: 0 }}>
+							<CardOuter style={{ flex: 1, borderWidth: 0 }}>
 								<div
 									style={{
-										...a.flex_1,
-										...a.justify_center,
+										flex: 1,
+										justifyContent: "center",
 									}}
 								>
 									<div
 										style={{
-											...a.flex_row,
-											...a.px_lg,
+											flexDirection: "row",
+											paddingLeft: 16,
+											paddingRight: 16,
 										}}
 									>
 										<Text
 											style={{
-												...a.pr_xl,
-												...a.flex_1,
-												...a.leading_snug,
+												paddingRight: 20,
+												flex: 1,
+												lineHeight: 1.3,
 											}}
 										>
 											Browse more suggestions on the Explore page
@@ -398,7 +426,7 @@ export function SuggestedFeeds() {
 			{feeds.slice(0, numFeedsToDisplay).map((feed) => (
 				<FeedCard.Link key={feed.uri} view={feed}>
 					{({ hovered, pressed }) => (
-						<CardOuter style={{ ...a.flex_1, ...(hovered || pressed ? t.atoms.border_contrast_high : {}) }}>
+						<CardOuter style={{ flex: 1, ...(hovered || pressed ? t.atoms.border_contrast_high : {}) }}>
 							<FeedCard.Outer>
 								<FeedCard.Header>
 									<FeedCard.Avatar src={feed.avatar} />
@@ -416,24 +444,27 @@ export function SuggestedFeeds() {
 	return error ? null : (
 		<div
 			style={{
-				...a.border_t,
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 				...t.atoms.border_contrast_low,
 				...t.atoms.bg_contrast_25,
 			}}
 		>
 			<div
 				style={{
-					...a.pt_2xl,
-					...a.px_lg,
-					...a.flex_row,
-					...a.pb_xs,
+					paddingTop: 24,
+					paddingLeft: 16,
+					paddingRight: 16,
+					flexDirection: "row",
+					paddingBottom: 4,
 				}}
 			>
 				<Text
 					style={{
-						...a.flex_1,
-						...a.text_lg,
-						...a.font_bold,
+						flex: 1,
+						fontSize: 18,
+						letterSpacing: 0,
+						fontWeight: "600",
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -445,22 +476,23 @@ export function SuggestedFeeds() {
 			{gtMobile ? (
 				<div
 					style={{
-						...a.flex_1,
-						...a.px_lg,
-						...a.pt_md,
-						...a.pb_xl,
-						...a.gap_md,
+						flex: 1,
+						paddingLeft: 16,
+						paddingRight: 16,
+						paddingTop: 12,
+						paddingBottom: 20,
+						gap: 12,
 					}}
 				>
 					{content}
 
 					<div
 						style={{
-							...a.flex_row,
-							...a.justify_end,
-							...a.align_center,
-							...a.pt_xs,
-							...a.gap_md,
+							flexDirection: "row",
+							justifyContent: "flex-end",
+							alignItems: "center",
+							paddingTop: 4,
+							gap: 12,
 						}}
 					>
 						<InlineLinkText
@@ -483,11 +515,12 @@ export function SuggestedFeeds() {
 				>
 					<div
 						style={{
-							...a.px_lg,
-							...a.pt_md,
-							...a.pb_xl,
-							...a.flex_row,
-							...a.gap_md,
+							paddingLeft: 16,
+							paddingRight: 16,
+							paddingTop: 12,
+							paddingBottom: 20,
+							flexDirection: "row",
+							gap: 12,
 						}}
 					>
 						{content}
@@ -497,26 +530,27 @@ export function SuggestedFeeds() {
 							onPress={() => {
 								navigate("/search");
 							}}
-							style={a.flex_col}
+							style={{ flexDirection:"column"}}
 						>
-							<CardOuter style={a.flex_1}>
+							<CardOuter style={{ flex: 1 }}>
 								<div
 									style={{
-										...a.flex_1,
-										...a.justify_center,
+										flex: 1,
+										justifyContent: "center",
 									}}
 								>
 									<div
 										style={{
-											...a.flex_row,
-											...a.px_lg,
+											flexDirection: "row",
+											paddingLeft: 16,
+											paddingRight: 16,
 										}}
 									>
 										<Text
 											style={{
-												...a.pr_xl,
-												...a.flex_1,
-												...a.leading_snug,
+												paddingRight: 20,
+												flex: 1,
+												lineHeight: 1.3,
 											}}
 										>
 											Browse more suggestions on the Explore page
@@ -540,9 +574,10 @@ export function ProgressGuide() {
 		<div
 			style={{
 				...t.atoms.border_contrast_low,
-				...a.px_lg,
-				...a.py_lg,
-				...a.pb_lg,
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingTop: 16,
+				paddingBottom: 16,
 			}}
 		>
 			<ProgressGuideList />

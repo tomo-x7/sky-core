@@ -45,8 +45,8 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 				{!imageLoaded || !link ? (
 					<div
 						style={{
-							...a.p_xl,
-							...a.align_center,
+							padding: 20,
+							alignItems: "center",
 						}}
 					>
 						<Loader size="xl" />
@@ -55,21 +55,23 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 					<div style={!isTabletOrDesktop ? a.gap_lg : undefined}>
 						<div
 							style={{
-								...a.gap_sm,
+								gap: 8,
 								...(isTabletOrDesktop && a.pb_lg),
 							}}
 						>
 							<Text
 								style={{
-									...a.font_bold,
-									...a.text_2xl,
+									fontWeight: "600",
+									fontSize: 22,
+									letterSpacing: 0,
 								}}
 							>
 								Invite people to this starter pack!
 							</Text>
 							<Text
 								style={{
-									...a.text_md,
+									fontSize: 16,
+									letterSpacing: 0,
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -79,7 +81,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 						<img
 							src={imageUrl}
 							style={{
-								...a.rounded_sm,
+								borderRadius: 8,
 								aspectRatio: 1200 / 630,
 								marginTop: isTabletOrDesktop ? -20 : 0,
 								scale: isTabletOrDesktop ? 0.85 : 1,
@@ -87,9 +89,8 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 						/>
 						<div
 							style={{
-								...a.gap_md,
-								...a.gap_sm,
-								...a.flex_row_reverse,
+								gap: 8,
+								flexDirection: "row-reverse",
 								marginLeft: "auto",
 							}}
 						>
@@ -98,7 +99,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={a.self_center}
+								style={{ ...a.self_center }}
 								onPress={onShareLink}
 							>
 								<ButtonText>Copy Link</ButtonText>
@@ -108,7 +109,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={a.self_center}
+								style={{ ...a.self_center }}
 								onPress={() => {
 									control.close(() => {
 										qrDialogControl.open();

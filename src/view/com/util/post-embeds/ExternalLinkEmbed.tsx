@@ -58,13 +58,17 @@ export const ExternalLinkEmbed = ({
 			{({ hovered }) => (
 				<div
 					style={{
-						...a.transition_color,
+						transitionProperty:
+							"color, background-color, border-color, text-decoration-color, fill, stroke",
+						transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+						transitionDuration: "100ms",
 
-						...a.flex_col,
-						...a.rounded_md,
-						...a.overflow_hidden,
-						...a.w_full,
-						...a.border,
+						flexDirection: "column",
+						borderRadius: 12,
+						overflow: "hidden",
+						width: "100%",
+						border: "1px solid black",
+						borderWidth: 1,
 						...style,
 						...(hovered ? t.atoms.border_contrast_high : t.atoms.border_contrast_low),
 					}}
@@ -86,8 +90,8 @@ export const ExternalLinkEmbed = ({
 
 					<div
 						style={{
-							...a.flex_1,
-							...a.pt_sm,
+							flex: 1,
+							paddingTop: 8,
 							...{ gap: 3 },
 							...(hasMedia && a.border_t),
 							...(hovered ? t.atoms.border_contrast_high : t.atoms.border_contrast_low),
@@ -96,17 +100,19 @@ export const ExternalLinkEmbed = ({
 						<div
 							style={{
 								...{ gap: 3 },
-								...a.pb_xs,
-								...a.px_md,
+								paddingBottom: 4,
+								paddingLeft: 12,
+								paddingRight: 12,
 							}}
 						>
 							{!embedPlayerParams?.isGif && !embedPlayerParams?.dimensions && (
 								<Text
 									numberOfLines={3}
 									style={{
-										...a.text_md,
-										...a.font_bold,
-										...a.leading_snug,
+										fontSize: 16,
+										letterSpacing: 0,
+										fontWeight: "600",
+										lineHeight: 1.3,
 									}}
 								>
 									{link.title || link.uri}
@@ -116,22 +122,23 @@ export const ExternalLinkEmbed = ({
 								<Text
 									numberOfLines={link.thumb ? 2 : 4}
 									style={{
-										...a.text_sm,
-										...a.leading_snug,
+										fontSize: 14,
+										letterSpacing: 0,
+										lineHeight: 1.3,
 									}}
 								>
 									{link.description}
 								</Text>
 							) : undefined}
 						</div>
-						<div style={a.px_md}>
+						<div style={{ ...a.px_md }}>
 							<Divider />
 							<div
 								style={{
-									...a.flex_row,
-									...a.align_center,
-									...a.gap_2xs,
-									...a.pb_sm,
+									flexDirection: "row",
+									alignItems: "center",
+									gap: 2,
+									paddingBottom: 8,
 
 									...{
 										paddingTop: 6, // off menu
@@ -141,7 +148,10 @@ export const ExternalLinkEmbed = ({
 								<Globe
 									size="xs"
 									style={{
-										...a.transition_color,
+										transitionProperty:
+											"color, background-color, border-color, text-decoration-color, fill, stroke",
+										transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+										transitionDuration: "100ms",
 
 										...(hovered ? t.atoms.text_contrast_medium : t.atoms.text_contrast_low),
 									}}
@@ -149,10 +159,14 @@ export const ExternalLinkEmbed = ({
 								<Text
 									numberOfLines={1}
 									style={{
-										...a.transition_color,
+										transitionProperty:
+											"color, background-color, border-color, text-decoration-color, fill, stroke",
+										transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+										transitionDuration: "100ms",
 
-										...a.text_xs,
-										...a.leading_snug,
+										fontSize: 12,
+										letterSpacing: 0,
+										lineHeight: 1.3,
 										...(hovered ? t.atoms.text_contrast_high : t.atoms.text_contrast_medium),
 									}}
 								>

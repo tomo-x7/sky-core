@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useLocation, useMatch } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import {
@@ -24,6 +24,7 @@ import {
 } from "#/components/icons/UserCircle";
 import { useMinimalShellFooterTransform } from "#/lib/hooks/useMinimalShellTransform";
 import { makeProfileLink } from "#/lib/routes/links";
+import { routes } from "#/routes";
 import { useHomeBadge } from "#/state/home-badge";
 import { useUnreadMessageCount } from "#/state/queries/messages/list-conversations";
 import { useUnreadNotifications } from "#/state/queries/notifications/unread";
@@ -34,7 +35,6 @@ import { Link } from "#/view/com/util/Link";
 import { Logo } from "#/view/icons/Logo";
 import { Logotype } from "#/view/icons/Logotype";
 import { styles } from "./BottomBarStyles";
-import { routes } from "#/routes";
 
 export function BottomBarWeb() {
 	const { hasSession, currentAccount } = useSession();
@@ -72,7 +72,7 @@ export function BottomBarWeb() {
 		>
 			{hasSession ? (
 				<>
-					<NavItem routeName="Home" href="/" >
+					<NavItem routeName="Home" href="/">
 						{({ isActive }) => {
 							const Icon = isActive ? HomeFilled : Home;
 							return (
@@ -201,9 +201,9 @@ export function BottomBarWeb() {
 
 						<div
 							style={{
-								...a.flex_row,
-								...a.flex_wrap,
-								...a.gap_sm,
+								flexDirection: "row",
+								flexWrap: "wrap",
+								gap: 8,
 							}}
 						>
 							<Button
@@ -260,7 +260,7 @@ const NavItem: React.FC<{
 			href={href}
 			style={{
 				...styles.ctrl,
-				...a.pb_lg,
+				paddingBottom: 16,
 			}}
 			navigationAction={isOnDifferentProfile ? "push" : "navigate"}
 			// aria-role="link"

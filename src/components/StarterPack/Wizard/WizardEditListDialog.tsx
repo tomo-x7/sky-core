@@ -2,7 +2,7 @@ import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import type { GeneratorView } from "@atproto/api/dist/client/types/app/bsky/feed/defs";
 import { useRef } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { WizardFeedCard, WizardProfileCard } from "#/components/StarterPack/Wizard/WizardListCard";
@@ -71,22 +71,24 @@ export function WizardEditListDialog({
 				ListHeaderComponent={
 					<div
 						style={{
-							...a.flex_row,
-							...a.justify_between,
-							...a.border_b,
-							...a.px_sm,
-							...a.mb_sm,
+							flexDirection: "row",
+							justifyContent: "space-between",
+							borderBottom: "1px solid black",
+							paddingLeft: 8,
+							paddingRight: 8,
+							marginBottom: 8,
 							...t.atoms.bg,
 							...t.atoms.border_contrast_medium,
-							...a.align_center,
+							alignItems: "center",
 							...{ height: 48 },
 						}}
 					>
 						<div style={{ width: 60 }} />
 						<Text
 							style={{
-								...a.font_bold,
-								...a.text_xl,
+								fontWeight: "600",
+								fontSize: 20,
+								letterSpacing: 0,
 							}}
 						>
 							{state.currentStep === "Profiles" ? <>Edit People</> : <>Edit Feeds</>}
@@ -106,11 +108,13 @@ export function WizardEditListDialog({
 				}
 				stickyHeaderIndices={[0]}
 				style={{
-					...a.py_0,
-					...{ height: "100vh", maxHeight: 600 },
-					...a.px_0,
+					paddingTop: 0,
+					paddingBottom: 0,
+					...{ height: "100dvh", maxHeight: 600 },
+					paddingLeft: 0,
+					paddingRight: 0,
 				}}
-				webInnerStyle={{ ...a.py_0, maxWidth: 500, minWidth: 200 }}
+				webInnerStyle={{ paddingTop: 0, paddingBottom: 0, maxWidth: 500, minWidth: 200 }}
 				keyboardDismissMode="on-drag"
 				initialNumToRender={initialNumToRender}
 			/>

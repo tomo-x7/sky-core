@@ -180,9 +180,9 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={a.rounded_full}
+				style={{ ...a.rounded_full }}
 			>
-				<ButtonText style={a.text_md}>Cancel</ButtonText>
+				<ButtonText style={{ ...a.text_md }}>Cancel</ButtonText>
 			</Button>
 		),
 		[onPressCancel],
@@ -197,11 +197,12 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={a.rounded_full}
+				style={{ ...a.rounded_full }}
 			>
 				<ButtonText
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...(!dirty && t.atoms.text_contrast_low),
 					}}
 				>
@@ -215,19 +216,19 @@ function DialogInner({
 	return (
 		<Dialog.ScrollableInner
 			label={"Edit profile"}
-			style={a.overflow_hidden}
-			contentContainerStyle={{ ...a.px_0, ...a.pt_0 }}
+			style={{ ...a.overflow_hidden }}
+			contentContainerStyle={{ paddingLeft: 0, paddingRight: 0, ...a.pt_0 }}
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
 					<Dialog.HeaderText>Edit profile</Dialog.HeaderText>
 				</Dialog.Header>
 			}
 		>
-			<div style={a.relative}>
+			<div style={{ ...a.relative }}>
 				<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
 				<div
 					style={{
-						...a.absolute,
+						position: "absolute",
 
 						...{
 							top: 80,
@@ -244,20 +245,21 @@ function DialogInner({
 				</div>
 			</div>
 			{isUpdateProfileError && (
-				<div style={a.mt_xl}>
+				<div style={{ ...a.mt_xl }}>
 					<ErrorMessage message={cleanError(updateProfileError)} />
 				</div>
 			)}
 			{imageError !== "" && (
-				<div style={a.mt_xl}>
+				<div style={{ ...a.mt_xl }}>
 					<ErrorMessage message={imageError} />
 				</div>
 			)}
 			<div
 				style={{
-					...a.mt_4xl,
-					...a.px_xl,
-					...a.gap_xl,
+					marginTop: 32,
+					paddingLeft: 20,
+					paddingRight: 20,
+					gap: 20,
 				}}
 			>
 				<div>
@@ -273,9 +275,10 @@ function DialogInner({
 					{displayNameTooLong && (
 						<TextField.SuffixText
 							style={{
-								...a.text_sm,
-								...a.mt_xs,
-								...a.font_bold,
+								fontSize: 14,
+								letterSpacing: 0,
+								marginTop: 4,
+								fontWeight: "600",
 								...{ color: t.palette.negative_400 },
 							}}
 						>
@@ -301,9 +304,10 @@ function DialogInner({
 					{descriptionTooLong && (
 						<TextField.SuffixText
 							style={{
-								...a.text_sm,
-								...a.mt_xs,
-								...a.font_bold,
+								fontSize: 14,
+								letterSpacing: 0,
+								marginTop: 4,
+								fontWeight: "600",
 								...{ color: t.palette.negative_400 },
 							}}
 						>

@@ -1,4 +1,5 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import { Splash } from "./Splash";
 import { bskyTitle } from "./lib/strings/headings";
 import { routes } from "./routes";
 import HashtagScreen from "./screens/Hashtag";
@@ -55,7 +56,6 @@ import { SearchScreen } from "./view/screens/Search";
 import { Storybook } from "./view/screens/Storybook";
 import { SupportScreen } from "./view/screens/Support";
 import { TermsOfServiceScreen } from "./view/screens/TermsOfService";
-import { Splash } from "./Splash";
 
 export function createRouter(unreadCountLabel: string, layoutComponent: React.FC) {
 	const title = (page: string) => {

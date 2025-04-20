@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { Palette } from "./Palette";
 
@@ -9,86 +9,94 @@ export function Theming() {
 		<div
 			style={{
 				...t.atoms.bg,
-				...a.gap_lg,
-				...a.p_xl,
+				gap: 16,
+				padding: 20,
 			}}
 		>
 			<Palette />
 			<Text
 				style={{
-					...a.font_bold,
-					...a.pt_xl,
-					...a.px_md,
+					fontWeight: "600",
+					paddingTop: 20,
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 			>
 				theme.atoms.text
 			</Text>
 			<div
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...t.atoms.border_contrast_high,
-					...a.border_t,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
 				}}
 			/>
 			<Text
 				style={{
-					...a.font_bold,
+					fontWeight: "600",
 					...t.atoms.text_contrast_high,
-					...a.px_md,
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 			>
 				theme.atoms.text_contrast_high
 			</Text>
 			<div
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...t.atoms.border_contrast_medium,
-					...a.border_t,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
 				}}
 			/>
 			<Text
 				style={{
-					...a.font_bold,
+					fontWeight: "600",
 					...t.atoms.text_contrast_medium,
-					...a.px_md,
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 			>
 				theme.atoms.text_contrast_medium
 			</Text>
 			<div
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...t.atoms.border_contrast_low,
-					...a.border_t,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
 				}}
 			/>
 			<Text
 				style={{
-					...a.font_bold,
+					fontWeight: "600",
 					...t.atoms.text_contrast_low,
-					...a.px_md,
+					paddingLeft: 12,
+					paddingRight: 12,
 				}}
 			>
 				theme.atoms.text_contrast_low
 			</Text>
 			<div
 				style={{
-					...a.flex_1,
+					flex: 1,
 					...t.atoms.border_contrast_low,
-					...a.border_t,
+					borderTop: "1px solid black",
+					borderTopWidth: 1,
 				}}
 			/>
 			<div
 				style={{
-					...a.w_full,
-					...a.gap_md,
+					width: "100%",
+					gap: 12,
 				}}
 			>
 				<div
 					style={{
 						...t.atoms.bg,
-						...a.justify_center,
-						...a.p_md,
+						justifyContent: "center",
+						padding: 12,
 					}}
 				>
 					<Text>theme.atoms.bg</Text>
@@ -96,8 +104,8 @@ export function Theming() {
 				<div
 					style={{
 						...t.atoms.bg_contrast_25,
-						...a.justify_center,
-						...a.p_md,
+						justifyContent: "center",
+						padding: 12,
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_25</Text>
@@ -105,8 +113,8 @@ export function Theming() {
 				<div
 					style={{
 						...t.atoms.bg_contrast_50,
-						...a.justify_center,
-						...a.p_md,
+						justifyContent: "center",
+						padding: 12,
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_50</Text>
@@ -114,8 +122,8 @@ export function Theming() {
 				<div
 					style={{
 						...t.atoms.bg_contrast_100,
-						...a.justify_center,
-						...a.p_md,
+						justifyContent: "center",
+						padding: 12,
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_100</Text>
@@ -123,8 +131,8 @@ export function Theming() {
 				<div
 					style={{
 						...t.atoms.bg_contrast_200,
-						...a.justify_center,
-						...a.p_md,
+						justifyContent: "center",
+						padding: 12,
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_200</Text>
@@ -132,8 +140,8 @@ export function Theming() {
 				<div
 					style={{
 						...t.atoms.bg_contrast_300,
-						...a.justify_center,
-						...a.p_md,
+						justifyContent: "center",
+						padding: 12,
 					}}
 				>
 					<Text>theme.atoms.bg_contrast_300</Text>

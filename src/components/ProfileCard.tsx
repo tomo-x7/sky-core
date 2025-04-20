@@ -68,9 +68,9 @@ export function Outer({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.flex_1,
-				...a.gap_xs,
+				width: "100%",
+				flex: 1,
+				gap: 4,
 			}}
 		>
 			{children}
@@ -86,9 +86,9 @@ export function Header({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.align_center,
-				...a.gap_sm,
+				flexDirection: "row",
+				alignItems: "center",
+				gap: 8,
 			}}
 		>
 			{children}
@@ -113,7 +113,7 @@ export function Link({
 			// 	params: { name: profile.did },
 			// }}
 			style={{
-				...a.flex_col,
+				flexDirection: "column",
 				...style,
 			}}
 			{...rest}
@@ -147,7 +147,7 @@ export function AvatarPlaceholder() {
 	return (
 		<div
 			style={{
-				...a.rounded_full,
+				borderRadius: 999,
 				...t.atoms.bg_contrast_50,
 
 				...{
@@ -175,13 +175,14 @@ export function NameAndHandle({
 	const handle = sanitizeHandle(profile.handle, "@");
 
 	return (
-		<div style={a.flex_1}>
+		<div style={{ flex: 1 }}>
 			<Text
 				style={{
-					...a.text_md,
-					...a.font_bold,
-					...a.leading_snug,
-					...a.self_start,
+					fontSize: 16,
+					letterSpacing: 0,
+					fontWeight: "600",
+					lineHeight: 1.3,
+					alignSelf: "flex-start",
 				}}
 				numberOfLines={1}
 			>
@@ -189,7 +190,7 @@ export function NameAndHandle({
 			</Text>
 			<Text
 				style={{
-					...a.leading_snug,
+					lineHeight: 1.3,
 					...t.atoms.text_contrast_medium,
 				}}
 				numberOfLines={1}
@@ -206,13 +207,13 @@ export function NameAndHandlePlaceholder() {
 	return (
 		<div
 			style={{
-				...a.flex_1,
-				...a.gap_xs,
+				flex: 1,
+				gap: 4,
 			}}
 		>
 			<div
 				style={{
-					...a.rounded_xs,
+					borderRadius: 4,
 					...t.atoms.bg_contrast_50,
 
 					...{
@@ -223,7 +224,7 @@ export function NameAndHandlePlaceholder() {
 			/>
 			<div
 				style={{
-					...a.rounded_xs,
+					borderRadius: 4,
 					...t.atoms.bg_contrast_50,
 
 					...{
@@ -254,8 +255,8 @@ export function Description({
 	if (profile.viewer && (profile.viewer.blockedBy || profile.viewer.blocking || profile.viewer.blockingByList))
 		return null;
 	return (
-		<div style={a.pt_xs}>
-			<RichText value={rt} style={a.leading_snug} numberOfLines={numberOfLines} disableLinks />
+		<div style={{ ...a.pt_xs }}>
+			<RichText value={rt} style={{ ...a.leading_snug }} numberOfLines={numberOfLines} disableLinks />
 		</div>
 	);
 }
@@ -274,8 +275,7 @@ export function DescriptionPlaceholder({
 					<div
 						key={i.toString()}
 						style={{
-							...a.rounded_xs,
-							...a.w_full,
+							borderRadius: 4,
 							...t.atoms.bg_contrast_50,
 							...{ height: 12, width: i + 1 === numberOfLines ? "60%" : "100%" },
 						}}

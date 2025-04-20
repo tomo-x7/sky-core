@@ -92,7 +92,10 @@ function ShellInner() {
 										: "transparent",
 								},
 
-								...a.transition_color,
+								transitionProperty:
+									"color, background-color, border-color, text-decoration-color, fill, stroke",
+								transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+								transitionDuration: "100ms",
 							}}
 						>
 							<div
@@ -116,7 +119,7 @@ export const Shell: React.FC = function ShellImpl() {
 	return (
 		<div
 			style={{
-				...a.util_screen_outer,
+				minHeight: "100dvh",
 				...pageBg,
 			}}
 		>

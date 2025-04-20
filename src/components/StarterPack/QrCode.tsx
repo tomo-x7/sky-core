@@ -30,20 +30,23 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 			<LinearGradientBackground
 				style={{
 					...{ width: 300, minHeight: 390 },
-					...a.align_center,
-					...a.px_sm,
-					...a.py_xl,
-					...a.rounded_sm,
-					...a.justify_between,
-					...a.gap_md,
+					alignItems: "center",
+					paddingLeft: 8,
+					paddingRight: 8,
+					paddingTop: 20,
+					paddingBottom: 20,
+					borderRadius: 8,
+					justifyContent: "space-between",
+					gap: 12,
 				}}
 			>
-				<div style={a.gap_sm}>
+				<div style={{ gap:8 }}>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_3xl,
-							...a.text_center,
+							fontWeight: "600",
+							fontSize: 26,
+							letterSpacing: 0,
+							textAlign: "center",
 							...{ color: "white" },
 						}}
 					>
@@ -52,14 +55,14 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 				</div>
 				<div
 					style={{
-						...a.gap_xl,
-						...a.align_center,
+						gap: 20,
+						alignItems: "center",
 					}}
 				>
 					<Text
 						style={{
-							...a.font_bold,
-							...a.text_center,
+							fontWeight: "600",
+							textAlign: "center",
 							...{ color: "white", fontSize: 18 },
 						}}
 					>
@@ -67,8 +70,8 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					</Text>
 					<div
 						style={{
-							...a.rounded_sm,
-							...a.overflow_hidden,
+							borderRadius: 8,
+							overflow: "hidden",
 						}}
 					>
 						<QrCodeInner link={link} />
@@ -77,9 +80,9 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 					<Text
 						style={{
 							...a.flex,
-							...a.flex_row,
-							...a.align_center,
-							...a.font_bold,
+							flexDirection: "row",
+							alignItems: "center",
+							fontWeight: "600",
 							...{ color: "white", fontSize: 18, gap: 6 },
 						}}
 					>
@@ -87,8 +90,8 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 							on
 							<div
 								style={{
-									...a.flex_row,
-									...a.align_center,
+									flexDirection: "row",
+									alignItems: "center",
 									...{ gap: 6 },
 								}}
 							>
@@ -110,7 +113,7 @@ function QrCodeInner({ link }: { link: string }) {
 	return (
 		<div
 			style={{
-				...a.rounded_sm,
+				borderRadius: 8,
 				height: 225,
 				width: 225,
 				backgroundColor: "#f3f3f3",
@@ -146,7 +149,7 @@ function QrCodeInner({ link }: { link: string }) {
 // 		<QRCode
 // 			data={link}
 // 			style={{
-// 				...a.rounded_sm,
+// 				borderRadius: 8,
 // 				...{ height: 225, width: 225, backgroundColor: "#f3f3f3" },
 // 			}}
 // 			pieceSize={8}

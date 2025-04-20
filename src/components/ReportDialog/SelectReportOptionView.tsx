@@ -58,7 +58,7 @@ export function SelectReportOptionView(props: {
 	}, [props.params.type]);
 
 	return (
-		<div style={a.gap_lg}>
+		<div style={{ gap:16 }}>
 			{props.labelers?.length > 1 ? (
 				<Button
 					size="small"
@@ -73,21 +73,23 @@ export function SelectReportOptionView(props: {
 			) : null}
 			<div
 				style={{
-					...a.justify_center,
+					justifyContent: "center",
 					...(gtMobile ? a.gap_sm : a.gap_xs),
 				}}
 			>
 				<Text
 					style={{
-						...a.text_2xl,
-						...a.font_bold,
+						fontSize: 22,
+						letterSpacing: 0,
+						fontWeight: "600",
 					}}
 				>
 					{i18n.title}
 				</Text>
 				<Text
 					style={{
-						...a.text_md,
+						fontSize: 16,
+						letterSpacing: 0,
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -95,7 +97,7 @@ export function SelectReportOptionView(props: {
 				</Text>
 			</div>
 			<Divider />
-			<div style={a.gap_sm}>
+			<div style={{ gap:8 }}>
 				{reportOptions.map((reportOption) => {
 					return (
 						<Button
@@ -111,22 +113,22 @@ export function SelectReportOptionView(props: {
 				{(props.params.type === "post" || props.params.type === "account") && (
 					<div
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.justify_between,
-							...a.gap_lg,
-							...a.p_md,
-							...a.pl_lg,
-							...a.rounded_md,
+							flexDirection: "row",
+							alignItems: "center",
+							justifyContent: "space-between",
+							gap: 16,
+							padding: 12,
+							paddingLeft: 16,
+							borderRadius: 12,
 							...t.atoms.bg_contrast_900,
 						}}
 					>
 						<Text
 							style={{
-								...a.flex_1,
+								flex: 1,
 								...t.atoms.text_inverted,
-								...a.italic,
-								...a.leading_snug,
+								fontStyle: "italic",
+								lineHeight: 1.3,
 							}}
 						>
 							Need to report a copyright violation?
@@ -162,12 +164,12 @@ function ReportOptionButton({
 	return (
 		<div
 			style={{
-				...a.w_full,
-				...a.flex_row,
-				...a.align_center,
-				...a.justify_between,
-				...a.p_md,
-				...a.rounded_md,
+				width: "100%",
+				flexDirection: "row",
+				alignItems: "center",
+				justifyContent: "space-between",
+				padding: 12,
+				borderRadius: 12,
 				...{ paddingRight: 70 },
 				...t.atoms.bg_contrast_25,
 				...(interacted && t.atoms.bg_contrast_50),
@@ -175,14 +177,15 @@ function ReportOptionButton({
 		>
 			<div
 				style={{
-					...a.flex_1,
-					...a.gap_xs,
+					flex: 1,
+					gap: 4,
 				}}
 			>
 				<Text
 					style={{
-						...a.text_md,
-						...a.font_bold,
+						fontSize: 16,
+						letterSpacing: 0,
+						fontWeight: "600",
 						...t.atoms.text_contrast_medium,
 					}}
 				>
@@ -190,7 +193,7 @@ function ReportOptionButton({
 				</Text>
 				<Text
 					style={{
-						...a.leading_tight,
+						lineHeight: 1.15,
 						...{ maxWidth: 400 },
 					}}
 				>
@@ -199,11 +202,13 @@ function ReportOptionButton({
 			</div>
 			<div
 				style={{
-					...a.absolute,
-					...a.inset_0,
-					...a.justify_center,
-					...a.pr_md,
-					...{ left: "auto" },
+					position: "absolute",
+					top: 0,
+					left: "auto",
+					right: 0,
+					bottom: 0,
+					justifyContent: "center",
+					paddingRight: 12,
 				}}
 			>
 				<ChevronRight size="md" fill={t.atoms.text_contrast_low.color} />

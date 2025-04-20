@@ -470,11 +470,11 @@ export const ComposePost = ({
 				// KeyboardAvoidingView
 				// behavior={"height"}
 				// keyboardVerticalOffset={keyboardVerticalOffset}
-				style={a.flex_1}
+				style={{ flex: 1 }}
 			>
 				<div
 					style={{
-						...a.flex_1,
+						flex: 1,
 						...viewStyles,
 					}}
 					aria-modal
@@ -503,8 +503,8 @@ export const ComposePost = ({
 						// Animated.ScrollView
 						ref={scrollViewRef}
 						// onScroll={scrollHandler}
-						// contentContainerStyle={a.flex_grow}
-						style={a.flex_1}
+						// contentContainerstyle={{...a.flex_grow}}
+						style={{ flex: 1 }}
 						// keyboardShouldPersistTaps="always"
 						// onContentSizeChange={onScrollViewContentSizeChange}
 					>
@@ -638,20 +638,21 @@ const ComposerPost = React.memo(function ComposerPost({
 	return (
 		<div
 			style={{
-				...a.mx_lg,
+				marginLeft: 16,
+				marginRight: 16,
 				...(!isActive && styles.inactivePost),
 			}}
 		>
-			<div style={a.flex_row}>
+			<div style={{ ...a.flex_row }}>
 				<UserAvatar
 					avatar={currentProfile?.avatar}
 					size={50}
 					type={currentProfile?.associated?.labeler ? "labeler" : "user"}
-					style={a.mt_xs}
+					style={{ ...a.mt_xs }}
 				/>
 				<TextInput
 					ref={textInput}
-					style={a.pt_xs}
+					style={{ ...a.pt_xs }}
 					richtext={richtext}
 					placeholder={selectTextInputPlaceholder}
 					autoFocus
@@ -683,7 +684,7 @@ const ComposerPost = React.memo(function ComposerPost({
 						variant="ghost"
 						shape="round"
 						style={{
-							...a.absolute,
+							position: "absolute",
 							...{ top: 0, right: 0 },
 						}}
 						onPress={() => {
@@ -767,15 +768,16 @@ function ComposerTopBar({
 					shape="default"
 					size="small"
 					style={{
-						...a.rounded_full,
-						...a.py_sm,
+						borderRadius: 999,
+						paddingTop: 8,
+						paddingBottom: 8,
 						...{ paddingLeft: 7, paddingRight: 7 },
 					}}
 					onPress={onCancel}
 				>
-					<ButtonText style={a.text_md}>Cancel</ButtonText>
+					<ButtonText style={{ ...a.text_md }}>Cancel</ButtonText>
 				</Button>
-				<div style={a.flex_1} />
+				<div style={{ flex: 1 }} />
 				{isPublishing ? (
 					<>
 						<Text style={pal.textLight}>{publishingStage}</Text>
@@ -791,13 +793,14 @@ function ComposerTopBar({
 						shape="default"
 						size="small"
 						style={{
-							...a.rounded_full,
-							...a.py_sm,
+							borderRadius: 999,
+							paddingTop: 8,
+							paddingBottom: 8,
 						}}
 						onPress={onPublish}
 						disabled={!canPost || isPublishQueued}
 					>
-						<ButtonText style={a.text_md}>
+						<ButtonText style={{ ...a.text_md }}>
 							{isReply ? <>Reply</> : isThread ? <>Post All</> : <>Post</>}
 						</ButtonText>
 					</Button>
@@ -823,7 +826,7 @@ function AltTextReminder({ error }: { error: string }) {
 			<Text
 				style={{
 					...pal.text,
-					...a.flex_1,
+					flex: 1,
 				}}
 			>
 				{error}
@@ -852,8 +855,8 @@ function ComposerEmbeds({
 			{embed.media?.type === "gif" && (
 				<div
 					style={{
-						...a.relative,
-						...a.mt_lg,
+						position: "relative",
+						marginTop: 16,
 					}}
 					key={embed.media.gif.url}
 				>
@@ -870,8 +873,8 @@ function ComposerEmbeds({
 			{!embed.media && embed.link && (
 				<div
 					style={{
-						...a.relative,
-						...a.mt_lg,
+						position: "relative",
+						marginTop: 16,
 					}}
 					key={embed.link.uri}
 				>
@@ -890,8 +893,8 @@ function ComposerEmbeds({
 					<div
 						// Animated.View
 						style={{
-							...a.w_full,
-							...a.mt_lg,
+							width: "100%",
+							marginTop: 16,
 						}}
 					>
 						{video.asset && video.status !== "compressing" && video.video && (
@@ -976,8 +979,8 @@ function ComposerPills({
 		<div
 			// Animated.View
 			style={{
-				...a.flex_row,
-				...a.p_sm,
+				flexDirection: "row",
+				padding: 8,
 				...t.atoms.bg,
 				...bottomBarAnimatedStyle,
 			}}
@@ -1071,20 +1074,22 @@ function ComposerFooter({
 	return (
 		<div
 			style={{
-				...a.flex_row,
-				...a.py_xs,
+				flexDirection: "row",
+				paddingTop: 4,
+				paddingBottom: 4,
 				...{ paddingLeft: 7, paddingRight: 16 },
-				...a.align_center,
-				...a.border_t,
+				alignItems: "center",
+				borderTop: "1px solid black",
+				borderTopWidth: 1,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_medium,
-				...a.justify_between,
+				justifyContent: "space-between",
 			}}
 		>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
+					flexDirection: "row",
+					alignItems: "center",
 				}}
 			>
 				{video && video.status !== "done" ? (
@@ -1092,9 +1097,9 @@ function ComposerFooter({
 				) : (
 					<ToolbarWrapper
 						style={{
-							...a.flex_row,
-							...a.align_center,
-							...a.gap_xs,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 4,
 						}}
 					>
 						<SelectPhotoBtn
@@ -1110,7 +1115,7 @@ function ComposerFooter({
 						<SelectGifBtn onSelectGif={onSelectGif} disabled={!!media} />
 						<Button
 							onPress={onEmojiButtonPress}
-							style={a.p_sm}
+							style={{ ...a.p_sm }}
 							label={"Open emoji picker"}
 							variant="ghost"
 							shape="round"
@@ -1123,9 +1128,9 @@ function ComposerFooter({
 			</div>
 			<div
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.justify_between,
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "space-between",
 				}}
 			>
 				{showAddButton && (
@@ -1133,7 +1138,7 @@ function ComposerFooter({
 						label={"Add new post"}
 						onPress={onAddPost}
 						style={{
-							...a.p_sm,
+							padding: 8,
 							...a.m_2xs,
 						}}
 						variant="ghost"
@@ -1371,34 +1376,37 @@ function ErrorBanner({
 		<div
 			// Animated.View
 			style={{
-				...a.px_lg,
-				...a.pb_sm,
+				paddingLeft: 16,
+				paddingRight: 16,
+				paddingBottom: 8,
 			}}
 			// entering={FadeIn}
 			// exiting={FadeOut}
 		>
 			<div
 				style={{
-					...a.px_md,
-					...a.py_sm,
-					...a.gap_xs,
-					...a.rounded_sm,
+					paddingLeft: 12,
+					paddingRight: 12,
+					paddingTop: 8,
+					paddingBottom: 8,
+					gap: 4,
+					borderRadius: 8,
 					...t.atoms.bg_contrast_25,
 				}}
 			>
 				<div
 					style={{
-						...a.relative,
-						...a.flex_row,
-						...a.gap_sm,
+						position: "relative",
+						flexDirection: "row",
+						gap: 8,
 						...{ paddingRight: 48 },
 					}}
 				>
 					<CircleInfo fill={t.palette.negative_400} />
 					<NewText
 						style={{
-							...a.flex_1,
-							...a.leading_snug,
+							flex: 1,
+							lineHeight: 1.3,
 							...{ paddingTop: 1 },
 						}}
 					>
@@ -1411,7 +1419,7 @@ function ErrorBanner({
 						variant="ghost"
 						shape="round"
 						style={{
-							...a.absolute,
+							position: "absolute",
 							...{ top: 0, right: 0 },
 						}}
 						onPress={onClearError}
@@ -1423,9 +1431,10 @@ function ErrorBanner({
 					<NewText
 						style={{
 							...{ paddingLeft: 28 },
-							...a.text_xs,
-							...a.font_bold,
-							...a.leading_snug,
+							fontSize: 12,
+							letterSpacing: 0,
+							fontWeight: "600",
+							lineHeight: 1.3,
 							...t.atoms.text_contrast_low,
 						}}
 					>
@@ -1495,8 +1504,8 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 	return (
 		<ToolbarWrapper
 			style={{
-				...a.flex_row,
-				...a.align_center,
+				flexDirection: "row",
+				alignItems: "center",
 				...{ paddingTop: 5, paddingBottom: 5 },
 			}}
 		>
@@ -1514,8 +1523,8 @@ function VideoUploadToolbar({ state }: { state: VideoState }) {
 			</div>
 			<NewText
 				style={{
-					...a.font_bold,
-					...a.ml_sm,
+					fontWeight: "600",
+					marginLeft: 8,
 				}}
 			>
 				{text}

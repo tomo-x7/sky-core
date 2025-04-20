@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
@@ -39,13 +39,13 @@ export function ThreadPreferencesScreen() {
 						<SettingsList.ItemText>Sort replies</SettingsList.ItemText>
 						<div
 							style={{
-								...a.w_full,
-								...a.gap_md,
+								width: "100%",
+								gap: 12,
 							}}
 						>
 							<Text
 								style={{
-									...a.flex_1,
+									flex: 1,
 									...t.atoms.text_contrast_medium,
 								}}
 							>
@@ -59,8 +59,8 @@ export function ThreadPreferencesScreen() {
 							>
 								<div
 									style={{
-										...a.gap_sm,
-										...a.flex_1,
+										gap: 8,
+										flex: 1,
 									}}
 								>
 									<Toggle.Item name="hotness" label={"Hot replies first"}>
@@ -101,11 +101,11 @@ export function ThreadPreferencesScreen() {
 								})
 							}
 							style={{
-								...a.w_full,
-								...a.gap_md,
+								width: "100%",
+								gap: 12,
 							}}
 						>
-							<Toggle.LabelText style={a.flex_1}>
+							<Toggle.LabelText style={{ flex: 1 }}>
 								Show replies by people you follow before all other replies
 							</Toggle.LabelText>
 							<Toggle.Platform />
@@ -126,11 +126,11 @@ export function ThreadPreferencesScreen() {
 								})
 							}
 							style={{
-								...a.w_full,
-								...a.gap_md,
+								width: "100%",
+								gap: 12,
 							}}
 						>
-							<Toggle.LabelText style={a.flex_1}>Show replies as threaded</Toggle.LabelText>
+							<Toggle.LabelText style={{ flex: 1 }}>Show replies as threaded</Toggle.LabelText>
 							<Toggle.Platform />
 						</Toggle.Item>
 					</SettingsList.Group>
