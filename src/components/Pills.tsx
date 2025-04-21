@@ -1,5 +1,5 @@
 import { BSKY_LABELER_DID, type ModerationCause } from "@atproto/api";
-import React from "react";
+import React, { type CSSProperties } from "react";
 
 import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
@@ -67,34 +67,30 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 		switch (size) {
 			case "lg": {
 				return {
-					outer: [
-						t.atoms.bg_contrast_25,
-						{
-							gap: 5,
-							paddingLeft: 5,
-							paddingRight: 5,
-							paddingTop: 5,
-							paddingBottom: 5,
-						},
-					],
+					outer: {
+						...t.atoms.bg_contrast_25,
+						gap: 5,
+						paddingLeft: 5,
+						paddingRight: 5,
+						paddingTop: 5,
+						paddingBottom: 5,
+					} satisfies CSSProperties,
 					avi: 16,
-					text: [a.text_sm],
+					text: { fontSize: 14, letterSpacing: 0 } satisfies CSSProperties,
 				};
 			}
 			default: {
 				return {
-					outer: [
-						!noBg ? t.atoms.bg_contrast_25 : {},
-						{
-							gap: 3,
-							paddingLeft: 3,
-							paddingRight: 3,
-							paddingTop: 3,
-							paddingBottom: 3,
-						},
-					],
+					outer: {
+						...(!noBg ? t.atoms.bg_contrast_25 : {}),
+						gap: 3,
+						paddingLeft: 3,
+						paddingRight: 3,
+						paddingTop: 3,
+						paddingBottom: 3,
+					},
 					avi: 12,
-					text: [a.text_xs],
+					text: { ...a.text_xs } satisfies CSSProperties,
 				};
 			}
 		}
@@ -117,7 +113,7 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 							flexDirection: "row",
 							alignItems: "center",
 							borderRadius: 999,
-							...flatten(outer),
+							...outer,
 							...((hovered || pressed) && t.atoms.bg_contrast_50),
 						}}
 					>
@@ -129,7 +125,7 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 
 						<Text
 							style={{
-								...flatten(text),
+								...text,
 								fontWeight: "600",
 								lineHeight: 1.15,
 								...t.atoms.text_contrast_medium,

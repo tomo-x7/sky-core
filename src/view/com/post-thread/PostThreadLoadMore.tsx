@@ -62,7 +62,7 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 					/>
 				</div>
 			</div>
-			<div style={{ ...a.px_sm }}>
+			<div style={{ paddingLeft: 8, paddingRight: 8 }}>
 				<Text
 					style={{
 						...{ color: t.palette.primary_500 },

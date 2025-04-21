@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -39,9 +39,9 @@ function SigninDialogInner(params: { control: Dialog.DialogOuterProps["control"]
 	return (
 		<Dialog.ScrollableInner
 			label="Sign in to Bluesky or create a new account"
-			style={gtMobile ? { width: "auto", maxWidth: 420 } : a.w_full}
+			style={gtMobile ? { width: "auto", maxWidth: 420 } : { width: "100%" }}
 		>
-			<div style={{ ...a.p_2xl }}>
+			<div style={{ padding: 24 }}>
 				<div
 					style={{
 						flexDirection: "row",

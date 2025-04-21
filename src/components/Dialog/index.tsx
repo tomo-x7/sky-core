@@ -3,7 +3,7 @@ import { useFocusGuards } from "@radix-ui/react-focus-guards";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React, { useImperativeHandle } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Context } from "#/components/Dialog/context";
 import type { DialogControlProps, DialogInnerProps, DialogOuterProps } from "#/components/Dialog/types";
@@ -95,12 +95,12 @@ export function Outer({ children, control, onClose, webOptions }: React.PropsWit
 									zIndex: 10,
 									paddingLeft: 20,
 									paddingRight: 20,
-									...(webOptions?.alignCenter ? a.justify_center : undefined),
+									justifyContent: webOptions?.alignCenter ? "center" : undefined,
 									alignItems: "center",
 
 									overflowY: "auto",
-									paddingTop: gtMobile ? "10vh" : a.pt_xl.paddingTop,
-									paddingBottom: gtMobile ? "10vh" : a.pt_xl.paddingTop,
+									paddingTop: gtMobile ? "10vh" : 20,
+									paddingBottom: gtMobile ? "10vh" : 20,
 								}}
 							>
 								<Backdrop />
@@ -157,13 +157,11 @@ export function Inner({
 					border: "1px solid black",
 					borderWidth: 1,
 					...t.atoms.bg,
-
 					maxWidth: 600,
 					borderColor: t.palette.contrast_200,
 					// TODO:2pxは適当に決めたので要チェック
 					boxShadow: `2px 2px 30px ${t.palette.black}`,
-
-					...(!reduceMotionEnabled ? a.zoom_fade_in : {}),
+					animation: reduceMotionEnabled ? undefined : "zoomIn ease-out 0.1s, fadeIn ease-out 0.1s",
 					...style,
 				}}
 			>
@@ -174,7 +172,7 @@ export function Inner({
 					style={{ display: "flex", flexDirection: "column" }}
 				>
 					{header}
-					<div style={{ ...(gtMobile ? a.p_2xl : a.p_xl), ...contentContainerStyle }}>{children}</div>
+					<div style={{ padding: gtMobile ? 24 : 20, ...contentContainerStyle }}>{children}</div>
 				</DismissableLayer>
 			</dialog>
 		</FocusScope>
@@ -207,7 +205,8 @@ export const InnerFlatList = React.forwardRef<
 			<FlatList
 				ref={ref}
 				style={{
-					...(gtMobile ? a.px_2xl : a.px_xl),
+					paddingRight: gtMobile ? 24 : 20,
+					paddingLeft: gtMobile ? 24 : 20,
 					...style,
 				}}
 				{...props}
@@ -223,11 +222,8 @@ export function Close() {
 			style={{
 				position: "absolute",
 				zIndex: 10,
-
-				...{
-					top: a.pt_md.paddingTop,
-					right: a.pr_md.paddingRight,
-				},
+				top: 12,
+				right: 12,
 			}}
 		>
 			<Button
@@ -260,8 +256,8 @@ function Backdrop() {
 					left: 0,
 					right: 0,
 					bottom: 0,
-					...{ backgroundColor: t.palette.black },
-					...(!reduceMotionEnabled && a.fade_in),
+					backgroundColor: t.palette.black,
+					animation: reduceMotionEnabled ? undefined : "fadeIn ease-out 0.15s",
 				}}
 			/>
 		</div>

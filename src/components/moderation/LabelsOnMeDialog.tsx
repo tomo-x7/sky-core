@@ -2,7 +2,7 @@ import { type ComAtprotoLabelDefs, ComAtprotoModerationDefs } from "@atproto/api
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
@@ -327,7 +327,7 @@ function AppealForm({
 					</>
 				</Text>
 			</div>
-			<div style={{ ...a.my_md }}>
+			<div style={{ marginTop: 12, marginBottom: 12 }}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={`Please explain why you think this label was incorrectly applied by ${
@@ -342,9 +342,11 @@ function AppealForm({
 				/>
 			</div>
 			<div
-				style={flatten(
-					gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm],
-				)}
+				style={{
+					flexDirection: gtMobile ? "row" : "column-reverse",
+					justifyContent: gtMobile ? "space-between" : undefined,
+					gap: gtMobile ? undefined : 8,
+				}}
 			>
 				<Button variant="solid" color="secondary" size="large" onPress={onPressBack} label={"Back"}>
 					<ButtonText>{"Back"}</ButtonText>

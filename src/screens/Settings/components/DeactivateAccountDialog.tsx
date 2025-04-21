@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import type { DialogOuterProps } from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -68,7 +68,7 @@ function DeactivateAccountDialogInner({
 				Your profile, posts, feeds, and lists will no longer be visible to other Bluesky users. You can
 				reactivate your account at any time by logging in.
 			</Prompt.DescriptionText>
-			<div style={{ ...a.pb_xl }}>
+			<div style={{ paddingBottom: 20 }}>
 				<Divider />
 				<div
 					style={{

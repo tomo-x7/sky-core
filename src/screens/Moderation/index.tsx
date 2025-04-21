@@ -37,7 +37,7 @@ import { ViewHeader } from "#/view/com/util/ViewHeader";
 function ErrorState({ error }: { error: string }) {
 	const t = useTheme();
 	return (
-		<div style={{ ...a.p_xl }}>
+		<div style={{ padding: 20 }}>
 			<Text
 				style={{
 					fontSize: 16,

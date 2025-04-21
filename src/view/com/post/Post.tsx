@@ -9,8 +9,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useMemo, useState } from "react";
-
-import { atoms as a } from "#/alf";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
 import { RichText } from "#/components/RichText";
 import { SubtleWebHover } from "#/components/SubtleWebHover";
@@ -225,7 +223,7 @@ function PostInner({
 						style={styles.contentHider}
 						childContainerStyle={styles.contentHiderChild}
 					>
-						<PostAlerts modui={moderation.ui("contentView")} style={{ ...a.py_xs }} />
+						<PostAlerts modui={moderation.ui("contentView")} style={{ paddingTop: 4, paddingBottom: 4 }} />
 						{richText.text ? (
 							<div style={styles.postTextContainer}>
 								<RichText

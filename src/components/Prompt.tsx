@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, type ButtonColor, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -36,7 +36,7 @@ export function Outer({
 			<Context.Provider value={context}>
 				<Dialog.ScrollableInner
 					accessibilityDescribedBy={descriptionId}
-					style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
+					style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : { width: "100%" }}
 				>
 					{children}
 				</Dialog.ScrollableInner>
@@ -87,8 +87,8 @@ export function Actions({ children }: React.PropsWithChildren) {
 			style={{
 				width: "100%",
 				gap: 12,
-				justifyContent: "flex-end",
-				...flatten(gtMobile ? [a.flex_row, a.flex_row_reverse, a.justify_start] : [a.flex_col]),
+				justifyContent: gtMobile ? "flex-start" : "flex-end",
+				flexDirection: gtMobile ? "row-reverse" : "column",
 			}}
 		>
 			{children}

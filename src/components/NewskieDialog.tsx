@@ -53,7 +53,7 @@ export function NewskieDialog({
 	if (!createdAt || daysOld > 7) return null;
 
 	return (
-		<div style={{ ...a.pr_2xs }}>
+		<div style={{ paddingRight: 2 }}>
 			<Button
 				disabled={disabled}
 				label={"This user is new here. Press for more info about when they joined."}

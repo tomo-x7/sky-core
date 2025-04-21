@@ -361,7 +361,7 @@ function ChatListItemReady({
 									{lastMessage}
 								</Text>
 
-								<PostAlerts modui={moderation.ui("contentList")} size="lg" style={{ ...a.pt_xs }} />
+								<PostAlerts modui={moderation.ui("contentList")} size="lg" style={{ paddingTop: 4 }} />
 
 								{children}
 							</div>

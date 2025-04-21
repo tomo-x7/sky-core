@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "../Typography";
 import { AnimatedCheck } from "../anim/AnimatedCheck";
 
@@ -24,7 +24,7 @@ export function ProgressGuideTask({
 			style={{
 				flexDirection: "row",
 				gap: 8,
-				...(!subtitle && a.align_center),
+				...(!subtitle && { alignItems: "center" }),
 			}}
 		>
 			{current === total ? (

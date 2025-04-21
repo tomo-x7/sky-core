@@ -1,7 +1,7 @@
 /* eslint-disable react-native-a11y/has-valid-accessibility-ignores-invert-colors */
 import { useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 import { Image_Stroke2_Corner0_Rounded as Image } from "#/components/icons/Image";
@@ -39,7 +39,7 @@ export function SelectPhotoBtn({ size, disabled, onAdd }: Props) {
 		<Button
 			onPress={onPressSelectPhotos}
 			label={"Gallery"}
-			style={{ ...a.p_sm }}
+			style={{ padding: 8 }}
 			variant="ghost"
 			shape="round"
 			color="primary"

@@ -200,7 +200,7 @@ function DialogInner({
 					</div>
 				)}
 
-				<div style={{ ...a.py_xs }}>
+				<div style={{ paddingTop: 4, paddingBottom: 4 }}>
 					<P
 						style={{
 							...t.atoms.text_contrast_medium,

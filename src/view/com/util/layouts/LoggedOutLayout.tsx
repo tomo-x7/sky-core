@@ -1,6 +1,4 @@
 import type React from "react";
-
-import { atoms as a } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useColorSchemeStyle } from "#/lib/hooks/useColorSchemeStyle";
 import { usePalette } from "#/lib/hooks/usePalette";
@@ -39,11 +37,11 @@ export const LoggedOutLayout = ({
 					// keyboardDismissMode="none"
 					// contentContainerStyle={[{ paddingBottom: isKeyboardVisible ? 300 : 0 }]}
 				>
-					<div style={{ ...a.pt_md }}>{children}</div>
+					<div style={{ paddingTop: 12 }}>{children}</div>
 				</div>
 			);
 		} else {
-			return <div style={{ ...a.pt_md }}>{children}</div>;
+			return <div style={{ paddingTop: 12 }}>{children}</div>;
 		}
 	}
 	return (

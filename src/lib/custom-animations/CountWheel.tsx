@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { decideShouldRoll } from "#/lib/custom-animations/util";
 import { s } from "#/lib/styles";
@@ -79,7 +79,8 @@ export function CountWheel({
 			<div ref={countView}>
 				<Text
 					style={{
-						...(big ? a.text_md : { fontSize: 15 }),
+						fontSize: big ? 16 : 15,
+						letterSpacing: 0,
 						userSelect: "none",
 						...(isLiked ? { fontWeight: "600", ...s.likeColor } : { color: t.palette.contrast_500 }),
 					}}
@@ -91,7 +92,8 @@ export function CountWheel({
 				<div style={{ position: "absolute", opacity: 0 }} aria-disabled={true} ref={prevCountView}>
 					<Text
 						style={{
-							...(big ? a.text_md : { fontSize: 15 }),
+							fontSize: big ? 16 : 15,
+							letterSpacing: 0,
 							userSelect: "none",
 							...(isLiked ? { fontWeight: "600", ...s.likeColor } : { color: t.palette.contrast_500 }),
 						}}

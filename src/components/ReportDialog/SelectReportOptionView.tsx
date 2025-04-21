@@ -5,7 +5,7 @@ import { Link } from "#/components/Link";
 import { DMCA_LINK } from "#/components/ReportDialog/const";
 import { type ReportOption, useReportOptions } from "#/lib/moderation/useReportOptions";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText, useButtonContext } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import { Text } from "#/components/Typography";
@@ -74,7 +74,7 @@ export function SelectReportOptionView(props: {
 			<div
 				style={{
 					justifyContent: "center",
-					...(gtMobile ? a.gap_sm : a.gap_xs),
+					gap: gtMobile ? 8 : 4,
 				}}
 			>
 				<Text

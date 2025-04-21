@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import Graphemer from "graphemer";
 import { useMemo, useState } from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { InlineLinkText } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -120,7 +120,8 @@ export function Takendown() {
 					style={{
 						flexDirection: "row",
 						justifyContent: "center",
-						...(gtMobile ? a.pt_4xl : flatten([a.px_xl, a.pt_4xl])),
+						paddingTop: 32,
+						...(gtMobile && { paddingLeft: 20, paddingRight: 20 }),
 					}}
 				>
 					<div
@@ -129,7 +130,7 @@ export function Takendown() {
 							...{ maxWidth: COL_WIDTH, minHeight: COL_WIDTH },
 						}}
 					>
-						<div style={{ ...a.pb_xl }}>
+						<div style={{ paddingBottom: 20 }}>
 							<Logo width={64} />
 						</div>
 
@@ -262,8 +263,9 @@ export function Takendown() {
 					style={{
 						alignItems: "center",
 						...t.atoms.bg,
-						...(gtMobile ? a.px_5xl : a.px_xl),
-						...{ paddingBottom: a.pb_5xl.paddingBottom },
+						paddingBottom: 40,
+						paddingLeft: gtMobile ? 40 : 20,
+						paddingRight: gtMobile ? 40 : 20,
 					}}
 				>
 					<div

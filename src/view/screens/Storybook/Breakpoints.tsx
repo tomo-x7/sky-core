@@ -1,4 +1,4 @@
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { H3, Text } from "#/components/Typography";
 
 export function Breakpoints() {
@@ -7,8 +7,8 @@ export function Breakpoints() {
 
 	return (
 		<div>
-			<H3 style={{ ...a.pb_md }}>Breakpoint Debugger</H3>
-			<Text style={{ ...a.pb_md }}>
+			<H3 style={{ paddingBottom: 12 }}>Breakpoint Debugger</H3>
+			<Text style={{ paddingBottom: 12 }}>
 				Current breakpoint: {!breakpoints.gtMobile && <Text>mobile</Text>}
 				{breakpoints.gtMobile && !breakpoints.gtTablet && <Text>tablet</Text>}
 				{breakpoints.gtTablet && <Text>desktop</Text>}

@@ -598,7 +598,7 @@ function OverflowMenu({
 							}}
 						>
 							<Text style={{ ...a.font_bold }}>Unable to delete</Text>
-							<Text style={{ ...a.leading_snug }}>{cleanError(deleteError)}</Text>
+							<Text style={{ lineHeight: 1.3 }}>{cleanError(deleteError)}</Text>
 						</div>
 						<CircleInfo size="sm" fill={t.palette.negative_400} />
 					</div>

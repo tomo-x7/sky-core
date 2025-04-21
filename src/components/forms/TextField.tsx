@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { type CSSProperties, useState } from "react";
 
 import { type TextStyleProp, atoms as a, applyFonts, flatten, useAlf, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
@@ -176,31 +176,22 @@ export function Input({
 	}
 
 	const refs = mergeRefs([ctx.inputRef, inputRef!].filter(Boolean));
-	const flattened = flatten([
-		a.relative,
-		a.z_20,
-		a.flex_1,
-		a.text_md,
-		t.atoms.text,
-		a.px_xs,
-		{
-			// paddingVertical doesn't work w/multiline - esb
-			lineHeight: 1.1875,
-
-			minHeight: rest.multiline ? 80 : undefined,
-			minWidth: 0,
-			border: "0px",
-			backgroundColor: "transparent",
-		},
-		// fix for autofill styles covering border
-		{
-			paddingTop: 10,
-			paddingBottom: 11,
-			marginTop: 2,
-			marginBottom: 2,
-		},
-		style,
-	]);
+	const flattened = {
+		...a.relative,
+		...a.z_20,
+		...a.flex_1,
+		...a.text_md,
+		...t.atoms.text,
+		lineHeight: 1.1875,
+		minHeight: rest.multiline ? 80 : undefined,
+		minWidth: 0,
+		border: "0px",
+		backgroundColor: "transparent",
+		padding: "10px 4px 11px",
+		marginTop: 2,
+		marginBottom: 2,
+		...style,
+	} satisfies CSSProperties;
 	applyFonts(flattened, fonts.family);
 
 	// should always be defined on `typography`

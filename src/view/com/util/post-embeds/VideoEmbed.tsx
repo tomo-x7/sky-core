@@ -1,8 +1,6 @@
 import type { AppBskyEmbedVideo } from "@atproto/api";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-import { atoms as a } from "#/alf";
 import { useIsWithinMessage } from "#/components/dms/MessageContext";
 import { useFullscreen } from "#/components/hooks/useFullscreen";
 import { isFirefox } from "#/lib/browser";
@@ -86,7 +84,7 @@ export function VideoEmbed({
 	);
 
 	return (
-		<div style={{ ...a.pt_xs }}>
+		<div style={{ paddingTop: 4 }}>
 			{cropDisabled ? (
 				<div
 					style={{

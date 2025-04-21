@@ -239,7 +239,7 @@ function ProvidedHandlePage({
 					>
 						{isPending ? <ButtonIcon icon={Loader} /> : <ButtonText>Save</ButtonText>}
 					</Button>
-					<Text style={{ ...a.leading_snug }}>
+					<Text style={{ lineHeight: 1.3 }}>
 						<>
 							If you have your own domain, you can use that as your handle. This lets you self-verify your
 							identity.{" "}
@@ -404,7 +404,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							}}
 						>
 							<Text style={t.atoms.text_contrast_medium}>Host:</Text>
-							<div style={{ ...a.py_xs }}>
+							<div style={{ paddingTop: 4, paddingBottom: 4 }}>
 								<CopyButton
 									variant="solid"
 									color="secondary"
@@ -433,7 +433,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							>
 								Type:
 							</Text>
-							<div style={{ ...a.py_xs }}>
+							<div style={{ paddingTop: 4, paddingBottom: 4 }}>
 								<Text style={{ ...a.text_md }}>TXT</Text>
 							</div>
 							<Text
@@ -444,7 +444,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 							>
 								Value:
 							</Text>
-							<div style={{ ...a.py_xs }}>
+							<div style={{ paddingTop: 4, paddingBottom: 4 }}>
 								<CopyButton
 									variant="solid"
 									color="secondary"
@@ -537,7 +537,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 			// Animated.View
 			>
 				{currentAccount?.handle?.endsWith(".bsky.social") && (
-					<Admonition type="info" style={{ ...a.mb_md }}>
+					<Admonition type="info" style={{ marginBottom: 12 }}>
 						<>
 							Your current handle{" "}
 							<Text style={{ ...a.font_bold }}>{sanitizeHandle(currentAccount?.handle || "", "@")}</Text>{" "}
@@ -581,7 +581,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					variant="outline"
 					color="secondary"
 					size="large"
-					style={{ ...a.mt_sm }}
+					style={{ marginTop: 8 }}
 				>
 					<ButtonIcon icon={ArrowLeftIcon} position="left" />
 					<ButtonText>Nevermind, create a handle for me</ButtonText>

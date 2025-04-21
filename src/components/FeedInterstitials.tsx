@@ -2,7 +2,7 @@ import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { type ViewStyleProp, atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
 import { InlineLinkText } from "#/components/Link";
@@ -232,8 +232,8 @@ function ProfileGrid({
 					key={profile.did}
 					profile={profile}
 					style={{
-						flex: 1,
-						...flatten(gtMobile && [a.flex_0, { width: "calc(50% - 6px)" }]),
+						flex: gtMobile ? "0 0 auto" : 1,
+						width: gtMobile ? "calc(50% - 6px)" : undefined,
 					}}
 				>
 					{({ hovered, pressed }) => (
@@ -337,7 +337,7 @@ function ProfileGrid({
 				// ScrollView from react-native-gesture-handler
 				// horizontal
 				// showsHorizontalScrollIndicator={false}
-				// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
+				// snapToInterval={MOBILE_CARD_WIDTH + atoms.gap_md.gap}
 				// decelerationRate="fast"
 				>
 					<div
@@ -510,7 +510,7 @@ export function SuggestedFeeds() {
 				// ScrollView from react-native-gesture-handler
 				// horizontal
 				// showsHorizontalScrollIndicator={false}
-				// snapToInterval={MOBILE_CARD_WIDTH + a.gap_md.gap}
+				// snapToInterval={MOBILE_CARD_WIDTH + atoms.gap_md.gap}
 				// decelerationRate="fast"
 				>
 					<div

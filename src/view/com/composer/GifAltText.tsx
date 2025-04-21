@@ -82,7 +82,7 @@ export function GifAltTextDialogLoaded({
 				}}
 			>
 				{altText ? (
-					<Check size="xs" fill={t.palette.white} style={{ ...a.ml_xs }} />
+					<Check size="xs" fill={t.palette.white} style={{ marginLeft: 4 }} />
 				) : (
 					<Plus size="sm" fill={t.palette.white} />
 				)}

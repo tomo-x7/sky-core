@@ -357,18 +357,18 @@ let PostThreadItemLoaded = ({
 							</div>
 						)}
 					</div>
-					<div style={{ ...a.pb_sm }}>
-						<LabelsOnMyPost post={post} style={{ ...a.pb_sm }} />
+					<div style={{ paddingBottom: 8 }}>
+						<LabelsOnMyPost post={post} style={{ paddingBottom: 8 }} />
 						<ContentHider
 							modui={moderation.ui("contentView")}
 							ignoreMute
-							childContainerStyle={{ ...a.pt_sm }}
+							childContainerStyle={{ paddingTop: 8 }}
 						>
 							<PostAlerts
 								modui={moderation.ui("contentView")}
 								size="lg"
 								includeMute
-								style={{ ...a.pb_sm }}
+								style={{ paddingBottom: 8 }}
 								additionalCauses={additionalPostAlerts}
 							/>
 							{richText?.text ? (
@@ -386,7 +386,7 @@ let PostThreadItemLoaded = ({
 								/>
 							) : undefined}
 							{post.embed && (
-								<div style={{ ...a.py_xs }}>
+								<div style={{ paddingTop: 4, paddingBottom: 4 }}>
 									<PostEmbeds
 										embed={post.embed}
 										moderation={moderation}
@@ -606,12 +606,12 @@ let PostThreadItemLoaded = ({
 								postHref={postHref}
 								showAvatar={isThreadedChild}
 								avatarSize={24}
-								style={{ ...a.pb_xs }}
+								style={{ paddingBottom: 4 }}
 							/>
-							<LabelsOnMyPost post={post} style={{ ...a.pb_xs }} />
+							<LabelsOnMyPost post={post} style={{ paddingBottom: 4 }} />
 							<PostAlerts
 								modui={moderation.ui("contentList")}
-								style={{ ...a.pb_2xs }}
+								style={{ paddingBottom: 2 }}
 								additionalCauses={additionalPostAlerts}
 							/>
 							{richText?.text ? (
@@ -639,7 +639,7 @@ let PostThreadItemLoaded = ({
 								<TextLink text={"Show More"} style={pal.link} onPress={onPressShowMore} href="#" />
 							) : undefined}
 							{post.embed && (
-								<div style={{ ...a.pb_xs }}>
+								<div style={{ paddingBottom: 4 }}>
 									<PostEmbeds
 										embed={post.embed}
 										moderation={moderation}

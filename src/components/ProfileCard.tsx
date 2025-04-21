@@ -1,7 +1,7 @@
 import { type ModerationOpts, RichText as RichTextApi, moderateProfile } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, type ButtonProps, ButtonText } from "#/components/Button";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
 import { RichText } from "#/components/RichText";
@@ -255,8 +255,8 @@ export function Description({
 	if (profile.viewer && (profile.viewer.blockedBy || profile.viewer.blocking || profile.viewer.blockingByList))
 		return null;
 	return (
-		<div style={{ ...a.pt_xs }}>
-			<RichText value={rt} style={{ ...a.leading_snug }} numberOfLines={numberOfLines} disableLinks />
+		<div style={{ paddingTop: 4 }}>
+			<RichText value={rt} style={{ lineHeight: 1.3 }} numberOfLines={numberOfLines} disableLinks />
 		</div>
 	);
 }

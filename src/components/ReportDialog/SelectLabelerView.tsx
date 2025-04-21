@@ -1,6 +1,6 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, useButtonContext } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import * as LabelingServiceCard from "#/components/LabelingServiceCard";
@@ -22,7 +22,7 @@ export function SelectLabelerView({
 			<div
 				style={{
 					justifyContent: "center",
-					...(gtMobile ? a.gap_sm : a.gap_xs),
+					gap: gtMobile ? 8 : 4,
 				}}
 			>
 				<Text

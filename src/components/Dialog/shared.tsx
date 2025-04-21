@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 
 export function Header({
@@ -29,8 +29,8 @@ export function Header({
 				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_medium,
 				...t.atoms.bg,
-				...{ borderTopLeftRadius: a.rounded_md.borderRadius },
-				...{ borderTopRightRadius: a.rounded_md.borderRadius },
+				...{ borderTopLeftRadius: 12 },
+				...{ borderTopRightRadius: 12 },
 				...style,
 			}}
 		>

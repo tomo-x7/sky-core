@@ -1,6 +1,6 @@
 import type React from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 
 export function FormContainer({
@@ -19,7 +19,7 @@ export function FormContainer({
 			style={{
 				gap: 12,
 				flex: 1,
-				...flatten(!gtMobile && [a.px_lg, a.py_md]),
+				...(!gtMobile && { padding: "12px 16px" }),
 				...style,
 			}}
 		>

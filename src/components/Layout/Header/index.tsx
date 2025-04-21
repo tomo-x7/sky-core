@@ -1,15 +1,7 @@
 import { createContext, useCallback, useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
-import {
-	type TextStyleProp,
-	atoms as a,
-	flatten,
-	useBreakpoints,
-	useGutters,
-	useLayoutBreakpoints,
-	useTheme,
-} from "#/alf";
+import { type TextStyleProp, atoms as a, useBreakpoints, useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, type ButtonProps } from "#/components/Button";
 import { BUTTON_VISUAL_ALIGNMENT_OFFSET, HEADER_SLOT_SIZE, SCROLLBAR_OFFSET } from "#/components/Layout/const";
 import { ScrollbarOffsetContext } from "#/components/Layout/context";
@@ -42,19 +34,17 @@ export function Outer({
 			ref={headerRef}
 			style={{
 				width: "100%",
-				...(!noBottomBorder && a.border_b),
+				borderBottom: noBottomBorder ? undefined : "1px solid black",
 				flexDirection: "row",
 				alignItems: "center",
 				gap: 8,
-
-				...flatten(sticky ? [a.sticky, { top: 0 }, a.z_10, t.atoms.bg] : []),
-
+				...(sticky ? { ...a.sticky, top: 0, ...a.z_10, ...t.atoms.bg } : undefined),
 				...gutters,
 				paddingTop: 4,
 				paddingBottom: 4,
 				...{ minHeight: 52 },
 				...t.atoms.border_contrast_low,
-				...flatten(gtMobile ? [a.mx_auto, { maxWidth: 600 }] : []),
+				...(gtMobile ? { ...a.mx_auto, maxWidth: 600 } : undefined),
 
 				...(!isWithinOffsetView && {
 					transform: `translateX(${centerColumnOffset ? -150 : 0}px) translateX(${SCROLLBAR_OFFSET ?? 0}px)`,
@@ -173,11 +163,10 @@ export function TitleText({ children, style }: { children: React.ReactNode } & T
 	return (
 		<Text
 			style={{
-				fontSize: 18,
+				fontSize: gtMobile ? 20 : 18,
 				letterSpacing: 0,
 				fontWeight: "800",
 				lineHeight: 1.15,
-				...(gtMobile && a.text_xl),
 				...style,
 			}}
 			numberOfLines={2}

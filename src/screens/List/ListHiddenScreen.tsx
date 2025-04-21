@@ -2,7 +2,7 @@ import { AppBskyGraphDefs } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -90,7 +90,7 @@ export function ListHiddenScreen({
 				flex: 1,
 				alignItems: "center",
 				gap: 40,
-				...(!gtMobile && a.justify_between),
+				...(!gtMobile && { justifyContent: "space-between" }),
 				...t.atoms.border_contrast_low,
 				...{ paddingTop: 175, paddingBottom: 110 },
 			}}
@@ -155,7 +155,7 @@ export function ListHiddenScreen({
 			<div
 				style={{
 					gap: 12,
-					...(gtMobile ? { width: 350 } : flatten([a.w_full, a.px_lg])),
+					...(gtMobile ? { width: 350 } : { width: "100%", paddingLeft: 16, paddingRight: 16 }),
 				}}
 			>
 				<div style={{ gap: 12 }}>

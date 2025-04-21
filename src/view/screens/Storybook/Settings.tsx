@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { Alien_Stroke2_Corner0_Rounded as AlienIcon } from "#/components/icons/Alien";
 import { BirthdayCake_Stroke2_Corner2_Rounded as BirthdayCakeIcon } from "#/components/icons/BirthdayCake";
@@ -57,7 +57,7 @@ export function Settings() {
 			<SettingsList.PressableItem destructive onPress={() => Toast.show("Sign out pressed")} label="Sign out">
 				<SettingsList.ItemText>Sign out</SettingsList.ItemText>
 			</SettingsList.PressableItem>
-			<SettingsList.Item style={{ ...a.mt_xl }}>
+			<SettingsList.Item style={{ marginTop: 20 }}>
 				<SettingsList.ItemIcon icon={PizzaIcon} />
 				<SettingsList.ItemText>Not pressable</SettingsList.ItemText>
 			</SettingsList.Item>
@@ -86,7 +86,7 @@ export function Settings() {
 					...{ backgroundColor: t.palette.primary_50 },
 				}}
 				hoverStyle={{ backgroundColor: t.palette.primary_100 }}
-				contentContainerStyle={{ borderRadius: 12, ...a.px_lg }}
+				contentContainerStyle={{ borderRadius: 12, paddingLeft: 16, paddingRight: 16 }}
 			>
 				<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
 				<SettingsList.ItemText

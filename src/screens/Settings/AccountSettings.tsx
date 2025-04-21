@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
 import { BirthDateSettingsDialog } from "#/components/dialogs/BirthDateSettings";
@@ -72,7 +72,11 @@ export function AccountSettingsScreen() {
 								...{ backgroundColor: t.palette.primary_50 },
 							}}
 							hoverStyle={{ backgroundColor: t.palette.primary_100 }}
-							contentContainerStyle={{ borderRadius: 12, ...a.px_lg }}
+							contentContainerStyle={{
+								borderRadius: 12,
+								paddingLeft: 16,
+								paddingRight: 16,
+							}}
 						>
 							<SettingsList.ItemIcon icon={VerifiedIcon} color={t.palette.primary_500} />
 							<SettingsList.ItemText

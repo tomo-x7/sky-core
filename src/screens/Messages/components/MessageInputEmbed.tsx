@@ -2,7 +2,7 @@ import { AppBskyFeedPost, AppBskyRichtextFacet, AtUri, RichText as RichTextAPI, 
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import * as MediaPreview from "#/components/MediaPreview";
@@ -171,9 +171,9 @@ export function MessageInputEmbed({
 						style={{ flex: "0 0 auto" }}
 					/>
 					<ContentHider modui={moderation.ui("contentView")}>
-						<PostAlerts modui={moderation.ui("contentView")} style={{ ...a.py_xs }} />
+						<PostAlerts modui={moderation.ui("contentView")} style={{ paddingTop: 4, paddingBottom: 4 }} />
 						{rt.text && (
-							<div style={{ ...a.mt_xs }}>
+							<div style={{ marginTop: 4 }}>
 								<RichText
 									enableTags
 									value={rt}
@@ -187,7 +187,7 @@ export function MessageInputEmbed({
 								/>
 							</div>
 						)}
-						<MediaPreview.Embed embed={post.embed} style={{ ...a.mt_sm }} />
+						<MediaPreview.Embed embed={post.embed} style={{ marginTop: 8 }} />
 					</ContentHider>
 				</div>
 			);

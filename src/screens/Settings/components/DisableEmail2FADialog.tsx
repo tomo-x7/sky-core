@@ -136,7 +136,7 @@ export function DisableEmail2FADialog({
 						</div>
 					) : stage === Stages.ConfirmCode ? (
 						<div>
-							<div style={{ ...a.mb_md }}>
+							<div style={{ marginBottom: 12 }}>
 								<TextField.LabelText>Confirmation code</TextField.LabelText>
 								<TextField.Root>
 									<TextField.Icon icon={Lock} />

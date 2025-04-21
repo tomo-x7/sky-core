@@ -191,7 +191,7 @@ function SubmitStep({
 			<div
 				style={{
 					justifyContent: "center",
-					...(gtMobile ? a.gap_sm : a.gap_xs),
+					gap: gtMobile ? 8 : 4,
 				}}
 			>
 				<Text
@@ -368,7 +368,7 @@ function DoneStep({
 			<div
 				style={{
 					justifyContent: "center",
-					...(gtMobile ? a.gap_sm : a.gap_xs),
+					gap: gtMobile ? 8 : 4,
 				}}
 			>
 				<Text

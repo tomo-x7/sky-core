@@ -1,7 +1,5 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
 import React from "react";
-
-import { atoms as a, flatten } from "#/alf";
 import { useMenuControl } from "#/components/Menu";
 import { MessageMenu } from "#/components/dms/MessageMenu";
 
@@ -40,7 +38,7 @@ export function ActionsWrapper({
 			onMouseLeave={onMouseLeave}
 			onFocus={onFocus}
 			onBlur={onMouseLeave}
-			style={flatten([a.flex_1, a.flex_row])}
+			style={{ flex: 1, flexDirection: "row" }}
 			ref={viewRef}
 		>
 			{isFromSelf && (

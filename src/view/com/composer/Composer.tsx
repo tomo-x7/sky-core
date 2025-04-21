@@ -648,11 +648,11 @@ const ComposerPost = React.memo(function ComposerPost({
 					avatar={currentProfile?.avatar}
 					size={50}
 					type={currentProfile?.associated?.labeler ? "labeler" : "user"}
-					style={{ ...a.mt_xs }}
+					style={{ marginTop: 4 }}
 				/>
 				<TextInput
 					ref={textInput}
-					style={{ ...a.pt_xs }}
+					style={{ paddingTop: 4 }}
 					richtext={richtext}
 					placeholder={selectTextInputPlaceholder}
 					autoFocus
@@ -1115,7 +1115,7 @@ function ComposerFooter({
 						<SelectGifBtn onSelectGif={onSelectGif} disabled={!!media} />
 						<Button
 							onPress={onEmojiButtonPress}
-							style={{ ...a.p_sm }}
+							style={{ padding: 8 }}
 							label={"Open emoji picker"}
 							variant="ghost"
 							shape="round"
@@ -1139,7 +1139,7 @@ function ComposerFooter({
 						onPress={onAddPost}
 						style={{
 							padding: 8,
-							...a.m_2xs,
+							margin: 2,
 						}}
 						variant="ghost"
 						shape="round"

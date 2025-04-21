@@ -71,7 +71,7 @@ export function LanguageSettingsScreen() {
 								width: "100%",
 							}}
 						>
-							<Text style={{ ...a.leading_snug }}>
+							<Text style={{ lineHeight: 1.3 }}>
 								Select which language to use for the app's user interface.
 							</Text>
 							<div
@@ -207,7 +207,7 @@ export function LanguageSettingsScreen() {
 								width: "100%",
 							}}
 						>
-							<Text style={{ ...a.leading_snug }}>
+							<Text style={{ lineHeight: 1.3 }}>
 								Select your preferred language for translations in your feed.
 							</Text>
 							<div
@@ -335,7 +335,7 @@ export function LanguageSettingsScreen() {
 					<SettingsList.Group iconInset={false}>
 						<SettingsList.ItemText>Content Languages</SettingsList.ItemText>
 						<div style={{ gap: 12 }}>
-							<Text style={{ ...a.leading_snug }}>
+							<Text style={{ lineHeight: 1.3 }}>
 								Select which languages you want your subscribed feeds to include. If none are selected,
 								all languages will be shown.
 							</Text>

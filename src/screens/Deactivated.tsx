@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { AccountList } from "#/components/AccountList";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Divider } from "#/components/Divider";
@@ -203,7 +203,7 @@ export function Deactivated() {
 						)}
 					</div>
 
-					<div style={{ ...a.pb_3xl }}>
+					<div style={{ paddingBottom: 28 }}>
 						<Divider />
 					</div>
 

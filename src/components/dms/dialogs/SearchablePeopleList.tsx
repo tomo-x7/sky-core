@@ -2,7 +2,7 @@ import { type ModerationOpts, moderateProfile } from "@atproto/api";
 import type React from "react";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -259,7 +259,7 @@ export function SearchablePeopleList({
 						<ButtonIcon icon={X} size="md" />
 					</Button>
 				</div>
-				<div style={{ ...a.pt_xs }}>
+				<div style={{ paddingTop: 4 }}>
 					<SearchInput
 						inputRef={inputRef}
 						value={searchText}
@@ -282,9 +282,16 @@ export function SearchablePeopleList({
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
-			style={{ paddingTop: 0, paddingBottom: 0, height: "100dvh", maxHeight: 600, ...a.px_0 }}
-			webInnerContentContainerStyle={{ ...a.py_0 }}
-			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
+			style={{
+				paddingTop: 0,
+				paddingBottom: 0,
+				height: "100dvh",
+				maxHeight: 600,
+				paddingLeft: 0,
+				paddingRight: 0,
+			}}
+			webInnerContentContainerStyle={{ paddingTop: 0, paddingBottom: 0 }}
+			webInnerStyle={{ maxWidth: 500, minWidth: 200, paddingTop: 0, paddingBottom: 0 }}
 			scrollIndicatorInsets={{ top: headerHeight }}
 			keyboardDismissMode="on-drag"
 		/>

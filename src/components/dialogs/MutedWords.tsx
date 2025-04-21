@@ -1,7 +1,7 @@
 import { type AppBskyActorDefs, sanitizeMutedWordValue } from "@atproto/api";
 import React from "react";
 
-import { type ViewStyleProp, atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -112,7 +112,7 @@ function MutedWordsInner() {
 					appear in many posts, since it can result in no posts being shown.
 				</Text>
 
-				<div style={{ ...a.pb_sm }}>
+				<div style={{ paddingBottom: 8 }}>
 					<Dialog.Input
 						autoCorrect={"off"}
 						autoCapitalize="none"
@@ -156,7 +156,11 @@ function MutedWordsInner() {
 
 						<div
 							style={{
-								...flatten(gtMobile ? [a.flex_row, a.align_center, a.justify_start] : undefined),
+								...(gtMobile && {
+									flexDirection: "row",
+									alignItems: "center",
+									justifyContent: "flex-start",
+								}),
 								gap: 8,
 							}}
 						>
@@ -403,7 +407,7 @@ function MutedWordsInner() {
 						</Toggle.Item>
 					</div>
 
-					<div style={{ ...a.pt_xs }}>
+					<div style={{ paddingTop: 4 }}>
 						<Button
 							disabled={isPending || !field}
 							label="Add mute word with chosen settings"
@@ -442,7 +446,7 @@ function MutedWordsInner() {
 
 				<Divider />
 
-				<div style={{ ...a.pt_2xl }}>
+				<div style={{ paddingTop: 24 }}>
 					<Text
 						style={{
 							fontSize: 16,
@@ -665,7 +669,7 @@ function MutedWordRow({ style, word }: ViewStyleProp & { word: AppBskyActorDefs.
 					variant="outline"
 					color="secondary"
 					onPress={() => control.open()}
-					style={{ ...a.ml_sm }}
+					style={{ marginLeft: 8 }}
 				>
 					<ButtonIcon icon={isPending ? Loader : X} />
 				</Button>
@@ -688,9 +692,8 @@ function TargetToggle({ children }: React.PropsWithChildren) {
 				flex: 1,
 				paddingTop: 8,
 				paddingBottom: 8,
-				paddingLeft: 8,
-				paddingRight: 8,
-				...(gtMobile && a.px_md),
+				paddingLeft: gtMobile ? 12 : 8,
+				paddingRight: gtMobile ? 12 : 8,
 				borderRadius: 8,
 				...t.atoms.bg_contrast_25,
 				...((ctx.hovered || ctx.focused) && t.atoms.bg_contrast_50),

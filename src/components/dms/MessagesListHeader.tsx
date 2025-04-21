@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Link } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { ConvoMenu } from "#/components/dms/ConvoMenu";
@@ -58,10 +58,8 @@ export let MessagesListHeader = ({
 				flexDirection: "row",
 				alignItems: "flex-start",
 				gap: 8,
-				...(gtTablet ? a.pl_lg : a.pl_xl),
-				paddingRight: 16,
-				paddingTop: 8,
-				paddingBottom: 8,
+				padding: "8px 16px",
+				paddingLeft: gtTablet ? 16 : 20,
 			}}
 		>
 			<button
@@ -174,7 +172,7 @@ function HeaderReady({
 					}}
 					to={makeProfileLink(profile)}
 				>
-					<div style={{ ...a.pt_2xs }}>
+					<div style={{ paddingTop: 2 }}>
 						<PreviewableUserAvatar
 							size={PFP_SIZE}
 							profile={profile}
@@ -230,10 +228,10 @@ function HeaderReady({
 			</div>
 			<div
 				style={{
-					paddingLeft: PFP_SIZE + a.gap_md.gap,
+					paddingLeft: PFP_SIZE + 12,
 				}}
 			>
-				<PostAlerts modui={moderation.ui("contentList")} size="lg" style={{ ...a.pt_xs }} />
+				<PostAlerts modui={moderation.ui("contentList")} size="lg" style={{ paddingTop: 4 }} />
 			</div>
 		</div>
 	);

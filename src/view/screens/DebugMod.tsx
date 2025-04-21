@@ -376,7 +376,7 @@ export const DebugModScreen = () => {
 										</Toggle.Group>
 
 										{LABELS[label[0] as keyof typeof LABELS]?.configurable !== false && (
-											<div style={{ ...a.mt_md }}>
+											<div style={{ marginTop: 12 }}>
 												<Text
 													style={{
 														fontWeight: "600",
@@ -742,7 +742,7 @@ function Toggler({ label, children }: React.PropsWithChildren<{ label: string }>
 	const t = useTheme();
 	const [show, setShow] = React.useState(false);
 	return (
-		<div style={{ ...a.mb_md }}>
+		<div style={{ marginBottom: 12 }}>
 			<div
 				style={{
 					...t.atoms.border_contrast_medium,
@@ -814,7 +814,7 @@ function ModerationUIView({
 }) {
 	return (
 		<Toggler label={label}>
-			<div style={{ ...a.p_lg }}>
+			<div style={{ padding: 16 }}>
 				{[
 					"profileList",
 					"profileView",

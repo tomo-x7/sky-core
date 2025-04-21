@@ -1,7 +1,7 @@
 import type React from "react";
 import { memo } from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { Error } from "#/components/Error";
@@ -169,7 +169,8 @@ let ListMaybePlaceholder = ({
 				style={{
 					height: "100dvh",
 					alignItems: "center",
-					...(!gtMobile ? a.justify_between : a.gap_5xl),
+					justifyContent: gtMobile ? undefined : "space-between",
+					gap: gtMobile ? 40 : undefined,
 					...t.atoms.border_contrast_low,
 					paddingTop: 175,
 					paddingBottom: 110,

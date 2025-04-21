@@ -1,7 +1,7 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, RichText as RichTextAPI } from "@atproto/api";
 import React, { useCallback, useMemo, useRef } from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
@@ -90,8 +90,8 @@ let MessageItem = ({
 			{isNewDay && <DateDivider date={message.sentAt} />}
 			<div
 				style={{
-					...(isFromSelf ? a.mr_md : a.ml_md),
-					...(nextIsMessage && !isNextFromSameSender && a.mb_md),
+					...(isFromSelf ? { marginRight: 12 } : { marginLeft: 12 }),
+					...(nextIsMessage && !isNextFromSameSender && { marginBottom: 12 }),
 				}}
 			>
 				<ActionsWrapper isFromSelf={isFromSelf} message={message}>
@@ -101,25 +101,20 @@ let MessageItem = ({
 							style={
 								isOnlyEmoji(message.text)
 									? undefined
-									: flatten([
-											a.py_sm,
-											a.my_2xs,
-											a.rounded_md,
-											{
-												paddingLeft: 14,
-												paddingRight: 14,
-												backgroundColor: isFromSelf
-													? isPending
-														? pendingColor
-														: t.palette.primary_500
-													: t.palette.contrast_50,
-												borderRadius: 17,
-											},
-											isFromSelf ? a.self_end : a.self_start,
-											isFromSelf
+									: {
+											...a.rounded_md,
+											padding: "8px 14px",
+											backgroundColor: isFromSelf
+												? isPending
+													? pendingColor
+													: t.palette.primary_500
+												: t.palette.contrast_50,
+											borderRadius: 17,
+											alignSelf: isFromSelf ? "flex-end" : "flex-start",
+											...(isFromSelf
 												? { borderBottomRightRadius: needsTail ? 2 : 17 }
-												: { borderBottomLeftRadius: needsTail ? 2 : 17 },
-										])
+												: { borderBottomLeftRadius: needsTail ? 2 : 17 }),
+										}
 							}
 						>
 							<RichText
@@ -137,7 +132,9 @@ let MessageItem = ({
 					)}
 				</ActionsWrapper>
 
-				{isLastInGroup && <MessageItemMetadata item={item} style={isFromSelf ? a.text_right : a.text_left} />}
+				{isLastInGroup && (
+					<MessageItemMetadata item={item} style={{ textAlign: isFromSelf ? "right" : "left" }} />
+				)}
 			</div>
 		</>
 	);

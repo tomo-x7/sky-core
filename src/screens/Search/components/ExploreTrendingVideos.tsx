@@ -72,7 +72,7 @@ export function ExploreTrendingVideos() {
 	}
 
 	return (
-		<div style={{ ...a.pb_xl }}>
+		<div style={{ paddingBottom: 20 }}>
 			<div
 				style={{
 					flexDirection: "row",

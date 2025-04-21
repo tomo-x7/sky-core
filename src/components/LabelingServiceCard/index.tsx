@@ -1,7 +1,7 @@
 import type { AppBskyLabelerDefs } from "@atproto/api";
 import type React from "react";
 
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, useTheme } from "#/alf";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
 import { RichText } from "#/components/RichText";
 import { Text } from "#/components/Typography";
@@ -56,10 +56,10 @@ export function Title({ value }: { value: string }) {
 export function Description({ value, handle }: { value?: string; handle: string }) {
 	return value ? (
 		<Text numberOfLines={2}>
-			<RichText value={value} style={{ ...a.leading_snug }} />
+			<RichText value={value} style={{ lineHeight: 1.3 }} />
 		</Text>
 	) : (
-		<Text style={{ ...a.leading_snug }}>{`By ${sanitizeHandle(handle, "@")}`}</Text>
+		<Text style={{ lineHeight: 1.3 }}>{`By ${sanitizeHandle(handle, "@")}`}</Text>
 	);
 }
 

@@ -1,6 +1,6 @@
 import { AppBskyEmbedVideo } from "@atproto/api";
 
-import { atoms as a, useGutters } from "#/alf";
+import { useGutters } from "#/alf";
 import * as Grid from "#/components/Grid";
 import { VideoPostCard, VideoPostCardPlaceholder } from "#/components/VideoPostCard";
 import type { VideoFeedSourceContext } from "#/screens/VideoFeed/types";
@@ -35,7 +35,7 @@ export function PostFeedVideoGridRow({
 					gap: 8,
 				}}
 			>
-				<Grid.Row gap={a.gap_sm.gap}>
+				<Grid.Row gap={8}>
 					{posts.map((post) => (
 						<Grid.Col key={post.post.uri} width={1 / 2}>
 							<VideoPostCard

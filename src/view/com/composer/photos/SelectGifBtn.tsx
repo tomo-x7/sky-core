@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { GifSelectDialog } from "#/components/dialogs/GifSelect";
 import { GifSquare_Stroke2_Corner0_Rounded as GifIcon } from "#/components/icons/Gif";
@@ -27,7 +27,7 @@ export function SelectGifBtn({ onClose, onSelectGif, disabled }: Props) {
 			<Button
 				onPress={onPressSelectGif}
 				label={"Select GIF"}
-				style={{ ...a.p_sm }}
+				style={{ padding: 8 }}
 				variant="ghost"
 				shape="round"
 				color="primary"

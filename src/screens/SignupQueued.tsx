@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { Modal } from "#/components/Motal";
@@ -89,7 +89,7 @@ export function SignupQueued() {
 					style={{
 						flexDirection: "row",
 						justifyContent: "center",
-						...(gtMobile ? a.pt_4xl : flatten([a.px_xl, a.pt_xl])),
+						...(gtMobile ? { paddingTop: 32 } : { paddingTop: 20, paddingLeft: 20, paddingRight: 20 }),
 					}}
 				>
 					<div
@@ -184,8 +184,9 @@ export function SignupQueued() {
 					style={{
 						alignItems: "center",
 						...t.atoms.bg,
-						...(gtMobile ? a.px_5xl : a.px_xl),
-						...{ paddingBottom: a.pb_5xl.paddingBottom },
+						paddingLeft: gtMobile ? 40 : 20,
+						paddingRight: gtMobile ? 40 : 20,
+						paddingBottom: 40,
 					}}
 				>
 					<div

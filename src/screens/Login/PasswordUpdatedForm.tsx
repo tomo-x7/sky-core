@@ -1,4 +1,4 @@
-import { atoms as a, useBreakpoints } from "#/alf";
+import { useBreakpoints } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { FormContainer } from "./FormContainer";
@@ -14,7 +14,7 @@ export const PasswordUpdatedForm = ({
 		<FormContainer
 			style={{
 				gap: 24,
-				...(!gtMobile && a.mt_5xl),
+				...(!gtMobile && { marginTop: 40 }),
 			}}
 		>
 			<Text

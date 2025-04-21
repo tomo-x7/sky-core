@@ -52,11 +52,11 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 						<Loader size="xl" />
 					</div>
 				) : (
-					<div style={!isTabletOrDesktop ? a.gap_lg : undefined}>
+					<div style={{ gap: !isTabletOrDesktop ? 16 : undefined }}>
 						<div
 							style={{
 								gap: 8,
-								...(isTabletOrDesktop && a.pb_lg),
+								...(isTabletOrDesktop && { paddingBottom: 16 }),
 							}}
 						>
 							<Text

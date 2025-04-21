@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import isEqual from "lodash.isequal";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -504,7 +504,7 @@ export function PostInteractionSettingsForm({
 				color="primary"
 				size="large"
 				variant="solid"
-				style={{ ...a.mt_xl }}
+				style={{ marginTop: 20 }}
 			>
 				<ButtonText>"Save"</ButtonText>
 				{isSaving && <ButtonIcon icon={Loader} position="right" />}
@@ -563,7 +563,7 @@ function Selectable({
 						style={{
 							fontSize: 14,
 							letterSpacing: 0,
-							...(isSelected && a.font_bold),
+							fontWeight: isSelected ? "600" : undefined,
 						}}
 					>
 						{label}

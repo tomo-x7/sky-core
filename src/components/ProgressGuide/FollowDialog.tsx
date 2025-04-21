@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { type ViewStyleProp, atoms as a, flatten, tokens, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, tokens, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import * as ProfileCard from "#/components/ProfileCard";
@@ -270,15 +270,9 @@ function DialogInner({ guide }: { guide: Follow10ProgressGuide }) {
 			ListHeaderComponent={listHeader}
 			stickyHeaderIndices={[0]}
 			keyExtractor={(item: Item) => item.key}
-			style={{
-				paddingLeft: 0,
-				paddingRight: 0,
-				paddingTop: 0,
-				paddingBottom: 0,
-				...{ height: "100dvh", maxHeight: 600 },
-			}}
-			webInnerContentContainerStyle={{ ...a.py_0 }}
-			webInnerStyle={flatten([a.py_0, { maxWidth: 500, minWidth: 200 }])}
+			style={{ padding: 0, height: "100dvh", maxHeight: 600 }}
+			webInnerContentContainerStyle={{ paddingTop: 0, paddingBottom: 0 }}
+			webInnerStyle={{ maxWidth: 500, minWidth: 200, paddingTop: 0, paddingBottom: 0 }}
 			keyboardDismissMode="on-drag"
 			scrollIndicatorInsets={{ top: headerHeight }}
 			initialNumToRender={8}
@@ -484,7 +478,7 @@ let Tabs = ({
 			ref={listRef}
 			// ScrollView
 			// horizontal
-			// contentContainerStyle={[a.gap_sm, a.px_lg]}
+			// contentContainerStyle={[atoms.gap_sm, atoms.px_lg]}
 			// showsHorizontalScrollIndicator={false}
 			// decelerationRate="fast"
 			// snapToOffsets={
@@ -619,7 +613,7 @@ function FollowProfileCardInner({
 				<CardOuter
 					style={{
 						flex: 1,
-						...(noBorder && a.border_t_0),
+						...(noBorder && { borderTopWidth: 0 }),
 						...((hovered || pressed) && t.atoms.border_contrast_high),
 					}}
 				>

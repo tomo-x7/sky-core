@@ -80,7 +80,7 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 			<div
 				style={{
 					padding: 16,
-					...((isTabletOrDesktop || index !== 0) && a.border_t),
+					...((isTabletOrDesktop || index !== 0) && { borderTop: "1px solid black" }),
 					...t.atoms.border_contrast_low,
 				}}
 			>
@@ -184,8 +184,8 @@ function Empty() {
 				paddingBottom: 16,
 				justifyContent: "space-between",
 				gap: 16,
+				marginTop: 1,
 				...a.shadow_lg,
-				...{ marginTop: a.border.borderWidth },
 			}}
 		>
 			<div style={{ gap: 4 }}>

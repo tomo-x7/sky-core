@@ -5,7 +5,6 @@ import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 import { SafeAreaView } from "#/lib/safe-area-context";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { atoms as a } from "#/alf";
 import * as Layout from "#/components/Layout";
 import { ProfileStarterPacks } from "#/components/StarterPack/ProfileStarterPacks";
 import { ScreenHider } from "#/components/moderation/ScreenHider";
@@ -42,7 +41,7 @@ interface SectionRef {
 
 export function ProfileScreen() {
 	return (
-		<Layout.Screen style={{ ...a.pt_0 }}>
+		<Layout.Screen style={{ paddingTop: 0 }}>
 			<ProfileScreenInner />
 		</Layout.Screen>
 	);

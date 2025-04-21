@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, flatten, useBreakpoints } from "#/alf";
+import { useBreakpoints } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
@@ -120,7 +120,7 @@ export function Inner({
 	return (
 		<Dialog.ScrollableInner
 			label="Verify email dialog"
-			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
+			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : { width: "100%" }}
 		>
 			<Dialog.Close />
 			<div style={{ gap: 20 }}>
@@ -267,7 +267,7 @@ export function Inner({
 				<div
 					style={{
 						gap: 8,
-						...flatten(gtMobile ? [a.flex_row_reverse, a.ml_auto] : undefined),
+						...(gtMobile && { flexDirection: "row-reverse", marginLeft: "auto" }),
 					}}
 				>
 					{currentStep === "StepOne" ? (

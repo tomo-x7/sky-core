@@ -1,7 +1,7 @@
 import type { ModerationUI } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
@@ -133,7 +133,7 @@ function ContentHiderActive({
 							gap: 4,
 							borderRadius: 8,
 							...t.atoms.bg_contrast_25,
-							...flatten(gtMobile ? [a.gap_sm, a.py_lg, a.mt_xs, a.px_xl] : []),
+							...(gtMobile ? { gap: 8, marginTop: 4, padding: "16px 20px" } : {}),
 							...((state.hovered || state.pressed) && t.atoms.bg_contrast_50),
 						}}
 					>
@@ -144,7 +144,6 @@ function ContentHiderActive({
 								textAlign: "left",
 								fontWeight: "600",
 								lineHeight: 1.3,
-								...(gtMobile && a.font_bold),
 								...t.atoms.text_contrast_medium,
 
 								...{
@@ -160,9 +159,7 @@ function ContentHiderActive({
 								style={{
 									fontWeight: "600",
 									lineHeight: 1.3,
-									...(gtMobile && a.font_bold),
 									...t.atoms.text_contrast_high,
-
 									marginBottom: 1,
 								}}
 							>
@@ -180,7 +177,7 @@ function ContentHiderActive({
 						control.open();
 					}}
 					label={"Learn more about the moderation applied to this content."}
-					style={{ ...a.pt_sm }}
+					style={{ paddingTop: 8 }}
 				>
 					{(state) => (
 						<Text

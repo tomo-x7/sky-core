@@ -107,7 +107,7 @@ function GifList({
 					marginBottom: 16,
 					flexDirection: "row",
 					alignItems: "center",
-					...(!gtMobile && a.gap_md),
+					gap: gtMobile ? undefined : 12,
 				}}
 			>
 				{/* cover top corners */}

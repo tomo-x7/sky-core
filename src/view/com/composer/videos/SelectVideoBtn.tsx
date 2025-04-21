@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
@@ -68,7 +68,7 @@ export function SelectVideoBtn({ onSelectVideo, disabled, setError }: Props) {
 			<Button
 				onPress={onPressSelectVideo}
 				label={"Select video"}
-				style={{ ...a.p_sm }}
+				style={{ padding: 8 }}
 				variant="ghost"
 				shape="round"
 				color="primary"

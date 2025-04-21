@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { type EmbedPlayerSource, embedPlayerSources, externalEmbedLabels } from "#/lib/strings/embed-player";
 import { useSetExternalEmbedPref } from "#/state/preferences";
@@ -44,7 +44,7 @@ export function EmbedConsentDialog({
 			<Dialog.Handle />
 			<Dialog.ScrollableInner
 				label="External Media"
-				style={gtMobile ? { width: "auto", maxWidth: 400 } : a.w_full}
+				style={gtMobile ? { width: "auto", maxWidth: 400 } : { width: "100%" }}
 			>
 				<div style={{ gap: 8 }}>
 					<Text
@@ -77,7 +77,7 @@ export function EmbedConsentDialog({
 				</div>
 				<div style={{ gap: 12 }}>
 					<Button
-						style={gtMobile ? a.flex_1 : undefined}
+						style={{ flex: gtMobile ? 1 : undefined }}
 						label="Enable external media"
 						onPress={onShowAllPress}
 						// onAccessibilityEscape={control.close}
@@ -88,7 +88,7 @@ export function EmbedConsentDialog({
 						<ButtonText>Enable external media</ButtonText>
 					</Button>
 					<Button
-						style={gtMobile ? a.flex_1 : undefined}
+						style={{ flex: gtMobile ? 1 : undefined }}
 						label="Enable this source only"
 						onPress={onShowPress}
 						// onAccessibilityEscape={control.close}

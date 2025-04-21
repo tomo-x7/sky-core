@@ -12,7 +12,7 @@ import {
 } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as ListCard from "#/components/ListCard";
 import { Embed as StarterPackCard } from "#/components/StarterPack/StarterPackCard";
 import { type MeasuredDimensions, measureHandle } from "#/lib/hooks/useHandleRef";
@@ -80,7 +80,7 @@ export function PostEmbeds({
 		// custom feed embed (i.e. generator view)
 		if (AppBskyFeedDefs.isGeneratorView(embed.record)) {
 			return (
-				<div style={{ ...a.mt_sm }}>
+				<div style={{ marginTop: 8 }}>
 					<MaybeFeedCard view={embed.record} />
 				</div>
 			);
@@ -89,7 +89,7 @@ export function PostEmbeds({
 		// list embed
 		if (AppBskyGraphDefs.isListView(embed.record)) {
 			return (
-				<div style={{ ...a.mt_sm }}>
+				<div style={{ marginTop: 8 }}>
 					<MaybeListCard view={embed.record} />
 				</div>
 			);
@@ -98,7 +98,7 @@ export function PostEmbeds({
 		// starter pack embed
 		if (AppBskyGraphDefs.isStarterPackViewBasic(embed.record)) {
 			return (
-				<div style={{ ...a.mt_sm }}>
+				<div style={{ marginTop: 8 }}>
 					<StarterPackCard starterPack={embed.record} />
 				</div>
 			);

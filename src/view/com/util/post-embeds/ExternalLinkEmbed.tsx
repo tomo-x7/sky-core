@@ -131,7 +131,7 @@ export const ExternalLinkEmbed = ({
 								</Text>
 							) : undefined}
 						</div>
-						<div style={{ ...a.px_md }}>
+						<div style={{ paddingLeft: 12, paddingRight: 12 }}>
 							<Divider />
 							<div
 								style={{

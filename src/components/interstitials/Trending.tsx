@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useGutters, useTheme } from "#/alf";
+import { useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import * as Prompt from "#/components/Prompt";
 import { TrendingTopicLink } from "#/components/TrendingTopics";
@@ -83,7 +83,7 @@ function Inner() {
 						<>
 							{trending.topics.map((topic) => (
 								<TrendingTopicLink key={topic.link} topic={topic}>
-									<div style={{ ...a.py_lg }}>
+									<div style={{ paddingTop: 16, paddingBottom: 16 }}>
 										<Text
 											style={{
 												...t.atoms.text,

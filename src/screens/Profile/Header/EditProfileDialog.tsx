@@ -217,7 +217,7 @@ function DialogInner({
 		<Dialog.ScrollableInner
 			label={"Edit profile"}
 			style={{ ...a.overflow_hidden }}
-			contentContainerStyle={{ paddingLeft: 0, paddingRight: 0, ...a.pt_0 }}
+			contentContainerStyle={{ paddingLeft: 0, paddingRight: 0, paddingTop: 0 }}
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
 					<Dialog.HeaderText>Edit profile</Dialog.HeaderText>
@@ -245,12 +245,12 @@ function DialogInner({
 				</div>
 			</div>
 			{isUpdateProfileError && (
-				<div style={{ ...a.mt_xl }}>
+				<div style={{ marginTop: 20 }}>
 					<ErrorMessage message={cleanError(updateProfileError)} />
 				</div>
 			)}
 			{imageError !== "" && (
-				<div style={{ ...a.mt_xl }}>
+				<div style={{ marginTop: 20 }}>
 					<ErrorMessage message={imageError} />
 				</div>
 			)}

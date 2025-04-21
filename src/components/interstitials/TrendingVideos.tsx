@@ -109,7 +109,7 @@ export function TrendingVideos() {
 			// horizontal
 			// showsHorizontalScrollIndicator={false}
 			// decelerationRate="fast"
-			// snapToInterval={CARD_WIDTH + a.gap_sm.gap}
+			// snapToInterval={CARD_WIDTH + atoms.gap_sm.gap}
 			>
 				<div
 					style={{

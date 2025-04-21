@@ -161,11 +161,8 @@ function ModerationDetailsDialogInner({
 						borderTopWidth: 1,
 						...t.atoms.bg_contrast_25,
 						...t.atoms.border_contrast_low,
-
-						...{
-							borderBottomLeftRadius: a.rounded_md.borderRadius,
-							borderBottomRightRadius: a.rounded_md.borderRadius,
-						},
+						borderBottomLeftRadius: 12,
+						borderBottomRightRadius: 12,
 					}}
 				>
 					{modcause.source.type === "user" ? (

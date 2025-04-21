@@ -1,7 +1,7 @@
 import type { ModerationDecision } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -57,7 +57,7 @@ export function MessagesListBlockedFooter({
 	return (
 		<div
 			style={{
-				...(hasMessages && a.pt_md),
+				paddingTop: hasMessages ? 12 : undefined,
 				paddingBottom: 20,
 				gap: 16,
 			}}

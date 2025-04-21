@@ -512,7 +512,7 @@ function Inner({
 					</div>
 
 					{profile.description?.trim() && !moderation.ui("profileView").blur ? (
-						<div style={{ ...a.pt_md }}>
+						<div style={{ paddingTop: 12 }}>
 							<RichText numberOfLines={8} value={descriptionRT} onLinkPress={hide} />
 						</div>
 					) : undefined}

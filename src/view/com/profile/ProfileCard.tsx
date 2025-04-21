@@ -153,7 +153,7 @@ export function ProfileCardPills({
 	}
 
 	return (
-		<Pills.Row style={{ ...a.pt_xs }}>
+		<Pills.Row style={{ paddingTop: 4 }}>
 			{followedBy && <Pills.FollowsYou />}
 			{modui.alerts.map((alert) => (
 				<Pills.Label key={getModerationCauseKey(alert)} cause={alert} />

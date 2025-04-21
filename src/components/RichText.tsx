@@ -1,7 +1,7 @@
 import { AppBskyRichtextFacet, RichText as RichTextAPI } from "@atproto/api";
 import React from "react";
 
-import { type TextStyleProp, atoms as a, flatten } from "#/alf";
+import { type TextStyleProp, atoms as a } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
 import { InlineLinkText, type LinkProps } from "#/components/Link";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
@@ -46,20 +46,19 @@ export function RichText({
 	);
 
 	const flattenedStyle = style;
-	const plainStyles = [a.leading_snug, flattenedStyle];
-	const interactiveStyles = [a.leading_snug, interactiveStyle, flattenedStyle];
+	const plainStyles = { lineHeight: 1.3, ...flattenedStyle };
+	const interactiveStyles = { ...a.leading_snug, ...interactiveStyle, ...flattenedStyle };
 
 	const { text, facets } = richText;
 
 	if (!facets?.length) {
 		if (isOnlyEmoji(text)) {
-			const fontSize =
-				Number.parseFloat(String(flattenedStyle?.fontSize ?? a.text_sm.fontSize)) * emojiMultiplier;
+			const fontSize = Number.parseFloat(String(flattenedStyle?.fontSize ?? 14)) * emojiMultiplier;
 			return (
 				<Text
 					selectable={selectable}
 					style={{
-						...flatten(plainStyles),
+						...plainStyles,
 						...{ fontSize },
 					}}
 					onLayout={onLayout}
@@ -73,7 +72,7 @@ export function RichText({
 		return (
 			<Text
 				selectable={selectable}
-				style={flatten(plainStyles)}
+				style={plainStyles}
 				numberOfLines={numberOfLines}
 				onLayout={onLayout}
 				// onTextLayout={onTextLayout}
@@ -97,7 +96,7 @@ export function RichText({
 					<InlineLinkText
 						selectable={selectable}
 						to={`/profile/${mention.did}`}
-						style={flatten(interactiveStyles)}
+						style={interactiveStyles}
 						// dataset={WORD_WRAP} //TODO
 						shouldProxy={shouldProxyLinks}
 						onPress={onLinkPress}
@@ -115,7 +114,7 @@ export function RichText({
 						selectable={selectable}
 						key={key}
 						to={link.uri}
-						style={flatten(interactiveStyles)}
+						style={interactiveStyles}
 						// dataset={WORD_WRAP} //TODO
 						shouldProxy={shouldProxyLinks}
 						onPress={onLinkPress}
@@ -130,7 +129,7 @@ export function RichText({
 					key={key}
 					display={segment.text}
 					tag={tag.tag}
-					textStyle={flatten(interactiveStyles)}
+					textStyle={interactiveStyles}
 					authorHandle={authorHandle}
 				/>,
 			);
@@ -143,7 +142,7 @@ export function RichText({
 	return (
 		<Text
 			selectable={selectable}
-			style={flatten(plainStyles)}
+			style={plainStyles}
 			numberOfLines={numberOfLines}
 			onLayout={onLayout}
 			// onTextLayout={onTextLayout}

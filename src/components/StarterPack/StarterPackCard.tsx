@@ -2,7 +2,7 @@ import { AppBskyGraphStarterpack, AtUri } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Link as BaseLink, type LinkProps as BaseLinkProps } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
@@ -98,7 +98,7 @@ export function Card({
 				</div>
 			</div>
 			{!noDescription && record.description ? (
-				<Text numberOfLines={3} style={{ ...a.leading_snug }}>
+				<Text numberOfLines={3} style={{ lineHeight: 1.3 }}>
 					{record.description}
 				</Text>
 			) : null}

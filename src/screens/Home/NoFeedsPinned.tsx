@@ -63,7 +63,7 @@ export function NoFeedsPinned({
 					paddingBottom: 28,
 					paddingLeft: 20,
 					paddingRight: 20,
-					paddingTop: headerOffset + a.py_3xl.paddingTop,
+					paddingTop: headerOffset + 28,
 				}}
 			>
 				<div

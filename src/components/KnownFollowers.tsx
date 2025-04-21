@@ -1,7 +1,7 @@
 import { type AppBskyActorDefs, type ModerationOpts, moderateProfile } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Link, type LinkProps } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { makeProfileLink } from "#/lib/routes/links";
@@ -84,7 +84,7 @@ function KnownFollowersInner({
 }) {
 	const t = useTheme();
 
-	const textStyle = flatten([a.text_sm, a.leading_snug, t.atoms.text_contrast_medium]);
+	const textStyle = { fontSize: 14, letterSpacing: 0, lineHeight: 1.3, ...t.atoms.text_contrast_medium };
 
 	const slice = cachedKnownFollowers.followers.slice(0, 3).map((f) => {
 		const moderation = moderateProfile(f, moderationOpts);
@@ -115,23 +115,18 @@ function KnownFollowersInner({
 			to={makeProfileLink(profile, "known-followers")}
 			style={{
 				flexDirection: "row",
-				...(minimal ? a.gap_sm : a.gap_md),
+				gap: minimal ? 8 : 12,
 				alignItems: "center",
-				...{ marginLeft: -AVI_BORDER },
+				marginLeft: -AVI_BORDER,
 			}}
 		>
 			{({ hovered, pressed }) => (
 				<>
 					<div
 						style={{
-							...{
-								height: SIZE,
-								width: SIZE + (slice.length - 1) * a.gap_md.gap,
-							},
-
-							...(pressed && {
-								opacity: 0.5,
-							}),
+							height: SIZE,
+							width: SIZE + (slice.length - 1) * 12,
+							opacity: pressed ? 0.5 : undefined,
 						}}
 					>
 						{slice.map(({ profile: prof, moderation }, i) => (
@@ -141,14 +136,12 @@ function KnownFollowersInner({
 									position: "absolute",
 									borderRadius: 999,
 
-									...{
-										borderWidth: AVI_BORDER,
-										borderColor: t.atoms.bg.backgroundColor,
-										width: SIZE + AVI_BORDER * 2,
-										height: SIZE + AVI_BORDER * 2,
-										left: i * a.gap_md.gap,
-										zIndex: AVI_BORDER - i,
-									},
+									borderWidth: AVI_BORDER,
+									borderColor: t.atoms.bg.backgroundColor,
+									width: SIZE + AVI_BORDER * 2,
+									height: SIZE + AVI_BORDER * 2,
+									left: i * 12,
+									zIndex: AVI_BORDER - i,
 								}}
 							>
 								<UserAvatar

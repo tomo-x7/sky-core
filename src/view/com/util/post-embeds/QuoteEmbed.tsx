@@ -221,7 +221,7 @@ export function QuoteEmbed({
 					...t.atoms.border_contrast_low,
 					...style,
 				}}
-				childContainerStyle={{ ...a.pt_sm }}
+				childContainerStyle={{ paddingTop: 8 }}
 			>
 				<SubtleWebHover hover={hover} />
 				<Link
@@ -239,7 +239,9 @@ export function QuoteEmbed({
 							timestamp={quote.indexedAt}
 						/>
 					</div>
-					{moderation ? <PostAlerts modui={moderation.ui("contentView")} style={{ ...a.py_xs }} /> : null}
+					{moderation ? (
+						<PostAlerts modui={moderation.ui("contentView")} style={{ paddingTop: 4, paddingBottom: 4 }} />
+					) : null}
 					{richText ? (
 						<RichText value={richText} style={{ ...a.text_md }} numberOfLines={20} disableLinks />
 					) : null}

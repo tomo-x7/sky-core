@@ -177,7 +177,7 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 				...t.atoms.border_contrast_low,
 				width: 602,
 				left: "50%",
-				transform: `translateX(-50%) translateX(${centerColumnOffset ? -150 : 0}px) ${a.scrollbar_offset.transform}`,
+				transform: `translateX(calc(-50%${centerColumnOffset ? " - 150px" : ""} - (var(--removed-body-scroll-bar-size, 0px) / 2)))`,
 			}}
 		/>
 	) : null;

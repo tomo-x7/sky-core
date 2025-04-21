@@ -1,7 +1,7 @@
 import type { AtUri } from "@atproto/api";
 import React from "react";
 
-import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
+import { type ViewStyleProp, useTheme } from "#/alf";
 import { Link as InternalLink, type LinkProps } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { StarterPack as StarterPackIcon } from "#/components/icons/StarterPack";
@@ -34,17 +34,7 @@ export function TrendingTopic({
 				borderWidth: 1,
 				...t.atoms.border_contrast_medium,
 				...t.atoms.bg,
-
-				...flatten(
-					isSmall
-						? [
-								{
-									padding: "5px 10px",
-								},
-							]
-						: [a.py_sm, a.px_md],
-				),
-
+				padding: isSmall ? "5px 10px" : "8px 12px",
 				...(hasIcon && { gap: 6 }),
 				...style,
 			}}
@@ -59,10 +49,10 @@ export function TrendingTopic({
 			{/*
         <div
           style={[
-            a.align_center,
-            a.justify_center,
-            a.rounded_full,
-            a.overflow_hidden,
+            atoms.align_center,
+            atoms.justify_center,
+            atoms.rounded_full,
+            atoms.overflow_hidden,
             {
               width: iconSize,
               height: iconSize,
@@ -91,7 +81,9 @@ export function TrendingTopic({
 				style={{
 					fontWeight: "600",
 					lineHeight: 1.15,
-					...flatten(isSmall ? [a.text_sm] : [a.text_md, { paddingBottom: 1 }]),
+					fontSize: isSmall ? 14 : 16,
+					letterSpacing: 0,
+					paddingBottom: isSmall ? undefined : 1,
 				}}
 				numberOfLines={1}
 			>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { CircleInfo_Stroke2_Corner0_Rounded as CircleInfo } from "#/components/icons/CircleInfo";
@@ -19,7 +19,7 @@ export function ErrorState({ error }: { error: string }) {
 	}, [navigate]);
 
 	return (
-		<div style={{ ...a.px_xl }}>
+		<div style={{ paddingLeft: 20, paddingRight: 20 }}>
 			<CircleInfo width={48} style={t.atoms.text_contrast_low} />
 			<Text
 				style={{

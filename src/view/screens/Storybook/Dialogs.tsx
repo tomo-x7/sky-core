@@ -1,6 +1,4 @@
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import * as Menu from "#/components/Menu";
@@ -157,7 +155,7 @@ export function Dialogs() {
 						<Menu.Trigger label="Open menu">
 							{({ props }) => (
 								<Button
-									style={{ ...a.mt_2xl }}
+									style={{ marginTop: 24 }}
 									label="Open menu"
 									color="primary"
 									variant="solid"

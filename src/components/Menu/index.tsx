@@ -1,7 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { atoms as a, useTheme } from "#/alf";
 import type * as Dialog from "#/components/Dialog";
 import { Context, ItemContext, useMenuContext, useMenuItemContext } from "#/components/Menu/context";
 import type {
@@ -176,11 +176,8 @@ export function Outer({
 						...(t.name === "light" ? t.atoms.bg : t.atoms.bg_contrast_25),
 						...t.atoms.shadow_md,
 						...t.atoms.border_contrast_low,
-
 						overflow: "auto",
-
-						...(!reduceMotionEnabled && a.zoom_fade_in),
-
+						animation: reduceMotionEnabled ? undefined : "zoomIn ease-out 0.1s, fadeIn ease-out 0.1s",
 						...style,
 					}}
 				>
@@ -227,22 +224,22 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 				onFocus={onFocus}
 				onBlur={onBlur}
 				// need `flatten` here for Radix compat
-				style={flatten([
-					a.flex_row,
-					a.align_center,
-					a.gap_lg,
-					a.py_sm,
-					a.rounded_xs,
-					{ minHeight: 32, paddingLeft: 10, paddingRight: 10 },
-					{ outline: 0 },
-					(hovered || focused) &&
+				style={{
+					...a.flex_row,
+					...a.align_center,
+					...a.gap_lg,
+					...a.rounded_xs,
+					minHeight: 32,
+					padding: "8px 10px",
+					outline: 0,
+					...((hovered || focused) &&
 						!rest.disabled && {
 							outline: "0 !important",
 							...(t.name === "light" ? t.atoms.bg_contrast_25 : t.atoms.bg_contrast_50),
-						},
+						}),
 
-					style,
-				])}
+					...style,
+				}}
 				{...{
 					onMouseEnter,
 					onMouseLeave,
@@ -357,6 +354,8 @@ export function Group({ children }: GroupProps) {
 export function Divider() {
 	const t = useTheme();
 	return (
-		<DropdownMenu.Separator style={flatten([a.my_xs, t.atoms.bg_contrast_100, a.flex_shrink_0, { height: 1 }])} />
+		<DropdownMenu.Separator
+			style={{ marginTop: 4, marginBottom: 4, ...t.atoms.bg_contrast_100, ...a.flex_shrink_0, height: 1 }}
+		/>
 	);
 }

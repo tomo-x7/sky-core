@@ -181,7 +181,7 @@ function SubtitleDialogInner({ defaultAltText, saveAltText, captions, setCaption
 							saveAltText(altText);
 							control.close();
 						}}
-						style={{ ...a.mt_lg }}
+						style={{ marginTop: 16 }}
 					>
 						<ButtonText>Done</ButtonText>
 					</Button>
@@ -296,7 +296,7 @@ function SubtitleFileRow({
 				variant="outline"
 				color="secondary"
 				onPress={() => setCaptions((subs) => subs.filter((s) => s.lang !== language))}
-				style={{ ...a.ml_sm }}
+				style={{ marginLeft: 8 }}
 			>
 				<ButtonIcon icon={X} />
 			</Button>

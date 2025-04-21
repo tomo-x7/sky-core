@@ -115,7 +115,7 @@ export function MessageInput({
 	useExtractEmbedFromFacets(message, setEmbed);
 
 	return (
-		<div style={{ ...a.p_sm }}>
+		<div style={{ padding: 8 }}>
 			{children}
 			<div
 				style={{

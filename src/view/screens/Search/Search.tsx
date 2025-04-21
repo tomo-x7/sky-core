@@ -50,7 +50,7 @@ import { SearchLinkCard, SearchProfileCard } from "#/view/shell/desktop/Search";
 function Loader() {
 	return (
 		<Layout.Content>
-			<div style={{ ...a.py_xl }}>
+			<div style={{ paddingTop: 20, paddingBottom: 20 }}>
 				<ActivityIndicator />
 			</div>
 		</Layout.Content>
@@ -62,7 +62,7 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 
 	return (
 		<Layout.Content>
-			<div style={{ ...a.p_xl }}>
+			<div style={{ padding: 20 }}>
 				<div
 					style={{
 						...t.atoms.bg_contrast_25,
@@ -788,7 +788,7 @@ export function SearchScreenShell({
 										size="large"
 										variant="ghost"
 										color="secondary"
-										style={{ ...a.px_sm }}
+										style={{ paddingLeft: 8, paddingRight: 8 }}
 										onPress={onPressCancelSearch}
 										hitSlop={HITSLOP_10}
 									>

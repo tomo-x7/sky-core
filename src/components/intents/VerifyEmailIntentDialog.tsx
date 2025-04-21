@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
@@ -58,7 +58,7 @@ function Inner({ control }: { control: DialogControlProps }) {
 	return (
 		<Dialog.ScrollableInner
 			label={"Verify email dialog"}
-			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : a.w_full}
+			style={gtMobile ? { width: "auto", maxWidth: 400, minWidth: 200 } : { width: "100%" }}
 		>
 			<div style={{ gap: 20 }}>
 				{status === "loading" ? (

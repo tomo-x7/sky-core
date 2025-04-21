@@ -222,11 +222,11 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 				// 	},
 				// ]}
 			>
-				<div style={{ ...a.px_xl }}>
+				<div style={{ paddingLeft: 20, paddingRight: 20 }}>
 					{hasSession && currentAccount ? (
 						<DrawerProfileCard account={currentAccount} onPressProfile={onPressProfile} />
 					) : (
-						<div style={{ ...a.pr_xl }}>
+						<div style={{ paddingRight: 20 }}>
 							<NavSignupCard />
 						</div>
 					)}
@@ -258,7 +258,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 					</>
 				)}
 
-				<div style={{ ...a.px_xl }}>
+				<div style={{ paddingLeft: 20, paddingRight: 20 }}>
 					<Divider
 						style={{
 							marginBottom: 20,

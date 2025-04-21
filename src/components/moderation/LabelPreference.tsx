@@ -51,7 +51,7 @@ export function Content({
 			<Text
 				style={{
 					fontWeight: "600",
-					...(gtPhone ? a.text_sm : a.text_md),
+					fontSize: gtPhone ? 14 : 16,
 				}}
 			>
 				{name}

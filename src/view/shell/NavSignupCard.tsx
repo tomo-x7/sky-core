@@ -29,7 +29,7 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 			<Link to="/" label="Bluesky - Home">
 				<Logo width={32} />
 			</Link>
-			<div style={{ ...a.pt_lg }}>
+			<div style={{ paddingTop: 16 }}>
 				<Text
 					style={{
 						fontSize: 26,

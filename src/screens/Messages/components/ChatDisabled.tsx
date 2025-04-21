@@ -13,7 +13,7 @@ import * as Toast from "#/view/com/util/Toast";
 export function ChatDisabled() {
 	const t = useTheme();
 	return (
-		<div style={{ ...a.p_md }}>
+		<div style={{ padding: 12 }}>
 			<div
 				style={{
 					alignItems: "flex-start",
@@ -60,7 +60,7 @@ function AppealDialog() {
 				size="small"
 				onPress={control.open}
 				label={"Appeal this decision"}
-				style={{ ...a.mt_sm }}
+				style={{ marginTop: 8 }}
 			>
 				<ButtonText>{"Appeal this decision"}</ButtonText>
 			</Button>
@@ -127,7 +127,7 @@ function DialogInner() {
 			>
 				This appeal will be sent to Bluesky's moderation service.
 			</Text>
-			<div style={{ ...a.my_md }}>
+			<div style={{ marginTop: 12, marginBottom: 12 }}>
 				<Dialog.Input
 					label={"Text input field"}
 					placeholder={"Please explain why you think your chats were incorrectly disabled"}

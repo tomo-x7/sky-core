@@ -1,4 +1,4 @@
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { useGoBack } from "#/lib/hooks/useGoBack";
@@ -31,7 +31,7 @@ export function Error({
 
 				alignItems: "center",
 				gap: 40,
-				...(!gtMobile && a.justify_between),
+				justifyContent: gtMobile ? undefined : "space-between",
 				...t.atoms.border_contrast_low,
 				paddingTop: 175,
 				paddingBottom: 110,

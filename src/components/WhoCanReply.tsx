@@ -1,7 +1,7 @@
 import { type AppBskyFeedDefs, AppBskyFeedPost, type AppBskyGraphDefs, AtUri } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { useDialogControl } from "#/components/Dialog";
@@ -88,7 +88,7 @@ export function WhoCanReply({ post, isThreadAuthor, style }: WhoCanReplyProps) {
 								letterSpacing: 0,
 								lineHeight: 1.15,
 								...t.atoms.text_contrast_medium,
-								...(hovered && a.underline),
+								textDecorationLine: hovered ? "underline" : undefined,
 							}}
 						>
 							{description}

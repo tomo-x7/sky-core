@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import { TIMELINE_SAVED_FEED } from "#/lib/constants";
@@ -51,7 +51,7 @@ export function NoFollowingFeed() {
 						to="/"
 						label={"Add the default feed of only people you follow"}
 						onPress={addRecommendedFeeds}
-						style={{ ...a.leading_snug }}
+						style={{ lineHeight: 1.3 }}
 					>
 						Click here to add one.
 					</InlineLinkText>

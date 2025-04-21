@@ -4,7 +4,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useRef } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { atoms as a } from "#/alf";
 import { ButtonIcon, ButtonText, Button as NewButton } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -792,7 +791,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 						color="primary"
 						size="small"
 						variant="outline"
-						style={{ ...a.py_md }}
+						style={{ paddingTop: 12, paddingBottom: 12 }}
 					>
 						<ButtonIcon icon={PersonPlusIcon} />
 						<ButtonText>Add people</ButtonText>
@@ -816,7 +815,7 @@ const AboutSection = React.forwardRef<SectionRef, AboutSectionProps>(function Ab
 					color="primary"
 					size="small"
 					variant="ghost"
-					style={{ ...a.py_sm }}
+					style={{ paddingTop: 8, paddingBottom: 8 }}
 				>
 					<ButtonIcon icon={PersonPlusIcon} />
 					<ButtonText>Add people</ButtonText>

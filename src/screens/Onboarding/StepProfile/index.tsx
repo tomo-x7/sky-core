@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
@@ -185,7 +185,7 @@ export function StepProfile() {
 					justifyContent: "space-between",
 				}}
 			>
-				<IconCircle icon={StreamingLive} style={{ ...a.mb_2xl }} />
+				<IconCircle icon={StreamingLive} style={{ marginBottom: 24 }} />
 				<TitleText>Give your profile a face</TitleText>
 				<DescriptionText>
 					Help people know you're not a bot by uploading a picture or creating an avatar.
@@ -218,7 +218,7 @@ export function StepProfile() {
 							}}
 						>
 							<CircleInfo_Stroke2_Corner0_Rounded size="sm" />
-							<Text style={{ ...a.leading_snug }}>{error}</Text>
+							<Text style={{ lineHeight: 1.3 }}>{error}</Text>
 						</div>
 					)}
 				</div>
@@ -280,7 +280,7 @@ export function StepProfile() {
 						<AvatarCreatorItems type="emojis" avatar={avatar} setAvatar={setAvatar} />
 						<AvatarCreatorItems type="colors" avatar={avatar} setAvatar={setAvatar} />
 					</div>
-					<div style={{ ...a.pt_4xl }}>
+					<div style={{ paddingTop: 32 }}>
 						<Button variant="solid" color="primary" size="large" label={"Done"} onPress={onDoneCreating}>
 							<ButtonText>Done</ButtonText>
 						</Button>

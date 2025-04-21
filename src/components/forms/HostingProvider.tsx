@@ -87,7 +87,7 @@ export function HostingProvider({
 						const interacted = hovered || pressed;
 						return (
 							<>
-								<div style={{ ...a.pr_xs }}>
+								<div style={{ paddingRight: 4 }}>
 									<GlobeIcon
 										size="md"
 										fill={interacted ? t.palette.contrast_800 : t.palette.contrast_500}
