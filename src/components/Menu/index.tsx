@@ -1,7 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import type * as Dialog from "#/components/Dialog";
 import { Context, ItemContext, useMenuContext, useMenuItemContext } from "#/components/Menu/context";
 import type {
@@ -225,10 +225,11 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 				onBlur={onBlur}
 				// need `flatten` here for Radix compat
 				style={{
-					...a.flex_row,
-					...a.align_center,
-					...a.gap_lg,
-					...a.rounded_xs,
+					display: "flex",
+					flexDirection: "row",
+					alignItems: "center",
+					gap: 16,
+					borderRadius: 4,
 					minHeight: 32,
 					padding: "8px 10px",
 					outline: 0,
@@ -237,7 +238,6 @@ export function Item({ children, label, onPress, style, ...rest }: ItemProps) {
 							outline: "0 !important",
 							...(t.name === "light" ? t.atoms.bg_contrast_25 : t.atoms.bg_contrast_50),
 						}),
-
 					...style,
 				}}
 				{...{
@@ -355,7 +355,13 @@ export function Divider() {
 	const t = useTheme();
 	return (
 		<DropdownMenu.Separator
-			style={{ marginTop: 4, marginBottom: 4, ...t.atoms.bg_contrast_100, ...a.flex_shrink_0, height: 1 }}
+			style={{
+				marginTop: 4,
+				marginBottom: 4,
+				...t.atoms.bg_contrast_100,
+				flexShrink: 0,
+				height: 1,
+			}}
 		/>
 	);
 }

@@ -29,7 +29,7 @@ export function InboxPreview({
 				gap: 12,
 				borderTop: "1px solid black",
 				borderTopWidth: 1,
-				...{ marginTop: a.border_t.borderTopWidth * -1 },
+				...{ marginTop: -1 },
 				borderBottom: "1px solid black",
 				...t.atoms.border_contrast_low,
 				...{ minHeight: 44 },

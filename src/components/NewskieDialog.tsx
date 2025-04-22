@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
 import { differenceInSeconds } from "date-fns";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { useDialogControl } from "#/components/Dialog";
@@ -77,7 +77,7 @@ export function NewskieDialog({
 					style={{ width: "auto", maxWidth: 400, minWidth: 200 }}
 				>
 					<div style={{ gap: 12 }}>
-						<div style={{ ...a.align_center }}>
+						<div style={{ alignItems: "center" }}>
 							<div
 								style={{
 									height: 60,

@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 
-import { atoms as a, useBreakpoints, useLayoutBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useLayoutBreakpoints, useTheme } from "#/alf";
 import { useDialogContext } from "#/components/Dialog";
 import { SCROLLBAR_OFFSET } from "#/components/Layout/const";
 import { ScrollbarOffsetContext } from "#/components/Layout/context";
@@ -172,8 +172,8 @@ const WebCenterBorders = React.memo(function LayoutContent() {
 				top: 0,
 				right: 0,
 				bottom: 0,
-				...a.border_l,
-				...a.border_r,
+				borderLeft: "1px solid black",
+				borderRight: "1px solid black",
 				...t.atoms.border_contrast_low,
 				width: 602,
 				left: "50%",

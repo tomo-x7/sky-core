@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs } from "@atproto/api";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { NewskieDialog } from "#/components/NewskieDialog";
 import { Text } from "#/components/Typography";
 import { isInvalidHandle } from "#/lib/strings/handles";
@@ -53,18 +53,16 @@ export function ProfileHeaderHandle({
 			<Text
 				numberOfLines={1}
 				style={{
-					...flatten(
-						invalidHandle
-							? [
-									a.border,
-									a.text_xs,
-									a.px_sm,
-									a.py_xs,
-									a.rounded_xs,
-									{ borderColor: t.palette.contrast_200 },
-								]
-							: [a.text_md, a.leading_snug, t.atoms.text_contrast_medium],
-					),
+					...(invalidHandle
+						? {
+								border: "1px solid black",
+								fontSize: 12,
+								padding: "4px 8px",
+								borderRadius: 4,
+								borderColor: t.palette.contrast_200,
+							}
+						: { fontSize: 16, lineHeight: 1.3, ...t.atoms.text_contrast_medium }),
+					letterSpacing: 0,
 					wordBreak: "break-all",
 					pointerEvents: "auto",
 				}}

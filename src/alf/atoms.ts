@@ -1,6 +1,7 @@
 import * as Layout from "../components/Layout/const";
 import * as tokens from "./tokens";
 
+// 定数に切り出してあるが、ハードコーディングに変更推奨
 export const atoms = {
 	debug: {
 		borderColor: "red",

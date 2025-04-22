@@ -2,7 +2,7 @@ import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -72,7 +72,7 @@ function ChangeHandleDialogInner() {
 					<Dialog.HeaderText>Change Handle</Dialog.HeaderText>
 				</Dialog.Header>
 			}
-			contentContainerStyle={flatten([a.pt_0, a.px_0])}
+			contentContainerStyle={{ paddingTop: 0, paddingLeft: 0, paddingRight: 0 }}
 		>
 			<div
 				style={{
@@ -631,9 +631,10 @@ function SuccessMessage({ text }: { text: string }) {
 				flexDirection: "row",
 				justifyContent: "center",
 				alignItems: "center",
-				...(gtMobile ? a.px_md : a.px_sm),
 				paddingTop: 4,
 				paddingBottom: 4,
+				paddingLeft: gtMobile ? 12 : 8,
+				paddingRight: gtMobile ? 12 : 8,
 				...t.atoms.border_contrast_low,
 			}}
 		>

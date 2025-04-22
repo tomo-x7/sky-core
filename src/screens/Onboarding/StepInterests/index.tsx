@@ -192,7 +192,7 @@ export function StepInterests() {
 					<div
 						style={{
 							gap: 12,
-							...(gtMobile ? a.flex_row : a.flex_col),
+							flexDirection: gtMobile ? "row" : "column",
 						}}
 					>
 						<Button

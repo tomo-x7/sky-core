@@ -201,7 +201,7 @@ let PostCtrls = ({
 		>
 			<div
 				style={{
-					...(big ? a.align_center : flatten([a.flex_1, a.align_start, { marginLeft: -6 }])),
+					...(big ? { alignItems: "center" } : { flex: 1, alignItems: "flex-start", marginLeft: -6 }),
 					...(replyDisabled ? { opacity: 0.5 } : undefined),
 				}}
 			>
@@ -227,7 +227,7 @@ let PostCtrls = ({
 						<Text
 							style={{
 								...defaultCtrlColor,
-								...(big ? a.text_md : { fontSize: 15 }),
+								...(big ? { fontSize: 16 } : { fontSize: 15 }),
 								userSelect: "none",
 							}}
 						>
@@ -236,7 +236,7 @@ let PostCtrls = ({
 					) : undefined}
 				</button>
 			</div>
-			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
+			<div style={big ? { alignItems: "center" } : { flex: 1, alignItems: "flex-start" }}>
 				<RepostButton
 					isReposted={!!post.viewer?.repost}
 					repostCount={(post.repostCount ?? 0) + (post.quoteCount ?? 0)}
@@ -246,7 +246,7 @@ let PostCtrls = ({
 					embeddingDisabled={Boolean(post.viewer?.embeddingDisabled)}
 				/>
 			</div>
-			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
+			<div style={big ? { alignItems: "center" } : { flex: 1, alignItems: "flex-start" }}>
 				<button
 					type="button"
 					style={btnStyle({ pressed, hovered })}

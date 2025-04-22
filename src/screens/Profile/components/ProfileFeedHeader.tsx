@@ -1,7 +1,7 @@
 import { AtUri } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -219,11 +219,10 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 										<div style={{ flex: 1 }}>
 											<Text
 												style={{
-													fontSize: 16,
+													fontSize: gtMobile ? 18 : 16,
 													letterSpacing: 0,
 													fontWeight: "800",
 													lineHeight: 1.15,
-													...(gtMobile && a.text_lg),
 												}}
 												numberOfLines={2}
 											>
@@ -344,7 +343,7 @@ export function ProfileFeedHeader({ info }: { info: FeedSourceFeedInfo }) {
 				<Dialog.Handle />
 				<Dialog.ScrollableInner
 					label={"Feed menu"}
-					style={gtMobile ? { width: "auto", minWidth: 450 } : a.w_full}
+					style={gtMobile ? { width: "auto", minWidth: 450 } : { width: "100%" }}
 				>
 					<DialogInner
 						info={info}

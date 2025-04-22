@@ -683,7 +683,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 							textAlign: "center",
 							...t.atoms.text_contrast_high,
 							lineHeight: 1.4,
-							...(gtMobile ? { width: 450 } : flatten([a.w_full, a.px_lg])),
+							...(gtMobile ? { width: 450 } : { width: "100%", paddingLeft: 16, paddingRight: 16 }),
 						}}
 					>
 						The starter pack that you are trying to view is invalid. You may delete this starter pack

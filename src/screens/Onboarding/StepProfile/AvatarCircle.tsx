@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Pencil_Stroke2_Corner0_Rounded as Pencil } from "#/components/icons/Pencil";
 import { StreamingLive_Stroke2_Corner0_Rounded as StreamingLive } from "#/components/icons/StreamingLive";
@@ -17,21 +17,21 @@ export function AvatarCircle({
 	const t = useTheme();
 	const { avatar } = useAvatar();
 
-	const styles = React.useMemo(
+	const styles = React.useMemo<{
+		imageContainer: React.CSSProperties;
+	}>(
 		() => ({
-			imageContainer: flatten([
-				a.rounded_full,
-				a.overflow_hidden,
-				a.align_center,
-				a.justify_center,
-				a.border,
-				t.atoms.border_contrast_low,
-				t.atoms.bg_contrast_25,
-				{
-					height: 200,
-					width: 200,
-				},
-			]),
+			imageContainer: {
+				borderRadius: 999,
+				overflow: "hidden",
+				alignItems: "center",
+				justifyContent: "center",
+				border: "1px solid black",
+				...t.atoms.border_contrast_low,
+				...t.atoms.bg_contrast_25,
+				height: 200,
+				width: 200,
+			},
 		}),
 		[t.atoms.bg_contrast_25, t.atoms.border_contrast_low],
 	);

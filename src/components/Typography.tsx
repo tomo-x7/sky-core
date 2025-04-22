@@ -1,4 +1,4 @@
-import { atoms, useAlf, useTheme } from "#/alf";
+import { useAlf, useTheme } from "#/alf";
 import { type TextProps, normalizeTextStyles, renderChildrenWithEmoji } from "#/alf/typography";
 import { useOnLayout } from "#/components/hooks/useOnLayout";
 export type { TextProps };
@@ -26,7 +26,8 @@ export function Text({
 	const t2 = useTheme2();
 	const s = normalizeTextStyles(
 		{
-			...atoms.text_sm,
+			fontSize: 14,
+			letterSpacing: 0,
 			...t.atoms.text,
 			...t2.typography[type],
 			wordBreak: "break-word",
@@ -85,8 +86,9 @@ export function P({ style, ...rest }: TextProps) {
 			{...attr}
 			{...rest}
 			style={{
-				...atoms.text_md,
-				...atoms.leading_normal,
+				fontSize: 16,
+				letterSpacing: 0,
+				lineHeight: 1.5,
 				...style,
 			}}
 		/>

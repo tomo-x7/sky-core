@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -97,24 +97,24 @@ export function LanguageSettingsScreen() {
 											color: t.atoms.text.color,
 											fontSize: 14,
 											letterSpacing: 0.5,
-											fontWeight: a.font_bold.fontWeight,
+											fontWeight: atoms.font_bold.fontWeight,
 											paddingLeft: 14,
 											paddingRight: 14,
 											paddingTop: 8,
 											paddingBottom: 8,
-											borderRadius: a.rounded_xs.borderRadius,
+											borderRadius: atoms.rounded_xs.borderRadius,
 										},
 										inputIOS: {
 											backgroundColor: t.atoms.bg_contrast_25.backgroundColor,
 											color: t.atoms.text.color,
 											fontSize: 14,
 											letterSpacing: 0.5,
-											fontWeight: a.font_bold.fontWeight,
+											fontWeight: atoms.font_bold.fontWeight,
 											paddingLeft: 14,
 											paddingRight: 14,
 											paddingTop: 8,
 											paddingBottom: 8,
-											borderRadius: a.rounded_xs.borderRadius,
+											borderRadius: atoms.rounded_xs.borderRadius,
 										},
 										inputWeb: {
 											flex: 1,
@@ -131,12 +131,12 @@ export function LanguageSettingsScreen() {
 											fontSize: 14,
 											fontFamily: "inherit",
 											letterSpacing: 0.5,
-											fontWeight: a.font_bold.fontWeight,
+											fontWeight: atoms.font_bold.fontWeight,
 											paddingLeft: 14,
 											paddingRight: 14,
 											paddingTop: 8,
 											paddingBottom: 8,
-											borderRadius: a.rounded_xs.borderRadius,
+											borderRadius: atoms.rounded_xs.borderRadius,
 										},
 									}}
 								/> */}
@@ -157,12 +157,12 @@ export function LanguageSettingsScreen() {
 										fontSize: 14,
 										fontFamily: "inherit",
 										letterSpacing: 0.5,
-										fontWeight: a.font_bold.fontWeight,
+										fontWeight: "600",
 										paddingLeft: 14,
 										paddingRight: 14,
 										paddingTop: 8,
 										paddingBottom: 8,
-										borderRadius: a.rounded_xs.borderRadius,
+										borderRadius: 4,
 									}}
 								>
 									{APP_LANGUAGES.filter((l) => Boolean(l.code2)).map((l) => (
@@ -233,24 +233,24 @@ export function LanguageSettingsScreen() {
 											color: t.atoms.text.color,
 											fontSize: 14,
 											letterSpacing: 0.5,
-											fontWeight: a.font_bold.fontWeight,
+											fontWeight: atoms.font_bold.fontWeight,
 											paddingLeft: 14,
 											paddingRight: 14,
 											paddingTop: 8,
 											paddingBottom: 8,
-											borderRadius: a.rounded_xs.borderRadius,
+											borderRadius: atoms.rounded_xs.borderRadius,
 										},
 										inputIOS: {
 											backgroundColor: t.atoms.bg_contrast_25.backgroundColor,
 											color: t.atoms.text.color,
 											fontSize: 14,
 											letterSpacing: 0.5,
-											fontWeight: a.font_bold.fontWeight,
+											fontWeight: atoms.font_bold.fontWeight,
 											paddingLeft: 14,
 											paddingRight: 14,
 											paddingTop: 8,
 											paddingBottom: 8,
-											borderRadius: a.rounded_xs.borderRadius,
+											borderRadius: atoms.rounded_xs.borderRadius,
 										},
 										inputWeb: {
 											flex: 1,
@@ -267,12 +267,12 @@ export function LanguageSettingsScreen() {
 											fontSize: 14,
 											fontFamily: "inherit",
 											letterSpacing: 0.5,
-											fontWeight: a.font_bold.fontWeight,
+											fontWeight: atoms.font_bold.fontWeight,
 											paddingLeft: 14,
 											paddingRight: 14,
 											paddingTop: 8,
 											paddingBottom: 8,
-											borderRadius: a.rounded_xs.borderRadius,
+											borderRadius: atoms.rounded_xs.borderRadius,
 										},
 									}}
 								/> */}
@@ -293,12 +293,12 @@ export function LanguageSettingsScreen() {
 										fontSize: 14,
 										fontFamily: "inherit",
 										letterSpacing: 0.5,
-										fontWeight: a.font_bold.fontWeight,
+										fontWeight: "600",
 										paddingLeft: 14,
 										paddingRight: 14,
 										paddingTop: 8,
 										paddingBottom: 8,
-										borderRadius: a.rounded_xs.borderRadius,
+										borderRadius: 4,
 									}}
 								>
 									{LANGUAGES.filter((l) => Boolean(l.code2)).map((l) => (
@@ -320,7 +320,7 @@ export function LanguageSettingsScreen() {
 										bottom: 1,
 										width: 40,
 										backgroundColor: t.atoms.bg_contrast_25.backgroundColor,
-										borderRadius: a.rounded_xs.borderRadius,
+										borderRadius: 4,
 										pointerEvents: "none",
 										alignItems: "center",
 										justifyContent: "center",

@@ -2,7 +2,7 @@ import { ComAtprotoModerationDefs } from "@atproto/api";
 import { useMutation } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -141,9 +141,11 @@ function DialogInner() {
 				/>
 			</div>
 			<div
-				style={flatten(
-					gtMobile ? [a.flex_row, a.justify_between] : [{ flexDirection: "column-reverse" }, a.gap_sm],
-				)}
+				style={{
+					flexDirection: gtMobile ? "row" : "column",
+					justifyContent: gtMobile ? "space-between" : undefined,
+					gap: gtMobile ? undefined : 8,
+				}}
 			>
 				<Button variant="solid" color="secondary" size="large" onPress={onBack} label={"Back"}>
 					<ButtonText>{"Back"}</ButtonText>

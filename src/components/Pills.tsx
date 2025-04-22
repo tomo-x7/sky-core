@@ -1,7 +1,7 @@
 import { BSKY_LABELER_DID, type ModerationCause } from "@atproto/api";
 import React, { type CSSProperties } from "react";
 
-import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
+import { type ViewStyleProp, flatten, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
@@ -84,13 +84,10 @@ export function Label({ cause, size = "sm", disableDetailsDialog, noBg }: LabelP
 					outer: {
 						...(!noBg ? t.atoms.bg_contrast_25 : {}),
 						gap: 3,
-						paddingLeft: 3,
-						paddingRight: 3,
-						paddingTop: 3,
-						paddingBottom: 3,
-					},
+						padding: 3,
+					} satisfies CSSProperties,
 					avi: 12,
-					text: { ...a.text_xs } satisfies CSSProperties,
+					text: { fontSize: 12, letterSpacing: 0 } satisfies CSSProperties,
 				};
 			}
 		}

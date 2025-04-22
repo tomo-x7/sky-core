@@ -333,10 +333,7 @@ function Footer({
 				gap: 12,
 				...t.atoms.bg,
 				...t.atoms.border_contrast_medium,
-
-				...{
-					paddingBottom: a.pb_lg.paddingBottom,
-				},
+				paddingBottom: 16,
 			}}
 		>
 			{items.length > minimumItems && (

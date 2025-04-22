@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 
-import { type ViewStyleProp, atoms as a, flatten, useTheme } from "#/alf";
+import { type ViewStyleProp, flatten, useTheme } from "#/alf";
 import * as Button from "#/components/Button";
 import { Link, type LinkProps } from "#/components/Link";
 import { createPortalGroup } from "#/components/Portal";
@@ -118,11 +118,11 @@ export function Item({
 				...(iconInset && {
 					paddingLeft:
 						// existing padding
-						a.pl_xl.paddingLeft +
+						20 +
 						// icon
 						28 +
 						// gap
-						a.gap_md.gap,
+						12,
 				}),
 
 				...style,

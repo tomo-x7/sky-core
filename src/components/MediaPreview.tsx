@@ -1,7 +1,7 @@
 import type { AppBskyFeedDefs } from "@atproto/api";
 import type React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
 import { PlayButtonIcon } from "#/components/video/PlayButtonIcon";
@@ -97,7 +97,7 @@ export function ImageItem({
 					objectFit: "cover",
 				}}
 			/>
-			<MediaInsetBorder style={{ ...a.rounded_xs }} />
+			<MediaInsetBorder style={{ borderRadius: 4 }} />
 			{children}
 		</div>
 	);

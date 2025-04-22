@@ -1,6 +1,6 @@
 import type { AppBskyActorDefs, ModerationDecision } from "@atproto/api";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { sanitizeDisplayName } from "#/lib/strings/display-names";
 import { sanitizeHandle } from "#/lib/strings/handles";
@@ -21,7 +21,8 @@ export function ProfileHeaderDisplayName({
 			<Text
 				style={{
 					...t.atoms.text,
-					...(gtMobile ? a.text_4xl : a.text_3xl),
+					fontSize: gtMobile ? 32 : 26,
+					letterSpacing: 0,
 					alignSelf: "flex-start",
 					fontWeight: "800",
 				}}

@@ -123,8 +123,8 @@ export function MessageInput({
 					...t.atoms.bg_contrast_25,
 
 					...{
-						paddingRight: a.p_sm.padding - 2,
-						paddingLeft: a.p_sm.padding - 2,
+						paddingRight: 6,
+						paddingLeft: 6,
 						borderWidth: 1,
 						borderRadius: 23,
 						borderColor: "transparent",

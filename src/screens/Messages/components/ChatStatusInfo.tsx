@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { KnownFollowers } from "#/components/KnownFollowers";
 import { usePromptControl } from "#/components/Prompt";
 import { LeaveConvoPrompt } from "#/components/dms/LeaveConvoPrompt";
@@ -40,7 +40,7 @@ export function ChatStatusInfo({ convoState }: { convoState: ActiveConvoStates }
 					flexDirection: "row",
 					gap: 12,
 					width: "100%",
-					...(otherUser && a.pt_sm),
+					paddingTop: otherUser ? 8 : undefined,
 				}}
 			>
 				{otherUser && (

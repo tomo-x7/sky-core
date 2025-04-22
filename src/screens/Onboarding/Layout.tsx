@@ -1,6 +1,6 @@
-import React from "react";
+import React, { type CSSProperties } from "react";
 
-import { type TextStyleProp, atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { type TextStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
 import { leading } from "#/alf/typography";
 import { Button, ButtonIcon } from "#/components/Button";
 import { createPortalGroup } from "#/components/Portal";
@@ -26,7 +26,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 		}
 	}, [state]);
 
-	const paddingTop = gtMobile ? a.py_5xl : a.py_lg;
+	const paddingTop = { paddingTop: gtMobile ? 40 : 16, paddingBottom: gtMobile ? 40 : 16 } satisfies CSSProperties;
 	const dialogLabel = "Set up your account";
 
 	return (
@@ -95,7 +95,8 @@ export function Layout({ children }: React.PropsWithChildren) {
 					style={{
 						flexDirection: "row",
 						justifyContent: "center",
-						...(gtMobile ? a.px_5xl : a.px_xl),
+						paddingLeft: gtMobile ? 40 : 20,
+						paddingRight: gtMobile ? 40 : 20,
 					}}
 				>
 					<div
@@ -165,16 +166,18 @@ export function Layout({ children }: React.PropsWithChildren) {
 					borderTop: "1px solid black",
 					borderTopWidth: 1,
 					alignItems: "center",
-					...(gtMobile ? a.px_5xl : a.px_xl),
 					paddingTop: 24,
 					paddingBottom: 24,
+					paddingLeft: gtMobile ? 40 : 20,
+					paddingRight: gtMobile ? 40 : 20,
 				}}
 			>
 				<div
 					style={{
 						width: "100%",
 						...{ maxWidth: COL_WIDTH },
-						...flatten(gtMobile && [a.flex_row, a.justify_between]),
+						flexDirection: gtMobile ? "row" : undefined,
+						justifyContent: gtMobile ? "space-between" : undefined,
 					}}
 				>
 					{gtMobile &&
@@ -208,7 +211,7 @@ export function TitleText({ children, style }: React.PropsWithChildren<TextStyle
 				fontSize: 32,
 				letterSpacing: 0,
 				fontWeight: "600",
-				lineHeight: leading(a.text_4xl, a.leading_tight),
+				lineHeight: leading({ fontSize: 32, letterSpacing: 0 }, { lineHeight: 1.15 }),
 				...style,
 			}}
 		>

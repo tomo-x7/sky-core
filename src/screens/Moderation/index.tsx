@@ -197,9 +197,8 @@ export function ModerationScreenInner({
 		<div
 			style={{
 				paddingTop: 24,
-				paddingLeft: 16,
-				paddingRight: 16,
-				...(gtMobile && a.px_2xl),
+				paddingLeft: gtMobile ? 24 : 16,
+				paddingRight: gtMobile ? 24 : 16,
 			}}
 		>
 			<Text
@@ -425,13 +424,13 @@ export function ModerationScreenInner({
 										<LabelingService.Outer
 											style={{
 												...(i === 0 && {
-													borderTopLeftRadius: a.rounded_sm.borderRadius,
-													borderTopRightRadius: a.rounded_sm.borderRadius,
+													borderTopLeftRadius: 8,
+													borderTopRightRadius: 8,
 												}),
 
 												...(i === labelers.length - 1 && {
-													borderBottomLeftRadius: a.rounded_sm.borderRadius,
-													borderBottomRightRadius: a.rounded_sm.borderRadius,
+													borderBottomLeftRadius: 8,
+													borderBottomRightRadius: 8,
 												}),
 
 												...(state.hovered || state.pressed

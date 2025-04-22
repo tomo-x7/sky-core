@@ -110,6 +110,7 @@ export function DisableEmail2FADialog({
 							style={{
 								gap: 8,
 								...flatten(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
+								...(gtMobile && { flexDirection: "row", justifyContent: "flex-end", gap: 12 }),
 							}}
 						>
 							<Button

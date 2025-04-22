@@ -250,7 +250,7 @@ function ChatListItemReady({
 						<div
 							style={{
 								flexDirection: "row",
-								...(isDeletedAccount ? a.align_center : a.align_start),
+								alignItems: isDeletedAccount ? "center" : "flex-start",
 								flex: 1,
 								paddingLeft: 16,
 								paddingRight: 16,
@@ -354,7 +354,8 @@ function ChatListItemReady({
 										fontSize: 14,
 										letterSpacing: 0,
 										lineHeight: 1.3,
-										...(hasUnread ? a.font_bold : t.atoms.text_contrast_high),
+										...(hasUnread ? { fontWeight: "600" } : t.atoms.text_contrast_high),
+
 										...(isDimStyle && t.atoms.text_contrast_medium),
 									}}
 								>
