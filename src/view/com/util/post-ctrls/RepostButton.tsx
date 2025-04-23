@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as Menu from "#/components/Menu";
 import { Text } from "#/components/Typography";
@@ -116,8 +116,8 @@ const RepostInner = ({
 				<Text
 					style={{
 						...color,
-						...(big ? a.text_md : { fontSize: 15 }),
-						...(isReposted ? a.font_bold : undefined),
+						...(big ? { fontSize: 16 } : { fontSize: 15 }),
+						...(isReposted ? { fontWeight: "600" } : undefined),
 						userSelect: "none",
 					}}
 				>

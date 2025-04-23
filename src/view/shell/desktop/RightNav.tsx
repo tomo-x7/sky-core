@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
-import { atoms as a, useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
+import { useGutters, useLayoutBreakpoints, useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
 import { Divider } from "#/components/Divider";
 import { InlineLinkText } from "#/components/Link";
@@ -53,7 +53,7 @@ export function DesktopRightNav() {
 
 				position: "fixed",
 				left: "50%",
-				transform: `translateX(${centerColumnOffset ? 150 : 300}px) ${a.scrollbar_offset.transform}`,
+				transform: `translateX(${centerColumnOffset ? 150 : 300}px) translateX(calc(-1 * var(--removed-body-scroll-bar-size, 0px) / 2))`,
 				width: 300 + gutters.paddingLeft,
 				maxHeight: "100%",
 				overflowY: "auto",

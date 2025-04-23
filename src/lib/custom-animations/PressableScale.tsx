@@ -28,7 +28,10 @@ export function PressableScale({
 				onMouseLeave?.(e);
 			}}
 			style={{
-				...(!reducedMotion && { scale: isHover ? targetScale : 1, transition: "scale 0.1s ease-out" }),
+				...(!reducedMotion && {
+					scale: isHover ? targetScale : 1,
+					transition: "scale 0.1s ease-out",
+				}),
 				...style,
 			}}
 			{...rest}

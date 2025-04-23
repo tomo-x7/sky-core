@@ -2,7 +2,7 @@ import type { AppBskyActorDefs } from "@atproto/api";
 import React from "react";
 
 import { useLocation } from "react-router-dom";
-import { atoms as a, useBreakpoints } from "#/alf";
+import { useBreakpoints } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Check_Stroke2_Corner0_Rounded as Check } from "#/components/icons/Check";
 import { PlusLarge_Stroke2_Corner0_Rounded as Plus } from "#/components/icons/Plus";
@@ -106,7 +106,7 @@ function PostThreadFollowBtnLoaded({
 			size="small"
 			variant="solid"
 			color={isFollowing ? "secondary" : "secondary_inverted"}
-			style={{ borderRadius:999 }}
+			style={{ borderRadius: 999 }}
 		>
 			{gtMobile && <ButtonIcon icon={isFollowing ? Check : Plus} position="left" size="sm" />}
 			<ButtonText>{!isFollowing ? isFollowedBy ? <>Follow Back</> : <>Follow</> : <>Following</>}</ButtonText>

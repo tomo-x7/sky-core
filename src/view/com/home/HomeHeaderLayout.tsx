@@ -1,7 +1,7 @@
 import type React from "react";
 
 import type { JSX } from "react";
-import { atoms as a, useBreakpoints, useGutters, useTheme } from "#/alf";
+import { useBreakpoints, useGutters, useTheme } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
@@ -69,7 +69,7 @@ function HomeHeaderLayoutDesktopAndTablet({
 							variant="ghost"
 							color="secondary"
 							shape="square"
-							style={{ justifyContent:"center" }}
+							style={{ justifyContent: "center" }}
 						>
 							<ButtonIcon icon={FeedsIcon} size="lg" />
 						</Link>

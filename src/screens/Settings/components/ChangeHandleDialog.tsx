@@ -2,7 +2,7 @@ import type { ComAtprotoServerDescribeServer } from "@atproto/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -56,9 +56,9 @@ function ChangeHandleDialogInner() {
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={{ borderRadius:999 }}
+				style={{ borderRadius: 999 }}
 			>
-				<ButtonText style={{ fontSize:16 }}>Cancel</ButtonText>
+				<ButtonText style={{ fontSize: 16 }}>Cancel</ButtonText>
 			</Button>
 		),
 		[control],
@@ -222,7 +222,7 @@ function ProvidedHandlePage({
 					<Text>
 						<>
 							Your full handle will be{" "}
-							<Text style={{ fontWeight:"600" }}>@{createFullHandle(subdomain, host)}</Text>
+							<Text style={{ fontWeight: "600" }}>@{createFullHandle(subdomain, host)}</Text>
 						</>
 					</Text>
 					<Button
@@ -246,7 +246,7 @@ function ProvidedHandlePage({
 							<InlineLinkText
 								label={"learn more"}
 								to="https://bsky.social/about/blog/4-28-2023-domain-handle-tutorial"
-								style={{ fontWeight:"600" }}
+								style={{ fontWeight: "600" }}
 								disableMismatchWarning
 							>
 								Learn more here.
@@ -410,7 +410,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									color="secondary"
 									value="_atproto"
 									label={"Copy host"}
-									hoverStyle={{ backgroundColor:"transparent" }}
+									hoverStyle={{ backgroundColor: "transparent" }}
 									hitSlop={HITSLOP_10}
 								>
 									<Text
@@ -434,7 +434,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								Type:
 							</Text>
 							<div style={{ paddingTop: 4, paddingBottom: 4 }}>
-								<Text style={{ fontSize:16 }}>TXT</Text>
+								<Text style={{ fontSize: 16 }}>TXT</Text>
 							</div>
 							<Text
 								style={{
@@ -450,7 +450,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 									color="secondary"
 									value={`did=${currentAccount?.did}`}
 									label={"Copy TXT record value"}
-									hoverStyle={{ backgroundColor:"transparent" }}
+									hoverStyle={{ backgroundColor: "transparent" }}
 									hitSlop={HITSLOP_10}
 								>
 									<Text
@@ -477,7 +477,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								...t.atoms.border_contrast_low,
 							}}
 						>
-							<Text style={{ fontSize:16 }}>_atproto.{domain}</Text>
+							<Text style={{ fontSize: 16 }}>_atproto.{domain}</Text>
 						</div>
 					</>
 				) : (
@@ -493,7 +493,7 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 								...t.atoms.border_contrast_low,
 							}}
 						>
-							<Text style={{ fontSize:16 }}>https://{domain}/.well-known/atproto-did</Text>
+							<Text style={{ fontSize: 16 }}>https://{domain}/.well-known/atproto-did</Text>
 						</div>
 						<Text>That contains the following:</Text>
 						<CopyButton
@@ -540,7 +540,9 @@ function OwnHandlePage({ goToServiceHandle }: { goToServiceHandle: () => void })
 					<Admonition type="info" style={{ marginBottom: 12 }}>
 						<>
 							Your current handle{" "}
-							<Text style={{ fontWeight:"600" }}>{sanitizeHandle(currentAccount?.handle || "", "@")}</Text>{" "}
+							<Text style={{ fontWeight: "600" }}>
+								{sanitizeHandle(currentAccount?.handle || "", "@")}
+							</Text>{" "}
 							will automatically remain reserved for you. You can switch back to it at any time from this
 							account.
 						</>
@@ -649,7 +651,7 @@ function SuccessMessage({ text }: { text: string }) {
 			>
 				<CheckIcon fill={t.palette.white} size="xs" />
 			</div>
-			<Text style={{ fontSize:16 }}>{text}</Text>
+			<Text style={{ fontSize: 16 }}>{text}</Text>
 		</div>
 	);
 }

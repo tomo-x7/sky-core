@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { atoms as a, tokens, useBreakpoints, useTheme } from "#/alf";
+import { tokens, useBreakpoints, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
@@ -70,7 +70,7 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 						padding: 16,
 					}}
 				>
-					<Text style={{ fontSize:16 }}>{message}</Text>
+					<Text style={{ fontSize: 16 }}>{message}</Text>
 
 					{error && (
 						<>
@@ -765,7 +765,7 @@ export function SearchScreenShell({
 								style={{
 									width: "100%",
 									flexDirection: "row",
-									alignItems:"stretch",
+									alignItems: "stretch",
 									gap: 4,
 								}}
 							>
@@ -956,8 +956,9 @@ function SearchHistory({
 							// horizontal={true}
 							style={{
 								flexDirection: "row",
-								flexWrap:"nowrap",
-								 marginLeft: tokens.space._2xl * -1, marginRight: tokens.space._2xl * -1 ,
+								flexWrap: "nowrap",
+								marginLeft: tokens.space._2xl * -1,
+								marginRight: tokens.space._2xl * -1,
 							}}
 							// contentContainerStyle={[a.px_2xl, a.border_0]}
 						>
@@ -1037,7 +1038,7 @@ function SearchHistory({
 										paddingBottom: 12,
 									}}
 								>
-									<Text style={{ fontSize:16 }}>{historyItem}</Text>
+									<Text style={{ fontSize: 16 }}>{historyItem}</Text>
 								</button>
 								<Button
 									label={`Remove ${historyItem}`}

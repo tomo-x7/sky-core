@@ -1,6 +1,6 @@
 import type { ModerationCause } from "@atproto/api";
 
-import { atoms as a, useGutters, useTheme } from "#/alf";
+import { useGutters, useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
 import type { AppModerationCause } from "#/components/Pills";
@@ -49,7 +49,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ fontSize:8 }}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ fontSize: 8 }}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have blocked.
@@ -72,7 +72,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ fontSize:8 }}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ fontSize: 8 }}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have muted.

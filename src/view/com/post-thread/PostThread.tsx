@@ -1,7 +1,7 @@
 import { AppBskyFeedDefs, type AppBskyFeedThreadgate, moderatePost } from "@atproto/api";
 import React, { memo, useRef, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Header } from "#/components/Layout";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
@@ -392,7 +392,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 				<div
 					style={{
 						padding: 16,
-						...(index !== 0 && a.border_t),
+						...(index !== 0 && { borderTop: "1px solid" }),
 						...t.atoms.border_contrast_low,
 						...t.atoms.bg_contrast_25,
 					}}
@@ -414,7 +414,7 @@ export function PostThread({ uri }: { uri: string | undefined }) {
 				<div
 					style={{
 						padding: 16,
-						...(index !== 0 && a.border_t),
+						...(index !== 0 && { borderTop: "1px solid" }),
 						...t.atoms.border_contrast_low,
 						...t.atoms.bg_contrast_25,
 					}}

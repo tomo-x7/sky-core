@@ -1,7 +1,7 @@
 import type { AppBskyEmbedExternal } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Divider } from "#/components/Divider";
 import { Link } from "#/components/Link";
 import { Text } from "#/components/Typography";
@@ -93,7 +93,7 @@ export const ExternalLinkEmbed = ({
 							flex: 1,
 							paddingTop: 8,
 							...{ gap: 3 },
-							...(hasMedia && a.border_t),
+							...(hasMedia && { borderTop: "1px solid black" }),
 							...(hovered ? t.atoms.border_contrast_high : t.atoms.border_contrast_low),
 						}}
 					>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
@@ -109,8 +109,11 @@ export function DisableEmail2FADialog({
 						<div
 							style={{
 								gap: 8,
-								...flatten(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
-								...(gtMobile && { flexDirection: "row", justifyContent: "flex-end", gap: 12 }),
+								...(gtMobile && {
+									flexDirection: "row",
+									justifyContent: "flex-end",
+									gap: 12,
+								}),
 							}}
 						>
 							<Button
@@ -157,7 +160,11 @@ export function DisableEmail2FADialog({
 							<div
 								style={{
 									gap: 8,
-									...flatten(gtMobile && [a.flex_row, a.justify_end, a.gap_md]),
+									...(gtMobile && {
+										flexDirection: "row",
+										justifyContent: "flex-end",
+										gap: 12,
+									}),
 								}}
 							>
 								<Button

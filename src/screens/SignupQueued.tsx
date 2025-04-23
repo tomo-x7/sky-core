@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { Modal } from "#/components/Motal";
@@ -75,7 +75,7 @@ export function SignupQueued() {
 	const webLayout = gtMobile;
 
 	return (
-		<Modal visible presentationStyle="formSheet" style={{ minHeight:"100dvh" }}>
+		<Modal visible presentationStyle="formSheet" style={{ minHeight: "100dvh" }}>
 			<div
 				// ScrollView
 				style={{

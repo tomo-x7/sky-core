@@ -2,7 +2,7 @@ import type { AppBskyActorDefs } from "@atproto/api";
 import React, { type JSX } from "react";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { atoms as a, flatten, tokens, useLayoutBreakpoints, useTheme } from "#/alf";
+import { tokens, useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import type { DialogControlProps } from "#/components/Dialog";
 import * as Menu from "#/components/Menu";
@@ -92,7 +92,7 @@ function ProfileCard() {
 			style={{
 				marginTop: 12,
 				marginBottom: 12,
-				...flatten(!leftNavMinimal && [a.w_full, a.align_start]),
+				...(!leftNavMinimal && { width: "100%", alignItems: "center" }),
 			}}
 		>
 			{!isLoading && profile ? (
@@ -105,31 +105,27 @@ function ProfileCard() {
 									{...props}
 									style={{
 										width: "100%",
-
 										transitionProperty:
 											"color, background-color, border-color, text-decoration-color, fill, stroke",
 										transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
 										transitionDuration: "100ms",
-
-										...(active ? t.atoms.bg_contrast_25 : a.transition_delay_50ms),
-
+										...(active ? t.atoms.bg_contrast_25 : { transitionDelay: "50ms" }),
 										borderRadius: 999,
 										justifyContent: "space-between",
 										alignItems: "center",
 										flexDirection: "row",
-										...{ gap: 6 },
-										...flatten(!leftNavMinimal && [a.pl_lg, a.pr_md]),
+										gap: 6,
+										...(!leftNavMinimal && { paddingLeft: 16, paddingRight: 12 }),
 									}}
 								>
 									<div
 										style={{
-											...flatten(
-												!getIsReducedMotionEnabled() && [
-													a.transition_transform,
-													{ transitionDuration: "250ms" },
-													!active && a.transition_delay_50ms,
-												],
-											),
+											...(!getIsReducedMotionEnabled() && {
+												transitionProperty: "transform",
+												transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
+												transitionDuration: "250ms",
+												...(!active && { transitionDelay: "50ms" }),
+											}),
 											position: "relative",
 											zIndex: 10,
 											...(active && {
@@ -152,7 +148,7 @@ function ProfileCard() {
 													transitionProperty: "opacity",
 													transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
 													transitionDuration: "100ms",
-													...(!active && a.transition_delay_50ms),
+													...(!active && { transitionDelay: "50ms" }),
 													marginLeft: tokens.space.xl * -1,
 													opacity: active ? 1 : 0,
 												}}
@@ -206,7 +202,7 @@ function ProfileCard() {
 					height={size}
 					style={{
 						...{ borderRadius: size },
-						...(!leftNavMinimal && a.ml_lg),
+						...(!leftNavMinimal && { marginLeft: 16 }),
 					}}
 				/>
 			)}
@@ -386,7 +382,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 								left: count.length === 1 ? 12 : 8,
 								backgroundColor: t.palette.primary_500,
 								color: t.palette.white,
-								lineHeight: `${a.text_sm.fontSize}px`,
+								lineHeight: "14px",
 								padding: "1px 4px",
 								minWidth: 16,
 								...(leftNavMinimal && {
@@ -425,7 +421,7 @@ function NavItem({ count, hasNew, href, icon, iconFilled, label }: NavItemProps)
 					style={{
 						fontSize: 20,
 						letterSpacing: 0,
-						...(isCurrent ? a.font_heavy : a.font_normal),
+						fontWeight: isCurrent ? "800" : "400",
 					}}
 				>
 					{label}
@@ -489,7 +485,7 @@ function ComposeBtn() {
 				size="large"
 				variant="solid"
 				color="primary"
-				style={{ borderRadius:999 }}
+				style={{ borderRadius: 999 }}
 			>
 				<ButtonIcon icon={EditBig} position="left" />
 				<ButtonText>New Post</ButtonText>
@@ -532,7 +528,7 @@ export function DesktopLeftNav() {
 				paddingRight: 20,
 				...styles.leftNav,
 				...(leftNavMinimal && styles.leftNavMinimal),
-				transform: `translateX(${centerColumnOffset ? -450 : -300}px) translateX(-100%) ${a.scrollbar_offset.transform}`,
+				transform: `translateX(${centerColumnOffset ? -450 : -300}px) translateX(-100%) translateX(calc(-1 * var(--removed-body-scroll-bar-size, 0px) / 2))`,
 			}}
 		>
 			{hasSession ? (

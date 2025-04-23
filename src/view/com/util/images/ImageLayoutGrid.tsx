@@ -1,7 +1,7 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
 import React, { type RefObject, useRef } from "react";
 
-import { atoms as a, useBreakpoints } from "#/alf";
+import { useBreakpoints } from "#/alf";
 import { PostEmbedViewContext } from "#/view/com/util/post-embeds/types";
 import type { Dimensions } from "../../lightbox/ImageViewing/@types";
 import { GalleryItem } from "./Gallery";
@@ -17,18 +17,13 @@ interface ImageLayoutGridProps {
 
 export function ImageLayoutGrid({ style, ...props }: ImageLayoutGridProps) {
 	const { gtMobile } = useBreakpoints();
-	const gap =
-		props.viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia
-			? gtMobile
-				? a.gap_xs
-				: a.gap_2xs
-			: a.gap_xs;
+	const gap = props.viewContext === PostEmbedViewContext.FeedEmbedRecordWithMedia ? (gtMobile ? 4 : 2) : 4;
 
 	return (
 		<div style={style}>
 			<div
 				style={{
-					...gap,
+					gap,
 					borderRadius: 12,
 					overflow: "hidden",
 				}}
@@ -45,7 +40,7 @@ interface ImageLayoutGridInnerProps {
 	onLongPress?: (index: number) => void;
 	onPressIn?: (index: number) => void;
 	viewContext?: PostEmbedViewContext;
-	gap: { gap: number };
+	gap: number;
 }
 
 function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
@@ -66,13 +61,13 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					style={{
 						flex: 1,
 						flexDirection: "row",
-						...gap,
+						gap,
 					}}
 				>
 					<div
 						style={{
 							flex: 1,
-							...{ aspectRatio: 1 },
+							aspectRatio: 1,
 						}}
 					>
 						<GalleryItem
@@ -108,13 +103,13 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					style={{
 						flex: 1,
 						flexDirection: "row",
-						...gap,
+						gap,
 					}}
 				>
 					<div
 						style={{
 							flex: 1,
-							...{ aspectRatio: 1 },
+							aspectRatio: 1,
 						}}
 					>
 						<GalleryItem
@@ -128,8 +123,8 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					<div
 						style={{
 							flex: 1,
-							...{ aspectRatio: 1 },
-							...gap,
+							aspectRatio: 1,
+							gap,
 						}}
 					>
 						<div style={{ flex: 1 }}>
@@ -162,13 +157,13 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					<div
 						style={{
 							flexDirection: "row",
-							...gap,
+							gap,
 						}}
 					>
 						<div
 							style={{
 								flex: 1,
-								...{ aspectRatio: 1.5 },
+								aspectRatio: 1.5,
 							}}
 						>
 							<GalleryItem
@@ -197,13 +192,13 @@ function ImageLayoutGridInner(props: ImageLayoutGridInnerProps) {
 					<div
 						style={{
 							flexDirection: "row",
-							...gap,
+							gap,
 						}}
 					>
 						<div
 							style={{
 								flex: 1,
-								...{ aspectRatio: 1.5 },
+								aspectRatio: 1.5,
 							}}
 						>
 							<GalleryItem

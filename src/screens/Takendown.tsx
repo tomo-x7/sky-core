@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import Graphemer from "graphemer";
 import { useMemo, useState } from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { InlineLinkText } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -107,7 +107,7 @@ export function Takendown() {
 	useEnableKeyboardController(true);
 
 	return (
-		<Modal visible presentationStyle="formSheet" style={{ minHeight:"100dvh" }}>
+		<Modal visible presentationStyle="formSheet" style={{ minHeight: "100dvh" }}>
 			<div
 				// KeyboardAwareScrollView
 				style={{

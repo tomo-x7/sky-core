@@ -1,7 +1,7 @@
 import { type AppBskyFeedDefs, AtUri } from "@atproto/api";
 import * as React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { makeProfileLink } from "#/lib/routes/links";
 import { Link } from "../util/Link";
@@ -27,7 +27,7 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 			}}
 			hoverStyle={t.atoms.bg_contrast_25}
 		>
-			<div style={{ flexDirection:"row" }}>
+			<div style={{ flexDirection: "row" }}>
 				<div
 					style={{
 						alignItems: "center",

@@ -1,4 +1,4 @@
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { PressableScale } from "#/lib/custom-animations/PressableScale";
@@ -20,7 +20,8 @@ export function PostThreadComposePrompt({
 	return (
 		<PressableScale
 			style={{
-				...(gtMobile ? a.py_xs : { paddingTop: 8, paddingBottom: 11 }),
+				paddingTop: gtMobile ? 4 : 8,
+				paddingBottom: gtMobile ? 4 : 11,
 				paddingLeft: 8,
 				paddingRight: 8,
 				borderTop: "1px solid black",

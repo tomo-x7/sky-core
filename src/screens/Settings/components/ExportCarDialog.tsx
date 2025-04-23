@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { InlineLinkText } from "#/components/Link";
@@ -106,7 +106,7 @@ export function ExportCarDialog({
 							<InlineLinkText
 								label={"View blogpost for more details"}
 								to="https://docs.bsky.app/blog/repo-export"
-								style={{ fontSize:8 }}
+								style={{ fontSize: 8 }}
 							>
 								this blogpost
 							</InlineLinkText>

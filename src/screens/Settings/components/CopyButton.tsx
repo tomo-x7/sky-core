@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, type ButtonProps } from "#/components/Button";
 import { Text } from "#/components/Typography";
 
@@ -27,7 +27,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 	);
 
 	return (
-		<div style={{ position:"relative" }}>
+		<div style={{ position: "relative" }}>
 			{hasBeenCopied && (
 				<div
 					// Animated.View

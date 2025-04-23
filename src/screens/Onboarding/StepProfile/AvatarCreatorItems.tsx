@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import type { Avatar } from "#/screens/Onboarding/StepProfile/index";
@@ -55,7 +55,7 @@ export function AvatarCreatorItems({
 	);
 
 	return (
-		<div style={{ width:"100%" }}>
+		<div style={{ width: "100%" }}>
 			<Text
 				style={{
 					paddingBottom: 12,

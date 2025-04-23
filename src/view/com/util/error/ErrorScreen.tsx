@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Text } from "#/components/Typography";
@@ -111,7 +111,7 @@ export function ErrorScreen({
 					</div>
 				)}
 				{onPressTryAgain && (
-					<div style={{ alignItems:"center" }}>
+					<div style={{ alignItems: "center" }}>
 						<Button
 							onPress={onPressTryAgain}
 							variant="solid"

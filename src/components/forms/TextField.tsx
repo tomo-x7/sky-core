@@ -1,6 +1,6 @@
 import React, { type CSSProperties, useState } from "react";
 
-import { type TextStyleProp, atoms as a, applyFonts, flatten, useAlf, useTheme } from "#/alf";
+import { type TextStyleProp, applyFonts, flatten, useAlf, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import type { Props as SVGIconProps } from "#/components/icons/common";
@@ -177,10 +177,10 @@ export function Input({
 
 	const refs = mergeRefs([ctx.inputRef, inputRef!].filter(Boolean));
 	const flattened = {
-		position:"relative",
-		zIndex:20,
-		flex:1,
-		fontSize:16,
+		position: "relative",
+		zIndex: 20,
+		flex: 1,
+		fontSize: 16,
 		...t.atoms.text,
 		lineHeight: 1.1875,
 		minHeight: rest.multiline ? 80 : undefined,

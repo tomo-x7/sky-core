@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -60,7 +60,7 @@ export function BirthDateSettingsDialog({
 						message={
 							error?.toString() || "We were unable to load your birth date preferences. Please try again."
 						}
-						style={{ borderradius:8 }}
+						style={{ borderRadius: 8 }}
 					/>
 				) : (
 					<BirthdayInner control={control} preferences={preferences} />
@@ -105,7 +105,7 @@ function BirthdayInner({
 					maximumDate={getDateAgo(13)}
 				/>
 			</div>
-			{isError ? <ErrorMessage message={cleanError(error)} style={{ borderradius:8 }} /> : undefined}
+			{isError ? <ErrorMessage message={cleanError(error)} style={{ borderRadius: 8 }} /> : undefined}
 			<div
 				style={{
 					flexDirection: "row",

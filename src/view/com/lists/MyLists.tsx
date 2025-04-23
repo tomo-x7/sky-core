@@ -1,7 +1,7 @@
 import type { AppBskyGraphDefs as GraphDefs } from "@atproto/api";
 import React, { type JSX } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import * as ListCard from "#/components/ListCard";
 import { Text } from "#/components/Typography";
@@ -141,7 +141,7 @@ export function MyLists({
 			) : (
 				<div
 					style={{
-						...(index !== 0 && a.border_t),
+						...(index !== 0 && { borderTop: "1px solid" }),
 						...t.atoms.border_contrast_low,
 						paddingLeft: 16,
 						paddingRight: 16,

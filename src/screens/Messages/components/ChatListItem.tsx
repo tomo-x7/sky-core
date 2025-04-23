@@ -2,7 +2,7 @@ import { AppBskyEmbedRecord, ChatBskyConvoDefs, type ModerationOpts, moderatePro
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import * as tokens from "#/alf/tokens";
 import { useDialogControl } from "#/components/Dialog";
 import { Link } from "#/components/Link";
@@ -401,7 +401,7 @@ function ChatListItemReady({
 						style={{
 							position: "absolute",
 							height: "100%",
-							alignSelf:"flex-end",
+							alignSelf: "flex-end",
 							justifyContent: "center",
 
 							...{

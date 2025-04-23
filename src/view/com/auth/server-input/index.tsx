@@ -1,6 +1,6 @@
 import { useCallback, useImperativeHandle, useRef, useState } from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
@@ -227,7 +227,7 @@ function DialogInner({
 					</P>
 				</div>
 
-				<div style={flatten(gtMobile && [a.flex_row, a.justify_end])}>
+				<div style={{ ...(gtMobile && { flexDirection: "row", justifyContent: "flex-end" }) }}>
 					<Button
 						variant="outline"
 						color="primary"

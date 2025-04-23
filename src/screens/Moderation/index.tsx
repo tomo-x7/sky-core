@@ -1,7 +1,7 @@
 import { LABELS } from "@atproto/api";
 import { Fragment, useCallback } from "react";
 
-import { type ViewStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Divider } from "#/components/Divider";
@@ -141,7 +141,7 @@ function SubItem({
 				size="sm"
 				style={{
 					...t.atoms.text_contrast_low,
-					alignSelf:"flex-end",
+					alignSelf: "flex-end",
 					...{ paddingBottom: 2 },
 				}}
 			/>

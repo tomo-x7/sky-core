@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ButtonText } from "#/components/Button";
 import { InlineLinkText, Link } from "#/components/Link";
 import { H1, Text } from "#/components/Typography";
@@ -19,10 +19,10 @@ export function Links() {
 					alignItems: "flex-start",
 				}}
 			>
-				<InlineLinkText label="foo" to="https://google.com" style={{ fontSize:16 }}>
+				<InlineLinkText label="foo" to="https://google.com" style={{ fontSize: 16 }}>
 					https://google.com
 				</InlineLinkText>
-				<InlineLinkText label="foo" to="https://google.com" style={{ fontSize:16 }}>
+				<InlineLinkText label="foo" to="https://google.com" style={{ fontSize: 16 }}>
 					External with custom children (google.com)
 				</InlineLinkText>
 				<InlineLinkText
@@ -36,7 +36,7 @@ export function Links() {
 				>
 					Internal (bsky.social)
 				</InlineLinkText>
-				<InlineLinkText label="foo" to="https://bsky.app/profile/bsky.app" style={{ fontSize:16 }}>
+				<InlineLinkText label="foo" to="https://bsky.app/profile/bsky.app" style={{ fontSize: 16 }}>
 					Internal (bsky.app)
 				</InlineLinkText>
 

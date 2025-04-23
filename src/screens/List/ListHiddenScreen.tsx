@@ -2,7 +2,7 @@ import { AppBskyGraphDefs } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -144,7 +144,7 @@ export function ListHiddenScreen({
 						) : (
 							<>
 								This list – created by{" "}
-								<Text style={{ fontWeight:"600" }}>{sanitizeHandle(list.creator.handle, "@")}</Text> –
+								<Text style={{ fontWeight: "600" }}>{sanitizeHandle(list.creator.handle, "@")}</Text> –
 								contains possible violations of Bluesky's community guidelines in its name or
 								description.
 							</>

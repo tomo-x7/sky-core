@@ -2,8 +2,6 @@ import Picker from "@emoji-mart/react";
 import { DismissableLayer } from "@radix-ui/react-dismissable-layer";
 import { FocusScope } from "@radix-ui/react-focus-scope";
 import React from "react";
-
-import { atoms as a, flatten } from "#/alf";
 import { Portal } from "#/components/Portal";
 import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { textInputWebEmitter } from "#/view/com/composer/text-input/textInputWebEmitter";
@@ -141,25 +139,18 @@ export function EmojiPicker({ state, close, pinToTop }: IProps) {
 				/>
 
 				<div
-					style={flatten([
-						a.fixed,
-						a.w_full,
-						a.h_full,
-						a.align_center,
-						a.z_10,
-						{
-							top: 0,
-							left: 0,
-							right: 0,
-						},
-					])}
+					style={{
+						top: 0,
+						left: 0,
+						right: 0,
+						position: "fixed",
+						width: "100%",
+						height: "100%",
+						alignItems: "center",
+						zIndex: 10,
+					}}
 				>
-					<div
-						style={{
-							...{ position: "absolute" },
-							...position,
-						}}
-					>
+					<div style={{ position: "absolute", ...position }}>
 						<DismissableLayer onFocusOutside={(evt) => evt.preventDefault()} onDismiss={close}>
 							<Picker
 								data={async () => {

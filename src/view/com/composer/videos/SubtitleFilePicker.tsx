@@ -1,7 +1,5 @@
 import type React from "react";
 import { useRef } from "react";
-
-import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { CC_Stroke2_Corner0_Rounded as CCIcon } from "#/components/icons/CC";
 import * as Toast from "#/view/com/util/Toast";
@@ -44,12 +42,12 @@ export function SubtitleFilePicker({
 				type="file"
 				accept=".vtt"
 				ref={ref}
-				style={{ display:"none" }}
+				style={{ display: "none" }}
 				onChange={handlePick}
 				disabled={disabled}
 				aria-disabled={disabled}
 			/>
-			<div style={{ flexDirection:"row" }}>
+			<div style={{ flexDirection: "row" }}>
 				<Button
 					onPress={handleClick}
 					label={"Select subtitle file (.vtt)"}

@@ -1,6 +1,4 @@
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { H1, H3 } from "#/components/Typography";
 import { DateField, LabelText } from "#/components/forms/DateField";
@@ -78,7 +76,7 @@ export function Forms() {
 					<TextField.Input value={value} onChangeText={setValue} label="Text field" isInvalid />
 				</TextField.Root>
 
-				<div style={{ width:"100%" }}>
+				<div style={{ width: "100%" }}>
 					<TextField.LabelText>Text field</TextField.LabelText>
 					<TextField.Root>
 						<TextField.Icon icon={Globe} />
@@ -87,7 +85,7 @@ export function Forms() {
 					</TextField.Root>
 				</div>
 
-				<div style={{ width:"100%" }}>
+				<div style={{ width: "100%" }}>
 					<TextField.LabelText>Textarea</TextField.LabelText>
 					<TextField.Input
 						multiline
@@ -101,7 +99,7 @@ export function Forms() {
 
 				<H3>DateField</H3>
 
-				<div style={{ width:"100%" }}>
+				<div style={{ width: "100%" }}>
 					<LabelText>Date</LabelText>
 					<DateField
 						value={date}

@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { RichText } from "#/components/RichText";
 import { SubtleWebHover } from "#/components/SubtleWebHover";
 import { Text } from "#/components/Typography";
@@ -243,7 +243,7 @@ export function QuoteEmbed({
 						<PostAlerts modui={moderation.ui("contentView")} style={{ paddingTop: 4, paddingBottom: 4 }} />
 					) : null}
 					{richText ? (
-						<RichText value={richText} style={{ fontSize:16 }} numberOfLines={20} disableLinks />
+						<RichText value={richText} style={{ fontSize: 16 }} numberOfLines={20} disableLinks />
 					) : null}
 					{embed && <PostEmbeds embed={embed} moderation={moderation} />}
 				</Link>

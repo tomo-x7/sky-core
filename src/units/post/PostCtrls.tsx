@@ -7,7 +7,7 @@ import {
 } from "@atproto/api";
 import React, { type CSSProperties, memo, useCallback, useState } from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { useDialogControl } from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
 import { Text } from "#/components/Typography";
@@ -269,7 +269,7 @@ let PostCtrls = ({
 			</div>
 			{big && (
 				<>
-					<div style={{ alignItems:"center" }}>
+					<div style={{ alignItems: "center" }}>
 						<button
 							type="button"
 							style={btnStyle({ pressed, hovered })}
@@ -301,7 +301,7 @@ let PostCtrls = ({
 					/>
 				</>
 			)}
-			<div style={big ? a.align_center : flatten([a.flex_1, a.align_start])}>
+			<div style={{ alignItems: big ? "center" : "flex-start", flex: big ? undefined : 1 }}>
 				<PostDropdownBtn
 					post={post}
 					postFeedContext={feedContext}

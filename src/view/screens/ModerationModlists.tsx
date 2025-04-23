@@ -3,7 +3,6 @@ import React from "react";
 import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -57,7 +56,7 @@ export function ModerationModlistsScreen() {
 					<ButtonText>New</ButtonText>
 				</Button>
 			</Layout.Header.Outer>
-			<MyLists filter="mod" style={{ flexGrow:1 }} />
+			<MyLists filter="mod" style={{ flexGrow: 1 }} />
 			<VerifyEmailDialog
 				reasonText={"Before creating a list, you must first verify your email."}
 				control={control}

@@ -4,7 +4,7 @@ import { FocusScope } from "@radix-ui/react-focus-scope";
 import React from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { useA11y } from "#/state/a11y";
 import { useModals } from "#/state/modals";
 import { type ComposerOpts, useComposerState } from "#/state/shell/composer";
@@ -70,15 +70,15 @@ function Inner({ state }: { state: ComposerOpts }) {
 				// biome-ignore lint/a11y/useSemanticElements: <explanation>
 				role="dialog"
 				aria-modal
-				style={flatten([
-					{ position: "fixed" },
-					a.inset_0,
-					{ backgroundColor: "#000c" },
-					a.flex,
-					a.flex_col,
-					a.align_center,
-					!reduceMotionEnabled && a.fade_in,
-				])}
+				style={{
+					position: "fixed",
+					inset: 0,
+					backgroundColor: "#000c",
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					animation: reduceMotionEnabled ? undefined : "fade-in",
+				}}
 				onFocusOutside={(evt) => evt.preventDefault()}
 				onInteractOutside={(evt) => evt.preventDefault()}
 				onDismiss={() => {
@@ -94,14 +94,11 @@ function Inner({ state }: { state: ComposerOpts }) {
 						...(!gtMobile && styles.containerMobile),
 						...t.atoms.bg,
 						...t.atoms.border_contrast_medium,
-
-						...flatten(
-							!reduceMotionEnabled && [
-								a.zoom_fade_in,
-								{ animationDelay: "0.1s" },
-								{ animationFillMode: "backwards" },
-							],
-						),
+						...(!reduceMotionEnabled && {
+							animation: "zoomIn ease-out 0.1s, fadeIn ease-out 0.1s",
+							animationDelay: "0.1s",
+							animationFillMode: "backwards",
+						}),
 					}}
 				>
 					<ComposePost

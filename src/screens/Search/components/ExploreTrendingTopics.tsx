@@ -140,7 +140,10 @@ function Inner() {
 											topic={topic}
 											style={
 												hovered
-													? { ...t.atoms.border_contrast_high, ...t.atoms.bg_contrast_25 }
+													? {
+															...t.atoms.border_contrast_high,
+															...t.atoms.bg_contrast_25,
+														}
 													: {}
 											}
 										/>

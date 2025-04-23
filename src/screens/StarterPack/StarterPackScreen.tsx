@@ -10,7 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -423,7 +423,7 @@ function Header({
 							color="primary"
 							size="large"
 						>
-							<ButtonText style={{ fontSize:16 }}>Join Bluesky</ButtonText>
+							<ButtonText style={{ fontSize: 16 }}>Join Bluesky</ButtonText>
 						</Button>
 					) : null}
 					{joinedAllTimeCount >= 25 ? (
@@ -597,7 +597,7 @@ function OverflowMenu({
 								gap: 2,
 							}}
 						>
-							<Text style={{ fontWeight:"600" }}>Unable to delete</Text>
+							<Text style={{ fontWeight: "600" }}>Unable to delete</Text>
 							<Text style={{ lineHeight: 1.3 }}>{cleanError(deleteError)}</Text>
 						</div>
 						<CircleInfo size="sm" fill={t.palette.negative_400} />
@@ -693,7 +693,7 @@ function InvalidStarterPack({ rkey }: { rkey: string }) {
 				<div
 					style={{
 						gap: 12,
-						...(gtMobile ? { width: 350 } : flatten([a.w_full, a.px_lg])),
+						...(gtMobile ? { width: 350 } : { width: "100%", paddingLeft: 16, paddingRight: 16 }),
 					}}
 				>
 					<Button

@@ -8,7 +8,7 @@ import {
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { colors } from "#/components/Admonition";
 import { Button } from "#/components/Button";
 import { InlineLinkText } from "#/components/Link";
@@ -138,7 +138,7 @@ function PostThreadItemDeleted({ hideTopBorder }: { hideTopBorder?: boolean }) {
 				paddingLeft: 16,
 				flexDirection: "row",
 				gap: 12,
-				...(!hideTopBorder && a.border_t),
+				...(!hideTopBorder && { borderTop: "1px solid black" }),
 			}}
 		>
 			<TrashIcon style={t.atoms.text} />
@@ -274,23 +274,13 @@ let PostThreadItemLoaded = ({
 		return (
 			<>
 				{rootUri !== post.uri && (
-					<div
-						style={{
-							paddingLeft: 16,
-							flexDirection: "row",
-							paddingBottom: 4,
-							...{ height: a.pt_lg.paddingTop },
-						}}
-					>
+					<div style={{ paddingLeft: 16, flexDirection: "row", paddingBottom: 4, height: 16 }}>
 						<div style={{ width: 42 }}>
 							<div
 								style={{
 									...styles.replyLine,
-
-									...{
-										flexGrow: 1,
-										backgroundColor: pal.colors.replyLine,
-									},
+									flexGrow: 1,
+									backgroundColor: pal.colors.replyLine,
 								}}
 							/>
 						</div>
@@ -301,9 +291,8 @@ let PostThreadItemLoaded = ({
 						paddingLeft: 16,
 						paddingRight: 16,
 						...t.atoms.border_contrast_low,
-
-						...// root post styles
-						flatten(rootUri === post.uri && [a.pt_lg]),
+						// root post styles
+						paddingTop: rootUri === post.uri ? 16 : undefined,
 					}}
 				>
 					<div
@@ -718,7 +707,7 @@ function PostOuterWrapper({
 					flexDirection: "row",
 					...t.atoms.border_contrast_low,
 					...styles.cursor,
-					...(depth === 1 && a.border_t),
+					...(depth === 1 && { borderTop: "1px solid black" }),
 				}}
 				onPointerEnter={onHoverIn}
 				onPointerLeave={onHoverOut}
@@ -732,7 +721,7 @@ function PostOuterWrapper({
 
 							...{
 								borderLeftWidth: 2,
-								paddingLeft: a.pl_sm.paddingLeft - 2, // minus border
+								paddingLeft: 8 - 2, // minus border
 							},
 						}}
 					/>
@@ -741,8 +730,8 @@ function PostOuterWrapper({
 					<SubtleWebHover
 						hover={hover}
 						style={{
-							left: (depth === 1 ? 0 : 2) - a.pl_sm.paddingLeft,
-							right: -a.pr_sm.paddingRight,
+							left: (depth === 1 ? 0 : 2) - 8,
+							right: -8,
 						}}
 					/>
 					{children}
@@ -918,8 +907,8 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 				<Prompt.DescriptionText>
 					<>
 						This post claims to have been created on{" "}
-						<span style={{ fontWeight:"600" }}>{niceDate(createdAt)}</span>, but was first seen by Bluesky on{" "}
-						<span style={{ fontWeight:"600" }}>{niceDate(indexedAt)}</span>.
+						<span style={{ fontWeight: "600" }}>{niceDate(createdAt)}</span>, but was first seen by Bluesky
+						on <span style={{ fontWeight: "600" }}>{niceDate(indexedAt)}</span>.
 					</>
 				</Prompt.DescriptionText>
 				<Text

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { InlineLinkText } from "#/components/Link";
 import { Loader } from "#/components/Loader";
@@ -101,7 +101,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 					<InlineLinkText
 						label={"The Discover feed"}
 						to="/profile/bsky.app/feed/whats-hot"
-						style={{ fontSize:16 }}
+						style={{ fontSize: 16 }}
 					>
 						Discover
 					</InlineLinkText>{" "}

@@ -1,7 +1,7 @@
 import type { AppBskyEmbedImages } from "@atproto/api";
 import React, { type RefObject, useRef } from "react";
 
-import { atoms as a, flatten, useBreakpoints, useTheme } from "#/alf";
+import { flatten, useBreakpoints, useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
 import { ArrowsDiagonalOut_Stroke2_Corner0_Rounded as Fullscreen } from "#/components/icons/ArrowsDiagonal";
@@ -31,7 +31,7 @@ export function ConstrainedImage({
 	}, [aspectRatio, gtMobile]);
 
 	return (
-		<div style={{ width:"100%" }}>
+		<div style={{ width: "100%" }}>
 			<div
 				style={{
 					overflow: "hidden",
@@ -54,7 +54,7 @@ export function ConstrainedImage({
 							borderRadius: 12,
 							overflow: "hidden",
 							...t.atoms.bg_contrast_25,
-							...(fullBleed ? a.w_full : { aspectRatio }),
+							...(fullBleed ? { width: "100%" } : { aspectRatio }),
 						}}
 					>
 						{children}
@@ -134,8 +134,8 @@ export function AutoSizedImage({
 					style={{
 						position: "absolute",
 						flexDirection: "row",
-						bottom: a.p_xs.padding,
-						right: a.p_xs.padding,
+						bottom: 4,
+						right: 4,
 						gap: 3,
 						...flatten(largeAlt && [{ gap: 4 }]),
 					}}
@@ -168,7 +168,7 @@ export function AutoSizedImage({
 							<Text
 								style={{
 									fontWeight: "800",
-									...(largeAlt ? a.text_xs : { fontSize: 8 }),
+									...(largeAlt ? { fontSize: 12 } : { fontSize: 8 }),
 								}}
 							>
 								ALT
@@ -206,7 +206,7 @@ export function AutoSizedImage({
 					onClick={() => onPress?.(containerRef, fetchedDimsRef.current)}
 					// onLongPress={onLongPress}
 					onMouseDown={onPressIn}
-					style={{ height:"100%" }}
+					style={{ height: "100%" }}
 				>
 					{contents}
 				</button>

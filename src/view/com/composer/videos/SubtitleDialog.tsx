@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -245,12 +245,12 @@ function SubtitleFileRow({
 					}}
 				>
 					{language === "" ? (
-						<WarningIcon style={{ flexShrink:0 }} fill={t.palette.negative_500} size="sm" />
+						<WarningIcon style={{ flexShrink: 0 }} fill={t.palette.negative_500} size="sm" />
 					) : (
 						<PageTextIcon
 							style={{
 								...t.atoms.text,
-								flexShrink:0,
+								flexShrink: 0,
 							}}
 							size="sm"
 						/>

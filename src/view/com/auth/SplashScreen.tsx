@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
 import { Button, ButtonText } from "#/components/Button";
 import * as Layout from "#/components/Layout";
@@ -72,9 +72,8 @@ export const SplashScreen = ({
 						height: "100%",
 						justifyContent: "center",
 
-						paddingBottom: "20vh",
+						paddingBottom: isMobileWeb ? 40 : "20vh",
 
-						...(isMobileWeb && a.pb_5xl),
 						...t.atoms.border_contrast_medium,
 						alignItems: "center",
 						gap: 40,

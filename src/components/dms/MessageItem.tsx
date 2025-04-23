@@ -1,7 +1,7 @@
 import { AppBskyEmbedRecord, ChatBskyConvoDefs, RichText as RichTextAPI } from "@atproto/api";
 import React, { useCallback, useMemo, useRef } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
@@ -102,7 +102,6 @@ let MessageItem = ({
 								isOnlyEmoji(message.text)
 									? undefined
 									: {
-											borderradius:12,
 											padding: "8px 14px",
 											backgroundColor: isFromSelf
 												? isPending
@@ -124,7 +123,7 @@ let MessageItem = ({
 									letterSpacing: 0,
 									...(isFromSelf && { color: t.palette.white }),
 								}}
-								interactiveStyle={{ textDecorationLine:"underline" }}
+								interactiveStyle={{ textDecorationLine: "underline" }}
 								enableTags
 								emojiMultiplier={3}
 							/>
@@ -227,7 +226,7 @@ let MessageItemMetadata = ({
 								label={"Click to retry failed message"}
 								to="#"
 								onPress={handleRetry}
-								style={{ fontSize:4 }}
+								style={{ fontSize: 4 }}
 							>
 								{"Retry"}
 							</InlineLinkText>

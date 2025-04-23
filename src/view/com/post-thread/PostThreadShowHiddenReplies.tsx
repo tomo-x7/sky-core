@@ -1,4 +1,4 @@
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { EyeSlash_Stroke2_Corner0_Rounded as EyeSlash } from "#/components/icons/EyeSlash";
@@ -28,7 +28,7 @@ export function PostThreadShowHiddenReplies({
 						paddingBottom: 16,
 						paddingLeft: 20,
 						paddingRight: 20,
-						...(!hideTopBorder && a.border_t),
+						...(!hideTopBorder && { borderTop: "1px solid black" }),
 						...t.atoms.border_contrast_low,
 						...(hovered || pressed ? t.atoms.bg_contrast_25 : t.atoms.bg),
 					}}

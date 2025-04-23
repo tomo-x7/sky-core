@@ -1,4 +1,3 @@
-import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import { InlineLinkText } from "#/components/Link";
@@ -33,7 +32,7 @@ export function AccessibilitySettingsScreen() {
 							label={"Require alt text before posting"}
 							value={requireAltTextEnabled ?? false}
 							onChange={(value) => setRequireAltTextEnabled(value)}
-							style={{ width:"100%" }}
+							style={{ width: "100%" }}
 						>
 							<Toggle.LabelText style={{ flex: 1 }}>Require alt text before posting</Toggle.LabelText>
 							<Toggle.Platform />
@@ -43,7 +42,7 @@ export function AccessibilitySettingsScreen() {
 							label={"Display larger alt text badges"}
 							value={!!largeAltBadgeEnabled}
 							onChange={(value) => setLargeAltBadgeEnabled(value)}
-							style={{ width:"100%" }}
+							style={{ width: "100%" }}
 						>
 							<Toggle.LabelText style={{ flex: 1 }}>Display larger alt text badges</Toggle.LabelText>
 							<Toggle.Platform />

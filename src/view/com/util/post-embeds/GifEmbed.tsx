@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Fill } from "#/components/Fill";
 import { Loader } from "#/components/Loader";
 import * as Prompt from "#/components/Prompt";
@@ -29,7 +29,7 @@ function PlaybackControls({
 				position: "absolute",
 				alignItems: "center",
 				justifyContent: "center",
-				...(!isLoaded && a.border),
+				...(!isLoaded && { border: "1px solid black" }),
 				...t.atoms.border_contrast_medium,
 				top: 0,
 				left: 0,
@@ -170,7 +170,7 @@ function AltText({ text }: { text: string }) {
 				<Text
 					style={{
 						...styles.alt,
-						...(largeAltBadge && a.text_xs),
+						...(largeAltBadge && { fontSize: 12 }),
 					}}
 				>
 					ALT

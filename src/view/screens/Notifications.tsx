@@ -1,7 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { ButtonIcon } from "#/components/Button";
 import * as Layout from "#/components/Layout";
 import { Link } from "#/components/Link";
@@ -105,7 +103,7 @@ export function NotificationsScreen() {
 						variant="ghost"
 						color="secondary"
 						shape="round"
-						style={{ justifyContent:"center" }}
+						style={{ justifyContent: "center" }}
 					>
 						<ButtonIcon icon={isLoading ? Loader : SettingsIcon} size="lg" />
 					</Link>

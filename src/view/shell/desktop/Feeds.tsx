@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { InlineLinkText, createStaticClick } from "#/components/Link";
 import { emitSoftReset } from "#/state/events";
 import { usePinnedFeedsInfos } from "#/state/queries/feed";
@@ -77,7 +77,7 @@ export function DesktopFeeds() {
 							fontSize: 16,
 							letterSpacing: 0,
 							lineHeight: 1.3,
-							...flatten(current ? [a.font_bold, t.atoms.text] : [t.atoms.text_contrast_medium]),
+							...(current ? { fontWeight: "600", ...t.atoms.text } : { ...t.atoms.text_contrast_medium }),
 						}}
 						// TODO
 						// numberOfLines={1}

@@ -1,7 +1,7 @@
 import type { ComAtprotoServerListAppPasswords } from "@atproto/api";
 import { useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Admonition, colors } from "#/components/Admonition";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -69,12 +69,12 @@ export function AppPasswordsScreen() {
 						>
 							{appPasswords ? (
 								appPasswords.length > 0 ? (
-									<div style={{ overflow:"hidden" }}>
+									<div style={{ overflow: "hidden" }}>
 										{appPasswords.map((appPassword) => (
 											<div
 												// Animated.View
 												key={appPassword.name}
-												style={{ width:"100%" }}
+												style={{ width: "100%" }}
 												// entering={FadeIn}
 												// exiting={FadeOut}
 												// layout={LinearTransition.delay(150)}
@@ -180,7 +180,7 @@ function AppPasswordCard({
 					variant="ghost"
 					color="negative"
 					size="small"
-					style={{ backgroundColor:"transparent" }}
+					style={{ backgroundColor: "transparent" }}
 					onPress={() => deleteControl.open()}
 				>
 					<ButtonIcon icon={TrashIcon} />

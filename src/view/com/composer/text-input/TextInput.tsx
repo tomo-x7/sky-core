@@ -11,7 +11,7 @@ import { Fragment, Node, Slice } from "@tiptap/pm/model";
 import { EditorContent, type JSONContent, useEditor } from "@tiptap/react";
 import React, { useRef } from "react";
 
-import { atoms as a, flatten, useAlf } from "#/alf";
+import { useAlf } from "#/alf";
 import { normalizeTextStyles } from "#/alf/typography";
 import { Portal } from "#/components/Portal";
 import { Text } from "#/components/Typography";
@@ -299,11 +299,10 @@ export const TextInput = React.forwardRef(function TextInputImpl(
 	}));
 
 	const inputStyle = React.useMemo(() => {
-		const style = normalizeTextStyles(flatten([a.text_lg, a.leading_snug, t.atoms.text]), {
-			fontScale: fonts.scaleMultiplier,
-			fontFamily: fonts.family,
-			flags: {},
-		});
+		const style = normalizeTextStyles(
+			{ fontSize: 18, letterSpacing: 0, lineHeight: 1.3, ...t.atoms.text },
+			{ fontScale: fonts.scaleMultiplier, fontFamily: fonts.family, flags: {} },
+		);
 		/*
 		 * TipTap component isn't a RN View and while it seems to convert
 		 * `fontSize` to `px`, it doesn't convert `lineHeight`.

@@ -2,7 +2,7 @@ import type { AppBskyGraphDefs } from "@atproto/api";
 import React, { useCallback, useImperativeHandle, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { LinearGradientBackground } from "#/components/LinearGradientBackground";
@@ -46,7 +46,10 @@ export const ProfileStarterPacks = React.forwardRef<SectionRef, ProfileFeedgensP
 	const t = useTheme();
 	const bottomBarOffset = useBottomBarOffset(100);
 	const [isPTRing, setIsPTRing] = useState(false);
-	const { data, refetch, isFetching, hasNextPage, fetchNextPage } = useActorStarterPacksQuery({ did, enabled });
+	const { data, refetch, isFetching, hasNextPage, fetchNextPage } = useActorStarterPacksQuery({
+		did,
+		enabled,
+	});
 	const { isTabletOrDesktop } = useWebMediaQueries();
 
 	const items = data?.pages.flatMap((page) => page.starterPacks);
@@ -130,7 +133,7 @@ function CreateAnother() {
 				variant="solid"
 				color="secondary"
 				size="small"
-				style={{ alignSelf:"center" }}
+				style={{ alignSelf: "center" }}
 				onPress={() => navigate("/starter-pack/create")}
 			>
 				<ButtonText>Create another</ButtonText>
@@ -185,7 +188,7 @@ function Empty() {
 				justifyContent: "space-between",
 				gap: 16,
 				marginTop: 1,
-				boxshadow:"0 16px 32px rgba(0, 0, 0, 0.1)",
+				boxShadow: "0 16px 32px rgba(0, 0, 0, 0.1)",
 			}}
 		>
 			<div style={{ gap: 4 }}>

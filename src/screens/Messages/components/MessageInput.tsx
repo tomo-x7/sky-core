@@ -3,7 +3,7 @@ import React from "react";
 import { flushSync } from "react-dom";
 import TextareaAutosize from "react-textarea-autosize";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import { useSharedInputStyles } from "#/components/forms/TextField";
 import { EmojiArc_Stroke2_Corner0_Rounded as EmojiSmile } from "#/components/icons/Emoji";
@@ -193,7 +193,7 @@ export function MessageInput({
 						flex: 1,
 						paddingLeft: 8,
 						paddingRight: 8,
-						borderWidth:0,
+						borderWidth: 0,
 						...t.atoms.text,
 						paddingTop: 10,
 						backgroundColor: "transparent",

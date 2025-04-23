@@ -1,8 +1,6 @@
 import "react-image-crop/dist/ReactCrop.css";
 import React from "react";
 import ReactCrop, { type PercentCrop } from "react-image-crop";
-
-import { atoms as a } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -64,7 +62,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 			>
 				Edit image
 			</Text>
-			<div style={{ alignItems:"center" }}>
+			<div style={{ alignItems: "center" }}>
 				<ReactCrop
 					crop={crop}
 					onChange={(_pixelCrop, percentCrop) => setCrop(percentCrop)}

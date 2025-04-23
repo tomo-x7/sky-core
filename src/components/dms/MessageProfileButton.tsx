@@ -2,7 +2,7 @@ import type { AppBskyActorDefs } from "@atproto/api";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { VerifyEmailDialog } from "#/components/dialogs/VerifyEmailDialog";
@@ -87,7 +87,7 @@ export function MessageProfileButton({
 					variant="solid"
 					shape="round"
 					label={`Message ${profile.handle}`}
-					style={{ justifyContent:"center" }}
+					style={{ justifyContent: "center" }}
 					onPress={onPress}
 				>
 					<ButtonIcon icon={Message} size="md" />

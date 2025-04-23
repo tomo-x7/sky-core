@@ -1,7 +1,5 @@
 import { TID } from "@atproto/common-web";
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Link } from "#/components/Link";
 import { Text } from "#/components/Typography";
@@ -55,7 +53,7 @@ export function NoFeedsPinned({
 	}, [overwriteSavedFeeds, preferences.savedFeeds]);
 
 	return (
-		<CenteredView sideBorders style={{ height:"100dvh" }}>
+		<CenteredView sideBorders style={{ height: "100dvh" }}>
 			<div
 				style={{
 					alignItems: "center",

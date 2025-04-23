@@ -163,7 +163,13 @@ function InviteCode({
 		<div
 			style={{
 				...pal.border,
-				...{ borderBottomWidth: 1, paddingLeft: 20, paddingRight: 20, paddingTop: 14, paddingBottom: 14 },
+				...{
+					borderBottomWidth: 1,
+					paddingLeft: 20,
+					paddingRight: 20,
+					paddingTop: 14,
+					paddingBottom: 14,
+				},
 			}}
 		>
 			<button type="button" style={styles.inviteCode} onClick={onPress}>

@@ -11,7 +11,6 @@ import {
 import { light, themes } from "./theme";
 import type { Theme, ThemeName } from "./types";
 
-export { atoms } from "./atoms";
 export * from "./breakpoints";
 export * from "./fonts";
 export * as tokens from "./tokens";

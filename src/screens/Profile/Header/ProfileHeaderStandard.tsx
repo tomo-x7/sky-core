@@ -5,8 +5,6 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
-
-import { atoms as a } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { KnownFollowers, shouldShowKnownFollowers } from "#/components/KnownFollowers";
@@ -221,7 +219,7 @@ let ProfileHeaderStandard = ({
 						{descriptionRT && !moderation.ui("profileView").blur ? (
 							<div style={{ pointerEvents: "auto" }}>
 								<RichText
-									style={{ fontSize:16 }}
+									style={{ fontSize: 16 }}
 									numberOfLines={15}
 									value={descriptionRT}
 									enableTags

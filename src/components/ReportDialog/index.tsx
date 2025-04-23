@@ -5,8 +5,6 @@ import { useMyLabelersQuery } from "#/state/queries/preferences";
 export { useDialogControl as useReportDialogControl } from "#/components/Dialog";
 
 import type { AppBskyLabelerDefs } from "@atproto/api";
-
-import { atoms as a } from "#/alf";
 import * as Dialog from "#/components/Dialog";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
@@ -48,7 +46,7 @@ function ReportDialogInner(props: ReportDialogProps) {
 				</div>
 			) : error || !labelers ? (
 				<div>
-					<Text style={{ fontSize:16 }}>Something went wrong, please try again.</Text>
+					<Text style={{ fontSize: 16 }}>Something went wrong, please try again.</Text>
 				</div>
 			) : (
 				<ReportDialogLoaded labelers={labelers} {...props} />

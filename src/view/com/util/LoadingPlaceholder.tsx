@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { atoms as a, useTheme as useTheme_NEW } from "#/alf";
+import { useTheme as useTheme_NEW } from "#/alf";
 import { Bubble_Stroke2_Corner2_Rounded as Bubble } from "#/components/icons/Bubble";
 import {
 	Heart2_Filled_Stroke2_Corner0_Rounded as HeartIconFilled,
@@ -343,7 +343,7 @@ export function ChatListItemLoadingPlaceholder({
 				...style,
 			}}
 		>
-			<LoadingPlaceholder width={52} height={52} style={{ borderRadius:999 }} />
+			<LoadingPlaceholder width={52} height={52} style={{ borderRadius: 999 }} />
 			<div>
 				<LoadingPlaceholder width={140} height={12} style={{ marginTop: 4 }} />
 				<LoadingPlaceholder width={120} height={8} style={{ marginTop: 8 }} />

@@ -342,7 +342,11 @@ export const dark = {
 		border_contrast_high: { borderColor: "hsl(211, 24%, 34.2%)" },
 		shadow_sm: { boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", shadowOpacity: 0.7, shadowColor: "#000000" },
 		shadow_md: { boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)", shadowOpacity: 0.7, shadowColor: "#000000" },
-		shadow_lg: { boxShadow: "0 16px 32px rgba(0, 0, 0, 0.1)", shadowOpacity: 0.7, shadowColor: "#000000" },
+		shadow_lg: {
+			boxShadow: "0 16px 32px rgba(0, 0, 0, 0.1)",
+			shadowOpacity: 0.7,
+			shadowColor: "#000000",
+		},
 	},
 } as const;
 export const dim = {

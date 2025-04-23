@@ -1,6 +1,4 @@
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { AppLanguageDropdown } from "#/components/AppLanguageDropdown";
 import { Button, ButtonText } from "#/components/Button";
 import { Link } from "#/components/Link";
@@ -35,7 +33,7 @@ let NavSignupCard = (props: unknown): React.ReactNode => {
 						fontSize: 26,
 						letterSpacing: 0,
 						fontWeight: "800",
-						...{ lineHeight: `${a.text_3xl.fontSize}px` },
+						...{ lineHeight: "26px" },
 					}}
 				>
 					Join the conversation

@@ -3,7 +3,7 @@ import debounce from "lodash.debounce";
 import React from "react";
 import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
-import { atoms as a, flatten, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { ButtonIcon } from "#/components/Button";
 import { Divider } from "#/components/Divider";
@@ -571,7 +571,13 @@ function SavedFeed({
 }) {
 	const t = useTheme();
 
-	const commonStyle = flatten([a.w_full, a.flex_1, a.px_lg, a.py_md, a.border_b, t.atoms.border_contrast_low]);
+	const commonStyle = {
+		width: "100%",
+		flex: 1,
+		padding: "12px 16px",
+		borderBottom: "1px solid black",
+		...t.atoms.border_contrast_low,
+	} satisfies React.CSSProperties;
 
 	return savedFeed.type === "feed" ? (
 		<FeedCard.Link {...savedFeed}>

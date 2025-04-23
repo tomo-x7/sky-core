@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, tokens, useTheme } from "#/alf";
+import { tokens, useTheme } from "#/alf";
 import { AvatarStackWithFetch } from "#/components/AvatarStack";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -317,7 +317,7 @@ function AccountRow({
 	};
 
 	return (
-		<div style={{ position:"relative" }}>
+		<div style={{ position: "relative" }}>
 			<SettingsList.PressableItem onPress={onSwitchAccount} label={"Switch account"}>
 				{moderationOpts && profile ? (
 					<UserAvatar

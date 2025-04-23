@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
@@ -159,7 +159,7 @@ const ImageAltTextInner = ({
 						onPress={() => {
 							control.close();
 						}}
-						style={{ flexGrow:1 }}
+						style={{ flexGrow: 1 }}
 					>
 						<ButtonText>Save</ButtonText>
 					</Button>

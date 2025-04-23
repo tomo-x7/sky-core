@@ -1,7 +1,7 @@
 import { AppBskyRichtextFacet, RichText as RichTextAPI } from "@atproto/api";
 import React from "react";
 
-import { type TextStyleProp, atoms as a } from "#/alf";
+import type { TextStyleProp } from "#/alf";
 import { isOnlyEmoji } from "#/alf/typography";
 import { InlineLinkText, type LinkProps } from "#/components/Link";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
@@ -47,7 +47,7 @@ export function RichText({
 
 	const flattenedStyle = style;
 	const plainStyles = { lineHeight: 1.3, ...flattenedStyle };
-	const interactiveStyles = { lineHeight:1.3, ...interactiveStyle, ...flattenedStyle };
+	const interactiveStyles = { lineHeight: 1.3, ...interactiveStyle, ...flattenedStyle };
 
 	const { text, facets } = richText;
 

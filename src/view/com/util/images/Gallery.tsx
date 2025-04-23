@@ -2,7 +2,7 @@ import type { AppBskyEmbedImages } from "@atproto/api";
 import type React from "react";
 
 import type { RefObject } from "react";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";
 import { Text } from "#/components/Typography";
 import type { Dimensions } from "#/lib/media/types";
@@ -90,8 +90,8 @@ export function GalleryItem({
 						...{
 							gap: 3,
 							padding: 3,
-							bottom: a.p_xs.padding,
-							right: a.p_xs.padding,
+							bottom: 4,
+							right: 4,
 							opacity: 0.8,
 						},
 
@@ -101,7 +101,7 @@ export function GalleryItem({
 					<Text
 						style={{
 							fontWeight: "800",
-							...(largeAltBadge ? a.text_xs : { fontSize: 8 }),
+							...(largeAltBadge ? { fontSize: 12 } : { fontSize: 8 }),
 						}}
 					>
 						ALT

@@ -4,7 +4,7 @@ import React from "react";
 import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -319,7 +319,7 @@ function Footer({
 
 	const minimumItems = state.currentStep === "Profiles" ? 8 : 0;
 
-	const textStyles = a.text_md;
+	const textStyles = { fontSize: 16, letterSpacing: 0 } satisfies React.CSSProperties;
 
 	return (
 		<div
@@ -343,7 +343,7 @@ function Footer({
 						...{ right: 14, top: 31 },
 					}}
 				>
-					<Text style={{ fontWeight:"600" }}>
+					<Text style={{ fontWeight: "600" }}>
 						{items.length}/{state.currentStep === "Profiles" ? STARTER_PACK_MAX_SIZE : 3}
 					</Text>
 				</div>

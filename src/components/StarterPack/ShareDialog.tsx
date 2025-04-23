@@ -1,6 +1,6 @@
 import type { AppBskyGraphDefs } from "@atproto/api";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import type { DialogControlProps } from "#/components/Dialog";
 import * as Dialog from "#/components/Dialog";
@@ -99,7 +99,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={{ alignSelf:"center" }}
+								style={{ alignSelf: "center" }}
 								onPress={onShareLink}
 							>
 								<ButtonText>Copy Link</ButtonText>
@@ -109,7 +109,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={{ alignSelf:"center" }}
+								style={{ alignSelf: "center" }}
 								onPress={() => {
 									control.close(() => {
 										qrDialogControl.open();

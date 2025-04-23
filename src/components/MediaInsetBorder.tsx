@@ -29,7 +29,10 @@ export function MediaInsetBorder({
 				borderWidth: 1,
 				...(opaque
 					? t.atoms.border_contrast_low
-					: { ...(isLight ? t.atoms.border_contrast_low : t.atoms.border_contrast_high), opacity: 0.6 }),
+					: {
+							...(isLight ? t.atoms.border_contrast_low : t.atoms.border_contrast_high),
+							opacity: 0.6,
+						}),
 				pointerEvents: "none",
 				...style,
 			}}

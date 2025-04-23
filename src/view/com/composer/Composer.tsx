@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useEffect, useImperativeHandle, useMemo, useReducer, useRef, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
@@ -643,7 +643,7 @@ const ComposerPost = React.memo(function ComposerPost({
 				...(!isActive && styles.inactivePost),
 			}}
 		>
-			<div style={{ flexDirection:"row" }}>
+			<div style={{ flexDirection: "row" }}>
 				<UserAvatar
 					avatar={currentProfile?.avatar}
 					size={50}
@@ -775,7 +775,7 @@ function ComposerTopBar({
 					}}
 					onPress={onCancel}
 				>
-					<ButtonText style={{ fontSize:16 }}>Cancel</ButtonText>
+					<ButtonText style={{ fontSize: 16 }}>Cancel</ButtonText>
 				</Button>
 				<div style={{ flex: 1 }} />
 				{isPublishing ? (
@@ -800,7 +800,7 @@ function ComposerTopBar({
 						onPress={onPublish}
 						disabled={!canPost || isPublishQueued}
 					>
-						<ButtonText style={{ fontSize:16 }}>
+						<ButtonText style={{ fontSize: 16 }}>
 							{isReply ? <>Reply</> : isThread ? <>Post All</> : <>Post</>}
 						</ButtonText>
 					</Button>
@@ -933,7 +933,7 @@ function ComposerEmbeds({
 				)}
 			</div>
 			{embed.quote?.uri ? (
-				<div style={!video ? a.mt_md : undefined}>
+				<div style={!video ? { marginTop: 12 } : undefined}>
 					<div
 						style={{
 							...s.mt5,

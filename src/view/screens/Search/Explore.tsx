@@ -7,7 +7,7 @@ import {
 } from "@atproto/api";
 import React from "react";
 
-import { type ViewStyleProp, atoms as a, useTheme } from "#/alf";
+import { type ViewStyleProp, useTheme } from "#/alf";
 import { Button } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
 import { Loader } from "#/components/Loader";
@@ -426,7 +426,7 @@ export function Explore() {
 			key: "suggested-feeds-header",
 			title: "Discover new feeds",
 			description: "Choose your own timeline! Feeds built by the community help you find content you love.",
-			style: a.pt_5xl,
+			style: { paddingTop: 40 },
 			icon: ListSparkle,
 		});
 

@@ -16,7 +16,7 @@ import {
 } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import * as Layout from "#/components/Layout";
@@ -772,7 +772,7 @@ function SmallToggler({ label, children }: React.PropsWithChildren<{ label: stri
 	const [show, setShow] = React.useState(false);
 	return (
 		<div>
-			<div style={{ flexDirection:"row" }}>
+			<div style={{ flexDirection: "row" }}>
 				<Button
 					variant="ghost"
 					color="secondary"
@@ -1038,7 +1038,7 @@ function Flag({ v, label }: { v: boolean | undefined; label: string }) {
 			>
 				{v && <Check size="xs" fill={t.palette.contrast_900} />}
 			</div>
-			<P style={{ fontSize:4 }}>{label}</P>
+			<P style={{ fontSize: 4 }}>{label}</P>
 		</div>
 	);
 }

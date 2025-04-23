@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 // import type { Image as RNImage } from "react-native-image-crop-picker";
 type RNImage = any;
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import * as Prompt from "#/components/Prompt";
@@ -180,9 +180,9 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={{ borderRadius:999 }}
+				style={{ borderRadius: 999 }}
 			>
-				<ButtonText style={{ fontSize:16 }}>Cancel</ButtonText>
+				<ButtonText style={{ fontSize: 16 }}>Cancel</ButtonText>
 			</Button>
 		),
 		[onPressCancel],
@@ -197,7 +197,7 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={{ borderRadius:999 }}
+				style={{ borderRadius: 999 }}
 			>
 				<ButtonText
 					style={{
@@ -216,7 +216,7 @@ function DialogInner({
 	return (
 		<Dialog.ScrollableInner
 			label={"Edit profile"}
-			style={{ overflow:"hidden" }}
+			style={{ overflow: "hidden" }}
 			contentContainerStyle={{ paddingLeft: 0, paddingRight: 0, paddingTop: 0 }}
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
@@ -224,7 +224,7 @@ function DialogInner({
 				</Dialog.Header>
 			}
 		>
-			<div style={{ position:"relative" }}>
+			<div style={{ position: "relative" }}>
 				<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
 				<div
 					style={{

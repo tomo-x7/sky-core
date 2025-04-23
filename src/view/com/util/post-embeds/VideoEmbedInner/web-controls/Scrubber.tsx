@@ -1,7 +1,7 @@
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { isFirefox, isTouchDevice } from "#/lib/browser";
 import { clamp } from "#/lib/numbers";
@@ -142,7 +142,7 @@ export function Scrubber({
 		<div
 			style={{
 				...{ height: isTouchDevice ? 32 : 18, width: "100%" },
-				flexShrink:0,
+				flexShrink: 0,
 				paddingLeft: 4,
 				paddingRight: 4,
 			}}

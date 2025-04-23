@@ -1,6 +1,6 @@
 import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import { ListFooter, ListMaybePlaceholder } from "#/components/Lists";
@@ -174,8 +174,8 @@ function GifList({
 				renderItem={renderItem}
 				// numColumns={gtMobile ? 3 : 2} //TODO
 				// columnWrapperstyle={{gap:8}}  //TODO
-				contentContainerStyle={{ height:"100dvh" }}
-				style={{ height:"100dvh" }}
+				contentContainerStyle={{ height: "100dvh" }}
+				style={{ height: "100dvh" }}
 				ListHeaderComponent={
 					<>
 						{listHeader}

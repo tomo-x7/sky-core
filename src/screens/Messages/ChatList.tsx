@@ -2,7 +2,7 @@ import type { ChatBskyActorDefs, ChatBskyConvoDefs } from "@atproto/api";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { type DialogControlProps, useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -331,7 +331,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 			variant="ghost"
 			color="secondary"
 			shape="square"
-			style={{ justifyContent:"center" }}
+			style={{ justifyContent: "center" }}
 		>
 			<ButtonIcon icon={SettingsSlider} size="md" />
 		</Link>

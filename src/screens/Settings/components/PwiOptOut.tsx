@@ -1,7 +1,7 @@
 import { type $Typed, ComAtprotoLabelDefs } from "@atproto/api";
 import React from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import * as Toggle from "#/components/forms/Toggle";
 import { useProfileQuery, useProfileUpdateMutation } from "#/state/queries/profile";
@@ -76,7 +76,7 @@ export function PwiOptOut() {
 				value={isOptedOut}
 				onChange={onToggleOptOut}
 				label={"Discourage apps from showing my account to logged-out users"}
-				style={{ width:"100%" }}
+				style={{ width: "100%" }}
 			>
 				<Toggle.LabelText style={{ flex: 1 }}>
 					Discourage apps from showing my account to logged-out users

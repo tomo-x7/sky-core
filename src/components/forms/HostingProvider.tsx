@@ -1,6 +1,6 @@
 import React from "react";
 
-import { atoms as a, tokens, useTheme } from "#/alf";
+import { tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -61,7 +61,7 @@ export function HostingProvider({
 								...{ marginRight: tokens.space.xs * -1, marginLeft: tokens.space.xs * -1 },
 							}}
 						>
-							<ButtonText style={{ fontSize:8 }}>{toNiceDomain(serviceUrl)}</ButtonText>
+							<ButtonText style={{ fontSize: 8 }}>{toNiceDomain(serviceUrl)}</ButtonText>
 							<ButtonIcon icon={PencilIcon} />
 						</Button>
 					</Text>
@@ -93,7 +93,7 @@ export function HostingProvider({
 										fill={interacted ? t.palette.contrast_800 : t.palette.contrast_500}
 									/>
 								</div>
-								<Text style={{ fontSize:16 }}>{toNiceDomain(serviceUrl)}</Text>
+								<Text style={{ fontSize: 16 }}>{toNiceDomain(serviceUrl)}</Text>
 								<div
 									style={{
 										borderRadius: 8,

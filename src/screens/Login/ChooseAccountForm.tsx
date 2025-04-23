@@ -1,6 +1,4 @@
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { AccountList } from "#/components/AccountList";
 import { Button, ButtonText } from "#/components/Button";
 import * as TextField from "#/components/forms/TextField";
@@ -64,7 +62,7 @@ export const ChooseAccountForm = ({
 					pendingDid={pendingDid}
 				/>
 			</div>
-			<div style={{ flexDirection:"row" }}>
+			<div style={{ flexDirection: "row" }}>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>{"Back"}</ButtonText>
 				</Button>

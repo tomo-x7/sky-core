@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import type { DialogControlProps } from "#/components/Dialog";
@@ -135,7 +135,7 @@ function AltTextInner({
 
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>
-			<div style={{ flexDirection:"column-reverse" }}>
+			<div style={{ flexDirection: "column-reverse" }}>
 				<div
 					style={{
 						marginTop: 12,
@@ -143,7 +143,7 @@ function AltTextInner({
 					}}
 				>
 					<div style={{ gap: 8 }}>
-						<div style={{ position:"relative" }}>
+						<div style={{ position: "relative" }}>
 							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
@@ -195,7 +195,7 @@ function AltTextInner({
 							onPress={() => {
 								control.close();
 							}}
-							style={{ flexGrow:1 }}
+							style={{ flexGrow: 1 }}
 						>
 							<ButtonText>Save</ButtonText>
 						</Button>
@@ -214,7 +214,7 @@ function AltTextInner({
 					>
 						Add alt text
 					</Text>
-					<div style={{ alignItems:"center" }}>
+					<div style={{ alignItems: "center" }}>
 						<GifEmbed
 							thumb={thumb}
 							altText={altText}

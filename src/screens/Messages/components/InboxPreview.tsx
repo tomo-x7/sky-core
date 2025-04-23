@@ -1,6 +1,6 @@
 import type { ChatBskyActorDefs } from "@atproto/api";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { AvatarStack } from "#/components/AvatarStack";
 import { ButtonIcon, ButtonText } from "#/components/Button";
 import { Link } from "#/components/Link";
@@ -39,7 +39,7 @@ export function InboxPreview({
 			color="secondary"
 			variant="solid"
 		>
-			<div style={{ position:"relative" }}>
+			<div style={{ position: "relative" }}>
 				<ButtonIcon icon={EnvelopeIcon} size="lg" />
 				{profiles.length > 0 && (
 					<div

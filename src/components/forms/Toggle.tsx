@@ -1,6 +1,6 @@
 import React from "react";
 
-import { type TextStyleProp, atoms as a, flatten, useTheme } from "#/alf";
+import { type TextStyleProp, flatten, useTheme } from "#/alf";
 import { Text } from "#/components/Typography";
 import { useInteractionState } from "#/components/hooks/useInteractionState";
 import { CheckThick_Stroke2_Corner0_Rounded as Checkmark } from "#/components/icons/Check";
@@ -113,7 +113,7 @@ export function Group({
 	return (
 		<GroupContext.Provider value={context}>
 			<div
-				style={{ width:"100%" }}
+				style={{ width: "100%" }}
 				role={groupRole}
 				{...(groupRole === "radiogroup"
 					? {

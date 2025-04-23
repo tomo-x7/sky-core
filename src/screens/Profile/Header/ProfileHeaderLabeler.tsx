@@ -6,7 +6,7 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
-import { atoms as a, tokens, useTheme } from "#/alf";
+import { tokens, useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { type DialogOuterProps, useDialogControl } from "#/components/Dialog";
 import { Link } from "#/components/Link";
@@ -221,7 +221,7 @@ let ProfileHeaderLabeler = ({
 						{descriptionRT && !moderation.ui("profileView").blur ? (
 							<div style={{ pointerEvents: "auto" }}>
 								<RichText
-									style={{ fontSize:16 }}
+									style={{ fontSize: 16 }}
 									numberOfLines={15}
 									value={descriptionRT}
 									enableTags

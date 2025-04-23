@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { IconCircle } from "#/components/IconCircle";
 import { Loader } from "#/components/Loader";
@@ -108,7 +108,7 @@ export function StepInterests() {
 	);
 
 	return (
-		<div style={{ alignItems:"flex-start" }}>
+		<div style={{ alignItems: "flex-start" }}>
 			<IconCircle
 				icon={isError ? EmojiSad : Hashtag}
 				style={{
@@ -144,7 +144,7 @@ export function StepInterests() {
 							},
 						}}
 					>
-						<Text style={{ fontSize:16 }}>
+						<Text style={{ fontSize: 16 }}>
 							<Text
 								style={{
 									fontSize: 16,

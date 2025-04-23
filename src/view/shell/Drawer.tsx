@@ -1,7 +1,7 @@
 import React, { type JSX } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, tokens, useTheme } from "#/alf";
+import { tokens, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import { InlineLinkText } from "#/components/Link";
@@ -208,7 +208,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 		<div
 			style={{
 				flex: 1,
-				borderRight:"1px solid black",
+				borderRight: "1px solid black",
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
 			}}
@@ -511,7 +511,7 @@ function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 						...((hovered || pressed) && t.atoms.bg_contrast_25),
 					}}
 				>
-					<div style={{ position:"relative" }}>
+					<div style={{ position: "relative" }}>
 						{icon}
 						{count ? (
 							<div
@@ -521,7 +521,7 @@ function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 									bottom: 0,
 									alignItems: "flex-end",
 									top: -4,
-									right: a.gap_sm.gap * -1,
+									right: -8,
 								}}
 							>
 								<div
@@ -557,7 +557,7 @@ function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 							flex: 1,
 							fontSize: 22,
 							letterSpacing: 0,
-							...(bold && a.font_heavy),
+							...(bold && { fontWeight: "800" }),
 							lineHeight: 1.3,
 						}}
 						numberOfLines={1}
@@ -583,14 +583,14 @@ function ExtraLinks() {
 			}}
 		>
 			<InlineLinkText
-				style={{ fontSize:16 }}
+				style={{ fontSize: 16 }}
 				label={"Terms of Service"}
 				to="https://bsky.social/about/support/tos"
 			>
 				Terms of Service
 			</InlineLinkText>
 			<InlineLinkText
-				style={{ fontSize:16 }}
+				style={{ fontSize: 16 }}
 				to="https://bsky.social/about/support/privacy-policy"
 				label={"Privacy Policy"}
 			>
@@ -601,7 +601,7 @@ function ExtraLinks() {
 					<>
 						Logo by{" "}
 						<InlineLinkText
-							style={{ fontSize:16 }}
+							style={{ fontSize: 16 }}
 							to="/profile/sawaratsuki.bsky.social"
 							label="@sawaratsuki.bsky.social"
 						>

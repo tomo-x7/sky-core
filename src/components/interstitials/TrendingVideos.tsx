@@ -2,7 +2,7 @@ import { AppBskyEmbedVideo, AtUri } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 
-import { atoms as a, useGutters, useTheme } from "#/alf";
+import { useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { Link } from "#/components/Link";
 import * as Prompt from "#/components/Prompt";
@@ -206,7 +206,7 @@ function VideoCards({
 								},
 							}}
 						>
-							<Text style={{ fontSize:16 }}>View more</Text>
+							<Text style={{ fontSize: 16 }}>View more</Text>
 							<div
 								style={{
 									alignItems: "center",

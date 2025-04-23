@@ -2,7 +2,7 @@ import type { ModerationUI } from "@atproto/api";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { Text } from "#/components/Typography";
 import { ModerationDetailsDialog } from "#/components/moderation/ModerationDetailsDialog";
@@ -152,7 +152,7 @@ export function ScreenHider({
 					variant="solid"
 					color="primary"
 					size="large"
-					style={{ borderRadius:999 }}
+					style={{ borderRadius: 999 }}
 					label={"Go back"}
 					onPress={() => {
 						if (history.length > 1) {
@@ -169,7 +169,7 @@ export function ScreenHider({
 						variant="solid"
 						color="secondary"
 						size="large"
-						style={{ borderRadius:999 }}
+						style={{ borderRadius: 999 }}
 						label={"Show anyway"}
 						onPress={() => setOverride((v) => !v)}
 					>

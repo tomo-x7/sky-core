@@ -1,8 +1,6 @@
 import { type AppBskyActorDefs, type ModerationDecision, moderateProfile } from "@atproto/api";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
-
-import { atoms as a } from "#/alf";
 import { KnownFollowers, shouldShowKnownFollowers } from "#/components/KnownFollowers";
 import * as Pills from "#/components/Pills";
 import { Text } from "#/components/Typography";
@@ -128,7 +126,7 @@ export function ProfileCard({
 								flexDirection: "row",
 								alignItems: "center",
 								gap: 8,
-								...(!!hasDescription && a.mt_md),
+								...(!!hasDescription && { marginTop: 12 }),
 							}}
 						>
 							<KnownFollowers minimal profile={profile} moderationOpts={moderationOpts} />

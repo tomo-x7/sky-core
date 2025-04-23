@@ -1,7 +1,7 @@
 import type { InterpretedLabelValueDefinition, LabelPreference } from "@atproto/api";
 import type React from "react";
 
-import { atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { InlineLinkText } from "#/components/Link";
 import { Text } from "#/components/Typography";
 import * as ToggleButton from "#/components/forms/ToggleButton";
@@ -251,7 +251,7 @@ export function LabelerLabelPreference({
 									<InlineLinkText
 										label={"moderation settings"}
 										to="/moderation"
-										style={{ fontSize:8 }}
+										style={{ fontSize: 8 }}
 									>
 										moderation settings
 									</InlineLinkText>

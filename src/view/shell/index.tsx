@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { RemoveScrollBar } from "react-remove-scroll-bar";
 import { OutletWrapper } from "#/Navigation";
-import { atoms as a, atoms, select, useTheme } from "#/alf";
+import { select, useTheme } from "#/alf";
 import { Outlet as PortalOutlet } from "#/components/Portal";
 import { MutedWordsDialog } from "#/components/dialogs/MutedWords";
 import { SigninDialog } from "#/components/dialogs/Signin";
@@ -51,7 +51,7 @@ function ShellInner() {
 	return (
 		<>
 			<ErrorBoundary>
-				<main style={atoms.flex_1}>
+				<main style={{ flex: 1 }}>
 					<OutletWrapper />
 					{/* <ScrollRestoration
 						getKey={(location, matches) => {
@@ -101,7 +101,9 @@ function ShellInner() {
 							<div
 								style={{
 									...styles.drawerContainer,
-									...(showDrawer ? a.slide_in_left : a.slide_out_left),
+									...(showDrawer
+										? { animation: "slideInLeft cubic-bezier(0.16, 1, 0.3, 1) 0.5s" }
+										: { animation: "slideOutLeft ease-in 0.15s", animationFillMode: "forwards" }),
 								}}
 							>
 								<DrawerContent />

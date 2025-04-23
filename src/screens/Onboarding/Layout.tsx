@@ -1,6 +1,6 @@
 import React, { type CSSProperties } from "react";
 
-import { type TextStyleProp, atoms as a, useBreakpoints, useTheme } from "#/alf";
+import { type TextStyleProp, useBreakpoints, useTheme } from "#/alf";
 import { leading } from "#/alf/typography";
 import { Button, ButtonIcon } from "#/components/Button";
 import { createPortalGroup } from "#/components/Portal";
@@ -26,7 +26,10 @@ export function Layout({ children }: React.PropsWithChildren) {
 		}
 	}, [state]);
 
-	const paddingTop = { paddingTop: gtMobile ? 40 : 16, paddingBottom: gtMobile ? 40 : 16 } satisfies CSSProperties;
+	const paddingTop = {
+		paddingTop: gtMobile ? 40 : 16,
+		paddingBottom: gtMobile ? 40 : 16,
+	} satisfies CSSProperties;
 	const dialogLabel = "Set up your account";
 
 	return (
@@ -73,7 +76,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 							size="small"
 							shape="round"
 							label={"Go back to previous step"}
-							style={{ position:"absolute" }}
+							style={{ position: "absolute" }}
 							onPress={() => dispatch({ type: "prev" })}
 						>
 							<ButtonIcon icon={ChevronLeft} />

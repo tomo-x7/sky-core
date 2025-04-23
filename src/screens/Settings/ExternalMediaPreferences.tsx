@@ -1,6 +1,4 @@
 import { Fragment } from "react";
-
-import { atoms as a } from "#/alf";
 import { Admonition } from "#/components/Admonition";
 import * as Layout from "#/components/Layout";
 import * as Toggle from "#/components/forms/Toggle";
@@ -74,7 +72,7 @@ function PrefSelector({
 			}}
 		>
 			<Toggle.Platform />
-			<Toggle.LabelText style={{ fontSize:16 }}>{label}</Toggle.LabelText>
+			<Toggle.LabelText style={{ fontSize: 16 }}>{label}</Toggle.LabelText>
 		</Toggle.Item>
 	);
 }

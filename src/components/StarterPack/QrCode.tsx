@@ -4,7 +4,6 @@ import { QRCodeSVG } from "qrcode.react";
 import QRCodeLogo from "../../assets/logo.png";
 
 import { useTheme } from "#/alf";
-import { atoms as a } from "#/alf";
 import { LinearGradientBackground } from "#/components/LinearGradientBackground";
 import { Text } from "#/components/Typography";
 import * as bsky from "#/types/bsky";
@@ -79,7 +78,7 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 
 					<Text
 						style={{
-							display:"flex",
+							display: "flex",
 							flexDirection: "row",
 							alignItems: "center",
 							fontWeight: "600",

@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { useFocusEffect } from "#/components/hooks/useFocusEffect";
 
-import { atoms as a, tokens, useGutters, useTheme } from "#/alf";
+import { tokens, useGutters, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { GradientFill } from "#/components/GradientFill";
 import { Link } from "#/components/Link";
@@ -272,7 +272,7 @@ function VideoCards({
 								},
 							}}
 						>
-							<Text style={{ fontSize:16 }}>View more</Text>
+							<Text style={{ fontSize: 16 }}>View more</Text>
 							<div
 								style={{
 									alignItems: "center",

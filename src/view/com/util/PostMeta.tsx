@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import type React from "react";
 import { memo, useCallback } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { WebOnlyInlineLinkText } from "#/components/Link";
 import { ProfileHoverCard } from "#/components/ProfileHoverCard";
 import { Text } from "#/components/Typography";
@@ -74,7 +74,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 				</div>
 			)}
 			<ProfileHoverCard inline did={opts.author.did}>
-				<Text numberOfLines={1} style={{ flexShrink:1 }}>
+				<Text numberOfLines={1} style={{ flexShrink: 1 }}>
 					<WebOnlyInlineLinkText
 						to={profileLink}
 						label={"View profile"}

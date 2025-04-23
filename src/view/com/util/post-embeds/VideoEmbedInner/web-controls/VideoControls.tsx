@@ -2,7 +2,7 @@ import type Hls from "hls.js";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Loader } from "#/components/Loader";
 import { Text } from "#/components/Typography";
 import { useIsWithinMessage } from "#/components/dms/MessageContext";
@@ -305,7 +305,7 @@ export function Controls({
 			{!showControls && !focused && duration > 0 && <TimeIndicator time={Math.floor(duration - currentTime)} />}
 			<div
 				style={{
-					flexShrink:0,
+					flexShrink: 0,
 					width: "100%",
 					paddingLeft: 4,
 					paddingRight: 4,

@@ -1,6 +1,6 @@
 import React, { useImperativeHandle } from "react";
 
-import { atoms as a, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Portal } from "#/components/Portal";
 import { useWindowDimensions } from "#/components/hooks/useWindowDimensions";
 import { Text } from "../Typography";
@@ -134,7 +134,6 @@ export const ProgressGuideToast = React.forwardRef<ProgressGuideToastRef, Progre
 								paddingRight: 16,
 								paddingTop: 12,
 								paddingBottom: 12,
-								boxshadow:"0 4px 8px rgba(0, 0, 0, 0.1)",
 								boxShadow: "0px 2px 8px rgba(0,0,0,0.1)",
 							}}
 							onClick={close}
