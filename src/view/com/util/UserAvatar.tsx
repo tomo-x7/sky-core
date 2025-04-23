@@ -100,9 +100,9 @@ let DefaultAvatar = ({
 		return (
 			<svg width={size} height={size} viewBox="0 0 32 32" fill="none" stroke="none">
 				{finalShape === "square" ? (
-					<rect x="0" y="0" width="32" height="32" rx="3" fill={tokens.color.temp_purple} />
+					<rect x="0" y="0" width="32" height="32" rx="3" fill={"rgb(105 0 255)"} />
 				) : (
-					<circle cx="16" cy="16" r="16" fill={tokens.color.temp_purple} />
+					<circle cx="16" cy="16" r="16" fill={"rgb(105 0 255)"} />
 				)}
 				<path
 					d="M24 9.75L16 7L8 9.75V15.9123C8 20.8848 12 23 16 25.1579C20 23 24 20.8848 24 15.9123V9.75Z"

@@ -166,6 +166,6 @@ const styles = {
 		height: 150,
 	},
 	labelerBanner: {
-		backgroundColor: tokens.color.temp_purple,
+		backgroundColor: "rgb(105 0 255)",
 	},
 } satisfies Record<string, React.CSSProperties>;

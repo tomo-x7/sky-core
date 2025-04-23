@@ -180,8 +180,8 @@ let ProfileHeaderLabeler = ({
 													? t.palette.contrast_50
 													: t.palette.contrast_25
 												: state.hovered || state.pressed
-													? tokens.color.temp_purple_dark
-													: tokens.color.temp_purple,
+													? "rgb(83 0 202)"
+													: "rgb(105 0 255)",
 										}}
 									>
 										<Text
