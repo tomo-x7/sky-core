@@ -918,8 +918,8 @@ function BackdatedPostIndicator({ post }: { post: AppBskyFeedDefs.PostView }) {
 				<Prompt.DescriptionText>
 					<>
 						This post claims to have been created on{" "}
-						<span style={{ ...a.font_bold }}>{niceDate(createdAt)}</span>, but was first seen by Bluesky on{" "}
-						<span style={{ ...a.font_bold }}>{niceDate(indexedAt)}</span>.
+						<span style={{ fontWeight:"600" }}>{niceDate(createdAt)}</span>, but was first seen by Bluesky on{" "}
+						<span style={{ fontWeight:"600" }}>{niceDate(indexedAt)}</span>.
 					</>
 				</Prompt.DescriptionText>
 				<Text

@@ -102,7 +102,7 @@ let MessageItem = ({
 								isOnlyEmoji(message.text)
 									? undefined
 									: {
-											...a.rounded_md,
+											borderradius:12,
 											padding: "8px 14px",
 											backgroundColor: isFromSelf
 												? isPending
@@ -124,7 +124,7 @@ let MessageItem = ({
 									letterSpacing: 0,
 									...(isFromSelf && { color: t.palette.white }),
 								}}
-								interactiveStyle={{ ...a.underline }}
+								interactiveStyle={{ textDecorationLine:"underline" }}
 								enableTags
 								emojiMultiplier={3}
 							/>
@@ -227,7 +227,7 @@ let MessageItemMetadata = ({
 								label={"Click to retry failed message"}
 								to="#"
 								onPress={handleRetry}
-								style={{ ...a.text_xs }}
+								style={{ fontSize:4 }}
 							>
 								{"Retry"}
 							</InlineLinkText>

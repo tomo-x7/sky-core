@@ -159,7 +159,7 @@ const ImageAltTextInner = ({
 						onPress={() => {
 							control.close();
 						}}
-						style={{ ...a.flex_grow }}
+						style={{ flexGrow:1 }}
 					>
 						<ButtonText>Save</ButtonText>
 					</Button>

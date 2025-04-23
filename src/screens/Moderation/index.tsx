@@ -141,7 +141,7 @@ function SubItem({
 				size="sm"
 				style={{
 					...t.atoms.text_contrast_low,
-					...a.self_end,
+					alignSelf:"flex-end",
 					...{ paddingBottom: 2 },
 				}}
 			/>

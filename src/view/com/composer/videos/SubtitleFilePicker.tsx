@@ -44,12 +44,12 @@ export function SubtitleFilePicker({
 				type="file"
 				accept=".vtt"
 				ref={ref}
-				style={{ ...a.hidden }}
+				style={{ display:"none" }}
 				onChange={handlePick}
 				disabled={disabled}
 				aria-disabled={disabled}
 			/>
-			<div style={{ ...a.flex_row }}>
+			<div style={{ flexDirection:"row" }}>
 				<Button
 					onPress={handleClick}
 					label={"Select subtitle file (.vtt)"}

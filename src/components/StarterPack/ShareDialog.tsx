@@ -99,7 +99,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={{ ...a.self_center }}
+								style={{ alignSelf:"center" }}
 								onPress={onShareLink}
 							>
 								<ButtonText>Copy Link</ButtonText>
@@ -109,7 +109,7 @@ function ShareDialogInner({ starterPack, link, imageLoaded, qrDialogControl, con
 								variant="solid"
 								color="secondary"
 								size="small"
-								style={{ ...a.self_center }}
+								style={{ alignSelf:"center" }}
 								onPress={() => {
 									control.close(() => {
 										qrDialogControl.open();

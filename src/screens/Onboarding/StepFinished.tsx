@@ -147,7 +147,7 @@ export function StepFinished() {
 	]);
 
 	return (
-		<div style={{ ...a.align_start }}>
+		<div style={{ alignItems:"flex-start" }}>
 			<IconCircle icon={Check} style={{ marginBottom: 24 }} />
 			<TitleText>You're ready to go!</TitleText>
 			<DescriptionText>We hope you have a wonderful time. Remember, Bluesky is:</DescriptionText>

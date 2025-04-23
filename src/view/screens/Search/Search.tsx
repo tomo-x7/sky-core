@@ -70,7 +70,7 @@ function EmptyState({ message, error }: { message: string; error?: string }) {
 						padding: 16,
 					}}
 				>
-					<Text style={{ ...a.text_md }}>{message}</Text>
+					<Text style={{ fontSize:16 }}>{message}</Text>
 
 					{error && (
 						<>
@@ -765,7 +765,7 @@ export function SearchScreenShell({
 								style={{
 									width: "100%",
 									flexDirection: "row",
-									...a.align_stretch,
+									alignItems:"stretch",
 									gap: 4,
 								}}
 							>
@@ -956,8 +956,8 @@ function SearchHistory({
 							// horizontal={true}
 							style={{
 								flexDirection: "row",
-								...a.flex_nowrap,
-								...{ marginLeft: tokens.space._2xl * -1, marginRight: tokens.space._2xl * -1 },
+								flexWrap:"nowrap",
+								 marginLeft: tokens.space._2xl * -1, marginRight: tokens.space._2xl * -1 ,
 							}}
 							// contentContainerStyle={[a.px_2xl, a.border_0]}
 						>
@@ -1037,7 +1037,7 @@ function SearchHistory({
 										paddingBottom: 12,
 									}}
 								>
-									<Text style={{ ...a.text_md }}>{historyItem}</Text>
+									<Text style={{ fontSize:16 }}>{historyItem}</Text>
 								</button>
 								<Button
 									label={`Remove ${historyItem}`}

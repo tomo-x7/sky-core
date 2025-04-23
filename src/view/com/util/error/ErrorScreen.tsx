@@ -111,7 +111,7 @@ export function ErrorScreen({
 					</div>
 				)}
 				{onPressTryAgain && (
-					<div style={{ ...a.align_center }}>
+					<div style={{ alignItems:"center" }}>
 						<Button
 							onPress={onPressTryAgain}
 							variant="solid"

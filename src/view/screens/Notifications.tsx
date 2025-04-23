@@ -105,7 +105,7 @@ export function NotificationsScreen() {
 						variant="ghost"
 						color="secondary"
 						shape="round"
-						style={{ ...a.justify_center }}
+						style={{ justifyContent:"center" }}
 					>
 						<ButtonIcon icon={isLoading ? Loader : SettingsIcon} size="lg" />
 					</Link>

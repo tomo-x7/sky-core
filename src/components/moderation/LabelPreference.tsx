@@ -251,7 +251,7 @@ export function LabelerLabelPreference({
 									<InlineLinkText
 										label={"moderation settings"}
 										to="/moderation"
-										style={{ ...a.text_sm }}
+										style={{ fontSize:8 }}
 									>
 										moderation settings
 									</InlineLinkText>

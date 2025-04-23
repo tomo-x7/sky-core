@@ -47,7 +47,7 @@ export function RichText({
 
 	const flattenedStyle = style;
 	const plainStyles = { lineHeight: 1.3, ...flattenedStyle };
-	const interactiveStyles = { ...a.leading_snug, ...interactiveStyle, ...flattenedStyle };
+	const interactiveStyles = { lineHeight:1.3, ...interactiveStyle, ...flattenedStyle };
 
 	const { text, facets } = richText;
 

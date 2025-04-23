@@ -58,7 +58,7 @@ export function ProfileHoverCard(props: ProfileHoverCardProps) {
 		return props.children;
 	} else {
 		return (
-			<div className="text" onPointerMove={onPointerMove} style={{ ...a.flex_shrink }}>
+			<div className="text" onPointerMove={onPointerMove} style={{ flexShrink:1 }}>
 				<ProfileHoverCardInner {...props} />
 			</div>
 		);
@@ -342,7 +342,7 @@ let Card = ({ did, hide }: { did: string; hide: () => void }): React.ReactNode =
 			{data && moderationOpts ? (
 				<Inner profile={data} moderationOpts={moderationOpts} hide={hide} />
 			) : (
-				<div style={{ ...a.justify_center }}>
+				<div style={{ justifyContent:"center" }}>
 					<Loader size="xl" />
 				</div>
 			)}
@@ -408,7 +408,7 @@ function Inner({
 							size="small"
 							color="secondary"
 							variant="solid"
-							style={{ ...a.rounded_full }}
+							style={{ borderRadius:999 }}
 						>
 							<ButtonText>{"View profile"}</ButtonText>
 						</Link>
@@ -418,7 +418,7 @@ function Inner({
 							color={profileShadow.viewer?.following ? "secondary" : "primary"}
 							variant="solid"
 							label={profileShadow.viewer?.following ? "Following" : "Follow"}
-							style={{ ...a.rounded_full }}
+							style={{ borderRadius:999 }}
 							onPress={profileShadow.viewer?.following ? unfollow : follow}
 						>
 							<ButtonIcon position="left" icon={profileShadow.viewer?.following ? Check : Plus} />

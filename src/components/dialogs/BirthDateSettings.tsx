@@ -60,7 +60,7 @@ export function BirthDateSettingsDialog({
 						message={
 							error?.toString() || "We were unable to load your birth date preferences. Please try again."
 						}
-						style={{ ...a.rounded_sm }}
+						style={{ borderradius:8 }}
 					/>
 				) : (
 					<BirthdayInner control={control} preferences={preferences} />
@@ -105,7 +105,7 @@ function BirthdayInner({
 					maximumDate={getDateAgo(13)}
 				/>
 			</div>
-			{isError ? <ErrorMessage message={cleanError(error)} style={{ ...a.rounded_sm }} /> : undefined}
+			{isError ? <ErrorMessage message={cleanError(error)} style={{ borderradius:8 }} /> : undefined}
 			<div
 				style={{
 					flexDirection: "row",

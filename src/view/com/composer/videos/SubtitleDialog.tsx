@@ -245,12 +245,12 @@ function SubtitleFileRow({
 					}}
 				>
 					{language === "" ? (
-						<WarningIcon style={{ ...a.flex_shrink_0 }} fill={t.palette.negative_500} size="sm" />
+						<WarningIcon style={{ flexShrink:0 }} fill={t.palette.negative_500} size="sm" />
 					) : (
 						<PageTextIcon
 							style={{
 								...t.atoms.text,
-								...a.flex_shrink_0,
+								flexShrink:0,
 							}}
 							size="sm"
 						/>

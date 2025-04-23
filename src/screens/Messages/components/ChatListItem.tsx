@@ -401,7 +401,7 @@ function ChatListItemReady({
 						style={{
 							position: "absolute",
 							height: "100%",
-							...a.self_end,
+							alignSelf:"flex-end",
 							justifyContent: "center",
 
 							...{

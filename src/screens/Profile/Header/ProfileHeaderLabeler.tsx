@@ -221,7 +221,7 @@ let ProfileHeaderLabeler = ({
 						{descriptionRT && !moderation.ui("profileView").blur ? (
 							<div style={{ pointerEvents: "auto" }}>
 								<RichText
-									style={{ ...a.text_md }}
+									style={{ fontSize:16 }}
 									numberOfLines={15}
 									value={descriptionRT}
 									enableTags

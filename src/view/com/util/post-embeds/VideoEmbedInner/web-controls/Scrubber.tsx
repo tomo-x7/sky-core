@@ -142,7 +142,7 @@ export function Scrubber({
 		<div
 			style={{
 				...{ height: isTouchDevice ? 32 : 18, width: "100%" },
-				...a.flex_shrink_0,
+				flexShrink:0,
 				paddingLeft: 4,
 				paddingRight: 4,
 			}}

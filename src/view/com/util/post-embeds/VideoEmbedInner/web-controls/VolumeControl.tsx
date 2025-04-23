@@ -49,7 +49,7 @@ export function VolumeControl({
 	}, [drawFocus, setVolume, isZeroVolume, changeMuted]);
 
 	return (
-		<div onPointerEnter={onHover} onPointerLeave={onEndHover} style={{ ...a.relative }}>
+		<div onPointerEnter={onHover} onPointerLeave={onEndHover} style={{ position:"relative" }}>
 			{hovered && !isTouchDevice && (
 				<div
 					// Animated.View

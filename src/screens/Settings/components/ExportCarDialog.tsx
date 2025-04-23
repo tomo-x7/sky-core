@@ -106,7 +106,7 @@ export function ExportCarDialog({
 							<InlineLinkText
 								label={"View blogpost for more details"}
 								to="https://docs.bsky.app/blog/repo-export"
-								style={{ ...a.text_sm }}
+								style={{ fontSize:8 }}
 							>
 								this blogpost
 							</InlineLinkText>

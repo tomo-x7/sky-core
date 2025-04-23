@@ -423,7 +423,7 @@ function Header({
 							color="primary"
 							size="large"
 						>
-							<ButtonText style={{ ...a.text_lg }}>Join Bluesky</ButtonText>
+							<ButtonText style={{ fontSize:16 }}>Join Bluesky</ButtonText>
 						</Button>
 					) : null}
 					{joinedAllTimeCount >= 25 ? (
@@ -597,7 +597,7 @@ function OverflowMenu({
 								gap: 2,
 							}}
 						>
-							<Text style={{ ...a.font_bold }}>Unable to delete</Text>
+							<Text style={{ fontWeight:"600" }}>Unable to delete</Text>
 							<Text style={{ lineHeight: 1.3 }}>{cleanError(deleteError)}</Text>
 						</div>
 						<CircleInfo size="sm" fill={t.palette.negative_400} />

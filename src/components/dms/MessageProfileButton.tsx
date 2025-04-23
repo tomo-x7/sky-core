@@ -87,7 +87,7 @@ export function MessageProfileButton({
 					variant="solid"
 					shape="round"
 					label={`Message ${profile.handle}`}
-					style={{ ...a.justify_center }}
+					style={{ justifyContent:"center" }}
 					onPress={onPress}
 				>
 					<ButtonIcon icon={Message} size="md" />

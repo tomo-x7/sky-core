@@ -101,7 +101,7 @@ export function FeedShutdownMsg({ feedUri }: { feedUri: string }) {
 					<InlineLinkText
 						label={"The Discover feed"}
 						to="/profile/bsky.app/feed/whats-hot"
-						style={{ ...a.text_md }}
+						style={{ fontSize:16 }}
 					>
 						Discover
 					</InlineLinkText>{" "}

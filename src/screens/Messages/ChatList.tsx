@@ -331,7 +331,7 @@ function Header({ newChatControl }: { newChatControl: DialogControlProps }) {
 			variant="ghost"
 			color="secondary"
 			shape="square"
-			style={{ ...a.justify_center }}
+			style={{ justifyContent:"center" }}
 		>
 			<ButtonIcon icon={SettingsSlider} size="md" />
 		</Link>

@@ -107,7 +107,7 @@ export function Takendown() {
 	useEnableKeyboardController(true);
 
 	return (
-		<Modal visible presentationStyle="formSheet" style={{ ...a.util_screen_outer }}>
+		<Modal visible presentationStyle="formSheet" style={{ minHeight:"100dvh" }}>
 			<div
 				// KeyboardAwareScrollView
 				style={{

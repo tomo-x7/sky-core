@@ -343,7 +343,7 @@ function Footer({
 						...{ right: 14, top: 31 },
 					}}
 				>
-					<Text style={{ ...a.font_bold }}>
+					<Text style={{ fontWeight:"600" }}>
 						{items.length}/{state.currentStep === "Profiles" ? STARTER_PACK_MAX_SIZE : 3}
 					</Text>
 				</div>

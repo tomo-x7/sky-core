@@ -180,9 +180,9 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={{ ...a.rounded_full }}
+				style={{ borderRadius:999 }}
 			>
-				<ButtonText style={{ ...a.text_md }}>Cancel</ButtonText>
+				<ButtonText style={{ fontSize:16 }}>Cancel</ButtonText>
 			</Button>
 		),
 		[onPressCancel],
@@ -197,7 +197,7 @@ function DialogInner({
 				size="small"
 				color="primary"
 				variant="ghost"
-				style={{ ...a.rounded_full }}
+				style={{ borderRadius:999 }}
 			>
 				<ButtonText
 					style={{
@@ -216,7 +216,7 @@ function DialogInner({
 	return (
 		<Dialog.ScrollableInner
 			label={"Edit profile"}
-			style={{ ...a.overflow_hidden }}
+			style={{ overflow:"hidden" }}
 			contentContainerStyle={{ paddingLeft: 0, paddingRight: 0, paddingTop: 0 }}
 			header={
 				<Dialog.Header renderLeft={cancelButton} renderRight={saveButton}>
@@ -224,7 +224,7 @@ function DialogInner({
 				</Dialog.Header>
 			}
 		>
-			<div style={{ ...a.relative }}>
+			<div style={{ position:"relative" }}>
 				<UserBanner banner={userBanner} onSelectNewBanner={onSelectNewBanner} />
 				<div
 					style={{

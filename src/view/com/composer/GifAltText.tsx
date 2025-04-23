@@ -135,7 +135,7 @@ function AltTextInner({
 
 	return (
 		<Dialog.ScrollableInner label={"Add alt text"}>
-			<div style={{ ...a.flex_col_reverse }}>
+			<div style={{ flexDirection:"column-reverse" }}>
 				<div
 					style={{
 						marginTop: 12,
@@ -143,7 +143,7 @@ function AltTextInner({
 					}}
 				>
 					<div style={{ gap: 8 }}>
-						<div style={{ ...a.relative }}>
+						<div style={{ position:"relative" }}>
 							<TextField.LabelText>Descriptive alt text</TextField.LabelText>
 							<TextField.Root>
 								<Dialog.Input
@@ -195,7 +195,7 @@ function AltTextInner({
 							onPress={() => {
 								control.close();
 							}}
-							style={{ ...a.flex_grow }}
+							style={{ flexGrow:1 }}
 						>
 							<ButtonText>Save</ButtonText>
 						</Button>
@@ -214,7 +214,7 @@ function AltTextInner({
 					>
 						Add alt text
 					</Text>
-					<div style={{ ...a.align_center }}>
+					<div style={{ alignItems:"center" }}>
 						<GifEmbed
 							thumb={thumb}
 							altText={altText}

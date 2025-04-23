@@ -113,7 +113,7 @@ export function Group({
 	return (
 		<GroupContext.Provider value={context}>
 			<div
-				style={{ ...a.w_full }}
+				style={{ width:"100%" }}
 				role={groupRole}
 				{...(groupRole === "radiogroup"
 					? {

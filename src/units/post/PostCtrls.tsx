@@ -269,7 +269,7 @@ let PostCtrls = ({
 			</div>
 			{big && (
 				<>
-					<div style={{ ...a.align_center }}>
+					<div style={{ alignItems:"center" }}>
 						<button
 							type="button"
 							style={btnStyle({ pressed, hovered })}

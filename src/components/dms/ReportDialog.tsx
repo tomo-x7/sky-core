@@ -394,11 +394,11 @@ function DoneStep({
 				<div style={{ gap: 12 }}>
 					<Toggle.Item name="block" label={"Block user"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={{ ...a.text_md }}>Block user</Toggle.LabelText>
+						<Toggle.LabelText style={{ fontSize:16 }}>Block user</Toggle.LabelText>
 					</Toggle.Item>
 					<Toggle.Item name="leave" label={"Delete conversation"}>
 						<Toggle.Checkbox />
-						<Toggle.LabelText style={{ ...a.text_md }}>Delete conversation</Toggle.LabelText>
+						<Toggle.LabelText style={{ fontSize:16 }}>Delete conversation</Toggle.LabelText>
 					</Toggle.Item>
 				</div>
 			</Toggle.Group>
@@ -432,7 +432,7 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 	}, [message.text, message.facets]);
 
 	return (
-		<div style={{ ...a.align_start }}>
+		<div style={{ alignItems:"flex-start" }}>
 			<div
 				style={{
 					paddingTop: 8,
@@ -453,7 +453,7 @@ function PreviewMessage({ message }: { message: ChatBskyConvoDefs.MessageView })
 						letterSpacing: 0,
 						lineHeight: 1.3,
 					}}
-					interactiveStyle={{ ...a.underline }}
+					interactiveStyle={{ textDecorationLine:"underline" }}
 					enableTags
 				/>
 			</div>

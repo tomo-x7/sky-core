@@ -174,8 +174,8 @@ function GifList({
 				renderItem={renderItem}
 				// numColumns={gtMobile ? 3 : 2} //TODO
 				// columnWrapperstyle={{gap:8}}  //TODO
-				contentContainerStyle={{ ...a.h_full_vh }}
-				style={{ ...a.h_full_vh }}
+				contentContainerStyle={{ height:"100dvh" }}
+				style={{ height:"100dvh" }}
 				ListHeaderComponent={
 					<>
 						{listHeader}

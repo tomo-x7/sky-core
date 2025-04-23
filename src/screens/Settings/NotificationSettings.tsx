@@ -64,7 +64,7 @@ export function NotificationSettingsScreen() {
 						<SettingsList.Item>
 							<Admonition type="warning" style={{ flex: 1 }}>
 								<>
-									<span style={{ ...a.font_bold }}>Experimental:</span> When this preference is
+									<span style={{ fontWeight:"600" }}>Experimental:</span> When this preference is
 									enabled, you'll only receive reply and quote notifications from users you follow.
 									We'll continue to add more controls here over time.
 								</>

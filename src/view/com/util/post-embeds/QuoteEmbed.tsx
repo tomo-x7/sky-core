@@ -243,7 +243,7 @@ export function QuoteEmbed({
 						<PostAlerts modui={moderation.ui("contentView")} style={{ paddingTop: 4, paddingBottom: 4 }} />
 					) : null}
 					{richText ? (
-						<RichText value={richText} style={{ ...a.text_md }} numberOfLines={20} disableLinks />
+						<RichText value={richText} style={{ fontSize:16 }} numberOfLines={20} disableLinks />
 					) : null}
 					{embed && <PostEmbeds embed={embed} moderation={moderation} />}
 				</Link>

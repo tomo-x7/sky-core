@@ -64,7 +64,7 @@ const EditImageInner = ({ control, image, onChange }: EditImageDialogProps) => {
 			>
 				Edit image
 			</Text>
-			<div style={{ ...a.align_center }}>
+			<div style={{ alignItems:"center" }}>
 				<ReactCrop
 					crop={crop}
 					onChange={(_pixelCrop, percentCrop) => setCrop(percentCrop)}

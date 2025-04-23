@@ -13,10 +13,10 @@ export function AltTextCounterWrapper({
 }) {
 	const t = useTheme();
 	return (
-		<div style={{ ...a.flex_row }}>
+		<div style={{ flexDirection:"row" }}>
 			<CharProgress
 				style={{
-					...a.flex_col_reverse,
+					flexDirection:"column-reverse",
 					alignItems: "center",
 					marginRight: 4,
 					...{ minWidth: 50, gap: 1 },

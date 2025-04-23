@@ -55,7 +55,7 @@ export function NoFeedsPinned({
 	}, [overwriteSavedFeeds, preferences.savedFeeds]);
 
 	return (
-		<CenteredView sideBorders style={{ ...a.h_full_vh }}>
+		<CenteredView sideBorders style={{ height:"100dvh" }}>
 			<div
 				style={{
 					alignItems: "center",

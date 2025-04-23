@@ -489,7 +489,7 @@ function ComposeBtn() {
 				size="large"
 				variant="solid"
 				color="primary"
-				style={{ ...a.rounded_full }}
+				style={{ borderRadius:999 }}
 			>
 				<ButtonIcon icon={EditBig} position="left" />
 				<ButtonText>New Post</ButtonText>

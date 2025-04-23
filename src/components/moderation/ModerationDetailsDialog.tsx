@@ -49,7 +49,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ ...a.text_sm }}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ fontSize:8 }}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have blocked.
@@ -72,7 +72,7 @@ function ModerationDetailsDialogInner({
 			description = (
 				<>
 					This user is included in the{" "}
-					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ ...a.text_sm }}>
+					<InlineLinkText label={list.name} to={listUriToHref(list.uri)} style={{ fontSize:8 }}>
 						{list.name}
 					</InlineLinkText>{" "}
 					list which you have muted.

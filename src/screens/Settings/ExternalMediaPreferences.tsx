@@ -74,7 +74,7 @@ function PrefSelector({
 			}}
 		>
 			<Toggle.Platform />
-			<Toggle.LabelText style={{ ...a.text_md }}>{label}</Toggle.LabelText>
+			<Toggle.LabelText style={{ fontSize:16 }}>{label}</Toggle.LabelText>
 		</Toggle.Item>
 	);
 }

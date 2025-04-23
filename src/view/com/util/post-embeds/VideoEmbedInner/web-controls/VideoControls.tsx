@@ -305,7 +305,7 @@ export function Controls({
 			{!showControls && !focused && duration > 0 && <TimeIndicator time={Math.floor(duration - currentTime)} />}
 			<div
 				style={{
-					...a.flex_shrink_0,
+					flexShrink:0,
 					width: "100%",
 					paddingLeft: 4,
 					paddingRight: 4,

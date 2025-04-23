@@ -79,7 +79,7 @@ export const QrCode = //React.forwardRef<ViewShot, Props>
 
 					<Text
 						style={{
-							...a.flex,
+							display:"flex",
 							flexDirection: "row",
 							alignItems: "center",
 							fontWeight: "600",

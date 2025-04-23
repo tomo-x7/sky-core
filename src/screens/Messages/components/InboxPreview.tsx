@@ -39,7 +39,7 @@ export function InboxPreview({
 			color="secondary"
 			variant="solid"
 		>
-			<div style={{ ...a.relative }}>
+			<div style={{ position:"relative" }}>
 				<ButtonIcon icon={EnvelopeIcon} size="lg" />
 				{profiles.length > 0 && (
 					<div

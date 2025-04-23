@@ -33,7 +33,7 @@ export function NewMessagesPill({
 					paddingTop: 8,
 					paddingBottom: 8,
 					borderRadius: 999,
-					...a.shadow_sm,
+					boxshadow:"0 4px 8px rgba(0, 0, 0, 0.1)",
 					border: "1px solid black",
 					borderWidth: 1,
 					...t.atoms.bg_contrast_50,

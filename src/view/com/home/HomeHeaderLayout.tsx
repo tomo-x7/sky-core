@@ -69,7 +69,7 @@ function HomeHeaderLayoutDesktopAndTablet({
 							variant="ghost"
 							color="secondary"
 							shape="square"
-							style={{ ...a.justify_center }}
+							style={{ justifyContent:"center" }}
 						>
 							<ButtonIcon icon={FeedsIcon} size="lg" />
 						</Link>

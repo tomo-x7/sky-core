@@ -55,7 +55,7 @@ export function AvatarCreatorItems({
 	);
 
 	return (
-		<div style={{ ...a.w_full }}>
+		<div style={{ width:"100%" }}>
 			<Text
 				style={{
 					paddingBottom: 12,

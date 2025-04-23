@@ -64,7 +64,7 @@ export const ChooseAccountForm = ({
 					pendingDid={pendingDid}
 				/>
 			</div>
-			<div style={{ ...a.flex_row }}>
+			<div style={{ flexDirection:"row" }}>
 				<Button label={"Back"} variant="solid" color="secondary" size="large" onPress={onPressBack}>
 					<ButtonText>{"Back"}</ButtonText>
 				</Button>

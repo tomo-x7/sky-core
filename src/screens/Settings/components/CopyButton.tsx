@@ -27,7 +27,7 @@ export function CopyButton({ style, value, onPress: onPressProp, ...props }: But
 	);
 
 	return (
-		<div style={{ ...a.relative }}>
+		<div style={{ position:"relative" }}>
 			{hasBeenCopied && (
 				<div
 					// Animated.View

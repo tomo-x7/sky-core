@@ -57,7 +57,7 @@ export function ListsScreen() {
 					<ButtonText>New</ButtonText>
 				</Button>
 			</Layout.Header.Outer>
-			<MyLists filter="curate" style={{ ...a.flex_grow }} />
+			<MyLists filter="curate" style={{ flexGrow:1 }} />
 			<VerifyEmailDialog
 				reasonText={"Before creating a list, you must first verify your email."}
 				control={control}

@@ -74,7 +74,7 @@ let PostMeta = (opts: PostMetaOpts): React.ReactNode => {
 				</div>
 			)}
 			<ProfileHoverCard inline did={opts.author.did}>
-				<Text numberOfLines={1} style={{ ...a.flex_shrink }}>
+				<Text numberOfLines={1} style={{ flexShrink:1 }}>
 					<WebOnlyInlineLinkText
 						to={profileLink}
 						label={"View profile"}

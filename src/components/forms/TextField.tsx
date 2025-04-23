@@ -177,10 +177,10 @@ export function Input({
 
 	const refs = mergeRefs([ctx.inputRef, inputRef!].filter(Boolean));
 	const flattened = {
-		...a.relative,
-		...a.z_20,
-		...a.flex_1,
-		...a.text_md,
+		position:"relative",
+		zIndex:20,
+		flex:1,
+		fontSize:16,
 		...t.atoms.text,
 		lineHeight: 1.1875,
 		minHeight: rest.multiline ? 80 : undefined,

@@ -503,7 +503,7 @@ export const ComposePost = ({
 						// Animated.ScrollView
 						ref={scrollViewRef}
 						// onScroll={scrollHandler}
-						// contentContainerstyle={{...a.flex_grow}}
+						// contentContainerstyle={{flexGrow:1}}
 						style={{ flex: 1 }}
 						// keyboardShouldPersistTaps="always"
 						// onContentSizeChange={onScrollViewContentSizeChange}
@@ -643,7 +643,7 @@ const ComposerPost = React.memo(function ComposerPost({
 				...(!isActive && styles.inactivePost),
 			}}
 		>
-			<div style={{ ...a.flex_row }}>
+			<div style={{ flexDirection:"row" }}>
 				<UserAvatar
 					avatar={currentProfile?.avatar}
 					size={50}
@@ -775,7 +775,7 @@ function ComposerTopBar({
 					}}
 					onPress={onCancel}
 				>
-					<ButtonText style={{ ...a.text_md }}>Cancel</ButtonText>
+					<ButtonText style={{ fontSize:16 }}>Cancel</ButtonText>
 				</Button>
 				<div style={{ flex: 1 }} />
 				{isPublishing ? (
@@ -800,7 +800,7 @@ function ComposerTopBar({
 						onPress={onPublish}
 						disabled={!canPost || isPublishQueued}
 					>
-						<ButtonText style={{ ...a.text_md }}>
+						<ButtonText style={{ fontSize:16 }}>
 							{isReply ? <>Reply</> : isThread ? <>Post All</> : <>Post</>}
 						</ButtonText>
 					</Button>

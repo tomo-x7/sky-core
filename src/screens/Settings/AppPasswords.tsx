@@ -69,12 +69,12 @@ export function AppPasswordsScreen() {
 						>
 							{appPasswords ? (
 								appPasswords.length > 0 ? (
-									<div style={{ ...a.overflow_hidden }}>
+									<div style={{ overflow:"hidden" }}>
 										{appPasswords.map((appPassword) => (
 											<div
 												// Animated.View
 												key={appPassword.name}
-												style={{ ...a.w_full }}
+												style={{ width:"100%" }}
 												// entering={FadeIn}
 												// exiting={FadeOut}
 												// layout={LinearTransition.delay(150)}
@@ -180,7 +180,7 @@ function AppPasswordCard({
 					variant="ghost"
 					color="negative"
 					size="small"
-					style={{ ...a.bg_transparent }}
+					style={{ backgroundColor:"transparent" }}
 					onPress={() => deleteControl.open()}
 				>
 					<ButtonIcon icon={TrashIcon} />

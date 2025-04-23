@@ -130,7 +130,7 @@ function CreateAnother() {
 				variant="solid"
 				color="secondary"
 				size="small"
-				style={{ ...a.self_center }}
+				style={{ alignSelf:"center" }}
 				onPress={() => navigate("/starter-pack/create")}
 			>
 				<ButtonText>Create another</ButtonText>
@@ -185,7 +185,7 @@ function Empty() {
 				justifyContent: "space-between",
 				gap: 16,
 				marginTop: 1,
-				...a.shadow_lg,
+				boxshadow:"0 16px 32px rgba(0, 0, 0, 0.1)",
 			}}
 		>
 			<div style={{ gap: 4 }}>

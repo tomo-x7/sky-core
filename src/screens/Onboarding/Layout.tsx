@@ -73,7 +73,7 @@ export function Layout({ children }: React.PropsWithChildren) {
 							size="small"
 							shape="round"
 							label={"Go back to previous step"}
-							style={{ ...a.absolute }}
+							style={{ position:"absolute" }}
 							onPress={() => dispatch({ type: "prev" })}
 						>
 							<ButtonIcon icon={ChevronLeft} />

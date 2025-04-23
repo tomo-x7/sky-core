@@ -33,7 +33,7 @@ export function AccessibilitySettingsScreen() {
 							label={"Require alt text before posting"}
 							value={requireAltTextEnabled ?? false}
 							onChange={(value) => setRequireAltTextEnabled(value)}
-							style={{ ...a.w_full }}
+							style={{ width:"100%" }}
 						>
 							<Toggle.LabelText style={{ flex: 1 }}>Require alt text before posting</Toggle.LabelText>
 							<Toggle.Platform />
@@ -43,7 +43,7 @@ export function AccessibilitySettingsScreen() {
 							label={"Display larger alt text badges"}
 							value={!!largeAltBadgeEnabled}
 							onChange={(value) => setLargeAltBadgeEnabled(value)}
-							style={{ ...a.w_full }}
+							style={{ width:"100%" }}
 						>
 							<Toggle.LabelText style={{ flex: 1 }}>Display larger alt text badges</Toggle.LabelText>
 							<Toggle.Platform />

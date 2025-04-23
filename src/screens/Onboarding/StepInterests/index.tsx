@@ -108,7 +108,7 @@ export function StepInterests() {
 	);
 
 	return (
-		<div style={{ ...a.align_start }}>
+		<div style={{ alignItems:"flex-start" }}>
 			<IconCircle
 				icon={isError ? EmojiSad : Hashtag}
 				style={{
@@ -144,7 +144,7 @@ export function StepInterests() {
 							},
 						}}
 					>
-						<Text style={{ ...a.text_md }}>
+						<Text style={{ fontSize:16 }}>
 							<Text
 								style={{
 									fontSize: 16,

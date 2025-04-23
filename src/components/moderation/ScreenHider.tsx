@@ -152,7 +152,7 @@ export function ScreenHider({
 					variant="solid"
 					color="primary"
 					size="large"
-					style={{ ...a.rounded_full }}
+					style={{ borderRadius:999 }}
 					label={"Go back"}
 					onPress={() => {
 						if (history.length > 1) {
@@ -169,7 +169,7 @@ export function ScreenHider({
 						variant="solid"
 						color="secondary"
 						size="large"
-						style={{ ...a.rounded_full }}
+						style={{ borderRadius:999 }}
 						label={"Show anyway"}
 						onPress={() => setOverride((v) => !v)}
 					>

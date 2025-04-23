@@ -317,7 +317,7 @@ function AccountRow({
 	};
 
 	return (
-		<div style={{ ...a.relative }}>
+		<div style={{ position:"relative" }}>
 			<SettingsList.PressableItem onPress={onSwitchAccount} label={"Switch account"}>
 				{moderationOpts && profile ? (
 					<UserAvatar

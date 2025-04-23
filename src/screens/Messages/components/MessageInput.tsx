@@ -193,7 +193,7 @@ export function MessageInput({
 						flex: 1,
 						paddingLeft: 8,
 						paddingRight: 8,
-						...a.border_0,
+						borderWidth:0,
 						...t.atoms.text,
 						paddingTop: 10,
 						backgroundColor: "transparent",

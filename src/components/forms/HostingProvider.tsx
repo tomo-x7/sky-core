@@ -61,7 +61,7 @@ export function HostingProvider({
 								...{ marginRight: tokens.space.xs * -1, marginLeft: tokens.space.xs * -1 },
 							}}
 						>
-							<ButtonText style={{ ...a.text_sm }}>{toNiceDomain(serviceUrl)}</ButtonText>
+							<ButtonText style={{ fontSize:8 }}>{toNiceDomain(serviceUrl)}</ButtonText>
 							<ButtonIcon icon={PencilIcon} />
 						</Button>
 					</Text>
@@ -93,7 +93,7 @@ export function HostingProvider({
 										fill={interacted ? t.palette.contrast_800 : t.palette.contrast_500}
 									/>
 								</div>
-								<Text style={{ ...a.text_md }}>{toNiceDomain(serviceUrl)}</Text>
+								<Text style={{ fontSize:16 }}>{toNiceDomain(serviceUrl)}</Text>
 								<div
 									style={{
 										borderRadius: 8,

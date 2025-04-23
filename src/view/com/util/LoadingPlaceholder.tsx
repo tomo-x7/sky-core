@@ -343,7 +343,7 @@ export function ChatListItemLoadingPlaceholder({
 				...style,
 			}}
 		>
-			<LoadingPlaceholder width={52} height={52} style={{ ...a.rounded_full }} />
+			<LoadingPlaceholder width={52} height={52} style={{ borderRadius:999 }} />
 			<div>
 				<LoadingPlaceholder width={140} height={12} style={{ marginTop: 4 }} />
 				<LoadingPlaceholder width={120} height={8} style={{ marginTop: 8 }} />

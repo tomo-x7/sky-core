@@ -31,7 +31,7 @@ export function ConstrainedImage({
 	}, [aspectRatio, gtMobile]);
 
 	return (
-		<div style={{ ...a.w_full }}>
+		<div style={{ width:"100%" }}>
 			<div
 				style={{
 					overflow: "hidden",
@@ -206,7 +206,7 @@ export function AutoSizedImage({
 					onClick={() => onPress?.(containerRef, fetchedDimsRef.current)}
 					// onLongPress={onLongPress}
 					onMouseDown={onPressIn}
-					style={{ ...a.h_full }}
+					style={{ height:"100%" }}
 				>
 					{contents}
 				</button>

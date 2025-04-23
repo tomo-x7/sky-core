@@ -208,7 +208,7 @@ let DrawerContent = (props: React.PropsWithoutRef<{}>): React.ReactNode => {
 		<div
 			style={{
 				flex: 1,
-				...a.border_r,
+				borderRight:"1px solid black",
 				...t.atoms.bg,
 				...t.atoms.border_contrast_low,
 			}}
@@ -511,7 +511,7 @@ function MenuItem({ icon, label, count, bold, onClick }: MenuItemProps) {
 						...((hovered || pressed) && t.atoms.bg_contrast_25),
 					}}
 				>
-					<div style={{ ...a.relative }}>
+					<div style={{ position:"relative" }}>
 						{icon}
 						{count ? (
 							<div
@@ -583,14 +583,14 @@ function ExtraLinks() {
 			}}
 		>
 			<InlineLinkText
-				style={{ ...a.text_md }}
+				style={{ fontSize:16 }}
 				label={"Terms of Service"}
 				to="https://bsky.social/about/support/tos"
 			>
 				Terms of Service
 			</InlineLinkText>
 			<InlineLinkText
-				style={{ ...a.text_md }}
+				style={{ fontSize:16 }}
 				to="https://bsky.social/about/support/privacy-policy"
 				label={"Privacy Policy"}
 			>
@@ -601,7 +601,7 @@ function ExtraLinks() {
 					<>
 						Logo by{" "}
 						<InlineLinkText
-							style={{ ...a.text_md }}
+							style={{ fontSize:16 }}
 							to="/profile/sawaratsuki.bsky.social"
 							label="@sawaratsuki.bsky.social"
 						>

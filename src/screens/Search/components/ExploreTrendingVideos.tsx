@@ -272,7 +272,7 @@ function VideoCards({
 								},
 							}}
 						>
-							<Text style={{ ...a.text_md }}>View more</Text>
+							<Text style={{ fontSize:16 }}>View more</Text>
 							<div
 								style={{
 									alignItems: "center",

@@ -772,7 +772,7 @@ function SmallToggler({ label, children }: React.PropsWithChildren<{ label: stri
 	const [show, setShow] = React.useState(false);
 	return (
 		<div>
-			<div style={{ ...a.flex_row }}>
+			<div style={{ flexDirection:"row" }}>
 				<Button
 					variant="ghost"
 					color="secondary"
@@ -1038,7 +1038,7 @@ function Flag({ v, label }: { v: boolean | undefined; label: string }) {
 			>
 				{v && <Check size="xs" fill={t.palette.contrast_900} />}
 			</div>
-			<P style={{ ...a.text_xs }}>{label}</P>
+			<P style={{ fontSize:4 }}>{label}</P>
 		</div>
 	);
 }

@@ -27,7 +27,7 @@ export function PostThreadLoadMore({ post }: { post: AppBskyFeedDefs.PostView })
 			}}
 			hoverStyle={t.atoms.bg_contrast_25}
 		>
-			<div style={{ ...a.flex_row }}>
+			<div style={{ flexDirection:"row" }}>
 				<div
 					style={{
 						alignItems: "center",
