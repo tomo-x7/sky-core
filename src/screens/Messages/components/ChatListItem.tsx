@@ -3,7 +3,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
 
 import { useBreakpoints, useTheme } from "#/alf";
-import * as tokens from "#/alf/tokens";
 import { useDialogControl } from "#/components/Dialog";
 import { Link } from "#/components/Link";
 import { useMenuControl } from "#/components/Menu";
@@ -239,7 +238,7 @@ function ChatListItemReady({
 					style={{
 						zIndex: 10,
 						position: "absolute",
-						...{ top: tokens.space.md, left: tokens.space.lg },
+						...{ top: 12, left: 16 },
 					}}
 				>
 					<PreviewableUserAvatar profile={profile} size={52} moderation={moderation.ui("avatar")} />
@@ -405,7 +404,7 @@ function ChatListItemReady({
 							justifyContent: "center",
 
 							...{
-								right: tokens.space.lg,
+								right: 16,
 								opacity: !gtMobile || showActions || menuControl.isOpen ? 1 : 0,
 							},
 						}}

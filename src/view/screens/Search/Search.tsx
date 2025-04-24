@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { tokens, useBreakpoints, useTheme } from "#/alf";
+import { useBreakpoints, useTheme } from "#/alf";
 import { ActivityIndicator } from "#/components/ActivityIndicator";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as FeedCard from "#/components/FeedCard";
@@ -736,7 +736,7 @@ export function SearchScreenShell({
 							// HACK: shift up search input. we can't remove the top padding
 							// on the search input because it messes up the layout animation
 							// if we add it only when the header is hidden
-							style={{ marginBottom: tokens.space.xs * -1 }}
+							style={{ marginBottom: 4 * -1 }}
 						>
 							<Layout.Header.Outer noBottomBorder>
 								{navButton === "menu" ? <Layout.Header.MenuButton /> : <Layout.Header.BackButton />}
@@ -957,8 +957,8 @@ function SearchHistory({
 							style={{
 								flexDirection: "row",
 								flexWrap: "nowrap",
-								marginLeft: tokens.space._2xl * -1,
-								marginRight: tokens.space._2xl * -1,
+								marginLeft: 24 * -1,
+								marginRight: 24 * -1,
 							}}
 							// contentContainerStyle={[a.px_2xl, a.border_0]}
 						>

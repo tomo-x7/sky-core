@@ -1,4 +1,3 @@
-import { tokens } from "#/alf";
 import { darkPalette, dimPalette, lightPalette } from "#/alf/theme";
 import { fontWeight } from "#/alf/tokens";
 import type { Theme } from "./ThemeContext";

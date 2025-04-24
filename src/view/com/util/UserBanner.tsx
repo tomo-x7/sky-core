@@ -3,7 +3,7 @@ import React from "react";
 // import type { Image as RNImage } from "react-native-image-crop-picker";
 type RNImage = any;
 
-import { tokens, useTheme as useAlfTheme } from "#/alf";
+import { useTheme as useAlfTheme } from "#/alf";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 import * as Menu from "#/components/Menu";
 import { Camera_Filled_Stroke2_Corner0_Rounded as CameraFilled } from "#/components/icons/Camera";

@@ -1,6 +1,4 @@
 import type { ChatBskyConvoDefs } from "@atproto/api";
-
-import { tokens } from "#/alf";
 import { KnownFollowers } from "#/components/KnownFollowers";
 import { Text } from "#/components/Typography";
 import { useModerationOpts } from "#/state/preferences/moderation-opts";
@@ -69,8 +67,8 @@ export function RequestListItem({ convo }: { convo: ChatBskyConvoDefs.ConvoView 
 					gap: 8,
 
 					...{
-						bottom: tokens.space.md,
-						paddingLeft: tokens.space.lg + 52 + tokens.space.md,
+						bottom: 12,
+						paddingLeft: 16 + 52 + 12,
 					},
 				}}
 			>

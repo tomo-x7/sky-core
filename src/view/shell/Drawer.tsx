@@ -1,7 +1,7 @@
 import React, { type JSX } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { tokens, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { Divider } from "#/components/Divider";
 import { InlineLinkText } from "#/components/Link";
@@ -292,7 +292,7 @@ let DrawerFooter = ({
 				paddingTop: 12,
 
 				...{
-					paddingBottom: tokens.space.xl,
+					paddingBottom: 20,
 				},
 			}}
 		>

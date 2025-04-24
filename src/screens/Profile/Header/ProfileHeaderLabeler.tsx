@@ -6,7 +6,7 @@ import {
 	moderateProfile,
 } from "@atproto/api";
 import React, { memo, useMemo } from "react";
-import { tokens, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonText } from "#/components/Button";
 import { type DialogOuterProps, useDialogControl } from "#/components/Dialog";
 import { Link } from "#/components/Link";

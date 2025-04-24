@@ -1,28 +1,27 @@
 import React from "react";
 
 import { type Breakpoint, useBreakpoints } from "../breakpoints";
-import * as tokens from "../tokens";
 
 type Gutter = "compact" | "base" | "wide" | 0;
 
 const gutters: Record<Exclude<Gutter, 0>, Record<Breakpoint | "default", number>> = {
 	compact: {
-		default: tokens.space.sm,
-		gtPhone: tokens.space.sm,
-		gtMobile: tokens.space.md,
-		gtTablet: tokens.space.md,
+		default: 8,
+		gtPhone: 8,
+		gtMobile: 12,
+		gtTablet: 12,
 	},
 	base: {
-		default: tokens.space.lg,
-		gtPhone: tokens.space.lg,
-		gtMobile: tokens.space.xl,
-		gtTablet: tokens.space.xl,
+		default: 16,
+		gtPhone: 16,
+		gtMobile: 20,
+		gtTablet: 20,
 	},
 	wide: {
-		default: tokens.space.xl,
-		gtPhone: tokens.space.xl,
-		gtMobile: tokens.space._3xl,
-		gtTablet: tokens.space._3xl,
+		default: 20,
+		gtPhone: 20,
+		gtMobile: 28,
+		gtTablet: 28,
 	},
 };
 

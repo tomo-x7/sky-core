@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tokens, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import { useDialogControl } from "#/components/Dialog";
 import { Text } from "#/components/Typography";
@@ -58,7 +58,7 @@ export function HostingProvider({
 							style={{
 								paddingLeft: 4,
 								paddingRight: 4,
-								...{ marginRight: tokens.space.xs * -1, marginLeft: tokens.space.xs * -1 },
+								...{ marginRight: 4 * -1, marginLeft: 4 * -1 },
 							}}
 						>
 							<ButtonText style={{ fontSize: 8 }}>{toNiceDomain(serviceUrl)}</ButtonText>

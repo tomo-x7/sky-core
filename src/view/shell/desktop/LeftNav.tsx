@@ -2,7 +2,7 @@ import type { AppBskyActorDefs } from "@atproto/api";
 import React, { type JSX } from "react";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { tokens, useLayoutBreakpoints, useTheme } from "#/alf";
+import { useLayoutBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import type { DialogControlProps } from "#/components/Dialog";
 import * as Menu from "#/components/Menu";
@@ -149,7 +149,7 @@ function ProfileCard() {
 													transitionTimingFunction: "cubic-bezier(0.17, 0.73, 0.14, 1)",
 													transitionDuration: "100ms",
 													...(!active && { transitionDelay: "50ms" }),
-													marginLeft: tokens.space.xl * -1,
+													marginLeft: 20 * -1,
 													opacity: active ? 1 : 0,
 												}}
 											>
@@ -256,7 +256,7 @@ function SwitchMenuItems({
 								)}`}
 								onPress={() => onPressSwitchAccount(other.account)}
 							>
-								<div style={{ marginLeft: tokens.space._2xs * -1 }}>
+								<div style={{ marginLeft: -2 }}>
 									<UserAvatar
 										avatar={other.profile?.avatar}
 										size={20}

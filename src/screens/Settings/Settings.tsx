@@ -2,7 +2,7 @@ import { type AppBskyActorDefs, moderateProfile } from "@atproto/api";
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { tokens, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { AvatarStackWithFetch } from "#/components/AvatarStack";
 import { useDialogControl } from "#/components/Dialog";
 import * as Layout from "#/components/Layout";
@@ -342,7 +342,7 @@ function AccountRow({
 								{...props}
 								style={{
 									position: "absolute",
-									...{ top: 10, right: tokens.space.lg },
+									...{ top: 10, right: 16 },
 									padding: 4,
 									borderRadius: 999,
 									...((state.hovered || state.pressed) && t.atoms.bg_contrast_25),

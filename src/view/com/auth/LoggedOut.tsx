@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tokens, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { Button, ButtonIcon } from "#/components/Button";
 import { TimesLarge_Stroke2_Corner0_Rounded as XIcon } from "#/components/icons/Times";
 import { Login } from "#/screens/Login";
@@ -65,8 +65,8 @@ export function LoggedOut({ onDismiss }: { onDismiss?: () => void }) {
 							position: "absolute",
 
 							...{
-								top: tokens.space.xl,
-								right: tokens.space.xl,
+								top: 20,
+								right: 20,
 								zIndex: 100,
 							},
 						}}

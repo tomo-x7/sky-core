@@ -5,7 +5,7 @@ import React, { memo, useMemo } from "react";
 // import type { Image as RNImage } from "react-native-image-crop-picker";
 type RNImage = any;
 
-import { tokens, useTheme } from "#/alf";
+import { useTheme } from "#/alf";
 import { useSheetWrapper } from "#/components/Dialog/sheet-wrapper";
 import { Link } from "#/components/Link";
 import { MediaInsetBorder } from "#/components/MediaInsetBorder";

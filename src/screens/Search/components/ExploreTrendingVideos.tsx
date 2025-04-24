@@ -147,7 +147,7 @@ export function ExploreTrendingVideos() {
 			// horizontal
 			// showsHorizontalScrollIndicator={false}
 			// decelerationRate="fast"
-			// snapToInterval={CARD_WIDTH + tokens.space.sm}
+			// snapToInterval={CARD_WIDTH + 8}
 			>
 				<div
 					style={{

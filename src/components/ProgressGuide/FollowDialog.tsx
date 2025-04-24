@@ -1,7 +1,7 @@
 import type { AppBskyActorDefs, ModerationOpts } from "@atproto/api";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { type ViewStyleProp, tokens, useBreakpoints, useTheme } from "#/alf";
+import { type ViewStyleProp, useBreakpoints, useTheme } from "#/alf";
 import { Button, ButtonIcon, ButtonText } from "#/components/Button";
 import * as Dialog from "#/components/Dialog";
 import * as ProfileCard from "#/components/ProfileCard";
@@ -447,12 +447,12 @@ let Tabs = ({
 
 		if (shouldScrollToLeftEdge) {
 			listRef.current?.scrollTo({
-				left: btnLayout.x - tokens.space.lg,
+				left: btnLayout.x - 16,
 				behavior: "smooth",
 			});
 		} else if (shouldScrollToRightEdge) {
 			listRef.current?.scrollTo({
-				left: btnLayout.x - totalWidth + btnLayout.width + tokens.space.lg,
+				left: btnLayout.x - totalWidth + btnLayout.width + 16,
 				behavior: "smooth",
 			});
 		}
@@ -482,7 +482,7 @@ let Tabs = ({
 			// showsHorizontalScrollIndicator={false}
 			// decelerationRate="fast"
 			// snapToOffsets={
-			// 	tabOffsets.length === interests.length ? tabOffsets.map((o) => o.x - tokens.space.xl) : undefined
+			// 	tabOffsets.length === interests.length ? tabOffsets.map((o) => o.x - 20) : undefined
 			// }
 			// onLayout={(evt) => setTotalWidth(evt.nativeEvent.layout.width)}
 			// scrollEventThrottle={200} // big throttle
