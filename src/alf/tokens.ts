@@ -1,12 +1,3 @@
-/**
- * These correspond to Inter font files we actually load.
- */
-export const fontWeight = {
-	normal: "400",
-	bold: "600",
-	heavy: "800",
-} as const;
-
 export const gradients = {
 	primary: {
 		values: [
